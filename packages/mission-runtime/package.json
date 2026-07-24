@@ -1,0 +1,28 @@
+{
+  "name": "@bhavya/mission-runtime",
+  "version": "0.6.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./gateway": "./src/gateway/index.ts",
+    "./registry": "./src/registry/index.ts",
+    "./memory": "./src/memory/index.ts",
+    "./events": "./src/events/index.ts",
+    "./metadata": "./src/metadata/index.ts",
+    "./accessibility": "./src/accessibility/index.ts",
+    "./observability": "./src/observability/index.ts",
+    "./auth": "./src/auth/index.ts",
+    "./permissions": "./src/permissions/index.ts",
+    "./content": "./src/content/index.ts",
+    "./navigation": "./src/navigation/index.ts",
+    "./search": "./src/search/index.ts",
+    "./audit": "./src/audit/index.ts",
+    "./documents": "./src/documents/index.ts",
+    "./media": "./src/media/index.ts",
+    "./localization": "./src/localization/index.ts",
+    "./notifications": "./src/notifications/index.ts"
+  },
+  "dependencies": {}
+}

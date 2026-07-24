@@ -1,0 +1,19 @@
+{
+  "_notice": "Environment-aware configuration. Applications read from this file, not from hardcoded constants.",
+  "development": {
+    "base_url": "http://localhost",
+    "ai_gateway": "http://localhost:8082",
+    "openhuman_rpc": "http://127.0.0.1:7788/rpc",
+    "registry_path": "../../registry",
+    "memory_path": "../../memory",
+    "content_path": "../../content"
+  },
+  "production": {
+    "base_url": "https://bhavya.foundation",
+    "ai_gateway": "https://gateway.bhavya.foundation",
+    "openhuman_rpc": "https://rpc.bhavya.foundation",
+    "registry_path": "/registry",
+    "memory_path": "/memory",
+    "content_path": "/content"
+  }
+}

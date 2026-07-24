@@ -1,0 +1,98 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "apps",
+  "generated_at": "2026-07-23T16:56:32.106Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
+    {
+      "id": "admin",
+      "name": "Engineering Dashboard",
+      "version": "0.5.0",
+      "owner": "Engineering",
+      "mission": "Platform",
+      "visibility": "internal",
+      "port": 3001,
+      "path": "apps/admin"
+    },
+    {
+      "id": "docs",
+      "name": "Knowledge Platform",
+      "version": "0.5.0",
+      "owner": "Documentation",
+      "mission": "Knowledge",
+      "visibility": "public",
+      "port": 3002,
+      "path": "apps/docs"
+    },
+    {
+      "id": "forest",
+      "name": "Forest & Nature",
+      "version": "0.5.0",
+      "owner": "Forest Team",
+      "mission": "Nature",
+      "visibility": "public",
+      "port": 3004,
+      "path": "apps/forest"
+    },
+    {
+      "id": "heritage",
+      "name": "Heritage & Culture",
+      "version": "0.5.0",
+      "owner": "Heritage Team",
+      "mission": "Heritage",
+      "visibility": "public",
+      "port": 3005,
+      "path": "apps/heritage"
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge & Education",
+      "version": "0.5.0",
+      "owner": "Education Team",
+      "mission": "Knowledge",
+      "visibility": "public",
+      "port": 3007,
+      "path": "apps/knowledge"
+    },
+    {
+      "id": "library",
+      "name": "Digital Library",
+      "version": "0.5.0",
+      "owner": "Library Team",
+      "mission": "Knowledge",
+      "visibility": "public",
+      "port": 3008,
+      "path": "apps/library"
+    },
+    {
+      "id": "transparency",
+      "name": "Transparency Portal",
+      "version": "0.5.0",
+      "owner": "Governance",
+      "mission": "Governance",
+      "visibility": "public",
+      "port": 3003,
+      "path": "apps/transparency"
+    },
+    {
+      "id": "volunteer",
+      "name": "Volunteer Portal",
+      "version": "0.5.0",
+      "owner": "Community Team",
+      "mission": "Community",
+      "visibility": "public",
+      "port": 3006,
+      "path": "apps/volunteer"
+    },
+    {
+      "id": "website",
+      "name": "Bhavya Foundation",
+      "version": "0.5.0",
+      "owner": "Communications",
+      "mission": "Foundation",
+      "visibility": "public",
+      "port": 3000,
+      "path": "apps/website"
+    }
+  ]
+}

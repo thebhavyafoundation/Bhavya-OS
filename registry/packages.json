@@ -1,0 +1,88 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "packages",
+  "generated_at": "2026-07-23T16:56:32.110Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
+    {
+      "id": "pkg.auth",
+      "name": "auth",
+      "path": "packages/auth"
+    },
+    {
+      "id": "pkg.bdl",
+      "name": "bdl",
+      "path": "packages/bdl"
+    },
+    {
+      "id": "pkg.bdx",
+      "name": "bdx",
+      "path": "packages/bdx"
+    },
+    {
+      "id": "pkg.branding",
+      "name": "branding",
+      "path": "packages/branding"
+    },
+    {
+      "id": "pkg.charts",
+      "name": "charts",
+      "path": "packages/charts"
+    },
+    {
+      "id": "pkg.config",
+      "name": "config",
+      "path": "packages/config"
+    },
+    {
+      "id": "pkg.database",
+      "name": "database",
+      "path": "packages/database"
+    },
+    {
+      "id": "pkg.docs",
+      "name": "docs",
+      "path": "packages/docs"
+    },
+    {
+      "id": "pkg.eslint",
+      "name": "eslint",
+      "path": "packages/eslint"
+    },
+    {
+      "id": "pkg.icons",
+      "name": "icons",
+      "path": "packages/icons"
+    },
+    {
+      "id": "pkg.maps",
+      "name": "maps",
+      "path": "packages/maps"
+    },
+    {
+      "id": "pkg.mission-runtime",
+      "name": "mission-runtime",
+      "path": "packages/mission-runtime"
+    },
+    {
+      "id": "pkg.runtime",
+      "name": "runtime",
+      "path": "packages/runtime"
+    },
+    {
+      "id": "pkg.sdk",
+      "name": "sdk",
+      "path": "packages/sdk"
+    },
+    {
+      "id": "pkg.typescript",
+      "name": "typescript",
+      "path": "packages/typescript"
+    },
+    {
+      "id": "pkg.ui",
+      "name": "ui",
+      "path": "packages/ui"
+    }
+  ]
+}

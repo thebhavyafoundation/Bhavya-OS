@@ -1,0 +1,19 @@
+{
+  "domain": "projects",
+  "owner": "agent.engineering",
+  "update_policy": "versioned-replace",
+  "retention_policy": "indefinite",
+  "records": [
+    {
+      "id": "proj-monorepo",
+      "timestamp": "2026-07-22T23:44:00Z",
+      "author": "agent.engineering",
+      "payload": {
+        "name": "Bhavya OS Monorepo",
+        "apps_count": 9,
+        "packages_count": 12,
+        "status": "active"
+      }
+    }
+  ]
+}

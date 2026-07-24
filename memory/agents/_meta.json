@@ -1,0 +1,32 @@
+{
+  "domain": "agents",
+  "owner": "agent.founder",
+  "update_policy": "versioned-replace",
+  "retention_policy": "indefinite",
+  "records": [
+    {
+      "id": "agent.founder",
+      "timestamp": "2026-07-22T23:15:00Z",
+      "author": "agent.founder",
+      "payload": { "name": "Founder Office", "role": "founder", "status": "active" }
+    },
+    {
+      "id": "agent.documentation",
+      "timestamp": "2026-07-22T23:15:00Z",
+      "author": "agent.founder",
+      "payload": { "name": "Documentation", "role": "documentation", "status": "active" }
+    },
+    {
+      "id": "agent.governance",
+      "timestamp": "2026-07-22T23:15:00Z",
+      "author": "agent.founder",
+      "payload": { "name": "Governance", "role": "governance", "status": "active" }
+    },
+    {
+      "id": "agent.release",
+      "timestamp": "2026-07-22T23:15:00Z",
+      "author": "agent.founder",
+      "payload": { "name": "Release Engineering", "role": "release", "status": "active" }
+    }
+  ]
+}

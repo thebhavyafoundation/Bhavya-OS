@@ -1,0 +1,14 @@
+{
+  "domain": "knowledge",
+  "owner": "agent.documentation",
+  "update_policy": "append-only",
+  "retention_policy": "indefinite",
+  "records": [
+    {
+      "id": "know-001",
+      "timestamp": "2026-07-22T23:44:00Z",
+      "author": "agent.documentation",
+      "payload": { "title": "Bhavya OS Institutional Architecture Index", "status": "INDEXED" }
+    }
+  ]
+}

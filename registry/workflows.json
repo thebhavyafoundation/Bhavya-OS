@@ -1,0 +1,38 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "workflows",
+  "generated_at": "2026-07-23T16:56:32.139Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
+    {
+      "id": "wf.dev.feature",
+      "category": "Development",
+      "name": "Feature Development"
+    },
+    {
+      "id": "wf.ops.registry",
+      "category": "Operations",
+      "name": "Registry Synchronization"
+    },
+    {
+      "id": "wf.gov.adr",
+      "category": "Governance",
+      "name": "ADR Lifecycle"
+    },
+    {
+      "id": "wf.rel.bump",
+      "category": "Release",
+      "name": "Version Bump & Release"
+    },
+    {
+      "id": "wf.inc.failover",
+      "category": "Incident",
+      "name": "Gateway Provider Failover"
+    },
+    {
+      "id": "wf.know.ingest",
+      "category": "Knowledge",
+      "name": "MDX Knowledge Ingestion"
+    }
+  ]
+}

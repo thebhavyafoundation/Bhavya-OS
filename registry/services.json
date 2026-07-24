@@ -1,0 +1,44 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "services",
+  "generated_at": "2026-07-23T16:56:32.140Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
+    {
+      "id": "svc.ai_gateway",
+      "name": "AI Gateway Proxy",
+      "endpoint": "http://localhost:8082",
+      "status": "active"
+    },
+    {
+      "id": "svc.website",
+      "name": "Bhavya Foundation Website",
+      "endpoint": "http://localhost:3000",
+      "status": "active"
+    },
+    {
+      "id": "svc.admin_dashboard",
+      "name": "Engineering Dashboard",
+      "endpoint": "http://localhost:3001",
+      "status": "active"
+    },
+    {
+      "id": "svc.docs",
+      "name": "Knowledge Platform",
+      "endpoint": "http://localhost:3002",
+      "status": "active"
+    },
+    {
+      "id": "svc.transparency",
+      "name": "Transparency Portal",
+      "endpoint": "http://localhost:3003",
+      "status": "active"
+    },
+    {
+      "id": "svc.openhuman_rpc",
+      "name": "OpenHuman Core RPC",
+      "endpoint": "http://127.0.0.1:7788/rpc",
+      "status": "configured"
+    }
+  ]
+}

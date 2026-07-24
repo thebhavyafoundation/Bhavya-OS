@@ -1,0 +1,14 @@
+{
+  "_notice": "Public navigation registry. All public routes are served directly inside the main website app.",
+  "items": [
+    { "id": "nav-home",         "label": "Home",         "href": "/" },
+    { "id": "nav-mission",      "label": "Our Mission",  "href": "/mission" },
+    { "id": "nav-nature",       "label": "Nature",       "href": "/nature" },
+    { "id": "nav-knowledge",    "label": "Knowledge",    "href": "/knowledge" },
+    { "id": "nav-heritage",     "label": "Heritage",     "href": "/heritage" },
+    { "id": "nav-community",    "label": "Community",    "href": "/community" },
+    { "id": "nav-transparency", "label": "Transparency", "href": "/transparency" },
+    { "id": "nav-programs",     "label": "Programs",     "href": "/programs", "visibility": "public" },
+    { "id": "nav-about",        "label": "About",        "href": "/about", "visibility": "public" }
+  ]
+}

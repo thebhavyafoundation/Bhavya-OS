@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bhavya OS Workflow Schema",
+  "type": "object",
+  "required": ["id", "name", "category", "steps", "owner"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": ["Development", "Operations", "Governance", "Release", "Incident", "Knowledge"]
+    },
+    "owner": { "type": "string" },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "action"],
+        "properties": {
+          "step": { "type": "integer" },
+          "action": { "type": "string" },
+          "agent": { "type": "string" },
+          "required_tools": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

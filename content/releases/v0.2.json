@@ -1,0 +1,1 @@
+{"id":"REL-001","version":"v0.2","name":"Platform Integration","status":"RELEASED","date":"2026-07-22","type":"Minor","description":"AI Gateway setup, OpenHuman workspace binding, provider abstraction.","highlights":["Provider-agnostic AI Gateway abstraction layer (ADR-0002)","OpenHuman workspace RPC integration","Gateway health monitoring endpoint"]}

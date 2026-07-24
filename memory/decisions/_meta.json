@@ -1,0 +1,20 @@
+{
+  "domain": "decisions",
+  "owner": "agent.governance",
+  "update_policy": "immutable-audit",
+  "retention_policy": "indefinite",
+  "records": [
+    {
+      "id": "adr-0001",
+      "timestamp": "2026-07-15T00:00:00Z",
+      "author": "agent.governance",
+      "payload": { "adr": "ADR-0001", "title": "Architectural Decision Records Standard", "status": "Accepted" }
+    },
+    {
+      "id": "adr-0002",
+      "timestamp": "2026-07-22T23:44:00Z",
+      "author": "agent.governance",
+      "payload": { "adr": "ADR-0002", "title": "Provider-Agnostic AI Gateway Abstraction Layer", "status": "Accepted" }
+    }
+  ]
+}

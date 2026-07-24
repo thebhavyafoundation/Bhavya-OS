@@ -1,0 +1,14 @@
+{
+  "domain": "tasks",
+  "owner": "agent.engineering",
+  "update_policy": "versioned-replace",
+  "retention_policy": "release-lifecycle",
+  "records": [
+    {
+      "id": "task-v0.3-impl",
+      "timestamp": "2026-07-22T23:44:00Z",
+      "author": "agent.engineering",
+      "payload": { "title": "v0.3 Institutional Runtime Implementation", "status": "IN_PROGRESS" }
+    }
+  ]
+}

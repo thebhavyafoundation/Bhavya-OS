@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bhavya OS Memory Schema",
+  "type": "object",
+  "required": ["domain", "owner", "update_policy", "retention_policy", "records"],
+  "properties": {
+    "domain": {
+      "type": "string",
+      "enum": ["projects", "releases", "agents", "knowledge", "decisions", "tasks", "research"]
+    },
+    "owner": {
+      "type": "string",
+      "description": "Agent ID responsible for this memory domain"
+    },
+    "update_policy": {
+      "type": "string",
+      "enum": ["append-only", "versioned-replace", "immutable-audit"]
+    },
+    "retention_policy": {
+      "type": "string",
+      "enum": ["indefinite", "release-lifecycle", "ephemeral"]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "timestamp", "payload"],
+        "properties": {
+          "id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "author": { "type": "string" },
+          "payload": { "type": "object" }
+        }
+      }
+    }
+  }
+}

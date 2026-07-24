@@ -1,0 +1,12 @@
+{
+  "_notice": "Canonical development port map. Never hardcode ports in application code.",
+  "website":      3000,
+  "admin":        3001,
+  "docs":         3002,
+  "transparency": 3003,
+  "forest":       3004,
+  "heritage":     3005,
+  "volunteer":    3006,
+  "knowledge":    3007,
+  "library":      3008
+}

@@ -1,0 +1,83 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "version": "v1.0",
+  "generatedAt": "2026-07-22T18:31:33.510Z",
+  "generator": "scripts/generate-knowledge-graph.js",
+  "documents": [
+    {
+      "id": "doc-adr-0001",
+      "title": "ADR-0001 Architectural Decision Records Standard",
+      "category": "ADR",
+      "path": "governance/adr/ADR-0001.md",
+      "content": "Adopt ADR format for all significant engineering, architectural, and governance decisions.",
+      "tags": [
+        "adr",
+        "governance",
+        "architecture"
+      ]
+    },
+    {
+      "id": "doc-adr-0002",
+      "title": "ADR-0002 Provider-Agnostic AI Gateway Abstraction Layer",
+      "category": "ADR",
+      "path": "governance/adr/ADR-0002.md",
+      "content": "Provider-agnostic AI Gateway architecture exposing generate, chat, embed, transcribe, reason endpoints.",
+      "tags": [
+        "adr",
+        "ai",
+        "gateway",
+        "architecture"
+      ]
+    },
+    {
+      "id": "doc-rfc-0003",
+      "title": "RFC-0003 AI Gateway Abstraction & Routing Architecture",
+      "category": "RFC",
+      "path": "rfcs/RFC-0003-AI-Gateway.md",
+      "content": "Technical RFC specifying the gateway routing pipeline, provider backends, and failover strategy.",
+      "tags": [
+        "rfc",
+        "ai",
+        "gateway"
+      ]
+    },
+    {
+      "id": "doc-bar-0001",
+      "title": "BAR-001 Bhavya Architecture Rules",
+      "category": "Standard",
+      "path": "standards/architecture.md",
+      "content": "Monorepo dependency rules, no circular dependencies, design system isolation.",
+      "tags": [
+        "standard",
+        "bar",
+        "architecture"
+      ]
+    },
+    {
+      "id": "doc-bdl-001",
+      "title": "BDL Bhavya Design Language",
+      "category": "Standard",
+      "path": "standards/design.md",
+      "content": "UI design tokens, typography, visual hierarchy, color palette, accessibility WCAG AA.",
+      "tags": [
+        "standard",
+        "bdl",
+        "design",
+        "a11y"
+      ]
+    },
+    {
+      "id": "doc-bps-001",
+      "title": "BPS Bhavya Production Standards",
+      "category": "Standard",
+      "path": "standards/release.md",
+      "content": "CI/CD quality gates, bundle budgets, automated testing requirements, release checklists.",
+      "tags": [
+        "standard",
+        "bps",
+        "release",
+        "quality"
+      ]
+    }
+  ]
+}

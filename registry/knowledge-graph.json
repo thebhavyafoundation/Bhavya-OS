@@ -1,0 +1,192 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "version": "v1.0",
+  "generatedAt": "2026-07-22T18:31:33.485Z",
+  "generator": "scripts/generate-knowledge-graph.js",
+  "nodes": [
+    {
+      "id": "ADR-0001",
+      "type": "adr",
+      "title": "Architectural Decision Records Standard",
+      "owner": "Architecture Board",
+      "status": "Accepted",
+      "created": "2026-07-15",
+      "updated": "2026-07-15",
+      "links": [
+        "BAR-001",
+        "Release-v0.1"
+      ]
+    },
+    {
+      "id": "ADR-0002",
+      "type": "adr",
+      "title": "Provider-Agnostic AI Gateway Abstraction Layer",
+      "owner": "Engineering Agent",
+      "status": "Accepted",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "RFC-0003",
+        "BPS-001",
+        "Release-v0.3"
+      ]
+    },
+    {
+      "id": "RFC-0001",
+      "type": "rfc",
+      "title": "Volunteer Portal Architecture",
+      "owner": "Community Agent",
+      "status": "Proposed",
+      "created": "2026-07-20",
+      "updated": "2026-07-20",
+      "links": [
+        "BDL-001",
+        "agent.volunteer"
+      ]
+    },
+    {
+      "id": "RFC-0002",
+      "type": "rfc",
+      "title": "Forest GIS & Environmental Mapping Infrastructure",
+      "owner": "Forest Agent",
+      "status": "Proposed",
+      "created": "2026-07-21",
+      "updated": "2026-07-21",
+      "links": [
+        "BAR-001",
+        "agent.forest"
+      ]
+    },
+    {
+      "id": "RFC-0003",
+      "type": "rfc",
+      "title": "AI Gateway Abstraction & Routing Architecture",
+      "owner": "Engineering Agent",
+      "status": "Accepted",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0002",
+        "agent.engineering"
+      ]
+    },
+    {
+      "id": "BAR-001",
+      "type": "standard",
+      "title": "Bhavya Architecture Rules",
+      "owner": "Governance Agent",
+      "status": "Active",
+      "created": "2026-07-15",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0001",
+        "ADR-0002"
+      ]
+    },
+    {
+      "id": "BDL-001",
+      "type": "standard",
+      "title": "Bhavya Design Language",
+      "owner": "Design Agent",
+      "status": "Active",
+      "created": "2026-07-15",
+      "updated": "2026-07-22",
+      "links": [
+        "packages/ui",
+        "packages/theme"
+      ]
+    },
+    {
+      "id": "BPS-001",
+      "type": "standard",
+      "title": "Bhavya Production Standards",
+      "owner": "Release Agent",
+      "status": "Active",
+      "created": "2026-07-15",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0002",
+        "Release-v0.3"
+      ]
+    },
+    {
+      "id": "BGS-001",
+      "type": "standard",
+      "title": "Bhavya Governance Standards",
+      "owner": "Governance Agent",
+      "status": "Active",
+      "created": "2026-07-15",
+      "updated": "2026-07-22",
+      "links": [
+        "agent.governance",
+        "agent.founder"
+      ]
+    },
+    {
+      "id": "BOM-001",
+      "type": "standard",
+      "title": "Bhavya Operating Model",
+      "owner": "Founder Agent",
+      "status": "Active",
+      "created": "2026-07-15",
+      "updated": "2026-07-22",
+      "links": [
+        "agent.founder",
+        "agent.release"
+      ]
+    },
+    {
+      "id": "Release-v0.1",
+      "type": "release",
+      "title": "v0.1 Foundation Bootstrap",
+      "owner": "Release Agent",
+      "status": "Released",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0001",
+        "BAR-001"
+      ]
+    },
+    {
+      "id": "Release-v0.2",
+      "type": "release",
+      "title": "v0.2 Platform Integration",
+      "owner": "Release Agent",
+      "status": "Released",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "RFC-0003",
+        "agent.engineering"
+      ]
+    },
+    {
+      "id": "Release-v0.3",
+      "type": "release",
+      "title": "v0.3 Institutional Runtime",
+      "owner": "Release Agent",
+      "status": "Certified",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0002",
+        "BPS-001"
+      ]
+    },
+    {
+      "id": "Release-v0.4",
+      "type": "release",
+      "title": "v0.4 Institutional Knowledge Platform",
+      "owner": "Release Agent",
+      "status": "Active",
+      "created": "2026-07-22",
+      "updated": "2026-07-22",
+      "links": [
+        "ADR-0001",
+        "ADR-0002",
+        "RFC-0003"
+      ]
+    }
+  ]
+}

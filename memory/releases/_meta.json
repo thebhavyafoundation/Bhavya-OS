@@ -1,0 +1,44 @@
+{
+  "domain": "releases",
+  "owner": "agent.release",
+  "update_policy": "append-only",
+  "retention_policy": "indefinite",
+  "records": [
+    {
+      "id": "rel-v0.1",
+      "timestamp": "2026-07-22T22:30:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.1", "milestone": "Foundation Bootstrap", "status": "RELEASED" }
+    },
+    {
+      "id": "rel-v0.2",
+      "timestamp": "2026-07-22T23:36:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.2", "milestone": "Platform Integration", "status": "RELEASED" }
+    },
+    {
+      "id": "rel-v0.3",
+      "timestamp": "2026-07-22T23:48:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.3", "milestone": "Institutional Runtime", "status": "CERTIFIED" }
+    },
+    {
+      "id": "rel-v0.4",
+      "timestamp": "2026-07-23T00:01:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.4", "milestone": "Institutional Knowledge Platform", "status": "CERTIFIED" }
+    },
+    {
+      "id": "rel-v0.5",
+      "timestamp": "2026-07-23T21:20:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.5", "milestone": "Mission Applications", "status": "CERTIFIED" }
+    },
+    {
+      "id": "rel-v0.6",
+      "timestamp": "2026-07-23T21:20:00Z",
+      "author": "agent.release",
+      "payload": { "version": "v0.6", "milestone": "Public APIs & Integrations", "status": "IN_PROGRESS" }
+    }
+  ]
+}

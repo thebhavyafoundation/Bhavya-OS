@@ -1,0 +1,72 @@
+{
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "standards",
+  "generated_at": "2026-07-23T16:56:32.138Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
+    {
+      "id": "std.accessibility",
+      "file": "standards/accessibility.md"
+    },
+    {
+      "id": "std.api",
+      "file": "standards/api.md"
+    },
+    {
+      "id": "std.architecture",
+      "file": "standards/architecture.md"
+    },
+    {
+      "id": "std.backend",
+      "file": "standards/backend.md"
+    },
+    {
+      "id": "std.database",
+      "file": "standards/database.md"
+    },
+    {
+      "id": "std.design",
+      "file": "standards/design.md"
+    },
+    {
+      "id": "std.documentation",
+      "file": "standards/documentation.md"
+    },
+    {
+      "id": "std.engineering",
+      "file": "standards/engineering.md"
+    },
+    {
+      "id": "std.frontend",
+      "file": "standards/frontend.md"
+    },
+    {
+      "id": "std.git",
+      "file": "standards/git.md"
+    },
+    {
+      "id": "std.observability",
+      "file": "standards/observability.md"
+    },
+    {
+      "id": "std.performance",
+      "file": "standards/performance.md"
+    },
+    {
+      "id": "std.README",
+      "file": "standards/README.md"
+    },
+    {
+      "id": "std.release",
+      "file": "standards/release.md"
+    },
+    {
+      "id": "std.security",
+      "file": "standards/security.md"
+    },
+    {
+      "id": "std.testing",
+      "file": "standards/testing.md"
+    }
+  ]
+}
