@@ -1,0 +1,20 @@
+id: REL-001
+version: v0.1
+name: Foundation Bootstrap
+status: Released
+date: 2026-07-22
+objective: Monorepo architecture, BDL/BPS/BAR standards, initial package and application shells.
+goals:
+  - Monorepo setup (Turborepo + pnpm)
+  - Initial apps and packages shells
+  - Master Bootstrap Prompt & Execution Protocol
+  - Bhavya Design Language tokens
+scope:
+  packages:
+    - PKG-001  # ui
+    - PKG-004  # bdl
+    - PKG-013  # typescript
+    - PKG-014  # eslint
+  apps:
+    - APP-001  # website
+successor: REL-002

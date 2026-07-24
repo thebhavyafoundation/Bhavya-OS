@@ -1,0 +1,14 @@
+{
+  "id": "TASK-005",
+  "title": "Build APP-005 (forest GIS)",
+  "status": "pending",
+  "priority": "low",
+  "goal": "Forest Platform",
+  "inputs": ["APP-005", "PKG-009", "PKG-002"],
+  "outputs": ["apps/forest/src"],
+  "commands": [],
+  "validation": ["lint", "typecheck"],
+  "success": ["build"],
+  "capability": "react",
+  "estimated_minutes": 90
+}

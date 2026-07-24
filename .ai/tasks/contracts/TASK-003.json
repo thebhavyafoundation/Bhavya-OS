@@ -1,0 +1,14 @@
+{
+  "id": "TASK-003",
+  "title": "Build Public APIs (v0.6)",
+  "status": "pending",
+  "priority": "medium",
+  "goal": "Public API Layer",
+  "inputs": ["PKG-002", "STD-002"],
+  "outputs": ["apps/transparency/src/api"],
+  "commands": [],
+  "validation": ["lint", "typecheck", "tests"],
+  "success": ["build", "runtime:validate"],
+  "capability": "api-design",
+  "estimated_minutes": 60
+}

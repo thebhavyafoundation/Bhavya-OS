@@ -1,0 +1,25 @@
+{
+  "release": "v0.5",
+  "name": "Mission Applications",
+  "status": "Certified",
+  "task": "Establish AI Runtime v2",
+  "task_priority": "High",
+  "branch": "main",
+  "last_updated": "2026-07-23",
+  "dirty": false,
+  "last_build": "2026-07-23T16:34:54.632Z",
+  "last_validation": "2026-07-23T16:34:54.632Z",
+  "next": [
+    "APP-001: Wire apps to mission-runtime",
+    "v0.6 Public APIs & Integrations"
+  ],
+  "blocked": [],
+  "completed": [
+    "REL-001 v0.1 Foundation Bootstrap",
+    "REL-002 v0.2 Platform Integration",
+    "REL-003 v0.3 Institutional Runtime",
+    "REL-004 v0.4 Institutional Knowledge Platform",
+    "REL-005 v0.5 Mission Applications",
+    ".ai runtime v2 fully established"
+  ]
+}

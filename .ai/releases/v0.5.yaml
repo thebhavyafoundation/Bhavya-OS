@@ -1,0 +1,47 @@
+id: REL-005
+version: v0.5
+name: Mission Applications
+status: Certified
+date: 2026-07-23
+objective: Consistent mission application architecture with shared mission runtime, public website, application manifests, and the establishment of the AI runtime (.ai/ as AI Operating System).
+goals:
+  - Modular Infrastructure-Only Runtime (packages/mission-runtime)
+  - Explicit App Manifests across all apps
+  - Centralized Environment Configuration
+  - Navigation Registries
+  - Separated Content Layer
+  - Status Service Abstraction
+  - Public Foundation Homepage
+  - Mission App Shell Wiring
+  - WCAG 2.1 AA Accessibility & Landmark Regions
+  - .ai/ AI Operating System (runtime.json, index.yaml, retrieval rules, context layers, load budgets, validation gates, memory split, agent registry, entity IDs, release YAMLs, dependencies.yaml)
+scope:
+  packages:
+    - PKG-002  # mission-runtime
+    - PKG-001  # ui
+    - PKG-004  # bdl
+    - PKG-011  # config
+  apps:
+    - APP-001  # website
+    - APP-002  # admin
+    - APP-003  # docs
+    - APP-004  # transparency
+    - APP-005  # forest
+    - APP-006  # heritage
+    - APP-007  # volunteer
+    - APP-008  # knowledge
+    - APP-009  # library
+  infrastructure:
+    - registry/*.json (all 8)
+    - config/*.json (all 3)
+    - navigation/*.json (all 3)
+  ai_runtime:
+    - .ai/runtime.json
+    - .ai/index.yaml
+    - .ai/retrieval.md
+    - .ai/validation.md
+    - .ai/dependencies.yaml
+    - .ai/agents/registry.yaml
+    - .ai/memory/ (5 files)
+    - .ai/releases/ (5 YAMLs)
+successor: REL-006

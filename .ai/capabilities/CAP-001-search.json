@@ -1,0 +1,18 @@
+{
+  "id": "CAP-001",
+  "name": "Search",
+  "version": "1.0",
+  "owner": "runtime",
+  "description": "Full-text search across institutional knowledge, standards, and documents",
+  "inputs": [
+    { "name": "query", "type": "string", "description": "Search query text" },
+    { "name": "type", "type": "string", "description": "Optional filter by content type", "optional": true },
+    { "name": "limit", "type": "integer", "description": "Maximum results", "default": 10 }
+  ],
+  "outputs": [
+    { "name": "ranked_results", "type": "array", "description": "Results sorted by relevance score" }
+  ],
+  "used_by": ["APP-001", "APP-003", "APP-005"],
+  "provided_by": "packages/mission-runtime/src/search/index.ts",
+  "status": "active"
+}

@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    { "id": "TASK-001", "title": "Establish AI Runtime v2", "status": "completed", "priority": "high" },
+    { "id": "TASK-002", "title": "Wire APP-001 (website) to PKG-002 (mission-runtime)", "status": "pending", "priority": "high" },
+    { "id": "TASK-003", "title": "Build Public APIs (v0.6)", "status": "pending", "priority": "medium" },
+    { "id": "TASK-004", "title": "Implement PKG-010 (auth)", "status": "pending", "priority": "medium" },
+    { "id": "TASK-005", "title": "Build APP-005 (forest GIS)", "status": "pending", "priority": "low" },
+    { "id": "TASK-006", "title": "Build APP-007 (volunteer portal)", "status": "pending", "priority": "low" },
+    { "id": "TASK-007", "title": "Run compile-runtime.mjs after changes", "status": "completed", "priority": "high" },
+    { "id": "TASK-008", "title": "Run validate-runtime.mjs before commit", "status": "completed", "priority": "high" }
+  ],
+  "edges": [
+    { "source": "TASK-002", "target": "TASK-001", "type": "depends" },
+    { "source": "TASK-003", "target": "TASK-002", "type": "depends" },
+    { "source": "TASK-004", "target": "TASK-003", "type": "depends" },
+    { "source": "TASK-005", "target": "TASK-002", "type": "depends" },
+    { "source": "TASK-006", "target": "TASK-002", "type": "depends" },
+    { "source": "TASK-007", "target": "PKG-014", "type": "uses" },
+    { "source": "TASK-008", "target": "PKG-014", "type": "uses" }
+  ]
+}

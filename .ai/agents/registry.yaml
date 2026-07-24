@@ -1,0 +1,124 @@
+agents:
+  architecture:
+    capabilities:
+      - system-design
+      - dependency-analysis
+      - architecture-review
+      - adr-authoring
+    loads:
+      - architecture
+      - repository-map
+      - dependencies
+      - standards/architecture
+      - governance/adr
+    max_files: 6
+
+  frontend:
+    capabilities:
+      - react
+      - nextjs
+      - typescript
+      - tailwind-css
+      - accessibility-wcag
+      - responsive-design
+      - component-design
+    loads:
+      - design-system
+      - coding-standards
+      - standards/frontend
+      - standards/accessibility
+      - memory/ui
+    max_files: 8
+
+  backend:
+    capabilities:
+      - api-design
+      - nodejs
+      - data-modeling
+      - authentication
+      - input-validation
+    loads:
+      - architecture
+      - coding-standards
+      - standards/api
+      - standards/backend
+      - schemas
+    max_files: 6
+
+  documentation:
+    capabilities:
+      - technical-writing
+      - mdx
+      - spec-authoring
+      - api-documentation
+      - knowledge-graph
+    loads:
+      - project-summary
+      - glossary
+      - standards/documentation
+      - specs
+    max_files: 5
+
+  release:
+    capabilities:
+      - versioning
+      - changelog
+      - ci-cd
+      - release-management
+      - snapshot-certification
+    loads:
+      - current-release
+      - roadmap
+      - standards/release
+      - registry
+    max_files: 5
+
+  testing:
+    capabilities:
+      - unit-testing
+      - accessibility-audit
+      - e2e-testing
+      - quality-gates
+      - linting
+    loads:
+      - coding-standards
+      - standards/testing
+      - standards/accessibility
+    max_files: 5
+
+  security:
+    capabilities:
+      - security-review
+      - vulnerability-scanning
+      - compliance
+      - secrets-management
+    loads:
+      - standards/security
+      - governance/security
+    max_files: 4
+
+  devops:
+    capabilities:
+      - docker
+      - ci-cd-pipelines
+      - infrastructure
+      - monitoring
+      - deployment
+    loads:
+      - repository-map
+      - config
+      - Dockerfile
+      - turbo.json
+    max_files: 5
+
+  research:
+    capabilities:
+      - technology-evaluation
+      - rfc-authoring
+      - feasibility-study
+      - vendor-analysis
+    loads:
+      - rfcs
+      - architecture
+      - glossary
+    max_files: 5

@@ -1,0 +1,37 @@
+{"time":"2026-07-23T00:00:00Z","type":"session.start","agent":"engineering","data":{"task":"Establish AI Runtime v2","version":"2.0"}}
+{"time":"2026-07-23T00:00:01Z","type":"file.created","agent":"engineering","data":{"path":".ai/runtime.json"}}
+{"time":"2026-07-23T00:00:02Z","type":"file.created","agent":"engineering","data":{"path":".ai/dependencies.yaml"}}
+{"time":"2026-07-23T00:00:03Z","type":"file.created","agent":"engineering","data":{"path":".ai/agents/registry.yaml"}}
+{"time":"2026-07-23T00:00:04Z","type":"decision.made","agent":"engineering","data":{"id":"DEC-001","title":"Establish .ai/ as AI Operating System"}}
+{"time":"2026-07-23T00:00:05Z","type":"decision.made","agent":"engineering","data":{"id":"DEC-002","title":"Context Loader Routing Pattern"}}
+{"time":"2026-07-23T00:00:06Z","type":"decision.made","agent":"engineering","data":{"id":"DEC-003","title":"Context Layers L0-L3"}}
+{"time":"2026-07-23T00:00:07Z","type":"decision.made","agent":"engineering","data":{"id":"DEC-004","title":"Entity ID System"}}
+{"time":"2026-07-23T00:00:08Z","type":"file.created","agent":"engineering","data":{"path":".ai/index.yaml"}}
+{"time":"2026-07-23T00:00:09Z","type":"file.created","agent":"engineering","data":{"path":".ai/retrieval.md"}}
+{"time":"2026-07-23T00:00:10Z","type":"file.created","agent":"engineering","data":{"path":".ai/validation.md"}}
+{"time":"2026-07-23T00:00:11Z","type":"file.created","agent":"engineering","data":{"path":".ai/memory/project.md"}}
+{"time":"2026-07-23T00:00:12Z","type":"file.created","agent":"engineering","data":{"path":".ai/memory/engineering.md"}}
+{"time":"2026-07-23T00:00:13Z","type":"file.created","agent":"engineering","data":{"path":".ai/memory/governance.md"}}
+{"time":"2026-07-23T00:00:14Z","type":"file.created","agent":"engineering","data":{"path":".ai/memory/ui.md"}}
+{"time":"2026-07-23T00:00:15Z","type":"file.created","agent":"engineering","data":{"path":".ai/memory/agents.md"}}
+{"time":"2026-07-23T00:00:16Z","type":"file.created","agent":"engineering","data":{"path":".ai/releases/v0.1.yaml"}}
+{"time":"2026-07-23T00:00:17Z","type":"file.created","agent":"engineering","data":{"path":".ai/releases/v0.2.yaml"}}
+{"time":"2026-07-23T00:00:18Z","type":"file.created","agent":"engineering","data":{"path":".ai/releases/v0.3.yaml"}}
+{"time":"2026-07-23T00:00:19Z","type":"file.created","agent":"engineering","data":{"path":".ai/releases/v0.4.yaml"}}
+{"time":"2026-07-23T00:00:20Z","type":"file.created","agent":"engineering","data":{"path":".ai/releases/v0.5.yaml"}}
+{"time":"2026-07-23T00:00:21Z","type":"file.created","agent":"engineering","data":{"path":".ai/build/compile-runtime.mjs"}}
+{"time":"2026-07-23T00:00:22Z","type":"file.created","agent":"engineering","data":{"path":".ai/build/validate-runtime.mjs"}}
+{"time":"2026-07-23T00:00:23Z","type":"file.created","agent":"engineering","data":{"path":".ai/events/event-log.jsonl"}}
+{"time":"2026-07-23T00:00:24Z","type":"file.created","agent":"engineering","data":{"path":".ai/state/repository.json"}}
+{"time":"2026-07-23T00:00:25Z","type":"file.created","agent":"engineering","data":{"path":".ai/tasks/graph.json"}}
+{"time":"2026-07-23T00:00:26Z","type":"file.created","agent":"engineering","data":{"path":".ai/graph/graph.json"}}
+{"time":"2026-07-23T00:00:27Z","type":"build.passed","agent":"engineering","data":{"command":"compile-runtime.mjs"}}
+{"time":"2026-07-23T00:00:28Z","type":"validation.passed","agent":"engineering","data":{"check":"validate-runtime.mjs"}}
+{"time":"2026-07-23T16:33:45.573Z","type":"build.passed","agent":"daemon","data":{"command":"compile-runtime.mjs","trigger":"startup"}}
+{"time":"2026-07-23T16:33:45.602Z","type":"validation.passed","agent":"daemon","data":{"check":"validate-runtime.mjs","trigger":"startup"}}
+{"time":"2026-07-23T16:33:45.616Z","type":"session.start","agent":"daemon","data":{"task":"runtime-daemon"}}
+{"time":"2026-07-23T16:34:54.586Z","type":"build.passed","agent":"daemon","data":{"command":"compile-runtime.mjs","trigger":"startup"}}
+{"time":"2026-07-23T16:34:54.631Z","type":"validation.passed","agent":"daemon","data":{"check":"validate-runtime.mjs","trigger":"startup"}}
+{"time":"2026-07-23T16:34:54.634Z","type":"session.start","agent":"daemon","data":{"task":"runtime-daemon"}}
+{"time":"2026-07-23T16:41:05.557Z","type":"orchestration.plan","agent":"orchestrator","data":{"goal":"Build APP-001","task_count":5,"assignable":0}}
+{"time":"2026-07-23T16:42:24.315Z","type":"orchestration.plan","agent":"orchestrator","data":{"goal":"Build APP-001","task_count":5,"assignable":5}}

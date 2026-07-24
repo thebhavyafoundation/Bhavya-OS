@@ -1,0 +1,28 @@
+id: REL-003
+version: v0.3
+name: Institutional Runtime
+status: Certified
+date: 2026-07-22
+objective: Self-managing institutional platform with schema validation, specification layer, domain-owned memory, deterministic registries, and AI gateway contracts.
+goals:
+  - Schema Validation Layer (schemas/*.schema.json)
+  - Specification layer (.ai/ MEMORY, WORKFLOWS, EVENTS, DECISIONS, TOOLS, PERMISSIONS, KPIS, POLICIES)
+  - Domain-Owned Memory System (memory/*/_meta.json)
+  - Deterministic Registry Generator (scripts/generate-registry.js)
+  - Provider-Agnostic AI Gateway Contract (ADR-0002, RFC-0003)
+  - Engineering Dashboard v2 Control Center
+scope:
+  schemas:
+    - agent.schema.json
+    - event.schema.json
+    - knowledge-graph.schema.json
+    - memory.schema.json
+    - registry.schema.json
+    - search-index.schema.json
+    - workflow.schema.json
+  infrastructure:
+    - registry/*.json generation
+    - memory/ domain ownership
+  apps:
+    - APP-002  # admin
+successor: REL-004

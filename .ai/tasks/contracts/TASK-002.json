@@ -1,0 +1,14 @@
+{
+  "id": "TASK-002",
+  "title": "Wire APP-001 (website) to PKG-002 (mission-runtime)",
+  "status": "pending",
+  "priority": "high",
+  "goal": "Build APP-001",
+  "inputs": ["APP-001", "PKG-002"],
+  "outputs": ["apps/website/src/services"],
+  "commands": [],
+  "validation": ["lint", "typecheck"],
+  "success": ["build"],
+  "capability": "react",
+  "estimated_minutes": 30
+}

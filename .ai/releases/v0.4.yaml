@@ -1,0 +1,25 @@
+id: REL-004
+version: v0.4
+name: Institutional Knowledge Platform
+status: Certified
+date: 2026-07-22
+objective: Comprehensive institutional knowledge layer for humans and AI agents — documentation portal, governance browser, standards browser, search, versioned docs, public APIs, transparency dashboard, knowledge graph.
+goals:
+  - Knowledge Graph schema and generator
+  - Search index schema
+  - Link validator
+  - Knowledge Browser (apps/docs)
+  - Public Read-Only APIs (apps/transparency)
+  - Transparency dashboard
+  - Search across institutional knowledge
+scope:
+  apps:
+    - APP-003  # docs
+    - APP-004  # transparency
+  infrastructure:
+    - knowledge-graph.json
+    - search-index.json
+  governance:
+    - ADR-0002 (AI Gateway)
+    - RFC-0003 (AI Gateway)
+successor: REL-005

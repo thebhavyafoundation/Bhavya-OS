@@ -1,0 +1,19 @@
+id: REL-002
+version: v0.2
+name: Platform Integration
+status: Released
+date: 2026-07-22
+objective: AI Gateway setup, OpenHuman workspace binding, Claude Code configuration, departmental agent registration.
+goals:
+  - AI Gateway setup & local proxy
+  - OpenHuman workspace binding
+  - Claude Code environment configuration
+  - Core agent registrations
+  - Engineering Dashboard v1
+scope:
+  apps:
+    - APP-002  # admin
+  infrastructure:
+    - AI Gateway routing
+    - Agent registration
+successor: REL-003

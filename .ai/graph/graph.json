@@ -1,0 +1,311 @@
+{
+  "nodes": [
+    {
+      "id": "APP-001",
+      "type": "app",
+      "name": "website",
+      "path": "apps/website"
+    },
+    {
+      "id": "APP-002",
+      "type": "app",
+      "name": "admin",
+      "path": "apps/admin"
+    },
+    {
+      "id": "APP-003",
+      "type": "app",
+      "name": "docs",
+      "path": "apps/docs"
+    },
+    {
+      "id": "APP-004",
+      "type": "app",
+      "name": "transparency",
+      "path": "apps/transparency"
+    },
+    {
+      "id": "APP-005",
+      "type": "app",
+      "name": "forest",
+      "path": "apps/forest"
+    },
+    {
+      "id": "APP-006",
+      "type": "app",
+      "name": "heritage",
+      "path": "apps/heritage"
+    },
+    {
+      "id": "APP-007",
+      "type": "app",
+      "name": "volunteer",
+      "path": "apps/volunteer"
+    },
+    {
+      "id": "APP-008",
+      "type": "app",
+      "name": "knowledge",
+      "path": "apps/knowledge"
+    },
+    {
+      "id": "APP-009",
+      "type": "app",
+      "name": "library",
+      "path": "apps/library"
+    },
+    {
+      "id": "PKG-001",
+      "type": "package",
+      "name": "auth",
+      "path": "packages/auth"
+    },
+    {
+      "id": "PKG-002",
+      "type": "package",
+      "name": "bdl",
+      "path": "packages/bdl"
+    },
+    {
+      "id": "PKG-003",
+      "type": "package",
+      "name": "bdx",
+      "path": "packages/bdx"
+    },
+    {
+      "id": "PKG-004",
+      "type": "package",
+      "name": "branding",
+      "path": "packages/branding"
+    },
+    {
+      "id": "PKG-005",
+      "type": "package",
+      "name": "charts",
+      "path": "packages/charts"
+    },
+    {
+      "id": "PKG-006",
+      "type": "package",
+      "name": "config",
+      "path": "packages/config"
+    },
+    {
+      "id": "PKG-007",
+      "type": "package",
+      "name": "database",
+      "path": "packages/database"
+    },
+    {
+      "id": "PKG-008",
+      "type": "package",
+      "name": "docs",
+      "path": "packages/docs"
+    },
+    {
+      "id": "PKG-009",
+      "type": "package",
+      "name": "eslint",
+      "path": "packages/eslint"
+    },
+    {
+      "id": "PKG-010",
+      "type": "package",
+      "name": "icons",
+      "path": "packages/icons"
+    },
+    {
+      "id": "PKG-011",
+      "type": "package",
+      "name": "maps",
+      "path": "packages/maps"
+    },
+    {
+      "id": "PKG-012",
+      "type": "package",
+      "name": "mission-runtime",
+      "path": "packages/mission-runtime"
+    },
+    {
+      "id": "PKG-013",
+      "type": "package",
+      "name": "runtime",
+      "path": "packages/runtime"
+    },
+    {
+      "id": "PKG-014",
+      "type": "package",
+      "name": "sdk",
+      "path": "packages/sdk"
+    },
+    {
+      "id": "PKG-015",
+      "type": "package",
+      "name": "typescript",
+      "path": "packages/typescript"
+    },
+    {
+      "id": "PKG-016",
+      "type": "package",
+      "name": "ui",
+      "path": "packages/ui"
+    },
+    {
+      "id": "ADR-0001",
+      "type": "adr",
+      "name": "Architectural Decision Records Standard"
+    },
+    {
+      "id": "ADR-0002",
+      "type": "adr",
+      "name": "Provider-Agnostic AI Gateway Abstraction Layer"
+    },
+    {
+      "id": "RFC-0001",
+      "type": "rfc",
+      "name": "Volunteer Portal Architecture"
+    },
+    {
+      "id": "RFC-0002",
+      "type": "rfc",
+      "name": "Forest GIS & Environmental Mapping Infrastructure"
+    },
+    {
+      "id": "RFC-0003",
+      "type": "rfc",
+      "name": "AI Gateway Abstraction & Routing Architecture"
+    },
+    {
+      "id": "BAR-001",
+      "type": "standard",
+      "name": "Bhavya Architecture Rules"
+    },
+    {
+      "id": "BDL-001",
+      "type": "standard",
+      "name": "Bhavya Design Language"
+    },
+    {
+      "id": "BPS-001",
+      "type": "standard",
+      "name": "Bhavya Production Standards"
+    },
+    {
+      "id": "BGS-001",
+      "type": "standard",
+      "name": "Bhavya Governance Standards"
+    },
+    {
+      "id": "BOM-001",
+      "type": "standard",
+      "name": "Bhavya Operating Model"
+    },
+    {
+      "id": "Release-v0.1",
+      "type": "release",
+      "name": "v0.1 Foundation Bootstrap"
+    },
+    {
+      "id": "Release-v0.2",
+      "type": "release",
+      "name": "v0.2 Platform Integration"
+    },
+    {
+      "id": "Release-v0.3",
+      "type": "release",
+      "name": "v0.3 Institutional Runtime"
+    },
+    {
+      "id": "Release-v0.4",
+      "type": "release",
+      "name": "v0.4 Institutional Knowledge Platform"
+    }
+  ],
+  "edges": [
+    {
+      "source": "APP-001",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-014",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "APP-002",
+      "target": "PKG-002",
+      "type": "depends"
+    },
+    {
+      "source": "APP-005",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "APP-005",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "APP-005",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "APP-007",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "APP-009",
+      "target": "PKG-008",
+      "type": "depends"
+    },
+    {
+      "source": "APP-009",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-005",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-008",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-011",
+      "target": "PKG-016",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-014",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-016",
+      "target": "PKG-002",
+      "type": "depends"
+    }
+  ]
+}

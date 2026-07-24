@@ -1,0 +1,14 @@
+{
+  "id": "TASK-004",
+  "title": "Implement PKG-010 (auth)",
+  "status": "pending",
+  "priority": "medium",
+  "goal": "Authentication System",
+  "inputs": ["PKG-010", "STD-014", "STD-002"],
+  "outputs": ["packages/auth/src"],
+  "commands": [],
+  "validation": ["lint", "typecheck", "tests", "security"],
+  "success": ["build", "runtime:validate"],
+  "capability": "authentication",
+  "estimated_minutes": 45
+}

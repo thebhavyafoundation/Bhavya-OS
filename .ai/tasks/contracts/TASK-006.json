@@ -1,0 +1,14 @@
+{
+  "id": "TASK-006",
+  "title": "Build APP-007 (volunteer portal)",
+  "status": "pending",
+  "priority": "low",
+  "goal": "Volunteer Platform",
+  "inputs": ["APP-007", "PKG-001", "PKG-002", "PKG-010"],
+  "outputs": ["apps/volunteer/src"],
+  "commands": [],
+  "validation": ["lint", "typecheck", "accessibility"],
+  "success": ["build"],
+  "capability": "react",
+  "estimated_minutes": 90
+}
