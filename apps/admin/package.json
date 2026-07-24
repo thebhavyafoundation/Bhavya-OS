@@ -1,0 +1,22 @@
+{
+  "name": "@bhavya/admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/bdl": "workspace:*",
+    "next": "15.5.20",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@bhavya/eslint": "workspace:*",
+    "@bhavya/typescript": "workspace:*"
+  }
+}

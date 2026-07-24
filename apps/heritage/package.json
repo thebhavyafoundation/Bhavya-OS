@@ -1,0 +1,22 @@
+{
+  "name": "@bhavya/heritage",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3005",
+    "build": "next build",
+    "start": "next start --port 3005",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/ui": "workspace:*",
+    "next": "15.5.20",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@bhavya/eslint": "workspace:*",
+    "@bhavya/typescript": "workspace:*"
+  }
+}
