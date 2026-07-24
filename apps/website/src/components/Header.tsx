@@ -1,11 +1,9 @@
-import { NavigationService, type NavItem } from "@bhavya/mission-runtime";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Leaf, ArrowRight } from "lucide-react";
 import { ThemeToggle, MobileMenu } from "./HeaderClient";
 
 export function Header({ currentPath = "/" }: { currentPath?: string }) {
-  const nav = new NavigationService();
-  const navItems: NavItem[] = nav.getPublic().length > 0 ? nav.getPublic() : [
+  const navItems = [
     { id: "nav-home", label: "Home", href: "/" },
     { id: "nav-mission", label: "Our Mission", href: "/mission" },
     { id: "nav-nature", label: "Nature", href: "/nature" },
