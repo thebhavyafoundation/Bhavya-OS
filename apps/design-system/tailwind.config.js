@@ -1,0 +1,82 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: "#eff6ff",
+          100: "#dbeafe",
+          200: "#bfdbfe",
+          300: "#93c5fd",
+          400: "#60a5fa",
+          500: "#1a56db",
+          600: "#1e40af",
+          700: "#1e3a8a",
+          800: "#172554",
+          900: "#0f172a",
+        },
+        accent: {
+          50: "#fffbeb",
+          100: "#fef3c7",
+          200: "#fde68a",
+          300: "#fcd34d",
+          400: "#fbbf24",
+          500: "#d97706",
+          600: "#b45309",
+          700: "#92400e",
+          800: "#78350f",
+          900: "#451a03",
+        },
+        forest: {
+          50: "#f0fdf4",
+          100: "#dcfce7",
+          200: "#bbf7d0",
+          300: "#86efac",
+          400: "#4ade80",
+          500: "#16a34a",
+          600: "#15803d",
+          700: "#166534",
+          800: "#14532d",
+          900: "#052e16",
+        },
+        heritage: {
+          50: "#faf5ff",
+          100: "#f3e8ff",
+          200: "#e9d5ff",
+          300: "#d8b4fe",
+          400: "#c084fc",
+          500: "#9333ea",
+          600: "#7e22ce",
+          700: "#6b21a8",
+          800: "#581c87",
+          900: "#3b0764",
+        },
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
+      },
+      fontSize: {
+        "display-xl": ["clamp(48px, 8vw, 96px)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
+        "display-lg": ["clamp(36px, 6vw, 72px)", { lineHeight: "1.1", letterSpacing: "-0.025em" }],
+        "display-md": ["clamp(28px, 4vw, 56px)", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
+        "display-sm": ["clamp(22px, 3vw, 40px)", { lineHeight: "1.2", letterSpacing: "-0.015em" }],
+      },
+      spacing: {
+        "18": "4.5rem",
+        "88": "22rem",
+        "128": "32rem",
+      },
+      borderRadius: {
+        "4xl": "2rem",
+      },
+      boxShadow: {
+        "glow": "0 0 20px rgba(26, 86, 219, 0.15)",
+        "glow-lg": "0 0 40px rgba(26, 86, 219, 0.2)",
+      },
+    },
+  },
+  plugins: [],
+};

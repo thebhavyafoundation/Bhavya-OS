@@ -1,0 +1,9 @@
+{
+  "name": "@bhavya/design-system",
+  "description": "Canonical design tokens, components, icons, typography, and patterns for Bhavya Foundation",
+  "version": "0.9.0",
+  "main": "src/tokens.ts",
+  "types": "src/tokens.ts",
+  "files": ["src/"],
+  "keywords": ["design-system", "tokens", "bhavya"]
+}
