@@ -1,163 +1,170 @@
 import fs from "fs";
 import path from "path";
+import {
+  getKnowledgeGraph,
+  getGovernanceDocs,
+  getPolicies,
+  getReleases,
+  getADRs,
+  getRFCs,
+  getStandards,
+  getApps,
+  getSearchIndex,
+} from "../../lib/data";
+import SearchClient from "../../components/SearchClient";
 
-interface KnowledgeNode {
-  id: string;
-  type: string;
-  title: string;
-  owner?: string;
-  status?: string;
-  links?: string[];
-}
+export default async function HomePage() {
+  const kg = getKnowledgeGraph();
+  const govDocs = getGovernanceDocs();
+  const policies = getPolicies();
+  const releases = getReleases();
+  const adrs = getADRs();
+  const rfcs = getRFCs();
+  const standards = getStandards();
+  const apps = getApps();
+  const searchIndex = getSearchIndex();
 
-interface SearchDocument {
-  id: string;
-  title: string;
-  category: string;
-  path: string;
-  content: string;
-  tags?: string[];
-}
+  const stats = [
+    { label: "Governance Docs", value: govDocs.length, color: "var(--accent)" },
+    { label: "Policies", value: policies.length, color: "var(--blue)" },
+    { label: "ADRs", value: adrs.length, color: "var(--purple)" },
+    { label: "RFCs", value: rfcs.length, color: "var(--blue)" },
+    { label: "Standards", value: standards.length, color: "var(--accent)" },
+    { label: "Releases", value: releases.length, color: "var(--warn)" },
+    { label: "Applications", value: apps.length, color: "#ec4899" },
+    { label: "Knowledge Nodes", value: kg.nodes.length, color: "var(--purple)" },
+  ];
 
-interface RegistryData {
-  nodes?: KnowledgeNode[];
-  documents?: SearchDocument[];
-  items?: { id: string; file: string }[];
-}
+  const recentReleases = releases.slice(0, 3);
+  const recentADRs = adrs.slice(0, 4);
 
-function loadRegistry(file: string): RegistryData {
-  try {
-    const filePath = path.resolve(process.cwd(), `../../registry/${file}`);
-    if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, "utf8"));
-    }
-  } catch (e) {
-    console.error(`Error loading registry/${file}:`, e);
-  }
-  return { nodes: [], documents: [], items: [] };
-}
-
-export default async function KnowledgePlatformPage() {
-  const kg = loadRegistry("knowledge-graph.json");
-  const searchIndex = loadRegistry("search-index.json");
-  const stds = loadRegistry("standards.json");
+  const searchItems = searchIndex.map((doc) => ({
+    ...doc,
+    type: doc.category.toLowerCase(),
+  }));
 
   return (
     <div className="shell">
-      {/* ── Sidebar Navigation ── */}
       <aside className="sidebar">
         <div className="logo">
           <span className="logo-name">Bhavya OS</span>
-          <span className="logo-sub">Knowledge Platform v0.4</span>
+          <span className="logo-sub">Knowledge Platform</span>
         </div>
-
         <nav className="nav">
-          <span className="nav-section">Entry Points</span>
-          <a href="#standards" className="active">📜 Standards ({stds.items?.length || 0})</a>
-          <a href="#governance">⚖️ Governance</a>
-          <a href="#adr">🏗️ ADR Explorer</a>
-          <a href="#rfc">📄 RFC Explorer</a>
-          <a href="#releases">🚀 Releases</a>
-          <a href="#agents">🤖 Agents</a>
-          <a href="#workflows">🔄 Workflows</a>
-          <a href="#policies">📋 Policies</a>
-          <a href="#graph">🕸️ Knowledge Graph ({kg.nodes?.length || 0})</a>
+          <span className="nav-section">Browse</span>
+          <a href="/" className="active">Dashboard</a>
+          <a href="/governance">Governance ({govDocs.length})</a>
+          <a href="/governance/policies">Policies ({policies.length})</a>
+          <a href="/decisions">Decision Records ({adrs.length})</a>
+          <a href="/standards">Standards ({standards.length})</a>
+          <a href="/releases">Releases ({releases.length})</a>
+          <a href="/graph">Knowledge Graph ({kg.nodes.length})</a>
+          <a href="/search">Global Search</a>
         </nav>
+        <div style={{ marginTop: "auto", padding: "0 8px" }}>
+          <div style={{ fontSize: 10, color: "var(--text-3)", fontFamily: "var(--mono)" }}>
+            Platform v0.9.0 · Runtime v3.0
+          </div>
+        </div>
       </aside>
 
-      {/* ── Main Content ── */}
       <main className="main">
-        {/* Header */}
         <div className="header">
           <h1>Institutional Knowledge Platform</h1>
-          <p>Navigable, versioned institutional truth for humans & AI agents · Deterministic Index Source</p>
+          <p>Canonical source for governance, decisions, standards, and releases across Bhavya Foundation</p>
         </div>
 
-        {/* ── Multi-Entry Points Grid ── */}
+        {/* Stats Grid */}
+        <div className="grid-3" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+          {stats.map((stat) => (
+            <div key={stat.label} className="card" style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 28, fontWeight: 700, color: stat.color }}>{stat.value}</div>
+              <div style={{ fontSize: 11, color: "var(--text-3)", fontFamily: "var(--mono)" }}>{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Entry Points */}
+        <div className="header" style={{ marginTop: 40 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700 }}>Quick Access</h2>
+        </div>
         <div className="grid-3">
-          <div className="card">
+          <a href="/governance" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
             <div className="card-title">
-              <span>ADR Explorer</span>
-              <span className="badge badge-purple">ADRs</span>
+              <span>Governance Library</span>
+              <span className="badge badge-green">Constitution · Trust Deed · Policies</span>
             </div>
-            <div className="card-desc">Architectural Decision Records with immutable history and tradeoff evaluations.</div>
-            <span className="badge badge-green">{kg.nodes?.filter((n: KnowledgeNode) => n.type === 'adr').length || 0} Registered</span>
-          </div>
-
-          <div className="card">
+            <div className="card-desc">Browse founding documents, governance manual, board charter, and all institutional policies.</div>
+          </a>
+          <a href="/decisions" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
             <div className="card-title">
-              <span>Standards Browser</span>
-              <span className="badge badge-blue">Standards</span>
+              <span>Decision Records</span>
+              <span className="badge badge-purple">{adrs.length} ADRs · {rfcs.length} RFCs</span>
             </div>
-            <div className="card-desc">Bhavya standards: BDL, BPS, BAR, BGS, BOM, MPS.</div>
-            <span className="badge badge-green">{stds.items?.length || 0} Standards</span>
-          </div>
-
-          <div className="card">
+            <div className="card-desc">Architecture Decision Records with context, alternatives, consequences, and cross-links.</div>
+          </a>
+          <a href="/standards" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
+            <div className="card-title">
+              <span>Standards Explorer</span>
+              <span className="badge badge-blue">{standards.length} Standards</span>
+            </div>
+            <div className="card-desc">Browse engineering, governance, accessibility, security, and design standards.</div>
+          </a>
+          <a href="/releases" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
+            <div className="card-title">
+              <span>Release Explorer</span>
+              <span className="badge badge-warn">{releases.length} Releases</span>
+            </div>
+            <div className="card-desc">Version history with highlights, breaking changes, related ADRs, and affected components.</div>
+          </a>
+          <a href="/graph" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
             <div className="card-title">
               <span>Knowledge Graph</span>
-              <span className="badge badge-warn">Graph</span>
+              <span className="badge badge-warn">{kg.nodes.length} Nodes</span>
             </div>
-            <div className="card-desc">Deterministic relationships: Standard ← ADR ← RFC ← Release ← Workflow.</div>
-            <span className="badge badge-green">{kg.nodes?.length || 0} Nodes</span>
-          </div>
+            <div className="card-desc">Navigate relationships: Policy → Standard → ADR → Release → Component → Application.</div>
+          </a>
+          <a href="/search" className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
+            <div className="card-title">
+              <span>Global Search</span>
+              <span className="badge badge-green">{searchIndex.length} Indexed</span>
+            </div>
+            <div className="card-desc">Search across documents, standards, releases, policies, projects, and components.</div>
+          </a>
         </div>
 
-        {/* ── Knowledge Graph Nodes with Traceability ── */}
-        <div className="header" id="graph" style={{ marginTop: "40px" }}>
-          <h2 style={{ fontSize: "18px", fontWeight: "700" }}>Knowledge Graph Traceability Nodes</h2>
-          <p>Links, owner agents, and bidirectional traceability references.</p>
+        {/* Recent Releases */}
+        <div className="header" style={{ marginTop: 40 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700 }}>Recent Releases</h2>
         </div>
-
-        <div className="grid-2">
-          {kg.nodes?.map((node: KnowledgeNode) => (
-            <div className="card" key={node.id}>
+        <div className="grid-3">
+          {recentReleases.map((rel) => (
+            <a key={rel.id} href={`/releases#${rel.version}`} className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
               <div className="card-title">
-                <span>{node.title}</span>
-                <span className="badge badge-blue">{node.type}</span>
+                <span>{rel.version} — {rel.name}</span>
+                <span className={`badge ${rel.status === "CERTIFIED" ? "badge-green" : "badge-warn"}`}>{rel.status}</span>
               </div>
-              <div className="card-desc">ID: {node.id} · Owner: {node.owner || 'System'} · Status: {node.status || 'Active'}</div>
-
-              {/* Traceability Component */}
-              <div className="traceability">
-                <div className="trace-label">References / Linked Nodes</div>
-                <div>
-                  {node.links && node.links.length > 0 ? (
-                    node.links.map((link: string) => (
-                      <span className="link-tag" key={link}>→ {link}</span>
-                    ))
-                  ) : (
-                    <span className="link-tag">Root Node</span>
-                  )}
-                </div>
-              </div>
-            </div>
+              <div className="card-desc">{rel.description}</div>
+              <div style={{ fontSize: 11, color: "var(--text-3)" }}>{rel.date} · {rel.type}</div>
+            </a>
           ))}
         </div>
 
-        {/* ── Pre-Indexed Search Entries ── */}
-        <div className="header" id="search" style={{ marginTop: "40px" }}>
-          <h2 style={{ fontSize: "18px", fontWeight: "700" }}>Pre-Indexed Knowledge Search Registry</h2>
-          <p>Exclusively served from registry/search-index.json</p>
+        {/* Recent ADRs */}
+        <div className="header" style={{ marginTop: 40 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700 }}>Recent Decisions</h2>
         </div>
-
         <div className="grid-2">
-          {searchIndex.documents?.map((doc: SearchDocument) => (
-            <div className="card" key={doc.id}>
+          {recentADRs.map((adr) => (
+            <a key={adr.id} href={`/decisions#${adr.id}`} className="card" style={{ textDecoration: "none", color: "var(--text)" }}>
               <div className="card-title">
-                <span>{doc.title}</span>
-                <span className="badge badge-green">{doc.category}</span>
+                <span>{adr.title}</span>
+                <span className="badge badge-purple">{adr.status}</span>
               </div>
-              <div className="card-desc">{doc.content}</div>
-              <div>
-                {doc.tags?.map((tag: string) => (
-                  <span className="link-tag" key={tag}>#{tag}</span>
-                ))}
-              </div>
-            </div>
+              <div className="card-desc">{adr.date ? `Decided: ${adr.date}` : ""} {adr.approvedBy ? `· Approved by: ${adr.approvedBy}` : ""}</div>
+            </a>
           ))}
         </div>
-
       </main>
     </div>
   );

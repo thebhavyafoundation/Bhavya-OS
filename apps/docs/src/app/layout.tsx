@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
-  title: "Bhavya OS | Institutional Knowledge Platform",
-  description: "Bhavya Foundation Knowledge Browser, Governance Explorer, and Knowledge Graph.",
+  title: "Bhavya Foundation | Institutional Knowledge Platform",
+  description: "Canonical source for governance, decisions, standards, and releases across Bhavya Foundation. Browse ADRs, policies, standards, releases, and the knowledge graph.",
+  keywords: ["Bhavya Foundation", "governance", "knowledge platform", "ADR", "standards", "releases"],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
