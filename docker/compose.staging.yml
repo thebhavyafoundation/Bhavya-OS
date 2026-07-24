@@ -1,0 +1,232 @@
+# ============================================================
+# Bhavya Foundation — Production Docker Compose (HTTPS)
+# Usage: docker compose -f docker/compose.staging.yml up -d
+# ============================================================
+
+version: "3.9"
+
+services:
+  # ----------------------------------------------------------
+  # Certbot (Let's Encrypt SSL)
+  # ----------------------------------------------------------
+  certbot:
+    image: certbot/certbot:latest
+    container_name: bhavya-certbot
+    volumes:
+      - ./docker/nginx/ssl:/etc/letsencrypt
+      - ./docker/nginx/certbot:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    profiles:
+      - setup
+
+  # ----------------------------------------------------------
+  # Reverse Proxy (Nginx with SSL)
+  # ----------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: bhavya-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
+      - ./docker/nginx/certbot:/var/www/certbot:ro
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      website:
+        condition: service_healthy
+      admin:
+        condition: service_healthy
+      runtime:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - bhavya-net
+
+  # ----------------------------------------------------------
+  # Website (Next.js)
+  # ----------------------------------------------------------
+  website:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.website
+      args:
+        - NODE_ENV=production
+    container_name: bhavya-website
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - NEXT_TELEMETRY_DISABLED=1
+    env_file:
+      - .env
+    volumes:
+      - website-data:/app/apps/website/.next
+      - ./registry:/app/registry:ro
+      - ./content:/app/content:ro
+      - ./navigation:/app/navigation:ro
+      - ./memory:/app/memory
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+    networks:
+      - bhavya-net
+
+  # ----------------------------------------------------------
+  # Admin Platform (Next.js)
+  # ----------------------------------------------------------
+  admin:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.admin
+      args:
+        - NODE_ENV=production
+    container_name: bhavya-admin
+    expose:
+      - "3003"
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+      - NEXT_TELEMETRY_DISABLED=1
+    env_file:
+      - .env
+    volumes:
+      - ./registry:/app/registry:ro
+      - ./content:/app/content:ro
+      - ./memory:/app/memory
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/api/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+    networks:
+      - bhavya-net
+
+  # ----------------------------------------------------------
+  # Runtime API (Mission Runtime)
+  # ----------------------------------------------------------
+  runtime:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.runtime
+      args:
+        - NODE_ENV=production
+    container_name: bhavya-runtime
+    expose:
+      - "8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+    env_file:
+      - .env
+    volumes:
+      - ./registry:/app/registry:ro
+      - ./content:/app/content:ro
+      - ./navigation:/app/navigation:ro
+      - ./memory:/app/memory
+      - runtime-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+    networks:
+      - bhavya-net
+
+  # ----------------------------------------------------------
+  # Design System (Next.js)
+  # ----------------------------------------------------------
+  design-system:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.design-system
+      args:
+        - NODE_ENV=production
+    container_name: bhavya-design-system
+    expose:
+      - "3010"
+    environment:
+      - NODE_ENV=production
+      - PORT=3010
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - ./registry:/app/registry:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3010/"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+    networks:
+      - bhavya-net
+
+  # ----------------------------------------------------------
+  # Monitoring (Uptime Kuma)
+  # ----------------------------------------------------------
+  monitoring:
+    image: louislam/uptime-kuma:latest
+    container_name: bhavya-monitoring
+    ports:
+      - "3004:3001"
+    volumes:
+      - monitoring-data:/app/data
+    restart: unless-stopped
+    networks:
+      - bhavya-net
+
+# ----------------------------------------------------------
+# Volumes
+# ----------------------------------------------------------
+volumes:
+  nginx-logs:
+    driver: local
+  website-data:
+    driver: local
+  runtime-data:
+    driver: local
+  monitoring-data:
+    driver: local
+
+# ----------------------------------------------------------
+# Networks
+# ----------------------------------------------------------
+networks:
+  bhavya-net:
+    driver: bridge
