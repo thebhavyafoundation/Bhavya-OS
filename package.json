@@ -37,7 +37,10 @@
     "docker:up": "docker compose -f docker/compose.prod.yml up -d",
     "docker:down": "docker compose -f docker/compose.prod.yml down",
     "docker:logs": "docker compose -f docker/compose.prod.yml logs -f",
-    "docker:ps": "docker compose -f docker/compose.prod.yml ps"
+    "docker:ps": "docker compose -f docker/compose.prod.yml ps",
+    "dev:admin": "turbo dev --filter=@bhavya/admin-app",
+    "build:admin": "turbo build --filter=@bhavya/admin-app",
+    "admin": "pnpm --filter @bhavya/admin-app dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

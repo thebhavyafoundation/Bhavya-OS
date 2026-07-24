@@ -1,16 +1,17 @@
 {
-  "name": "@bhavya/admin",
+  "name": "@bhavya/admin-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev --port 3003",
     "build": "next build",
-    "start": "next start --port 3001",
+    "start": "next start --port 3003",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@bhavya/bdl": "workspace:*",
+    "@bhavya/mission-runtime": "workspace:*",
+    "@bhavya/sdk": "workspace:*",
     "next": "15.5.20",
     "react": "19.2.4",
     "react-dom": "19.2.4"
