@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import {
   getKnowledgeGraph,
   getGovernanceDocs,
@@ -10,8 +8,7 @@ import {
   getStandards,
   getApps,
   getSearchIndex,
-} from "../../lib/data";
-import SearchClient from "../../components/SearchClient";
+} from "../lib/data";
 
 export default async function HomePage() {
   const kg = getKnowledgeGraph();

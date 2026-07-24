@@ -9,7 +9,7 @@ function readJSON<T>(filePath: string, fallback: T): T {
     if (fs.existsSync(full)) {
       return JSON.parse(fs.readFileSync(full, "utf8"));
     }
-  } catch {}
+  } catch { /* fallback */ }
   return fallback;
 }
 
@@ -19,7 +19,7 @@ function readMD(filePath: string): string {
     if (fs.existsSync(full)) {
       return fs.readFileSync(full, "utf8");
     }
-  } catch {}
+  } catch { /* fallback */ }
   return "";
 }
 
@@ -29,7 +29,7 @@ function listDir(dirPath: string): string[] {
     if (fs.existsSync(full)) {
       return fs.readdirSync(full).filter((f) => !f.startsWith("."));
     }
-  } catch {}
+  } catch { /* fallback */ }
   return [];
 }
 
