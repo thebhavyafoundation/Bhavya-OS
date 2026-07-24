@@ -1,0 +1,9 @@
+{
+  "name": "Link",
+  "category": "Primitive",
+  "version": "1.0.0",
+  "status": "Draft",
+  "since": "BDL 0.2",
+  "accessibility": "AA",
+  "owner": "BDL Team"
+}

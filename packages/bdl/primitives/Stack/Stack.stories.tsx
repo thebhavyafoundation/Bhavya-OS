@@ -1,0 +1,11 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { Stack } from './Stack';
+
+const meta: Meta<typeof Stack> = {
+  title: 'Primitives/Stack',
+  component: Stack,
+};
+export default meta;
+
+type Story = StoryObj<typeof Stack>;
+export const Default: Story = {};

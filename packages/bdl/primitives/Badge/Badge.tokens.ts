@@ -1,0 +1,1 @@
+/* Token mapping for Badge */

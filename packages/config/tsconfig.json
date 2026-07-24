@@ -1,0 +1,7 @@
+{
+  "extends": "@bhavya/typescript/react-library",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
