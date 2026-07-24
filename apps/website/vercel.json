@@ -1,6 +1,6 @@
 {
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build",
+  "installCommand": "cd ../.. && pnpm install --filter @bhavya/website... && cd apps/website",
+  "buildCommand": "next build",
   "framework": "nextjs",
   "outputDirectory": ".next"
 }
