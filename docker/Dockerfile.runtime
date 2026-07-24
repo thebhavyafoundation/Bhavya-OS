@@ -1,0 +1,57 @@
+# ============================================================
+# Bhavya Foundation — Runtime API Dockerfile
+# Minimal image for mission-runtime server
+# ============================================================
+
+# ----------------------------------------------------------
+# Stage 1: deps
+# ----------------------------------------------------------
+FROM node:20-alpine AS deps
+RUN apk add --no-cache libc6-compat
+RUN corepack enable && corepack prepare pnpm@9 --activate
+
+WORKDIR /app
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* ./
+COPY packages/runtime/package.json packages/runtime/
+COPY packages/mission-runtime/package.json packages/mission-runtime/
+COPY packages/sdk/package.json packages/sdk/
+
+RUN pnpm install --frozen-lockfile || pnpm install --no-frozen-lockfile
+
+# ----------------------------------------------------------
+# Stage 2: runner
+# ----------------------------------------------------------
+FROM node:20-alpine AS runner
+
+RUN apk add --no-cache curl tini jq && \
+    addgroup -g 1001 -S bhavya && \
+    adduser -S bhavya -u 1001 -G bhavya
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/packages ./packages
+COPY . .
+
+# Copy config and data
+COPY config/ ./config/
+COPY registry/ ./registry/
+COPY content/ ./content/
+COPY navigation/ ./navigation/
+COPY memory/ ./memory/
+
+RUN chown -R bhavya:bhavya /app
+
+USER bhavya
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1
+
+ENTRYPOINT ["/sbin/tini", "--"]
+
+CMD ["node", "packages/mission-runtime/src/index.ts"]

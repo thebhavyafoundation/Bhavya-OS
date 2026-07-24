@@ -1,0 +1,59 @@
+# ============================================================
+# Bhavya Foundation — .dockerignore
+# ============================================================
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+.turbo
+dist
+build
+coverage
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# AI / Skills (not needed in container)
+.agents/
+.opencode/
+.ai/cache/
+design-system/bhavya-foundation/
+
+# Foundation snapshots (generated)
+foundation-snapshot-*/
+extracted_pages/
+
+# Binary documents
+*.zip
+*.pdf
+*.docx
+
+# Development files
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Lock files (we generate fresh)
+pnpm-lock.yaml
+
+# Scripts not needed in container
+scripts/start-platform.ps1
+
+# History
+history/
