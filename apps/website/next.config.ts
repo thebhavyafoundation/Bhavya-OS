@@ -1,12 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   transpilePackages: ["@bhavya/ui", "@bhavya/branding", "@bhavya/icons", "@bhavya/docs", "@bhavya/charts", "@bhavya/maps", "@bhavya/theme"],
   serverExternalPackages: ["@bhavya/mission-runtime"],
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "2mb",
+    },
+  },
   async headers() {
     return [
       {
