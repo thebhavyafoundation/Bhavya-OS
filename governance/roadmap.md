@@ -1,23 +1,20 @@
 # Bhavya OS Master Release Progression Roadmap
 
 ```
-v0.1  Foundation                      ✓ (Complete)
-v0.2  Platform Integration            ✓ (Complete)
-v0.3  Institutional Runtime           ✓ (Certified & Released)
+v0.1  Foundation                         ✓ Complete
+v0.2  Platform Integration               ✓ Complete
+v0.3  Institutional Runtime              ✓ Certified & Released
+v0.4  Institutional Knowledge Platform   ✓ Complete
   ↓
-v0.4  Institutional Knowledge Platform (Next)
+v1.0  Public Production Launch           RC (Staging + UAT + Ops Rehearsal)
   ↓
-v0.5  Mission Applications
+v1.1  Admin Platform (APP-003)           Planned
+v1.2  Volunteer Platform                 Planned
+v1.3  Programs Platform                  Planned
+v1.4  Heritage Platform                  Planned
+v1.5  Nature Platform                    Planned
   ↓
-v0.6  Public APIs & Integrations
-  ↓
-v0.7  Automation & Operations
-  ↓
-v0.8  Security & Compliance
-  ↓
-v0.9  Performance & Scalability
-  ↓
-v1.0  Bhavya OS Stable
+v2.0  Multi-organization Federation      If justified by Foundation needs
 ```
 
 ## Milestone Descriptions
@@ -37,21 +34,53 @@ Self-managing institutional platform:
 - Provider-Agnostic AI Gateway Contract (`governance/adr/ADR-0002.md`, `rfcs/RFC-0003-AI-Gateway.md`)
 - Control Center Dashboard v2 (`apps/admin`)
 
-### v0.4 Institutional Knowledge Platform (Active / Next)
+### v0.4 Institutional Knowledge Platform (Complete)
 Comprehensive institutional knowledge layer for humans and AI agents:
-- Public documentation portal
-- Governance browser (ADR & RFC explorers)
-- Standards browser (MPS, BDL, BPS, BAR, BGS, BOM)
-- Search across institutional knowledge
-- Versioned documentation
-- Public APIs for read-only institutional data
-- Transparency dashboard & Knowledge graph
+- APP-001: Public website (22 pages, redesigned with UI/UX Pro Max)
+- APP-000: Design System (tokens, components, icons, typography, patterns, playground)
+- APP-002: Documentation Platform (governance, ADRs, standards, releases, knowledge graph, search)
+- Production infrastructure (Docker, Compose, Nginx, CI/CD, backups, deployment)
+- Runtime v3.0 frozen, SDK scaffold, mission-runtime v0.6
 
-### v0.5 Mission Applications
-Consistent mission application architecture (Forests, Education, Heritage, Research, Governance, Volunteers, Donations, Transparency) inheriting Auth, Gateway, Event Bus, Registry, Memory, Design System, Accessibility, and Observability.
+### v1.0 Public Production Launch (RC — Staging + UAT + Ops Rehearsal)
+First production-grade release requiring:
+- Staging deployment on production-matching infrastructure
+- External validation: HTTPS, HTTP/2, DNS, TLS, backups, rollback, monitoring
+- User acceptance testing with trustees/contributors
+- Operational readiness: backup restore, rollback, secret rotation, crash recovery
+- Security and accessibility audits passed
 
-### v0.6 Public APIs & Integrations
-### v0.7 Automation & Operations
-### v0.8 Security & Compliance
-### v0.9 Performance & Scalability
-### v1.0 Bhavya OS Stable
+### v1.1 Admin Platform (APP-003)
+Internal operational management:
+- Content management workflows
+- Governance document editing and approval
+- User and permission management
+- Audit trail viewing
+- Platform health dashboard
+
+### v1.2 Volunteer Platform
+Community engagement:
+- Volunteer onboarding and profiles
+- Assignment management
+- Training tracking
+- Communication tools
+
+### v1.3 Programs Platform
+Project and impact management:
+- Initiative tracking
+- Milestone management
+- Outcome reporting
+- Impact measurement
+
+### v1.4 Heritage Platform
+Cultural heritage digital preservation
+
+### v1.5 Nature Platform
+Forest and environmental monitoring
+
+### v2.0 Multi-organization Federation
+If justified by Foundation needs: multi-tenant capabilities, cross-organization data sharing, federation protocols.
+
+## Release Governance
+
+See `governance/adr/ADR-0003.md` for the full release train policy, branching strategy, and pre-release gates.
