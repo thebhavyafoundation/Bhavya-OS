@@ -1,0 +1,40 @@
+node_modules
+.next
+.turbo
+dist
+coverage
+.env
+.env.*
+!.env.example
+
+# Build outputs
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# AI / Design system artifacts
+design-system/bhavya-foundation/
+
+# Foundation snapshots (generated)
+foundation-snapshot-*/
+
+# Extracted pages (temporary)
+extracted_pages/
+
+# Binary documents (tracked in Git LFS or external)
+*.zip
+*.pdf
+*.docx
+
+# Hyperframes / skills (external)
+.agents/
+.opencode/

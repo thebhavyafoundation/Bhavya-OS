@@ -1,0 +1,56 @@
+import { NavigationService, type NavItem } from "@bhavya/mission-runtime";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { Leaf, ArrowRight } from "lucide-react";
+import { ThemeToggle, MobileMenu } from "./HeaderClient";
+
+export function Header({ currentPath = "/" }: { currentPath?: string }) {
+  const nav = new NavigationService();
+  const navItems: NavItem[] = nav.getPublic().length > 0 ? nav.getPublic() : [
+    { id: "nav-home", label: "Home", href: "/" },
+    { id: "nav-mission", label: "Our Mission", href: "/mission" },
+    { id: "nav-nature", label: "Nature", href: "/nature" },
+    { id: "nav-knowledge", label: "Knowledge", href: "/knowledge" },
+    { id: "nav-heritage", label: "Heritage", href: "/heritage" },
+    { id: "nav-community", label: "Community", href: "/community" },
+    { id: "nav-transparency", label: "Transparency", href: "/transparency" },
+    { id: "nav-programs", label: "Programs", href: "/programs" },
+    { id: "nav-about", label: "About", href: "/about" },
+  ];
+
+  const isActive = (href: string) => currentPath === href;
+
+  return (
+    <>
+      <header className="site-header" role="banner">
+        <a href="/" className="nav-logo" aria-label="Bhavya Foundation home">
+          <Leaf className="nav-logo-icon" aria-hidden="true" />
+          <span className="nav-logo-text">Bhavya Foundation</span>
+          <span className="nav-logo-version">v0.6</span>
+        </a>
+
+        <nav className="nav-list" aria-label="Main navigation">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              className={`nav-link${isActive(item.href) ? " active" : ""}`}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="nav-actions">
+          <LanguageSwitcher />
+          <ThemeToggle />
+          <a href="/transparency" className="nav-cta">
+            Platform Status
+            <ArrowRight aria-hidden="true" />
+          </a>
+          <MobileMenu items={navItems} currentPath={currentPath} />
+        </div>
+      </header>
+    </>
+  );
+}

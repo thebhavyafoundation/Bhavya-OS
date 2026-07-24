@@ -1,0 +1,15 @@
+{
+  "name": "@bhavya/runtime",
+  "version": "3.0.0",
+  "stable": true,
+  "private": true,
+  "description": "AI Runtime Engine v3.0 — daemon, loader, compiler, validator, graph, retrieval, scheduler, memory, planner, executor, orchestrator, CLI, API, metrics",
+  "type": "module",
+  "scripts": {
+    "daemon": "node ../../packages/runtime/daemon/watch.mjs",
+    "daemon:once": "node ../../packages/runtime/daemon/watch.mjs --once",
+    "compile": "node ../../.ai/build/compile-runtime.mjs",
+    "validate": "node ../../.ai/build/validate-runtime.mjs",
+    "snapshot": "node ../../.ai/build/generate-snapshot.mjs"
+  }
+}
