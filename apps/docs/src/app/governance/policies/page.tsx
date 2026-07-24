@@ -5,7 +5,7 @@ export default async function PoliciesPage() {
 
   return (
     <div className="shell">
-      <aside className="sidebar">
+      <aside className="sidebar" aria-label="Platform navigation">
         <div className="logo">
           <span className="logo-name">Bhavya OS</span>
           <span className="logo-sub">Knowledge Platform</span>
@@ -23,7 +23,7 @@ export default async function PoliciesPage() {
         </nav>
       </aside>
 
-      <main className="main">
+      <main className="main" id="main-content">
         <div className="header">
           <h1>Policies</h1>
           <p>Institutional policies governing data, privacy, security, operations, and conduct</p>

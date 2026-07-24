@@ -44,7 +44,7 @@ export default async function SearchPage() {
 
   return (
     <div className="shell">
-      <aside className="sidebar">
+      <aside className="sidebar" aria-label="Platform navigation">
         <div className="logo">
           <span className="logo-name">Bhavya OS</span>
           <span className="logo-sub">Knowledge Platform</span>
@@ -62,7 +62,7 @@ export default async function SearchPage() {
         </nav>
       </aside>
 
-      <main className="main">
+      <main className="main" id="main-content">
         <div className="header">
           <h1>Global Search</h1>
           <p>Search across governance documents, policies, ADRs, RFCs, standards, releases, and applications</p>

@@ -6,7 +6,7 @@ export default async function GraphPage() {
 
   return (
     <div className="shell">
-      <aside className="sidebar">
+      <aside className="sidebar" aria-label="Platform navigation">
         <div className="logo">
           <span className="logo-name">Bhavya OS</span>
           <span className="logo-sub">Knowledge Platform</span>
@@ -24,7 +24,7 @@ export default async function GraphPage() {
         </nav>
       </aside>
 
-      <main className="main">
+      <main className="main" id="main-content">
         <div className="header">
           <h1>Knowledge Graph</h1>
           <p>Navigate relationships between policies, standards, ADRs, releases, components, and applications</p>

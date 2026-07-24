@@ -40,7 +40,6 @@ extracted_pages/
 .opencode/
 
 # Lock files
-pnpm-lock.yaml
 skills-lock.json
 
 # Leftover directories
