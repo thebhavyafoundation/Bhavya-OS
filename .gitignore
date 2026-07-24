@@ -38,3 +38,10 @@ extracted_pages/
 # Hyperframes / skills (external)
 .agents/
 .opencode/
+
+# Lock files
+pnpm-lock.yaml
+skills-lock.json
+
+# Leftover directories
+https-github.com-Alishahryar1-free-claude-code/
