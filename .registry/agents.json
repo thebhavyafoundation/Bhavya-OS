@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "agents": [
+    {
+      "id": "founder",
+      "name": "Founder Agent",
+      "role": "strategic-oversight",
+      "status": "active"
+    },
+    {
+      "id": "ceo",
+      "name": "CEO Agent",
+      "role": "operational-management",
+      "status": "active"
+    },
+    {
+      "id": "cto",
+      "name": "CTO Agent",
+      "role": "technical-leadership",
+      "status": "active"
+    },
+    {
+      "id": "designer",
+      "name": "Designer Agent",
+      "role": "visual-design",
+      "status": "active"
+    },
+    {
+      "id": "developer",
+      "name": "Developer Agent",
+      "role": "software-development",
+      "status": "active"
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer Agent",
+      "role": "code-review",
+      "status": "active"
+    },
+    {
+      "id": "researcher",
+      "name": "Researcher Agent",
+      "role": "research",
+      "status": "active"
+    },
+    {
+      "id": "writer",
+      "name": "Writer Agent",
+      "role": "content-creation",
+      "status": "active"
+    },
+    {
+      "id": "seo",
+      "name": "SEO Agent",
+      "role": "search-optimization",
+      "status": "active"
+    },
+    {
+      "id": "translator",
+      "name": "Translator Agent",
+      "role": "translation",
+      "status": "active"
+    },
+    {
+      "id": "historian",
+      "name": "Historian Agent",
+      "role": "history-preservation",
+      "status": "active"
+    },
+    {
+      "id": "legal",
+      "name": "Legal Agent",
+      "role": "legal-compliance",
+      "status": "active"
+    },
+    {
+      "id": "volunteer",
+      "name": "Volunteer Agent",
+      "role": "volunteer-management",
+      "status": "active"
+    },
+    {
+      "id": "donation",
+      "name": "Donation Agent",
+      "role": "donation-management",
+      "status": "active"
+    },
+    {
+      "id": "social-media",
+      "name": "SocialMedia Agent",
+      "role": "social-media",
+      "status": "active"
+    },
+    {
+      "id": "qa",
+      "name": "QA Agent",
+      "role": "quality-assurance",
+      "status": "active"
+    },
+    {
+      "id": "release",
+      "name": "Release Agent",
+      "role": "release-management",
+      "status": "active"
+    },
+    {
+      "id": "security",
+      "name": "Security Agent",
+      "role": "security",
+      "status": "active"
+    }
+  ]
+}

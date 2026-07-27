@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "models": [
+    {
+      "id": "mimo-v2.5-free",
+      "name": "Mimo v2.5 Free",
+      "provider": "opencode",
+      "type": "text",
+      "status": "active"
+    },
+    {
+      "id": "gpt-4",
+      "name": "GPT-4",
+      "provider": "openai",
+      "type": "text",
+      "status": "available"
+    },
+    {
+      "id": "claude-3",
+      "name": "Claude 3",
+      "provider": "anthropic",
+      "type": "text",
+      "status": "available"
+    },
+    {
+      "id": "gemini-pro",
+      "name": "Gemini Pro",
+      "provider": "google",
+      "type": "text",
+      "status": "available"
+    }
+  ]
+}

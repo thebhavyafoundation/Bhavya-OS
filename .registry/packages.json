@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "packages": [
+    {
+      "id": "ui",
+      "name": "UI Components",
+      "path": "packages/ui",
+      "status": "active"
+    },
+    {
+      "id": "design-system",
+      "name": "Design System",
+      "path": "packages/design-system",
+      "status": "active"
+    },
+    {
+      "id": "mission-runtime",
+      "name": "Mission Runtime",
+      "path": "packages/mission-runtime",
+      "status": "active"
+    },
+    {
+      "id": "ai-runtime",
+      "name": "AI Runtime",
+      "path": "packages/runtime",
+      "status": "active"
+    },
+    {
+      "id": "sdk",
+      "name": "SDK",
+      "path": "packages/sdk",
+      "status": "active"
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics",
+      "path": "packages/analytics",
+      "status": "planned"
+    },
+    {
+      "id": "seo",
+      "name": "SEO",
+      "path": "packages/seo",
+      "status": "planned"
+    },
+    {
+      "id": "knowledge-engine",
+      "name": "Knowledge Engine",
+      "path": "packages/knowledge-engine",
+      "status": "planned"
+    },
+    {
+      "id": "event-bus",
+      "name": "Event Bus",
+      "path": "packages/event-bus",
+      "status": "planned"
+    },
+    {
+      "id": "agent-runtime",
+      "name": "Agent Runtime",
+      "path": "packages/agent-runtime",
+      "status": "planned"
+    },
+    {
+      "id": "component-library",
+      "name": "Component Library",
+      "path": "packages/component-library",
+      "status": "planned"
+    }
+  ]
+}

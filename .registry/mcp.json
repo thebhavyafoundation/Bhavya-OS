@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "mcpServers": [
+    {
+      "id": "context7",
+      "name": "Context7",
+      "type": "documentation",
+      "status": "active"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "type": "version-control",
+      "status": "active"
+    },
+    {
+      "id": "gh_grep",
+      "name": "GitHub Code Search",
+      "type": "search",
+      "status": "active"
+    },
+    {
+      "id": "filesystem",
+      "name": "Filesystem",
+      "type": "file-operations",
+      "status": "planned"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "type": "version-control",
+      "status": "planned"
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "type": "containerization",
+      "status": "planned"
+    },
+    {
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "type": "database",
+      "status": "planned"
+    },
+    {
+      "id": "figma",
+      "name": "Figma",
+      "type": "design",
+      "status": "planned"
+    },
+    {
+      "id": "browser",
+      "name": "Browser",
+      "type": "automation",
+      "status": "planned"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "type": "documentation",
+      "status": "planned"
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "type": "communication",
+      "status": "planned"
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "type": "issue-tracking",
+      "status": "planned"
+    },
+    {
+      "id": "excalidraw",
+      "name": "Excalidraw",
+      "type": "diagrams",
+      "status": "planned"
+    }
+  ]
+}

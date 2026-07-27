@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "services": [
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "type": "deployment",
+      "status": "active"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "type": "version-control",
+      "status": "active"
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "type": "database",
+      "status": "planned"
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "type": "caching",
+      "status": "planned"
+    },
+    {
+      "id": "s3",
+      "name": "AWS S3",
+      "type": "storage",
+      "status": "planned"
+    }
+  ]
+}

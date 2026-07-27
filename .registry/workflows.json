@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "workflows": [
+    {
+      "id": "create-page",
+      "name": "Create Page",
+      "path": ".workflows/create-page.md",
+      "status": "active"
+    },
+    {
+      "id": "deploy",
+      "name": "Deploy",
+      "path": ".workflows/deploy.md",
+      "status": "active"
+    },
+    {
+      "id": "review-pr",
+      "name": "Review PR",
+      "path": ".workflows/review-pr.md",
+      "status": "active"
+    },
+    {
+      "id": "write-blog",
+      "name": "Write Blog",
+      "path": ".workflows/write-blog.md",
+      "status": "active"
+    },
+    {
+      "id": "research-forest",
+      "name": "Research Forest",
+      "path": ".workflows/research-forest.md",
+      "status": "active"
+    },
+    {
+      "id": "research-heritage",
+      "name": "Research Heritage",
+      "path": ".workflows/research-heritage.md",
+      "status": "active"
+    },
+    {
+      "id": "upload-documents",
+      "name": "Upload Documents",
+      "path": ".workflows/upload-documents.md",
+      "status": "active"
+    },
+    {
+      "id": "generate-report",
+      "name": "Generate Report",
+      "path": ".workflows/generate-report.md",
+      "status": "active"
+    },
+    {
+      "id": "fundraising",
+      "name": "Fundraising",
+      "path": ".workflows/fundraising.md",
+      "status": "active"
+    },
+    {
+      "id": "volunteer-onboarding",
+      "name": "Volunteer Onboarding",
+      "path": ".workflows/volunteer-onboarding.md",
+      "status": "active"
+    }
+  ]
+}

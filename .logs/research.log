@@ -1,0 +1,24 @@
+# Log: Research Agent
+
+## Format
+```
+[timestamp] [level] [message]
+```
+
+## Levels
+- INFO: Normal operations
+- WARN: Potential issues
+- ERROR: Errors requiring attention
+
+## Log Rotation
+- Daily rotation
+- Keep 30 days
+- Archive old logs
+
+## Example Entries
+```
+2026-07-27T10:00:00Z INFO Research started: Himalayan biodiversity
+2026-07-27T10:15:00Z INFO Research completed: Digital library best practices
+2026-07-27T10:30:00Z WARN Source credibility issue
+2026-07-27T10:45:00Z ERROR Research failed: Access denied
+```

@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "standards": [
+    {
+      "id": "accessibility",
+      "name": "Accessibility Standard",
+      "path": "standards/accessibility.md",
+      "status": "active"
+    },
+    {
+      "id": "api",
+      "name": "API Standard",
+      "path": "standards/api.md",
+      "status": "active"
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture Standard",
+      "path": "standards/architecture.md",
+      "status": "active"
+    },
+    {
+      "id": "backend",
+      "name": "Backend Standard",
+      "path": "standards/backend.md",
+      "status": "active"
+    },
+    {
+      "id": "database",
+      "name": "Database Standard",
+      "path": "standards/database.md",
+      "status": "active"
+    },
+    {
+      "id": "design",
+      "name": "Design Standard",
+      "path": "standards/design.md",
+      "status": "active"
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation Standard",
+      "path": "standards/documentation.md",
+      "status": "active"
+    },
+    {
+      "id": "engineering",
+      "name": "Engineering Standard",
+      "path": "standards/engineering.md",
+      "status": "active"
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend Standard",
+      "path": "standards/frontend.md",
+      "status": "active"
+    },
+    {
+      "id": "git",
+      "name": "Git Standard",
+      "path": "standards/git.md",
+      "status": "active"
+    },
+    {
+      "id": "observability",
+      "name": "Observability Standard",
+      "path": "standards/observability.md",
+      "status": "active"
+    },
+    {
+      "id": "performance",
+      "name": "Performance Standard",
+      "path": "standards/performance.md",
+      "status": "active"
+    },
+    {
+      "id": "release",
+      "name": "Release Standard",
+      "path": "standards/release.md",
+      "status": "active"
+    },
+    {
+      "id": "security",
+      "name": "Security Standard",
+      "path": "standards/security.md",
+      "status": "active"
+    },
+    {
+      "id": "testing",
+      "name": "Testing Standard",
+      "path": "standards/testing.md",
+      "status": "active"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Log: Developer Agent
+
+## Format
+```
+[timestamp] [level] [message]
+```
+
+## Levels
+- INFO: Normal operations
+- WARN: Potential issues
+- ERROR: Errors requiring attention
+
+## Log Rotation
+- Daily rotation
+- Keep 30 days
+- Archive old logs
+
+## Example Entries
+```
+2026-07-27T10:00:00Z INFO Feature implemented: Volunteer Portal
+2026-07-27T10:15:00Z INFO Bug fixed: Navigation issue
+2026-07-27T10:30:00Z WARN Performance issue detected
+2026-07-27T10:45:00Z ERROR Build failed: TypeScript error
+```
