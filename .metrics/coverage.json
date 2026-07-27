@@ -1,0 +1,26 @@
+{
+  "metric": "coverage",
+  "lastUpdated": "2026-07-27T00:00:00Z",
+  "data": {
+    "components": {
+      "total": 0,
+      "tested": 0,
+      "coverage": 0
+    },
+    "pages": {
+      "total": 0,
+      "tested": 0,
+      "coverage": 0
+    },
+    "workflows": {
+      "total": 0,
+      "tested": 0,
+      "coverage": 0
+    },
+    "agents": {
+      "total": 0,
+      "tested": 0,
+      "coverage": 0
+    }
+  }
+}

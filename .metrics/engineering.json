@@ -1,0 +1,30 @@
+{
+  "metric": "engineering",
+  "lastUpdated": "2026-07-27T00:00:00Z",
+  "data": {
+    "commits": {
+      "total": 0,
+      "thisWeek": 0,
+      "thisMonth": 0
+    },
+    "pullRequests": {
+      "open": 0,
+      "merged": 0,
+      "reviewTime": "0h"
+    },
+    "issues": {
+      "open": 0,
+      "closed": 0,
+      "avgResolutionTime": "0h"
+    },
+    "releases": {
+      "total": 0,
+      "latest": null
+    },
+    "codeQuality": {
+      "testCoverage": 0,
+      "lintErrors": 0,
+      "typeErrors": 0
+    }
+  }
+}

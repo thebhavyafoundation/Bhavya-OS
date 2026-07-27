@@ -1,0 +1,33 @@
+{
+  "metric": "institution",
+  "lastUpdated": "2026-07-27T00:00:00Z",
+  "data": {
+    "milestones": {
+      "total": 0,
+      "completed": 0,
+      "upcoming": 0
+    },
+    "missions": {
+      "forest": { "status": "active", "progress": 0 },
+      "knowledge": { "status": "active", "progress": 0 },
+      "heritage": { "status": "active", "progress": 0 },
+      "community": { "status": "active", "progress": 0 },
+      "technology": { "status": "active", "progress": 0 }
+    },
+    "team": {
+      "trustees": 2,
+      "volunteers": 0,
+      "contributors": 0
+    },
+    "financials": {
+      "raised": 0,
+      "spent": 0,
+      "remaining": 0
+    },
+    "documents": {
+      "total": 0,
+      "governance": 0,
+      "technical": 0
+    }
+  }
+}
