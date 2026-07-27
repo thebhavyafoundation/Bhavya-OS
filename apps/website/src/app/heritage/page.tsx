@@ -1,21 +1,60 @@
 import type { Metadata } from "next";
-import { Scroll, Mic, Landmark } from "lucide-react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { PageHero, SectionHeader, FeatureCard } from "../../components/ui/PageHero";
+import {
+  PageHero,
+  SectionHeader,
+  FeatureCard,
+} from "../../components/ui/PageHero";
 import { buildMetadata } from "../../lib/metadata";
+import { PageContent, AnimatedGrid } from "../../components/PageContent";
+import {
+  Landmark,
+  BookOpen,
+  Users,
+  TreePine,
+  Scroll,
+  Heart,
+} from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Cultural Heritage & Digital Archiving — Bhavya Foundation",
-  description: "Documenting, digitizing, and safeguarding indigenous traditions, ancient manuscripts, oral histories, and historic architecture.",
+  title: "Bhavya Heritage Mission — Cultural Preservation — Bhavya Foundation",
+  description:
+    "Preserving traditional knowledge, yoga, temple documentation, architecture, history, and living heritage for future generations.",
   path: "/heritage",
 });
 
-const heritageProjects = [
-  { id: "H-101", title: "Palm-Leaf Manuscript Multispectral Archive", type: "3D & Multispectral Scan", itemsCount: "4,200 Manuscripts", status: "Digitized" },
-  { id: "H-102", title: "Regional Oral History & Folk Songs Vault", type: "Audio & Folk Recording", itemsCount: "850 Recordings", status: "Active" },
-  { id: "H-103", title: "Sacred Architecture Photogrammetry", type: "3D Laser Mesh Scan", itemsCount: "32 Monuments", status: "Active" },
-  { id: "H-104", title: "Indigenous Botanical Medicine Codex", type: "Textual & Ethno-botany", itemsCount: "1,120 Species", status: "Published" },
+const heritageAreas = [
+  {
+    icon: <Landmark />,
+    title: "Temple Documentation",
+    desc: "Documenting sacred architecture, historical temples, and heritage structures to preserve their cultural and spiritual significance.",
+  },
+  {
+    icon: <BookOpen />,
+    title: "Traditional Knowledge",
+    desc: "Preserving indigenous wisdom, folk traditions, ecological knowledge, and cultural practices passed down through generations.",
+  },
+  {
+    icon: <Heart />,
+    title: "Yoga & Wellness",
+    desc: "Promoting yoga as a living heritage tradition — physical, mental, and spiritual well-being rooted in ancient wisdom.",
+  },
+  {
+    icon: <Scroll />,
+    title: "Historical Records",
+    desc: "Documenting local history, oral traditions, community narratives, and cultural archives for future generations.",
+  },
+  {
+    icon: <TreePine />,
+    title: "Sacred Groves",
+    desc: "Protecting and restoring sacred groves — natural heritage sites that hold ecological, cultural, and spiritual value.",
+  },
+  {
+    icon: <Users />,
+    title: "Community Awareness",
+    desc: "Building awareness about cultural heritage through community programmes, heritage walks, and educational initiatives.",
+  },
 ];
 
 export default function HeritagePage() {
@@ -24,46 +63,90 @@ export default function HeritagePage() {
       <Header currentPath="/heritage" />
       <main id="main-content">
         <PageHero
-          badge="CULTURAL HERITAGE"
-          title="Digital Archiving & Preservation of Living Wisdom"
-          lead="The Heritage Initiative preserves ancient manuscripts, records oral traditions from elder knowledge-keepers, and creates high-precision 3D digital twins of historic architecture."
+          badge="BHAVYA HERITAGE MISSION"
+          title="Preserving What Endures"
+          lead="Heritage is not merely about the past — it is about preserving the wisdom, traditions, and cultural identity that shape our future. The Bhavya Heritage Mission protects traditional knowledge, yoga, temple architecture, and living heritage for generations to come."
         />
-
         <div className="container">
-          <SectionHeader eyebrow="Active Initiatives" title="Heritage Preservation Programs" />
+          <PageContent>
+            <SectionHeader
+              eyebrow="Heritage Programmes"
+              title="What We Preserve"
+              description="From temple documentation to traditional knowledge, our programmes protect the cultural fabric of communities."
+            />
+          </PageContent>
+          <AnimatedGrid columns={2}>
+            {heritageAreas.map((h, i) => (
+              <FeatureCard
+                key={i}
+                icon={h.icon}
+                title={h.title}
+                description={h.desc}
+              />
+            ))}
+          </AnimatedGrid>
 
-          <div className="grid-3" style={{ marginBottom: "64px" }}>
-            <FeatureCard icon={<Scroll />} title="Multispectral Manuscript Vault" description="Using non-destructive multispectral cameras to capture faded ink on ancient palm-leaf texts, making hidden historical scripts readable and searchable." />
-            <FeatureCard icon={<Mic />} title="Oral History Recordings" description="High-fidelity audio and video archives preserving traditional songs, ecological wisdom, and historical narratives in regional dialects." />
-            <FeatureCard icon={<Landmark />} title="3D Monument Photogrammetry" description="Creating millimeter-accurate 3D point-cloud models of endangered heritage architecture for structural monitoring and global open access." />
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Our Approach"
+                title="How We Serve Heritage"
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              <div className="info-card">
+                <div className="info-card-title">Respect for Tradition</div>
+                <div className="info-card-desc">
+                  Heritage preservation is conducted with deep respect for
+                  cultural sensitivities, community consent, and applicable
+                  laws.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Documentation & Recording</div>
+                <div className="info-card-desc">
+                  Systematic documentation of oral traditions, architectural
+                  heritage, traditional practices, and cultural knowledge.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Community Partnership</div>
+                <div className="info-card-desc">
+                  Working with local communities, scholars, and cultural
+                  institutions to ensure heritage preservation is community-led.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Living Heritage</div>
+                <div className="info-card-desc">
+                  Focus on living traditions — yoga, folk arts, ecological
+                  knowledge — that continue to shape communities today.
+                </div>
+              </div>
+            </AnimatedGrid>
           </div>
 
-          <SectionHeader eyebrow="Archival Repositories" title="Digitized Heritage Vault Projects" />
-
-          <div className="table-wrap">
-            <table>
-              <caption style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden" }}>Digitized heritage vault projects</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Project Code</th>
-                  <th scope="col">Archive Description</th>
-                  <th scope="col">Format / Method</th>
-                  <th scope="col">Archived Volume</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {heritageProjects.map(p => (
-                  <tr key={p.id}>
-                    <td><code>{p.id}</code></td>
-                    <td><strong>{p.title}</strong></td>
-                    <td><span className="tag tag-purple">{p.type}</span></td>
-                    <td>{p.itemsCount}</td>
-                    <td><span className="tag tag-green">{p.status}</span></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Founder's Principle"
+                title="Our Commitment to Heritage"
+              />
+            </PageContent>
+            <div className="info-card" style={{ maxWidth: 800 }}>
+              <div
+                className="info-card-desc"
+                style={{ fontSize: 15, lineHeight: 1.7, fontStyle: "italic" }}
+              >
+                "Heritage is not a relic of the past. It is the foundation of
+                the future. Every temple documented, every tradition preserved,
+                every story recorded contributes to a richer, more resilient
+                society."
+              </div>
+              <div className="content-meta" style={{ marginTop: 12 }}>
+                — Shri Manohar Lal, Founder
+              </div>
+            </div>
           </div>
         </div>
       </main>

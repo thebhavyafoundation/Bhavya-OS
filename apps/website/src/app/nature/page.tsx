@@ -1,53 +1,206 @@
 import type { Metadata } from "next";
-import { TreePine, Flower2, PawPrint } from "lucide-react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { PageHero, SectionHeader, FeatureCard } from "../../components/ui/PageHero";
+import {
+  PageHero,
+  SectionHeader,
+  FeatureCard,
+} from "../../components/ui/PageHero";
 import { buildMetadata } from "../../lib/metadata";
-import { readContent, type ContentItem, type ContentEnvelope } from "../../services/content";
+import { PageContent, AnimatedGrid } from "../../components/PageContent";
+import {
+  TreePine,
+  Droplets,
+  Bug,
+  Sprout,
+  Users,
+  BookOpen,
+  Leaf,
+  Mountain,
+} from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Nature & Forest Conservation — Bhavya Foundation",
-  description: "Protecting canopy forests, restoring sacred groves, and deploying real-time GIS telemetry for wildlife corridor protection.",
+  title:
+    "Bhavya Forest Mission — Environmental Conservation — Bhavya Foundation",
+  description:
+    "Restoring ecosystems, protecting biodiversity, increasing native forest cover, and conserving water through community-led ecological stewardship.",
   path: "/nature",
 });
 
-interface SectorData { name: string; canopyDensity: string; telemetry: string; alerts: number; }
-interface ForestProject extends ContentItem { sectors: SectorData[]; }
+const programmes = [
+  {
+    icon: <TreePine />,
+    title: "Forest Restoration",
+    desc: "Reforestation, afforestation, and assisted natural regeneration to restore degraded ecosystems and increase native forest cover.",
+  },
+  {
+    icon: <Sprout />,
+    title: "Native Tree Plantation",
+    desc: "Preference for indigenous species naturally suited to the local ecosystem. monoculture plantations avoided unless justified for ecological restoration.",
+  },
+  {
+    icon: <Bug />,
+    title: "Biodiversity Conservation",
+    desc: "Habitat restoration, pollinator protection, bird conservation, native grasses and shrubs, wildlife awareness, and invasive species management.",
+  },
+  {
+    icon: <Droplets />,
+    title: "Water Conservation",
+    desc: "Rainwater harvesting, spring rejuvenation, watershed management, stream restoration, water literacy, and groundwater recharge awareness.",
+  },
+  {
+    icon: <Mountain />,
+    title: "Soil Conservation",
+    desc: "Protecting and restoring soil health through sustainable land management, erosion control, and organic practices.",
+  },
+  {
+    icon: <Users />,
+    title: "Community Participation",
+    desc: "Conservation succeeds when communities become long-term stewards. Schools, youth groups, Panchayats, farmers, and women's groups participate.",
+  },
+  {
+    icon: <BookOpen />,
+    title: "Environmental Education",
+    desc: "School awareness sessions, biodiversity walks, nature camps, teacher training, environmental clubs, and digital learning resources.",
+  },
+  {
+    icon: <Leaf />,
+    title: "Sacred Grove Restoration",
+    desc: "Partnering with communities to restore and protect ancient sacred groves that harbor endangered endemic flora and fauna.",
+  },
+];
+
+const principles = [
+  {
+    title: "Ecology Before Optics",
+    desc: "Projects prioritize ecological value over publicity.",
+  },
+  {
+    title: "Native Before Exotic",
+    desc: "Preference given to indigenous species naturally suited to the local ecosystem.",
+  },
+  {
+    title: "Survival Before Plantation",
+    desc: "Success measured by long-term survival, health, and ecological impact — not by the number of saplings planted.",
+  },
+  {
+    title: "Restoration Before Expansion",
+    desc: "Existing ecosystems protected and restored before creating new interventions.",
+  },
+  {
+    title: "Science With Community",
+    desc: "Scientific knowledge and community participation complement one another.",
+  },
+  {
+    title: "Long-Term Stewardship",
+    desc: "Every plantation or restoration project includes a maintenance and monitoring plan.",
+  },
+];
 
 export default function NaturePage() {
-  const project = readContent<ForestProject>("projects", "P-001") as (ContentEnvelope<ForestProject> & { data: ForestProject }) | null;
-  const sectors = project?.data?.sectors ?? [];
-
   return (
     <>
       <Header currentPath="/nature" />
       <main id="main-content">
-        <PageHero badge="NATURE & CONSERVATION" title="Canopy Protection & Real-Time Forest GIS" lead="The Nature Initiative protects primary forest canopy, restores ancient sacred groves, and operates automated bio-acoustic sensors to safeguard wildlife migration corridors." />
+        <PageHero
+          badge="BHAVYA FOREST MISSION"
+          title="Restoring Living Forests, Healthy Ecosystems"
+          lead="Environmental conservation is not merely a programme of the Foundation; it is one of its constitutional pillars. Every initiative seeks to restore ecological balance, strengthen community stewardship, and create measurable environmental benefit for present and future generations."
+        />
         <div className="container">
-          {project && <p className="content-meta">Data source: {project.source} · Last updated: {project.lastUpdated}</p>}
+          <PageContent>
+            <SectionHeader
+              eyebrow="Guiding Principles"
+              title="How We Conserve"
+              description="Every environmental programme follows these principles to ensure ecological integrity and long-term impact."
+            />
+          </PageContent>
+          <AnimatedGrid columns={3}>
+            {principles.map((p, i) => (
+              <div key={i} className="info-card">
+                <div className="info-card-title">{p.title}</div>
+                <div className="info-card-desc">{p.desc}</div>
+              </div>
+            ))}
+          </AnimatedGrid>
 
-          <SectionHeader eyebrow="Active Operations" title="Conservation Programs" />
-          <div className="grid-3" style={{ marginBottom: "64px" }}>
-            <FeatureCard icon={<TreePine />} title="Canopy GIS Telemetry" description="Deploying satellite GIS integration and canopy sensor nodes to monitor forest health, track temperature fluctuations, and detect illegal tree felling alerts in real time." />
-            <FeatureCard icon={<Flower2 />} title="Sacred Grove Restoration" description="Partnering with indigenous communities to survey, fence, and ecologically nurture ancient sacred groves that harbor endangered endemic flora and fauna." />
-            <FeatureCard icon={<PawPrint />} title="Wildlife Corridor Protection" description="Non-invasive AI camera traps and solar bio-acoustic listening posts monitor elephant and big cat movement across critical habitat connectors." />
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Programme Areas"
+                title="Environmental Activities"
+                description="From forest restoration to environmental education, our programmes serve ecosystems and communities across India."
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              {programmes.map((p, i) => (
+                <FeatureCard
+                  key={i}
+                  icon={p.icon}
+                  title={p.title}
+                  description={p.desc}
+                />
+              ))}
+            </AnimatedGrid>
           </div>
 
-          <SectionHeader eyebrow="Real-Time Data" title="Forest Telemetry Sector Status" />
-          <div className="table-wrap">
-            <table>
-              <caption style={{ position: "absolute", width: "1px", height: "1px", overflow: "hidden" }}>Forest telemetry sector monitoring data</caption>
-              <thead><tr><th scope="col">Protected Region</th><th scope="col">Canopy Density</th><th scope="col">Telemetry</th><th scope="col">Alerts</th></tr></thead>
-              <tbody>{sectors.map((s, i) => (
-                <tr key={i}>
-                  <td><strong>{s.name}</strong></td>
-                  <td><span className="tag tag-green">{s.canopyDensity}</span></td>
-                  <td><span className="tag tag-blue">{s.telemetry}</span></td>
-                  <td>{s.alerts === 0 ? <span className="tag tag-green">0 Alerts</span> : <span className="tag tag-amber">{s.alerts} Alert Flagged</span>}</td>
-                </tr>
-              ))}</tbody>
-            </table>
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Founder's Principle"
+                title="Our Commitment to Nature"
+              />
+            </PageContent>
+            <div className="info-card" style={{ maxWidth: 800 }}>
+              <div
+                className="info-card-desc"
+                style={{ fontSize: 15, lineHeight: 1.7, fontStyle: "italic" }}
+              >
+                "A tree planted without care is an event. A forest restored with
+                patience is a legacy. Bhavya Foundation shall be remembered not
+                for campaigns, but for landscapes transformed, communities
+                empowered, and ecosystems renewed."
+              </div>
+              <div className="content-meta" style={{ marginTop: 12 }}>
+                — Shri Manohar Lal, Founder
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: 64 }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Standards"
+                title="Tree Plantation Standards"
+                description="Every plantation project follows rigorous standards to ensure long-term ecological success."
+              />
+            </PageContent>
+            <AnimatedGrid columns={3}>
+              <div className="info-card">
+                <div className="info-card-title">Site Assessment</div>
+                <div className="info-card-desc">
+                  Soil suitability, water availability, land ownership
+                  confirmation, and ecological compatibility assessed before
+                  planting.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Species Selection</div>
+                <div className="info-card-desc">
+                  Indigenous trees, climate-resilient species, and
+                  biodiversity-supporting species preferred. Monoculture
+                  avoided.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Maintenance & Monitoring</div>
+                <div className="info-card-desc">
+                  Watering schedule, weeding, replacement of failed saplings,
+                  fencing, and periodic monitoring. Plantation is only the
+                  beginning.
+                </div>
+              </div>
+            </AnimatedGrid>
           </div>
         </div>
       </main>

@@ -1,23 +1,76 @@
 import type { Metadata } from "next";
-import { TreePine, Scroll, Flower2, Landmark, GraduationCap, Users } from "lucide-react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { PageHero, SectionHeader } from "../../components/ui/PageHero";
 import { buildMetadata } from "../../lib/metadata";
+import { PageContent, AnimatedGrid } from "../../components/PageContent";
+import {
+  TreePine,
+  Brain,
+  Landmark,
+  Heart,
+  BookOpen,
+  Users,
+  Laptop,
+  Sprout,
+} from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Programs — Bhavya Foundation",
-  description: "Explore Bhavya Foundation's active programs in nature conservation, heritage preservation, open knowledge, and community engagement.",
+  title: "Programmes — Bhavya Foundation",
+  description:
+    "Active programmes in forest restoration, AI education, heritage preservation, community development, and the Bhavya Volunteer Corps.",
   path: "/programs",
 });
 
-const programs = [
-  { icon: <TreePine />, title: "Canopy GIS Program", desc: "Satellite telemetry and on-ground sensor networks monitoring primary forest canopy density, detecting illegal logging, and tracking biodiversity health across 14,000+ hectares.", status: "Active" },
-  { icon: <Scroll />, title: "Manuscript Digitization", desc: "Non-destructive multispectral imaging of ancient palm-leaf manuscripts. Over 4,200 texts digitized with full-text search and cross-referencing.", status: "Active" },
-  { icon: <Flower2 />, title: "Sacred Grove Restoration", desc: "Indigenous community-led restoration of sacred groves — fencing, invasive removal, native species reintroduction, and biodiversity surveys.", status: "Active" },
-  { icon: <Landmark />, title: "3D Heritage Architecture", desc: "Millimeter-accurate photogrammetry and laser scanning of endangered heritage structures for digital preservation and structural monitoring.", status: "Active" },
-  { icon: <GraduationCap />, title: "Open Knowledge Platform", desc: "Versioned institutional standards, governance ADRs, and research publications in machine-readable format with full knowledge graph navigation.", status: "Active" },
-  { icon: <Users />, title: "Volunteer Corps", desc: "Field conservation teams, digital archiving squads, open-source contributors, and community chapter leaders across India.", status: "Active" },
+const programmes = [
+  {
+    icon: <TreePine />,
+    title: "Bhavya Forest Mission",
+    desc: "Forest restoration, native tree plantation, biodiversity conservation, watershed protection, soil conservation, and community forestry.",
+    status: "Active",
+  },
+  {
+    icon: <Brain />,
+    title: "Bhavya Knowledge Mission",
+    desc: "AI Labs, Digital Libraries, computer education, AI literacy, coding workshops, research support, and community hackathons.",
+    status: "Active",
+  },
+  {
+    icon: <Landmark />,
+    title: "Bhavya Heritage Mission",
+    desc: "Temple documentation, traditional knowledge preservation, yoga programmes, historical records, and sacred grove protection.",
+    status: "Active",
+  },
+  {
+    icon: <Heart />,
+    title: "Bhavya Community Mission",
+    desc: "Youth empowerment, women's leadership, school programmes, village development, health awareness, and disaster relief.",
+    status: "Active",
+  },
+  {
+    icon: <Users />,
+    title: "Bhavya Volunteer Corps",
+    desc: "Structured volunteer programme — recruiting, training, supporting, and recognizing volunteers across India.",
+    status: "Active",
+  },
+  {
+    icon: <Laptop />,
+    title: "Bhavya AI Labs",
+    desc: "Learning centres providing computers, internet, open-source software, coding workshops, mentorship, and innovation challenges.",
+    status: "Active",
+  },
+  {
+    icon: <BookOpen />,
+    title: "Bhavya Digital Library",
+    desc: "Physical and digital libraries, AI learning centres, mobile libraries, community knowledge centres, and village learning hubs.",
+    status: "Active",
+  },
+  {
+    icon: <Sprout />,
+    title: "Environmental Education",
+    desc: "School awareness sessions, biodiversity walks, nature camps, teacher training, environmental clubs, and digital learning resources.",
+    status: "Active",
+  },
 ];
 
 export default function ProgramsPage() {
@@ -26,25 +79,37 @@ export default function ProgramsPage() {
       <Header currentPath="/programs" />
       <main id="main-content">
         <PageHero
-          badge="ACTIVE PROGRAMS"
-          title="Mission-Driven Programs & Initiatives"
-          lead="Every program at Bhavya Foundation is governed by explicit standards, tracked in real time, and accessible through the institutional transparency portal."
+          badge="ACTIVE PROGRAMMES"
+          title="Field Operations & Initiatives"
+          lead="Every programme at Bhavya Foundation is governed by constitutional principles, tracked through measurable outcomes, and designed for long-term community impact."
         />
-
         <div className="container">
-          <SectionHeader eyebrow="In Focus" title="Flagship Programs" />
-          <div className="grid-2">
-            {programs.map((p, i) => (
+          <PageContent>
+            <SectionHeader
+              eyebrow="Flagship Programmes"
+              title="What We Do"
+              description="From forest restoration to AI education, our programmes serve communities and ecosystems across India."
+            />
+          </PageContent>
+          <AnimatedGrid columns={2}>
+            {programmes.map((p, i) => (
               <div className="card" key={i}>
                 <div className="card-header">
-                  <span className="card-icon" aria-hidden="true">{p.icon}</span>
-                  <span className="tag tag-green" style={{ marginLeft: "auto" }}>{p.status}</span>
+                  <span className="card-icon" aria-hidden="true">
+                    {p.icon}
+                  </span>
+                  <span
+                    className="tag tag-green"
+                    style={{ marginLeft: "auto" }}
+                  >
+                    {p.status}
+                  </span>
                 </div>
                 <h3 className="card-title">{p.title}</h3>
                 <p className="card-desc">{p.desc}</p>
               </div>
             ))}
-          </div>
+          </AnimatedGrid>
         </div>
       </main>
       <Footer />

@@ -11,7 +11,6 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
     { id: "nav-heritage", label: "Heritage", href: "/heritage" },
     { id: "nav-community", label: "Community", href: "/community" },
     { id: "nav-transparency", label: "Transparency", href: "/transparency" },
-    { id: "nav-programs", label: "Programs", href: "/programs" },
     { id: "nav-about", label: "About", href: "/about" },
   ];
 
@@ -22,8 +21,7 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
       <header className="site-header" role="banner">
         <a href="/" className="nav-logo" aria-label="Bhavya Foundation home">
           <Leaf className="nav-logo-icon" aria-hidden="true" />
-          <span className="nav-logo-text">Bhavya Foundation</span>
-          <span className="nav-logo-version">v0.6</span>
+          <span className="nav-logo-text">Bhavya</span>
         </a>
 
         <nav className="nav-list" aria-label="Main navigation">
@@ -43,7 +41,7 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
           <LanguageSwitcher />
           <ThemeToggle />
           <a href="/transparency" className="nav-cta">
-            Platform Status
+            Transparency
             <ArrowRight aria-hidden="true" />
           </a>
           <MobileMenu items={navItems} currentPath={currentPath} />

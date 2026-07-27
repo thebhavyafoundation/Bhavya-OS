@@ -1,15 +1,63 @@
 import type { Metadata } from "next";
-import { Landmark, ClipboardList, Bot, Globe, Zap, Wrench, Package } from "lucide-react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { PageHero, SectionHeader, FeatureCard } from "../../components/ui/PageHero";
+import {
+  PageHero,
+  SectionHeader,
+  FeatureCard,
+} from "../../components/ui/PageHero";
 import { buildMetadata } from "../../lib/metadata";
+import { PageContent, AnimatedGrid } from "../../components/PageContent";
+import { TreePine, BookOpen, Landmark, Heart } from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
   title: "About — Bhavya Foundation",
-  description: "Learn about Bhavya Foundation's institutional structure, governance model, and commitment to long-term impact.",
+  description:
+    "Bhavya Foundation is a public charitable trust dedicated to environmental conservation, education, heritage preservation, and community development.",
   path: "/about",
 });
+
+const governance = [
+  {
+    role: "Founder & Managing Trustee",
+    name: "Shri Manohar Lal",
+    desc: "Leading the Foundation with a vision to restore nature, empower communities, and build institutions worthy of future generations.",
+  },
+  {
+    role: "Trustee",
+    name: "Smt. Kanta Devi",
+    desc: "Governing the Foundation with integrity, diligence, and a commitment to public service.",
+  },
+  {
+    role: "Trustee",
+    name: "Shri Kuldeep Sangal",
+    desc: "Contributing to the Board's strategic oversight and institutional stewardship.",
+  },
+];
+
+const values = [
+  "Integrity",
+  "Stewardship",
+  "Knowledge",
+  "Discipline",
+  "Humility",
+  "Innovation",
+  "Excellence",
+  "Compassion",
+  "Courage",
+  "Service",
+];
+
+const commitments = [
+  "We serve the public before ourselves",
+  "We protect nature responsibly",
+  "We expand knowledge ethically",
+  "We preserve heritage respectfully",
+  "We tell the truth",
+  "We manage resources responsibly",
+  "We respect every individual",
+  "We remain transparent and accountable",
+];
 
 export default function AboutPage() {
   return (
@@ -17,43 +65,177 @@ export default function AboutPage() {
       <Header currentPath="/about" />
       <main id="main-content">
         <PageHero
-          badge="INSTITUTIONAL OVERVIEW"
-          title="A Foundation Built for the Long Term"
-          lead="Bhavya Foundation is registered as a non-profit trust committed to nature conservation, cultural heritage preservation, open knowledge, and community empowerment."
+          badge="ABOUT THE FOUNDATION"
+          title="An Institution Designed for Generations"
+          lead="Bhavya Foundation is established as an irrevocable Public Charitable Trust, existing exclusively for charitable purposes and for the benefit of the public without distinction."
         />
-
         <div className="container">
-          <SectionHeader eyebrow="Our Structure" title="Institutional Framework" />
-          <div className="grid-2" style={{ marginBottom: "64px" }}>
-            <FeatureCard icon={<Landmark />} title="Governing Trust" description="The Foundation operates under a governing trust deed that mandates radical transparency, vendor independence, and immutable decision logging as core institutional principles." />
-            <FeatureCard icon={<ClipboardList />} title="Architecture Board" description="All technical and governance decisions pass through the Architecture Board, which maintains ADRs, capability contracts, and the institutional knowledge graph." />
-            <FeatureCard icon={<Bot />} title="AI Agent Framework" description="Autonomous AI agents handle documentation, governance, release engineering, and specialized domain tasks under human oversight using the Bhavya Runtime." />
-            <FeatureCard icon={<Globe />} title="Open Community" description="All software, standards, and governance data are open-source. The Foundation operates without proprietary lock-in, ensuring long-term institutional independence." />
+          <PageContent>
+            <SectionHeader
+              eyebrow="Our Founders"
+              title="Board of Trustees"
+              description="The Board is entrusted with the highest responsibility — safeguarding the Foundation's charitable mission, upholding public trust, and ensuring responsible stewardship of resources."
+            />
+          </PageContent>
+          <AnimatedGrid columns={3}>
+            {governance.map((g, i) => (
+              <div key={i} className="stat-box" style={{ textAlign: "left" }}>
+                <div className="stat-eyebrow">{g.role}</div>
+                <div
+                  className="stat-number primary"
+                  style={{ fontSize: "22px" }}
+                >
+                  {g.name}
+                </div>
+                <p className="stat-description">{g.desc}</p>
+              </div>
+            ))}
+          </AnimatedGrid>
+
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Governance Structure"
+                title="How We Are Governed"
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              <div className="info-card">
+                <div className="info-card-title">
+                  Founder & Managing Trustee
+                </div>
+                <div className="info-card-desc">
+                  Supervises administration, implements Trustee decisions,
+                  represents the Trust, and coordinates programmes.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Board of Trustees</div>
+                <div className="info-card-desc">
+                  Governs — does not manage. Establishes direction, approves
+                  strategy, budget, and major decisions.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Executive Director</div>
+                <div className="info-card-desc">
+                  Leads day-to-day operations under the direction of the
+                  Managing Trustee and Board.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Programme Directors</div>
+                <div className="info-card-desc">
+                  Lead specific mission areas — Forest, Knowledge, Heritage, and
+                  Community — with operational teams.
+                </div>
+              </div>
+            </AnimatedGrid>
           </div>
 
-          <div className="grid-3" style={{ marginBottom: "64px" }}>
-            <div className="stat-box">
-              <div className="stat-number primary">100%</div>
-              <div className="stat-label">Open Source Code</div>
-            </div>
-            <div className="stat-box">
-              <div className="stat-number blue">9</div>
-              <div className="stat-label">Active Mission Apps</div>
-            </div>
-            <div className="stat-box">
-              <div className="stat-number purple">14k+</div>
-              <div className="stat-label">Hectares Under Protection</div>
-            </div>
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Our Constitution"
+                title="Governing Documents"
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              <div className="info-card">
+                <div className="info-card-title">The Constitution</div>
+                <div className="info-card-desc">
+                  Establishes the governance, ethics, and operational framework.
+                  Contains 14 Parts, 5 Missions, 11 Values, and 8 Commitments.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">
+                  Public Charitable Trust Deed
+                </div>
+                <div className="info-card-desc">
+                  The founding legal document establishing Bhavya Foundation as
+                  an irrevocable Public Charitable Trust.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Founders Charter</div>
+                <div className="info-card-desc">
+                  Shri Manohar Lal's stewardship principles and commitments to
+                  the Foundation's mission.
+                </div>
+              </div>
+              <div className="info-card">
+                <div className="info-card-title">Governance Manual</div>
+                <div className="info-card-desc">
+                  Philosophy, structure, and principles governing the
+                  Foundation's operations and decision-making.
+                </div>
+              </div>
+            </AnimatedGrid>
           </div>
 
-          <SectionHeader eyebrow="Technology Stack" title="Built on Bhavya OS" />
-          <p className="section-desc">
-            The entire platform runs on Bhavya OS — an AI-native software development runtime providing deterministic context loading, knowledge graphs, autonomous planning, and multi-agent orchestration.
-          </p>
-          <div className="grid-3">
-            <FeatureCard icon={<Zap />} title="Runtime v3.0 Stable" description="The core runtime is frozen at v3.0 with CLI, planner, executor, orchestrator, API, metrics, and compatibility snapshots." />
-            <FeatureCard icon={<Wrench />} title="Mission Runtime v0.6" description="Shared application services including auth, permissions, content, navigation, search, audit, documents, media, localization, and notifications." />
-            <FeatureCard icon={<Package />} title="SDK Layer" description="Public API wrappers at @bhavya/sdk provide typed interfaces for all mission applications consuming the runtime." />
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader eyebrow="Core Values" title="What Guides Us" />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              {values.map((v, i) => (
+                <div key={i} className="info-card">
+                  <div className="info-card-title" style={{ fontSize: "14px" }}>
+                    {v}
+                  </div>
+                </div>
+              ))}
+            </AnimatedGrid>
+          </div>
+
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Constitutional Commitments"
+                title="What We Promise"
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              {commitments.map((c, i) => (
+                <div key={i} className="info-card">
+                  <div className="info-card-desc" style={{ fontSize: 13 }}>
+                    {c}
+                  </div>
+                </div>
+              ))}
+            </AnimatedGrid>
+          </div>
+
+          <div style={{ marginTop: "64px" }}>
+            <PageContent>
+              <SectionHeader
+                eyebrow="Our Missions"
+                title="Four Permanent Missions"
+              />
+            </PageContent>
+            <AnimatedGrid columns={2}>
+              <FeatureCard
+                icon={<TreePine />}
+                title="Bhavya Forest Mission"
+                description="Restore ecosystems, protect biodiversity, increase native forest cover, and conserve water."
+              />
+              <FeatureCard
+                icon={<BookOpen />}
+                title="Bhavya Knowledge Mission"
+                description="AI Labs, Digital Libraries, research, innovation, and digital literacy."
+              />
+              <FeatureCard
+                icon={<Landmark />}
+                title="Bhavya Heritage Mission"
+                description="Traditional knowledge, yoga, temple documentation, architecture, and living heritage."
+              />
+              <FeatureCard
+                icon={<Heart />}
+                title="Bhavya Community Mission"
+                description="Youth, women, schools, village development, and the Bhavya Volunteer Corps."
+              />
+            </AnimatedGrid>
           </div>
         </div>
       </main>
