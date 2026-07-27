@@ -1,0 +1,91 @@
+{
+  "version": "1.0.0-alpha",
+  "lastUpdated": "2026-07-27T00:00:00Z",
+  "registries": {
+    "agents": {
+      "path": ".agents/registry.json",
+      "description": "AI agent definitions and capabilities"
+    },
+    "workflows": {
+      "path": ".workflows/index.json",
+      "description": "Operational workflow definitions"
+    },
+    "memory": {
+      "path": ".memory/index.json",
+      "description": "Long-term memory entries"
+    },
+    "events": {
+      "path": ".events/index.json",
+      "description": "Event definitions and handlers"
+    },
+    "commands": {
+      "path": ".commands/index.json",
+      "description": "Command definitions"
+    },
+    "prompts": {
+      "path": ".prompts/index.json",
+      "description": "Prompt templates"
+    },
+    "templates": {
+      "path": ".templates/index.json",
+      "description": "Content templates"
+    },
+    "pages": {
+      "path": ".registry/pages.json",
+      "description": "Website page registry"
+    },
+    "components": {
+      "path": ".registry/components.json",
+      "description": "UI component registry"
+    },
+    "documents": {
+      "path": ".registry/documents.json",
+      "description": "Document registry"
+    },
+    "models": {
+      "path": ".registry/models.json",
+      "description": "AI model registry"
+    },
+    "services": {
+      "path": ".registry/services.json",
+      "description": "Service registry"
+    },
+    "standards": {
+      "path": ".registry/standards.json",
+      "description": "Coding standards registry"
+    },
+    "packages": {
+      "path": ".registry/packages.json",
+      "description": "Package registry"
+    },
+    "search": {
+      "path": ".registry/search.json",
+      "description": "Search index"
+    },
+    "mcp": {
+      "path": ".registry/mcp.json",
+      "description": "MCP server registry"
+    },
+    "policies": {
+      "path": ".policies/",
+      "description": "Operational policies"
+    },
+    "schemas": {
+      "path": ".schemas/",
+      "description": "Validation schemas"
+    },
+    "metrics": {
+      "path": ".metrics/",
+      "description": "Dashboard metrics"
+    }
+  },
+  "discovery": {
+    "startHere": ".ai/MASTER_CONTEXT.md",
+    "forAgents": ".agents/registry.json",
+    "forWorkflows": ".workflows/",
+    "forMemory": ".memory/",
+    "forDocs": "docs/",
+    "forSchema": ".schemas/",
+    "forMetrics": ".metrics/"
+  }
+}
