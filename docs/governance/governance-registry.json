@@ -1,0 +1,118 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-07-27",
+  "documents": [
+    {
+      "id": "01",
+      "title": "The Constitution",
+      "file": "01-constitution.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Founder"
+    },
+    {
+      "id": "02",
+      "title": "Public Charitable Trust Deed",
+      "file": "02-trust-deed.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Founder"
+    },
+    {
+      "id": "03",
+      "title": "The Founders Charter",
+      "file": "03-founders-charter.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Founder"
+    },
+    {
+      "id": "04",
+      "title": "Board Of Trustees Charter",
+      "file": "04-board-charter.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Board"
+    },
+    {
+      "id": "05",
+      "title": "Governance Manual",
+      "file": "05-governance-manual.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "CEO"
+    },
+    {
+      "id": "06",
+      "title": "Code Of Ethics",
+      "file": "06-code-of-ethics.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "CEO"
+    },
+    {
+      "id": "07",
+      "title": "Conflict Of Interest Policy",
+      "file": "07-conflict-of-interest.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Legal"
+    },
+    {
+      "id": "08",
+      "title": "Financial Management And Procurement Policy",
+      "file": "08-financial-management.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "CTO"
+    },
+    {
+      "id": "09",
+      "title": "Donation Acceptance Policy",
+      "file": "09-donation-acceptance.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Donation"
+    },
+    {
+      "id": "10",
+      "title": "Volunteer Policy",
+      "file": "10-volunteer-policy.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Volunteer"
+    },
+    {
+      "id": "11",
+      "title": "Child Protection And Safeguarding Policy",
+      "file": "11-child-protection.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Legal"
+    },
+    {
+      "id": "12",
+      "title": "Environmental Conservation Policy",
+      "file": "12-environmental-conservation.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Researcher"
+    },
+    {
+      "id": "13",
+      "title": "AI Ethics And Responsible AI Policy",
+      "file": "13-ai-ethics.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "CTO"
+    },
+    {
+      "id": "14",
+      "title": "Digital Library Policy",
+      "file": "14-digital-library.md",
+      "status": "active",
+      "category": "governance",
+      "owner": "Historian"
+    }
+  ]
+}
