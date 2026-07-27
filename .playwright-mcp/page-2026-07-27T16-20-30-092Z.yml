@@ -1,0 +1,175 @@
+- generic [active] [ref=f4e1]:
+  - link "Skip to main content" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f4e3]:
+    - link "Bhavya Foundation home" [ref=f4e4] [cursor=pointer]:
+      - /url: /
+      - generic [ref=f4e8]: Bhavya
+    - navigation "Main navigation" [ref=f4e9]:
+      - link "Home" [ref=f4e10] [cursor=pointer]:
+        - /url: /
+      - link "Our Mission" [ref=f4e11] [cursor=pointer]:
+        - /url: /mission
+      - link "Nature" [ref=f4e12] [cursor=pointer]:
+        - /url: /nature
+      - link "Knowledge" [ref=f4e13] [cursor=pointer]:
+        - /url: /knowledge
+      - link "Heritage" [ref=f4e14] [cursor=pointer]:
+        - /url: /heritage
+      - link "Community" [ref=f4e15] [cursor=pointer]:
+        - /url: /community
+      - link "Transparency" [ref=f4e16] [cursor=pointer]:
+        - /url: /transparency
+      - link "About" [ref=f4e17] [cursor=pointer]:
+        - /url: /about
+    - generic [ref=f4e18]:
+      - radiogroup "Language selection" [ref=f4e19]:
+        - radio "Switch to en-IN" [checked] [ref=f4e20] [cursor=pointer]: en-IN
+        - radio "Switch to hi" [ref=f4e21] [cursor=pointer]: hi
+        - radio "Switch to ta" [ref=f4e22] [cursor=pointer]: ta
+        - radio "Switch to te" [ref=f4e23] [cursor=pointer]: te
+      - button "Switch to dark mode" [ref=f4e24] [cursor=pointer]
+      - link "Transparency" [ref=f4e27] [cursor=pointer]:
+        - /url: /transparency
+  - main [ref=f4e30]:
+    - region [ref=f4e31]:
+      - generic [ref=f4e32]:
+        - generic [ref=f4e33]:
+          - generic [ref=f4e34]: Public Charitable Trust
+          - heading "Restoring nature. Empowering humanity." [level=1] [ref=f4e37]: Restoring nature.Empowering humanity.
+          - paragraph [ref=f4e38]: Bhavya Foundation exists to build institutions that endure — restoring forests, expanding knowledge, preserving heritage, and giving communities the tools to shape what comes next.
+          - generic [ref=f4e39]:
+            - link "Explore Our Mission" [ref=f4e40] [cursor=pointer]:
+              - /url: /mission
+            - link "View Transparency Portal" [ref=f4e43] [cursor=pointer]:
+              - /url: /transparency
+          - generic "Foundation principles" [ref=f4e44]:
+            - generic [ref=f4e45]: Building for generations
+            - generic [ref=f4e47]: Nature. Knowledge. Heritage.
+            - generic [ref=f4e49]: Stewardship for tomorrow
+        - generic [ref=f4e51]:
+          - generic [ref=f4e58]: FOREST
+          - generic [ref=f4e60]: KNOWLEDGE
+          - generic [ref=f4e62]: COMMUNITY
+          - generic [ref=f4e64]:
+            - strong [ref=f4e65]: Bhavya
+            - text: — Grand. Noble. Magnificent.
+    - region [ref=f4e66]:
+      - generic [ref=f4e67]:
+        - paragraph [ref=f4e68]: Our Four Missions
+        - heading "Institutions That Endure" [level=2] [ref=f4e69]
+        - paragraph [ref=f4e70]: Everything under Bhavya belongs to one of these permanent missions. Projects finish. Institutions endure.
+      - generic [ref=f4e71]:
+        - link [ref=f4e72] [cursor=pointer]:
+          - /url: /nature
+          - heading "Bhavya Forest Mission" [level=3] [ref=f4e76]
+          - paragraph [ref=f4e77]: Restore ecosystems, protect biodiversity, increase native forest cover, and conserve water through community-led ecological stewardship.
+        - link [ref=f4e78] [cursor=pointer]:
+          - /url: /knowledge
+          - heading "Bhavya Knowledge Mission" [level=3] [ref=f4e88]
+          - paragraph [ref=f4e89]: AI Labs, Digital Libraries, research, and innovation. Making education accessible to rural and underserved communities.
+        - link [ref=f4e90] [cursor=pointer]:
+          - /url: /heritage
+          - heading "Bhavya Heritage Mission" [level=3] [ref=f4e96]
+          - paragraph [ref=f4e97]: Preserving traditional knowledge, yoga, temple documentation, architecture, history, and living heritage for future generations.
+        - link [ref=f4e98] [cursor=pointer]:
+          - /url: /community
+          - heading "Bhavya Community Mission" [level=3] [ref=f4e102]
+          - paragraph [ref=f4e103]: Youth empowerment, women's leadership, school programmes, village development, and the Bhavya Volunteer Corps.
+    - region [ref=f4e104]:
+      - generic [ref=f4e105]:
+        - paragraph [ref=f4e106]: About the Foundation
+        - heading "Founded on Public Trust" [level=2] [ref=f4e107]
+        - paragraph [ref=f4e108]: Established as an irrevocable Public Charitable Trust, Bhavya Foundation is governed by a Board of Trustees committed to transparency, stewardship, and long-term impact.
+      - generic [ref=f4e109]:
+        - generic [ref=f4e110]:
+          - generic [ref=f4e111]: FOUNDER & MANAGING TRUSTEE
+          - generic [ref=f4e112]: Shri Manohar Lal
+          - paragraph [ref=f4e113]: Leading the Foundation with a vision to restore nature, empower communities, and build institutions worthy of future generations.
+          - link "Read the Founders Charter" [ref=f4e114] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=f4e117]:
+          - generic [ref=f4e118]: BOARD OF TRUSTEES
+          - generic [ref=f4e119]: Three Trustees
+          - paragraph [ref=f4e120]: Shri Manohar Lal (Founder), Smt. Kanta Devi, and Shri Kuldeep Sangal — governing with integrity, diligence, and independence.
+          - link "View Governance Structure" [ref=f4e121] [cursor=pointer]:
+            - /url: /governance
+        - generic [ref=f4e124]:
+          - generic [ref=f4e125]: CONSTITUTIONAL COMMITMENTS
+          - generic [ref=f4e126]: 14 Parts · 11 Values
+          - paragraph [ref=f4e127]: Our Constitution establishes the governance, ethics, and operational framework that guides every decision of the Foundation.
+          - link "Read the Constitution" [ref=f4e128] [cursor=pointer]:
+            - /url: /constitution
+    - region [ref=f4e131]:
+      - generic [ref=f4e132]:
+        - paragraph [ref=f4e133]: Guiding Principles
+        - heading "How We Serve" [level=2] [ref=f4e134]
+        - paragraph [ref=f4e135]: Every decision of the Foundation is guided by constitutional principles, ethical commitments, and a duty to future generations.
+      - generic [ref=f4e136]:
+        - generic [ref=f4e137]: Radical transparency in governance and finances
+        - generic [ref=f4e139]: Long-term stewardship over short-term gains
+        - generic [ref=f4e141]: Evidence-based conservation and education
+        - generic [ref=f4e143]: Open participation and community ownership
+        - generic [ref=f4e145]: Ethical leadership and public accountability
+    - region [ref=f4e147]:
+      - generic [ref=f4e148]:
+        - paragraph [ref=f4e149]: Active Programmes
+        - heading "Field Operations & Initiatives" [level=2] [ref=f4e150]
+        - paragraph [ref=f4e151]: From forest restoration to AI education, our programmes serve communities across India.
+      - generic [ref=f4e152]:
+        - generic [ref=f4e153]:
+          - generic [ref=f4e154]: BHAVYA FOREST MISSION
+          - generic [ref=f4e155]: Native Plantation
+          - paragraph [ref=f4e156]: Forest restoration using indigenous species, watershed protection, biodiversity documentation, and community-led conservation.
+          - link "View Forest Programmes" [ref=f4e157] [cursor=pointer]:
+            - /url: /nature
+        - generic [ref=f4e160]:
+          - generic [ref=f4e161]: BHAVYA AI LABS
+          - generic [ref=f4e162]: AI Education
+          - paragraph [ref=f4e163]: Computer education, AI literacy, coding workshops, digital libraries, and innovation challenges in rural communities.
+          - link "View Knowledge Programmes" [ref=f4e164] [cursor=pointer]:
+            - /url: /knowledge
+        - generic [ref=f4e167]:
+          - generic [ref=f4e168]: BHAVYA VOLUNTEER CORPS
+          - generic [ref=f4e169]: Open Enrollment
+          - paragraph [ref=f4e170]: Join field conservation teams, digital literacy programmes, heritage documentation, and community development initiatives.
+          - link "Apply as a Volunteer" [ref=f4e171] [cursor=pointer]:
+            - /url: /community
+  - contentinfo [ref=f4e174]:
+    - generic [ref=f4e175]:
+      - generic [ref=f4e176]:
+        - generic [ref=f4e177]: Bhavya Foundation
+        - paragraph [ref=f4e182]: Restoring nature. Empowering humanity. Preserving heritage. A public charitable trust built for generations.
+      - generic [ref=f4e183]:
+        - generic [ref=f4e184]: Missions
+        - navigation "Mission navigation" [ref=f4e185]:
+          - link "Bhavya Forest Mission" [ref=f4e186] [cursor=pointer]:
+            - /url: /nature
+          - link "Bhavya Knowledge Mission" [ref=f4e187] [cursor=pointer]:
+            - /url: /knowledge
+          - link "Bhavya Heritage Mission" [ref=f4e188] [cursor=pointer]:
+            - /url: /heritage
+          - link "Bhavya Community Mission" [ref=f4e189] [cursor=pointer]:
+            - /url: /community
+      - generic [ref=f4e190]:
+        - generic [ref=f4e191]: Governance
+        - navigation "Governance navigation" [ref=f4e192]:
+          - link "About" [ref=f4e193] [cursor=pointer]:
+            - /url: /about
+          - link "Transparency" [ref=f4e194] [cursor=pointer]:
+            - /url: /transparency
+          - link "Governance Structure" [ref=f4e195] [cursor=pointer]:
+            - /url: /governance
+          - link "Constitution" [ref=f4e196] [cursor=pointer]:
+            - /url: /constitution
+      - generic [ref=f4e197]:
+        - generic [ref=f4e198]: Legal
+        - navigation "Legal navigation" [ref=f4e199]:
+          - link "Privacy Policy" [ref=f4e200] [cursor=pointer]:
+            - /url: /privacy
+          - link "Accessibility" [ref=f4e201] [cursor=pointer]:
+            - /url: /accessibility
+    - generic [ref=f4e202]:
+      - generic [ref=f4e203]: © 2026 Bhavya Foundation
+      - generic [ref=f4e204]: Built for Generations · Nature. Knowledge. Heritage.
+  - alert [ref=f4e205]

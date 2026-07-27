@@ -1,7 +1,7 @@
 "use client";
 
 import { useGsapStagger } from "../lib/animations";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TreePine, GraduationCap, HandHeart } from "lucide-react";
 
 const programs = [
   {
@@ -11,7 +11,8 @@ const programs = [
       "Forest restoration using indigenous species, watershed protection, biodiversity documentation, and community-led conservation.",
     link: "/nature",
     linkText: "View Forest Programmes",
-    color: "var(--forest-700)",
+    icon: <TreePine size={20} />,
+    color: "var(--forest-600)",
   },
   {
     eyebrow: "BHAVYA AI LABS",
@@ -20,6 +21,7 @@ const programs = [
       "Computer education, AI literacy, coding workshops, digital libraries, and innovation challenges in rural communities.",
     link: "/knowledge",
     linkText: "View Knowledge Programmes",
+    icon: <GraduationCap size={20} />,
     color: "var(--earth-600)",
   },
   {
@@ -29,6 +31,7 @@ const programs = [
       "Join field conservation teams, digital literacy programmes, heritage documentation, and community development initiatives.",
     link: "/community",
     linkText: "Apply as a Volunteer",
+    icon: <HandHeart size={20} />,
     color: "var(--gold-600)",
   },
 ];
@@ -48,19 +51,44 @@ export function CTASection() {
       </div>
       <div className="grid-3" ref={containerRef}>
         {programs.map((program, i) => (
-          <div key={i} className="stat-box" style={{ textAlign: "left" }}>
-            <div className="stat-eyebrow">{program.eyebrow}</div>
+          <div key={i} className="card" style={{ textAlign: "left" }}>
             <div
-              className="stat-number"
-              style={{ fontSize: "22px", color: program.color }}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "var(--radius-md)",
+                background: "var(--primary-subtle)",
+                border: "1px solid rgba(21, 128, 61, 0.1)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: program.color,
+                marginBottom: "var(--space-5)",
+              }}
+            >
+              {program.icon}
+            </div>
+            <div className="stat-eyebrow">{program.eyebrow}</div>
+            <h3
+              style={{
+                fontSize: "var(--text-xl)",
+                fontWeight: 700,
+                color: program.color,
+                letterSpacing: "-0.02em",
+                marginBottom: "var(--space-3)",
+              }}
             >
               {program.value}
-            </div>
+            </h3>
             <p className="stat-description">{program.description}</p>
             <a
               href={program.link}
               className="stat-link"
-              style={{ color: program.color }}
+              style={{
+                color: program.color,
+                marginTop: "var(--space-4)",
+                display: "inline-flex",
+              }}
             >
               {program.linkText}
               <ArrowRight size={14} aria-hidden="true" />

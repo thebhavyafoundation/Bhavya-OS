@@ -15,7 +15,9 @@ export function HeroSection() {
             Public Charitable Trust
           </div>
           <h1 id="hero-heading" className="hero-title" style={{ opacity: 0 }}>
-            Restoring nature.
+            Restoring
+            <br />
+            nature.
             <br />
             Empowering <span className="highlight">humanity.</span>
           </h1>
@@ -49,7 +51,11 @@ export function HeroSection() {
             </span>
           </div>
         </div>
-        <div className="mission-field" aria-hidden="true">
+        <div
+          className="mission-field"
+          aria-hidden="true"
+          style={{ opacity: 0 }}
+        >
           <div className="mission-grid" />
           <div className="mission-orbit orbit-one" />
           <div className="mission-orbit orbit-two" />

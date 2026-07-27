@@ -18,7 +18,7 @@ const stats = [
     value: "Three Trustees",
     description:
       "Shri Manohar Lal (Founder), Smt. Kanta Devi, and Shri Kuldeep Sangal — governing with integrity, diligence, and independence.",
-    link: "/governance",
+    link: "/about",
     linkText: "View Governance Structure",
     color: "var(--text)",
   },
@@ -27,7 +27,7 @@ const stats = [
     value: "14 Parts · 11 Values",
     description:
       "Our Constitution establishes the governance, ethics, and operational framework that guides every decision of the Foundation.",
-    link: "/constitution",
+    link: "/mission",
     linkText: "Read the Constitution",
     color: "var(--gold-600)",
   },
@@ -53,7 +53,7 @@ export function StatsSection() {
             <div className="stat-eyebrow">{stat.eyebrow}</div>
             <div
               className="stat-number"
-              style={{ fontSize: "22px", color: stat.color }}
+              style={{ fontSize: "var(--text-xl)", color: stat.color }}
             >
               {stat.value}
             </div>

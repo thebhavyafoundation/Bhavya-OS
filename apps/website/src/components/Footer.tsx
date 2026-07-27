@@ -8,7 +8,12 @@ export function Footer() {
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <Leaf size={20} color="var(--primary)" aria-hidden="true" />
             <span
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--text)" }}
+              style={{
+                fontSize: "var(--text-md)",
+                fontWeight: 800,
+                color: "var(--text)",
+                letterSpacing: "-0.02em",
+              }}
             >
               Bhavya Foundation
             </span>
@@ -17,6 +22,36 @@ export function Footer() {
             Restoring nature. Empowering humanity. Preserving heritage. A public
             charitable trust built for generations.
           </p>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-3)",
+              marginTop: "var(--space-5)",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "var(--text-xs)",
+                fontFamily: "var(--font-mono)",
+                color: "var(--text-tertiary)",
+                display: "flex",
+                alignItems: "center",
+                gap: "var(--space-2)",
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "var(--primary)",
+                  boxShadow: "0 0 0 4px var(--primary-glow)",
+                  animation: "pulse 2s infinite",
+                }}
+              />
+              Active since 2026
+            </span>
+          </div>
         </div>
         <div>
           <div className="footer-col-title">Missions</div>
@@ -32,8 +67,8 @@ export function Footer() {
           <nav className="footer-links" aria-label="Governance navigation">
             <a href="/about">About</a>
             <a href="/transparency">Transparency</a>
-            <a href="/governance">Governance Structure</a>
-            <a href="/constitution">Constitution</a>
+            <a href="/about">Governance Structure</a>
+            <a href="/mission">Constitution</a>
           </nav>
         </div>
         <div>
