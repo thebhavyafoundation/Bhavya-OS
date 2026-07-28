@@ -26,3 +26,8 @@ export { FinanceService } from './finance-service.js';
 export { ProjectsService } from './projects-service.js';
 export { AuditService } from './audit-service.js';
 export { PublicAPI } from './public-api.js';
+
+// Mission Operations Platform (v3.3.0)
+export { MissionService } from './mission-service.js';
+export { ResourceRegistry } from './resource-registry.js';
+export { ImpactRegistry } from './impact-registry.js';
