@@ -294,6 +294,9 @@ importers:
 
   apps/volunteer:
     dependencies:
+      '@bhavya/content-core':
+        specifier: workspace:*
+        version: link:../../packages/content-core
       '@bhavya/ui':
         specifier: workspace:*
         version: link:../../packages/ui

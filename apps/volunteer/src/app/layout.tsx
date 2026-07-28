@@ -1,13 +1,15 @@
 import type { ReactNode } from "react";
-import { ThemeProvider } from "@bhavya/ui";
 import "./globals.css";
+
+export const metadata = {
+  title: "Volunteer | Bhavya Foundation",
+  description: "Volunteer management for Bhavya Foundation missions",
+};
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en-IN" suppressHydrationWarning>
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
