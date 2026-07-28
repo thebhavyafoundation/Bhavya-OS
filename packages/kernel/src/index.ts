@@ -2,7 +2,7 @@
 // Everything the kernel exposes.
 
 export { boot } from './boot/index.js';
-export type { Kernel } from './boot/index.js';
+export type { Kernel, BootResult, BootStep } from './boot/index.js';
 
 export { Runtime } from './runtime/index.js';
 export type { RuntimeContext } from './runtime/index.js';
@@ -27,6 +27,20 @@ export { Scheduler } from './scheduler/index.js';
 export { Planner } from './planner/index.js';
 
 export { Api } from './api/index.js';
+
+export { Observability } from './observability/index.js';
+export type { Dashboard, KernelStatus, AgentStatus, WorkflowStatus, MemoryStatus, EventStatus, SchedulerStatus, PlannerStatus } from './observability/index.js';
+
+export {
+  validateAgent,
+  validateWorkflow,
+  validateEvent,
+  validateMemory,
+  validateGoal,
+  validateTask,
+  validatePlan,
+} from './contracts/index.js';
+export type { ContractResult } from './contracts/index.js';
 
 // Re-export all types
 export * from './types/index.js';
