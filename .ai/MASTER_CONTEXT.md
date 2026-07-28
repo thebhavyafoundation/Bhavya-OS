@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
 **Last Updated:** 2026-07-28
-**Version:** 3.0.0
-**Status:** Bhavya OS — Stable Platform, Applications Phase
+**Version:** 3.1.0
+**Status:** Transparency & Governance Platform — The institution's source of truth
 
 ---
 
@@ -10,14 +10,72 @@
 
 Build the world's first AI Native Foundation Operating System — a version-controlled institutional manual that any AI model can clone, read, and immediately contribute to the Bhavya Foundation repository.
 
-## What Changed
+## What We Built
 
-The OS is now **stable infrastructure**. We stopped building kernel modules and started building **applications** that solve real institutional problems.
+### Transparency & Governance Platform (v3.1.0)
+
+The institution's source of truth. Every other application consumes from here.
+
+```
+Transparency Platform
+  |
+  +-- Governance Service (decisions, approvals, resolutions)
+  +-- Finance Service (budgets, grants, donations)
+  +-- Projects Service (lifecycle, milestones, impact)
+  +-- Audit Service (trail, compliance, snapshots)
+  +-- Public API (REST endpoints)
+  |
+Kernel (@bhavya/kernel)
+  |
+Engines (@bhavya/*-engine)
+  |
+Memory (.memory/)
+```
+
+### Application Architecture
+
+```
+Website (presentation)
+  |
+Transparency Platform (source of truth)
+  |
+Institution Registry
+  |
+Bhavya OS (kernel)
+```
+
+Instead of hardcoded JSON, the Website reads from the Transparency Platform.
+
+### Version History
+
+| Version | Milestone |
+|---------|----------|
+| v1.0.0-alpha | Repository Foundation |
+| v1.1.0-alpha | Kernel Runtime |
+| v1.2.0-alpha | Productive Runtime |
+| v1.3.0-alpha | Institution Services |
+| v1.4.0-alpha | Autonomous Coordination |
+| v2.0.0-beta | Production Platform |
+| v3.0.0 | Bhavya OS + Knowledge Platform |
+| **v3.1.0** | **Transparency & Governance Platform** |
+
+## Applications
+
+| Application | Status | Description |
+|-------------|--------|-------------|
+| **Transparency & Governance** | Active | Source of truth for decisions, finance, projects |
+| Knowledge Platform | Active | Upload, classify, index, search, summarize |
+| Website | Planned | Public presentation powered by source of truth |
+| Volunteer Platform | Planned | Onboard, manage, recognize volunteers |
+| Heritage Platform | Planned | Preserve cultural heritage |
+| Forest Platform | Planned | Restore and monitor forests |
+| Library Platform | Planned | Digital library |
+| Research Platform | Planned | Research management |
+| Administration Platform | Planned | Internal operations |
 
 ## Compatibility Promise
 
-These APIs are **guaranteed stable**. Breaking changes require a major version bump.
-
+These APIs are **guaranteed stable**:
 - Kernel API v1
 - BRP v1
 - Memory API v1
@@ -34,64 +92,9 @@ These APIs are **guaranteed stable**. Breaking changes require a major version b
 | Channel | Version | Status |
 |---------|---------|--------|
 | LTS | v3.x | Planned |
-| Stable | v3.0.0 | Current |
+| Stable | v3.1.0 | Current |
 | Preview | v4.0-beta | Not started |
 | Experimental | feature/* | Available |
-
-## Applications
-
-| Application | Status | Description |
-|-------------|--------|-------------|
-| Knowledge Platform | Active | Upload, classify, index, search, summarize, track provenance |
-| Website | Planned | Public website |
-| Transparency Portal | Planned | Published reports, releases, financials |
-| Volunteer Platform | Planned | Onboard, manage, recognize volunteers |
-| Heritage Platform | Planned | Preserve cultural heritage |
-| Forest Platform | Planned | Restore and monitor forests |
-| Library Platform | Planned | Digital library |
-| Research Platform | Planned | Research management |
-| Administration Platform | Planned | Internal operations |
-
-## CLI
-
-```
-bhavya create agent <name>        # Create agent definition
-bhavya create workflow <name>     # Create workflow
-bhavya create service <name>      # Create institution service
-bhavya test workflow <name>       # Test workflow
-bhavya inspect execution <id>     # Inspect execution
-bhavya replay execution <id>      # Replay failed execution
-bhavya doctor                     # Check system health
-```
-
-## Architecture
-
-```
-Applications (Knowledge, Website, Transparency, ...)
-  |
-Kernel (@bhavya/kernel)
-  |
-Engines (@bhavya/*-engine)
-  |
-Memory (.memory/)
-  |
-Agents (.agents/)
-  |
-Events (.events/)
-```
-
-## How To Use
-
-```bash
-# Clone
-git clone https://github.com/thebhavyafoundation/Bhavya-OS.git
-
-# Read the master context
-cat .ai/MASTER_CONTEXT.md
-
-# Start contributing
-# Any AI model can read these files and immediately understand the system
-```
 
 ## Engineering Priorities
 
@@ -99,12 +102,22 @@ Instead of asking: "What engine should we build next?"
 
 Ask: "What institutional problem should Bhavya solve next?"
 
-- A volunteer joins -> Can Bhavya onboard them end to end?
 - A trustee approves a policy -> Can Bhavya publish it automatically?
-- A research paper arrives -> Can Bhavya ingest, index, and connect it?
 - A donation is received -> Can Bhavya update transparency records?
+- A project is started -> Can Bhavya track milestones and impact?
+- A volunteer joins -> Can Bhavya onboard them end to end?
 
 If the runtime supports those scenarios cleanly, it is succeeding.
+
+## CLI
+
+```
+bhavya create agent/workflow/service
+bhavya test agent/workflow/service/all
+bhavya inspect execution/agent/memory/event
+bhavya replay execution/workflow
+bhavya doctor
+```
 
 ## Important Documents
 
@@ -114,6 +127,7 @@ If the runtime supports those scenarios cleanly, it is succeeding.
 | Release Channels | `docs/standards/RELEASE-CHANNELS.md` |
 | CLI Spec | `docs/standards/CLI.md` |
 | Knowledge Platform | `docs/applications/knowledge-platform.md` |
+| Transparency Platform | `docs/releases/v3.1.0.md` |
 | BRP Protocol | `docs/architecture/BRP.md` |
 | Frozen Contracts | `docs/standards/FROZEN-CONTRACTS.md` |
 
