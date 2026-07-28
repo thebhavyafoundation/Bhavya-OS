@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
 **Last Updated:** 2026-07-28
-**Version:** 3.1.0
-**Status:** Transparency & Governance Platform — The institution's source of truth
+**Version:** 3.2.0
+**Status:** Public Foundation Website — Thin presentation layer over source of truth
 
 ---
 
@@ -12,25 +12,29 @@ Build the world's first AI Native Foundation Operating System — a version-cont
 
 ## What We Built
 
-### Transparency & Governance Platform (v3.1.0)
+### Public Foundation Website (v3.2.0)
 
-The institution's source of truth. Every other application consumes from here.
+A thin presentation layer. No business logic. Just rendering what Bhavya OS provides.
 
 ```
-Transparency Platform
+Visitor
   |
-  +-- Governance Service (decisions, approvals, resolutions)
-  +-- Finance Service (budgets, grants, donations)
-  +-- Projects Service (lifecycle, milestones, impact)
-  +-- Audit Service (trail, compliance, snapshots)
-  +-- Public API (REST endpoints)
+Website (Next.js)
   |
-Kernel (@bhavya/kernel)
+Public API (read-only)
   |
-Engines (@bhavya/*-engine)
+Transparency Platform (source of truth)
   |
-Memory (.memory/)
+Bhavya OS (kernel)
 ```
+
+### Key Design Decisions
+
+1. **Declarative pages** — Every page is a schema. The renderer assembles it.
+2. **No business logic** — Website only queries and displays data.
+3. **Content publishing** — Changes in Bhavya OS auto-reflect on website.
+4. **Unified search** — One search across all content types.
+5. **API separation** — Public (read-only), Partner (authenticated), Internal (full).
 
 ### Application Architecture
 
@@ -44,8 +48,6 @@ Institution Registry
 Bhavya OS (kernel)
 ```
 
-Instead of hardcoded JSON, the Website reads from the Transparency Platform.
-
 ### Version History
 
 | Version | Milestone |
@@ -57,15 +59,16 @@ Instead of hardcoded JSON, the Website reads from the Transparency Platform.
 | v1.4.0-alpha | Autonomous Coordination |
 | v2.0.0-beta | Production Platform |
 | v3.0.0 | Bhavya OS + Knowledge Platform |
-| **v3.1.0** | **Transparency & Governance Platform** |
+| v3.1.0 | Transparency & Governance Platform |
+| **v3.2.0** | **Public Foundation Website** |
 
 ## Applications
 
 | Application | Status | Description |
 |-------------|--------|-------------|
+| **Public Website** | Active | Thin presentation layer over source of truth |
 | **Transparency & Governance** | Active | Source of truth for decisions, finance, projects |
 | Knowledge Platform | Active | Upload, classify, index, search, summarize |
-| Website | Planned | Public presentation powered by source of truth |
 | Volunteer Platform | Planned | Onboard, manage, recognize volunteers |
 | Heritage Platform | Planned | Preserve cultural heritage |
 | Forest Platform | Planned | Restore and monitor forests |
@@ -73,9 +76,15 @@ Instead of hardcoded JSON, the Website reads from the Transparency Platform.
 | Research Platform | Planned | Research management |
 | Administration Platform | Planned | Internal operations |
 
+## Development Rule
+
+Every new feature must first be implemented as a Bhavya OS capability and then consumed by an application.
+
+This prevents applications from developing their own business logic and keeps Bhavya OS as the single institutional platform.
+
 ## Compatibility Promise
 
-These APIs are **guaranteed stable**:
+These APIs are guaranteed stable:
 - Kernel API v1
 - BRP v1
 - Memory API v1
@@ -92,32 +101,19 @@ These APIs are **guaranteed stable**:
 | Channel | Version | Status |
 |---------|---------|--------|
 | LTS | v3.x | Planned |
-| Stable | v3.1.0 | Current |
+| Stable | v3.2.0 | Current |
 | Preview | v4.0-beta | Not started |
 | Experimental | feature/* | Available |
 
-## Engineering Priorities
+## Next in Sequence
 
-Instead of asking: "What engine should we build next?"
-
-Ask: "What institutional problem should Bhavya solve next?"
-
-- A trustee approves a policy -> Can Bhavya publish it automatically?
-- A donation is received -> Can Bhavya update transparency records?
-- A project is started -> Can Bhavya track milestones and impact?
-- A volunteer joins -> Can Bhavya onboard them end to end?
-
-If the runtime supports those scenarios cleanly, it is succeeding.
-
-## CLI
-
-```
-bhavya create agent/workflow/service
-bhavya test agent/workflow/service/all
-bhavya inspect execution/agent/memory/event
-bhavya replay execution/workflow
-bhavya doctor
-```
+| Version | Application |
+|---------|-------------|
+| v3.3.0 | Volunteer Platform |
+| v3.4.0 | Research Platform |
+| v3.5.0 | Forest Platform |
+| v3.6.0 | Heritage Platform |
+| v3.7.0 | Library Platform |
 
 ## Important Documents
 
@@ -126,10 +122,8 @@ bhavya doctor
 | Compatibility Promise | `docs/standards/COMPATIBILITY-PROMISE.md` |
 | Release Channels | `docs/standards/RELEASE-CHANNELS.md` |
 | CLI Spec | `docs/standards/CLI.md` |
-| Knowledge Platform | `docs/applications/knowledge-platform.md` |
-| Transparency Platform | `docs/releases/v3.1.0.md` |
+| Website Schemas | `apps/website/src/lib/schemas.ts` |
 | BRP Protocol | `docs/architecture/BRP.md` |
-| Frozen Contracts | `docs/standards/FROZEN-CONTRACTS.md` |
 
 ---
 
