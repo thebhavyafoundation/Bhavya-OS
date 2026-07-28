@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
-**Last Updated:** 2026-07-27
+**Last Updated:** 2026-07-28
 **Version:** 1.1.0-alpha
-**Status:** Phase 2 In Progress
+**Status:** Phase 3 Complete
 
 ---
 
@@ -12,19 +12,25 @@ Build the world's first AI Native Foundation Operating System — a version-cont
 
 ## Active Release
 
-**v1.1.0-alpha** — Phase 2: Bhavya Kernel
+**v1.1.0-alpha** — Phase 3: Institution Runtime
 
 Features:
-- **Bhavya Kernel** — Core runtime with 12 modules
+- **Bhavya Kernel** — Core runtime with 14 modules
 - **Bhavya Runtime Protocol (BRP)** — Goal → Plan → Tasks → Events → Memory
 - **7 Engine Packages** — Each with one responsibility
-- **@bhavya/* namespace** — Consistent package naming
-- Phase 1 features (Memory, Governance, Agents, Workflows, etc.)
+- **Contracts** — Input validation for every engine
+- **Observability** — Runtime dashboard
+- **Boot Sequence** — Proper validation at every step
+- **E2E Integration Test** — Acceptance criterion met
+
+## Acceptance Criterion (MET)
+
+> A founder can submit a single goal to Bhavya OS, and the kernel can autonomously plan it, execute a workflow, assign agents, publish events, update memory, and return a final execution report—all through BRP.
 
 ## Current Priorities
 
-1. **Complete Phase 2** — Kernel and engines
-2. **Integration testing** — Verify kernel works with all apps
+1. **Real execution** — Wire agents to actually execute tasks
+2. **Real persistence** — Wire memory to actually persist
 3. **Documentation** — Fill institutional knowledge base
 4. **Testing** — Establish quality gates
 
@@ -44,6 +50,33 @@ Agents (.agents/)
 Events (.events/)
 ```
 
+## BRP v1
+
+```
+Goal → Plan → Task → Event → Memory → Knowledge → Result
+```
+
+Small. Versioned. The contract for everything inside Bhavya OS.
+
+## Kernel Modules (14)
+
+| Module | Purpose |
+|--------|---------|
+| `boot/` | Bootstrap and validation |
+| `runtime/` | Lifecycle management |
+| `configuration/` | Config management |
+| `logging/` | Structured logging |
+| `events/` | Event bus (pub/sub) |
+| `registry/` | Auto-discovery |
+| `memory/` | Unified memory interface |
+| `permissions/` | Access control |
+| `health/` | Health checks |
+| `scheduler/` | Task scheduling |
+| `planner/` | Goal → Plan → Tasks |
+| `api/` | API surface |
+| `observability/` | Runtime dashboard |
+| `contracts/` | Input validation |
+
 ## Package Namespace
 
 ```
@@ -59,30 +92,39 @@ Events (.events/)
 @bhavya/sdk              → packages/sdk/ (legacy)
 ```
 
-## Kernel Modules
-
-| Module | Purpose |
-|--------|---------|
-| `boot/` | Bootstrap and initialization |
-| `runtime/` | Runtime lifecycle management |
-| `scheduler/` | Task scheduling and execution |
-| `planner/` | Goal → Plan → Tasks conversion |
-| `memory/` | Unified memory interface |
-| `events/` | Event bus (pub/sub) |
-| `registry/` | Auto-discovery of resources |
-| `permissions/` | Access control |
-| `health/` | Health checks and monitoring |
-| `logging/` | Structured logging |
-| `configuration/` | Config management |
-| `api/` | Kernel API surface |
-
-## Bhavya Runtime Protocol (BRP)
-
-Every engine understands:
+## Boot Sequence
 
 ```
-Goal → Plan → Workflow → Tasks → Events → Agent Actions → Memory Updates → Knowledge Updates
+Load Configuration
+  ↓
+Initialize Logging
+  ↓
+Initialize Event Bus
+  ↓
+Initialize Registry
+  ↓
+Initialize Memory
+  ↓
+Initialize Permissions
+  ↓
+Initialize Health
+  ↓
+Initialize Scheduler
+  ↓
+Initialize Planner
+  ↓
+Initialize Observability
+  ↓
+Initialize API
+  ↓
+Initialize Runtime
+  ↓
+Health Check
+  ↓
+READY
 ```
+
+If the kernel cannot boot cleanly, nothing else runs.
 
 ## Active Agents
 
@@ -140,14 +182,14 @@ Goal → Plan → Workflow → Tasks → Events → Agent Actions → Memory Upd
 ├── apps/                   # Applications
 │   └── website/            # Main website
 ├── packages/               # Shared packages (@bhavya/*)
-│   ├── kernel/             # Bhavya Kernel (NEW)
-│   ├── agent-engine/       # Agent Engine (NEW)
-│   ├── workflow-engine/    # Workflow Engine (NEW)
-│   ├── memory-engine/      # Memory Engine (NEW)
-│   ├── knowledge-engine/   # Knowledge Engine (NEW)
-│   ├── search-engine/      # Search Engine (NEW)
-│   ├── planner-engine/     # Planner Engine (NEW)
-│   ├── scheduler-engine/   # Scheduler Engine (NEW)
+│   ├── kernel/             # Bhavya Kernel (14 modules)
+│   ├── agent-engine/       # Agent Engine
+│   ├── workflow-engine/    # Workflow Engine
+│   ├── memory-engine/      # Memory Engine
+│   ├── knowledge-engine/   # Knowledge Engine
+│   ├── search-engine/      # Search Engine
+│   ├── planner-engine/     # Planner Engine
+│   ├── scheduler-engine/   # Scheduler Engine
 │   ├── runtime/            # Legacy runtime
 │   └── sdk/                # Legacy SDK
 ├── docs/                   # Institutional knowledge
@@ -186,13 +228,12 @@ Goal → Plan → Workflow → Tasks → Events → Agent Actions → Memory Upd
 |----------|----------|
 | BRP Protocol | `docs/architecture/BRP.md` |
 | Package Namespace | `docs/architecture/PACKAGE-NAMESPACE.md` |
+| v1.1.0-alpha Release | `docs/releases/v1.1.0-alpha.md` |
 | Mission | `.ai/MISSION.md` |
 | Vision | `.ai/VISION.md` |
 | Values | `.ai/VALUES.md` |
 | Style Guide | `.ai/STYLE_GUIDE.md` |
 | Coding Standard | `.ai/CODING_STANDARD.md` |
-| Migration Plan | `docs/MIGRATION-PLAN.md` |
-| Reorganization Summary | `docs/REORGANIZATION-SUMMARY.md` |
 | Agent Registry | `.agents/registry.json` |
 | Registry Index | `.registry/index.json` |
 
