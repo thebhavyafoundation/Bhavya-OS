@@ -18,22 +18,23 @@ Agents
 Events
 ```
 
-## Modules
+## Modules (27)
 
 | Module | Purpose |
 |--------|---------|
 | `boot/` | Bootstrap and initialization |
 | `runtime/` | Runtime lifecycle management |
-| `scheduler/` | Task scheduling and execution |
-| `planner/` | Goal → Plan → Tasks conversion |
-| `memory/` | Unified memory interface |
+| `configuration/` | Config management |
+| `logging/` | Structured logging |
 | `events/` | Event bus (pub/sub) |
 | `registry/` | Auto-discovery of resources |
+| `memory/` | Unified memory interface |
 | `permissions/` | Access control |
 | `health/` | Health checks and monitoring |
-| `logging/` | Structured logging |
-| `configuration/` | Config management |
+| `scheduler/` | Task scheduling and execution |
+| `planner/` | Goal → Plan → Tasks conversion |
 | `api/` | Kernel API surface |
+| `observability/` | Runtime dashboard |
 | `contracts/` | Input validation |
 | `idempotency/` | Duplicate prevention |
 | `coordinator/` | Multi-engine orchestration |
@@ -43,38 +44,23 @@ Events
 | `orchestrator/` | Event-driven workflow triggers |
 | `consensus/` | Multi-agent voting + decisions |
 | `capability-matcher/` | Agent-to-task pairing |
+| `auth/` | Token auth + RBAC |
+| `rate-limit/` | Request throttling |
+| `monitoring/` | Metrics + alerting |
+| `backup/` | Backup + recovery |
 
 ## Bhavya Runtime Protocol (BRP)
 
-Every engine understands BRP:
-
 ```
-Goal
-  ↓
-Plan
-  ↓
-Workflow
-  ↓
-Tasks
-  ↓
-Events
-  ↓
-Agent Actions
-  ↓
-Memory Updates
-  ↓
-Knowledge Updates
+Goal → Plan → Task → Event → Memory → Knowledge → Result
 ```
 
 ## Usage
 
 ```typescript
-import { Kernel } from '@bhavya/kernel';
+import { boot } from '@bhavya/kernel';
 
-const kernel = await Kernel.boot({
-  root: process.cwd(),
-  config: 'bhavya.config.ts'
-});
+const kernel = await boot({ root: process.cwd() });
 
 // Memory
 const project = await kernel.memory.get('project');
@@ -86,14 +72,6 @@ const work = await kernel.selfOrganizing.discoverWork({
   requiredCapabilities: ['design']
 });
 
-// Orchestrator
-kernel.orchestrator.registerTrigger({
-  eventType: 'page.created',
-  workflowId: 'update-navigation',
-  workflowInput: (payload) => ({ page: payload.page }),
-  enabled: true
-});
-
 // Consensus
 const proposal = await kernel.consensus.createProposal({
   title: 'Use Tailwind',
@@ -101,17 +79,16 @@ const proposal = await kernel.consensus.createProposal({
   type: 'decision'
 });
 
-// Capability Matcher
-const match = await kernel.capabilityMatcher.match({
-  id: 'req-1',
-  requiredCapabilities: ['react'],
-  priority: 'high'
-});
+// Auth
+const token = await kernel.auth.issueToken('agent:dev', ['agent']);
+
+// Monitoring
+kernel.monitoring.record('api.latency', 245);
 ```
 
 ## Design Principle
 
-Every engine is behind a stable interface. Applications never know whether memory is stored in Markdown, JSON, SQLite, or Qdrant.
+Every engine is behind a stable interface. Applications never know implementation details.
 
 ```typescript
 // Always this:
