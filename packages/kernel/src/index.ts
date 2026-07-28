@@ -31,6 +31,8 @@ export { Api } from './api/index.js';
 export { Observability } from './observability/index.js';
 export type { Dashboard, KernelStatus, AgentStatus, WorkflowStatus, MemoryStatus, EventStatus, SchedulerStatus, PlannerStatus } from './observability/index.js';
 
+export { Idempotency } from './idempotency/index.js';
+
 export {
   validateAgent,
   validateWorkflow,
@@ -41,6 +43,13 @@ export {
   validatePlan,
 } from './contracts/index.js';
 export type { ContractResult } from './contracts/index.js';
+
+// Scenarios (real execution)
+export { CreateMissionPage } from './scenarios/create-mission-page.js';
+export type { CreatePageInput, CreatePageContext } from './scenarios/create-mission-page.js';
+
+export { PublishReleaseNotes } from './scenarios/publish-release-notes.js';
+export type { PublishReleaseInput, PublishReleaseContext } from './scenarios/publish-release-notes.js';
 
 // Re-export all types
 export * from './types/index.js';
