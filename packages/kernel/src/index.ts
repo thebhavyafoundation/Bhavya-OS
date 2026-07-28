@@ -44,6 +44,29 @@ export {
 } from './contracts/index.js';
 export type { ContractResult } from './contracts/index.js';
 
+// Coordinator (v1.3.0-alpha)
+export { Coordinator } from './coordinator/index.js';
+export type { CoordinatorConfig, AgentExecution, ExecutionReport } from './coordinator/index.js';
+
+// Replay Engine (v1.3.0-alpha)
+export { ReplayEngine } from './replay/index.js';
+export type { ReplayConfig, ReplayResult } from './replay/index.js';
+
+// Institution Services (v1.3.0-alpha)
+export {
+  WebsiteContentService,
+  TransparencyService,
+  VolunteerService,
+  ResearchService,
+  GovernanceService,
+} from './services/index.js';
+export type { InstitutionService } from './services/index.js';
+export type { WebsiteContentInput } from './services/website-content.js';
+export type { TransparencyInput } from './services/transparency.js';
+export type { VolunteerInput } from './services/volunteer.js';
+export type { ResearchInput } from './services/research.js';
+export type { GovernanceInput } from './services/governance.js';
+
 // Scenarios (real execution)
 export { CreateMissionPage } from './scenarios/create-mission-page.js';
 export type { CreatePageInput, CreatePageContext } from './scenarios/create-mission-page.js';

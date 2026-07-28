@@ -19,6 +19,9 @@ These contracts are stable public interfaces. Future improvements happen **behin
 | Event model | `packages/kernel/src/events/index.ts` | Frozen |
 | Memory API | `packages/kernel/src/memory/index.ts` | Frozen |
 | Registry API | `packages/kernel/src/registry/index.ts` | Frozen |
+| Coordinator API | `packages/kernel/src/coordinator/index.ts` | Frozen (v1.3.0) |
+| Replay API | `packages/kernel/src/replay/index.ts` | Frozen (v1.3.0) |
+| Service Interface | `packages/kernel/src/services/index.ts` | Frozen (v1.3.0) |
 
 ## Rules
 
@@ -86,6 +89,68 @@ interface Registry {
   get(type: RegistryType): RegistryEntry[];
   getById(id: string): RegistryEntry | undefined;
   getAll(): RegistryEntry[];
+}
+```
+
+## Coordinator API (Frozen — v1.3.0)
+
+```typescript
+interface Coordinator {
+  execute(config: CoordinatorConfig): Promise<ExecutionReport>;
+  getExecutionHistory(): Promise<ExecutionReport[]>;
+  initialize(): Promise<void>;
+  shutdown(): Promise<void>;
+}
+
+interface CoordinatorConfig {
+  name: string;
+  steps: CoordinatorStep[];
+  context?: ExecutionContext;
+}
+
+interface ExecutionReport {
+  name: string;
+  success: boolean;
+  outputs: Record<string, unknown>;
+  duration: number;
+  agentExecutions: AgentExecution[];
+  timestamp: Date;
+}
+```
+
+## Replay API (Frozen — v1.3.0)
+
+```typescript
+interface ReplayEngine {
+  replay(executionId: string): Promise<ReplayResult>;
+  resume(executionId: string): Promise<ReplayResult>;
+  getReplayHistory(executionId: string): Promise<ReplayResult[]>;
+  getAllReplays(): Promise<ReplayResult[]>;
+  initialize(): Promise<void>;
+  shutdown(): Promise<void>;
+}
+
+interface ReplayResult {
+  executionId: string;
+  originalStatus: ExecutionState;
+  replayedEvents: number;
+  newStatus: ExecutionState;
+  context: ExecutionContext;
+  duration: number;
+  timestamp: Date;
+}
+```
+
+## Service Interface (Frozen — v1.3.0)
+
+```typescript
+interface InstitutionService {
+  name: string;
+  description: string;
+  capabilities: string[];
+  initialize(): Promise<void>;
+  execute(input: unknown): Promise<unknown>;
+  shutdown(): Promise<void>;
 }
 ```
 

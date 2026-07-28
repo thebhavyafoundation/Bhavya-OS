@@ -34,6 +34,11 @@ Events
 | `logging/` | Structured logging |
 | `configuration/` | Config management |
 | `api/` | Kernel API surface |
+| `contracts/` | Input validation |
+| `idempotency/` | Duplicate prevention |
+| `coordinator/` | Multi-engine orchestration (v1.3.0) |
+| `replay/` | Context restore + event replay (v1.3.0) |
+| `services/` | Institution services (v1.3.0) |
 
 ## Bhavya Runtime Protocol (BRP)
 
@@ -78,6 +83,24 @@ await kernel.events.emit('page.created', { page });
 
 // Registry
 const agents = await kernel.registry.discover('agents');
+
+// Coordinator (multi-engine)
+const report = await kernel.coordinator.execute({
+  name: 'build-website',
+  steps: [
+    { engine: 'planner', action: 'createPlan', input: {...} },
+    { engine: 'agent', action: 'build', input: {...} }
+  ]
+});
+
+// Replay
+await kernel.replay.replay('exec-123');
+
+// Services
+const { artifacts } = await kernel.services.websiteContent.execute({
+  action: 'create', type: 'page', name: 'mission',
+  title: 'Our Mission', content: '...'
+});
 ```
 
 ## Design Principle

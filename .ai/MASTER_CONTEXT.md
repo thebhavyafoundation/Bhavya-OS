@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
 **Last Updated:** 2026-07-28
-**Version:** 1.2.0-alpha
-**Status:** From Simulated Execution to Productive Execution
+**Version:** 1.3.0-alpha
+**Status:** Institution Services — Real operational needs powered by the runtime
 
 ---
 
@@ -12,25 +12,24 @@ Build the world's first AI Native Foundation Operating System — a version-cont
 
 ## Active Release
 
-**v1.2.0-alpha** — From Simulated Execution to Productive Execution
+**v1.3.0-alpha** — Institution Services
 
 Features:
-- **ExecutionContext** — Shared context across all operations
-- **Idempotency** — Prevents duplicate execution
-- **Scenario 1** — Create Mission Page (real artifacts)
-- **Scenario 2** — Publish Release Notes (real artifacts)
-- **15 Kernel Modules** — Complete runtime
+- **Coordinator** — Multi-engine orchestration
+- **Replay Engine** — Restore context, replay events, resume workflow
+- **5 Institution Services** — Website Content, Transparency, Volunteer, Research, Governance
+- **18 Kernel Modules** — Complete runtime
 - **7 Engine Packages** — Each with one responsibility
 
 ## Acceptance Criterion (MET)
 
-> A founder can issue a real goal and Bhavya OS can create, modify, validate, and report on actual project assets using the runtime.
+> Institution services solve real operational needs while exercising the runtime.
 
 ## Current Priorities
 
-1. **Real mission capabilities** — Website content management, transparency publishing, volunteer onboarding
-2. **Documentation** — Fill institutional knowledge base
-3. **Testing** — Establish quality gates
+1. **v1.4.0-alpha** — Autonomous Coordination (self-organizing systems)
+2. **v2.0.0-beta** — Production Platform (operational foundation)
+3. **Documentation** — Fill institutional knowledge base
 
 ## Architecture
 
@@ -56,7 +55,7 @@ Goal → Plan → Task → Event → Memory → Knowledge → Result
 
 Small. Versioned. The contract for everything inside Bhavya OS.
 
-## Kernel Modules (15)
+## Kernel Modules (18)
 
 | Module | Purpose |
 |--------|---------|
@@ -75,45 +74,47 @@ Small. Versioned. The contract for everything inside Bhavya OS.
 | `observability/` | Runtime dashboard |
 | `contracts/` | Input validation |
 | `idempotency/` | Duplicate prevention |
+| `coordinator/` | Multi-engine orchestration |
+| `replay/` | Context restore + event replay |
+| `services/` | Institution services |
 
-## ExecutionContext
+## Institution Services (v1.3.0)
 
-Every event, task, workflow, and memory update has a shared context:
+| Service | Solves | Exercises |
+|---------|--------|-----------|
+| Website Content | Create, update, publish web content | Planner, workflow, content, search |
+| Transparency | Publish reports, releases, financials | Events, memory, releases, registry |
+| Volunteer | Onboard, manage, recognize volunteers | Agents, workflows, permissions |
+| Research | Ingest, index, search research | Knowledge, search, memory |
+| Governance | Manage documents, approvals, history | Documents, approvals, history |
 
-```typescript
-interface ExecutionContext {
-  executionId: string;
-  parentExecutionId?: string;
-  triggeringEvent?: string;
-  initiatingAgent?: string;
-  correlationId: string;
-  timestamps: { started, lastUpdated, completed?, deadline? };
-  retryCount: number;
-  maxRetries: number;
-  state: ExecutionState;
-  metadata: Record<string, unknown>;
-}
-```
+## Coordinator
 
-## Idempotency
+Orchestrates multiple engines, combines outputs:
 
 ```typescript
-const { proceed, reason } = await kernel.idempotency.shouldExecute('key');
-// 'key_not_found' → proceed
-// 'already_completed' → skip
-// 'already_in_progress' → skip
-// 'retry_after_failure' → proceed
+const report = await coordinator.execute({
+  name: 'build-website',
+  steps: [
+    { engine: 'planner', action: 'createPlan', input: {...} },
+    { engine: 'agent', action: 'build', input: {...} }
+  ]
+});
+// report.success, report.outputs, report.duration
 ```
 
-## Scenarios
+## Replay Engine
 
-### Scenario 1: Create Mission Page
-**Input:** "Create a new mission page"
-**Output:** Real files, navigation, tests, docs, report
+Restore context, replay events, resume workflow:
 
-### Scenario 2: Publish Release Notes
-**Input:** "Publish release notes"
-**Output:** Release document, registry, snapshot, metrics
+```typescript
+// Replay failed execution
+const result = await replay.replay('exec-123');
+// result.replayedEvents, result.newStatus
+
+// Resume paused execution
+const result = await replay.resume('exec-123');
+```
 
 ## Package Namespace
 
@@ -167,15 +168,6 @@ If the kernel cannot boot cleanly, nothing else runs.
 
 ```
 ├── .ai/                    # AI brain (read first)
-│   ├── MASTER_CONTEXT.md   # This file
-│   ├── MISSION.md          # Foundation mission
-│   ├── VISION.md           # Long-term vision
-│   ├── VALUES.md           # Core values
-│   ├── CONSTRAINTS.md      # Operational constraints
-│   ├── STYLE_GUIDE.md      # Brand guidelines
-│   ├── CODING_STANDARD.md  # Development standards
-│   └── DECISION_RULES.md   # Decision framework
-│
 ├── .agents/                # Agent definitions
 ├── .memory/                # Long-term memory
 ├── .workflows/             # Operational workflows
@@ -196,7 +188,7 @@ If the kernel cannot boot cleanly, nothing else runs.
 ├── apps/                   # Applications
 │   └── website/            # Main website
 ├── packages/               # Shared packages (@bhavya/*)
-│   ├── kernel/             # Bhavya Kernel (15 modules)
+│   ├── kernel/             # Bhavya Kernel (18 modules)
 │   ├── agent-engine/       # Agent Engine
 │   ├── workflow-engine/    # Workflow Engine
 │   ├── memory-engine/      # Memory Engine
@@ -241,8 +233,9 @@ If the kernel cannot boot cleanly, nothing else runs.
 | Document | Location |
 |----------|----------|
 | BRP Protocol | `docs/architecture/BRP.md` |
+| Frozen Contracts | `docs/standards/FROZEN-CONTRACTS.md` |
 | Package Namespace | `docs/architecture/PACKAGE-NAMESPACE.md` |
-| v1.2.0-alpha Release | `docs/releases/v1.2.0-alpha.md` |
+| v1.3.0-alpha Release | `docs/releases/v1.3.0-alpha.md` |
 | Mission | `.ai/MISSION.md` |
 | Vision | `.ai/VISION.md` |
 | Values | `.ai/VALUES.md` |
