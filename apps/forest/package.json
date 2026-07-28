@@ -1,6 +1,6 @@
 {
   "name": "@bhavya/forest",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3004",
@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bhavya/content-core": "workspace:*",
     "@bhavya/maps": "workspace:*",
     "@bhavya/mission-runtime": "workspace:*",
     "@bhavya/ui": "workspace:*",

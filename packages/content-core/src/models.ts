@@ -250,3 +250,129 @@ export interface ResearchStats {
   evidenceByStrength: Record<EvidenceStrength, number>;
   totalReviews: number;
 }
+
+// ── Forest Domain ──────────────────────────────────────────
+
+export type MissionStatus =
+  "planning" | "active" | "monitoring" | "completed" | "on-hold" | "archived";
+
+export interface Mission {
+  id: string;
+  name: string;
+  description: string;
+  status: MissionStatus;
+  region: string;
+  startDate: string;
+  endDate?: string;
+  goals: string[];
+  tags: string[];
+  siteIds: string[];
+  created: string;
+  updated: string;
+}
+
+export interface Site {
+  id: string;
+  missionId: string;
+  name: string;
+  description: string;
+  latitude?: number;
+  longitude?: number;
+  areaHectares?: number;
+  terrainType?: string;
+  currentCondition?: string;
+  surveyIds: string[];
+  plantingIds: string[];
+  created: string;
+  updated: string;
+}
+
+export type SurveyType =
+  "baseline" | "periodic" | "final" | "biodiversity" | "soil" | "water";
+
+export interface Survey {
+  id: string;
+  siteId: string;
+  missionId: string;
+  type: SurveyType;
+  title: string;
+  description: string;
+  conductedBy: string;
+  conductedDate: string;
+  findings: string[];
+  speciesObserved: string[];
+  conditionRating?: number;
+  photos: string[];
+  documentId?: string;
+  created: string;
+}
+
+export type PlantingStatus =
+  "planned" | "in-progress" | "completed" | "monitoring";
+
+export interface Planting {
+  id: string;
+  siteId: string;
+  missionId: string;
+  name: string;
+  status: PlantingStatus;
+  species: string[];
+  targetCount: number;
+  plantedCount: number;
+  survivalRate?: number;
+  startDate: string;
+  endDate?: string;
+  notes: string;
+  documentId?: string;
+  created: string;
+  updated: string;
+}
+
+export type MonitoringType =
+  "growth" | "survival" | "biodiversity" | "soil" | "water" | "photo";
+
+export interface Monitoring {
+  id: string;
+  plantingId?: string;
+  siteId: string;
+  missionId: string;
+  type: MonitoringType;
+  title: string;
+  observations: string[];
+  metrics: Record<string, number>;
+  photos: string[];
+  conductedBy: string;
+  conductedDate: string;
+  documentId?: string;
+  created: string;
+}
+
+export interface Impact {
+  id: string;
+  missionId: string;
+  title: string;
+  summary: string;
+  areaRestoredHectares: number;
+  totalPlanted: number;
+  survivalRate: number;
+  speciesCount: number;
+  biodiversityIndex?: number;
+  carbonSequestrationTonnes?: number;
+  communityMembers?: number;
+  period: string;
+  documentId?: string;
+  created: string;
+}
+
+export interface ForestStats {
+  totalMissions: number;
+  missionsByStatus: Record<MissionStatus, number>;
+  totalSites: number;
+  totalSurveys: number;
+  totalPlantings: number;
+  totalMonitoring: number;
+  totalImpactReports: number;
+  totalAreaRestored: number;
+  totalPlanted: number;
+  averageSurvivalRate: number;
+}
