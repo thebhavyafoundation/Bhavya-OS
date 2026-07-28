@@ -108,3 +108,66 @@ export {
   createImpact,
   getForestStats,
 } from "./forest";
+
+// ── Publication Contract ───────────────────────────────────
+export {
+  publishKnowledge,
+  publishFieldReport,
+  publishImpactReport,
+  publishSurveyResult,
+  publishMonitoringLog,
+} from "./publish";
+export type {
+  PublicationRequest,
+  PublicationResult,
+  DocumentType,
+  Visibility,
+} from "./publish";
+
+// ── Heritage ───────────────────────────────────────────────
+export {
+  getHeritageMissions,
+  getHeritageMission,
+  createHeritageMission,
+  getHeritageSites,
+  getHeritageSite,
+  getHeritageSitesByMission,
+  createHeritageSite,
+  getHeritageAssets,
+  getHeritageAsset,
+  getHeritageAssetsBySite,
+  getHeritageAssetsByMission,
+  createHeritageAsset,
+  getAssessments,
+  getAssessment,
+  getAssessmentsByAsset,
+  createAssessment,
+  getDocumentations,
+  getDocumentation,
+  getDocumentationsByAsset,
+  createDocumentation,
+  getConservationPlans,
+  getConservationPlan,
+  getConservationPlansByAsset,
+  createConservationPlan,
+  getHeritageImpactReports,
+  getHeritageImpact,
+  createHeritageImpact,
+  getHeritageStats,
+} from "./heritage";
+export type {
+  AssetType,
+  AssetCondition,
+  HeritageAsset,
+  AssessmentType,
+  ConditionAssessment,
+  DocumentationType,
+  Documentation,
+  ConservationStatus,
+  ConservationPlan,
+  HeritageImpact,
+  HeritageMissionStatus,
+  HeritageMission,
+  HeritageSite,
+  HeritageStats,
+} from "./heritage";

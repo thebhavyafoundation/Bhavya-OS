@@ -1,1 +1,17 @@
-@import "@bhavya/ui/styles.css";
+:root {
+  --heritage-gold: #c9a84c;
+  --heritage-dark: #0f0a05;
+  --heritage-card: #1a1208;
+  --heritage-border: #2a1f10;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: var(--heritage-dark);
+  color: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
