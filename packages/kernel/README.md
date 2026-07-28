@@ -36,9 +36,13 @@ Events
 | `api/` | Kernel API surface |
 | `contracts/` | Input validation |
 | `idempotency/` | Duplicate prevention |
-| `coordinator/` | Multi-engine orchestration (v1.3.0) |
-| `replay/` | Context restore + event replay (v1.3.0) |
-| `services/` | Institution services (v1.3.0) |
+| `coordinator/` | Multi-engine orchestration |
+| `replay/` | Context restore + event replay |
+| `services/` | Institution services |
+| `self-organizing/` | Autonomous work discovery + assignment |
+| `orchestrator/` | Event-driven workflow triggers |
+| `consensus/` | Multi-agent voting + decisions |
+| `capability-matcher/` | Agent-to-task pairing |
 
 ## Bhavya Runtime Protocol (BRP)
 
@@ -75,31 +79,33 @@ const kernel = await Kernel.boot({
 // Memory
 const project = await kernel.memory.get('project');
 
-// Workflows
-await kernel.workflow.start('deploy');
-
-// Events
-await kernel.events.emit('page.created', { page });
-
-// Registry
-const agents = await kernel.registry.discover('agents');
-
-// Coordinator (multi-engine)
-const report = await kernel.coordinator.execute({
-  name: 'build-website',
-  steps: [
-    { engine: 'planner', action: 'createPlan', input: {...} },
-    { engine: 'agent', action: 'build', input: {...} }
-  ]
+// Self-Organizing
+const work = await kernel.selfOrganizing.discoverWork({
+  type: 'task',
+  title: 'Update homepage',
+  requiredCapabilities: ['design']
 });
 
-// Replay
-await kernel.replay.replay('exec-123');
+// Orchestrator
+kernel.orchestrator.registerTrigger({
+  eventType: 'page.created',
+  workflowId: 'update-navigation',
+  workflowInput: (payload) => ({ page: payload.page }),
+  enabled: true
+});
 
-// Services
-const { artifacts } = await kernel.services.websiteContent.execute({
-  action: 'create', type: 'page', name: 'mission',
-  title: 'Our Mission', content: '...'
+// Consensus
+const proposal = await kernel.consensus.createProposal({
+  title: 'Use Tailwind',
+  proposedBy: 'agent:designer',
+  type: 'decision'
+});
+
+// Capability Matcher
+const match = await kernel.capabilityMatcher.match({
+  id: 'req-1',
+  requiredCapabilities: ['react'],
+  priority: 'high'
 });
 ```
 

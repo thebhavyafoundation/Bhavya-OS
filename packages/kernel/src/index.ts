@@ -67,6 +67,22 @@ export type { VolunteerInput } from './services/volunteer.js';
 export type { ResearchInput } from './services/research.js';
 export type { GovernanceInput } from './services/governance.js';
 
+// Self-Organizing Engine (v1.4.0-alpha)
+export { SelfOrganizingEngine } from './self-organizing/index.js';
+export type { SelfOrganizingConfig, WorkItem, Agent } from './self-organizing/index.js';
+
+// Event-Driven Orchestrator (v1.4.0-alpha)
+export { EventDrivenOrchestrator } from './orchestrator/index.js';
+export type { OrchestratorConfig, WorkflowTrigger } from './orchestrator/index.js';
+
+// Consensus Engine (v1.4.0-alpha)
+export { ConsensusEngine } from './consensus/index.js';
+export type { ConsensusConfig, Proposal, Vote } from './consensus/index.js';
+
+// Capability Matcher (v1.4.0-alpha)
+export { CapabilityMatcher } from './capability-matcher/index.js';
+export type { MatchingConfig, MatchingRequest, MatchingResult, AgentMatch } from './capability-matcher/index.js';
+
 // Scenarios (real execution)
 export { CreateMissionPage } from './scenarios/create-mission-page.js';
 export type { CreatePageInput, CreatePageContext } from './scenarios/create-mission-page.js';

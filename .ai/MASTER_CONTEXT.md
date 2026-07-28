@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
 **Last Updated:** 2026-07-28
-**Version:** 1.3.0-alpha
-**Status:** Institution Services — Real operational needs powered by the runtime
+**Version:** 1.4.0-alpha
+**Status:** Autonomous Coordination — Self-organizing systems
 
 ---
 
@@ -12,24 +12,26 @@ Build the world's first AI Native Foundation Operating System — a version-cont
 
 ## Active Release
 
-**v1.3.0-alpha** — Institution Services
+**v1.4.0-alpha** — Autonomous Coordination
 
 Features:
-- **Coordinator** — Multi-engine orchestration
-- **Replay Engine** — Restore context, replay events, resume workflow
-- **5 Institution Services** — Website Content, Transparency, Volunteer, Research, Governance
-- **18 Kernel Modules** — Complete runtime
+- **Self-Organizing Engine** — Discovers work, assigns agents, coordinates autonomously
+- **Event-Driven Orchestrator** — Reacts to events, triggers workflows automatically
+- **Consensus Engine** — Multi-agent decision making
+- **Capability Matcher** — Pairs agents to tasks based on skills
+- **22 Kernel Modules** — Complete runtime
 - **7 Engine Packages** — Each with one responsibility
+- **5 Institution Services** — Website Content, Transparency, Volunteer, Research, Governance
 
 ## Acceptance Criterion (MET)
 
-> Institution services solve real operational needs while exercising the runtime.
+> The system self-organizes when given goals. Agents are discovered, assigned, and coordinated without human intervention.
 
 ## Current Priorities
 
-1. **v1.4.0-alpha** — Autonomous Coordination (self-organizing systems)
-2. **v2.0.0-beta** — Production Platform (operational foundation)
-3. **Documentation** — Fill institutional knowledge base
+1. **v2.0.0-beta** — Production Platform (operational foundation)
+2. **Documentation** — Fill institutional knowledge base
+3. **Testing** — Establish quality gates
 
 ## Architecture
 
@@ -55,7 +57,7 @@ Goal → Plan → Task → Event → Memory → Knowledge → Result
 
 Small. Versioned. The contract for everything inside Bhavya OS.
 
-## Kernel Modules (18)
+## Kernel Modules (22)
 
 | Module | Purpose |
 |--------|---------|
@@ -77,43 +79,27 @@ Small. Versioned. The contract for everything inside Bhavya OS.
 | `coordinator/` | Multi-engine orchestration |
 | `replay/` | Context restore + event replay |
 | `services/` | Institution services |
+| `self-organizing/` | Autonomous work discovery + assignment |
+| `orchestrator/` | Event-driven workflow triggers |
+| `consensus/` | Multi-agent voting + decisions |
+| `capability-matcher/` | Agent-to-task pairing |
 
-## Institution Services (v1.3.0)
+## Autonomous Coordination (v1.4.0)
 
-| Service | Solves | Exercises |
-|---------|--------|-----------|
-| Website Content | Create, update, publish web content | Planner, workflow, content, search |
-| Transparency | Publish reports, releases, financials | Events, memory, releases, registry |
-| Volunteer | Onboard, manage, recognize volunteers | Agents, workflows, permissions |
-| Research | Ingest, index, search research | Knowledge, search, memory |
-| Governance | Manage documents, approvals, history | Documents, approvals, history |
+The system now self-organizes:
 
-## Coordinator
-
-Orchestrates multiple engines, combines outputs:
-
-```typescript
-const report = await coordinator.execute({
-  name: 'build-website',
-  steps: [
-    { engine: 'planner', action: 'createPlan', input: {...} },
-    { engine: 'agent', action: 'build', input: {...} }
-  ]
-});
-// report.success, report.outputs, report.duration
 ```
-
-## Replay Engine
-
-Restore context, replay events, resume workflow:
-
-```typescript
-// Replay failed execution
-const result = await replay.replay('exec-123');
-// result.replayedEvents, result.newStatus
-
-// Resume paused execution
-const result = await replay.resume('exec-123');
+Event → Self-Organizing Engine → Discovers Work
+  ↓
+Capability Matcher → Finds Best Agent
+  ↓
+Event-Driven Orchestrator → Triggers Workflow
+  ↓
+Consensus Engine → Multi-Agent Decision
+  ↓
+Coordinator → Executes + Reports
+  ↓
+Replay Engine → Recovery if Failed
 ```
 
 ## Package Namespace
@@ -188,7 +174,7 @@ If the kernel cannot boot cleanly, nothing else runs.
 ├── apps/                   # Applications
 │   └── website/            # Main website
 ├── packages/               # Shared packages (@bhavya/*)
-│   ├── kernel/             # Bhavya Kernel (18 modules)
+│   ├── kernel/             # Bhavya Kernel (22 modules)
 │   ├── agent-engine/       # Agent Engine
 │   ├── workflow-engine/    # Workflow Engine
 │   ├── memory-engine/      # Memory Engine
@@ -235,7 +221,7 @@ If the kernel cannot boot cleanly, nothing else runs.
 | BRP Protocol | `docs/architecture/BRP.md` |
 | Frozen Contracts | `docs/standards/FROZEN-CONTRACTS.md` |
 | Package Namespace | `docs/architecture/PACKAGE-NAMESPACE.md` |
-| v1.3.0-alpha Release | `docs/releases/v1.3.0-alpha.md` |
+| v1.4.0-alpha Release | `docs/releases/v1.4.0-alpha.md` |
 | Mission | `.ai/MISSION.md` |
 | Vision | `.ai/VISION.md` |
 | Values | `.ai/VALUES.md` |

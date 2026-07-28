@@ -1,6 +1,6 @@
 # Frozen Contracts
 
-**Version:** 1.3.0-alpha
+**Version:** 1.4.0-alpha
 **Status:** Frozen
 **Last Updated:** 2026-07-28
 
@@ -19,9 +19,13 @@ These contracts are stable public interfaces. Future improvements happen **behin
 | Event model | `packages/kernel/src/events/index.ts` | Frozen |
 | Memory API | `packages/kernel/src/memory/index.ts` | Frozen |
 | Registry API | `packages/kernel/src/registry/index.ts` | Frozen |
-| Coordinator API | `packages/kernel/src/coordinator/index.ts` | Frozen (v1.3.0) |
-| Replay API | `packages/kernel/src/replay/index.ts` | Frozen (v1.3.0) |
-| Service Interface | `packages/kernel/src/services/index.ts` | Frozen (v1.3.0) |
+| Coordinator API | `packages/kernel/src/coordinator/index.ts` | Frozen |
+| Replay API | `packages/kernel/src/replay/index.ts` | Frozen |
+| Service Interface | `packages/kernel/src/services/index.ts` | Frozen |
+| Self-Organizing API | `packages/kernel/src/self-organizing/index.ts` | Frozen (v1.4.0) |
+| Orchestrator API | `packages/kernel/src/orchestrator/index.ts` | Frozen (v1.4.0) |
+| Consensus API | `packages/kernel/src/consensus/index.ts` | Frozen (v1.4.0) |
+| Capability Matcher API | `packages/kernel/src/capability-matcher/index.ts` | Frozen (v1.4.0) |
 
 ## Rules
 
@@ -36,120 +40,56 @@ These contracts are stable public interfaces. Future improvements happen **behin
 Goal → Plan → Task → Event → Memory → Knowledge → Result
 ```
 
-## ExecutionContext (Frozen)
+## Self-Organizing API (Frozen — v1.4.0)
 
 ```typescript
-interface ExecutionContext {
-  executionId: string;
-  parentExecutionId?: string;
-  triggeringEvent?: string;
-  initiatingAgent?: string;
-  correlationId: string;
-  timestamps: ExecutionTimestamps;
-  retryCount: number;
-  maxRetries: number;
-  state: ExecutionState;
-  metadata: Record<string, unknown>;
-}
-```
-
-## Event Model (Frozen)
-
-```typescript
-interface Event {
-  id: string;
-  type: string;
-  source: string;
-  payload: Record<string, unknown>;
-  timestamp: Date;
-  metadata: Record<string, unknown>;
-  context?: ExecutionContext;
-}
-```
-
-## Memory API (Frozen)
-
-```typescript
-interface MemoryEngine {
-  get(id: string): Promise<MemoryEntry | undefined>;
-  getByType(type: MemoryType): Promise<MemoryEntry[]>;
-  getAll(): Promise<MemoryEntry[]>;
-  set(entry: Omit<MemoryEntry, 'id' | 'createdAt' | 'updatedAt'>): Promise<MemoryEntry>;
-  update(id: string, updates: Partial<MemoryEntry>): Promise<MemoryEntry | undefined>;
-  delete(id: string): Promise<boolean>;
-  search(query: string): Promise<MemoryEntry[]>;
-}
-```
-
-## Registry API (Frozen)
-
-```typescript
-interface Registry {
-  discover(type: RegistryType): Promise<RegistryEntry[]>;
-  get(type: RegistryType): RegistryEntry[];
-  getById(id: string): RegistryEntry | undefined;
-  getAll(): RegistryEntry[];
-}
-```
-
-## Coordinator API (Frozen — v1.3.0)
-
-```typescript
-interface Coordinator {
-  execute(config: CoordinatorConfig): Promise<ExecutionReport>;
-  getExecutionHistory(): Promise<ExecutionReport[]>;
+interface SelfOrganizingEngine {
+  discoverWork(signal: WorkSignal): Promise<WorkItem>;
+  attemptAssignment(): Promise<void>;
+  assignWork(workItemId: string, agentId: string): Promise<void>;
+  startWork(workItemId: string): Promise<void>;
+  completeWork(workItemId: string, output?: unknown): Promise<void>;
+  getWorkItems(status?: WorkItemStatus): Promise<WorkItem[]>;
+  getUnassigned(): Promise<WorkItem[]>;
   initialize(): Promise<void>;
   shutdown(): Promise<void>;
 }
-
-interface CoordinatorConfig {
-  name: string;
-  steps: CoordinatorStep[];
-  context?: ExecutionContext;
-}
-
-interface ExecutionReport {
-  name: string;
-  success: boolean;
-  outputs: Record<string, unknown>;
-  duration: number;
-  agentExecutions: AgentExecution[];
-  timestamp: Date;
-}
 ```
 
-## Replay API (Frozen — v1.3.0)
+## Orchestrator API (Frozen — v1.4.0)
 
 ```typescript
-interface ReplayEngine {
-  replay(executionId: string): Promise<ReplayResult>;
-  resume(executionId: string): Promise<ReplayResult>;
-  getReplayHistory(executionId: string): Promise<ReplayResult[]>;
-  getAllReplays(): Promise<ReplayResult[]>;
+interface EventDrivenOrchestrator {
+  registerTrigger(trigger: WorkflowTrigger): string;
+  setTriggerEnabled(triggerId: string, enabled: boolean): void;
+  getExecutionLog(): ExecutionLogEntry[];
+  getTriggers(): WorkflowTrigger[];
   initialize(): Promise<void>;
   shutdown(): Promise<void>;
 }
+```
 
-interface ReplayResult {
-  executionId: string;
-  originalStatus: ExecutionState;
-  replayedEvents: number;
-  newStatus: ExecutionState;
-  context: ExecutionContext;
-  duration: number;
-  timestamp: Date;
+## Consensus API (Frozen — v1.4.0)
+
+```typescript
+interface ConsensusEngine {
+  createProposal(input: ProposalInput): Promise<Proposal>;
+  castVote(proposalId: string, vote: Vote): Promise<Proposal | null>;
+  getProposal(id: string): Proposal | undefined;
+  getProposals(status?: ProposalStatus): Proposal[];
+  initialize(): Promise<void>;
+  shutdown(): Promise<void>;
 }
 ```
 
-## Service Interface (Frozen — v1.3.0)
+## Capability Matcher API (Frozen — v1.4.0)
 
 ```typescript
-interface InstitutionService {
-  name: string;
-  description: string;
-  capabilities: string[];
+interface CapabilityMatcher {
+  match(request: MatchingRequest): Promise<MatchingResult>;
+  matchBatch(requests: MatchingRequest[]): Promise<MatchingResult[]>;
+  getUtilization(): UtilizationReport[];
   initialize(): Promise<void>;
-  execute(input: unknown): Promise<unknown>;
   shutdown(): Promise<void>;
 }
 ```
