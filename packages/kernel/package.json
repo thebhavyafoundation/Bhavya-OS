@@ -1,77 +1,26 @@
 {
   "name": "@bhavya/kernel",
-  "version": "0.1.0",
-  "description": "Bhavya Kernel — the core runtime for Bhavya OS",
-  "type": "module",
+  "version": "3.1.0",
+  "description": "Bhavya Kernel - The core runtime for Bhavya OS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./types": {
-      "import": "./dist/types/index.js",
-      "types": "./dist/types/index.d.ts"
-    },
-    "./boot": {
-      "import": "./dist/boot/index.js",
-      "types": "./dist/boot/index.d.ts"
-    },
-    "./runtime": {
-      "import": "./dist/runtime/index.js",
-      "types": "./dist/runtime/index.d.ts"
-    },
-    "./memory": {
-      "import": "./dist/memory/index.js",
-      "types": "./dist/memory/index.d.ts"
-    },
-    "./events": {
-      "import": "./dist/events/index.js",
-      "types": "./dist/events/index.d.ts"
-    },
-    "./registry": {
-      "import": "./dist/registry/index.js",
-      "types": "./dist/registry/index.d.ts"
-    },
-    "./permissions": {
-      "import": "./dist/permissions/index.js",
-      "types": "./dist/permissions/index.d.ts"
-    },
-    "./health": {
-      "import": "./dist/health/index.js",
-      "types": "./dist/health/index.d.ts"
-    },
-    "./logging": {
-      "import": "./dist/logging/index.js",
-      "types": "./dist/logging/index.d.ts"
-    },
-    "./configuration": {
-      "import": "./dist/configuration/index.js",
-      "types": "./dist/configuration/index.d.ts"
-    },
-    "./scheduler": {
-      "import": "./dist/scheduler/index.js",
-      "types": "./dist/scheduler/index.d.ts"
-    },
-    "./planner": {
-      "import": "./dist/planner/index.js",
-      "types": "./dist/planner/index.d.ts"
-    },
-    "./api": {
-      "import": "./dist/api/index.js",
-      "types": "./dist/api/index.d.ts"
-    }
-  },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "vitest",
-    "lint": "eslint src/"
+    "test": "jest",
+    "lint": "eslint src --ext .ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@bhavya/agent-engine": "workspace:*",
+    "@bhavya/workflow-engine": "workspace:*",
+    "@bhavya/memory-engine": "workspace:*",
+    "@bhavya/knowledge-engine": "workspace:*",
+    "@bhavya/search-engine": "workspace:*",
+    "@bhavya/planner-engine": "workspace:*",
+    "@bhavya/scheduler-engine": "workspace:*"
+  },
   "devDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "license": "MIT"
+    "typescript": "^5.3.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0"
+  }
 }

@@ -15,3 +15,4 @@ export { TransparencyService } from './transparency.js';
 export { VolunteerService } from './volunteer.js';
 export { ResearchService } from './research.js';
 export { GovernanceService } from './governance.js';
+export { KnowledgePlatformService } from './knowledge-platform.js';
