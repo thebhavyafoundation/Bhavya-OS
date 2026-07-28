@@ -1,5 +1,6 @@
 // Bhavya Kernel — Boot Module
-// Bootstrap and initialization.
+// If the kernel cannot boot cleanly, nothing else runs.
+// Boot sequence: Config → Registry → Agents → Workflows → Memory → Events → Scheduler → Health → READY
 
 import type { KernelConfig } from '../types/index.js';
 import { Runtime } from '../runtime/index.js';
@@ -13,6 +14,7 @@ import { Health } from '../health/index.js';
 import { Scheduler } from '../scheduler/index.js';
 import { Planner } from '../planner/index.js';
 import { Api } from '../api/index.js';
+import { Observability } from '../observability/index.js';
 
 export interface Kernel {
   runtime: Runtime;
@@ -26,50 +28,124 @@ export interface Kernel {
   scheduler: Scheduler;
   planner: Planner;
   api: Api;
+  observability: Observability;
 }
 
-export async function boot(config: KernelConfig): Promise<Kernel> {
-  // 1. Load configuration
+export interface BootResult {
+  success: boolean;
+  kernel?: Kernel;
+  error?: string;
+  duration: number;
+  steps: BootStep[];
+}
+
+export interface BootStep {
+  name: string;
+  status: 'ok' | 'error' | 'skipped';
+  duration: number;
+  message?: string;
+}
+
+export async function boot(config: KernelConfig): Promise<BootResult> {
+  const startTime = Date.now();
+  const steps: BootStep[] = [];
+
+  const step = async (name: string, fn: () => Promise<void>): Promise<boolean> => {
+    const stepStart = Date.now();
+    try {
+      await fn();
+      steps.push({ name, status: 'ok', duration: Date.now() - stepStart });
+      return true;
+    } catch (error) {
+      steps.push({
+        name,
+        status: 'error',
+        duration: Date.now() - stepStart,
+        message: error instanceof Error ? error.message : String(error),
+      });
+      return false;
+    }
+  };
+
+  // 1. Load Configuration
   const configuration = new Configuration(config);
-  await configuration.load();
+  if (!(await step('Load Configuration', () => configuration.load()))) {
+    return { success: false, error: 'Failed to load configuration', duration: Date.now() - startTime, steps };
+  }
 
-  // 2. Initialize logging
+  // 2. Initialize Logging
   const logging = new Logging({ level: config.logLevel ?? 'info' });
-  logging.info('kernel', 'Booting Bhavya Kernel...');
+  if (!(await step('Initialize Logging', async () => { logging.info('kernel', 'Booting Bhavya Kernel...'); }))) {
+    return { success: false, error: 'Failed to initialize logging', duration: Date.now() - startTime, steps };
+  }
 
-  // 3. Initialize event bus (first, so other modules can emit)
+  // 3. Initialize Event Bus (first, so other modules can emit)
   const events = new EventBus();
-  await events.initialize();
+  if (!(await step('Initialize Event Bus', () => events.initialize()))) {
+    return { success: false, error: 'Failed to initialize event bus', duration: Date.now() - startTime, steps };
+  }
 
-  // 4. Initialize registry
+  // 4. Initialize Registry (discover agents, workflows, etc.)
   const registry = new Registry({ root: config.root });
-  await registry.initialize();
+  if (!(await step('Initialize Registry', () => registry.initialize()))) {
+    return { success: false, error: 'Failed to initialize registry', duration: Date.now() - startTime, steps };
+  }
 
-  // 5. Initialize memory
+  // 5. Initialize Memory
   const memory = new MemoryEngine({ root: config.root });
-  await memory.initialize();
+  if (!(await step('Initialize Memory', () => memory.initialize()))) {
+    return { success: false, error: 'Failed to initialize memory', duration: Date.now() - startTime, steps };
+  }
 
-  // 6. Initialize permissions
+  // 6. Initialize Permissions
   const permissions = new Permissions();
-  await permissions.initialize();
+  if (!(await step('Initialize Permissions', () => permissions.initialize()))) {
+    return { success: false, error: 'Failed to initialize permissions', duration: Date.now() - startTime, steps };
+  }
 
-  // 7. Initialize health
+  // 7. Initialize Health
   const health = new Health();
-  await health.initialize();
+  if (!(await step('Initialize Health', () => health.initialize()))) {
+    return { success: false, error: 'Failed to initialize health', duration: Date.now() - startTime, steps };
+  }
 
-  // 8. Initialize scheduler
+  // 8. Initialize Scheduler
   const scheduler = new Scheduler({ events });
-  await scheduler.initialize();
+  if (!(await step('Initialize Scheduler', () => scheduler.initialize()))) {
+    return { success: false, error: 'Failed to initialize scheduler', duration: Date.now() - startTime, steps };
+  }
 
-  // 9. Initialize planner
+  // 9. Initialize Planner
   const planner = new Planner({ memory, events, scheduler });
-  await planner.initialize();
+  if (!(await step('Initialize Planner', () => planner.initialize()))) {
+    return { success: false, error: 'Failed to initialize planner', duration: Date.now() - startTime, steps };
+  }
 
-  // 10. Initialize API
-  const api = new Api({ kernel: { runtime: null as any, config: configuration, logging, registry, events, memory, permissions, health, scheduler, planner } });
-  await api.initialize();
+  // 10. Initialize Observability
+  const observability = new Observability({ events, registry, memory, scheduler, health, logging });
+  if (!(await step('Initialize Observability', () => observability.initialize()))) {
+    return { success: false, error: 'Failed to initialize observability', duration: Date.now() - startTime, steps };
+  }
 
-  // 11. Initialize runtime (last, depends on everything)
+  // 11. Initialize API
+  const kernelContext = {
+    runtime: null as any,
+    config: configuration,
+    logging,
+    registry,
+    events,
+    memory,
+    permissions,
+    health,
+    scheduler,
+    planner,
+  };
+  const api = new Api({ kernel: kernelContext });
+  if (!(await step('Initialize API', () => api.initialize()))) {
+    return { success: false, error: 'Failed to initialize API', duration: Date.now() - startTime, steps };
+  }
+
+  // 12. Initialize Runtime (last, depends on everything)
   const runtime = new Runtime({
     config: configuration,
     logging,
@@ -82,17 +158,31 @@ export async function boot(config: KernelConfig): Promise<Kernel> {
     planner,
     api,
   });
-  await runtime.initialize();
+  if (!(await step('Initialize Runtime', () => runtime.initialize()))) {
+    return { success: false, error: 'Failed to initialize runtime', duration: Date.now() - startTime, steps };
+  }
 
-  logging.info('kernel', 'Bhavya Kernel booted successfully.');
+  // 13. Health Check
+  if (!(await step('Health Check', async () => {
+    const healthStatus = await health.check();
+    if (healthStatus.status === 'unhealthy') {
+      throw new Error('Kernel is unhealthy after boot');
+    }
+  }))) {
+    return { success: false, error: 'Health check failed', duration: Date.now() - startTime, steps };
+  }
 
-  // Emit boot event
+  // READY
+  logging.info('kernel', `Bhavya Kernel booted successfully in ${Date.now() - startTime}ms`);
+  logging.info('kernel', `Boot steps: ${steps.filter((s) => s.status === 'ok').length}/${steps.length} OK`);
+
   await events.emit('kernel.booted', {
     timestamp: new Date(),
-    version: '0.1.0',
+    version: '1.1.0-alpha',
+    duration: Date.now() - startTime,
   });
 
-  return {
+  const kernel: Kernel = {
     runtime,
     config: configuration,
     logging,
@@ -104,5 +194,13 @@ export async function boot(config: KernelConfig): Promise<Kernel> {
     scheduler,
     planner,
     api,
+    observability,
+  };
+
+  return {
+    success: true,
+    kernel,
+    duration: Date.now() - startTime,
+    steps,
   };
 }
