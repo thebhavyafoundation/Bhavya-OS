@@ -1,8 +1,8 @@
 # MASTER CONTEXT
 
 **Last Updated:** 2026-07-27
-**Version:** 1.0.0-alpha
-**Status:** Frozen
+**Version:** 1.1.0-alpha
+**Status:** Phase 2 In Progress
 
 ---
 
@@ -12,29 +12,77 @@ Build the world's first AI Native Foundation Operating System — a version-cont
 
 ## Active Release
 
-**v1.0.0-alpha** — Phase 1 Frozen
+**v1.1.0-alpha** — Phase 2: Bhavya Kernel
 
 Features:
-- Runtime system
-- Memory system
-- Governance framework
-- Repository structure
-- Agent Registry
-- Workflow Registry
-- Event Registry
-- Prompt Library
-- Commands
-- Templates
-- Policies
-- Schemas
-- Metrics
+- **Bhavya Kernel** — Core runtime with 12 modules
+- **Bhavya Runtime Protocol (BRP)** — Goal → Plan → Tasks → Events → Memory
+- **7 Engine Packages** — Each with one responsibility
+- **@bhavya/* namespace** — Consistent package naming
+- Phase 1 features (Memory, Governance, Agents, Workflows, etc.)
 
 ## Current Priorities
 
-1. **Freeze Phase 1** — Lock foundational structure
-2. **Begin Phase 2** — Intelligence engines (planned)
+1. **Complete Phase 2** — Kernel and engines
+2. **Integration testing** — Verify kernel works with all apps
 3. **Documentation** — Fill institutional knowledge base
 4. **Testing** — Establish quality gates
+
+## Architecture
+
+```
+Website
+  ↓
+Kernel (@bhavya/kernel)
+  ↓
+Engines (@bhavya/*-engine)
+  ↓
+Memory (.memory/)
+  ↓
+Agents (.agents/)
+  ↓
+Events (.events/)
+```
+
+## Package Namespace
+
+```
+@bhavya/kernel           → packages/kernel/
+@bhavya/agent-engine     → packages/agent-engine/
+@bhavya/workflow-engine  → packages/workflow-engine/
+@bhavya/memory-engine    → packages/memory-engine/
+@bhavya/knowledge-engine → packages/knowledge-engine/
+@bhavya/search-engine    → packages/search-engine/
+@bhavya/planner-engine   → packages/planner-engine/
+@bhavya/scheduler-engine → packages/scheduler-engine/
+@bhavya/runtime          → packages/runtime/ (legacy)
+@bhavya/sdk              → packages/sdk/ (legacy)
+```
+
+## Kernel Modules
+
+| Module | Purpose |
+|--------|---------|
+| `boot/` | Bootstrap and initialization |
+| `runtime/` | Runtime lifecycle management |
+| `scheduler/` | Task scheduling and execution |
+| `planner/` | Goal → Plan → Tasks conversion |
+| `memory/` | Unified memory interface |
+| `events/` | Event bus (pub/sub) |
+| `registry/` | Auto-discovery of resources |
+| `permissions/` | Access control |
+| `health/` | Health checks and monitoring |
+| `logging/` | Structured logging |
+| `configuration/` | Config management |
+| `api/` | Kernel API surface |
+
+## Bhavya Runtime Protocol (BRP)
+
+Every engine understands:
+
+```
+Goal → Plan → Workflow → Tasks → Events → Agent Actions → Memory Updates → Knowledge Updates
+```
 
 ## Active Agents
 
@@ -58,20 +106,6 @@ Features:
 | QA | Quality assurance | Active |
 | Release | Deployment | Active |
 | Security | Security | Active |
-
-## Active Workflows
-
-- `create-page` — Create new website page
-- `deploy` — Deploy to production
-- `review-pr` — Review pull requests
-- `write-blog` — Create blog content
-- `publish-news` — Publish news articles
-- `research-forest` — Forest mission research
-- `research-heritage` — Heritage mission research
-- `upload-documents` — Upload governance docs
-- `generate-report` — Generate reports
-- `fundraising` — Fundraising operations
-- `volunteer-onboarding` — Onboard volunteers
 
 ## Folder Map
 
@@ -105,9 +139,17 @@ Features:
 │
 ├── apps/                   # Applications
 │   └── website/            # Main website
-├── packages/               # Shared packages
-│   ├── runtime/            # Runtime system
-│   └── sdk/                # SDK
+├── packages/               # Shared packages (@bhavya/*)
+│   ├── kernel/             # Bhavya Kernel (NEW)
+│   ├── agent-engine/       # Agent Engine (NEW)
+│   ├── workflow-engine/    # Workflow Engine (NEW)
+│   ├── memory-engine/      # Memory Engine (NEW)
+│   ├── knowledge-engine/   # Knowledge Engine (NEW)
+│   ├── search-engine/      # Search Engine (NEW)
+│   ├── planner-engine/     # Planner Engine (NEW)
+│   ├── scheduler-engine/   # Scheduler Engine (NEW)
+│   ├── runtime/            # Legacy runtime
+│   └── sdk/                # Legacy SDK
 ├── docs/                   # Institutional knowledge
 │   ├── governance/         # Governance documents
 │   ├── architecture/       # Architecture decisions
@@ -126,7 +168,7 @@ Features:
 
 ## Current Blockers
 
-- None (Phase 1 complete)
+- None
 
 ## Quality Gates
 
@@ -142,6 +184,8 @@ Features:
 
 | Document | Location |
 |----------|----------|
+| BRP Protocol | `docs/architecture/BRP.md` |
+| Package Namespace | `docs/architecture/PACKAGE-NAMESPACE.md` |
 | Mission | `.ai/MISSION.md` |
 | Vision | `.ai/VISION.md` |
 | Values | `.ai/VALUES.md` |
