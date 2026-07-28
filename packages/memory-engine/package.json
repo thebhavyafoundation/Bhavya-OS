@@ -1,0 +1,25 @@
+{
+  "name": "@bhavya/memory-engine",
+  "version": "0.1.0",
+  "description": "Memory Engine — unified interface for institutional memory (files, SQLite, Qdrant)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@bhavya/kernel": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT"
+}
