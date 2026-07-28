@@ -8,6 +8,8 @@ export { Runtime } from './runtime/index.js';
 export type { RuntimeContext } from './runtime/index.js';
 
 export { Configuration } from './configuration/index.js';
+export { ProductionConfiguration } from './configuration/production.js';
+export type { ProductionConfig, Environment, ConfigSchema } from './configuration/production.js';
 
 export { Logging } from './logging/index.js';
 export type { LogLevel, LogEntry, LoggingConfig } from './logging/index.js';
@@ -61,11 +63,6 @@ export {
   GovernanceService,
 } from './services/index.js';
 export type { InstitutionService } from './services/index.js';
-export type { WebsiteContentInput } from './services/website-content.js';
-export type { TransparencyInput } from './services/transparency.js';
-export type { VolunteerInput } from './services/volunteer.js';
-export type { ResearchInput } from './services/research.js';
-export type { GovernanceInput } from './services/governance.js';
 
 // Self-Organizing Engine (v1.4.0-alpha)
 export { SelfOrganizingEngine } from './self-organizing/index.js';
@@ -82,6 +79,22 @@ export type { ConsensusConfig, Proposal, Vote } from './consensus/index.js';
 // Capability Matcher (v1.4.0-alpha)
 export { CapabilityMatcher } from './capability-matcher/index.js';
 export type { MatchingConfig, MatchingRequest, MatchingResult, AgentMatch } from './capability-matcher/index.js';
+
+// Auth (v2.0.0-beta)
+export { Auth } from './auth/index.js';
+export type { AuthToken, AuthConfig, Role } from './auth/index.js';
+
+// Rate Limiting (v2.0.0-beta)
+export { RateLimiter } from './rate-limit/index.js';
+export type { RateLimitConfig, RateLimitResult } from './rate-limit/index.js';
+
+// Monitoring & Alerting (v2.0.0-beta)
+export { Monitoring } from './monitoring/index.js';
+export type { MonitoringConfig, Alert, Metric } from './monitoring/index.js';
+
+// Backup & Recovery (v2.0.0-beta)
+export { BackupRecovery } from './backup/index.js';
+export type { BackupConfig, Backup, RecoveryResult } from './backup/index.js';
 
 // Scenarios (real execution)
 export { CreateMissionPage } from './scenarios/create-mission-page.js';
