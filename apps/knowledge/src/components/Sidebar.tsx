@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { href: "/search", label: "Search", icon: "\u{1F50D}" },
   { href: "/graph", label: "Knowledge Graph", icon: "\u{1F578}" },
   { href: "/relationships", label: "Relationships", icon: "\u{1F517}" },
+  { href: "/entities", label: "Entities", icon: "\u{200D}" },
   { href: "/collections", label: "Collections", icon: "\u{1F4E6}" },
 ];
 
@@ -34,16 +35,19 @@ export default function Sidebar() {
       {/* Brand */}
       <div style={{ marginBottom: 24, padding: "0 8px" }}>
         <Link href="/" style={{ textDecoration: "none" }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#f8fafc" }}>Knowledge</div>
-          <div style={{ fontSize: 11, color: "#64748b" }}>Bhavya Foundation</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#f8fafc" }}>
+            Knowledge
+          </div>
+          <div style={{ fontSize: 11, color: "#64748b" }}>
+            Bhavya Foundation
+          </div>
         </Link>
       </div>
 
       {/* Nav Links */}
       {NAV_ITEMS.map((item) => {
-        const isActive = item.href === "/"
-          ? pathname === "/"
-          : pathname.startsWith(item.href);
+        const isActive =
+          item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
 
         return (
           <Link
@@ -70,8 +74,17 @@ export default function Sidebar() {
       })}
 
       {/* Footer */}
-      <div style={{ marginTop: "auto", padding: "16px 8px", borderTop: "1px solid #1e293b" }}>
-        <Link href="/" style={{ fontSize: 11, color: "#475569", textDecoration: "none" }}>
+      <div
+        style={{
+          marginTop: "auto",
+          padding: "16px 8px",
+          borderTop: "1px solid #1e293b",
+        }}
+      >
+        <Link
+          href="/"
+          style={{ fontSize: 11, color: "#475569", textDecoration: "none" }}
+        >
           &larr; Back to Platform
         </Link>
       </div>
