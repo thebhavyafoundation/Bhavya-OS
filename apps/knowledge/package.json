@@ -1,6 +1,6 @@
 {
   "name": "@bhavya/knowledge",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3007",
@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bhavya/content-core": "workspace:*",
     "@bhavya/mission-runtime": "workspace:*",
     "@bhavya/ui": "workspace:*",
     "next": "15.5.20",
