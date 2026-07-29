@@ -225,3 +225,4 @@ pnpm lint && pnpm test && pnpm validate && pnpm build
 | v1.1.0 | Institution intelligence |
 | v1.2.0 | Operational intelligence |
 | v1.3.0 | Decision support |
+| v2.0.0 | Phase II: Governance operations |
