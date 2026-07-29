@@ -1,9 +1,9 @@
 // ── @bhavya/intelligence ──────────────────────────────────
 // Cross-mission intelligence layer for the Bhavya Foundation platform.
-// Provides search, exploration, analytics, and recommendations.
+// Provides search, exploration, analytics, recommendations, and decision support.
 //
 // INVARIANT: This package never mutates institutional data.
-// It only queries, aggregates, ranks, traverses, recommends, and analyzes.
+// It only queries, aggregates, ranks, traverses, recommends, analyzes, and advises.
 
 export {
   search,
@@ -39,6 +39,17 @@ export {
   getRelatedEntities,
 } from "./recommendations";
 
+export {
+  generateDecisionSupport,
+} from "./decision-support-generator";
+
+export {
+  recordSnapshot,
+  getHistory,
+  getLatestSnapshot,
+  calculateTrends,
+} from "./historical-metrics";
+
 // ── Insight Types ─────────────────────────────────────────
 // Common result type for all intelligence capabilities.
 
@@ -68,3 +79,19 @@ export {
   createEvidence,
   calculateConfidence,
 } from "./insight";
+
+// ── Decision Support Types ────────────────────────────────
+// Types for actionable insights and work queues.
+
+export type {
+  DecisionSupport,
+  DataQualityAlert,
+  MissionHealthScore,
+  KnowledgeGap,
+  WorkItem,
+} from "./decision-support";
+
+export type {
+  MetricSnapshot,
+  MetricTrend,
+} from "./historical-metrics";

@@ -11,12 +11,23 @@ import {
   getHeritageMissions,
   getHeritageAssets,
 } from "@bhavya/content-core";
+import {
+  generateDecisionSupport,
+  calculateTrends,
+} from "@bhavya/intelligence";
 
-function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
+function StatCard({ label, value, color, trend }: { label: string; value: number; color: string; trend?: { change: number; direction: "up" | "down" | "stable" } }) {
   return (
     <div style={{ background: "#1e293b", borderRadius: 12, padding: "20px 24px" }}>
       <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>{label}</p>
-      <p style={{ fontSize: 28, fontWeight: 700, color, margin: 0 }}>{value}</p>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+        <p style={{ fontSize: 28, fontWeight: 700, color, margin: 0 }}>{value}</p>
+        {trend && trend.direction !== "stable" && (
+          <p style={{ fontSize: 12, color: trend.direction === "up" ? "#10b981" : "#ef4444", margin: 0 }}>
+            {trend.direction === "up" ? "↑" : "↓"} {Math.abs(trend.change)}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
@@ -74,6 +85,16 @@ export default function Dashboard() {
     },
   ].slice(0, 6);
 
+  // Decision support
+  const decisionSupport = generateDecisionSupport();
+  const trends = calculateTrends();
+
+  // Get trends for key metrics
+  const docsTrend = trends.find((t) => t.metric === "Total Documents");
+  const entitiesTrend = trends.find((t) => t.metric === "Entities");
+  const relationshipsTrend = trends.find((t) => t.metric === "Relationships");
+  const knowledgeTrend = trends.find((t) => t.metric === "Knowledge Nodes");
+
   return (
     <div style={{ maxWidth: 1400, margin: "0 auto", padding: "32px 24px" }}>
       {/* Header */}
@@ -91,10 +112,10 @@ export default function Dashboard() {
 
       {/* Top Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
-        <StatCard label="Documents" value={docs.length} color="#10b981" />
-        <StatCard label="Entities" value={entities.length} color="#8b5cf6" />
-        <StatCard label="Relationships" value={totalEdges} color="#3b82f6" />
-        <StatCard label="Knowledge Nodes" value={kg.length} color="#f59e0b" />
+        <StatCard label="Documents" value={docs.length} color="#10b981" trend={docsTrend} />
+        <StatCard label="Entities" value={entities.length} color="#8b5cf6" trend={entitiesTrend} />
+        <StatCard label="Relationships" value={totalEdges} color="#3b82f6" trend={relationshipsTrend} />
+        <StatCard label="Knowledge Nodes" value={kg.length} color="#f59e0b" trend={knowledgeTrend} />
       </div>
 
       {/* Main Grid */}
@@ -229,6 +250,119 @@ export default function Dashboard() {
           ))}
         </div>
       </WidgetCard>
+
+      {/* Decision Support */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24 }}>
+        {/* Data Quality Alerts */}
+        <WidgetCard title="Data Quality Alerts">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {decisionSupport.dataQualityAlerts.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#10b981", margin: 0 }}>✓ No data quality issues detected</p>
+            ) : (
+              decisionSupport.dataQualityAlerts.slice(0, 3).map((alert) => (
+                <div key={alert.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #334155" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{alert.title}</p>
+                    <span style={{
+                      fontSize: 10,
+                      padding: "2px 8px",
+                      borderRadius: 4,
+                      background: alert.data.severity === "high" ? "#ef444420" : alert.data.severity === "medium" ? "#f59e0b20" : "#3b82f620",
+                      color: alert.data.severity === "high" ? "#ef4444" : alert.data.severity === "medium" ? "#f59e0b" : "#3b82f6",
+                    }}>
+                      {alert.data.severity}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>{alert.description}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </WidgetCard>
+
+        {/* Mission Health */}
+        <WidgetCard title="Mission Health">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {decisionSupport.missionHealthScores.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#64748b", margin: 0 }}>No missions to evaluate</p>
+            ) : (
+              decisionSupport.missionHealthScores.slice(0, 4).map((score) => (
+                <div key={score.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #334155" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{score.data.missionName}</p>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <div style={{ width: 60, height: 6, background: "#334155", borderRadius: 3 }}>
+                        <div style={{
+                          width: `${score.data.score}%`,
+                          height: "100%",
+                          background: score.data.status === "healthy" ? "#10b981" : score.data.status === "needs_attention" ? "#f59e0b" : "#ef4444",
+                          borderRadius: 3,
+                        }} />
+                      </div>
+                      <p style={{ fontSize: 12, fontWeight: 600, color: "#f8fafc", margin: 0, minWidth: 30, textAlign: "right" }}>{score.data.score}</p>
+                    </div>
+                  </div>
+                  <p style={{ fontSize: 11, color: "#64748b", margin: 0 }}>{score.data.missionType}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </WidgetCard>
+
+        {/* Knowledge Gaps */}
+        <WidgetCard title="Knowledge Gaps">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {decisionSupport.knowledgeGaps.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#10b981", margin: 0 }}>✓ No significant knowledge gaps</p>
+            ) : (
+              decisionSupport.knowledgeGaps.slice(0, 3).map((gap) => (
+                <div key={gap.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #334155" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{gap.data.area}</p>
+                    <span style={{
+                      fontSize: 10,
+                      padding: "2px 8px",
+                      borderRadius: 4,
+                      background: gap.data.priority === "high" ? "#ef444420" : gap.data.priority === "medium" ? "#f59e0b20" : "#3b82f620",
+                      color: gap.data.priority === "high" ? "#ef4444" : gap.data.priority === "medium" ? "#f59e0b" : "#3b82f6",
+                    }}>
+                      {gap.data.priority}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>{gap.description}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </WidgetCard>
+
+        {/* Work Queue */}
+        <WidgetCard title="Work Queue">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {decisionSupport.workQueue.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#10b981", margin: 0 }}>✓ No pending work items</p>
+            ) : (
+              decisionSupport.workQueue.slice(0, 4).map((item) => (
+                <div key={item.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #334155" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{item.data.title}</p>
+                    <span style={{
+                      fontSize: 10,
+                      padding: "2px 8px",
+                      borderRadius: 4,
+                      background: item.data.priority === "high" ? "#ef444420" : item.data.priority === "medium" ? "#f59e0b20" : "#3b82f620",
+                      color: item.data.priority === "high" ? "#ef4444" : item.data.priority === "medium" ? "#f59e0b" : "#3b82f6",
+                    }}>
+                      {item.data.type.replace(/_/g, " ")}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>{item.description}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </WidgetCard>
+      </div>
     </div>
   );
 }
