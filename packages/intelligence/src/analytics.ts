@@ -1,6 +1,6 @@
 // ── Cross-Mission Analytics ───────────────────────────────
 // Provides analytics across all mission domains.
-// Answers institutional questions about progress, coverage, and impact.
+// Distinguishes operational metrics from knowledge metrics.
 
 import {
   getDocuments,
@@ -16,203 +16,250 @@ import {
   getHeritageAssets,
 } from "@bhavya/content-core";
 
-// ── Types ─────────────────────────────────────────────────
+import {
+  AnalyticsInsight,
+  Metric,
+  createInsight,
+  createEvidence,
+} from "./insight";
 
-export interface MissionSummary {
-  mission: string;
-  documents: number;
-  entities: number;
-  activities: number;
-  status: "active" | "growing" | "stable";
-}
+// ── Operational Metrics ───────────────────────────────────
+// Metrics about active work and operations
 
-export interface ActivityTimeline {
-  period: string;
-  documents: number;
-  entities: number;
-  missions: number;
-}
-
-export interface DomainCoverage {
-  domain: string;
-  total: number;
-  published: number;
-  draft: number;
-  coverage: number;
-}
-
-export interface PlatformOverview {
-  totalDocuments: number;
-  totalEntities: number;
-  totalMissions: number;
-  totalRelationships: number;
-  documentsByCategory: Record<string, number>;
-  entitiesByType: Record<string, number>;
-  missionSummaries: MissionSummary[];
-}
-
-// ── Analytics Functions ───────────────────────────────────
-
-export function getPlatformOverview(): PlatformOverview {
+export function getOperationalMetrics(): AnalyticsInsight {
   const docs = getDocuments();
   const entities = getEntities();
   const kg = getKnowledgeGraph();
 
-  // Documents by category
-  const documentsByCategory: Record<string, number> = {};
-  for (const doc of docs) {
-    documentsByCategory[doc.category] =
-      (documentsByCategory[doc.category] || 0) + 1;
-  }
-
-  // Entities by type
-  const entitiesByType: Record<string, number> = {};
-  for (const entity of entities) {
-    entitiesByType[entity.type] = (entitiesByType[entity.type] || 0) + 1;
-  }
-
-  // Mission summaries
-  const missionSummaries: MissionSummary[] = [
+  const metrics: Metric[] = [
     {
-      mission: "Forest",
-      documents: docs.filter(
-        (d) => d.category === "content" && d.id.includes("nature"),
-      ).length,
-      entities: entities.filter((e) => e.type === "species").length,
-      activities: getMissions().length + getSites().length,
-      status: "active",
+      name: "Active Missions",
+      value: getMissions().length + getHeritageMissions().length,
+      unit: "missions",
     },
     {
-      mission: "Heritage",
-      documents: docs.filter(
-        (d) => d.category === "content" && d.id.includes("heritage"),
-      ).length,
-      entities: entities.filter((e) => e.id.includes("heritage")).length,
-      activities:
-        getHeritageMissions().length + getHeritageAssets().length,
-      status: "active",
+      name: "Restoration Sites",
+      value: getSites().length,
+      unit: "sites",
     },
     {
-      mission: "Research",
-      documents: docs.filter((d) => d.category === "rfc").length,
-      entities: entities.filter((e) => e.type === "technology").length,
-      activities: getProjects().length,
-      status: "growing",
+      name: "Trees Planted",
+      value: getPlantings().length,
+      unit: "plantings",
     },
     {
-      mission: "Volunteer",
-      documents: docs.filter(
-        (d) => d.category === "content" && d.id.includes("community"),
-      ).length,
-      entities: entities.filter((e) => e.type === "person").length,
-      activities: getVolunteers().length + getAssignments().length,
-      status: "growing",
+      name: "Research Projects",
+      value: getProjects().length,
+      unit: "projects",
+    },
+    {
+      name: "Volunteers",
+      value: getVolunteers().length,
+      unit: "people",
+    },
+    {
+      name: "Volunteer Assignments",
+      value: getAssignments().length,
+      unit: "assignments",
+    },
+    {
+      name: "Heritage Assets",
+      value: getHeritageAssets().length,
+      unit: "assets",
     },
   ];
 
-  return {
-    totalDocuments: docs.length,
-    totalEntities: entities.length,
-    totalMissions: kg.length,
-    totalRelationships: kg.reduce((sum, n) => sum + (n.links?.length || 0), 0),
-    documentsByCategory,
-    entitiesByType,
-    missionSummaries,
-  };
-}
+  const totalActivity = metrics.reduce((sum, m) => sum + m.value, 0);
 
-export function getDomainCoverage(): DomainCoverage[] {
-  const docs = getDocuments();
-
-  const domains = [
-    { domain: "Governance", filter: (d: { category: string }) => d.category === "governance" },
-    { domain: "Policy", filter: (d: { category: string }) => d.category === "policy" },
-    { domain: "Standards", filter: (d: { category: string }) => d.category === "standard" },
-    { domain: "RFCs", filter: (d: { category: string }) => d.category === "rfc" },
-    { domain: "ADRs", filter: (d: { category: string }) => d.category === "adr" },
-    { domain: "Releases", filter: (d: { category: string }) => d.category === "release" },
-    { domain: "Content", filter: (d: { category: string }) => d.category === "content" },
-  ];
-
-  return domains.map(({ domain, filter }) => {
-    const domainDocs = docs.filter(filter);
-    const published = domainDocs.filter((d) => d.status === "published").length;
-    const draft = domainDocs.filter((d) => d.status === "draft").length;
-
-    return {
-      domain,
-      total: domainDocs.length,
-      published,
-      draft,
-      coverage:
-        domainDocs.length > 0
-          ? Math.round((published / domainDocs.length) * 100)
-          : 0,
-    };
+  return createInsight({
+    id: `operational-metrics-${Date.now()}`,
+    title: "Operational Overview",
+    description: `${totalActivity} total operational activities across all missions`,
+    confidence: 1,
+    evidence: [
+      createEvidence({
+        sourceId: "content-core",
+        sourceType: "document",
+        relevance: "Aggregated from all mission domains",
+      }),
+    ],
+    data: {
+      type: "operational",
+      metrics,
+      summary: `${getMissions().length} Forest missions, ${getHeritageMissions().length} Heritage missions, ${getProjects().length} Research projects, ${getVolunteers().length} Volunteers`,
+    },
   });
 }
 
-export function getMissionActivity(): {
-  forest: number;
-  heritage: number;
-  research: number;
-  volunteer: number;
-} {
-  return {
-    forest:
-      getMissions().length +
-      getSites().length +
-      getPlantings().length,
-    heritage:
-      getHeritageMissions().length + getHeritageAssets().length,
-    research: getProjects().length,
-    volunteer: getVolunteers().length + getAssignments().length,
-  };
-}
+// ── Knowledge Metrics ─────────────────────────────────────
+// Metrics about the knowledge base and its health
 
-export function getEntityTypeDistribution(): Record<string, number> {
-  const entities = getEntities();
-  const distribution: Record<string, number> = {};
-
-  for (const entity of entities) {
-    distribution[entity.type] = (distribution[entity.type] || 0) + 1;
-  }
-
-  return distribution;
-}
-
-export function getDocumentStatusDistribution(): Record<string, number> {
+export function getKnowledgeMetrics(): AnalyticsInsight {
   const docs = getDocuments();
-  const distribution: Record<string, number> = {};
-
-  for (const doc of docs) {
-    distribution[doc.status] = (distribution[doc.status] || 0) + 1;
-  }
-
-  return distribution;
-}
-
-export function getKnowledgeGraphStats(): {
-  totalNodes: number;
-  totalEdges: number;
-  averageConnections: number;
-  nodesByType: Record<string, number>;
-} {
+  const entities = getEntities();
   const kg = getKnowledgeGraph();
-  const nodesByType: Record<string, number> = {};
 
-  for (const node of kg) {
-    nodesByType[node.type] = (nodesByType[node.type] || 0) + 1;
-  }
+  // Document metrics
+  const publishedDocs = docs.filter((d) => d.status === "published").length;
+  const draftDocs = docs.filter((d) => d.status === "draft").length;
 
+  // Entity metrics
+  const entitiesWithDocs = entities.filter(
+    (e) => e.documentIds.length > 0,
+  ).length;
+  const entityCoverage =
+    entities.length > 0
+      ? Math.round((entitiesWithDocs / entities.length) * 100)
+      : 0;
+
+  // Relationship metrics
   const totalEdges = kg.reduce((sum, n) => sum + (n.links?.length || 0), 0);
-  const averageConnections =
+  const avgConnections =
     kg.length > 0 ? (totalEdges / kg.length) * 2 : 0;
 
-  return {
-    totalNodes: kg.length,
-    totalEdges,
-    averageConnections: Math.round(averageConnections * 100) / 100,
-    nodesByType,
-  };
+  // Cross-domain connections
+  const crossDomainEdges = kg.filter((n) => {
+    if (!n.links) return false;
+    return n.links.some((linkId) => {
+      const linked = kg.find((l) => l.id === linkId);
+      return linked && linked.type !== n.type;
+    });
+  }).length;
+
+  const metrics: Metric[] = [
+    {
+      name: "Total Documents",
+      value: docs.length,
+      unit: "documents",
+    },
+    {
+      name: "Published Documents",
+      value: publishedDocs,
+      unit: "documents",
+    },
+    {
+      name: "Draft Documents",
+      value: draftDocs,
+      unit: "documents",
+    },
+    {
+      name: "Document Coverage",
+      value:
+        docs.length > 0
+          ? Math.round((publishedDocs / docs.length) * 100)
+          : 0,
+      unit: "%",
+    },
+    {
+      name: "Total Entities",
+      value: entities.length,
+      unit: "entities",
+    },
+    {
+      name: "Entities with Documents",
+      value: entitiesWithDocs,
+      unit: "entities",
+    },
+    {
+      name: "Entity Coverage",
+      value: entityCoverage,
+      unit: "%",
+    },
+    {
+      name: "Knowledge Graph Nodes",
+      value: kg.length,
+      unit: "nodes",
+    },
+    {
+      name: "Relationship Edges",
+      value: totalEdges,
+      unit: "edges",
+    },
+    {
+      name: "Average Connections",
+      value: avgConnections,
+      unit: "per node",
+    },
+    {
+      name: "Cross-Domain Connections",
+      value: crossDomainEdges,
+      unit: "connections",
+    },
+  ];
+
+  return createInsight({
+    id: `knowledge-metrics-${Date.now()}`,
+    title: "Knowledge Base Health",
+    description: `${docs.length} documents, ${entities.length} entities, ${kg.length} knowledge graph nodes`,
+    confidence: 1,
+    evidence: [
+      createEvidence({
+        sourceId: "content-core",
+        sourceType: "document",
+        relevance: "Aggregated from knowledge base",
+      }),
+    ],
+    data: {
+      type: "knowledge",
+      metrics,
+      summary: `${publishedDocs} published docs, ${entityCoverage}% entity coverage, ${crossDomainEdges} cross-domain connections`,
+    },
+  });
+}
+
+// ── Combined Analytics ────────────────────────────────────
+
+export function getPlatformAnalytics(): AnalyticsInsight[] {
+  return [getOperationalMetrics(), getKnowledgeMetrics()];
+}
+
+// ── Domain Coverage ───────────────────────────────────────
+
+export function getDomainCoverage(): AnalyticsInsight {
+  const docs = getDocuments();
+
+  const domains = [
+    { name: "Governance", filter: (d: { category: string }) => d.category === "governance" },
+    { name: "Policy", filter: (d: { category: string }) => d.category === "policy" },
+    { name: "Standards", filter: (d: { category: string }) => d.category === "standard" },
+    { name: "RFCs", filter: (d: { category: string }) => d.category === "rfc" },
+    { name: "ADRs", filter: (d: { category: string }) => d.category === "adr" },
+    { name: "Releases", filter: (d: { category: string }) => d.category === "release" },
+    { name: "Content", filter: (d: { category: string }) => d.category === "content" },
+  ];
+
+  const metrics: Metric[] = domains.map(({ name, filter }) => {
+    const domainDocs = docs.filter(filter);
+    const published = domainDocs.filter((d) => d.status === "published").length;
+    const coverage =
+      domainDocs.length > 0
+        ? Math.round((published / domainDocs.length) * 100)
+        : 0;
+
+    return {
+      name,
+      value: coverage,
+      unit: "%",
+      trend: coverage >= 80 ? "up" : coverage >= 50 ? "stable" : "down",
+    };
+  });
+
+  return createInsight({
+    id: `domain-coverage-${Date.now()}`,
+    title: "Domain Coverage",
+    description: `Coverage across ${domains.length} content domains`,
+    confidence: 1,
+    evidence: [
+      createEvidence({
+        sourceId: "content-core",
+        sourceType: "document",
+        relevance: "Domain coverage analysis",
+      }),
+    ],
+    data: {
+      type: "knowledge",
+      metrics,
+      summary: `Average coverage: ${Math.round(metrics.reduce((sum, m) => sum + m.value, 0) / metrics.length)}%`,
+    },
+  });
 }

@@ -1,53 +1,22 @@
 // ── Knowledge Graph Explorer ──────────────────────────────
 // Explores relationships between documents, entities, and missions.
-// Provides graph traversal, path finding, and neighborhood analysis.
+// Returns GraphInsight with graph data.
 
 import {
   getDocuments,
   getEntities,
   getKnowledgeGraph,
-  getGraphNode,
-  getLinkedNodes,
-  getRelationships,
-  getGraphNodeNeighbors,
 } from "@bhavya/content-core";
 
-// ── Types ─────────────────────────────────────────────────
-
-export interface GraphNode {
-  id: string;
-  type: string;
-  title: string;
-  level: number;
-  metadata: Record<string, unknown>;
-}
-
-export interface GraphEdge {
-  source: string;
-  target: string;
-  type: string;
-  weight: number;
-}
-
-export interface GraphPath {
-  nodes: GraphNode[];
-  edges: GraphEdge[];
-  length: number;
-}
-
-export interface GraphStats {
-  totalNodes: number;
-  totalEdges: number;
-  nodesByType: Record<string, number>;
-  edgesByType: Record<string, number>;
-  averageConnections: number;
-}
-
-export interface Neighborhood {
-  center: GraphNode;
-  neighbors: GraphNode[];
-  edges: GraphEdge[];
-}
+import {
+  GraphInsight,
+  GraphNode,
+  GraphEdge,
+  GraphPath,
+  createInsight,
+  createEvidence,
+  calculateConfidence,
+} from "./insight";
 
 // ── Graph Building ────────────────────────────────────────
 
@@ -65,11 +34,6 @@ function buildFullGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
         type: "document",
         title: doc.title,
         level: 0,
-        metadata: {
-          category: doc.category,
-          status: doc.status,
-          created: doc.created,
-        },
       });
       nodeIds.add(doc.id);
     }
@@ -84,10 +48,6 @@ function buildFullGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
         type: "entity",
         title: entity.name,
         level: 1,
-        metadata: {
-          entityType: entity.type,
-          mentions: entity.mentions,
-        },
       });
       nodeIds.add(entity.id);
     }
@@ -102,11 +62,6 @@ function buildFullGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
         type: node.type,
         title: node.title,
         level: 2,
-        metadata: {
-          status: node.status,
-          owner: node.owner,
-          created: node.created,
-        },
       });
       nodeIds.add(node.id);
     }
@@ -145,7 +100,7 @@ function buildFullGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
   return { nodes, edges };
 }
 
-// ── Graph Exploration ─────────────────────────────────────
+// ── Graph Cache ───────────────────────────────────────────
 
 let _graphCache: { nodes: GraphNode[]; edges: GraphEdge[] } | null = null;
 
@@ -156,29 +111,85 @@ function getGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
   return _graphCache;
 }
 
-export function getGraphNodes(): GraphNode[] {
-  return getGraph().nodes;
+// ── Graph Exploration Functions ────────────────────────────
+
+export function getGraphNodes(): GraphInsight {
+  const graph = getGraph();
+
+  return createInsight({
+    id: `graph-nodes-${Date.now()}`,
+    title: "All Graph Nodes",
+    description: `Graph contains ${graph.nodes.length} nodes`,
+    confidence: 1,
+    evidence: [],
+    data: { nodes: graph.nodes, edges: [] },
+  });
 }
 
-export function getGraphEdges(): GraphEdge[] {
-  return getGraph().edges;
+export function getGraphEdges(): GraphInsight {
+  const graph = getGraph();
+
+  return createInsight({
+    id: `graph-edges-${Date.now()}`,
+    title: "All Graph Edges",
+    description: `Graph contains ${graph.edges.length} edges`,
+    confidence: 1,
+    evidence: [],
+    data: { nodes: [], edges: graph.edges },
+  });
 }
 
-export function getGraphNodeById(id: string): GraphNode | undefined {
-  return getGraph().nodes.find((n) => n.id === id);
-}
+export function getGraphNodeById(id: string): GraphInsight {
+  const graph = getGraph();
+  const node = graph.nodes.find((n) => n.id === id);
 
-export function getNodeNeighbors(nodeId: string): Neighborhood {
-  const center = getGraphNodeById(nodeId);
-  if (!center) {
-    return {
-      center: { id: nodeId, type: "unknown", title: "Unknown", level: 0, metadata: {} },
-      neighbors: [],
-      edges: [],
-    };
+  if (!node) {
+    return createInsight({
+      id: `graph-node-${id}-not-found`,
+      title: `Node Not Found: ${id}`,
+      description: `No node found with ID "${id}"`,
+      confidence: 1,
+      evidence: [],
+      data: { nodes: [], edges: [] },
+    });
   }
 
-  const edges = getGraph().edges.filter(
+  const edges = graph.edges.filter(
+    (e) => e.source === id || e.target === id,
+  );
+
+  return createInsight({
+    id: `graph-node-${id}`,
+    title: `Node: ${node.title}`,
+    description: `Node of type "${node.type}" with ${edges.length} connections`,
+    confidence: 1,
+    evidence: [
+      createEvidence({
+        sourceId: id,
+        sourceType: node.type as "document" | "entity" | "mission",
+        relevance: "Direct node lookup",
+      }),
+    ],
+    data: { nodes: [node], edges },
+  });
+}
+
+export function getNodeNeighbors(nodeId: string): GraphInsight {
+  const graph = getGraph();
+  const node = graph.nodes.find((n) => n.id === nodeId);
+
+  if (!node) {
+    return createInsight({
+      id: `graph-neighbors-${nodeId}-not-found`,
+      title: `Neighbors Not Found: ${nodeId}`,
+      description: `No node found with ID "${nodeId}"`,
+      confidence: 1,
+      evidence: [],
+      data: { nodes: [], edges: [], center: nodeId },
+    });
+  }
+
+  const edges = graph.edges.filter(
     (e) => e.source === nodeId || e.target === nodeId,
   );
 
@@ -188,9 +199,22 @@ export function getNodeNeighbors(nodeId: string): Neighborhood {
     if (edge.target === nodeId) neighborIds.add(edge.source);
   }
 
-  const neighbors = getGraph().nodes.filter((n) => neighborIds.has(n.id));
+  const neighbors = graph.nodes.filter((n) => neighborIds.has(n.id));
 
-  return { center, neighbors, edges };
+  return createInsight({
+    id: `graph-neighbors-${nodeId}`,
+    title: `Neighbors of: ${node.title}`,
+    description: `${neighbors.length} nodes connected to "${node.title}"`,
+    confidence: 1,
+    evidence: [
+      createEvidence({
+        sourceId: nodeId,
+        sourceType: node.type as "document" | "entity" | "mission",
+        relevance: "Center node",
+      }),
+    ],
+    data: { nodes: [node, ...neighbors], edges, center: nodeId },
+  });
 }
 
 // ── Path Finding (BFS) ───────────────────────────────────
@@ -199,13 +223,23 @@ export function findPath(
   startId: string,
   endId: string,
   maxDepth: number = 5,
-): GraphPath | null {
+): GraphInsight {
   const graph = getGraph();
   const startNode = graph.nodes.find((n) => n.id === startId);
   const endNode = graph.nodes.find((n) => n.id === endId);
 
-  if (!startNode || !endNode) return null;
+  if (!startNode || !endNode) {
+    return createInsight({
+      id: `graph-path-${startId}-to-${endId}-not-found`,
+      title: "Path Not Found",
+      description: `Could not find path from "${startId}" to "${endId}"`,
+      confidence: 1,
+      evidence: [],
+      data: { nodes: [], edges: [] },
+    });
+  }
 
+  // BFS
   const visited = new Set<string>();
   const queue: { nodeId: string; path: string[] }[] = [
     { nodeId: startId, path: [startId] },
@@ -215,7 +249,6 @@ export function findPath(
     const { nodeId, path } = queue.shift()!;
 
     if (nodeId === endId) {
-      // Build path result
       const pathNodes = path
         .map((id) => graph.nodes.find((n) => n.id === id))
         .filter(Boolean) as GraphNode[];
@@ -230,11 +263,29 @@ export function findPath(
         if (edge) pathEdges.push(edge);
       }
 
-      return {
-        nodes: pathNodes,
-        edges: pathEdges,
-        length: path.length - 1,
-      };
+      return createInsight({
+        id: `graph-path-${startId}-to-${endId}`,
+        title: `Path: ${startNode.title} → ${endNode.title}`,
+        description: `Found path of length ${path.length - 1}`,
+        confidence: 1,
+        evidence: [
+          createEvidence({
+            sourceId: startId,
+            sourceType: startNode.type as "document" | "entity" | "mission",
+            relevance: "Path start",
+          }),
+          createEvidence({
+            sourceId: endId,
+            sourceType: endNode.type as "document" | "entity" | "mission",
+            relevance: "Path end",
+          }),
+        ],
+        data: {
+          nodes: pathNodes,
+          edges: pathEdges,
+          path: { nodes: path, edges: pathEdges.map((e) => `${e.source}->${e.target}`), length: path.length - 1 },
+        },
+      });
     }
 
     if (path.length > maxDepth) continue;
@@ -242,7 +293,6 @@ export function findPath(
 
     visited.add(nodeId);
 
-    // Find neighbors
     const neighbors = graph.edges
       .filter((e) => e.source === nodeId || e.target === nodeId)
       .map((e) => (e.source === nodeId ? e.target : e.source));
@@ -254,12 +304,19 @@ export function findPath(
     }
   }
 
-  return null;
+  return createInsight({
+    id: `graph-path-${startId}-to-${endId}-no-path`,
+    title: "No Path Found",
+    description: `No path exists between "${startId}" and "${endId}" within depth ${maxDepth}`,
+    confidence: 0.8,
+    evidence: [],
+    data: { nodes: [], edges: [] },
+  });
 }
 
 // ── Graph Statistics ──────────────────────────────────────
 
-export function getGraphStatistics(): GraphStats {
+export function getGraphStatistics(): GraphInsight {
   const graph = getGraph();
   const nodesByType: Record<string, number> = {};
   const edgesByType: Record<string, number> = {};
@@ -276,18 +333,30 @@ export function getGraphStatistics(): GraphStats {
   const averageConnections =
     graph.nodes.length > 0 ? totalConnections / graph.nodes.length : 0;
 
-  return {
-    totalNodes: graph.nodes.length,
-    totalEdges: graph.edges.length,
-    nodesByType,
-    edgesByType,
-    averageConnections: Math.round(averageConnections * 100) / 100,
-  };
+  return createInsight({
+    id: `graph-stats-${Date.now()}`,
+    title: "Knowledge Graph Statistics",
+    description: `${graph.nodes.length} nodes, ${graph.edges.length} edges`,
+    confidence: 1,
+    evidence: [],
+    data: {
+      nodes: [],
+      edges: [],
+      // Include stats in the insight data
+      ...{
+        totalNodes: graph.nodes.length,
+        totalEdges: graph.edges.length,
+        averageConnections: Math.round(averageConnections * 100) / 100,
+        nodesByType,
+        edgesByType,
+      },
+    },
+  });
 }
 
 // ── Connected Components ──────────────────────────────────
 
-export function getConnectedComponents(): string[][] {
+export function getConnectedComponents(): GraphInsight {
   const graph = getGraph();
   const visited = new Set<string>();
   const components: string[][] = [];
@@ -319,5 +388,16 @@ export function getConnectedComponents(): string[][] {
     }
   }
 
-  return components;
+  return createInsight({
+    id: `graph-components-${Date.now()}`,
+    title: "Connected Components",
+    description: `Graph has ${components.length} connected components`,
+    confidence: 1,
+    evidence: [],
+    data: {
+      nodes: graph.nodes,
+      edges: graph.edges,
+      components,
+    },
+  });
 }

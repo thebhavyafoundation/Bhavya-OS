@@ -1,6 +1,9 @@
 // ── @bhavya/intelligence ──────────────────────────────────
 // Cross-mission intelligence layer for the Bhavya Foundation platform.
 // Provides search, exploration, analytics, and recommendations.
+//
+// INVARIANT: This package never mutates institutional data.
+// It only queries, aggregates, ranks, traverses, recommends, and analyzes.
 
 export {
   search,
@@ -10,9 +13,7 @@ export {
 } from "./search";
 
 export type {
-  SearchResult,
   SearchOptions,
-  SearchResponse,
 } from "./search";
 
 export {
@@ -25,28 +26,11 @@ export {
   getConnectedComponents,
 } from "./graph-explorer";
 
-export type {
-  GraphNode,
-  GraphEdge,
-  GraphPath,
-  GraphStats,
-  Neighborhood,
-} from "./graph-explorer";
-
 export {
-  getPlatformOverview,
+  getOperationalMetrics,
+  getKnowledgeMetrics,
+  getPlatformAnalytics,
   getDomainCoverage,
-  getMissionActivity,
-  getEntityTypeDistribution,
-  getDocumentStatusDistribution,
-  getKnowledgeGraphStats,
-} from "./analytics";
-
-export type {
-  MissionSummary,
-  ActivityTimeline,
-  DomainCoverage,
-  PlatformOverview,
 } from "./analytics";
 
 export {
@@ -55,7 +39,32 @@ export {
   getRelatedEntities,
 } from "./recommendations";
 
+// ── Insight Types ─────────────────────────────────────────
+// Common result type for all intelligence capabilities.
+
 export type {
+  Insight,
+  Evidence,
+  InsightCategory,
+  SearchInsight,
+  SearchData,
+  SearchResult,
+  SearchFacets,
+  GraphInsight,
+  GraphData,
+  GraphNode,
+  GraphEdge,
+  GraphPath,
+  AnalyticsInsight,
+  AnalyticsData,
+  Metric,
+  RecommendationInsight,
+  RecommendationData,
   Recommendation,
-  RecommendationsResponse,
-} from "./recommendations";
+} from "./insight";
+
+export {
+  createInsight,
+  createEvidence,
+  calculateConfidence,
+} from "./insight";
