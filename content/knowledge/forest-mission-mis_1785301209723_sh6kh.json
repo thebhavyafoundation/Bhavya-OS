@@ -1,0 +1,26 @@
+{
+  "id": "forest-mission-mis_1785301209723_sh6kh",
+  "title": "Test Forest Mission",
+  "category": "report",
+  "path": "/documents/forest-mission-mis_1785301209723_sh6kh",
+  "content": "Mission: Test Forest Mission — Test description",
+  "summary": "Region: Test Region. Status: planning.",
+  "tags": [
+    "forest",
+    "mission"
+  ],
+  "status": "published",
+  "created": "2026-07-29T05:00:09.725Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "mission",
+    "sourceEntityId": "mis_1785301209723_sh6kh",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

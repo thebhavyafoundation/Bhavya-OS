@@ -1,0 +1,12 @@
+{
+  "id": "imp_1785323004364_nxj3s",
+  "missionId": "mis_1785301209723_sh6kh",
+  "title": "Test Impact",
+  "summary": "Impact summary",
+  "areaRestoredHectares": 50,
+  "totalPlanted": 1000,
+  "survivalRate": 0.85,
+  "speciesCount": 5,
+  "period": "2026-Q1",
+  "created": "2026-07-29T11:03:24.364Z"
+}

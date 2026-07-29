@@ -1,0 +1,28 @@
+{
+  "id": "forest-planting-plant_1785301391892_vl4y3",
+  "title": "Test Planting",
+  "category": "report",
+  "path": "/documents/forest-planting-plant_1785301391892_vl4y3",
+  "content": "Planting: Test Planting — Sal, Teak",
+  "summary": "Target: 100 trees. Site: Test Site.",
+  "tags": [
+    "forest",
+    "planting",
+    "Sal",
+    "Teak"
+  ],
+  "status": "published",
+  "created": "2026-07-29T05:03:11.894Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "planting",
+    "sourceEntityId": "plant_1785301391892_vl4y3",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

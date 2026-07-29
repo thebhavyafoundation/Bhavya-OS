@@ -1,0 +1,5 @@
+{
+  "extends": "@bhavya/typescript/base",
+  "compilerOptions": { "outDir": "dist" },
+  "include": ["src"]
+}

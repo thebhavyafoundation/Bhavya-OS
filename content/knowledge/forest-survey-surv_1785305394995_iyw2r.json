@@ -1,0 +1,26 @@
+{
+  "id": "forest-survey-surv_1785305394995_iyw2r",
+  "title": "Test Survey",
+  "category": "report",
+  "path": "/documents/forest-survey-surv_1785305394995_iyw2r",
+  "content": "baseline survey: Test Survey",
+  "summary": "Site: Test Site. Conducted by Test Researcher.",
+  "tags": [
+    "forest",
+    "survey"
+  ],
+  "status": "published",
+  "created": "2026-07-29T06:09:55.027Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "survey",
+    "sourceEntityId": "surv_1785305394995_iyw2r",
+    "documentType": "survey-result",
+    "visibility": "public"
+  }
+}

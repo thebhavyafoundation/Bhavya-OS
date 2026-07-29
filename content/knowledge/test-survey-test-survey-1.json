@@ -1,0 +1,27 @@
+{
+  "id": "test-survey-test-survey-1",
+  "title": "Test Survey Result",
+  "category": "report",
+  "path": "/documents/test-survey-test-survey-1",
+  "content": "Survey content",
+  "summary": "Summary",
+  "tags": [
+    "test",
+    "survey",
+    "survey"
+  ],
+  "status": "published",
+  "created": "2026-07-29T16:28:31.911Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "test",
+    "sourceEntity": "survey",
+    "sourceEntityId": "test-survey-1",
+    "documentType": "survey-result",
+    "visibility": "public"
+  }
+}

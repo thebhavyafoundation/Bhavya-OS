@@ -1,0 +1,26 @@
+{
+  "id": "forest-mission-mis_1785320607687_t1oap",
+  "title": "Test Forest Mission",
+  "category": "report",
+  "path": "/documents/forest-mission-mis_1785320607687_t1oap",
+  "content": "Mission: Test Forest Mission — Test description",
+  "summary": "Region: Test Region. Status: planning.",
+  "tags": [
+    "forest",
+    "mission"
+  ],
+  "status": "published",
+  "created": "2026-07-29T10:23:27.688Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "mission",
+    "sourceEntityId": "mis_1785320607687_t1oap",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

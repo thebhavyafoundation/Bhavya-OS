@@ -5,13 +5,23 @@
   --heritage-border: #2a1f10;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: var(--heritage-dark);
   color: #f8fafc;
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}

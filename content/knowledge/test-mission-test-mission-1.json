@@ -1,0 +1,27 @@
+{
+  "id": "test-mission-test-mission-1",
+  "title": "Test Field Report",
+  "category": "report",
+  "path": "/documents/test-mission-test-mission-1",
+  "content": "Field report content",
+  "summary": "Summary",
+  "tags": [
+    "test",
+    "mission",
+    "test"
+  ],
+  "status": "published",
+  "created": "2026-07-29T16:28:31.905Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "test",
+    "sourceEntity": "mission",
+    "sourceEntityId": "test-mission-1",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "forest-survey-surv_1785324918250_jqmdz",
+  "title": "Test Survey",
+  "category": "report",
+  "path": "/documents/forest-survey-surv_1785324918250_jqmdz",
+  "content": "baseline survey: Test Survey",
+  "summary": "Site: Test Site. Conducted by Test Researcher.",
+  "tags": [
+    "forest",
+    "survey"
+  ],
+  "status": "published",
+  "created": "2026-07-29T11:35:18.254Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "survey",
+    "sourceEntityId": "surv_1785324918250_jqmdz",
+    "documentType": "survey-result",
+    "visibility": "public"
+  }
+}

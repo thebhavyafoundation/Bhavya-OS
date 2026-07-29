@@ -3,5 +3,5 @@
   "buildCommand": "node scripts/vercel-build-app.mjs website",
   "outputDirectory": "apps/website/.next",
   "framework": "nextjs",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install --no-frozen-lockfile"
 }

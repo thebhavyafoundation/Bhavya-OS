@@ -1,0 +1,14 @@
+{
+  "id": "surv_1785301322644_5kow7",
+  "siteId": "site_1785301209731_dfgj0",
+  "missionId": "mis_1785301209723_sh6kh",
+  "type": "baseline",
+  "title": "Test Survey",
+  "description": "Survey description",
+  "conductedBy": "Test Researcher",
+  "conductedDate": "2026-07-29T05:02:02.622Z",
+  "findings": [],
+  "speciesObserved": [],
+  "photos": [],
+  "created": "2026-07-29T05:02:02.644Z"
+}

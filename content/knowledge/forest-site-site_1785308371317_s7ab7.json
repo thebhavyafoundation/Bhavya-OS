@@ -1,0 +1,26 @@
+{
+  "id": "forest-site-site_1785308371317_s7ab7",
+  "title": "Test Site",
+  "category": "report",
+  "path": "/documents/forest-site-site_1785308371317_s7ab7",
+  "content": "Site: Test Site — Site description",
+  "summary": "Mission: Test Forest Mission. Area: unknown ha.",
+  "tags": [
+    "forest",
+    "site"
+  ],
+  "status": "published",
+  "created": "2026-07-29T06:59:31.320Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "site",
+    "sourceEntityId": "site_1785308371317_s7ab7",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

@@ -13,8 +13,8 @@ import {
   MissionHealthScore,
   KnowledgeGap,
   WorkItem,
-} from "./decision-support.js";
-import { createInsight, createEvidence } from "./insight.js";
+} from "./decision-support";
+import { createInsight, createEvidence } from "./insight";
 
 export function generateDecisionSupport(): DecisionSupport {
   return {

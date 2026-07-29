@@ -1,0 +1,24 @@
+{
+  "name": "@bhavya/agent-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapters": "./src/adapters.ts",
+    "./research": "./src/research-graph.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.68",
+    "@langchain/langgraph": "^0.2.74"
+  },
+  "devDependencies": {
+    "@bhavya/eslint": "workspace:*",
+    "@bhavya/typescript": "workspace:*"
+  }
+}

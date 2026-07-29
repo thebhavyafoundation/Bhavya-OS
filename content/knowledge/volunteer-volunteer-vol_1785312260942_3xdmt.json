@@ -1,0 +1,26 @@
+{
+  "id": "volunteer-volunteer-vol_1785312260942_3xdmt",
+  "title": "New Volunteer: Test Volunteer",
+  "category": "report",
+  "path": "/documents/volunteer-volunteer-vol_1785312260942_3xdmt",
+  "content": "Volunteer Test Volunteer joined Bhavya Foundation.",
+  "summary": "Location: TBD. Interests: none.",
+  "tags": [
+    "volunteer",
+    "volunteer"
+  ],
+  "status": "published",
+  "created": "2026-07-29T08:04:20.944Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "volunteer",
+    "sourceEntity": "volunteer",
+    "sourceEntityId": "vol_1785312260942_3xdmt",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

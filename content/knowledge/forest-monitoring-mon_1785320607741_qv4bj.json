@@ -1,0 +1,26 @@
+{
+  "id": "forest-monitoring-mon_1785320607741_qv4bj",
+  "title": "Test Monitoring",
+  "category": "report",
+  "path": "/documents/forest-monitoring-mon_1785320607741_qv4bj",
+  "content": "growth monitoring: Test Monitoring",
+  "summary": "Conducted by Test Observer. Observations: 1.",
+  "tags": [
+    "forest",
+    "monitoring"
+  ],
+  "status": "approved",
+  "created": "2026-07-29T10:23:27.741Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "monitoring",
+    "sourceEntityId": "mon_1785320607741_qv4bj",
+    "documentType": "monitoring-log",
+    "visibility": "internal"
+  }
+}

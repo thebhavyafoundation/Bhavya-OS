@@ -1,0 +1,26 @@
+{
+  "id": "test-impact-test-impact-1",
+  "title": "Test Impact Report",
+  "category": "report",
+  "path": "/documents/test-impact-test-impact-1",
+  "content": "Impact report content",
+  "summary": "Summary",
+  "tags": [
+    "test",
+    "impact"
+  ],
+  "status": "published",
+  "created": "2026-07-29T16:28:31.908Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "test",
+    "sourceEntity": "impact",
+    "sourceEntityId": "test-impact-1",
+    "documentType": "impact-report",
+    "visibility": "public"
+  }
+}

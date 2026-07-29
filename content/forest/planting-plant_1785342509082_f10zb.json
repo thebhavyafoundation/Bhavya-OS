@@ -1,0 +1,16 @@
+{
+  "id": "plant_1785342509082_f10zb",
+  "siteId": "site_1785301209731_dfgj0",
+  "missionId": "mis_1785301209723_sh6kh",
+  "name": "Test Planting",
+  "status": "planned",
+  "species": [
+    "Sal",
+    "Teak"
+  ],
+  "targetCount": 100,
+  "plantedCount": 0,
+  "notes": "",
+  "created": "2026-07-29T16:28:29.082Z",
+  "updated": "2026-07-29T16:28:29.082Z"
+}

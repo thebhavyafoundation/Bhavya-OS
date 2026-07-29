@@ -1,0 +1,13 @@
+{
+  "id": "assign_1785306684459_gl9qo",
+  "volunteerId": "vol_1785301209722_8b4dp",
+  "missionType": "forest",
+  "missionId": "test-mission-1",
+  "role": "Field Worker",
+  "description": "Assist with planting operations",
+  "status": "assigned",
+  "assignedDate": "2026-07-29T06:31:24.459Z",
+  "hoursLogged": 0,
+  "created": "2026-07-29T06:31:24.459Z",
+  "updated": "2026-07-29T06:31:24.459Z"
+}

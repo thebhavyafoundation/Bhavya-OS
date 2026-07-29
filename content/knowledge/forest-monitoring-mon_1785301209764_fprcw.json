@@ -1,0 +1,26 @@
+{
+  "id": "forest-monitoring-mon_1785301209764_fprcw",
+  "title": "Test Monitoring",
+  "category": "report",
+  "path": "/documents/forest-monitoring-mon_1785301209764_fprcw",
+  "content": "growth monitoring: Test Monitoring",
+  "summary": "Conducted by Test Observer. Observations: 1.",
+  "tags": [
+    "forest",
+    "monitoring"
+  ],
+  "status": "approved",
+  "created": "2026-07-29T05:00:09.771Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "monitoring",
+    "sourceEntityId": "mon_1785301209764_fprcw",
+    "documentType": "monitoring-log",
+    "visibility": "internal"
+  }
+}

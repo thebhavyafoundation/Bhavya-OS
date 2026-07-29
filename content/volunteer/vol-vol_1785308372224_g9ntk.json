@@ -1,0 +1,13 @@
+{
+  "id": "vol_1785308372224_g9ntk",
+  "name": "Test Volunteer",
+  "email": "test@example.com",
+  "status": "active",
+  "interests": [],
+  "skillIds": [],
+  "missionIds": [],
+  "joinedDate": "2026-07-29T06:59:32.222Z",
+  "lastActive": "2026-07-29T06:59:32.222Z",
+  "created": "2026-07-29T06:59:32.222Z",
+  "updated": "2026-07-29T06:59:32.222Z"
+}

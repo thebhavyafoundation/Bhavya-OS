@@ -1,0 +1,26 @@
+{
+  "id": "forest-impact-imp_1785341836513_8v6l1",
+  "title": "Test Impact",
+  "category": "report",
+  "path": "/documents/forest-impact-imp_1785341836513_8v6l1",
+  "content": "Impact Report: Test Impact",
+  "summary": "Area: 50 ha. Planted: 1000. Survival: 0.85%.",
+  "tags": [
+    "forest",
+    "impact"
+  ],
+  "status": "published",
+  "created": "2026-07-29T16:17:16.514Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "impact",
+    "sourceEntityId": "imp_1785341836513_8v6l1",
+    "documentType": "impact-report",
+    "visibility": "public"
+  }
+}

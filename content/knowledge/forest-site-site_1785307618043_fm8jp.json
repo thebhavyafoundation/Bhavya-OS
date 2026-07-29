@@ -1,0 +1,26 @@
+{
+  "id": "forest-site-site_1785307618043_fm8jp",
+  "title": "Test Site",
+  "category": "report",
+  "path": "/documents/forest-site-site_1785307618043_fm8jp",
+  "content": "Site: Test Site — Site description",
+  "summary": "Mission: Test Forest Mission. Area: unknown ha.",
+  "tags": [
+    "forest",
+    "site"
+  ],
+  "status": "published",
+  "created": "2026-07-29T06:46:58.044Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "forest",
+    "sourceEntity": "site",
+    "sourceEntityId": "site_1785307618043_fm8jp",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

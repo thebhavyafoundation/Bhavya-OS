@@ -1,0 +1,15 @@
+{
+  "id": "mon_1785301209764_fprcw",
+  "siteId": "site_1785301209731_dfgj0",
+  "missionId": "mis_1785301209723_sh6kh",
+  "type": "growth",
+  "title": "Test Monitoring",
+  "observations": [
+    "Trees growing well"
+  ],
+  "metrics": {},
+  "photos": [],
+  "conductedBy": "Test Observer",
+  "conductedDate": "2026-07-29T05:00:09.763Z",
+  "created": "2026-07-29T05:00:09.764Z"
+}

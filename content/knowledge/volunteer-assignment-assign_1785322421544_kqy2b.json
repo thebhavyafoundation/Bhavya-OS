@@ -1,0 +1,28 @@
+{
+  "id": "volunteer-assignment-assign_1785322421544_kqy2b",
+  "title": "Volunteer Assigned: Test Volunteer",
+  "category": "report",
+  "path": "/documents/volunteer-assignment-assign_1785322421544_kqy2b",
+  "content": "Test Volunteer assigned to forest mission as Field Worker.",
+  "summary": "Mission type: forest. Role: Field Worker.",
+  "tags": [
+    "volunteer",
+    "assignment",
+    "forest",
+    "Field Worker"
+  ],
+  "status": "published",
+  "created": "2026-07-29T10:53:41.546Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "volunteer",
+    "sourceEntity": "assignment",
+    "sourceEntityId": "assign_1785322421544_kqy2b",
+    "documentType": "field-report",
+    "visibility": "public"
+  }
+}

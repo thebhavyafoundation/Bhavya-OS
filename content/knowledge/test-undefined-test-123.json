@@ -1,0 +1,22 @@
+{
+  "id": "test-undefined-test-123",
+  "title": "Test Publication",
+  "path": "/documents/test-undefined-test-123",
+  "content": "Test content for publishing pipeline",
+  "summary": "Test summary",
+  "tags": [
+    "test",
+    null,
+    "test"
+  ],
+  "created": "2026-07-29T05:00:11.331Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "test",
+    "sourceEntityId": "test-123"
+  }
+}

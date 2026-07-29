@@ -1,4 +1,4 @@
-import { Insight, createInsight, createEvidence } from "./insight.js";
+import { Insight, createInsight, createEvidence } from "./insight";
 
 export interface DecisionSupport {
   dataQualityAlerts: Insight<DataQualityAlert>[];

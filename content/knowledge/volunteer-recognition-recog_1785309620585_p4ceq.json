@@ -1,0 +1,26 @@
+{
+  "id": "volunteer-recognition-recog_1785309620585_p4ceq",
+  "title": "milestone: 100 Hours Service",
+  "category": "report",
+  "path": "/documents/volunteer-recognition-recog_1785309620585_p4ceq",
+  "content": "Recognition awarded to Test Volunteer: 100 Hours Service",
+  "summary": "Type: milestone. Completed 100 hours of volunteer service",
+  "tags": [
+    "volunteer",
+    "recognition"
+  ],
+  "status": "published",
+  "created": "2026-07-29T07:20:20.586Z",
+  "readingTime": 1,
+  "version": 1,
+  "links": [],
+  "citations": [],
+  "entityIds": [],
+  "metadata": {
+    "source": "volunteer",
+    "sourceEntity": "recognition",
+    "sourceEntityId": "recog_1785309620585_p4ceq",
+    "documentType": "impact-report",
+    "visibility": "public"
+  }
+}

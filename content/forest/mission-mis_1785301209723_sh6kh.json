@@ -1,0 +1,32 @@
+{
+  "id": "mis_1785301209723_sh6kh",
+  "name": "Test Forest Mission",
+  "description": "Test description",
+  "status": "planning",
+  "region": "Test Region",
+  "startDate": "2026-07-29T05:00:09.722Z",
+  "goals": [],
+  "tags": [],
+  "siteIds": [
+    "site_1785301209731_dfgj0",
+    "site_1785301322609_p26x0",
+    "site_1785301391843_zaefj",
+    "site_1785305394882_afq42",
+    "site_1785306684440_w29ek",
+    "site_1785307618043_fm8jp",
+    "site_1785308371317_s7ab7",
+    "site_1785309620663_pbo7b",
+    "site_1785312260981_f12na",
+    "site_1785320607694_pjx3b",
+    "site_1785322421542_s89sf",
+    "site_1785323004174_032ub",
+    "site_1785323651557_spmes",
+    "site_1785323996069_asc0j",
+    "site_1785324367604_qcc0o",
+    "site_1785324918224_zbnbz",
+    "site_1785341836163_f6mnt",
+    "site_1785342509048_6xr3s"
+  ],
+  "created": "2026-07-29T05:00:09.722Z",
+  "updated": "2026-07-29T16:28:29.056Z"
+}
