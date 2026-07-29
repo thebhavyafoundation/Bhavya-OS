@@ -119,9 +119,11 @@ export class SearchEngine {
     const lower = query.toLowerCase();
     let score = 0;
 
-    if (item.title?.toLowerCase().includes(lower)) score += 10;
+    // Handle different title/name properties
+    const title = 'title' in item ? item.title : 'name' in item ? item.name : '';
+    if (title?.toLowerCase().includes(lower)) score += 10;
     if ('description' in item && item.description?.toLowerCase().includes(lower)) score += 5;
-    if (item.content?.toLowerCase().includes(lower)) score += 3;
+    if ('content' in item && item.content?.toLowerCase().includes(lower)) score += 3;
 
     return score;
   }
