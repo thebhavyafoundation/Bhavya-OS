@@ -8,29 +8,29 @@ import {
   Resolution,
   Policy,
   TraceabilityChain,
-} from "./models.js";
+} from "./models";
 import {
   getDecisionContexts,
   getLessons,
   getPatterns,
-} from "./institutional-memory.js";
+} from "./institutional-memory";
 import {
   analyzePatterns,
   generateLearningReport,
-} from "./organizational-learning.js";
+} from "./organizational-learning";
 import {
   generatePredictions,
   assessRisks,
-} from "./predictive-intelligence.js";
+} from "./predictive-intelligence";
 import {
   getMissions,
-} from "./forest.js";
+} from "./forest";
 import {
   getResolutions,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItems,
-} from "./action-items.js";
+} from "./action-items";
 
 // ── Playbook Types ─────────────────────────────────────────
 

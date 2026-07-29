@@ -6,7 +6,7 @@ import {
   ActionItemSource,
   ActionItemStats,
   ActionItemEvent,
-} from "./models.js";
+} from "./models";
 
 const DATA_DIR = join(process.cwd(), "data");
 const ACTIONS_FILE = join(DATA_DIR, "action-items.json");

@@ -3,35 +3,35 @@ import {
   getResolutions,
   getPolicies,
   getGovernanceStats,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItems,
   getActionItemStats,
-} from "./action-items.js";
+} from "./action-items";
 import {
   getMissions,
   getForestStats,
-} from "./forest.js";
+} from "./forest";
 import {
   getHeritageMissions,
   getHeritageStats,
-} from "./heritage.js";
+} from "./heritage";
 import {
   getProjects,
   getResearchStats,
-} from "./research.js";
+} from "./research";
 import {
   getVolunteers,
   getVolunteerStats,
-} from "./volunteer.js";
+} from "./volunteer";
 import {
   getDocuments,
   getEntities,
   getKnowledgeGraph,
-} from "./index.js";
+} from "./index";
 import {
   getEvidence,
-} from "./traceability.js";
+} from "./traceability";
 
 // ── Cross-Domain Report Types ──────────────────────────────
 

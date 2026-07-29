@@ -5,7 +5,7 @@ import {
   LessonLearned,
   InstitutionalPattern,
   MemoryStats,
-} from "./models.js";
+} from "./models";
 
 const DATA_DIR = join(process.cwd(), "data");
 const MEMORY_FILE = join(DATA_DIR, "institutional-memory.json");

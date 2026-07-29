@@ -5,20 +5,20 @@ import {
   Policy,
   GovernanceEvidence,
   TraceabilityChain,
-} from "./models.js";
+} from "./models";
 import {
   getBoardMeetingById,
   getResolutionsByMeeting,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItems,
   getActionItemById,
-} from "./action-items.js";
+} from "./action-items";
 import {
   getMissions,
   getProjects,
   getPolicies,
-} from "./index.js";
+} from "./index";
 
 // ── Traceability Chain ─────────────────────────────────────
 

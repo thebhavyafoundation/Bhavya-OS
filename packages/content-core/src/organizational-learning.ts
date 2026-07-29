@@ -2,25 +2,25 @@ import {
   DecisionContext,
   LessonLearned,
   InstitutionalPattern,
-} from "./models.js";
+} from "./models";
 import {
   getDecisionContexts,
   getLessons,
   getPatterns,
   getSuccessfulPatterns,
-} from "./institutional-memory.js";
+} from "./institutional-memory";
 import {
   getMissions,
   getForestStats,
-} from "./forest.js";
+} from "./forest";
 import {
   getResolutions,
   getGovernanceStats,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItems,
   getActionItemStats,
-} from "./action-items.js";
+} from "./action-items";
 
 // ── Learning Types ─────────────────────────────────────────
 

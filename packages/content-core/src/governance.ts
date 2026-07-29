@@ -9,7 +9,7 @@ import {
   PolicyStatus,
   GovernanceStats,
   ResolutionEvent,
-} from "./models.js";
+} from "./models";
 
 const DATA_DIR = join(process.cwd(), "data");
 const GOVERNANCE_FILE = join(DATA_DIR, "governance.json");

@@ -3,10 +3,10 @@ import { join } from "path";
 import {
   getGovernanceStats,
   getOperationalHealth,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItemStats,
-} from "./action-items.js";
+} from "./action-items";
 
 // ── Snapshot Metrics ───────────────────────────────────────
 

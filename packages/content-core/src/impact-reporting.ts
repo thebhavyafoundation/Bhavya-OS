@@ -4,26 +4,26 @@ import {
   ActionItem,
   Policy,
   Evidence,
-} from "./models.js";
+} from "./models";
 import {
   getBoardMeetings,
   getBoardMeetingById,
   getResolutions,
   getResolutionsByMeeting,
-} from "./governance.js";
+} from "./governance";
 import {
   getActionItems,
   getActionItemsBySource,
-} from "./action-items.js";
+} from "./action-items";
 import {
   getMissions,
   getProjects,
   getPolicies,
-} from "./index.js";
+} from "./index";
 import {
   getEvidence,
   getEvidenceByActionItem,
-} from "./traceability.js";
+} from "./traceability";
 
 // ── Impact Report Types ────────────────────────────────────
 
