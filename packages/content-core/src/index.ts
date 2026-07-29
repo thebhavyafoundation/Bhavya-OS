@@ -508,3 +508,37 @@ export type {
   LongTermImpactSummary,
   MultiYearComparison,
 } from "./long-term-impact";
+
+// ── Institutional Resilience ──────────────────────────────
+export {
+  createDependency,
+  getDependencies,
+  getDependencyById,
+  getDependenciesBySource,
+  getDependenciesByTarget,
+  getDependenciesByCriticality,
+  deleteDependency,
+  createContinuityGap,
+  getContinuityGaps,
+  getContinuityGapById,
+  getContinuityGapsByCategory,
+  getContinuityGapsBySeverity,
+  getContinuityGapsByStatus,
+  updateContinuityGap,
+  mitigateGap,
+  resolveGap,
+  buildDependencyMap,
+  assessResilience,
+  getResilienceStats,
+  detectSinglePointOfFailures,
+  detectUndocumentedKnowledge,
+  detectMissingPlaybooks,
+  createDefaultDependencies,
+} from "./institutional-resilience";
+export type {
+  Dependency,
+  ContinuityGap,
+  ResilienceScore,
+  DependencyMap,
+  ResilienceStats,
+} from "./institutional-resilience";
