@@ -432,3 +432,28 @@ export type {
   ReviewRecord,
   LifecycleStats,
 } from "./knowledge-lifecycle";
+
+// ── Succession Support ────────────────────────────────────
+export {
+  createRole,
+  getRoles,
+  getRoleById,
+  getRolesByDomain,
+  getRolesByStatus,
+  updateRole,
+  assignHolder,
+  transitionHolder,
+  createSuccessionPlan,
+  updateSuccessionPlan,
+  getTransitions,
+  getTransitionsByRole,
+  getSuccessionStats,
+  assessSuccessionReadiness,
+} from "./succession-support";
+export type {
+  Role,
+  SuccessionPlan,
+  SuccessorCandidate,
+  TransitionRecord,
+  SuccessionStats,
+} from "./succession-support";
