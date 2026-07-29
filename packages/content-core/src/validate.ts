@@ -9,7 +9,7 @@ import { getEntities } from "./entities";
 import { getRelationships, getGraphStats } from "./graph";
 import { getSearchIndex, getContentStats } from "./search";
 import { getKnowledgeGraph } from "./documents";
-import { getMissions, getSites, getPlantings, getMonitoring, getImpactReports } from "./forest";
+import { getMissions, getSites, getPlantings, getMonitoring, getForestImpactReports } from "./forest";
 import { getHeritageMissions, getHeritageAssets, getAssessments, getConservationPlans } from "./heritage";
 import { getVolunteers, getAssignments, getTrainings, getRecognitions } from "./volunteer";
 import { getProjects, getSources, getEvidence, getReviews } from "./research";
@@ -231,7 +231,7 @@ function validateMissionData(): ValidationResult {
   const sites = getSites();
   const plantings = getPlantings();
   const monitoring = getMonitoring();
-  const impact = getImpactReports();
+  const impact = getForestImpactReports();
 
   checks.push({
     name: "Forest data consistent",

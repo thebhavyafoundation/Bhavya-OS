@@ -425,7 +425,7 @@ function loadImpact(): Impact[] {
   });
 }
 
-export function getImpactReports(): Impact[] {
+export function getForestImpactReports(): Impact[] {
   return loadImpact();
 }
 
@@ -485,7 +485,7 @@ export function getForestStats(): ForestStats {
   const surveys = getSurveys();
   const plantings = getPlantings();
   const monitoring = getMonitoring();
-  const impacts = getImpactReports();
+  const impacts = getForestImpactReports();
 
   const missionsByStatus: Record<MissionStatus, number> = {
     planning: 0,

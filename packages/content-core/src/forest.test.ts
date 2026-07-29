@@ -11,7 +11,7 @@ import {
   createPlanting,
   getMonitoring,
   createMonitoring,
-  getImpactReports,
+  getForestImpactReports,
   createImpact,
   getForestStats,
 } from "./forest";

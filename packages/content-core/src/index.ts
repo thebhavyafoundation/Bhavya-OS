@@ -99,7 +99,7 @@ export {
   getMonitoringByPlanting,
   getMonitoringByMission,
   createMonitoring,
-  getImpactReports,
+  getForestImpactReports,
   getImpact,
   getImpactByMission,
   createImpact,
