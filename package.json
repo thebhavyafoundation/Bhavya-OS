@@ -32,6 +32,8 @@
     "admin": "pnpm --filter @bhavya/admin-app dev",
     "vercel:build": "vercel build",
     "vercel:deploy": "vercel deploy --prebuilt",
+    "vercel:deploy:app": "node scripts/vercel-build-app.mjs",
+    "vercel:deploy:all": "bash scripts/deploy-all-vercel.sh",
     "dashboard": "pnpm --filter @bhavya/dashboard dev"
   },
   "dependencies": {

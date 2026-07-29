@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "node scripts/vercel-build-app.mjs research",
+  "framework": "nextjs",
+  "outputDirectory": "apps/research/.next"
+}

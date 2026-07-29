@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "node scripts/vercel-build-app.mjs volunteer",
+  "framework": "nextjs",
+  "outputDirectory": "apps/volunteer/.next"
+}
