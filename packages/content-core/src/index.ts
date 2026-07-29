@@ -484,3 +484,27 @@ export type {
   RecurrencePattern,
   StewardshipStats,
 } from "./automated-stewardship";
+
+// ── Long-Term Impact ──────────────────────────────────────
+export {
+  createImpactMetric,
+  getImpactMetrics,
+  getImpactMetricById,
+  getImpactMetricsByDomain,
+  getImpactMetricsByCategory,
+  createImpactRecord,
+  getImpactRecords,
+  getImpactRecordsByMetric,
+  getImpactRecordsByDateRange,
+  calculateImpactTrends,
+  compareMultiYear,
+  getLongTermImpactSummary,
+  createDefaultImpactMetrics,
+} from "./long-term-impact";
+export type {
+  ImpactMetric,
+  ImpactRecord,
+  ImpactTrend,
+  LongTermImpactSummary,
+  MultiYearComparison,
+} from "./long-term-impact";
