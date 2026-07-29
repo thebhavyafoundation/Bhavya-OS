@@ -276,4 +276,32 @@ export type {
   ActionItem,
   ActionItemEvent,
   ActionItemStats,
+  TraceabilityChain,
+  Evidence,
 } from "./models";
+
+// ── Traceability ──────────────────────────────────────────
+export {
+  buildTraceabilityChain,
+  traceFromResolution,
+  traceFromActionItem,
+  traceFromMission,
+  getEvidence,
+  getEvidenceByActionItem,
+  addEvidence,
+  verifyEvidence,
+  getFullTraceability,
+} from "./traceability";
+
+// ── Governance Metrics ─────────────────────────────────────
+export {
+  captureSnapshot,
+  getTrendMetrics,
+  getSnapshotHistory,
+  getLatestSnapshot,
+} from "./governance-metrics";
+export type {
+  SnapshotMetrics,
+  TrendMetric,
+  TrendMetrics,
+} from "./governance-metrics";

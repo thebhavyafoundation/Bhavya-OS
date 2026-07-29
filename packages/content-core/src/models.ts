@@ -504,6 +504,11 @@ export interface ActionItem {
   completedDate?: string;
   notes: string[];
   dependencies: string[];
+  // Traceability
+  missionId?: string;
+  projectId?: string;
+  policyId?: string;
+  evidenceIds: string[];
   created: string;
   updated: string;
 }
@@ -523,6 +528,31 @@ export interface ActionItemStats {
   overdue: number;
   completionRate: number;
   avgDaysToComplete: number;
+}
+
+// ── Traceability ──────────────────────────────────────────
+
+export interface TraceabilityChain {
+  meeting?: BoardMeeting;
+  resolution?: Resolution;
+  actionItems: ActionItem[];
+  mission?: any;
+  project?: any;
+  policy?: Policy;
+  evidence: Evidence[];
+}
+
+export interface Evidence {
+  id: string;
+  actionItemId: string;
+  type: "document" | "report" | "certificate" | "photo" | "testimonial";
+  title: string;
+  description: string;
+  fileId?: string;
+  url?: string;
+  verifiedBy?: string;
+  verifiedAt?: string;
+  created: string;
 }
 
 export interface GovernanceStats {

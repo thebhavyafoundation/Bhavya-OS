@@ -10,6 +10,8 @@ import {
   getActionItems,
   getActionItemStats,
   getOverdueActionItems,
+  getTrendMetrics,
+  getLatestSnapshot,
 } from "@bhavya/content-core";
 
 function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
@@ -34,6 +36,8 @@ export default function GovernancePage() {
   const stats = getGovernanceStats();
   const operationalHealth = getOperationalHealth();
   const actionStats = getActionItemStats();
+  const trendData = getTrendMetrics();
+  const latestSnapshot = getLatestSnapshot();
   const upcomingMeetings = getUpcomingMeetings();
   const overdueResolutions = getOverdueResolutions();
   const policiesDueForReview = getPoliciesDueForReview();
@@ -108,25 +112,49 @@ export default function GovernancePage() {
       </div>
 
       {/* Trend Metrics */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
-        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
-          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Open Resolutions</p>
-          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.openResolutions}</p>
-        </div>
-        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
-          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Policies Approaching Review</p>
-          <p style={{ fontSize: 16, fontWeight: 600, color: operationalHealth.policiesApproachingReview > 0 ? "#f59e0b" : "#f8fafc", margin: 0 }}>
-            {operationalHealth.policiesApproachingReview}
-          </p>
-        </div>
-        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
-          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Policy Versions</p>
-          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.avgPolicyVersions}</p>
-        </div>
-        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
-          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Days to Complete</p>
-          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{actionStats.avgDaysToComplete}</p>
-        </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16, marginBottom: 32 }}>
+        {trendData.metrics.length > 0 ? (
+          trendData.metrics.map((metric) => (
+            <div key={metric.name} style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>{metric.name}</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+                <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>
+                  {metric.current}{metric.unit}
+                </p>
+                {metric.direction !== "stable" && (
+                  <p style={{ fontSize: 10, color: metric.direction === "up" ? "#10b981" : "#ef4444", margin: 0 }}>
+                    {metric.direction === "up" ? "↑" : "↓"} {Math.abs(metric.change)}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <>
+            <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Open Resolutions</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.openResolutions}</p>
+            </div>
+            <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Policies Approaching Review</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: operationalHealth.policiesApproachingReview > 0 ? "#f59e0b" : "#f8fafc", margin: 0 }}>
+                {operationalHealth.policiesApproachingReview}
+              </p>
+            </div>
+            <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Policy Versions</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.avgPolicyVersions}</p>
+            </div>
+            <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Days to Complete</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{actionStats.avgDaysToComplete}</p>
+            </div>
+            <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+              <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Snapshot Status</p>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#f59e0b", margin: 0 }}>No data</p>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Alerts */}

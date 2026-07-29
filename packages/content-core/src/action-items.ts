@@ -77,6 +77,7 @@ export function createActionItem(action: Omit<ActionItem, "created" | "updated">
   const actions = loadActions();
   const newAction: ActionItem = {
     ...action,
+    evidenceIds: action.evidenceIds || [],
     created: new Date().toISOString(),
     updated: new Date().toISOString(),
   };
