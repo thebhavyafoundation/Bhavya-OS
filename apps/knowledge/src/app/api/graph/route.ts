@@ -1,50 +1,64 @@
-import { NextResponse } from "next/server";
-import { getKnowledgeGraph, getLinkedNodes, searchDocuments } from "@/lib/data";
+import { NextRequest, NextResponse } from "next/server";
+import {
+  getGraphNodeById,
+  getNodeNeighbors,
+  findPath,
+  getGraphStatistics,
+} from "@bhavya/intelligence";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const node = searchParams.get("node");
-  const query = searchParams.get("q");
+  const action = searchParams.get("action") || "node";
+  const id = searchParams.get("id");
+  const targetId = searchParams.get("targetId");
 
-  if (node) {
-    const linkedNodes = getLinkedNodes(node);
-    return NextResponse.json({
-      nodeId: node,
-      linkedNodes: linkedNodes.map((n) => ({
-        id: n.id,
-        type: n.type,
-        title: n.title,
-        owner: n.owner,
-        status: n.status,
-      })),
-    });
+  switch (action) {
+    case "node":
+      if (!id) {
+        return NextResponse.json({
+          success: false,
+          error: "Missing required parameter 'id'",
+        });
+      }
+      return NextResponse.json({
+        success: true,
+        data: getGraphNodeById(id),
+      });
+
+    case "neighbors":
+      if (!id) {
+        return NextResponse.json({
+          success: false,
+          error: "Missing required parameter 'id'",
+        });
+      }
+      return NextResponse.json({
+        success: true,
+        data: getNodeNeighbors(id),
+      });
+
+    case "path":
+      if (!id || !targetId) {
+        return NextResponse.json({
+          success: false,
+          error: "Missing required parameters 'id' and 'targetId'",
+        });
+      }
+      return NextResponse.json({
+        success: true,
+        data: findPath(id, targetId),
+      });
+
+    case "stats":
+      return NextResponse.json({
+        success: true,
+        data: getGraphStatistics(),
+      });
+
+    default:
+      return NextResponse.json({
+        success: false,
+        error: `Unknown action: ${action}`,
+      });
   }
-
-  if (query) {
-    const results = searchDocuments(query);
-    return NextResponse.json({
-      query,
-      total: results.length,
-      results: results.map((d) => ({
-        id: d.id,
-        title: d.title,
-        category: d.category,
-        summary: d.summary,
-        tags: d.tags,
-      })),
-    });
-  }
-
-  const graph = getKnowledgeGraph();
-  return NextResponse.json({
-    total: graph.length,
-    nodes: graph.map((n) => ({
-      id: n.id,
-      type: n.type,
-      title: n.title,
-      owner: n.owner,
-      status: n.status,
-      links: n.links,
-    })),
-  });
 }

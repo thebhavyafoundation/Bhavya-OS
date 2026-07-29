@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@bhavya/content-core": "workspace:*",
+    "@bhavya/intelligence": "workspace:*",
     "@bhavya/mission-runtime": "workspace:*",
     "@bhavya/ui": "workspace:*",
     "next": "15.5.20",
