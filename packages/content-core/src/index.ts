@@ -457,3 +457,30 @@ export type {
   TransitionRecord,
   SuccessionStats,
 } from "./succession-support";
+
+// ── Automated Stewardship ─────────────────────────────────
+export {
+  createScheduledTask,
+  getScheduledTasks,
+  getScheduledTaskById,
+  getScheduledTasksByType,
+  getScheduledTasksByStatus,
+  updateScheduledTask,
+  completeScheduledTask,
+  cancelScheduledTask,
+  startTaskExecution,
+  completeTaskExecution,
+  getExecutionsByTask,
+  getStewardshipStats,
+  getOverdueTasks,
+  getUpcomingTasks,
+  createDefaultStewardshipTasks,
+} from "./automated-stewardship";
+export type {
+  ScheduledTask,
+  TaskExecution,
+  TaskType,
+  TaskStatus,
+  RecurrencePattern,
+  StewardshipStats,
+} from "./automated-stewardship";
