@@ -6,7 +6,7 @@ All notable changes to @bhavya/content-core will be documented in this file.
 
 ### Engineering Excellence
 
-Testing and validation release. No feature changes.
+Testing, validation, and developer experience release. No feature changes.
 
 ### Added
 
@@ -30,8 +30,17 @@ Testing and validation release. No feature changes.
   - Publication Validator: published documents exist, valid statuses
   - Mission Data Validator: forest, heritage, research, volunteer data consistency
 
+- **Scaffolding CLI**: `pnpm scaffold` for rapid development
+  - `scaffold mission <name> <port>`: Create new mission app
+  - `scaffold page <app> <page>`: Create new page
+  - `scaffold api <app> <route>`: Create new API route
+  - `scaffold document <category> <title>`: Create RFC/standard/ADR
+  - `scaffold entity <type> <name>`: Create new entity
+
+- **Developer Documentation**: CONTRIBUTING.md with workflow guide
+
 - **Test Configuration**: vitest.config.ts with globals enabled
-- **Root Scripts**: `pnpm test` and `pnpm validate` run across all packages via turbo
+- **Root Scripts**: `pnpm test`, `pnpm validate`, `pnpm scaffold` run across all packages
 
 ## [1.0.0] - 2026-07-29
 
