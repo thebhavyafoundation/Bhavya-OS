@@ -226,3 +226,44 @@ pnpm lint && pnpm test && pnpm validate && pnpm build
 | v1.2.0 | Operational intelligence |
 | v1.3.0 | Decision support |
 | v2.0.0 | Phase II: Governance operations |
+| v2.1.0 | Phase II: Resolution lifecycle, policy versioning |
+| v2.2.0 | Phase II: Action items, operational health |
+| v2.3.0 | Phase II: Traceability, evidence, snapshot/trend metrics |
+| v2.4.0 | Phase II: Impact reporting |
+| v2.5.0 | Phase II: Cross-domain reporting |
+
+## Institutional Cycle
+
+The platform now supports a complete institutional accountability loop:
+
+```
+Strategy
+    │
+    ▼
+Governance
+    │
+    ▼
+Operations
+    │
+    ▼
+Evidence
+    │
+    ▼
+Knowledge
+    │
+    ▼
+Intelligence
+    │
+    ▼
+Decision Support
+    │
+    ▼
+Institutional Reports
+    │
+    ▼
+Governance Review
+    │
+    └──────────────► informs the next decision
+```
+
+Every stage consumes the outputs of the previous stage instead of introducing another source of truth.
