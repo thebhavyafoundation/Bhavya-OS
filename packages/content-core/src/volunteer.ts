@@ -69,7 +69,7 @@ export interface MissionAssignment {
   updated: string;
 }
 
-export type TaskStatus = "pending" | "in-progress" | "completed" | "verified";
+export type VolunteerTaskStatus = "pending" | "in-progress" | "completed" | "verified";
 
 export interface Participation {
   id: string;

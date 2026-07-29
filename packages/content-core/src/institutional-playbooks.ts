@@ -82,8 +82,8 @@ export function generatePlaybooks(): Playbook[] {
   const decisions = getDecisionContexts();
 
   // Forest Mission Playbook
-  const forestPatterns = patterns.filter((p) => p.domain === "forest");
-  const forestLessons = lessons.filter((l) => l.domain === "forest");
+  const forestPatterns = patterns.filter((p) => p.patternType === "mission");
+  const forestLessons = lessons.filter((l) => l.category === "mission");
 
   playbooks.push({
     id: "playbook-forest-mission",
@@ -125,7 +125,7 @@ export function generatePlaybooks(): Playbook[] {
             successIndicators: ["Stakeholder map created", "MOUs signed"],
           },
         ],
-        decisions: decisions.filter((d) => d.domain === "forest").map((d) => d.id).slice(0, 2),
+        decisions: decisions.filter((d) => d.decisionType === "mission").map((d) => d.id).slice(0, 2),
         evidence: [],
       },
       {
@@ -199,8 +199,8 @@ export function generatePlaybooks(): Playbook[] {
   });
 
   // Governance Mission Playbook
-  const governancePatterns = patterns.filter((p) => p.domain === "governance");
-  const governanceLessons = lessons.filter((l) => l.domain === "governance");
+  const governancePatterns = patterns.filter((p) => p.patternType === "governance");
+  const governanceLessons = lessons.filter((l) => l.category === "governance");
 
   playbooks.push({
     id: "playbook-governance-mission",
@@ -271,7 +271,7 @@ export function generatePlaybooks(): Playbook[] {
             successIndicators: ["Resolutions documented", "Action items assigned"],
           },
         ],
-        decisions: decisions.filter((d) => d.domain === "governance").map((d) => d.id).slice(0, 2),
+        decisions: decisions.filter((d) => d.decisionType === "policy").map((d) => d.id).slice(0, 2),
         evidence: [],
       },
       {

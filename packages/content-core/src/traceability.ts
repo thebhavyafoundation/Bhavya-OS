@@ -153,7 +153,7 @@ export function addEvidence(evidence: Omit<GovernanceEvidence, "id" | "created">
   return newEvidence;
 }
 
-export function verifyEvidence(id: string, verifiedBy: string): Evidence | null {
+export function verifyEvidence(id: string, verifiedBy: string): GovernanceEvidence | null {
   const allEvidence = loadEvidence();
   const index = allEvidence.findIndex((e) => e.id === id);
   if (index === -1) return null;

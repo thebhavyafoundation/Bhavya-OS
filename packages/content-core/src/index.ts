@@ -203,7 +203,7 @@ export type {
   MissionType,
   AssignmentStatus,
   MissionAssignment,
-  TaskStatus,
+  VolunteerTaskStatus,
   Participation,
   RecognitionType,
   Recognition,
@@ -476,7 +476,7 @@ export type {
   ScheduledTask,
   TaskExecution,
   TaskType,
-  TaskStatus,
+  StewardshipTaskStatus,
   RecurrencePattern,
   StewardshipStats,
 } from "./automated-stewardship";

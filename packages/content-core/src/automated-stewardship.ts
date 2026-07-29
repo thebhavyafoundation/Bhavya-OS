@@ -15,7 +15,7 @@ export type TaskType =
   | "pattern-validation"
   | "playbook-update";
 
-export type TaskStatus = "scheduled" | "pending" | "in-progress" | "completed" | "overdue" | "cancelled";
+export type StewardshipTaskStatus = "scheduled" | "pending" | "in-progress" | "completed" | "overdue" | "cancelled";
 
 export type RecurrencePattern = "daily" | "weekly" | "monthly" | "quarterly" | "annually" | "custom";
 
@@ -24,7 +24,7 @@ export interface ScheduledTask {
   type: TaskType;
   title: string;
   description: string;
-  status: TaskStatus;
+  status: StewardshipTaskStatus;
   assignedTo?: string;
   scheduledDate: string;
   dueDate?: string;
@@ -52,7 +52,7 @@ export interface TaskExecution {
 
 export interface StewardshipStats {
   totalTasks: number;
-  byStatus: Record<TaskStatus, number>;
+  byStatus: Record<StewardshipTaskStatus, number>;
   byType: Record<TaskType, number>;
   overdueCount: number;
   upcomingCount: number;
@@ -142,7 +142,7 @@ export function getScheduledTasksByType(type: TaskType): ScheduledTask[] {
   return readTasksData().filter((t) => t.type === type);
 }
 
-export function getScheduledTasksByStatus(status: TaskStatus): ScheduledTask[] {
+export function getScheduledTasksByStatus(status: StewardshipTaskStatus): ScheduledTask[] {
   return readTasksData().filter((t) => t.status === status);
 }
 
@@ -251,7 +251,7 @@ export function getStewardshipStats(): StewardshipStats {
   const tasks = readTasksData();
   const now = new Date();
 
-  const byStatus: Record<TaskStatus, number> = {
+  const byStatus: Record<StewardshipTaskStatus, number> = {
     scheduled: 0,
     pending: 0,
     "in-progress": 0,
