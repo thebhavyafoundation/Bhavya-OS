@@ -366,3 +366,18 @@ export type {
   InstitutionalPattern,
   MemoryStats,
 } from "./models";
+
+// ── Organizational Learning ───────────────────────────────
+export {
+  analyzePatterns,
+  generateLearningInsights,
+  generateLearningReport,
+  getLessonsByDomain,
+  getPatternSuccessByType,
+  getLearningVelocity,
+} from "./organizational-learning";
+export type {
+  LearningInsight,
+  PatternAnalysis,
+  LearningReport,
+} from "./organizational-learning";

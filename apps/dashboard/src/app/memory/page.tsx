@@ -5,6 +5,8 @@ import {
   getMemoryStats,
   getSuccessfulPatterns,
   getDecisionsWithFullContext,
+  generateLearningReport,
+  getLearningVelocity,
 } from "@bhavya/content-core";
 
 function StatCard({ label, value, color }: { label: string; value: number | string; color: string }) {
@@ -32,6 +34,8 @@ export default function MemoryPage() {
   const patterns = getPatterns();
   const successfulPatterns = getSuccessfulPatterns();
   const decisionsWithFullContext = getDecisionsWithFullContext();
+  const learningReport = generateLearningReport();
+  const learningVelocity = getLearningVelocity();
 
   return (
     <div style={{ maxWidth: 1400, margin: "0 auto", padding: "32px 24px" }}>
@@ -195,6 +199,51 @@ export default function MemoryPage() {
                 ))}
               </div>
             </div>
+            <div style={{ borderTop: "1px solid #334155", paddingTop: 16 }}>
+              <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 8px 0" }}>Learning Velocity</p>
+              <div style={{ display: "flex", gap: 16 }}>
+                <div style={{ textAlign: "center" }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{learningVelocity.lessonsPerMonth}</p>
+                  <p style={{ fontSize: 10, color: "#64748b", margin: "2px 0 0 0" }}>Lessons/Month</p>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{learningVelocity.patternsPerMonth}</p>
+                  <p style={{ fontSize: 10, color: "#64748b", margin: "2px 0 0 0" }}>Patterns/Month</p>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{Math.round(learningVelocity.avgConfidence * 100)}%</p>
+                  <p style={{ fontSize: 10, color: "#64748b", margin: "2px 0 0 0" }}>Avg Confidence</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </WidgetCard>
+      </div>
+
+      {/* Learning Insights */}
+      <div style={{ marginTop: 24 }}>
+        <WidgetCard title="Learning Insights">
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {learningReport.insights.slice(0, 4).map((insight) => (
+              <div key={insight.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #334155" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                  <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{insight.title}</p>
+                  <span style={{
+                    fontSize: 10,
+                    padding: "2px 8px",
+                    borderRadius: 4,
+                    background: insight.type === "pattern" ? "#8b5cf620" : insight.type === "recommendation" ? "#10b98120" : "#3b82f620",
+                    color: insight.type === "pattern" ? "#8b5cf6" : insight.type === "recommendation" ? "#10b981" : "#3b82f6",
+                  }}>
+                    {insight.type}
+                  </span>
+                </div>
+                <p style={{ fontSize: 12, color: "#94a3b8", margin: "4px 0 0 0" }}>{insight.description}</p>
+                {insight.recommendation && (
+                  <p style={{ fontSize: 11, color: "#10b981", margin: "4px 0 0 0" }}>→ {insight.recommendation}</p>
+                )}
+              </div>
+            ))}
           </div>
         </WidgetCard>
       </div>
