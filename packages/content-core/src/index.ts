@@ -408,3 +408,27 @@ export type {
   PlaybookPhase,
   PlaybookTask,
 } from "./institutional-playbooks";
+
+// ── Knowledge Lifecycle ───────────────────────────────────
+export {
+  createLifecycleEntry,
+  getLifecycleEntries,
+  getLifecycleEntryById,
+  getLifecycleEntryByKnowledgeId,
+  transitionState,
+  publishKnowledge,
+  reviewKnowledge,
+  archiveKnowledge,
+  preserveKnowledge,
+  getEntriesNeedingReview,
+  getReviewStats,
+  getLifecycleStats,
+  addDependency,
+  removeDependency,
+} from "./knowledge-lifecycle";
+export type {
+  KnowledgeLifecycle,
+  KnowledgeState,
+  ReviewRecord,
+  LifecycleStats,
+} from "./knowledge-lifecycle";

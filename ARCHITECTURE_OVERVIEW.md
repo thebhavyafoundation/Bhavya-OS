@@ -231,10 +231,14 @@ pnpm lint && pnpm test && pnpm validate && pnpm build
 | v2.3.0 | Phase II: Traceability, evidence, snapshot/trend metrics |
 | v2.4.0 | Phase II: Impact reporting |
 | v2.5.0 | Phase II: Cross-domain reporting |
+| v3.0.0 | Phase III: Institutional memory |
+| v3.1.0 | Phase III: Organizational learning |
+| v3.2.0 | Phase III: Predictive intelligence |
+| v3.3.0 | Phase III: Institutional playbooks |
 
 ## Institutional Cycle
 
-The platform now supports a complete institutional accountability loop:
+The platform now supports a complete institutional learning cycle:
 
 ```
 Strategy
@@ -249,21 +253,56 @@ Operations
 Evidence
     │
     ▼
-Knowledge
+Canonical Records
     │
     ▼
-Intelligence
+Institutional Memory
+    │
+    ▼
+Organizational Learning
+    │
+    ▼
+Predictive Intelligence
+    │
+    ▼
+Institutional Playbooks
     │
     ▼
 Decision Support
     │
     ▼
-Institutional Reports
+Reports
     │
     ▼
 Governance Review
     │
-    └──────────────► informs the next decision
+    └──────────────► informs the next Strategy
 ```
 
 Every stage consumes the outputs of the previous stage instead of introducing another source of truth.
+
+## Institutional Knowledge Hierarchy
+
+The platform supports six levels of institutional knowledge:
+
+| Level | Question Answered | Source |
+|-------|-------------------|--------|
+| Records | What happened? | Canonical data in content-core |
+| Evidence | How do we know? | Verification, traceability |
+| Memory | Why did it happen? | Decision context, lessons |
+| Patterns | What tends to happen? | Organizational learning |
+| Predictions | What is likely to happen? | Predictive intelligence |
+| Playbooks | What should we do? | Validated institutional experience |
+
+This progression moves from descriptive knowledge to prescriptive guidance.
+
+## Four Eras of Development
+
+| Era | Central Question | Outcome |
+|-----|------------------|---------|
+| Platform Foundation | How do we represent the institution consistently? | Canonical models, mission applications, engineering quality |
+| Operational Intelligence | How do we understand current institutional state? | Knowledge, analytics, dashboards, decision support |
+| Institutional Operations | How do we govern and execute work? | Governance, evidence, traceability, reporting |
+| Institutional Learning | How do we improve because of accumulated experience? | Memory, predictive intelligence, organizational learning, playbooks |
+
+Each era builds on the previous one without replacing it.
