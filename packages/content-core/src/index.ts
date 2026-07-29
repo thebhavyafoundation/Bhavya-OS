@@ -394,3 +394,17 @@ export type {
   RiskAssessment,
   Forecast,
 } from "./predictive-intelligence";
+
+// ── Institutional Playbooks ───────────────────────────────
+export {
+  generatePlaybooks,
+  getPlaybooks,
+  getPlaybookById,
+  getPlaybooksByDomain,
+  getPlaybookSummary,
+} from "./institutional-playbooks";
+export type {
+  Playbook,
+  PlaybookPhase,
+  PlaybookTask,
+} from "./institutional-playbooks";
