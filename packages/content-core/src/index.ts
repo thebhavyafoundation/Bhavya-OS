@@ -381,3 +381,16 @@ export type {
   PatternAnalysis,
   LearningReport,
 } from "./organizational-learning";
+
+// ── Predictive Intelligence ───────────────────────────────
+export {
+  generatePredictions,
+  assessRisks,
+  generateForecasts,
+  getPredictionSummary,
+} from "./predictive-intelligence";
+export type {
+  Prediction,
+  RiskAssessment,
+  Forecast,
+} from "./predictive-intelligence";
