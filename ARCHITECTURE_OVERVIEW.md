@@ -224,3 +224,4 @@ pnpm lint && pnpm test && pnpm validate && pnpm build
 | v1.0.1 | Engineering excellence |
 | v1.1.0 | Institution intelligence |
 | v1.2.0 | Operational intelligence |
+| v1.3.0 | Decision support |
