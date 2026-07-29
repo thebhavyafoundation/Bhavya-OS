@@ -31,7 +31,8 @@
     "build:admin": "turbo build --filter=@bhavya/admin-app",
     "admin": "pnpm --filter @bhavya/admin-app dev",
     "vercel:build": "vercel build",
-    "vercel:deploy": "vercel deploy --prebuilt"
+    "vercel:deploy": "vercel deploy --prebuilt",
+    "dashboard": "pnpm --filter @bhavya/dashboard dev"
   },
   "dependencies": {
     "next": "15.5.20",
