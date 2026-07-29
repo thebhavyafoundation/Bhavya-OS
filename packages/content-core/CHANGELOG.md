@@ -21,8 +21,17 @@ Testing and validation release. No feature changes.
   - `forest.test.ts`: Forest domain (missions, sites, surveys, plantings, monitoring, impact)
   - `volunteer.test.ts`: Volunteer domain (volunteers, skills, training, assignments, participations, recognitions)
 
+- **Validation Framework**: `pnpm validate` runs 7 validators across 21 checks
+  - Document Validator: duplicate IDs, missing title, missing category, missing content
+  - Entity Validator: duplicate IDs, missing type, missing name
+  - Relationship Validator: duplicate edges, broken source/target references
+  - Knowledge Graph Validator: duplicate nodes, graph consistency
+  - Search Index Validator: index has documents, stats consistency
+  - Publication Validator: published documents exist, valid statuses
+  - Mission Data Validator: forest, heritage, research, volunteer data consistency
+
 - **Test Configuration**: vitest.config.ts with globals enabled
-- **Root Test Script**: `pnpm test` runs tests across all packages via turbo
+- **Root Scripts**: `pnpm test` and `pnpm validate` run across all packages via turbo
 
 ## [1.0.0] - 2026-07-29
 
