@@ -305,3 +305,19 @@ export type {
   TrendMetric,
   TrendMetrics,
 } from "./governance-metrics";
+
+// ── Impact Reporting ──────────────────────────────────────
+export {
+  generateImpactReport,
+  getImpactReports,
+  generateExecutiveSummary,
+  generateForestImpactReport,
+  generateGovernanceEffectivenessReport,
+} from "./impact-reporting";
+export type {
+  ImpactReport,
+  ImpactSummary,
+  GovernanceImpact,
+  OperationalImpact,
+  KnowledgeImpact,
+} from "./impact-reporting";
