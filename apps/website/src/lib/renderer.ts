@@ -2,13 +2,13 @@
 // Reads the schema and composes the page from components.
 // Every page is declarative. The renderer just assembles it.
 
-import type { PageSchema, SectionSchema, DataSource } from './schemas.js';
+import type { PageSchema, SectionSchema, DataSource, PageMetadata } from './schemas.js';
 
 export interface RenderedPage {
   id: string;
   title: string;
   sections: RenderedSection[];
-  metadata: Record<string, unknown>;
+  metadata: PageMetadata;
 }
 
 export interface RenderedSection {
