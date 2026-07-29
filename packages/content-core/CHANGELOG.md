@@ -2,6 +2,28 @@
 
 All notable changes to @bhavya/content-core will be documented in this file.
 
+## [1.0.1] - 2026-07-29
+
+### Engineering Excellence
+
+Testing and validation release. No feature changes.
+
+### Added
+
+- **Test Suite**: 55 unit tests across 9 test files
+  - `io.test.ts`: Filesystem operations (ensureDir, writeJSON, readJSON, listDir)
+  - `documents.test.ts`: Document metadata parsing (parseMarkdownMetadata, parseJsonMetadata)
+  - `entities.test.ts`: Entity repository (getEntities, getEntity, getEntitiesByType, searchEntities)
+  - `graph.test.ts`: Knowledge graph (getGraphNodeNeighbors, getGraphStats)
+  - `search.test.ts`: Search indexing (getSearchIndex, searchAll, searchDocuments, getContentStats)
+  - `publish.test.ts`: Publishing pipeline (publishKnowledge, publishFieldReport, publishImpactReport, publishSurveyResult, publishMonitoringLog)
+  - `research.test.ts`: Research domain (projects, sources, evidence, reviews, stats)
+  - `forest.test.ts`: Forest domain (missions, sites, surveys, plantings, monitoring, impact)
+  - `volunteer.test.ts`: Volunteer domain (volunteers, skills, training, assignments, participations, recognitions)
+
+- **Test Configuration**: vitest.config.ts with globals enabled
+- **Root Test Script**: `pnpm test` runs tests across all packages via turbo
+
 ## [1.0.0] - 2026-07-29
 
 ### Initial Stable Release

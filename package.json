@@ -11,6 +11,7 @@
     "dev": "turbo dev --parallel",
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
+    "test": "turbo test",
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json,css}\"",
     "clean": "turbo clean && git clean -xdf .turbo node_modules",
     "registry:generate": "node scripts/generate-registry.js",
