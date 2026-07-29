@@ -33,7 +33,7 @@ function generateInsights(): Insight[] {
       id: `pub-${doc.id}`,
       type: "publication",
       title: `${doc.title} published`,
-      description: `${doc.type} document added to ${doc.category} knowledge base.`,
+      description: `${doc.category} document added to ${doc.category} knowledge base.`,
       timestamp: doc.created || new Date().toISOString(),
       source: doc.category,
     });
