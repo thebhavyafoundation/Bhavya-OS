@@ -465,6 +465,8 @@ export interface Policy {
   resolutionId?: string;
   previousVersionId?: string;
   supersededBy?: string;
+  supersedes?: string;
+  reviewReason?: string;
   created: string;
   updated: string;
 }
@@ -481,6 +483,46 @@ export interface PolicyVersion {
   documentId: string;
   resolutionId?: string;
   created: string;
+}
+
+// ── Action Items ──────────────────────────────────────────
+
+export type ActionItemStatus = "pending" | "in-progress" | "completed" | "cancelled" | "overdue";
+
+export type ActionItemSource = "resolution" | "meeting" | "policy" | "manual";
+
+export interface ActionItem {
+  id: string;
+  title: string;
+  description: string;
+  source: ActionItemSource;
+  sourceId: string;
+  assignedTo: string;
+  status: ActionItemStatus;
+  priority: "high" | "medium" | "low";
+  dueDate: string;
+  completedDate?: string;
+  notes: string[];
+  dependencies: string[];
+  created: string;
+  updated: string;
+}
+
+export interface ActionItemEvent {
+  timestamp: string;
+  fromStatus: ActionItemStatus;
+  toStatus: ActionItemStatus;
+  actor: string;
+  notes?: string;
+}
+
+export interface ActionItemStats {
+  total: number;
+  byStatus: Record<ActionItemStatus, number>;
+  bySource: Record<ActionItemSource, number>;
+  overdue: number;
+  completionRate: number;
+  avgDaysToComplete: number;
 }
 
 export interface GovernanceStats {

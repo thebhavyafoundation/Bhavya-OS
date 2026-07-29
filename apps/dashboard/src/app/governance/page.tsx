@@ -7,6 +7,9 @@ import {
   getOverdueResolutions,
   getPoliciesDueForReview,
   getOperationalHealth,
+  getActionItems,
+  getActionItemStats,
+  getOverdueActionItems,
 } from "@bhavya/content-core";
 
 function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
@@ -30,15 +33,21 @@ function WidgetCard({ title, children }: { title: string; children: React.ReactN
 export default function GovernancePage() {
   const stats = getGovernanceStats();
   const operationalHealth = getOperationalHealth();
+  const actionStats = getActionItemStats();
   const upcomingMeetings = getUpcomingMeetings();
   const overdueResolutions = getOverdueResolutions();
   const policiesDueForReview = getPoliciesDueForReview();
+  const overdueActions = getOverdueActionItems();
 
   const recentResolutions = [...getResolutions()]
     .sort((a, b) => (b.created || "").localeCompare(a.created || ""))
     .slice(0, 5);
 
   const recentPolicies = [...getPolicies()]
+    .sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))
+    .slice(0, 5);
+
+  const recentActions = [...getActionItems()]
     .sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))
     .slice(0, 5);
 
@@ -91,10 +100,32 @@ export default function GovernancePage() {
           </p>
         </div>
         <div style={{ background: "#1e293b", borderRadius: 12, padding: "16px 20px" }}>
-          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Meeting Resolution Rate</p>
-          <p style={{ fontSize: 24, fontWeight: 700, color: operationalHealth.meetingResolutionRate >= 80 ? "#10b981" : "#f59e0b", margin: 0 }}>
-            {operationalHealth.meetingResolutionRate}%
+          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Action Completion</p>
+          <p style={{ fontSize: 24, fontWeight: 700, color: actionStats.completionRate >= 80 ? "#10b981" : "#f59e0b", margin: 0 }}>
+            {actionStats.completionRate}%
           </p>
+        </div>
+      </div>
+
+      {/* Trend Metrics */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
+        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Open Resolutions</p>
+          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.openResolutions}</p>
+        </div>
+        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Policies Approaching Review</p>
+          <p style={{ fontSize: 16, fontWeight: 600, color: operationalHealth.policiesApproachingReview > 0 ? "#f59e0b" : "#f8fafc", margin: 0 }}>
+            {operationalHealth.policiesApproachingReview}
+          </p>
+        </div>
+        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Policy Versions</p>
+          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{operationalHealth.avgPolicyVersions}</p>
+        </div>
+        <div style={{ background: "#0f172a", borderRadius: 8, padding: "12px 16px", border: "1px solid #334155" }}>
+          <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 2px 0" }}>Avg Days to Complete</p>
+          <p style={{ fontSize: 16, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{actionStats.avgDaysToComplete}</p>
         </div>
       </div>
 
@@ -238,6 +269,49 @@ export default function GovernancePage() {
                   }}>
                     {policy.status}
                   </span>
+                </div>
+              ))}
+            </div>
+          )}
+        </WidgetCard>
+      </div>
+
+      {/* Action Items */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24 }}>
+        {/* Action Item Stats */}
+        <WidgetCard title="Action Items">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+            {Object.entries(actionStats.byStatus).map(([status, count]) => (
+              <div key={status} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <p style={{ fontSize: 13, color: "#94a3b8", margin: 0, textTransform: "capitalize" }}>{status.replace(/-/g, " ")}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{count}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ borderTop: "1px solid #334155", paddingTop: 16 }}>
+            <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 8px 0" }}>By Source</p>
+            {Object.entries(actionStats.bySource).map(([source, count]) => (
+              <div key={source} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <p style={{ fontSize: 13, color: "#94a3b8", margin: 0, textTransform: "capitalize" }}>{source}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{count}</p>
+              </div>
+            ))}
+          </div>
+        </WidgetCard>
+
+        {/* Overdue Actions */}
+        <WidgetCard title="Overdue Actions">
+          {overdueActions.length === 0 ? (
+            <p style={{ fontSize: 13, color: "#10b981", margin: 0 }}>✓ No overdue actions</p>
+          ) : (
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {overdueActions.slice(0, 4).map((action) => (
+                <div key={action.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #ef4444" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#f8fafc", margin: 0 }}>{action.title}</p>
+                    <span style={{ fontSize: 10, color: "#ef4444" }}>Due: {action.dueDate}</span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>{action.assignedTo}</p>
                 </div>
               ))}
             </div>

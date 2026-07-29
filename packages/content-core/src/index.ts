@@ -254,3 +254,26 @@ export type {
   PolicyVersion,
   GovernanceStats,
 } from "./models";
+
+// ── Action Items ──────────────────────────────────────────
+export {
+  getActionItems,
+  getActionItemById,
+  getActionItemsByStatus,
+  getActionItemsBySource,
+  getActionItemsByAssignee,
+  getOverdueActionItems,
+  getActionItemsDueSoon,
+  createActionItem,
+  updateActionItem,
+  advanceActionItem,
+  getActionItemStats,
+  createActionItemsFromResolution,
+} from "./action-items";
+export type {
+  ActionItemStatus,
+  ActionItemSource,
+  ActionItem,
+  ActionItemEvent,
+  ActionItemStats,
+} from "./models";

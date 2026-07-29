@@ -389,6 +389,23 @@ export function getOperationalHealth() {
     ? Math.round((meetingsWithResolutions.length / completedMeetings.length) * 100)
     : 100;
 
+  // Resolution backlog (open resolutions)
+  const openResolutions = data.resolutions.filter(
+    (r) => !["implemented", "archived", "rejected"].includes(r.status)
+  ).length;
+
+  // Policies approaching review (within 30 days)
+  const thirtyDaysFromNow = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+  const policiesApproachingReview = activePolicies.filter(
+    (p) => p.reviewDate <= thirtyDaysFromNow && p.reviewDate > now
+  ).length;
+
+  // Policy revision frequency (versions per policy)
+  const policyIds = [...new Set(data.policies.map((p) => p.id.replace(/-v\d+$/, "")))];
+  const avgPolicyVersions = policyIds.length > 0
+    ? Math.round((data.policies.length / policyIds.length) * 10) / 10
+    : 1;
+
   return {
     implementationRate,
     avgTimeToResolution,
@@ -396,5 +413,8 @@ export function getOperationalHealth() {
     meetingResolutionRate,
     totalActivePolicies: activePolicies.length,
     totalPendingReviews: data.policies.filter((p) => p.reviewDate <= now && p.status === "active").length,
+    openResolutions,
+    policiesApproachingReview,
+    avgPolicyVersions,
   };
 }
