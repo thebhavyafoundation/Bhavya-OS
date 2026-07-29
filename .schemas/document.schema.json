@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Document Schema",
+  "description": "Schema for document definitions",
+  "type": "object",
+  "required": ["id", "title", "type", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^DOC-[0-9]+$",
+      "description": "Unique document identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Document title"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["governance", "architecture", "standard", "policy", "research", "decision", "release"],
+      "description": "Document type"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "superseded", "archived", "draft"],
+      "description": "Document status"
+    },
+    "author": {
+      "type": "string",
+      "description": "Document author"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update date"
+    },
+    "version": {
+      "type": "string",
+      "description": "Document version"
+    },
+    "supersedes": {
+      "type": "string",
+      "description": "Document this replaces"
+    },
+    "path": {
+      "type": "string",
+      "description": "File path to document"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Document tags"
+    }
+  }
+}

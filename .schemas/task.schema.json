@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Task Schema",
+  "description": "Schema for task definitions",
+  "type": "object",
+  "required": ["id", "title", "status", "priority"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^TASK-[0-9]+$",
+      "description": "Unique task identifier"
+    },
+    "title": {
+      "type": "string",
+      "description": "Task title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed task description"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["todo", "doing", "review", "completed", "cancelled"],
+      "description": "Current task status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "description": "Task priority"
+    },
+    "assignee": {
+      "type": "string",
+      "description": "Agent assigned to this task"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Task dependencies"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    },
+    "due": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Due date"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Task tags"
+    }
+  }
+}

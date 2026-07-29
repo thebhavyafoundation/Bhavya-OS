@@ -1,0 +1,22 @@
+{
+  "name": "@bhavya/cli",
+  "version": "1.0.0",
+  "description": "Bhavya OS CLI - Make extending the platform effortless",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "bhavya": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@bhavya/kernel": "workspace:*",
+    "commander": "^11.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0"
+  }
+}

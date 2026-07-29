@@ -1,0 +1,26 @@
+{
+  "name": "@bhavya/kernel",
+  "version": "3.1.0",
+  "description": "Bhavya Kernel - The core runtime for Bhavya OS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@bhavya/agent-engine": "workspace:*",
+    "@bhavya/workflow-engine": "workspace:*",
+    "@bhavya/memory-engine": "workspace:*",
+    "@bhavya/knowledge-engine": "workspace:*",
+    "@bhavya/search-engine": "workspace:*",
+    "@bhavya/planner-engine": "workspace:*",
+    "@bhavya/scheduler-engine": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0"
+  }
+}

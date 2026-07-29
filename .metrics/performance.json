@@ -1,0 +1,27 @@
+{
+  "metric": "performance",
+  "lastUpdated": "2026-07-27T00:00:00Z",
+  "data": {
+    "lighthouse": {
+      "performance": 0,
+      "accessibility": 0,
+      "bestPractices": 0,
+      "seo": 0
+    },
+    "coreWebVitals": {
+      "lcp": { "value": 0, "target": 2.5, "unit": "seconds" },
+      "cls": { "value": 0, "target": 0.1, "unit": "score" },
+      "fid": { "value": 0, "target": 100, "unit": "milliseconds" }
+    },
+    "build": {
+      "time": 0,
+      "size": 0,
+      "chunks": 0
+    },
+    "runtime": {
+      "ttfb": 0,
+      "tti": 0,
+      "fcp": 0
+    }
+  }
+}
