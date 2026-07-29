@@ -2,6 +2,38 @@
 
 All notable changes to @bhavya/content-core will be documented in this file.
 
+## [1.1.0] - 2026-07-29
+
+### Institution Intelligence
+
+Cross-mission intelligence layer. Read-only interpretation of institutional knowledge.
+
+### Added
+
+- **@bhavya/intelligence**: New package for cross-mission intelligence
+  - Global Search: unified search across documents, entities, missions
+  - Knowledge Graph Explorer: graph traversal, path finding, neighborhoods
+  - Cross-Mission Analytics: operational and knowledge metrics
+  - Recommendations Engine: explainable recommendations with evidence
+
+- **Insight<T>**: Common result type for all intelligence capabilities
+  - Evidence tracking with source attribution
+  - Confidence scoring based on data quality
+  - Typed data payloads for each capability
+
+- **Knowledge API Integration**: Intelligence exposed through Knowledge app
+  - `GET /api/search?q=query` - Global search
+  - `GET /api/recommendations?id=X&type=document` - Related content
+  - `GET /api/graph?action=node&id=X` - Graph exploration
+  - `GET /api/analytics` - Platform analytics
+
+### Architecture
+
+- Read-only invariant: intelligence never mutates institutional data
+- Deterministic recommendations with explicit evidence
+- Operational vs knowledge metrics for meaningful dashboards
+- One-way dependency flow: content-core → intelligence → Knowledge API
+
 ## [1.0.1] - 2026-07-29
 
 ### Engineering Excellence
