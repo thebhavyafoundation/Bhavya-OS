@@ -13,7 +13,9 @@ export type DocumentCategory =
   | "content"
   | "financial"
   | "source"
-  | "evidence";
+  | "evidence"
+  | "board-meeting"
+  | "resolution";
 
 export type DocumentStatus =
   "draft" | "review" | "approved" | "published" | "archived";
@@ -375,4 +377,85 @@ export interface ForestStats {
   totalAreaRestored: number;
   totalPlanted: number;
   averageSurvivalRate: number;
+}
+
+// ── Governance ────────────────────────────────────────────
+
+export type BoardMeetingStatus = "scheduled" | "in-progress" | "completed" | "cancelled";
+
+export interface BoardMeeting {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  status: BoardMeetingStatus;
+  agenda: AgendaItem[];
+  minutes?: string;
+  attendees: string[];
+  documents: string[];
+  created: string;
+  updated: string;
+}
+
+export interface AgendaItem {
+  id: string;
+  order: number;
+  title: string;
+  description: string;
+  presenter: string;
+  duration: number;
+  type: "information" | "discussion" | "decision" | "action";
+  resolutionId?: string;
+  documentIds: string[];
+}
+
+export type ResolutionStatus = "proposed" | "seconded" | "voting" | "approved" | "rejected" | "tabled";
+
+export interface Resolution {
+  id: string;
+  meetingId: string;
+  number: string;
+  title: string;
+  description: string;
+  proposer: string;
+  seconder?: string;
+  status: ResolutionStatus;
+  votesFor: number;
+  votesAgainst: number;
+  abstentions: number;
+  dueDate?: string;
+  assignedTo?: string;
+  documentIds: string[];
+  created: string;
+  updated: string;
+}
+
+export type PolicyStatus = "draft" | "review" | "active" | "under-review" | "archived";
+
+export interface Policy {
+  id: string;
+  title: string;
+  category: string;
+  status: PolicyStatus;
+  version: number;
+  owner: string;
+  effectiveDate: string;
+  reviewDate: string;
+  summary: string;
+  documentId: string;
+  resolutionId?: string;
+  created: string;
+  updated: string;
+}
+
+export interface GovernanceStats {
+  totalMeetings: number;
+  meetingsByStatus: Record<BoardMeetingStatus, number>;
+  totalResolutions: number;
+  resolutionsByStatus: Record<ResolutionStatus, number>;
+  totalPolicies: number;
+  policiesByStatus: Record<PolicyStatus, number>;
+  pendingReviews: number;
+  overdueResolutions: number;
 }

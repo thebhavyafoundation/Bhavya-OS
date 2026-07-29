@@ -10,9 +10,9 @@ import {
   PlantingStatus,
   MonitoringType,
   ForestStats,
-  Document,
 } from "./models";
 import { readJSON, writeJSON, listDir, ensureDir } from "./io";
+import { publishFieldReport, publishSurveyResult, publishMonitoringLog, publishImpactReport } from "./publish";
 import { getDocuments } from "./documents";
 
 const FOREST_DIR = "content/forest";
@@ -90,14 +90,12 @@ export function createMission(data: {
   };
   saveItem("mission", mission);
   _missionsCache = null;
-  publishToKnowledge(
-    "mission",
-    mission.id,
-    mission.name,
-    `Mission: ${mission.name} — ${mission.description}`,
-    `Region: ${mission.region}. Status: ${mission.status}.`,
-    [...mission.tags, "forest", "mission"],
-  );
+  publishFieldReport("forest", "mission", mission.id, {
+    title: mission.name,
+    content: `Mission: ${mission.name} — ${mission.description}`,
+    summary: `Region: ${mission.region}. Status: ${mission.status}.`,
+    tags: mission.tags,
+  });
   return mission;
 }
 
@@ -176,14 +174,11 @@ export function createSite(data: {
     });
   }
 
-  publishToKnowledge(
-    "site",
-    site.id,
-    site.name,
-    `Site: ${site.name} — ${site.description}`,
-    `Mission: ${mission?.name || data.missionId}. Area: ${data.areaHectares || "unknown"} ha.`,
-    ["forest", "site"],
-  );
+  publishFieldReport("forest", "site", site.id, {
+    title: site.name,
+    content: `Site: ${site.name} — ${site.description}`,
+    summary: `Mission: ${mission?.name || data.missionId}. Area: ${data.areaHectares || "unknown"} ha.`,
+  });
   return site;
 }
 
@@ -256,14 +251,12 @@ export function createSurvey(data: {
     _sitesCache = null;
   }
 
-  publishToKnowledge(
-    "survey",
-    survey.id,
-    survey.title,
-    `${survey.type} survey: ${survey.title}`,
-    `Site: ${site?.name || data.siteId}. Conducted by ${data.conductedBy}.`,
-    [...survey.findings, "forest", "survey"],
-  );
+  publishSurveyResult("forest", "survey", survey.id, {
+    title: survey.title,
+    content: `${survey.type} survey: ${survey.title}`,
+    summary: `Site: ${site?.name || data.siteId}. Conducted by ${data.conductedBy}.`,
+    tags: survey.findings,
+  });
   return survey;
 }
 
@@ -332,14 +325,12 @@ export function createPlanting(data: {
     _sitesCache = null;
   }
 
-  publishToKnowledge(
-    "planting",
-    planting.id,
-    planting.name,
-    `Planting: ${planting.name} — ${data.species.join(", ")}`,
-    `Target: ${data.targetCount} trees. Site: ${site?.name || data.siteId}.`,
-    [...data.species, "forest", "planting"],
-  );
+  publishFieldReport("forest", "planting", planting.id, {
+    title: planting.name,
+    content: `Planting: ${planting.name} — ${data.species.join(", ")}`,
+    summary: `Target: ${data.targetCount} trees. Site: ${site?.name || data.siteId}.`,
+    tags: data.species,
+  });
   return planting;
 }
 
@@ -416,14 +407,11 @@ export function createMonitoring(data: {
   saveItem("monitoring", entry);
   _monitoringCache = null;
 
-  publishToKnowledge(
-    "monitoring",
-    entry.id,
-    entry.title,
-    `${entry.type} monitoring: ${entry.title}`,
-    `Conducted by ${data.conductedBy}. Observations: ${data.observations.length}.`,
-    ["forest", "monitoring"],
-  );
+  publishMonitoringLog("forest", "monitoring", entry.id, {
+    title: entry.title,
+    content: `${entry.type} monitoring: ${entry.title}`,
+    summary: `Conducted by ${data.conductedBy}. Observations: ${data.observations.length}.`,
+  });
   return entry;
 }
 
@@ -481,52 +469,12 @@ export function createImpact(data: {
   saveItem("impact", impact);
   _impactCache = null;
 
-  publishToKnowledge(
-    "impact",
-    impact.id,
-    impact.title,
-    `Impact Report: ${impact.title}`,
-    `Area: ${data.areaRestoredHectares} ha. Planted: ${data.totalPlanted}. Survival: ${data.survivalRate}%.`,
-    ["forest", "impact", "report"],
-  );
+  publishImpactReport("forest", "impact", impact.id, {
+    title: impact.title,
+    content: `Impact Report: ${impact.title}`,
+    summary: `Area: ${data.areaRestoredHectares} ha. Planted: ${data.totalPlanted}. Survival: ${data.survivalRate}%.`,
+  });
   return impact;
-}
-
-// ── Publishing to Knowledge ────────────────────────────────
-
-function publishToKnowledge(
-  category: string,
-  id: string,
-  title: string,
-  content: string,
-  summary: string,
-  tags: string[],
-): void {
-  const docId = `forest-${category}-${id}`;
-  const now = new Date().toISOString();
-
-  // Create a document entry in content-core's document system
-  const doc = {
-    id: docId,
-    title,
-    category: "report" as const,
-    path: `/documents/${docId}`,
-    content,
-    summary,
-    tags,
-    status: "published" as const,
-    created: now,
-    readingTime: Math.max(1, Math.ceil(content.split(/\s+/).length / 200)),
-    version: 1,
-    links: [],
-    citations: [],
-    entityIds: [],
-    metadata: { source: "forest", sourceId: id },
-  };
-
-  // Write to the knowledge documents directory
-  ensureDir("content/knowledge");
-  writeJSON("content/knowledge", `${docId}.json`, doc);
 }
 
 // ── Forest Stats ───────────────────────────────────────────

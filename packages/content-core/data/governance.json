@@ -1,0 +1,153 @@
+{
+  "meetings": [
+    {
+      "id": "meeting-001",
+      "title": "Q4 2026 Board Meeting",
+      "date": "2026-10-15",
+      "time": "10:00 AM",
+      "location": "Main Office / Virtual",
+      "status": "scheduled",
+      "agenda": [
+        {
+          "id": "agenda-001",
+          "order": 1,
+          "title": "Quarterly Financial Review",
+          "description": "Review of Q3 financial performance and Q4 projections",
+          "presenter": "Treasurer",
+          "duration": 30,
+          "type": "information",
+          "documentIds": []
+        },
+        {
+          "id": "agenda-002",
+          "order": 2,
+          "title": "Forest Mission Progress",
+          "description": "Update on ongoing forest restoration missions",
+          "presenter": "Forest Program Lead",
+          "duration": 45,
+          "type": "information",
+          "documentIds": []
+        },
+        {
+          "id": "agenda-003",
+          "order": 3,
+          "title": "Heritage Preservation Policy",
+          "description": "Discussion and vote on new heritage preservation policy",
+          "presenter": "Heritage Director",
+          "duration": 60,
+          "type": "decision",
+          "documentIds": []
+        }
+      ],
+      "attendees": ["Chair", "Vice Chair", "Treasurer", "Secretary", "Forest Program Lead", "Heritage Director"],
+      "documents": [],
+      "created": "2026-07-15T10:00:00.000Z",
+      "updated": "2026-07-15T10:00:00.000Z"
+    },
+    {
+      "id": "meeting-002",
+      "title": "Special Session - Grant Review",
+      "date": "2026-08-20",
+      "time": "2:00 PM",
+      "location": "Virtual",
+      "status": "scheduled",
+      "agenda": [
+        {
+          "id": "agenda-004",
+          "order": 1,
+          "title": "Grant Application Review",
+          "description": "Review and approve pending grant applications",
+          "presenter": "Grants Manager",
+          "duration": 90,
+          "type": "decision",
+          "documentIds": []
+        }
+      ],
+      "attendees": ["Chair", "Grants Manager", "Finance Director"],
+      "documents": [],
+      "created": "2026-07-20T14:00:00.000Z",
+      "updated": "2026-07-20T14:00:00.000Z"
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "resolution-001",
+      "meetingId": "meeting-001",
+      "number": "2026-Q4-001",
+      "title": "Approve Forest Mission Expansion",
+      "description": "Resolution to expand forest restoration missions to three new sites in 2027",
+      "proposer": "Forest Program Lead",
+      "seconder": "Vice Chair",
+      "status": "proposed",
+      "votesFor": 0,
+      "votesAgainst": 0,
+      "abstentions": 0,
+      "dueDate": "2026-10-15",
+      "documentIds": [],
+      "created": "2026-07-15T10:00:00.000Z",
+      "updated": "2026-07-15T10:00:00.000Z"
+    },
+    {
+      "id": "resolution-002",
+      "meetingId": "meeting-001",
+      "number": "2026-Q4-002",
+      "title": "Adopt Heritage Preservation Policy",
+      "description": "Resolution to adopt the new heritage asset preservation policy",
+      "proposer": "Heritage Director",
+      "seconder": "Chair",
+      "status": "proposed",
+      "votesFor": 0,
+      "votesAgainst": 0,
+      "abstentions": 0,
+      "dueDate": "2026-10-15",
+      "documentIds": [],
+      "created": "2026-07-15T10:00:00.000Z",
+      "updated": "2026-07-15T10:00:00.000Z"
+    }
+  ],
+  "policies": [
+    {
+      "id": "policy-001",
+      "title": "Volunteer Safety Policy",
+      "category": "Operations",
+      "status": "active",
+      "version": 2,
+      "owner": "Operations Director",
+      "effectiveDate": "2025-01-01",
+      "reviewDate": "2026-01-01",
+      "summary": "Safety protocols and requirements for all volunteers participating in foundation activities",
+      "documentId": "",
+      "created": "2024-12-01T10:00:00.000Z",
+      "updated": "2025-12-15T10:00:00.000Z"
+    },
+    {
+      "id": "policy-002",
+      "title": "Data Governance Policy",
+      "category": "Technology",
+      "status": "active",
+      "version": 1,
+      "owner": "Technology Director",
+      "effectiveDate": "2026-03-01",
+      "reviewDate": "2027-03-01",
+      "summary": "Policies for data management, access control, and institutional knowledge governance",
+      "documentId": "",
+      "created": "2026-02-15T10:00:00.000Z",
+      "updated": "2026-02-15T10:00:00.000Z"
+    },
+    {
+      "id": "policy-003",
+      "title": "Grant Management Policy",
+      "category": "Finance",
+      "status": "under-review",
+      "version": 1,
+      "owner": "Finance Director",
+      "effectiveDate": "2026-01-01",
+      "reviewDate": "2026-07-01",
+      "summary": "Policies for grant application, management, and reporting",
+      "documentId": "",
+      "resolutionId": "resolution-001",
+      "created": "2026-01-01T10:00:00.000Z",
+      "updated": "2026-06-15T10:00:00.000Z"
+    }
+  ]
+}

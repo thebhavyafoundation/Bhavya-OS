@@ -213,3 +213,37 @@ export type {
   Recognition,
   VolunteerStats,
 } from "./volunteer";
+
+// ── Governance ─────────────────────────────────────────────
+export {
+  getBoardMeetings,
+  getBoardMeetingById,
+  getBoardMeetingsByStatus,
+  getUpcomingMeetings,
+  createBoardMeeting,
+  updateBoardMeeting,
+  getResolutions,
+  getResolutionById,
+  getResolutionsByStatus,
+  getResolutionsByMeeting,
+  getOverdueResolutions,
+  createResolution,
+  updateResolution,
+  getPolicies,
+  getPolicyById,
+  getPoliciesByStatus,
+  getPoliciesDueForReview,
+  createPolicy,
+  updatePolicy,
+  getGovernanceStats,
+} from "./governance";
+export type {
+  BoardMeetingStatus,
+  BoardMeeting,
+  AgendaItem,
+  ResolutionStatus,
+  Resolution,
+  PolicyStatus,
+  Policy,
+  GovernanceStats,
+} from "./models";
