@@ -6,6 +6,7 @@ import {
   getUpcomingMeetings,
   getOverdueResolutions,
   getPoliciesDueForReview,
+  getOperationalHealth,
 } from "@bhavya/content-core";
 
 function StatCard({ label, value, color }: { label: string; value: number; color: string }) {
@@ -28,6 +29,7 @@ function WidgetCard({ title, children }: { title: string; children: React.ReactN
 
 export default function GovernancePage() {
   const stats = getGovernanceStats();
+  const operationalHealth = getOperationalHealth();
   const upcomingMeetings = getUpcomingMeetings();
   const overdueResolutions = getOverdueResolutions();
   const policiesDueForReview = getPoliciesDueForReview();
@@ -39,6 +41,11 @@ export default function GovernancePage() {
   const recentPolicies = [...getPolicies()]
     .sort((a, b) => (b.updated || "").localeCompare(a.updated || ""))
     .slice(0, 5);
+
+  // Get resolutions due for implementation
+  const resolutionsDueForImplementation = getResolutions().filter(
+    (r) => r.status === "approved" && r.dueDate
+  );
 
   return (
     <div style={{ maxWidth: 1400, margin: "0 auto", padding: "32px 24px" }}>
@@ -61,6 +68,34 @@ export default function GovernancePage() {
         <StatCard label="Resolutions" value={stats.totalResolutions} color="#3b82f6" />
         <StatCard label="Policies" value={stats.totalPolicies} color="#8b5cf6" />
         <StatCard label="Pending Reviews" value={stats.pendingReviews} color="#ef4444" />
+      </div>
+
+      {/* Operational Health */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, marginBottom: 32 }}>
+        <div style={{ background: "#1e293b", borderRadius: 12, padding: "16px 20px" }}>
+          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Implementation Rate</p>
+          <p style={{ fontSize: 24, fontWeight: 700, color: operationalHealth.implementationRate >= 80 ? "#10b981" : "#f59e0b", margin: 0 }}>
+            {operationalHealth.implementationRate}%
+          </p>
+        </div>
+        <div style={{ background: "#1e293b", borderRadius: 12, padding: "16px 20px" }}>
+          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Avg Days to Resolution</p>
+          <p style={{ fontSize: 24, fontWeight: 700, color: operationalHealth.avgTimeToResolution <= 30 ? "#10b981" : "#f59e0b", margin: 0 }}>
+            {operationalHealth.avgTimeToResolution}
+          </p>
+        </div>
+        <div style={{ background: "#1e293b", borderRadius: 12, padding: "16px 20px" }}>
+          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Policy Compliance</p>
+          <p style={{ fontSize: 24, fontWeight: 700, color: operationalHealth.policyComplianceRate >= 90 ? "#10b981" : "#f59e0b", margin: 0 }}>
+            {operationalHealth.policyComplianceRate}%
+          </p>
+        </div>
+        <div style={{ background: "#1e293b", borderRadius: 12, padding: "16px 20px" }}>
+          <p style={{ fontSize: 12, color: "#64748b", margin: "0 0 4px 0" }}>Meeting Resolution Rate</p>
+          <p style={{ fontSize: 24, fontWeight: 700, color: operationalHealth.meetingResolutionRate >= 80 ? "#10b981" : "#f59e0b", margin: 0 }}>
+            {operationalHealth.meetingResolutionRate}%
+          </p>
+        </div>
       </div>
 
       {/* Alerts */}
@@ -116,13 +151,36 @@ export default function GovernancePage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {Object.entries(stats.resolutionsByStatus).map(([status, count]) => (
               <div key={status} style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <p style={{ fontSize: 13, color: "#94a3b8", margin: 0, textTransform: "capitalize" }}>{status}</p>
+                <p style={{ fontSize: 13, color: "#94a3b8", margin: 0, textTransform: "capitalize" }}>{status.replace(/-/g, " ")}</p>
                 <p style={{ fontSize: 13, fontWeight: 600, color: "#f8fafc", margin: 0 }}>{count}</p>
               </div>
             ))}
           </div>
         </WidgetCard>
       </div>
+
+      {/* Resolutions Due for Implementation */}
+      {resolutionsDueForImplementation.length > 0 && (
+        <div style={{ marginBottom: 32 }}>
+          <WidgetCard title="Resolutions Due for Implementation">
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {resolutionsDueForImplementation.map((resolution) => (
+                <div key={resolution.id} style={{ padding: "12px 16px", background: "#0f172a", borderRadius: 8, border: "1px solid #f59e0b" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: "#f8fafc", margin: 0 }}>
+                      {resolution.number}: {resolution.title}
+                    </p>
+                    <span style={{ fontSize: 11, color: "#f59e0b" }}>Due: {resolution.dueDate}</span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#94a3b8", margin: 0 }}>
+                    Assigned to: {resolution.assignedTo || "Not assigned"}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </WidgetCard>
+        </div>
+      )}
 
       {/* Bottom Grid */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>

@@ -78,12 +78,21 @@
       "description": "Resolution to expand forest restoration missions to three new sites in 2027",
       "proposer": "Forest Program Lead",
       "seconder": "Vice Chair",
-      "status": "proposed",
+      "status": "under-review",
       "votesFor": 0,
       "votesAgainst": 0,
       "abstentions": 0,
-      "dueDate": "2026-10-15",
+      "dueDate": "2026-12-31",
       "documentIds": [],
+      "history": [
+        {
+          "timestamp": "2026-07-15T10:00:00.000Z",
+          "fromStatus": "draft",
+          "toStatus": "under-review",
+          "actor": "Forest Program Lead",
+          "notes": "Submitted for board review"
+        }
+      ],
       "created": "2026-07-15T10:00:00.000Z",
       "updated": "2026-07-15T10:00:00.000Z"
     },
@@ -95,14 +104,30 @@
       "description": "Resolution to adopt the new heritage asset preservation policy",
       "proposer": "Heritage Director",
       "seconder": "Chair",
-      "status": "proposed",
+      "status": "voting",
       "votesFor": 0,
       "votesAgainst": 0,
       "abstentions": 0,
       "dueDate": "2026-10-15",
       "documentIds": [],
+      "history": [
+        {
+          "timestamp": "2026-07-15T10:00:00.000Z",
+          "fromStatus": "draft",
+          "toStatus": "under-review",
+          "actor": "Heritage Director",
+          "notes": "Submitted for board review"
+        },
+        {
+          "timestamp": "2026-07-20T14:00:00.000Z",
+          "fromStatus": "under-review",
+          "toStatus": "voting",
+          "actor": "Chair",
+          "notes": "Board review complete, moving to vote"
+        }
+      ],
       "created": "2026-07-15T10:00:00.000Z",
-      "updated": "2026-07-15T10:00:00.000Z"
+      "updated": "2026-07-20T14:00:00.000Z"
     }
   ],
   "policies": [

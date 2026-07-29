@@ -410,7 +410,15 @@ export interface AgendaItem {
   documentIds: string[];
 }
 
-export type ResolutionStatus = "proposed" | "seconded" | "voting" | "approved" | "rejected" | "tabled";
+export type ResolutionStatus =
+  | "draft"
+  | "under-review"
+  | "voting"
+  | "approved"
+  | "implemented"
+  | "rejected"
+  | "tabled"
+  | "archived";
 
 export interface Resolution {
   id: string;
@@ -426,9 +434,19 @@ export interface Resolution {
   abstentions: number;
   dueDate?: string;
   assignedTo?: string;
+  implementedDate?: string;
   documentIds: string[];
+  history: ResolutionEvent[];
   created: string;
   updated: string;
+}
+
+export interface ResolutionEvent {
+  timestamp: string;
+  fromStatus: ResolutionStatus;
+  toStatus: ResolutionStatus;
+  actor: string;
+  notes?: string;
 }
 
 export type PolicyStatus = "draft" | "review" | "active" | "under-review" | "archived";
@@ -445,8 +463,24 @@ export interface Policy {
   summary: string;
   documentId: string;
   resolutionId?: string;
+  previousVersionId?: string;
+  supersededBy?: string;
   created: string;
   updated: string;
+}
+
+export interface PolicyVersion {
+  policyId: string;
+  version: number;
+  status: PolicyStatus;
+  title: string;
+  summary: string;
+  owner: string;
+  effectiveDate: string;
+  reviewDate: string;
+  documentId: string;
+  resolutionId?: string;
+  created: string;
 }
 
 export interface GovernanceStats {

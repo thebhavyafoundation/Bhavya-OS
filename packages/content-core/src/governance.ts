@@ -8,6 +8,7 @@ import {
   ResolutionStatus,
   PolicyStatus,
   GovernanceStats,
+  ResolutionEvent,
 } from "./models.js";
 
 const DATA_DIR = join(process.cwd(), "data");
@@ -124,6 +125,57 @@ export function updateResolution(id: string, updates: Partial<Resolution>): Reso
   return data.resolutions[index];
 }
 
+export function advanceResolution(id: string, toStatus: ResolutionStatus, actor: string, notes?: string): Resolution | null {
+  const data = loadGovernance();
+  const index = data.resolutions.findIndex((r) => r.id === id);
+  if (index === -1) return null;
+
+  const resolution = data.resolutions[index];
+  const fromStatus = resolution.status;
+
+  // Valid transitions
+  const validTransitions: Record<ResolutionStatus, ResolutionStatus[]> = {
+    "draft": ["under-review", "tabled"],
+    "under-review": ["voting", "tabled", "draft"],
+    "voting": ["approved", "rejected", "tabled"],
+    "approved": ["implemented", "archived"],
+    "implemented": ["archived"],
+    "rejected": ["archived"],
+    "tabled": ["under-review", "archived"],
+    "archived": [],
+  };
+
+  if (!validTransitions[fromStatus]?.includes(toStatus)) {
+    return null; // Invalid transition
+  }
+
+  const event: ResolutionEvent = {
+    timestamp: new Date().toISOString(),
+    fromStatus,
+    toStatus,
+    actor,
+    notes,
+  };
+
+  data.resolutions[index] = {
+    ...resolution,
+    status: toStatus,
+    history: [...resolution.history, event],
+    implementedDate: toStatus === "implemented" ? new Date().toISOString() : resolution.implementedDate,
+    updated: new Date().toISOString(),
+  };
+
+  saveGovernance(data);
+  return data.resolutions[index];
+}
+
+export function getResolutionsDueForImplementation(): Resolution[] {
+  const now = new Date().toISOString();
+  return loadGovernance().resolutions.filter(
+    (r) => r.status === "approved" && r.dueDate && r.dueDate < now
+  );
+}
+
 // ── Policies ───────────────────────────────────────────────
 
 export function getPolicies(): Policy[] {
@@ -166,6 +218,66 @@ export function updatePolicy(id: string, updates: Partial<Policy>): Policy | nul
   return data.policies[index];
 }
 
+export function createPolicyVersion(policyId: string, updates: Partial<Policy>): Policy | null {
+  const data = loadGovernance();
+  const index = data.policies.findIndex((p) => p.id === policyId);
+  if (index === -1) return null;
+
+  const currentPolicy = data.policies[index];
+  const newVersion = currentPolicy.version + 1;
+
+  // Archive current version
+  data.policies[index] = {
+    ...currentPolicy,
+    status: "archived",
+    supersededBy: `${policyId}-v${newVersion}`,
+    updated: new Date().toISOString(),
+  };
+
+  // Create new version
+  const newPolicy: Policy = {
+    ...currentPolicy,
+    ...updates,
+    id: `${policyId}-v${newVersion}`,
+    version: newVersion,
+    previousVersionId: policyId,
+    status: "draft",
+    created: new Date().toISOString(),
+    updated: new Date().toISOString(),
+  };
+
+  data.policies.push(newPolicy);
+  saveGovernance(data);
+  return newPolicy;
+}
+
+export function getPolicyLineage(policyId: string): Policy[] {
+  const data = loadGovernance();
+  const lineage: Policy[] = [];
+
+  // Find the original policy
+  let currentId = policyId;
+  while (currentId) {
+    const policy = data.policies.find((p) => p.id === currentId);
+    if (!policy) break;
+    lineage.unshift(policy);
+    currentId = policy.previousVersionId || "";
+  }
+
+  // Find subsequent versions
+  let nextId = policyId;
+  while (nextId) {
+    const policy = data.policies.find((p) => p.previousVersionId === nextId);
+    if (!policy) break;
+    if (policy.id !== policyId) {
+      lineage.push(policy);
+    }
+    nextId = policy.id;
+  }
+
+  return lineage;
+}
+
 // ── Statistics ─────────────────────────────────────────────
 
 export function getGovernanceStats(): GovernanceStats {
@@ -180,12 +292,14 @@ export function getGovernanceStats(): GovernanceStats {
   };
 
   const resolutionsByStatus: Record<ResolutionStatus, number> = {
-    proposed: 0,
-    seconded: 0,
+    draft: 0,
+    "under-review": 0,
     voting: 0,
     approved: 0,
+    implemented: 0,
     rejected: 0,
     tabled: 0,
+    archived: 0,
   };
 
   const policiesByStatus: Record<PolicyStatus, number> = {
@@ -213,7 +327,7 @@ export function getGovernanceStats(): GovernanceStats {
   ).length;
 
   const overdueResolutions = data.resolutions.filter(
-    (r) => r.dueDate && r.dueDate < now && !["approved", "rejected", "tabled"].includes(r.status)
+    (r) => r.dueDate && r.dueDate < now && !["implemented", "archived", "rejected"].includes(r.status)
   ).length;
 
   return {
@@ -225,5 +339,62 @@ export function getGovernanceStats(): GovernanceStats {
     policiesByStatus,
     pendingReviews,
     overdueResolutions,
+  };
+}
+
+export function getOperationalHealth() {
+  const data = loadGovernance();
+  const now = new Date().toISOString();
+
+  // Resolution implementation rate
+  const approvedResolutions = data.resolutions.filter((r) => r.status === "approved");
+  const implementedResolutions = data.resolutions.filter((r) => r.status === "implemented");
+  const implementationRate = approvedResolutions.length > 0
+    ? Math.round((implementedResolutions.length / approvedResolutions.length) * 100)
+    : 100;
+
+  // Average time from meeting to resolution
+  const resolutionsWithMeetings = data.resolutions.filter((r) => {
+    const meeting = data.meetings.find((m) => m.id === r.meetingId);
+    return meeting && meeting.status === "completed";
+  });
+
+  let avgTimeToResolution = 0;
+  if (resolutionsWithMeetings.length > 0) {
+    const totalTime = resolutionsWithMeetings.reduce((sum, r) => {
+      const meeting = data.meetings.find((m) => m.id === r.meetingId);
+      if (meeting) {
+        const meetingDate = new Date(meeting.date).getTime();
+        const resolutionDate = new Date(r.created).getTime();
+        return sum + (resolutionDate - meetingDate);
+      }
+      return sum;
+    }, 0);
+    avgTimeToResolution = Math.round(totalTime / resolutionsWithMeetings.length / (1000 * 60 * 60 * 24)); // days
+  }
+
+  // Policy review compliance
+  const activePolicies = data.policies.filter((p) => p.status === "active");
+  const policiesUpToDate = activePolicies.filter((p) => p.reviewDate > now);
+  const policyComplianceRate = activePolicies.length > 0
+    ? Math.round((policiesUpToDate.length / activePolicies.length) * 100)
+    : 100;
+
+  // Meetings with completed resolutions
+  const completedMeetings = data.meetings.filter((m) => m.status === "completed");
+  const meetingsWithResolutions = completedMeetings.filter((m) =>
+    data.resolutions.some((r) => r.meetingId === m.id)
+  );
+  const meetingResolutionRate = completedMeetings.length > 0
+    ? Math.round((meetingsWithResolutions.length / completedMeetings.length) * 100)
+    : 100;
+
+  return {
+    implementationRate,
+    avgTimeToResolution,
+    policyComplianceRate,
+    meetingResolutionRate,
+    totalActivePolicies: activePolicies.length,
+    totalPendingReviews: data.policies.filter((p) => p.reviewDate <= now && p.status === "active").length,
   };
 }
