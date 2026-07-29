@@ -1,0 +1,123 @@
+{
+  "decisions": [
+    {
+      "id": "decision-001",
+      "decisionId": "resolution-001",
+      "decisionType": "resolution",
+      "title": "Expand Forest Restoration to Three New Sites",
+      "rationale": "Current forest missions have achieved 85% survival rate, demonstrating operational capability. Expansion will increase impact and test scalability of our approach.",
+      "alternativesConsidered": [
+        "Focus on improving existing sites only",
+        "Expand to only one new site as a pilot",
+        "Partner with another organization for expansion"
+      ],
+      "assumptions": [
+        "Current operational model is transferable to new sites",
+        "Volunteer capacity can scale with expansion",
+        "Funding will be available for three sites"
+      ],
+      "risksIdentified": [
+        "Operational complexity may exceed current capacity",
+        "New sites may have different environmental conditions",
+        "Volunteer recruitment may not keep pace"
+      ],
+      "expectedOutcomes": [
+        "Three additional forest sites restored",
+        "15,000 additional trees planted",
+        "Operational model validated for scalability"
+      ],
+      "participants": ["Forest Program Lead", "Board Chair", "Operations Director"],
+      "evidenceReviewed": ["Q3 2026 Forest Report", "Volunteer Capacity Assessment", "Site Survey Results"],
+      "decisionDate": "2026-10-15",
+      "created": "2026-07-15T10:00:00.000Z",
+      "updated": "2026-07-15T10:00:00.000Z"
+    },
+    {
+      "id": "decision-002",
+      "decisionId": "policy-001",
+      "decisionType": "policy",
+      "title": "Adopt Heritage Preservation Policy",
+      "rationale": "Heritage assets require systematic preservation approach. Policy establishes clear procedures for assessment, documentation, and conservation.",
+      "alternativesConsidered": [
+        "Continue ad-hoc preservation efforts",
+        "Develop guidelines instead of formal policy",
+        "Partner with heritage organizations for preservation"
+      ],
+      "assumptions": [
+        "Formal policy will improve preservation outcomes",
+        "Staff can implement policy requirements",
+        "Funding for preservation activities will be available"
+      ],
+      "risksIdentified": [
+        "Policy may be too rigid for diverse heritage assets",
+        "Implementation may require additional resources",
+        "Stakeholder buy-in may be incomplete"
+      ],
+      "expectedOutcomes": [
+        "Systematic approach to heritage preservation",
+        "Consistent assessment and documentation",
+        "Improved preservation outcomes"
+      ],
+      "participants": ["Heritage Director", "Board Chair", "Policy Committee"],
+      "evidenceReviewed": ["Heritage Asset Inventory", "Preservation Best Practices", "Staff Capacity Assessment"],
+      "decisionDate": "2026-10-15",
+      "created": "2026-07-15T10:00:00.000Z",
+      "updated": "2026-07-15T10:00:00.000Z"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "lesson-001",
+      "sourceId": "mission-001",
+      "sourceType": "mission",
+      "category": "success",
+      "title": "Community Engagement Improves Survival Rates",
+      "description": "Forest missions with active community engagement achieved 90% survival rate vs 75% without engagement.",
+      "context": "Three forest missions were compared over 12 months. Two had structured community engagement programs, one did not.",
+      "recommendation": "Include community engagement as a standard component of all forest missions.",
+      "confidence": 0.85,
+      "tags": ["community", "survival-rate", "best-practice"],
+      "created": "2026-06-01T10:00:00.000Z",
+      "updated": "2026-06-01T10:00:00.000Z"
+    },
+    {
+      "id": "lesson-002",
+      "sourceId": "resolution-002",
+      "sourceType": "resolution",
+      "category": "insight",
+      "title": "Policy Implementation Requires Training",
+      "description": "Policies implemented without accompanying training had 40% lower compliance rates.",
+      "context": "Analysis of three policy implementations over 18 months showed correlation between training and compliance.",
+      "recommendation": "Always include training component when implementing new policies.",
+      "confidence": 0.75,
+      "tags": ["policy", "compliance", "training"],
+      "created": "2026-05-15T10:00:00.000Z",
+      "updated": "2026-05-15T10:00:00.000Z"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "pattern-001",
+      "name": "Phased Expansion",
+      "description": "Successful mission expansion follows a phased approach: pilot, validate, scale.",
+      "patternType": "mission",
+      "frequency": 3,
+      "successRate": 0.85,
+      "avgTimeToComplete": 180,
+      "conditions": [
+        "Existing mission demonstrates success",
+        "Operational model is documented",
+        "Resources available for scaling"
+      ],
+      "outcomes": [
+        "Scalable operational model",
+        "Increased impact",
+        "Validated approach"
+      ],
+      "confidence": 0.8,
+      "sampleSize": 3,
+      "created": "2026-04-01T10:00:00.000Z",
+      "updated": "2026-04-01T10:00:00.000Z"
+    }
+  ]
+}

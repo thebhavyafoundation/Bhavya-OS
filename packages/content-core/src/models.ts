@@ -565,3 +565,65 @@ export interface GovernanceStats {
   pendingReviews: number;
   overdueResolutions: number;
 }
+
+// ── Institutional Memory ──────────────────────────────────
+
+export interface DecisionContext {
+  id: string;
+  decisionId: string;
+  decisionType: "resolution" | "policy" | "mission" | "strategic";
+  title: string;
+  rationale: string;
+  alternativesConsidered: string[];
+  assumptions: string[];
+  risksIdentified: string[];
+  expectedOutcomes: string[];
+  actualOutcomes?: string[];
+  lessonsLearned?: string[];
+  participants: string[];
+  evidenceReviewed: string[];
+  decisionDate: string;
+  reviewDate?: string;
+  created: string;
+  updated: string;
+}
+
+export interface LessonLearned {
+  id: string;
+  sourceId: string;
+  sourceType: "resolution" | "mission" | "policy" | "project";
+  category: "success" | "failure" | "insight" | "warning";
+  title: string;
+  description: string;
+  context: string;
+  recommendation: string;
+  confidence: number;
+  tags: string[];
+  created: string;
+  updated: string;
+}
+
+export interface InstitutionalPattern {
+  id: string;
+  name: string;
+  description: string;
+  patternType: "governance" | "mission" | "volunteer" | "research";
+  frequency: number;
+  successRate: number;
+  avgTimeToComplete: number;
+  conditions: string[];
+  outcomes: string[];
+  confidence: number;
+  sampleSize: number;
+  created: string;
+  updated: string;
+}
+
+export interface MemoryStats {
+  totalDecisions: number;
+  totalLessons: number;
+  totalPatterns: number;
+  decisionsWithContext: number;
+  lessonsByCategory: Record<string, number>;
+  patternsByType: Record<string, number>;
+}

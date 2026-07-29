@@ -334,3 +334,35 @@ export type {
   ReportSection,
   ReportMetric,
 } from "./cross-domain-reporting";
+
+// ── Institutional Memory ──────────────────────────────────
+export {
+  getDecisionContexts,
+  getDecisionContextById,
+  getDecisionContextsByType,
+  createDecisionContext,
+  updateDecisionContext,
+  addLessonToDecision,
+  getLessons,
+  getLessonById,
+  getLessonsByCategory,
+  getLessonsBySource,
+  createLesson,
+  updateLesson,
+  getPatterns,
+  getPatternById,
+  getPatternsByType,
+  getHighConfidencePatterns,
+  createPattern,
+  updatePattern,
+  getMemoryStats,
+  getSuccessfulPatterns,
+  getLessonsByConfidence,
+  getDecisionsWithFullContext,
+} from "./institutional-memory";
+export type {
+  DecisionContext,
+  LessonLearned,
+  InstitutionalPattern,
+  MemoryStats,
+} from "./models";
