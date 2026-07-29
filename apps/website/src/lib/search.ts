@@ -17,6 +17,29 @@ export interface SearchConfig {
   };
 }
 
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  vertical?: string;
+  status?: string;
+}
+
+interface GovernanceDoc {
+  id: string;
+  title: string;
+  type: string;
+  content: string;
+  status?: string;
+}
+
+interface ResearchDoc {
+  id: string;
+  title: string;
+  summary: string;
+  topic?: string;
+}
+
 export class SearchEngine {
   private config: SearchConfig;
 
@@ -29,7 +52,7 @@ export class SearchEngine {
     const results: SearchResult[] = [];
 
     // Search projects
-    const projects = await this.config.apiClient.get('projects', 'list') as any[];
+    const projects = await this.config.apiClient.get('projects', 'list') as Project[];
     if (projects) {
       for (const project of projects) {
         if (this.matchesQuery(project, query)) {
@@ -47,7 +70,7 @@ export class SearchEngine {
     }
 
     // Search governance documents
-    const governance = await this.config.apiClient.get('governance', 'list') as any[];
+    const governance = await this.config.apiClient.get('governance', 'list') as GovernanceDoc[];
     if (governance) {
       for (const doc of governance) {
         if (this.matchesQuery(doc, query)) {
@@ -65,7 +88,7 @@ export class SearchEngine {
     }
 
     // Search knowledge/research
-    const research = await this.config.apiClient.get('knowledge', 'search', { query }) as any[];
+    const research = await this.config.apiClient.get('knowledge', 'search', { query }) as ResearchDoc[];
     if (research) {
       for (const doc of research) {
         results.push({
@@ -86,18 +109,18 @@ export class SearchEngine {
     return results;
   }
 
-  private matchesQuery(item: any, query: string): boolean {
+  private matchesQuery(item: Project | GovernanceDoc | ResearchDoc, query: string): boolean {
     const lower = query.toLowerCase();
     const searchableText = JSON.stringify(item).toLowerCase();
     return searchableText.includes(lower);
   }
 
-  private calculateRelevance(item: any, query: string): number {
+  private calculateRelevance(item: Project | GovernanceDoc | ResearchDoc, query: string): number {
     const lower = query.toLowerCase();
     let score = 0;
 
     if (item.title?.toLowerCase().includes(lower)) score += 10;
-    if (item.description?.toLowerCase().includes(lower)) score += 5;
+    if ('description' in item && item.description?.toLowerCase().includes(lower)) score += 5;
     if (item.content?.toLowerCase().includes(lower)) score += 3;
 
     return score;

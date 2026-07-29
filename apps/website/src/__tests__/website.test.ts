@@ -62,14 +62,14 @@ export class WebsiteTest {
       await cache.set('test', { value: 42 });
       const cached = await cache.get('test');
       if (!cached) throw new Error('Cache miss');
-      if ((cached as any).value !== 42) throw new Error('Cache wrong value');
+      if ((cached as { value: number }).value !== 42) throw new Error('Cache wrong value');
     });
 
     // Phase 4: Search
     await this.test('Search engine works', async () => {
       const search = new SearchEngine({
         apiClient: {
-          get: async (service, action) => {
+          get: async (service, _action) => {
             if (service === 'projects') return [{ id: '1', name: 'Forest Restoration', description: 'Restore forests', vertical: 'environment' }];
             if (service === 'governance') return [{ id: '2', title: 'Conservation Policy', content: 'Policy content', type: 'policy' }];
             return [];
