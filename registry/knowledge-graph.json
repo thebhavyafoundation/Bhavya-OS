@@ -13,8 +13,7 @@
       "created": "2026-07-15",
       "updated": "2026-07-15",
       "links": [
-        "BAR-001",
-        "Release-v0.1"
+        "standard-BAR-001"
       ]
     },
     {
@@ -26,13 +25,12 @@
       "created": "2026-07-22",
       "updated": "2026-07-22",
       "links": [
-        "RFC-0003",
-        "BPS-001",
-        "Release-v0.3"
+        "RFC-0003-AI-Gateway",
+        "standard-BPS-001"
       ]
     },
     {
-      "id": "RFC-0001",
+      "id": "RFC-0001-Volunteer-Portal",
       "type": "rfc",
       "title": "Volunteer Portal Architecture",
       "owner": "Community Agent",
@@ -40,12 +38,12 @@
       "created": "2026-07-20",
       "updated": "2026-07-20",
       "links": [
-        "BDL-001",
-        "agent.volunteer"
+        "standard-BDL-001",
+        "entity-community"
       ]
     },
     {
-      "id": "RFC-0002",
+      "id": "RFC-0002-Forest-GIS",
       "type": "rfc",
       "title": "Forest GIS & Environmental Mapping Infrastructure",
       "owner": "Forest Agent",
@@ -53,12 +51,12 @@
       "created": "2026-07-21",
       "updated": "2026-07-21",
       "links": [
-        "BAR-001",
-        "agent.forest"
+        "standard-BAR-001",
+        "entity-nature"
       ]
     },
     {
-      "id": "RFC-0003",
+      "id": "RFC-0003-AI-Gateway",
       "type": "rfc",
       "title": "AI Gateway Abstraction & Routing Architecture",
       "owner": "Engineering Agent",
@@ -67,11 +65,11 @@
       "updated": "2026-07-22",
       "links": [
         "ADR-0002",
-        "agent.engineering"
+        "entity-ai-gateway"
       ]
     },
     {
-      "id": "BAR-001",
+      "id": "standard-BAR-001",
       "type": "standard",
       "title": "Bhavya Architecture Rules",
       "owner": "Governance Agent",
@@ -84,20 +82,17 @@
       ]
     },
     {
-      "id": "BDL-001",
+      "id": "standard-BDL-001",
       "type": "standard",
       "title": "Bhavya Design Language",
       "owner": "Design Agent",
       "status": "Active",
       "created": "2026-07-15",
       "updated": "2026-07-22",
-      "links": [
-        "packages/ui",
-        "packages/theme"
-      ]
+      "links": []
     },
     {
-      "id": "BPS-001",
+      "id": "standard-BPS-001",
       "type": "standard",
       "title": "Bhavya Production Standards",
       "owner": "Release Agent",
@@ -105,12 +100,11 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "ADR-0002",
-        "Release-v0.3"
+        "ADR-0002"
       ]
     },
     {
-      "id": "BGS-001",
+      "id": "standard-BGS-001",
       "type": "standard",
       "title": "Bhavya Governance Standards",
       "owner": "Governance Agent",
@@ -118,12 +112,12 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "agent.governance",
-        "agent.founder"
+        "entity-bhavya",
+        "entity-founder"
       ]
     },
     {
-      "id": "BOM-001",
+      "id": "standard-BOM-001",
       "type": "standard",
       "title": "Bhavya Operating Model",
       "owner": "Founder Agent",
@@ -131,12 +125,12 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "agent.founder",
-        "agent.release"
+        "entity-founder",
+        "entity-bhavya"
       ]
     },
     {
-      "id": "Release-v0.1",
+      "id": "REL-000",
       "type": "release",
       "title": "v0.1 Foundation Bootstrap",
       "owner": "Release Agent",
@@ -145,11 +139,11 @@
       "updated": "2026-07-22",
       "links": [
         "ADR-0001",
-        "BAR-001"
+        "standard-BAR-001"
       ]
     },
     {
-      "id": "Release-v0.2",
+      "id": "REL-001",
       "type": "release",
       "title": "v0.2 Platform Integration",
       "owner": "Release Agent",
@@ -157,12 +151,11 @@
       "created": "2026-07-22",
       "updated": "2026-07-22",
       "links": [
-        "RFC-0003",
-        "agent.engineering"
+        "RFC-0003-AI-Gateway"
       ]
     },
     {
-      "id": "Release-v0.3",
+      "id": "REL-002",
       "type": "release",
       "title": "v0.3 Institutional Runtime",
       "owner": "Release Agent",
@@ -171,11 +164,11 @@
       "updated": "2026-07-22",
       "links": [
         "ADR-0002",
-        "BPS-001"
+        "standard-BPS-001"
       ]
     },
     {
-      "id": "Release-v0.4",
+      "id": "REL-003",
       "type": "release",
       "title": "v0.4 Institutional Knowledge Platform",
       "owner": "Release Agent",
@@ -185,7 +178,7 @@
       "links": [
         "ADR-0001",
         "ADR-0002",
-        "RFC-0003"
+        "RFC-0003-AI-Gateway"
       ]
     }
   ]

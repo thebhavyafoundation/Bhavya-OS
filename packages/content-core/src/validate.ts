@@ -68,6 +68,7 @@ function validateDocuments(): ValidationResult {
     name: "Missing content",
     passed: missingContent.length === 0,
     count: missingContent.length,
+    details: missingContent.map((d) => `${d.id} (${d.category})`),
   });
 
   return { name: "Documents", passed: checks.every((c) => c.passed), checks };
@@ -129,6 +130,7 @@ function validateRelationships(): ValidationResult {
     name: "Broken source references",
     passed: brokenSources.length === 0,
     count: brokenSources.length,
+    details: brokenSources.map((r) => `${r.sourceId} → ${r.targetId} (${r.type})`),
   });
 
   // Broken target references
@@ -137,6 +139,7 @@ function validateRelationships(): ValidationResult {
     name: "Broken target references",
     passed: brokenTargets.length === 0,
     count: brokenTargets.length,
+    details: brokenTargets.map((r) => `${r.sourceId} → ${r.targetId} (${r.type})`),
   });
 
   return { name: "Relationships", passed: checks.every((c) => c.passed), checks };
@@ -214,6 +217,7 @@ function validatePublications(): ValidationResult {
     name: "Valid document statuses",
     passed: invalidStatus.length === 0,
     count: invalidStatus.length,
+    details: invalidStatus.map((d) => `${d.id}: "${d.status}"`),
   });
 
   return { name: "Publications", passed: checks.every((c) => c.passed), checks };
