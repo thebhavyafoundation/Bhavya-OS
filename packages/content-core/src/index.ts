@@ -321,3 +321,16 @@ export type {
   OperationalImpact,
   KnowledgeImpact,
 } from "./impact-reporting";
+
+// ── Cross-Domain Reporting ────────────────────────────────
+export {
+  generateInstitutionalReport,
+  getInstitutionalReports,
+  generateAnnualReport,
+  generateQuarterlyReport,
+} from "./cross-domain-reporting";
+export type {
+  InstitutionalReport,
+  ReportSection,
+  ReportMetric,
+} from "./cross-domain-reporting";
