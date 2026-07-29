@@ -4,34 +4,13 @@ import {
   getPolicies,
   getGovernanceStats,
 } from "./governance";
-import {
-  getActionItems,
-  getActionItemStats,
-} from "./action-items";
-import {
-  getMissions,
-  getForestStats,
-} from "./forest";
-import {
-  getHeritageMissions,
-  getHeritageStats,
-} from "./heritage";
-import {
-  getProjects,
-  getResearchStats,
-} from "./research";
-import {
-  getVolunteers,
-  getVolunteerStats,
-} from "./volunteer";
-import {
-  getDocuments,
-  getEntities,
-  getKnowledgeGraph,
-} from "./index";
-import {
-  getEvidence,
-} from "./traceability";
+import { getActionItems, getActionItemStats } from "./action-items";
+import { getMissions, getForestStats } from "./forest";
+import { getHeritageMissions, getHeritageStats } from "./heritage";
+import { getProjects, getResearchStats } from "./research";
+import { getVolunteers, getVolunteerStats } from "./volunteer";
+import { getDocuments, getEntities, getKnowledgeGraph } from "./index";
+import { getEvidence } from "./traceability";
 
 // ── Cross-Domain Report Types ──────────────────────────────
 
@@ -65,7 +44,9 @@ export interface ReportMetric {
 
 // ── Cross-Domain Report Generation ─────────────────────────
 
-export function generateInstitutionalReport(period?: string): InstitutionalReport {
+export function generateInstitutionalReport(
+  period?: string,
+): InstitutionalReport {
   const now = new Date();
   const reportPeriod = period || `${now.getFullYear()} Annual Report`;
 
@@ -80,7 +61,13 @@ export function generateInstitutionalReport(period?: string): InstitutionalRepor
 
   // Calculate overall score
   const overallScore = Math.round(
-    sections.reduce((sum, s) => sum + (s.metrics.find((m) => m.name === "Health Score")?.value as number || 80), 0) / sections.length
+    sections.reduce(
+      (sum, s) =>
+        sum +
+        ((s.metrics.find((m) => m.name === "Health Score")?.value as number) ||
+          80),
+      0,
+    ) / sections.length,
   );
 
   // Generate executive summary
@@ -106,11 +93,12 @@ function generateGovernanceSection(): ReportSection {
   const actionStats = getActionItemStats();
   const evidence = getEvidence();
 
-  const healthScore = Math.min(100,
+  const healthScore = Math.min(
+    100,
     (stats.totalMeetings > 0 ? 25 : 0) +
-    (stats.totalResolutions > 0 ? 25 : 0) +
-    (actionStats.completionRate * 0.25) +
-    (evidence.length > 0 ? 25 : 0)
+      (stats.totalResolutions > 0 ? 25 : 0) +
+      actionStats.completionRate * 0.25 +
+      (evidence.length > 0 ? 25 : 0),
   );
 
   return {
@@ -128,7 +116,10 @@ function generateGovernanceSection(): ReportSection {
       `${actionStats.completionRate}% action completion rate`,
       `${stats.totalPolicies} policies active`,
     ],
-    concerns: actionStats.overdue > 0 ? [`${actionStats.overdue} overdue action items`] : [],
+    concerns:
+      actionStats.overdue > 0
+        ? [`${actionStats.overdue} overdue action items`]
+        : [],
     evidenceCount: evidence.length,
   };
 }
@@ -138,11 +129,12 @@ function generateForestSection(): ReportSection {
   const missions = getMissions();
   const evidence = getEvidence();
 
-  const healthScore = Math.min(100,
+  const healthScore = Math.min(
+    100,
     (stats.totalMissions > 0 ? 30 : 0) +
-    (stats.totalPlantings > 0 ? 30 : 0) +
-    (stats.averageSurvivalRate * 0.2) +
-    (stats.totalImpactReports > 0 ? 20 : 0)
+      (stats.totalPlantings > 0 ? 30 : 0) +
+      stats.averageSurvivalRate * 0.2 +
+      (stats.totalImpactReports > 0 ? 20 : 0),
   );
 
   return {
@@ -153,15 +145,24 @@ function generateForestSection(): ReportSection {
       { name: "Active Missions", value: stats.totalMissions, unit: "" },
       { name: "Trees Planted", value: stats.totalPlanted, unit: "" },
       { name: "Survival Rate", value: stats.averageSurvivalRate, unit: "%" },
-      { name: "Area Restored", value: stats.totalAreaRestored, unit: " hectares" },
+      {
+        name: "Area Restored",
+        value: stats.totalAreaRestored,
+        unit: " hectares",
+      },
       { name: "Health Score", value: healthScore, unit: "/100" },
     ],
     highlights: [
       `${stats.totalPlanted.toLocaleString()} trees planted across ${stats.totalMissions} missions`,
       `${stats.totalAreaRestored} hectares of forest restored`,
     ],
-    concerns: stats.averageSurvivalRate < 70 ? [`Survival rate ${stats.averageSurvivalRate}% below target`] : [],
-    evidenceCount: evidence.filter((e) => e.type === "photo" || e.type === "report").length,
+    concerns:
+      stats.averageSurvivalRate < 70
+        ? [`Survival rate ${stats.averageSurvivalRate}% below target`]
+        : [],
+    evidenceCount: evidence.filter(
+      (e) => e.type === "photo" || e.type === "report",
+    ).length,
   };
 }
 
@@ -170,11 +171,12 @@ function generateHeritageSection(): ReportSection {
   const missions = getHeritageMissions();
   const evidence = getEvidence();
 
-  const healthScore = Math.min(100,
+  const healthScore = Math.min(
+    100,
     (stats.totalMissions > 0 ? 30 : 0) +
-    (stats.totalAssets > 0 ? 30 : 0) +
-    (stats.totalAssessments > 0 ? 20 : 0) +
-    (stats.totalConservationPlans > 0 ? 20 : 0)
+      (stats.totalAssets > 0 ? 30 : 0) +
+      (stats.totalAssessments > 0 ? 20 : 0) +
+      (stats.totalConservationPlans > 0 ? 20 : 0),
   );
 
   return {
@@ -185,7 +187,11 @@ function generateHeritageSection(): ReportSection {
       { name: "Active Missions", value: stats.totalMissions, unit: "" },
       { name: "Heritage Assets", value: stats.totalAssets, unit: "" },
       { name: "Assessments", value: stats.totalAssessments, unit: "" },
-      { name: "Conservation Plans", value: stats.totalConservationPlans, unit: "" },
+      {
+        name: "Conservation Plans",
+        value: stats.totalConservationPlans,
+        unit: "",
+      },
       { name: "Health Score", value: healthScore, unit: "/100" },
     ],
     highlights: [
@@ -202,11 +208,15 @@ function generateResearchSection(): ReportSection {
   const projects = getProjects();
   const evidence = getEvidence();
 
-  const healthScore = Math.min(100,
+  const completedCount = stats.projectsByStatus?.published || 0;
+  const activeCount = stats.projectsByStatus?.active || 0;
+
+  const healthScore = Math.min(
+    100,
     (stats.totalProjects > 0 ? 30 : 0) +
-    (stats.totalSources > 0 ? 30 : 0) +
-    (stats.totalEvidence > 0 ? 20 : 0) +
-    (stats.completedProjects > 0 ? 20 : 0)
+      (stats.totalSources > 0 ? 30 : 0) +
+      (stats.totalEvidence > 0 ? 20 : 0) +
+      (completedCount > 0 ? 20 : 0),
   );
 
   return {
@@ -214,17 +224,20 @@ function generateResearchSection(): ReportSection {
     title: "Research & Knowledge",
     summary: `${stats.totalProjects} projects, ${stats.totalSources} sources, ${stats.totalEvidence} evidence items.`,
     metrics: [
-      { name: "Active Projects", value: stats.totalProjects, unit: "" },
+      { name: "Active Projects", value: activeCount, unit: "" },
       { name: "Sources Collected", value: stats.totalSources, unit: "" },
       { name: "Evidence Items", value: stats.totalEvidence, unit: "" },
-      { name: "Completed Projects", value: stats.completedProjects, unit: "" },
+      { name: "Completed Projects", value: completedCount, unit: "" },
       { name: "Health Score", value: healthScore, unit: "/100" },
     ],
     highlights: [
       `${stats.totalSources} research sources collected`,
-      `${stats.completedProjects} projects completed`,
+      `${completedCount} projects completed`,
     ],
-    concerns: stats.activeProjects > stats.completedProjects ? ["More active than completed projects"] : [],
+    concerns:
+      activeCount > completedCount
+        ? ["More active than completed projects"]
+        : [],
     evidenceCount: evidence.filter((e) => e.type === "document").length,
   };
 }
@@ -234,29 +247,35 @@ function generateVolunteerSection(): ReportSection {
   const volunteers = getVolunteers();
   const evidence = getEvidence();
 
-  const healthScore = Math.min(100,
+  const activeCount = stats.volunteersByStatus?.active || 0;
+
+  const healthScore = Math.min(
+    100,
     (stats.totalVolunteers > 0 ? 25 : 0) +
-    (stats.activeVolunteers > 0 ? 25 : 0) +
-    (stats.totalAssignments > 0 ? 25 : 0) +
-    (stats.totalRecognitions > 0 ? 25 : 0)
+      (activeCount > 0 ? 25 : 0) +
+      (stats.totalAssignments > 0 ? 25 : 0) +
+      (stats.totalRecognitions > 0 ? 25 : 0),
   );
 
   return {
     domain: "volunteer",
     title: "Volunteer Engagement",
-    summary: `${stats.totalVolunteers} volunteers, ${stats.activeVolunteers} active, ${stats.totalAssignments} assignments completed.`,
+    summary: `${stats.totalVolunteers} volunteers, ${activeCount} active, ${stats.totalAssignments} assignments completed.`,
     metrics: [
       { name: "Total Volunteers", value: stats.totalVolunteers, unit: "" },
-      { name: "Active Volunteers", value: stats.activeVolunteers, unit: "" },
+      { name: "Active Volunteers", value: activeCount, unit: "" },
       { name: "Assignments", value: stats.totalAssignments, unit: "" },
       { name: "Recognitions", value: stats.totalRecognitions, unit: "" },
       { name: "Health Score", value: healthScore, unit: "/100" },
     ],
     highlights: [
-      `${stats.activeVolunteers} active volunteers`,
+      `${activeCount} active volunteers`,
       `${stats.totalRecognitions} volunteer recognitions`,
     ],
-    concerns: stats.activeVolunteers < stats.totalVolunteers * 0.5 ? ["Less than 50% volunteer activity"] : [],
+    concerns:
+      activeCount < stats.totalVolunteers * 0.5
+        ? ["Less than 50% volunteer activity"]
+        : [],
     evidenceCount: evidence.filter((e) => e.type === "testimonial").length,
   };
 }
@@ -269,11 +288,12 @@ function generateKnowledgeSection(): ReportSection {
   const totalEdges = kg.reduce((sum, n) => sum + (n.links?.length || 0), 0);
   const publishedDocs = docs.filter((d) => d.status === "published").length;
 
-  const healthScore = Math.min(100,
+  const healthScore = Math.min(
+    100,
     (docs.length > 0 ? 25 : 0) +
-    (entities.length > 0 ? 25 : 0) +
-    (kg.length > 0 ? 25 : 0) +
-    (publishedDocs / docs.length > 0.8 ? 25 : 0)
+      (entities.length > 0 ? 25 : 0) +
+      (kg.length > 0 ? 25 : 0) +
+      (publishedDocs / docs.length > 0.8 ? 25 : 0),
   );
 
   return {
@@ -292,12 +312,18 @@ function generateKnowledgeSection(): ReportSection {
       `${publishedDocs} documents published (${Math.round((publishedDocs / docs.length) * 100)}%)`,
       `${totalEdges} relationships in knowledge graph`,
     ],
-    concerns: publishedDocs / docs.length < 0.8 ? ["Less than 80% publication rate"] : [],
+    concerns:
+      publishedDocs / docs.length < 0.8
+        ? ["Less than 80% publication rate"]
+        : [],
     evidenceCount: docs.length,
   };
 }
 
-function generateExecutiveSummary(sections: ReportSection[], overallScore: number): string {
+function generateExecutiveSummary(
+  sections: ReportSection[],
+  overallScore: number,
+): string {
   const totalEvidence = sections.reduce((sum, s) => sum + s.evidenceCount, 0);
   const totalMetrics = sections.reduce((sum, s) => sum + s.metrics.length, 0);
 
@@ -316,11 +342,18 @@ ${sections.map((s) => `- **${s.title}**: ${s.summary}`).join("\n")}
 - **Metrics Tracked**: ${totalMetrics}
 
 ## Cross-Domain Observations
-${sections.filter((s) => s.concerns.length > 0).map((s) => `- **${s.title}**: ${s.concerns.join(", ")}`).join("\n") || "No significant concerns across domains."}
+${
+  sections
+    .filter((s) => s.concerns.length > 0)
+    .map((s) => `- **${s.title}**: ${s.concerns.join(", ")}`)
+    .join("\n") || "No significant concerns across domains."
+}
   `.trim();
 }
 
-function generateCrossDomainRecommendations(sections: ReportSection[]): string[] {
+function generateCrossDomainRecommendations(
+  sections: ReportSection[],
+): string[] {
   const recommendations: string[] = [];
 
   // Check for domains with low health scores
@@ -330,26 +363,36 @@ function generateCrossDomainRecommendations(sections: ReportSection[]): string[]
   });
 
   if (lowHealthDomains.length > 0) {
-    recommendations.push(`Focus improvement efforts on: ${lowHealthDomains.map((s) => s.domain).join(", ")}`);
+    recommendations.push(
+      `Focus improvement efforts on: ${lowHealthDomains.map((s) => s.domain).join(", ")}`,
+    );
   }
 
   // Check for cross-domain evidence gaps
   const totalEvidence = sections.reduce((sum, s) => sum + s.evidenceCount, 0);
   if (totalEvidence < sections.length * 5) {
-    recommendations.push("Increase evidence collection across all domains for better traceability.");
+    recommendations.push(
+      "Increase evidence collection across all domains for better traceability.",
+    );
   }
 
   // Check for governance alignment
   const governanceSection = sections.find((s) => s.domain === "governance");
   if (governanceSection) {
-    const completionRate = governanceSection.metrics.find((m) => m.name === "Completion Rate")?.value;
+    const completionRate = governanceSection.metrics.find(
+      (m) => m.name === "Completion Rate",
+    )?.value;
     if (completionRate && (completionRate as number) < 80) {
-      recommendations.push("Improve governance action completion to ensure better institutional oversight.");
+      recommendations.push(
+        "Improve governance action completion to ensure better institutional oversight.",
+      );
     }
   }
 
   if (recommendations.length === 0) {
-    recommendations.push("All domains are performing well. Continue current practices.");
+    recommendations.push(
+      "All domains are performing well. Continue current practices.",
+    );
   }
 
   return recommendations;
@@ -366,6 +409,9 @@ export function generateAnnualReport(year: number): InstitutionalReport {
   return generateInstitutionalReport(`${year} Annual Report`);
 }
 
-export function generateQuarterlyReport(year: number, quarter: number): InstitutionalReport {
+export function generateQuarterlyReport(
+  year: number,
+  quarter: number,
+): InstitutionalReport {
   return generateInstitutionalReport(`Q${quarter} ${year} Report`);
 }

@@ -88,6 +88,7 @@ describe("forest", () => {
           name: "Test Planting",
           species: ["Sal", "Teak"],
           targetCount: 100,
+          startDate: new Date().toISOString(),
         });
         expect(planting).toHaveProperty("id");
         expect(planting.species).toEqual(["Sal", "Teak"]);

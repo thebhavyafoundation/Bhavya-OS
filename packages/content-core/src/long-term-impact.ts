@@ -1,13 +1,25 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // ── Long-Term Impact Types ─────────────────────────────────
 
 export interface ImpactMetric {
   id: string;
   name: string;
-  domain: "forest" | "heritage" | "research" | "volunteer" | "governance" | "knowledge" | "cross-domain";
-  category: "environmental" | "social" | "governance" | "knowledge" | "operational";
+  domain:
+    | "forest"
+    | "heritage"
+    | "research"
+    | "volunteer"
+    | "governance"
+    | "knowledge"
+    | "cross-domain";
+  category:
+    "environmental" | "social" | "governance" | "knowledge" | "operational";
   unit: string;
   description: string;
   created: string;
@@ -61,7 +73,7 @@ export interface MultiYearComparison {
 
 // ── Long-Term Impact Storage ───────────────────────────────
 
-const DATA_DIR = join(import.meta.dirname, "..", "..", "data");
+const DATA_DIR = join(__dirname, "..", "data");
 const METRICS_FILE = join(DATA_DIR, "impact-metrics.json");
 const RECORDS_FILE = join(DATA_DIR, "impact-records.json");
 
@@ -100,7 +112,7 @@ export function createImpactMetric(
   domain: ImpactMetric["domain"],
   category: ImpactMetric["category"],
   unit: string,
-  description: string
+  description: string,
 ): ImpactMetric {
   const metrics = readMetricsData();
   const now = new Date().toISOString();
@@ -128,11 +140,15 @@ export function getImpactMetricById(id: string): ImpactMetric | undefined {
   return readMetricsData().find((m) => m.id === id);
 }
 
-export function getImpactMetricsByDomain(domain: ImpactMetric["domain"]): ImpactMetric[] {
+export function getImpactMetricsByDomain(
+  domain: ImpactMetric["domain"],
+): ImpactMetric[] {
   return readMetricsData().filter((m) => m.domain === domain);
 }
 
-export function getImpactMetricsByCategory(category: ImpactMetric["category"]): ImpactMetric[] {
+export function getImpactMetricsByCategory(
+  category: ImpactMetric["category"],
+): ImpactMetric[] {
   return readMetricsData().filter((m) => m.category === category);
 }
 
@@ -144,7 +160,7 @@ export function createImpactRecord(
   date: string,
   period: ImpactRecord["period"],
   source: string,
-  notes?: string
+  notes?: string,
 ): ImpactRecord {
   const records = readRecordsData();
   const now = new Date().toISOString();
@@ -173,7 +189,10 @@ export function getImpactRecordsByMetric(metricId: string): ImpactRecord[] {
   return readRecordsData().filter((r) => r.metricId === metricId);
 }
 
-export function getImpactRecordsByDateRange(startDate: string, endDate: string): ImpactRecord[] {
+export function getImpactRecordsByDateRange(
+  startDate: string,
+  endDate: string,
+): ImpactRecord[] {
   const start = new Date(startDate);
   const end = new Date(endDate);
   return readRecordsData().filter((r) => {
@@ -184,7 +203,9 @@ export function getImpactRecordsByDateRange(startDate: string, endDate: string):
 
 // ── Impact Trend Analysis ──────────────────────────────────
 
-export function calculateImpactTrends(timeframe: string = "1 year"): ImpactTrend[] {
+export function calculateImpactTrends(
+  timeframe: string = "1 year",
+): ImpactTrend[] {
   const metrics = getImpactMetrics();
   const records = getImpactRecords();
   const now = new Date();
@@ -208,23 +229,34 @@ export function calculateImpactTrends(timeframe: string = "1 year"): ImpactTrend
       startDate = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
   }
 
-  const midpoint = new Date(startDate.getTime() + (now.getTime() - startDate.getTime()) / 2);
+  const midpoint = new Date(
+    startDate.getTime() + (now.getTime() - startDate.getTime()) / 2,
+  );
 
   return metrics.map((metric) => {
     const metricRecords = records.filter((r) => r.metricId === metric.id);
-    const recentRecords = metricRecords.filter((r) => new Date(r.date) >= midpoint);
-    const olderRecords = metricRecords.filter((r) => new Date(r.date) < midpoint && new Date(r.date) >= startDate);
+    const recentRecords = metricRecords.filter(
+      (r) => new Date(r.date) >= midpoint,
+    );
+    const olderRecords = metricRecords.filter(
+      (r) => new Date(r.date) < midpoint && new Date(r.date) >= startDate,
+    );
 
-    const currentValue = recentRecords.length > 0
-      ? recentRecords.reduce((sum, r) => sum + r.value, 0) / recentRecords.length
-      : 0;
+    const currentValue =
+      recentRecords.length > 0
+        ? recentRecords.reduce((sum, r) => sum + r.value, 0) /
+          recentRecords.length
+        : 0;
 
-    const previousValue = olderRecords.length > 0
-      ? olderRecords.reduce((sum, r) => sum + r.value, 0) / olderRecords.length
-      : 0;
+    const previousValue =
+      olderRecords.length > 0
+        ? olderRecords.reduce((sum, r) => sum + r.value, 0) /
+          olderRecords.length
+        : 0;
 
     const change = currentValue - previousValue;
-    const changePercent = previousValue !== 0 ? Math.round((change / previousValue) * 100) : 0;
+    const changePercent =
+      previousValue !== 0 ? Math.round((change / previousValue) * 100) : 0;
 
     let direction: "improving" | "declining" | "stable" = "stable";
     if (Math.abs(changePercent) > 5) {
@@ -259,10 +291,14 @@ export function compareMultiYear(years: number = 5): MultiYearComparison[] {
 
     for (let i = 0; i < years; i++) {
       const year = currentYear - i;
-      const yearRecords = metricRecords.filter((r) => new Date(r.date).getFullYear() === year);
-      const avgValue = yearRecords.length > 0
-        ? yearRecords.reduce((sum, r) => sum + r.value, 0) / yearRecords.length
-        : 0;
+      const yearRecords = metricRecords.filter(
+        (r) => new Date(r.date).getFullYear() === year,
+      );
+      const avgValue =
+        yearRecords.length > 0
+          ? yearRecords.reduce((sum, r) => sum + r.value, 0) /
+            yearRecords.length
+          : 0;
 
       yearData.unshift({ year, value: Math.round(avgValue * 100) / 100 });
     }
@@ -311,8 +347,12 @@ export function getLongTermImpactSummary(): LongTermImpactSummary {
     byCategory[metric.category] = (byCategory[metric.category] || 0) + 1;
   });
 
-  const improvingTrends = trends.filter((t) => t.direction === "improving").length;
-  const decliningTrends = trends.filter((t) => t.direction === "declining").length;
+  const improvingTrends = trends.filter(
+    (t) => t.direction === "improving",
+  ).length;
+  const decliningTrends = trends.filter(
+    (t) => t.direction === "declining",
+  ).length;
   const stableTrends = trends.filter((t) => t.direction === "stable").length;
 
   return {
@@ -333,30 +373,102 @@ export function createDefaultImpactMetrics(): ImpactMetric[] {
 
   // Forest metrics
   metrics.push(
-    createImpactMetric("Forest Cover (hectares)", "forest", "environmental", "hectares", "Total forest cover area"),
-    createImpactMetric("Species Diversity Index", "forest", "environmental", "index", "Biodiversity measurement"),
-    createImpactMetric("Trees Planted", "forest", "environmental", "count", "Cumulative trees planted")
+    createImpactMetric(
+      "Forest Cover (hectares)",
+      "forest",
+      "environmental",
+      "hectares",
+      "Total forest cover area",
+    ),
+    createImpactMetric(
+      "Species Diversity Index",
+      "forest",
+      "environmental",
+      "index",
+      "Biodiversity measurement",
+    ),
+    createImpactMetric(
+      "Trees Planted",
+      "forest",
+      "environmental",
+      "count",
+      "Cumulative trees planted",
+    ),
   );
 
   // Governance metrics
   metrics.push(
-    createImpactMetric("Board Attendance Rate", "governance", "governance", "percentage", "Average board meeting attendance"),
-    createImpactMetric("Resolution Implementation Rate", "governance", "governance", "percentage", "Resolutions implemented on time"),
-    createImpactMetric("Policy Compliance Rate", "governance", "governance", "percentage", "Policy compliance score")
+    createImpactMetric(
+      "Board Attendance Rate",
+      "governance",
+      "governance",
+      "percentage",
+      "Average board meeting attendance",
+    ),
+    createImpactMetric(
+      "Resolution Implementation Rate",
+      "governance",
+      "governance",
+      "percentage",
+      "Resolutions implemented on time",
+    ),
+    createImpactMetric(
+      "Policy Compliance Rate",
+      "governance",
+      "governance",
+      "percentage",
+      "Policy compliance score",
+    ),
   );
 
   // Knowledge metrics
   metrics.push(
-    createImpactMetric("Knowledge Documents", "knowledge", "knowledge", "count", "Total knowledge documents"),
-    createImpactMetric("Institutional Patterns", "knowledge", "knowledge", "count", "Validated patterns"),
-    createImpactMetric("Lessons Captured", "knowledge", "knowledge", "count", "Lessons learned from missions")
+    createImpactMetric(
+      "Knowledge Documents",
+      "knowledge",
+      "knowledge",
+      "count",
+      "Total knowledge documents",
+    ),
+    createImpactMetric(
+      "Institutional Patterns",
+      "knowledge",
+      "knowledge",
+      "count",
+      "Validated patterns",
+    ),
+    createImpactMetric(
+      "Lessons Captured",
+      "knowledge",
+      "knowledge",
+      "count",
+      "Lessons learned from missions",
+    ),
   );
 
   // Volunteer metrics
   metrics.push(
-    createImpactMetric("Active Volunteers", "volunteer", "social", "count", "Currently active volunteers"),
-    createImpactMetric("Volunteer Retention Rate", "volunteer", "social", "percentage", "Year-over-year retention"),
-    createImpactMetric("Hours Contributed", "volunteer", "social", "hours", "Total volunteer hours")
+    createImpactMetric(
+      "Active Volunteers",
+      "volunteer",
+      "social",
+      "count",
+      "Currently active volunteers",
+    ),
+    createImpactMetric(
+      "Volunteer Retention Rate",
+      "volunteer",
+      "social",
+      "percentage",
+      "Year-over-year retention",
+    ),
+    createImpactMetric(
+      "Hours Contributed",
+      "volunteer",
+      "social",
+      "hours",
+      "Total volunteer hours",
+    ),
   );
 
   return metrics;

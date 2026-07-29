@@ -1,5 +1,9 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // ── Automated Stewardship Types ────────────────────────────
 
@@ -15,9 +19,16 @@ export type TaskType =
   | "pattern-validation"
   | "playbook-update";
 
-export type StewardshipTaskStatus = "scheduled" | "pending" | "in-progress" | "completed" | "overdue" | "cancelled";
+export type StewardshipTaskStatus =
+  | "scheduled"
+  | "pending"
+  | "in-progress"
+  | "completed"
+  | "overdue"
+  | "cancelled";
 
-export type RecurrencePattern = "daily" | "weekly" | "monthly" | "quarterly" | "annually" | "custom";
+export type RecurrencePattern =
+  "daily" | "weekly" | "monthly" | "quarterly" | "annually" | "custom";
 
 export interface ScheduledTask {
   id: string;
@@ -61,7 +72,7 @@ export interface StewardshipStats {
 
 // ── Stewardship Storage ────────────────────────────────────
 
-const DATA_DIR = join(import.meta.dirname, "..", "..", "data");
+const DATA_DIR = join(__dirname, "..", "data");
 const TASKS_FILE = join(DATA_DIR, "scheduled-tasks.json");
 const EXECUTIONS_FILE = join(DATA_DIR, "task-executions.json");
 
@@ -103,7 +114,7 @@ export function createScheduledTask(
   recurrence: RecurrencePattern = "monthly",
   assignedTo?: string,
   dueDate?: string,
-  metadata: Record<string, unknown> = {}
+  metadata: Record<string, unknown> = {},
 ): ScheduledTask {
   const tasks = readTasksData();
   const now = new Date().toISOString();
@@ -142,13 +153,15 @@ export function getScheduledTasksByType(type: TaskType): ScheduledTask[] {
   return readTasksData().filter((t) => t.type === type);
 }
 
-export function getScheduledTasksByStatus(status: StewardshipTaskStatus): ScheduledTask[] {
+export function getScheduledTasksByStatus(
+  status: StewardshipTaskStatus,
+): ScheduledTask[] {
   return readTasksData().filter((t) => t.status === status);
 }
 
 export function updateScheduledTask(
   id: string,
-  updates: Partial<Omit<ScheduledTask, "id" | "created">>
+  updates: Partial<Omit<ScheduledTask, "id" | "created">>,
 ): ScheduledTask {
   const tasks = readTasksData();
   const index = tasks.findIndex((t) => t.id === id);
@@ -166,7 +179,10 @@ export function updateScheduledTask(
   return tasks[index];
 }
 
-export function completeScheduledTask(id: string, output?: string): ScheduledTask {
+export function completeScheduledTask(
+  id: string,
+  output?: string,
+): ScheduledTask {
   const task = updateScheduledTask(id, {
     status: "completed",
     completedDate: new Date().toISOString(),
@@ -209,7 +225,7 @@ export function completeTaskExecution(
   status: "success" | "failure" | "partial",
   output?: string,
   errors?: string[],
-  metrics?: Record<string, number>
+  metrics?: Record<string, number>,
 ): TaskExecution {
   const executions = readExecutionsData();
   const index = executions.findIndex((e) => e.id === executionId);
@@ -280,7 +296,10 @@ export function getStewardshipStats(): StewardshipStats {
     byStatus[task.status]++;
     byType[task.type]++;
 
-    if (task.status === "overdue" || (task.dueDate && new Date(task.dueDate) < now)) {
+    if (
+      task.status === "overdue" ||
+      (task.dueDate && new Date(task.dueDate) < now)
+    ) {
       overdueCount++;
     }
 
@@ -295,7 +314,8 @@ export function getStewardshipStats(): StewardshipStats {
 
   const completedCount = byStatus.completed;
   const totalCount = tasks.length - byStatus.cancelled;
-  const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+  const completionRate =
+    totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return {
     totalTasks: tasks.length,
@@ -381,8 +401,8 @@ export function createDefaultStewardshipTasks(): ScheduledTask[] {
       new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
       "quarterly",
       undefined,
-      new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString()
-    )
+      new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+    ),
   );
 
   // Annual Report - Annually
@@ -394,8 +414,8 @@ export function createDefaultStewardshipTasks(): ScheduledTask[] {
       new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
       "annually",
       undefined,
-      new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString()
-    )
+      new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+    ),
   );
 
   // Knowledge Review - Monthly
@@ -407,8 +427,8 @@ export function createDefaultStewardshipTasks(): ScheduledTask[] {
       new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
       "monthly",
       undefined,
-      new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-    )
+      new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    ),
   );
 
   // Broken Reference Detection - Weekly
@@ -420,8 +440,8 @@ export function createDefaultStewardshipTasks(): ScheduledTask[] {
       new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       "weekly",
       undefined,
-      new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
-    )
+      new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    ),
   );
 
   // Succession Review - Quarterly
@@ -433,8 +453,8 @@ export function createDefaultStewardshipTasks(): ScheduledTask[] {
       new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
       "quarterly",
       undefined,
-      new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString()
-    )
+      new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+    ),
   );
 
   return tasks;

@@ -18,19 +18,10 @@ import {
   analyzePatterns,
   generateLearningReport,
 } from "./organizational-learning";
-import {
-  generatePredictions,
-  assessRisks,
-} from "./predictive-intelligence";
-import {
-  getMissions,
-} from "./forest";
-import {
-  getResolutions,
-} from "./governance";
-import {
-  getActionItems,
-} from "./action-items";
+import { generatePredictions, assessRisks } from "./predictive-intelligence";
+import { getMissions } from "./forest";
+import { getResolutions } from "./governance";
+import { getActionItems } from "./action-items";
 
 // ── Playbook Types ─────────────────────────────────────────
 
@@ -39,7 +30,14 @@ export interface Playbook {
   name: string;
   description: string;
   missionType: string;
-  domain: "forest" | "heritage" | "research" | "volunteer" | "governance" | "knowledge" | "cross-domain";
+  domain:
+    | "forest"
+    | "heritage"
+    | "research"
+    | "volunteer"
+    | "governance"
+    | "knowledge"
+    | "cross-domain";
   version: string;
   lastUpdated: string;
   confidence: number;
@@ -83,19 +81,25 @@ export function generatePlaybooks(): Playbook[] {
 
   // Forest Mission Playbook
   const forestPatterns = patterns.filter((p) => p.patternType === "mission");
-  const forestLessons = lessons.filter((l) => l.category === "mission");
+  const forestLessons = lessons.filter((l) => l.sourceType === "mission");
 
   playbooks.push({
     id: "playbook-forest-mission",
     name: "Forest Mission Playbook",
-    description: "Reusable guidance for forest conservation and restoration missions",
+    description:
+      "Reusable guidance for forest conservation and restoration missions",
     missionType: "forest-conservation",
     domain: "forest",
     version: "1.0.0",
     lastUpdated: new Date().toISOString(),
-    confidence: forestPatterns.length > 0
-      ? Math.round(forestPatterns.reduce((sum, p) => sum + p.confidence, 0) / forestPatterns.length * 100) / 100
-      : 0.5,
+    confidence:
+      forestPatterns.length > 0
+        ? Math.round(
+            (forestPatterns.reduce((sum, p) => sum + p.confidence, 0) /
+              forestPatterns.length) *
+              100,
+          ) / 100
+        : 0.5,
     sourceCount: forestPatterns.length + forestLessons.length,
     tags: ["forest", "conservation", "restoration", "biodiversity"],
     phases: [
@@ -113,7 +117,10 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Forest Manager",
             duration: "1 week",
             dependencies: [],
-            successIndicators: ["Assessment report completed", "Baseline data collected"],
+            successIndicators: [
+              "Assessment report completed",
+              "Baseline data collected",
+            ],
           },
           {
             id: "task-1.2",
@@ -125,7 +132,10 @@ export function generatePlaybooks(): Playbook[] {
             successIndicators: ["Stakeholder map created", "MOUs signed"],
           },
         ],
-        decisions: decisions.filter((d) => d.decisionType === "mission").map((d) => d.id).slice(0, 2),
+        decisions: decisions
+          .filter((d) => d.decisionType === "mission")
+          .map((d) => d.id)
+          .slice(0, 2),
         evidence: [],
       },
       {
@@ -142,16 +152,23 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Field Team",
             duration: "2-3 months",
             dependencies: ["task-1.1", "task-1.2"],
-            successIndicators: ["Survival rate > 80%", "Species diversity maintained"],
+            successIndicators: [
+              "Survival rate > 80%",
+              "Species diversity maintained",
+            ],
           },
           {
             id: "task-2.2",
             name: "Community Training",
-            description: "Train local communities in sustainable forest management",
+            description:
+              "Train local communities in sustainable forest management",
             responsible: "Training Lead",
             duration: "1 month",
             dependencies: ["task-1.2"],
-            successIndicators: ["Training sessions completed", "Participants certified"],
+            successIndicators: [
+              "Training sessions completed",
+              "Participants certified",
+            ],
           },
         ],
         decisions: [],
@@ -171,7 +188,10 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Research Lead",
             duration: "Ongoing",
             dependencies: ["task-2.1"],
-            successIndicators: ["Monitoring reports generated", "Data updated quarterly"],
+            successIndicators: [
+              "Monitoring reports generated",
+              "Data updated quarterly",
+            ],
           },
           {
             id: "task-3.2",
@@ -199,8 +219,12 @@ export function generatePlaybooks(): Playbook[] {
   });
 
   // Governance Mission Playbook
-  const governancePatterns = patterns.filter((p) => p.patternType === "governance");
-  const governanceLessons = lessons.filter((l) => l.category === "governance");
+  const governancePatterns = patterns.filter(
+    (p) => p.patternType === "governance",
+  );
+  const governanceLessons = lessons.filter(
+    (l) => l.sourceType === "policy" || l.sourceType === "resolution",
+  );
 
   playbooks.push({
     id: "playbook-governance-mission",
@@ -210,9 +234,14 @@ export function generatePlaybooks(): Playbook[] {
     domain: "governance",
     version: "1.0.0",
     lastUpdated: new Date().toISOString(),
-    confidence: governancePatterns.length > 0
-      ? Math.round(governancePatterns.reduce((sum, p) => sum + p.confidence, 0) / governancePatterns.length * 100) / 100
-      : 0.5,
+    confidence:
+      governancePatterns.length > 0
+        ? Math.round(
+            (governancePatterns.reduce((sum, p) => sum + p.confidence, 0) /
+              governancePatterns.length) *
+              100,
+          ) / 100
+        : 0.5,
     sourceCount: governancePatterns.length + governanceLessons.length,
     tags: ["governance", "policy", "board", "resolutions"],
     phases: [
@@ -230,7 +259,10 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Secretary",
             duration: "1 week",
             dependencies: [],
-            successIndicators: ["Agenda finalized", "Supporting documents distributed"],
+            successIndicators: [
+              "Agenda finalized",
+              "Supporting documents distributed",
+            ],
           },
           {
             id: "task-1.2",
@@ -268,10 +300,16 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Secretary",
             duration: "1 day",
             dependencies: ["task-2.1"],
-            successIndicators: ["Resolutions documented", "Action items assigned"],
+            successIndicators: [
+              "Resolutions documented",
+              "Action items assigned",
+            ],
           },
         ],
-        decisions: decisions.filter((d) => d.decisionType === "policy").map((d) => d.id).slice(0, 2),
+        decisions: decisions
+          .filter((d) => d.decisionType === "policy")
+          .map((d) => d.id)
+          .slice(0, 2),
         evidence: [],
       },
       {
@@ -288,7 +326,10 @@ export function generatePlaybooks(): Playbook[] {
             responsible: "Action Owners",
             duration: "Varies",
             dependencies: ["task-2.2"],
-            successIndicators: ["Action items completed on time", "Progress reported"],
+            successIndicators: [
+              "Action items completed on time",
+              "Progress reported",
+            ],
           },
           {
             id: "task-3.2",
@@ -343,11 +384,19 @@ export function getPlaybookSummary(): {
 } {
   const playbooks = generatePlaybooks();
   const domains = new Set(playbooks.map((p) => p.domain)).size;
-  const avgConfidence = playbooks.length > 0
-    ? Math.round((playbooks.reduce((sum, p) => sum + p.confidence, 0) / playbooks.length) * 100) / 100
-    : 0;
+  const avgConfidence =
+    playbooks.length > 0
+      ? Math.round(
+          (playbooks.reduce((sum, p) => sum + p.confidence, 0) /
+            playbooks.length) *
+            100,
+        ) / 100
+      : 0;
   const totalPhases = playbooks.reduce((sum, p) => sum + p.phases.length, 0);
-  const totalTasks = playbooks.reduce((sum, p) => sum + p.phases.reduce((sum, ph) => sum + ph.tasks.length, 0), 0);
+  const totalTasks = playbooks.reduce(
+    (sum, p) => sum + p.phases.reduce((sum, ph) => sum + ph.tasks.length, 0),
+    0,
+  );
 
   return {
     totalPlaybooks: playbooks.length,

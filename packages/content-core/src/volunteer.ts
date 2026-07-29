@@ -31,7 +31,8 @@ export interface Skill {
   created: string;
 }
 
-export type TrainingStatus = "enrolled" | "in-progress" | "completed" | "expired";
+export type TrainingStatus =
+  "enrolled" | "in-progress" | "completed" | "expired";
 
 export interface Training {
   id: string;
@@ -51,7 +52,8 @@ export interface Training {
 
 export type MissionType = "forest" | "heritage" | "research";
 
-export type AssignmentStatus = "assigned" | "active" | "completed" | "withdrawn";
+export type AssignmentStatus =
+  "assigned" | "active" | "completed" | "withdrawn";
 
 export interface MissionAssignment {
   id: string;
@@ -69,7 +71,8 @@ export interface MissionAssignment {
   updated: string;
 }
 
-export type VolunteerTaskStatus = "pending" | "in-progress" | "completed" | "verified";
+export type VolunteerTaskStatus =
+  "pending" | "in-progress" | "completed" | "verified";
 
 export interface Participation {
   id: string;
@@ -79,14 +82,15 @@ export interface Participation {
   missionId: string;
   task: string;
   description: string;
-  status: TaskStatus;
+  status: VolunteerTaskStatus;
   hours: number;
   date: string;
   verifiedBy?: string;
   created: string;
 }
 
-export type RecognitionType = "certificate" | "milestone" | "badge" | "commendation";
+export type RecognitionType =
+  "certificate" | "milestone" | "badge" | "commendation";
 
 export interface Recognition {
   id: string;
@@ -122,7 +126,11 @@ function genId(prefix: string): string {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
 }
 
-function loadFiles<T>(pattern: string, cache: T[] | null, setter: (v: T[]) => void): T[] {
+function loadFiles<T>(
+  pattern: string,
+  cache: T[] | null,
+  setter: (v: T[]) => void,
+): T[] {
   if (cache) return cache;
   ensureDir(VOLUNTEER_DIR);
   const files = listDir(VOLUNTEER_DIR).filter(
@@ -145,7 +153,9 @@ function saveItem<T extends { id: string }>(prefix: string, item: T): void {
 let _volunteersCache: Volunteer[] | null = null;
 
 function loadVolunteers(): Volunteer[] {
-  return loadFiles("vol-", _volunteersCache, (v) => { _volunteersCache = v; });
+  return loadFiles("vol-", _volunteersCache, (v) => {
+    _volunteersCache = v;
+  });
 }
 
 export function getVolunteers(): Volunteer[] {
@@ -195,7 +205,9 @@ export function createVolunteer(data: {
 let _skillsCache: Skill[] | null = null;
 
 function loadSkills(): Skill[] {
-  return loadFiles("skill-", _skillsCache, (v) => { _skillsCache = v; });
+  return loadFiles("skill-", _skillsCache, (v) => {
+    _skillsCache = v;
+  });
 }
 
 export function getSkills(): Skill[] {
@@ -231,7 +243,9 @@ export function createSkill(data: {
 let _trainingCache: Training[] | null = null;
 
 function loadTraining(): Training[] {
-  return loadFiles("train-", _trainingCache, (v) => { _trainingCache = v; });
+  return loadFiles("train-", _trainingCache, (v) => {
+    _trainingCache = v;
+  });
 }
 
 export function getTrainings(): Training[] {
@@ -279,7 +293,9 @@ export function createTraining(data: {
 let _assignmentsCache: MissionAssignment[] | null = null;
 
 function loadAssignments(): MissionAssignment[] {
-  return loadFiles("assign-", _assignmentsCache, (v) => { _assignmentsCache = v; });
+  return loadFiles("assign-", _assignmentsCache, (v) => {
+    _assignmentsCache = v;
+  });
 }
 
 export function getAssignments(): MissionAssignment[] {
@@ -290,7 +306,9 @@ export function getAssignment(id: string): MissionAssignment | undefined {
   return loadAssignments().find((a) => a.id === id);
 }
 
-export function getAssignmentsByVolunteer(volunteerId: string): MissionAssignment[] {
+export function getAssignmentsByVolunteer(
+  volunteerId: string,
+): MissionAssignment[] {
   return loadAssignments().filter((a) => a.volunteerId === volunteerId);
 }
 
@@ -320,7 +338,11 @@ export function createAssignment(data: {
 
   const volunteer = getVolunteer(data.volunteerId);
   if (volunteer) {
-    const updated = { ...volunteer, missionIds: [...volunteer.missionIds, assignment.id], updated: now };
+    const updated = {
+      ...volunteer,
+      missionIds: [...volunteer.missionIds, assignment.id],
+      updated: now,
+    };
     saveItem("vol", updated);
     _volunteersCache = null;
   }
@@ -339,7 +361,9 @@ export function createAssignment(data: {
 let _participationCache: Participation[] | null = null;
 
 function loadParticipation(): Participation[] {
-  return loadFiles("part-", _participationCache, (v) => { _participationCache = v; });
+  return loadFiles("part-", _participationCache, (v) => {
+    _participationCache = v;
+  });
 }
 
 export function getParticipations(): Participation[] {
@@ -350,7 +374,9 @@ export function getParticipation(id: string): Participation | undefined {
   return loadParticipation().find((p) => p.id === id);
 }
 
-export function getParticipationsByVolunteer(volunteerId: string): Participation[] {
+export function getParticipationsByVolunteer(
+  volunteerId: string,
+): Participation[] {
   return loadParticipation().filter((p) => p.volunteerId === volunteerId);
 }
 
@@ -383,7 +409,11 @@ export function createParticipation(data: {
 
   const assignment = getAssignment(data.assignmentId);
   if (assignment) {
-    const updated = { ...assignment, hoursLogged: assignment.hoursLogged + data.hours, updated: now };
+    const updated = {
+      ...assignment,
+      hoursLogged: assignment.hoursLogged + data.hours,
+      updated: now,
+    };
     saveItem("assign", updated);
     _assignmentsCache = null;
   }
@@ -396,7 +426,9 @@ export function createParticipation(data: {
 let _recognitionCache: Recognition[] | null = null;
 
 function loadRecognition(): Recognition[] {
-  return loadFiles("recog-", _recognitionCache, (v) => { _recognitionCache = v; });
+  return loadFiles("recog-", _recognitionCache, (v) => {
+    _recognitionCache = v;
+  });
 }
 
 export function getRecognitions(): Recognition[] {
@@ -456,21 +488,32 @@ export function getVolunteerStats(): VolunteerStats {
   const recognitions = loadRecognition();
 
   const volunteersByStatus: Record<VolunteerStatus, number> = {
-    active: 0, inactive: 0, "on-mission": 0, training: 0,
+    active: 0,
+    inactive: 0,
+    "on-mission": 0,
+    training: 0,
   };
   volunteers.forEach((v) => volunteersByStatus[v.status]++);
 
   const trainingsByStatus: Record<TrainingStatus, number> = {
-    enrolled: 0, "in-progress": 0, completed: 0, expired: 0,
+    enrolled: 0,
+    "in-progress": 0,
+    completed: 0,
+    expired: 0,
   };
   training.forEach((t) => trainingsByStatus[t.status]++);
 
   const assignmentsByMissionType: Record<MissionType, number> = {
-    forest: 0, heritage: 0, research: 0,
+    forest: 0,
+    heritage: 0,
+    research: 0,
   };
   assignments.forEach((a) => assignmentsByMissionType[a.missionType]++);
 
-  const totalHoursLogged = assignments.reduce((sum, a) => sum + a.hoursLogged, 0);
+  const totalHoursLogged = assignments.reduce(
+    (sum, a) => sum + a.hoursLogged,
+    0,
+  );
 
   return {
     totalVolunteers: volunteers.length,

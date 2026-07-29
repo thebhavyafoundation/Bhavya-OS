@@ -59,7 +59,7 @@ export function getActionItemsByAssignee(assignee: string): ActionItem[] {
 export function getOverdueActionItems(): ActionItem[] {
   const now = new Date().toISOString();
   return loadActions().filter(
-    (a) => a.dueDate < now && !["completed", "cancelled"].includes(a.status)
+    (a) => a.dueDate < now && !["completed", "cancelled"].includes(a.status),
   );
 }
 
@@ -69,11 +69,16 @@ export function getActionItemsDueSoon(days: number = 7): ActionItem[] {
   const nowStr = now.toISOString();
   const futureStr = future.toISOString();
   return loadActions().filter(
-    (a) => a.dueDate >= nowStr && a.dueDate <= futureStr && !["completed", "cancelled"].includes(a.status)
+    (a) =>
+      a.dueDate >= nowStr &&
+      a.dueDate <= futureStr &&
+      !["completed", "cancelled"].includes(a.status),
   );
 }
 
-export function createActionItem(action: Omit<ActionItem, "created" | "updated">): ActionItem {
+export function createActionItem(
+  action: Omit<ActionItem, "created" | "updated">,
+): ActionItem {
   const actions = loadActions();
   const newAction: ActionItem = {
     ...action,
@@ -86,16 +91,28 @@ export function createActionItem(action: Omit<ActionItem, "created" | "updated">
   return newAction;
 }
 
-export function updateActionItem(id: string, updates: Partial<ActionItem>): ActionItem | null {
+export function updateActionItem(
+  id: string,
+  updates: Partial<ActionItem>,
+): ActionItem | null {
   const actions = loadActions();
   const index = actions.findIndex((a) => a.id === id);
   if (index === -1) return null;
-  actions[index] = { ...actions[index], ...updates, updated: new Date().toISOString() };
+  actions[index] = {
+    ...actions[index],
+    ...updates,
+    updated: new Date().toISOString(),
+  };
   saveActions(actions);
   return actions[index];
 }
 
-export function advanceActionItem(id: string, toStatus: ActionItemStatus, actor: string, notes?: string): ActionItem | null {
+export function advanceActionItem(
+  id: string,
+  toStatus: ActionItemStatus,
+  actor: string,
+  notes?: string,
+): ActionItem | null {
   const actions = loadActions();
   const index = actions.findIndex((a) => a.id === id);
   if (index === -1) return null;
@@ -105,11 +122,11 @@ export function advanceActionItem(id: string, toStatus: ActionItemStatus, actor:
 
   // Valid transitions
   const validTransitions: Record<ActionItemStatus, ActionItemStatus[]> = {
-    "pending": ["in-progress", "cancelled"],
+    pending: ["in-progress", "cancelled"],
     "in-progress": ["completed", "cancelled", "overdue"],
-    "completed": [],
-    "cancelled": [],
-    "overdue": ["in-progress", "completed", "cancelled"],
+    completed: [],
+    cancelled: [],
+    overdue: ["in-progress", "completed", "cancelled"],
   };
 
   if (!validTransitions[fromStatus]?.includes(toStatus)) {
@@ -119,7 +136,10 @@ export function advanceActionItem(id: string, toStatus: ActionItemStatus, actor:
   actions[index] = {
     ...action,
     status: toStatus,
-    completedDate: toStatus === "completed" ? new Date().toISOString() : action.completedDate,
+    completedDate:
+      toStatus === "completed"
+        ? new Date().toISOString()
+        : action.completedDate,
     notes: notes ? [...action.notes, `${actor}: ${notes}`] : action.notes,
     updated: new Date().toISOString(),
   };
@@ -155,13 +175,14 @@ export function getActionItemStats(): ActionItemStats {
   }
 
   const overdue = actions.filter(
-    (a) => a.dueDate < now && !["completed", "cancelled"].includes(a.status)
+    (a) => a.dueDate < now && !["completed", "cancelled"].includes(a.status),
   ).length;
 
   const completedActions = actions.filter((a) => a.status === "completed");
-  const completionRate = actions.length > 0
-    ? Math.round((completedActions.length / actions.length) * 100)
-    : 100;
+  const completionRate =
+    actions.length > 0
+      ? Math.round((completedActions.length / actions.length) * 100)
+      : 100;
 
   let avgDaysToComplete = 0;
   if (completedActions.length > 0) {
@@ -170,7 +191,9 @@ export function getActionItemStats(): ActionItemStats {
       const completed = new Date(a.completedDate || a.updated).getTime();
       return sum + (completed - created);
     }, 0);
-    avgDaysToComplete = Math.round(totalTime / completedActions.length / (1000 * 60 * 60 * 24));
+    avgDaysToComplete = Math.round(
+      totalTime / completedActions.length / (1000 * 60 * 60 * 24),
+    );
   }
 
   return {
@@ -185,11 +208,21 @@ export function getActionItemStats(): ActionItemStats {
 
 // ── Actions from Resolutions ──────────────────────────────
 
-export function createActionItemsFromResolution(resolutionId: string, actions: Array<{ title: string; description: string; assignedTo: string; priority: "high" | "medium" | "low"; dueDate: string }>): ActionItem[] {
+export function createActionItemsFromResolution(
+  resolutionId: string,
+  actions: Array<{
+    title: string;
+    description: string;
+    assignedTo: string;
+    priority: "high" | "medium" | "low";
+    dueDate: string;
+  }>,
+): ActionItem[] {
   const createdActions: ActionItem[] = [];
 
   for (const action of actions) {
     const newAction = createActionItem({
+      id: `action-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       title: action.title,
       description: action.description,
       source: "resolution",
@@ -200,6 +233,7 @@ export function createActionItemsFromResolution(resolutionId: string, actions: A
       dueDate: action.dueDate,
       notes: [],
       dependencies: [],
+      evidenceIds: [],
     });
     createdActions.push(newAction);
   }

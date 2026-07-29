@@ -1,5 +1,9 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // ── Succession Support Types ───────────────────────────────
 
@@ -7,7 +11,14 @@ export interface Role {
   id: string;
   name: string;
   description: string;
-  domain: "forest" | "heritage" | "research" | "volunteer" | "governance" | "knowledge" | "cross-domain";
+  domain:
+    | "forest"
+    | "heritage"
+    | "research"
+    | "volunteer"
+    | "governance"
+    | "knowledge"
+    | "cross-domain";
   status: "active" | "vacant" | "transitioning";
   currentHolder?: string;
   responsibilities: string[];
@@ -66,7 +77,7 @@ export interface SuccessionStats {
 
 // ── Succession Storage ─────────────────────────────────────
 
-const DATA_DIR = join(import.meta.dirname, "..", "..", "data");
+const DATA_DIR = join(__dirname, "..", "data");
 const ROLES_FILE = join(DATA_DIR, "roles.json");
 const TRANSITIONS_FILE = join(DATA_DIR, "transitions.json");
 
@@ -88,7 +99,9 @@ function readTransitionsData(): TransitionRecord[] {
   if (!existsSync(TRANSITIONS_FILE)) {
     return [];
   }
-  return JSON.parse(readFileSync(TRANSITIONS_FILE, "utf-8")) as TransitionRecord[];
+  return JSON.parse(
+    readFileSync(TRANSITIONS_FILE, "utf-8"),
+  ) as TransitionRecord[];
 }
 
 function writeTransitionsData(data: TransitionRecord[]): void {
@@ -108,7 +121,7 @@ export function createRole(
   keyDecisions: string[] = [],
   activeWork: string[] = [],
   recommendedReading: string[] = [],
-  institutionalContext: string = ""
+  institutionalContext: string = "",
 ): Role {
   const roles = readRolesData();
   const now = new Date().toISOString();
@@ -151,7 +164,7 @@ export function getRolesByStatus(status: Role["status"]): Role[] {
 
 export function updateRole(
   id: string,
-  updates: Partial<Omit<Role, "id" | "created">>
+  updates: Partial<Omit<Role, "id" | "created">>,
 ): Role {
   const roles = readRolesData();
   const index = roles.findIndex((r) => r.id === id);
@@ -181,7 +194,7 @@ export function transitionHolder(
   newHolderName: string,
   knowledgeTransferred: string[] = [],
   lessonsLearned: string[] = [],
-  notes: string = ""
+  notes: string = "",
 ): { role: Role; transition: TransitionRecord } {
   const role = getRoleById(roleId);
   if (!role) {
@@ -226,7 +239,7 @@ export function createSuccessionPlan(
   transitionTimeline: string = "To be determined",
   keyKnowledge: string[] = [],
   criticalRelationships: string[] = [],
-  riskFactors: string[] = []
+  riskFactors: string[] = [],
 ): SuccessionPlan {
   const roles = readRolesData();
   const roleIndex = roles.findIndex((r) => r.id === roleId);
@@ -256,7 +269,7 @@ export function createSuccessionPlan(
 
 export function updateSuccessionPlan(
   roleId: string,
-  updates: Partial<Omit<SuccessionPlan, "id" | "roleId" | "created">>
+  updates: Partial<Omit<SuccessionPlan, "id" | "roleId" | "created">>,
 ): SuccessionPlan {
   const roles = readRolesData();
   const roleIndex = roles.findIndex((r) => r.id === roleId);
@@ -300,7 +313,8 @@ export function getSuccessionStats(): SuccessionStats {
     totalRoles: roles.length,
     activeRoles: roles.filter((r) => r.status === "active").length,
     vacantRoles: roles.filter((r) => r.status === "vacant").length,
-    transitioningRoles: roles.filter((r) => r.status === "transitioning").length,
+    transitioningRoles: roles.filter((r) => r.status === "transitioning")
+      .length,
     rolesWithSuccessionPlan: roles.filter((r) => r.successionPlan).length,
     rolesWithoutSuccessionPlan: roles.filter((r) => !r.successionPlan).length,
     totalTransitions: transitions.length,
@@ -325,9 +339,10 @@ export function assessSuccessionReadiness(): {
   const roles = readRolesData();
   const details = roles.map((role) => {
     const hasPlan = !!role.successionPlan;
-    const readyCandidates = role.successionPlan?.potentialSuccessors.filter(
-      (s) => s.readiness === "ready" || s.readiness === "near-ready"
-    ).length || 0;
+    const readyCandidates =
+      role.successionPlan?.potentialSuccessors.filter(
+        (s) => s.readiness === "ready" || s.readiness === "near-ready",
+      ).length || 0;
 
     let riskLevel: "low" | "medium" | "high" = "low";
     if (!hasPlan) {

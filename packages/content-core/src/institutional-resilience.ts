@@ -1,14 +1,26 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // ── Institutional Resilience Types ─────────────────────────
 
 export interface Dependency {
   id: string;
   sourceId: string;
-  sourceType: "mission" | "role" | "policy" | "knowledge" | "process" | "system";
+  sourceType:
+    "mission" | "role" | "policy" | "knowledge" | "process" | "system";
   targetId: string;
-  targetType: "mission" | "role" | "policy" | "knowledge" | "process" | "system" | "person";
+  targetType:
+    | "mission"
+    | "role"
+    | "policy"
+    | "knowledge"
+    | "process"
+    | "system"
+    | "person";
   type: "requires" | "supports" | "informs" | "governs";
   criticality: "critical" | "important" | "standard";
   description: string;
@@ -17,7 +29,13 @@ export interface Dependency {
 
 export interface ContinuityGap {
   id: string;
-  category: "single-point-of-failure" | "undocumented-knowledge" | "missing-playbook" | "unowned-asset" | "skill-gap" | "dependency-risk";
+  category:
+    | "single-point-of-failure"
+    | "undocumented-knowledge"
+    | "missing-playbook"
+    | "unowned-asset"
+    | "skill-gap"
+    | "dependency-risk";
   title: string;
   description: string;
   affectedEntity: string;
@@ -63,7 +81,7 @@ export interface ResilienceStats {
 
 // ── Resilience Storage ─────────────────────────────────────
 
-const DATA_DIR = join(import.meta.dirname, "..", "..", "data");
+const DATA_DIR = join(__dirname, "..", "data");
 const DEPENDENCIES_FILE = join(DATA_DIR, "dependencies.json");
 const GAPS_FILE = join(DATA_DIR, "continuity-gaps.json");
 
@@ -104,7 +122,7 @@ export function createDependency(
   targetType: Dependency["targetType"],
   type: Dependency["type"],
   criticality: Dependency["criticality"],
-  description: string
+  description: string,
 ): Dependency {
   const dependencies = readDependenciesData();
   const now = new Date().toISOString();
@@ -142,7 +160,9 @@ export function getDependenciesByTarget(targetId: string): Dependency[] {
   return readDependenciesData().filter((d) => d.targetId === targetId);
 }
 
-export function getDependenciesByCriticality(criticality: Dependency["criticality"]): Dependency[] {
+export function getDependenciesByCriticality(
+  criticality: Dependency["criticality"],
+): Dependency[] {
   return readDependenciesData().filter((d) => d.criticality === criticality);
 }
 
@@ -161,7 +181,7 @@ export function createContinuityGap(
   affectedEntity: string,
   affectedType: string,
   severity: ContinuityGap["severity"],
-  mitigation?: string
+  mitigation?: string,
 ): ContinuityGap {
   const gaps = readGapsData();
   const now = new Date().toISOString();
@@ -193,21 +213,27 @@ export function getContinuityGapById(id: string): ContinuityGap | undefined {
   return readGapsData().find((g) => g.id === id);
 }
 
-export function getContinuityGapsByCategory(category: ContinuityGap["category"]): ContinuityGap[] {
+export function getContinuityGapsByCategory(
+  category: ContinuityGap["category"],
+): ContinuityGap[] {
   return readGapsData().filter((g) => g.category === category);
 }
 
-export function getContinuityGapsBySeverity(severity: ContinuityGap["severity"]): ContinuityGap[] {
+export function getContinuityGapsBySeverity(
+  severity: ContinuityGap["severity"],
+): ContinuityGap[] {
   return readGapsData().filter((g) => g.severity === severity);
 }
 
-export function getContinuityGapsByStatus(status: ContinuityGap["status"]): ContinuityGap[] {
+export function getContinuityGapsByStatus(
+  status: ContinuityGap["status"],
+): ContinuityGap[] {
   return readGapsData().filter((g) => g.status === status);
 }
 
 export function updateContinuityGap(
   id: string,
-  updates: Partial<Omit<ContinuityGap, "id" | "identifiedDate">>
+  updates: Partial<Omit<ContinuityGap, "id" | "identifiedDate">>,
 ): ContinuityGap {
   const gaps = readGapsData();
   const index = gaps.findIndex((g) => g.id === id);
@@ -240,7 +266,10 @@ export function resolveGap(id: string): ContinuityGap {
 
 export function buildDependencyMap(): DependencyMap {
   const dependencies = readDependenciesData();
-  const nodeMap = new Map<string, { id: string; type: string; name: string; criticality: string }>();
+  const nodeMap = new Map<
+    string,
+    { id: string; type: string; name: string; criticality: string }
+  >();
 
   // Build nodes from dependencies
   dependencies.forEach((dep) => {
@@ -280,26 +309,44 @@ export function assessResilience(): ResilienceScore {
   const gaps = readGapsData();
 
   // Count critical dependencies
-  const criticalDeps = dependencies.filter((d) => d.criticality === "critical").length;
+  const criticalDeps = dependencies.filter(
+    (d) => d.criticality === "critical",
+  ).length;
   const totalDeps = dependencies.length;
-  const depScore = totalDeps > 0 ? Math.max(0, 100 - (criticalDeps / totalDeps) * 100) : 100;
+  const depScore =
+    totalDeps > 0 ? Math.max(0, 100 - (criticalDeps / totalDeps) * 100) : 100;
 
   // Count gaps
   const criticalGaps = gaps.filter((g) => g.severity === "critical").length;
-  const mitigatedGaps = gaps.filter((g) => g.status === "resolved" || g.status === "mitigating").length;
+  const mitigatedGaps = gaps.filter(
+    (g) => g.status === "resolved" || g.status === "mitigating",
+  ).length;
   const totalGaps = gaps.length;
-  const gapScore = totalGaps > 0 ? Math.max(0, 100 - (criticalGaps / totalGaps) * 100) : 100;
+  const gapScore =
+    totalGaps > 0 ? Math.max(0, 100 - (criticalGaps / totalGaps) * 100) : 100;
 
   // Overall score
-  const overall = Math.round((depScore * 0.6 + gapScore * 0.4));
+  const overall = Math.round(depScore * 0.6 + gapScore * 0.4);
 
   // By category
-  const categories = ["single-point-of-failure", "undocumented-knowledge", "missing-playbook", "unowned-asset", "skill-gap", "dependency-risk"];
+  const categories = [
+    "single-point-of-failure",
+    "undocumented-knowledge",
+    "missing-playbook",
+    "unowned-asset",
+    "skill-gap",
+    "dependency-risk",
+  ];
   const byCategory: Record<string, number> = {};
   categories.forEach((cat) => {
     const catGaps = gaps.filter((g) => g.category === cat);
-    const criticalCatGaps = catGaps.filter((g) => g.severity === "critical").length;
-    byCategory[cat] = catGaps.length > 0 ? Math.max(0, 100 - (criticalCatGaps / catGaps.length) * 100) : 100;
+    const criticalCatGaps = catGaps.filter(
+      (g) => g.severity === "critical",
+    ).length;
+    byCategory[cat] =
+      catGaps.length > 0
+        ? Math.max(0, 100 - (criticalCatGaps / catGaps.length) * 100)
+        : 100;
   });
 
   return {
@@ -378,7 +425,7 @@ export function detectSinglePointOfFailures(): ContinuityGap[] {
         `Entity ${targetId} depends on only one source`,
         targetId,
         "unknown",
-        "medium"
+        "medium",
       );
       gaps.push(gap);
     }
@@ -404,22 +451,86 @@ export function createDefaultDependencies(): Dependency[] {
 
   // Mission dependencies
   dependencies.push(
-    createDependency("forest-mission", "mission", "forest-manager", "role", "requires", "critical", "Forest mission requires a forest manager"),
-    createDependency("forest-mission", "mission", "conservation-policy", "policy", "governs", "critical", "Forest mission governed by conservation policy"),
-    createDependency("heritage-mission", "mission", "heritage-manager", "role", "requires", "critical", "Heritage mission requires a heritage manager"),
-    createDependency("research-mission", "mission", "research-lead", "role", "requires", "critical", "Research mission requires a research lead")
+    createDependency(
+      "forest-mission",
+      "mission",
+      "forest-manager",
+      "role",
+      "requires",
+      "critical",
+      "Forest mission requires a forest manager",
+    ),
+    createDependency(
+      "forest-mission",
+      "mission",
+      "conservation-policy",
+      "policy",
+      "governs",
+      "critical",
+      "Forest mission governed by conservation policy",
+    ),
+    createDependency(
+      "heritage-mission",
+      "mission",
+      "heritage-manager",
+      "role",
+      "requires",
+      "critical",
+      "Heritage mission requires a heritage manager",
+    ),
+    createDependency(
+      "research-mission",
+      "mission",
+      "research-lead",
+      "role",
+      "requires",
+      "critical",
+      "Research mission requires a research lead",
+    ),
   );
 
   // Knowledge dependencies
   dependencies.push(
-    createDependency("knowledge-graph", "knowledge", "content-core", "system", "requires", "critical", "Knowledge graph requires content-core"),
-    createDependency("search-index", "knowledge", "content-core", "system", "requires", "critical", "Search index requires content-core")
+    createDependency(
+      "knowledge-graph",
+      "knowledge",
+      "content-core",
+      "system",
+      "requires",
+      "critical",
+      "Knowledge graph requires content-core",
+    ),
+    createDependency(
+      "search-index",
+      "knowledge",
+      "content-core",
+      "system",
+      "requires",
+      "critical",
+      "Search index requires content-core",
+    ),
   );
 
   // Governance dependencies
   dependencies.push(
-    createDependency("board-meetings", "process", "board-members", "role", "requires", "critical", "Board meetings require board members"),
-    createDependency("policy-review", "process", "compliance-officer", "role", "requires", "important", "Policy review requires compliance officer")
+    createDependency(
+      "board-meetings",
+      "process",
+      "board-members",
+      "role",
+      "requires",
+      "critical",
+      "Board meetings require board members",
+    ),
+    createDependency(
+      "policy-review",
+      "process",
+      "compliance-officer",
+      "role",
+      "requires",
+      "important",
+      "Policy review requires compliance officer",
+    ),
   );
 
   return dependencies;

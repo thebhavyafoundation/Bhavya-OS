@@ -1,19 +1,29 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // ── Knowledge Lifecycle Types ──────────────────────────────
 
 export type KnowledgeState =
-  | "draft"        // Initial creation
-  | "published"    // Active, current knowledge
-  | "reviewed"     // Confirmed still relevant
-  | "archived"     // No longer active, but preserved
-  | "preserved";   // Must never be deleted
+  | "draft" // Initial creation
+  | "published" // Active, current knowledge
+  | "reviewed" // Confirmed still relevant
+  | "archived" // No longer active, but preserved
+  | "preserved"; // Must never be deleted
 
 export interface KnowledgeLifecycle {
   id: string;
   knowledgeId: string;
-  knowledgeType: "document" | "lesson" | "pattern" | "playbook" | "decision-context" | "evidence";
+  knowledgeType:
+    | "document"
+    | "lesson"
+    | "pattern"
+    | "playbook"
+    | "decision-context"
+    | "evidence";
   title: string;
   state: KnowledgeState;
   previousState?: KnowledgeState;
@@ -50,14 +60,16 @@ export interface LifecycleStats {
 
 // ── Knowledge Lifecycle Storage ────────────────────────────
 
-const DATA_DIR = join(import.meta.dirname, "..", "..", "data");
+const DATA_DIR = join(__dirname, "..", "data");
 const LIFECYCLE_FILE = join(DATA_DIR, "knowledge-lifecycle.json");
 
 function readLifecycleData(): KnowledgeLifecycle[] {
   if (!existsSync(LIFECYCLE_FILE)) {
     return [];
   }
-  return JSON.parse(readFileSync(LIFECYCLE_FILE, "utf-8")) as KnowledgeLifecycle[];
+  return JSON.parse(
+    readFileSync(LIFECYCLE_FILE, "utf-8"),
+  ) as KnowledgeLifecycle[];
 }
 
 function writeLifecycleData(data: KnowledgeLifecycle[]): void {
@@ -73,7 +85,7 @@ export function createLifecycleEntry(
   knowledgeId: string,
   knowledgeType: KnowledgeLifecycle["knowledgeType"],
   title: string,
-  reviewCycle: KnowledgeLifecycle["reviewCycle"] = "quarterly"
+  reviewCycle: KnowledgeLifecycle["reviewCycle"] = "quarterly",
 ): KnowledgeLifecycle {
   const entries = readLifecycleData();
   const now = new Date().toISOString();
@@ -102,11 +114,15 @@ export function getLifecycleEntries(): KnowledgeLifecycle[] {
   return readLifecycleData();
 }
 
-export function getLifecycleEntryById(id: string): KnowledgeLifecycle | undefined {
+export function getLifecycleEntryById(
+  id: string,
+): KnowledgeLifecycle | undefined {
   return readLifecycleData().find((e) => e.id === id);
 }
 
-export function getLifecycleEntryByKnowledgeId(knowledgeId: string): KnowledgeLifecycle | undefined {
+export function getLifecycleEntryByKnowledgeId(
+  knowledgeId: string,
+): KnowledgeLifecycle | undefined {
   return readLifecycleData().find((e) => e.knowledgeId === knowledgeId);
 }
 
@@ -117,7 +133,7 @@ export function transitionState(
   newState: KnowledgeState,
   reviewer: string,
   reason: string,
-  notes: string = ""
+  notes: string = "",
 ): KnowledgeLifecycle {
   const entries = readLifecycleData();
   const index = entries.findIndex((e) => e.id === id);
@@ -164,32 +180,65 @@ export function transitionState(
   return entry;
 }
 
-export function publishLifecycleEntry(knowledgeId: string, reviewer: string): KnowledgeLifecycle {
+export function publishLifecycleEntry(
+  knowledgeId: string,
+  reviewer: string,
+): KnowledgeLifecycle {
   const entry = getLifecycleEntryByKnowledgeId(knowledgeId);
   if (!entry) {
     throw new Error(`No lifecycle entry for knowledge: ${knowledgeId}`);
   }
-  return transitionState(entry.id, "published", reviewer, "Initial publication");
+  return transitionState(
+    entry.id,
+    "published",
+    reviewer,
+    "Initial publication",
+  );
 }
 
-export function reviewKnowledge(id: string, reviewer: string, stillRelevant: boolean, notes: string): KnowledgeLifecycle {
+export function reviewKnowledge(
+  id: string,
+  reviewer: string,
+  stillRelevant: boolean,
+  notes: string,
+): KnowledgeLifecycle {
   const entry = getLifecycleEntryById(id);
   if (!entry) {
     throw new Error(`Lifecycle entry not found: ${id}`);
   }
 
   if (stillRelevant) {
-    return transitionState(id, "reviewed", reviewer, "Confirmed still relevant", notes);
+    return transitionState(
+      id,
+      "reviewed",
+      reviewer,
+      "Confirmed still relevant",
+      notes,
+    );
   } else {
-    return transitionState(id, "archived", reviewer, "No longer relevant", notes);
+    return transitionState(
+      id,
+      "archived",
+      reviewer,
+      "No longer relevant",
+      notes,
+    );
   }
 }
 
-export function archiveKnowledge(id: string, reviewer: string, reason: string): KnowledgeLifecycle {
+export function archiveKnowledge(
+  id: string,
+  reviewer: string,
+  reason: string,
+): KnowledgeLifecycle {
   return transitionState(id, "archived", reviewer, reason);
 }
 
-export function preserveKnowledge(id: string, reviewer: string, reason: string): KnowledgeLifecycle {
+export function preserveKnowledge(
+  id: string,
+  reviewer: string,
+  reason: string,
+): KnowledgeLifecycle {
   return transitionState(id, "preserved", reviewer, reason);
 }
 
@@ -215,15 +264,22 @@ export function getReviewStats(): {
   upcomingMonth: number;
 } {
   const entries = readLifecycleData().filter(
-    (e) => e.state !== "archived" && e.state !== "preserved"
+    (e) => e.state !== "archived" && e.state !== "preserved",
   );
   const now = new Date();
   const monthFromNow = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  const needsReview = entries.filter((e) => e.nextReview && new Date(e.nextReview) <= now);
-  const overdue = needsReview.filter((e) => e.nextReview && new Date(e.nextReview) < now);
+  const needsReview = entries.filter(
+    (e) => e.nextReview && new Date(e.nextReview) <= now,
+  );
+  const overdue = needsReview.filter(
+    (e) => e.nextReview && new Date(e.nextReview) < now,
+  );
   const upcomingMonth = entries.filter(
-    (e) => e.nextReview && new Date(e.nextReview) > now && new Date(e.nextReview) <= monthFromNow
+    (e) =>
+      e.nextReview &&
+      new Date(e.nextReview) > now &&
+      new Date(e.nextReview) <= monthFromNow,
   );
 
   return {
@@ -260,7 +316,7 @@ export function getLifecycleStats(): LifecycleStats {
       e.state !== "archived" &&
       e.state !== "preserved" &&
       e.nextReview &&
-      new Date(e.nextReview) <= now
+      new Date(e.nextReview) <= now,
   ).length;
 
   return {
@@ -296,7 +352,9 @@ export function removeDependency(entryId: string, dependencyId: string): void {
     throw new Error(`Lifecycle entry not found: ${entryId}`);
   }
 
-  entries[index].dependencies = entries[index].dependencies.filter((d) => d !== dependencyId);
+  entries[index].dependencies = entries[index].dependencies.filter(
+    (d) => d !== dependencyId,
+  );
   entries[index].lastUpdated = new Date().toISOString();
   writeLifecycleData(entries);
 }
@@ -314,7 +372,10 @@ function isValidTransition(from: KnowledgeState, to: KnowledgeState): boolean {
   return validTransitions[from].includes(to);
 }
 
-function computeNextReview(from: string, cycle: KnowledgeLifecycle["reviewCycle"]): string {
+function computeNextReview(
+  from: string,
+  cycle: KnowledgeLifecycle["reviewCycle"],
+): string {
   const date = new Date(from);
   switch (cycle) {
     case "monthly":

@@ -11,19 +11,9 @@ import {
   getResolutions,
   getResolutionsByMeeting,
 } from "./governance";
-import {
-  getActionItems,
-  getActionItemsBySource,
-} from "./action-items";
-import {
-  getMissions,
-  getProjects,
-  getPolicies,
-} from "./index";
-import {
-  getEvidence,
-  getEvidenceByActionItem,
-} from "./traceability";
+import { getActionItems, getActionItemsBySource } from "./action-items";
+import { getMissions, getProjects, getPolicies } from "./index";
+import { getEvidence, getEvidenceByActionItem } from "./traceability";
 
 // ── Impact Report Types ────────────────────────────────────
 
@@ -75,7 +65,8 @@ export interface KnowledgeImpact {
 
 export function generateImpactReport(period?: string): ImpactReport {
   const now = new Date();
-  const reportPeriod = period || `${now.getFullYear()}-Q${Math.ceil((now.getMonth() + 1) / 3)}`;
+  const reportPeriod =
+    period || `${now.getFullYear()}-Q${Math.ceil((now.getMonth() + 1) / 3)}`;
 
   const meetings = getBoardMeetings();
   const resolutions = getResolutions();
@@ -86,16 +77,24 @@ export function generateImpactReport(period?: string): ImpactReport {
 
   // Calculate completion rate
   const completedActions = actionItems.filter((a) => a.status === "completed");
-  const completionRate = actionItems.length > 0
-    ? Math.round((completedActions.length / actionItems.length) * 100)
-    : 100;
+  const completionRate =
+    actionItems.length > 0
+      ? Math.round((completedActions.length / actionItems.length) * 100)
+      : 100;
 
   // Calculate implementation rate
-  const approvedResolutions = resolutions.filter((r) => r.status === "approved" || r.status === "implemented");
-  const implementedResolutions = resolutions.filter((r) => r.status === "implemented");
-  const implementationRate = approvedResolutions.length > 0
-    ? Math.round((implementedResolutions.length / approvedResolutions.length) * 100)
-    : 100;
+  const approvedResolutions = resolutions.filter(
+    (r) => r.status === "approved" || r.status === "implemented",
+  );
+  const implementedResolutions = resolutions.filter(
+    (r) => r.status === "implemented",
+  );
+  const implementationRate =
+    approvedResolutions.length > 0
+      ? Math.round(
+          (implementedResolutions.length / approvedResolutions.length) * 100,
+        )
+      : 100;
 
   // Calculate average time to implement
   let avgTimeToImplement = 0;
@@ -105,12 +104,18 @@ export function generateImpactReport(period?: string): ImpactReport {
       const implemented = new Date(r.implementedDate || r.updated).getTime();
       return sum + (implemented - created);
     }, 0);
-    avgTimeToImplement = Math.round(totalTime / implementedResolutions.length / (1000 * 60 * 60 * 24));
+    avgTimeToImplement = Math.round(
+      totalTime / implementedResolutions.length / (1000 * 60 * 60 * 24),
+    );
   }
 
   // Count affected domains
-  const missionsAffected = new Set(actionItems.filter((a) => a.missionId).map((a) => a.missionId)).size;
-  const projectsAffected = new Set(actionItems.filter((a) => a.projectId).map((a) => a.projectId)).size;
+  const missionsAffected = new Set(
+    actionItems.filter((a) => a.missionId).map((a) => a.missionId),
+  ).size;
+  const projectsAffected = new Set(
+    actionItems.filter((a) => a.projectId).map((a) => a.projectId),
+  ).size;
 
   // Count evidence
   const evidenceCount = evidence.length;
@@ -121,12 +126,15 @@ export function generateImpactReport(period?: string): ImpactReport {
     completionRate,
     implementationRate,
     evidenceCount,
-    actionItems.length
+    actionItems.length,
   );
 
   // Calculate overall score
   const overallScore = Math.round(
-    (completionRate * 0.3 + implementationRate * 0.3 + (evidenceCount > 0 ? 80 : 50) * 0.2 + 80 * 0.2)
+    completionRate * 0.3 +
+      implementationRate * 0.3 +
+      (evidenceCount > 0 ? 80 : 50) * 0.2 +
+      80 * 0.2,
   );
 
   return {
@@ -170,28 +178,38 @@ function generateRecommendations(
   completionRate: number,
   implementationRate: number,
   evidenceCount: number,
-  totalActions: number
+  totalActions: number,
 ): string[] {
   const recommendations: string[] = [];
 
   if (completionRate < 70) {
-    recommendations.push("Action completion rate is below 70%. Consider reviewing overdue items and reallocating resources.");
+    recommendations.push(
+      "Action completion rate is below 70%. Consider reviewing overdue items and reallocating resources.",
+    );
   }
 
   if (implementationRate < 80) {
-    recommendations.push("Resolution implementation rate is below 80%. Review blocked resolutions and identify obstacles.");
+    recommendations.push(
+      "Resolution implementation rate is below 80%. Review blocked resolutions and identify obstacles.",
+    );
   }
 
   if (evidenceCount === 0 && totalActions > 0) {
-    recommendations.push("No evidence collected yet. Start documenting completion evidence for audit trails.");
+    recommendations.push(
+      "No evidence collected yet. Start documenting completion evidence for audit trails.",
+    );
   }
 
   if (evidenceCount < totalActions * 0.5) {
-    recommendations.push("Less than 50% of actions have supporting evidence. Increase evidence collection for better traceability.");
+    recommendations.push(
+      "Less than 50% of actions have supporting evidence. Increase evidence collection for better traceability.",
+    );
   }
 
   if (recommendations.length === 0) {
-    recommendations.push("Governance metrics are healthy. Continue current practices.");
+    recommendations.push(
+      "Governance metrics are healthy. Continue current practices.",
+    );
   }
 
   return recommendations;
@@ -237,14 +255,14 @@ export function generateForestImpactReport(): {
 } {
   const actionItems = getActionItems().filter((a) => a.missionId);
   const completed = actionItems.filter((a) => a.status === "completed");
-  const evidence = evidence.filter((e) =>
-    actionItems.some((a) => a.id === e.actionItemId)
+  const evidenceItems = getEvidence().filter((e) =>
+    actionItems.some((a) => a.id === e.actionItemId),
   );
 
   return {
     missions: new Set(actionItems.map((a) => a.missionId)).size,
     actionsCompleted: completed.length,
-    evidenceCount: evidence.length,
+    evidenceCount: evidenceItems.length,
     outcomes: completed.map((a) => a.title),
   };
 }
@@ -259,17 +277,21 @@ export function generateGovernanceEffectivenessReport(): {
   const resolutions = getResolutions();
   const actionItems = getActionItems();
 
-  const approvedResolutions = resolutions.filter((r) => r.status === "approved" || r.status === "implemented");
+  const approvedResolutions = resolutions.filter(
+    (r) => r.status === "approved" || r.status === "implemented",
+  );
   const completedActions = actionItems.filter((a) => a.status === "completed");
 
   return {
     meetingFrequency: meetings.length,
-    resolutionRate: resolutions.length > 0
-      ? Math.round((approvedResolutions.length / resolutions.length) * 100)
-      : 100,
+    resolutionRate:
+      resolutions.length > 0
+        ? Math.round((approvedResolutions.length / resolutions.length) * 100)
+        : 100,
     policyCompliance: 95, // Placeholder
-    actionCompletion: actionItems.length > 0
-      ? Math.round((completedActions.length / actionItems.length) * 100)
-      : 100,
+    actionCompletion:
+      actionItems.length > 0
+        ? Math.round((completedActions.length / actionItems.length) * 100)
+        : 100,
   };
 }

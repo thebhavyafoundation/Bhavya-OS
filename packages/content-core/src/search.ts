@@ -76,6 +76,8 @@ export function getContentStats(): ContentStats {
     financial: 0,
     source: 0,
     evidence: 0,
+    "board-meeting": 0,
+    resolution: 0,
   };
 
   for (const doc of documents) {
