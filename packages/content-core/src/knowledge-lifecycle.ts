@@ -164,7 +164,7 @@ export function transitionState(
   return entry;
 }
 
-export function publishKnowledge(knowledgeId: string, reviewer: string): KnowledgeLifecycle {
+export function publishLifecycleEntry(knowledgeId: string, reviewer: string): KnowledgeLifecycle {
   const entry = getLifecycleEntryByKnowledgeId(knowledgeId);
   if (!entry) {
     throw new Error(`No lifecycle entry for knowledge: ${knowledgeId}`);

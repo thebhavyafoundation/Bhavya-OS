@@ -66,9 +66,6 @@ export {
   getSources,
   getSourcesByProject,
   addSource,
-  getEvidence,
-  getEvidenceByProject,
-  addEvidence,
   getReviews,
   getReviewsByProject,
   addReview,
@@ -111,7 +108,6 @@ export {
 
 // ── Publication Contract ───────────────────────────────────
 export {
-  publishKnowledge,
   publishFieldReport,
   publishImpactReport,
   publishSurveyResult,
@@ -277,7 +273,7 @@ export type {
   ActionItemEvent,
   ActionItemStats,
   TraceabilityChain,
-  Evidence,
+  GovernanceEvidence,
 } from "./models";
 
 // ── Traceability ──────────────────────────────────────────
@@ -416,7 +412,7 @@ export {
   getLifecycleEntryById,
   getLifecycleEntryByKnowledgeId,
   transitionState,
-  publishKnowledge,
+  publishLifecycleEntry,
   reviewKnowledge,
   archiveKnowledge,
   preserveKnowledge,

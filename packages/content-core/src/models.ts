@@ -539,10 +539,10 @@ export interface TraceabilityChain {
   mission?: any;
   project?: any;
   policy?: Policy;
-  evidence: Evidence[];
+  evidence: GovernanceEvidence[];
 }
 
-export interface Evidence {
+export interface GovernanceEvidence {
   id: string;
   actionItemId: string;
   type: "document" | "report" | "certificate" | "photo" | "testimonial";

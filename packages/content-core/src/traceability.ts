@@ -3,7 +3,7 @@ import {
   Resolution,
   ActionItem,
   Policy,
-  Evidence,
+  GovernanceEvidence,
   TraceabilityChain,
 } from "./models.js";
 import {
@@ -113,7 +113,7 @@ export function traceFromMission(missionId: string): TraceabilityChain {
 
 const EVIDENCE_FILE = "data/evidence.json";
 
-function loadEvidence(): Evidence[] {
+function loadEvidence(): GovernanceEvidence[] {
   const { readFileSync, existsSync } = require("fs");
   const { join } = require("path");
   const filePath = join(process.cwd(), EVIDENCE_FILE);
@@ -125,7 +125,7 @@ function loadEvidence(): Evidence[] {
   }
 }
 
-function saveEvidence(evidence: Evidence[]): void {
+function saveEvidence(evidence: GovernanceEvidence[]): void {
   const { writeFileSync, mkdirSync, existsSync } = require("fs");
   const { join } = require("path");
   const dir = join(process.cwd(), "data");
@@ -133,17 +133,17 @@ function saveEvidence(evidence: Evidence[]): void {
   writeFileSync(join(process.cwd(), EVIDENCE_FILE), JSON.stringify(evidence, null, 2));
 }
 
-export function getEvidence(): Evidence[] {
+export function getEvidence(): GovernanceEvidence[] {
   return loadEvidence();
 }
 
-export function getEvidenceByActionItem(actionItemId: string): Evidence[] {
+export function getEvidenceByActionItem(actionItemId: string): GovernanceEvidence[] {
   return loadEvidence().filter((e) => e.actionItemId === actionItemId);
 }
 
-export function addEvidence(evidence: Omit<Evidence, "id" | "created">): Evidence {
+export function addEvidence(evidence: Omit<GovernanceEvidence, "id" | "created">): GovernanceEvidence {
   const allEvidence = loadEvidence();
-  const newEvidence: Evidence = {
+  const newEvidence: GovernanceEvidence = {
     ...evidence,
     id: `evidence-${Date.now()}`,
     created: new Date().toISOString(),
