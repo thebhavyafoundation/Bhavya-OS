@@ -1,0 +1,28 @@
+{
+  "id": "lesson",
+  "name": "Lesson Builder",
+  "version": "1.0.0",
+  "description": "Compiles Knowledge Objects into structured lessons",
+  "input": "knowledge-object",
+  "output": ["lesson-json", "web-html", "pdf", "slides", "quiz", "teacher-guide"],
+  "skills": ["education", "writing"],
+  "registries": ["curriculum", "schemas"],
+  "pipeline": [
+    {
+      "step": "validate",
+      "action": "Validate input Knowledge Objects against schema"
+    },
+    {
+      "step": "compile",
+      "action": "Compile lesson sections from Knowledge Objects"
+    },
+    {
+      "step": "generate",
+      "action": "Generate outputs: web, pdf, slides, quiz, teacher-guide"
+    },
+    {
+      "step": "validate-output",
+      "action": "Validate all outputs against schemas"
+    }
+  ]
+}

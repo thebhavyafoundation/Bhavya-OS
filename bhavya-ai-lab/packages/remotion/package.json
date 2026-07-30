@@ -1,0 +1,13 @@
+{
+  "name": "@bhavya/remotion",
+  "version": "1.0.0",
+  "description": "Video rendering, animation, and multimedia production",
+  "main": "index.ts",
+  "dependencies": ["@bhavya/core", "@bhavya/react"],
+  "exports": {
+    "./components": "./components/index.ts",
+    "./schemas": "./schemas/index.ts",
+    "./skills": "./skills/index.ts",
+    "./builders": "./builders/index.ts"
+  }
+}

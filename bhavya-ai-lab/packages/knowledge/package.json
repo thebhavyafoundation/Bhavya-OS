@@ -1,0 +1,13 @@
+{
+  "name": "@bhavya/knowledge",
+  "version": "1.0.0",
+  "description": "Knowledge Objects, concepts, and educational content storage",
+  "main": "index.ts",
+  "dependencies": ["@bhavya/core"],
+  "exports": {
+    "./components": "./components/index.ts",
+    "./schemas": "./schemas/index.ts",
+    "./skills": "./skills/index.ts",
+    "./builders": "./builders/index.ts"
+  }
+}

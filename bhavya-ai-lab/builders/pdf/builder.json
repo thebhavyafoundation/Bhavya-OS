@@ -1,0 +1,24 @@
+{
+  "id": "pdf",
+  "name": "PDF Builder",
+  "version": "1.0.0",
+  "description": "Generates PDF workbooks and teacher guides",
+  "input": "lesson",
+  "output": ["workbook-pdf", "teacher-guide-pdf"],
+  "skills": ["education", "writing"],
+  "registries": ["layouts", "curriculum"],
+  "pipeline": [
+    {
+      "step": "validate",
+      "action": "Validate lesson against schema"
+    },
+    {
+      "step": "compose",
+      "action": "Compose PDF layout from lesson"
+    },
+    {
+      "step": "render",
+      "action": "Render PDF"
+    }
+  ]
+}

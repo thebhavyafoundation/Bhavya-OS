@@ -1,98 +1,172 @@
 {
-  "remotion": {
-    "path": "skills/remotion",
-    "version": "1.0.0",
-    "description": "Video and animation production with React and Remotion",
-    "workspaces": ["production"],
-    "dependencies": ["react", "typescript"],
-    "registries": ["components", "layouts", "animations"]
+  "skills": {
+    "remotion": {
+      "path": "skills/remotion",
+      "version": "1.0.0",
+      "description": "Video and animation production with React and Remotion",
+      "workspaces": ["production"],
+      "dependencies": ["react", "typescript"],
+      "registries": ["components", "layouts", "animations"]
+    },
+    "react": {
+      "path": "skills/react",
+      "version": "1.0.0",
+      "description": "React component development",
+      "workspaces": ["platform", "production"],
+      "dependencies": ["typescript"],
+      "registries": ["components", "layouts"]
+    },
+    "typescript": {
+      "path": "skills/typescript",
+      "version": "1.0.0",
+      "description": "TypeScript development patterns",
+      "workspaces": ["platform", "production", "build"],
+      "dependencies": [],
+      "registries": ["schemas"]
+    },
+    "education": {
+      "path": "skills/education",
+      "version": "1.0.0",
+      "description": "Curriculum design and lesson creation",
+      "workspaces": ["curriculum"],
+      "dependencies": [],
+      "registries": ["curriculum", "schemas"]
+    },
+    "research": {
+      "path": "skills/research",
+      "version": "1.0.0",
+      "description": "Educational research and source analysis",
+      "workspaces": ["research"],
+      "dependencies": [],
+      "registries": ["citations", "glossary"]
+    },
+    "writing": {
+      "path": "skills/writing",
+      "version": "1.0.0",
+      "description": "Educational writing and content creation",
+      "workspaces": ["curriculum", "research"],
+      "dependencies": [],
+      "registries": ["voice"]
+    },
+    "qa": {
+      "path": "skills/qa",
+      "version": "1.0.0",
+      "description": "Quality assurance and testing",
+      "workspaces": ["platform", "production", "build"],
+      "dependencies": [],
+      "registries": ["schemas"]
+    },
+    "deployment": {
+      "path": "skills/deployment",
+      "version": "1.0.0",
+      "description": "Static site generation and offline deployment",
+      "workspaces": ["platform"],
+      "dependencies": ["react"],
+      "registries": ["layouts", "components"]
+    },
+    "animation": {
+      "path": "skills/animation",
+      "version": "1.0.0",
+      "description": "Motion graphics and kinetic typography",
+      "workspaces": ["production"],
+      "dependencies": ["remotion", "react"],
+      "registries": ["animations", "components"]
+    },
+    "diagramming": {
+      "path": "skills/diagramming",
+      "version": "1.0.0",
+      "description": "Diagrams, flowcharts, and visual explanations",
+      "workspaces": ["production", "curriculum"],
+      "dependencies": [],
+      "registries": ["diagrams"]
+    },
+    "python": {
+      "path": "skills/python",
+      "version": "1.0.0",
+      "description": "Python development and data processing",
+      "workspaces": ["build", "research"],
+      "dependencies": [],
+      "registries": []
+    },
+    "translation": {
+      "path": "skills/translation",
+      "version": "1.0.0",
+      "description": "Hindi-English bilingual content",
+      "workspaces": ["curriculum", "production"],
+      "dependencies": [],
+      "registries": ["voice"]
+    }
   },
-  "react": {
-    "path": "skills/react",
-    "version": "1.0.0",
-    "description": "React component development",
-    "workspaces": ["platform", "production"],
-    "dependencies": ["typescript"],
-    "registries": ["components", "layouts"]
+  "capabilities": {
+    "video_generation": {
+      "builder": "video",
+      "skills": ["remotion", "animation", "react"],
+      "workspace": "production",
+      "description": "Generate videos from scripts and storyboards"
+    },
+    "lesson_generation": {
+      "builder": "lesson",
+      "skills": ["education", "writing"],
+      "workspace": "curriculum",
+      "description": "Generate lessons from Knowledge Objects"
+    },
+    "quiz_generation": {
+      "builder": "quiz",
+      "skills": ["education", "qa"],
+      "workspace": "curriculum",
+      "description": "Generate quizzes from Knowledge Objects"
+    },
+    "website_generation": {
+      "builder": "website",
+      "skills": ["deployment", "react"],
+      "workspace": "platform",
+      "description": "Generate static websites from content"
+    },
+    "slides_generation": {
+      "builder": "slides",
+      "skills": ["education", "writing"],
+      "workspace": "curriculum",
+      "description": "Generate presentation slides from lessons"
+    },
+    "pdf_generation": {
+      "builder": "pdf",
+      "skills": ["education", "writing"],
+      "workspace": "curriculum",
+      "description": "Generate PDF workbooks and teacher guides"
+    },
+    "animation_generation": {
+      "builder": "video",
+      "skills": ["remotion", "animation"],
+      "workspace": "production",
+      "description": "Generate animated explainers and motion graphics"
+    },
+    "diagram_generation": {
+      "builder": "video",
+      "skills": ["diagramming", "animation"],
+      "workspace": "production",
+      "description": "Generate diagrams and flowcharts"
+    },
+    "research_analysis": {
+      "builder": null,
+      "skills": ["research", "writing"],
+      "workspace": "research",
+      "description": "Analyze topics and generate research briefs"
+    },
+    "translation": {
+      "builder": null,
+      "skills": ["translation", "writing"],
+      "workspace": "curriculum",
+      "description": "Translate content between Hindi and English"
+    }
   },
-  "typescript": {
-    "path": "skills/typescript",
-    "version": "1.0.0",
-    "description": "TypeScript development patterns",
-    "workspaces": ["platform", "production", "build"],
-    "dependencies": [],
-    "registries": ["schemas"]
-  },
-  "education": {
-    "path": "skills/education",
-    "version": "1.0.0",
-    "description": "Curriculum design and lesson creation",
-    "workspaces": ["curriculum"],
-    "dependencies": [],
-    "registries": ["curriculum", "schemas"]
-  },
-  "research": {
-    "path": "skills/research",
-    "version": "1.0.0",
-    "description": "Educational research and source analysis",
-    "workspaces": ["research"],
-    "dependencies": [],
-    "registries": ["citations", "glossary"]
-  },
-  "writing": {
-    "path": "skills/writing",
-    "version": "1.0.0",
-    "description": "Educational writing and content creation",
-    "workspaces": ["curriculum", "research"],
-    "dependencies": [],
-    "registries": ["voice"]
-  },
-  "qa": {
-    "path": "skills/qa",
-    "version": "1.0.0",
-    "description": "Quality assurance and testing",
-    "workspaces": ["platform", "production", "build"],
-    "dependencies": [],
-    "registries": ["schemas"]
-  },
-  "deployment": {
-    "path": "skills/deployment",
-    "version": "1.0.0",
-    "description": "Static site generation and offline deployment",
-    "workspaces": ["platform"],
-    "dependencies": ["react"],
-    "registries": ["layouts", "components"]
-  },
-  "animation": {
-    "path": "skills/animation",
-    "version": "1.0.0",
-    "description": "Motion graphics and kinetic typography",
-    "workspaces": ["production"],
-    "dependencies": ["remotion", "react"],
-    "registries": ["animations", "components"]
-  },
-  "diagramming": {
-    "path": "skills/diagramming",
-    "version": "1.0.0",
-    "description": "Diagrams, flowcharts, and visual explanations",
-    "workspaces": ["production", "curriculum"],
-    "dependencies": [],
-    "registries": ["diagrams"]
-  },
-  "python": {
-    "path": "skills/python",
-    "version": "1.0.0",
-    "description": "Python development and data processing",
-    "workspaces": ["build", "research"],
-    "dependencies": [],
-    "registries": []
-  },
-  "translation": {
-    "path": "skills/translation",
-    "version": "1.0.0",
-    "description": "Hindi-English bilingual content",
-    "workspaces": ["curriculum", "production"],
-    "dependencies": [],
-    "registries": ["voice"]
+  "builders": {
+    "lesson": "builders/lesson/builder.json",
+    "video": "builders/video/builder.json",
+    "website": "builders/website/builder.json",
+    "slides": "builders/slides/builder.json",
+    "pdf": "builders/pdf/builder.json",
+    "quiz": "builders/quiz/builder.json",
+    "teacher-guide": "builders/teacher-guide/builder.json",
+    "workbook": "builders/workbook/builder.json"
   }
 }
