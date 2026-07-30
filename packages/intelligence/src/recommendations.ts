@@ -25,14 +25,17 @@ function getDocumentRecommendations(
   const docs = getDocuments();
   const doc = docs.find((d) => d.id === docId);
   if (!doc) {
-    return createInsight({
-      id: `rec-doc-${docId}-not-found`,
-      title: "Document Not Found",
-      description: `No document found with ID "${docId}"`,
-      confidence: 1,
-      evidence: [],
-      data: { targetId: docId, targetType: "document", recommendations: [] },
-    });
+    return {
+      ...createInsight({
+        id: `rec-doc-${docId}-not-found`,
+        title: "Document Not Found",
+        description: `No document found with ID "${docId}"`,
+        confidence: 1,
+        evidence: [],
+        data: { targetId: docId, targetType: "document", recommendations: [] },
+      }),
+      category: "recommendation",
+    };
   }
 
   const recommendations: Recommendation[] = [];
@@ -133,18 +136,21 @@ function getDocumentRecommendations(
     recency: 1,
   });
 
-  return createInsight({
-    id: `rec-doc-${docId}`,
-    title: `Recommendations for: ${doc.title}`,
-    description: `${topRecommendations.length} related items found`,
-    confidence,
-    evidence: evidence.slice(0, 5),
-    data: {
-      targetId: docId,
-      targetType: "document",
-      recommendations: topRecommendations,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `rec-doc-${docId}`,
+      title: `Recommendations for: ${doc.title}`,
+      description: `${topRecommendations.length} related items found`,
+      confidence,
+      evidence: evidence.slice(0, 5),
+      data: {
+        targetId: docId,
+        targetType: "document",
+        recommendations: topRecommendations,
+      },
+    }),
+    category: "recommendation",
+  };
 }
 
 // ── Entity Recommendations ────────────────────────────────
@@ -156,14 +162,17 @@ function getEntityRecommendations(
   const entities = getEntities();
   const entity = entities.find((e) => e.id === entityId);
   if (!entity) {
-    return createInsight({
-      id: `rec-entity-${entityId}-not-found`,
-      title: "Entity Not Found",
-      description: `No entity found with ID "${entityId}"`,
-      confidence: 1,
-      evidence: [],
-      data: { targetId: entityId, targetType: "entity", recommendations: [] },
-    });
+    return {
+      ...createInsight({
+        id: `rec-entity-${entityId}-not-found`,
+        title: "Entity Not Found",
+        description: `No entity found with ID "${entityId}"`,
+        confidence: 1,
+        evidence: [],
+        data: { targetId: entityId, targetType: "entity", recommendations: [] },
+      }),
+      category: "recommendation",
+    };
   }
 
   const recommendations: Recommendation[] = [];
@@ -236,18 +245,21 @@ function getEntityRecommendations(
     recency: 1,
   });
 
-  return createInsight({
-    id: `rec-entity-${entityId}`,
-    title: `Recommendations for: ${entity.name}`,
-    description: `${topRecommendations.length} related entities found`,
-    confidence,
-    evidence: evidence.slice(0, 5),
-    data: {
-      targetId: entityId,
-      targetType: "entity",
-      recommendations: topRecommendations,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `rec-entity-${entityId}`,
+      title: `Recommendations for: ${entity.name}`,
+      description: `${topRecommendations.length} related entities found`,
+      confidence,
+      evidence: evidence.slice(0, 5),
+      data: {
+        targetId: entityId,
+        targetType: "entity",
+        recommendations: topRecommendations,
+      },
+    }),
+    category: "recommendation",
+  };
 }
 
 // ── Mission Recommendations ───────────────────────────────
@@ -259,14 +271,17 @@ function getMissionRecommendations(
   const kg = getKnowledgeGraph();
   const mission = kg.find((n) => n.id === missionId);
   if (!mission) {
-    return createInsight({
-      id: `rec-mission-${missionId}-not-found`,
-      title: "Mission Not Found",
-      description: `No mission found with ID "${missionId}"`,
-      confidence: 1,
-      evidence: [],
-      data: { targetId: missionId, targetType: "mission", recommendations: [] },
-    });
+    return {
+      ...createInsight({
+        id: `rec-mission-${missionId}-not-found`,
+        title: "Mission Not Found",
+        description: `No mission found with ID "${missionId}"`,
+        confidence: 1,
+        evidence: [],
+        data: { targetId: missionId, targetType: "mission", recommendations: [] },
+      }),
+      category: "recommendation",
+    };
   }
 
   const recommendations: Recommendation[] = [];
@@ -334,18 +349,21 @@ function getMissionRecommendations(
     recency: 1,
   });
 
-  return createInsight({
-    id: `rec-mission-${missionId}`,
-    title: `Recommendations for: ${mission.title}`,
-    description: `${topRecommendations.length} related missions found`,
-    confidence,
-    evidence: evidence.slice(0, 5),
-    data: {
-      targetId: missionId,
-      targetType: "mission",
-      recommendations: topRecommendations,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `rec-mission-${missionId}`,
+      title: `Recommendations for: ${mission.title}`,
+      description: `${topRecommendations.length} related missions found`,
+      confidence,
+      evidence: evidence.slice(0, 5),
+      data: {
+        targetId: missionId,
+        targetType: "mission",
+        recommendations: topRecommendations,
+      },
+    }),
+    category: "recommendation",
+  };
 }
 
 // ── Main Recommendation Function ──────────────────────────
@@ -363,14 +381,17 @@ export function getRecommendations(
     case "mission":
       return getMissionRecommendations(id, limit);
     default:
-      return createInsight({
-        id: `rec-unknown-${id}`,
-        title: "Unknown Type",
-        description: `Unknown recommendation type: ${type}`,
-        confidence: 0,
-        evidence: [],
-        data: { targetId: id, targetType: type, recommendations: [] },
-      });
+      return {
+        ...createInsight({
+          id: `rec-unknown-${id}`,
+          title: "Unknown Type",
+          description: `Unknown recommendation type: ${type}`,
+          confidence: 0,
+          evidence: [],
+          data: { targetId: id, targetType: type, recommendations: [] },
+        }),
+        category: "recommendation",
+      };
   }
 }
 

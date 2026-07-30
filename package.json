@@ -34,7 +34,11 @@
     "vercel:deploy": "vercel deploy --prebuilt",
     "vercel:deploy:app": "node scripts/vercel-build-app.mjs",
     "vercel:deploy:all": "bash scripts/deploy-all-vercel.sh",
-    "dashboard": "pnpm --filter @bhavya/dashboard dev"
+    "dashboard": "pnpm --filter @bhavya/dashboard dev",
+    "studio": "pnpm --filter @bhavya/lesson-studio dev",
+    "studio:build": "pnpm --filter @bhavya/lesson-studio build",
+    "studio:full": "start cmd /k \"pnpm run bhavya:api\" && pnpm run studio",
+    "bhavya:api:verbose": "node packages/runtime/cli/api-standalone.mjs"
   },
   "dependencies": {
     "next": "15.5.20",

@@ -66,6 +66,7 @@ export {
   getSources,
   getSourcesByProject,
   addSource,
+  getEvidenceByProject,
   getReviews,
   getReviewsByProject,
   addReview,

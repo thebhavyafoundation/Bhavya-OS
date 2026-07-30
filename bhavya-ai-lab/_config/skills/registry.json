@@ -146,6 +146,12 @@
       "workspace": "production",
       "description": "Generate diagrams and flowcharts"
     },
+    "visual_spec_generation": {
+      "builder": "visual-spec",
+      "skills": ["education", "animation"],
+      "workspace": "production",
+      "description": "Generate visual specifications from lesson content for animation"
+    },
     "research_analysis": {
       "builder": null,
       "skills": ["research", "writing"],
@@ -167,6 +173,12 @@
     "pdf": "builders/pdf/builder.json",
     "quiz": "builders/quiz/builder.json",
     "teacher-guide": "builders/teacher-guide/builder.json",
-    "workbook": "builders/workbook/builder.json"
+    "workbook": "builders/workbook/builder.json",
+    "visual-spec": "builders/visual-spec/builder.json",
+    "video": "builders/video/builder.json"
+  },
+  "pipeline": {
+    "lesson": ["lesson", "assessment", "guide", "workbook", "visual-spec", "website"],
+    "full": ["lesson", "assessment", "guide", "workbook", "visual-spec", "video", "website"]
   }
 }

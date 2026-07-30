@@ -1,0 +1,14 @@
+{
+  "artifactId": "visualSpec-1785407048781-6ca8a5",
+  "builder": "visual-spec",
+  "builderVersion": "3.0.0",
+  "runtimeVersion": "3.0.0",
+  "capability": "visual_spec_generation",
+  "execId": "exec-1785407048778-15bc0cb0",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [
+    "workbook-1785407048774-7188b6"
+  ],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:24:08.781Z"
+}

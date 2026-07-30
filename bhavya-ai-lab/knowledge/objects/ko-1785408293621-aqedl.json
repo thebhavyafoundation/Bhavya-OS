@@ -1,0 +1,23 @@
+{
+  "id": "ko-1785408293621-aqedl",
+  "title": "Test KO",
+  "subject": "",
+  "grade": 9,
+  "domain": "Test",
+  "concepts": [
+    {
+      "name": "Concept A",
+      "description": "Desc",
+      "difficulty": "beginner"
+    }
+  ],
+  "definitions": [],
+  "examples": [],
+  "misconceptions": [],
+  "exercises": [],
+  "references": [],
+  "prerequisites": [],
+  "createdAt": "2026-07-30T10:44:53.621Z",
+  "updatedAt": "2026-07-30T10:44:53.621Z",
+  "version": "0.1.0"
+}

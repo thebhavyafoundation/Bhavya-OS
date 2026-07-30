@@ -1,0 +1,14 @@
+{
+  "buildId": "pipeline-1785408471368",
+  "runtimeVersion": "3.0.0",
+  "knowledgeObjectId": "ko-ai-what-is-ai",
+  "knowledgeObjectTitle": "What is Artificial Intelligence?",
+  "artifacts": [],
+  "qualityGates": {
+    "passed": 0,
+    "failed": 0,
+    "warning": 0
+  },
+  "durationMs": 14,
+  "completedAt": "2026-07-30T10:47:51.382Z"
+}

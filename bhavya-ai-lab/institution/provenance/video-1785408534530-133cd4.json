@@ -1,0 +1,14 @@
+{
+  "artifactId": "video-1785408534530-133cd4",
+  "builder": "video",
+  "builderVersion": "3.0.0",
+  "runtimeVersion": "3.0.0",
+  "capability": "video_generation",
+  "execId": "exec-1785408534527-7fe77082",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [
+    "visualSpec-1785408534519-aad6c1"
+  ],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:48:54.530Z"
+}

@@ -1,0 +1,14 @@
+{
+  "artifactId": "assessment-1785407048743-98dcb8",
+  "builder": "quiz",
+  "builderVersion": "3.0.0",
+  "runtimeVersion": "3.0.0",
+  "capability": "quiz_generation",
+  "execId": "exec-1785407048729-4f3a6d71",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [
+    "lesson-1785407048725-7a0539"
+  ],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:24:08.743Z"
+}

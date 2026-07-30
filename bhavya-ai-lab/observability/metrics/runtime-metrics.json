@@ -1,0 +1,50 @@
+{
+  "totalRequests": 14,
+  "completedRequests": 14,
+  "failedRequests": 0,
+  "totalDuration": 145,
+  "byCapability": {
+    "lesson_generation": {
+      "count": 6,
+      "totalDuration": 78
+    },
+    "quiz_generation": {
+      "count": 2,
+      "totalDuration": 25
+    },
+    "visual_spec_generation": {
+      "count": 2,
+      "totalDuration": 15
+    },
+    "video_generation": {
+      "count": 2,
+      "totalDuration": 9
+    },
+    "website_generation": {
+      "count": 2,
+      "totalDuration": 18
+    }
+  },
+  "byBuilder": {
+    "lesson": {
+      "count": 6,
+      "totalDuration": 78
+    },
+    "quiz": {
+      "count": 2,
+      "totalDuration": 25
+    },
+    "visual-spec": {
+      "count": 2,
+      "totalDuration": 15
+    },
+    "video": {
+      "count": 2,
+      "totalDuration": 9
+    },
+    "website": {
+      "count": 2,
+      "totalDuration": 18
+    }
+  }
+}

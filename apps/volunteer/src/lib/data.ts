@@ -57,7 +57,7 @@ export type {
   MissionType,
   AssignmentStatus,
   MissionAssignment,
-  TaskStatus,
+  VolunteerTaskStatus,
   Participation,
   RecognitionType,
   Recognition,

@@ -79,14 +79,17 @@ export function search(options: SearchOptions): SearchInsight {
   const evidence: ReturnType<typeof createEvidence>[] = [];
 
   if (!queryLower) {
-    return createInsight({
-      id: `search-${Date.now()}`,
-      title: "Empty Search",
-      description: "No search query provided",
-      confidence: 0,
-      evidence: [],
-      data: { query, results: [], facets },
-    });
+    return {
+      ...createInsight({
+        id: `search-${Date.now()}`,
+        title: "Empty Search",
+        description: "No search query provided",
+        confidence: 0,
+        evidence: [],
+        data: { query, results: [], facets },
+      }),
+      category: "search",
+    };
   }
 
   // Search documents
@@ -198,14 +201,17 @@ export function search(options: SearchOptions): SearchInsight {
     recency: 1,
   });
 
-  return createInsight({
-    id: `search-${query.replace(/\s+/g, "-")}-${Date.now()}`,
-    title: `Search Results for "${query}"`,
-    description: `Found ${results.length} results across ${Object.keys(facets.types).length} content types`,
-    confidence,
-    evidence: evidence.slice(0, 10),
-    data: { query, results: paginatedResults, facets },
-  });
+  return {
+    ...createInsight({
+      id: `search-${query.replace(/\s+/g, "-")}-${Date.now()}`,
+      title: `Search Results for "${query}"`,
+      description: `Found ${results.length} results across ${Object.keys(facets.types).length} content types`,
+      confidence,
+      evidence: evidence.slice(0, 10),
+      data: { query, results: paginatedResults, facets },
+    }),
+    category: "search",
+  };
 }
 
 export function searchDocuments(

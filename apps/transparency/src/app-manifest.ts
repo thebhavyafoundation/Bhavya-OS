@@ -1,4 +1,12 @@
-import type { AppManifest } from "@bhavya/mission-runtime";
+export interface AppManifest {
+  id: string;
+  name: string;
+  version: string;
+  owner: string;
+  mission: string;
+  visibility: string;
+  dependencies: string[];
+}
 
 export const appManifest: AppManifest = {
   id: "transparency",

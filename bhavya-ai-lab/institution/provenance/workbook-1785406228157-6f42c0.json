@@ -1,0 +1,14 @@
+{
+  "artifactId": "workbook-1785406228157-6f42c0",
+  "builder": "workbook",
+  "builderVersion": "3.0.0",
+  "runtimeVersion": "3.0.0",
+  "capability": "lesson_generation",
+  "execId": "exec-1785406228148-dad52868",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [
+    "teacherGuide-1785406228142-aeddc1"
+  ],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:10:28.157Z"
+}

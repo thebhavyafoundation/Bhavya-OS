@@ -116,27 +116,33 @@ function getGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
 export function getGraphNodes(): GraphInsight {
   const graph = getGraph();
 
-  return createInsight({
-    id: `graph-nodes-${Date.now()}`,
-    title: "All Graph Nodes",
-    description: `Graph contains ${graph.nodes.length} nodes`,
-    confidence: 1,
-    evidence: [],
-    data: { nodes: graph.nodes, edges: [] },
-  });
+  return {
+    ...createInsight({
+      id: `graph-nodes-${Date.now()}`,
+      title: "All Graph Nodes",
+      description: `Graph contains ${graph.nodes.length} nodes`,
+      confidence: 1,
+      evidence: [],
+      data: { nodes: graph.nodes, edges: [] },
+    }),
+    category: "graph",
+  };
 }
 
 export function getGraphEdges(): GraphInsight {
   const graph = getGraph();
 
-  return createInsight({
-    id: `graph-edges-${Date.now()}`,
-    title: "All Graph Edges",
-    description: `Graph contains ${graph.edges.length} edges`,
-    confidence: 1,
-    evidence: [],
-    data: { nodes: [], edges: graph.edges },
-  });
+  return {
+    ...createInsight({
+      id: `graph-edges-${Date.now()}`,
+      title: "All Graph Edges",
+      description: `Graph contains ${graph.edges.length} edges`,
+      confidence: 1,
+      evidence: [],
+      data: { nodes: [], edges: graph.edges },
+    }),
+    category: "graph",
+  };
 }
 
 export function getGraphNodeById(id: string): GraphInsight {
@@ -144,34 +150,40 @@ export function getGraphNodeById(id: string): GraphInsight {
   const node = graph.nodes.find((n) => n.id === id);
 
   if (!node) {
-    return createInsight({
-      id: `graph-node-${id}-not-found`,
-      title: `Node Not Found: ${id}`,
-      description: `No node found with ID "${id}"`,
-      confidence: 1,
-      evidence: [],
-      data: { nodes: [], edges: [] },
-    });
+    return {
+      ...createInsight({
+        id: `graph-node-${id}-not-found`,
+        title: `Node Not Found: ${id}`,
+        description: `No node found with ID "${id}"`,
+        confidence: 1,
+        evidence: [],
+        data: { nodes: [], edges: [] },
+      }),
+      category: "graph",
+    };
   }
 
   const edges = graph.edges.filter(
     (e) => e.source === id || e.target === id,
   );
 
-  return createInsight({
-    id: `graph-node-${id}`,
-    title: `Node: ${node.title}`,
-    description: `Node of type "${node.type}" with ${edges.length} connections`,
-    confidence: 1,
-    evidence: [
-      createEvidence({
-        sourceId: id,
-        sourceType: node.type as "document" | "entity" | "mission",
-        relevance: "Direct node lookup",
-      }),
-    ],
-    data: { nodes: [node], edges },
-  });
+  return {
+    ...createInsight({
+      id: `graph-node-${id}`,
+      title: `Node: ${node.title}`,
+      description: `Node of type "${node.type}" with ${edges.length} connections`,
+      confidence: 1,
+      evidence: [
+        createEvidence({
+          sourceId: id,
+          sourceType: node.type as "document" | "entity" | "mission",
+          relevance: "Direct node lookup",
+        }),
+      ],
+      data: { nodes: [node], edges },
+    }),
+    category: "graph",
+  };
 }
 
 export function getNodeNeighbors(nodeId: string): GraphInsight {
@@ -179,14 +191,17 @@ export function getNodeNeighbors(nodeId: string): GraphInsight {
   const node = graph.nodes.find((n) => n.id === nodeId);
 
   if (!node) {
-    return createInsight({
-      id: `graph-neighbors-${nodeId}-not-found`,
-      title: `Neighbors Not Found: ${nodeId}`,
-      description: `No node found with ID "${nodeId}"`,
-      confidence: 1,
-      evidence: [],
-      data: { nodes: [], edges: [], center: nodeId },
-    });
+    return {
+      ...createInsight({
+        id: `graph-neighbors-${nodeId}-not-found`,
+        title: `Neighbors Not Found: ${nodeId}`,
+        description: `No node found with ID "${nodeId}"`,
+        confidence: 1,
+        evidence: [],
+        data: { nodes: [], edges: [], center: nodeId },
+      }),
+      category: "graph",
+    };
   }
 
   const edges = graph.edges.filter(
@@ -201,20 +216,23 @@ export function getNodeNeighbors(nodeId: string): GraphInsight {
 
   const neighbors = graph.nodes.filter((n) => neighborIds.has(n.id));
 
-  return createInsight({
-    id: `graph-neighbors-${nodeId}`,
-    title: `Neighbors of: ${node.title}`,
-    description: `${neighbors.length} nodes connected to "${node.title}"`,
-    confidence: 1,
-    evidence: [
-      createEvidence({
-        sourceId: nodeId,
-        sourceType: node.type as "document" | "entity" | "mission",
-        relevance: "Center node",
-      }),
-    ],
-    data: { nodes: [node, ...neighbors], edges, center: nodeId },
-  });
+  return {
+    ...createInsight({
+      id: `graph-neighbors-${nodeId}`,
+      title: `Neighbors of: ${node.title}`,
+      description: `${neighbors.length} nodes connected to "${node.title}"`,
+      confidence: 1,
+      evidence: [
+        createEvidence({
+          sourceId: nodeId,
+          sourceType: node.type as "document" | "entity" | "mission",
+          relevance: "Center node",
+        }),
+      ],
+      data: { nodes: [node, ...neighbors], edges, center: nodeId },
+    }),
+    category: "graph",
+  };
 }
 
 // ── Path Finding (BFS) ───────────────────────────────────
@@ -229,14 +247,17 @@ export function findPath(
   const endNode = graph.nodes.find((n) => n.id === endId);
 
   if (!startNode || !endNode) {
-    return createInsight({
-      id: `graph-path-${startId}-to-${endId}-not-found`,
-      title: "Path Not Found",
-      description: `Could not find path from "${startId}" to "${endId}"`,
-      confidence: 1,
-      evidence: [],
-      data: { nodes: [], edges: [] },
-    });
+    return {
+      ...createInsight({
+        id: `graph-path-${startId}-to-${endId}-not-found`,
+        title: "Path Not Found",
+        description: `Could not find path from "${startId}" to "${endId}"`,
+        confidence: 1,
+        evidence: [],
+        data: { nodes: [], edges: [] },
+      }),
+      category: "graph",
+    };
   }
 
   // BFS
@@ -263,29 +284,32 @@ export function findPath(
         if (edge) pathEdges.push(edge);
       }
 
-      return createInsight({
-        id: `graph-path-${startId}-to-${endId}`,
-        title: `Path: ${startNode.title} → ${endNode.title}`,
-        description: `Found path of length ${path.length - 1}`,
-        confidence: 1,
-        evidence: [
-          createEvidence({
-            sourceId: startId,
-            sourceType: startNode.type as "document" | "entity" | "mission",
-            relevance: "Path start",
-          }),
-          createEvidence({
-            sourceId: endId,
-            sourceType: endNode.type as "document" | "entity" | "mission",
-            relevance: "Path end",
-          }),
-        ],
-        data: {
-          nodes: pathNodes,
-          edges: pathEdges,
-          path: { nodes: path, edges: pathEdges.map((e) => `${e.source}->${e.target}`), length: path.length - 1 },
-        },
-      });
+      return {
+        ...createInsight({
+          id: `graph-path-${startId}-to-${endId}`,
+          title: `Path: ${startNode.title} → ${endNode.title}`,
+          description: `Found path of length ${path.length - 1}`,
+          confidence: 1,
+          evidence: [
+            createEvidence({
+              sourceId: startId,
+              sourceType: startNode.type as "document" | "entity" | "mission",
+              relevance: "Path start",
+            }),
+            createEvidence({
+              sourceId: endId,
+              sourceType: endNode.type as "document" | "entity" | "mission",
+              relevance: "Path end",
+            }),
+          ],
+          data: {
+            nodes: pathNodes,
+            edges: pathEdges,
+            path: { nodes: path, edges: pathEdges.map((e) => `${e.source}->${e.target}`), length: path.length - 1 },
+          },
+        }),
+        category: "graph",
+      };
     }
 
     if (path.length > maxDepth) continue;
@@ -304,14 +328,17 @@ export function findPath(
     }
   }
 
-  return createInsight({
-    id: `graph-path-${startId}-to-${endId}-no-path`,
-    title: "No Path Found",
-    description: `No path exists between "${startId}" and "${endId}" within depth ${maxDepth}`,
-    confidence: 0.8,
-    evidence: [],
-    data: { nodes: [], edges: [] },
-  });
+  return {
+    ...createInsight({
+      id: `graph-path-${startId}-to-${endId}-no-path`,
+      title: "No Path Found",
+      description: `No path exists between "${startId}" and "${endId}" within depth ${maxDepth}`,
+      confidence: 0.8,
+      evidence: [],
+      data: { nodes: [], edges: [] },
+    }),
+    category: "graph",
+  };
 }
 
 // ── Graph Statistics ──────────────────────────────────────
@@ -333,25 +360,28 @@ export function getGraphStatistics(): GraphInsight {
   const averageConnections =
     graph.nodes.length > 0 ? totalConnections / graph.nodes.length : 0;
 
-  return createInsight({
-    id: `graph-stats-${Date.now()}`,
-    title: "Knowledge Graph Statistics",
-    description: `${graph.nodes.length} nodes, ${graph.edges.length} edges`,
-    confidence: 1,
-    evidence: [],
-    data: {
-      nodes: [],
-      edges: [],
-      // Include stats in the insight data
-      ...{
-        totalNodes: graph.nodes.length,
-        totalEdges: graph.edges.length,
-        averageConnections: Math.round(averageConnections * 100) / 100,
-        nodesByType,
-        edgesByType,
+  return {
+    ...createInsight({
+      id: `graph-stats-${Date.now()}`,
+      title: "Knowledge Graph Statistics",
+      description: `${graph.nodes.length} nodes, ${graph.edges.length} edges`,
+      confidence: 1,
+      evidence: [],
+      data: {
+        nodes: [],
+        edges: [],
+        // Include stats in the insight data
+        ...{
+          totalNodes: graph.nodes.length,
+          totalEdges: graph.edges.length,
+          averageConnections: Math.round(averageConnections * 100) / 100,
+          nodesByType,
+          edgesByType,
+        },
       },
-    },
-  });
+    }),
+    category: "graph",
+  };
 }
 
 // ── Connected Components ──────────────────────────────────
@@ -388,16 +418,19 @@ export function getConnectedComponents(): GraphInsight {
     }
   }
 
-  return createInsight({
-    id: `graph-components-${Date.now()}`,
-    title: "Connected Components",
-    description: `Graph has ${components.length} connected components`,
-    confidence: 1,
-    evidence: [],
-    data: {
-      nodes: graph.nodes,
-      edges: graph.edges,
-      components,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `graph-components-${Date.now()}`,
+      title: "Connected Components",
+      description: `Graph has ${components.length} connected components`,
+      confidence: 1,
+      evidence: [],
+      data: {
+        nodes: graph.nodes,
+        edges: graph.edges,
+        components,
+      },
+    }),
+    category: "graph",
+  };
 }

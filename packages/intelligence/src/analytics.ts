@@ -246,22 +246,25 @@ export function getDomainCoverage(): AnalyticsInsight {
     };
   });
 
-  return createInsight({
-    id: `domain-coverage-${Date.now()}`,
-    title: "Domain Coverage",
-    description: `Coverage across ${domains.length} content domains`,
-    confidence: 1,
-    evidence: [
-      createEvidence({
-        sourceId: "content-core",
-        sourceType: "document",
-        relevance: "Domain coverage analysis",
-      }),
-    ],
-    data: {
-      type: "knowledge",
-      metrics,
-      summary: `Average coverage: ${Math.round(metrics.reduce((sum, m) => sum + m.value, 0) / metrics.length)}%`,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `domain-coverage-${Date.now()}`,
+      title: "Domain Coverage",
+      description: `Coverage across ${domains.length} content domains`,
+      confidence: 1,
+      evidence: [
+        createEvidence({
+          sourceId: "content-core",
+          sourceType: "document",
+          relevance: "Domain coverage analysis",
+        }),
+      ],
+      data: {
+        type: "knowledge",
+        metrics,
+        summary: `Average coverage: ${Math.round(metrics.reduce((sum, m) => sum + m.value, 0) / metrics.length)}%`,
+      },
+    }),
+    category: "analytics",
+  };
 }

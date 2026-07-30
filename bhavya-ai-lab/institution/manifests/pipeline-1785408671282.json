@@ -1,0 +1,57 @@
+{
+  "buildId": "pipeline-1785408671282",
+  "runtimeVersion": "3.0.0",
+  "knowledgeObjectId": "ko-ai-what-is-ai",
+  "knowledgeObjectTitle": "What is Artificial Intelligence?",
+  "artifacts": [
+    {
+      "stage": "lesson",
+      "artifactId": "lesson-1785408671310-7c979e",
+      "builder": "lesson",
+      "status": "WARNING"
+    },
+    {
+      "stage": "assessment",
+      "artifactId": "assessment-1785408671332-7e3b30",
+      "builder": "quiz",
+      "status": "WARNING"
+    },
+    {
+      "stage": "teacherGuide",
+      "artifactId": "teacherGuide-1785408671340-d88d32",
+      "builder": "teacher-guide",
+      "status": "WARNING"
+    },
+    {
+      "stage": "workbook",
+      "artifactId": "workbook-1785408671371-b909ae",
+      "builder": "workbook",
+      "status": "WARNING"
+    },
+    {
+      "stage": "visualSpec",
+      "artifactId": "visualSpec-1785408671377-910c46",
+      "builder": "visual-spec",
+      "status": "WARNING"
+    },
+    {
+      "stage": "video",
+      "artifactId": "video-1785408671387-111c2d",
+      "builder": "video",
+      "status": "WARNING"
+    },
+    {
+      "stage": "website",
+      "artifactId": "website-1785408671399-7c0b62",
+      "builder": "website",
+      "status": "WARNING"
+    }
+  ],
+  "qualityGates": {
+    "passed": 0,
+    "failed": 0,
+    "warning": 7
+  },
+  "durationMs": 121,
+  "completedAt": "2026-07-30T10:51:11.403Z"
+}

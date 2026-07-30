@@ -80,14 +80,14 @@ function generateDataQualityAlerts() {
   }
 
   return alerts.map((alert, i) =>
-    createInsight(
-      `quality-alert-${i}`,
-      `Data Quality: ${alert.type.replace(/_/g, " ")}`,
-      alert.recommendation,
-      alert.severity === "high" ? 0.9 : alert.severity === "medium" ? 0.7 : 0.5,
-      [createEvidence("data-quality-check", "Automated data quality analysis")],
-      alert
-    )
+    createInsight({
+      id: `quality-alert-${i}`,
+      title: `Data Quality: ${alert.type.replace(/_/g, " ")}`,
+      description: alert.recommendation,
+      confidence: alert.severity === "high" ? 0.9 : alert.severity === "medium" ? 0.7 : 0.5,
+      evidence: [createEvidence({ sourceId: "data-quality-check", sourceType: "document", relevance: "Automated data quality analysis" })],
+      data: alert,
+    })
   );
 }
 
@@ -100,7 +100,7 @@ function generateMissionHealthScores() {
   // Forest missions
   const forestMissions = getMissions();
   for (const mission of forestMissions) {
-    const missionDocs = docs.filter((d) => d.category === "forest");
+    const missionDocs = docs.filter((d) => d.mission === mission.id);
     const missionEntities = entities.filter((e) => e.type === "species" || e.type === "location");
 
     const factors = [
@@ -136,7 +136,7 @@ function generateMissionHealthScores() {
   // Heritage missions
   const heritageMissions = getHeritageMissions();
   for (const mission of heritageMissions) {
-    const missionDocs = docs.filter((d) => d.category === "heritage");
+    const missionDocs = docs.filter((d) => d.mission === mission.id);
 
     const factors = [
       {
@@ -164,14 +164,14 @@ function generateMissionHealthScores() {
   }
 
   return scores.map((score) =>
-    createInsight(
-      `health-${score.missionId}`,
-      `Mission Health: ${score.missionName}`,
-      `${score.missionName} is ${score.status} with a score of ${score.score}/100.`,
-      score.score / 100,
-      [createEvidence("health-scoring", "Mission health analysis")],
-      score
-    )
+    createInsight({
+      id: `health-${score.missionId}`,
+      title: `Mission Health: ${score.missionName}`,
+      description: `${score.missionName} is ${score.status} with a score of ${score.score}/100.`,
+      confidence: score.score / 100,
+      evidence: [createEvidence({ sourceId: "health-scoring", sourceType: "mission", relevance: "Mission health analysis" })],
+      data: score,
+    })
   );
 }
 
@@ -193,7 +193,7 @@ function generateKnowledgeGaps() {
   }
 
   // Find potential missing relationships
-  const entityTypes = [...new Set(entities.map((e) => e.type))];
+  const entityTypes = Array.from(new Set(entities.map((e) => e.type)));
   for (let i = 0; i < entityTypes.length; i++) {
     for (let j = i + 1; j < entityTypes.length; j++) {
       const type1 = entityTypes[i];
@@ -205,7 +205,7 @@ function generateKnowledgeGaps() {
       const hasRelationships = kg.some(
         (n) =>
           entities1.some((e) => e.id === n.id) &&
-          n.links?.some((l) => entities2.some((e) => e.id === l.targetId))
+          n.links?.some((l) => entities2.some((e) => e.id === l))
       );
 
       if (!hasRelationships && entities1.length > 0 && entities2.length > 0) {
@@ -221,14 +221,14 @@ function generateKnowledgeGaps() {
   }
 
   return gaps.map((gap, i) =>
-    createInsight(
-      `gap-${i}`,
-      `Knowledge Gap: ${gap.area}`,
-      gap.description,
-      gap.priority === "high" ? 0.9 : gap.priority === "medium" ? 0.7 : 0.5,
-      [createEvidence("gap-analysis", "Knowledge graph analysis")],
-      gap
-    )
+    createInsight({
+      id: `gap-${i}`,
+      title: `Knowledge Gap: ${gap.area}`,
+      description: gap.description,
+      confidence: gap.priority === "high" ? 0.9 : gap.priority === "medium" ? 0.7 : 0.5,
+      evidence: [createEvidence({ sourceId: "gap-analysis", sourceType: "entity", relevance: "Knowledge graph analysis" })],
+      data: gap,
+    })
   );
 }
 
@@ -241,7 +241,7 @@ function generateWorkQueue() {
   const forestMissions = getMissions();
   for (const mission of forestMissions) {
     const hasImpactReport = docs.some(
-      (d) => d.category === "forest" && d.type === "report" && d.title?.toLowerCase().includes("impact")
+      (d) => d.mission === mission.id && d.category === "report" && d.title?.toLowerCase().includes("impact")
     );
     if (!hasImpactReport) {
       workItems.push({
@@ -258,7 +258,7 @@ function generateWorkQueue() {
   const researchDocs = docs.filter((d) => d.category === "research");
   for (const doc of researchDocs) {
     const hasFieldEvidence = docs.some(
-      (d) => d.category === "forest" && d.title?.toLowerCase().includes(doc.title?.toLowerCase() || "")
+      (d) => d.category === "evidence" && d.title?.toLowerCase().includes(doc.title?.toLowerCase() || "")
     );
     if (!hasFieldEvidence) {
       workItems.push({
@@ -287,7 +287,7 @@ function generateWorkQueue() {
   const volunteerSkills = volunteers.map((v) => ({
     id: v.id,
     name: v.name,
-    skills: v.skills || [],
+    skills: v.skillIds || [],
   }));
 
   // Simple skill matching (placeholder logic)
@@ -302,13 +302,13 @@ function generateWorkQueue() {
   }
 
   return workItems.map((item, i) =>
-    createInsight(
-      `work-${i}`,
-      item.title,
-      item.description,
-      item.priority === "high" ? 0.9 : item.priority === "medium" ? 0.7 : 0.5,
-      [createEvidence("work-queue", "Automated work item generation")],
-      item
-    )
+    createInsight({
+      id: `work-${i}`,
+      title: item.title,
+      description: item.description,
+      confidence: item.priority === "high" ? 0.9 : item.priority === "medium" ? 0.7 : 0.5,
+      evidence: [createEvidence({ sourceId: "work-queue", sourceType: "document", relevance: "Automated work item generation" })],
+      data: item,
+    })
   );
 }

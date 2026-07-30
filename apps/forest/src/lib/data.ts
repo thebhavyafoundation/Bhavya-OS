@@ -24,7 +24,7 @@ import {
   getMonitoringByPlanting as _getMonitoringByPlanting,
   getMonitoringByMission as _getMonitoringByMission,
   createMonitoring as _createMonitoring,
-  getImpactReports as _getImpactReports,
+  getForestImpactReports as _getImpactReports,
   getImpact as _getImpact,
   getImpactByMission as _getImpactByMission,
   createImpact as _createImpact,

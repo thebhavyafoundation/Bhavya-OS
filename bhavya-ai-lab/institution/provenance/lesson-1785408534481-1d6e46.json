@@ -1,0 +1,12 @@
+{
+  "artifactId": "lesson-1785408534481-1d6e46",
+  "builder": "lesson",
+  "builderVersion": "3.0.0",
+  "runtimeVersion": "3.0.0",
+  "capability": "lesson_generation",
+  "execId": "exec-1785408534470-b256ecef",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:48:54.481Z"
+}

@@ -1,0 +1,14 @@
+{
+  "artifactId": "teacherGuide-1785408671340-d88d32",
+  "builder": "teacher-guide",
+  "builderVersion": "3.1.0",
+  "runtimeVersion": "3.1.0",
+  "capability": "lesson_generation",
+  "execId": "exec-1785408671336-92205a24",
+  "sourceKnowledgeObject": "ko-ai-what-is-ai",
+  "parentArtifactIds": [
+    "assessment-1785408671332-7e3b30"
+  ],
+  "qualityGate": "WARNING",
+  "generatedAt": "2026-07-30T10:51:11.340Z"
+}

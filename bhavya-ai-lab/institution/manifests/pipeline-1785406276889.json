@@ -1,0 +1,27 @@
+{
+  "buildId": "pipeline-1785406276889",
+  "runtimeVersion": "3.0.0",
+  "knowledgeObjectId": "ko-ai-what-is-ai",
+  "knowledgeObjectTitle": "What is Artificial Intelligence?",
+  "artifacts": [
+    {
+      "stage": "lesson",
+      "artifactId": "lesson-1785406276909-77e2e3",
+      "builder": "lesson",
+      "status": "WARNING"
+    },
+    {
+      "stage": "assessment",
+      "artifactId": "assessment-1785406276926-239226",
+      "builder": "quiz",
+      "status": "WARNING"
+    }
+  ],
+  "qualityGates": {
+    "passed": 0,
+    "failed": 0,
+    "warning": 2
+  },
+  "durationMs": 44,
+  "completedAt": "2026-07-30T10:11:16.934Z"
+}
