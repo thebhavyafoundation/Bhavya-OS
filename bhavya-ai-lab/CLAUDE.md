@@ -11,9 +11,9 @@ Bhavya AI Lab is a free, offline-first educational operating system for teaching
 | Research a topic | research/ | CONTEXT.md | research brief |
 | Create curriculum | curriculum/ | CONTEXT.md | lesson/course |
 | Produce video | production/ | CONTEXT.md | animation |
-| Build website | platform/ | CONTEXT.md | site |
-| Design assessment | assessments/ | CONTEXT.md | quiz/rubric |
-| Create teacher guide | teachers/ | CONTEXT.md | guide |
+| Deploy website | platform/ | CONTEXT.md | site |
+| Build output | build/ | README.md | compiled artifact |
+| Check institution | institution/ | README.md | decision/history |
 
 ## Folder Map
 
@@ -23,12 +23,22 @@ bhavya-ai-lab/
 ├── curriculum/        # Curriculum workspace
 ├── production/        # Video/content production
 ├── platform/          # Website deployment
+├── build/             # Build system (compilers)
 ├── assessments/       # Assessment engine
 ├── teachers/          # Teacher resources
-├── _config/           # Global config + registries
-│   ├── registries/    # Reusable assets
-│   └── voice.md       # Voice rules
-└── knowledge/         # Knowledge Objects
+├── institution/       # Memory, decisions, governance
+├── knowledge/         # Knowledge Objects
+│   ├── objects/       # Atomic knowledge units
+│   ├── concepts/      # Concept definitions
+│   ├── glossary/      # Terminology
+│   ├── citations/     # Source citations
+│   ├── taxonomy/      # Classification system
+│   └── graph/         # Relationships
+└── _config/           # Global config
+    ├── rules/         # Permanent rules
+    ├── registries/    # Reusable assets
+    ├── schemas/       # Data schemas
+    └── skills/        # Reusable expertise
 ```
 
 ## Naming Rules
@@ -37,3 +47,4 @@ bhavya-ai-lab/
 - Schemas: `{type}.schema.json`
 - Decisions: `DEC-{YYYY-MM-DD}-{slug}.json`
 - Versions: `MAJOR.MINOR.PATCH`
+- Each workspace has: CONTEXT.md (for AI) + MANIFEST.md (for humans)

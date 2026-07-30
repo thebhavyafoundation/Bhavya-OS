@@ -1,50 +1,41 @@
-# Research Workspace
+# CONTEXT — Research Workspace
 
-**Last Updated:** 2026-07-30
-**Current Goal:** Transform topic requests into structured research briefs
-**Known Constraints:** No internet required. Use local references when possible.
-**Open Questions:** How to handle contradictory sources?
-**Recent Decisions:** Use JSON for knowledge objects, not markdown
-**Next Review:** 2026-08-15
+## Purpose
+Transform topic requests into structured research briefs with key points, sources, and local relevance.
 
-## Context
+## Audience
+Curriculum developers, teachers, content creators.
 
-**Audience:** Curriculum developers, teachers
-**Input:** Topic request from user
-**Output:** Research brief with key points, sources, local relevance
+## Current Goal
+Build initial research pipeline for AI education topics.
 
-## Stages
+## Inputs
+- Topic request from user
+- References from `_config/registries/`
+- Existing knowledge from `knowledge/`
 
-### 01_topic_brief
-- Read user request
-- Define scope and questions
-- Output: `output/brief.md`
+## Outputs
+- Research brief (JSON)
+- Source list with citations
+- Local relevance assessment
 
-### 02_source_collection
-- Gather from references/ folder
-- Document sources with citations
-- Output: `output/sources.md`
+## Dependencies
+- `knowledge/` — Existing knowledge objects
+- `_config/voice.md` — Voice rules
+- `_config/skills/research/` — Research patterns
 
-### 03_synthesis
-- Combine into structured brief
-- Identify key concepts, misconceptions, local examples
-- Output: `output/research-brief.md`
+## Constraints
+- No internet required
+- Use local references when possible
+- All outputs must be versioned
 
-## References (Layer 3)
+## Quality Standard
+- At least 3 sources per topic
+- Local examples required
+- Misconceptions documented
 
-- `references/` — Local reference files
-- `../../_config/voice.md` — Voice rules
-- `../../knowledge/` — Existing knowledge objects
+## Recent Decisions
+- 2026-07-30: Use JSON for knowledge objects, not markdown
 
-## Output Format
-
-```json
-{
-  "topic": "...",
-  "keyPoints": [...],
-  "sources": [...],
-  "misconceptions": [...],
-  "localRelevance": "...",
-  "prerequisites": [...]
-}
-```
+## Last Updated
+2026-07-30

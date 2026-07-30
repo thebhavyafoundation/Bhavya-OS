@@ -1,48 +1,42 @@
-# Production Workspace
+# CONTEXT — Production Workspace
 
-**Last Updated:** 2026-07-30
-**Current Goal:** Transform scripts into rendered videos and animations
-**Known Constraints:** Render locally. No cloud rendering. MP4/WebM output.
-**Open Questions:** How to optimize for low-bandwidth delivery?
-**Recent Decisions:** Use Remotion for video rendering
-**Next Review:** 2026-08-15
+## Purpose
+Transform scripts into rendered videos, animations, and multimedia content.
 
-## Context
+## Audience
+Students, teachers, content consumers.
 
-**Audience:** Students, Teachers
-**Input:** Script from curriculum workspace
-**Output:** Video, thumbnail, transcript
+## Current Goal
+Build video production pipeline for lesson content.
 
-## Stages
+## Inputs
+- Script from curriculum workspace
+- Animation patterns from `_config/skills/remotion/`
+- Design system from `_config/registries/branding/`
 
-### 01_visual_spec
-- Read script
-- Define scenes, camera, animations
-- Output: `output/visual-spec.json`
+## Outputs
+- Video (MP4, WebM, GIF)
+- Thumbnail
+- Transcript
+- Subtitles
 
-### 02_script
-- Finalize narration
-- Add timing markers
-- Output: `output/script.md`
+## Dependencies
+- `curriculum/` — Scripts and lessons
+- `_config/skills/remotion/` — Animation patterns
+- `_config/registries/animations/` — Reusable animations
 
-### 03_remotion
-- Translate to Remotion code
-- Build components
-- Output: `output/src/`
+## Constraints
+- Render locally (no cloud)
+- Optimized for low bandwidth
+- All outputs versioned
 
-### 04_render
-- Render locally
-- Generate outputs
-- Output: `output/video/`
+## Quality Standard
+- Video matches script timing
+- Subtitles accurate
+- Thumbnail representative
 
-## References (Layer 3)
+## Recent Decisions
+- 2026-07-30: Use Remotion for video rendering
 
-- `references/animations.md` — Animation conventions
-- `references/design-system.md` — Visual design rules
-- `../../_config/registries/animations/` — Reusable animations
-
-## Output Format
-
-- `video/` — MP4, WebM, GIF
-- `thumbnail.png`
-- `transcript.md`
+## Last Updated
+2026-07-30

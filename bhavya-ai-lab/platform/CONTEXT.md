@@ -1,43 +1,42 @@
-# Platform Workspace
+# CONTEXT — Platform Workspace
 
-**Last Updated:** 2026-07-30
-**Current Goal:** Deploy content to web, mobile, offline packages
-**Known Constraints:** Static generation. No mandatory server. Works offline.
-**Open Questions:** How to handle versioning across deployments?
-**Recent Decisions:** Use Next.js with static export
-**Next Review:** 2026-08-15
+## Purpose
+Deploy content to web, mobile, and offline packages.
 
-## Context
+## Audience
+Students, teachers, contributors, general public.
 
-**Audience:** Students, Teachers, Contributors
-**Input:** Validated content from curriculum/production
-**Output:** Website, offline package, mobile app
+## Current Goal
+Build static website deployment for AI lab content.
 
-## Stages
+## Inputs
+- Validated content from curriculum workspace
+- Rendered media from production workspace
+- Layouts from `_config/registries/layouts/`
 
-### 01_structure
-- Define site structure
-- Map content to routes
-- Output: `output/routes.json`
+## Outputs
+- Static website
+- Offline package (USB/MicroSD)
+- Mobile-optimized content
 
-### 02_content
-- Compile content for web
-- Apply design system
-- Output: `output/pages/`
+## Dependencies
+- `curriculum/` — Validated lessons
+- `production/` — Rendered videos
+- `_config/skills/deployment/` — Deployment patterns
+- `_config/registries/layouts/` — Page layouts
 
-### 03_deploy
-- Build and deploy
-- Generate offline package
-- Output: `output/deployed/`
+## Constraints
+- Static generation (no server required)
+- Works offline
+- All outputs versioned
 
-## References (Layer 3)
+## Quality Standard
+- All pages render correctly
+- Offline package complete
+- Mobile responsive
 
-- `references/design-system.md` — Web design rules
-- `references/deployment.md` — Deployment procedures
-- `../../_config/registries/layouts/` — Reusable layouts
+## Recent Decisions
+- 2026-07-30: Use Next.js with static export
 
-## Output Format
-
-- `site/` — Static website
-- `offline/` — USB/MicroSD package
-- `mobile/` — Mobile-optimized content
+## Last Updated
+2026-07-30
