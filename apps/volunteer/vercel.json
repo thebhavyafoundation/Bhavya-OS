@@ -1,6 +1,6 @@
 {
-    "installCommand":  "pnpm install --no-frozen-lockfile",
-    "buildCommand":  "node scripts/vercel-build-app.mjs volunteer",
-    "framework":  "nextjs",
-    "outputDirectory":  "apps/volunteer/.next"
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @bhavya/volunteer build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }

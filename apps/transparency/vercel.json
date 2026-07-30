@@ -1,6 +1,6 @@
 {
-    "installCommand":  "pnpm install --no-frozen-lockfile",
-    "buildCommand":  "node scripts/vercel-build-app.mjs transparency",
-    "framework":  "nextjs",
-    "outputDirectory":  "apps/transparency/.next"
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @bhavya/transparency build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }

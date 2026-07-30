@@ -1,6 +1,6 @@
 {
-    "installCommand":  "pnpm install --no-frozen-lockfile",
-    "buildCommand":  "node scripts/vercel-build-app.mjs forest",
-    "framework":  "nextjs",
-    "outputDirectory":  "apps/forest/.next"
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @bhavya/forest build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }

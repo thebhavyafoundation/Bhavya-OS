@@ -1,6 +1,6 @@
 {
-    "installCommand":  "pnpm install --no-frozen-lockfile",
-    "buildCommand":  "node scripts/vercel-build-app.mjs design-system",
-    "framework":  "nextjs",
-    "outputDirectory":  "apps/design-system/.next"
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @bhavya/design-system build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }

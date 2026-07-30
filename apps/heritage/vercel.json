@@ -1,6 +1,6 @@
 {
-    "installCommand":  "pnpm install --no-frozen-lockfile",
-    "buildCommand":  "node scripts/vercel-build-app.mjs heritage",
-    "framework":  "nextjs",
-    "outputDirectory":  "apps/heritage/.next"
+  "installCommand": "cd ../.. && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @bhavya/heritage build",
+  "framework": "nextjs",
+  "outputDirectory": ".next"
 }
