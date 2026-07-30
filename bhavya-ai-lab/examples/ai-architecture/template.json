@@ -1,0 +1,19 @@
+{
+  "id": "ai-architecture",
+  "name": "AI Architecture Template",
+  "version": "1.0.0",
+  "description": "Reusable template for explaining AI architectures",
+  "duration": "5-10 minutes",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Title", "duration": 5, "purpose": "Architecture title"},
+    {"name": "Overview", "duration": 30, "purpose": "High level overview"},
+    {"name": "Components", "duration": 120, "purpose": "Component breakdown"},
+    {"name": "Data Flow", "duration": 60, "purpose": "Data flow visualization"},
+    {"name": "Summary", "duration": 15, "purpose": "Key takeaways"}
+  ],
+  "components": ["TitleCard", "OverviewCard", "ComponentDiagram", "DataFlowCard", "SummaryCard"],
+  "skills": ["remotion", "education", "diagramming"],
+  "registries": ["components", "animations", "diagrams"]
+}

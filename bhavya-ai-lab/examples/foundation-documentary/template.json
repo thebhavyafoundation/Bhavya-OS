@@ -1,0 +1,20 @@
+{
+  "id": "foundation-documentary",
+  "name": "Foundation Documentary Template",
+  "version": "1.0.0",
+  "description": "Reusable template for foundation documentaries",
+  "duration": "5-10 minutes",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Title", "duration": 5, "purpose": "Foundation title"},
+    {"name": "Mission", "duration": 30, "purpose": "Mission statement"},
+    {"name": "Impact", "duration": 120, "purpose": "Impact stories"},
+    {"name": "Team", "duration": 30, "purpose": "Team introduction"},
+    {"name": "Future", "duration": 30, "purpose": "Future vision"},
+    {"name": "CTA", "duration": 5, "purpose": "Support call"}
+  ],
+  "components": ["TitleCard", "MissionCard", "ImpactCard", "TeamCard", "FutureCard", "CTACard"],
+  "skills": ["remotion", "writing"],
+  "registries": ["components", "animations"]
+}

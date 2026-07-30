@@ -1,0 +1,19 @@
+{
+  "id": "history-timeline",
+  "name": "History Timeline Template",
+  "version": "1.0.0",
+  "description": "Reusable template for historical timelines",
+  "duration": "5-10 minutes",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Title", "duration": 5, "purpose": "Timeline title"},
+    {"name": "Context", "duration": 30, "purpose": "Historical context"},
+    {"name": "Events", "duration": 300, "purpose": "Timeline events with visuals"},
+    {"name": "Impact", "duration": 60, "purpose": "Historical impact"},
+    {"name": "Summary", "duration": 30, "purpose": "Key takeaways"}
+  ],
+  "components": ["TitleCard", "ContextCard", "TimelineEvent", "ImpactCard", "SummaryCard"],
+  "skills": ["remotion", "education"],
+  "registries": ["components", "animations"]
+}

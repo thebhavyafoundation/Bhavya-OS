@@ -1,0 +1,20 @@
+{
+  "id": "coding-tutorial",
+  "name": "Coding Tutorial Template",
+  "version": "1.0.0",
+  "description": "Reusable template for coding tutorials",
+  "duration": "10-20 minutes",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Title", "duration": 5, "purpose": "Tutorial title"},
+    {"name": "Goal", "duration": 30, "purpose": "What we're building"},
+    {"name": "Setup", "duration": 60, "purpose": "Development environment"},
+    {"name": "Code Walkthrough", "duration": 600, "purpose": "Step by step coding"},
+    {"name": "Demo", "duration": 60, "purpose": "Working demo"},
+    {"name": "Summary", "duration": 30, "purpose": "Key concepts"}
+  ],
+  "components": ["TitleCard", "GoalCard", "SetupCard", "CodeBlock", "DemoCard", "SummaryCard"],
+  "skills": ["remotion", "education", "typescript"],
+  "registries": ["components", "animations"]
+}

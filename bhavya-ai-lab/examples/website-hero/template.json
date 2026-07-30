@@ -1,0 +1,17 @@
+{
+  "id": "website-hero",
+  "name": "Website Hero Animation Template",
+  "version": "1.0.0",
+  "description": "Reusable template for website hero animations",
+  "duration": "5-10 seconds loop",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Entrance", "duration": 30, "purpose": "Elements enter"},
+    {"name": "Loop", "duration": 60, "purpose": "Main animation loop"},
+    {"name": "Exit", "duration": 30, "purpose": "Elements exit"}
+  ],
+  "components": ["Background", "TextReveal", "GraphicElements", "LogoReveal"],
+  "skills": ["remotion", "animation", "uiux"],
+  "registries": ["components", "animations", "backgrounds"]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "math-visualization",
+  "name": "Math Visualization Template",
+  "version": "1.0.0",
+  "description": "Reusable template for math concept visualizations",
+  "duration": "5-10 minutes",
+  "fps": 30,
+  "resolution": "1920x1080",
+  "structure": [
+    {"name": "Title", "duration": 5, "purpose": "Math concept title"},
+    {"name": "Problem", "duration": 30, "purpose": "Problem statement"},
+    {"name": "Visual Proof", "duration": 180, "purpose": "Visual mathematical proof"},
+    {"name": "Examples", "duration": 60, "purpose": " worked examples"},
+    {"name": "Summary", "duration": 15, "purpose": "Key formulas"}
+  ],
+  "components": ["TitleCard", "ProblemCard", "VisualProof", "ExampleCard", "FormulaCard"],
+  "skills": ["remotion", "education"],
+  "registries": ["components", "animations"]
+}
