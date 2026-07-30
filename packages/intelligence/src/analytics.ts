@@ -27,10 +27,6 @@ import {
 // Metrics about active work and operations
 
 export function getOperationalMetrics(): AnalyticsInsight {
-  const docs = getDocuments();
-  const entities = getEntities();
-  const kg = getKnowledgeGraph();
-
   const metrics: Metric[] = [
     {
       name: "Active Missions",
@@ -71,24 +67,27 @@ export function getOperationalMetrics(): AnalyticsInsight {
 
   const totalActivity = metrics.reduce((sum, m) => sum + m.value, 0);
 
-  return createInsight({
-    id: `operational-metrics-${Date.now()}`,
-    title: "Operational Overview",
-    description: `${totalActivity} total operational activities across all missions`,
-    confidence: 1,
-    evidence: [
-      createEvidence({
-        sourceId: "content-core",
-        sourceType: "document",
-        relevance: "Aggregated from all mission domains",
-      }),
-    ],
-    data: {
-      type: "operational",
-      metrics,
-      summary: `${getMissions().length} Forest missions, ${getHeritageMissions().length} Heritage missions, ${getProjects().length} Research projects, ${getVolunteers().length} Volunteers`,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `operational-metrics-${Date.now()}`,
+      title: "Operational Overview",
+      description: `${totalActivity} total operational activities across all missions`,
+      confidence: 1,
+      evidence: [
+        createEvidence({
+          sourceId: "content-core",
+          sourceType: "document",
+          relevance: "Aggregated from all mission domains",
+        }),
+      ],
+      data: {
+        type: "operational",
+        metrics,
+        summary: `${getMissions().length} Forest missions, ${getHeritageMissions().length} Heritage missions, ${getProjects().length} Research projects, ${getVolunteers().length} Volunteers`,
+      },
+    }),
+    category: "analytics",
+  };
 }
 
 // ── Knowledge Metrics ─────────────────────────────────────
@@ -187,24 +186,27 @@ export function getKnowledgeMetrics(): AnalyticsInsight {
     },
   ];
 
-  return createInsight({
-    id: `knowledge-metrics-${Date.now()}`,
-    title: "Knowledge Base Health",
-    description: `${docs.length} documents, ${entities.length} entities, ${kg.length} knowledge graph nodes`,
-    confidence: 1,
-    evidence: [
-      createEvidence({
-        sourceId: "content-core",
-        sourceType: "document",
-        relevance: "Aggregated from knowledge base",
-      }),
-    ],
-    data: {
-      type: "knowledge",
-      metrics,
-      summary: `${publishedDocs} published docs, ${entityCoverage}% entity coverage, ${crossDomainEdges} cross-domain connections`,
-    },
-  });
+  return {
+    ...createInsight({
+      id: `knowledge-metrics-${Date.now()}`,
+      title: "Knowledge Base Health",
+      description: `${docs.length} documents, ${entities.length} entities, ${kg.length} knowledge graph nodes`,
+      confidence: 1,
+      evidence: [
+        createEvidence({
+          sourceId: "content-core",
+          sourceType: "document",
+          relevance: "Aggregated from knowledge base",
+        }),
+      ],
+      data: {
+        type: "knowledge",
+        metrics,
+        summary: `${publishedDocs} published docs, ${entityCoverage}% entity coverage, ${crossDomainEdges} cross-domain connections`,
+      },
+    }),
+    category: "analytics",
+  };
 }
 
 // ── Combined Analytics ────────────────────────────────────

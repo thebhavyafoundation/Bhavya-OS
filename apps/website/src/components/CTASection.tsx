@@ -18,9 +18,9 @@ const programs = [
     eyebrow: "BHAVYA AI LABS",
     value: "AI Education",
     description:
-      "Computer education, AI literacy, coding workshops, digital libraries, and innovation challenges in rural communities.",
-    link: "/knowledge",
-    linkText: "View Knowledge Programmes",
+      "Free, offline-first AI education for children in rural Himachal Pradesh and beyond. Learn AI, programming, robotics, and more.",
+    link: "https://bhavya-foundation-bhavya-ai-lab.vercel.app",
+    linkText: "Visit Bhavya AI Lab",
     icon: <GraduationCap size={20} />,
     color: "var(--earth-600)",
   },

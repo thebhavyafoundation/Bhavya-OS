@@ -41,7 +41,7 @@ function generateInsights(): Insight[] {
 
   // Entity growth
   const recentEntities = [...entities]
-    .sort((a, b) => (b.createdAt || "").localeCompare(a.createdAt || ""))
+    .sort((a, b) => (b.created || "").localeCompare(a.created || ""))
     .slice(0, 2);
 
   for (const entity of recentEntities) {
@@ -50,7 +50,7 @@ function generateInsights(): Insight[] {
       type: "entity",
       title: `New entity: ${entity.name}`,
       description: `${entity.type} entity added to the knowledge graph.`,
-      timestamp: entity.createdAt || new Date().toISOString(),
+      timestamp: entity.created || new Date().toISOString(),
       source: "knowledge-graph",
     });
   }
@@ -61,8 +61,8 @@ function generateInsights(): Insight[] {
       id: `mission-${mission.id}`,
       type: "mission",
       title: `Forest mission: ${mission.name}`,
-      description: `Active mission tracking ${mission.targetTrees?.toLocaleString()} trees in ${mission.location}.`,
-      timestamp: mission.createdAt || new Date().toISOString(),
+      description: `Active mission in ${mission.region} with goals: ${mission.goals.slice(0, 2).join(", ")}.`,
+      timestamp: mission.created || new Date().toISOString(),
       source: "forest",
     });
   }

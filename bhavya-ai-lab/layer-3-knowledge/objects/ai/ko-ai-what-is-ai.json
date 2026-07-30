@@ -1,0 +1,66 @@
+{
+  "id": "ko-ai-what-is-ai",
+  "version": "1.0.0",
+  "domain": "ai",
+  "concept": "What is Artificial Intelligence?",
+  "definition": "AI is the ability of computers to perform tasks that normally require human intelligence. This includes learning, reasoning, problem-solving, understanding language, and recognizing patterns.",
+  "examples": [
+    {
+      "type": "analogy",
+      "content": "Like a village elder who has seen many things — the more they see, the better their guesses become."
+    },
+    {
+      "type": "analogy",
+      "content": "Like a student learning to cook — at first they follow recipes exactly, after making many dishes they learn what tastes good together."
+    },
+    {
+      "type": "application",
+      "content": "Email spam filters that learn what you mark as spam or not spam."
+    },
+    {
+      "type": "application",
+      "content": "Voice assistants like Google Assistant that convert speech to text and find answers."
+    },
+    {
+      "type": "local",
+      "content": "Weather prediction for farmers in Himachal Pradesh — predicting when rain will come, best planting times, frost warnings."
+    }
+  ],
+  "misconceptions": [
+    "AI is not magic — it's mathematics, statistics, and clever programming",
+    "AI doesn't think like humans — it finds patterns in data",
+    "AI is not new — it's been around since the 1950s",
+    "AI won't replace all jobs — it changes what jobs require"
+  ],
+  "difficulty": "beginner",
+  "prerequisites": [],
+  "relatedObjects": [
+    "ko-ai-types-of-ai",
+    "ko-ai-how-it-works",
+    "ko-ai-history"
+  ],
+  "projects": [
+    "ko-project-simple-decision-tree",
+    "ko-project-village-ai-system"
+  ],
+  "references": [
+    {
+      "type": "url",
+      "title": "Khan Academy: Introduction to AI",
+      "url": "https://www.khanacademy.org/computing/computer-science/algorithms"
+    },
+    {
+      "type": "url",
+      "title": "Google AI Experiments",
+      "url": "https://experiments.withgoogle.com/ai"
+    }
+  ],
+  "metadata": {
+    "author": "Bhavya AI Lab",
+    "created": "2026-07-30",
+    "updated": "2026-07-30",
+    "reviewStatus": "published",
+    "educationalLevel": "foundation",
+    "localRelevance": "High — applicable to farming, weather prediction, plant disease detection"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "DEC-2026-07-30-architecture",
+  "title": "BICM Architecture Adoption",
+  "date": "2026-07-30",
+  "reviewer": "Bhavya Foundation",
+  "decision": "Adopt BICM v1.0 as the architectural framework for Bhavya AI Lab",
+  "reason": "Need institutional memory, knowledge objects, universal compiler, and factory pattern for sustainable educational platform",
+  "alternatives": [
+    {
+      "name": "Keep ICM",
+      "description": "Continue with Interpretable Context Methodology as-is",
+      "reason": "Simpler, already implemented",
+      "rejectedBecause": "Lacks institutional memory, factory pattern, and knowledge object granularity"
+    },
+    {
+      "name": "Custom framework",
+      "description": "Build a completely custom educational framework",
+      "reason": "More control over implementation",
+      "rejectedBecause": "Reinventing the wheel, BICM already addresses requirements"
+    },
+    {
+      "name": "Use existing LMS",
+      "description": "Adapt Moodle or similar LMS",
+      "reason": "Proven system, large community",
+      "rejectedBecause": "Not offline-first, not portable, not filesystem-based"
+    }
+  ],
+  "outcome": "BICM v1.0 adopted as architectural framework",
+  "impact": "Full architecture rebuild required. Previous ICM work provides foundation but structure needs reorganization.",
+  "dependencies": [],
+  "status": "accepted",
+  "metadata": {
+    "author": "Bhavya Foundation",
+    "created": "2026-07-30",
+    "reviewStatus": "accepted"
+  }
+}

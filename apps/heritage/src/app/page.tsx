@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getHeritageStats, getHeritageMissions } from "@/lib/data";
+import { getHeritageStats } from "@/lib/data";
 import type { Mission } from "@/lib/data";
 import Sidebar from "@/components/Sidebar";
 

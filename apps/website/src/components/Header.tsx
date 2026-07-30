@@ -8,7 +8,7 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
     { id: "nav-mission", label: "Our Mission", href: "/mission" },
     { id: "nav-nature", label: "Nature", href: "/nature" },
     { id: "nav-knowledge", label: "Knowledge", href: "/knowledge" },
-    { id: "nav-ai-lab", label: "AI Lab", href: "/resources" },
+    { id: "nav-ai-lab", label: "AI Lab", href: "https://bhavya-foundation-bhavya-ai-lab.vercel.app" },
     { id: "nav-heritage", label: "Heritage", href: "/heritage" },
     { id: "nav-community", label: "Community", href: "/community" },
     { id: "nav-transparency", label: "Transparency", href: "/transparency" },

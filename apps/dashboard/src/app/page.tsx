@@ -100,12 +100,12 @@ export default function Dashboard() {
   }
 
   // Generate insights
-  const insights = [
+  const insights: { id: string; type: string; title: string; description: string; timestamp: string; source: string }[] = [
     ...recentDocs.slice(0, 3).map((doc) => ({
       id: `pub-${doc.id}`,
       type: "publication" as const,
       title: `${doc.title} published`,
-      description: `${doc.type} document added to ${doc.category} knowledge base.`,
+      description: `${doc.category} document added to ${doc.category} knowledge base.`,
       timestamp: doc.created || new Date().toISOString(),
       source: doc.category,
     })),
