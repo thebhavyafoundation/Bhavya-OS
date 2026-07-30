@@ -10,7 +10,7 @@ if (!app) {
 const validApps = [
   'website', 'dashboard', 'forest', 'heritage', 'research',
   'volunteer', 'knowledge', 'library', 'admin', 'docs',
-  'transparency', 'design-system'
+  'transparency', 'design-system', 'bhavya-ai-lab'
 ];
 
 if (!validApps.includes(app)) {
