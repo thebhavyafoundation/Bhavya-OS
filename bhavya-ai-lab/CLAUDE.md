@@ -1,5 +1,11 @@
 # CLAUDE.md — Bhavya AI Lab OS v3.0.0
 
+## Status
+
+**ENGINEERING FROZEN** — No new infrastructure. Build applications.
+
+The platform is production-ready. All future effort goes into Mission Applications (Lesson Studio, Animation Studio, Knowledge Browser, Assessment Studio, Engineering Dashboard). Read `ARCHITECTURE.md` before making changes.
+
 ## Identity
 
 Bhavya AI Lab is a free, offline-first educational operating system for teaching AI/CS in rural Himachal Pradesh.
@@ -71,4 +77,8 @@ bhavya-ai-lab/
 
 ## Version
 
-**3.0.0** — Model-independent production engineering ecosystem.
+**3.0.0** — ENGINEERING FROZEN. Build Mission Applications.
+
+## First Read
+
+Before any work, read `ARCHITECTURE.md` (24 sections, canonical reference). It covers the complete system: layer architecture, builder philosophy, capability model, provider abstraction, Knowledge Objects, package system, registry design, runtime flow, extension guidelines, and decision records.
