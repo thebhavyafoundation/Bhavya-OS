@@ -1,59 +1,25 @@
-# CLAUDE.md — Bhavya AI Lab
+# CLAUDE.md — Bhavya AI Lab OS v3.0.0
 
 ## Identity
 
 Bhavya AI Lab is a free, offline-first educational operating system for teaching AI/CS in rural Himachal Pradesh.
 
-AI models are interchangeable. Claude, GPT-5, Gemini, Qwen, Codex, or any future model are execution engines. This OS belongs to the workspace, not to any model.
+AI models are interchangeable. This OS belongs to the workspace, not to any model.
 
 ## Routing by Capability
 
-| Capability | Builder | Skills | Workspace |
-|------------|---------|--------|-----------|
-| Generate video | video | remotion, animation, react | production/ |
-| Generate lesson | lesson | education, writing | curriculum/ |
-| Generate quiz | quiz | education, qa | curriculum/ |
-| Generate website | website | deployment, react | platform/ |
-| Generate slides | slides | education, writing | curriculum/ |
-| Generate PDF | pdf | education, writing | curriculum/ |
-| Research topic | — | research, writing | research/ |
-| Translate content | — | translation, writing | curriculum/ |
-
-## Routing by Workspace
-
-| Workspace | Read | Skills | Purpose |
-|-----------|------|--------|---------|
-| research/ | CONTEXT.md | research | Transform topic requests into research briefs |
-| curriculum/ | CONTEXT.md | education | Transform research briefs into lessons |
-| production/ | CONTEXT.md | remotion | Transform scripts into videos |
-| platform/ | CONTEXT.md | deployment | Deploy content to web/mobile/offline |
-
-## Folder Map
-
-```
-bhavya-ai-lab/
-├── research/          # Research workspace
-├── curriculum/        # Curriculum workspace
-├── production/        # Video/content production
-├── platform/          # Website deployment
-├── builders/          # Deterministic build pipelines
-├── packages/          # Modular, installable components
-├── assessments/       # Assessment engine
-├── teachers/          # Teacher resources
-├── institution/       # Memory, decisions, governance
-├── knowledge/         # Knowledge Objects
-│   ├── objects/       # Atomic knowledge units
-│   ├── concepts/      # Concept definitions
-│   ├── glossary/      # Terminology
-│   ├── citations/     # Source citations
-│   ├── taxonomy/      # Classification system
-│   └── graph/         # Relationships
-└── _config/           # Global config
-    ├── rules/         # Permanent rules
-    ├── registries/    # Reusable assets
-    ├── schemas/       # Data schemas
-    └── skills/        # Model-independent skill packages
-```
+| Capability | Builder | Skills | Agent |
+|------------|---------|--------|-------|
+| research_analysis | — | research, writing | research-agent |
+| lesson_generation | lesson | education, writing | curriculum-agent |
+| quiz_generation | quiz | education, qa | curriculum-agent |
+| slides_generation | slides | education, writing | curriculum-agent |
+| pdf_generation | pdf | education, writing | curriculum-agent |
+| video_generation | video | remotion, animation, react | animation-agent |
+| animation_generation | video | remotion, animation | animation-agent |
+| diagram_generation | video | diagramming, animation | animation-agent |
+| website_generation | website | deployment, react | website-agent |
+| translation | — | translation, writing | curriculum-agent |
 
 ## Runtime Flow
 
@@ -62,23 +28,47 @@ User Request
       ↓
 CLAUDE.md (Capability Routing)
       ↓
-Workspace CONTEXT.md
+Orchestrator → Resolve Capability → Resolve Dependencies
       ↓
-Load Registered Skills
+Load Skills → Load Registries → Pre-Validate
       ↓
-Load Component Registry
+Execute Builder → Post-Validate → Publish Artifacts
       ↓
-Invoke Builder (if applicable)
-      ↓
-Generate / Modify Code
-      ↓
-Validate Output
+Observability (Metrics, Logs, Traces)
 ```
 
-## Naming Rules
+## Folder Map
 
-- Knowledge Objects: `ko-{domain}-{slug}.json`
-- Schemas: `{type}.schema.json`
-- Decisions: `DEC-{YYYY-MM-DD}-{slug}.json`
-- Versions: `MAJOR.MINOR.PATCH`
-- Each workspace has: CONTEXT.md (for AI) + MANIFEST.md (for humans)
+```
+bhavya-ai-lab/
+├── agents/            # Multi-agent runtime
+├── apps/              # Foundation applications
+├── builders/          # Deterministic build pipelines
+├── cli/               # Developer CLI and templates
+├── compilers/         # Animation compiler pipeline
+├── dashboard/         # Engineering dashboard
+├── dependency-graph/  # Dependency visualization
+├── docs-gen/          # Documentation generator
+├── examples/          # Reusable project templates
+├── institution/       # Memory, decisions, governance
+├── knowledge/         # Knowledge Objects + Graph
+├── observability/     # Metrics, logs, tracing
+├── orchestrator/      # Pipeline orchestration
+├── packages/          # Modular, installable packages
+├── plugins/           # Bhavya Package Registry (BPR)
+├── providers/         # AI provider abstraction
+├── quality-gates/     # Validation and quality
+├── release/           # Release pipeline
+├── security/          # Policies and verification
+├── skills/            # Model-independent skills
+├── tests/             # Automated test suites
+└── _config/           # Global config
+    ├── design/        # Design intelligence
+    ├── registries/    # Reusable assets
+    ├── schemas/       # Data schemas
+    └── skills/        # Registry + capabilities
+```
+
+## Version
+
+**3.0.0** — Model-independent production engineering ecosystem.

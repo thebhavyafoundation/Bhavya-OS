@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "description": "AI Provider abstraction layer. Providers implement a common interface. The runtime never depends on a specific provider.",
+  "interface": {
+    "name": "AIProvider",
+    "methods": [
+      {
+        "name": "generate",
+        "input": "GenerateRequest",
+        "output": "GenerateResponse",
+        "description": "Generate text from a prompt"
+      },
+      {
+        "name": "generateStream",
+        "input": "GenerateRequest",
+        "output": "Stream<GenerateResponse>",
+        "description": "Stream text from a prompt"
+      },
+      {
+        "name": "generateCode",
+        "input": "CodeRequest",
+        "output": "CodeResponse",
+        "description": "Generate code with language constraints"
+      },
+      {
+        "name": "analyze",
+        "input": "AnalysisRequest",
+        "output": "AnalysisResponse",
+        "description": "Analyze code or content"
+      },
+      {
+        "name": "validate",
+        "input": "ValidationRequest",
+        "output": "ValidationResponse",
+        "description": "Validate output against requirements"
+      }
+    ]
+  },
+  "types": {
+    "GenerateRequest": {
+      "prompt": "string",
+      "systemPrompt": "string?",
+      "temperature": "number?",
+      "maxTokens": "number?"
+    },
+    "GenerateResponse": {
+      "text": "string",
+      "usage": "{ promptTokens: number, completionTokens: number }"
+    },
+    "CodeRequest": {
+      "prompt": "string",
+      "language": "string",
+      "context": "string?"
+    },
+    "CodeResponse": {
+      "code": "string",
+      "language": "string",
+      "explanation": "string?"
+    }
+  },
+  "providers": {
+    "opencode": { "status": "active", "version": "1.0.0" },
+    "gpt5": { "status": "available", "version": "1.0.0" },
+    "codex": { "status": "available", "version": "1.0.0" },
+    "gemini": { "status": "available", "version": "1.0.0" },
+    "qwen": { "status": "available", "version": "1.0.0" },
+    "deepseek": { "status": "available", "version": "1.0.0" },
+    "devstral": { "status": "available", "version": "1.0.0" },
+    "claude": { "status": "available", "version": "1.0.0" }
+  }
+}

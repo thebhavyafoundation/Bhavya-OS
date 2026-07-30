@@ -1,0 +1,66 @@
+{
+  "version": "1.0.0",
+  "name": "Security System",
+  "description": "Permission model, package verification, schema validation, registry integrity, dependency verification, safe plugin loading.",
+  "policies": {
+    "packages": {
+      "verification": "required",
+      "signing": "ed25519",
+      "sources": {
+        "system": "trusted",
+        "community": "verified",
+        "external": "sandboxed"
+      }
+    },
+    "plugins": {
+      "loading": "sandboxed",
+      "capabilities": ["read-config", "write-output", "register-skills"],
+      "restrictions": ["no-network", "no-filesystem-outside-workspace"]
+    },
+    "execution": {
+      "maxConcurrentBuilds": 4,
+      "timeoutPerBuild": 300000,
+      "maxOutputSize": 1073741824
+    },
+    "access": {
+      "read": ["knowledge/", "_config/", "institution/", "skills/", "packages/"],
+      "write": ["build/", "output/", "logs/"],
+      "execute": ["builders/", "compilers/"]
+    }
+  },
+  "verification": {
+    "schema": {
+      "description": "All JSON data must conform to a schema",
+      "enforcement": ["knowledge/objects/*.json", "builders/*/builder.json", "packages/*/package.json"]
+    },
+    "integrity": {
+      "description": "Registry entries must match actual files",
+      "checks": [
+        "Every skill in registry.json exists in skills/",
+        "Every builder in registry.json exists in builders/",
+        "Every registry path is valid",
+        "No orphaned files"
+      ]
+    },
+    "dependencies": {
+      "description": "Package dependencies must be resolvable",
+      "checks": [
+        "No circular dependencies",
+        "All referenced packages exist",
+        "Version compatibility"
+      ]
+    }
+  },
+  "audit": {
+    "enabled": true,
+    "logPath": "security/audit/",
+    "events": [
+      "package-install",
+      "package-uninstall",
+      "builder-execution",
+      "capability-resolution",
+      "schema-validation-failure",
+      "dependency-failure"
+    ]
+  }
+}

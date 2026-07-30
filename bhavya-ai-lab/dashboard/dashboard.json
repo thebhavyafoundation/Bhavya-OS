@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "name": "Engineering Dashboard",
+  "description": "Unified view of the entire platform. Packages, skills, builders, capabilities, registries, workspaces, templates, build history, validation, dependency graph.",
+  "sections": [
+    {
+      "id": "overview",
+      "name": "Platform Overview",
+      "widgets": [
+        { "type": "stat", "label": "Total Capabilities", "source": "_config/skills/registry.json#/capabilities" },
+        { "type": "stat", "label": "Total Builders", "source": "_config/skills/registry.json#/builders" },
+        { "type": "stat", "label": "Total Skills", "source": "_config/skills/registry.json#/skills" },
+        { "type": "stat", "label": "Installed Packages", "source": "packages/*/package.json" },
+        { "type": "stat", "label": "Active Workspaces", "source": "/workspaces" },
+        { "type": "stat", "label": "Quality Gates", "source": "quality-gates/rules.json#/gates" }
+      ]
+    },
+    {
+      "id": "packages",
+      "name": "Packages",
+      "source": "packages/*/package.json",
+      "columns": ["name", "version", "description", "dependencies"]
+    },
+    {
+      "id": "skills",
+      "name": "Skills",
+      "source": "skills/*/skill.json",
+      "columns": ["id", "version", "description", "workspaces"]
+    },
+    {
+      "id": "builders",
+      "name": "Builders",
+      "source": "builders/*/builder.json",
+      "columns": ["id", "name", "input", "output", "pipeline"]
+    },
+    {
+      "id": "capabilities",
+      "name": "Capabilities",
+      "source": "_config/skills/registry.json#/capabilities",
+      "columns": ["capability", "builder", "skills", "workspace"]
+    },
+    {
+      "id": "registries",
+      "name": "Registries",
+      "source": "_config/registries/",
+      "columns": ["name", "type", "entries"]
+    },
+    {
+      "id": "workspaces",
+      "name": "Active Workspaces",
+      "source": "/workspaces",
+      "columns": ["workspace", "context", "skills", "status"]
+    },
+    {
+      "id": "templates",
+      "name": "Installed Templates",
+      "source": "examples/*/template.json",
+      "columns": ["name", "type", "duration", "components"]
+    },
+    {
+      "id": "build-history",
+      "name": "Build History",
+      "source": "observability/metrics/",
+      "columns": ["timestamp", "capability", "builder", "duration", "status"]
+    },
+    {
+      "id": "validation",
+      "name": "Validation Status",
+      "source": "quality-gates/rules.json#/gates",
+      "columns": ["gate", "checks", "passed", "failed"]
+    },
+    {
+      "id": "dependency-graph",
+      "name": "Dependency Graph",
+      "source": "dependency-graph/data/graph.json",
+      "visualization": "force-directed-graph"
+    }
+  ]
+}

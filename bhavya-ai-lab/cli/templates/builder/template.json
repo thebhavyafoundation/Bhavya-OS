@@ -1,0 +1,24 @@
+{
+  "name": "{{name}}",
+  "description": "{{description}} builder",
+  "files": [
+    "builder.json",
+    "README.md"
+  ],
+  "builder.json": {
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "version": "1.0.0",
+    "description": "{{description}}",
+    "input": "{{input}}",
+    "output": ["{{output}}"],
+    "skills": ["{{skills}}"],
+    "registries": ["{{registries}}"],
+    "pipeline": [
+      { "step": "validate", "action": "Validate input" },
+      { "step": "process", "action": "Process input" },
+      { "step": "generate", "action": "Generate output" },
+      { "step": "validate-output", "action": "Validate output" }
+    ]
+  }
+}

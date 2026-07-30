@@ -1,0 +1,31 @@
+{
+  "name": "{{name}}",
+  "description": "{{description}} package",
+  "files": [
+    "package.json",
+    "skill.json"
+  ],
+  "subdirectories": ["components", "schemas", "registries", "skills", "builders", "tests"],
+  "package.json": {
+    "name": "{{name}}",
+    "version": "1.0.0",
+    "description": "{{description}}",
+    "main": "index.ts",
+    "dependencies": ["@bhavya/core"],
+    "exports": {
+      "./components": "./components/index.ts",
+      "./schemas": "./schemas/index.ts",
+      "./skills": "./skills/index.ts",
+      "./builders": "./builders/index.ts"
+    }
+  },
+  "skill.json": {
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "version": "1.0.0",
+    "description": "{{description}}",
+    "workspaces": ["{{workspace}}"],
+    "dependencies": [],
+    "registries": []
+  }
+}

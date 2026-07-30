@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "description": "Observability system. Tracks execution metrics, builder duration, validation failures, dependency errors, and runtime performance.",
+  "metrics": {
+    "execution": {
+      "totalRequests": "counter",
+      "activeRequests": "gauge",
+      "executionDuration": "histogram",
+      "requestsByCapability": "counter_labels"
+    },
+    "builders": {
+      "buildsStarted": "counter",
+      "buildsCompleted": "counter",
+      "buildsFailed": "counter",
+      "buildDuration": "histogram",
+      "buildsByBuilder": "counter_labels",
+      "buildsByWorkspace": "counter_labels"
+    },
+    "validation": {
+      "totalChecks": "counter",
+      "passedChecks": "counter",
+      "failedChecks": "counter",
+      "failuresByGate": "counter_labels"
+    },
+    "dependencies": {
+      "resolvedDeps": "counter",
+      "failedResolutions": "counter",
+      "cycleDetections": "counter"
+    },
+    "quality": {
+      "gatesPassed": "counter",
+      "gatesFailed": "counter",
+      "gatesSkipped": "counter"
+    },
+    "packages": {
+      "installedPackages": "gauge",
+      "packageUpdates": "counter",
+      "installationFailures": "counter"
+    },
+    "providers": {
+      "providerCalls": "counter_labels",
+      "providerErrors": "counter_labels",
+      "providerLatency": "histogram_labels"
+    }
+  },
+  "logs": {
+    "level": "info",
+    "structured": true,
+    "fields": {
+      "timestamp": "ISO8601",
+      "level": "string",
+      "component": "string",
+      "requestId": "string",
+      "capability": "string?",
+      "builder": "string?",
+      "duration": "number?",
+      "error": "string?"
+    },
+    "destinations": ["console", "observability/logs/"],
+    "retention": "30d"
+  },
+  "tracing": {
+    "enabled": true,
+    "samplingRate": 0.1,
+    "propagation": "w3c-tracecontext"
+  },
+  "alerts": {
+    "buildFailureRate": { "threshold": 0.1, "window": "5m" },
+    "validationFailureRate": { "threshold": 0.2, "window": "5m" },
+    "dependencyFailureRate": { "threshold": 0.1, "window": "5m" },
+    "providerErrorRate": { "threshold": 0.05, "window": "5m" }
+  }
+}

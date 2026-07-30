@@ -1,0 +1,19 @@
+{
+  "id": "opencode",
+  "name": "OpenCode Provider",
+  "version": "1.0.0",
+  "description": "Default provider. OpenCode serves as the execution engine.",
+  "status": "active",
+  "capabilities": [
+    "generate",
+    "generateStream",
+    "generateCode",
+    "analyze",
+    "validate"
+  ],
+  "config": {
+    "model": "default",
+    "temperature": 0.2,
+    "maxTokens": 4096
+  }
+}

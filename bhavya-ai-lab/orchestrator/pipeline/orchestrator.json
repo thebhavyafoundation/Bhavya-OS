@@ -1,0 +1,101 @@
+{
+  "id": "orchestrator",
+  "version": "1.0.0",
+  "name": "Builder Orchestrator",
+  "description": "Pipeline orchestration engine. Accepts capability requests, resolves dependencies, loads skills/registries, executes builders, validates, publishes.",
+  "capabilities": {
+    "resolve": "Resolve capability to builder, skills, registries, schemas",
+    "load": "Load required skills and registries from _config",
+    "validate": "Run quality gates before execution",
+    "execute": "Execute builder pipeline steps",
+    "publish": "Publish artifacts to output directory",
+    "observe": "Record metrics and structured logs"
+  },
+  "pipeline": {
+    "steps": [
+      {
+        "id": "receive",
+        "name": "Receive Request",
+        "input": "CapabilityRequest",
+        "output": "ValidatedRequest",
+        "description": "Validate capability request format"
+      },
+      {
+        "id": "resolve",
+        "name": "Resolve Capability",
+        "input": "ValidatedRequest",
+        "output": "ResolvedCapability",
+        "description": "Map capability to builder, skills, registries, schemas"
+      },
+      {
+        "id": "dep-resolve",
+        "name": "Resolve Dependencies",
+        "input": "ResolvedCapability",
+        "output": "DependencyTree",
+        "description": "Resolve dependency graph and detect cycles"
+      },
+      {
+        "id": "load-skills",
+        "name": "Load Skills",
+        "input": "DependencyTree",
+        "output": "LoadedSkills",
+        "description": "Load skill patterns from registry"
+      },
+      {
+        "id": "load-registries",
+        "name": "Load Registries",
+        "input": "DependencyTree",
+        "output": "LoadedRegistries",
+        "description": "Load reusable assets from registries"
+      },
+      {
+        "id": "pre-validate",
+        "name": "Pre-Validate",
+        "input": "LoadedRegistries",
+        "output": "ValidatedInput",
+        "description": "Run quality gates before builder execution"
+      },
+      {
+        "id": "execute",
+        "name": "Execute Builder",
+        "input": "ValidatedInput",
+        "output": "BuildOutput",
+        "description": "Run builder pipeline with loaded skills and registries"
+      },
+      {
+        "id": "post-validate",
+        "name": "Post-Validate",
+        "input": "BuildOutput",
+        "output": "ValidatedOutput",
+        "description": "Run quality gates on output"
+      },
+      {
+        "id": "publish",
+        "name": "Publish Artifacts",
+        "input": "ValidatedOutput",
+        "output": "PublishedArtifacts",
+        "description": "Publish to output directory with versioning"
+      }
+    ]
+  },
+  "parallel": {
+    "description": "Steps that can run in parallel",
+    "groups": [
+      ["load-skills", "load-registries"]
+    ]
+  },
+  "retry": {
+    "maxRetries": 3,
+    "backoff": "exponential",
+    "initialDelay": 1000
+  },
+  "errors": {
+    "capability-not-found": "Capability not found in registry",
+    "builder-not-found": "Builder not found for capability",
+    "skill-not-found": "Required skill not installed",
+    "registry-not-found": "Required registry not found",
+    "dependency-cycle": "Circular dependency detected",
+    "validation-failed": "Quality gate validation failed",
+    "build-failed": "Builder execution failed"
+  }
+}
