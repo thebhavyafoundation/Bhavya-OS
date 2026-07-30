@@ -1,0 +1,44 @@
+{
+  "id": "ko-ai-what-is-ai",
+  "version": "1.0.0",
+  "domain": "ai",
+  "concept": "What is Artificial Intelligence?",
+  "definition": "AI is the ability of computers to perform tasks that normally require human intelligence.",
+  "examples": [
+    {
+      "type": "analogy",
+      "content": "Like a village elder who learns from experience — the more they see, the better their guesses become."
+    },
+    {
+      "type": "application",
+      "content": "Email spam filters that learn what you mark as spam."
+    },
+    {
+      "type": "local",
+      "content": "Weather prediction for farmers in Himachal Pradesh."
+    }
+  ],
+  "misconceptions": [
+    "AI is not magic — it's mathematics and statistics",
+    "AI doesn't think like humans — it finds patterns in data"
+  ],
+  "difficulty": "beginner",
+  "prerequisites": [],
+  "relatedObjects": ["ko-ai-types-of-ai", "ko-ai-how-it-works"],
+  "projects": ["ko-project-simple-decision-tree"],
+  "references": [
+    {
+      "type": "url",
+      "title": "Khan Academy AI",
+      "url": "https://www.khanacademy.org/computing"
+    }
+  ],
+  "metadata": {
+    "author": "Bhavya AI Lab",
+    "created": "2026-07-30",
+    "updated": "2026-07-30",
+    "reviewStatus": "published",
+    "educationalLevel": "foundation",
+    "localRelevance": "High — farming, weather, tourism"
+  }
+}
