@@ -1,0 +1,9 @@
+{
+  "id": "remotion",
+  "name": "Remotion Video Engineering",
+  "version": "1.0.0",
+  "description": "Guidance for building educational animations with React and Remotion.",
+  "workspaces": ["production"],
+  "dependencies": ["react", "typescript"],
+  "registries": ["components", "layouts", "animations"]
+}

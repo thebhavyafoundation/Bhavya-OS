@@ -1,0 +1,9 @@
+{
+  "id": "education",
+  "name": "Curriculum Design",
+  "version": "1.0.0",
+  "description": "Pedagogical patterns for teaching AI/CS to rural students.",
+  "workspaces": ["curriculum"],
+  "dependencies": [],
+  "registries": ["curriculum", "schemas"]
+}

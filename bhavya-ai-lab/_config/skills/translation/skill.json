@@ -1,0 +1,9 @@
+{
+  "id": "translation",
+  "name": "Hindi-English Translation",
+  "version": "1.0.0",
+  "description": "Bilingual content creation for Himachal Pradesh schools.",
+  "workspaces": ["curriculum", "production"],
+  "dependencies": [],
+  "registries": ["voice"]
+}

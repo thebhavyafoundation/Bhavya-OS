@@ -1,0 +1,9 @@
+{
+  "id": "deployment",
+  "name": "Deployment & Offline Packages",
+  "version": "1.0.0",
+  "description": "Static site generation, offline deployment, USB/MicroSD packaging.",
+  "workspaces": ["platform"],
+  "dependencies": ["react"],
+  "registries": ["layouts", "components"]
+}

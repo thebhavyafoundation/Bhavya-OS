@@ -4,16 +4,18 @@
 
 Bhavya AI Lab is a free, offline-first educational operating system for teaching AI/CS in rural Himachal Pradesh.
 
+AI models are interchangeable. Claude, GPT-5, Gemini, Qwen, Codex, or any future model are execution engines. This OS belongs to the workspace, not to any model.
+
 ## Routing Table
 
-| Task | Workspace | Read | Output |
-|------|-----------|------|--------|
-| Research a topic | research/ | CONTEXT.md | research brief |
-| Create curriculum | curriculum/ | CONTEXT.md | lesson/course |
-| Produce video | production/ | CONTEXT.md | animation |
-| Deploy website | platform/ | CONTEXT.md | site |
-| Build output | build/ | README.md | compiled artifact |
-| Check institution | institution/ | README.md | decision/history |
+| Task | Workspace | Read | OpenCode Skills |
+|------|-----------|------|-----------------|
+| Research a topic | research/ | CONTEXT.md | research |
+| Create curriculum | curriculum/ | CONTEXT.md | education |
+| Generate animation | production/ | CONTEXT.md | remotion, animation |
+| Deploy website | platform/ | CONTEXT.md | deployment |
+| Build output | build/ | README.md | typescript |
+| Check institution | institution/ | README.md | — |
 
 ## Folder Map
 
@@ -38,7 +40,7 @@ bhavya-ai-lab/
     ├── rules/         # Permanent rules
     ├── registries/    # Reusable assets
     ├── schemas/       # Data schemas
-    └── skills/        # Reusable expertise
+    └── skills/        # Model-independent skill packages
 ```
 
 ## Naming Rules
@@ -48,3 +50,21 @@ bhavya-ai-lab/
 - Decisions: `DEC-{YYYY-MM-DD}-{slug}.json`
 - Versions: `MAJOR.MINOR.PATCH`
 - Each workspace has: CONTEXT.md (for AI) + MANIFEST.md (for humans)
+
+## Runtime Flow
+
+```
+User Request
+      ↓
+CLAUDE.md (Routing)
+      ↓
+Workspace CONTEXT.md
+      ↓
+Load Registered Skills
+      ↓
+Load Component Registry
+      ↓
+Generate / Modify Code
+      ↓
+Validate Output
+```

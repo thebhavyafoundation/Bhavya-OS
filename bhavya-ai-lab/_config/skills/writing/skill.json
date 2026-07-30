@@ -1,0 +1,9 @@
+{
+  "id": "writing",
+  "name": "Educational Writing",
+  "version": "1.0.0",
+  "description": "Content writing for bilingual educational materials.",
+  "workspaces": ["curriculum", "research"],
+  "dependencies": [],
+  "registries": ["voice"]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "diagramming",
+  "name": "Diagrams & Visual Explanations",
+  "version": "1.0.0",
+  "description": "Flowcharts, concept maps, and visual explanations.",
+  "workspaces": ["production", "curriculum"],
+  "dependencies": [],
+  "registries": ["diagrams"]
+}

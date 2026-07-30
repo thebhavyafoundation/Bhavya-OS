@@ -1,0 +1,98 @@
+{
+  "remotion": {
+    "path": "skills/remotion",
+    "version": "1.0.0",
+    "description": "Video and animation production with React and Remotion",
+    "workspaces": ["production"],
+    "dependencies": ["react", "typescript"],
+    "registries": ["components", "layouts", "animations"]
+  },
+  "react": {
+    "path": "skills/react",
+    "version": "1.0.0",
+    "description": "React component development",
+    "workspaces": ["platform", "production"],
+    "dependencies": ["typescript"],
+    "registries": ["components", "layouts"]
+  },
+  "typescript": {
+    "path": "skills/typescript",
+    "version": "1.0.0",
+    "description": "TypeScript development patterns",
+    "workspaces": ["platform", "production", "build"],
+    "dependencies": [],
+    "registries": ["schemas"]
+  },
+  "education": {
+    "path": "skills/education",
+    "version": "1.0.0",
+    "description": "Curriculum design and lesson creation",
+    "workspaces": ["curriculum"],
+    "dependencies": [],
+    "registries": ["curriculum", "schemas"]
+  },
+  "research": {
+    "path": "skills/research",
+    "version": "1.0.0",
+    "description": "Educational research and source analysis",
+    "workspaces": ["research"],
+    "dependencies": [],
+    "registries": ["citations", "glossary"]
+  },
+  "writing": {
+    "path": "skills/writing",
+    "version": "1.0.0",
+    "description": "Educational writing and content creation",
+    "workspaces": ["curriculum", "research"],
+    "dependencies": [],
+    "registries": ["voice"]
+  },
+  "qa": {
+    "path": "skills/qa",
+    "version": "1.0.0",
+    "description": "Quality assurance and testing",
+    "workspaces": ["platform", "production", "build"],
+    "dependencies": [],
+    "registries": ["schemas"]
+  },
+  "deployment": {
+    "path": "skills/deployment",
+    "version": "1.0.0",
+    "description": "Static site generation and offline deployment",
+    "workspaces": ["platform"],
+    "dependencies": ["react"],
+    "registries": ["layouts", "components"]
+  },
+  "animation": {
+    "path": "skills/animation",
+    "version": "1.0.0",
+    "description": "Motion graphics and kinetic typography",
+    "workspaces": ["production"],
+    "dependencies": ["remotion", "react"],
+    "registries": ["animations", "components"]
+  },
+  "diagramming": {
+    "path": "skills/diagramming",
+    "version": "1.0.0",
+    "description": "Diagrams, flowcharts, and visual explanations",
+    "workspaces": ["production", "curriculum"],
+    "dependencies": [],
+    "registries": ["diagrams"]
+  },
+  "python": {
+    "path": "skills/python",
+    "version": "1.0.0",
+    "description": "Python development and data processing",
+    "workspaces": ["build", "research"],
+    "dependencies": [],
+    "registries": []
+  },
+  "translation": {
+    "path": "skills/translation",
+    "version": "1.0.0",
+    "description": "Hindi-English bilingual content",
+    "workspaces": ["curriculum", "production"],
+    "dependencies": [],
+    "registries": ["voice"]
+  }
+}

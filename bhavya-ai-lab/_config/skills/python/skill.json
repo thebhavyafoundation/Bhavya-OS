@@ -1,0 +1,9 @@
+{
+  "id": "python",
+  "name": "Python Development",
+  "version": "1.0.0",
+  "description": "Python scripting, data processing, and tooling.",
+  "workspaces": ["build", "research"],
+  "dependencies": [],
+  "registries": []
+}
