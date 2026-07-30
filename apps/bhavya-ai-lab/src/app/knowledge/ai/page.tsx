@@ -1,51 +1,27 @@
+import { getKnowledgeObjects } from "@/lib/data";
 import Link from "next/link";
 
-const articles = [
-  {
-    id: "what-is-ai",
-    title: "What is Artificial Intelligence?",
-    description: "Definition, explanation, and local examples",
-    difficulty: "Beginner",
-  },
-  {
-    id: "types-of-ai",
-    title: "Types of AI",
-    description: "Narrow vs General AI, levels of intelligence",
-    difficulty: "Beginner",
-  },
-  {
-    id: "how-ai-works",
-    title: "How AI Works",
-    description: "Data, patterns, and learning mechanisms",
-    difficulty: "Intermediate",
-  },
-  {
-    id: "machine-learning",
-    title: "Machine Learning",
-    description: "Supervised, unsupervised, and reinforcement learning",
-    difficulty: "Intermediate",
-  },
-  {
-    id: "neural-networks",
-    title: "Neural Networks",
-    description: "Brain-inspired computing and deep learning",
-    difficulty: "Advanced",
-  },
-  {
-    id: "ai-applications",
-    title: "AI Applications",
-    description: "Image recognition, NLP, recommendation systems",
-    difficulty: "Intermediate",
-  },
-  {
-    id: "ai-ethics",
-    title: "AI Ethics",
-    description: "Bias, safety, and responsible AI development",
-    difficulty: "Beginner",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function AIKnowledgePage() {
+export default async function AIKnowledgePage() {
+  const knowledgeObjects = await getKnowledgeObjects();
+
+  const aiObjects = knowledgeObjects.filter((ko) => {
+    const domain = (ko.domain || "").toLowerCase();
+    const subject = (ko.subject || "").toLowerCase();
+    return (
+      domain.includes("artificial") ||
+      domain.includes("ai") ||
+      domain.includes("machine") ||
+      domain.includes("computer") ||
+      subject.includes("artificial") ||
+      subject.includes("ai") ||
+      subject.includes("computer")
+    );
+  });
+
+  const allObjects = aiObjects.length > 0 ? aiObjects : knowledgeObjects;
+
   return (
     <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px" }}>
       {/* Header */}
@@ -53,7 +29,7 @@ export default function AIKnowledgePage() {
         <Link
           href="/knowledge"
           style={{
-            color: "#94a3b8",
+            color: "#71717a",
             textDecoration: "none",
             fontSize: 14,
             marginBottom: 16,
@@ -62,54 +38,148 @@ export default function AIKnowledgePage() {
         >
           ← Back to Knowledge Base
         </Link>
-        <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 16 }}>
-          🤖 Artificial Intelligence
-        </h1>
-        <p style={{ fontSize: 18, color: "#94a3b8" }}>
-          Core AI concepts from fundamentals to advanced topics
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            marginBottom: 8,
+          }}
+        >
+          <span style={{ fontSize: 24 }}>🤖</span>
+          <h1
+            style={{
+              fontSize: 28,
+              fontWeight: 700,
+              color: "#fafafa",
+              margin: 0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Artificial Intelligence
+          </h1>
+        </div>
+        <p style={{ fontSize: 14, color: "#71717a", margin: 0 }}>
+          {allObjects.length} Knowledge Objects
+          {aiObjects.length > 0 ? ` filtered by AI domain` : ""}
         </p>
       </div>
 
-      {/* Articles */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {articles.map((article) => (
-          <Link
-            key={article.id}
-            href={`/knowledge/ai/${article.id}`}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: 24,
-              background: "#1e293b",
-              borderRadius: 12,
-              border: "1px solid #334155",
-              textDecoration: "none",
-              color: "#f8fafc",
-            }}
-          >
-            <div>
-              <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
-                {article.title}
-              </h2>
-              <p style={{ fontSize: 14, color: "#94a3b8" }}>
-                {article.description}
-              </p>
-            </div>
-            <span
+      {/* Knowledge Objects */}
+      {allObjects.length > 0 ? (
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
+        >
+          {allObjects.map((ko) => (
+            <div
+              key={ko.id}
               style={{
-                fontSize: 12,
-                padding: "4px 12px",
-                borderRadius: 16,
-                background: "#334155",
-                color: "#94a3b8",
+                background: "#18181b",
+                border: "1px solid #27272a",
+                borderRadius: 12,
+                padding: 24,
+                transition: "border-color 0.2s",
+                cursor: "pointer",
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderColor = "#3f3f46")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderColor = "#27272a")
+              }
             >
-              {article.difficulty}
-            </span>
-          </Link>
-        ))}
-      </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  marginBottom: 12,
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "#fafafa",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {ko.title}
+                  </div>
+                  <div style={{ fontSize: 12, color: "#71717a" }}>
+                    {ko.domain} · Grade {ko.grade} · {ko.subject}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: "3px 8px",
+                    borderRadius: 6,
+                    background: "#166534",
+                    color: "#22c55e",
+                    fontWeight: 500,
+                  }}
+                >
+                  {ko.concepts?.length || 0} concepts
+                </span>
+              </div>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "#a1a1aa",
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}
+              >
+                {ko.description}
+              </p>
+              {ko.concepts && ko.concepts.length > 0 && (
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 6,
+                    flexWrap: "wrap",
+                    marginTop: 12,
+                  }}
+                >
+                  {ko.concepts.slice(0, 4).map((c) => (
+                    <span
+                      key={c.name}
+                      style={{
+                        fontSize: 11,
+                        padding: "3px 8px",
+                        borderRadius: 4,
+                        background: "#1c1c1f",
+                        color: "#a1a1aa",
+                        border: "1px solid #27272a",
+                      }}
+                    >
+                      {c.name}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div
+          style={{
+            padding: 60,
+            textAlign: "center",
+            color: "#52525b",
+            fontSize: 14,
+            background: "#18181b",
+            border: "1px solid #27272a",
+            borderRadius: 12,
+          }}
+        >
+          <div style={{ fontSize: 32, marginBottom: 12 }}>🤖</div>
+          No AI knowledge objects found. Add JSON files to
+          bhavya-ai-lab/knowledge/objects/
+        </div>
+      )}
     </div>
   );
 }

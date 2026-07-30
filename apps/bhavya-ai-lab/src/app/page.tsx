@@ -1,289 +1,557 @@
-import Link from "next/link";
+import { Greeting } from "@/components/greeting";
+import { StatCard } from "@/components/stat-card";
+import {
+  getContentStats,
+  getKnowledgeObjects,
+  getContentDocuments,
+  getGovernanceDocs,
+  getPolicies,
+  getDecisions,
+  getRegistry,
+  getRuntime,
+  getBuilders,
+  getForestMissions,
+  getResearchProjects,
+  getProjects,
+} from "@/lib/data";
 
-const layers = [
-  {
-    id: "layer-0-identity",
-    title: "Identity",
-    icon: "👤",
-    description: "Who we are",
-    color: "#10b981",
-  },
-  {
-    id: "layer-1-mission",
-    title: "Mission",
-    icon: "🎯",
-    description: "Why we exist",
-    color: "#3b82f6",
-  },
-  {
-    id: "layer-2-context",
-    title: "Context",
-    icon: "🗺️",
-    description: "How to navigate",
-    color: "#8b5cf6",
-  },
-  {
-    id: "layer-3-knowledge",
-    title: "Knowledge",
-    icon: "📚",
-    description: "What we know — atomic Knowledge Objects",
-    color: "#f59e0b",
-  },
-  {
-    id: "layer-4-factories",
-    title: "Factories",
-    icon: "🏭",
-    description: "Universal Compiler — transform knowledge",
-    color: "#ef4444",
-  },
-  {
-    id: "layer-5-applications",
-    title: "Applications",
-    icon: "📱",
-    description: "Web, PDF, Video, Mobile, Offline",
-    color: "#06b6d4",
-  },
-  {
-    id: "layer-6-runtime",
-    title: "Runtime",
-    icon: "⚡",
-    description: "Current execution state",
-    color: "#64748b",
-  },
-  {
-    id: "layer-7-memory",
-    title: "Institutional Memory",
-    icon: "🧠",
-    description: "Why things exist — decisions, changelog, audit",
-    color: "#ec4899",
-  },
-];
+export const dynamic = "force-dynamic";
 
-const features = [
-  {
-    icon: "📦",
-    title: "Knowledge First",
-    description: "AI is a runtime, not the center. Knowledge is.",
-  },
-  {
-    icon: "🔄",
-    title: "Universal Compiler",
-    description: "One source compiles to web, PDF, video, mobile, offline",
-  },
-  {
-    icon: "📋",
-    title: "Registry Layer",
-    description: "Single source of truth for reusable components",
-  },
-  {
-    icon: "🧠",
-    title: "Institutional Memory",
-    description: "Every decision recorded. Why things exist, not just what.",
-  },
-];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyRecord = Record<string, any>;
 
-export default function HomePage() {
+async function getHomeData() {
+  const [
+    stats,
+    knowledgeObjects,
+    contentDocs,
+    governanceDocs,
+    policies,
+    decisions,
+    knowledgeGraph,
+    runtime,
+    builders,
+    forestMissions,
+    researchProjects,
+    projects,
+  ] = await Promise.all([
+    getContentStats(),
+    getKnowledgeObjects(),
+    getContentDocuments(),
+    getGovernanceDocs(),
+    getPolicies(),
+    getDecisions(),
+    getRegistry("knowledge-graph"),
+    getRuntime(),
+    getBuilders(),
+    getForestMissions(),
+    getResearchProjects(),
+    getProjects(),
+  ]);
+
+  return {
+    stats,
+    knowledgeObjects,
+    contentDocs,
+    governanceDocs,
+    policies,
+    decisions,
+    knowledgeGraph,
+    runtime,
+    builders,
+    forestMissions,
+    researchProjects,
+    projects,
+  };
+}
+
+export default async function HomePage() {
+  const data = await getHomeData();
+
+  const recentDocs = data.contentDocs.slice(0, 5);
+  const recentKO = data.knowledgeObjects.slice(0, 3);
+  const recentGovernance = data.governanceDocs.slice(0, 3);
+  const recentPolicies = data.policies.slice(0, 3);
+  const recentDecisions: AnyRecord[] =
+    data.decisions?.records?.slice(0, 5) || [];
+  const graphNodes: AnyRecord[] = data.knowledgeGraph?.nodes?.slice(0, 6) || [];
+  const runtimeComponents: [string, AnyRecord][] = data.runtime?.components
+    ? Object.entries(data.runtime.components)
+    : [];
+
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px" }}>
-      {/* Hero Section */}
-      <div style={{ textAlign: "center", marginBottom: 64 }}>
-        <p
+    <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+      <div style={{ marginBottom: 48 }}>
+        <Greeting />
+        <div
           style={{
-            fontSize: 12,
-            fontWeight: 600,
-            color: "#10b981",
-            marginBottom: 8,
+            fontSize: 14,
+            color: "#71717a",
+            marginTop: 12,
+            lineHeight: 1.6,
           }}
         >
-          BICM v1.0
-        </p>
-        <h1
-          style={{
-            fontSize: 48,
-            fontWeight: 800,
-            marginBottom: 16,
-            background: "linear-gradient(135deg, #10b981, #3b82f6)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          Bhavya AI Lab
-        </h1>
-        <p
-          style={{
-            fontSize: 20,
-            color: "#94a3b8",
-            maxWidth: 600,
-            margin: "0 auto 16px",
-          }}
-        >
-          An Educational Operating System built on the Bhavya Institutional
-          Context Methodology.
-        </p>
-        <p
-          style={{
-            fontSize: 16,
-            color: "#64748b",
-            maxWidth: 500,
-            margin: "0 auto 32px",
-          }}
-        >
-          Knowledge is the center. AI is a runtime. The filesystem is the
-          operating system.
-        </p>
-        <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
-          <Link
-            href="/layer-3-knowledge"
-            style={{
-              padding: "12px 32px",
-              background: "#10b981",
-              color: "#fff",
-              borderRadius: 8,
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
-          >
-            Explore Knowledge
-          </Link>
-          <Link
-            href="/bbl"
-            style={{
-              padding: "12px 32px",
-              background: "#1e293b",
-              color: "#f8fafc",
-              borderRadius: 8,
-              textDecoration: "none",
-              fontWeight: 600,
-              border: "1px solid #334155",
-            }}
-          >
-            BBL Examples
-          </Link>
+          Institutional Operating System — {data.stats.knowledgeObjects}{" "}
+          Knowledge Objects · {data.stats.contentDocuments} Documents ·{" "}
+          {data.stats.apps} Apps · {data.stats.services} Services
         </div>
       </div>
 
-      {/* Features */}
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 24,
-          marginBottom: 64,
+          gap: 12,
+          marginBottom: 48,
         }}
       >
-        {features.map((feature) => (
-          <div
-            key={feature.title}
-            style={{
-              padding: 24,
-              background: "#1e293b",
-              borderRadius: 12,
-              border: "1px solid #334155",
-              textAlign: "center",
-            }}
-          >
-            <div style={{ fontSize: 32, marginBottom: 12 }}>{feature.icon}</div>
-            <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 8 }}>
-              {feature.title}
-            </h3>
-            <p style={{ fontSize: 14, color: "#94a3b8" }}>
-              {feature.description}
-            </p>
-          </div>
-        ))}
+        <StatCard
+          label="Knowledge Objects"
+          value={data.stats.knowledgeObjects}
+          icon="📚"
+          color="#22c55e"
+          subtitle="AI curriculum content"
+        />
+        <StatCard
+          label="Content Documents"
+          value={data.stats.contentDocuments}
+          icon="📄"
+          color="#3b82f6"
+          subtitle="Forest, research, governance"
+        />
+        <StatCard
+          label="Governance Docs"
+          value={data.stats.governanceDocs + data.stats.policies}
+          icon="⚖️"
+          color="#f59e0b"
+          subtitle="Policies & trust deed"
+        />
+        <StatCard
+          label="System Services"
+          value={data.stats.services}
+          icon="⚡"
+          color="#a855f7"
+          subtitle="AI Gateway, Website, Docs"
+        />
       </div>
 
-      {/* 8-Layer Architecture */}
-      <div style={{ marginBottom: 64 }}>
-        <h2
-          style={{
-            fontSize: 32,
-            fontWeight: 700,
-            marginBottom: 16,
-            textAlign: "center",
-          }}
-        >
-          8-Layer Architecture
-        </h2>
-        <p
-          style={{
-            fontSize: 16,
-            color: "#94a3b8",
-            textAlign: "center",
-            marginBottom: 32,
-          }}
-        >
-          From Identity to Institutional Memory — every layer has a purpose
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {layers.map((layer) => (
-            <Link
-              key={layer.id}
-              href={`/${layer.id}`}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 24,
-                padding: 24,
-                background: "#1e293b",
-                borderRadius: 12,
-                border: "1px solid #334155",
-                textDecoration: "none",
-                color: "#f8fafc",
-              }}
-            >
-              <div
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: 12,
-                  background: `${layer.color}20`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 28,
-                  flexShrink: 0,
-                }}
-              >
-                {layer.icon}
-              </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: 18, fontWeight: 600, margin: "0 0 4px" }}>
-                  {layer.title}
-                </h3>
-                <p style={{ fontSize: 14, color: "#94a3b8", margin: 0 }}>
-                  {layer.description}
-                </p>
-              </div>
-              <div
-                style={{
-                  fontSize: 12,
-                  color: layer.color,
-                  fontWeight: 500,
-                }}
-              >
-                Layer {layer.id.split("-")[1]}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* Footer */}
       <div
         style={{
-          textAlign: "center",
-          padding: "32px 0",
-          borderTop: "1px solid #334155",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 24,
+          marginBottom: 48,
         }}
       >
-        <p style={{ fontSize: 14, color: "#64748b" }}>
-          Bhavya AI Lab — BICM v1.0 — Knowledge First
-        </p>
-        <p style={{ fontSize: 12, color: "#475569", marginTop: 8 }}>
-          Built with ❤️ for rural Himachal Pradesh
-        </p>
+        <Section title="Knowledge Objects" icon="🧠" href="/knowledge">
+          {recentKO.length > 0 ? (
+            recentKO.map((ko) => (
+              <div
+                key={ko.id}
+                style={{
+                  padding: "12px 16px",
+                  borderBottom: "1px solid #27272a",
+                  transition: "background 0.15s",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#1c1c1f")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                }
+              >
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#fafafa",
+                    marginBottom: 4,
+                  }}
+                >
+                  {ko.title}
+                </div>
+                <div style={{ fontSize: 12, color: "#71717a" }}>
+                  {ko.domain} · Grade {ko.grade} · {ko.concepts?.length || 0}{" "}
+                  concepts
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+
+        <Section title="Recent Documents" icon="📄" href="/knowledge">
+          {recentDocs.length > 0 ? (
+            recentDocs.map((doc) => (
+              <div
+                key={doc.id}
+                style={{
+                  padding: "12px 16px",
+                  borderBottom: "1px solid #27272a",
+                  transition: "background 0.15s",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#1c1c1f")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                }
+              >
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    color: "#fafafa",
+                    marginBottom: 4,
+                  }}
+                >
+                  {doc.title}
+                </div>
+                <div style={{ fontSize: 12, color: "#71717a" }}>
+                  {doc.category} · {doc.metadata?.source || "general"}
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
       </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 24,
+          marginBottom: 48,
+        }}
+      >
+        <Section title="Runtime" icon="⚡" href="/runtime">
+          {runtimeComponents.length > 0 ? (
+            runtimeComponents.map(([key, comp]) => (
+              <div
+                key={key}
+                style={{
+                  padding: "10px 16px",
+                  borderBottom: "1px solid #27272a",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 500,
+                      color: "#fafafa",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {key.replace(/-/g, " ")}
+                  </div>
+                  <div style={{ fontSize: 11, color: "#52525b" }}>
+                    {comp.description}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    background: "#22c55e",
+                  }}
+                />
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+
+        <Section title="Knowledge Graph" icon="🔗" href="/knowledge">
+          {graphNodes.length > 0 ? (
+            graphNodes.map((node) => (
+              <div
+                key={node.id}
+                style={{
+                  padding: "10px 16px",
+                  borderBottom: "1px solid #27272a",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <div
+                    style={{ fontSize: 13, fontWeight: 500, color: "#fafafa" }}
+                  >
+                    {node.title}
+                  </div>
+                  <div style={{ fontSize: 11, color: "#52525b" }}>
+                    {node.type} · {node.owner}
+                  </div>
+                </div>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: "2px 8px",
+                    borderRadius: 4,
+                    background:
+                      node.status === "Accepted" || node.status === "Active"
+                        ? "#166534"
+                        : node.status === "Released"
+                          ? "#1e3a5f"
+                          : "#78350f",
+                    color:
+                      node.status === "Accepted" || node.status === "Active"
+                        ? "#22c55e"
+                        : node.status === "Released"
+                          ? "#3b82f6"
+                          : "#f59e0b",
+                  }}
+                >
+                  {node.status}
+                </span>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 24,
+          marginBottom: 48,
+        }}
+      >
+        <Section title="Governance" icon="⚖️" href="/governance">
+          {recentGovernance.length > 0 ? (
+            recentGovernance.map((doc) => (
+              <div
+                key={doc.id}
+                style={{
+                  padding: "10px 16px",
+                  borderBottom: "1px solid #27272a",
+                }}
+              >
+                <div
+                  style={{ fontSize: 13, fontWeight: 500, color: "#fafafa" }}
+                >
+                  {doc.title}
+                </div>
+                <div style={{ fontSize: 11, color: "#52525b" }}>
+                  {doc.type} · {doc.status}
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+
+        <Section title="Policies" icon="📋" href="/governance">
+          {recentPolicies.length > 0 ? (
+            recentPolicies.map((pol) => (
+              <div
+                key={pol.id}
+                style={{
+                  padding: "10px 16px",
+                  borderBottom: "1px solid #27272a",
+                }}
+              >
+                <div
+                  style={{ fontSize: 13, fontWeight: 500, color: "#fafafa" }}
+                >
+                  {pol.icon} {pol.title}
+                </div>
+                <div style={{ fontSize: 11, color: "#52525b" }}>
+                  {pol.status}
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+
+        <Section title="Decisions" icon="🧠" href="/memory">
+          {recentDecisions.length > 0 ? (
+            recentDecisions.map((dec) => (
+              <div
+                key={dec.id}
+                style={{
+                  padding: "10px 16px",
+                  borderBottom: "1px solid #27272a",
+                }}
+              >
+                <div
+                  style={{ fontSize: 13, fontWeight: 500, color: "#fafafa" }}
+                >
+                  {dec.payload?.title || dec.id}
+                </div>
+                <div style={{ fontSize: 11, color: "#52525b" }}>
+                  {dec.payload?.status || "recorded"} · {dec.author}
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyRow />
+          )}
+        </Section>
+      </div>
+
+      {data.builders.length > 0 && (
+        <div style={{ marginBottom: 48 }}>
+          <Section title="Builders" icon="🔨" href="/runtime">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 12,
+                padding: "16px",
+              }}
+            >
+              {data.builders.map((builder: AnyRecord) => (
+                <div
+                  key={builder.id}
+                  style={{
+                    padding: "16px",
+                    background: "#09090b",
+                    border: "1px solid #27272a",
+                    borderRadius: 8,
+                    transition: "border-color 0.15s",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.borderColor = "#3f3f46")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.borderColor = "#27272a")
+                  }
+                >
+                  <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: "#fafafa",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {builder.name}
+                  </div>
+                  <div
+                    style={{ fontSize: 12, color: "#71717a", marginBottom: 8 }}
+                  >
+                    {builder.description}
+                  </div>
+                  <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                    {builder.output?.slice(0, 3).map((o: string) => (
+                      <span
+                        key={o}
+                        style={{
+                          fontSize: 10,
+                          padding: "2px 6px",
+                          borderRadius: 4,
+                          background: "#1c1c1f",
+                          color: "#71717a",
+                        }}
+                      >
+                        {o}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+        </div>
+      )}
+
+      <div
+        style={{
+          padding: "24px 0",
+          borderTop: "1px solid #27272a",
+          fontSize: 12,
+          color: "#52525b",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <span>AI Lab OS v3.0.0 · Bhavya Foundation</span>
+        <span style={{ fontFamily: "monospace" }}>
+          ⌘K to search · Built for institutional intelligence
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function Section({
+  title,
+  icon,
+  href,
+  children,
+}: {
+  title: string;
+  icon: string;
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      style={{
+        background: "#18181b",
+        border: "1px solid #27272a",
+        borderRadius: 12,
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          padding: "14px 16px",
+          borderBottom: "1px solid #27272a",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 14 }}>{icon}</span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "#fafafa" }}>
+            {title}
+          </span>
+        </div>
+        <a
+          href={href}
+          style={{ fontSize: 12, color: "#71717a", textDecoration: "none" }}
+        >
+          View all →
+        </a>
+      </div>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function EmptyRow() {
+  return (
+    <div
+      style={{
+        padding: "24px 16px",
+        textAlign: "center",
+        fontSize: 13,
+        color: "#52525b",
+      }}
+    >
+      No data available
     </div>
   );
 }
