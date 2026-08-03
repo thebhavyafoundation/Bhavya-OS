@@ -1,0 +1,20 @@
+{
+  "name": "@bhavya/bee",
+  "version": "0.1.0",
+  "description": "Bhavya Execution Engine — autonomous goal-oriented planning and execution",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "bin": {
+    "bee": "./src/cli/bee.mjs"
+  },
+  "scripts": {
+    "test": "node --test src/**/*.test.mjs",
+    "bee": "node src/cli/bee.mjs"
+  },
+  "dependencies": {
+    "@bhavya/runtime": "workspace:*"
+  }
+}
