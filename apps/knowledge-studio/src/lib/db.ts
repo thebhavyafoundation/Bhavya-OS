@@ -118,6 +118,16 @@ function initSchema(db: Database.Database) {
       FOREIGN KEY (ko_id) REFERENCES knowledge_objects(id),
       FOREIGN KEY (package_id) REFERENCES knowledge_packages(id)
     );
+
+    CREATE INDEX IF NOT EXISTS idx_ko_user_id ON knowledge_objects(user_id);
+    CREATE INDEX IF NOT EXISTS idx_ko_domain ON knowledge_objects(domain);
+    CREATE INDEX IF NOT EXISTS idx_pkg_user_id ON knowledge_packages(user_id);
+    CREATE INDEX IF NOT EXISTS idx_pkg_ko_id ON knowledge_packages(ko_id);
+    CREATE INDEX IF NOT EXISTS idx_art_ko_id ON artifacts(ko_id);
+    CREATE INDEX IF NOT EXISTS idx_art_pkg_id ON artifacts(package_id);
+    CREATE INDEX IF NOT EXISTS idx_pipe_user_id ON pipeline_executions(user_id);
+    CREATE INDEX IF NOT EXISTS idx_pipe_ko_id ON pipeline_executions(ko_id);
+    CREATE INDEX IF NOT EXISTS idx_pipe_pkg_id ON pipeline_executions(package_id);
   `);
 }
 
@@ -322,10 +332,13 @@ export function updateKO(
 
 export function deleteKO(id: string) {
   const db = getDb();
-  db.prepare("DELETE FROM artifacts WHERE ko_id = ?").run(id);
-  db.prepare("DELETE FROM pipeline_executions WHERE ko_id = ?").run(id);
-  db.prepare("DELETE FROM knowledge_packages WHERE ko_id = ?").run(id);
-  db.prepare("DELETE FROM knowledge_objects WHERE id = ?").run(id);
+  const deleteAll = db.transaction(() => {
+    db.prepare("DELETE FROM artifacts WHERE ko_id = ?").run(id);
+    db.prepare("DELETE FROM pipeline_executions WHERE ko_id = ?").run(id);
+    db.prepare("DELETE FROM knowledge_packages WHERE ko_id = ?").run(id);
+    db.prepare("DELETE FROM knowledge_objects WHERE id = ?").run(id);
+  });
+  deleteAll();
 }
 
 // ─── Package operations ────────────────────────

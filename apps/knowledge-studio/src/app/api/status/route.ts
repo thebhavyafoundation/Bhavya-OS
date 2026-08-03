@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAuth } from "@/lib/auth-guard";
 import { getDb } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
+  const session = await requireAuth();
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const userId = (session.user as any).id;
   const { searchParams } = new URL(req.url);
   const planId = searchParams.get("planId");
   const db = getDb();
 
   if (planId) {
     const row = db
-      .prepare("SELECT * FROM pipeline_executions WHERE id = ?")
-      .get(planId) as any;
+      .prepare("SELECT * FROM pipeline_executions WHERE id = ? AND user_id = ?")
+      .get(planId, userId) as any;
     if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({
       planId: row.id,
@@ -28,9 +34,9 @@ export async function GET(req: NextRequest) {
 
   const rows = db
     .prepare(
-      "SELECT * FROM pipeline_executions ORDER BY created_at DESC LIMIT 50",
+      "SELECT * FROM pipeline_executions WHERE user_id = ? ORDER BY created_at DESC LIMIT 50",
     )
-    .all() as any[];
+    .all(userId) as any[];
   const pipelines = rows.map((r) => ({
     planId: r.id,
     goal: r.goal,

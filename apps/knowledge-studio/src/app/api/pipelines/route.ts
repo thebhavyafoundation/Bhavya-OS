@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireAuth } from "@/lib/auth-guard";
 import { getDb } from "@/lib/db";
 
 export async function GET() {
   try {
-    const session = await auth();
-    const userId = (session?.user as any)?.id;
-    const db = getDb();
-    let query = "SELECT * FROM pipeline_executions";
-    const params: any[] = [];
-    if (userId) {
-      query += " WHERE user_id = ?";
-      params.push(userId);
+    const session = await requireAuth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    query += " ORDER BY created_at DESC LIMIT 50";
-    const rows = db.prepare(query).all(...params) as any[];
+    const userId = (session.user as any)?.id;
+    const db = getDb();
+    const rows = db
+      .prepare(
+        "SELECT * FROM pipeline_executions WHERE user_id = ? ORDER BY created_at DESC LIMIT 50",
+      )
+      .all(userId) as any[];
     const pipelines = rows.map((r) => ({
       id: r.id,
       goal: r.goal,
@@ -28,6 +28,9 @@ export async function GET() {
     }));
     return NextResponse.json({ pipelines });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

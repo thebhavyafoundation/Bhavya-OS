@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { createRegistry } from '../../runtime/src/registry-loader.mjs';
+import { createRegistry } from '@bhavya/runtime/registry';
 import { parseGoal } from './planners/goal-planner.mjs';
 import { CapabilityResolver } from './planners/capability-resolver.mjs';
 import { WorkflowPlanner } from './planners/workflow-planner.mjs';

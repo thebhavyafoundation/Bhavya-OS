@@ -7,6 +7,7 @@ import {
   createExecution,
   updateExecution,
   getKO,
+  getDb,
 } from "@/lib/db";
 
 export const runtime = "nodejs";
@@ -33,23 +34,27 @@ export async function POST(req: NextRequest) {
     const packageId = `pkg-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const goalText = goal || `Create educational package for: ${ko.title}`;
 
-    createExecution({
-      id: executionId,
-      goal: goalText,
-      userId,
-      koId,
-      packageId,
+    const db = getDb();
+    const setupTx = db.transaction(() => {
+      createExecution({
+        id: executionId,
+        goal: goalText,
+        userId,
+        koId,
+        packageId,
+      });
+      createPackage({
+        id: packageId,
+        title: ko.title,
+        koId,
+        userId,
+        description: ko.description || undefined,
+        domain: ko.domain || undefined,
+        subject: ko.subject || undefined,
+        gradeLevel: ko.grade_level || undefined,
+      });
     });
-    createPackage({
-      id: packageId,
-      title: ko.title,
-      koId,
-      userId,
-      description: ko.description || undefined,
-      domain: ko.domain || undefined,
-      subject: ko.subject || undefined,
-      gradeLevel: ko.grade_level || undefined,
-    });
+    setupTx();
     updateExecution(executionId, { status: "running" });
 
     const startTime = Date.now();

@@ -30,6 +30,7 @@ const authOptions = {
     }),
   ],
   session: { strategy: "jwt" as const },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: { signIn: "/login" },
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
@@ -58,7 +59,11 @@ export { authOptions };
 export async function register(email: string, password: string, name?: string) {
   const existing = getUserByEmail(email);
   if (existing) throw new Error("Email already registered");
-  const hashed = await bcrypt.hash(password, 10);
+  if (password.length < 8)
+    throw new Error("Password must be at least 8 characters");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    throw new Error("Invalid email format");
+  const hashed = await bcrypt.hash(password, 12);
   const { createUser } = await import("./db");
   return createUser(email, hashed, name);
 }

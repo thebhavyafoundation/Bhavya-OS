@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAuth } from "@/lib/auth-guard";
 import { listArtifacts, getArtifact } from "@/lib/artifacts";
 
 export async function GET(req: NextRequest) {
   try {
+    const session = await requireAuth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     const koId = searchParams.get("koId") || undefined;
@@ -18,6 +23,9 @@ export async function GET(req: NextRequest) {
     const artifacts = listArtifacts(koId, packageId);
     return NextResponse.json({ artifacts });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

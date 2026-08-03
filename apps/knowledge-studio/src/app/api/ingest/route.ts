@@ -6,11 +6,19 @@ import {
   createArtifact,
   createExecution,
 } from "@/lib/db";
+import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { join } from "path";
-import { writeFileSync, mkdirSync, existsSync } from "fs";
+import { writeFile, mkdirSync, existsSync } from "fs";
 
 const UPLOAD_DIR = join(process.cwd(), "uploads");
 if (!existsSync(UPLOAD_DIR)) mkdirSync(UPLOAD_DIR, { recursive: true });
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_EXTENSIONS = ["pdf", "docx", "md", "markdown", "txt"];
+
+function sanitizeFilename(name: string): string {
+  return name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 200);
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,6 +27,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const userId = (session.user as any).id;
+
+    // Rate limit uploads
+    const { limited, remaining, resetAt } = checkRateLimit(
+      `upload:${userId}`,
+      RateLimits.upload,
+    );
+    if (limited) {
+      return NextResponse.json(
+        { error: "Too many upload attempts. Please try again later." },
+        { status: 429 },
+      );
+    }
 
     const contentType = req.headers.get("content-type") || "";
 
@@ -41,12 +61,34 @@ export async function POST(req: NextRequest) {
 
       const file = formData.get("file") as File | null;
       if (file) {
+        // Validate file size
+        if (file.size > MAX_FILE_SIZE) {
+          return NextResponse.json(
+            {
+              error: `File too large. Maximum size is ${MAX_FILE_SIZE / 1024 / 1024}MB`,
+            },
+            { status: 400 },
+          );
+        }
+
         const ext = file.name.split(".").pop()?.toLowerCase() || "";
+
+        // Validate file extension
+        if (!ALLOWED_EXTENSIONS.includes(ext)) {
+          return NextResponse.json(
+            {
+              error: `Invalid file type. Allowed: ${ALLOWED_EXTENSIONS.join(", ")}`,
+            },
+            { status: 400 },
+          );
+        }
+
         const buffer = Buffer.from(await file.arrayBuffer());
 
-        // Save file
-        const filename = `${Date.now()}-${file.name}`;
-        writeFileSync(join(UPLOAD_DIR, filename), buffer);
+        // Save file with sanitized filename
+        const safeName = sanitizeFilename(file.name);
+        const filename = `${Date.now()}-${safeName}`;
+        await writeFile(join(UPLOAD_DIR, filename), buffer);
 
         if (ext === "pdf") {
           const pdfParse = (await import("pdf-parse")).default;
@@ -173,6 +215,9 @@ export async function POST(req: NextRequest) {
     });
   } catch (err: any) {
     console.error("Ingest error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireAuth } from "@/lib/auth-guard";
 import { listPackages } from "@/lib/db";
 
 export async function GET() {
   try {
-    const session = await auth();
-    const userId = (session?.user as any)?.id;
-    const packages = listPackages(userId || undefined);
+    const session = await requireAuth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const userId = (session.user as any)?.id;
+    const packages = listPackages(userId);
     return NextResponse.json({
       packages: packages.map((p) => ({
         id: p.id,
@@ -28,6 +31,9 @@ export async function GET() {
       })),
     });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

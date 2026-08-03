@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { requireAuth } from "@/lib/auth-guard";
 import { getDb } from "@/lib/db";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await requireAuth();
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const q = request.nextUrl.searchParams.get("q") || "";
     const domain = request.nextUrl.searchParams.get("domain") || "";
 
@@ -46,6 +49,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ results, query: q, total: results.length });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

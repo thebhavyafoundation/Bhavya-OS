@@ -29,6 +29,29 @@ import * as lessonManager from "../engine/lesson-manager.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// ── Security: API Key Authentication ──────────────────────────
+const API_KEY = process.env.RUNTIME_API_KEY || "";
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS || "http://localhost:3020,http://localhost:3030").split(",").map(s => s.trim());
+const VALID_ID_PATTERN = /^[a-zA-Z0-9_-]+$/;
+
+function validateId(id) {
+  return id && VALID_ID_PATTERN.test(id);
+}
+
+function checkAuth(req) {
+  if (!API_KEY) return true; // No key configured = open (dev mode)
+  const authHeader = req.headers.authorization || "";
+  const apiKey = req.headers["x-api-key"] || "";
+  return authHeader === `Bearer ${API_KEY}` || apiKey === API_KEY;
+}
+
+function getCorsOrigin(req) {
+  const origin = req.headers.origin || "";
+  if (ALLOWED_ORIGINS.includes(origin)) return origin;
+  if (ALLOWED_ORIGINS.length > 0) return ALLOWED_ORIGINS[0];
+  return "*";
+}
+
 function readJSON(p) {
   try {
     if (!fs.existsSync(p)) return null;
@@ -48,7 +71,8 @@ function readBody(req) {
 }
 
 function json(res, status, data) {
-  res.writeHead(status, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+  // CORS is set on the server level, not here
+  res.writeHead(status, { "Content-Type": "application/json" });
   res.end(JSON.stringify(data, null, 2));
 }
 
@@ -58,8 +82,10 @@ export async function startServer(root, port = 3100) {
     const method = req.method;
     const parts = url.pathname.split("/").filter(Boolean);
 
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    const origin = getCorsOrigin(req);
+    res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-API-Key");
     res.setHeader("Content-Type", "application/json");
 
     if (method === "OPTIONS") {
@@ -68,10 +94,17 @@ export async function startServer(root, port = 3100) {
       return;
     }
 
+    // Auth check (skip for health endpoint)
+    const resource = parts[0];
+    if (resource !== "health" && !checkAuth(req)) {
+      return json(res, 401, { error: "Unauthorized. Provide X-API-Key header or Bearer token." });
+    }
+
     try {
       await route(root, method, parts, url, req, res);
     } catch (err) {
-      json(res, 500, { error: err.message });
+      console.error("Runtime API error:", err);
+      json(res, 500, { error: "Internal server error" });
     }
   });
 
@@ -247,6 +280,7 @@ async function route(root, method, parts, url, req, res) {
     const manifestsDir = path.resolve(root, "bhavya-ai-lab/institution/manifests");
     try {
       if (id) {
+        if (!validateId(id)) return json(res, 400, { error: "Invalid ID format" });
         const m = readJSON(path.join(manifestsDir, `${id}.json`));
         if (!m) return json(res, 404, { error: "Manifest not found" });
         return json(res, 200, m);
@@ -261,6 +295,7 @@ async function route(root, method, parts, url, req, res) {
   if (resource === "knowledge") {
     const koDir = path.resolve(root, "bhavya-ai-lab/knowledge/objects");
     if (id && method === "GET") {
+      if (!validateId(id)) return json(res, 400, { error: "Invalid ID format" });
       const ko = readJSON(path.join(koDir, `${id}.json`));
       if (!ko) return json(res, 404, { error: `Knowledge Object "${id}" not found` });
       return json(res, 200, ko);
@@ -307,6 +342,7 @@ async function route(root, method, parts, url, req, res) {
       return json(res, 201, ko);
     }
     if (id && method === "PUT") {
+      if (!validateId(id)) return json(res, 400, { error: "Invalid ID format" });
       const existing = readJSON(path.join(koDir, `${id}.json`));
       if (!existing) return json(res, 404, { error: `Knowledge Object "${id}" not found` });
       const body = await readBody(req);
@@ -325,6 +361,7 @@ async function route(root, method, parts, url, req, res) {
       return json(res, 200, updated);
     }
     if (id && method === "DELETE") {
+      if (!validateId(id)) return json(res, 400, { error: "Invalid ID format" });
       const koPath = path.join(koDir, `${id}.json`);
       if (!fs.existsSync(koPath)) return json(res, 404, { error: `Knowledge Object "${id}" not found` });
       try {
