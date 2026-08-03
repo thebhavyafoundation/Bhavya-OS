@@ -335,3 +335,106 @@ export function RecommendationWidget({ items }: { items: RecItem[] }) {
     </div>
   );
 }
+
+interface PatternItem {
+  id: string;
+  name: string;
+  category: string;
+  difficulty: string;
+  educational_value: string | null;
+}
+
+function getDifficultyColor(difficulty: string) {
+  switch (difficulty) {
+    case "beginner":
+      return "bg-[#22c55e]/20 text-[#22c55e]";
+    case "intermediate":
+      return "bg-[#3b82f6]/20 text-[#3b82f6]";
+    case "advanced":
+      return "bg-[#eab308]/20 text-[#eab308]";
+    case "expert":
+      return "bg-[#ef4444]/20 text-[#ef4444]";
+    default:
+      return "bg-[#71717a]/20 text-[#71717a]";
+  }
+}
+
+export function PatternWidget({ patterns }: { patterns: PatternItem[] }) {
+  return (
+    <div className="bg-[#111111] border border-[#27272a] rounded-lg">
+      <div className="px-5 py-4 border-b border-[#27272a]">
+        <h3 className="text-sm font-semibold text-[#fafafa]">
+          Engineering Patterns
+        </h3>
+      </div>
+      <div className="divide-y divide-[#27272a]">
+        {patterns.map((pattern) => (
+          <div
+            key={pattern.id}
+            className="px-5 py-3 hover:bg-[#1a1a1a] transition-colors cursor-pointer"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-sm text-[#fafafa]">{pattern.name}</span>
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-medium ${getDifficultyColor(pattern.difficulty)}`}
+              >
+                {pattern.difficulty}
+              </span>
+            </div>
+            <div className="text-[12px] text-[#71717a] capitalize">
+              {pattern.category}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface HealthItem {
+  id: string;
+  repository_id: string;
+  overall_score: number;
+  repository_name?: string;
+}
+
+export function HealthWidget({ items }: { items: HealthItem[] }) {
+  return (
+    <div className="bg-[#111111] border border-[#27272a] rounded-lg">
+      <div className="px-5 py-4 border-b border-[#27272a]">
+        <h3 className="text-sm font-semibold text-[#fafafa]">
+          Engineering Health
+        </h3>
+      </div>
+      <div className="divide-y divide-[#27272a]">
+        {items.map((item) => (
+          <div
+            key={item.id}
+            className="px-5 py-3 hover:bg-[#1a1a1a] transition-colors cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex-1 min-w-0">
+                <div className="text-sm text-[#fafafa] truncate">
+                  {item.repository_name || item.repository_id}
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-16 h-1.5 bg-[#27272a] rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${item.overall_score >= 90 ? "bg-[#22c55e]" : item.overall_score >= 80 ? "bg-[#3b82f6]" : item.overall_score >= 70 ? "bg-[#eab308]" : "bg-[#ef4444]"}`}
+                    style={{ width: `${item.overall_score}%` }}
+                  />
+                </div>
+                <span
+                  className={`text-[12px] font-medium ${getHealthColor(item.overall_score)}`}
+                >
+                  {item.overall_score}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

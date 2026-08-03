@@ -10,8 +10,18 @@ import {
   KnowledgeWidget,
   RadarWidget,
   RecommendationWidget,
+  PatternWidget,
+  HealthWidget,
 } from "@/components/Widgets";
-import { FolderGit2, Brain, Zap, GitBranch, Search } from "lucide-react";
+import {
+  FolderGit2,
+  Brain,
+  Zap,
+  GitBranch,
+  Search,
+  Layers,
+  Heart,
+} from "lucide-react";
 
 interface DashboardData {
   repositories: {
@@ -49,6 +59,19 @@ interface DashboardData {
     priority: string;
     status: string;
   }[];
+  patterns: {
+    id: string;
+    name: string;
+    category: string;
+    difficulty: string;
+    educational_value: string | null;
+  }[];
+  health: {
+    id: string;
+    repository_id: string;
+    overall_score: number;
+    repository_name?: string;
+  }[];
 }
 
 export default function Dashboard() {
@@ -58,14 +81,19 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [reposRes, kpsRes, actRes] = await Promise.all([
-          fetch("/api/repositories"),
-          fetch("/api/knowledge"),
-          fetch("/api/activity"),
-        ]);
+        const [reposRes, kpsRes, actRes, patternsRes, healthRes] =
+          await Promise.all([
+            fetch("/api/repositories"),
+            fetch("/api/knowledge"),
+            fetch("/api/activity"),
+            fetch("/api/patterns"),
+            fetch("/api/health"),
+          ]);
         const repos = await reposRes.json();
         const kps = await kpsRes.json();
         const act = await actRes.json();
+        const patternsData = await patternsRes.json();
+        const healthData = await healthRes.json();
 
         setData({
           repositories: repos.repositories || [],
@@ -141,6 +169,8 @@ export default function Dashboard() {
               status: "accepted",
             },
           ],
+          patterns: patternsData.patterns || [],
+          health: healthData.health || [],
         });
       } catch (err) {
         console.error("Failed to load dashboard:", err);
@@ -204,18 +234,25 @@ export default function Dashboard() {
               icon={<Brain size={18} />}
             />
             <StatCard
-              label="Tech Radar Items"
-              value={data?.radar.length || 0}
-              change="8 technologies"
+              label="Patterns"
+              value={data?.patterns.length || 0}
+              change="10 patterns"
               changeType="neutral"
-              icon={<GitBranch size={18} />}
+              icon={<Layers size={18} />}
             />
             <StatCard
-              label="Recommendations"
-              value={data?.recommendations.length || 0}
-              change="2 pending"
+              label="Avg Health"
+              value={
+                data?.health.length
+                  ? Math.round(
+                      data.health.reduce((a, h) => a + h.overall_score, 0) /
+                        data.health.length,
+                    )
+                  : 0
+              }
+              change="Across all repos"
               changeType="neutral"
-              icon={<Zap size={18} />}
+              icon={<Heart size={18} />}
             />
           </div>
 
@@ -228,13 +265,22 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-4 gap-6 mb-8">
             <div className="animate-fade-in">
               <RepositoryWidget repositories={data?.repositories || []} />
             </div>
             <div className="animate-fade-in">
               <KnowledgeWidget packages={data?.packages || []} />
             </div>
+            <div className="animate-fade-in">
+              <PatternWidget patterns={data?.patterns || []} />
+            </div>
+            <div className="animate-fade-in">
+              <HealthWidget items={data?.health || []} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="animate-fade-in">
               <RecommendationWidget items={data?.recommendations || []} />
             </div>

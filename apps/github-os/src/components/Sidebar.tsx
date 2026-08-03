@@ -12,6 +12,10 @@ import {
   ChevronDown,
   ChevronRight,
   Zap,
+  Layers,
+  GitBranch,
+  GraduationCap,
+  Network,
 } from "lucide-react";
 
 interface NavItem {
@@ -38,6 +42,7 @@ const navItems: NavItem[] = [
       { label: "Knowledge Base", href: "/knowledge" },
       { label: "Technology Radar", href: "/radar" },
       { label: "Recommendations", href: "/recommendations" },
+      { label: "Knowledge Graph", href: "/knowledge-graph" },
     ],
   },
   {
@@ -47,6 +52,14 @@ const navItems: NavItem[] = [
       { label: "Issues", href: "/issues" },
       { label: "Pull Requests", href: "/pull-requests" },
       { label: "Releases", href: "/releases" },
+    ],
+  },
+  {
+    label: "Patterns",
+    icon: <Layers size={18} />,
+    children: [
+      { label: "Pattern Library", href: "/patterns" },
+      { label: "Comparisons", href: "/comparisons" },
     ],
   },
   {
@@ -60,9 +73,10 @@ const navItems: NavItem[] = [
   },
   {
     label: "Learning",
-    icon: <BookOpen size={18} />,
+    icon: <GraduationCap size={18} />,
     children: [
       { label: "Learning Paths", href: "/learning" },
+      { label: "Educational Exports", href: "/educational" },
       { label: "Resources", href: "/resources" },
     ],
   },
