@@ -7,9 +7,13 @@ const NAV = [
   { id: "ingest", label: "Ingest", href: "/ingest" },
   { id: "pipelines", label: "Pipelines", href: "/pipelines" },
   { id: "artifacts", label: "Artifacts", href: "/artifacts" },
+  { id: "packages", label: "Packages", href: "/packages" },
 ];
 
-export function Sidebar({ active }: { active: string }) {
+export function Sidebar({ active }: { active?: string }) {
+  const pathname = usePathname();
+  const current = active || NAV.find((n) => n.href === pathname)?.id || "home";
+
   return (
     <nav
       style={{
@@ -50,8 +54,8 @@ export function Sidebar({ active }: { active: string }) {
               borderRadius: "6px",
               textDecoration: "none",
               fontSize: "0.85rem",
-              color: active === item.id ? "#fff" : "#a3a3a3",
-              background: active === item.id ? "#262626" : "transparent",
+              color: current === item.id ? "#fff" : "#a3a3a3",
+              background: current === item.id ? "#262626" : "transparent",
             }}
           >
             {item.label}
@@ -67,7 +71,7 @@ export function Sidebar({ active }: { active: string }) {
             paddingTop: "1rem",
           }}
         >
-          BEE Engine v0.1
+          BEE Engine v0.2 — Production Loop
         </div>
       </div>
     </nav>

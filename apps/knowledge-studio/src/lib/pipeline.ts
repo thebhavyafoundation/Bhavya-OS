@@ -9,6 +9,12 @@ import { EventBus } from "../../../packages/bee/src/engines/event-bus.mjs";
 import { StateManager } from "../../../packages/bee/src/engines/state-manager.mjs";
 import { ObservabilityEngine } from "../../../packages/bee/src/engines/observability-engine.mjs";
 import { MetricsEngine } from "../../../packages/bee/src/engines/metrics-engine.mjs";
+import { KnowledgePackage } from "../../../packages/bee/src/knowledge-package.mjs";
+import { WebsiteBuilder } from "../../../packages/bee/src/engines/website-builder.mjs";
+import { PublicationManager } from "../../../packages/bee/src/engines/publication-manager.mjs";
+import { VersionManager } from "../../../packages/bee/src/engines/version-manager.mjs";
+import { SearchEngine } from "../../../packages/bee/src/engines/search-engine.mjs";
+import { MetricsDashboard } from "../../../packages/bee/src/engines/metrics-dashboard.mjs";
 import { saveArtifact, type Artifact } from "./artifacts";
 
 const ROOT = join(process.cwd(), "..", "..");
@@ -71,17 +77,23 @@ export interface PipelineExecution {
   metrics: any;
   trace: any[];
   graph: string;
+  knowledgePackage?: any;
+  publication?: any;
+  version?: any;
 }
 
 const activePipelines = new Map<string, PipelineExecution>();
 
+// Export engines for external use
+export const websiteBuilder = new WebsiteBuilder();
+export const publicationManager = new PublicationManager();
+export const versionManager = new VersionManager();
+export const searchEngine = new SearchEngine();
+export const metricsDashboard = new MetricsDashboard();
+
 /**
  * Execute the full Knowledge Studio pipeline through BEE.
- * This is the core orchestrator — it:
- * 1. Plans via BEE
- * 2. Executes each node with REAL builders
- * 3. Saves artifacts
- * 4. Records provenance
+ * Extended stages: website → review → publish → version → search index.
  */
 export async function executePipeline(
   ko: any,
@@ -108,14 +120,14 @@ export async function executePipeline(
     goal || `Create complete educational package for: ${ko.title}`;
   const parsedGoal = parseGoal(goalText);
   parsedGoal.capabilities = [
-    "D03-C02", // Lesson Planning
-    "D03-C04", // Assessment Design
-    "D03-C05", // Curriculum Integration
-    "D03-C01", // Curriculum Design
-    "D08-C01", // Content Creation
-    "D03-C06", // Academic Publishing
-    "D03-C07", // Academic Review
-    "D03-C08", // Academic Assessment
+    "D03-C02",
+    "D03-C04",
+    "D03-C05",
+    "D03-C01",
+    "D08-C01",
+    "D03-C06",
+    "D03-C07",
+    "D03-C08",
   ];
 
   // Build plan — create a custom DAG for the pipeline
@@ -176,6 +188,95 @@ export async function executePipeline(
     // Check if any node failed
     const anyFailed = execution.nodeResults.some((r) => r.status === "failed");
     execution.status = anyFailed ? "failed" : "completed";
+
+    // ─── Post-pipeline: Knowledge Package + Website + Publish + Version ───
+    if (!anyFailed) {
+      const pkg = buildKnowledgePackage(ko, execution);
+      execution.knowledgePackage = pkg.toJSON();
+
+      // Website generation
+      const website = websiteBuilder.build(pkg);
+      pkg.website = website;
+      saveArtifact({
+        id: `art-website-${Date.now()}`,
+        planId: execution.planId,
+        type: "website",
+        nodeId: "post-pipeline",
+        capabilityId: "D03-C06",
+        data: website,
+        provenance: {
+          capabilityId: "D03-C06",
+          skillId: "SK-WEB-001",
+          agentId: "system",
+          sourceKoId: ko.id,
+        },
+        createdAt: new Date().toISOString(),
+      });
+      execution.artifacts.push({
+        id: `art-website-${Date.now()}`,
+        planId: execution.planId,
+        type: "website",
+        nodeId: "post-pipeline",
+        capabilityId: "D03-C06",
+        data: website,
+        provenance: {
+          capabilityId: "D03-C06",
+          skillId: "SK-WEB-001",
+          agentId: "system",
+          sourceKoId: ko.id,
+        },
+        createdAt: new Date().toISOString(),
+      });
+
+      // Search indexing
+      searchEngine.indexPackage(pkg);
+
+      // Publication workflow
+      pkg.status = "in_review";
+      pkg.publication = {
+        status: "in_review",
+        submittedAt: new Date().toISOString(),
+      };
+      const approval = publicationManager.approve(pkg, "bee-system");
+      execution.publication = pkg.publication;
+
+      // Versioning
+      if (approval.success) {
+        const pubResult = publicationManager.publish(pkg);
+        if (pubResult.success) {
+          const verResult = versionManager.createVersion(
+            pkg,
+            "Initial release",
+          );
+          execution.version = {
+            version: pkg.version,
+            hash: pubResult.hash,
+            versionId: verResult.versionId,
+          };
+          pkg.versionMeta = {
+            createdAt: new Date().toISOString(),
+            immutableHash: pubResult.hash,
+            previousVersion: "1.0.0",
+          };
+        }
+      }
+
+      // Save package
+      pkg.save();
+
+      // Record in metrics dashboard
+      metricsDashboard.recordPlan({
+        id: plan.id,
+        goal: parsedGoal,
+        totalNodes: plan.nodes.length,
+        parallelLayers: plan.layers.length,
+        criticalPath: plan.criticalPath || [],
+        estimatedDuration: plan.estimatedDuration || 0,
+        agentCount: new Set(plan.nodes.map((n) => n.agentId)).size,
+      });
+      metricsDashboard.completePlan(plan.id, true);
+    }
+
     execution.completedAt = new Date().toISOString();
 
     const totalDuration =
@@ -183,7 +284,10 @@ export async function executePipeline(
       new Date(execution.startedAt).getTime();
     metrics.completePlan(plan.id, execution.status);
 
-    execution.metrics = metrics.getPlanSummary(plan.id);
+    execution.metrics = {
+      ...metrics.getPlanSummary(plan.id),
+      dashboard: metricsDashboard.getGlobalMetrics(),
+    };
     execution.trace = observability.getTimeline(plan.id);
 
     // Save pipeline result
@@ -243,20 +347,17 @@ async function executeNode(
     // Route to the correct builder based on skillId
     switch (node.skillId) {
       case "SK-L1-001": {
-        // lesson
         const koData = typeof ko === "string" ? JSON.parse(ko) : ko;
         result = await b.lesson.execute({ knowledgeObject: koData });
         break;
       }
       case "SK-L1-002": {
-        // assessment
         const lesson = getArtifact("lesson");
         if (!lesson) throw new Error("Lesson artifact not found");
         result = await b.assessment.execute({ lesson, knowledgeObject: ko });
         break;
       }
       case "SK-L1-003": {
-        // teacher-guide
         const lesson = getArtifact("lesson");
         if (!lesson) throw new Error("Lesson artifact not found");
         result = await b["teacher-guide"].execute({
@@ -266,21 +367,18 @@ async function executeNode(
         break;
       }
       case "SK-L1-004": {
-        // workbook
         const lesson = getArtifact("lesson");
         if (!lesson) throw new Error("Lesson artifact not found");
         result = await b.workbook.execute({ lesson, knowledgeObject: ko });
         break;
       }
       case "SK-L3-001": {
-        // visual-spec
         const lesson = getArtifact("lesson");
         if (!lesson) throw new Error("Lesson artifact not found");
         result = await b["visual-spec"].execute({ lesson });
         break;
       }
       case "SK-L3-002": {
-        // video
         const visualSpec = getArtifact("visual-spec");
         const lesson = getArtifact("lesson");
         if (!visualSpec || !lesson)
@@ -289,7 +387,6 @@ async function executeNode(
         break;
       }
       default: {
-        // Default: try to find the builder by capability
         const builderName = node.skillId
           ?.replace("SK-L1-", "")
           .replace("SK-L3-", "");
@@ -300,7 +397,6 @@ async function executeNode(
             knowledgeObject: ko,
           });
         } else {
-          // Simulate for capabilities without direct builders
           result = {
             output: {
               [node.capabilityId]: { status: "completed", simulated: true },
@@ -386,13 +482,50 @@ function getArtifactType(skillId: string): string {
   return map[skillId] || "unknown";
 }
 
+function buildKnowledgePackage(ko: any, execution: PipelineExecution) {
+  const getArtifact = (type: string) =>
+    execution.artifacts.find((a) => a.type === type)?.data;
+
+  return new KnowledgePackage({
+    title: ko.title || execution.ko?.title,
+    description: ko.description || execution.ko?.description,
+    domain: ko.domain || execution.ko?.domain,
+    subject: ko.subject || execution.ko?.subject,
+    gradeLevel: ko.gradeLevel || execution.ko?.gradeLevel,
+    source: ko.source || {
+      type: "text",
+      content: ko.title,
+      ingestedAt: new Date().toISOString(),
+    },
+    ko: ko,
+    lesson: getArtifact("lesson"),
+    assessment: getArtifact("assessment"),
+    teacherGuide: getArtifact("teacher-guide"),
+    workbook: getArtifact("workbook"),
+    visualSpec: getArtifact("visual-spec"),
+    video: getArtifact("video"),
+    provenance: execution.artifacts.map((a) => ({
+      capabilityId: a.provenance?.capabilityId,
+      skillId: a.provenance?.skillId,
+      agentId: a.provenance?.agentId,
+      sourceKoId: a.provenance?.sourceKoId,
+      executedAt: a.provenance?.executedAt,
+      durationMs: 0,
+    })),
+    executionTrace: execution.nodeResults.map((n) => ({
+      nodeId: n.nodeId,
+      capabilityId: n.capabilityId,
+      status: n.status,
+      durationMs: 0,
+    })),
+  });
+}
+
 function buildPipelinePlan(goal: any, koId: string) {
   const now = Date.now();
   const id = `plan-${now}-${Math.random().toString(36).slice(2, 8)}`;
 
-  // Define the pipeline as a proper DAG
   const nodes = [
-    // Layer 0: Lesson (no deps)
     {
       id: "n-001",
       capabilityId: "D03-C02",
@@ -414,7 +547,6 @@ function buildPipelinePlan(goal: any, koId: string) {
         actor: "bee-engine",
       },
     },
-    // Layer 1: Assessment, Teacher Guide, Workbook (depend on lesson)
     {
       id: "n-002",
       capabilityId: "D03-C04",
@@ -478,7 +610,6 @@ function buildPipelinePlan(goal: any, koId: string) {
         actor: "bee-engine",
       },
     },
-    // Layer 2: Visual Spec (depends on lesson)
     {
       id: "n-005",
       capabilityId: "D08-C01",
@@ -500,7 +631,6 @@ function buildPipelinePlan(goal: any, koId: string) {
         actor: "bee-engine",
       },
     },
-    // Layer 3: Video (depends on visual-spec)
     {
       id: "n-006",
       capabilityId: "D08-C02",
@@ -529,11 +659,7 @@ function buildPipelinePlan(goal: any, koId: string) {
     goal: goal.text,
     status: "pending",
     nodes,
-    layers: [
-      ["n-001"], // Lesson first
-      ["n-002", "n-003", "n-004", "n-005"], // Assessment, Guide, Workbook, VisualSpec (parallel)
-      ["n-006"], // Video (after visual-spec)
-    ],
+    layers: [["n-001"], ["n-002", "n-003", "n-004", "n-005"], ["n-006"]],
     context: { goal, koId },
     metrics: {
       totalNodes: 6,
