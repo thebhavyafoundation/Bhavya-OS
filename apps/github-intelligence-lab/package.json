@@ -1,0 +1,32 @@
+{
+  "name": "github-intelligence-lab",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3060",
+    "build": "next build",
+    "start": "next start --port 3060"
+  },
+  "dependencies": {
+    "@bhavya/intelligence": "workspace:*",
+    "@bhavya/github-intelligence": "workspace:*",
+    "@bhavya/mcp-manager": "workspace:*",
+    "@bhavya/plugin-manager": "workspace:*",
+    "@bhavya/browser-automation": "workspace:*",
+    "@bhavya/technology-radar": "workspace:*",
+    "@bhavya/capability-registry": "workspace:*",
+    "@bhavya/platform": "workspace:*",
+    "@bhavya/platform-ui": "workspace:*",
+    "next": "^15.5.20",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "lucide-react": "^0.400.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.8.0"
+  }
+}
