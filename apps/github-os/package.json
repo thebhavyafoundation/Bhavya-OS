@@ -1,0 +1,32 @@
+{
+  "name": "@bhavya/github-os",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3070",
+    "build": "next build",
+    "start": "next start --port 3070",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/events": "workspace:*",
+    "@bhavya/platform": "workspace:*",
+    "@bhavya/types": "workspace:*",
+    "better-sqlite3": "^13.0.2",
+    "lucide-react": "^0.400.0",
+    "next": "^15.5.20",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.1"
+  }
+}
