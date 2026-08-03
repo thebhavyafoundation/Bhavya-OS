@@ -1,15 +1,31 @@
 {
   "name": "@bhavya/runtime",
-  "version": "3.0.0",
-  "stable": true,
-  "private": true,
-  "description": "AI Runtime Engine v3.0 — daemon, loader, compiler, validator, graph, retrieval, scheduler, memory, planner, executor, orchestrator, CLI, API, metrics",
+  "version": "0.1.0",
+  "description": "Bhavya Architecture Registry Runtime - executable architecture from BAR",
   "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./registry": "./src/registry-loader.mjs",
+    "./resolver": "./src/resolvers/entity-resolver.mjs",
+    "./events": "./src/engines/event-dispatcher.mjs",
+    "./permissions": "./src/engines/permission-engine.mjs",
+    "./provenance": "./src/engines/provenance-engine.mjs"
+  },
   "scripts": {
-    "daemon": "node ../../packages/runtime/daemon/watch.mjs",
-    "daemon:once": "node ../../packages/runtime/daemon/watch.mjs --once",
-    "compile": "node ../../.ai/build/compile-runtime.mjs",
-    "validate": "node ../../.ai/build/validate-runtime.mjs",
-    "snapshot": "node ../../.ai/build/generate-snapshot.mjs"
-  }
+    "test": "node --test src/**/*.test.mjs",
+    "validate": "node src/cli/validate.mjs",
+    "serve": "node src/cli/serve.mjs"
+  },
+  "dependencies": {
+    "pino": "^9.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "bhavya",
+    "runtime",
+    "architecture",
+    "registry"
+  ],
+  "license": "MIT"
 }
