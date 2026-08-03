@@ -1,0 +1,30 @@
+{
+  "id": "D06-C07",
+  "name": "Interlibrary Loan",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Share resources with partner institutions",
+  "domain": "D06",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D06-C02", "D20-C01"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["library", "loan"],
+  "metadata": {}
+}

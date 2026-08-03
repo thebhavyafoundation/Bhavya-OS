@@ -1,0 +1,30 @@
+{
+  "id": "KO-LEGAL",
+  "name": "Legal KO",
+  "kind": "knowledge-object",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Legal document KO",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D12-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ko", "legal"],
+  "metadata": {}
+}

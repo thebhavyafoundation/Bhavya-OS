@@ -1,0 +1,30 @@
+{
+  "id": "PK-001",
+  "name": "@bhavya/core",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Runtime engine, knowledge pipeline, config",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core"],
+  "metadata": {}
+}

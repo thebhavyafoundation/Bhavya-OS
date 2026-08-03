@@ -1,0 +1,33 @@
+{
+  "id": "SV-CORE-001",
+  "name": "notification-service",
+  "kind": "service",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Send notifications across channels",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["cross-cutting"],
+  "metadata": {
+    "crossCutting": true,
+    "usedBy": 80
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D09-C06",
+  "name": "Showcase Gallery",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Display community projects and achievements",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D09-C01", "D03-C10"],
+  "upstream": [],
+  "downstream": ["D19-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "showcase"],
+  "metadata": {}
+}

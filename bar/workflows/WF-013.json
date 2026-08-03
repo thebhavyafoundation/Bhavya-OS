@@ -1,0 +1,30 @@
+{
+  "id": "WF-013",
+  "name": "Event Planning Workflow",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Plan → Promote → Register → Execute → Follow-up",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D09-C03"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "events"],
+  "metadata": {}
+}

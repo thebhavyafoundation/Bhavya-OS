@@ -1,0 +1,30 @@
+{
+  "id": "D16-C04",
+  "name": "Recommendation Engine",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Recommend learning paths and resources",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D16-C01", "D18-C01"],
+  "upstream": [],
+  "downstream": ["D03-C06", "D06-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai", "recommendations"],
+  "metadata": {}
+}

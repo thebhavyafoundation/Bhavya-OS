@@ -1,0 +1,924 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:57:22.461Z",
+  "total": 131,
+  "items": [
+    {
+      "id": "PM-KNOW-READ",
+      "name": "knowledge.read",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-CREATE",
+      "name": "knowledge.create",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-UPDATE",
+      "name": "knowledge.update",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-DELETE",
+      "name": "knowledge.delete",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-PUBLISH",
+      "name": "knowledge.publish",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-VALIDATE",
+      "name": "knowledge.validate",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-INGEST",
+      "name": "knowledge.ingest",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-GRAPH-MA",
+      "name": "knowledge.graph.manage",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-SEARCH",
+      "name": "knowledge.search",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-KNOW-VERSION",
+      "name": "knowledge.version",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-READ",
+      "name": "lesson.read",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-CREATE",
+      "name": "lesson.create",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-UPDATE",
+      "name": "lesson.update",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-DELETE",
+      "name": "lesson.delete",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-PUBLISH",
+      "name": "lesson.publish",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-GENERATE",
+      "name": "lesson.generate",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-ASSIGN",
+      "name": "lesson.assign",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-LESS-GRADE",
+      "name": "lesson.grade",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-READ",
+      "name": "assessment.read",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-CREATE",
+      "name": "assessment.create",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-UPDATE",
+      "name": "assessment.update",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-DELETE",
+      "name": "assessment.delete",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-PUBLISH",
+      "name": "assessment.publish",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-SUBMIT",
+      "name": "assessment.submit",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-GRADE",
+      "name": "assessment.grade",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-ASSE-REVIEW",
+      "name": "assessment.review",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-READ",
+      "name": "curriculum.read",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-CREATE",
+      "name": "curriculum.create",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-UPDATE",
+      "name": "curriculum.update",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-DELETE",
+      "name": "curriculum.delete",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-PUBLISH",
+      "name": "curriculum.publish",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CURR-APPROVE",
+      "name": "curriculum.approve",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-READ",
+      "name": "student.read",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-CREATE",
+      "name": "student.create",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-UPDATE",
+      "name": "student.update",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-DELETE",
+      "name": "student.delete",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-ENROLL",
+      "name": "student.enroll",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-TRANSFER",
+      "name": "student.transfer",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-GRADUATE",
+      "name": "student.graduate",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STUD-SUSPEND",
+      "name": "student.suspend",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-READ",
+      "name": "staff.read",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-CREATE",
+      "name": "staff.create",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-UPDATE",
+      "name": "staff.update",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-DELETE",
+      "name": "staff.delete",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-HIRE",
+      "name": "staff.hire",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-TERMINAT",
+      "name": "staff.terminate",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-STAF-PROMOTE",
+      "name": "staff.promote",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-READ",
+      "name": "finance.read",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-CREATE",
+      "name": "finance.create",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-UPDATE",
+      "name": "finance.update",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-DELETE",
+      "name": "finance.delete",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-APPROVE",
+      "name": "finance.approve",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-REJECT",
+      "name": "finance.reject",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-FINA-EXPORT",
+      "name": "finance.export",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-BUDG-READ",
+      "name": "budget.read",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-BUDG-CREATE",
+      "name": "budget.create",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-BUDG-UPDATE",
+      "name": "budget.update",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-BUDG-DELETE",
+      "name": "budget.delete",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-BUDG-APPROVE",
+      "name": "budget.approve",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-READ",
+      "name": "grant.read",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-CREATE",
+      "name": "grant.create",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-UPDATE",
+      "name": "grant.update",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-DELETE",
+      "name": "grant.delete",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-APPLY",
+      "name": "grant.apply",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-GRAN-REPORT",
+      "name": "grant.report",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-READ",
+      "name": "compliance.read",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-CREATE",
+      "name": "compliance.create",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-UPDATE",
+      "name": "compliance.update",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-DELETE",
+      "name": "compliance.delete",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-AUDIT",
+      "name": "compliance.audit",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-REPORT",
+      "name": "compliance.report",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMP-ENFORCE",
+      "name": "compliance.enforce",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-READ",
+      "name": "media.read",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-CREATE",
+      "name": "media.create",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-UPDATE",
+      "name": "media.update",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-DELETE",
+      "name": "media.delete",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-PUBLISH",
+      "name": "media.publish",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-MEDI-DISTRIBU",
+      "name": "media.distribute",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-READ",
+      "name": "community.read",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-CREATE",
+      "name": "community.create",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-UPDATE",
+      "name": "community.update",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-DELETE",
+      "name": "community.delete",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-MODERATE",
+      "name": "community.moderate",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-COMM-BAN",
+      "name": "community.ban",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-READ",
+      "name": "volunteer.read",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-CREATE",
+      "name": "volunteer.create",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-UPDATE",
+      "name": "volunteer.update",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-DELETE",
+      "name": "volunteer.delete",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-APPROVE",
+      "name": "volunteer.approve",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-ASSIGN",
+      "name": "volunteer.assign",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-VOLU-LOG-HOUR",
+      "name": "volunteer.log-hours",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-READ",
+      "name": "contract.read",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-CREATE",
+      "name": "contract.create",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-UPDATE",
+      "name": "contract.update",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-DELETE",
+      "name": "contract.delete",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-APPROVE",
+      "name": "contract.approve",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-SIGN",
+      "name": "contract.sign",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-CONT-RENEW",
+      "name": "contract.renew",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-REPO-READ",
+      "name": "report.read",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-REPO-CREATE",
+      "name": "report.create",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-REPO-EXPORT",
+      "name": "report.export",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-REPO-SCHEDULE",
+      "name": "report.schedule",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-ADMIN",
+      "name": "system.admin",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-DEPLOY",
+      "name": "system.deploy",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-CONFIGUR",
+      "name": "system.configure",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-MONITOR",
+      "name": "system.monitor",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-BACKUP",
+      "name": "system.backup",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-SYST-RESTORE",
+      "name": "system.restore",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-READ",
+      "name": "user.read",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-CREATE",
+      "name": "user.create",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-UPDATE",
+      "name": "user.update",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-DELETE",
+      "name": "user.delete",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-SUSPEND",
+      "name": "user.suspend",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-USER-ROLE-ASS",
+      "name": "user.role.assign",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-READ",
+      "name": "research.read",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-CREATE",
+      "name": "research.create",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-UPDATE",
+      "name": "research.update",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-DELETE",
+      "name": "research.delete",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-SUBMIT",
+      "name": "research.submit",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-RESE-APPROVE",
+      "name": "research.approve",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-READ",
+      "name": "publication.read",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-CREATE",
+      "name": "publication.create",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-UPDATE",
+      "name": "publication.update",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-DELETE",
+      "name": "publication.delete",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-PUBLISH",
+      "name": "publication.publish",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PUBL-REVIEW",
+      "name": "publication.review",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PART-READ",
+      "name": "partner.read",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PART-CREATE",
+      "name": "partner.create",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PART-UPDATE",
+      "name": "partner.update",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PART-DELETE",
+      "name": "partner.delete",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PM-PART-ACTIVATE",
+      "name": "partner.activate",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

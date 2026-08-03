@@ -1,0 +1,126 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:03.019Z",
+  "total": 17,
+  "items": [
+    {
+      "id": "PK-001",
+      "name": "@bhavya/core",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "PK-002",
+      "name": "@bhavya/knowledge",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "partial"
+    },
+    {
+      "id": "PK-003",
+      "name": "@bhavya/education",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "partial"
+    },
+    {
+      "id": "PK-004",
+      "name": "@bhavya/media",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "partial"
+    },
+    {
+      "id": "PK-005",
+      "name": "@bhavya/ai",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-006",
+      "name": "@bhavya/operations",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-007",
+      "name": "@bhavya/finance",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-008",
+      "name": "@bhavya/compliance",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-009",
+      "name": "@bhavya/community",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-010",
+      "name": "@bhavya/analytics",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-011",
+      "name": "@bhavya/infra",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-012",
+      "name": "@bhavya/legal",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-013",
+      "name": "@bhavya/research",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-014",
+      "name": "@bhavya/outreach",
+      "domain": "D19",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-015",
+      "name": "@bhavya/governance",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-016",
+      "name": "@bhavya/library",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "PK-017",
+      "name": "@bhavya/sustainability",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

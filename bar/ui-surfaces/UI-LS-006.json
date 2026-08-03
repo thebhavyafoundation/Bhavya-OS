@@ -1,0 +1,30 @@
+{
+  "id": "UI-LS-006",
+  "name": "Publish Workflow",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Publish content",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C02"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:studio", "education"],
+  "metadata": {}
+}

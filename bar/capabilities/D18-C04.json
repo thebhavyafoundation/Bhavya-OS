@@ -1,0 +1,30 @@
+{
+  "id": "D18-C04",
+  "name": "Predictive Analytics",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Predict student outcomes and trends",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D18-C02", "D16-C04"],
+  "upstream": [],
+  "downstream": ["D03-C11"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["analytics", "predictive"],
+  "metadata": {}
+}

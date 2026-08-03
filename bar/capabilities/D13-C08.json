@@ -1,0 +1,30 @@
+{
+  "id": "D13-C08",
+  "name": "Incident Reporting",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Report and track compliance incidents",
+  "domain": "D13",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D13-C01", "D12-C04"],
+  "upstream": [],
+  "downstream": ["D13-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["compliance", "incidents"],
+  "metadata": {}
+}

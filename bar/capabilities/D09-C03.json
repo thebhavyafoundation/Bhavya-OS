@@ -1,0 +1,30 @@
+{
+  "id": "D09-C03",
+  "name": "Events & Meetups",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Community events and gatherings",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D09-C01", "D02-C06"],
+  "upstream": [],
+  "downstream": ["D09-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "events"],
+  "metadata": {}
+}

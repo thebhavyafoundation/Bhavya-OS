@@ -1,0 +1,482 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Bhavya Architecture Registry API",
+    "description": "Machine-readable API for the Bhavya Architecture Registry",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3100",
+      "description": "Local development"
+    },
+    {
+      "url": "https://api.bhavya.org",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/domains": {
+      "get": {
+        "summary": "List all domains",
+        "operationId": "listDomains",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/domains/{id}": {
+      "get": {
+        "summary": "Get domain by ID",
+        "operationId": "getDomain",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/capabilities": {
+      "get": {
+        "summary": "List all capabilities",
+        "operationId": "listCapabilities",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/capabilities/{id}": {
+      "get": {
+        "summary": "Get capabilitie by ID",
+        "operationId": "getCapabilitie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/workflows": {
+      "get": {
+        "summary": "List all workflows",
+        "operationId": "listWorkflows",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/workflows/{id}": {
+      "get": {
+        "summary": "Get workflow by ID",
+        "operationId": "getWorkflow",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "summary": "List all skills",
+        "operationId": "listSkills",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/skills/{id}": {
+      "get": {
+        "summary": "Get skill by ID",
+        "operationId": "getSkill",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/agents": {
+      "get": {
+        "summary": "List all agents",
+        "operationId": "listAgents",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/agents/{id}": {
+      "get": {
+        "summary": "Get agent by ID",
+        "operationId": "getAgent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "summary": "List all services",
+        "operationId": "listServices",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "summary": "Get service by ID",
+        "operationId": "getService",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/packages": {
+      "get": {
+        "summary": "List all packages",
+        "operationId": "listPackages",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/packages/{id}": {
+      "get": {
+        "summary": "Get package by ID",
+        "operationId": "getPackage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/applications": {
+      "get": {
+        "summary": "List all applications",
+        "operationId": "listApplications",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/applications/{id}": {
+      "get": {
+        "summary": "Get application by ID",
+        "operationId": "getApplication",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/events": {
+      "get": {
+        "summary": "List all events",
+        "operationId": "listEvents",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "summary": "Get event by ID",
+        "operationId": "getEvent",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/permissions": {
+      "get": {
+        "summary": "List all permissions",
+        "operationId": "listPermissions",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/permissions/{id}": {
+      "get": {
+        "summary": "Get permission by ID",
+        "operationId": "getPermission",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/knowledge-objects": {
+      "get": {
+        "summary": "List all knowledge-objects",
+        "operationId": "listKnowledgeObjects",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/knowledge-objects/{id}": {
+      "get": {
+        "summary": "Get knowledge-object by ID",
+        "operationId": "getKnowledgeObject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/ui-surfaces": {
+      "get": {
+        "summary": "List all ui-surfaces",
+        "operationId": "listUiSurfaces",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ui-surfaces/{id}": {
+      "get": {
+        "summary": "Get ui-surface by ID",
+        "operationId": "getUiSurface",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/validate": {
+      "post": {
+        "summary": "Validate registry integrity",
+        "operationId": "validateRegistry",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validation passed"
+          },
+          "400": {
+            "description": "Validation errors"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Domain": {
+        "type": "string",
+        "enum": []
+      },
+      "EntityStatus": {
+        "type": "string",
+        "enum": ["proposed", "active", "deprecated", "archived"]
+      },
+      "ImplementationStatus": {
+        "type": "string",
+        "enum": ["not-started", "in-progress", "implemented", "partial"]
+      },
+      "BarEntity": {
+        "$ref": "#/components/schemas/BarEntity"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D03-C10",
+  "name": "Certification",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Issue certificates and transcripts",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C05", "D02-C02"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "certificates"],
+  "metadata": {}
+}

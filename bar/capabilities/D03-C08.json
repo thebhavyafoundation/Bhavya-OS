@@ -1,0 +1,30 @@
+{
+  "id": "D03-C08",
+  "name": "Timetable Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Class scheduling and timetable generation",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D02-C03", "D03-C01"],
+  "upstream": [],
+  "downstream": ["D03-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "timetable"],
+  "metadata": {}
+}

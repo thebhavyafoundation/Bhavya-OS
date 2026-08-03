@@ -1,0 +1,546 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:57:22.546Z",
+  "total": 77,
+  "items": [
+    {
+      "id": "UI-LAB-001",
+      "name": "Knowledge Browser",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-002",
+      "name": "KO Editor",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-003",
+      "name": "Lesson Builder",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-004",
+      "name": "Assessment Builder",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-005",
+      "name": "Pipeline Monitor",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-006",
+      "name": "Quality Gates View",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-007",
+      "name": "Provenance Timeline",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-008",
+      "name": "Video Preview",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-009",
+      "name": "Website Preview",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-010",
+      "name": "Visual Spec Editor",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-011",
+      "name": "Command Palette",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-012",
+      "name": "Sidebar Navigation",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-013",
+      "name": "Dashboard Home",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LAB-014",
+      "name": "Settings Panel",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DASH-001",
+      "name": "Analytics Dashboard",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DASH-002",
+      "name": "Real-time Metrics",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DASH-003",
+      "name": "System Health",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DASH-004",
+      "name": "Deployment Status",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DASH-005",
+      "name": "Error Tracker",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-KP-001",
+      "name": "Knowledge Explorer",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-KP-002",
+      "name": "Search Results",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-KP-003",
+      "name": "KO Detail View",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-KP-004",
+      "name": "Knowledge Collections",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-001",
+      "name": "Student Management",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-002",
+      "name": "Staff Management",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-003",
+      "name": "Attendance Dashboard",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-004",
+      "name": "Event Calendar",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-005",
+      "name": "Document Manager",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-ADM-006",
+      "name": "Report Generator",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-001",
+      "name": "Budget Overview",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-002",
+      "name": "Expense Tracker",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-003",
+      "name": "Invoice Manager",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-004",
+      "name": "Payroll View",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-005",
+      "name": "Financial Reports",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-FIN-006",
+      "name": "Grant Tracker",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMT-001",
+      "name": "Community Feed",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMT-002",
+      "name": "Events Board",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMT-003",
+      "name": "Mentorship Hub",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMT-004",
+      "name": "Showcase Gallery",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMT-005",
+      "name": "Feedback Portal",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-RES-001",
+      "name": "Research Programs",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-RES-002",
+      "name": "Grant Applications",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-RES-003",
+      "name": "Research Data",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-RES-004",
+      "name": "Publication Pipeline",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMP-001",
+      "name": "Compliance Overview",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMP-002",
+      "name": "Audit Trail Viewer",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMP-003",
+      "name": "Violation Tracker",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-CMP-004",
+      "name": "Policy Manager",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-TRN-001",
+      "name": "Public Reports",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-TRN-002",
+      "name": "Impact Metrics",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-TRN-003",
+      "name": "Financial Disclosure",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-VOL-001",
+      "name": "Volunteer Dashboard",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-VOL-002",
+      "name": "Task Board",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-VOL-003",
+      "name": "Hours Log",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-VOL-004",
+      "name": "Training Hub",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-LIB-001",
+      "name": "Catalog Browser",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-LIB-002",
+      "name": "Digital Lending",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-LIB-003",
+      "name": "Citation Manager",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-HER-001",
+      "name": "Heritage Gallery",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-HER-002",
+      "name": "Impact Stories",
+      "domain": "D19",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-MON-001",
+      "name": "System Metrics",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-MON-002",
+      "name": "Alert Dashboard",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-MON-003",
+      "name": "Cost Dashboard",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DOC-001",
+      "name": "API Reference",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DOC-002",
+      "name": "Architecture Docs",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DOC-003",
+      "name": "User Guides",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DS-001",
+      "name": "Component Library",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DS-002",
+      "name": "Token Reference",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-DS-003",
+      "name": "Pattern Gallery",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-API-001",
+      "name": "API Explorer",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-API-002",
+      "name": "Schema Viewer",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "UI-LS-001",
+      "name": "Lesson Editor",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LS-002",
+      "name": "Assessment Editor",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LS-003",
+      "name": "Teacher Guide View",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LS-004",
+      "name": "Workbook View",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LS-005",
+      "name": "Preview Pane",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "UI-LS-006",
+      "name": "Publish Workflow",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    }
+  ]
+}

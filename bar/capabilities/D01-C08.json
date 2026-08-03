@@ -1,0 +1,30 @@
+{
+  "id": "D01-C08",
+  "name": "Transparency Reporting",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Public transparency and accountability reports",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D01-C04", "D18-C01"],
+  "upstream": [],
+  "downstream": ["D09-C01"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance", "transparency"],
+  "metadata": {}
+}

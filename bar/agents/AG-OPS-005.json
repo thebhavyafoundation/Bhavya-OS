@@ -1,0 +1,41 @@
+{
+  "id": "AG-OPS-005",
+  "name": "operations-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Operational orchestration",
+  "domain": "D14",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D14-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["operations"],
+  "metadata": {
+    "capabilities": [
+      "D14-C01",
+      "D14-C02",
+      "D14-C03",
+      "D14-C04",
+      "D14-C05",
+      "D14-C06",
+      "D14-C07",
+      "D14-C08"
+    ]
+  }
+}

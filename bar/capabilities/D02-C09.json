@@ -1,0 +1,30 @@
+{
+  "id": "D02-C09",
+  "name": "Document Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Centralized document storage and retrieval",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D05-C01", "D17-C02"],
+  "upstream": [],
+  "downstream": ["D02-C10", "D13-C01"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["admin", "documents"],
+  "metadata": {}
+}

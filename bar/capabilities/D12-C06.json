@@ -1,0 +1,30 @@
+{
+  "id": "D12-C06",
+  "name": "Intellectual Property",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Protect institutional IP",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D12-C01", "D04-C06"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["legal", "ip"],
+  "metadata": {}
+}

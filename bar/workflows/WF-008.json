@@ -1,0 +1,30 @@
+{
+  "id": "WF-008",
+  "name": "Incident Response Workflow",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Detect → Triage → Investigate → Resolve → Review",
+  "domain": "D14",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D14-C06"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["operations"],
+  "metadata": {}
+}

@@ -1,0 +1,40 @@
+{
+  "id": "AG-AN-001",
+  "name": "analytics-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Analytics and reporting",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D18-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["analytics"],
+  "metadata": {
+    "capabilities": [
+      "D18-C01",
+      "D18-C02",
+      "D18-C03",
+      "D18-C04",
+      "D18-C05",
+      "D18-C06",
+      "D18-C07"
+    ]
+  }
+}

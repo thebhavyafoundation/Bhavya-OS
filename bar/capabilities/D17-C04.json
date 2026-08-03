@@ -1,0 +1,30 @@
+{
+  "id": "D17-C04",
+  "name": "Version Control",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Version tracking for all artifacts",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D17-C02"],
+  "upstream": [],
+  "downstream": ["D05-C06", "D05-C09", "D13-C02"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering", "versioning"],
+  "metadata": {}
+}

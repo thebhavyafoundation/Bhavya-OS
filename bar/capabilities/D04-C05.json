@@ -1,0 +1,30 @@
+{
+  "id": "D04-C05",
+  "name": "Collaboration Hub",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Multi-institutional research collaboration",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D04-C01"],
+  "upstream": [],
+  "downstream": ["D04-C06"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research", "collaboration"],
+  "metadata": {}
+}

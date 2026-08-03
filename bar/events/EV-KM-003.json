@@ -1,0 +1,30 @@
+{
+  "id": "EV-KM-003",
+  "name": "ko.published",
+  "kind": "event",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Knowledge object published",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D05-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["knowledge"],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "PM-PUBL-CREATE",
+  "name": "publication.create",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "create publication",
+  "domain": "D07",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "publication"],
+  "metadata": {
+    "group": "publication",
+    "action": "create"
+  }
+}

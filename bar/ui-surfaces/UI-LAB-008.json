@@ -1,0 +1,30 @@
+{
+  "id": "UI-LAB-008",
+  "name": "Video Preview",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Preview generated video",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C01"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:lab", "media"],
+  "metadata": {}
+}

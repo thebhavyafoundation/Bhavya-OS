@@ -1,0 +1,182 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:03.006Z",
+  "total": 25,
+  "items": [
+    {
+      "id": "SV-CORE-001",
+      "name": "notification-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-002",
+      "name": "document-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-003",
+      "name": "analytics-service",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-004",
+      "name": "auth-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-005",
+      "name": "search-service",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-006",
+      "name": "file-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-007",
+      "name": "cache-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-008",
+      "name": "queue-service",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-009",
+      "name": "email-service",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-CORE-010",
+      "name": "audit-service",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D05-001",
+      "name": "ko-service",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D05-002",
+      "name": "kg-service",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D03-001",
+      "name": "lesson-service",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D03-002",
+      "name": "assessment-service",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D03-003",
+      "name": "grading-service",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D08-001",
+      "name": "media-service",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D08-002",
+      "name": "video-service",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D08-003",
+      "name": "website-service",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D17-001",
+      "name": "pipeline-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SV-D17-002",
+      "name": "deploy-service",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "partial"
+    },
+    {
+      "id": "SV-D11-001",
+      "name": "finance-service",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D13-001",
+      "name": "compliance-service",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D14-001",
+      "name": "workflow-service",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D16-001",
+      "name": "ai-service",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SV-D15-001",
+      "name": "infra-service",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

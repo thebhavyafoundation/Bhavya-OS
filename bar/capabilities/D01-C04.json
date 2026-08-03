@@ -1,0 +1,30 @@
+{
+  "id": "D01-C04",
+  "name": "Decision Logging",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Record and trace all institutional decisions",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D01-C03", "D05-C01"],
+  "upstream": [],
+  "downstream": ["D18-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance", "decisions", "audit"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D18-C07",
+  "name": "Real-time Metrics",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Live system and business metrics",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D18-C01", "D15-C04"],
+  "upstream": [],
+  "downstream": ["D14-C05"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["analytics", "realtime"],
+  "metadata": {}
+}

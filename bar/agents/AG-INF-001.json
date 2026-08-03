@@ -1,0 +1,40 @@
+{
+  "id": "AG-INF-001",
+  "name": "infrastructure-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Infrastructure management",
+  "domain": "D15",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D15-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["infrastructure"],
+  "metadata": {
+    "capabilities": [
+      "D15-C01",
+      "D15-C02",
+      "D15-C03",
+      "D15-C04",
+      "D15-C05",
+      "D15-C06",
+      "D15-C07"
+    ]
+  }
+}

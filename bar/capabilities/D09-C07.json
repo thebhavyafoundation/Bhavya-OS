@@ -1,0 +1,30 @@
+{
+  "id": "D09-C07",
+  "name": "Parent Community",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Parent engagement and communication",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D09-C01", "D03-C07"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "parents"],
+  "metadata": {}
+}

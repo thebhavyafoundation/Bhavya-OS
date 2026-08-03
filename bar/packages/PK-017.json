@@ -1,0 +1,30 @@
+{
+  "id": "PK-017",
+  "name": "@bhavya/sustainability",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Environmental, social, financial impact",
+  "domain": "D21",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-010", "PK-015"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["sustainability"],
+  "metadata": {}
+}

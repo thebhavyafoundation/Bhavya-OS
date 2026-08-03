@@ -1,0 +1,30 @@
+{
+  "id": "SK-L1-003",
+  "name": "teacher-guide",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Lesson → objectives, materials, discussion prompts, timing",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C02", "D17-C01"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "foundation", "teaching"],
+  "metadata": {}
+}

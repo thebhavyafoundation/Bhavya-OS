@@ -1,0 +1,147 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:02.944Z",
+  "total": 20,
+  "items": [
+    {
+      "id": "WF-001",
+      "name": "Lesson Generation Pipeline",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "WF-002",
+      "name": "Knowledge Ingestion Pipeline",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-003",
+      "name": "Assessment Grading Pipeline",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-004",
+      "name": "Admission Workflow",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-005",
+      "name": "Grant Application Workflow",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-006",
+      "name": "Publication Workflow",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-007",
+      "name": "Compliance Audit Workflow",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-008",
+      "name": "Incident Response Workflow",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-009",
+      "name": "Volunteer Onboarding Workflow",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-010",
+      "name": "Financial Reporting Workflow",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-011",
+      "name": "Media Production Pipeline",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-012",
+      "name": "Contract Lifecycle",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-013",
+      "name": "Event Planning Workflow",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-014",
+      "name": "Data Governance Workflow",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-015",
+      "name": "Content Distribution Workflow",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-016",
+      "name": "Knowledge Graph Build",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-017",
+      "name": "Partner Onboarding",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-018",
+      "name": "Sustainability Reporting",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-019",
+      "name": "CI/CD Pipeline",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "WF-020",
+      "name": "AI Model Pipeline",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

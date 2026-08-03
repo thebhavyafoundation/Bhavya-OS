@@ -1,0 +1,30 @@
+{
+  "id": "SK-L3-002",
+  "name": "grading-engine",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Grade submissions with rubrics",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C05", "D16-C03"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "education"],
+  "metadata": {}
+}

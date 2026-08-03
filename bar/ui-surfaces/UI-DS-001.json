@@ -1,0 +1,30 @@
+{
+  "id": "UI-DS-001",
+  "name": "Component Library",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "UI components",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C09"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:ds", "design"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "UI-CMT-005",
+  "name": "Feedback Portal",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Submit feedback",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D09-C05"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:community", "community"],
+  "metadata": {}
+}

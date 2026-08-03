@@ -1,0 +1,33 @@
+{
+  "id": "PM-COMM-MODERATE",
+  "name": "community.moderate",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "moderate community",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "community"],
+  "metadata": {
+    "group": "community",
+    "action": "moderate"
+  }
+}

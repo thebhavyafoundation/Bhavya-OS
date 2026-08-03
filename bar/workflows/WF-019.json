@@ -1,0 +1,30 @@
+{
+  "id": "WF-019",
+  "name": "CI/CD Pipeline",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Build → Test → Lint → Stage → Deploy → Monitor",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D17-C06"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering", "cicd"],
+  "metadata": {}
+}

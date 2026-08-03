@@ -1,0 +1,30 @@
+{
+  "id": "EV-GOV-002",
+  "name": "decision.recorded",
+  "kind": "event",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Decision recorded",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D01-C04"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D05-C08",
+  "name": "Ontology Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Define and maintain knowledge ontologies",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D05-C03"],
+  "upstream": [],
+  "downstream": ["D16-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["km", "ontology"],
+  "metadata": {}
+}

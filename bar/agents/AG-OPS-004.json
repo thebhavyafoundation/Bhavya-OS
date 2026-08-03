@@ -1,0 +1,40 @@
+{
+  "id": "AG-OPS-004",
+  "name": "legal-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Legal operations",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D12-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["legal"],
+  "metadata": {
+    "capabilities": [
+      "D12-C01",
+      "D12-C02",
+      "D12-C03",
+      "D12-C04",
+      "D12-C05",
+      "D12-C06",
+      "D12-C07"
+    ]
+  }
+}

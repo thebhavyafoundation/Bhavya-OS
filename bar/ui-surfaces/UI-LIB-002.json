@@ -1,0 +1,30 @@
+{
+  "id": "UI-LIB-002",
+  "name": "Digital Lending",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Borrow digital resources",
+  "domain": "D06",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D06-C02"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:library", "library"],
+  "metadata": {}
+}

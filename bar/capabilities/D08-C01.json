@@ -1,0 +1,30 @@
+{
+  "id": "D08-C01",
+  "name": "Lesson Video Production",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Produce educational videos from lessons",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C02", "D05-C01"],
+  "upstream": [],
+  "downstream": ["D08-C02", "D08-C03"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "video", "lessons"],
+  "metadata": {}
+}

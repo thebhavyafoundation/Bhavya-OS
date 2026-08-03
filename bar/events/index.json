@@ -1,0 +1,637 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:57:22.361Z",
+  "total": 90,
+  "items": [
+    {
+      "id": "EV-KM-001",
+      "name": "ko.created",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-002",
+      "name": "ko.updated",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-003",
+      "name": "ko.published",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-004",
+      "name": "ko.deleted",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-005",
+      "name": "ko.validated",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-006",
+      "name": "ko.versioned",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-007",
+      "name": "kg.edge-added",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-008",
+      "name": "kg.edge-removed",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-009",
+      "name": "kg.node-added",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-KM-010",
+      "name": "ingestion.completed",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-001",
+      "name": "lesson.generated",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-002",
+      "name": "lesson.published",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-003",
+      "name": "assessment.generated",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-004",
+      "name": "assessment.submitted",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-005",
+      "name": "assessment.graded",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-006",
+      "name": "grade.posted",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-007",
+      "name": "progress.updated",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-008",
+      "name": "curriculum.published",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-009",
+      "name": "certificate.issued",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-EDU-010",
+      "name": "enrollment.completed",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-MED-001",
+      "name": "video.generated",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-MED-002",
+      "name": "website.generated",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-MED-003",
+      "name": "slides.generated",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-MED-004",
+      "name": "content.published",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-MED-005",
+      "name": "content.distributed",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-001",
+      "name": "workflow.started",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-002",
+      "name": "workflow.completed",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-003",
+      "name": "workflow.failed",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-004",
+      "name": "task.created",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-005",
+      "name": "task.assigned",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-006",
+      "name": "task.completed",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-007",
+      "name": "incident.detected",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-008",
+      "name": "incident.resolved",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-009",
+      "name": "sla.breached",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-OPS-010",
+      "name": "change.deployed",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-001",
+      "name": "budget.created",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-002",
+      "name": "budget.approved",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-003",
+      "name": "expense.recorded",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-004",
+      "name": "payment.processed",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-005",
+      "name": "invoice.received",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-006",
+      "name": "payroll.processed",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-007",
+      "name": "grant.received",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-008",
+      "name": "financial-report.generated",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-FIN-009",
+      "name": "donation.received",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-001",
+      "name": "audit.started",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-002",
+      "name": "audit.completed",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-003",
+      "name": "violation.detected",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-004",
+      "name": "violation.resolved",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-005",
+      "name": "policy.updated",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-COM-006",
+      "name": "compliance-report.generated",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-001",
+      "name": "student.admitted",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-002",
+      "name": "student.enrolled",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-003",
+      "name": "staff.hired",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-004",
+      "name": "attendance.recorded",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-005",
+      "name": "announcement.published",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ADM-006",
+      "name": "event.created",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-001",
+      "name": "deploy.started",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-002",
+      "name": "deploy.completed",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-003",
+      "name": "deploy.failed",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-004",
+      "name": "build.succeeded",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-005",
+      "name": "build.failed",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-006",
+      "name": "test.passed",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ENG-007",
+      "name": "test.failed",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-AI-001",
+      "name": "model.trained",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-AI-002",
+      "name": "model.deployed",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-AI-003",
+      "name": "content.generated",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-AI-004",
+      "name": "recommendation.made",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-AI-005",
+      "name": "rag.query",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-CMT-001",
+      "name": "member.joined",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-CMT-002",
+      "name": "post.created",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-CMT-003",
+      "name": "comment.added",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-CMT-004",
+      "name": "feedback.submitted",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-VOL-001",
+      "name": "volunteer.applied",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-VOL-002",
+      "name": "volunteer.approved",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-VOL-003",
+      "name": "hours.logged",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-VOL-004",
+      "name": "task.completed",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-GOV-001",
+      "name": "policy.enacted",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-GOV-002",
+      "name": "decision.recorded",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-GOV-003",
+      "name": "board-meeting.completed",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-RES-001",
+      "name": "proposal.submitted",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-RES-002",
+      "name": "proposal.approved",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-RES-003",
+      "name": "paper.submitted",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-RES-004",
+      "name": "paper.published",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ANL-001",
+      "name": "metric.recorded",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ANL-002",
+      "name": "dashboard.refreshed",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-ANL-003",
+      "name": "report.generated",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-INF-001",
+      "name": "alert.triggered",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-INF-002",
+      "name": "alert.resolved",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-INF-003",
+      "name": "backup.completed",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "EV-INF-004",
+      "name": "scaling.triggered",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

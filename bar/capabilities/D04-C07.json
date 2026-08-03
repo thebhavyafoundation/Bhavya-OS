@@ -1,0 +1,30 @@
+{
+  "id": "D04-C07",
+  "name": "Publication Pipeline",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Research paper writing and submission",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D04-C03"],
+  "upstream": [],
+  "downstream": ["D07-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research", "publications"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D13-C02",
+  "name": "Audit Trail",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Maintain complete audit trail",
+  "domain": "D13",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D13-C01", "D17-C04"],
+  "upstream": [],
+  "downstream": ["D13-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["compliance", "audit"],
+  "metadata": {}
+}

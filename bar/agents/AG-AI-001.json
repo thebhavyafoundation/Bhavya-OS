@@ -1,0 +1,40 @@
+{
+  "id": "AG-AI-001",
+  "name": "ai-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "AI and intelligence",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D16-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai"],
+  "metadata": {
+    "capabilities": [
+      "D16-C01",
+      "D16-C02",
+      "D16-C03",
+      "D16-C04",
+      "D16-C05",
+      "D16-C06",
+      "D16-C07"
+    ]
+  }
+}

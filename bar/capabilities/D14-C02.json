@@ -1,0 +1,30 @@
+{
+  "id": "D14-C02",
+  "name": "Process Automation",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Automate repetitive business processes",
+  "domain": "D14",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D14-C01", "D17-C01"],
+  "upstream": [],
+  "downstream": ["D14-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["operations", "automation"],
+  "metadata": {}
+}

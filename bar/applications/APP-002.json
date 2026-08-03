@@ -1,0 +1,30 @@
+{
+  "id": "APP-002",
+  "name": "Lesson Studio",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Educational content authoring platform",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-003", "PK-004"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "education"],
+  "metadata": {}
+}

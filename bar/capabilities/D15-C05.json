@@ -1,0 +1,30 @@
+{
+  "id": "D15-C05",
+  "name": "Auto Scaling",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Automatic resource scaling",
+  "domain": "D15",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D15-C04", "D15-C01"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["infra", "scaling"],
+  "metadata": {}
+}

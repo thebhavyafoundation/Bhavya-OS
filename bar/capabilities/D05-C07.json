@@ -1,0 +1,30 @@
+{
+  "id": "D05-C07",
+  "name": "Knowledge Curation",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Curate and organize knowledge collections",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D05-C03", "D05-C04"],
+  "upstream": [],
+  "downstream": ["D06-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["km", "curation"],
+  "metadata": {}
+}

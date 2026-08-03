@@ -1,0 +1,30 @@
+{
+  "id": "EV-COM-005",
+  "name": "policy.updated",
+  "kind": "event",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Policy updated",
+  "domain": "D13",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D01-C02"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["compliance", "governance"],
+  "metadata": {}
+}

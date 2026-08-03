@@ -1,0 +1,30 @@
+{
+  "id": "D17-C06",
+  "name": "Deployment Engine",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Build and deploy applications",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D17-C01"],
+  "upstream": [],
+  "downstream": ["D14-C07", "D15-C02"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering", "deployment"],
+  "metadata": {}
+}

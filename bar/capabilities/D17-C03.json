@@ -1,0 +1,30 @@
+{
+  "id": "D17-C03",
+  "name": "Data Store",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Structured data storage (JSON, future DB)",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": ["D05-C01", "D05-C03", "D04-C03"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering", "datastore"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "EV-INF-002",
+  "name": "alert.resolved",
+  "kind": "event",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Alert resolved",
+  "domain": "D15",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D15-C04"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["infrastructure"],
+  "metadata": {}
+}

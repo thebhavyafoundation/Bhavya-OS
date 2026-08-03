@@ -1,0 +1,30 @@
+{
+  "id": "SK-L9-001",
+  "name": "impact-analyzer",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Measure institutional impact",
+  "domain": "D21",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D21-C01", "D21-C02"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "mission"],
+  "metadata": {}
+}

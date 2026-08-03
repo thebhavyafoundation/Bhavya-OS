@@ -1,0 +1,30 @@
+{
+  "id": "APP-003",
+  "name": "Dashboard",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Analytics and monitoring dashboard",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-010"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "analytics"],
+  "metadata": {}
+}

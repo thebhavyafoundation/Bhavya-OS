@@ -1,0 +1,30 @@
+{
+  "id": "SK-L1-007",
+  "name": "website",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Artifacts → 4-page HTML/CSS website",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C03", "D17-C01"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "foundation", "web"],
+  "metadata": {}
+}

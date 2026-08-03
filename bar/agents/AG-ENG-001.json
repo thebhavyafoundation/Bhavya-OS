@@ -1,0 +1,41 @@
+{
+  "id": "AG-ENG-001",
+  "name": "engineering-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Platform engineering",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D17-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering"],
+  "metadata": {
+    "capabilities": [
+      "D17-C01",
+      "D17-C02",
+      "D17-C03",
+      "D17-C04",
+      "D17-C05",
+      "D17-C06",
+      "D17-C07",
+      "D17-C08"
+    ]
+  }
+}

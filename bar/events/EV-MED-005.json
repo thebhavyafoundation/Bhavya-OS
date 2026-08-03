@@ -1,0 +1,30 @@
+{
+  "id": "EV-MED-005",
+  "name": "content.distributed",
+  "kind": "event",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Content distributed to platforms",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C05"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media"],
+  "metadata": {}
+}

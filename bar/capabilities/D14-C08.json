@@ -1,0 +1,30 @@
+{
+  "id": "D14-C08",
+  "name": "Service Desk",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Help desk and support ticketing",
+  "domain": "D14",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D14-C01", "D02-C05"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["operations", "support"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D09-C08",
+  "name": "Alumni Network",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Alumni relations and engagement",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D09-C01", "D02-C02"],
+  "upstream": [],
+  "downstream": ["D20-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "alumni"],
+  "metadata": {}
+}

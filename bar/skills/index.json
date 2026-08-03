@@ -1,0 +1,259 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:02.974Z",
+  "total": 36,
+  "items": [
+    {
+      "id": "SK-L1-001",
+      "name": "lesson",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-002",
+      "name": "assessment",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-003",
+      "name": "teacher-guide",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-004",
+      "name": "workbook",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-005",
+      "name": "visual-spec",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-006",
+      "name": "video",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L1-007",
+      "name": "website",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L2-001",
+      "name": "ko-editor",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L2-002",
+      "name": "knowledge-search",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L2-003",
+      "name": "knowledge-graph",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L2-004",
+      "name": "ko-validation",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L2-005",
+      "name": "provenance-tracker",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L3-001",
+      "name": "curriculum-designer",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L3-002",
+      "name": "grading-engine",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L3-003",
+      "name": "progress-tracker",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-001",
+      "name": "slides",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-002",
+      "name": "design-system",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-003",
+      "name": "banner-design",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-004",
+      "name": "faceless-explainer",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-005",
+      "name": "hyperframes-core",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L4-006",
+      "name": "media-resolver",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L5-001",
+      "name": "audit-logger",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L5-002",
+      "name": "policy-enforcer",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L5-003",
+      "name": "compliance-checker",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L6-001",
+      "name": "rag-pipeline",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L6-002",
+      "name": "citation-manager",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L7-001",
+      "name": "runtime-engine",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L7-002",
+      "name": "quality-gates",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "SK-L7-003",
+      "name": "api-gateway",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L7-004",
+      "name": "event-bus",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L7-005",
+      "name": "deploy-engine",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "partial"
+    },
+    {
+      "id": "SK-L8-001",
+      "name": "monitoring",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L8-002",
+      "name": "incident-handler",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L8-003",
+      "name": "task-orchestrator",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L9-001",
+      "name": "impact-analyzer",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "SK-L9-002",
+      "name": "storyteller",
+      "domain": "D19",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

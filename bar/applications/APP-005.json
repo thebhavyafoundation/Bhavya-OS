@@ -1,0 +1,30 @@
+{
+  "id": "APP-005",
+  "name": "Admin Console",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Administrative operations panel",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-006"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "admin"],
+  "metadata": {}
+}

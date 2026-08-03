@@ -1,0 +1,154 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:00:00Z",
+  "source": "ADR-005, ADR-006",
+  "domains": [
+    {
+      "id": "D01",
+      "name": "Governance",
+      "capabilityCount": 9,
+      "depth": 4,
+      "dependsOn": ["D02", "D03", "D04", "D05"]
+    },
+    {
+      "id": "D02",
+      "name": "Administration",
+      "capabilityCount": 10,
+      "depth": 4,
+      "dependsOn": ["D03", "D05", "D11"]
+    },
+    {
+      "id": "D03",
+      "name": "Academics",
+      "capabilityCount": 11,
+      "depth": 5,
+      "dependsOn": ["D04", "D05", "D06"]
+    },
+    {
+      "id": "D04",
+      "name": "Research",
+      "capabilityCount": 8,
+      "depth": 5,
+      "dependsOn": ["D05", "D06", "D16"]
+    },
+    {
+      "id": "D05",
+      "name": "Knowledge Management",
+      "capabilityCount": 9,
+      "depth": 0,
+      "dependsOn": []
+    },
+    {
+      "id": "D06",
+      "name": "Library",
+      "capabilityCount": 7,
+      "depth": 5,
+      "dependsOn": ["D05", "D15"]
+    },
+    {
+      "id": "D07",
+      "name": "Publications",
+      "capabilityCount": 6,
+      "depth": 6,
+      "dependsOn": ["D04", "D05", "D16"]
+    },
+    {
+      "id": "D08",
+      "name": "Media Production",
+      "capabilityCount": 9,
+      "depth": 4,
+      "dependsOn": ["D05", "D16", "D17"]
+    },
+    {
+      "id": "D09",
+      "name": "Community",
+      "capabilityCount": 8,
+      "depth": 6,
+      "dependsOn": ["D02", "D10", "D05"]
+    },
+    {
+      "id": "D10",
+      "name": "Volunteers",
+      "capabilityCount": 7,
+      "depth": 6,
+      "dependsOn": ["D02", "D09"]
+    },
+    {
+      "id": "D11",
+      "name": "Finance",
+      "capabilityCount": 9,
+      "depth": 5,
+      "dependsOn": ["D02", "D05"]
+    },
+    {
+      "id": "D12",
+      "name": "Legal",
+      "capabilityCount": 7,
+      "depth": 6,
+      "dependsOn": ["D01", "D02", "D11"]
+    },
+    {
+      "id": "D13",
+      "name": "Compliance",
+      "capabilityCount": 8,
+      "depth": 5,
+      "dependsOn": ["D01", "D11", "D12"]
+    },
+    {
+      "id": "D14",
+      "name": "Operations",
+      "capabilityCount": 8,
+      "depth": 3,
+      "dependsOn": ["D05", "D15", "D17"]
+    },
+    {
+      "id": "D15",
+      "name": "Infrastructure",
+      "capabilityCount": 7,
+      "depth": 4,
+      "dependsOn": ["D17"]
+    },
+    {
+      "id": "D16",
+      "name": "AI & Intelligence",
+      "capabilityCount": 7,
+      "depth": 3,
+      "dependsOn": ["D05", "D17"]
+    },
+    {
+      "id": "D17",
+      "name": "Engineering",
+      "capabilityCount": 8,
+      "depth": 2,
+      "dependsOn": ["D05"]
+    },
+    {
+      "id": "D18",
+      "name": "Analytics",
+      "capabilityCount": 7,
+      "depth": 4,
+      "dependsOn": ["D05", "D16", "D17"]
+    },
+    {
+      "id": "D19",
+      "name": "Outreach",
+      "capabilityCount": 6,
+      "depth": 7,
+      "dependsOn": ["D02", "D09", "D08"]
+    },
+    {
+      "id": "D20",
+      "name": "Partnerships",
+      "capabilityCount": 6,
+      "depth": 7,
+      "dependsOn": ["D02", "D11", "D01"]
+    },
+    {
+      "id": "D21",
+      "name": "Sustainability",
+      "capabilityCount": 5,
+      "depth": 8,
+      "dependsOn": ["D01", "D11", "D18", "D20"]
+    }
+  ]
+}

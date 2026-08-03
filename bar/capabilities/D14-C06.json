@@ -1,0 +1,30 @@
+{
+  "id": "D14-C06",
+  "name": "Incident Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Handle operational incidents",
+  "domain": "D14",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D14-C05", "D13-C08"],
+  "upstream": [],
+  "downstream": ["D14-C07"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["operations", "incidents"],
+  "metadata": {}
+}

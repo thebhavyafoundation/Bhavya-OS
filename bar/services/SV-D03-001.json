@@ -1,0 +1,32 @@
+{
+  "id": "SV-D03-001",
+  "name": "lesson-service",
+  "kind": "service",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Lesson generation and management",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["domain"],
+  "metadata": {
+    "crossCutting": false
+  }
+}

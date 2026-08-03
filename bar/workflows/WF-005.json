@@ -1,0 +1,30 @@
+{
+  "id": "WF-005",
+  "name": "Grant Application Workflow",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Identify → Write → Submit → Track → Report",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D04-C02"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research", "grants"],
+  "metadata": {}
+}

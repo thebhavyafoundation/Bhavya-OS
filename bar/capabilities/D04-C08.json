@@ -1,0 +1,30 @@
+{
+  "id": "D04-C08",
+  "name": "Impact Tracking",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Track research citations and impact",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D04-C07", "D18-C01"],
+  "upstream": [],
+  "downstream": ["D01-C07"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research", "impact"],
+  "metadata": {}
+}

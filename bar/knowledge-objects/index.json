@@ -1,0 +1,147 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:57:22.479Z",
+  "total": 20,
+  "items": [
+    {
+      "id": "KO-LESSON",
+      "name": "Lesson KO",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "KO-CONCEPT",
+      "name": "Concept KO",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "KO-ASSESSMENT",
+      "name": "Assessment KO",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "KO-CURRICULUM",
+      "name": "Curriculum KO",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-EXERCISE",
+      "name": "Exercise KO",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-EXAMPLE",
+      "name": "Example KO",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-VOCABULARY",
+      "name": "Vocabulary KO",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-MISCONCEPTION",
+      "name": "Misconception KO",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-RESEARCH",
+      "name": "Research KO",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-POLICY",
+      "name": "Policy KO",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-FINANCIAL",
+      "name": "Financial KO",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-COMPLIANCE",
+      "name": "Compliance KO",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-LEGAL",
+      "name": "Legal KO",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-MEDIA",
+      "name": "Media KO",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-STUDENT",
+      "name": "Student KO",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-STAFF",
+      "name": "Staff KO",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-EVENT",
+      "name": "Event KO",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-GRANT",
+      "name": "Grant KO",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-CONTRACT",
+      "name": "Contract KO",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "KO-REPORT",
+      "name": "Report KO",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

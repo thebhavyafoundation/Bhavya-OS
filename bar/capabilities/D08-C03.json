@@ -1,0 +1,30 @@
+{
+  "id": "D08-C03",
+  "name": "Website Builder",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Generate educational websites",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D08-C01", "D17-C01"],
+  "upstream": [],
+  "downstream": ["D08-C04"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "website"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D11-C02",
+  "name": "Fund Accounting",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Track restricted and unrestricted funds",
+  "domain": "D11",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D11-C01", "D13-C01"],
+  "upstream": [],
+  "downstream": ["D11-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["finance", "funds"],
+  "metadata": {}
+}

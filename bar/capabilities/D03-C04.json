@@ -1,0 +1,30 @@
+{
+  "id": "D03-C04",
+  "name": "Assessment Design",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Create assessments, rubrics, and evaluation criteria",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C01", "D05-C02"],
+  "upstream": [],
+  "downstream": ["D03-C05", "D18-C02"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "assessment"],
+  "metadata": {}
+}

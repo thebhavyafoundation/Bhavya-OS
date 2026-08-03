@@ -1,0 +1,30 @@
+{
+  "id": "APP-001",
+  "name": "Bhavya AI Lab",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Knowledge management and content generation UI",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-002", "PK-003", "PK-004"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "core"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "SK-L4-002",
+  "name": "design-system",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Token architecture and component specs",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C09"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "media"],
+  "metadata": {}
+}

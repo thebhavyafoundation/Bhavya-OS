@@ -1,0 +1,30 @@
+{
+  "id": "SK-L1-002",
+  "name": "assessment",
+  "kind": "skill",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Lesson → 15 questions (MCQ, short-answer, reflection, practical)",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C04", "D17-C01"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["core", "foundation", "assessment"],
+  "metadata": {}
+}

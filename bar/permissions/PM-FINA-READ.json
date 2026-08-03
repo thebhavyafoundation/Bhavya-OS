@@ -1,0 +1,33 @@
+{
+  "id": "PM-FINA-READ",
+  "name": "finance.read",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "read finance",
+  "domain": "D11",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "finance"],
+  "metadata": {
+    "group": "finance",
+    "action": "read"
+  }
+}

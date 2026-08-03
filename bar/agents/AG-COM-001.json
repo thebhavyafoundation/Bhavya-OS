@@ -1,0 +1,41 @@
+{
+  "id": "AG-COM-001",
+  "name": "community-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Community engagement",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D09-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community"],
+  "metadata": {
+    "capabilities": [
+      "D09-C01",
+      "D09-C02",
+      "D09-C03",
+      "D09-C04",
+      "D09-C05",
+      "D09-C06",
+      "D09-C07",
+      "D09-C08"
+    ]
+  }
+}

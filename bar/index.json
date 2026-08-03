@@ -1,0 +1,43 @@
+{
+  "name": "Bhavya Architecture Registry",
+  "version": "1.0.0",
+  "description": "Machine-readable source of truth for Bhavya OS architecture",
+  "generatedAt": "2026-08-03T00:00:00Z",
+  "source": ["ADR-001", "ADR-002", "ADR-003", "ADR-004", "ADR-005", "ADR-006"],
+  "counts": {
+    "domains": 21,
+    "capabilities": 162,
+    "workflows": 20,
+    "skills": 36,
+    "agents": 22,
+    "services": 25,
+    "packages": 17,
+    "applications": 18,
+    "events": 90,
+    "permissions": 131,
+    "knowledgeObjects": 20,
+    "uiSurfaces": 77,
+    "total": 618
+  },
+  "validation": {
+    "errors": 0,
+    "warnings": 196,
+    "report": "validation-report.json"
+  },
+  "generated": {
+    "types": "generated/types/bar.ts",
+    "zod": "generated/schemas/bar.ts",
+    "jsonSchema": "generated/schemas/bar-schema.json",
+    "openapi": "generated/openapi/bar-api.json",
+    "events": "generated/types/events.ts",
+    "permissions": "generated/types/permissions.ts",
+    "navigation": "generated/types/navigation.ts",
+    "dependencies": "generated/types/dependencies.ts",
+    "traceability": "generated/types/traceability.ts"
+  },
+  "scripts": {
+    "generate": "node scripts/generate-all.mjs",
+    "validate": "node scripts/validate.mjs",
+    "trace": "node scripts/generate-traceability.mjs"
+  }
+}

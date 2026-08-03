@@ -1,0 +1,30 @@
+{
+  "id": "WF-012",
+  "name": "Contract Lifecycle",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Draft → Review → Negotiate → Sign → Monitor → Renew",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D12-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["legal"],
+  "metadata": {}
+}

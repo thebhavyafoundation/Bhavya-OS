@@ -1,0 +1,30 @@
+{
+  "id": "D05-C09",
+  "name": "Provenance Tracking",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Track origin and lineage of knowledge",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D05-C06", "D17-C04"],
+  "upstream": [],
+  "downstream": ["D01-C08"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["km", "provenance"],
+  "metadata": {}
+}

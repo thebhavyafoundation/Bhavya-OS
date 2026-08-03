@@ -1,0 +1,30 @@
+{
+  "id": "APP-018",
+  "name": "Monitoring Console",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Infrastructure monitoring dashboard",
+  "domain": "D15",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-011"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "monitoring"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D01-C03",
+  "name": "Board Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Board meetings, resolutions, and governance records",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D01-C01", "D01-C02"],
+  "upstream": [],
+  "downstream": ["D01-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance", "board"],
+  "metadata": {}
+}

@@ -1,0 +1,32 @@
+{
+  "id": "AG-EDU-002",
+  "name": "assessment-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Create and grade assessments",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C04", "D03-C05"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["education"],
+  "metadata": {
+    "capabilities": ["D03-C04", "D03-C05", "D03-C09"]
+  }
+}

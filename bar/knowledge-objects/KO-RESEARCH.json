@@ -1,0 +1,30 @@
+{
+  "id": "KO-RESEARCH",
+  "name": "Research KO",
+  "kind": "knowledge-object",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Research finding KO",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D04-C03"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ko", "research"],
+  "metadata": {}
+}

@@ -1,0 +1,39 @@
+{
+  "id": "AG-OUT-001",
+  "name": "outreach-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Outreach and marketing",
+  "domain": "D19",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D19-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["outreach"],
+  "metadata": {
+    "capabilities": [
+      "D19-C01",
+      "D19-C02",
+      "D19-C03",
+      "D19-C04",
+      "D19-C05",
+      "D19-C06"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D04-C02",
+  "name": "Grant Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Apply for, track, and report on grants",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D04-C01", "D11-C02"],
+  "upstream": [],
+  "downstream": ["D04-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research", "grants"],
+  "metadata": {}
+}

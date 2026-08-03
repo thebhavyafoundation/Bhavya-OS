@@ -1,0 +1,30 @@
+{
+  "id": "APP-017",
+  "name": "Mobile App",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Mobile companion application",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-006"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "mobile"],
+  "metadata": {}
+}

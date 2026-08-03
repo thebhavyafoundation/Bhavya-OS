@@ -1,0 +1,30 @@
+{
+  "id": "D20-C06",
+  "name": "Sponsorship Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Manage sponsors and funding partners",
+  "domain": "D20",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D20-C01", "D11-C01"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["partnerships", "sponsorship"],
+  "metadata": {}
+}

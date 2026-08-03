@@ -1,0 +1,30 @@
+{
+  "id": "D19-C05",
+  "name": "Brand Ambassadorship",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Represent the institution publicly",
+  "domain": "D19",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D19-C01", "D08-C09"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["outreach", "brand"],
+  "metadata": {}
+}

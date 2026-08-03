@@ -1,0 +1,30 @@
+{
+  "id": "D11-C09",
+  "name": "Financial Audit",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Internal and external financial audits",
+  "domain": "D11",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D11-C03", "D13-C01"],
+  "upstream": [],
+  "downstream": ["D01-C08"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["finance", "audit"],
+  "metadata": {}
+}

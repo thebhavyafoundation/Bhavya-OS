@@ -1,0 +1,30 @@
+{
+  "id": "D02-C01",
+  "name": "Admission Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "End-to-end student admission workflow",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C01"],
+  "upstream": [],
+  "downstream": ["D02-C02", "D03-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["admin", "admissions"],
+  "metadata": {}
+}

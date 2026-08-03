@@ -1,0 +1,30 @@
+{
+  "id": "D16-C02",
+  "name": "Content Generation",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Generate educational content via AI",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D16-C01", "D05-C01"],
+  "upstream": [],
+  "downstream": ["D03-C02", "D08-C01"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai", "generation"],
+  "metadata": {}
+}

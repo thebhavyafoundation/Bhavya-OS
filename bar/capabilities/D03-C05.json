@@ -1,0 +1,30 @@
+{
+  "id": "D03-C05",
+  "name": "Grading & Evaluation",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Grade submissions and compute results",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C04", "D03-C03"],
+  "upstream": [],
+  "downstream": ["D02-C02", "D18-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "grading"],
+  "metadata": {}
+}

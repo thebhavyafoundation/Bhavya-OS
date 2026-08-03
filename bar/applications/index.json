@@ -1,0 +1,133 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:03.039Z",
+  "total": 18,
+  "items": [
+    {
+      "id": "APP-001",
+      "name": "Bhavya AI Lab",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "APP-002",
+      "name": "Lesson Studio",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "APP-003",
+      "name": "Dashboard",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-004",
+      "name": "Knowledge Portal",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-005",
+      "name": "Admin Console",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-006",
+      "name": "Finance Portal",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-007",
+      "name": "Community Hub",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-008",
+      "name": "Research Portal",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-009",
+      "name": "Design System",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "implemented"
+    },
+    {
+      "id": "APP-010",
+      "name": "Documentation",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-011",
+      "name": "Volunteer Portal",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-012",
+      "name": "Library Portal",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-013",
+      "name": "Heritage Portal",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-014",
+      "name": "Compliance Dashboard",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-015",
+      "name": "Transparency Portal",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-016",
+      "name": "API Playground",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-017",
+      "name": "Mobile App",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "APP-018",
+      "name": "Monitoring Console",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

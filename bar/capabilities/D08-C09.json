@@ -1,0 +1,30 @@
+{
+  "id": "D08-C09",
+  "name": "Brand Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Maintain visual identity across outputs",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D08-C02"],
+  "upstream": [],
+  "downstream": ["D08-C01", "D08-C03", "D08-C04"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "brand"],
+  "metadata": {}
+}

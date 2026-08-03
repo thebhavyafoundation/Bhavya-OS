@@ -1,0 +1,30 @@
+{
+  "id": "APP-004",
+  "name": "Knowledge Portal",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Public knowledge browsing and search",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-002"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "knowledge"],
+  "metadata": {}
+}

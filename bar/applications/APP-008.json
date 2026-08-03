@@ -1,0 +1,30 @@
+{
+  "id": "APP-008",
+  "name": "Research Portal",
+  "kind": "application",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Research management interface",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-013"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app", "research"],
+  "metadata": {}
+}

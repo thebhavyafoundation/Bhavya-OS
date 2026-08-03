@@ -1,0 +1,30 @@
+{
+  "id": "D03-C07",
+  "name": "Parent Portal",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Parent access to student academic information",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C06", "D02-C05"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "parents"],
+  "metadata": {}
+}

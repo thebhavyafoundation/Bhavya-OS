@@ -1,0 +1,30 @@
+{
+  "id": "D12-C01",
+  "name": "Contract Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Draft, review, and manage contracts",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D02-C09", "D11-C01"],
+  "upstream": [],
+  "downstream": ["D12-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["legal", "contracts"],
+  "metadata": {}
+}

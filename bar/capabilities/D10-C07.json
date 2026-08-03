@@ -1,0 +1,30 @@
+{
+  "id": "D10-C07",
+  "name": "Volunteer Portal",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Self-service portal for volunteers",
+  "domain": "D10",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D10-C01", "D09-C01"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["volunteers", "portal"],
+  "metadata": {}
+}

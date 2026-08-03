@@ -1,0 +1,30 @@
+{
+  "id": "D10-C02",
+  "name": "Volunteer Matching",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Match volunteers to tasks and programs",
+  "domain": "D10",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D10-C01", "D16-C01"],
+  "upstream": [],
+  "downstream": ["D10-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["volunteers", "matching"],
+  "metadata": {}
+}

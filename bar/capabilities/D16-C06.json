@@ -1,0 +1,30 @@
+{
+  "id": "D16-C06",
+  "name": "Computer Vision",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Visual analysis for educational content",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D16-C05", "D17-C03"],
+  "upstream": [],
+  "downstream": ["D16-C07"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai", "vision"],
+  "metadata": {}
+}

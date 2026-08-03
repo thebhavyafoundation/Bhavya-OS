@@ -1,0 +1,30 @@
+{
+  "id": "PK-010",
+  "name": "@bhavya/analytics",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Analytics, dashboards, reports",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-002"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["analytics"],
+  "metadata": {}
+}

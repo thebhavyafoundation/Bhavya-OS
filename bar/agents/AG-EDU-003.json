@@ -1,0 +1,41 @@
+{
+  "id": "AG-EDU-003",
+  "name": "research-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Manage research programs and publications",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D04-C01", "D04-C07"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research"],
+  "metadata": {
+    "capabilities": [
+      "D04-C01",
+      "D04-C02",
+      "D04-C03",
+      "D04-C04",
+      "D04-C05",
+      "D04-C06",
+      "D04-C07",
+      "D04-C08"
+    ]
+  }
+}

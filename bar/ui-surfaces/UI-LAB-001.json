@@ -1,0 +1,30 @@
+{
+  "id": "UI-LAB-001",
+  "name": "Knowledge Browser",
+  "kind": "ui-surface",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Browse and search knowledge objects",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D05-C01", "D05-C04"],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["app:lab", "knowledge"],
+  "metadata": {}
+}

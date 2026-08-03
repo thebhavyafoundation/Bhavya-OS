@@ -1,0 +1,30 @@
+{
+  "id": "PK-013",
+  "name": "@bhavya/research",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Research programs, grants, publications",
+  "domain": "D04",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-002", "PK-005"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["research"],
+  "metadata": {}
+}

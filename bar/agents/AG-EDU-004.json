@@ -1,0 +1,40 @@
+{
+  "id": "AG-EDU-004",
+  "name": "library-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Manage library resources",
+  "domain": "D06",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D06-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["library"],
+  "metadata": {
+    "capabilities": [
+      "D06-C01",
+      "D06-C02",
+      "D06-C03",
+      "D06-C04",
+      "D06-C05",
+      "D06-C06",
+      "D06-C07"
+    ]
+  }
+}

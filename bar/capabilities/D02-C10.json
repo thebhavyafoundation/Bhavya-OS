@@ -1,0 +1,30 @@
+{
+  "id": "D02-C10",
+  "name": "Report Generation",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Generate institutional reports and summaries",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D18-C01", "D02-C09"],
+  "upstream": [],
+  "downstream": ["D01-C07"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["admin", "reports"],
+  "metadata": {}
+}

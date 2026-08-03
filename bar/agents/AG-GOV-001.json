@@ -1,0 +1,42 @@
+{
+  "id": "AG-GOV-001",
+  "name": "governance-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Governance and policy",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D01-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance"],
+  "metadata": {
+    "capabilities": [
+      "D01-C01",
+      "D01-C02",
+      "D01-C03",
+      "D01-C04",
+      "D01-C05",
+      "D01-C06",
+      "D01-C07",
+      "D01-C08",
+      "D01-C09"
+    ]
+  }
+}

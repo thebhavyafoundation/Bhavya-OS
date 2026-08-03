@@ -1,0 +1,43 @@
+{
+  "id": "AG-OPS-001",
+  "name": "admin-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Administrative operations",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D02-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["admin"],
+  "metadata": {
+    "capabilities": [
+      "D02-C01",
+      "D02-C02",
+      "D02-C03",
+      "D02-C04",
+      "D02-C05",
+      "D02-C06",
+      "D02-C07",
+      "D02-C08",
+      "D02-C09",
+      "D02-C10"
+    ]
+  }
+}

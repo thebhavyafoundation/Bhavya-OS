@@ -1,0 +1,30 @@
+{
+  "id": "D09-C05",
+  "name": "Feedback Collection",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Gather community feedback and suggestions",
+  "domain": "D09",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D09-C01"],
+  "upstream": [],
+  "downstream": ["D01-C07", "D03-C06"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["community", "feedback"],
+  "metadata": {}
+}

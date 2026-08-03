@@ -1,0 +1,30 @@
+{
+  "id": "D16-C05",
+  "name": "NLP Pipeline",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Natural language processing for education",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D16-C02"],
+  "upstream": [],
+  "downstream": ["D16-C06"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai", "nlp"],
+  "metadata": {}
+}

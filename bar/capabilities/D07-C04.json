@@ -1,0 +1,30 @@
+{
+  "id": "D07-C04",
+  "name": "Distribution",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Distribute publications to channels",
+  "domain": "D07",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D07-C03", "D09-C01"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["publications", "distribution"],
+  "metadata": {}
+}

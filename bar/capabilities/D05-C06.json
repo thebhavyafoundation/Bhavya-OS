@@ -1,0 +1,30 @@
+{
+  "id": "D05-C06",
+  "name": "Knowledge Versioning",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Version control for knowledge objects",
+  "domain": "D05",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D05-C01", "D17-C04"],
+  "upstream": [],
+  "downstream": ["D05-C07"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["km", "versioning"],
+  "metadata": {}
+}

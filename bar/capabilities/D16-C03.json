@@ -1,0 +1,30 @@
+{
+  "id": "D16-C03",
+  "name": "Assessment AI",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "AI-powered assessment and grading",
+  "domain": "D16",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D16-C02", "D03-C04"],
+  "upstream": [],
+  "downstream": ["D03-C05"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ai", "assessment"],
+  "metadata": {}
+}

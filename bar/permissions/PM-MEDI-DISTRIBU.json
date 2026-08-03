@@ -1,0 +1,33 @@
+{
+  "id": "PM-MEDI-DISTRIBU",
+  "name": "media.distribute",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "distribute media",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "media"],
+  "metadata": {
+    "group": "media",
+    "action": "distribute"
+  }
+}

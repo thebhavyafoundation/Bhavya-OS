@@ -1,0 +1,30 @@
+{
+  "id": "D10-C06",
+  "name": "Hours Tracking",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Track volunteer service hours",
+  "domain": "D10",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D10-C03"],
+  "upstream": [],
+  "downstream": ["D10-C05", "D18-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["volunteers", "hours"],
+  "metadata": {}
+}

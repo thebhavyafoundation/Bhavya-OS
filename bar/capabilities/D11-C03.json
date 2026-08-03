@@ -1,0 +1,30 @@
+{
+  "id": "D11-C03",
+  "name": "Financial Reporting",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Generate financial statements and reports",
+  "domain": "D11",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D11-C02", "D18-C01"],
+  "upstream": [],
+  "downstream": ["D01-C07", "D13-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["finance", "reporting"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D03-C02",
+  "name": "Lesson Planning",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Create detailed lesson plans from curriculum",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D03-C01", "D05-C02"],
+  "upstream": [],
+  "downstream": ["D03-C03", "D08-C01"],
+  "related": [],
+  "implementation": {
+    "status": "implemented",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["academics", "lessons"],
+  "metadata": {}
+}

@@ -1,0 +1,33 @@
+{
+  "id": "PM-PART-DELETE",
+  "name": "partner.delete",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "delete partner",
+  "domain": "D20",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "partner"],
+  "metadata": {
+    "group": "partner",
+    "action": "delete"
+  }
+}

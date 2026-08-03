@@ -1,0 +1,161 @@
+{
+  "registryVersion": "1.0.0",
+  "generatedAt": "2026-08-03T00:55:02.989Z",
+  "total": 22,
+  "items": [
+    {
+      "id": "AG-EDU-001",
+      "name": "curriculum-agent",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-EDU-002",
+      "name": "assessment-agent",
+      "domain": "D03",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-EDU-003",
+      "name": "research-agent",
+      "domain": "D04",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-EDU-004",
+      "name": "library-agent",
+      "domain": "D06",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OPS-001",
+      "name": "admin-agent",
+      "domain": "D02",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OPS-002",
+      "name": "finance-agent",
+      "domain": "D11",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OPS-003",
+      "name": "compliance-agent",
+      "domain": "D13",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OPS-004",
+      "name": "legal-agent",
+      "domain": "D12",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OPS-005",
+      "name": "operations-agent",
+      "domain": "D14",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-MEDIA-001",
+      "name": "media-agent",
+      "domain": "D08",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-KM-001",
+      "name": "knowledge-agent",
+      "domain": "D05",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-AI-001",
+      "name": "ai-agent",
+      "domain": "D16",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-ENG-001",
+      "name": "engineering-agent",
+      "domain": "D17",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-AN-001",
+      "name": "analytics-agent",
+      "domain": "D18",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-GOV-001",
+      "name": "governance-agent",
+      "domain": "D01",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-INF-001",
+      "name": "infrastructure-agent",
+      "domain": "D15",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-COM-001",
+      "name": "community-agent",
+      "domain": "D09",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-VOL-001",
+      "name": "volunteer-agent",
+      "domain": "D10",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-PUB-001",
+      "name": "publications-agent",
+      "domain": "D07",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-OUT-001",
+      "name": "outreach-agent",
+      "domain": "D19",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-PART-001",
+      "name": "partnerships-agent",
+      "domain": "D20",
+      "status": "proposed",
+      "impl": "not-started"
+    },
+    {
+      "id": "AG-SUS-001",
+      "name": "sustainability-agent",
+      "domain": "D21",
+      "status": "proposed",
+      "impl": "not-started"
+    }
+  ]
+}

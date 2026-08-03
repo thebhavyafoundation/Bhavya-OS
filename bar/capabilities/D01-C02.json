@@ -1,0 +1,30 @@
+{
+  "id": "D01-C02",
+  "name": "Policy Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Create, version, and enforce institutional policies",
+  "domain": "D01",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D01-C01"],
+  "upstream": [],
+  "downstream": ["D01-C03", "D13-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["governance", "policy"],
+  "metadata": {}
+}

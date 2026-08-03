@@ -1,0 +1,30 @@
+{
+  "id": "D11-C07",
+  "name": "Payroll",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Process staff payroll",
+  "domain": "D11",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D02-C03", "D11-C04"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["finance", "payroll"],
+  "metadata": {}
+}

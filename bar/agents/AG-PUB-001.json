@@ -1,0 +1,39 @@
+{
+  "id": "AG-PUB-001",
+  "name": "publications-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Publication management",
+  "domain": "D07",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D07-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["publications"],
+  "metadata": {
+    "capabilities": [
+      "D07-C01",
+      "D07-C02",
+      "D07-C03",
+      "D07-C04",
+      "D07-C05",
+      "D07-C06"
+    ]
+  }
+}

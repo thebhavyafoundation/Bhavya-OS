@@ -1,0 +1,30 @@
+{
+  "id": "D08-C07",
+  "name": "Animation Studio",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Create educational animations",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D08-C02", "D17-C01"],
+  "upstream": [],
+  "downstream": ["D08-C05"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "animation"],
+  "metadata": {}
+}

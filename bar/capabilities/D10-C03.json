@@ -1,0 +1,30 @@
+{
+  "id": "D10-C03",
+  "name": "Task Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Assign and track volunteer tasks",
+  "domain": "D10",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D10-C02", "D14-C01"],
+  "upstream": [],
+  "downstream": ["D10-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["volunteers", "tasks"],
+  "metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "id": "D08-C08",
+  "name": "Interactive Content",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Build interactive learning modules",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D08-C01", "D17-C01"],
+  "upstream": [],
+  "downstream": ["D08-C05"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "interactive"],
+  "metadata": {}
+}

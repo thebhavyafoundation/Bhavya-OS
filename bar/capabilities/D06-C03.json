@@ -1,0 +1,30 @@
+{
+  "id": "D06-C03",
+  "name": "Resource Discovery",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Help users find relevant resources",
+  "domain": "D06",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D06-C01", "D05-C04"],
+  "upstream": [],
+  "downstream": ["D06-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["library", "discovery"],
+  "metadata": {}
+}

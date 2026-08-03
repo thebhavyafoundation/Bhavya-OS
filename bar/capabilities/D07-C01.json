@@ -1,0 +1,30 @@
+{
+  "id": "D07-C01",
+  "name": "Journal Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Manage institutional journals",
+  "domain": "D07",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D06-C06"],
+  "upstream": [],
+  "downstream": ["D07-C02"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["publications", "journals"],
+  "metadata": {}
+}

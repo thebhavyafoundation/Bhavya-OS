@@ -1,0 +1,30 @@
+{
+  "id": "KO-EVENT",
+  "name": "Event KO",
+  "kind": "knowledge-object",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Event record KO",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D02-C06"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["ko", "event"],
+  "metadata": {}
+}

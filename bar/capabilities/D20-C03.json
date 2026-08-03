@@ -1,0 +1,30 @@
+{
+  "id": "D20-C03",
+  "name": "Joint Programs",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Run programs with partner institutions",
+  "domain": "D20",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D20-C02", "D03-C01"],
+  "upstream": [],
+  "downstream": ["D20-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["partnerships", "programs"],
+  "metadata": {}
+}

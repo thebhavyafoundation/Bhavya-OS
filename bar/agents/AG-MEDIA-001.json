@@ -1,0 +1,42 @@
+{
+  "id": "AG-MEDIA-001",
+  "name": "media-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Media production",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D08-C01"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media"],
+  "metadata": {
+    "capabilities": [
+      "D08-C01",
+      "D08-C02",
+      "D08-C03",
+      "D08-C04",
+      "D08-C05",
+      "D08-C06",
+      "D08-C07",
+      "D08-C08",
+      "D08-C09"
+    ]
+  }
+}

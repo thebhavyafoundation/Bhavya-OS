@@ -1,0 +1,42 @@
+{
+  "id": "AG-EDU-001",
+  "name": "curriculum-agent",
+  "kind": "agent",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Design and manage curriculum",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D03-C01", "D03-C02", "D03-C03"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["education"],
+  "metadata": {
+    "capabilities": [
+      "D03-C01",
+      "D03-C02",
+      "D03-C03",
+      "D03-C04",
+      "D03-C06",
+      "D03-C08",
+      "D03-C09",
+      "D03-C10",
+      "D03-C11"
+    ]
+  }
+}

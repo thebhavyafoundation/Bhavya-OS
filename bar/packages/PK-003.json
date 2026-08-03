@@ -1,0 +1,30 @@
+{
+  "id": "PK-003",
+  "name": "@bhavya/education",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Lesson, assessment, grading, curriculum",
+  "domain": "D03",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-002"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["education"],
+  "metadata": {}
+}

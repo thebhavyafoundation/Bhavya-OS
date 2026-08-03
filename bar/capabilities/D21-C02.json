@@ -1,0 +1,30 @@
+{
+  "id": "D21-C02",
+  "name": "Social Impact",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Measure social impact and community benefit",
+  "domain": "D21",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D18-C01", "D09-C05"],
+  "upstream": [],
+  "downstream": ["D21-C03"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["sustainability", "social"],
+  "metadata": {}
+}

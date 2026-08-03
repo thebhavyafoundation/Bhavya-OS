@@ -1,0 +1,30 @@
+{
+  "id": "D08-C05",
+  "name": "Content Distribution",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Distribute content across platforms",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D08-C03", "D08-C04"],
+  "upstream": [],
+  "downstream": ["D09-C01", "D19-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media", "distribution"],
+  "metadata": {}
+}

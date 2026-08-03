@@ -1,0 +1,30 @@
+{
+  "id": "WF-014",
+  "name": "Data Governance Workflow",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Classify → Catalog → Monitor → Audit → Report",
+  "domain": "D13",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D13-C04"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["compliance", "data"],
+  "metadata": {}
+}

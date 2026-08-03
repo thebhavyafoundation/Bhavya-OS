@@ -1,0 +1,30 @@
+{
+  "id": "D02-C03",
+  "name": "Staff Management",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "HR records, contracts, and staff lifecycle",
+  "domain": "D02",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D02-C01", "D11-C01"],
+  "upstream": [],
+  "downstream": ["D02-C04"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["admin", "hr", "staff"],
+  "metadata": {}
+}

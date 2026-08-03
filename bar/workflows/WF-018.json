@@ -1,0 +1,30 @@
+{
+  "id": "WF-018",
+  "name": "Sustainability Reporting",
+  "kind": "workflow",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Collect → Measure → Analyze → Report → Plan",
+  "domain": "D21",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": ["D21-C04"],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["sustainability"],
+  "metadata": {}
+}

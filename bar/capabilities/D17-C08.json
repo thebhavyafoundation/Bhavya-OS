@@ -1,0 +1,30 @@
+{
+  "id": "D17-C08",
+  "name": "Event Bus",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Inter-service event messaging",
+  "domain": "D17",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D17-C01"],
+  "upstream": [],
+  "downstream": ["D14-C03", "D18-C01"],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["engineering", "events"],
+  "metadata": {}
+}

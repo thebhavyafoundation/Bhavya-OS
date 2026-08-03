@@ -1,0 +1,33 @@
+{
+  "id": "PM-CONT-APPROVE",
+  "name": "contract.approve",
+  "kind": "permission",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "approve contract",
+  "domain": "D12",
+  "sourceAdr": "ADR-006",
+  "dependsOn": [],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "not-started",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["permission", "contract"],
+  "metadata": {
+    "group": "contract",
+    "action": "approve"
+  }
+}

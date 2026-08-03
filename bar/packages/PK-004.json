@@ -1,0 +1,30 @@
+{
+  "id": "PK-004",
+  "name": "@bhavya/media",
+  "kind": "package",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Video, visual, website, slides",
+  "domain": "D08",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["PK-001", "PK-003"],
+  "upstream": [],
+  "downstream": [],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["media"],
+  "metadata": {}
+}

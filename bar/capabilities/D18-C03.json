@@ -1,0 +1,30 @@
+{
+  "id": "D18-C03",
+  "name": "Dashboards",
+  "kind": "capability",
+  "version": "0.1.0",
+  "status": "proposed",
+  "owner": "bhavya-core",
+  "description": "Interactive analytics dashboards",
+  "domain": "D18",
+  "sourceAdr": "ADR-006",
+  "dependsOn": ["D18-C01"],
+  "upstream": [],
+  "downstream": ["D01-C07", "D02-C10"],
+  "related": [],
+  "implementation": {
+    "status": "partial",
+    "location": "",
+    "files": []
+  },
+  "tests": {
+    "status": "none"
+  },
+  "docs": {
+    "status": "none"
+  },
+  "release": "",
+  "automation": "manual",
+  "tags": ["analytics", "dashboards"],
+  "metadata": {}
+}
