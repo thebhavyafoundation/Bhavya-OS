@@ -1,60 +1,43 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPipeline, listPipelines } from "@/lib/pipeline";
-import { listPipelineResults } from "@/lib/artifacts";
+import { getDb } from "@/lib/db";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const planId = searchParams.get("planId");
+  const db = getDb();
 
   if (planId) {
-    const pipeline = getPipeline(planId);
-    if (pipeline) {
-      return NextResponse.json({
-        planId: pipeline.planId,
-        goal: pipeline.goal,
-        status: pipeline.status,
-        startedAt: pipeline.startedAt,
-        completedAt: pipeline.completedAt,
-        totalArtifacts: pipeline.artifacts.length,
-        nodeResults: pipeline.nodeResults,
-        events: pipeline.events.slice(-20),
-        metrics: pipeline.metrics,
-        graph: pipeline.graph,
-      });
-    }
-    // Check persisted results
-    const results = listPipelineResults();
-    const result = results.find((r) => r.planId === planId);
-    if (result) return NextResponse.json(result);
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    const row = db
+      .prepare("SELECT * FROM pipeline_executions WHERE id = ?")
+      .get(planId) as any;
+    if (!row) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json({
+      planId: row.id,
+      goal: row.goal,
+      status: row.status,
+      startedAt: row.started_at,
+      completedAt: row.completed_at,
+      totalDurationMs: row.total_duration_ms,
+      error: row.error,
+      nodeResults: JSON.parse(row.node_results || "[]"),
+      events: JSON.parse(row.events || "[]").slice(-20),
+      metrics: row.metrics ? JSON.parse(row.metrics) : null,
+      trace: row.trace ? JSON.parse(row.trace) : null,
+    });
   }
 
-  // List all pipelines
-  const active = listPipelines().map((p) => ({
-    planId: p.planId,
-    goal: p.goal,
-    status: p.status,
-    startedAt: p.startedAt,
-    completedAt: p.completedAt,
-    totalArtifacts: p.artifacts.length,
-  }));
-
-  const persisted = listPipelineResults().map((r) => ({
-    planId: r.planId,
+  const rows = db
+    .prepare(
+      "SELECT * FROM pipeline_executions ORDER BY created_at DESC LIMIT 50",
+    )
+    .all() as any[];
+  const pipelines = rows.map((r) => ({
+    planId: r.id,
     goal: r.goal,
     status: r.status,
-    startedAt: r.startedAt,
-    completedAt: r.completedAt,
-    totalArtifacts: r.artifacts.length,
+    startedAt: r.started_at,
+    completedAt: r.completed_at,
+    totalDurationMs: r.total_duration_ms,
   }));
-
-  // Merge, deduplicate by planId
-  const seen = new Set<string>();
-  const all = [...active, ...persisted].filter((p) => {
-    if (seen.has(p.planId)) return false;
-    seen.add(p.planId);
-    return true;
-  });
-
-  return NextResponse.json({ pipelines: all });
+  return NextResponse.json({ pipelines });
 }

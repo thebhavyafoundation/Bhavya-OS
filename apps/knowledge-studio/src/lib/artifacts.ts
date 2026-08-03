@@ -1,70 +1,62 @@
-import {
-  readFileSync,
-  writeFileSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-} from "fs";
-import { join } from "path";
-
-const ROOT = join(process.cwd(), "..", "..");
-const ARTIFACTS_DIR = join(
-  ROOT,
-  "bhavya-ai-lab",
-  "knowledge-studio",
-  "artifacts",
-);
-const PLANS_DIR = join(ROOT, "bar", "bee-state");
-
-function ensureDir(dir: string) {
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-}
+import { getDb } from "./db";
 
 export interface Artifact {
   id: string;
-  planId: string;
   type: string;
-  nodeId: string;
-  capabilityId: string;
   data: any;
-  provenance: any;
+  capabilityId?: string;
+  skillId?: string;
+  agentId?: string;
+  koId?: string;
+  packageId?: string;
   createdAt: string;
 }
 
 export function saveArtifact(artifact: Artifact): void {
-  ensureDir(ARTIFACTS_DIR);
-  const filename = `${artifact.id}.json`;
-  writeFileSync(
-    join(ARTIFACTS_DIR, filename),
-    JSON.stringify(artifact, null, 2),
+  const db = getDb();
+  db.prepare(
+    `
+    INSERT INTO artifacts (id, type, data, capability_id, skill_id, agent_id, ko_id, package_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `,
+  ).run(
+    artifact.id,
+    artifact.type,
+    JSON.stringify(artifact.data),
+    artifact.capabilityId || null,
+    artifact.skillId || null,
+    artifact.agentId || null,
+    artifact.koId || null,
+    artifact.packageId || null,
   );
 }
 
 export function getArtifact(id: string): Artifact | null {
-  const filepath = join(ARTIFACTS_DIR, `${id}.json`);
-  if (!existsSync(filepath)) return null;
-  return JSON.parse(readFileSync(filepath, "utf-8"));
+  const row = getDb()
+    .prepare("SELECT * FROM artifacts WHERE id = ?")
+    .get(id) as any;
+  if (!row) return null;
+  return { ...row, data: JSON.parse(row.data) };
 }
 
-export function listArtifacts(planId?: string): Artifact[] {
-  if (!existsSync(ARTIFACTS_DIR)) return [];
-  const files = readdirSync(ARTIFACTS_DIR).filter((f) => f.endsWith(".json"));
-  let artifacts = files
-    .map((f) => {
-      try {
-        return JSON.parse(readFileSync(join(ARTIFACTS_DIR, f), "utf-8"));
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean);
-
-  if (planId) artifacts = artifacts.filter((a) => a.planId === planId);
-  return artifacts;
-}
-
-export function getArtifactsByPlan(planId: string): Artifact[] {
-  return listArtifacts(planId);
+export function listArtifacts(koId?: string, packageId?: string): Artifact[] {
+  let query = "SELECT * FROM artifacts";
+  const conditions: string[] = [];
+  const params: any[] = [];
+  if (koId) {
+    conditions.push("ko_id = ?");
+    params.push(koId);
+  }
+  if (packageId) {
+    conditions.push("package_id = ?");
+    params.push(packageId);
+  }
+  if (conditions.length) query += " WHERE " + conditions.join(" AND ");
+  query += " ORDER BY created_at DESC";
+  const rows = getDb()
+    .prepare(query)
+    .all(...params) as any[];
+  return rows.map((r) => ({ ...r, data: JSON.parse(r.data) }));
 }
 
 export interface PipelineResult {
@@ -75,45 +67,59 @@ export interface PipelineResult {
   startedAt: string;
   completedAt: string | null;
   totalDurationMs: number | null;
-  nodeResults: {
-    nodeId: string;
-    capabilityId: string;
-    status: string;
-    artifactId?: string;
-    error?: string;
-  }[];
+  nodeResults: any[];
 }
 
 export function savePipelineResult(result: PipelineResult): void {
-  ensureDir(join(ROOT, "bhavya-ai-lab", "knowledge-studio", "pipelines"));
-  const filename = `${result.planId}.json`;
-  const dir = join(ROOT, "bhavya-ai-lab", "knowledge-studio", "pipelines");
-  writeFileSync(join(dir, filename), JSON.stringify(result, null, 2));
-}
-
-export function getPipelineResult(planId: string): PipelineResult | null {
-  const filepath = join(
-    ROOT,
-    "bhavya-ai-lab",
-    "knowledge-studio",
-    "pipelines",
-    `${planId}.json`,
+  const db = getDb();
+  db.prepare(
+    `
+    INSERT OR REPLACE INTO pipeline_executions
+    (id, goal, status, started_at, completed_at, total_duration_ms, node_results, events, user_id, ko_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, '[]', 'system', 'unknown')
+  `,
+  ).run(
+    result.planId,
+    result.goal,
+    result.status,
+    result.startedAt,
+    result.completedAt,
+    result.totalDurationMs,
+    JSON.stringify(result.nodeResults),
   );
-  if (!existsSync(filepath)) return null;
-  return JSON.parse(readFileSync(filepath, "utf-8"));
 }
 
 export function listPipelineResults(): PipelineResult[] {
-  const dir = join(ROOT, "bhavya-ai-lab", "knowledge-studio", "pipelines");
-  if (!existsSync(dir)) return [];
-  return readdirSync(dir)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => {
-      try {
-        return JSON.parse(readFileSync(join(dir, f), "utf-8"));
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean);
+  const rows = getDb()
+    .prepare(
+      "SELECT * FROM pipeline_executions ORDER BY created_at DESC LIMIT 50",
+    )
+    .all() as any[];
+  return rows.map((r) => ({
+    planId: r.id,
+    goal: r.goal,
+    status: r.status,
+    startedAt: r.started_at,
+    completedAt: r.completed_at,
+    totalDurationMs: r.total_duration_ms,
+    nodeResults: JSON.parse(r.node_results || "[]"),
+    artifacts: [],
+  }));
+}
+
+export function getPipelineResult(planId: string): PipelineResult | null {
+  const row = getDb()
+    .prepare("SELECT * FROM pipeline_executions WHERE id = ?")
+    .get(planId) as any;
+  if (!row) return null;
+  return {
+    planId: row.id,
+    goal: row.goal,
+    status: row.status,
+    startedAt: row.started_at,
+    completedAt: row.completed_at,
+    totalDurationMs: row.total_duration_ms,
+    nodeResults: JSON.parse(row.node_results || "[]"),
+    artifacts: [],
+  };
 }

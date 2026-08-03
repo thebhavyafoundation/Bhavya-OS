@@ -1,19 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
-import { VersionManager } from "../../../../../packages/bee/src/engines/version-manager.mjs";
+import { NextResponse } from "next/server";
+import { getDb } from "@/lib/db";
 
-const vm = new VersionManager();
-
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const packageId = request.nextUrl.searchParams.get("packageId");
-    if (!packageId)
-      return NextResponse.json(
-        { error: "packageId required" },
-        { status: 400 },
-      );
-
-    const versions = vm.listVersions(packageId);
-    return NextResponse.json({ versions, packageId });
+    const db = getDb();
+    const rows = db
+      .prepare(
+        "SELECT id, version, status, title, created_at FROM knowledge_packages ORDER BY created_at DESC LIMIT 100",
+      )
+      .all() as any[];
+    return NextResponse.json({ versions: rows });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
