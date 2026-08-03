@@ -1,0 +1,21 @@
+{
+  "name": "@bhavya/github-intelligence",
+  "version": "1.0.0",
+  "description": "OSIP — GitHub trending, releases, discussions, breaking changes tracking",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/intelligence": "workspace:*",
+    "@bhavya/capability-registry": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

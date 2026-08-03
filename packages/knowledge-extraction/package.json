@@ -1,0 +1,21 @@
+{
+  "name": "@bhavya/knowledge-extraction",
+  "version": "1.0.0",
+  "description": "OSIP — Knowledge Package generator, normalization, relationship mapping",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/intelligence": "workspace:*",
+    "@bhavya/platform": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

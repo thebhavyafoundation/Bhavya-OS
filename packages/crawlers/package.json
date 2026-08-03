@@ -1,7 +1,7 @@
 {
-  "name": "@bhavya/intelligence",
+  "name": "@bhavya/crawlers",
   "version": "1.0.0",
-  "description": "Open Source Intelligence Platform — core types, Knowledge Package schema, source interfaces",
+  "description": "OSIP — data crawlers for external sources",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -11,6 +11,10 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc"
+  },
+  "dependencies": {
+    "@bhavya/intelligence": "workspace:*",
+    "@bhavya/platform": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.8.2"
