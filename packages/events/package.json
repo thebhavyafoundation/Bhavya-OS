@@ -1,0 +1,25 @@
+{
+  "name": "@bhavya/events",
+  "version": "0.1.0",
+  "description": "Bhavya OS event bus — publish/subscribe, event history, retry, persistence",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./bus": "./src/bus.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/platform": "workspace:*",
+    "@bhavya/types": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.1"
+  },
+  "license": "MIT"
+}

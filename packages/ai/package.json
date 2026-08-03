@@ -1,0 +1,27 @@
+{
+  "name": "@bhavya/ai",
+  "version": "0.1.0",
+  "description": "Bhavya OS AI platform — provider abstraction, prompt registry, context builder, evaluation",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./provider": "./src/provider.ts",
+    "./prompt": "./src/prompt.ts",
+    "./context": "./src/context.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/platform": "workspace:*",
+    "@bhavya/types": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.1"
+  },
+  "license": "MIT"
+}
