@@ -252,5 +252,153 @@ function initializeDatabase(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_graph_edges_target ON knowledge_graph_edges(target_id);
     CREATE INDEX IF NOT EXISTS idx_educational_repo ON educational_exports(repository_id);
     CREATE INDEX IF NOT EXISTS idx_memory_repo ON institutional_memory(repository_id);
+
+    CREATE TABLE IF NOT EXISTS engineering_reviews (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      review_type TEXT NOT NULL,
+      overall_score REAL DEFAULT 0,
+      architecture_score REAL DEFAULT 0,
+      code_organization_score REAL DEFAULT 0,
+      documentation_score REAL DEFAULT 0,
+      testing_score REAL DEFAULT 0,
+      automation_score REAL DEFAULT 0,
+      maintainability_score REAL DEFAULT 0,
+      extensibility_score REAL DEFAULT 0,
+      developer_experience_score REAL DEFAULT 0,
+      educational_value_score REAL DEFAULT 0,
+      future_risk_score REAL DEFAULT 0,
+      strengths TEXT DEFAULT '[]',
+      weaknesses TEXT DEFAULT '[]',
+      missing_patterns TEXT DEFAULT '[]',
+      recommendations TEXT DEFAULT '[]',
+      verdict TEXT,
+      reviewed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS technical_debt (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      category TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      severity TEXT DEFAULT 'medium',
+      business_impact TEXT,
+      engineering_impact TEXT,
+      estimated_effort TEXT,
+      suggested_solution TEXT,
+      related_knowledge_packages TEXT DEFAULT '[]',
+      related_adrs TEXT DEFAULT '[]',
+      status TEXT DEFAULT 'open',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS architecture_advisor (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      comparison_repo TEXT,
+      missing_layers TEXT DEFAULT '[]',
+      architectural_drift TEXT DEFAULT '[]',
+      duplicated_concepts TEXT DEFAULT '[]',
+      improvement_recommendations TEXT DEFAULT '[]',
+      migration_effort TEXT,
+      tradeoffs TEXT DEFAULT '[]',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS implementation_plans (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      plan_type TEXT NOT NULL,
+      title TEXT NOT NULL,
+      roadmap TEXT DEFAULT '[]',
+      epics TEXT DEFAULT '[]',
+      milestones TEXT DEFAULT '[]',
+      phases TEXT DEFAULT '[]',
+      dependencies TEXT DEFAULT '[]',
+      suggested_order TEXT DEFAULT '[]',
+      risk_analysis TEXT,
+      learning_prerequisites TEXT DEFAULT '[]',
+      status TEXT DEFAULT 'draft',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS build_blueprints (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      blueprint_type TEXT NOT NULL,
+      title TEXT NOT NULL,
+      project_blueprint TEXT,
+      folder_structure TEXT DEFAULT '{}',
+      package_layout TEXT DEFAULT '{}',
+      domain_model TEXT DEFAULT '{}',
+      adr_checklist TEXT DEFAULT '[]',
+      testing_plan TEXT,
+      deployment_plan TEXT,
+      documentation_plan TEXT,
+      referenced_repos TEXT DEFAULT '[]',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS repository_fitness (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      engineering_quality REAL DEFAULT 0,
+      educational_quality REAL DEFAULT 0,
+      architecture_quality REAL DEFAULT 0,
+      maintainability REAL DEFAULT 0,
+      extensibility REAL DEFAULT 0,
+      reusability REAL DEFAULT 0,
+      innovation REAL DEFAULT 0,
+      community REAL DEFAULT 0,
+      bhavya_score REAL DEFAULT 0,
+      explanations TEXT DEFAULT '{}',
+      calculated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS student_mode (
+      id TEXT PRIMARY KEY,
+      repository_id TEXT NOT NULL,
+      study_guide TEXT,
+      learning_roadmap TEXT DEFAULT '[]',
+      prerequisites TEXT DEFAULT '[]',
+      exercises TEXT DEFAULT '[]',
+      mini_projects TEXT DEFAULT '[]',
+      capstone_projects TEXT DEFAULT '[]',
+      interview_questions TEXT DEFAULT '[]',
+      discussion_questions TEXT DEFAULT '[]',
+      reflection_notes TEXT DEFAULT '[]',
+      engineering_challenges TEXT DEFAULT '[]',
+      difficulty_score REAL DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS elite_engineering_library (
+      id TEXT PRIMARY KEY,
+      category TEXT NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      repository_id TEXT,
+      tags TEXT DEFAULT '[]',
+      quality_score REAL DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_reviews_repo ON engineering_reviews(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_debt_repo ON technical_debt(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_debt_category ON technical_debt(category);
+    CREATE INDEX IF NOT EXISTS idx_advisor_repo ON architecture_advisor(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_plans_repo ON implementation_plans(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_blueprints_repo ON build_blueprints(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_fitness_repo ON repository_fitness(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_student_repo ON student_mode(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_elite_category ON elite_engineering_library(category);
   `);
 }

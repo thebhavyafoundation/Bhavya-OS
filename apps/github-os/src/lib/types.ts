@@ -209,3 +209,160 @@ export type LearningDifficulty =
   "beginner" | "intermediate" | "advanced" | "expert";
 export type RecommendationType =
   "adopt" | "study" | "reference" | "monitor" | "archive";
+
+// Slice 4 — Engineering Co-Founder
+
+export interface EngineeringReview {
+  id: string;
+  repository_id: string;
+  review_type: string;
+  overall_score: number;
+  architecture_score: number;
+  code_organization_score: number;
+  documentation_score: number;
+  testing_score: number;
+  automation_score: number;
+  maintainability_score: number;
+  extensibility_score: number;
+  developer_experience_score: number;
+  educational_value_score: number;
+  future_risk_score: number;
+  strengths: string;
+  weaknesses: string;
+  missing_patterns: string;
+  recommendations: string;
+  verdict: string;
+  created_at: string;
+}
+
+export interface TechnicalDebt {
+  id: string;
+  repository_id: string;
+  category: string;
+  title: string;
+  description: string;
+  severity: string;
+  business_impact: string;
+  engineering_impact: string;
+  estimated_effort: string;
+  suggested_solution: string;
+  related_knowledge_packages: string;
+  related_adrs: string;
+  status: string;
+  created_at: string;
+}
+
+export interface ArchitectureAdvisor {
+  id: string;
+  repository_id: string;
+  comparison_repo: string;
+  missing_layers: string;
+  architectural_drift: string;
+  duplicated_concepts: string;
+  improvement_recommendations: string;
+  migration_effort: string;
+  tradeoffs: string;
+  created_at: string;
+}
+
+export interface ImplementationPlan {
+  id: string;
+  repository_id: string;
+  plan_type: string;
+  title: string;
+  roadmap: string;
+  epics: string;
+  milestones: string;
+  phases: string;
+  dependencies: string;
+  suggested_order: string;
+  risk_analysis: string;
+  learning_prerequisites: string;
+  status: string;
+  created_at: string;
+}
+
+export interface BuildBlueprint {
+  id: string;
+  repository_id: string;
+  blueprint_type: string;
+  title: string;
+  overview: string;
+  folder_structure: string;
+  tech_stack: string;
+  implementation_roadmap: string;
+  key_decisions: string;
+  pitfalls: string;
+  testing_strategy: string;
+  deployment_guide: string;
+  estimated_effort: string;
+  created_at: string;
+}
+
+export interface RepositoryFitness {
+  id: string;
+  repository_id: string;
+  engineering_quality: number;
+  educational_quality: number;
+  architecture_quality: number;
+  maintainability: number;
+  extensibility: number;
+  reusability: number;
+  innovation: number;
+  community: number;
+  bhavya_score: number;
+  explanations: string;
+  calculated_at: string;
+}
+
+export interface StudentMode {
+  id: string;
+  repository_id: string;
+  study_guide: string;
+  learning_roadmap: string;
+  prerequisites: string;
+  exercises: string;
+  mini_projects: string;
+  capstone_projects: string;
+  interview_questions: string;
+  discussion_questions: string;
+  reflection_notes: string;
+  engineering_challenges: string;
+  difficulty_score: number;
+  created_at: string;
+}
+
+export interface EliteEngineeringLibrary {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  repository_id: string;
+  tags: string;
+  quality_score: number;
+  created_at: string;
+}
+
+export type ReviewType =
+  "comprehensive" | "quick" | "architecture" | "security";
+export type DebtCategory =
+  | "documentation"
+  | "testing"
+  | "infrastructure"
+  | "code-quality"
+  | "dependency"
+  | "architecture";
+export type DebtSeverity = "low" | "medium" | "high" | "critical";
+export type DebtStatus = "open" | "in-progress" | "resolved" | "accepted";
+export type BlueprintType = "from-scratch" | "from-repository" | "from-pattern";
+export type PlanType = "improvement" | "migration" | "greenfield" | "refactor";
+export type EliteCategory =
+  | "architecture"
+  | "testing"
+  | "documentation"
+  | "folder-structures"
+  | "design-systems"
+  | "ai-agents"
+  | "devops"
+  | "performance"
+  | "security";

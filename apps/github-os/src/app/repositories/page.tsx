@@ -116,6 +116,14 @@ export default function RepositoriesPage() {
       <Sidebar />
       <main className="ml-[240px] flex-1 p-8">
         <div className="max-w-6xl mx-auto">
+          <nav className="flex items-center gap-2 text-xs text-[#52525b] mb-6">
+            <Link href="/" className="hover:text-[#fafafa] transition-colors">
+              Dashboard
+            </Link>
+            <ChevronRight size={12} />
+            <span className="text-[#71717a]">Repositories</span>
+          </nav>
+
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-2xl font-semibold text-[#fafafa]">

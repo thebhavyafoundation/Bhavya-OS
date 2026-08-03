@@ -1753,4 +1753,655 @@ export function seedData() {
       m.confidence,
     );
   }
+
+  // Engineering Reviews
+  const reviews = [
+    {
+      id: "rev-1",
+      repository_id: "bhavya-platform",
+      review_type: "comprehensive",
+      overall_score: 91,
+      architecture_score: 95,
+      code_organization_score: 92,
+      documentation_score: 88,
+      testing_score: 85,
+      automation_score: 90,
+      maintainability_score: 93,
+      extensibility_score: 94,
+      developer_experience_score: 87,
+      educational_value_score: 90,
+      future_risk_score: 85,
+      strengths:
+        '["Zero circular dependencies","Clean layer model","Strong type safety","Provider pattern consistency","Well-defined package boundaries"]',
+      weaknesses:
+        '["Limited test coverage in some packages","Missing onboarding documentation","No performance benchmarks","Incomplete API reference"]',
+      missing_patterns:
+        '["Unit of Work","CQRS","Saga Pattern","Circuit Breaker"]',
+      recommendations:
+        '["Add integration tests","Create architecture decision records for layer boundaries","Document package interaction patterns","Add performance benchmarks"]',
+      verdict:
+        "Mature and well-architected. Primary risk is documentation gap as system grows.",
+    },
+    {
+      id: "rev-2",
+      repository_id: "knowledge-studio",
+      review_type: "comprehensive",
+      overall_score: 82,
+      architecture_score: 85,
+      code_organization_score: 83,
+      documentation_score: 78,
+      testing_score: 72,
+      automation_score: 80,
+      maintainability_score: 84,
+      extensibility_score: 82,
+      developer_experience_score: 85,
+      educational_value_score: 88,
+      future_risk_score: 78,
+      strengths:
+        '["Excellent educational value","6-tab UI is intuitive","Runtime engine integration","Knowledge extraction pipeline"]',
+      weaknesses:
+        '["Low test coverage","Missing error handling patterns","No loading states for some operations","Limited offline support"]',
+      missing_patterns:
+        '["Error Boundary","Optimistic Updates","Cache Invalidation","Background Sync"]',
+      recommendations:
+        '["Add unit tests for all components","Implement error boundaries","Add loading skeletons","Create offline-first architecture"]',
+      verdict:
+        "Good educational tool with room for engineering maturity improvements.",
+    },
+    {
+      id: "rev-3",
+      repository_id: "bhavya-intelligence-network",
+      review_type: "comprehensive",
+      overall_score: 87,
+      architecture_score: 90,
+      code_organization_score: 88,
+      documentation_score: 82,
+      testing_score: 80,
+      automation_score: 88,
+      maintainability_score: 86,
+      extensibility_score: 92,
+      developer_experience_score: 84,
+      educational_value_score: 85,
+      future_risk_score: 82,
+      strengths:
+        '["12-step pipeline is well-designed","Event-driven architecture","Quality gates enforce standards","Extensible intelligence loop"]',
+      weaknesses:
+        '["Pipeline stages could be more modular","Limited observability","No circuit breaker for external calls","Missing retry policies"]',
+      missing_patterns:
+        '["Circuit Breaker","Retry with Backoff","Bulkhead","Rate Limiting"]',
+      recommendations:
+        '["Add circuit breakers for external APIs","Implement retry with exponential backoff","Add distributed tracing","Create pipeline monitoring dashboard"]',
+      verdict: "Strong architecture with production hardening needed.",
+    },
+  ];
+
+  const insertReview = db.prepare(`
+    INSERT INTO engineering_reviews (id, repository_id, review_type, overall_score, architecture_score, code_organization_score, documentation_score, testing_score, automation_score, maintainability_score, extensibility_score, developer_experience_score, educational_value_score, future_risk_score, strengths, weaknesses, missing_patterns, recommendations, verdict)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const r of reviews) {
+    insertReview.run(
+      r.id,
+      r.repository_id,
+      r.review_type,
+      r.overall_score,
+      r.architecture_score,
+      r.code_organization_score,
+      r.documentation_score,
+      r.testing_score,
+      r.automation_score,
+      r.maintainability_score,
+      r.extensibility_score,
+      r.developer_experience_score,
+      r.educational_value_score,
+      r.future_risk_score,
+      r.strengths,
+      r.weaknesses,
+      r.missing_patterns,
+      r.recommendations,
+      r.verdict,
+    );
+  }
+
+  // Technical Debt
+  const debt = [
+    {
+      id: "debt-1",
+      repository_id: "bhavya-platform",
+      category: "documentation",
+      title: "Missing API reference for @bhavya/platform",
+      description:
+        "The platform package lacks comprehensive API documentation for exported utilities.",
+      severity: "medium",
+      business_impact: "New developers spend extra time understanding APIs",
+      engineering_impact: "Delays onboarding and increases support requests",
+      estimated_effort: "2-3 days",
+      suggested_solution: "Generate API docs from JSDoc comments using TypeDoc",
+      related_knowledge_packages: '["kp-1"]',
+      related_adrs: '["adr-1"]',
+      status: "open",
+    },
+    {
+      id: "debt-2",
+      repository_id: "bhavya-platform",
+      category: "testing",
+      title: "Integration tests missing for database package",
+      description:
+        "The database package has unit tests but no integration tests with real SQLite.",
+      severity: "high",
+      business_impact: "Risk of data corruption in production",
+      engineering_impact: "Bugs discovered in production instead of CI",
+      estimated_effort: "3-4 days",
+      suggested_solution: "Add integration tests using temp SQLite databases",
+      related_knowledge_packages: '["kp-1"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "debt-3",
+      repository_id: "knowledge-studio",
+      category: "testing",
+      title: "No end-to-end tests for lesson creation flow",
+      description: "The 6-tab lesson creation flow has no E2E tests.",
+      severity: "high",
+      business_impact: "Lesson creation bugs affect all users",
+      engineering_impact: "Manual testing required for every release",
+      estimated_effort: "4-5 days",
+      suggested_solution: "Add Playwright E2E tests for critical paths",
+      related_knowledge_packages: '["kp-2"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "debt-4",
+      repository_id: "bhavya-intelligence-network",
+      category: "infrastructure",
+      title: "No circuit breaker for external API calls",
+      description:
+        "The intelligence loop makes external API calls without circuit breaker pattern.",
+      severity: "high",
+      business_impact: "External API failures cascade to entire system",
+      engineering_impact: "System becomes unstable during outages",
+      estimated_effort: "2-3 days",
+      suggested_solution: "Implement circuit breaker with state machine",
+      related_knowledge_packages: '["kp-4"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "debt-5",
+      repository_id: "design-system",
+      category: "documentation",
+      title: "Missing Storybook for component documentation",
+      description: "Components lack interactive documentation and examples.",
+      severity: "medium",
+      business_impact: "Developers don't know how to use components",
+      engineering_impact: "Inconsistent component usage across apps",
+      estimated_effort: "3-4 days",
+      suggested_solution: "Add Storybook with stories for all components",
+      related_knowledge_packages: '["kp-5"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+  ];
+
+  const insertDebt = db.prepare(`
+    INSERT INTO technical_debt (id, repository_id, category, title, description, severity, business_impact, engineering_impact, estimated_effort, suggested_solution, related_knowledge_packages, related_adrs, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const d of debt) {
+    insertDebt.run(
+      d.id,
+      d.repository_id,
+      d.category,
+      d.title,
+      d.description,
+      d.severity,
+      d.business_impact,
+      d.engineering_impact,
+      d.estimated_effort,
+      d.suggested_solution,
+      d.related_knowledge_packages,
+      d.related_adrs,
+      d.status,
+    );
+  }
+
+  // Architecture Advisor
+  const advisors = [
+    {
+      id: "adv-1",
+      repository_id: "bhavya-platform",
+      comparison_repo: "vercel/next.js",
+      missing_layers:
+        '["Monitoring Layer","Observability Layer","Caching Layer"]',
+      architectural_drift:
+        '["Some packages have grown beyond single responsibility","Event bus used for sync operations in some places"]',
+      duplicated_concepts:
+        '["ID generation logic duplicated in platform and database packages","Error handling patterns inconsistent across packages"]',
+      improvement_recommendations:
+        '["Extract monitoring into separate package","Standardize error handling with Result type","Add package size limits to prevent bloat","Create package dependency graph visualization"]',
+      migration_effort: "Medium — 2-3 weeks for refactoring",
+      tradeoffs:
+        '["More packages = more complexity but better separation","Strict layers = less flexibility but more predictability","Type safety everywhere = slower iteration but fewer bugs"]',
+    },
+    {
+      id: "adv-2",
+      repository_id: "knowledge-studio",
+      comparison_repo: "linear/linear",
+      missing_layers:
+        '["State Management Layer","Optimistic Updates Layer","Offline Support Layer"]',
+      architectural_drift:
+        '["Tab components have grown too large","Some business logic leaked into UI components"]',
+      duplicated_concepts:
+        '["Form validation logic repeated across tabs","Search functionality duplicated"]',
+      improvement_recommendations:
+        '["Extract shared form components","Create custom hooks for search","Implement Zustand for state management","Add service worker for offline support"]',
+      migration_effort: "Medium — 2 weeks for state management",
+      tradeoffs:
+        '["More abstraction = more indirection but better reusability","Offline support = more complexity but better UX","State management = more files but better predictability"]',
+    },
+  ];
+
+  const insertAdvisor = db.prepare(`
+    INSERT INTO architecture_advisor (id, repository_id, comparison_repo, missing_layers, architectural_drift, duplicated_concepts, improvement_recommendations, migration_effort, tradeoffs)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const a of advisors) {
+    insertAdvisor.run(
+      a.id,
+      a.repository_id,
+      a.comparison_repo,
+      a.missing_layers,
+      a.architectural_drift,
+      a.duplicated_concepts,
+      a.improvement_recommendations,
+      a.migration_effort,
+      a.tradeoffs,
+    );
+  }
+
+  // Technical Debt Center
+  const technicalDebt = [
+    {
+      id: "td-1",
+      repository_id: "bhavya-platform",
+      category: "documentation",
+      title: "Missing API reference for @bhavya/platform",
+      description:
+        "The platform package lacks comprehensive API documentation for exported utilities.",
+      severity: "medium",
+      business_impact: "New developers spend extra time understanding APIs",
+      engineering_impact: "Delays onboarding and increases support requests",
+      estimated_effort: "2-3 days",
+      suggested_solution: "Generate API docs from JSDoc comments using TypeDoc",
+      related_knowledge_packages: '["kp-1"]',
+      related_adrs: '["adr-1"]',
+      status: "open",
+    },
+    {
+      id: "td-2",
+      repository_id: "bhavya-platform",
+      category: "testing",
+      title: "Integration tests missing for database package",
+      description:
+        "The database package has unit tests but no integration tests with real SQLite.",
+      severity: "high",
+      business_impact: "Risk of data corruption in production",
+      engineering_impact: "Bugs discovered in production instead of CI",
+      estimated_effort: "3-4 days",
+      suggested_solution: "Add integration tests using temp SQLite databases",
+      related_knowledge_packages: '["kp-1"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "td-3",
+      repository_id: "knowledge-studio",
+      category: "testing",
+      title: "No end-to-end tests for lesson creation flow",
+      description: "The 6-tab lesson creation flow has no E2E tests.",
+      severity: "high",
+      business_impact: "Lesson creation bugs affect all users",
+      engineering_impact: "Manual testing required for every release",
+      estimated_effort: "4-5 days",
+      suggested_solution: "Add Playwright E2E tests for critical paths",
+      related_knowledge_packages: '["kp-2"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "td-4",
+      repository_id: "bhavya-intelligence-network",
+      category: "infrastructure",
+      title: "No circuit breaker for external API calls",
+      description:
+        "The intelligence loop makes external API calls without circuit breaker pattern.",
+      severity: "high",
+      business_impact: "External API failures cascade to entire system",
+      engineering_impact: "System becomes unstable during outages",
+      estimated_effort: "2-3 days",
+      suggested_solution: "Implement circuit breaker with state machine",
+      related_knowledge_packages: '["kp-4"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+    {
+      id: "td-5",
+      repository_id: "design-system",
+      category: "documentation",
+      title: "Missing Storybook for component documentation",
+      description: "Components lack interactive documentation and examples.",
+      severity: "medium",
+      business_impact: "Developers don't know how to use components",
+      engineering_impact: "Inconsistent component usage across apps",
+      estimated_effort: "3-4 days",
+      suggested_solution: "Add Storybook with stories for all components",
+      related_knowledge_packages: '["kp-5"]',
+      related_adrs: "[]",
+      status: "open",
+    },
+  ];
+
+  // Implementation Plans
+  const plans = [
+    {
+      id: "plan-1",
+      repository_id: "bhavya-platform",
+      plan_type: "improvement",
+      title: "Platform Hardening Roadmap",
+      roadmap:
+        '["Phase 1: Documentation (Week 1-2)","Phase 2: Testing (Week 3-4)","Phase 3: Monitoring (Week 5-6)","Phase 4: Performance (Week 7-8)"]',
+      epics:
+        '["Epic 1: API Documentation","Epic 2: Integration Testing","Epic 3: Observability","Epic 4: Performance Benchmarks"]',
+      milestones:
+        '["M1: All packages have API docs","M2: 80% test coverage","M3: Distributed tracing enabled","M4: Performance baseline established"]',
+      phases:
+        '["Phase 1: Low-hanging fruit (docs, examples)","Phase 2: Quality gates (tests, linting)","Phase 3: Production readiness (monitoring, alerting)","Phase 4: Optimization (caching, profiling)"]',
+      dependencies:
+        '["TypeDoc for API docs","Playwright for E2E tests","OpenTelemetry for tracing","Clinic.js for profiling"]',
+      suggested_order:
+        '["Start with documentation (highest ROI)","Then testing (reduces risk)","Then monitoring (visibility)","Then performance (optimization)"]',
+      risk_analysis:
+        "Low risk — incremental improvements to existing stable system.",
+      learning_prerequisites:
+        '["TypeDoc API documentation","Playwright E2E testing","OpenTelemetry instrumentation","Node.js performance profiling"]',
+      status: "draft",
+    },
+  ];
+
+  const insertPlan = db.prepare(`
+    INSERT INTO implementation_plans (id, repository_id, plan_type, title, roadmap, epics, milestones, phases, dependencies, suggested_order, risk_analysis, learning_prerequisites, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const p of plans) {
+    insertPlan.run(
+      p.id,
+      p.repository_id,
+      p.plan_type,
+      p.title,
+      p.roadmap,
+      p.epics,
+      p.milestones,
+      p.phases,
+      p.dependencies,
+      p.suggested_order,
+      p.risk_analysis,
+      p.learning_prerequisites,
+      p.status,
+    );
+  }
+
+  // Repository Fitness
+  const fitness = [
+    {
+      id: "fit-1",
+      repository_id: "bhavya-platform",
+      engineering_quality: 92,
+      educational_quality: 88,
+      architecture_quality: 95,
+      maintainability: 90,
+      extensibility: 93,
+      reusability: 94,
+      innovation: 85,
+      community: 80,
+      bhavya_score: 90,
+      explanations:
+        '{"engineering_quality":"High-quality code with consistent patterns","educational_value":"Good documentation but missing onboarding guides","architecture":"Excellent layer model with zero circular deps","maintainability":"Well-organized packages with clear boundaries","extensibility":"Provider pattern enables easy extension","reusability":"11 packages designed for reuse","innovation":"Standard patterns applied well","community":"Internal project, limited external adoption"}',
+    },
+    {
+      id: "fit-2",
+      repository_id: "knowledge-studio",
+      engineering_quality: 82,
+      educational_quality: 90,
+      architecture_quality: 85,
+      maintainability: 83,
+      extensibility: 80,
+      reusability: 75,
+      innovation: 82,
+      community: 70,
+      bhavya_score: 84,
+      explanations:
+        '{"engineering_quality":"Solid code with some areas for improvement","educational_value":"Excellent for learning knowledge management","architecture":"Good tab-based UI with clear separation","maintainability":"Some components too large, need decomposition","extensibility":"Limited extension points currently","reusability":"Some UI components reusable","innovation":"Creative approach to knowledge management","community":"Internal tool, growing adoption"}',
+    },
+    {
+      id: "fit-3",
+      repository_id: "bhavya-intelligence-network",
+      engineering_quality: 87,
+      educational_quality: 85,
+      architecture_quality: 90,
+      maintainability: 85,
+      extensibility: 92,
+      reusability: 88,
+      innovation: 90,
+      community: 75,
+      bhavya_score: 85,
+      explanations:
+        '{"engineering_quality":"Strong pipeline design with quality gates","educational_value":"Good for learning event-driven architecture","architecture":"Excellent 12-step intelligence loop","maintainability":"Well-structured but complex","extensibility":"Highly extensible pipeline stages","reusability":"Intelligence loop reusable for other domains","innovation":"Autonomous intelligence is innovative","community":"Internal project, high internal adoption"}',
+    },
+  ];
+
+  const insertFitness = db.prepare(`
+    INSERT INTO repository_fitness (id, repository_id, engineering_quality, educational_quality, architecture_quality, maintainability, extensibility, reusability, innovation, community, bhavya_score, explanations)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const f of fitness) {
+    insertFitness.run(
+      f.id,
+      f.repository_id,
+      f.engineering_quality,
+      f.educational_quality,
+      f.architecture_quality,
+      f.maintainability,
+      f.extensibility,
+      f.reusability,
+      f.innovation,
+      f.community,
+      f.bhavya_score,
+      f.explanations,
+    );
+  }
+
+  // Student Mode
+  const studentMode = [
+    {
+      id: "sm-1",
+      repository_id: "bhavya-platform",
+      study_guide:
+        "A comprehensive guide to understanding layered architecture through Bhavya Platform. Start with the types package to understand the domain model, then explore how each layer builds on the previous.",
+      learning_roadmap:
+        '["Week 1: TypeScript basics and package structure","Week 2: Understanding the types package","Week 3: Database layer and data access patterns","Week 4: Events and async communication","Week 5: Security patterns","Week 6: Building your own package"]',
+      prerequisites:
+        '["TypeScript fundamentals","Node.js basics","Git version control","Package management with pnpm"]',
+      exercises:
+        '["Create a new type in @bhavya/types","Implement a simple provider","Write a database query","Create an event handler","Add a security middleware","Write unit tests for each package"]',
+      mini_projects:
+        '["Build a simple CRUD API using the platform packages","Create a notification system using events","Implement a caching layer","Build a monitoring dashboard"]',
+      capstone_projects:
+        '["Design and implement a plugin system","Build a workflow engine","Create an API gateway with rate limiting","Implement a distributed task queue"]',
+      interview_questions:
+        '["Explain the layered architecture and why each layer exists","How does the Provider Pattern work and when would you use it?","What is the purpose of the Event Bus and how does it enable loose coupling?","How would you add a new integration to the platform?","What are the trade-offs of using SQLite vs PostgreSQL?"]',
+      discussion_questions:
+        '["Why was the Package Promotion Rule chosen over pre-planning packages?","How does zero circular dependencies improve the system?","What would change if we needed to support multiple databases?","How would you migrate from one provider to another?"]',
+      reflection_notes:
+        '["What patterns did you recognize from your previous experience?","How does this architecture compare to systems you have worked with?","What would you do differently if designing from scratch?","What principles can you apply to your own projects?"]',
+      engineering_challenges:
+        '["Add a new package that depends on three existing packages without creating circular dependencies","Implement a provider that works with both local and cloud storage","Design an event schema that supports versioning","Create a migration strategy for schema changes"]',
+      difficulty_score: 75,
+    },
+    {
+      id: "sm-2",
+      repository_id: "knowledge-studio",
+      study_guide:
+        "Learn how to build educational software by studying Knowledge Studio. Focus on the tab-based UI architecture, knowledge extraction patterns, and content management strategies.",
+      learning_roadmap:
+        '["Week 1: React and Next.js basics","Week 2: Understanding the tab-based UI","Week 3: Database design for knowledge management","Week 4: Content creation workflows","Week 5: Knowledge extraction patterns","Week 6: Building your own knowledge tool"]',
+      prerequisites:
+        '["React fundamentals","Next.js App Router basics","TypeScript","Database concepts"]',
+      exercises:
+        '["Create a new tab for the lesson manager","Implement a search feature","Build a knowledge package editor","Add form validation","Create a data export feature","Write component tests"]',
+      mini_projects:
+        '["Build a quiz generator","Create a lesson planner","Implement a progress tracker","Build a content recommendation engine"]',
+      capstone_projects:
+        '["Design a curriculum management system","Build an AI-powered content generator","Create a student assessment platform","Implement a collaborative editing tool"]',
+      interview_questions:
+        '["How does the 6-tab architecture improve user experience?","What patterns are used for knowledge extraction?","How would you add a new content type?","What are the trade-offs of client-side vs server-side rendering?"]',
+      discussion_questions:
+        '["Why were these specific 6 tabs chosen?","How does the runtime engine integration improve the workflow?","What would change if we needed real-time collaboration?","How would you handle offline support?"]',
+      reflection_notes:
+        '["What makes educational software different from other software?","How does the knowledge extraction pipeline work?","What patterns from this project could apply to other domains?","How would you improve the learning experience?"]',
+      engineering_challenges:
+        '["Implement optimistic updates for the lesson editor","Add offline support with service workers","Build a real-time collaboration feature","Create a plugin system for custom tabs"]',
+      difficulty_score: 60,
+    },
+  ];
+
+  const insertStudent = db.prepare(`
+    INSERT INTO student_mode (id, repository_id, study_guide, learning_roadmap, prerequisites, exercises, mini_projects, capstone_projects, interview_questions, discussion_questions, reflection_notes, engineering_challenges, difficulty_score)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const s of studentMode) {
+    insertStudent.run(
+      s.id,
+      s.repository_id,
+      s.study_guide,
+      s.learning_roadmap,
+      s.prerequisites,
+      s.exercises,
+      s.mini_projects,
+      s.capstone_projects,
+      s.interview_questions,
+      s.discussion_questions,
+      s.reflection_notes,
+      s.engineering_challenges,
+      s.difficulty_score,
+    );
+  }
+
+  // Elite Engineering Library
+  const eliteLibrary = [
+    {
+      id: "elite-1",
+      category: "architecture",
+      title: "Layered Architecture Pattern",
+      description:
+        "Clean separation of concerns through layered dependencies. Foundation → Data → Communication → Integration → Presentation.",
+      repository_id: "bhavya-platform",
+      tags: '["architecture","layering","separation-of-concerns"]',
+      quality_score: 95,
+    },
+    {
+      id: "elite-2",
+      category: "architecture",
+      title: "Provider Pattern for External Integrations",
+      description:
+        "Abstract external services behind interfaces for swappability and testability.",
+      repository_id: "bhavya-platform",
+      tags: '["pattern","provider","integration","testability"]',
+      quality_score: 92,
+    },
+    {
+      id: "elite-3",
+      category: "testing",
+      title: "Quality Gates in Pipeline",
+      description:
+        "Automated quality checks at each pipeline stage with 30+ checks.",
+      repository_id: "bhavya-intelligence-network",
+      tags: '["testing","quality","pipeline","automation"]',
+      quality_score: 90,
+    },
+    {
+      id: "elite-4",
+      category: "documentation",
+      title: "Architecture Decision Records",
+      description:
+        "Structured format for documenting architectural decisions with context, decision, and consequences.",
+      repository_id: "bhavya-platform",
+      tags: '["documentation","adr","decisions","architecture"]',
+      quality_score: 88,
+    },
+    {
+      id: "elite-5",
+      category: "folder-structures",
+      title: "Monorepo with Package Boundaries",
+      description:
+        "pnpm workspaces with Turborepo enforcing package boundaries and dependency rules.",
+      repository_id: "bhavya-platform",
+      tags: '["monorepo","packages","turborepo","pnpm"]',
+      quality_score: 93,
+    },
+    {
+      id: "elite-6",
+      category: "design-systems",
+      title: "Dark Mode First Component Library",
+      description:
+        "10 shared React components with dark mode first design and glassmorphism aesthetic.",
+      repository_id: "design-system",
+      tags: '["ui","components","dark-mode","design-system"]',
+      quality_score: 90,
+    },
+    {
+      id: "elite-7",
+      category: "ai-agents",
+      title: "12-Step Intelligence Loop",
+      description:
+        "Autonomous intelligence pipeline with discovery, analysis, and recommendation stages.",
+      repository_id: "bhavya-intelligence-network",
+      tags: '["ai","pipeline","intelligence","automation"]',
+      quality_score: 94,
+    },
+    {
+      id: "elite-8",
+      category: "architecture",
+      title: "Event-Driven Architecture",
+      description:
+        "Domain events for loose coupling between components with history, retry, and metrics.",
+      repository_id: "bhavya-platform",
+      tags: '["events","async","loose-coupling","architecture"]',
+      quality_score: 91,
+    },
+  ];
+
+  const insertElite = db.prepare(`
+    INSERT INTO elite_engineering_library (id, category, title, description, repository_id, tags, quality_score)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const e of eliteLibrary) {
+    insertElite.run(
+      e.id,
+      e.category,
+      e.title,
+      e.description,
+      e.repository_id,
+      e.tags,
+      e.quality_score,
+    );
+  }
 }

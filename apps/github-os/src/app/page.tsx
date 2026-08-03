@@ -1,182 +1,40 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Sidebar } from "@/components/Sidebar";
 import { CommandPalette } from "@/components/CommandPalette";
 import {
-  StatCard,
-  ActivityFeed,
-  RepositoryWidget,
-  KnowledgeWidget,
-  RadarWidget,
-  RecommendationWidget,
-  PatternWidget,
-  HealthWidget,
-} from "@/components/Widgets";
-import {
   FolderGit2,
-  Brain,
-  Zap,
-  GitBranch,
+  BookOpen,
+  GraduationCap,
   Search,
-  Layers,
-  Heart,
+  ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 
-interface DashboardData {
-  repositories: {
-    id: string;
-    name: string;
-    description: string | null;
-    language: string | null;
-    health_score: number;
-  }[];
-  packages: {
-    id: string;
-    title: string;
-    category: string;
-    quality_score: number;
-  }[];
-  activities: {
-    id: string;
-    type: string;
-    title: string;
-    description: string | null;
-    created_at: string;
-  }[];
-  radar: {
-    id: string;
-    name: string;
-    category: string;
-    ring: string;
-    score: number;
-  }[];
-  recommendations: {
-    id: string;
-    type: string;
-    title: string;
-    description: string;
-    priority: string;
-    status: string;
-  }[];
-  patterns: {
-    id: string;
-    name: string;
-    category: string;
-    difficulty: string;
-    educational_value: string | null;
-  }[];
-  health: {
-    id: string;
-    repository_id: string;
-    overall_score: number;
-    repository_name?: string;
-  }[];
+interface Repository {
+  id: string;
+  name: string;
+  description: string | null;
+  language: string | null;
+  bhavya_score: number;
+  engineering_maturity: string;
 }
 
 export default function Dashboard() {
   const [cmdOpen, setCmdOpen] = useState(false);
-  const [data, setData] = useState<DashboardData | null>(null);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [reposRes, kpsRes, actRes, patternsRes, healthRes] =
-          await Promise.all([
-            fetch("/api/repositories"),
-            fetch("/api/knowledge"),
-            fetch("/api/activity"),
-            fetch("/api/patterns"),
-            fetch("/api/health"),
-          ]);
-        const repos = await reposRes.json();
-        const kps = await kpsRes.json();
-        const act = await actRes.json();
-        const patternsData = await patternsRes.json();
-        const healthData = await healthRes.json();
-
-        setData({
-          repositories: repos.repositories || [],
-          packages: kps.packages || [],
-          activities: act.activities || [],
-          radar: [
-            {
-              id: "r1",
-              name: "Next.js",
-              category: "frameworks",
-              ring: "adopt",
-              score: 95,
-            },
-            {
-              id: "r2",
-              name: "TypeScript",
-              category: "languages",
-              ring: "adopt",
-              score: 98,
-            },
-            {
-              id: "r3",
-              name: "Tailwind CSS",
-              category: "frameworks",
-              ring: "adopt",
-              score: 90,
-            },
-            {
-              id: "r4",
-              name: "SQLite",
-              category: "databases",
-              ring: "adopt",
-              score: 88,
-            },
-            {
-              id: "r5",
-              name: "MCP",
-              category: "protocols",
-              ring: "trial",
-              score: 82,
-            },
-            {
-              id: "r6",
-              name: "Ollama",
-              category: "ai",
-              ring: "trial",
-              score: 80,
-            },
-          ],
-          recommendations: [
-            {
-              id: "rec-1",
-              type: "mcp",
-              title: "Install GitHub MCP",
-              description: "Core integration for repository management",
-              priority: "high",
-              status: "pending",
-            },
-            {
-              id: "rec-2",
-              type: "mcp",
-              title: "Install Filesystem MCP",
-              description: "Local file operations for code access",
-              priority: "high",
-              status: "pending",
-            },
-            {
-              id: "rec-3",
-              type: "tool",
-              title: "Standardize ripgrep",
-              description: "Fast search tool for codebase exploration",
-              priority: "medium",
-              status: "accepted",
-            },
-          ],
-          patterns: patternsData.patterns || [],
-          health: healthData.health || [],
-        });
-      } catch (err) {
-        console.error("Failed to load dashboard:", err);
-      }
-    };
-    fetchData();
+    async function load() {
+      const res = await fetch("/api/repositories");
+      const data = await res.json();
+      setRepositories(data.repositories || []);
+      setLoading(false);
+    }
+    load();
   }, []);
 
   useEffect(() => {
@@ -190,19 +48,33 @@ export default function Dashboard() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
+  function getScoreColor(score: number) {
+    if (score >= 90) return "text-emerald-400";
+    if (score >= 80) return "text-blue-400";
+    if (score >= 70) return "text-amber-400";
+    return "text-red-400";
+  }
+
+  const maturityColors: Record<string, string> = {
+    emerging: "bg-amber-900/40 text-amber-300 border-amber-800",
+    developing: "bg-blue-900/40 text-blue-300 border-blue-800",
+    mature: "bg-emerald-900/40 text-emerald-300 border-emerald-800",
+    exemplary: "bg-purple-900/40 text-purple-300 border-purple-800",
+  };
+
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-[#0a0a0a]">
       <Sidebar />
       <main className="ml-[240px] flex-1 p-8">
-        <div className="max-w-[1400px] mx-auto">
-          <header className="mb-8 animate-fade-in">
+        <div className="max-w-4xl mx-auto">
+          <header className="mb-8">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-[28px] font-bold text-[#fafafa]">
-                  Engineering Workspace
+                <h1 className="text-2xl font-semibold text-[#fafafa]">
+                  Engineering Mentor
                 </h1>
-                <p className="text-[14px] text-[#71717a] mt-1">
-                  Bhavya Foundation — Intelligence-driven engineering platform
+                <p className="text-sm text-[#71717a] mt-1">
+                  Understand repositories like a senior engineer
                 </p>
               </div>
               <button
@@ -218,76 +90,183 @@ export default function Dashboard() {
             </div>
           </header>
 
-          <div className="grid grid-cols-4 gap-4 mb-8 animate-fade-in">
-            <StatCard
-              label="Repositories"
-              value={data?.repositories.length || 0}
-              change="+2 this month"
-              changeType="positive"
-              icon={<FolderGit2 size={18} />}
-            />
-            <StatCard
-              label="Knowledge Packages"
-              value={data?.packages.length || 0}
-              change="+4 this week"
-              changeType="positive"
-              icon={<Brain size={18} />}
-            />
-            <StatCard
-              label="Patterns"
-              value={data?.patterns.length || 0}
-              change="10 patterns"
-              changeType="neutral"
-              icon={<Layers size={18} />}
-            />
-            <StatCard
-              label="Avg Health"
-              value={
-                data?.health.length
+          <div className="bg-[#111111] border border-[#27272a] rounded-lg p-6 mb-8">
+            <h2 className="text-sm font-medium text-[#fafafa] mb-4">
+              What would you like to do?
+            </h2>
+            <div className="grid grid-cols-3 gap-4">
+              <Link
+                href="/repositories"
+                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
+              >
+                <FolderGit2 size={20} className="text-[#3b82f6]" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-[#fafafa]">
+                    Browse Repositories
+                  </p>
+                  <p className="text-[11px] text-[#52525b]">
+                    Discover and analyze codebases
+                  </p>
+                </div>
+                <ArrowRight
+                  size={14}
+                  className="text-[#52525b] group-hover:text-[#3b82f6] transition-colors"
+                />
+              </Link>
+              <Link
+                href="/knowledge"
+                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
+              >
+                <BookOpen size={20} className="text-[#f59e0b]" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-[#fafafa]">
+                    Explore Knowledge
+                  </p>
+                  <p className="text-[11px] text-[#52525b]">
+                    Patterns, packages, and insights
+                  </p>
+                </div>
+                <ArrowRight
+                  size={14}
+                  className="text-[#52525b] group-hover:text-[#f59e0b] transition-colors"
+                />
+              </Link>
+              <Link
+                href="/learning"
+                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
+              >
+                <GraduationCap size={20} className="text-emerald-400" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-[#fafafa]">
+                    Start Learning
+                  </p>
+                  <p className="text-[11px] text-[#52525b]">
+                    Educational exports and materials
+                  </p>
+                </div>
+                <ArrowRight
+                  size={14}
+                  className="text-[#52525b] group-hover:text-[#22c55e] transition-colors"
+                />
+              </Link>
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-medium text-[#fafafa]">
+                Recent Repositories
+              </h2>
+              <Link
+                href="/repositories"
+                className="text-xs text-[#3b82f6] hover:text-[#60a5fa] transition-colors"
+              >
+                View all
+              </Link>
+            </div>
+            {loading ? (
+              <div className="space-y-3">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="bg-[#111111] border border-[#27272a] rounded-lg p-4 animate-pulse"
+                  >
+                    <div className="h-4 bg-[#27272a] rounded w-1/3 mb-2" />
+                    <div className="h-3 bg-[#27272a] rounded w-1/2" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {repositories.slice(0, 5).map((repo) => (
+                  <Link
+                    key={repo.id}
+                    href={`/repositories/${repo.id}`}
+                    className="flex items-center justify-between p-4 bg-[#111111] border border-[#27272a] rounded-lg hover:border-[#3f3f46] transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FolderGit2 size={16} className="text-[#52525b]" />
+                      <div>
+                        <p className="text-sm font-medium text-[#fafafa]">
+                          {repo.name}
+                        </p>
+                        <p className="text-xs text-[#52525b] truncate max-w-md">
+                          {repo.description || "No description"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {repo.language && (
+                        <span className="flex items-center gap-1.5 text-xs text-[#52525b]">
+                          <span className="w-2 h-2 rounded-full bg-[#3b82f6]" />
+                          {repo.language}
+                        </span>
+                      )}
+                      <span
+                        className={`px-2 py-0.5 rounded text-[10px] font-medium border ${maturityColors[repo.engineering_maturity] || ""}`}
+                      >
+                        {repo.engineering_maturity}
+                      </span>
+                      <span
+                        className={`text-sm font-semibold ${getScoreColor(repo.bhavya_score)}`}
+                      >
+                        {repo.bhavya_score}
+                      </span>
+                      <ChevronRight size={14} className="text-[#52525b]" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
+              <p className="text-xs text-[#52525b] mb-1">Repositories</p>
+              <p className="text-2xl font-semibold text-[#fafafa]">
+                {repositories.length}
+              </p>
+            </div>
+            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
+              <p className="text-xs text-[#52525b] mb-1">Avg Bhavya Score</p>
+              <p
+                className={`text-2xl font-semibold ${getScoreColor(
+                  repositories.length
+                    ? Math.round(
+                        repositories.reduce((a, r) => a + r.bhavya_score, 0) /
+                          repositories.length,
+                      )
+                    : 0,
+                )}`}
+              >
+                {repositories.length
                   ? Math.round(
-                      data.health.reduce((a, h) => a + h.overall_score, 0) /
-                        data.health.length,
+                      repositories.reduce((a, r) => a + r.bhavya_score, 0) /
+                        repositories.length,
                     )
-                  : 0
-              }
-              change="Across all repos"
-              changeType="neutral"
-              icon={<Heart size={18} />}
-            />
-          </div>
-
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="col-span-2 animate-fade-in">
-              <ActivityFeed activities={data?.activities || []} />
+                  : "—"}
+              </p>
             </div>
-            <div className="animate-fade-in">
-              <RadarWidget items={data?.radar || []} />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-4 gap-6 mb-8">
-            <div className="animate-fade-in">
-              <RepositoryWidget repositories={data?.repositories || []} />
-            </div>
-            <div className="animate-fade-in">
-              <KnowledgeWidget packages={data?.packages || []} />
-            </div>
-            <div className="animate-fade-in">
-              <PatternWidget patterns={data?.patterns || []} />
-            </div>
-            <div className="animate-fade-in">
-              <HealthWidget items={data?.health || []} />
+            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
+              <p className="text-xs text-[#52525b] mb-1">Maturity</p>
+              <p className="text-2xl font-semibold text-[#fafafa]">
+                {
+                  repositories.filter(
+                    (r) =>
+                      r.engineering_maturity === "mature" ||
+                      r.engineering_maturity === "exemplary",
+                  ).length
+                }
+                <span className="text-sm font-normal text-[#52525b]">
+                  {" "}
+                  / {repositories.length}
+                </span>
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="animate-fade-in">
-              <RecommendationWidget items={data?.recommendations || []} />
-            </div>
-          </div>
-
-          <footer className="pt-8 border-t border-[#27272a] text-center text-[12px] text-[#71717a]">
-            GitHub OS v1.0 — Engineering Workspace — Bhavya Foundation
+          <footer className="pt-8 border-t border-[#27272a] text-center text-xs text-[#52525b]">
+            GitHub OS v2.0 — Engineering Mentor — Bhavya Foundation
           </footer>
         </div>
       </main>
