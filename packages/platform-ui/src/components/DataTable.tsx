@@ -80,7 +80,7 @@ export function DataTable<T extends Record<string, unknown>>({
                     color: "#e2e8f0",
                   }}
                 >
-                  {col.render ? col.render(item) : item[col.key]}
+                  {col.render ? col.render(item) : String(item[col.key])}
                 </td>
               ))}
             </tr>
