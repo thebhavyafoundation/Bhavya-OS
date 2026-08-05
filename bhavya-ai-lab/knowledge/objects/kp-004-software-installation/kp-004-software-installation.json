@@ -1,0 +1,145 @@
+{
+  "id": "kp-004-software-installation",
+  "domain": "digital-foundations",
+  "title": "Software Installation",
+  "description": "A comprehensive guide to installing, configuring, and maintaining software on desktop operating systems. Covers software types, safe download practices, post-installation configuration, updates, and proper uninstallation for Grade 9 students.",
+  "grade": 9,
+  "subject": "Digital Literacy",
+  "concepts": [
+    {
+      "name": "Software Types",
+      "description": "The distinction between system software (operating systems, utilities, drivers) and application software (productivity tools, creative suites, games), and how each category serves different computing needs",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Installation Methods",
+      "description": "The various approaches to installing software including downloading from official websites, using centralized app stores like Microsoft Store or Ubuntu Software Center, and command-line package managers like APT or Chocolatey",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Software Configuration",
+      "description": "The process of customizing application preferences, setting up user accounts, configuring permissions, and adjusting default settings after installation to match individual needs",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Updates and Patches",
+      "description": "The importance of keeping software current through automatic or manual updates that fix security vulnerabilities, patch bugs, improve performance, and add new features",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Uninstallation",
+      "description": "The proper procedure for removing software from a system, including using built-in uninstallers, cleaning up residual files, and reclaiming disk space safely",
+      "difficulty": "beginner"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "Software",
+      "definition": "A set of instructions that tells computer hardware what to do"
+    },
+    {
+      "term": "Installer",
+      "definition": "A program that sets up software on a computer by copying files and configuring settings"
+    },
+    {
+      "term": "App Store",
+      "definition": "A centralized platform for downloading and updating verified software applications"
+    },
+    {
+      "term": "License",
+      "definition": "Legal terms governing how software can be used, copied, and distributed"
+    },
+    {
+      "term": "Patch",
+      "definition": "A software update that fixes bugs, closes security holes, or adds features"
+    }
+  ],
+  "examples": [
+    {
+      "title": "Microsoft Office",
+      "description": "Productivity suite installed via Microsoft 365 subscription or standalone installer, offering Word, Excel, PowerPoint, and Outlook for document creation, spreadsheets, presentations, and email"
+    },
+    {
+      "title": "Google Chrome",
+      "description": "Web browser downloaded from the official Google website, providing fast browsing, extension support, sync across devices, and built-in security features"
+    },
+    {
+      "title": "Ubuntu Software Center",
+      "description": "Linux app store for installing open-source applications, offering thousands of free and verified packages with automatic dependency resolution"
+    },
+    {
+      "title": "Visual Studio Code",
+      "description": "Free code editor installed via download from Microsoft or package managers, featuring extensions, integrated terminal, Git support, and IntelliSense code completion"
+    },
+    {
+      "title": "WhatsApp Desktop",
+      "description": "Mobile messaging app available as a desktop installation, synchronizing conversations and contacts from the phone for convenient computer-based communication"
+    }
+  ],
+  "misconceptions": [
+    {
+      "belief": "Free software means unsafe",
+      "correction": "Many free and open-source tools like VLC, Firefox, and LibreOffice are more secure than paid alternatives because their code is publicly audited by thousands of developers worldwide"
+    },
+    {
+      "belief": "I can download software from any website",
+      "correction": "Only downloading from official sources or verified app stores protects you from malware, adware, and modified installers that can harm your computer or steal personal data"
+    },
+    {
+      "belief": "Old software versions are fine",
+      "correction": "Outdated software has known security vulnerabilities that hackers actively exploit. Keeping software updated is one of the simplest ways to stay safe online"
+    }
+  ],
+  "exercises": [
+    {
+      "prompt": "What is a software patch?",
+      "type": "mcq",
+      "solution": "An update that fixes bugs or security issues in existing software"
+    },
+    {
+      "prompt": "Explain why downloading software from official sources is important. Give at least three reasons.",
+      "type": "short-answer"
+    },
+    {
+      "prompt": "Describe a time when software caused problems on your device. What happened, how did you discover it, and what did you do to fix it?",
+      "type": "reflection"
+    },
+    {
+      "prompt": "Create a step-by-step software installation guide for an application of your choice. Include screenshots or diagrams where possible.",
+      "type": "project"
+    },
+    {
+      "prompt": "True or False: You should always install software updates when available. Explain your reasoning.",
+      "type": "mcq",
+      "solution": "True. Software updates patch security vulnerabilities, fix bugs, and often include performance improvements that protect your device and data"
+    }
+  ],
+  "references": [
+    {
+      "title": "Software Installation Safety — Cybersecurity & Infrastructure Security Agency (CISA)",
+      "type": "article",
+      "url": "https://www.cisa.gov/news-events/news/software-installation-safety"
+    },
+    {
+      "title": "Ubuntu Software Management — Ubuntu Tutorials",
+      "type": "video",
+      "url": "https://ubuntu.com/tutorials/package-management"
+    },
+    {
+      "title": "Ninite — Bulk Software Installation Tool",
+      "type": "article",
+      "url": "https://ninite.com/"
+    }
+  ],
+  "prerequisites": ["kp-003-file-management"],
+  "related": ["kp-003-file-management", "kp-005-internet-safety"],
+  "metadata": {
+    "author": "Bhavya Foundation",
+    "targetAudience": "Grade 9 students in Himachal Pradesh",
+    "language": "English",
+    "estimatedDuration": "2 hours",
+    "priorityScore": 96,
+    "bloomTaxonomy": ["remember", "understand", "apply", "analyze"],
+    "tags": ["software", "installation", "digital-literacy", "computer-fundamentals", "class-9"]
+  }
+}
