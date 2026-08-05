@@ -92,26 +92,41 @@
   ],
   "exercises": [
     {
-      "prompt": "What is a software patch?",
-      "type": "mcq",
-      "solution": "An update that fixes bugs or security issues in existing software"
+      "prompt": "Your friend wants to download a video editor from a website called 'free-video-editor-download.com' that offers a popular paid video editor for free. What should your friend do?",
+      "type": "scenario-mcq",
+      "solution": "Go to the official website of the video editor and download from there instead"
     },
     {
-      "prompt": "Explain why downloading software from official sources is important. Give at least three reasons.",
-      "type": "short-answer"
+      "prompt": "Write a step-by-step guide for a younger sibling to install a game safely on the family computer.",
+      "type": "scenario-short-answer"
     },
     {
-      "prompt": "Describe a time when software caused problems on your device. What happened, how did you discover it, and what did you do to fix it?",
+      "prompt": "You installed a media player last week and noticed it has not been updated in months. Write a paragraph explaining why you should update immediately.",
+      "type": "scenario-short-answer"
+    },
+    {
+      "prompt": "Your friend found a website offering Microsoft Office for free. Write a message explaining why this might be dangerous and what they should do instead.",
+      "type": "scenario-short-answer"
+    },
+    {
+      "prompt": "You try to install a program and get an error: 'Insufficient disk space. Required: 2.5 GB, Available: 800 MB.' Write a troubleshooting guide with at least three solutions.",
+      "type": "debugging"
+    },
+    {
+      "prompt": "A student installs a program and gets an error: 'MSVCP140.dll not found.' Explain what this error means and how to fix it.",
+      "type": "debugging"
+    },
+    {
+      "prompt": "Think about the software you use every day. Choose one application and explain how it would be different if it stopped working tomorrow.",
       "type": "reflection"
     },
     {
-      "prompt": "Create a step-by-step software installation guide for an application of your choice. Include screenshots or diagrams where possible.",
-      "type": "project"
+      "prompt": "Some people believe paid software is always better and safer than free software. Do you agree or disagree? Support your answer with at least two specific examples.",
+      "type": "reflection"
     },
     {
-      "prompt": "True or False: You should always install software updates when available. Explain your reasoning.",
-      "type": "mcq",
-      "solution": "True. Software updates patch security vulnerabilities, fix bugs, and often include performance improvements that protect your device and data"
+      "prompt": "Create a GitHub-ready Software Installation Guide for an application of your choice, following the README structure with software comparison table, security checklist, and reflection.",
+      "type": "project"
     }
   ],
   "references": [
@@ -139,7 +154,7 @@
     "language": "English",
     "estimatedDuration": "2 hours",
     "priorityScore": 96,
-    "bloomTaxonomy": ["remember", "understand", "apply", "analyze"],
+    "bloomTaxonomy": ["remember", "understand", "apply", "analyze", "evaluate"],
     "tags": ["software", "installation", "digital-literacy", "computer-fundamentals", "class-9"]
   }
 }

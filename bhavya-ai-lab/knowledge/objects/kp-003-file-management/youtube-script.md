@@ -155,7 +155,7 @@ Projects/
 **[VISUAL: Diagram showing the 3-2-1 backup rule.]**
 
 **VOICEOVER:**
-"最后一个关键话题：备份。你的文件很有价值。硬盘故障、电脑损坏、意外删除——这些事情都会发生。备份规则很简单。"
+"The last key topic: backups. Your files are valuable. Hard drive failure, stolen laptop, accidental deletion — these things happen. The backup rule is simple."
 
 **[VISUAL: Three circles appearing one by one.]**
 
@@ -219,7 +219,7 @@ Projects/
 ```
 Tired of losing files on your computer? In this video, learn 5 rules for naming files, organizing folders, and backing up your work.
 
-⏱️ Timestamps:
+Timestamps:
 0:00 - The Messy Desktop Problem
 0:30 - Why File Management Matters
 1:30 - 5 Rules for Naming Files
@@ -227,8 +227,8 @@ Tired of losing files on your computer? In this video, learn 5 rules for naming 
 3:30 - Backup Basics (3-2-1 Rule)
 4:15 - Your 5-Minute Challenge
 
-📚 Full lesson: [link]
-🏫 Bhavya Foundation — Free AI education for all
+Full lesson: [link]
+Bhavya Foundation — Free AI education for all
 
 #FileManagement #DigitalLiteracy #StudyTips #ComputerBasics
 ```

@@ -4,156 +4,156 @@
 
 ---
 
-## Section A: Multiple Choice Questions (5 questions, 2 points each)
+## Section A: Scenario-Based Multiple Choice (5 questions, 2 points each)
 
 ### Question 1
-What is a file extension?
+Your teacher emails the class a file called `untitled.docx` and says "This is your homework template." You download it but accidentally save it alongside 40 other files in your Downloads folder. When you try to find it later, you cannot tell which `untitled.docx` is the right one.
 
-A) The size of a file in kilobytes
-B) The date a file was last modified
-C) The suffix after a filename that indicates the file type
-D) The location of a file on a hard drive
+What is the root cause of this problem?
 
-**Answer: C** — A file extension is the suffix after a filename (such as .txt, .jpg, or .pdf) that tells the operating system what type of file it is and which program should open it.
+A) Your Downloads folder is too large
+B) The file was not given a descriptive name that distinguishes it from other files
+C) Your computer should have prevented you from downloading the same file name twice
+D) Email is not a reliable way to share files
+
+**Answer: B** — The file name `untitled.docx` gives no information about its content, subject, or purpose. When multiple files share the same generic name, identification becomes impossible without opening each one. Descriptive naming prevents this problem.
 
 ---
 
 ### Question 2
-Which of the following is the correct file name according to standard naming conventions?
+You have a science report saved as `2026-08-05_science-report.pdf`. You need to submit it to your teacher, but the submission system requires a file named with your student ID. You rename it to `STU-2048_science-report.pdf` and upload it. Later, you need to find the original file on your computer.
 
-A) My Homework.docx
-B) myhomework.docx
-C) 2026-08-05_homework.docx
-D) homework(1).docx
+What happened to the original file?
 
-**Answer: C** — The correct format uses a date prefix in YYYY-MM-DD format, hyphens or underscores instead of spaces, and a descriptive name without special characters or generic labels.
+A) It was deleted when you renamed it
+B) It is still in the same folder with the new name — the original name no longer exists
+C) It was moved to the Recycle Bin
+D) It was copied to a new location with the new name
+
+**Answer: B** — Rename changes the file's name in place. The file stays in the same folder with the new name. The old name `2026-08-05_science-report.pdf` no longer exists as a separate file.
 
 ---
 
 ### Question 3
-What happens when you use the Move operation on a file?
+A friend asks you to send them your English essay. You have the only copy on your computer. You want to share it but keep your own copy. Which operation should you use?
 
-A) A duplicate is created at the new location while the original remains
-B) The file is copied to the new location and deleted from the original
-C) The file is sent to the Recycle Bin
-D) The file name is changed to indicate a new location
+A) Move the file to a shared folder
+B) Copy the file to a shared folder
+C) Delete the file and tell your friend to check the Recycle Bin
+D) Rename the file and send the renamed version
 
-**Answer: B** — Move transfers the file from one location to another. The original is removed from its source and placed at the destination. Unlike Copy, no duplicate remains at the original location.
+**Answer: B** — Copy creates a duplicate at the destination while leaving the original in place. Move would transfer the file and remove it from your computer. Since you want to keep your copy, Copy is correct.
 
 ---
 
 ### Question 4
-According to the 3-2-1 backup rule, how many copies of important files should you keep?
+Your classmate says: "I don't need to organize my files. I can just use search to find everything." Which response best explains why this approach fails?
 
-A) 1 copy on 3 different devices
-B) 3 copies on 2 different types of storage, with 1 offsite
-C) 2 copies on 3 different cloud services
-D) 3 copies on the same hard drive
+A) Search is too slow on most computers
+B) Search only works for files created in the last week
+C) Files with vague names like "doc1" or "notes" are hard to identify even in search results, and search depends on proper indexing
+D) Search requires an internet connection
 
-**Answer: B** — The 3-2-1 rule states: keep 3 copies of your data, on 2 different types of storage media, with 1 copy stored offsite (such as cloud storage or a separate physical location).
+**Answer: C** — Search is a powerful tool, but it depends on two things: meaningful file names (so results are recognizable) and proper file system indexing (so files are discoverable). Vague names produce vague results, and indexing is not always reliable.
 
 ---
 
 ### Question 5
-Why should you avoid using spaces in file names?
+You have 500 photos named `IMG_0001.jpg` through `IMG_0500.jpg`. You want to find all photos from a school trip that happened on March 15, 2026. Without opening each photo, how can you find them quickly?
 
-A) Spaces make files take up more storage space
-B) Some systems and programs handle spaces poorly, causing errors
-C) Spaces slow down file transfers
-D) Spaces are only allowed in file names on macOS
+A) Sort the files by size — school trip photos are all the same size
+B) Sort by date taken (file metadata) and select the photos from March 15
+C) Open each photo one by one until you find the right ones
+D) Delete all photos except the ones you want
 
-**Answer: B** — While modern operating systems handle spaces, many web servers, scripts, and older programs do not. Using hyphens or underscores ensures compatibility across all systems and environments.
+**Answer: B** — Digital photos contain metadata (EXIF data) that records the date and time they were taken. File explorers can sort by this date, allowing you to quickly locate all photos from a specific day without opening each one.
 
 ---
 
-## Section B: Short Answer Questions (5 questions, 4 points each)
+## Section B: Scenario-Based Short Answer (5 questions, 4 points each)
 
 ### Question 6
-Explain the difference between a file path and a file extension. Give an example of each.
+Your teacher asks the class to submit their history essay by Friday. You finish yours on Wednesday and save it as `history-essay.docx`. On Friday, you realize you also saved your science homework as `homework.docx` and your math work as `notes.txt`.
+
+Explain two problems with your file naming and suggest a better name for each file.
 
 **Model Answer:**
-A **file path** is the complete address showing where a file is located, starting from the root directory and including all folders leading to the file. Example: `C:\Users\Priya\Documents\School\Science\lab-report.pdf`
+Problem 1: `history-essay.docx` lacks a date, so it cannot be sorted chronologically or identified by submission date.
+Better: `2026-08-05_history-essay_final.docx`
 
-A **file extension** is the suffix at the end of a filename that indicates the file type. Example: `.pdf` in `lab-report.pdf`
-
-The path tells you WHERE the file is; the extension tells you WHAT type of file it is.
+Problem 2: `homework.docx` and `notes.txt` are generic — they could be anything. If you have homework for multiple subjects, you cannot tell them apart.
+Better: `2026-08-05_science-homework_ch3.pdf` and `2026-08-04_math-notes_ch5.pdf`
 
 ---
 
 ### Question 7
-A classmate says, "I don't need to organize my files — I can just search for them." Write a response explaining why this approach is problematic.
+A student has the following folder structure:
+
+```
+Desktop/
+├── science stuff
+├── english things
+├── math
+├── pictures
+├── downloads
+├── New Folder
+├── New Folder (2)
+└── homework
+```
+
+Identify three specific problems with this structure and explain how to fix each one.
 
 **Model Answer:**
-Searching for files works best when files are already organized. Problems with relying only on search include:
-- Files with vague names like "doc1.txt" or "notes.txt" are hard to identify even in search results
-- Search cannot find files if you misspell the name or forget what you named it
-- Organized folders let you browse related files together, which search cannot do
-- Good organization saves time because you know exactly where to look
-- Search depends on the file system indexing properly, which is not always reliable
+Problem 1: Vague folder names like "science stuff" and "english things" do not describe contents clearly. Fix: Rename to "Science" and "English" or more specific names like "Science-Homework" and "English-Essays."
+
+Problem 2: "New Folder" and "New Folder (2)" are default names with no meaning. Fix: Give them descriptive names or delete them if empty.
+
+Problem 3: Files from different subjects may be mixed in "homework" and "downloads." Fix: Create subfolders within "homework" for each subject, and move files from "downloads" to their correct subject folders.
 
 ---
 
 ### Question 8
-Describe two situations where the Copy operation is better than the Move operation, and one situation where Move is better.
+You want to move a file from your Downloads folder to your Documents folder, but you accidentally press Ctrl+X (Cut) instead of Ctrl+C (Copy). You then paste it into Documents.
+
+What happened? Is the file now in both folders or only in Documents? Explain the difference between Cut and Copy.
 
 **Model Answer:**
-**Copy is better when:**
-1. You want to share a file with someone but keep the original — Copy the file to a shared folder while keeping your version
-2. You are making a backup before making changes — Copy the file before editing so you can restore if something goes wrong
-
-**Move is better when:**
-1. You are reorganizing files into a better folder structure — Move the file to its new location because you no longer need it in the old spot
+The file is now ONLY in Documents. Cut (Ctrl+X) moves the file — it removes it from Downloads and places it in Documents. No duplicate remains in Downloads. Copy (Ctrl+C) would have created a duplicate, leaving the file in both locations. The student lost the copy in Downloads because they used Cut instead of Copy. To fix this, they could use Ctrl+Z to undo the last action.
 
 ---
 
 ### Question 9
-Explain the difference between an HDD and an SSD. Which would you choose for a laptop, and why?
+A company stores all its employee records on a single hard drive. The hard drive fails and all data is lost. Using the 3-2-1 backup rule, design a backup system that would have prevented this disaster. Explain where each copy lives and why.
 
 **Model Answer:**
-An **HDD (Hard Disk Drive)** uses spinning magnetic disks to read and write data. It is slower but offers more storage capacity at a lower price.
+Copy 1: The working files on the office computer's hard drive — this is the primary copy for daily access.
+Copy 2: An external hard drive in the office, updated weekly — this provides a local backup that survives cloud outages.
+Copy 3: Cloud storage (like Google Workspace or OneDrive for Business) — this survives physical disasters like fire or theft.
 
-An **SSD (Solid State Drive)** uses flash memory with no moving parts. It is much faster, more durable, and uses less battery power, but costs more per gigabyte.
-
-For a laptop, I would choose an **SSD** because:
-- Faster boot times and file access improve daily performance
-- No moving parts means it is more durable for a portable device
-- Better battery life is important for laptop use
-- The speed difference is noticeable in everyday tasks like opening files and applications
+Two types of storage: hard drive and cloud — if one fails, the other survives.
+One offsite: the cloud copy is not in the physical office — it survives building-level disasters.
 
 ---
 
 ### Question 10
-A student has 500 photos with names like `IMG_0001.jpg` through `IMG_0500.jpg`. Propose a naming and organization system to make these photos easier to find.
+Your friend has 200 files on their desktop. They ask you to help organize everything in 30 minutes. Create a step-by-step plan that includes the folder structure you would create, the order of operations, and any tools you would use.
 
 **Model Answer:**
-**Organization Structure:**
-```
-Photos/
-├── 2026/
-│   ├── January/
-│   ├── February/
-│   └── ...
-└── By-Event/
-    ├── School-Trip-March/
-    └── Sports-Day-May/
-```
+Step 1 (5 min): Take a screenshot of the current desktop for before/after comparison.
+Step 2 (3 min): Create a folder structure: Desktop (keep empty), Documents/School/[subject folders], Documents/Personal, Downloads, Pictures.
+Step 3 (5 min): Sort files by type — identify photos, documents, downloads, and misc files.
+Step 4 (10 min): Move files to correct folders. Rename obviously bad names using date-first convention.
+Step 5 (5 min): Delete empty files, duplicates, and files no longer needed.
+Step 6 (2 min): Upload important files to cloud backup.
 
-**Naming Convention:**
-- Pattern: `YYYY-MM-DD_event-description_sequence.jpg`
-- Examples: `2026-03-15_school-trip_001.jpg`, `2026-05-20_sports-day_042.jpg`
-
-**Steps:**
-1. Sort photos by date taken (metadata in each file)
-2. Create event-based folders for major occasions
-3. Rename files following the date-first pattern
-4. Keep the original SD card as backup until organization is complete
+Tools: File Explorer's sort-by-type and sort-by-date features, search to find specific files, and a cloud storage service for backup.
 
 ---
 
 ## Section C: Reflection Questions (3 questions, 4 points each)
 
 ### Question 11
-Describe your current file management habits. What is one thing you do well and one thing you want to improve?
+Describe your current file management habits. What is one thing you do well and one thing you want to improve. Include a specific example of each.
 
 **Evaluation Criteria:**
 - Honest self-assessment (1 point)
@@ -164,24 +164,24 @@ Describe your current file management habits. What is one thing you do well and 
 ---
 
 ### Question 12
-Think about all the digital files you create in a typical school week (homework, notes, projects, photos). How are they currently organized? Would a friend be able to find a specific file on your computer?
+Think about a time you lost a file or could not find something important on your computer. What happened? How did it make you feel? What would you do differently now?
 
 **Evaluation Criteria:**
-- Description of current organization approach (1 point)
-- Self-evaluation of findability (1 point)
-- Awareness of strengths and weaknesses (1 point)
-- Suggestion for improvement (1 point)
+- Description of the situation (1 point)
+- Emotional response and consequences (1 point)
+- Analysis of what went wrong (1 point)
+- Concrete changes to prevent it from happening again (1 point)
 
 ---
 
 ### Question 13
-Why do you think many students struggle with file management even though the tools (folders, naming, search) are simple to use? What motivates you to stay organized?
+Why do you think many students struggle with file management even though the tools (folders, naming, search) are simple to use? What motivates you to stay organized? Connect your answer to a real career or life situation.
 
 **Evaluation Criteria:**
 - Insight into why organization is difficult (1 point)
 - Connection to procrastination or lack of habits (1 point)
 - Personal motivation statement (1 point)
-- Connection to real-world benefits (1 point)
+- Connection to real-world career or life application (1 point)
 
 ---
 
@@ -192,25 +192,27 @@ Design a complete folder structure for a student who takes 6 subjects, participa
 - A tree diagram of the folder structure
 - At least 3 levels of hierarchy in at least one branch
 - A naming convention for each file type (documents, images, presentations)
-- An explanation of why you chose this structure
+- An explanation of why you chose this structure over alternatives
 
 **Evaluation Criteria:**
 - Logical hierarchy that covers all three categories (3 points)
 - Appropriate depth without over-complication (2 points)
 - Clear naming conventions for different file types (3 points)
-- Well-reasoned explanation (2 points)
+- Well-reasoned explanation with comparison to alternatives (2 points)
 
 ---
 
 ### Question 15
-A friend asks you to help them organize their computer. Their desktop has 200 files, including homework, photos, music, downloads, and random files. Create a step-by-step plan for how you would help them organize everything in one hour. Include the folder structure you would create, the order of operations, and any tools you would use.
+**Debugging Challenge:** A friend sends you this screenshot description: "My desktop has 150 files. I can't find anything. My last homework is in there somewhere but I don't know what I named it. I think it was due yesterday."
+
+Write a step-by-step plan to help your friend find the homework AND set up a system so this never happens again. Your plan must address both the immediate problem (finding the file) and the long-term problem (preventing future chaos).
 
 **Evaluation Criteria:**
-- Prioritized step-by-step plan (3 points)
-- Realistic time allocation (2 points)
-- Appropriate folder structure (2 points)
-- Tool recommendations (File Explorer, search, etc.) (1 point)
-- Consideration of backup before reorganizing (2 points)
+- Immediate search strategy (3 points)
+- Identification of the file using available tools (2 points)
+- Long-term organization system (2 points)
+- Naming convention to prevent future problems (2 points)
+- Realistic and actionable advice (1 point)
 
 ---
 
@@ -218,8 +220,8 @@ A friend asks you to help them organize their computer. Their desktop has 200 fi
 
 | Section | Questions | Points per Question | Total Points |
 |---------|-----------|-------------------|--------------|
-| A: Multiple Choice | 1-5 | 2 | 10 |
-| B: Short Answer | 6-10 | 4 | 20 |
+| A: Scenario MCQ | 1-5 | 2 | 10 |
+| B: Scenario Short Answer | 6-10 | 4 | 20 |
 | C: Reflection | 11-13 | 4 | 12 |
 | D: Practical | 14-15 | 10 | 20 |
 | **Total** | **15** | | **62** |
@@ -237,9 +239,10 @@ A friend asks you to help them organize their computer. Their desktop has 200 fi
 
 ## Notes for Teachers
 
-- Section A can be used as a quick quiz
-- Section B tests conceptual understanding
-- Section C encourages metacognition about personal habits
-- Section D assesses application and problem-solving
+- Section A tests application through real scenarios, not recall
+- Section B requires students to analyze problems and propose solutions
+- Section C encourages metacognition about personal habits and career connections
+- Section D assesses problem-solving and system design thinking
 - Consider allowing students to use a computer for Section D if time permits
 - Practical questions can be completed as take-home assignments for more thoughtful responses
+- The debugging challenge (Q15) is particularly effective for assessing whether students can apply knowledge to messy, real-world situations

@@ -1,7 +1,7 @@
 # YouTube Script: Software Installation
 
 **Title:** How to Install Software Safely — A Beginner's Guide
-**Duration:** 5 minutes
+**Duration:** 6 minutes
 **Format:** Screen recording with voiceover + motion graphics
 
 ---
@@ -10,93 +10,98 @@
 
 ### [0:00 - 0:30] Hook
 
-**Visual:** Montage of installation dialog boxes, progress bars, and app icons appearing on a desktop.
+**Visual:** Montage of installation dialog boxes, progress bars, and app icons appearing on a desktop. Quick cuts between clean desktop and cluttered desktop with error messages.
 
 **Voiceover:**
-"Every app on your computer had to be installed. But here is something most people never think about: how you install software determines how safe your computer is. A single wrong download can introduce malware, steal your passwords, or slow your computer to a crawl. In the next five minutes, I will show you how to install software safely, step by step."
+"Every app on your computer had to be installed. But here is something most people never think about: how you install software determines how safe your computer is. A single wrong download can introduce malware, steal your passwords, or slow your computer to a crawl. In the next six minutes, I will show you five habits that will keep your computer safe — habits that take seconds to practice but prevent hours of cleanup."
 
-**Text Overlay:** "How to Install Software Safely"
+**Text Overlay:** "5 Habits That Keep Your Computer Safe"
 
 ---
 
-### [0:30 - 1:30] What Is Software?
+### [0:30 - 1:15] Habit 1: Official Sources Only
 
-**Visual:** Animated diagram splitting into two branches.
+**Visual:** Screen recording of a Google search for "download VLC." Highlight the ad results vs. the official site.
 
 **Voiceover:**
-"First, let us understand what software actually is. Software is a set of instructions that tells your computer hardware what to do. Without software, even the most powerful computer is just an expensive paperweight.
+"Habit one: only download from official sources. Let me show you what I mean. When I search for VLC media player, look at these results. The first few are advertisements. They look legitimate, but they are download portals that bundle extra software with the installer. The official site is videolan.org. That is the only URL I trust.
 
-Software falls into two main categories. System software is what makes your computer work — your operating system like Windows or Linux, utilities like antivirus programs, and device drivers that let your computer talk to printers and keyboards.
+Here is how to verify. First, check the domain name. Is it exactly the developer's domain? Second, look for the HTTPS lock icon. Third, cross-reference with an app store. If the same software is available in the Microsoft Store or Ubuntu Software Center, that is a good sign."
 
-Application software is what you use to get things done — web browsers, word processors, games, and video editors. When you install software, you are almost always installing application software."
-
-**Visual:** Animated icons for each category appearing as they are mentioned.
+**Visual:** Zoom into the URL bar. Red circle around the official domain. Green checkmark. Red X on fake sites.
 
 ---
 
-### [1:30 - 2:30] Finding Safe Sources
+### [1:15 - 2:15] Habit 2: Read Installation Prompts
 
-**Visual:** Screen recording of a Google search for "download VLC."
-
-**Voiceover:**
-"Now, where do you get software? The golden rule is simple: only download from official sources. Let me show you what I mean.
-
-When I search for VLC media player, look at these results. The first few are advertisements. They look legitimate, but they are download portals that bundle extra software with the installer. The official site is videolan.org — and you can verify this by checking the URL carefully.
-
-Here is your checklist for safe downloading. First, make sure you are on the developer's official website. Second, look for the HTTPS lock icon in the address bar. Third, verify the domain name is exactly right — scammers use variations like vlc-player.com instead of videolan.org.
-
-Alternatively, use a verified app store. The Microsoft Store on Windows, Ubuntu Software Center on Linux, and the Mac App Store on macOS all verify software before listing it."
-
-**Visual:** Highlighting the official URL vs. ad results. Close-up of HTTPS lock icon.
-
----
-
-### [2:30 - 3:30] The Installation Process
-
-**Visual:** Screen recording of installing VLC Media Player.
+**Visual:** Screen recording of installing VLC Media Player. Pause at each dialog box.
 
 **Voiceover:**
-"Let me walk you through a real installation. I am installing VLC Media Player from the official website.
-
-Step one: I downloaded the installer from videolan.org. Step two: I am running it. Notice this dialog — it asks me to choose a language. I will select English.
+"Habit two: read installation prompts before clicking. Let me walk you through a real installation. I downloaded the installer from videolan.org. Now I am running it. Notice this dialog — it asks me to choose a language. I will select English.
 
 Now, here is where most people make a mistake. They click Next without reading. Look at this screen. It is offering to install additional software. This is pre-checked, meaning it will install unless I uncheck it. I do not want this, so I am unchecking it.
 
-The installer is now copying files, configuring settings, and creating shortcuts. This takes about thirty seconds.
+If an installer offers Express or Custom installation, always choose Custom. Express hides bundled offers. Custom shows you everything."
 
-And done. VLC is installed and ready to use. The whole process took less than two minutes."
-
-**Visual:** Annotated screen recording with arrows pointing to key moments.
+**Visual:** Annotated screen recording with arrows pointing to pre-checked boxes. Red highlight on bundled offers. Green highlight on custom install option.
 
 ---
 
-### [3:30 - 4:30] Configuration and Updates
+### [2:15 - 3:15] Habit 3: Enable Automatic Updates
 
-**Visual:** Screen recording of VLC settings and Windows Update.
+**Visual:** Screen recording of Windows Update settings. Motion graphics showing WannaCry statistics.
 
 **Voiceover:**
-"After installation, take a minute to configure the application. Open the settings and review three things: privacy options, notification preferences, and default behaviors. Only grant permissions the app actually needs. If a calculator asks for camera access, that is a red flag.
+"Habit three: enable automatic updates. Software updates are not optional. They patch security vulnerabilities that hackers actively exploit.
 
-Now, the most important step: updates. Software updates are not optional. They patch security vulnerabilities that hackers actively exploit.
+In 2017, the WannaCry ransomware attack infected over two hundred thousand computers across one hundred fifty countries. It encrypted files and demanded Bitcoin payment. Hospitals, businesses, government agencies — all locked out of their own data. Here is the part that should make you uncomfortable: Microsoft had released a patch for the vulnerability two months earlier. The victims had simply not updated their systems.
 
-In 2017, the WannaCry ransomware attack infected over two hundred thousand computers across one hundred fifty countries. It exploited a vulnerability that Microsoft had already patched two months earlier. The victims had simply not updated their systems.
+The simplest security practice for any computer is this: turn on automatic updates. Go to your settings right now and enable them."
 
-Check for updates right now. On Windows, go to Settings, Update and Security, and click Check for Updates. On a Mac, go to System Settings, General, Software Update. It takes less than a minute, and it could prevent the next security breach from affecting you."
-
-**Visual:** Settings navigation with zoom annotations. WannaCry statistics as motion graphics.
+**Visual:** WannaCry stats as motion graphics. Calendar showing "Patch available" vs. "Attack date" with a two-month gap highlighted.
 
 ---
 
-### [4:30 - 5:00] Call to Action
+### [3:15 - 4:15] Habit 4: Review Permissions
+
+**Visual:** Screen recording of app permission dialogs. Split screen showing legitimate vs. suspicious permission requests.
+
+**Voiceover:**
+"Habit four: review permissions after installation. When an app asks for permission, ask yourself: does this app need this to do its job?
+
+A note-taking app needs file access to save your notes. It does not need your camera. A music player needs file access to play your music. It does not need your contacts. A web browser needs network access. That makes sense.
+
+This is called the principle of least privilege. Software should only have access to what it needs to function. When you see a permission that does not make sense, deny it. You can always grant it later if you discover you were wrong."
+
+**Visual:** Permission dialog with "Grant" and "Deny" buttons. Green checkmark on legitimate requests, red X on suspicious ones.
+
+---
+
+### [4:15 - 5:00] Habit 5: Clean Up
+
+**Visual:** Screen recording of Windows Settings > Apps > Installed apps. Scrolling through a long list.
+
+**Voiceover:**
+"Habit five: uninstall software you no longer use. Every installed application is a potential security risk. Outdated software with known vulnerabilities is dangerous — even if you never open the program.
+
+Here is the six-month rule: if you have not used a program in six months, uninstall it. Use the operating system's built-in uninstaller, not just deleting shortcuts. After uninstalling, restart your computer to clear background processes.
+
+Right now, open your list of installed programs. Count how many you actually use. The rest? Uninstall them."
+
+**Visual:** Before/after showing disk space reclaimed. Counter showing number of programs removed.
+
+---
+
+### [5:00 - 5:45] Recap and Call to Action
 
 **Visual:** Summary checklist appearing on screen. Bhavya Foundation branding.
 
 **Voiceover:**
 "Let us recap the five habits that will keep your computer safe. One: only download from official sources. Two: read installation prompts before clicking. Three: enable automatic updates. Four: review permissions after installation. Five: uninstall software you no longer use.
 
-Here is your challenge: right now, check for updates on your computer. It takes sixty seconds.
+These five habits take minimal time — a few extra seconds during installation and a few minutes each month for maintenance. But they make the difference between a computer that runs smoothly for years and one that is slow, cluttered, and vulnerable.
 
-If this video helped you, share it with someone who needs to hear it. And follow Bhavya Foundation for more digital literacy lessons."
+Here is your challenge: right now, check for updates on your computer. It takes sixty seconds."
 
 **Text Overlay:**
 ```
@@ -107,6 +112,15 @@ If this video helped you, share it with someone who needs to hear it. And follow
 5. Uninstall unused software
 ```
 
+---
+
+### [5:45 - 6:00] End Screen
+
+**Visual:** Bhavya Foundation logo, subscribe button, related video suggestions.
+
+**Voiceover:**
+"If this video helped you, share it with someone who needs to hear it. And follow Bhavya Foundation for more digital literacy lessons."
+
 **End Screen:** Bhavya Foundation logo, subscribe button, related video suggestions.
 
 ---
@@ -114,9 +128,10 @@ If this video helped you, share it with someone who needs to hear it. And follow
 ## Production Notes
 
 - **Tone:** Friendly, confident, educational — not condescending
-- **Pacing:** Steady, with pauses at key moments for emphasis
-- **Visuals:** Mix of screen recordings and motion graphics
-- **Audio:** Clean voiceover with subtle background music
+- **Pacing:** Steady, with pauses at key moments for emphasis. Slightly faster during the WannaCry story for urgency.
+- **Visuals:** Mix of screen recordings and motion graphics. Annotations on every screen recording.
+- **Audio:** Clean voiceover with subtle background music during intro/outro. No music during screen recordings.
 - **Subtitles:** Burned-in subtitles for accessibility
 - **Branding:** Bhavya Foundation lower-third throughout
 - **Thumbnail:** Computer screen with shield icon and text "Install Software Safely"
+- **Chapter markers:** Add YouTube chapters for each habit so viewers can jump to specific sections

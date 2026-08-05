@@ -1,338 +1,354 @@
 # Lesson: Operating System Navigation
 
-**Knowledge Package:** KP-002  
-**Duration:** 2 hours (90 minutes instruction + 30 minutes practice)  
-**Grade Level:** 9  
-**Subject:** Digital Literacy  
+**Knowledge Package:** KP-002
+**Duration:** 2 hours (90 minutes instruction + 30 minutes practice)
+**Grade Level:** 9
+**Subject:** Digital Literacy
 
 ---
 
 ## Learning Objective
 
-Navigate a desktop operating system to manage windows, settings, and system resources.
+By the end of this lesson, you will navigate any desktop operating system confidently — managing windows, configuring settings, monitoring system health, and using keyboard shortcuts to work efficiently.
 
 ---
 
-## Section 1: Introduction to the Desktop Interface (15 minutes)
+## Section 1: The Desktop Is Your Workspace (15 minutes)
 
-### Opening Hook
+### Opening Provocation
 
-Have you ever sat down at a computer and felt overwhelmed by everything on the screen? The desktop is your digital workspace — and learning to navigate it is like learning to organize your physical desk. Today, you'll become a confident navigator of any operating system.
+Your computer screen right now has dozens of elements on it. Most students can name maybe three. Let's see how many YOU can identify without help.
 
-### Core Content
+### DO: Silent Discovery (5 minutes)
 
-**What is a Desktop Interface?**
+**No instructions. No hints. Just explore.**
 
-The desktop interface is the visual environment you see when you turn on a computer. It includes several key components that work together:
+1. Right-click anywhere on your desktop. Write down every option you see.
+2. Click the Start button (Windows) or Apple menu (Mac). Count how many categories you find.
+3. Look at the bottom-right corner of your screen. List every icon you see.
+4. Find ONE thing on your screen you cannot name. Write it down.
 
-**Key Components:**
+**Do not ask anyone for help yet. Just observe and record.**
 
-1. **Wallpaper/Background** — The image or color behind everything on your screen
-2. **Icons** — Small pictures that represent files, folders, and applications
-3. **Taskbar** — The horizontal bar at the bottom showing open programs and system information
-4. **Start Menu** — The menu that appears when you click the Start button
-5. **System Tray** — The area in the bottom-right corner with clock, volume, and network icons
-6. **Notification Area** — Where alerts and messages appear
+### PAIR: Compare Discoveries (3 minutes)
 
-**Desktop vs. Desktop Environment:**
+Turn to a partner. Compare your lists:
+- What did you both find?
+- What did one person find that the other missed?
+- What could neither of you name?
 
-- **Desktop** refers to the visual area you see
-- **Desktop Environment** is the complete software package including windows, panels, and file managers
+### Think About It
 
-### Activity: Desktop Scavenger Hunt
+- Why does your desktop look different from your partner's desktop?
+- If you could rearrange everything on screen, what would you move and why?
+- What would happen if someone removed the taskbar entirely?
 
-**Time:** 5 minutes
+### The Components That Matter
 
-On your computer, find and identify:
-1. The Start button
-2. The system tray with clock
-3. Three application icons on your desktop
-4. An open window (if any)
-5. The network/Wi-Fi icon
+After your exploration, here are the components you discovered:
 
-Write down what you found and where it is located on your screen.
+| Component | What It Does | Why It Matters |
+|-----------|-------------|----------------|
+| **Taskbar** | Shows open programs and system status | Your launchpad — everything starts here |
+| **Start Menu / App Launcher** | Lists all installed applications | The catalog of everything your computer can do |
+| **System Tray** | Clock, volume, network, battery | Quick-glance system health |
+| **Icons** | Shortcuts to files, folders, apps | Visual bookmarks for your workspace |
+| **Notification Center** | Alerts from apps and the system | Your computer talking to you |
 
-### Discussion Questions
+**Key Insight:** A "desktop" is just the visual area. A "desktop environment" is the entire software package — windows, panels, file managers, and settings working together. Windows, macOS, and Linux each use different desktop environments, but the concepts are identical.
 
-- What do you notice about your desktop that looks different from a classmate's desktop?
-- Why do you think different operating systems arrange things differently?
+### Teach Someone
 
----
-
-## Section 2: Window Management (20 minutes)
-
-### Core Content
-
-**What is a Window?**
-
-A window is a rectangular area on your screen that displays an application or document. Every window has these standard controls:
-
-**Window Controls:**
-
-| Control | Location | Function |
-|---------|----------|----------|
-| Minimize (—) | Top-right | Hides window to taskbar |
-| Maximize (□) | Top-right | Expands window to full screen |
-| Close (×) | Top-right | Closes the window |
-| Title Bar | Top | Shows program name, allows dragging |
-| Resize Handles | Edges/corners | Allows changing window size |
-
-**Window Management Techniques:**
-
-1. **Moving Windows**
-   - Click and drag the title bar
-   - Use keyboard shortcuts (Alt + Space + M for move)
-
-2. **Resizing Windows**
-   - Drag edges or corners
-   - Double-click title bar to maximize/restore
-
-3. **Minimizing vs. Closing**
-   - Minimizing: Window hides but program keeps running
-   - Closing: Window disappears and program may close
-
-4. **Switching Between Windows**
-   - Click on visible windows
-   - Use Alt + Tab to cycle through open windows
-   - Click on taskbar buttons
-
-5. **Arranging Windows Side by Side**
-   - Drag window to left/right edge of screen (Snap Assist in Windows 11)
-   - Use keyboard shortcuts for split screen
-
-### Activity: Window Management Practice
-
-**Time:** 10 minutes
-
-1. Open three different applications (Calculator, Notepad, File Explorer)
-2. Minimize each one, then restore them from the taskbar
-3. Arrange two windows side by side using Snap
-4. Resize a window to take up exactly half the screen
-5. Switch between windows using Alt + Tab
-
-### Key Takeaway
-
-Window management is about organizing your workspace efficiently. The more windows you have open, the more important it becomes to manage them well.
+Explain to your partner what the system tray does and why it's useful. Use an analogy from everyday life (like a car dashboard, a school notice board, etc.).
 
 ---
 
-## Section 3: System Settings (15 minutes)
+## Section 2: Windows — Organize Your Digital Desk (20 minutes)
 
-### Core Content
+### Opening Experiment
 
-**Why Configure Settings?**
+Open three applications right now: a text editor, a web browser, and a calculator. Don't arrange them yet — just open them and look at the chaos.
 
-Every computer comes with default settings, but you can customize them to suit your needs. Settings control how your computer looks, sounds, connects, and behaves.
+**Question:** How many windows can you see? Which one is "active"? How do you know?
 
-**Common Settings Categories:**
+### DO: Window Playground (8 minutes)
 
-1. **Display Settings**
-   - Screen brightness
-   - Resolution (clarity of text and images)
-   - Multiple monitor setup
-   - Night light/blue light filter
+**Experiment 1: The Minimize Test**
+1. Minimize each window one by one. Where do they go?
+2. Click each minimized window on the taskbar. What happens?
+3. **Now here's the puzzle:** If you minimize a window, is the program still running? How can you prove it?
 
-2. **Sound Settings**
-   - Volume control
-   - Speaker/headphone selection
-   - Microphone settings
-   - Sound effects
+**Experiment 2: The Close vs. Minimize Test**
+1. Open Calculator. Type `2+2`. Minimize it.
+2. Open a second Calculator. Type `5*3`. Close it.
+3. Restore the first Calculator. What do you see?
+4. **Think:** Why did the first Calculator remember your calculation but the second one is gone?
 
-3. **Network Settings**
-   - Wi-Fi connection
-   - Bluetooth pairing
-   - VPN configuration
-   - Hotspot sharing
+**Experiment 3: Snap and Split**
+1. Drag a window to the LEFT edge of your screen. What happens?
+2. Drag another window to the RIGHT edge. What happens?
+3. Now try dragging a window to a CORNER instead of an edge. What happens?
+4. **Challenge:** Can you get THREE windows visible at once? Four? How?
 
-4. **Privacy Settings**
-   - App permissions (camera, microphone, location)
-   - Data collection preferences
-   - Account privacy
-   - Activity history
+**Experiment 4: The Alt+Tab Mystery**
+1. Hold Alt and press Tab once. What do you see?
+2. Keep holding Alt and press Tab again. What changes?
+3. While still holding Alt, try pressing the LEFT/RIGHT arrow keys. What happens?
+4. **Why this matters:** Alt+Tab is the fastest way to switch windows. Master it and you'll never touch the taskbar for switching again.
 
-5. **Personalization**
-   - Wallpaper and themes
-   - Color scheme (light/dark mode)
-   - Lock screen settings
-   - Font size and accessibility
+### Window Controls Reference
 
-### Activity: Explore Your Settings
+| Control | Location | What Happens |
+|---------|----------|-------------|
+| Minimize (—) | Top-right | Window hides to taskbar; program keeps running |
+| Maximize (□) | Top-right | Window fills entire screen |
+| Restore (□) | Top-right (when maximized) | Returns window to previous size |
+| Close (×) | Top-right | Window closes; program may exit |
+| Title Bar | Top strip | Shows program name; drag to move |
+| Resize Handles | Edges/corners | Drag to change window size |
 
-**Time:** 10 minutes
+### Socratic Check
 
-Navigate to your system settings and:
-1. Change your desktop wallpaper to a solid color
-2. Adjust the screen brightness to 75%
-3. Check which apps have access to your camera
-4. Find your Wi-Fi network name (SSID)
-5. Locate the accessibility options
+- If you minimize a window, can you still hear audio from that program? Test it.
+- What happens if you close a program with unsaved work? Try it in Notepad (type something, then close without saving).
+- Why would someone choose to maximize a window instead of just making it bigger manually?
 
-**Windows:** Settings > System, Personalization, Privacy  
-**macOS:** System Preferences  
-**Linux (Ubuntu):** Settings > Appearance, Privacy, Network
+### Real-World Scenario
 
-### Discussion Questions
+> Your friend calls and says: "I have my essay on one side of the screen and my research on the other, but I can't figure out how to make them share the screen equally. Every time I resize one, the other disappears."
 
-- Why might a school want to restrict certain privacy settings on student computers?
-- How do display settings affect your ability to read and work comfortably?
+What's happening? How would you walk them through fixing it? Write out the steps you'd tell them.
 
 ---
 
-## Section 4: Task Manager — Your System Dashboard (15 minutes)
+## Section 3: Settings — Your Computer, Your Rules (15 minutes)
 
-### Core Content
+### Opening Question
 
-**What is Task Manager?**
+If your computer is a car, settings are the dashboard controls. What would you want to adjust? Brightness? Volume? What about things you didn't know you could control?
 
-Task Manager is a built-in system utility that shows you what's happening inside your computer. Think of it as a dashboard for your system's health.
+### DO: Settings Scavenger Hunt (10 minutes)
 
-**How to Open Task Manager:**
+**Navigate to your settings and complete these challenges:**
 
-| Method | Windows | macOS | Linux (Ubuntu) |
-|--------|---------|-------|----------------|
-| Keyboard | Ctrl + Shift + Esc | Cmd + Option + Esc | Ctrl + Alt + Del |
-| Right-click | Right-click taskbar | N/A | Right-click desktop |
-| Search | Search "Task Manager" | Spotlight search "Activity Monitor" | Search "System Monitor" |
+**Challenge 1:** Find your screen resolution. Right now, what is it? Write it down.
 
-**Key Information Displayed:**
+**Challenge 2:** Change your wallpaper to something completely different. Take a screenshot. Then change it back.
 
-1. **Processes** — List of running programs
-2. **CPU Usage** — How hard your processor is working (0-100%)
-3. **Memory (RAM)** — How much temporary memory is being used
-4. **Disk Usage** — How much your hard drive is being accessed
-5. **Network** — Internet and network activity
+**Challenge 3:** Find the privacy settings. Answer these questions:
+- How many apps currently have camera access? List them.
+- How many apps have microphone access? List them.
+- Is location services on or off?
 
-**When to Use Task Manager:**
+**Challenge 4:** Find your network information:
+- What is your Wi-Fi network name (SSID)?
+- Are you connected via Wi-Fi or Ethernet?
+- Can you find your IP address? (Hint: look for "Network properties" or "Advanced")
 
-- A program is frozen or not responding
-- Computer is running slowly
-- You want to see what's using your resources
-- You need to force-close a stuck program
+**Challenge 5:** Find ONE accessibility setting you didn't know existed. What does it do?
 
-### Activity: Monitor Your System
+### Think About It
 
-**Time:** 10 minutes
+- Why might a school configure settings differently than a home computer?
+- If you could only change ONE setting to make your computer more comfortable, what would it be and why?
+- What's the difference between a setting you change once and a setting you change frequently?
 
-1. Open Task Manager (or Activity Monitor on Mac)
-2. Identify the top 3 processes using the most CPU
-3. Identify the top 3 processes using the most memory
-4. Close one unnecessary program
-5. Observe how CPU and memory usage change
+### Settings Categories Map
 
-### Important Warning
+| Category | What You Control | Why It Matters |
+|----------|-----------------|----------------|
+| **Display** | Brightness, resolution, night light | Comfort and readability |
+| **Sound** | Volume, output device, microphone | Communication and media |
+| **Network** | Wi-Fi, Bluetooth, VPN, hotspot | Connectivity |
+| **Privacy** | App permissions, data sharing | Safety and security |
+| **Personalization** | Wallpaper, colors, lock screen | Making it feel like YOUR computer |
 
-Never close processes you don't recognize — they may be essential system processes. Only close programs you intentionally opened and understand.
+### Peer Teaching Moment
 
----
-
-## Section 5: Keyboard Shortcuts — Work Smarter (15 minutes)
-
-### Core Content
-
-**What are Keyboard Shortcuts?**
-
-Keyboard shortcuts are combinations of keys that perform actions without using a mouse. They save time and make you more productive.
-
-**Essential Navigation Shortcuts:**
-
-| Shortcut | Action | Windows | macOS |
-|----------|--------|---------|-------|
-| Copy | Ctrl + C | ✓ | Cmd + C |
-| Paste | Ctrl + V | ✓ | Cmd + V |
-| Cut | Ctrl + X | ✓ | Cmd + X |
-| Undo | Ctrl + Z | ✓ | Cmd + Z |
-| Select All | Ctrl + A | ✓ | Cmd + A |
-| Switch Window | Alt + Tab | ✓ | Cmd + Tab |
-| Lock Screen | Win + L | ✓ | Cmd + Ctrl + Q |
-| Screenshot | Win + Shift + S | ✓ | Cmd + Shift + 4 |
-
-**Advanced Shortcuts:**
-
-| Shortcut | Action | Windows | macOS |
-|----------|--------|---------|-------|
-| Task View | Win + Tab | ✓ | Cmd + Tab |
-| File Explorer | Win + E | ✓ | Cmd + Shift + N |
-| Settings | Win + I | ✓ | Cmd + , |
-| Find | Ctrl + F | ✓ | Cmd + F |
-| Refresh | F5 | ✓ | Cmd + R |
-
-### Activity: Shortcut Challenge
-
-**Time:** 10 minutes
-
-Complete these tasks using only keyboard shortcuts (no mouse):
-
-1. Open a text editor
-2. Type "Hello, World!"
-3. Select all text (Ctrl/Cmd + A)
-4. Copy it (Ctrl/Cmd + C)
-5. Create a new line
-6. Paste it three times (Ctrl/Cmd + V)
-7. Undo the last paste (Ctrl/Cmd + Z)
-8. Save the file (Ctrl/Cmd + S)
-
-Time yourself! Can you do it in under 60 seconds?
-
-### Key Takeaway
-
-Keyboard shortcuts are like secret codes that make you a power user. Start with 5 shortcuts and gradually learn more.
+Explain to a partner why a school might disable camera access for most apps on student computers. What problem are they solving?
 
 ---
 
-## Section 6: Putting It All Together (10 minutes)
+## Section 4: Task Manager — Your System's Health Monitor (15 minutes)
 
-### Activity: OS Navigation Challenge
+### Opening Scenario
 
-**Time:** 10 minutes
+> Your computer is running slowly. Your game keeps freezing. Your video won't play smoothly. What do you do?
 
-Complete the following challenge, applying everything you've learned:
+Most students' first instinct is "restart." But that's like going to the hospital for a headache. Let's learn to diagnose first.
 
-**Challenge Steps:**
+### DO: Task Manager Investigation (10 minutes)
 
-1. **Open** three different applications
-2. **Arrange** them so you can see all three (use Snap or manual arrangement)
-3. **Open** Task Manager and note your current CPU and memory usage
-4. **Use** keyboard shortcuts to copy text from one application and paste into another
-5. **Change** one system setting (wallpaper, brightness, or volume)
-6. **Close** one application using Task Manager
-7. **Document** what you did in a text file
+**Step 1: Open Task Manager**
+
+| Platform | How |
+|----------|-----|
+| Windows | Ctrl + Shift + Esc |
+| Mac | Cmd + Option + Esc (Force Quit) or search "Activity Monitor" |
+| Linux | Ctrl + Alt + Del or search "System Monitor" |
+
+**Step 2: The Current State**
+Write down RIGHT NOW:
+- CPU usage: _______%
+- Memory usage: _______%
+- Top process by CPU: _______
+- Top process by Memory: _______
+
+**Step 3: The Experiment**
+1. Open 5 browser tabs (different websites).
+2. Watch CPU and memory usage. Write down new values.
+3. Close 3 of those tabs.
+4. Watch the numbers change again.
+5. **What did you observe?**
+
+**Step 4: The Safe Close**
+1. Find a program YOU opened (not a system process).
+2. Close it using Task Manager ("End Task").
+3. What happened to the CPU/memory numbers?
+
+### Critical Safety Rule
+
+> **NEVER close a process you don't recognize.** System processes keep your computer alive. Only close programs YOU opened. If in doubt, ask your teacher.
+
+### Think About It
+
+- Why does opening more browser tabs use more memory?
+- What would happen if you closed every process in Task Manager?
+- How is Task Manager like a doctor checking your pulse?
+
+### Debugging Scenario
+
+> A classmate says: "My computer is SO slow. I opened Task Manager and the CPU is at 98%. One process called 'Antimalware Service' is using 60%."
+
+What's probably happening? Is this a problem? What should they do? (Hint: think about what "antimalware" means.)
+
+---
+
+## Section 5: Keyboard Shortcuts — The Secret Weapon (15 minutes)
+
+### Opening Challenge
+
+I'm going to time you. Open a text editor, type "Hello World", select it, copy it, paste it 5 times, undo 3 pastes, and save the file. Using only the mouse. Ready? Go.
+
+Now do the same thing using only keyboard shortcuts. Which was faster?
+
+### DO: The Shortcut Gauntlet (10 minutes)
+
+**Round 1: The Basics (no mouse allowed)**
+
+Open a text editor. Complete these tasks using ONLY keyboard shortcuts:
+
+| Task | Shortcut | Time (seconds) |
+|------|----------|---------------|
+| Type "KP-002 Master" | | |
+| Select all text | | |
+| Copy it | | |
+| Paste it 10 times | | |
+| Undo the last 5 pastes | | |
+| Save the file | | |
+| Select all, then delete | | |
+| Type "I am a power user" | | |
+| Save and close | | |
+
+**Record your total time. Can you beat 45 seconds?**
+
+**Round 2: Cross-Application**
+1. Type a sentence in your text editor
+2. Copy it (Ctrl/Cmd + C)
+3. Switch to your browser (Alt/Cmd + Tab)
+4. Paste it into the search bar (Ctrl/Cmd + V)
+5. Switch back to the editor (Alt/Cmd + Tab)
+
+**How many seconds did that take?**
+
+**Round 3: Discovery**
+Try these shortcuts and write down what each one does:
+- Win/Cmd + L
+- Win/Cmd + D
+- Ctrl/Cmd + Shift + T
+- Win/Cmd + Shift + S
+
+### The Shortcut Reference
+
+| Category | Shortcut | What It Does |
+|----------|----------|-------------|
+| **Editing** | Ctrl/Cmd + C | Copy selected content |
+| | Ctrl/Cmd + V | Paste from clipboard |
+| | Ctrl/Cmd + X | Cut selected content |
+| | Ctrl/Cmd + Z | Undo last action |
+| | Ctrl/Cmd + A | Select everything |
+| **Navigation** | Alt/Cmd + Tab | Switch between windows |
+| | Alt/Tab (release) | Switch to previous window |
+| | Win/Cmd + D | Show/hide desktop |
+| | Win/Cmd + L | Lock computer |
+| **System** | Ctrl/Cmd + S | Save current document |
+| | Ctrl/Cmd + F | Find in document |
+| | F5 | Refresh page |
+| | Win/Cmd + Shift + S | Screenshot tool |
+
+### Socratic Check
+
+- Why does Ctrl+Z feel more powerful than Ctrl+V?
+- If shortcuts save 64 hours per year, how many minutes per day is that? Is that realistic?
+- What's the shortcut you'd use most often in a math class? In an English class?
+
+### Real-World Scenario
+
+> Your teacher says: "Everyone, take a screenshot of your completed work and paste it into the shared document." What shortcuts do you need, in order, to complete this task?
+
+Write out the exact sequence of shortcuts you'd use.
+
+---
+
+## Section 6: Integration Challenge (10 minutes)
+
+### The OS Navigation Gauntlet
+
+This challenge combines everything. Complete all 7 steps and document what you did.
+
+**Step 1:** Open a text editor, a web browser, and File Explorer.
+
+**Step 2:** Arrange them using Snap so you can see at least two at once.
+
+**Step 3:** Open Task Manager. Write down your current CPU and memory usage.
+
+**Step 4:** Copy text from your browser and paste it into your text editor using keyboard shortcuts.
+
+**Step 5:** Change one system setting (brightness, wallpaper, or volume).
+
+**Step 6:** Close one application using Task Manager.
+
+**Step 7:** Write a brief summary of everything you did in your text editor. Save it.
 
 ### Reflection Questions
 
-1. Which operating system feature do you find most useful? Why?
-2. What keyboard shortcut surprised you the most?
-3. How might these skills help you in other subjects or future jobs?
+1. Which skill from today will you actually use tomorrow? Why that one?
+2. What's one thing you used to do slowly that you can now do faster?
+3. If you had to teach this lesson to a younger student, which topic would you start with and why?
 
-### Closing Summary
+### Closing Insight
 
-Today you learned to:
-- Navigate the desktop interface
-- Manage windows efficiently
-- Configure system settings
-- Monitor system performance with Task Manager
-- Use keyboard shortcuts to work faster
-
-These are foundational skills that will make you more confident and productive with any computer.
+Operating system navigation isn't about memorizing buttons. It's about understanding your workspace. When you understand what each component does, you can figure out any computer — Windows, Mac, Linux, or whatever comes next. The concepts are universal. The details vary, but the logic is always the same.
 
 ---
 
 ## Homework
 
-Practice using at least 5 keyboard shortcuts daily for one week. Keep a log of which shortcuts you used and how they helped you work faster.
+For one week, keep a "shortcut journal." Every time you use a keyboard shortcut, write it down. At the end of the week, count how many times you used shortcuts and estimate how much time they saved you.
 
 ---
 
 ## Materials Needed
 
 - Computer with Windows 11, macOS, or Ubuntu Linux
-- Internet access (optional, for settings exploration)
 - Text editor (Notepad, TextEdit, or Gedit)
-- This lesson handout
+- Web browser
+- Calculator app
 
 ---
 
 ## Differentiation
 
-- **Struggling learners:** Pair with a buddy; focus on basic shortcuts (copy, paste, switch)
-- **Advanced learners:** Explore virtual desktops and advanced Task Manager features
-- **Visual learners:** Use the concept map (concept-map.md) to visualize relationships
+- **Struggling learners:** Pair with a buddy. Focus on 3 shortcuts (copy, paste, switch). Use the scavenger hunt format for exploration.
+- **Advanced learners:** Explore virtual desktops (Task View / Mission Control), custom keyboard shortcuts, and advanced Task Manager features like startup impact analysis.
+- **Visual learners:** Use the concept map (concept-map.md) to visualize relationships between components.

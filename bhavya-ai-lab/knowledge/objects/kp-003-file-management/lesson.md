@@ -9,19 +9,20 @@
 ### Learning Objective
 Understand the hierarchical structure of files and folders on a computer.
 
-### Opening Question
-Have you ever lost a file on your computer and spent minutes searching for it? Where do you think it went?
+### Opening Challenge
+Before we learn anything, try this: Open your file explorer right now. Can you find a file you saved more than two weeks ago in under 30 seconds? Start a timer. Go.
 
-### Core Content
+If you could not do it, you are not alone. Most students cannot. By the end of this lesson, you will be able to find any file in under 10 seconds.
 
-A **file system** is the method your computer uses to organize and store files. Think of it like a library:
+### DO: Map Your Computer's Brain
 
-- The **library building** is your hard drive or storage device
-- The **rooms** are your main folders (Documents, Pictures, Music)
-- The **shelves** are subfolders within those rooms
-- The **books** are your individual files
+Forget reading about file systems for a moment. Open your file explorer and answer these questions by exploring:
 
-Every file system follows a **hierarchy** — a tree structure that starts at the **root** and branches into folders and subfolders.
+1. **What is at the very top?** Click to the highest level you can see. What do you see? That is the **root** — the starting point of everything.
+2. **How many main folders exist?** Count them. Write the number down.
+3. **Pick any main folder and go two levels deep.** Draw what you see — the folder, its subfolders, and anything inside them.
+
+You just mapped a file system. The structure you drew is called a **tree** — it starts at the root and branches downward.
 
 ```
 Root (C:\)
@@ -39,16 +40,19 @@ Root (C:\)
     └── Screenshots
 ```
 
+### Think About It
+Why does the root folder not have a parent folder? What would happen if folders could have folders above them forever? Where would the chain end?
+
+### Try This Experiment
+Create a folder on your desktop. Inside it, create a subfolder. Inside that, create another subfolder. Now try to move the deepest subfolder to the desktop. What happens to the files inside it? Why?
+
 ### Key Terms
 - **Root** — The top level of the file system (usually C:\ on Windows)
 - **Directory** — Another word for folder
-- **Path** — The route from root to a specific file
+- **Path** — The route from root to a specific file (like an address)
 
-### Activity
-Draw a tree diagram of your own computer's folder structure. Include at least 3 main folders and 2 subfolders each.
-
-### Check for Understanding
-Why does the root folder not have a parent folder?
+### Teach Someone
+Turn to a partner. Without using any computer terms, explain how files are organized on a computer. Use an analogy — a library, a house, a kitchen. If your partner understands, you understand.
 
 ---
 
@@ -57,40 +61,70 @@ Why does the root folder not have a parent folder?
 ### Learning Objective
 Apply consistent rules for naming files clearly and professionally.
 
-### Opening Question
-Look at these two file names: `untitled1.docx` and `2026-08-05_science-report_draft.docx`. Which one would you rather search for three months from now?
+### Opening Experiment
+Your teacher will show you two lists of files on the board. One list has poorly named files, the other has well-named files. You have 60 seconds to find "the biology homework" in each list. Which list was faster? Why?
 
-### Core Content
+List A (bad names):
+```
+untitled.docx
+doc1.pdf
+notes.txt
+homework (3).docx
+IMG_4521.jpg
+```
 
-File naming conventions are rules that help you and others find files quickly. Poor naming leads to confusion, lost work, and wasted time.
+List B (good names):
+```
+2026-08-05_biology-homework_ch5.pdf
+2026-08-03_english-essay_draft2.docx
+2026-08-01_science-lab_report.pdf
+2026-07-28_math-assignment_ch3.pdf
+2026-07-25_history-presentation_final.pptx
+```
+
+If List B was faster, you already understand why naming matters. Now let us learn the rules.
+
+### DO: The Name Game
+
+Here is a file name. Your job: make it better.
+
+**Original:** `doc1.docx`
+
+Before you read the rules, write down three better names for this file. Then check your answers against the rules below.
 
 **The 5 Rules of File Naming:**
 
 1. **Be descriptive** — The name should describe what is inside
-   - Good: `chapter-3-notes.pdf`
-   - Bad: `notes.pdf` or `doc1.pdf`
-
 2. **Use dates in ISO format** — Start with YYYY-MM-DD so files sort chronologically
-   - Good: `2026-08-05_homework.docx`
-   - Bad: `aug-5-homework.docx` or `5-8-26_homework.docx`
-
 3. **Use hyphens or underscores, not spaces** — Some systems handle spaces poorly
-   - Good: `science-lab-report.docx`
-   - Bad: `science lab report.docx`
-
 4. **Avoid special characters** — Characters like / \ : * ? " < > | can cause errors
-   - Good: `math-assignment-01.pdf`
-   - Bad: `math@assignment#01!.pdf`
-
 5. **Keep it short but clear** — Aim for 3-8 words that describe the content
-   - Good: `presentation-final-v2.pptx`
-   - Bad: `my really long presentation that I worked on for hours.pptx`
 
-### Activity
-Rename three files on your computer using proper naming conventions. Write down the old and new names.
+### Try This: Transform These Names
 
-### Check for Understanding
-Why should you put the date at the beginning of a file name instead of the end?
+Take these badly named files and rewrite them using all 5 rules. Write your answers, then compare with a partner.
+
+| Original | Your Improved Name |
+|----------|-------------------|
+| `my homework.docx` | |
+| `notes.txt` | |
+| `presentation FINAL FINAL v2.pptx` | |
+| `screenshot 2026-01-20.png` | |
+| `science fair project.docx` | |
+
+### Experiment: What Happens If...
+
+Try these on your computer and record what happens:
+
+1. **Create a file with a space in the name.** Can you open it? Does anything break?
+2. **Create a file with a special character (like `!` or `#`).** What happens?
+3. **Create two files: `report.docx` and `Report.docx`.** Are they the same file or different files on your system? Why does this matter?
+
+### Think About It
+Why should you put the date at the beginning of a file name instead of the end? What happens to your files when you sort them alphabetically?
+
+### Real-World Scenario
+Your teacher asks you to submit a science report. The file name on your USB drive is `homework.docx`. There are 12 files with that exact name from different students. Your teacher cannot tell which one is yours. What do you do? Write the steps you would take to fix this.
 
 ---
 
@@ -99,60 +133,73 @@ Why should you put the date at the beginning of a file name instead of the end?
 ### Learning Objective
 Design logical folder structures that make files easy to find and manage.
 
-### Opening Question
-If you had to find a photo from a school trip last year, where would you look first on your computer?
+### Opening Scenario
+You just started at a new school. Your teacher says, "Please save your essay in the English folder." You open your file explorer and see:
 
-### Core Content
-
-Good folder organization is like having a well-organized kitchen — everything has a place, and you can find what you need without searching everywhere.
-
-**Three Common Organization Methods:**
-
-**Method 1: By Project**
 ```
-Projects/
-├── Science-Fair-2026/
-│   ├── Research
-│   ├── Drafts
-│   ├── Final
-│   └── Presentation
-└── English-Essay/
-    ├── Outline
-    ├── Draft
-    └── Final
+Desktop/
+├── New Folder
+├── New Folder (2)
+├── New Folder (3)
+├── stuff
+├── things
+├── school
+└── backup
 ```
-Best for: Students with multiple ongoing projects
 
-**Method 2: By Subject**
+Where would you look? What if there is no "English folder"? This is what happens when organization breaks down.
+
+### DO: Design Before You Build
+
+Before touching your computer, grab a piece of paper. You are going to design a folder system for a student who:
+
+- Takes 5 subjects (Science, English, Math, History, Art)
+- Works on 2 ongoing projects (Science Fair, English Essay)
+- Has photos from school events
+- Downloads files from the internet
+
+**Task 1:** Draw your folder tree on paper. Include at least 8 folders and at least 3 levels of hierarchy in one branch.
+
+**Task 2:** Label each folder with a one-sentence explanation of what goes inside it.
+
+**Task 3:** Show your design to a partner. Ask them: "Can you figure out where to save a new Science homework file?" If they cannot, redesign.
+
+### The Three Methods
+
+| Method | Best For | Example |
+|--------|----------|---------|
+| **By Subject** | Daily schoolwork across classes | `School/Science/Lab-Reports/` |
+| **By Project** | Multi-part assignments | `Projects/Science-Fair/Research/` |
+| **By Date** | Time-sensitive or chronological work | `2026/August/Week-2/` |
+
+### Try This: Mix and Match
+
+Pure subject-only or project-only organization often fails in the real world. Try designing a **hybrid system** that uses two methods together. For example:
+
 ```
 School/
 ├── Science/
+│   ├── Homework/
+│   ├── Labs/
+│   └── Science-Fair-2026/
 ├── English/
-├── Mathematics/
-├── History/
-└── Art/
+│   ├── Essays/
+│   └── Reading/
+└── Projects/
+    ├── English-Essay/
+    └── History-Presentation/
 ```
-Best for: Daily schoolwork across subjects
 
-**Method 3: By Date**
-```
-2026/
-├── August/
-│   ├── Week-1
-│   ├── Week-2
-│   └── Week-3
-└── September/
-```
-Best for: Work that is time-sensitive or needs chronological tracking
+Why does this hybrid work better than either method alone?
 
 ### The Golden Rule
 **Create folders before you need them.** A moment of organization now saves hours of searching later.
 
-### Activity
-Design a folder structure for managing all your schoolwork. Include at least 5 folders and use at least 2 levels of hierarchy. Draw the tree diagram.
+### Think About It
+Which organization method would work best for a student who submits different types of work (essays, lab reports, presentations) for each subject? Why? What would fail if they only used the by-date method?
 
-### Check for Understanding
-Which organization method would work best for a student who submits different types of work (essays, lab reports, presentations) for each subject? Why?
+### Peer Teaching
+Explain to a partner why "saving everything to the desktop" is a bad strategy. Give at least three specific problems it causes. Your partner should be able to repeat your explanation to someone else.
 
 ---
 
@@ -161,39 +208,54 @@ Which organization method would work best for a student who submits different ty
 ### Learning Objective
 Perform copy, move, rename, and delete operations on files correctly and safely.
 
-### Opening Question
-What happens when you accidentally delete an important file? Can you get it back?
+### Opening Challenge
+Open a text editor. Create a file and save it to your desktop. Now answer these questions by trying:
 
-### Core Content
+1. Can you have two files with the exact same name in the same folder?
+2. What happens when you drag a file from one folder to another on the same drive? What about to a different drive (like a USB)?
+3. What is the difference between pressing Delete and pressing Shift+Delete?
 
-File operations are the actions you perform on files. Mastering them prevents mistakes and saves time.
+If you got any of these wrong, this section will clarify why.
 
-**The Four Essential Operations:**
+### DO: The Operations Lab
 
-| Operation | What It Does | Shortcut (Windows) | Shortcut (Mac) |
-|-----------|-------------|-------------------|----------------|
-| **Copy** | Creates a duplicate of the file | Ctrl+C | Cmd+C |
-| **Move** | Transfers the file to a new location (original is removed) | Ctrl+X (cut) then Ctrl+V (paste) | Cmd+X then Cmd+V |
-| **Rename** | Changes the file's name | F2 or slow double-click | Enter or Return |
-| **Delete** | Sends the file to Recycle Bin / Trash | Delete key | Cmd+Delete |
+Create a test folder on your desktop called `File-Ops-Lab`. Inside it, create 3 text files. Then complete these tasks:
 
-**Critical Distinction: Copy vs. Move**
+**Task 1: Copy vs. Move**
+- Copy `file1.txt` to a new folder called `Copy-Destination`
+- Move `file2.txt` to a new folder called `Move-Destination`
+- Check: How many copies of `file1.txt` exist now? How many copies of `file2.txt`?
+
+**Task 2: Rename**
+- Rename `file1.txt` to `2026-08-05_renamed-file.txt`
+- What happens to the file's contents when you rename it? (Open it and check)
+
+**Task 3: Delete and Recover**
+- Delete `file3.txt`
+- Find it in the Recycle Bin / Trash
+- Restore it
+- What did you learn about the safety net?
+
+**Task 4: The Keyboard Speed Round**
+Practice these shortcuts until you can do them without looking:
+- `Ctrl+C` / `Cmd+C` — Copy
+- `Ctrl+X` / `Cmd+X` — Cut (Move)
+- `Ctrl+V` / `Cmd+V` — Paste
+- `F2` / `Enter` — Rename
+- `Delete` / `Cmd+Delete` — Delete
+- `Ctrl+Z` / `Cmd+Z` — Undo (your best friend)
+
+Time yourself. How fast can you copy a file, rename the copy, and move the original?
+
+### Critical Distinction: Copy vs. Move
 - **Copy** = The original stays, and a duplicate appears at the new location
 - **Move** = The original is removed from its current location and placed at the new location
 
-**The Recycle Bin / Trash Safety Net**
-When you delete a file, it goes to the Recycle Bin (Windows) or Trash (Mac) first. This is your safety net — you can restore files from there until you empty it.
+### Think About It
+You want to move a file from your Downloads folder to your Documents folder, but you also want to keep a copy in Downloads. Should you use Copy or Move? What if you only wanted ONE copy total — which operation would you use?
 
-**Keyboard Shortcut Reference:**
-- **Ctrl+Z / Cmd+Z** — Undo the last action
-- **Ctrl+A / Cmd+A** — Select all files in a folder
-- **Ctrl+D / Cmd+D** — Duplicate a file (some applications)
-
-### Activity
-Create a test folder. Inside it, create a text file, copy it to a new folder, rename the copy, move the original, and finally delete the copy. Practice using keyboard shortcuts.
-
-### Check for Understanding
-You want to move a file from your Downloads folder to your Documents folder, but you also want to keep a copy in Downloads. Should you use Copy or Move?
+### Real-World Scenario
+Your friend asks you to share a document with them. You have the only copy on your computer. What operation should you use? Why is it different from just sending them the file? What happens if you accidentally Move instead of Copy?
 
 ---
 
@@ -203,42 +265,48 @@ You want to move a file from your Downloads folder to your Documents folder, but
 Understand different storage types and implement basic backup strategies.
 
 ### Opening Question
-If your computer stopped working right now, would you lose any important files? How would you get them back?
+If your computer stopped working right now, would you lose any important files? Think about it honestly. How many irreplaceable files — photos, documents, projects — exist only on your computer's hard drive?
 
-### Core Content
+### DO: The Storage Audit
 
-Storage management means knowing where your files live, how much space you have, and how to protect your data from loss.
+Open your computer's storage settings right now. Find:
+1. How much total storage does your computer have?
+2. How much is used? How much is free?
+3. What is taking up the most space?
 
-**Types of Storage:**
+Now answer: If your hard drive failed tomorrow, what files would you lose forever?
 
-| Storage Type | Speed | Capacity | Portability | Backup? |
-|-------------|-------|----------|-------------|---------|
-| **HDD (Hard Disk Drive)** | Moderate | Large (1-10 TB) | No (internal) | Needs external backup |
-| **SSD (Solid State Drive)** | Fast | Moderate (256 GB - 4 TB) | No (internal) | Needs external backup |
-| **USB Flash Drive** | Moderate | Small (8 GB - 1 TB) | Yes | Good for temporary transfer |
-| **External Hard Drive** | Moderate | Large (1-5 TB) | Yes | Excellent for backups |
-| **Cloud Storage** | Depends on internet | Varies (5 GB - unlimited) | Yes (online) | Convenient but not complete |
+### Experiment: Speed Test
 
-**The 3-2-1 Backup Rule:**
+If possible, try this:
+1. Copy a large file (like a video) from your computer to a USB drive. Time it.
+2. Copy the same file from your computer to a cloud service (like Google Drive). Time it.
+3. Compare. Which was faster? What are the tradeoffs?
+
+### The Storage Comparison
+
+| Storage Type | Speed | Capacity | Portability | Survives Computer Failure? |
+|-------------|-------|----------|-------------|---------------------------|
+| **HDD** | Moderate | Large (1-10 TB) | No | No |
+| **SSD** | Fast | Moderate (256 GB-4 TB) | No | No |
+| **USB Flash Drive** | Moderate | Small (8 GB-1 TB) | Yes | Yes |
+| **External Hard Drive** | Moderate | Large (1-5 TB) | Yes | Yes |
+| **Cloud Storage** | Depends on internet | Varies | Yes (online) | Yes |
+
+### The 3-2-1 Backup Rule
 Keep **3** copies of important files, on **2** different types of storage, with **1** copy offsite (such as cloud storage).
 
-**When to Back Up:**
-- Before major system updates
-- Weekly for important schoolwork
-- Before traveling with your laptop
-- After completing any significant project
+**Why this works:**
+- If your computer fails, you have 2 other copies
+- If your USB drive fails, you have a cloud copy
+- If your cloud account is compromised, you have local copies
+- No single point of failure can destroy all your work
 
-**Storage Cleanup Tips:**
-- Delete files you no longer need from Downloads
-- Empty the Recycle Bin / Trash regularly
-- Move old projects to an external drive
-- Check your storage usage in system settings
+### Think About It
+Why is cloud storage alone not enough for a complete backup strategy? What could go wrong if you only used Google Drive?
 
-### Activity
-Check how much free space is on your computer's main drive. Identify three files or folders you could delete or move to free up space.
-
-### Check for Understanding
-Why is cloud storage alone not enough for a complete backup strategy?
+### Real-World Scenario
+A company stores all its financial records on a single hard drive. The hard drive fails. They lose 10 years of data. Using the 3-2-1 rule, design a backup system that would have prevented this disaster. Explain each copy and where it lives.
 
 ---
 
@@ -247,30 +315,22 @@ Why is cloud storage alone not enough for a complete backup strategy?
 ### Learning Objective
 Apply all file management skills in a realistic scenario.
 
-### Opening Question
-How would you organize all the files for every class this school year if you were starting from scratch?
+### DO: The Full Challenge
 
-### Core Content
+You have 10 minutes. Complete this scenario from start to finish:
 
-Today we learned five interconnected skills:
+**Scenario:** Your teacher just emailed the class a zip file containing 15 disorganized files for a group project. The files include documents, images, spreadsheets, and presentations. Your job:
 
-1. **File Systems** — Understanding the tree structure of folders and files
-2. **File Naming** — Using clear, consistent naming conventions
-3. **Folder Organization** — Designing logical structures for your work
-4. **File Operations** — Copying, moving, renaming, and deleting files
-5. **Storage Management** — Knowing your storage options and backing up data
+1. **Extract the files** to a new folder on your desktop
+2. **Create a folder structure** for the project (you decide the organization)
+3. **Rename every file** using proper naming conventions
+4. **Move each file** to the correct folder
+5. **Back up the entire project** to a cloud service or USB drive
 
-**A Real-World Scenario:**
+When you finish, your partner should be able to find any file in under 10 seconds.
 
-Imagine you just finished a science fair project. Here is how all five skills come together:
+### Quick Review — Answer These Without Looking at Notes
 
-1. You navigate to your **Science-Fair-2026** folder (file system knowledge)
-2. You save your final report as `2026-08-05_science-fair_report_final.pdf` (naming conventions)
-3. The report lives in `Projects/Science-Fair-2026/Final/` (folder organization)
-4. You copy the presentation to a USB drive for the fair (file operations)
-5. You upload everything to Google Drive as a backup (storage management)
-
-### Quick Review Quiz
 1. What is the difference between a file path and a file extension?
 2. Name two rules for good file naming.
 3. What does the 3-2-1 backup rule mean?
@@ -278,7 +338,14 @@ Imagine you just finished a science fair project. Here is how all five skills co
 5. Why should you organize files into folders instead of keeping everything on the desktop?
 
 ### Closing Reflection
-Write three things you learned today, two things you want to practice, and one thing you will do differently with your files starting tomorrow.
+Write answers to these three questions:
+
+1. **Three things I learned today** (specific, not "file management")
+2. **Two things I want to practice** (what will you actually do?)
+3. **One thing I will do differently starting tomorrow** (concrete action)
+
+### Teach Someone
+Explain the 3-2-1 backup rule to a partner using only words a younger student would understand. If they can repeat it back accurately, you understand it deeply.
 
 ---
 

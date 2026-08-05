@@ -1,246 +1,329 @@
-# Lab: Operating System Navigation
+# Lab: Operating System Navigation — Exploration Edition
 
-**Knowledge Package:** KP-002  
-**Duration:** 45 minutes  
-**Prerequisites:** Lesson completed  
-
----
-
-## Lab Objective
-
-Practice hands-on OS navigation skills in a controlled environment. Complete all exercises to build muscle memory for desktop operations.
+**Knowledge Package:** KP-002
+**Duration:** 45 minutes
+**Prerequisites:** Lesson completed
 
 ---
 
-## Lab Environment Setup
+## Lab Philosophy
 
-**Before starting, ensure:**
-- Computer is logged in with your student account
-- At least 3 applications are installed (Calculator, Text Editor, Web Browser)
-- You have a USB drive or cloud storage for saving work
+This lab is NOT a step-by-step tutorial. It's an exploration. You'll encounter challenges, not instructions. You'll discover solutions, not follow directions. Your job is to figure things out — and that's where real learning happens.
 
----
-
-## Exercise 1: Desktop Interface Exploration (8 minutes)
-
-### Task 1.1: Identify Desktop Components
-
-**Instructions:** Using the checklist below, identify each component on your screen. Check off each item you find.
-
-| Component | Found? | Location Description |
-|-----------|--------|---------------------|
-| Start Button/Menu | ☐ | |
-| Taskbar | ☐ | |
-| System Tray | ☐ | |
-| Clock | ☐ | |
-| Network Icon | ☐ | |
-| Volume Icon | ☐ | |
-| Desktop Icons | ☐ | |
-| Recycle Bin/Trash | ☐ | |
-
-### Task 1.2: Customize Your Desktop
-
-1. Right-click on the desktop and select "Personalize" or "Change Background"
-2. Change the wallpaper to any image or solid color
-3. Take a screenshot of your desktop (Windows: Win+Shift+S, Mac: Cmd+Shift+4)
-4. Save the screenshot as `desktop-screenshot.png`
-
-**Write your answers here:**
-- How many desktop icons do you have? _______
-- What is your screen resolution? _______
-- What is the current time shown in your system tray? _______
+**Ground rules:**
+- Read each challenge, then try it BEFORE reading any hints
+- If you're stuck, use the hint (but only after trying on your own first)
+- Record your observations, not just your answers
+- Help a neighbor, but don't give them the answer — give them a question
 
 ---
 
-## Exercise 2: Window Management Mastery (10 minutes)
+## Exercise 1: Desktop Discovery (8 minutes)
 
-### Task 2.1: Open and Close Windows
+### Challenge 1.1: The Unmarked Desktop
 
-**Instructions:** Perform these actions and record the results.
+**No instructions. No hints. Just look.**
 
-1. Open **Calculator** — Record: _______
-2. Open **Text Editor** (Notepad/TextEdit) — Record: _______
-3. Open **Web Browser** — Record: _______
-4. Open **File Explorer** (Windows Explorer/Finder) — Record: _______
+Spend 3 minutes silently exploring your desktop. Right-click everything. Click every icon in the system tray. Open the Start menu and scroll through all categories.
 
-**Questions:**
-- How many windows are now on your taskbar? _______
-- Can you see all four windows at once? _______
+**Record:**
+- 3 things you found that you didn't know existed
+- 1 thing you expected to find but couldn't
+- The name of a process you see in your system tray that you don't recognize
 
-### Task 2.2: Minimize, Maximize, and Restore
+### Challenge 1.2: The Clean Desk Challenge
 
-For each window, perform these actions:
+**Goal:** Reduce your desktop icons to 5 or fewer.
 
-| Window | Minimized? | Maximized? | Restored? |
-|--------|-----------|-----------|-----------|
-| Calculator | ☐ | ☐ | ☐ |
-| Text Editor | ☐ | ☐ | ☐ |
-| Web Browser | ☐ | ☐ | ☐ |
-| File Explorer | ☐ | ☐ | ☐ |
+1. Count your current desktop icons: _______
+2. Create a folder called "Desktop Clean" on your desktop
+3. Move at least 80% of your icons into that folder
+4. Count your remaining icons: _______
 
-### Task 2.3: Arrange Windows Side by Side
+**Reflection:** Did finding things get easier or harder? Why?
 
-1. Drag the **Text Editor** window to the left edge of your screen until it snaps
-2. Drag the **Web Browser** to the right edge until it snaps
-3. Both windows should now share the screen equally
-4. Take a screenshot: `window-arrangement.png`
+### Challenge 1.3: The Resolution Experiment
 
-**Write your observation:**
-- Did Snap Assist work? _______
-- How many windows can you see at once in split view? _______
+**Goal:** Discover what screen resolution does.
 
-### Task 2.4: Resize Windows
+1. Find your current resolution (Hint: right-click desktop > Display settings)
+   Resolution: _______ × _______
+2. Change it to a lower setting. What changed?
+3. Change it to a higher setting. What changed?
+4. Return to your original setting.
 
-1. Resize the Calculator to be exactly half its original size
-2. Resize the Web Browser to take up the full screen
-3. Move the Calculator to the center of the screen
-
-**Questions:**
-- What happens when you drag a window corner? _______
-- What happens when you double-click the title bar? _______
+**Observation:** What's the relationship between resolution and how much you can see on screen?
 
 ---
 
-## Exercise 3: System Settings Configuration (8 minutes)
+## Exercise 2: Window Experiments (10 minutes)
 
-### Task 3.1: Display Settings
+### Challenge 2.1: The Overlap Problem
 
-**Windows:** Settings > System > Display  
-**macOS:** System Preferences > Displays  
-**Linux:** Settings > Displays
+**Goal:** Create the worst possible window arrangement.
 
-1. Find your current screen resolution: _______
-2. Change brightness to 80% (or nearest value)
-3. Enable Night Light/Blue Light Filter if available
+1. Open 5 different applications
+2. Arrange them so they all overlap randomly
+3. Try to read text from each window without moving any
+4. How many can you read clearly? _______
 
-### Task 3.2: Sound Settings
+**Now fix it:** Arrange them using Snap so you can see at least 3 at once.
 
-**Windows:** Settings > System > Sound  
-**macOS:** System Preferences > Sound  
-**Linux:** Settings > Sound
+**Reflection:** What's the productivity difference between messy and organized windows?
 
-1. Find your current output device: _______
-2. Set volume to 50%
-3. Test your speakers or headphones
+### Challenge 2.2: The Minimize/Close Test
 
-### Task 3.3: Network Settings
+**Goal:** Understand the difference between minimizing and closing.
 
-**Windows:** Settings > Network & Internet  
-**macOS:** System Preferences > Network  
-**Linux:** Settings > Network
+1. Open Notepad. Type "hello". Minimize it.
+2. Open a second Notepad. Type "world". Close it.
+3. Restore the first Notepad. What do you see?
+4. Open Notepad again. Is "world" still there?
 
-1. Find your Wi-Fi network name (SSID): _______
-2. Check if you are connected: _______
-3. Find your IP address: _______
+**Record:**
+- What happened to "hello"? _______
+- What happened to "world"? _______
+- Why are they different? _______
 
-### Task 3.4: Privacy Settings
+### Challenge 2.3: The Snap Discovery
 
-**Windows:** Settings > Privacy  
-**macOS:** System Preferences > Security & Privacy  
-**Linux:** Settings > Privacy
+**Goal:** Find all the ways to snap windows.
 
-1. Find which apps have camera access: _______
-2. Find which apps have microphone access: _______
-3. Check if location services are enabled: _______
+1. Drag a window to the LEFT edge. What happened?
+2. Drag a window to the RIGHT edge. What happened?
+3. Drag a window to the TOP edge. What happened?
+4. Drag a window to a CORNER. What happened?
+5. Press Win+Z (Windows) or look for Split View (Mac). What options appear?
 
----
+**Record all snap behaviors you discovered:**
 
-## Exercise 4: Task Manager Investigation (9 minutes)
+| Edge/Corner | What Happened |
+|-------------|--------------|
+| Left | |
+| Right | |
+| Top | |
+| Bottom | |
+| Top-left corner | |
+| Top-right corner | |
 
-### Task 4.1: Open Task Manager
+### Challenge 2.4: The Alt+Tab Challenge
 
-**Windows:** Ctrl + Shift + Esc  
-**macOS:** Cmd + Option + Esc (Force Quit) or Activity Monitor  
-**Linux:** Ctrl + Alt + Del or search "System Monitor"
-
-### Task 4.2: Analyze Running Processes
-
-Record the top 5 processes by CPU usage:
-
-| Rank | Process Name | CPU % | Memory |
-|------|-------------|-------|--------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-
-### Task 4.3: Analyze Memory Usage
-
-1. Total memory (RAM): _______
-2. Used memory: _______
-3. Available memory: _______
-4. Percentage used: _______
-
-### Task 4.4: Close a Process
-
-1. Identify one unnecessary process (a game, extra browser tab, etc.)
-2. Select it and click "End Task" or "Quit Process"
-3. Record: Process name: _______
-4. Record: Memory freed: _______
-
-**Safety Rule:** NEVER close processes you don't recognize. Only close programs you opened intentionally.
-
----
-
-## Exercise 5: Keyboard Shortcuts Challenge (10 minutes)
-
-### Task 5.1: Basic Shortcuts
-
-Complete each task using ONLY keyboard shortcuts. No mouse allowed!
-
-| Task | Shortcut Used | Time |
-|------|--------------|------|
-| Open a new text document | | |
-| Type "KP-002 Lab Complete" | | |
-| Select all text | | |
-| Copy the text | | |
-| Create a new line | | |
-| Paste the text 3 times | | |
-| Undo the last paste | | |
-| Save the document | | |
-
-### Task 5.2: Window Switching Challenge
+**Goal:** Master Alt+Tab without looking at the keyboard.
 
 1. Open 4 different applications
-2. Use Alt+Tab (Windows/Linux) or Cmd+Tab (Mac) to switch between them
-3. Record how long it takes to cycle through all 4 and return to the first: _______ seconds
+2. Close your eyes (or look away from the screen)
+3. Press Alt+Tab, then release. Which window appeared?
+4. Repeat 10 times. How many times did you land on the right window?
 
-### Task 5.3: Screenshot Challenge
+**Your accuracy: _______ / 10**
 
-Take screenshots of:
-1. Your entire desktop: `full-desktop.png`
-2. Just the active window: `active-window.png`
-3. A selected region: `selected-region.png`
+**If accuracy is below 70%:** Practice 10 more times. Focus on counting Tab presses.
 
-### Task 5.4: Speed Round
+---
 
-Time yourself completing these 10 tasks. Record your total time:
+## Exercise 3: Settings Investigation (8 minutes)
+
+### Challenge 3.1: The Settings Maze
+
+**Goal:** Find specific settings without using Search.
+
+**Windows:** Open Settings (Win+I)
+**Mac:** Open System Preferences
+
+**Without using the search bar, find:**
+1. Your screen resolution: _______
+2. Your Wi-Fi network name: _______
+3. How many apps have camera access: _______
+4. Your current volume level: _______
+5. An accessibility feature you didn't know existed: _______
+
+**Time yourself:** How long did it take? _______ minutes
+
+### Challenge 3.2: The Privacy Audit
+
+**Goal:** Evaluate your privacy settings critically.
+
+**Navigate to Privacy Settings:**
+
+**Camera access:**
+- Apps with access: _______
+- Which ones actually NEED camera access? _______
+- Which ones should you disable? _______
+
+**Microphone access:**
+- Apps with access: _______
+- Which ones actually NEED microphone access? _______
+
+**Location services:**
+- Is it on or off? _______
+- Which apps have location access? _______
+
+**Decision:** For each app, answer: "Does this app genuinely need this permission to function?" If no, disable it.
+
+### Challenge 3.3: The Accessibility Experiment
+
+**Goal:** Experience your computer differently.
+
+**Enable ONE accessibility feature:**
+- High contrast mode
+- Larger text
+- Screen magnifier
+- Color filter
+
+**Use your computer for 2 minutes with this feature active.**
+
+**Reflection:**
+- How did this change your experience?
+- Why is this feature important for some users?
+- What would you want to know about accessibility that you don't?
+
+---
+
+## Exercise 4: Task Manager Forensics (9 minutes)
+
+### Challenge 4.1: The Current State
+
+**Goal:** Capture a snapshot of your computer's health right now.
+
+**Open Task Manager (Ctrl+Shift+Esc):**
+
+| Metric | Current Value | Is this healthy? |
+|--------|--------------|-----------------|
+| CPU | _____% | |
+| Memory | _____% | |
+| Disk | _____% | |
+| Network | active/idle | |
+
+**Top 3 processes by CPU:**
+1. _______ — _____% — Is this a program YOU opened? Y/N
+2. _______ — _____% — Is this a program YOU opened? Y/N
+3. _______ — _____% — Is this a program YOU opened? Y/N
+
+### Challenge 4.2: The Load Test
+
+**Goal:** Observe how activities affect system resources.
+
+**Before test:** Record CPU and memory: CPU _____% / Memory _____%
+
+1. Open 5 browser tabs (different websites)
+2. Wait 10 seconds. Record: CPU _____% / Memory _____%
+3. Open a video on one tab (YouTube or similar)
+4. Wait 10 seconds. Record: CPU _____% / Memory _____%
+5. Close all browser tabs
+6. Wait 10 seconds. Record: CPU _____% / Memory _____%
+
+**Graph your observations:**
+
+```
+CPU:   [before] → [5 tabs] → [video] → [closed]
+Memory: [before] → [5 tabs] → [video] → [closed]
+```
+
+**What pattern do you notice?**
+
+### Challenge 4.3: The Safe Close Experiment
+
+**Goal:** Close a program using Task Manager and observe the effect.
+
+1. Identify a program YOU opened (not a system process): _______
+2. Record memory usage before closing: _____%
+3. Close it using Task Manager (End Task)
+4. Record memory usage after closing: _____%
+5. Memory freed: _____%
+
+**Safety reminder:** Did you recognize the program name before closing it? If you're ever unsure, DON'T close it.
+
+---
+
+## Exercise 5: Keyboard Shortcuts Obstacle Course (10 minutes)
+
+### Challenge 5.1: The No-Mouse Challenge
+
+**Goal:** Complete 10 tasks using ONLY keyboard shortcuts. No mouse allowed.
+
+**Time yourself for each:**
+
+| Task | Shortcut | Time |
+|------|----------|------|
+| Open text editor | | |
+| Type "KP-002 Lab Complete" | | |
+| Select all text | | |
+| Copy it | | |
+| Switch to browser | | |
+| Click the address bar | | |
+| Paste into address bar | | |
+| Switch back to text editor | | |
+| Undo the last action | | |
+| Save the file | | |
+
+**Total time: _______ seconds**
+
+**Target: Under 60 seconds.** Did you meet it? Y/N
+
+### Challenge 5.2: The Screenshot Collection
+
+**Goal:** Master screenshot techniques.
+
+| Type | Shortcut (Windows) | Shortcut (Mac) | Got it? |
+|------|-------------------|---------------|---------|
+| Full screen | Print Screen | Cmd+Shift+3 | |
+| Active window | Alt+Print Screen | Cmd+Shift+4 then Space | |
+| Selected region | Win+Shift+Save | Cmd+Shift+4 | |
+
+**Take all three types and save them:**
+- `screenshot-full.png`
+- `screenshot-window.png`
+- `screenshot-region.png`
+
+### Challenge 5.3: The Mystery Shortcuts
+
+**Goal:** Discover what these shortcuts do (try them in a text editor):
+
+| Shortcut | What it does (write your answer) |
+|----------|----------------------------------|
+| Ctrl+Shift+T | |
+| Win+D | |
+| Ctrl+L | |
+| Ctrl+Shift+N | |
+| F11 | |
+
+**Which one is most useful to you?** _______
+
+**Why?** _______
+
+### Challenge 5.4: The Speed Run
+
+**Goal:** Complete all 10 tasks as fast as possible.
 
 1. Open Calculator: _______
 2. Open Text Editor: _______
-3. Type "Hello": _______
-4. Copy text: _______
+3. Type "speed run": _______
+4. Copy the text: _______
 5. Switch to Browser: _______
-6. Paste in URL bar: _______
-7. Take screenshot: _______
+6. Paste in address bar: _______
+7. Take a screenshot: _______
 8. Open Settings: _______
 9. Change wallpaper: _______
 10. Close Calculator: _______
 
-**Total Time:** _______ seconds
+**Total time: _______ seconds**
+
+**Beat the clock:** Try again. Can you improve by 20%?
 
 ---
 
 ## Lab Submission
 
 **Files to submit:**
-1. `desktop-screenshot.png` — Your customized desktop
-2. `window-arrangement.png` — Side-by-side window arrangement
-3. `full-desktop.png` — Full desktop screenshot
-4. `active-window.png` — Active window screenshot
-5. `selected-region.png` — Selected region screenshot
-6. `lab-answers.txt` — All written answers from exercises
+1. `desktop-clean.png` — Your cleaned-up desktop
+2. `window-arrangement.png` — Your best window arrangement
+3. `privacy-audit.txt` — Your privacy findings
+4. `task-manager-snapshot.txt` — Your system health data
+5. `screenshot-full.png` — Full screen screenshot
+6. `screenshot-window.png` — Active window screenshot
+7. `screenshot-region.png` — Regional screenshot
+8. `mystery-shortcuts.txt` — What each mystery shortcut does
+9. `lab-reflection.txt` — Answers to all reflection questions
 
 ---
 
@@ -248,12 +331,12 @@ Time yourself completing these 10 tasks. Record your total time:
 
 | Exercise | Points | Criteria |
 |----------|--------|----------|
-| Exercise 1 | 15 | All components identified, customization completed |
-| Exercise 2 | 20 | All window operations performed, screenshots taken |
-| Exercise 3 | 15 | All settings found and configured |
-| Exercise 4 | 20 | Task Manager opened, processes analyzed correctly |
-| Exercise 5 | 20 | All shortcuts performed, screenshots taken |
-| **Total** | **100** | |
+| Exercise 1 | 15 | Discovery completed, desktop cleaned, resolution tested |
+| Exercise 2 | 20 | All experiments performed, observations recorded, Alt+Tab practiced |
+| Exercise 3 | 15 | Settings found without search, privacy audited, accessibility tested |
+| Exercise 4 | 20 | Task Manager opened, load test completed, safe close performed |
+| Exercise 5 | 20 | No-mouse challenge completed, screenshots taken, mystery shortcuts solved |
+| **Total** | **90** | |
 
 ---
 
@@ -261,6 +344,8 @@ Time yourself completing these 10 tasks. Record your total time:
 
 For students who finish early:
 
-1. **Virtual Desktops:** Create a virtual desktop and move one application to it (Windows: Task View, Mac: Ctrl+Up Arrow)
-2. **Accessibility:** Explore accessibility settings and enable one feature
-3. **Timer:** Use Task Manager to time how long your computer takes to open a large file
+1. **Virtual Desktops:** Create a virtual desktop and move one application to it. Switch between desktops. What's the advantage?
+2. **Custom Shortcut:** Research how to create a custom keyboard shortcut on your OS. Create one for your most-used application.
+3. **Startup Programs:** In Task Manager, go to the Startup tab. What programs launch when your computer starts? Which ones are necessary?
+4. **Network Deep Dive:** Find your IP address, DNS server, and default gateway. What do each of these mean?
+5. **Terminal Exploration:** Open Terminal (Mac/Linux) or Command Prompt (Windows). Type `dir` or `ls`. How is this different from File Explorer?

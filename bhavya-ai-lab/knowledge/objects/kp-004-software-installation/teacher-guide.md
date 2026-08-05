@@ -104,6 +104,17 @@ Students often believe free software is less safe than paid software. Use exampl
 | 25 min | All students have configured the application |
 | 30 min | All students have begun uninstallation |
 
+### AI Mentor Integration
+
+Use `ai-mentor.md` to guide one-on-one or small-group conversations. The AI mentor provides:
+- Socratic questioning sequences for each concept
+- Hint systems for common struggles
+- Misconception corrections through guided discovery
+- Debugging guidance for installation problems
+- Career connections showing how software skills apply to different fields
+
+Use the AI mentor when students are stuck, not when they need direct answers. Let them discover the answer through questions.
+
 ---
 
 ## Session 2: Configuration, Updates, and Cleanup (45 minutes)
@@ -183,11 +194,12 @@ Show students on the projector:
 
 | Section | Points | Weight |
 |---------|--------|--------|
-| MCQ (5) | 10 | 17% |
-| Short Answer (5) | 20 | 33% |
-| Reflection (3) | 15 | 25% |
-| Practical (2) | 15 | 25% |
-| **Total** | **60** | **100%** |
+| Scenario MCQ (5) | 10 | 15% |
+| Scenario Short Answer (5) | 20 | 31% |
+| Debugging (3) | 15 | 23% |
+| Reflection (2) | 10 | 15% |
+| Practical (1) | 10 | 15% |
+| **Total** | **65** | **100%** |
 
 ### Common Grading Mistakes
 

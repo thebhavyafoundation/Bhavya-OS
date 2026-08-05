@@ -1,7 +1,7 @@
 # LinkedIn Carousel: Software Installation
 
-**Title:** 7 Software Installation Safety Tips Every Student Should Know
-**Slides:** 10 (1080 × 1080 px)
+**Title:** 5 Software Installation Habits That Protect Your Computer
+**Slides:** 10 (1080 x 1080 px)
 **Platform:** LinkedIn / Instagram
 **Estimated Read Time:** 2 minutes
 
@@ -9,18 +9,17 @@
 
 ## Slide 1: Cover
 
-**Headline:** 7 Software Installation Safety Tips Every Student Should Know
+**Headline:** 5 Software Installation Habits That Protect Your Computer
 
-**Subheadline:** Protect your computer in 2 minutes
+**Subheadline:** Habits that take seconds to practice but prevent hours of cleanup
 
 **Visual:** Clean background with Bhavya Foundation logo. Bold typography. Computer icon with a shield overlay.
 
 **Text on Slide:**
 ```
-7 Software Installation
-Safety Tips
-
-Every Student Should Know
+5 Software Installation
+Habits That Protect
+Your Computer
 
 Bhavya Foundation
 Digital Literacy Series
@@ -28,15 +27,39 @@ Digital Literacy Series
 
 ---
 
-## Slide 2: Tip 1 — Official Sources Only
+## Slide 2: The Problem
 
-**Headline:** Only Download from Official Websites
+**Headline:** One Wrong Download Can Change Everything
 
-**Visual:** Shield icon with a checkmark. Split screen showing official site vs. fake site.
+**Visual:** Split screen: clean desktop vs. cluttered desktop with error pop-ups.
 
 **Text on Slide:**
 ```
-Tip #1
+Every app on your computer
+had to be installed.
+
+How you install it determines:
+→ Whether your data is safe
+→ Whether your computer is fast
+→ Whether you are protected
+
+Most people click "Next"
+without reading.
+```
+
+**Speaker Notes:** Start with the problem. Make the viewer realize this affects them personally.
+
+---
+
+## Slide 3: Habit 1
+
+**Headline:** Only Download from Official Websites
+
+**Visual:** Shield icon with a checkmark. URL bar showing official site vs. fake site.
+
+**Text on Slide:**
+```
+Habit #1
 
 Only Download from
 Official Websites
@@ -44,53 +67,27 @@ Official Websites
 The developer's website is the
 only guaranteed safe source.
 
-How to find it:
-→ Search for the app name + "official"
-→ Check the domain carefully
-→ Avoid ad-supported download sites
+How to verify:
+→ Check the exact domain name
+→ Look for the HTTPS lock icon
+→ Cross-reference with app stores
 ```
 
 **Speaker Notes:** Emphasize that fake sites look professional. The URL is the key differentiator.
 
 ---
 
-## Slide 3: Tip 2 — Check for HTTPS
+## Slide 4: Habit 2
 
-**Headline:** Look for the Lock Icon
-
-**Visual:** Browser address bar with lock icon highlighted. Green vs. red comparison.
-
-**Text on Slide:**
-```
-Tip #2
-
-Check for HTTPS
-
-The lock icon means your
-connection is encrypted.
-
-✓ Lock icon = Safe connection
-✗ No lock = Proceed with caution
-
-Never enter personal information
-on a site without HTTPS.
-```
-
-**Speaker Notes:** HTTPS prevents others from intercepting your data during download.
-
----
-
-## Slide 4: Tip 3 — Read Before You Click Accept
-
-**Headline:** Read Installation Prompts
+**Headline:** Read Before You Click Accept
 
 **Visual:** Screenshot of installer dialog with pre-checked options highlighted.
 
 **Text on Slide:**
 ```
-Tip #3
+Habit #2
 
-Read Before You Click Accept
+Read Installation Prompts
 
 Pre-checked boxes often install
 unwanted additional software.
@@ -106,48 +103,17 @@ What to watch for:
 
 ---
 
-## Slide 5: Tip 4 — Uncheck Bundled Software
+## Slide 5: Habit 3
 
-**Headline:** Decline What You Did Not Ask For
-
-**Visual:** Checkbox being unchecked with a red X.
-
-**Text on Slide:**
-```
-Tip #4
-
-Decline Bundled Software
-
-Free software often comes with
-offers for other programs.
-
-Rule: If you did not ask for it,
-do not install it.
-
-→ Browser toolbars
-→ "Free" antivirus trials
-→ System optimizers
-→ Search engine changes
-```
-
-**Speaker Notes:** Bundled software is a major source of system slowdowns and security issues.
-
----
-
-## Slide 6: Tip 5 — Enable Automatic Updates
-
-**Headline:** Turn On Automatic Updates
+**Headline:** Enable Automatic Updates
 
 **Visual:** Circular arrows (refresh icon). Calendar showing "Updated Today."
 
 **Text on Slide:**
 ```
-Tip #5
+Habit #3
 
 Enable Automatic Updates
-
-Updates patch security holes
-that hackers actively exploit.
 
 The 2017 WannaCry attack:
 → Affected 200,000 computers
@@ -161,7 +127,7 @@ Turn on updates. Stay protected.
 
 ---
 
-## Slide 7: Tip 6 — Review Permissions
+## Slide 6: Habit 4
 
 **Headline:** Only Grant What Is Necessary
 
@@ -169,16 +135,16 @@ Turn on updates. Stay protected.
 
 **Text on Slide:**
 ```
-Tip #6
+Habit #4
 
 Review Permissions
 
 Ask: "Does this app need
 this to do its job?"
 
-Note-taking app + camera access = NO
-Music player + contacts access = NO
-Browser + network access = YES
+Note-taking app + camera = NO
+Music player + contacts = NO
+Browser + network = YES
 
 Principle of Least Privilege:
 Only give what is needed.
@@ -188,7 +154,7 @@ Only give what is needed.
 
 ---
 
-## Slide 8: Tip 7 — Uninstall What You Do Not Use
+## Slide 7: Habit 5
 
 **Headline:** Clean Up Regularly
 
@@ -196,7 +162,7 @@ Only give what is needed.
 
 **Text on Slide:**
 ```
-Tip #7
+Habit #5
 
 Uninstall Unused Software
 
@@ -205,29 +171,27 @@ Old, unused software:
 → Runs background processes
 → Creates security risks
 
-Review your apps every 3 months.
-Uninstall what you have not used.
-Restart after uninstalling.
+The 6-Month Rule:
+If you have not used it in
+6 months, uninstall it.
 ```
 
 **Speaker Notes:** Uninstallation is as important as installation.
 
 ---
 
-## Slide 9: Quick Reference
+## Slide 8: Quick Reference
 
 **Headline:** Your Safety Checklist
 
-**Visual:** Clean checklist format with all 7 tips.
+**Visual:** Clean checklist format with all 5 habits.
 
 **Text on Slide:**
 ```
 Software Safety Checklist
 
 ☐ Download from official sources only
-☐ Check for HTTPS lock icon
 ☐ Read installation prompts
-☐ Uncheck bundled software
 ☐ Enable automatic updates
 ☐ Review app permissions
 ☐ Uninstall unused software
@@ -237,6 +201,30 @@ Use it every time.
 ```
 
 **Speaker Notes:** This is the summary slide students should screenshot or save.
+
+---
+
+## Slide 9: Indian Context
+
+**Headline:** Why This Matters More in India
+
+**Visual:** Map of India with shared computer icon.
+
+**Text on Slide:**
+```
+In India, shared family
+computers are common.
+
+Multiple users = more risk
+Limited bandwidth = harder cleanup
+Language barriers = missed warnings
+
+Rule: Never install software
+without asking someone who
+understands these habits first.
+```
+
+**Speaker Notes:** Connect to the audience's lived experience.
 
 ---
 
@@ -275,4 +263,4 @@ bhavyafoundation.org
 - **Colors:** Bhavya Foundation brand palette — high contrast for readability
 - **Consistency:** Same layout structure on every slide (headline top, content middle, branding bottom)
 - **Accessibility:** Sufficient contrast ratios, readable text sizes
-- **File Format:** Export as PNG or JPG at 1080 × 1080 px
+- **File Format:** Export as PNG or JPG at 1080 x 1080 px

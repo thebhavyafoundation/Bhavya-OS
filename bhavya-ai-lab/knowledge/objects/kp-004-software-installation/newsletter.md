@@ -34,7 +34,19 @@ The five core concepts covered are:
 
 Students in this module complete a hands-on lab where they install real software, configure it, check for updates, and then uninstall it. They document every step and write a reflection on what they learned.
 
-The capstone project is a **Software Installation Guide** — a step-by-step reference document that a non-technical person could follow. Students choose an application, research it thoroughly, and create a guide covering download, installation, configuration, updates, troubleshooting, and uninstallation.
+The capstone project is a **Software Installation Guide** — a GitHub-ready reference document that follows the README structure used by professional open-source projects. Students choose an application, research it thoroughly, and create a guide covering download, installation, configuration, updates, troubleshooting, and uninstallation. They include a software comparison table, security checklist, and personal reflection.
+
+### Try This: The Source Investigation
+
+Here is an activity every student can do right now:
+
+1. Open your web browser
+2. Search for "download VLC media player"
+3. Look at the first five results. Do NOT click yet
+4. For each result, write down: the URL, whether it has an ad label, whether it says "official"
+5. Now click through and verify which one is actually the official site
+
+The official VLC site is videolan.org. Every other URL is a third-party portal. Can you tell the difference before clicking?
 
 ### Common Questions from Students
 
@@ -54,7 +66,7 @@ No. Only download from the developer's official website or a verified app store.
 Software safety is a family matter. Here are three things parents can do:
 
 ### 1. Set Up Automatic Updates
-Enable automatic updates on every device in your home. On Windows, go to Settings > Update & Security. On phones, enable automatic app updates in the app store settings.
+Enable automatic updates on every device in your home. On Windows, go to Settings > Update & Security. On phones, enable automatic app updates in the app store settings. This is the single most important security step you can take.
 
 ### 2. Review Installed Applications
 Once a month, look at the list of installed programs on shared family computers. Remove anything that looks unfamiliar or unused. This is especially important for applications installed by children.
@@ -72,12 +84,13 @@ All KP-004 materials are ready for classroom use:
 
 | Resource | Purpose | Time |
 |----------|---------|------|
-| `lesson.md` | Interactive lesson with 6 sections | 2 hours |
+| `lesson.md` | Active-learning lesson with experiments and discovery tasks | 2 hours |
 | `lab.md` | Hands-on installation exercises | 30 min |
-| `project.md` | Software Installation Guide project | 45 min |
-| `assessment.md` | 15-question assessment | 45 min |
+| `project.md` | GitHub-ready Software Installation Guide project | 45 min |
+| `assessment.md` | 16-question scenario-based assessment | 45 min |
 | `workbook.md` | 8-page student workbook | Ongoing |
 | `teacher-guide.md` | Full teaching guide with timing | Reference |
+| `ai-mentor.md` | AI tutoring guide with Socratic questions | Reference |
 
 ### Quick Start
 
@@ -85,6 +98,15 @@ All KP-004 materials are ready for classroom use:
 2. Pre-download installers to a shared folder in case of slow internet
 3. Ensure students have admin access for the lab session
 4. Have the assessment ready for Session 2
+
+### What Makes This Module Different
+
+This module emphasizes **active learning** over passive reading. Every section of the lesson includes:
+- **DO activities** where students experiment and discover
+- **TRY THIS experiments** that let students test what happens
+- **Think About It prompts** for deeper reasoning
+- **Teach Someone activities** where students explain concepts to peers
+- **Real-world scenarios** that connect to students' lives
 
 ---
 
@@ -106,10 +128,12 @@ If you cannot answer "yes" to all three, do not download it.
 | Term | Definition | Example |
 |------|-----------|---------|
 | Software | Instructions that tell hardware what to do | Microsoft Word, Google Chrome |
-| Installer | A program that sets up software | setup.exe, .deb package |
+| Installer | A program that sets up software on a computer | setup.exe, .deb package |
 | App Store | Centralized platform for verified software | Microsoft Store, Ubuntu Software Center |
-| License | Legal terms for software use | MIT License, GNU GPL |
+| License | Legal terms governing software use | MIT License, GNU GPL |
 | Patch | Update that fixes bugs or security issues | Windows Update, Chrome update |
+| Dependencies | Other programs that software needs to work | Visual C++ Redistributable |
+| Bundled Software | Additional programs included with an installer | Browser toolbars, trial software |
 
 ---
 
@@ -131,6 +155,25 @@ Test your knowledge with these quick questions:
 
 3. True or False: You can safely download software from any website.
    - Answer: False — only download from official sources or verified app stores
+
+4. What should you do when an installer offers "Express" and "Custom" options?
+   - A) Choose Express — it is faster
+   - B) Choose Custom — it shows you all options
+   - C) It does not matter
+   - D) Choose Express to avoid bundled software
+
+---
+
+## Indian Context: Why This Matters Here
+
+In India, shared family computers are common. A single computer might be used by parents, children, and sometimes extended family members. This makes software safety even more important:
+
+- **Multiple users** mean more chances for someone to install unsafe software
+- **Limited bandwidth** makes malware removal time-consuming and expensive
+- **Language barriers** mean some users may not understand English installation prompts
+- **School computers** often have hundreds of users, making cleanup critical
+
+**Family Rule:** Never install software without asking someone who understands these safety habits first.
 
 ---
 
