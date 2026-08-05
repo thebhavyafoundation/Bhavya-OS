@@ -1,1 +1,7 @@
-{"$schema":"https://openapi.vercel.sh/vercel.json","installCommand":"pnpm install --no-frozen-lockfile","buildCommand":"node scripts/vercel-build-app.mjs bhavya-ai-lab","framework":"nextjs","outputDirectory":"apps/bhavya-ai-lab/.next"}
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "node scripts/vercel-build-app.mjs website",
+  "framework": "nextjs",
+  "outputDirectory": "apps/website/.next"
+}
