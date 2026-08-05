@@ -1,4 +1,4 @@
-import { Leaf } from "lucide-react";
+import { Leaf, Github, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -52,6 +52,41 @@ export function Footer() {
               Active since 2026
             </span>
           </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-3)",
+              marginTop: "var(--space-5)",
+            }}
+          >
+            <a
+              href="https://github.com/thebhavyafoundation"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/bhavya-foundation"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href="https://twitter.com/bhavyafoundation"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              style={{ color: "var(--text-tertiary)" }}
+            >
+              <Twitter size={18} />
+            </a>
+          </div>
         </div>
         <div>
           <div className="footer-col-title">Missions</div>
@@ -63,11 +98,24 @@ export function Footer() {
           </nav>
         </div>
         <div>
+          <div className="footer-col-title">Learn</div>
+          <nav className="footer-links" aria-label="Learn navigation">
+            <a href="/knowledge/packages">Knowledge Packages</a>
+            <a
+              href="https://bhavya-foundation-bhavya-ai-lab.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AI Lab
+            </a>
+            <a href="/knowledge">Digital Library</a>
+          </nav>
+        </div>
+        <div>
           <div className="footer-col-title">Governance</div>
           <nav className="footer-links" aria-label="Governance navigation">
             <a href="/about">About</a>
             <a href="/transparency">Transparency</a>
-            <a href="/about">Governance Structure</a>
             <a href="/mission">Constitution</a>
           </nav>
         </div>

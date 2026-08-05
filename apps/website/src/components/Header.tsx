@@ -5,10 +5,8 @@ import { ThemeToggle, MobileMenu } from "./HeaderClient";
 export function Header({ currentPath = "/" }: { currentPath?: string }) {
   const navItems = [
     { id: "nav-home", label: "Home", href: "/" },
-    { id: "nav-mission", label: "Our Mission", href: "/mission" },
-    { id: "nav-nature", label: "Nature", href: "/nature" },
+    { id: "nav-mission", label: "Mission", href: "/mission" },
     { id: "nav-knowledge", label: "Knowledge", href: "/knowledge" },
-    { id: "nav-ai-lab", label: "AI Lab", href: "https://bhavya-foundation-bhavya-ai-lab.vercel.app" },
     { id: "nav-heritage", label: "Heritage", href: "/heritage" },
     { id: "nav-community", label: "Community", href: "/community" },
     { id: "nav-transparency", label: "Transparency", href: "/transparency" },
@@ -41,8 +39,8 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
         <div className="nav-actions">
           <LanguageSwitcher />
           <ThemeToggle />
-          <a href="/transparency" className="nav-cta">
-            Transparency
+          <a href="/knowledge" className="nav-cta">
+            Start Learning
             <ArrowRight aria-hidden="true" />
           </a>
           <MobileMenu items={navItems} currentPath={currentPath} />

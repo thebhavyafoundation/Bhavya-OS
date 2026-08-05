@@ -22,14 +22,17 @@ export function HeroSection() {
             Empowering <span className="highlight">humanity.</span>
           </h1>
           <p className="hero-desc" style={{ opacity: 0 }}>
-            Bhavya Foundation exists to build institutions that endure —
-            restoring forests, expanding knowledge, preserving heritage, and
-            giving communities the tools to shape what comes next.
+            Free AI education for rural India. Restoring forests, preserving
+            heritage, and building communities. 13 levels. 78 modules. 331
+            knowledge packages — designed for generations.
           </p>
           <div className="hero-actions" style={{ opacity: 0 }}>
-            <a href="/mission" className="btn btn-primary">
-              Explore Our Mission
+            <a href="/knowledge" className="btn btn-primary">
+              Start Learning
               <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <a href="/knowledge#packages" className="btn btn-secondary">
+              Explore Knowledge Packages
             </a>
             <a href="/transparency" className="btn btn-secondary">
               View Transparency Portal
@@ -38,16 +41,16 @@ export function HeroSection() {
           <div
             className="hero-proof"
             style={{ opacity: 0 }}
-            aria-label="Foundation principles"
+            aria-label="Foundation stats"
           >
             <span>
-              <i /> Building for generations
+              <i /> 13 Levels · 78 Modules
             </span>
             <span>
-              <i /> Nature. Knowledge. Heritage.
+              <i /> 331 Knowledge Packages
             </span>
             <span>
-              <i /> Stewardship for tomorrow
+              <i /> 594 Production Days
             </span>
           </div>
         </div>

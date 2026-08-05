@@ -17,6 +17,8 @@ import {
   GraduationCap,
   Code,
   Lightbulb,
+  ArrowRight,
+  BookMarked,
 } from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
@@ -95,6 +97,29 @@ export default function KnowledgePage() {
           lead="Knowledge is one of humanity's greatest public resources. Access should not be determined by geography, income, or social background. The Bhavya Knowledge Mission makes education accessible to rural and underserved communities."
         />
         <div className="container">
+          <PageContent>
+            <SectionHeader
+              eyebrow="Knowledge Packages"
+              title="Start Learning Today"
+              description="Free, structured Knowledge Packages for Grade 9 students. Each package is a complete learning unit — concepts, exercises, assessments, and portfolio projects."
+            />
+          </PageContent>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-4)",
+              marginTop: "var(--space-6)",
+              marginBottom: "var(--space-12)",
+              flexWrap: "wrap",
+            }}
+          >
+            <a href="/knowledge/packages" className="btn btn-primary">
+              <BookMarked size={16} aria-hidden="true" />
+              Browse Knowledge Packages
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </div>
+
           <PageContent>
             <SectionHeader
               eyebrow="Bhavya AI Labs"
