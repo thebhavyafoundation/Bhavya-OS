@@ -88,6 +88,12 @@ export default function LandingPage() {
             >
               Learning Paths
             </Link>
+            <Link
+              href="/playground"
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors hidden sm:block"
+            >
+              Lab
+            </Link>
             {progress?.enrolled ? (
               <Link
                 href="/dashboard"
@@ -239,9 +245,15 @@ export default function LandingPage() {
             </Link>
             <Link
               href="/learning-paths"
-              className="px-6 py-3 text-base font-semibold bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+              className="px-6 py-3 text-base font-semibold border border-border-primary rounded-lg text-text-primary hover:border-accent-blue hover:text-accent-blue transition-colors"
             >
               View Learning Paths →
+            </Link>
+            <Link
+              href="/playground"
+              className="px-6 py-3 text-base font-semibold bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+            >
+              Open AI Lab →
             </Link>
           </div>
         </div>
