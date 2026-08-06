@@ -1,0 +1,6 @@
+{
+  "agent": "frontend-engineer",
+  "paths": ["apps/*"],
+  "packages": ["apps/*"],
+  "actions": ["implement", "refactor", "test", "deploy"]
+}

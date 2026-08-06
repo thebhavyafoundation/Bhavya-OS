@@ -1,0 +1,6 @@
+{
+  "agent": "repo-intelligence",
+  "paths": ["*"],
+  "packages": ["*"],
+  "actions": ["indexing", "analysis", "graph-generation"]
+}

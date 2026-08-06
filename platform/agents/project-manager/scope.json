@@ -1,0 +1,6 @@
+{
+  "agent": "project-manager",
+  "paths": [".tasks/*", "docs/*"],
+  "packages": ["*"],
+  "actions": ["task-management", "priority-setting", "coordination"]
+}

@@ -1,0 +1,9 @@
+{
+  "agent": "frontend-engineer",
+  "permissions": ["read", "write", "build", "test"],
+  "scope": {
+    "paths": ["apps/*"],
+    "packages": ["apps/*"],
+    "actions": ["implement", "refactor", "test", "deploy"]
+  }
+}

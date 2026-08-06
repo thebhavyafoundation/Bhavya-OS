@@ -1,0 +1,6 @@
+{
+  "agent": "qa-engineer",
+  "paths": ["*"],
+  "packages": ["*"],
+  "actions": ["testing", "validation", "quality-gates"]
+}

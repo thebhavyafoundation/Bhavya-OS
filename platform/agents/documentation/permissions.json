@@ -1,0 +1,9 @@
+{
+  "agent": "documentation",
+  "permissions": ["read", "write", "review"],
+  "scope": {
+    "paths": ["docs/*", "*.md"],
+    "packages": ["*"],
+    "actions": ["documentation", "blogging", "changelog"]
+  }
+}

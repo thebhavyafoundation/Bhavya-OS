@@ -1,0 +1,9 @@
+{
+  "agent": "backend-engineer",
+  "permissions": ["read", "write", "build", "test"],
+  "scope": {
+    "paths": ["packages/*"],
+    "packages": ["packages/*"],
+    "actions": ["implement", "refactor", "test", "deploy"]
+  }
+}

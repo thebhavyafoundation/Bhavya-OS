@@ -1,0 +1,6 @@
+{
+  "agent": "backend-engineer",
+  "paths": ["packages/*"],
+  "packages": ["packages/*"],
+  "actions": ["implement", "refactor", "test", "deploy"]
+}

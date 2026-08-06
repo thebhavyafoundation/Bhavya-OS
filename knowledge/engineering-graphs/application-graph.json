@@ -1,0 +1,1322 @@
+{
+  "name": "Application Graph",
+  "generatedAt": "2026-08-06T04:24:32.350Z",
+  "applications": [
+    {
+      "id": "@bhavya/admin-app",
+      "path": "apps/admin",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/audit",
+          "type": "page"
+        },
+        {
+          "path": "/content",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/releases",
+          "type": "page"
+        },
+        {
+          "path": "/users",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3003",
+        "build": "next build",
+        "start": "next start --port 3003",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/mission-runtime",
+        "@bhavya/sdk",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/ai-institute",
+      "path": "apps/ai-institute",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/assessment",
+          "type": "page"
+        },
+        {
+          "path": "/courses/foundations/check",
+          "type": "page"
+        },
+        {
+          "path": "/courses/foundations/lab",
+          "type": "page"
+        },
+        {
+          "path": "/courses/foundations/lessons/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/courses/foundations/project",
+          "type": "page"
+        },
+        {
+          "path": "/dashboard",
+          "type": "page"
+        },
+        {
+          "path": "/impact",
+          "type": "page"
+        },
+        {
+          "path": "/impact/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/projects",
+          "type": "page"
+        },
+        {
+          "path": "/projects/[id]",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev -p 3030",
+        "build": "next build",
+        "start": "next start -p 3030"
+      },
+      "workspaceDependencies": [
+        "@bhavya/platform-ui",
+        "@bhavya/learning-runtime",
+        "@bhavya/project-runtime",
+        "@bhavya/impact-runtime"
+      ]
+    },
+    {
+      "id": "@bhavya/bhavya-ai-lab",
+      "path": "apps/bhavya-ai-lab",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/api-explorer",
+          "type": "page"
+        },
+        {
+          "path": "/courses",
+          "type": "page"
+        },
+        {
+          "path": "/forest",
+          "type": "page"
+        },
+        {
+          "path": "/governance",
+          "type": "page"
+        },
+        {
+          "path": "/heritage",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge/ai",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/lessons",
+          "type": "page"
+        },
+        {
+          "path": "/memory",
+          "type": "page"
+        },
+        {
+          "path": "/observability",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/playbooks",
+          "type": "page"
+        },
+        {
+          "path": "/projects",
+          "type": "page"
+        },
+        {
+          "path": "/research",
+          "type": "page"
+        },
+        {
+          "path": "/runtime",
+          "type": "page"
+        },
+        {
+          "path": "/search",
+          "type": "page"
+        },
+        {
+          "path": "/videos",
+          "type": "page"
+        },
+        {
+          "path": "/volunteers",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3012",
+        "build": "next build",
+        "start": "next start --port 3012",
+        "lint": "next lint"
+      },
+      "workspaceDependencies": []
+    },
+    {
+      "id": "bhavya-intelligence-network",
+      "path": "apps/bhavya-intelligence-network",
+      "version": "1.0.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3050",
+        "build": "next build",
+        "start": "next start --port 3050"
+      },
+      "workspaceDependencies": [
+        "@bhavya/intelligence",
+        "@bhavya/capability-registry",
+        "@bhavya/crawlers",
+        "@bhavya/mcp-manager",
+        "@bhavya/plugin-manager",
+        "@bhavya/browser-automation",
+        "@bhavya/github-intelligence",
+        "@bhavya/technology-radar",
+        "@bhavya/analyzers",
+        "@bhavya/knowledge-extraction",
+        "@bhavya/events",
+        "@bhavya/workflows",
+        "@bhavya/platform",
+        "@bhavya/platform-ui"
+      ]
+    },
+    {
+      "id": "capability-center",
+      "path": "apps/capability-center",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3041",
+        "build": "next build",
+        "start": "next start --port 3041"
+      },
+      "workspaceDependencies": [
+        "@bhavya/capability-registry",
+        "@bhavya/intelligence",
+        "@bhavya/mcp-manager",
+        "@bhavya/plugin-manager",
+        "@bhavya/platform",
+        "@bhavya/platform-ui"
+      ]
+    },
+    {
+      "id": "@bhavya/dashboard",
+      "path": "apps/dashboard",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/governance",
+          "type": "page"
+        },
+        {
+          "path": "/impact",
+          "type": "page"
+        },
+        {
+          "path": "/impact-trends",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/lifecycle",
+          "type": "page"
+        },
+        {
+          "path": "/memory",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/playbooks",
+          "type": "page"
+        },
+        {
+          "path": "/predictive",
+          "type": "page"
+        },
+        {
+          "path": "/reports",
+          "type": "page"
+        },
+        {
+          "path": "/resilience",
+          "type": "page"
+        },
+        {
+          "path": "/stewardship",
+          "type": "page"
+        },
+        {
+          "path": "/succession",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3010",
+        "build": "next build",
+        "start": "next start --port 3010",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/intelligence",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/design-system",
+      "path": "apps/design-system",
+      "version": "0.9.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/components",
+          "type": "page"
+        },
+        {
+          "path": "/icons",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/patterns",
+          "type": "page"
+        },
+        {
+          "path": "/playground",
+          "type": "page"
+        },
+        {
+          "path": "/tokens",
+          "type": "page"
+        },
+        {
+          "path": "/typography",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3010",
+        "build": "next build",
+        "start": "next start --port 3010",
+        "lint": "next lint"
+      },
+      "workspaceDependencies": []
+    },
+    {
+      "id": "@bhavya/docs-app",
+      "path": "apps/docs",
+      "version": "0.9.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/decisions",
+          "type": "page"
+        },
+        {
+          "path": "/governance",
+          "type": "page"
+        },
+        {
+          "path": "/governance/policies",
+          "type": "page"
+        },
+        {
+          "path": "/graph",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/releases",
+          "type": "page"
+        },
+        {
+          "path": "/search",
+          "type": "page"
+        },
+        {
+          "path": "/standards",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3002",
+        "build": "next build",
+        "start": "next start --port 3002",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/mission-runtime",
+        "@bhavya/sdk",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/forest",
+      "path": "apps/forest",
+      "version": "0.7.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/impact",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/missions/new",
+          "type": "page"
+        },
+        {
+          "path": "/missions",
+          "type": "page"
+        },
+        {
+          "path": "/missions/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/monitoring",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/plantings",
+          "type": "page"
+        },
+        {
+          "path": "/sites",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3004",
+        "build": "next build",
+        "start": "next start --port 3004",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/maps",
+        "@bhavya/mission-runtime",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "github-intelligence-lab",
+      "path": "apps/github-intelligence-lab",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3060",
+        "build": "next build",
+        "start": "next start --port 3060"
+      },
+      "workspaceDependencies": [
+        "@bhavya/intelligence",
+        "@bhavya/github-intelligence",
+        "@bhavya/mcp-manager",
+        "@bhavya/plugin-manager",
+        "@bhavya/browser-automation",
+        "@bhavya/technology-radar",
+        "@bhavya/capability-registry",
+        "@bhavya/platform",
+        "@bhavya/platform-ui"
+      ]
+    },
+    {
+      "id": "@bhavya/github-os",
+      "path": "apps/github-os",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/comparisons",
+          "type": "page"
+        },
+        {
+          "path": "/educational",
+          "type": "page"
+        },
+        {
+          "path": "/elite",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge-graph",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/learning",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/patterns",
+          "type": "page"
+        },
+        {
+          "path": "/repositories",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/advisor",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/architecture-advisor",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/blueprint",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/debt",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/fitness",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/health",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/learning",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/memory",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/plan",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/review",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/student",
+          "type": "page"
+        },
+        {
+          "path": "/repositories/[id]/timeline",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3070",
+        "build": "next build",
+        "start": "next start --port 3070",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/events",
+        "@bhavya/platform",
+        "@bhavya/platform-ui",
+        "@bhavya/types"
+      ]
+    },
+    {
+      "id": "@bhavya/heritage",
+      "path": "apps/heritage",
+      "version": "0.8.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/assessments",
+          "type": "page"
+        },
+        {
+          "path": "/assets",
+          "type": "page"
+        },
+        {
+          "path": "/conservation",
+          "type": "page"
+        },
+        {
+          "path": "/impact",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/missions/new",
+          "type": "page"
+        },
+        {
+          "path": "/missions",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3005",
+        "build": "next build",
+        "start": "next start --port 3005",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/ioc",
+      "path": "apps/ioc",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/actions",
+          "type": "page"
+        },
+        {
+          "path": "/dashboard",
+          "type": "page"
+        },
+        {
+          "path": "/events",
+          "type": "page"
+        },
+        {
+          "path": "/health",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/okr",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/production/kp",
+          "type": "page"
+        },
+        {
+          "path": "/production",
+          "type": "page"
+        },
+        {
+          "path": "/reviews",
+          "type": "page"
+        },
+        {
+          "path": "/risks",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3090",
+        "build": "next build",
+        "start": "next start --port 3090",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": []
+    },
+    {
+      "id": "@bhavya/knowledge",
+      "path": "apps/knowledge",
+      "version": "0.6.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/collections",
+          "type": "page"
+        },
+        {
+          "path": "/collections/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/documents",
+          "type": "page"
+        },
+        {
+          "path": "/documents/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/entities",
+          "type": "page"
+        },
+        {
+          "path": "/graph",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/relationships",
+          "type": "page"
+        },
+        {
+          "path": "/search",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3007",
+        "build": "next build",
+        "start": "next start --port 3007",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/intelligence",
+        "@bhavya/mission-runtime",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "knowledge-studio",
+      "path": "apps/knowledge-studio",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/artifacts",
+          "type": "page"
+        },
+        {
+          "path": "/artifacts/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/ingest",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/login",
+          "type": "page"
+        },
+        {
+          "path": "/packages",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/pipeline/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/pipelines",
+          "type": "page"
+        },
+        {
+          "path": "/register",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3030",
+        "build": "next build",
+        "start": "next start --port 3030",
+        "test": "vitest run",
+        "test:watch": "vitest"
+      },
+      "workspaceDependencies": []
+    },
+    {
+      "id": "@bhavya/lesson-studio",
+      "path": "apps/lesson-studio",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/animation/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/courses/new",
+          "type": "page"
+        },
+        {
+          "path": "/courses",
+          "type": "page"
+        },
+        {
+          "path": "/courses/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge/[id]/edit",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/lessons/new",
+          "type": "page"
+        },
+        {
+          "path": "/lessons",
+          "type": "page"
+        },
+        {
+          "path": "/lessons/[id]/assessment",
+          "type": "page"
+        },
+        {
+          "path": "/lessons/[id]/guide",
+          "type": "page"
+        },
+        {
+          "path": "/lessons/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/lessons/[id]/publish",
+          "type": "page"
+        },
+        {
+          "path": "/lessons/[id]/workbook",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/provenance",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3020",
+        "build": "next build",
+        "start": "next start --port 3020",
+        "lint": "next lint",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": []
+    },
+    {
+      "id": "@bhavya/library",
+      "path": "apps/library",
+      "version": "0.6.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/browse",
+          "type": "page"
+        },
+        {
+          "path": "/collections",
+          "type": "page"
+        },
+        {
+          "path": "/collections/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/read/[id]",
+          "type": "page"
+        },
+        {
+          "path": "/search",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3008",
+        "build": "next build",
+        "start": "next start --port 3008",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "open-source-intelligence",
+      "path": "apps/open-source-intelligence",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3040",
+        "build": "next build",
+        "start": "next start --port 3040"
+      },
+      "workspaceDependencies": [
+        "@bhavya/intelligence",
+        "@bhavya/capability-registry",
+        "@bhavya/crawlers",
+        "@bhavya/mcp-manager",
+        "@bhavya/github-intelligence",
+        "@bhavya/technology-radar",
+        "@bhavya/analyzers",
+        "@bhavya/knowledge-extraction",
+        "@bhavya/browser-automation",
+        "@bhavya/platform",
+        "@bhavya/platform-ui"
+      ]
+    },
+    {
+      "id": "@bhavya/research",
+      "path": "apps/research",
+      "version": "0.6.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/projects/new",
+          "type": "page"
+        },
+        {
+          "path": "/projects/[id]",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3009",
+        "build": "next build",
+        "start": "next start --port 3009",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/social-os",
+      "path": "apps/social-os",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/ceo",
+          "type": "page"
+        },
+        {
+          "path": "/dashboard",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3080",
+        "build": "next build",
+        "start": "next start --port 3080",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/events",
+        "@bhavya/platform",
+        "@bhavya/platform-ui",
+        "@bhavya/types"
+      ]
+    },
+    {
+      "id": "@bhavya/transparency",
+      "path": "apps/transparency",
+      "version": "0.1.0",
+      "framework": "Next.js",
+      "routes": [],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3003",
+        "build": "next build",
+        "start": "next start --port 3003",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": ["@bhavya/eslint", "@bhavya/typescript"]
+    },
+    {
+      "id": "@bhavya/volunteer",
+      "path": "apps/volunteer",
+      "version": "0.9.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/assignments",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/participation",
+          "type": "page"
+        },
+        {
+          "path": "/recognition",
+          "type": "page"
+        },
+        {
+          "path": "/skills",
+          "type": "page"
+        },
+        {
+          "path": "/training",
+          "type": "page"
+        },
+        {
+          "path": "/volunteers/new",
+          "type": "page"
+        },
+        {
+          "path": "/volunteers",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3006",
+        "build": "next build",
+        "start": "next start --port 3006",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/content-core",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    },
+    {
+      "id": "@bhavya/website",
+      "path": "apps/website",
+      "version": "0.9.0",
+      "framework": "Next.js",
+      "routes": [
+        {
+          "path": "/about",
+          "type": "page"
+        },
+        {
+          "path": "/accessibility",
+          "type": "page"
+        },
+        {
+          "path": "/community",
+          "type": "page"
+        },
+        {
+          "path": "/heritage",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge/packages",
+          "type": "page"
+        },
+        {
+          "path": "/knowledge",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "layout"
+        },
+        {
+          "path": "/mission",
+          "type": "page"
+        },
+        {
+          "path": "/nature",
+          "type": "page"
+        },
+        {
+          "path": "/",
+          "type": "page"
+        },
+        {
+          "path": "/privacy",
+          "type": "page"
+        },
+        {
+          "path": "/programs",
+          "type": "page"
+        },
+        {
+          "path": "/resources",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/audit",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/financials",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/governance",
+          "type": "page"
+        },
+        {
+          "path": "/transparency",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/policies",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/projects",
+          "type": "page"
+        },
+        {
+          "path": "/transparency/releases",
+          "type": "page"
+        }
+      ],
+      "components": [],
+      "scripts": {
+        "dev": "next dev --port 3000",
+        "build": "next build",
+        "start": "next start --port 3000",
+        "lint": "eslint . --max-warnings=0",
+        "typecheck": "tsc --noEmit"
+      },
+      "workspaceDependencies": [
+        "@bhavya/mission-runtime",
+        "@bhavya/sdk",
+        "@bhavya/ui",
+        "@bhavya/eslint",
+        "@bhavya/typescript"
+      ]
+    }
+  ]
+}

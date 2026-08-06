@@ -1,0 +1,9 @@
+{
+  "agent": "repo-intelligence",
+  "permissions": ["read", "scan", "index"],
+  "scope": {
+    "paths": ["*"],
+    "packages": ["*"],
+    "actions": ["indexing", "analysis", "graph-generation"]
+  }
+}

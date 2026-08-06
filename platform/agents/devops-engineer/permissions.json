@@ -1,0 +1,9 @@
+{
+  "agent": "devops-engineer",
+  "permissions": ["read", "deploy", "monitor", "configure"],
+  "scope": {
+    "paths": [".github/*", "vercel.json", "turbo.json"],
+    "packages": ["*"],
+    "actions": ["deployment", "monitoring", "infrastructure"]
+  }
+}

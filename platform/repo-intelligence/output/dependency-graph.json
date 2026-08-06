@@ -1,0 +1,2747 @@
+{
+  "nodes": [
+    {
+      "id": "@bhavya/admin-app",
+      "type": "app",
+      "path": "apps/admin"
+    },
+    {
+      "id": "@bhavya/ai-institute",
+      "type": "app",
+      "path": "apps/ai-institute"
+    },
+    {
+      "id": "@bhavya/bhavya-ai-lab",
+      "type": "app",
+      "path": "apps/bhavya-ai-lab"
+    },
+    {
+      "id": "bhavya-intelligence-network",
+      "type": "app",
+      "path": "apps/bhavya-intelligence-network"
+    },
+    {
+      "id": "capability-center",
+      "type": "app",
+      "path": "apps/capability-center"
+    },
+    {
+      "id": "@bhavya/dashboard",
+      "type": "app",
+      "path": "apps/dashboard"
+    },
+    {
+      "id": "@bhavya/design-system",
+      "type": "app",
+      "path": "apps/design-system"
+    },
+    {
+      "id": "@bhavya/docs-app",
+      "type": "app",
+      "path": "apps/docs"
+    },
+    {
+      "id": "@bhavya/forest",
+      "type": "app",
+      "path": "apps/forest"
+    },
+    {
+      "id": "github-intelligence-lab",
+      "type": "app",
+      "path": "apps/github-intelligence-lab"
+    },
+    {
+      "id": "@bhavya/github-os",
+      "type": "app",
+      "path": "apps/github-os"
+    },
+    {
+      "id": "@bhavya/heritage",
+      "type": "app",
+      "path": "apps/heritage"
+    },
+    {
+      "id": "@bhavya/ioc",
+      "type": "app",
+      "path": "apps/ioc"
+    },
+    {
+      "id": "@bhavya/knowledge",
+      "type": "app",
+      "path": "apps/knowledge"
+    },
+    {
+      "id": "knowledge-studio",
+      "type": "app",
+      "path": "apps/knowledge-studio"
+    },
+    {
+      "id": "@bhavya/lesson-studio",
+      "type": "app",
+      "path": "apps/lesson-studio"
+    },
+    {
+      "id": "@bhavya/library",
+      "type": "app",
+      "path": "apps/library"
+    },
+    {
+      "id": "open-source-intelligence",
+      "type": "app",
+      "path": "apps/open-source-intelligence"
+    },
+    {
+      "id": "@bhavya/research",
+      "type": "app",
+      "path": "apps/research"
+    },
+    {
+      "id": "@bhavya/social-os",
+      "type": "app",
+      "path": "apps/social-os"
+    },
+    {
+      "id": "@bhavya/transparency",
+      "type": "app",
+      "path": "apps/transparency"
+    },
+    {
+      "id": "@bhavya/volunteer",
+      "type": "app",
+      "path": "apps/volunteer"
+    },
+    {
+      "id": "@bhavya/website",
+      "type": "app",
+      "path": "apps/website"
+    },
+    {
+      "id": "@bhavya/agent-engine",
+      "type": "package",
+      "path": "packages/agent-engine"
+    },
+    {
+      "id": "@bhavya/agent-platform",
+      "type": "package",
+      "path": "packages/agent-platform"
+    },
+    {
+      "id": "@bhavya/ai",
+      "type": "package",
+      "path": "packages/ai"
+    },
+    {
+      "id": "@bhavya/analyzers",
+      "type": "package",
+      "path": "packages/analyzers"
+    },
+    {
+      "id": "@bhavya/api",
+      "type": "package",
+      "path": "packages/api"
+    },
+    {
+      "id": "@bhavya/bdl",
+      "type": "package",
+      "path": "packages/bdl"
+    },
+    {
+      "id": "@bhavya/bee",
+      "type": "package",
+      "path": "packages/bee"
+    },
+    {
+      "id": "@bhavya/branding",
+      "type": "package",
+      "path": "packages/branding"
+    },
+    {
+      "id": "@bhavya/browser-automation",
+      "type": "package",
+      "path": "packages/browser-automation"
+    },
+    {
+      "id": "@bhavya/capability-registry",
+      "type": "package",
+      "path": "packages/capability-registry"
+    },
+    {
+      "id": "@bhavya/charts",
+      "type": "package",
+      "path": "packages/charts"
+    },
+    {
+      "id": "@bhavya/cli",
+      "type": "package",
+      "path": "packages/cli"
+    },
+    {
+      "id": "@bhavya/config",
+      "type": "package",
+      "path": "packages/config"
+    },
+    {
+      "id": "@bhavya/constitution",
+      "type": "package",
+      "path": "packages/constitution"
+    },
+    {
+      "id": "@bhavya/content-core",
+      "type": "package",
+      "path": "packages/content-core"
+    },
+    {
+      "id": "@bhavya/crawlers",
+      "type": "package",
+      "path": "packages/crawlers"
+    },
+    {
+      "id": "@bhavya/database",
+      "type": "package",
+      "path": "packages/database"
+    },
+    {
+      "id": "@bhavya/docs",
+      "type": "package",
+      "path": "packages/docs"
+    },
+    {
+      "id": "@bhavya/eslint",
+      "type": "package",
+      "path": "packages/eslint"
+    },
+    {
+      "id": "@bhavya/events",
+      "type": "package",
+      "path": "packages/events"
+    },
+    {
+      "id": "@bhavya/github-intelligence",
+      "type": "package",
+      "path": "packages/github-intelligence"
+    },
+    {
+      "id": "@bhavya/icons",
+      "type": "package",
+      "path": "packages/icons"
+    },
+    {
+      "id": "@bhavya/impact-runtime",
+      "type": "package",
+      "path": "packages/impact-runtime"
+    },
+    {
+      "id": "@bhavya/intelligence",
+      "type": "package",
+      "path": "packages/intelligence"
+    },
+    {
+      "id": "@bhavya/kernel",
+      "type": "package",
+      "path": "packages/kernel"
+    },
+    {
+      "id": "@bhavya/knowledge-engine",
+      "type": "package",
+      "path": "packages/knowledge-engine"
+    },
+    {
+      "id": "@bhavya/knowledge-extraction",
+      "type": "package",
+      "path": "packages/knowledge-extraction"
+    },
+    {
+      "id": "@bhavya/learning-runtime",
+      "type": "package",
+      "path": "packages/learning-runtime"
+    },
+    {
+      "id": "@bhavya/maps",
+      "type": "package",
+      "path": "packages/maps"
+    },
+    {
+      "id": "@bhavya/mcp-manager",
+      "type": "package",
+      "path": "packages/mcp-manager"
+    },
+    {
+      "id": "@bhavya/memory-engine",
+      "type": "package",
+      "path": "packages/memory-engine"
+    },
+    {
+      "id": "@bhavya/mission-runtime",
+      "type": "package",
+      "path": "packages/mission-runtime"
+    },
+    {
+      "id": "@bhavya/notifications",
+      "type": "package",
+      "path": "packages/notifications"
+    },
+    {
+      "id": "@bhavya/planner-engine",
+      "type": "package",
+      "path": "packages/planner-engine"
+    },
+    {
+      "id": "@bhavya/platform",
+      "type": "package",
+      "path": "packages/platform"
+    },
+    {
+      "id": "@bhavya/platform-ui",
+      "type": "package",
+      "path": "packages/platform-ui"
+    },
+    {
+      "id": "@bhavya/plugin-manager",
+      "type": "package",
+      "path": "packages/plugin-manager"
+    },
+    {
+      "id": "@bhavya/project-runtime",
+      "type": "package",
+      "path": "packages/project-runtime"
+    },
+    {
+      "id": "@bhavya/providers",
+      "type": "package",
+      "path": "packages/providers"
+    },
+    {
+      "id": "@bhavya/runtime",
+      "type": "package",
+      "path": "packages/runtime"
+    },
+    {
+      "id": "@bhavya/scheduler-engine",
+      "type": "package",
+      "path": "packages/scheduler-engine"
+    },
+    {
+      "id": "@bhavya/sdk",
+      "type": "package",
+      "path": "packages/sdk"
+    },
+    {
+      "id": "@bhavya/search-engine",
+      "type": "package",
+      "path": "packages/search-engine"
+    },
+    {
+      "id": "@bhavya/security",
+      "type": "package",
+      "path": "packages/security"
+    },
+    {
+      "id": "@bhavya/technology-radar",
+      "type": "package",
+      "path": "packages/technology-radar"
+    },
+    {
+      "id": "@bhavya/types",
+      "type": "package",
+      "path": "packages/types"
+    },
+    {
+      "id": "@bhavya/typescript",
+      "type": "package",
+      "path": "packages/typescript"
+    },
+    {
+      "id": "@bhavya/ui",
+      "type": "package",
+      "path": "packages/ui"
+    },
+    {
+      "id": "@bhavya/workflow-engine",
+      "type": "package",
+      "path": "packages/workflow-engine"
+    },
+    {
+      "id": "@bhavya/workflows",
+      "type": "package",
+      "path": "packages/workflows"
+    }
+  ],
+  "edges": [
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/sdk",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "next",
+      "type": "npm",
+      "version": "15.3.3"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "react",
+      "type": "npm",
+      "version": "^19"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/learning-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/project-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/impact-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.468.0"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^22"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@tailwindcss/postcss",
+      "type": "npm",
+      "version": "^4"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "eslint",
+      "type": "npm",
+      "version": "^9.0.0"
+    },
+    {
+      "from": "@bhavya/bhavya-ai-lab",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/crawlers",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/mcp-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/plugin-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/browser-automation",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/github-intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/technology-radar",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/analyzers",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/knowledge-extraction",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/events",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/workflows",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/mcp-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/plugin-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "capability-center",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "capability-center",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "capability-center",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "capability-center",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.0.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.468.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^22.0.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.7.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "postcss",
+      "type": "npm",
+      "version": "^8.4.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "autoprefixer",
+      "type": "npm",
+      "version": "^10.4.0"
+    },
+    {
+      "from": "@bhavya/design-system",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^3.4.0"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/sdk",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/maps",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/github-intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/mcp-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/plugin-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/browser-automation",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/technology-radar",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/events",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "better-sqlite3",
+      "type": "npm",
+      "version": "^13.0.2"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@types/better-sqlite3",
+      "type": "npm",
+      "version": "^7.6.12"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "better-sqlite3",
+      "type": "npm",
+      "version": "^13.0.2"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "uuid",
+      "type": "npm",
+      "version": "^11.1.1"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "@types/better-sqlite3",
+      "type": "npm",
+      "version": "^7.6.12"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "@types/uuid",
+      "type": "npm",
+      "version": "^10.0.0"
+    },
+    {
+      "from": "@bhavya/ioc",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "@prisma/client",
+      "type": "npm",
+      "version": "^7.9.1"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "bcryptjs",
+      "type": "npm",
+      "version": "^3.0.3"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "better-sqlite3",
+      "type": "npm",
+      "version": "^13.0.2"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "mammoth",
+      "type": "npm",
+      "version": "^1.12.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "next-auth",
+      "type": "npm",
+      "version": "^4.24.15"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "pdf-parse",
+      "type": "npm",
+      "version": "^2.4.5"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "prisma",
+      "type": "npm",
+      "version": "^7.9.1"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "@types/bcryptjs",
+      "type": "npm",
+      "version": "^3.0.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "knowledge-studio",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "eslint",
+      "type": "npm",
+      "version": "^9.0.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/lesson-studio",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/crawlers",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/mcp-manager",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/github-intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/technology-radar",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/analyzers",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/knowledge-extraction",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/browser-automation",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.400.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/events",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/platform-ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "better-sqlite3",
+      "type": "npm",
+      "version": "^13.0.2"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "next",
+      "type": "npm",
+      "version": "^15.5.20"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "uuid",
+      "type": "npm",
+      "version": "^11.1.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@types/better-sqlite3",
+      "type": "npm",
+      "version": "^7.6.12"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@types/node",
+      "type": "npm",
+      "version": "^20.0.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@types/uuid",
+      "type": "npm",
+      "version": "^10.0.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "tailwindcss",
+      "type": "npm",
+      "version": "^4.1.13"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.0"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/content-core",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/sdk",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "framer-motion",
+      "type": "npm",
+      "version": "^13.0.0"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "gsap",
+      "type": "npm",
+      "version": "^3.15.0"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "lenis",
+      "type": "npm",
+      "version": "^1.3.26"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.544.0"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "react",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "19.2.4"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/agent-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/agent-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@langchain/core",
+      "type": "npm",
+      "version": "^0.3.68"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@langchain/langgraph",
+      "type": "npm",
+      "version": "^0.2.74"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/analyzers",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/analyzers",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/analyzers",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "@bhavya/security",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/bee",
+      "to": "@bhavya/runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/branding",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/branding",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/browser-automation",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/browser-automation",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/capability-registry",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/capability-registry",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/capability-registry",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.4"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/cli",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/cli",
+      "to": "commander",
+      "type": "npm",
+      "version": "^11.0.0"
+    },
+    {
+      "from": "@bhavya/cli",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.3.0"
+    },
+    {
+      "from": "@bhavya/cli",
+      "to": "ts-node",
+      "type": "npm",
+      "version": "^10.9.0"
+    },
+    {
+      "from": "@bhavya/config",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/config",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/content-core",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/content-core",
+      "to": "ts-node",
+      "type": "npm",
+      "version": "^10.9.2"
+    },
+    {
+      "from": "@bhavya/content-core",
+      "to": "tsx",
+      "type": "npm",
+      "version": "^4.23.1"
+    },
+    {
+      "from": "@bhavya/content-core",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^4.1.10"
+    },
+    {
+      "from": "@bhavya/crawlers",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/crawlers",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/crawlers",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/database",
+      "to": "better-sqlite3",
+      "type": "npm",
+      "version": "^13.0.2"
+    },
+    {
+      "from": "@bhavya/database",
+      "to": "@types/better-sqlite3",
+      "type": "npm",
+      "version": "^7.6.0"
+    },
+    {
+      "from": "@bhavya/database",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/database",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/eslint",
+      "to": "@eslint/js",
+      "type": "npm",
+      "version": "^9.36.0"
+    },
+    {
+      "from": "@bhavya/eslint",
+      "to": "eslint-config-next",
+      "type": "npm",
+      "version": "15.5.20"
+    },
+    {
+      "from": "@bhavya/eslint",
+      "to": "typescript-eslint",
+      "type": "npm",
+      "version": "^8.44.1"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/github-intelligence",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-intelligence",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/github-intelligence",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.544.0"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.4"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/intelligence",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/agent-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/workflow-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/memory-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/knowledge-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/search-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/planner-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/scheduler-engine",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.3.0"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "jest",
+      "type": "npm",
+      "version": "^29.0.0"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@types/jest",
+      "type": "npm",
+      "version": "^29.0.0"
+    },
+    {
+      "from": "@bhavya/knowledge-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/knowledge-extraction",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge-extraction",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/knowledge-extraction",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.468.0"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/learning-runtime",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/ui",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "maplibre-gl",
+      "type": "npm",
+      "version": "^5.7.1"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.4"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/eslint",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/typescript",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/mcp-manager",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/mcp-manager",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/mcp-manager",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/memory-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/memory-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/planner-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/planner-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/platform",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/platform",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "lucide-react",
+      "type": "npm",
+      "version": "^0.468.0"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "@types/react",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "@types/react-dom",
+      "type": "npm",
+      "version": "^19.0.0"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "react",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "react-dom",
+      "type": "npm",
+      "version": "^19.2.0"
+    },
+    {
+      "from": "@bhavya/platform-ui",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/plugin-manager",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/plugin-manager",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/plugin-manager",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/providers",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/providers",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/runtime",
+      "to": "pino",
+      "type": "npm",
+      "version": "^9.0.0"
+    },
+    {
+      "from": "@bhavya/scheduler-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/scheduler-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/sdk",
+      "to": "@bhavya/mission-runtime",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/search-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/search-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/security",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/security",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    },
+    {
+      "from": "@bhavya/technology-radar",
+      "to": "@bhavya/intelligence",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/technology-radar",
+      "to": "@bhavya/capability-registry",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/technology-radar",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.8.2"
+    },
+    {
+      "from": "@bhavya/types",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/ui",
+      "to": "@bhavya/bdl",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/workflow-engine",
+      "to": "@bhavya/kernel",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/workflow-engine",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.0.0"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/platform",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/types",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/events",
+      "type": "workspace",
+      "version": "workspace:*"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "typescript",
+      "type": "npm",
+      "version": "^5.9.2"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "vitest",
+      "type": "npm",
+      "version": "^3.2.1"
+    }
+  ]
+}

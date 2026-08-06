@@ -1,0 +1,178 @@
+{
+  "name": "Deployment Graph",
+  "generatedAt": "2026-08-06T04:24:33.125Z",
+  "platforms": {
+    "vercel": {
+      "provider": "Vercel",
+      "projects": [
+        {
+          "name": "@bhavya/admin-app",
+          "path": "apps/admin",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/ai-institute",
+          "path": "apps/ai-institute",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/bhavya-ai-lab",
+          "path": "apps/bhavya-ai-lab",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "bhavya-intelligence-network",
+          "path": "apps/bhavya-intelligence-network",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "capability-center",
+          "path": "apps/capability-center",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/dashboard",
+          "path": "apps/dashboard",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/design-system",
+          "path": "apps/design-system",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/docs-app",
+          "path": "apps/docs",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/forest",
+          "path": "apps/forest",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "github-intelligence-lab",
+          "path": "apps/github-intelligence-lab",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/github-os",
+          "path": "apps/github-os",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/heritage",
+          "path": "apps/heritage",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/ioc",
+          "path": "apps/ioc",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/knowledge",
+          "path": "apps/knowledge",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "knowledge-studio",
+          "path": "apps/knowledge-studio",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/lesson-studio",
+          "path": "apps/lesson-studio",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/library",
+          "path": "apps/library",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "open-source-intelligence",
+          "path": "apps/open-source-intelligence",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/research",
+          "path": "apps/research",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/social-os",
+          "path": "apps/social-os",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/transparency",
+          "path": "apps/transparency",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/volunteer",
+          "path": "apps/volunteer",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        },
+        {
+          "name": "@bhavya/website",
+          "path": "apps/website",
+          "buildCommand": "next build",
+          "framework": "nextjs"
+        }
+      ]
+    }
+  },
+  "ci": {
+    "githubActions": ["ci.yml", "deploy.yml"],
+    "turboPipeline": {
+      "$schema": "https://turborepo.com/schema.json",
+      "tasks": {
+        "build": {
+          "dependsOn": ["^build"],
+          "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+        },
+        "dev": {
+          "cache": false,
+          "persistent": true
+        },
+        "lint": {
+          "dependsOn": ["^build"]
+        },
+        "typecheck": {
+          "dependsOn": ["^build"]
+        },
+        "test": {
+          "dependsOn": ["^build"],
+          "cache": false
+        },
+        "clean": {
+          "cache": false
+        }
+      }
+    }
+  }
+}

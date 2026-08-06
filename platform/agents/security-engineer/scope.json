@@ -1,0 +1,6 @@
+{
+  "agent": "security-engineer",
+  "paths": ["*"],
+  "packages": ["*"],
+  "actions": ["security-audit", "dependency-review", "vulnerability-scan"]
+}

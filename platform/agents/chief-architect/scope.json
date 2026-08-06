@@ -1,0 +1,6 @@
+{
+  "agent": "chief-architect",
+  "paths": ["packages/*", "platform/*", "docs/architecture/*"],
+  "packages": ["*"],
+  "actions": ["architecture-review", "design-decision", "technical-direction"]
+}

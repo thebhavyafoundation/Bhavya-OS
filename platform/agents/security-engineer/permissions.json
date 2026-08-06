@@ -1,0 +1,9 @@
+{
+  "agent": "security-engineer",
+  "permissions": ["read", "audit", "review", "reject"],
+  "scope": {
+    "paths": ["*"],
+    "packages": ["*"],
+    "actions": ["security-audit", "dependency-review", "vulnerability-scan"]
+  }
+}

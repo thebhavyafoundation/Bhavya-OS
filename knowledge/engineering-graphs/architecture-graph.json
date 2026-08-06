@@ -1,0 +1,1273 @@
+{
+  "name": "Architecture Graph",
+  "generatedAt": "2026-08-06T04:24:32.346Z",
+  "layers": {
+    "presentation": {
+      "description": "User-facing applications",
+      "nodes": [
+        {
+          "id": "@bhavya/admin-app",
+          "path": "apps/admin",
+          "framework": "Next.js",
+          "routes": 6
+        },
+        {
+          "id": "@bhavya/ai-institute",
+          "path": "apps/ai-institute",
+          "framework": "Next.js",
+          "routes": 12
+        },
+        {
+          "id": "@bhavya/bhavya-ai-lab",
+          "path": "apps/bhavya-ai-lab",
+          "framework": "Next.js",
+          "routes": 19
+        },
+        {
+          "id": "bhavya-intelligence-network",
+          "path": "apps/bhavya-intelligence-network",
+          "framework": "Next.js",
+          "routes": 2
+        },
+        {
+          "id": "capability-center",
+          "path": "apps/capability-center",
+          "framework": "Next.js",
+          "routes": 2
+        },
+        {
+          "id": "@bhavya/dashboard",
+          "path": "apps/dashboard",
+          "framework": "Next.js",
+          "routes": 13
+        },
+        {
+          "id": "@bhavya/design-system",
+          "path": "apps/design-system",
+          "framework": "Next.js",
+          "routes": 8
+        },
+        {
+          "id": "@bhavya/docs-app",
+          "path": "apps/docs",
+          "framework": "Next.js",
+          "routes": 9
+        },
+        {
+          "id": "@bhavya/forest",
+          "path": "apps/forest",
+          "framework": "Next.js",
+          "routes": 9
+        },
+        {
+          "id": "github-intelligence-lab",
+          "path": "apps/github-intelligence-lab",
+          "framework": "Next.js",
+          "routes": 2
+        },
+        {
+          "id": "@bhavya/github-os",
+          "path": "apps/github-os",
+          "framework": "Next.js",
+          "routes": 23
+        },
+        {
+          "id": "@bhavya/heritage",
+          "path": "apps/heritage",
+          "framework": "Next.js",
+          "routes": 8
+        },
+        {
+          "id": "@bhavya/ioc",
+          "path": "apps/ioc",
+          "framework": "Next.js",
+          "routes": 11
+        },
+        {
+          "id": "@bhavya/knowledge",
+          "path": "apps/knowledge",
+          "framework": "Next.js",
+          "routes": 10
+        },
+        {
+          "id": "knowledge-studio",
+          "path": "apps/knowledge-studio",
+          "framework": "Next.js",
+          "routes": 10
+        },
+        {
+          "id": "@bhavya/lesson-studio",
+          "path": "apps/lesson-studio",
+          "framework": "Next.js",
+          "routes": 16
+        },
+        {
+          "id": "@bhavya/library",
+          "path": "apps/library",
+          "framework": "Next.js",
+          "routes": 7
+        },
+        {
+          "id": "open-source-intelligence",
+          "path": "apps/open-source-intelligence",
+          "framework": "Next.js",
+          "routes": 2
+        },
+        {
+          "id": "@bhavya/research",
+          "path": "apps/research",
+          "framework": "Next.js",
+          "routes": 4
+        },
+        {
+          "id": "@bhavya/social-os",
+          "path": "apps/social-os",
+          "framework": "Next.js",
+          "routes": 4
+        },
+        {
+          "id": "@bhavya/transparency",
+          "path": "apps/transparency",
+          "framework": "Next.js",
+          "routes": 0
+        },
+        {
+          "id": "@bhavya/volunteer",
+          "path": "apps/volunteer",
+          "framework": "Next.js",
+          "routes": 9
+        },
+        {
+          "id": "@bhavya/website",
+          "path": "apps/website",
+          "framework": "Next.js",
+          "routes": 20
+        }
+      ]
+    },
+    "platform": {
+      "description": "Shared platform packages",
+      "nodes": [
+        {
+          "id": "@bhavya/agent-engine",
+          "path": "packages/agent-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/agent-platform",
+          "path": "packages/agent-platform",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/ai",
+          "path": "packages/ai",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/analyzers",
+          "path": "packages/analyzers",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/api",
+          "path": "packages/api",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/bdl",
+          "path": "packages/bdl",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/bee",
+          "path": "packages/bee",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/branding",
+          "path": "packages/branding",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/browser-automation",
+          "path": "packages/browser-automation",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/capability-registry",
+          "path": "packages/capability-registry",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/charts",
+          "path": "packages/charts",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/cli",
+          "path": "packages/cli",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/config",
+          "path": "packages/config",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/constitution",
+          "path": "packages/constitution",
+          "purpose": "Governance & constitution"
+        },
+        {
+          "id": "@bhavya/content-core",
+          "path": "packages/content-core",
+          "purpose": "Content management"
+        },
+        {
+          "id": "@bhavya/crawlers",
+          "path": "packages/crawlers",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/database",
+          "path": "packages/database",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/docs",
+          "path": "packages/docs",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/eslint",
+          "path": "packages/eslint",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/events",
+          "path": "packages/events",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/github-intelligence",
+          "path": "packages/github-intelligence",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/icons",
+          "path": "packages/icons",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/impact-runtime",
+          "path": "packages/impact-runtime",
+          "purpose": "Runtime engine"
+        },
+        {
+          "id": "@bhavya/intelligence",
+          "path": "packages/intelligence",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/kernel",
+          "path": "packages/kernel",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/knowledge-engine",
+          "path": "packages/knowledge-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/knowledge-extraction",
+          "path": "packages/knowledge-extraction",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/learning-runtime",
+          "path": "packages/learning-runtime",
+          "purpose": "Runtime engine"
+        },
+        {
+          "id": "@bhavya/maps",
+          "path": "packages/maps",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/mcp-manager",
+          "path": "packages/mcp-manager",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/memory-engine",
+          "path": "packages/memory-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/mission-runtime",
+          "path": "packages/mission-runtime",
+          "purpose": "Runtime engine"
+        },
+        {
+          "id": "@bhavya/notifications",
+          "path": "packages/notifications",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/planner-engine",
+          "path": "packages/planner-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/platform",
+          "path": "packages/platform",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/platform-ui",
+          "path": "packages/platform-ui",
+          "purpose": "UI component library"
+        },
+        {
+          "id": "@bhavya/plugin-manager",
+          "path": "packages/plugin-manager",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/project-runtime",
+          "path": "packages/project-runtime",
+          "purpose": "Runtime engine"
+        },
+        {
+          "id": "@bhavya/providers",
+          "path": "packages/providers",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/runtime",
+          "path": "packages/runtime",
+          "purpose": "Runtime engine"
+        },
+        {
+          "id": "@bhavya/scheduler-engine",
+          "path": "packages/scheduler-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/sdk",
+          "path": "packages/sdk",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/search-engine",
+          "path": "packages/search-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/security",
+          "path": "packages/security",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/technology-radar",
+          "path": "packages/technology-radar",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/types",
+          "path": "packages/types",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/typescript",
+          "path": "packages/typescript",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/ui",
+          "path": "packages/ui",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/workflow-engine",
+          "path": "packages/workflow-engine",
+          "purpose": "Shared library"
+        },
+        {
+          "id": "@bhavya/workflows",
+          "path": "packages/workflows",
+          "purpose": "Shared library"
+        }
+      ]
+    },
+    "infrastructure": {
+      "description": "Build, deploy, and tooling",
+      "nodes": [
+        {
+          "id": "turbo",
+          "type": "build-system",
+          "config": "turbo.json"
+        },
+        {
+          "id": "pnpm",
+          "type": "package-manager",
+          "version": "10.17.1"
+        },
+        {
+          "id": "vercel",
+          "type": "deployment",
+          "platform": "Vercel"
+        },
+        {
+          "id": "husky",
+          "type": "git-hooks",
+          "config": ".husky/"
+        },
+        {
+          "id": "commitlint",
+          "type": "commit-convention",
+          "config": "commitlint.config.js"
+        },
+        {
+          "id": "lint-staged",
+          "type": "pre-commit",
+          "config": ".lintstagedrc.json"
+        }
+      ]
+    },
+    "data": {
+      "description": "Knowledge objects and content",
+      "nodes": [
+        {
+          "id": "knowledge-objects",
+          "path": "bhavya-ai-lab/knowledge/objects/"
+        },
+        {
+          "id": "institution-data",
+          "path": "bhavya-ai-lab/institution/"
+        },
+        {
+          "id": "constitution",
+          "path": "packages/constitution/"
+        }
+      ]
+    }
+  },
+  "connections": [
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/sdk",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/admin-app",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/learning-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/project-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai-institute",
+      "to": "@bhavya/impact-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/crawlers",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/mcp-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/plugin-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/browser-automation",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/github-intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/technology-radar",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/analyzers",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/knowledge-extraction",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/events",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/workflows",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "bhavya-intelligence-network",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/mcp-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/plugin-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "capability-center",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/dashboard",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/sdk",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs-app",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/maps",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/forest",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/github-intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/mcp-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/plugin-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/browser-automation",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/technology-radar",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "github-intelligence-lab",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/events",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-os",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/heritage",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/library",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/crawlers",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/mcp-manager",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/github-intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/technology-radar",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/analyzers",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/knowledge-extraction",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/browser-automation",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "open-source-intelligence",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/research",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/events",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/platform-ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/social-os",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/transparency",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/content-core",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/volunteer",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/sdk",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/website",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/agent-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/agent-platform",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ai",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/analyzers",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/analyzers",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/api",
+      "to": "@bhavya/security",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/bee",
+      "to": "@bhavya/runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/branding",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/branding",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/browser-automation",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/capability-registry",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/capability-registry",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/charts",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/cli",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/config",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/config",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/content-core",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/crawlers",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/crawlers",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/docs",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/events",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-intelligence",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/github-intelligence",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/icons",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/agent-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/workflow-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/memory-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/knowledge-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/search-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/planner-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/kernel",
+      "to": "@bhavya/scheduler-engine",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge-extraction",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/knowledge-extraction",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/ui",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/eslint",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/maps",
+      "to": "@bhavya/typescript",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/mcp-manager",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/mcp-manager",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/memory-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/notifications",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/planner-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/plugin-manager",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/plugin-manager",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/providers",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/scheduler-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/sdk",
+      "to": "@bhavya/mission-runtime",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/search-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/technology-radar",
+      "to": "@bhavya/intelligence",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/technology-radar",
+      "to": "@bhavya/capability-registry",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/ui",
+      "to": "@bhavya/bdl",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/workflow-engine",
+      "to": "@bhavya/kernel",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/platform",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/types",
+      "type": "depends-on"
+    },
+    {
+      "from": "@bhavya/workflows",
+      "to": "@bhavya/events",
+      "type": "depends-on"
+    }
+  ]
+}

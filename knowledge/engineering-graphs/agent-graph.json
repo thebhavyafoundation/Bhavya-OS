@@ -1,0 +1,80 @@
+{
+  "name": "Agent Graph",
+  "generatedAt": "2026-08-06T04:24:33.159Z",
+  "agents": [
+    {
+      "id": "chief-architect",
+      "role": "Chief Architect",
+      "scope": "architecture",
+      "permissions": ["read", "write", "review"]
+    },
+    {
+      "id": "project-manager",
+      "role": "Project Manager",
+      "scope": "tasks",
+      "permissions": ["read", "write", "assign"]
+    },
+    {
+      "id": "repo-intelligence",
+      "role": "Repository Intelligence",
+      "scope": "indexing",
+      "permissions": ["read", "scan"]
+    },
+    {
+      "id": "frontend-engineer",
+      "role": "Frontend Engineer",
+      "scope": "apps/*",
+      "permissions": ["read", "write", "build"]
+    },
+    {
+      "id": "backend-engineer",
+      "role": "Backend Engineer",
+      "scope": "packages/*",
+      "permissions": ["read", "write", "build"]
+    },
+    {
+      "id": "design-system",
+      "role": "Design System",
+      "scope": "packages/platform-ui",
+      "permissions": ["read", "write", "review"]
+    },
+    {
+      "id": "qa-engineer",
+      "role": "QA Engineer",
+      "scope": "testing",
+      "permissions": ["read", "test", "report"]
+    },
+    {
+      "id": "security-engineer",
+      "role": "Security Engineer",
+      "scope": "security",
+      "permissions": ["read", "audit", "review"]
+    },
+    {
+      "id": "devops-engineer",
+      "role": "DevOps Engineer",
+      "scope": "deployment",
+      "permissions": ["read", "deploy", "monitor"]
+    },
+    {
+      "id": "documentation",
+      "role": "Documentation",
+      "scope": "docs",
+      "permissions": ["read", "write", "review"]
+    }
+  ],
+  "workflows": [
+    {
+      "name": "feature-development",
+      "steps": ["plan", "implement", "test", "review", "document", "deploy"]
+    },
+    {
+      "name": "bug-fix",
+      "steps": ["diagnose", "fix", "test", "review", "deploy"]
+    },
+    {
+      "name": "architecture-review",
+      "steps": ["analyze", "propose", "review", "approve", "implement"]
+    }
+  ]
+}

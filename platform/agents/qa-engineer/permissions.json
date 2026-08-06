@@ -1,0 +1,9 @@
+{
+  "agent": "qa-engineer",
+  "permissions": ["read", "test", "report", "reject"],
+  "scope": {
+    "paths": ["*"],
+    "packages": ["*"],
+    "actions": ["testing", "validation", "quality-gates"]
+  }
+}

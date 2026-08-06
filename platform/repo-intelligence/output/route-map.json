@@ -1,0 +1,1238 @@
+[
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/audit",
+    "file": "apps\\admin\\src\\app\\audit\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/content",
+    "file": "apps\\admin\\src\\app\\content\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/",
+    "file": "apps\\admin\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/",
+    "file": "apps\\admin\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/releases",
+    "file": "apps\\admin\\src\\app\\releases\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/admin-app",
+    "path": "/users",
+    "file": "apps\\admin\\src\\app\\users\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/assessment",
+    "file": "apps\\ai-institute\\src\\app\\assessment\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/courses/foundations/check",
+    "file": "apps\\ai-institute\\src\\app\\courses\\foundations\\check\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/courses/foundations/lab",
+    "file": "apps\\ai-institute\\src\\app\\courses\\foundations\\lab\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/courses/foundations/lessons/[id]",
+    "file": "apps\\ai-institute\\src\\app\\courses\\foundations\\lessons\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/courses/foundations/project",
+    "file": "apps\\ai-institute\\src\\app\\courses\\foundations\\project\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/dashboard",
+    "file": "apps\\ai-institute\\src\\app\\dashboard\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/impact",
+    "file": "apps\\ai-institute\\src\\app\\impact\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/impact/[id]",
+    "file": "apps\\ai-institute\\src\\app\\impact\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/",
+    "file": "apps\\ai-institute\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/",
+    "file": "apps\\ai-institute\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/projects",
+    "file": "apps\\ai-institute\\src\\app\\projects\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ai-institute",
+    "path": "/projects/[id]",
+    "file": "apps\\ai-institute\\src\\app\\projects\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/api-explorer",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\api-explorer\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/courses",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\courses\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/forest",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\forest\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/governance",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\governance\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/heritage",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\heritage\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/knowledge/ai",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\knowledge\\ai\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/knowledge",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\knowledge\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/lessons",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\lessons\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/memory",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\memory\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/observability",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\observability\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/playbooks",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\playbooks\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/projects",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\projects\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/research",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\research\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/runtime",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\runtime\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/search",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\search\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/videos",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\videos\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/bhavya-ai-lab",
+    "path": "/volunteers",
+    "file": "apps\\bhavya-ai-lab\\src\\app\\volunteers\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "bhavya-intelligence-network",
+    "path": "/",
+    "file": "apps\\bhavya-intelligence-network\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "bhavya-intelligence-network",
+    "path": "/",
+    "file": "apps\\bhavya-intelligence-network\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "capability-center",
+    "path": "/",
+    "file": "apps\\capability-center\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "capability-center",
+    "path": "/",
+    "file": "apps\\capability-center\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/governance",
+    "file": "apps\\dashboard\\src\\app\\governance\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/impact",
+    "file": "apps\\dashboard\\src\\app\\impact\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/impact-trends",
+    "file": "apps\\dashboard\\src\\app\\impact-trends\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/",
+    "file": "apps\\dashboard\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/lifecycle",
+    "file": "apps\\dashboard\\src\\app\\lifecycle\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/memory",
+    "file": "apps\\dashboard\\src\\app\\memory\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/",
+    "file": "apps\\dashboard\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/playbooks",
+    "file": "apps\\dashboard\\src\\app\\playbooks\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/predictive",
+    "file": "apps\\dashboard\\src\\app\\predictive\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/reports",
+    "file": "apps\\dashboard\\src\\app\\reports\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/resilience",
+    "file": "apps\\dashboard\\src\\app\\resilience\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/stewardship",
+    "file": "apps\\dashboard\\src\\app\\stewardship\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/dashboard",
+    "path": "/succession",
+    "file": "apps\\dashboard\\src\\app\\succession\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/components",
+    "file": "apps\\design-system\\src\\app\\components\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/icons",
+    "file": "apps\\design-system\\src\\app\\icons\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/",
+    "file": "apps\\design-system\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/",
+    "file": "apps\\design-system\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/patterns",
+    "file": "apps\\design-system\\src\\app\\patterns\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/playground",
+    "file": "apps\\design-system\\src\\app\\playground\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/tokens",
+    "file": "apps\\design-system\\src\\app\\tokens\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/design-system",
+    "path": "/typography",
+    "file": "apps\\design-system\\src\\app\\typography\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/decisions",
+    "file": "apps\\docs\\src\\app\\decisions\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/governance",
+    "file": "apps\\docs\\src\\app\\governance\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/governance/policies",
+    "file": "apps\\docs\\src\\app\\governance\\policies\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/graph",
+    "file": "apps\\docs\\src\\app\\graph\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/",
+    "file": "apps\\docs\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/",
+    "file": "apps\\docs\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/releases",
+    "file": "apps\\docs\\src\\app\\releases\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/search",
+    "file": "apps\\docs\\src\\app\\search\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/docs-app",
+    "path": "/standards",
+    "file": "apps\\docs\\src\\app\\standards\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/impact",
+    "file": "apps\\forest\\src\\app\\impact\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/",
+    "file": "apps\\forest\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/missions/new",
+    "file": "apps\\forest\\src\\app\\missions\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/missions",
+    "file": "apps\\forest\\src\\app\\missions\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/missions/[id]",
+    "file": "apps\\forest\\src\\app\\missions\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/monitoring",
+    "file": "apps\\forest\\src\\app\\monitoring\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/",
+    "file": "apps\\forest\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/plantings",
+    "file": "apps\\forest\\src\\app\\plantings\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/forest",
+    "path": "/sites",
+    "file": "apps\\forest\\src\\app\\sites\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "github-intelligence-lab",
+    "path": "/",
+    "file": "apps\\github-intelligence-lab\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "github-intelligence-lab",
+    "path": "/",
+    "file": "apps\\github-intelligence-lab\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/comparisons",
+    "file": "apps\\github-os\\src\\app\\comparisons\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/educational",
+    "file": "apps\\github-os\\src\\app\\educational\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/elite",
+    "file": "apps\\github-os\\src\\app\\elite\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/knowledge",
+    "file": "apps\\github-os\\src\\app\\knowledge\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/knowledge-graph",
+    "file": "apps\\github-os\\src\\app\\knowledge-graph\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/",
+    "file": "apps\\github-os\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/learning",
+    "file": "apps\\github-os\\src\\app\\learning\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/",
+    "file": "apps\\github-os\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/patterns",
+    "file": "apps\\github-os\\src\\app\\patterns\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories",
+    "file": "apps\\github-os\\src\\app\\repositories\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/advisor",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\advisor\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/architecture-advisor",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\architecture-advisor\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/blueprint",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\blueprint\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/debt",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\debt\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/fitness",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\fitness\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/health",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\health\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/learning",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\learning\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/memory",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\memory\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/plan",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\plan\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/review",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\review\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/student",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\student\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/github-os",
+    "path": "/repositories/[id]/timeline",
+    "file": "apps\\github-os\\src\\app\\repositories\\[id]\\timeline\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/assessments",
+    "file": "apps\\heritage\\src\\app\\assessments\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/assets",
+    "file": "apps\\heritage\\src\\app\\assets\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/conservation",
+    "file": "apps\\heritage\\src\\app\\conservation\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/impact",
+    "file": "apps\\heritage\\src\\app\\impact\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/",
+    "file": "apps\\heritage\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/missions/new",
+    "file": "apps\\heritage\\src\\app\\missions\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/missions",
+    "file": "apps\\heritage\\src\\app\\missions\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/heritage",
+    "path": "/",
+    "file": "apps\\heritage\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/actions",
+    "file": "apps\\ioc\\src\\app\\actions\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/dashboard",
+    "file": "apps\\ioc\\src\\app\\dashboard\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/events",
+    "file": "apps\\ioc\\src\\app\\events\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/health",
+    "file": "apps\\ioc\\src\\app\\health\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/",
+    "file": "apps\\ioc\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/okr",
+    "file": "apps\\ioc\\src\\app\\okr\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/",
+    "file": "apps\\ioc\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/production/kp",
+    "file": "apps\\ioc\\src\\app\\production\\kp\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/production",
+    "file": "apps\\ioc\\src\\app\\production\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/reviews",
+    "file": "apps\\ioc\\src\\app\\reviews\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/ioc",
+    "path": "/risks",
+    "file": "apps\\ioc\\src\\app\\risks\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/collections",
+    "file": "apps\\knowledge\\src\\app\\collections\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/collections/[id]",
+    "file": "apps\\knowledge\\src\\app\\collections\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/documents",
+    "file": "apps\\knowledge\\src\\app\\documents\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/documents/[id]",
+    "file": "apps\\knowledge\\src\\app\\documents\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/entities",
+    "file": "apps\\knowledge\\src\\app\\entities\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/graph",
+    "file": "apps\\knowledge\\src\\app\\graph\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/",
+    "file": "apps\\knowledge\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/",
+    "file": "apps\\knowledge\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/relationships",
+    "file": "apps\\knowledge\\src\\app\\relationships\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/knowledge",
+    "path": "/search",
+    "file": "apps\\knowledge\\src\\app\\search\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/artifacts",
+    "file": "apps\\knowledge-studio\\src\\app\\artifacts\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/artifacts/[id]",
+    "file": "apps\\knowledge-studio\\src\\app\\artifacts\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/ingest",
+    "file": "apps\\knowledge-studio\\src\\app\\ingest\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/",
+    "file": "apps\\knowledge-studio\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/login",
+    "file": "apps\\knowledge-studio\\src\\app\\login\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/packages",
+    "file": "apps\\knowledge-studio\\src\\app\\packages\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/",
+    "file": "apps\\knowledge-studio\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/pipeline/[id]",
+    "file": "apps\\knowledge-studio\\src\\app\\pipeline\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/pipelines",
+    "file": "apps\\knowledge-studio\\src\\app\\pipelines\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "knowledge-studio",
+    "path": "/register",
+    "file": "apps\\knowledge-studio\\src\\app\\register\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/animation/[id]",
+    "file": "apps\\lesson-studio\\src\\app\\animation\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/courses/new",
+    "file": "apps\\lesson-studio\\src\\app\\courses\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/courses",
+    "file": "apps\\lesson-studio\\src\\app\\courses\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/courses/[id]",
+    "file": "apps\\lesson-studio\\src\\app\\courses\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/knowledge",
+    "file": "apps\\lesson-studio\\src\\app\\knowledge\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/knowledge/[id]/edit",
+    "file": "apps\\lesson-studio\\src\\app\\knowledge\\[id]\\edit\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/",
+    "file": "apps\\lesson-studio\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/new",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/[id]/assessment",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\[id]\\assessment\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/[id]/guide",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\[id]\\guide\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/[id]",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/[id]/publish",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\[id]\\publish\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/lessons/[id]/workbook",
+    "file": "apps\\lesson-studio\\src\\app\\lessons\\[id]\\workbook\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/",
+    "file": "apps\\lesson-studio\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/lesson-studio",
+    "path": "/provenance",
+    "file": "apps\\lesson-studio\\src\\app\\provenance\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/browse",
+    "file": "apps\\library\\src\\app\\browse\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/collections",
+    "file": "apps\\library\\src\\app\\collections\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/collections/[id]",
+    "file": "apps\\library\\src\\app\\collections\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/",
+    "file": "apps\\library\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/",
+    "file": "apps\\library\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/read/[id]",
+    "file": "apps\\library\\src\\app\\read\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/library",
+    "path": "/search",
+    "file": "apps\\library\\src\\app\\search\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "open-source-intelligence",
+    "path": "/",
+    "file": "apps\\open-source-intelligence\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "open-source-intelligence",
+    "path": "/",
+    "file": "apps\\open-source-intelligence\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/research",
+    "path": "/",
+    "file": "apps\\research\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/research",
+    "path": "/",
+    "file": "apps\\research\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/research",
+    "path": "/projects/new",
+    "file": "apps\\research\\src\\app\\projects\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/research",
+    "path": "/projects/[id]",
+    "file": "apps\\research\\src\\app\\projects\\[id]\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/social-os",
+    "path": "/ceo",
+    "file": "apps\\social-os\\src\\app\\ceo\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/social-os",
+    "path": "/dashboard",
+    "file": "apps\\social-os\\src\\app\\dashboard\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/social-os",
+    "path": "/",
+    "file": "apps\\social-os\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/social-os",
+    "path": "/",
+    "file": "apps\\social-os\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/assignments",
+    "file": "apps\\volunteer\\src\\app\\assignments\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/",
+    "file": "apps\\volunteer\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/",
+    "file": "apps\\volunteer\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/participation",
+    "file": "apps\\volunteer\\src\\app\\participation\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/recognition",
+    "file": "apps\\volunteer\\src\\app\\recognition\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/skills",
+    "file": "apps\\volunteer\\src\\app\\skills\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/training",
+    "file": "apps\\volunteer\\src\\app\\training\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/volunteers/new",
+    "file": "apps\\volunteer\\src\\app\\volunteers\\new\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/volunteer",
+    "path": "/volunteers",
+    "file": "apps\\volunteer\\src\\app\\volunteers\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/about",
+    "file": "apps\\website\\src\\app\\about\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/accessibility",
+    "file": "apps\\website\\src\\app\\accessibility\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/community",
+    "file": "apps\\website\\src\\app\\community\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/heritage",
+    "file": "apps\\website\\src\\app\\heritage\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/knowledge/packages",
+    "file": "apps\\website\\src\\app\\knowledge\\packages\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/knowledge",
+    "file": "apps\\website\\src\\app\\knowledge\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/",
+    "file": "apps\\website\\src\\app\\layout.tsx",
+    "type": "layout"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/mission",
+    "file": "apps\\website\\src\\app\\mission\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/nature",
+    "file": "apps\\website\\src\\app\\nature\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/",
+    "file": "apps\\website\\src\\app\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/privacy",
+    "file": "apps\\website\\src\\app\\privacy\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/programs",
+    "file": "apps\\website\\src\\app\\programs\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/resources",
+    "file": "apps\\website\\src\\app\\resources\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/audit",
+    "file": "apps\\website\\src\\app\\transparency\\audit\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/financials",
+    "file": "apps\\website\\src\\app\\transparency\\financials\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/governance",
+    "file": "apps\\website\\src\\app\\transparency\\governance\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency",
+    "file": "apps\\website\\src\\app\\transparency\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/policies",
+    "file": "apps\\website\\src\\app\\transparency\\policies\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/projects",
+    "file": "apps\\website\\src\\app\\transparency\\projects\\page.tsx",
+    "type": "page"
+  },
+  {
+    "app": "@bhavya/website",
+    "path": "/transparency/releases",
+    "file": "apps\\website\\src\\app\\transparency\\releases\\page.tsx",
+    "type": "page"
+  }
+]

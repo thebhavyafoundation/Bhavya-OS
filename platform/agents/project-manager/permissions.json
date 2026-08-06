@@ -1,0 +1,9 @@
+{
+  "agent": "project-manager",
+  "permissions": ["read", "write", "assign", "prioritize"],
+  "scope": {
+    "paths": [".tasks/*", "docs/*"],
+    "packages": ["*"],
+    "actions": ["task-management", "priority-setting", "coordination"]
+  }
+}

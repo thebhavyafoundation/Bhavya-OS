@@ -1,0 +1,13 @@
+{
+  "agent": "design-system",
+  "permissions": ["read", "write", "review"],
+  "scope": {
+    "paths": ["packages/platform-ui/*", "docs/design-system/*"],
+    "packages": ["@bhavya/platform-ui"],
+    "actions": [
+      "design-system-maintenance",
+      "component-development",
+      "token-management"
+    ]
+  }
+}

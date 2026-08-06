@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhavya OS — Engineering Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: #e5e5e5;
+      padding: 24px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #262626;
+    }
+    .header h1 { font-size: 24px; font-weight: 700; color: #fff; }
+    .header .badge {
+      background: #15803d;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: #171717;
+      border: 1px solid #262626;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .card h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #262626;
+    }
+    .stat:last-child { border-bottom: none; }
+    .stat-label { color: #a3a3a3; font-size: 14px; }
+    .stat-value { font-size: 20px; font-weight: 700; color: #fff; }
+    .stat-value.green { color: #22c55e; }
+    .stat-value.gold { color: #eab308; }
+    .stat-value.red { color: #ef4444; }
+    .list { list-style: none; max-height: 300px; overflow-y: auto; }
+    .list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #262626;
+      font-size: 13px;
+      font-family: monospace;
+    }
+    .list li:last-child { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      background: #262626;
+      color: #a3a3a3;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 2px;
+    }
+    .tag.app { background: #1e3a5f; color: #60a5fa; }
+    .tag.pkg { background: #1e3a1e; color: #4ade80; }
+    .progress {
+      width: 100%;
+      height: 8px;
+      background: #262626;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #15803d, #22c55e);
+      border-radius: 4px;
+    }
+    .timestamp { color: #525252; font-size: 12px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Bhavya OS — Engineering Dashboard</h1>
+    <span class="badge">v2.0</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Repository Overview</h2>
+      <div class="stat">
+        <span class="stat-label">Total Files</span>
+        <span class="stat-value">13,126</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Directories</span>
+        <span class="stat-value">3,380</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Packages</span>
+        <span class="stat-value green">73</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Routes</span>
+        <span class="stat-value">206</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Components</span>
+        <span class="stat-value">857</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Package Distribution</h2>
+      <div class="stat">
+        <span class="stat-label">Applications</span>
+        <span class="stat-value green">23</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Libraries</span>
+        <span class="stat-value gold">54</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Dependencies</span>
+        <span class="stat-value">396</span>
+      </div>
+      <div style="margin-top: 12px;">
+        <div class="stat-label" style="margin-bottom: 8px;">Apps</div>
+        <div><span class="tag app">admin</span> <span class="tag app">ai-institute</span> <span class="tag app">bhavya-ai-lab</span> <span class="tag app">bhavya-intelligence-network</span> <span class="tag app">capability-center</span> <span class="tag app">dashboard</span> <span class="tag app">design-system</span> <span class="tag app">docs</span> <span class="tag app">forest</span> <span class="tag app">github-intelligence-lab</span> <span class="tag app">github-os</span> <span class="tag app">heritage</span> <span class="tag app">ioc</span> <span class="tag app">knowledge</span> <span class="tag app">knowledge-studio</span> <span class="tag app">lesson-studio</span> <span class="tag app">library</span> <span class="tag app">open-source-intelligence</span> <span class="tag app">research</span> <span class="tag app">social-os</span> <span class="tag app">transparency</span> <span class="tag app">volunteer</span> <span class="tag app">website</span></div>
+      </div>
+      <div style="margin-top: 12px;">
+        <div class="stat-label" style="margin-bottom: 8px;">Packages</div>
+        <div><span class="tag pkg">agent-engine</span> <span class="tag pkg">agent-platform</span> <span class="tag pkg">ai</span> <span class="tag pkg">analyzers</span> <span class="tag pkg">api</span> <span class="tag pkg">auth</span> <span class="tag pkg">bar</span> <span class="tag pkg">bdl</span> <span class="tag pkg">bdx</span> <span class="tag pkg">bee</span> <span class="tag pkg">bhavya-ai-lab</span> <span class="tag pkg">branding</span> <span class="tag pkg">browser-automation</span> <span class="tag pkg">capability-registry</span> <span class="tag pkg">charts</span> <span class="tag pkg">cli</span> <span class="tag pkg">config</span> <span class="tag pkg">constitution</span> <span class="tag pkg">content-core</span> <span class="tag pkg">crawlers</span> <span class="tag pkg">database</span> <span class="tag pkg">docs</span> <span class="tag pkg">eslint</span> <span class="tag pkg">events</span> <span class="tag pkg">github-intelligence</span> <span class="tag pkg">icons</span> <span class="tag pkg">impact-runtime</span> <span class="tag pkg">intelligence</span> <span class="tag pkg">kernel</span> <span class="tag pkg">knowledge-engine</span> <span class="tag pkg">knowledge-extraction</span> <span class="tag pkg">learning-runtime</span> <span class="tag pkg">maps</span> <span class="tag pkg">mcp-manager</span> <span class="tag pkg">memory-engine</span> <span class="tag pkg">mission-runtime</span> <span class="tag pkg">notifications</span> <span class="tag pkg">planner-engine</span> <span class="tag pkg">platform</span> <span class="tag pkg">platform-ui</span> <span class="tag pkg">plugin-manager</span> <span class="tag pkg">project-runtime</span> <span class="tag pkg">providers</span> <span class="tag pkg">runtime</span> <span class="tag pkg">scheduler-engine</span> <span class="tag pkg">sdk</span> <span class="tag pkg">search-engine</span> <span class="tag pkg">security</span> <span class="tag pkg">technology-radar</span> <span class="tag pkg">types</span> <span class="tag pkg">typescript</span> <span class="tag pkg">ui</span> <span class="tag pkg">workflow-engine</span> <span class="tag pkg">workflows</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Git Activity</h2>
+      <div class="stat">
+        <span class="stat-label">Recent Commits</span>
+        <span class="stat-value">50</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Last Commit</span>
+        <span class="stat-value" style="font-size: 14px;">feat(website): cinematic design system v2.0</span>
+      </div>
+      <ul class="list">
+        <li>feat(website): cinematic design system v2.0</li>
+        <li>fix(deploy): point vercel.json to website build instead of b</li>
+        <li>feat(website): launch sprint v2.0 — conversion, knowledge di</li>
+        <li>feat: Validation Sprint Phase 1 — Evidence collection comple</li>
+        <li>feat: Validation Sprint plan — validate before producing</li>
+        <li>feat: Masterpiece Sprint — KP-002/003/004 elevated to 10/10</li>
+        <li>feat: Production Sprint — KP-002, KP-003, KP-004 complete</li>
+        <li>feat: Production Era v1.0 — IOC v1.0 + Production Planning S</li>
+        <li>feat(social-os): social os v2 — institutional communication </li>
+        <li>feat(ai-institute): slice 1 first student experience</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Architecture Health</h2>
+      <div class="stat">
+        <span class="stat-label">Workspace Dependencies</span>
+        <span class="stat-value green">163</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">External Dependencies</span>
+        <span class="stat-value">233</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Dependency Ratio</span>
+        <span class="stat-value gold">1.4:1</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" style="width: 100%"></div>
+      </div>
+      <div class="timestamp">Updated: 2026-08-06T04:31:14.664Z</div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Top Packages by Dependencies</h2>
+      <ul class="list">
+        <li><span class="tag app">bhavya-intelligence-network</span> 23 deps</li>
+        <li><span class="tag app">open-source-intelligence</span> 20 deps</li>
+        <li><span class="tag app">github-intelligence-lab</span> 18 deps</li>
+        <li><span class="tag app">knowledge-studio</span> 18 deps</li>
+        <li><span class="tag app">@bhavya/social-os</span> 17 deps</li>
+        <li><span class="tag app">@bhavya/github-os</span> 16 deps</li>
+        <li><span class="tag app">capability-center</span> 15 deps</li>
+        <li><span class="tag app">@bhavya/ai-institute</span> 14 deps</li>
+        <li><span class="tag app">@bhavya/website</span> 12 deps</li>
+        <li><span class="tag app">@bhavya/ioc</span> 11 deps</li>
+        <li><span class="tag app">@bhavya/design-system</span> 10 deps</li>
+        <li><span class="tag app">@bhavya/lesson-studio</span> 10 deps</li>
+        <li><span class="tag pkg">@bhavya/kernel</span> 10 deps</li>
+        <li><span class="tag app">@bhavya/forest</span> 9 deps</li>
+        <li><span class="tag app">@bhavya/knowledge</span> 9 deps</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Routes by Application</h2>
+      <ul class="list">
+        <li><span class="tag app">@bhavya/admin-app</span> 6 routes</li>
+        <li><span class="tag app">@bhavya/ai-institute</span> 12 routes</li>
+        <li><span class="tag app">@bhavya/bhavya-ai-lab</span> 19 routes</li>
+        <li><span class="tag app">bhavya-intelligence-network</span> 2 routes</li>
+        <li><span class="tag app">capability-center</span> 2 routes</li>
+        <li><span class="tag app">@bhavya/dashboard</span> 13 routes</li>
+        <li><span class="tag app">@bhavya/design-system</span> 8 routes</li>
+        <li><span class="tag app">@bhavya/docs-app</span> 9 routes</li>
+        <li><span class="tag app">@bhavya/forest</span> 9 routes</li>
+        <li><span class="tag app">github-intelligence-lab</span> 2 routes</li>
+        <li><span class="tag app">@bhavya/github-os</span> 23 routes</li>
+        <li><span class="tag app">@bhavya/heritage</span> 8 routes</li>
+        <li><span class="tag app">@bhavya/ioc</span> 11 routes</li>
+        <li><span class="tag app">@bhavya/knowledge</span> 10 routes</li>
+        <li><span class="tag app">knowledge-studio</span> 10 routes</li>
+        <li><span class="tag app">@bhavya/lesson-studio</span> 16 routes</li>
+        <li><span class="tag app">@bhavya/library</span> 7 routes</li>
+        <li><span class="tag app">open-source-intelligence</span> 2 routes</li>
+        <li><span class="tag app">@bhavya/research</span> 4 routes</li>
+        <li><span class="tag app">@bhavya/social-os</span> 4 routes</li>
+        <li><span class="tag app">@bhavya/volunteer</span> 9 routes</li>
+        <li><span class="tag app">@bhavya/website</span> 20 routes</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

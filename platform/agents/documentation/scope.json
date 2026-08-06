@@ -1,0 +1,6 @@
+{
+  "agent": "documentation",
+  "paths": ["docs/*", "*.md"],
+  "packages": ["*"],
+  "actions": ["documentation", "blogging", "changelog"]
+}
