@@ -76,6 +76,18 @@ export default function LandingPage() {
             </span>
           </Link>
           <div className="flex items-center gap-4">
+            <Link
+              href="/knowledge-graph"
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors hidden sm:block"
+            >
+              Knowledge Graph
+            </Link>
+            <Link
+              href="/learning-paths"
+              className="text-sm text-text-secondary hover:text-text-primary transition-colors hidden sm:block"
+            >
+              Learning Paths
+            </Link>
             {progress?.enrolled ? (
               <Link
                 href="/dashboard"
@@ -185,6 +197,52 @@ export default function LandingPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Knowledge Graph Preview */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-text-primary text-center mb-4">
+            The Complete AI Knowledge Graph
+          </h2>
+          <p className="text-text-secondary text-center mb-12 max-w-2xl mx-auto">
+            Every concept in AI, connected. From "What is AI?" to multi-agent
+            systems. Click any node to explore.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: "Concepts", value: "30+", icon: "🧠" },
+              { label: "Learning Paths", value: "8", icon: "🎯" },
+              { label: "Projects", value: "15+", icon: "🔨" },
+              { label: "Certifications", value: "8", icon: "🏆" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="text-center p-4 border border-border-primary rounded-lg bg-bg-secondary"
+              >
+                <div className="text-2xl mb-1">{s.icon}</div>
+                <div className="text-xl font-bold text-text-primary">
+                  {s.value}
+                </div>
+                <div className="text-xs text-text-tertiary">{s.label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center gap-4">
+            <Link
+              href="/knowledge-graph"
+              className="px-6 py-3 text-base font-semibold border border-border-primary rounded-lg text-text-primary hover:border-accent-blue hover:text-accent-blue transition-colors"
+            >
+              Explore Knowledge Graph →
+            </Link>
+            <Link
+              href="/learning-paths"
+              className="px-6 py-3 text-base font-semibold bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+            >
+              View Learning Paths →
+            </Link>
           </div>
         </div>
       </section>
