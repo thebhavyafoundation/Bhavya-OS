@@ -1,5 +1,5 @@
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Leaf, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ThemeToggle, MobileMenu } from "./HeaderClient";
 
 export function Header({ currentPath = "/" }: { currentPath?: string }) {
@@ -19,7 +19,14 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
     <>
       <header className="site-header" role="banner">
         <a href="/" className="nav-logo" aria-label="Bhavya Foundation home">
-          <Leaf className="nav-logo-icon" aria-hidden="true" />
+          <img
+            src="/brand/icon.svg"
+            alt=""
+            className="nav-logo-icon"
+            width="32"
+            height="32"
+            aria-hidden="true"
+          />
           <span className="nav-logo-text">Bhavya</span>
         </a>
 

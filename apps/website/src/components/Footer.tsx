@@ -1,4 +1,4 @@
-import { Leaf, Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -6,7 +6,13 @@ export function Footer() {
       <div className="footer-grid">
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Leaf size={20} color="var(--primary)" aria-hidden="true" />
+            <img
+              src="/brand/icon.svg"
+              alt=""
+              width="24"
+              height="24"
+              aria-hidden="true"
+            />
             <span
               style={{
                 fontSize: "var(--text-md)",
