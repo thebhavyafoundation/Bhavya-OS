@@ -539,3 +539,41 @@ export type {
   DependencyMap,
   ResilienceStats,
 } from "./institutional-resilience";
+
+// ── Content Authoring Pipeline ─────────────────────────
+export {
+  validateContent,
+  createVersion,
+  bumpMajor,
+  submitForReview,
+  addReviewComment,
+  completeReview,
+  publishContent,
+  archiveContent,
+  createContentItem,
+  runPipeline,
+  defaultStages,
+  saveContent,
+  loadContent,
+  listContent,
+} from "./pipeline";
+export type {
+  ContentDomain,
+  ContentStatus,
+  ContentType,
+  Citation,
+  ContentPrerequisite,
+  LabConfig,
+  LabParameter,
+  CodeExample,
+  CodeError,
+  Translation,
+  Review,
+  ReviewComment,
+  ContentVersion,
+  ContentItem,
+  QualityCheck,
+  PipelineStage,
+  PipelineResult,
+  StageResult,
+} from "./pipeline";
