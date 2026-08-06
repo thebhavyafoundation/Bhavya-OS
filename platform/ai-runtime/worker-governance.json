@@ -1,0 +1,125 @@
+{
+  "version": "4.0",
+  "workers": {
+    "frontend-engineer": {
+      "specialization": "frontend",
+      "description": "UI components, CSS, React, Next.js",
+      "allowedDirectories": [
+        "apps/*/src/components",
+        "apps/*/src/app",
+        "apps/*/src/styles",
+        "packages/platform-ui/src"
+      ],
+      "blockedDirectories": [
+        "platform/ai-runtime",
+        "packages/runtime/src/engines"
+      ],
+      "resourceLimits": {
+        "maxConcurrentTasks": 2,
+        "maxMemoryMB": 512,
+        "maxExecutionTimeMs": 300000
+      },
+      "qualityTargets": {
+        "lintScore": 90,
+        "typeCheck": true,
+        "accessibility": true,
+        "performance": "good"
+      },
+      "reviewRequirements": {
+        "required": true,
+        "reviewer": "qa-engineer",
+        "minApprovalCount": 1
+      }
+    },
+    "backend-engineer": {
+      "specialization": "backend",
+      "description": "API routes, database, server logic",
+      "allowedDirectories": [
+        "apps/*/src/app/api",
+        "packages/runtime/src",
+        "packages/api/src",
+        "packages/database/src"
+      ],
+      "blockedDirectories": [
+        "apps/*/src/components",
+        "packages/platform-ui/src"
+      ],
+      "resourceLimits": {
+        "maxConcurrentTasks": 2,
+        "maxMemoryMB": 512,
+        "maxExecutionTimeMs": 300000
+      },
+      "qualityTargets": {
+        "lintScore": 90,
+        "typeCheck": true,
+        "testCoverage": 80,
+        "securityAudit": true
+      },
+      "reviewRequirements": {
+        "required": true,
+        "reviewer": "qa-engineer",
+        "minApprovalCount": 1
+      }
+    },
+    "qa-engineer": {
+      "specialization": "testing",
+      "description": "Unit tests, integration tests, E2E tests",
+      "allowedDirectories": [
+        "apps/*/src/**/*.test.*",
+        "apps/*/src/**/*.spec.*",
+        "packages/*/src/**/*.test.*",
+        "packages/*/src/**/*.spec.*"
+      ],
+      "blockedDirectories": [],
+      "resourceLimits": {
+        "maxConcurrentTasks": 3,
+        "maxMemoryMB": 1024,
+        "maxExecutionTimeMs": 600000
+      },
+      "qualityTargets": {
+        "testCoverage": 80,
+        "allTestsPass": true,
+        "noFlakyTests": true
+      },
+      "reviewRequirements": {
+        "required": false,
+        "reviewer": null,
+        "minApprovalCount": 0
+      }
+    },
+    "devops-engineer": {
+      "specialization": "devops",
+      "description": "Deployment, CI/CD, infrastructure",
+      "allowedDirectories": [
+        "platform/ai-runtime/deployment-pipeline.mjs",
+        "platform/ai-runtime/continuous-verification.mjs",
+        ".github/workflows",
+        "vercel.json"
+      ],
+      "blockedDirectories": [
+        "apps/*/src/components",
+        "packages/platform-ui/src"
+      ],
+      "resourceLimits": {
+        "maxConcurrentTasks": 1,
+        "maxMemoryMB": 256,
+        "maxExecutionTimeMs": 600000
+      },
+      "qualityTargets": {
+        "deploymentSuccess": true,
+        "rollbackAvailable": true,
+        "monitoringActive": true
+      },
+      "reviewRequirements": {
+        "required": true,
+        "reviewer": "chief-architect",
+        "minApprovalCount": 1
+      }
+    }
+  },
+  "enforcement": {
+    "strictMode": true,
+    "violationAction": "block",
+    "logViolations": true
+  }
+}
