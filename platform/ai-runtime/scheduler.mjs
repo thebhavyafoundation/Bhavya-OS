@@ -150,6 +150,7 @@ export class ExecutionScheduler {
   }
 
   processQueue() {
+    if (!this.workerPool) return;
     while (this.queue.length > 0 && this.running < this.maxConcurrency) {
       const taskId = this.queue.shift();
       const task = this.tasks.get(taskId);
