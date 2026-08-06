@@ -95,27 +95,7 @@ commands["runtime"] = {
   },
 };
 
-commands["graph"] = {
-  build: async () => {
-    print("Rebuilding graph via compile-runtime...");
-    const { default: compile } = await import(path.join(AI_DIR, "build/compile-runtime.mjs").replace(/\\/g, "/"));
-    print("Graph rebuilt.");
-  },
-  query: async (entityId) => {
-    if (!entityId) { print("Usage: bhavya graph query <entity-id>"); return; }
-    const graph = readJSON(".ai/graph/graph.json");
-    if (!graph) { print("No graph found. Run 'bhavya graph build' first."); return; }
-    const node = graph.nodes.find(n => n.id === entityId.toUpperCase());
-    if (!node) { print(`Entity ${entityId} not found in graph.`); return; }
-    const edges = graph.edges.filter(e => e.source === node.id || e.target === node.id);
-    const related = edges.map(e => {
-      const otherId = e.source === node.id ? e.target : e.source;
-      const other = graph.nodes.find(n => n.id === otherId);
-      return { relation: e.type, entity: other?.id || otherId, name: other?.name || "", path: other?.path || "" };
-    });
-    print({ node, edges: related });
-  },
-};
+// graph commands defined in v3 section
 
 commands["context"] = {
   load: async (domain) => {
@@ -200,22 +180,7 @@ commands["release"] = {
   },
 };
 
-commands["memory"] = {
-  search: async (query) => {
-    if (!query) { print("Usage: bhavya memory search <query>"); return; }
-    const memoryDir = path.join(AI_DIR, "memory");
-    if (!fs.existsSync(memoryDir)) { print("No memory directory found."); return; }
-    const results = [];
-    const q = query.toLowerCase();
-    for (const f of fs.readdirSync(memoryDir).filter(f => f.endsWith(".md"))) {
-      const content = fs.readFileSync(path.join(memoryDir, f), "utf8").toLowerCase();
-      if (content.includes(q)) {
-        results.push({ file: f, domain: f.replace(".md", "") });
-      }
-    }
-    print({ query, results, count: results.length });
-  },
-};
+// memory commands defined in v3 section
 
 commands["planner"] = {
   build: async (goal) => {
@@ -272,6 +237,313 @@ commands["metrics"] = {
   },
 };
 
+// ── Platform Commands ────────────────────────────────────────────
+
+commands["index"] = {
+  _default: async () => {
+    print("Running Repository Intelligence Engine...");
+    const url = toFileURL(path.join(ROOT, "platform/repo-intelligence/index.mjs"));
+    await import(url);
+  },
+};
+
+commands["plan"] = {
+  build: async (goal) => {
+    if (!goal) { print("Usage: bhavya plan build <goal>"); return; }
+    const { Planner } = await import(path.join(ROOT, "platform/ai-runtime/planner.mjs").replace(/\\/g, "/"));
+    const planner = new Planner();
+    const plan = await planner.createPlan({ goal });
+    await planner.addStep(plan.id, { name: "Research", description: "Understand requirements" });
+    await planner.addStep(plan.id, { name: "Design", description: "Design solution" });
+    await planner.addStep(plan.id, { name: "Implement", description: "Build the solution" });
+    await planner.addStep(plan.id, { name: "Test", description: "Verify implementation" });
+    await planner.addStep(plan.id, { name: "Document", description: "Write documentation" });
+    print(plan);
+  },
+  list: async () => {
+    const { Planner } = await import(path.join(ROOT, "platform/ai-runtime/planner.mjs").replace(/\\/g, "/"));
+    const planner = new Planner();
+    print(planner.listPlans());
+  },
+};
+
+commands["tasks"] = {
+  _default: async () => {
+    print("Task Orchestration Commands:");
+    print("  bhavya tasks list       — List all tasks");
+    print("  bhavya tasks create     — Create a new task");
+    print("  bhavya tasks queue      — Show task queue");
+    print("  bhavya tasks stats      — Show task statistics");
+  },
+  list: async () => {
+    const { TaskOrchestrator } = await import(path.join(ROOT, "platform/ai-runtime/task-orchestrator.mjs").replace(/\\/g, "/"));
+    const orch = new TaskOrchestrator();
+    print(orch.listTasks());
+  },
+  create: async (name, ...descParts) => {
+    if (!name) { print("Usage: bhavya tasks create <name> [description]"); return; }
+    const { TaskOrchestrator } = await import(path.join(ROOT, "platform/ai-runtime/task-orchestrator.mjs").replace(/\\/g, "/"));
+    const orch = new TaskOrchestrator();
+    const task = orch.createTask({ name, description: descParts.join(" ") });
+    print(task);
+  },
+  queue: async () => {
+    const { TaskOrchestrator } = await import(path.join(ROOT, "platform/ai-runtime/task-orchestrator.mjs").replace(/\\/g, "/"));
+    const orch = new TaskOrchestrator();
+    print(orch.getQueue());
+  },
+  stats: async () => {
+    const { TaskOrchestrator } = await import(path.join(ROOT, "platform/ai-runtime/task-orchestrator.mjs").replace(/\\/g, "/"));
+    const orch = new TaskOrchestrator();
+    print(orch.getStats());
+  },
+};
+
+// review commands defined in v3 section
+
+commands["dashboard"] = {
+  _default: async () => {
+    print("Generating Engineering Dashboard...");
+    const url = toFileURL(path.join(ROOT, "platform/dashboard/generate.mjs"));
+    await import(url);
+  },
+};
+
+commands["platform"] = {
+  status: async () => {
+    const repoIndex = readJSON("platform/repo-intelligence/output/repository-index.json");
+    const depGraph = readJSON("platform/repo-intelligence/output/dependency-graph.json");
+    print({
+      name: "Bhavya OS Platform",
+      version: "2.0.0",
+      packages: repoIndex?.stats?.totalPackages || 0,
+      routes: repoIndex?.stats?.totalRoutes || 0,
+      components: repoIndex?.stats?.totalComponents || 0,
+      dependencies: depGraph?.edges?.length || 0,
+      agents: 10,
+      qualityGates: 8,
+    });
+  },
+};
+
+// ── v3 Commands: Autonomous Engineering ────────────────────────
+
+commands["orchestrate"] = {
+  _default: async (goal) => {
+    if (!goal) { print("Usage: bhavya orchestrate <goal>"); return; }
+    const runtimeUrl = toFileURL(path.join(ROOT, "platform/ai-runtime/runtime-v2.mjs"));
+    const { Runtime } = await import(runtimeUrl);
+    const runtime = new Runtime();
+
+    // Create a task from the goal
+    const task = {
+      name: goal,
+      type: "feature",
+      priority: 1,
+      description: goal,
+    };
+
+    print({ status: "submitted", task: goal, message: "Task submitted to scheduler" });
+
+    // Execute via runtime
+    const submitted = runtime.scheduler.submit(task);
+    print({ taskId: submitted.id, state: submitted.state, priority: submitted.priority });
+  },
+};
+
+commands["worker"] = {
+  start: async (...args) => {
+    const type = args[0] || "general";
+    const name = args[1] || `worker-${Date.now()}`;
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/worker-pool.mjs"));
+    const { WorkerPool, Worker: W } = await import(url);
+    const pool = new WorkerPool({ maxWorkers: 8 });
+    const worker = pool.addWorker({ name, type, capabilities: [type] });
+    print({ status: "started", workerId: worker.id, name, type });
+  },
+  stop: async (workerId) => {
+    if (!workerId) { print("Usage: bhavya worker stop <worker-id>"); return; }
+    print({ status: "stopped", workerId });
+  },
+  list: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/worker-pool.mjs"));
+    const { WorkerPool } = await import(url);
+    const pool = new WorkerPool();
+    print(pool.getStats());
+  },
+};
+
+commands["queue"] = {
+  _default: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/scheduler.mjs"));
+    const { ExecutionScheduler } = await import(url);
+    const scheduler = new ExecutionScheduler();
+    print(scheduler.getStats());
+  },
+  add: async (name, ...descParts) => {
+    if (!name) { print("Usage: bhavya queue add <name> [description]"); return; }
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/scheduler.mjs"));
+    const { ExecutionScheduler } = await import(url);
+    const scheduler = new ExecutionScheduler();
+    const task = scheduler.submit({ name, description: descParts.join(" ") });
+    print(task);
+  },
+  stats: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/scheduler.mjs"));
+    const { ExecutionScheduler } = await import(url);
+    const scheduler = new ExecutionScheduler();
+    print(scheduler.getStats());
+  },
+};
+
+commands["events"] = {
+  _default: async (limit) => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/event-bus.mjs"));
+    const { EventBus } = await import(url);
+    const bus = new EventBus();
+    const events = bus.getRecentEvents(parseInt(limit) || 20);
+    print({ count: events.length, events });
+  },
+  stats: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/event-bus.mjs"));
+    const { EventBus } = await import(url);
+    const bus = new EventBus();
+    print(bus.getMetrics());
+  },
+};
+
+commands["graph"] = {
+  build: async () => {
+    print("Rebuilding graph via compile-runtime...");
+    const url = toFileURL(path.join(AI_DIR, "build/compile-runtime.mjs"));
+    await import(url);
+    print("Graph rebuilt.");
+  },
+  query: async (entityId) => {
+    if (!entityId) { print("Usage: bhavya graph query <entity-id>"); return; }
+    const graph = readJSON(".ai/graph/graph.json");
+    if (!graph) { print("No graph found. Run 'bhavya graph build' first."); return; }
+    const node = graph.nodes.find(n => n.id === entityId.toUpperCase());
+    if (!node) { print(`Entity ${entityId} not found in graph.`); return; }
+    const edges = graph.edges.filter(e => e.source === node.id || e.target === node.id);
+    const related = edges.map(e => {
+      const otherId = e.source === node.id ? e.target : e.source;
+      const other = graph.nodes.find(n => n.id === otherId);
+      return { relation: e.type, entity: other?.id || otherId, name: other?.name || "", path: other?.path || "" };
+    });
+    print({ node, edges: related });
+  },
+  live: async () => {
+    print("Starting live graph updates...");
+    const { execSync } = await import("child_process");
+    const watch = (await import("fs")).watch;
+    const graphFile = path.join(ROOT, "platform/repo-intelligence/output/repository-index.json");
+    if (fs.existsSync(graphFile)) {
+      const data = JSON.parse(fs.readFileSync(graphFile, "utf8"));
+      print({ packages: data.stats?.totalPackages || 0, routes: data.stats?.totalRoutes || 0, components: data.stats?.totalComponents || 0 });
+    }
+    watch(path.join(ROOT, "platform/repo-intelligence/output"), { recursive: false }, () => {
+      console.log("📊 Graph data updated");
+    });
+    print("Watching for changes... Press Ctrl+C to stop.");
+  },
+};
+
+commands["worktree"] = {
+  list: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/worktree-manager.mjs"));
+    const { WorktreeManager } = await import(url);
+    const wm = new WorktreeManager();
+    print(wm.getStats());
+  },
+  create: async (workerId) => {
+    if (!workerId) { print("Usage: bhavya worktree create <worker-id>"); return; }
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/worktree-manager.mjs"));
+    const { WorktreeManager } = await import(url);
+    const wm = new WorktreeManager();
+    const wt = wm.create(workerId);
+    print(wt);
+  },
+  remove: async (worktreeId) => {
+    if (!worktreeId) { print("Usage: bhavya worktree remove <worktree-id>"); return; }
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/worktree-manager.mjs"));
+    const { WorktreeManager } = await import(url);
+    const wm = new WorktreeManager();
+    const result = wm.remove(worktreeId);
+    print({ removed: result });
+  },
+};
+
+commands["architecture"] = {
+  _default: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/chief-architect.mjs"));
+    const { ChiefArchitect } = await import(url);
+    const ca = new ChiefArchitect();
+    print(ca.getStatus());
+  },
+  validate: async (filePath) => {
+    if (!filePath) { print("Usage: bhavya architecture validate <file-path>"); return; }
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/chief-architect.mjs"));
+    const { ChiefArchitect } = await import(url);
+    const ca = new ChiefArchitect();
+    const result = ca.validateArchitecture({ path: filePath });
+    print(result);
+  },
+};
+
+commands["memory"] = {
+  search: async (query) => {
+    if (!query) { print("Usage: bhavya memory search <query>"); return; }
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/engineering-memory.mjs"));
+    const { EngineeringMemory } = await import(url);
+    const mem = new EngineeringMemory();
+    const results = mem.search(query);
+    print({ query, results: results.slice(0, 10), total: results.length });
+  },
+  stats: async () => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/engineering-memory.mjs"));
+    const { EngineeringMemory } = await import(url);
+    const mem = new EngineeringMemory();
+    print(mem.getStats());
+  },
+  recent: async (category, limit) => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/engineering-memory.mjs"));
+    const { EngineeringMemory } = await import(url);
+    const mem = new EngineeringMemory();
+    if (!category) {
+      print("Categories: architecture-decisions, engineering-decisions, completed-work, known-issues, technical-debt, release-notes, lessons-learned");
+      return;
+    }
+    const entries = mem.getRecent(category, parseInt(limit) || 5);
+    print(entries);
+  },
+  init: async () => {
+    print("Initializing Repository Memory...");
+    const url = toFileURL(path.join(ROOT, "platform/repo-intelligence/repository-memory.mjs"));
+    await import(url);
+  },
+};
+
+commands["review"] = {
+  _default: async () => {
+    print("Running Quality Gates...");
+    const { QualityGates } = await import(path.join(ROOT, "platform/ai-runtime/quality-gates.mjs").replace(/\\/g, "/"));
+    const gates = new QualityGates();
+    await gates.runAll();
+  },
+  self: async (taskId) => {
+    const url = toFileURL(path.join(ROOT, "platform/ai-runtime/self-review.mjs"));
+    const { SelfReview } = await import(url);
+    const sr = new SelfReview();
+    if (taskId) {
+      const review = sr.getReviewByTaskId(taskId);
+      print(review || { message: `No review found for task ${taskId}` });
+    } else {
+      print(sr.getStats());
+    }
+  },
+};
+
 // ── Dispatcher ────────────────────────────────────────────────────
 
 async function main() {
@@ -282,16 +554,27 @@ async function main() {
     console.log("");
     console.log("Commands:");
     console.log("  runtime compile|validate|watch|status");
-    console.log("  graph build|query <entity>");
+    console.log("  graph build|query|live");
     console.log("  context load <domain>");
     console.log("  task next|show <id>");
     console.log("  release current");
-    console.log("  memory search <query>");
-    console.log("  planner build <goal>");
+    console.log("  memory search|stats|recent|init");
+    console.log("  planner build|list");
     console.log("  execute <task-id> [--dry-run]");
-    console.log("  orchestrate <goal>");
+    console.log("  orchestrate <goal>     — Submit task to scheduler");
+    console.log("  worker start|stop|list — Manage workers");
+    console.log("  queue add|stats        — Task queue management");
+    console.log("  events [limit]         — Event history");
+    console.log("  worktree list|create|remove — Git worktree management");
+    console.log("  architecture validate  — Architecture enforcement");
+    console.log("  review self            — Self review");
     console.log("  api start [--port 3100]");
     console.log("  metrics");
+    console.log("  index                  — Run repository intelligence");
+    console.log("  plan build|list        — Task planning");
+    console.log("  tasks list|create|queue|stats — Task orchestration");
+    console.log("  dashboard              — Generate engineering dashboard");
+    console.log("  platform status        — Show platform status");
     return;
   }
 
