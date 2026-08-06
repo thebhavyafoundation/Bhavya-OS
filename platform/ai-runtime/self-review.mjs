@@ -10,7 +10,7 @@ import { EventBus, EventTypes } from "./event-bus.mjs";
 export class SelfReview {
   constructor(config = {}) {
     this.eventBus = config.eventBus || new EventBus();
-    this.qualityGates = new QualityGates();
+    this.qualityGates = new QualityGates({ quickMode: config.quickMode || false });
     this.reviews = new Map();
     this.reviewHistory = [];
   }

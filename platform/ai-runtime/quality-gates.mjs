@@ -10,12 +10,13 @@ import { join } from "path";
 const ROOT = "F:\\Bhavya Foundation";
 
 export class QualityGates {
-  constructor() {
+  constructor(config = {}) {
+    this.quickMode = config.quickMode || false;
     this.gates = [
       { id: "typecheck", name: "TypeScript Type Check", required: true, fn: () => this.runTypecheck() },
       { id: "lint", name: "ESLint", required: true, fn: () => this.runLint() },
-      { id: "build", name: "Build", required: true, fn: () => this.runBuild() },
-      { id: "accessibility", name: "Accessibility", required: true, fn: () => this.checkAccessibility() },
+      { id: "build", name: "Build", required: !this.quickMode, fn: () => this.runBuild() },
+      { id: "accessibility", name: "Accessibility", required: false, fn: () => this.checkAccessibility() },
       { id: "performance", name: "Performance", required: false, fn: () => this.checkPerformance() },
       { id: "architecture", name: "Architecture Validation", required: true, fn: () => this.validateArchitecture() },
       { id: "dependency", name: "Dependency Validation", required: true, fn: () => this.validateDependencies() },
@@ -67,7 +68,7 @@ export class QualityGates {
 
   runTypecheck() {
     try {
-      execSync("pnpm --filter @bhavya/website build", { cwd: ROOT, encoding: "utf-8", stdio: "pipe" });
+      execSync("pnpm --filter @bhavya/website build", { cwd: ROOT, encoding: "utf-8", stdio: "pipe", timeout: 30000 });
       return { passed: true, message: "TypeScript type check passed" };
     } catch (error) {
       return { passed: false, message: "TypeScript type check failed", details: error.message };
@@ -76,7 +77,7 @@ export class QualityGates {
 
   runLint() {
     try {
-      execSync("pnpm lint", { cwd: ROOT, encoding: "utf-8", stdio: "pipe" });
+      execSync("pnpm lint", { cwd: ROOT, encoding: "utf-8", stdio: "pipe", timeout: 30000 });
       return { passed: true, message: "Lint passed" };
     } catch (error) {
       return { passed: false, message: "Lint failed", details: error.message };

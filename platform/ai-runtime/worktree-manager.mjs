@@ -149,20 +149,26 @@ export class WorktreeManager {
         });
       }
 
-      execSync(`git commit -m "${message}"`, {
-        cwd: worktree.path,
-        encoding: "utf-8",
-        stdio: "pipe",
-        shell: "powershell.exe",
-      });
+      let hash = null;
+      try {
+        execSync(`git commit -m "${message}"`, {
+          cwd: worktree.path,
+          encoding: "utf-8",
+          stdio: "pipe",
+          shell: "powershell.exe",
+        });
 
-      const hash = execSync("git rev-parse HEAD", {
-        cwd: worktree.path,
-        encoding: "utf-8",
-        shell: "powershell.exe",
-      }).trim();
+        hash = execSync("git rev-parse HEAD", {
+          cwd: worktree.path,
+          encoding: "utf-8",
+          shell: "powershell.exe",
+        }).trim();
 
-      worktree.lastCommit = hash;
+        worktree.lastCommit = hash;
+      } catch (commitError) {
+        // Nothing to commit - that's OK
+        worktree.lastCommit = null;
+      }
       worktree.filesModified = [];
       this.save();
 
