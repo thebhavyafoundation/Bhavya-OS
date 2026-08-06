@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-08-06T04:46:59.296Z",
+  "stats": {
+    "totalFiles": 13205,
+    "totalDirs": 3398,
+    "totalPackages": 73,
+    "totalRoutes": 206,
+    "totalComponents": 857,
+    "totalDependencies": 396,
+    "totalCommits": 50
+  },
+  "packages": {
+    "actualApps": 23,
+    "actualPkgs": 54,
+    "indexedApps": 23,
+    "indexedPkgs": 50
+  },
+  "dependencies": {
+    "workspace": 163,
+    "npm": 233
+  },
+  "components": {
+    "src": 857
+  },
+  "routes": {
+    "@bhavya/admin-app": 6,
+    "@bhavya/ai-institute": 12,
+    "@bhavya/bhavya-ai-lab": 19,
+    "bhavya-intelligence-network": 2,
+    "capability-center": 2,
+    "@bhavya/dashboard": 13,
+    "@bhavya/design-system": 8,
+    "@bhavya/docs-app": 9,
+    "@bhavya/forest": 9,
+    "github-intelligence-lab": 2,
+    "@bhavya/github-os": 23,
+    "@bhavya/heritage": 8,
+    "@bhavya/ioc": 11,
+    "@bhavya/knowledge": 10,
+    "knowledge-studio": 10,
+    "@bhavya/lesson-studio": 16,
+    "@bhavya/library": 7,
+    "open-source-intelligence": 2,
+    "@bhavya/research": 4,
+    "@bhavya/social-os": 4,
+    "@bhavya/volunteer": 9,
+    "@bhavya/website": 20
+  },
+  "issues": [
+    "Missing indexed package: auth",
+    "Missing indexed package: bar",
+    "Missing indexed package: bdx",
+    "Missing indexed package: bhavya-ai-lab"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "results": [
+    {
+      "name": "Repository Index",
+      "duration": 8367
+    },
+    {
+      "name": "Knowledge Graph",
+      "duration": 1983
+    },
+    {
+      "name": "Dashboard Generate",
+      "duration": 2410
+    },
+    {
+      "name": "Agent Registry",
+      "duration": 965
+    },
+    {
+      "name": "bhavya help",
+      "duration": 958
+    },
+    {
+      "name": "bhavya platform status",
+      "duration": 812
+    },
+    {
+      "name": "bhavya metrics",
+      "duration": 776
+    }
+  ],
+  "memoryUsage": {
+    "rss": 37,
+    "heapUsed": 5,
+    "heapTotal": 7
+  },
+  "totalDuration": 16271,
+  "timestamp": "2026-08-06T04:52:54.666Z"
+}

@@ -1,0 +1,17 @@
+{
+  "issues": [
+    {
+      "doc": "architecture-handbook.md",
+      "issue": "Referenced path not found: \n┌─────────────────────────────────────────┐\n│  Presentation Layer (apps/)              │\n│  - Next.js applications                 │\n│  - User-facing interfaces               │\n├─────────────────────────────────────────┤\n│  Platform Layer (packages/)              │\n│  - Shared libraries                     │\n│  - UI components                        │\n│  - Runtime engine                       │\n├─────────────────────────────────────────┤\n│  Infrastructure Layer                    │\n│  - Build system (Turbo)                 │\n│  - Package manager (pnpm)               │\n│  - Deployment (Vercel)                  │\n├─────────────────────────────────────────┤\n│  Data Layer                              │\n│  - Knowledge objects                    │\n│  - Institution data                     │\n│  - Constitution                         │\n└─────────────────────────────────────────┘\n"
+    },
+    {
+      "doc": "repository-handbook.md",
+      "issue": "Referenced path not found: \nBhavya-OS/\n├── apps/                    # Applications\n│   ├── website/            # Public website\n│   ├── ai-institute/       # AI education\n│   ├── knowledge-studio/   # Knowledge management\n│   └── github-os/          # GitHub integration\n├── packages/                # Libraries\n│   ├── platform-ui/        # Design system\n│   ├── runtime/            # Runtime engine\n│   └── constitution/       # Governance\n├── platform/                # Platform infrastructure\n│   ├── repo-intelligence/  # Repository indexing\n│   ├── ai-runtime/         # AI runtime modules\n│   ├── agents/             # Agent definitions\n│   └── dashboard/          # Engineering dashboard\n├── knowledge/               # Knowledge graphs\n│   └── engineering-graphs/ # Generated graphs\n├── memory/                  # Engineering memory\n│   └── engineering/        # Persistent memory\n└── docs/                    # Documentation\n    └── platform/           # Platform docs\n"
+    },
+    {
+      "doc": "runtime-handbook.md",
+      "issue": "Referenced path not found: javascript\nimport { Runtime } from \"./platform/ai-runtime/index.mjs\";\n\nconst runtime = new Runtime();\nconst plan = await runtime.planner.createPlan({ goal: \"Build feature X\" });\n"
+    }
+  ],
+  "timestamp": "2026-08-06T04:53:42.238Z"
+}

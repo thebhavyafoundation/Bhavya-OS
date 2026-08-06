@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "name": "Planner: createPlan",
+      "passed": true,
+      "duration": 2,
+      "error": null
+    },
+    {
+      "name": "Planner: addStep",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Memory: addEntry",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Memory: query",
+      "passed": true,
+      "duration": 2,
+      "error": null
+    },
+    {
+      "name": "Execution: submitTask",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Execution: completeTask",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Review: createReview",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Review: runGate",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Workflow: registerWorkflow",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Workflow: startInstance",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Registry: registerAgent",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Registry: registerTool",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "State: set/get",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "State: history",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Events: on/emit",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    },
+    {
+      "name": "Events: history",
+      "passed": true,
+      "duration": 0,
+      "error": null
+    },
+    {
+      "name": "Tools: register/execute",
+      "passed": true,
+      "duration": 1,
+      "error": null
+    }
+  ],
+  "passed": 17,
+  "failed": 0,
+  "timestamp": "2026-08-06T04:49:13.896Z"
+}

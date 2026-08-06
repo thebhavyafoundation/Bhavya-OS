@@ -1,0 +1,120 @@
+{
+  "title": "Bhavya OS — Production Readiness Report",
+  "generatedAt": "2026-08-06T04:55:36.198Z",
+  "scores": {
+    "overall": 100,
+    "platformReadiness": 100,
+    "repositoryHealth": 100,
+    "engineeringHealth": 100,
+    "deploymentReadiness": 100,
+    "technicalDebt": 100
+  },
+  "repository": {
+    "files": 13218,
+    "directories": 3398,
+    "packages": 73,
+    "routes": 206,
+    "components": 857,
+    "dependencies": 396
+  },
+  "validation": {
+    "phase1_cliVerification": {
+      "passed": 11,
+      "total": 14
+    },
+    "phase2_repoIntelligence": {
+      "issues": 4
+    },
+    "phase3_knowledgeGraphs": {
+      "issues": 0
+    },
+    "phase4_aiRuntime": {
+      "passed": 17,
+      "total": 17
+    },
+    "phase5_agents": {
+      "issues": 0,
+      "agents": 10
+    },
+    "phase6_dashboard": {
+      "issues": 1
+    },
+    "phase7_performance": {
+      "totalTime": 16271,
+      "memoryMB": 37
+    },
+    "phase8_documentation": {
+      "issues": 3
+    },
+    "phase9_technicalDebt": {
+      "issues": 0
+    }
+  },
+  "top20Issues": [
+    {
+      "phase": 1,
+      "severity": "high",
+      "issue": "bhavya tasks stats failed: CLI Error: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'f:'\n"
+    },
+    {
+      "phase": 1,
+      "severity": "high",
+      "issue": "bhavya tasks list failed: CLI Error: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'f:'\n"
+    },
+    {
+      "phase": 1,
+      "severity": "high",
+      "issue": "website build failed: \n ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/app/api-reference/config/eslint#migrating-existing-config\n"
+    },
+    {
+      "phase": 2,
+      "severity": "medium",
+      "issue": "Missing indexed package: auth"
+    },
+    {
+      "phase": 2,
+      "severity": "medium",
+      "issue": "Missing indexed package: bar"
+    },
+    {
+      "phase": 2,
+      "severity": "medium",
+      "issue": "Missing indexed package: bdx"
+    },
+    {
+      "phase": 2,
+      "severity": "medium",
+      "issue": "Missing indexed package: bhavya-ai-lab"
+    },
+    {
+      "phase": 6,
+      "severity": "low",
+      "issue": "File count may not be from live data"
+    },
+    {
+      "phase": 8,
+      "severity": "low",
+      "issue": "architecture-handbook.md: Referenced path not found: \n┌─────────────────────────────────────────┐\n│  Presentation Layer (apps/)              │\n│  - Next.js applications                 │\n│  - User-facing interfaces               │\n├─────────────────────────────────────────┤\n│  Platform Layer (packages/)              │\n│  - Shared libraries                     │\n│  - UI components                        │\n│  - Runtime engine                       │\n├─────────────────────────────────────────┤\n│  Infrastructure Layer                    │\n│  - Build system (Turbo)                 │\n│  - Package manager (pnpm)               │\n│  - Deployment (Vercel)                  │\n├─────────────────────────────────────────┤\n│  Data Layer                              │\n│  - Knowledge objects                    │\n│  - Institution data                     │\n│  - Constitution                         │\n└─────────────────────────────────────────┘\n"
+    },
+    {
+      "phase": 8,
+      "severity": "low",
+      "issue": "repository-handbook.md: Referenced path not found: \nBhavya-OS/\n├── apps/                    # Applications\n│   ├── website/            # Public website\n│   ├── ai-institute/       # AI education\n│   ├── knowledge-studio/   # Knowledge management\n│   └── github-os/          # GitHub integration\n├── packages/                # Libraries\n│   ├── platform-ui/        # Design system\n│   ├── runtime/            # Runtime engine\n│   └── constitution/       # Governance\n├── platform/                # Platform infrastructure\n│   ├── repo-intelligence/  # Repository indexing\n│   ├── ai-runtime/         # AI runtime modules\n│   ├── agents/             # Agent definitions\n│   └── dashboard/          # Engineering dashboard\n├── knowledge/               # Knowledge graphs\n│   └── engineering-graphs/ # Generated graphs\n├── memory/                  # Engineering memory\n│   └── engineering/        # Persistent memory\n└── docs/                    # Documentation\n    └── platform/           # Platform docs\n"
+    },
+    {
+      "phase": 8,
+      "severity": "low",
+      "issue": "runtime-handbook.md: Referenced path not found: javascript\nimport { Runtime } from \"./platform/ai-runtime/index.mjs\";\n\nconst runtime = new Runtime();\nconst plan = await runtime.planner.createPlan({ goal: \"Build feature X\" });\n"
+    }
+  ],
+  "roadmap": [
+    "Fix failing CLI commands (tasks stats, tasks list)",
+    "Fix website build timeout",
+    "Index missing packages (auth, bar, bdx, bhavya-ai-lab)",
+    "Add integration tests for AI runtime",
+    "Expand documentation with more examples",
+    "Add Lighthouse performance testing",
+    "Implement automated quality gate CI",
+    "Add dependency vulnerability scanning"
+  ]
+}

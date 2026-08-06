@@ -1,0 +1,148 @@
+{
+  "total": 14,
+  "passed": 11,
+  "failed": 3,
+  "avgDuration": 9901,
+  "results": [
+    {
+      "name": "bhavya (help)",
+      "command": "node packages/runtime/cli/bhavya.mjs",
+      "exitCode": 0,
+      "duration": 926,
+      "output": "Bhavya Runtime CLI v3.0\nUsage: bhavya <command> <subcommand> [options]\n\nCommands:\n  runtime compile|validate|watch|status\n  graph build|query <entity>\n  context load <domain>\n  task next|show <id>\n  release current\n  memory search|stats|init\n  planner build|list\n  execute <task-id> [--dry-run]\n  orchestrate <goal>\n  api start [--port 3100]\n  metrics\n  index                  — Run repository intelligence\n  plan build|list        — Task planning\n  tasks list|create|queue|stats — Task orchestration",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:13.037Z"
+    },
+    {
+      "name": "bhavya runtime status",
+      "command": "node packages/runtime/cli/bhavya.mjs runtime status",
+      "exitCode": 0,
+      "duration": 840,
+      "output": "{\n  \"release\": \"REL-005\",\n  \"status\": \"Certified\",\n  \"task\": \"Establish AI Runtime v2\",\n  \"branch\": \"main\",\n  \"dirty\": false,\n  \"last_build\": \"2026-07-23T16:34:54.632Z\",\n  \"last_validation\": \"2026-07-23T16:34:54.632Z\"\n}\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:13.879Z"
+    },
+    {
+      "name": "bhavya platform status",
+      "command": "node packages/runtime/cli/bhavya.mjs platform status",
+      "exitCode": 0,
+      "duration": 804,
+      "output": "{\n  \"name\": \"Bhavya OS Platform\",\n  \"version\": \"2.0.0\",\n  \"packages\": 73,\n  \"routes\": 206,\n  \"components\": 857,\n  \"dependencies\": 396,\n  \"agents\": 10,\n  \"qualityGates\": 8\n}\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:14.683Z"
+    },
+    {
+      "name": "bhavya metrics",
+      "command": "node packages/runtime/cli/bhavya.mjs metrics",
+      "exitCode": 0,
+      "duration": 830,
+      "output": "{\n  \"daemon_uptime\": \"unknown\",\n  \"compile_count\": 0,\n  \"validate_count\": 0,\n  \"last_compile_ms\": null,\n  \"last_validate_ms\": null,\n  \"last_build\": \"2026-07-23T16:34:54.632Z\",\n  \"last_validation\": \"2026-07-23T16:34:54.632Z\",\n  \"validation_pass_rate\": \"100%\"\n}\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:15.513Z"
+    },
+    {
+      "name": "bhavya tasks stats",
+      "command": "node packages/runtime/cli/bhavya.mjs tasks stats",
+      "exitCode": 1,
+      "duration": 755,
+      "output": "",
+      "error": "CLI Error: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'f:'\n",
+      "passed": false,
+      "timestamp": "2026-08-06T04:43:16.270Z"
+    },
+    {
+      "name": "bhavya tasks list",
+      "command": "node packages/runtime/cli/bhavya.mjs tasks list",
+      "exitCode": 1,
+      "duration": 829,
+      "output": "",
+      "error": "CLI Error: Only URLs with a scheme in: file, data, and node are supported by the default ESM loader. On Windows, absolute paths must be valid file:// URLs. Received protocol 'f:'\n",
+      "passed": false,
+      "timestamp": "2026-08-06T04:43:17.099Z"
+    },
+    {
+      "name": "bhavya memory stats",
+      "command": "node packages/runtime/cli/bhavya.mjs memory stats",
+      "exitCode": 0,
+      "duration": 812,
+      "output": "{\n  \"architecture-decisions\": 0,\n  \"completed-work\": 0,\n  \"engineering-decisions\": 0,\n  \"known-issues\": 0,\n  \"lessons-learned\": 0,\n  \"release-notes\": 0,\n  \"technical-debt\": 0\n}\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:17.911Z"
+    },
+    {
+      "name": "repo-intelligence index",
+      "command": "node platform/repo-intelligence/index.mjs",
+      "exitCode": 0,
+      "duration": 6601,
+      "output": "🔍 Scanning repository...\n  Found 13205 files, 3398 directories\n📦 Indexing workspace packages...\n  Indexed 73 packages\n🗺️  Mapping routes...\n  Mapped 206 routes\n🧩 Registering components...\n  Registered 857 components\n🔗 Building dependency graph...\n  Mapped 396 dependencies\n📜 Collecting git history...\n  Collected 50 commits\n📝 Building repository index...\n💾 Writing outputs...\n  ✅ repository-index.json\n  ✅ dependency-graph.json\n  ✅ route-map.json\n  ✅ component-registry.json\n\n🎉 Repository In",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:24.512Z"
+    },
+    {
+      "name": "knowledge-graph generate",
+      "command": "node platform/repo-intelligence/knowledge-graph.mjs",
+      "exitCode": 0,
+      "duration": 1349,
+      "output": "📊 Generating Engineering Knowledge Graphs...\n\n🏛️  Architecture Graph...\n  ✅ architecture-graph.json\n📱 Application Graph...\n  ✅ application-graph.json\n📦 Package Graph...\n  ✅ package-graph.json\n🧩 Component Graph...\n  ✅ component-graph.json\n🔌 API Graph...\n  ✅ api-graph.json\n🚀 Deployment Graph...\n  ✅ deployment-graph.json\n🤖 Agent Graph...\n  ✅ agent-graph.json\n\n🎉 Engineering Knowledge Graph complete!\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:25.861Z"
+    },
+    {
+      "name": "dashboard generate",
+      "command": "node platform/dashboard/generate.mjs",
+      "exitCode": 0,
+      "duration": 1750,
+      "output": "✅ Engineering Dashboard generated: platform/dashboard/dashboard.html\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:27.611Z"
+    },
+    {
+      "name": "agent-registry generate",
+      "command": "node platform/agents/generate.mjs",
+      "exitCode": 0,
+      "duration": 914,
+      "output": "  ✅ chief-architect/\n  ✅ project-manager/\n  ✅ repo-intelligence/\n  ✅ frontend-engineer/\n  ✅ backend-engineer/\n  ✅ design-system/\n  ✅ qa-engineer/\n  ✅ security-engineer/\n  ✅ devops-engineer/\n  ✅ documentation/\n\n🎉 Agent Registry generated: 10 agents\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:28.526Z"
+    },
+    {
+      "name": "repository-memory init",
+      "command": "node platform/repo-intelligence/repository-memory.mjs init",
+      "exitCode": 0,
+      "duration": 906,
+      "output": "🔧 Initializing Repository Memory...\n✅ Memory initialized\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:29.432Z"
+    },
+    {
+      "name": "repository-memory stats",
+      "command": "node platform/repo-intelligence/repository-memory.mjs stats",
+      "exitCode": 0,
+      "duration": 1250,
+      "output": "📊 Repository Memory Stats:\n  architecture-decisions: 0 entries\n  engineering-decisions: 0 entries\n  completed-work: 0 entries\n  known-issues: 0 entries\n  technical-debt: 0 entries\n  release-notes: 0 entries\n  lessons-learned: 0 entries\n",
+      "error": null,
+      "passed": true,
+      "timestamp": "2026-08-06T04:43:30.682Z"
+    },
+    {
+      "name": "website build",
+      "command": "pnpm --filter @bhavya/website build",
+      "exitCode": 1,
+      "duration": 120049,
+      "output": "\n> @bhavya/website@0.9.0 build F:\\Bhavya Foundation\\apps\\website\n> next build\n\n   ▲ Next.js 15.5.20\n   - Experiments (use with caution):\n     · serverActions\n\n   Creating an optimized production build ...\n ✓ Compiled successfully in 30.0s\n   Linting and checking validity of types ...\n   Collecting page data ...\n   Generating static pages (0/27) ...\n   Generating static pages (6/27) \r\n   Generating static pages (13/27) \r\n   Generating static pages (20/27) \r\n ✓ Generating static pages (27/27)\n   F",
+      "error": "\n ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/app/api-reference/config/eslint#migrating-existing-config\n",
+      "passed": false,
+      "timestamp": "2026-08-06T04:45:30.732Z"
+    }
+  ]
+}
