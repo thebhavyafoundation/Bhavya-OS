@@ -1,0 +1,92 @@
+{
+  "version": "5.0",
+  "generated": "2026-08-05",
+  "applications": {
+    "APP-001": {
+      "name": "Foundation Website",
+      "directory": "apps/website",
+      "status": "production",
+      "runtime": {
+        "port": 3000,
+        "build": "next build",
+        "start": "next start",
+        "dev": "next dev"
+      },
+      "metrics": {
+        "buildTime": "60s",
+        "pages": 19,
+        "components": 50
+      }
+    },
+    "APP-002": {
+      "name": "Transparency Portal",
+      "directory": "apps/transparency",
+      "status": "production",
+      "runtime": {
+        "port": 3001,
+        "build": "next build",
+        "start": "next start",
+        "dev": "next dev"
+      },
+      "metrics": {
+        "buildTime": "45s",
+        "pages": 5,
+        "components": 10
+      }
+    },
+    "APP-003": {
+      "name": "Administration Platform",
+      "directory": "apps/admin",
+      "status": "production",
+      "runtime": {
+        "port": 3002,
+        "build": "next build",
+        "start": "next start",
+        "dev": "next dev"
+      },
+      "metrics": {
+        "buildTime": "50s",
+        "pages": 5,
+        "components": 10
+      }
+    },
+    "APP-004": {
+      "name": "Knowledge Platform",
+      "directory": "apps/knowledge-studio",
+      "status": "production",
+      "runtime": {
+        "port": 3003,
+        "build": "next build",
+        "start": "next start",
+        "dev": "next dev"
+      },
+      "metrics": {
+        "buildTime": "55s",
+        "pages": 9,
+        "components": 15
+      }
+    }
+  },
+  "integration": {
+    "sharedComponents": [
+      "Header",
+      "Footer",
+      "Navigation",
+      "ThemeToggle",
+      "SkipNavigation"
+    ],
+    "sharedStyles": [
+      "globals.css",
+      "design-tokens"
+    ],
+    "sharedUtils": [
+      "metadata",
+      "animations"
+    ]
+  },
+  "deployment": {
+    "platform": "Vercel",
+    "organization": "thebhavyafoundation",
+    "project": "bhavya-os"
+  }
+}

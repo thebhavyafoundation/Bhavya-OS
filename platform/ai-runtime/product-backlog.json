@@ -1,0 +1,314 @@
+{
+  "version": "5.0",
+  "generated": "2026-08-05",
+  "totalItems": 150,
+  "epics": [
+    {
+      "id": "EPIC-001",
+      "title": "Foundation Website Production Hardening",
+      "application": "APP-001",
+      "priority": "P0",
+      "status": "active",
+      "stories": [
+        {
+          "id": "STORY-001",
+          "title": "Implement dark mode toggle",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "3",
+          "status": "ready",
+          "acceptanceCriteria": ["Toggle persists preference", "Respects system preference", "No flash on load"]
+        },
+        {
+          "id": "STORY-002",
+          "title": "Add interactive impact map",
+          "type": "feature",
+          "priority": "P2",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Shows project locations", "Interactive markers", "Mobile responsive"]
+        },
+        {
+          "id": "STORY-003",
+          "title": "Implement donation integration",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "8",
+          "status": "ready",
+          "acceptanceCriteria": ["Payment processing", "Receipt generation", "Donor management"]
+        },
+        {
+          "id": "STORY-004",
+          "title": "Add volunteer signup flow",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Registration form", "Email confirmation", "Profile creation"]
+        },
+        {
+          "id": "STORY-005",
+          "title": "Optimize bundle size below 200kB",
+          "type": "improvement",
+          "priority": "P1",
+          "estimate": "2",
+          "status": "ready",
+          "acceptanceCriteria": ["Bundle analyzer pass", "Code splitting", "Tree shaking"]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-002",
+      "title": "Transparency Portal Launch",
+      "application": "APP-002",
+      "priority": "P0",
+      "status": "active",
+      "stories": [
+        {
+          "id": "STORY-006",
+          "title": "Implement search functionality",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Full-text search", "Filters", "Pagination"]
+        },
+        {
+          "id": "STORY-007",
+          "title": "Add version history for documents",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "3",
+          "status": "ready",
+          "acceptanceCriteria": ["Version tracking", "Diff view", "Restore capability"]
+        },
+        {
+          "id": "STORY-008",
+          "title": "Create interactive financial charts",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Chart.js integration", "Responsive", "Accessible"]
+        },
+        {
+          "id": "STORY-009",
+          "title": "Build PDF viewer for reports",
+          "type": "feature",
+          "priority": "P2",
+          "estimate": "3",
+          "status": "ready",
+          "acceptanceCriteria": ["In-browser viewing", "Download", "Print"]
+        },
+        {
+          "id": "STORY-010",
+          "title": "Add print-friendly views",
+          "type": "improvement",
+          "priority": "P2",
+          "estimate": "2",
+          "status": "ready",
+          "acceptanceCriteria": ["Print CSS", "Page breaks", "No UI elements"]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-003",
+      "title": "Administration Platform MVP",
+      "application": "APP-003",
+      "priority": "P1",
+      "status": "planned",
+      "stories": [
+        {
+          "id": "STORY-011",
+          "title": "Build content management system",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "13",
+          "status": "ready",
+          "acceptanceCriteria": ["CRUD operations", "Version control", "Publishing workflow"]
+        },
+        {
+          "id": "STORY-012",
+          "title": "Implement media management",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "8",
+          "status": "ready",
+          "acceptanceCriteria": ["Upload", "Organization", "Search"]
+        },
+        {
+          "id": "STORY-013",
+          "title": "Build volunteer management",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "8",
+          "status": "ready",
+          "acceptanceCriteria": ["Registration", "Profiles", "Scheduling"]
+        },
+        {
+          "id": "STORY-014",
+          "title": "Implement user authentication",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "8",
+          "status": "ready",
+          "acceptanceCriteria": ["Login", "Roles", "Permissions"]
+        },
+        {
+          "id": "STORY-015",
+          "title": "Build audit logging",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Action tracking", "User attribution", "Searchable logs"]
+        }
+      ]
+    },
+    {
+      "id": "EPIC-004",
+      "title": "Knowledge Platform Foundation",
+      "application": "APP-004",
+      "priority": "P1",
+      "status": "planned",
+      "stories": [
+        {
+          "id": "STORY-016",
+          "title": "Implement knowledge graph visualization",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "8",
+          "status": "ready",
+          "acceptanceCriteria": ["Interactive graph", "Node details", "Filtering"]
+        },
+        {
+          "id": "STORY-017",
+          "title": "Build document search",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Full-text search", "Filters", "Relevance ranking"]
+        },
+        {
+          "id": "STORY-018",
+          "title": "Add document versioning",
+          "type": "feature",
+          "priority": "P1",
+          "estimate": "3",
+          "status": "ready",
+          "acceptanceCriteria": ["Version tracking", "Diff view", "Restore"]
+        },
+        {
+          "id": "STORY-019",
+          "title": "Implement access control",
+          "type": "feature",
+          "priority": "P0",
+          "estimate": "5",
+          "status": "ready",
+          "acceptanceCriteria": ["Roles", "Permissions", "Audit trail"]
+        },
+        {
+          "id": "STORY-020",
+          "title": "Build document templates",
+          "type": "improvement",
+          "priority": "P2",
+          "estimate": "3",
+          "status": "ready",
+          "acceptanceCriteria": ["Template library", "Custom templates", "Auto-fill"]
+        }
+      ]
+    }
+  ],
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "title": "Website bundle size exceeds 200kB",
+      "application": "APP-001",
+      "priority": "P1",
+      "status": "open",
+      "description": "Current bundle is 205kB, target is <200kB"
+    },
+    {
+      "id": "BUG-002",
+      "title": "Transparency portal missing search",
+      "application": "APP-002",
+      "priority": "P0",
+      "status": "open",
+      "description": "No search functionality implemented"
+    },
+    {
+      "id": "BUG-003",
+      "title": "Admin platform has no authentication",
+      "application": "APP-003",
+      "priority": "P0",
+      "status": "open",
+      "description": "No user authentication system"
+    }
+  ],
+  "improvements": [
+    {
+      "id": "IMP-001",
+      "title": "Add dark mode to website",
+      "application": "APP-001",
+      "priority": "P1",
+      "status": "ready",
+      "description": "Implement system-preference-aware dark mode"
+    },
+    {
+      "id": "IMP-002",
+      "title": "Optimize website images",
+      "application": "APP-001",
+      "priority": "P2",
+      "status": "ready",
+      "description": "Implement WebP format and lazy loading"
+    },
+    {
+      "id": "IMP-003",
+      "title": "Add error boundaries",
+      "application": "APP-001",
+      "priority": "P1",
+      "status": "ready",
+      "description": "Implement React error boundaries"
+    }
+  ],
+  "debt": [
+    {
+      "id": "DEBT-001",
+      "title": "Remove unused packages",
+      "application": "ALL",
+      "priority": "P2",
+      "status": "open",
+      "description": "25 potentially unused packages identified"
+    },
+    {
+      "id": "DEBT-002",
+      "title": "Update outdated dependencies",
+      "application": "ALL",
+      "priority": "P2",
+      "status": "open",
+      "description": "Several packages have major version updates available"
+    },
+    {
+      "id": "DEBT-003",
+      "title": "Add missing TypeScript types",
+      "application": "ALL",
+      "priority": "P1",
+      "status": "open",
+      "description": "Several components lack proper typing"
+    }
+  ],
+  "summary": {
+    "epics": 4,
+    "stories": 20,
+    "bugs": 3,
+    "improvements": 3,
+    "debt": 3,
+    "total": 33,
+    "byPriority": {
+      "P0": 8,
+      "P1": 14,
+      "P2": 11
+    }
+  }
+}
