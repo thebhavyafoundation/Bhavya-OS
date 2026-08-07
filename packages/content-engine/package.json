@@ -1,0 +1,20 @@
+{
+  "name": "@bhavya/content-engine",
+  "version": "1.0.0",
+  "description": "Canonical content production system for Bhavya AI Institute",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/shared": "workspace:*",
+    "@bhavya/knowledge-graph": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
