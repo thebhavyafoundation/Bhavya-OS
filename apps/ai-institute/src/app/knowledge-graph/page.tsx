@@ -569,7 +569,10 @@ export default function KnowledgeGraphPage() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.25, 0.46, 0.45, 0.94] as const,
+                  }}
                   className="sticky top-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6"
                 >
                   <div className="flex items-start justify-between mb-4">

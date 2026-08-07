@@ -306,14 +306,16 @@ export function generatePortfolioEntry(
   project: Record<string, unknown>,
   _template: PortfolioTemplate = portfolioTemplates[2],
 ): PortfolioProject {
-  const skillsUsed = project.skills || project.technologies || [];
-  const outcomes = project.outcomes || project.learningOutcomes || [];
+  const skillsUsed = (project.skills || project.technologies || []) as string[];
+  const outcomes = (project.outcomes ||
+    project.learningOutcomes ||
+    []) as string[];
 
   return {
-    title: project.name || project.title || "Untitled Project",
-    description: project.description || "",
+    title: String(project.name || project.title || "Untitled Project"),
+    description: String(project.description || ""),
     skillsDemonstrated: skillsUsed.slice(0, 5),
-    technologies: project.tools || project.technologies || [],
+    technologies: (project.tools || project.technologies || []) as string[],
     learningOutcomes: outcomes.slice(0, 4),
     suggestedImprovements: [
       "Add comprehensive unit tests",
@@ -322,10 +324,11 @@ export function generatePortfolioEntry(
       "Create detailed documentation",
       "Optimize for production deployment",
     ],
-    githubUrl: project.repo || project.githubUrl || "",
-    liveUrl: project.demo || project.liveUrl || "",
-    screenshot:
+    githubUrl: String(project.repo || project.githubUrl || ""),
+    liveUrl: String(project.demo || project.liveUrl || ""),
+    screenshot: String(
       project.screenshot || `/screenshots/${project.id || "default"}.png`,
+    ),
   };
 }
 

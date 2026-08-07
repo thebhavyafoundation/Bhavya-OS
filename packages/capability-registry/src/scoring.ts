@@ -119,16 +119,18 @@ function estimateEducationalValue(c: Partial<Capability>): number {
 
 function estimateFutureProof(c: Partial<Capability>): number {
   let score = 5;
-  if (c.openSourceHealth && c.openSourceHealth > 7) score += 2;
-  if (c.community && c.community > 7) score += 1;
-  if (c.maintenance && c.maintenance > 7) score += 1;
+  const ext = c as Record<string, unknown>;
+  if (typeof ext.openSourceHealth === "number" && ext.openSourceHealth > 7)
+    score += 2;
+  if (typeof ext.community === "number" && ext.community > 7) score += 1;
+  if (typeof ext.maintenance === "number" && ext.maintenance > 7) score += 1;
   return Math.min(10, score);
 }
 
 function estimateVendorLockin(c: Partial<Capability>): number {
   let score = 7;
   if (c.offlineSupport) score += 2;
-  if (c.type === "open_source" || c.license) score += 1;
+  if ((c.type as string) === "open_source" || c.license) score += 1;
   if (c.apiRequired) score -= 2;
   return Math.min(10, Math.max(1, score));
 }

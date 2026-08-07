@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-const TYPES = ["All", "Papers", "Datasets", "Tutorials"] as const;
+const TYPES = ["All", "Paper", "Dataset", "Tutorial"] as const;
 const TOPICS = ["All", "ML", "DL", "NLP", "CV", "Robotics"] as const;
 
 type FilterType = (typeof TYPES)[number];
@@ -123,7 +123,7 @@ const fadeUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -181,7 +181,7 @@ export default function ResearchPage() {
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">

@@ -8,7 +8,7 @@ const fadeUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -136,7 +136,11 @@ function RadarChart() {
           strokeWidth={2}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1] as const,
+            delay: 0.3,
+          }}
           style={{ transformOrigin: `${cx}px ${cy}px` }}
         />
 
@@ -219,7 +223,7 @@ export default function PortfolioPage() {
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
@@ -302,7 +306,7 @@ export default function PortfolioPage() {
                           transition={{
                             delay: 0.5,
                             duration: 0.8,
-                            ease: [0.22, 1, 0.36, 1],
+                            ease: [0.22, 1, 0.36, 1] as const,
                           }}
                           className="h-full rounded-full bg-gradient-to-r from-[#1a3a2a] to-[#c9a227]"
                         />

@@ -31,7 +31,7 @@ export abstract class SqliteRepository<T, TCreate = T> implements Repository<
   protected abstract rowToEntity(row: Record<string, unknown>): T;
   protected abstract entityToRow(data: TCreate): Record<string, unknown>;
 
-  protected get db() {
+  protected get db(): ReturnType<typeof getDatabase> {
     return getDatabase({ path: "" });
   }
 

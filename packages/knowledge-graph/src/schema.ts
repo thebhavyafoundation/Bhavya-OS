@@ -74,7 +74,7 @@ export interface EnrollmentStats {
 
 // ─── Project ─────────────────────────────────────────────────────
 
-export interface ProjectEntity extends BaseEntity {
+export interface ProjectEntity extends Omit<BaseEntity, "status"> {
   type: "project";
   milestones: ProjectMilestone[];
   technologies: string[];
@@ -107,7 +107,7 @@ export interface PublicationEntity extends BaseEntity {
 
 // ─── Research ────────────────────────────────────────────────────
 
-export interface ResearchEntity extends BaseEntity {
+export interface ResearchEntity extends Omit<BaseEntity, "status"> {
   type: "research";
   hypothesis: string;
   methodology: string;
@@ -233,7 +233,7 @@ export type ConservationStatus =
 
 // ─── Grant ───────────────────────────────────────────────────────
 
-export interface GrantEntity extends BaseEntity {
+export interface GrantEntity extends Omit<BaseEntity, "status"> {
   type: "grant";
   funder: string;
   amount: number;

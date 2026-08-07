@@ -991,7 +991,7 @@ export const learningPaths: LearningPath[] = [
       {
         id: "paper-implementation",
         title: "Paper Implementation",
-        difficulty: "expert",
+        difficulty: "production",
         description:
           "Implement and reproduce results from a recent AI research paper.",
         skills: ["Research", "Implementation", "Evaluation", "Writing"],

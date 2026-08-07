@@ -118,7 +118,7 @@ export default function CoursePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
           >
             <div className="flex items-center gap-3 mb-6">
               <span
@@ -254,7 +254,7 @@ export default function CoursePage() {
                             exit={{ height: 0, opacity: 0 }}
                             transition={{
                               duration: 0.3,
-                              ease: [0.22, 1, 0.36, 1],
+                              ease: [0.22, 1, 0.36, 1] as const,
                             }}
                             className="overflow-hidden"
                           >

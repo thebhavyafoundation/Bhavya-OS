@@ -144,14 +144,16 @@ export class ApiClient {
         data: data as T,
         headers: responseHeaders,
       };
-    } catch (err: unknown) {
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
       return {
         ok: false,
         status: 0,
         data: null as T,
         error: {
-          message: err.name === "AbortError" ? "Request timeout" : err.message,
-          code: err.name === "AbortError" ? "TIMEOUT" : "NETWORK_ERROR",
+          message:
+            error.name === "AbortError" ? "Request timeout" : error.message,
+          code: error.name === "AbortError" ? "TIMEOUT" : "NETWORK_ERROR",
           status: 0,
         },
         headers: {},

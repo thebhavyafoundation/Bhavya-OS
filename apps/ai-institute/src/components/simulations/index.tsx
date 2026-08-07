@@ -270,7 +270,7 @@ export function TokenizationSimulator() {
     const result: { id: number; text: string; type: "bpe" }[] = [];
     let remaining = input;
     let id = 0;
-    const patterns = [
+    const patterns: [RegExp, string][] = [
       [/the/g, "the"],
       [/\s+/g, "▁"],
       [/er/g, "er"],

@@ -814,8 +814,8 @@ export async function saveContent(
   basePath: string,
 ): Promise<void> {
   const dir = resolve(basePath, item.domain, item.type);
-  await ensureDir(dir);
-  await writeJSON(resolve(dir, `${item.id}.json`), item);
+  ensureDir(dir);
+  writeJSON(dir, `${item.id}.json`, item);
 }
 
 /** Load content item from filesystem */
@@ -825,11 +825,10 @@ export async function loadContent(
   type: ContentType,
   basePath: string,
 ): Promise<ContentItem | null> {
-  try {
-    return await readJSON(resolve(basePath, domain, type, `${id}.json`));
-  } catch {
-    return null;
-  }
+  return readJSON<ContentItem | null>(
+    resolve(basePath, domain, type, `${id}.json`),
+    null,
+  );
 }
 
 /** List all content items in a domain */
@@ -840,11 +839,14 @@ export async function listContent(
 ): Promise<ContentItem[]> {
   const dir = resolve(basePath, domain, type);
   try {
-    const files = await listDir(dir);
+    const files = listDir(dir);
     const items: ContentItem[] = [];
     for (const file of files) {
       if (file.endsWith(".json")) {
-        const item = await readJSON(resolve(dir, file));
+        const item = readJSON<ContentItem>(
+          resolve(dir, file),
+          {} as ContentItem,
+        );
         items.push(item);
       }
     }
