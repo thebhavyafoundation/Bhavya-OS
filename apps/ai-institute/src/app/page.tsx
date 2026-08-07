@@ -1049,6 +1049,16 @@ export default function FlagshipHomepage() {
                   </a>
                 </li>
                 <li>
+                  <a
+                    href="https://www.linkedin.com/company/bhavya-ailab"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
                   <Link
                     href="/newsletter"
                     className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
