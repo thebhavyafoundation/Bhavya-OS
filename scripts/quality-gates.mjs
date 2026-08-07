@@ -50,6 +50,7 @@ function checkNoDuplicateTypes() {
     "types/src/artifacts.ts",
     "kernel/src/types/index.ts",
     "kernel/src/observability",
+    "sdk/extension.ts", // Re-exports shared types for convenience
   ];
   
   const duplicates = [];
