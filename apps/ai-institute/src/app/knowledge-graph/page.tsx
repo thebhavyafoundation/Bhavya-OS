@@ -1,374 +1,720 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  knowledgeGraph,
-  getCategories,
-  getNodesByCategory,
-  getPrerequisites,
-  getRelated,
-  type KnowledgeNode,
-  type KnowledgeCategory,
-} from "@/data/knowledge-graph";
+import { motion, AnimatePresence } from "framer-motion";
 
-const categoryColors: Record<KnowledgeCategory, string> = {
-  fundamentals: "#22c55e",
-  "machine-learning": "#3b82f6",
-  "deep-learning": "#8b5cf6",
-  nlp: "#06b6d4",
-  "computer-vision": "#f59e0b",
-  "generative-ai": "#ec4899",
-  llm: "#6366f1",
-  agents: "#ef4444",
-  rag: "#14b8a6",
-  embeddings: "#a855f7",
-  infrastructure: "#64748b",
-  deployment: "#0ea5e9",
-  ethics: "#f97316",
-  product: "#e11d48",
-  research: "#7c3aed",
-};
+interface GraphNode {
+  id: string;
+  label: string;
+  x: number;
+  y: number;
+  color: string;
+  mastery: number;
+  prerequisites: string[];
+  relatedLessons: string[];
+  relatedLabs: string[];
+  description: string;
+}
 
-const difficultyBadge: Record<string, { bg: string; text: string }> = {
-  beginner: { bg: "#dcfce7", text: "#166534" },
-  intermediate: { bg: "#dbeafe", text: "#1e40af" },
-  advanced: { bg: "#fef3c7", text: "#92400e" },
-  expert: { bg: "#fce7f3", text: "#9d174d" },
-};
+const graphNodes: GraphNode[] = [
+  {
+    id: "ai",
+    label: "AI",
+    x: 400,
+    y: 300,
+    color: "#1a3a2a",
+    mastery: 85,
+    prerequisites: [],
+    relatedLessons: ["AI Fundamentals", "History of AI"],
+    relatedLabs: ["Lab 0: Setup"],
+    description:
+      "Artificial Intelligence — the broad field of creating systems that mimic human intelligence.",
+  },
+  {
+    id: "ml",
+    label: "ML",
+    x: 250,
+    y: 180,
+    color: "#c9a227",
+    mastery: 72,
+    prerequisites: ["ai"],
+    relatedLessons: ["Linear Regression", "Decision Trees"],
+    relatedLabs: ["Lab 1: Data Prep"],
+    description:
+      "Machine Learning — algorithms that learn patterns from data without explicit programming.",
+  },
+  {
+    id: "dl",
+    label: "DL",
+    x: 550,
+    y: 180,
+    color: "#8a7359",
+    mastery: 45,
+    prerequisites: ["ml"],
+    relatedLessons: ["Neural Networks", "Backpropagation"],
+    relatedLabs: ["Lab 2: Neural Nets"],
+    description:
+      "Deep Learning — neural networks with multiple layers that learn hierarchical representations.",
+  },
+  {
+    id: "nlp",
+    label: "NLP",
+    x: 150,
+    y: 350,
+    color: "#4ade80",
+    mastery: 60,
+    prerequisites: ["ml"],
+    relatedLessons: ["Text Processing", "Sentiment Analysis"],
+    relatedLabs: ["Lab 3: NLP"],
+    description:
+      "Natural Language Processing — enabling computers to understand and generate human language.",
+  },
+  {
+    id: "cv",
+    label: "CV",
+    x: 650,
+    y: 350,
+    color: "#60a5fa",
+    mastery: 38,
+    prerequisites: ["dl"],
+    relatedLessons: ["Image Classification", "Object Detection"],
+    relatedLabs: ["Lab 4: Computer Vision"],
+    description:
+      "Computer Vision — teaching machines to interpret and understand visual information.",
+  },
+  {
+    id: "rl",
+    label: "RL",
+    x: 150,
+    y: 500,
+    color: "#f472b6",
+    mastery: 20,
+    prerequisites: ["ml"],
+    relatedLessons: ["Reinforcement Learning", "Q-Learning"],
+    relatedLabs: ["Lab 5: RL"],
+    description:
+      "Reinforcement Learning — training agents through reward and punishment signals.",
+  },
+  {
+    id: "cnn",
+    label: "CNN",
+    x: 700,
+    y: 220,
+    color: "#60a5fa",
+    mastery: 30,
+    prerequisites: ["dl", "cv"],
+    relatedLessons: ["Convolutional Layers", "Image Nets"],
+    relatedLabs: ["Lab 4: CNN"],
+    description:
+      "Convolutional Neural Networks — specialized architectures for grid-like data such as images.",
+  },
+  {
+    id: "rnn",
+    label: "RNN",
+    x: 350,
+    y: 480,
+    color: "#a78bfa",
+    mastery: 25,
+    prerequisites: ["dl"],
+    relatedLessons: ["Sequential Data", "LSTM"],
+    relatedLabs: ["Lab 6: RNN"],
+    description:
+      "Recurrent Neural Networks — networks designed for sequential data with memory of past inputs.",
+  },
+  {
+    id: "transformers",
+    label: "Transformers",
+    x: 450,
+    y: 120,
+    color: "#fbbf24",
+    mastery: 55,
+    prerequisites: ["dl", "nlp"],
+    relatedLessons: ["Attention Mechanism", "Self-Attention"],
+    relatedLabs: ["Lab 7: Transformers"],
+    description:
+      "Transformers — attention-based architecture that revolutionized NLP and beyond.",
+  },
+  {
+    id: "gans",
+    label: "GANs",
+    x: 600,
+    y: 480,
+    color: "#f472b6",
+    mastery: 15,
+    prerequisites: ["dl"],
+    relatedLessons: ["Generative Models", "Adversarial Training"],
+    relatedLabs: ["Lab 8: GANs"],
+    description:
+      "Generative Adversarial Networks — two networks competing to generate realistic outputs.",
+  },
+  {
+    id: "bert",
+    label: "BERT",
+    x: 250,
+    y: 100,
+    color: "#34d399",
+    mastery: 40,
+    prerequisites: ["transformers", "nlp"],
+    relatedLessons: ["Bidirectional Encoding", "Fine-tuning"],
+    relatedLabs: ["Lab 9: BERT"],
+    description:
+      "BERT — bidirectional encoder representations from transformers for understanding language.",
+  },
+  {
+    id: "gpt",
+    label: "GPT",
+    x: 550,
+    y: 60,
+    color: "#fbbf24",
+    mastery: 65,
+    prerequisites: ["transformers"],
+    relatedLessons: ["Language Models", "Prompt Engineering"],
+    relatedLabs: ["Lab 10: GPT"],
+    description:
+      "GPT — generative pre-trained transformer for natural language generation tasks.",
+  },
+];
+
+const edges: [string, string][] = [
+  ["ai", "ml"],
+  ["ai", "nlp"],
+  ["ai", "cv"],
+  ["ai", "rl"],
+  ["ml", "dl"],
+  ["ml", "nlp"],
+  ["ml", "rl"],
+  ["dl", "cnn"],
+  ["dl", "rnn"],
+  ["dl", "transformers"],
+  ["dl", "gans"],
+  ["nlp", "transformers"],
+  ["nlp", "bert"],
+  ["cv", "cnn"],
+  ["transformers", "bert"],
+  ["transformers", "gpt"],
+  ["rnn", "nlp"],
+];
+
+function getMasteryColor(mastery: number): string {
+  if (mastery < 40) return "#ef4444";
+  if (mastery < 70) return "#eab308";
+  return "#22c55e";
+}
 
 export default function KnowledgeGraphPage() {
-  const [selectedCategory, setSelectedCategory] = useState<
-    KnowledgeCategory | "all"
-  >("all");
-  const [selectedNode, setSelectedNode] = useState<KnowledgeNode | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [filter, setFilter] = useState<
+    "all" | "mastered" | "in-progress" | "not-started"
+  >("all");
+  const offsetRef = useRef({ x: 0, y: 0 });
+  const scaleRef = useRef(1);
+  const isPanning = useRef(false);
+  const lastMouse = useRef({ x: 0, y: 0 });
+  const animFrame = useRef<number>(0);
 
-  const categories = getCategories();
-  const allNodes =
-    selectedCategory === "all"
-      ? knowledgeGraph
-      : getNodesByCategory(selectedCategory);
+  const getNodeAtPos = useCallback(
+    (mx: number, my: number): GraphNode | null => {
+      const canvas = canvasRef.current;
+      if (!canvas) return null;
+      const rect = canvas.getBoundingClientRect();
+      const x = (mx - rect.left - offsetRef.current.x) / scaleRef.current;
+      const y = (my - rect.top - offsetRef.current.y) / scaleRef.current;
+      for (const node of graphNodes) {
+        const dx = x - node.x;
+        const dy = y - node.y;
+        if (dx * dx + dy * dy < 900) return node;
+      }
+      return null;
+    },
+    [],
+  );
 
-  const filteredNodes = searchQuery
-    ? allNodes.filter(
-        (n) =>
-          n.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          n.description.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    : allNodes;
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.scale(dpr, dpr);
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.save();
+    ctx.translate(offsetRef.current.x, offsetRef.current.y);
+    ctx.scale(scaleRef.current, scaleRef.current);
+
+    const filteredNodes = graphNodes
+      .filter((n) => {
+        if (filter === "mastered") return n.mastery >= 70;
+        if (filter === "in-progress") return n.mastery >= 40 && n.mastery < 70;
+        if (filter === "not-started") return n.mastery < 40;
+        return true;
+      })
+      .filter((n) => {
+        if (!searchQuery) return true;
+        return (
+          n.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          n.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+
+    const nodeIds = new Set(filteredNodes.map((n) => n.id));
+
+    for (const [fromId, toId] of edges) {
+      if (!nodeIds.has(fromId) || !nodeIds.has(toId)) continue;
+      const from = graphNodes.find((n) => n.id === fromId)!;
+      const to = graphNodes.find((n) => n.id === toId)!;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.strokeStyle =
+        hoveredNode === fromId ||
+        hoveredNode === toId ||
+        selectedNode?.id === fromId ||
+        selectedNode?.id === toId
+          ? "rgba(201, 162, 39, 0.4)"
+          : "rgba(255, 255, 255, 0.06)";
+      ctx.lineWidth =
+        hoveredNode === fromId ||
+        hoveredNode === toId ||
+        selectedNode?.id === fromId ||
+        selectedNode?.id === toId
+          ? 2
+          : 1;
+      ctx.stroke();
+    }
+
+    for (const node of filteredNodes) {
+      const isSelected = selectedNode?.id === node.id;
+      const isHovered = hoveredNode === node.id;
+      const isPrereq = selectedNode?.prerequisites.includes(node.id);
+      const isRelated = filteredNodes.some(
+        (n) => n.id === selectedNode?.id && n.prerequisites.includes(node.id),
+      );
+      const radius = isSelected ? 32 : isHovered ? 28 : 24;
+      const mColor = getMasteryColor(node.mastery);
+
+      if (isSelected || isHovered) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius + 8, 0, Math.PI * 2);
+        ctx.fillStyle = node.color + "15";
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+      const grad = ctx.createRadialGradient(
+        node.x - 4,
+        node.y - 4,
+        0,
+        node.x,
+        node.y,
+        radius,
+      );
+      grad.addColorStop(0, node.color + "cc");
+      grad.addColorStop(1, node.color + "66");
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = isSelected
+        ? "#c9a227"
+        : isPrereq
+          ? "#ef4444"
+          : isRelated
+            ? "#4ade80"
+            : "rgba(255,255,255,0.1)";
+      ctx.lineWidth = isSelected ? 2.5 : 1.5;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(node.x + radius * 0.6, node.y - radius * 0.6, 5, 0, Math.PI * 2);
+      ctx.fillStyle = mColor;
+      ctx.fill();
+
+      ctx.fillStyle = "#f5f1e6";
+      ctx.font = `${isSelected ? "bold " : ""}${radius < 28 ? 11 : 13}px system-ui, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(node.label, node.x, node.y);
+    }
+
+    ctx.restore();
+    animFrame.current = requestAnimationFrame(draw);
+  }, [selectedNode, hoveredNode, searchQuery, filter]);
+
+  useEffect(() => {
+    animFrame.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(animFrame.current);
+  }, [draw]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      const node = getNodeAtPos(e.clientX, e.clientY);
+      if (node) {
+        setSelectedNode(node);
+        return;
+      }
+      isPanning.current = true;
+      lastMouse.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const node = getNodeAtPos(e.clientX, e.clientY);
+      setHoveredNode(node?.id || null);
+      canvas.style.cursor = node
+        ? "pointer"
+        : isPanning.current
+          ? "grabbing"
+          : "grab";
+
+      if (isPanning.current) {
+        const dx = e.clientX - lastMouse.current.x;
+        const dy = e.clientY - lastMouse.current.y;
+        offsetRef.current.x += dx;
+        offsetRef.current.y += dy;
+        lastMouse.current = { x: e.clientX, y: e.clientY };
+      }
+    };
+
+    const handleMouseUp = () => {
+      isPanning.current = false;
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? 0.92 : 1.08;
+      const newScale = Math.max(0.3, Math.min(3, scaleRef.current * delta));
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      offsetRef.current.x =
+        mx - (mx - offsetRef.current.x) * (newScale / scaleRef.current);
+      offsetRef.current.y =
+        my - (my - offsetRef.current.y) * (newScale / scaleRef.current);
+      scaleRef.current = newScale;
+    };
+
+    canvas.addEventListener("mousedown", handleMouseDown);
+    canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("mouseup", handleMouseUp);
+    canvas.addEventListener("mouseleave", handleMouseUp);
+    canvas.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      canvas.removeEventListener("mousedown", handleMouseDown);
+      canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("mouseup", handleMouseUp);
+      canvas.removeEventListener("mouseleave", handleMouseUp);
+      canvas.removeEventListener("wheel", handleWheel);
+    };
+  }, [getNodeAtPos]);
+
+  const _filteredGraphNodes = graphNodes
+    .filter((n) => {
+      if (filter === "mastered") return n.mastery >= 70;
+      if (filter === "in-progress") return n.mastery >= 40 && n.mastery < 70;
+      if (filter === "not-started") return n.mastery < 40;
+      return true;
+    })
+    .filter((n) => {
+      if (!searchQuery) return true;
+      return (
+        n.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        n.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Header */}
-      <div className="border-b border-white/10 px-6 py-8">
-        <div className="max-w-7xl mx-auto">
-          <Link
-            href="/"
-            className="text-sm text-white/50 hover:text-white/70 mb-4 inline-block"
+      <div className="border-b border-white/[0.06]">
+        <div className="max-w-7xl mx-auto px-6 py-10">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            ← Back to AI University
-          </Link>
-          <h1 className="text-4xl font-bold mb-3">AI Knowledge Graph</h1>
-          <p className="text-white/60 text-lg max-w-2xl">
-            Every concept in AI, connected. Click any node to explore
-            prerequisites, related concepts, and learning resources.
-          </p>
+            <Link
+              href="/"
+              className="text-xs text-white/30 hover:text-white/50 transition-colors mb-6 inline-flex items-center gap-1.5"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+              </svg>
+              AI Institute
+            </Link>
+            <h1
+              className="text-4xl md:text-5xl font-bold tracking-tight mt-4 mb-2"
+              style={{
+                background: "linear-gradient(135deg, #f5f1e6 0%, #c9a227 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Knowledge Graph
+            </h1>
+            <p className="text-white/40 text-lg">
+              Explore AI concepts and their relationships
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Search */}
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Search concepts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full max-w-md bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#22c55e]/50"
-          />
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
+          <div className="relative flex-1 max-w-md">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="text-white/30"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search concepts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#c9a227]/40 transition-all"
+            />
+          </div>
+          <div className="flex gap-2">
+            {(["all", "mastered", "in-progress", "not-started"] as const).map(
+              (f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                    filter === f
+                      ? "bg-[#1a3a2a] text-[#4ade80]"
+                      : "bg-white/[0.04] text-white/40 hover:bg-white/[0.08]"
+                  }`}
+                >
+                  {f === "all"
+                    ? "All"
+                    : f === "mastered"
+                      ? "Mastered"
+                      : f === "in-progress"
+                        ? "In Progress"
+                        : "Not Started"}
+                </button>
+              ),
+            )}
+          </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              selectedCategory === "all"
-                ? "bg-white text-black"
-                : "bg-white/5 text-white/60 hover:bg-white/10"
-            }`}
-          >
-            All ({knowledgeGraph.length})
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedCategory === cat.id
-                  ? "text-white"
-                  : "bg-white/5 text-white/60 hover:bg-white/10"
-              }`}
-              style={
-                selectedCategory === cat.id
-                  ? { backgroundColor: categoryColors[cat.id] }
-                  : undefined
-              }
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2" ref={containerRef}>
+            <div
+              className="relative bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden"
+              style={{ height: "600px" }}
             >
-              {cat.label} ({cat.count})
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Concept Grid */}
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredNodes.map((node) => {
-                const badge = difficultyBadge[node.difficulty];
-                return (
-                  <button
-                    key={node.id}
-                    onClick={() => setSelectedNode(node)}
-                    className={`text-left p-5 rounded-xl border transition-all ${
-                      selectedNode?.id === node.id
-                        ? "border-[#22c55e]/50 bg-[#22c55e]/10"
-                        : "border-white/10 bg-white/5 hover:border-white/20"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-white">{node.title}</h3>
-                      <span
-                        className="text-xs px-2 py-0.5 rounded-full font-medium"
-                        style={{ backgroundColor: badge.bg, color: badge.text }}
-                      >
-                        {node.difficulty}
-                      </span>
-                    </div>
-                    <p className="text-white/50 text-sm line-clamp-2">
-                      {node.description}
-                    </p>
-                    <div className="mt-3 flex items-center gap-2">
-                      <span
-                        className="w-2 h-2 rounded-full"
-                        style={{
-                          backgroundColor: categoryColors[node.category],
-                        }}
-                      />
-                      <span className="text-xs text-white/40">
-                        {node.category
-                          .split("-")
-                          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-                          .join(" ")}
-                      </span>
-                      <span className="text-xs text-white/30">•</span>
-                      <span className="text-xs text-white/40">
-                        {node.estimatedMinutes} min
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
+              <canvas ref={canvasRef} className="absolute inset-0" />
+              <div className="absolute bottom-4 left-4 flex items-center gap-4 px-4 py-2.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl border border-white/[0.06]">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <span className="text-[10px] text-white/40">&lt; 40%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <span className="text-[10px] text-white/40">40–70%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="text-[10px] text-white/40">&gt; 70%</span>
+                </div>
+              </div>
+              <div className="absolute top-4 right-4 px-3 py-1.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-lg border border-white/[0.06] text-[10px] text-white/30">
+                Scroll to zoom • Drag to pan • Click node for details
+              </div>
             </div>
           </div>
 
-          {/* Detail Panel */}
           <div className="lg:col-span-1">
-            {selectedNode ? (
-              <div className="sticky top-8 bg-white/5 border border-white/10 rounded-xl p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <h2 className="text-xl font-bold">{selectedNode.title}</h2>
-                  <span
-                    className="text-xs px-2 py-0.5 rounded-full font-medium"
-                    style={{
-                      backgroundColor:
-                        difficultyBadge[selectedNode.difficulty].bg,
-                      color: difficultyBadge[selectedNode.difficulty].text,
-                    }}
-                  >
-                    {selectedNode.difficulty}
-                  </span>
-                </div>
+            <AnimatePresence mode="wait">
+              {selectedNode ? (
+                <motion.div
+                  key={selectedNode.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="sticky top-8 bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h2 className="text-xl font-bold text-[#f5f1e6]">
+                        {selectedNode.label}
+                      </h2>
+                      <p className="text-xs text-white/30 mt-1">
+                        {selectedNode.description}
+                      </p>
+                    </div>
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold"
+                      style={{
+                        background: selectedNode.color + "22",
+                        color: selectedNode.color,
+                      }}
+                    >
+                      {selectedNode.mastery}%
+                    </div>
+                  </div>
 
-                <p className="text-white/60 text-sm mb-6">
-                  {selectedNode.description}
-                </p>
+                  <div className="mb-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] text-white/30 uppercase tracking-wider">
+                        Mastery
+                      </span>
+                      <span
+                        className="text-[10px] font-medium"
+                        style={{ color: getMasteryColor(selectedNode.mastery) }}
+                      >
+                        {selectedNode.mastery < 40
+                          ? "Beginner"
+                          : selectedNode.mastery < 70
+                            ? "Intermediate"
+                            : "Advanced"}
+                      </span>
+                    </div>
+                    <div className="w-full h-2 bg-white/[0.06] rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${selectedNode.mastery}%` }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="h-full rounded-full"
+                        style={{
+                          background: getMasteryColor(selectedNode.mastery),
+                        }}
+                      />
+                    </div>
+                  </div>
 
-                {/* Why It Exists */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Why It Exists
-                  </h3>
-                  <p className="text-white/50 text-sm">
-                    {selectedNode.whyItExists}
-                  </p>
-                </div>
+                  {selectedNode.prerequisites.length > 0 && (
+                    <div className="mb-5">
+                      <h3 className="text-[10px] text-white/30 uppercase tracking-wider mb-2">
+                        Prerequisites
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedNode.prerequisites.map((pid) => {
+                          const p = graphNodes.find((n) => n.id === pid);
+                          return p ? (
+                            <button
+                              key={pid}
+                              onClick={() => setSelectedNode(p)}
+                              className="px-2.5 py-1 text-[11px] bg-white/[0.06] text-white/60 rounded-lg hover:bg-white/[0.1] transition-colors"
+                            >
+                              {p.label}
+                            </button>
+                          ) : null;
+                        })}
+                      </div>
+                    </div>
+                  )}
 
-                {/* History */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    History
-                  </h3>
-                  <p className="text-white/50 text-sm">
-                    {selectedNode.history}
-                  </p>
-                </div>
-
-                {/* Prerequisites */}
-                {selectedNode.prerequisites.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-white/80 mb-2">
-                      Prerequisites
+                  <div className="mb-5">
+                    <h3 className="text-[10px] text-white/30 uppercase tracking-wider mb-2">
+                      Related Lessons
                     </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {getPrerequisites(selectedNode.id).map((pre) => (
-                        <button
-                          key={pre.id}
-                          onClick={() => setSelectedNode(pre)}
-                          className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/70 hover:bg-white/20"
+                    <div className="space-y-1.5">
+                      {selectedNode.relatedLessons.map((lesson) => (
+                        <div
+                          key={lesson}
+                          className="flex items-center gap-2 text-sm text-white/50"
                         >
-                          {pre.title}
-                        </button>
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
+                          {lesson}
+                        </div>
                       ))}
                     </div>
                   </div>
-                )}
 
-                {/* Related Concepts */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Related Concepts
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {getRelated(selectedNode.id).map((rel) => (
-                      <button
-                        key={rel.id}
-                        onClick={() => setSelectedNode(rel)}
-                        className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/70 hover:bg-white/20"
-                      >
-                        {rel.title}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Real-World Use Cases */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Real-World Use Cases
-                  </h3>
-                  <ul className="space-y-1">
-                    {selectedNode.realWorldUseCases.map((use, i) => (
-                      <li
-                        key={i}
-                        className="text-white/50 text-sm flex items-start gap-2"
-                      >
-                        <span className="text-[#22c55e] mt-1">•</span>
-                        {use}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Common Mistakes */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Common Mistakes
-                  </h3>
-                  <ul className="space-y-1">
-                    {selectedNode.commonMistakes.map((mistake, i) => (
-                      <li
-                        key={i}
-                        className="text-white/50 text-sm flex items-start gap-2"
-                      >
-                        <span className="text-red-400 mt-1">✗</span>
-                        {mistake}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Interview Questions */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Interview Questions
-                  </h3>
-                  <ul className="space-y-1">
-                    {selectedNode.interviewQuestions.map((q, i) => (
-                      <li
-                        key={i}
-                        className="text-white/50 text-sm flex items-start gap-2"
-                      >
-                        <span className="text-blue-400 mt-1">Q</span>
-                        {q}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Glossary */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-white/80 mb-2">
-                    Key Terms
-                  </h3>
-                  <dl className="space-y-2">
-                    {selectedNode.glossary.map((term, i) => (
-                      <div key={i}>
-                        <dt className="text-sm font-medium text-white/70">
-                          {term.term}
-                        </dt>
-                        <dd className="text-xs text-white/40">
-                          {term.definition}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-
-                {/* References */}
-                {selectedNode.references.length > 0 && (
-                  <div>
-                    <h3 className="text-sm font-semibold text-white/80 mb-2">
-                      References
+                  <div className="mb-5">
+                    <h3 className="text-[10px] text-white/30 uppercase tracking-wider mb-2">
+                      Related Labs
                     </h3>
-                    <ul className="space-y-1">
-                      {selectedNode.references.map((ref, i) => (
-                        <li key={i}>
-                          <a
-                            href={ref.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-[#22c55e] hover:underline"
-                          >
-                            {ref.title}
-                          </a>
-                          <span className="text-xs text-white/30 ml-2">
-                            ({ref.type})
-                          </span>
-                        </li>
+                    <div className="space-y-1.5">
+                      {selectedNode.relatedLabs.map((lab) => (
+                        <div
+                          key={lab}
+                          className="flex items-center gap-2 text-sm text-white/50"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#c9a227]" />
+                          {lab}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
-                )}
 
-                <Link
-                  href={`/concepts/${selectedNode.slug}`}
-                  className="mt-6 block w-full text-center bg-[#22c55e] text-black font-semibold py-3 rounded-lg hover:bg-[#16a34a] transition-colors"
+                  <Link
+                    href={`/concepts/${selectedNode.id}`}
+                    className="block w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-[#1a3a2a] text-[#4ade80] hover:bg-[#1a3a2a]/80 transition-colors"
+                  >
+                    Learn This Concept →
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="sticky top-8 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 text-center"
                 >
-                  Learn This Concept →
-                </Link>
-              </div>
-            ) : (
-              <div className="sticky top-8 bg-white/5 border border-white/10 rounded-xl p-6 text-center">
-                <div className="text-4xl mb-4">🧠</div>
-                <h3 className="font-semibold mb-2">Select a Concept</h3>
-                <p className="text-white/50 text-sm">
-                  Click any concept card to see its full details, prerequisites,
-                  and learning resources.
-                </p>
-              </div>
-            )}
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/[0.04] flex items-center justify-center">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-white/20"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                  </div>
+                  <h3 className="text-sm font-semibold text-white/50 mb-1">
+                    Select a Concept
+                  </h3>
+                  <p className="text-xs text-white/25">
+                    Click any node on the graph to explore its details,
+                    prerequisites, and learning resources.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
