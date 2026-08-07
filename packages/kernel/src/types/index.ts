@@ -39,6 +39,7 @@ import type {
   Permission,
   Schema,
   Artifact,
+  Capability,
 } from "@bhavya/shared";
 
 // Re-export shared types so existing kernel consumers don't break
@@ -69,6 +70,7 @@ export type {
   Permission,
   Schema,
   Artifact,
+  Capability,
 };
 
 // Re-export shared types under kernel-preferred aliases
@@ -127,13 +129,6 @@ export interface ExecutionRecord {
   createdAt: Date;
   completedAt?: Date;
   error?: string;
-}
-
-export interface Capability {
-  name: string;
-  description: string;
-  inputs: Schema[];
-  outputs: Schema[];
 }
 
 export interface RegistryEntry {

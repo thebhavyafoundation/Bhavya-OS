@@ -1,7 +1,7 @@
 // Agent Engine
 // Loads .agents/, creates Agent, manages Capabilities, Permissions, Lifecycle
 
-import type { Agent, AgentId, Capability, Permission, AgentStatus } from '@bhavya/kernel';
+import type { Agent, AgentId, Capability, Permission, AgentStatus } from '@bhavya/shared';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
