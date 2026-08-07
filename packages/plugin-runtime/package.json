@@ -1,0 +1,21 @@
+{
+  "name": "@bhavya/plugin-runtime",
+  "version": "1.0.0",
+  "description": "Bhavya OS Plugin Runtime — lifecycle management for platform extensions",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/shared": "workspace:*",
+    "@bhavya/events": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
