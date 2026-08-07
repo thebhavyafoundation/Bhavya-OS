@@ -75,7 +75,7 @@ export function Footer() {
               <Github size={18} />
             </a>
             <a
-              href="https://www.linkedin.com/company/bhavya-foundation"
+              href="https://www.linkedin.com/company/bhavya-ailab"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
