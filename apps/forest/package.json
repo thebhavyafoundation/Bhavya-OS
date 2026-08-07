@@ -13,7 +13,6 @@
     "@bhavya/content-core": "workspace:*",
     "@bhavya/maps": "workspace:*",
     "@bhavya/mission-runtime": "workspace:*",
-    "@bhavya/ui": "workspace:*",
     "next": "15.5.20",
     "react": "19.2.4",
     "react-dom": "19.2.4"
