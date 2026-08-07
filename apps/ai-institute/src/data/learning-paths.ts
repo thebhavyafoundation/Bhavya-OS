@@ -1,5 +1,203 @@
-// Bhavya AI University — Learning Paths
-// Structured journeys from beginner to expert
+export interface LearningStage {
+  id: string;
+  number: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  duration: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced" | "Expert";
+  color: string;
+  icon: string;
+  modules: string[];
+  prerequisites: string[];
+  skills: string[];
+  projectIdea: string;
+}
+
+export const flagshipPath: LearningStage[] = [
+  {
+    id: "ai-foundations",
+    number: 1,
+    title: "AI Foundations",
+    subtitle: "Understand what AI is and how it works",
+    description:
+      "Start your journey with the fundamental concepts of artificial intelligence. Learn what AI can do, how machines learn, and the different types of AI systems.",
+    duration: "4 weeks",
+    difficulty: "Beginner",
+    color: "#1a3a2a",
+    icon: "🧠",
+    modules: [
+      "What is AI?",
+      "Types of Machine Learning",
+      "The AI Workflow",
+      "Data Fundamentals",
+      "Ethics in AI",
+    ],
+    prerequisites: [],
+    skills: ["AI Literacy", "Data Thinking", "Problem Framing"],
+    projectIdea:
+      "Build an AI-powered quiz app that adapts to your knowledge level",
+  },
+  {
+    id: "python-for-ai",
+    number: 2,
+    title: "Python for AI",
+    subtitle: "Master the language of AI",
+    description:
+      "Python is the lingua franca of AI. Learn Python specifically for AI development — data structures, libraries, and patterns used in every AI project.",
+    duration: "6 weeks",
+    difficulty: "Beginner",
+    color: "#2d5a42",
+    icon: "🐍",
+    modules: [
+      "Python Basics",
+      "NumPy & Pandas",
+      "Data Visualization",
+      "File I/O & APIs",
+      "Object-Oriented Python",
+    ],
+    prerequisites: ["ai-foundations"],
+    skills: ["Python", "NumPy", "Pandas", "Matplotlib"],
+    projectIdea:
+      "Build a data analysis pipeline that cleans and visualizes real-world datasets",
+  },
+  {
+    id: "mathematics-for-ai",
+    number: 3,
+    title: "Mathematics for AI",
+    subtitle: "The mathematical foundations of intelligence",
+    description:
+      "Math is the language AI speaks. Build intuition for linear algebra, calculus, probability, and statistics — the pillars every AI algorithm stands on.",
+    duration: "8 weeks",
+    difficulty: "Intermediate",
+    color: "#c9a227",
+    icon: "📐",
+    modules: [
+      "Linear Algebra",
+      "Calculus & Optimization",
+      "Probability Theory",
+      "Statistics & Inference",
+      "Information Theory",
+    ],
+    prerequisites: ["python-for-ai"],
+    skills: ["Linear Algebra", "Calculus", "Probability", "Statistics"],
+    projectIdea:
+      "Implement gradient descent from scratch and visualize convergence",
+  },
+  {
+    id: "machine-learning",
+    number: 4,
+    title: "Machine Learning",
+    subtitle: "Teach machines to learn from data",
+    description:
+      "The core of AI. Learn supervised, unsupervised, and reinforcement learning. Build models, evaluate them, and apply them to real problems.",
+    duration: "10 weeks",
+    difficulty: "Intermediate",
+    color: "#8a7359",
+    icon: "⚡",
+    modules: [
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Model Evaluation",
+      "Feature Engineering",
+      "Ensemble Methods",
+    ],
+    prerequisites: ["mathematics-for-ai"],
+    skills: ["Scikit-learn", "Regression", "Classification", "Clustering"],
+    projectIdea: "Build a house price predictor and deploy it as a web API",
+  },
+  {
+    id: "deep-learning",
+    number: 5,
+    title: "Deep Learning",
+    subtitle: "Neural networks that learn representations",
+    description:
+      "Go deep. Learn neural networks, backpropagation, CNNs, RNNs, and the architectures powering modern AI. Build and train networks from scratch.",
+    duration: "12 weeks",
+    difficulty: "Advanced",
+    color: "#1a3a2a",
+    icon: "🔬",
+    modules: [
+      "Neural Networks",
+      "Backpropagation",
+      "CNNs",
+      "RNNs & LSTMs",
+      "Training Techniques",
+    ],
+    prerequisites: ["machine-learning"],
+    skills: ["PyTorch", "TensorFlow", "CNNs", "RNNs"],
+    projectIdea:
+      "Build an image classifier that identifies 100+ object categories",
+  },
+  {
+    id: "transformers",
+    number: 6,
+    title: "Transformers",
+    subtitle: "The architecture that changed everything",
+    description:
+      "The transformer architecture revolutionized AI. Understand self-attention, positional encoding, and the models behind GPT, BERT, and beyond.",
+    duration: "10 weeks",
+    difficulty: "Advanced",
+    color: "#2d5a42",
+    icon: "🔄",
+    modules: [
+      "Attention Mechanism",
+      "Self-Attention",
+      "Multi-Head Attention",
+      "BERT & GPT",
+      "Vision Transformers",
+    ],
+    prerequisites: ["deep-learning"],
+    skills: ["Transformers", "Attention", "Hugging Face", "BERT", "GPT"],
+    projectIdea: "Fine-tune a pre-trained transformer for text classification",
+  },
+  {
+    id: "llm-engineering",
+    number: 7,
+    title: "LLM Engineering",
+    subtitle: "Build with large language models",
+    description:
+      "Learn to work with LLMs at scale. Prompt engineering, RAG, fine-tuning, evaluation, and building production applications with language models.",
+    duration: "8 weeks",
+    difficulty: "Expert",
+    color: "#c9a227",
+    icon: "🚀",
+    modules: [
+      "Prompt Engineering",
+      "RAG Systems",
+      "Fine-Tuning",
+      "Evaluation",
+      "Production Deployment",
+    ],
+    prerequisites: ["transformers"],
+    skills: ["OpenAI API", "LangChain", "RAG", "Prompt Engineering"],
+    projectIdea:
+      "Build a RAG-powered knowledge base with conversational interface",
+  },
+  {
+    id: "ai-agents",
+    number: 8,
+    title: "AI Agents",
+    subtitle: "Autonomous systems that reason and act",
+    description:
+      "The frontier of AI. Build agents that can reason, plan, use tools, and take actions autonomously. Multi-agent systems, tool use, and real-world deployment.",
+    duration: "10 weeks",
+    difficulty: "Expert",
+    color: "#8a7359",
+    icon: "🤖",
+    modules: [
+      "Agent Architecture",
+      "Tool Use",
+      "Planning & Reasoning",
+      "Multi-Agent Systems",
+      "Safety & Alignment",
+    ],
+    prerequisites: ["llm-engineering"],
+    skills: ["Agent Frameworks", "Tool Integration", "Planning", "Memory"],
+    projectIdea:
+      "Build a multi-agent system that researches, writes, and edits articles",
+  },
+];
 
 export interface LearningPath {
   id: string;
