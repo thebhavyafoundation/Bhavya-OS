@@ -1,0 +1,41 @@
+{
+  "name": "@bhavya/dependency-rules",
+  "version": "1.0.0",
+  "description": "Dependency enforcement rules for Bhavya OS consolidation",
+  "rules": {
+    "forbidden": [
+      {
+        "from": "*",
+        "to": "@bhavya/bdl",
+        "reason": "DEPRECATED: Use @bhavya/platform-ui instead"
+      },
+      {
+        "from": "*",
+        "to": "@bhavya/ui",
+        "reason": "DEPRECATED: Use @bhavya/platform-ui instead"
+      },
+      {
+        "from": "packages/*",
+        "to": "packages/types",
+        "reason": "Types come from @bhavya/shared. @bhavya/types re-exports from shared."
+      }
+    ],
+    "required": [
+      {
+        "rule": "All domain types (Workflow, Event, Memory, Goal, Task, Agent, etc.) must import from @bhavya/shared",
+        "check": "grep -r 'interface Workflow' packages/*/src/ | grep -v shared | grep -v node_modules"
+      },
+      {
+        "rule": "No package may define its own KnowledgePackage type",
+        "check": "grep -r 'interface KnowledgePackage' packages/*/src/ | grep -v shared | grep -v node_modules"
+      }
+    ],
+    "canonical": {
+      "types": "@bhavya/shared",
+      "ui": "@bhavya/platform-ui",
+      "design-tokens": "@bhavya/design-system",
+      "knowledge-graph": "@bhavya/knowledge-graph",
+      "content-pipeline": "packages/content-core"
+    }
+  }
+}

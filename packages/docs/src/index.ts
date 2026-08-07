@@ -1,4 +1,4 @@
-import type { DocEntry } from "@bhavya/ui";
+import type { DocEntry } from "@bhavya/platform-ui";
 
 export const docsVersion = "Founding Edition";
 

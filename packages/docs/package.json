@@ -12,7 +12,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@bhavya/ui": "workspace:*"
+    "@bhavya/platform-ui": "workspace:*"
   },
   "devDependencies": {
     "@bhavya/eslint": "workspace:*",

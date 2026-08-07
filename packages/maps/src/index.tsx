@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@bhavya/ui";
+import { Card, CardContent } from "@bhavya/platform-ui";
 
 export function InteractiveMapPlaceholder() {
   return (

@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@bhavya/ui";
+import { Card, CardContent } from "@bhavya/platform-ui";
 
 export function MetricBars({ data }: { data: readonly { label: string; value: number }[] }) {
   return (

@@ -12,7 +12,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@bhavya/ui": "workspace:*",
+    "@bhavya/platform-ui": "workspace:*",
     "maplibre-gl": "^5.7.1",
     "react": "^19.2.4"
   },
