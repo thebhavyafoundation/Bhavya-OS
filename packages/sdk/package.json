@@ -13,6 +13,8 @@
     "./search": "./src/search.ts"
   },
   "dependencies": {
-    "@bhavya/mission-runtime": "workspace:*"
+    "@bhavya/mission-runtime": "workspace:*",
+    "@bhavya/plugin-runtime": "workspace:*",
+    "@bhavya/events": "workspace:*"
   }
 }
