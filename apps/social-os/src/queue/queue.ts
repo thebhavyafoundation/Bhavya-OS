@@ -7,7 +7,7 @@ import {
 import { createApprovalRequest, approvePublication } from "../approval/gate.js";
 import { formatForAllPlatforms } from "../lib/formatter.js";
 import { emitEvent } from "../lib/events.js";
-import type { PlatformType, ContentSource, Priority } from "../lib/types.js";
+import type { PlatformType, ContentSource, SocialPriority } from "../lib/types.js";
 
 export interface QueueItem {
   id: string;
@@ -22,7 +22,7 @@ export function addToQueue(input: {
   content: string;
   platforms: PlatformType[];
   source: ContentSource;
-  priority?: Priority;
+  priority?: SocialPriority;
   hashtags?: string[];
   scheduledAt?: string;
 }): QueueItem {

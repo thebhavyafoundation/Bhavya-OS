@@ -8,17 +8,33 @@
  * @license MIT
  */
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Types (imported from @bhavya/shared) ────────────────────────────────────
 
-export type WorkflowStatus =
-  "draft" | "active" | "paused" | "completed" | "failed" | "cancelled";
+import type {
+  WorkflowStatus,
+  StepStatus,
+  StepType,
+  WorkflowTrigger,
+  StepConfig,
+  RetryPolicy,
+  WorkflowExecution,
+  StepResult,
+  WorkflowMetrics,
+} from "@bhavya/shared";
 
-export type StepStatus =
-  "pending" | "running" | "completed" | "failed" | "skipped" | "cancelled";
+export type {
+  WorkflowStatus,
+  StepStatus,
+  StepType,
+  WorkflowTrigger,
+  StepConfig,
+  RetryPolicy,
+  WorkflowExecution,
+  StepResult,
+  WorkflowMetrics,
+};
 
-export type StepType =
-  "action" | "condition" | "parallel" | "loop" | "wait" | "subworkflow";
-
+/** Runtime Workflow — extends shared with Date fields for execution */
 export interface Workflow {
   id: string;
   name: string;
@@ -34,6 +50,7 @@ export interface Workflow {
   completedAt?: Date;
 }
 
+/** Runtime WorkflowStep — extends shared with execution state */
 export interface WorkflowStep {
   id: string;
   name: string;
@@ -49,54 +66,6 @@ export interface WorkflowStep {
   completedAt?: Date;
   error?: string;
   result?: unknown;
-}
-
-export interface StepConfig {
-  action?: string;
-  condition?: string;
-  parallel?: string[];
-  loop?: { items: string; step: string };
-  wait?: { duration: number };
-  subworkflow?: { workflowId: string; input: Record<string, unknown> };
-  [key: string]: unknown;
-}
-
-export interface RetryPolicy {
-  maxRetries: number;
-  backoffMultiplier: number;
-  initialDelay: number;
-}
-
-export interface WorkflowTrigger {
-  type: "manual" | "schedule" | "event" | "webhook";
-  config: Record<string, unknown>;
-}
-
-export interface WorkflowExecution {
-  id: string;
-  workflowId: string;
-  status: WorkflowStatus;
-  stepResults: Map<string, StepResult>;
-  variables: Record<string, unknown>;
-  startedAt: Date;
-  completedAt?: Date;
-  error?: string;
-}
-
-export interface StepResult {
-  stepId: string;
-  status: StepStatus;
-  output: unknown;
-  error?: string;
-  duration: number;
-}
-
-export interface WorkflowMetrics {
-  totalWorkflows: number;
-  byStatus: Record<WorkflowStatus, number>;
-  avgExecutionTime: number;
-  successRate: number;
-  totalExecutions: number;
 }
 
 // ─── Engine ───────────────────────────────────────────────────────────────────

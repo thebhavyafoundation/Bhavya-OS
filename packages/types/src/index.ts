@@ -1,10 +1,13 @@
 /**
- * @bhavya/types — Barrel Export
+ * @bhavya/types — Canonical Type Re-exports
  *
- * Re-exports all canonical types for convenient single-import usage.
+ * ALL types now live in @bhavya/shared.
+ * This package re-exports them for backward compatibility.
+ * New code should import directly from @bhavya/shared.
  */
 
 export type {
+  // Knowledge Types
   KnowledgeObject,
   KnowledgePackage,
   Concept,
@@ -35,21 +38,22 @@ export type {
   PublicationStatus,
   QuestionType,
   ExerciseType,
-} from "./knowledge.js";
 
-export type {
+  // User & Auth
   User,
   UserRole,
   Session,
   AuthCredentials,
   RegistrationData,
   Permission,
-} from "./user.js";
 
-export type {
+  // Workflow & Goals
   Goal,
   KPI,
+  GoalStatus,
   Plan,
+  PlanStep,
+  PlanStatus,
   Milestone,
   Resource,
   Timeline,
@@ -60,14 +64,11 @@ export type {
   StepConfig,
   RetryPolicy,
   Priority,
-  GoalStatus,
-  PlanStatus,
   WorkflowStatus,
   StepType,
   StepStatus,
-} from "./workflow.js";
 
-export type {
+  // Events
   BhavyaEvent,
   EventHandler,
   EventSubscription,
@@ -79,11 +80,13 @@ export type {
   PipelineCompletedPayload,
   UserRegisteredPayload,
   NotificationSentPayload,
-} from "./events.js";
 
-export type { Artifact, ArtifactType, ArtifactMetadata } from "./artifacts.js";
+  // Artifacts
+  Artifact,
+  ArtifactType,
+  ArtifactMetadata,
 
-export type {
+  // Pipeline
   PipelineExecution,
   NodeResult,
   PipelineEvent,
@@ -91,29 +94,28 @@ export type {
   TraceSpan,
   PipelineStatus,
   NodeStatus,
-} from "./pipeline.js";
 
-export type {
+  // Search
   SearchResult,
   SearchHighlight,
   SearchQuery,
   SearchResponse,
-} from "./search.js";
 
-export type {
+  // Notifications
   Notification,
   NotificationType,
   NotificationChannel,
   NotificationStatus,
   NotificationPreference,
-} from "./notifications.js";
 
-export type { AuditEntry, AuditAction } from "./audit.js";
+  // Audit
+  AuditEntry,
+  AuditAction,
 
-export type {
+  // Providers
   Provider,
   ProviderType,
   ProviderStatus,
   ProviderCapability,
   ProviderHealth,
-} from "./providers.js";
+} from "@bhavya/shared";

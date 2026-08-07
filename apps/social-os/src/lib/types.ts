@@ -9,7 +9,7 @@ export type PublicationStatus =
   | "published"
   | "analytics_collected";
 
-export type Priority = "low" | "normal" | "high" | "urgent";
+export type SocialPriority = "low" | "normal" | "high" | "urgent";
 
 export type ApprovalStatus = "pending" | "approved" | "rejected" | "edited";
 
@@ -188,7 +188,7 @@ export interface Publication {
   content: string;
   platformContent: Record<PlatformType, PlatformContent>;
   status: PublicationStatus;
-  priority: Priority;
+  priority: SocialPriority;
   source: ContentSource;
   campaignId?: string;
   scheduledAt?: string;

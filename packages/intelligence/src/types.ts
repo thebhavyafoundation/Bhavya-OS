@@ -86,7 +86,7 @@ export type KnowledgeCategory =
   | "product"
   | "comparison";
 
-export interface KnowledgePackage {
+export interface TechnologyKnowledgePackage {
   id: string;
   sourceId: string;
   sourceKind: SourceKind;
@@ -275,13 +275,13 @@ export interface SyncError {
 // ─── Dashboard Types ───────────────────────────────────────────────────────
 
 export interface TrendingItem {
-  package: KnowledgePackage;
+  package: TechnologyKnowledgePackage;
   trendScore: number;
   trendReason: string;
 }
 
 export interface RankingEntry {
-  package: KnowledgePackage;
+  package: TechnologyKnowledgePackage;
   rank: number;
   score: number;
   category: string;
@@ -289,7 +289,7 @@ export interface RankingEntry {
 
 export interface DashboardState {
   trending: TrendingItem[];
-  recentlyAdded: KnowledgePackage[];
+  recentlyAdded: TechnologyKnowledgePackage[];
   radar: RadarEntry[];
   rankings: RankingEntry[];
   recommendations: Recommendation[];

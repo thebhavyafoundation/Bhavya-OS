@@ -1,10 +1,6 @@
-export interface BhavyaEvent<T = unknown> {
-  name: string;
-  version: number;
-  producer: string;
-  timestamp: string;
-  payload: T;
-}
+import type { BhavyaEvent } from "@bhavya/shared";
+
+export type { BhavyaEvent };
 
 export function createEvent<T>(
   name: string,
@@ -12,5 +8,16 @@ export function createEvent<T>(
   payload: T,
   version = 1
 ): BhavyaEvent<T> {
-  return { name, version, producer, timestamp: new Date().toISOString(), payload };
+  return {
+    id: crypto.randomUUID(),
+    name,
+    version,
+    producer,
+    timestamp: new Date().toISOString(),
+    payload,
+    priority: "medium",
+    status: "pending",
+    retryCount: 0,
+    maxRetries: 3,
+  };
 }

@@ -18,7 +18,7 @@ export interface WorkItem {
   metadata: Record<string, unknown>;
 }
 
-export interface Agent {
+export interface SelfOrganizingAgent {
   id: string;
   name: string;
   capabilities: string[];
@@ -39,9 +39,9 @@ export interface SelfOrganizingConfig {
     search: (query: string) => Promise<any[]>;
   };
   agents: {
-    getAll: () => Agent[];
-    getAvailable: () => Agent[];
-    getBestMatch: (capabilities: string[]) => Agent | undefined;
+    getAll: () => SelfOrganizingAgent[];
+    getAvailable: () => SelfOrganizingAgent[];
+    getBestMatch: (capabilities: string[]) => SelfOrganizingAgent | undefined;
   };
 }
 

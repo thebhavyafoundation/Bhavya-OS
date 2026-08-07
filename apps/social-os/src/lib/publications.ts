@@ -3,7 +3,7 @@ import { getDb } from "./db.js";
 import type {
   Publication,
   PublicationStatus,
-  Priority,
+  SocialPriority,
   ContentSource,
   PlatformType,
   PlatformContent,
@@ -13,7 +13,7 @@ export function createPublication(input: {
   title: string;
   content: string;
   source: ContentSource;
-  priority?: Priority;
+  priority?: SocialPriority;
   tags?: string[];
   campaign?: string;
   createdBy?: string;

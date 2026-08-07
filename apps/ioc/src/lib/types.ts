@@ -252,7 +252,7 @@ export type KPStatus = 'draft' | 'in-review' | 'approved' | 'published';
 export type MediaAssetType = 'article' | 'video' | 'carousel' | 'infographic';
 export type ProductionStage = 'research' | 'writing' | 'review' | 'design' | 'media' | 'publishing';
 
-export interface KnowledgePackage {
+export interface ContentKnowledgePackage {
   id: string;
   title: string;
   level: string;
@@ -287,7 +287,7 @@ export interface ProductionMetrics {
   publishingQueue: number;
   communityRequests: number;
   studentFeedbackAvg: number;
-  upcomingReleases: KnowledgePackage[];
+  upcomingReleases: ContentKnowledgePackage[];
   bottleneck: string;
   missionProgress: number;
 }

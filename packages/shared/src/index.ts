@@ -85,6 +85,7 @@ export type {
 
   // Knowledge Types
   KnowledgeObject,
+  KnowledgePackage,
   Concept,
   Definition,
   Example,

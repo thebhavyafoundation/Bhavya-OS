@@ -33,7 +33,7 @@ export interface Repository {
   updated_at: string;
 }
 
-export interface KnowledgePackage {
+export interface GitHubKnowledgePackage {
   id: string;
   repository_id: string | null;
   category: string;
@@ -200,7 +200,7 @@ export interface InstitutionalMemory {
 }
 
 export type RingType = "adopt" | "trial" | "assess" | "hold";
-export type Priority = "low" | "medium" | "high" | "critical";
+export type { Priority } from "@bhavya/shared";
 export type RecommendationStatus =
   "pending" | "accepted" | "rejected" | "deferred";
 export type EngineeringMaturity =

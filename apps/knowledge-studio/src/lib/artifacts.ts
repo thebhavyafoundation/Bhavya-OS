@@ -1,6 +1,6 @@
 import { getDb } from "./db";
 
-export interface Artifact {
+export interface KnowledgeStudioArtifact {
   id: string;
   type: string;
   data: any;
@@ -19,7 +19,7 @@ export interface PipelineResult {
   planId: string;
   goal: string;
   status: string;
-  artifacts: Artifact[];
+  artifacts: KnowledgeStudioArtifact[];
   startedAt: string;
   completedAt: string | null;
   totalDurationMs: number | null;

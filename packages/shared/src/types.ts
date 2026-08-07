@@ -572,6 +572,9 @@ export interface Exercise {
   answer?: string;
 }
 
+/** KnowledgePackage — canonical name for compiled artifact bundles (alias for EducationalPackage) */
+export type KnowledgePackage = EducationalPackage;
+
 /** Educational Knowledge Package — compiled bundle of learning artifacts */
 export interface EducationalPackage {
   id: string;

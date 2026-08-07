@@ -1,22 +1,82 @@
-// Bhavya Runtime Protocol (BRP) Types
-// Every engine understands these types.
+/**
+ * Bhavya Runtime Protocol (BRP) Types
+ *
+ * Kernel-specific types for execution, idempotency, and registry.
+ * All shared domain types (Workflow, Event, Memory, Goal, Task, Agent, etc.)
+ * are imported from @bhavya/shared — the single source of truth.
+ */
 
-// ─── Core Identifiers ───────────────────────────────────────────────
+import type {
+  // Core Identifiers
+  AgentId,
+  TaskId,
+  WorkflowId,
+  EventId,
+  MemoryId,
+  GoalId,
+  PlanId,
+  ExecutionId,
+  CorrelationId,
 
-export type AgentId = string;
-export type TaskId = string;
-export type WorkflowId = string;
-export type EventId = string;
-export type MemoryId = string;
-export type GoalId = string;
-export type PlanId = string;
-export type RegistryId = string;
-export type ExecutionId = string;
-export type CorrelationId = string;
+  // Shared Domain Types (canonical definitions)
+  Workflow,
+  WorkflowStep,
+  WorkflowStatus,
+  WorkflowTrigger,
+  Agent,
+  AgentStatus,
+  Task,
+  TaskStatus,
+  Event as BhavyaEvent,
+  EventHandler,
+  Memory as MemoryEntry,
+  MemoryType,
+  Goal,
+  Priority,
+  Plan,
+  PlanStep,
+  PlanStatus,
+  Permission,
+  Schema,
+  Artifact,
+} from "@bhavya/shared";
 
-// ─── Execution Context ──────────────────────────────────────────────
-// Shared context across all events, tasks, workflows, and memory updates.
-// Makes debugging and observability possible.
+// Re-export shared types so existing kernel consumers don't break
+export type {
+  AgentId,
+  TaskId,
+  WorkflowId,
+  EventId,
+  MemoryId,
+  GoalId,
+  PlanId,
+  ExecutionId,
+  CorrelationId,
+  Workflow,
+  WorkflowStep,
+  WorkflowStatus,
+  WorkflowTrigger,
+  Agent,
+  AgentStatus,
+  Task,
+  TaskStatus,
+  MemoryType,
+  Goal,
+  Priority,
+  Plan,
+  PlanStep,
+  PlanStatus,
+  Permission,
+  Schema,
+  Artifact,
+};
+
+// Re-export shared types under kernel-preferred aliases
+export type Event = BhavyaEvent;
+export type EventHandler_ = EventHandler;
+export type MemoryEntry = MemoryEntry;
+
+// ─── BRP-Specific Types (not in @bhavya/shared) ────────────────────
 
 export interface ExecutionContext {
   executionId: ExecutionId;
@@ -47,9 +107,6 @@ export type ExecutionState =
   | 'cancelled'
   | 'retrying';
 
-// ─── Idempotency ────────────────────────────────────────────────────
-// Tracks what has already been executed to prevent duplicate work.
-
 export interface IdempotencyKey {
   key: string;
   executionId: ExecutionId;
@@ -72,21 +129,6 @@ export interface ExecutionRecord {
   error?: string;
 }
 
-// ─── Agent ──────────────────────────────────────────────────────────
-
-export interface Agent {
-  id: AgentId;
-  name: string;
-  role: string;
-  description: string;
-  capabilities: Capability[];
-  permissions: Permission[];
-  status: AgentStatus;
-  metadata: Record<string, unknown>;
-}
-
-export type AgentStatus = 'idle' | 'busy' | 'error' | 'offline';
-
 export interface Capability {
   name: string;
   description: string;
@@ -94,122 +136,8 @@ export interface Capability {
   outputs: Schema[];
 }
 
-// ─── Task ───────────────────────────────────────────────────────────
-
-export interface Task {
-  id: TaskId;
-  type: string;
-  goal: string;
-  input: Record<string, unknown>;
-  output?: Record<string, unknown>;
-  status: TaskStatus;
-  assignee?: AgentId;
-  dependencies: TaskId[];
-  events: EventId[];
-  context?: ExecutionContext;
-  createdAt: Date;
-  updatedAt: Date;
-  completedAt?: Date;
-  error?: Error;
-}
-
-export type TaskStatus = 'pending' | 'queued' | 'running' | 'completed' | 'failed' | 'cancelled';
-
-// ─── Workflow ───────────────────────────────────────────────────────
-
-export interface Workflow {
-  id: WorkflowId;
-  name: string;
-  description: string;
-  trigger: WorkflowTrigger;
-  steps: WorkflowStep[];
-  status: WorkflowStatus;
-}
-
-export type WorkflowStatus = 'active' | 'inactive' | 'draft';
-
-export interface WorkflowTrigger {
-  type: 'manual' | 'event' | 'schedule' | 'webhook';
-  event?: string;
-  schedule?: string;
-}
-
-export interface WorkflowStep {
-  name: string;
-  action: string;
-  agent?: AgentId;
-  inputs?: Record<string, unknown>;
-  outputs?: Record<string, unknown>;
-  onError?: 'continue' | 'stop' | 'retry';
-  idempotencyKey?: string;
-}
-
-// ─── Event ──────────────────────────────────────────────────────────
-
-export interface Event {
-  id: EventId;
-  type: string;
-  source: string;
-  payload: Record<string, unknown>;
-  timestamp: Date;
-  metadata: Record<string, unknown>;
-  context?: ExecutionContext;
-}
-
-export type EventHandler = (event: Event) => Promise<void>;
-
-// ─── Memory ─────────────────────────────────────────────────────────
-
-export interface MemoryEntry {
-  id: MemoryId;
-  type: MemoryType;
-  content: string;
-  context?: string;
-  source?: string;
-  confidence?: number;
-  tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
-  expiresAt?: Date;
-}
-
-export type MemoryType = 'project' | 'person' | 'knowledge' | 'architecture' | 'history' | 'bug' | 'lesson';
-
-// ─── Goal & Plan (BRP) ─────────────────────────────────────────────
-
-export interface Goal {
-  id: GoalId;
-  description: string;
-  priority: Priority;
-  deadline?: Date;
-  constraints: string[];
-  metadata: Record<string, unknown>;
-}
-
-export type Priority = 'critical' | 'high' | 'medium' | 'low';
-
-export interface Plan {
-  id: PlanId;
-  goalId: GoalId;
-  steps: PlanStep[];
-  status: PlanStatus;
-  context?: ExecutionContext;
-  createdAt: Date;
-}
-
-export type PlanStatus = 'draft' | 'approved' | 'executing' | 'completed' | 'failed';
-
-export interface PlanStep {
-  name: string;
-  task: Task;
-  dependencies: number[];
-  estimatedDuration?: number;
-}
-
-// ─── Registry ───────────────────────────────────────────────────────
-
 export interface RegistryEntry {
-  id: RegistryId;
+  id: string;
   type: RegistryType;
   name: string;
   path: string;
@@ -218,25 +146,6 @@ export interface RegistryEntry {
 }
 
 export type RegistryType = 'agent' | 'workflow' | 'event' | 'memory' | 'command' | 'prompt' | 'template' | 'schema' | 'policy';
-
-// ─── Permission ─────────────────────────────────────────────────────
-
-export interface Permission {
-  resource: string;
-  actions: string[];
-  conditions?: Record<string, unknown>;
-}
-
-// ─── Schema (for validation) ────────────────────────────────────────
-
-export interface Schema {
-  type: string;
-  properties?: Record<string, Schema>;
-  required?: string[];
-  description?: string;
-}
-
-// ─── Health ─────────────────────────────────────────────────────────
 
 export interface HealthStatus {
   status: 'healthy' | 'degraded' | 'unhealthy';
@@ -251,8 +160,6 @@ export interface ComponentHealth {
   latency?: number;
 }
 
-// ─── Kernel Configuration ───────────────────────────────────────────
-
 export interface KernelConfig {
   root: string;
   config?: string;
@@ -265,17 +172,6 @@ export interface ModuleConfig {
   enabled: boolean;
   options?: Record<string, unknown>;
 }
-
-// ─── Artifact (tangible output) ─────────────────────────────────────
-
-export interface Artifact {
-  path: string;
-  action: 'created' | 'updated' | 'deleted';
-  content?: string;
-  metadata: Record<string, unknown>;
-}
-
-// ─── Execution Report ───────────────────────────────────────────────
 
 export interface ExecutionReport {
   executionId: ExecutionId;

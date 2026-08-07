@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getDb } from './db';
-import type { KnowledgePackage, MediaAsset, ProductionMetrics, KPStatus, ProductionStage, MediaAssetType } from './types';
+import type { ContentKnowledgePackage, MediaAsset, ProductionMetrics, KPStatus, ProductionStage, MediaAssetType } from './types';
 
 // ─── Schema ─────────────────────────────────────────────────
 
@@ -62,7 +62,7 @@ export function createKP(input: {
   assignee?: string;
   dueDate?: string;
   concepts?: number;
-}): KnowledgePackage {
+}): ContentKnowledgePackage {
   ensureSchema();
   const db = getDb();
   const id = uuidv4();
@@ -76,7 +76,7 @@ export function createKP(input: {
   return getKP(id)!;
 }
 
-export function getKP(id: string): KnowledgePackage | null {
+export function getKP(id: string): ContentKnowledgePackage | null {
   ensureSchema();
   const db = getDb();
   const row = db.prepare('SELECT * FROM knowledge_packages WHERE id = ?').get(id) as any;
@@ -84,7 +84,7 @@ export function getKP(id: string): KnowledgePackage | null {
   return mapRowToKP(row);
 }
 
-export function listKPs(filter?: { status?: KPStatus; level?: string; stage?: ProductionStage }): KnowledgePackage[] {
+export function listKPs(filter?: { status?: KPStatus; level?: string; stage?: ProductionStage }): ContentKnowledgePackage[] {
   ensureSchema();
   const db = getDb();
   let query = 'SELECT * FROM knowledge_packages';
@@ -101,7 +101,7 @@ export function listKPs(filter?: { status?: KPStatus; level?: string; stage?: Pr
   return db.prepare(query).all(...params).map(mapRowToKP);
 }
 
-export function updateKPStatus(id: string, status: KPStatus, stage?: ProductionStage): KnowledgePackage | null {
+export function updateKPStatus(id: string, status: KPStatus, stage?: ProductionStage): ContentKnowledgePackage | null {
   ensureSchema();
   const db = getDb();
   const now = new Date().toISOString();
@@ -116,7 +116,7 @@ export function updateKPStatus(id: string, status: KPStatus, stage?: ProductionS
   return getKP(id);
 }
 
-export function advanceKP(id: string): KnowledgePackage | null {
+export function advanceKP(id: string): ContentKnowledgePackage | null {
   ensureSchema();
   const kp = getKP(id);
   if (!kp) return null;
@@ -282,7 +282,7 @@ export function getProductionMetrics(): ProductionMetrics {
 
 // ─── Helpers ────────────────────────────────────────────────
 
-function mapRowToKP(row: any): KnowledgePackage {
+function mapRowToKP(row: any): ContentKnowledgePackage {
   return {
     id: row.id,
     title: row.title,

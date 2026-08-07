@@ -11,6 +11,25 @@
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+import type {
+  MemoryPriority,
+  MemoryStatus,
+  MemoryRelation,
+  MemoryQuery,
+  MemorySearchResult,
+  MemoryStats,
+} from "@bhavya/shared";
+
+export type {
+  MemoryPriority,
+  MemoryStatus,
+  MemoryRelation,
+  MemoryQuery,
+  MemorySearchResult,
+  MemoryStats,
+};
+
+/** Runtime MemoryType — subset for engine-specific use */
 export type MemoryType =
   | "decision"
   | "learning"
@@ -23,10 +42,7 @@ export type MemoryType =
   | "conversation"
   | "context";
 
-export type MemoryPriority = "critical" | "high" | "medium" | "low";
-
-export type MemoryStatus = "active" | "archived" | "deprecated" | "superseded";
-
+/** Runtime Memory — extends shared with execution state */
 export interface Memory {
   id: string;
   type: MemoryType;
@@ -43,40 +59,6 @@ export interface Memory {
   createdAt: Date;
   updatedAt: Date;
   expiresAt?: Date;
-}
-
-export interface MemoryRelation {
-  targetId: string;
-  type: "supports" | "contradicts" | "extends" | "depends_on" | "related_to";
-  strength: number;
-}
-
-export interface MemoryQuery {
-  text?: string;
-  types?: MemoryType[];
-  tags?: string[];
-  priority?: MemoryPriority;
-  status?: MemoryStatus;
-  dateRange?: { start: Date; end: Date };
-  limit?: number;
-  offset?: number;
-  minRelevance?: number;
-}
-
-export interface MemorySearchResult {
-  memory: Memory;
-  score: number;
-  explanation: string;
-}
-
-export interface MemoryStats {
-  totalMemories: number;
-  byType: Record<MemoryType, number>;
-  byPriority: Record<MemoryPriority, number>;
-  byStatus: Record<MemoryStatus, number>;
-  avgAccessCount: number;
-  oldestMemory: Date;
-  newestMemory: Date;
 }
 
 // ─── Engine ───────────────────────────────────────────────────────────────────

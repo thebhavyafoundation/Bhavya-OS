@@ -8,18 +8,28 @@
  * @license MIT
  */
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Types (imported from @bhavya/shared) ────────────────────────────────────
 
-export type PlanStatus =
-  "draft" | "active" | "on-hold" | "completed" | "cancelled";
+import type {
+  PlanStatus,
+  GoalStatus,
+  KPI,
+  Milestone,
+  Resource,
+} from "@bhavya/shared";
 
-export type GoalStatus =
-  "pending" | "in-progress" | "achieved" | "missed" | "cancelled";
+export type {
+  PlanStatus,
+  GoalStatus,
+  KPI,
+  Milestone,
+  Resource,
+};
 
 export type GoalPriority = "critical" | "high" | "medium" | "low";
-
 export type ResourceType = "human" | "financial" | "technical" | "temporal";
 
+/** Runtime Plan — extends shared with execution state */
 export interface Plan {
   id: string;
   name: string;
@@ -35,6 +45,7 @@ export interface Plan {
   updatedAt: Date;
 }
 
+/** Runtime Goal — extends shared with description */
 export interface Goal {
   id: string;
   name: string;
@@ -46,35 +57,6 @@ export interface Goal {
   owner: string;
   progress: number;
   metadata: Record<string, unknown>;
-}
-
-export interface KPI {
-  id: string;
-  name: string;
-  target: number;
-  current: number;
-  unit: string;
-  trend: "up" | "down" | "stable";
-}
-
-export interface Milestone {
-  id: string;
-  name: string;
-  description: string;
-  dueDate: Date;
-  completedAt?: Date;
-  goals: string[];
-  status: "pending" | "achieved" | "missed";
-}
-
-export interface Resource {
-  id: string;
-  name: string;
-  type: ResourceType;
-  capacity: number;
-  allocated: number;
-  cost: number;
-  unit: string;
 }
 
 export interface PlanTimeline {

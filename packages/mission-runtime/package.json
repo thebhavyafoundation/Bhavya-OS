@@ -24,5 +24,7 @@
     "./localization": "./src/localization/index.ts",
     "./notifications": "./src/notifications/index.ts"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@bhavya/shared": "workspace:*"
+  }
 }

@@ -8,63 +8,32 @@
  * @license MIT
  */
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Types (re-exported from @bhavya/shared) ────────────────────────────────────
 
-export type EventPriority = "critical" | "high" | "medium" | "low";
+import type {
+  BhavyaEvent,
+  EventPriority,
+  EventStatus,
+  EventHandler,
+  EventSubscription,
+  EventFilter,
+  EventBusConfig,
+  EventBusMetrics,
+} from "@bhavya/shared";
 
-export type EventStatus =
-  "pending" | "processing" | "completed" | "failed" | "retrying";
+export type {
+  BhavyaEvent,
+  EventPriority,
+  EventStatus,
+  EventHandler,
+  EventSubscription,
+  EventFilter,
+  EventBusConfig,
+  EventBusMetrics,
+};
 
-export interface Event {
-  id: string;
-  type: string;
-  source: string;
-  payload: Record<string, unknown>;
-  priority: EventPriority;
-  status: EventStatus;
-  metadata: Record<string, unknown>;
-  retryCount: number;
-  maxRetries: number;
-  createdAt: Date;
-  processedAt?: Date;
-  failedAt?: Date;
-  error?: string;
-}
-
-export interface EventSubscription {
-  id: string;
-  eventType: string;
-  handler: EventHandler;
-  filter?: EventFilter;
-  priority: number;
-  once: boolean;
-  createdAt: Date;
-}
-
-export interface EventFilter {
-  source?: string;
-  priority?: EventPriority[];
-  payloadFilter?: (payload: Record<string, unknown>) => boolean;
-}
-
-export type EventHandler = (event: Event) => Promise<void> | void;
-
-export interface EventBusConfig {
-  maxRetries: number;
-  retryDelay: number;
-  maxQueueSize: number;
-  persistenceEnabled: boolean;
-  persistencePath?: string;
-}
-
-export interface EventBusMetrics {
-  totalEvents: number;
-  eventsByType: Record<string, number>;
-  eventsByPriority: Record<EventPriority, number>;
-  eventsByStatus: Record<EventStatus, number>;
-  avgProcessingTime: number;
-  errorRate: number;
-}
+// Local alias for runtime compatibility
+export type Event = BhavyaEvent;
 
 // ─── Engine ───────────────────────────────────────────────────────────────────
 
