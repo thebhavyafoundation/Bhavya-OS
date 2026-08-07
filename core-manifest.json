@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "bhavya-os-core",
+  "version": "1.0.0",
+  "frozen": "2026-08-07",
+  "description": "Bhavya OS Platform Core — frozen, stable, immutable",
+  "stability": "stable",
+  "breakingChangePolicy": "Major version bump required for any change",
+  "deprecationPeriod": 3,
+  "core": {
+    "kernel": {
+      "version": "3.1.0",
+      "description": "Core kernel with BRP types and registry",
+      "stability": "frozen",
+      "exports": ["types", "registry", "observability"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "runtime": {
+      "version": "0.1.0",
+      "description": "Engine pipeline and orchestration",
+      "stability": "frozen",
+      "exports": ["engines", "pipeline", "managers"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "shared": {
+      "version": "1.0.0",
+      "description": "Canonical type definitions (100+ types)",
+      "stability": "frozen",
+      "exports": ["types", "enums", "interfaces"],
+      "dependencies": []
+    },
+    "platform-ui": {
+      "version": "0.1.0",
+      "description": "Canonical UI component library",
+      "stability": "frozen",
+      "exports": ["components", "themes", "tokens"],
+      "dependencies": []
+    },
+    "events": {
+      "version": "0.1.0",
+      "description": "Event bus and event system",
+      "stability": "frozen",
+      "exports": ["event-bus", "event-types"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "config": {
+      "version": "0.1.0",
+      "description": "Platform configuration management",
+      "stability": "frozen",
+      "exports": ["config-manager"],
+      "dependencies": []
+    },
+    "capability-registry": {
+      "version": "1.0.0",
+      "description": "Centralized capability registry",
+      "stability": "frozen",
+      "exports": ["registry", "capabilities"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "plugin-manager": {
+      "version": "1.0.0",
+      "description": "Plugin lifecycle management",
+      "stability": "frozen",
+      "exports": ["manager", "lifecycle"],
+      "dependencies": ["@bhavya/shared", "@bhavya/events"]
+    },
+    "content-core": {
+      "version": "0.6.0",
+      "description": "Content authoring pipeline",
+      "stability": "frozen",
+      "exports": ["pipeline", "validation", "citation"],
+      "dependencies": []
+    },
+    "knowledge-graph": {
+      "version": "1.0.0",
+      "description": "Knowledge graph with 17 entity types",
+      "stability": "frozen",
+      "exports": ["graph", "traversal", "validation"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "mission-runtime": {
+      "version": "0.6.0",
+      "description": "Mission execution runtime",
+      "stability": "frozen",
+      "exports": ["mission", "events"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "agent-engine": {
+      "version": "0.1.0",
+      "description": "Agent lifecycle management",
+      "stability": "frozen",
+      "exports": ["agent", "capabilities"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "types": {
+      "version": "0.1.0",
+      "description": "Type re-exports from shared",
+      "stability": "frozen",
+      "exports": ["re-exports"],
+      "dependencies": ["@bhavya/shared"]
+    },
+    "sdk": {
+      "version": "0.1.0",
+      "description": "Extension SDK for developers",
+      "stability": "frozen",
+      "exports": ["sdk", "apis"],
+      "dependencies": ["@bhavya/shared", "@bhavya/mission-runtime"]
+    },
+    "constitution": {
+      "version": "1.0.0",
+      "description": "Constitutional documents",
+      "stability": "frozen",
+      "exports": ["documents"],
+      "dependencies": []
+    }
+  },
+  "deprecated": {
+    "bdl": {
+      "replacement": "@bhavya/design-system",
+      "consumers": 0
+    },
+    "ui": {
+      "replacement": "@bhavya/platform-ui",
+      "consumers": 0
+    }
+  },
+  "boundaryRules": {
+    "coreMayNotImportFrom": ["apps/*", "deprecated/*"],
+    "appsMayImportFrom": ["core/*", "extensions/*"],
+    "extensionsMayImportFrom": ["core/*"],
+    "noCircularImports": true
+  },
+  "validation": {
+    "qualityGates": [
+      "Shared package has 50+ types",
+      "No duplicate type definitions",
+      "No deprecated package imports",
+      "No circular dependencies",
+      "Constitution docs exist"
+    ],
+    "dependencyRules": "scripts/enforce-deps.mjs",
+    "contractValidation": "contracts/"
+  }
+}
