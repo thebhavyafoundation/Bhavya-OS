@@ -19,13 +19,13 @@ export interface Milestone {
   order: number;
   title: string;
   description: string;
-  tasks: Task[];
+  tasks: ProjectTask[];
   reflection?: Reflection;
   status: "locked" | "available" | "in-progress" | "completed";
   evidence?: string;
 }
 
-export interface Task {
+export interface ProjectTask {
   id: string;
   title: string;
   description: string;

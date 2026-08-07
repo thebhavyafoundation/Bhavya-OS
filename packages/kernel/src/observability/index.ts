@@ -20,7 +20,7 @@ export interface ObservabilityConfig {
 export interface Dashboard {
   kernel: KernelStatus;
   agents: AgentStatus[];
-  workflows: WorkflowStatus[];
+  workflows: WorkflowStatusEntry[];
   memory: MemoryStatus;
   events: EventStatus;
   scheduler: SchedulerStatus;
@@ -43,7 +43,7 @@ export interface AgentStatus {
   status: string;
 }
 
-export interface WorkflowStatus {
+export interface WorkflowStatusEntry {
   id: string;
   name: string;
   status: string;
