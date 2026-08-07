@@ -2,6 +2,7 @@
   "name": "@bhavya/ui",
   "version": "0.1.0",
   "private": true,
+  "deprecated": "DEPRECATED: Use @bhavya/platform-ui instead. This package is a dead bridge to @bhavya/bdl which is also deprecated.",
   "main": "src/index.ts",
   "dependencies": {
     "@bhavya/bdl": "workspace:*"

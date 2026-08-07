@@ -403,4 +403,27 @@ Months 5-6: Platform Hardening
 
 ---
 
+## 9. Consolidation Progress (Wave 3)
+
+### Completed
+- **Mission 1:** Type migration — 33 duplicate type definitions eliminated across 12 packages
+  - `@bhavya/shared` = canonical source for all domain types
+  - `@bhavya/kernel`: 14 duplicates removed, imports from shared
+  - `@bhavya/types`: Barrel rewritten to re-export from shared
+  - `@bhavya/runtime`: 4 engines migrated (event-bus, workflow, memory, planning)
+  - `@bhavya/mission-runtime`: BhavyaEvent migrated
+  - App-level renames: intelligence, project-runtime, github-os, ioc, knowledge-studio, social-os
+- **Missions 3-5:** Event/workflow/memory systems consolidated to import from shared
+- **Mission 2 (partial):** UI consolidation — `bdl` and `ui` deprecated, `platform-ui` confirmed canonical per Constitution 05
+
+### In Progress
+- **Mission 2:** UI migration — 9 `ui` consumers need migration to `platform-ui`
+- **Mission 6:** Knowledge graph integration
+- **Mission 7:** Dependency enforcement
+- **Mission 8:** Quality gates
+- **Mission 9:** Architecture visualization
+- **Mission 10:** Consolidation report
+
+---
+
 _This plan is the execution roadmap for constitutional reorganization. Every phase references the constitutional documents in `docs/constitution/`. No features are built until consolidation is complete._
