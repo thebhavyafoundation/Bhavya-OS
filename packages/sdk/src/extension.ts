@@ -7,6 +7,7 @@ import type {
   PluginConfig,
 } from "@bhavya/plugin-runtime";
 import type { BhavyaEvent, EventHandler } from "@bhavya/events";
+import type { WorkflowStatus as SharedWorkflowStatus } from "@bhavya/shared";
 
 // ─── Application API ────────────────────────────────────────────────
 
@@ -55,17 +56,12 @@ export interface ConfigurationAPI {
 
 export interface WorkflowAPI {
   start: (workflowId: string, input: Record<string, unknown>) => Promise<string>;
-  getStatus: (executionId: string) => Promise<WorkflowStatus>;
+  getStatus: (executionId: string) => Promise<SharedWorkflowStatus>;
   cancel: (executionId: string) => Promise<void>;
 }
 
-export interface WorkflowStatus {
-  executionId: string;
-  status: "pending" | "running" | "completed" | "failed" | "cancelled";
-  progress?: number;
-  result?: unknown;
-  error?: string;
-}
+// Re-export shared type for convenience
+export type WorkflowStatus = SharedWorkflowStatus;
 
 // ─── Knowledge API ──────────────────────────────────────────────────
 
