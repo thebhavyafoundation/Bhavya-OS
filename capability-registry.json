@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "bhavya-os-capabilities",
+  "version": "1.0.0",
+  "generated": "2026-08-07",
+  "description": "Centralized registry of all platform capabilities",
+  "capabilities": {
+    "core": [
+      {
+        "id": "core:kernel",
+        "name": "Kernel",
+        "owner": "core-team",
+        "contractVersion": "3.1.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["read:state", "write:state"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/kernel/README.md"
+      },
+      {
+        "id": "core:shared",
+        "name": "Shared Types",
+        "owner": "core-team",
+        "contractVersion": "1.0.0",
+        "dependencies": [],
+        "permissions": [],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/shared/README.md"
+      },
+      {
+        "id": "core:runtime",
+        "name": "Runtime Engine",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["execute:workflow"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/runtime/README.md"
+      },
+      {
+        "id": "core:platform-ui",
+        "name": "Platform UI",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": [],
+        "permissions": ["access:ui"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/platform-ui/README.md"
+      },
+      {
+        "id": "core:events",
+        "name": "Event Bus",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["read:events", "write:events"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/events/README.md"
+      },
+      {
+        "id": "core:config",
+        "name": "Configuration",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": [],
+        "permissions": ["read:config", "write:config"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/config/README.md"
+      },
+      {
+        "id": "core:plugin-runtime",
+        "name": "Plugin Runtime",
+        "owner": "core-team",
+        "contractVersion": "1.0.0",
+        "dependencies": ["core:shared", "core:events"],
+        "permissions": ["read:state", "write:state"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/plugin-runtime/README.md"
+      },
+      {
+        "id": "core:capability-registry",
+        "name": "Capability Registry",
+        "owner": "core-team",
+        "contractVersion": "1.0.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["read:state", "write:state"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/capability-registry/README.md"
+      },
+      {
+        "id": "core:content-core",
+        "name": "Content Pipeline",
+        "owner": "core-team",
+        "contractVersion": "0.6.0",
+        "dependencies": [],
+        "permissions": ["execute:workflow"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/content-core/README.md"
+      },
+      {
+        "id": "core:knowledge-graph",
+        "name": "Knowledge Graph",
+        "owner": "core-team",
+        "contractVersion": "1.0.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["read:state", "write:state"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/knowledge-graph/README.md"
+      },
+      {
+        "id": "core:mission-runtime",
+        "name": "Mission Runtime",
+        "owner": "core-team",
+        "contractVersion": "0.6.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["execute:workflow"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/mission-runtime/README.md"
+      },
+      {
+        "id": "core:agent-engine",
+        "name": "Agent Engine",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:shared"],
+        "permissions": ["execute:workflow"],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/agent-engine/README.md"
+      },
+      {
+        "id": "core:sdk",
+        "name": "Extension SDK",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:shared", "core:mission-runtime"],
+        "permissions": [],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/sdk/README.md"
+      },
+      {
+        "id": "core:constitution",
+        "name": "Constitution",
+        "owner": "core-team",
+        "contractVersion": "1.0.0",
+        "dependencies": [],
+        "permissions": [],
+        "lifecycle": "stable",
+        "health": "healthy",
+        "documentation": "packages/constitution/README.md"
+      }
+    ],
+    "extensions": [
+      {
+        "id": "ext:maps",
+        "name": "Maps",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:platform-ui"],
+        "permissions": ["access:ui"],
+        "lifecycle": "stable",
+        "health": "healthy"
+      },
+      {
+        "id": "ext:charts",
+        "name": "Charts",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:platform-ui"],
+        "permissions": ["access:ui"],
+        "lifecycle": "stable",
+        "health": "healthy"
+      },
+      {
+        "id": "ext:docs",
+        "name": "Docs",
+        "owner": "core-team",
+        "contractVersion": "0.1.0",
+        "dependencies": ["core:platform-ui"],
+        "permissions": ["access:ui"],
+        "lifecycle": "stable",
+        "health": "healthy"
+      }
+    ]
+  },
+  "metadata": {
+    "totalCapabilities": 17,
+    "coreCapabilities": 14,
+    "extensionCapabilities": 3,
+    "allHealthy": true,
+    "lastScan": "2026-08-07T12:00:00Z"
+  }
+}
