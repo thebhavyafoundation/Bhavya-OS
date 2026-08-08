@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 
 const TYPES = ["All", "Paper", "Dataset", "Tutorial"] as const;
 const TOPICS = ["All", "ML", "DL", "NLP", "CV", "Robotics"] as const;
