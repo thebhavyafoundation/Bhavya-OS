@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 
-// Animated Knowledge Graph Component
 function KnowledgeGraphAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -189,26 +188,21 @@ function KnowledgeGraphAnimation() {
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
 
-      // Update positions
       nodes.forEach((node) => {
         node.x += node.vx;
         node.y += node.vy;
-
         if (node.x < 0 || node.x > w) node.vx *= -1;
         if (node.y < 0 || node.y > h) node.vy *= -1;
-
         node.x = Math.max(0, Math.min(w, node.x));
         node.y = Math.max(0, Math.min(h, node.y));
       });
 
-      // Draw edges
       edges.forEach((edge) => {
         const from = nodes[edge.from];
         const to = nodes[edge.to];
         const dx = to.x - from.x;
         const dy = to.y - from.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
         if (dist < 200) {
           const opacity = (1 - dist / 200) * 0.3 * edge.strength;
           ctx.beginPath();
@@ -220,14 +214,12 @@ function KnowledgeGraphAnimation() {
         }
       });
 
-      // Draw nodes
       nodes.forEach((node) => {
         const dx = mouseX - node.x;
         const dy = mouseY - node.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const glow = dist < 100 ? (1 - dist / 100) * 0.5 : 0;
 
-        // Glow
         if (glow > 0) {
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
@@ -237,13 +229,11 @@ function KnowledgeGraphAnimation() {
           ctx.fill();
         }
 
-        // Node
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
         ctx.fill();
 
-        // Label
         if (dist < 150 || node.radius >= 3) {
           ctx.font = "11px Inter, sans-serif";
           ctx.fillStyle = `rgba(245, 241, 230, ${dist < 150 ? 1 - dist / 150 : 0.6})`;
@@ -273,19 +263,16 @@ function KnowledgeGraphAnimation() {
   );
 }
 
-// School Card Component
 function SchoolCard({
   name,
   icon,
   description,
   color,
-  courseCount,
 }: {
   name: string;
   icon: string;
   description: string;
   color: string;
-  courseCount: number;
 }) {
   const [hovered, setHovered] = useState(false);
 
@@ -309,31 +296,25 @@ function SchoolCard({
       <p className="text-sm text-[#8a7359] leading-relaxed mb-4">
         {description}
       </p>
-      <div className="flex items-center justify-between">
-        <span className="text-xs text-[#8a7359]">{courseCount} courses</span>
-        <span
-          className="text-xs font-medium transition-colors duration-300"
-          style={{ color: hovered ? color : "#8a7359" }}
-        >
-          Explore →
-        </span>
-      </div>
+      <span
+        className="text-xs font-medium transition-colors duration-300"
+        style={{ color: hovered ? color : "#8a7359" }}
+      >
+        Explore →
+      </span>
     </div>
   );
 }
 
-// Learning Path Card Component
 function PathCard({
   title,
   duration,
   difficulty,
-  progress,
   modules,
 }: {
   title: string;
   duration: string;
   difficulty: string;
-  progress: number;
   modules: number;
 }) {
   return (
@@ -345,55 +326,14 @@ function PathCard({
         <span className="text-xs text-[#8a7359]">{duration}</span>
       </div>
       <h3 className="text-base font-semibold text-[#f5f1e6] mb-3">{title}</h3>
-      <div className="flex items-center gap-2 mb-4">
-        <div className="flex-1 h-1.5 bg-[#1a2a1f] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[#c9a227] rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <span className="text-xs text-[#8a7359]">{progress}%</span>
-      </div>
       <div className="flex items-center justify-between text-xs text-[#8a7359]">
         <span>{modules} modules</span>
-        <span className="text-[#c9a227]">Continue →</span>
+        <span className="text-[#c9a227]">View →</span>
       </div>
     </div>
   );
 }
 
-// Research Card Component
-function ResearchCard({
-  title,
-  authors,
-  abstract,
-  citations,
-  year,
-}: {
-  title: string;
-  authors: string;
-  abstract: string;
-  citations: number;
-  year: number;
-}) {
-  return (
-    <div className="p-6 rounded-xl border border-[#1a2a1f] bg-[#111916] hover:border-[#c9a227]/30 transition-all duration-300">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-xs text-[#8a7359]">{year}</span>
-        <span className="text-xs text-[#c9a227]">{citations} citations</span>
-      </div>
-      <h3 className="text-base font-semibold text-[#f5f1e6] mb-2 leading-snug">
-        {title}
-      </h3>
-      <p className="text-xs text-[#8a7359] mb-3">{authors}</p>
-      <p className="text-sm text-[#8a7359]/80 leading-relaxed line-clamp-3">
-        {abstract}
-      </p>
-    </div>
-  );
-}
-
-// Roadmap Stage Component
 function RoadmapStage({
   number,
   title,
@@ -434,7 +374,6 @@ function RoadmapStage({
   );
 }
 
-// Main Homepage Component
 export default function FlagshipHomepage() {
   const [activeStage, setActiveStage] = useState(0);
 
@@ -451,84 +390,72 @@ export default function FlagshipHomepage() {
       icon: "🧠",
       description: "Core AI concepts, Python, mathematics",
       color: "#1a3a2a",
-      courseCount: 8,
     },
     {
       name: "Machine Learning",
       icon: "📊",
       description: "Supervised, unsupervised, reinforcement",
       color: "#1a3a2a",
-      courseCount: 6,
     },
     {
       name: "Deep Learning",
       icon: "🔬",
       description: "Neural networks, architectures, optimization",
       color: "#1a3a2a",
-      courseCount: 7,
     },
     {
       name: "LLM Engineering",
       icon: "💬",
       description: "Large language models, fine-tuning, deployment",
       color: "#c9a227",
-      courseCount: 5,
     },
     {
       name: "AI Agents",
       icon: "🤖",
       description: "Autonomous systems, tool use, planning",
       color: "#c9a227",
-      courseCount: 4,
     },
     {
       name: "Robotics",
       icon: "🦾",
       description: "Embodied AI, control systems, perception",
       color: "#8a7359",
-      courseCount: 5,
     },
     {
       name: "Data Engineering",
       icon: "🗄️",
       description: "Pipelines, infrastructure, MLOps",
       color: "#8a7359",
-      courseCount: 6,
     },
     {
       name: "Mathematics",
       icon: "📐",
       description: "Linear algebra, calculus, probability",
       color: "#1a3a2a",
-      courseCount: 4,
     },
     {
       name: "Research",
       icon: "📝",
       description: "Methodology, papers, reproducibility",
       color: "#c9a227",
-      courseCount: 3,
     },
     {
       name: "AI Systems",
       icon: "⚙️",
       description: "Infrastructure, deployment, scaling",
       color: "#8a7359",
-      courseCount: 5,
     },
     {
       name: "AI Safety",
       icon: "🛡️",
       description: "Alignment, ethics, governance",
       color: "#c9a227",
-      courseCount: 3,
     },
     {
       name: "Open Source",
       icon: "🌐",
       description: "Contributing, maintaining, community",
       color: "#1a3a2a",
-      courseCount: 4,
     },
   ];
 
@@ -537,84 +464,49 @@ export default function FlagshipHomepage() {
       title: "AI Foundations",
       duration: "12 weeks",
       difficulty: "Beginner",
-      progress: 0,
       modules: 8,
     },
     {
       title: "Machine Learning Engineer",
       duration: "16 weeks",
       difficulty: "Intermediate",
-      progress: 0,
       modules: 12,
     },
     {
       title: "Deep Learning Specialist",
       duration: "20 weeks",
       difficulty: "Advanced",
-      progress: 0,
       modules: 15,
     },
     {
       title: "LLM Engineer",
       duration: "14 weeks",
       difficulty: "Intermediate",
-      progress: 0,
       modules: 10,
     },
     {
       title: "AI Agent Developer",
       duration: "10 weeks",
       difficulty: "Advanced",
-      progress: 0,
       modules: 8,
     },
     {
       title: "MLOps Engineer",
       duration: "12 weeks",
       difficulty: "Intermediate",
-      progress: 0,
       modules: 9,
     },
     {
       title: "Research Scientist",
       duration: "24 weeks",
       difficulty: "Expert",
-      progress: 0,
       modules: 18,
     },
     {
       title: "AI Safety Researcher",
       duration: "16 weeks",
       difficulty: "Advanced",
-      progress: 0,
       modules: 12,
-    },
-  ];
-
-  const research = [
-    {
-      title: "Attention Is All You Need",
-      authors: "Vaswani et al.",
-      abstract:
-        "We propose a new simple network architecture, the Transformer, based solely on attention mechanisms...",
-      citations: 120000,
-      year: 2017,
-    },
-    {
-      title: "BERT: Pre-training of Deep Bidirectional Transformers",
-      authors: "Devlin et al.",
-      abstract:
-        "We introduce a new language representation model called BERT, designed to pre-train deep bidirectional representations...",
-      citations: 85000,
-      year: 2018,
-    },
-    {
-      title: "Language Models are Few-Shot Learners",
-      authors: "Brown et al.",
-      abstract:
-        "Recent work has demonstrated substantial gains on many NLP tasks by pre-training on a large corpus of text...",
-      citations: 45000,
-      year: 2020,
     },
   ];
 
@@ -658,58 +550,6 @@ export default function FlagshipHomepage() {
 
   return (
     <div className="min-h-screen bg-[#0a0f0d]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#1a2a1f] bg-[#0a0f0d]/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-              <span className="text-[#c9a227] font-bold text-sm">B</span>
-            </div>
-            <span className="text-sm font-semibold text-[#f5f1e6]">
-              Bhavya AI Institute
-            </span>
-          </Link>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/schools"
-              className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-            >
-              Schools
-            </Link>
-            <Link
-              href="/learning-paths"
-              className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-            >
-              Learning Paths
-            </Link>
-            <Link
-              href="/knowledge-graph"
-              className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-            >
-              Knowledge Graph
-            </Link>
-            <Link
-              href="/research"
-              className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-            >
-              Research
-            </Link>
-            <Link
-              href="/lab"
-              className="text-sm text-[#8a7359] hover-[#f5f1e6] transition-colors hidden md:block"
-            >
-              Lab
-            </Link>
-            <Link
-              href="/assessment"
-              className="px-4 py-2 text-sm font-medium bg-[#1a3a2a] text-[#f5f1e6] rounded-lg hover:bg-[#1a3a2a]/80 transition-colors"
-            >
-              Begin Journey
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <KnowledgeGraphAnimation />
@@ -794,31 +634,8 @@ export default function FlagshipHomepage() {
         </div>
       </section>
 
-      {/* Research Highlights */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Research
-            </p>
-            <h2 className="text-4xl font-bold text-[#f5f1e6] mb-4">
-              Foundational Research
-            </h2>
-            <p className="text-[#8a7359] max-w-2xl mx-auto">
-              Our curriculum is built on the research that shaped modern AI.
-              Every concept traces back to its source.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {research.map((paper) => (
-              <ResearchCard key={paper.title} {...paper} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Student Success Roadmap */}
-      <section className="py-24 px-6 bg-[#111916]/50">
+      <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
@@ -842,8 +659,8 @@ export default function FlagshipHomepage() {
         </div>
       </section>
 
-      {/* Faculty Vision */}
-      <section className="py-24 px-6">
+      {/* Vision */}
+      <section className="py-24 px-6 bg-[#111916]/50">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
             Vision
@@ -861,8 +678,8 @@ export default function FlagshipHomepage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-24 px-6 bg-[#111916]/50 border-y border-[#1a2a1f]">
+      {/* Stats — Real structural counts only */}
+      <section className="py-24 px-6 border-y border-[#1a2a1f]">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
           {[
             { label: "Schools", value: "12" },
@@ -897,193 +714,6 @@ export default function FlagshipHomepage() {
           </Link>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-[#1a2a1f]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <h4 className="text-sm font-semibold text-[#f5f1e6] mb-4">
-                Institution
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/about"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/faculty"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Faculty
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/research"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Research
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/open-source"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Open Source
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-[#f5f1e6] mb-4">
-                Education
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/schools"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Schools
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/learning-paths"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Learning Paths
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/lab"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    AI Lab
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/mentor"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    AI Mentor
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-[#f5f1e6] mb-4">
-                Community
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    href="/discussions"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Discussions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/events"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Events
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/portfolio"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Portfolio
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/careers"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Careers
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-[#f5f1e6] mb-4">
-                Connect
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="https://github.com/bhavya-foundation"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://twitter.com/bhavyaai"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://discord.gg/bhavya"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Discord
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/company/bhavya-ailab"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <Link
-                    href="/newsletter"
-                    className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
-                  >
-                    Newsletter
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#1a2a1f]">
-            <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-                <span className="text-[#c9a227] font-bold text-sm">B</span>
-              </div>
-              <span className="text-sm text-[#8a7359]">
-                Bhavya AI Institute — Building the future of AI education
-              </span>
-            </div>
-            <p className="text-xs text-[#8a7359]">
-              © 2026 Bhavya Foundation. Built for the next decade.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

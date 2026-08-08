@@ -128,104 +128,99 @@ export default function KnowledgeCheckPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      <nav className="sticky top-0 z-50 border-b border-border-primary bg-bg-primary/80 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link
-            href="/dashboard"
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            ← Back to Dashboard
-          </Link>
-          <span className="text-xs text-text-tertiary">
-            Question {currentQ + 1} of {check.questions.length}
-          </span>
+    <div className="max-w-2xl mx-auto px-6 py-8">
+      <div className="flex items-center justify-between mb-6">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary transition-colors"
+        >
+          ← Back to Dashboard
+        </Link>
+        <span className="text-xs text-text-tertiary">
+          Question {currentQ + 1} of {check.questions.length}
+        </span>
+      </div>
+      {/* Progress */}
+      <div className="mb-8">
+        <div className="h-1 bg-bg-tertiary rounded-full overflow-hidden">
+          <div
+            className="h-full bg-accent-blue transition-all duration-300"
+            style={{ width: `${progressPct}%` }}
+          />
         </div>
-      </nav>
+      </div>
 
-      <div className="max-w-2xl mx-auto px-6 py-12">
-        {/* Progress */}
-        <div className="mb-8">
-          <div className="h-1 bg-bg-tertiary rounded-full overflow-hidden">
-            <div
-              className="h-full bg-accent-blue transition-all duration-300"
-              style={{ width: `${progressPct}%` }}
-            />
+      {/* Question */}
+      <div className="animate-fade-in">
+        <p className="text-[10px] text-text-muted uppercase tracking-wider mb-2">
+          {question.type.replace("-", " ")}
+        </p>
+        <h2 className="text-lg font-semibold text-text-primary mb-6">
+          {question.question}
+        </h2>
+
+        {question.type === "multiple-choice" && question.options && (
+          <div className="space-y-3">
+            {question.options.map((opt, i) => (
+              <button
+                key={i}
+                onClick={() => submitAnswer(i)}
+                className="w-full text-left p-4 border border-border-primary rounded-md text-sm text-text-secondary bg-bg-secondary hover:border-border-secondary hover:text-text-primary transition-colors"
+              >
+                <span className="text-text-muted mr-3">
+                  {String.fromCharCode(65 + i)}.
+                </span>
+                {opt}
+              </button>
+            ))}
           </div>
-        </div>
+        )}
 
-        {/* Question */}
-        <div className="animate-fade-in">
-          <p className="text-[10px] text-text-muted uppercase tracking-wider mb-2">
-            {question.type.replace("-", " ")}
-          </p>
-          <h2 className="text-lg font-semibold text-text-primary mb-6">
-            {question.question}
-          </h2>
+        {question.type === "short-answer" && (
+          <div className="space-y-4">
+            <textarea
+              className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
+              placeholder="Write your answer..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.metaKey) {
+                  submitAnswer((e.target as HTMLTextAreaElement).value);
+                }
+              }}
+            />
+            <button
+              onClick={() => {
+                const textarea = document.querySelector("textarea");
+                if (textarea) submitAnswer(textarea.value);
+              }}
+              className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+            >
+              Submit Answer
+            </button>
+          </div>
+        )}
 
-          {question.type === "multiple-choice" && question.options && (
-            <div className="space-y-3">
-              {question.options.map((opt, i) => (
-                <button
-                  key={i}
-                  onClick={() => submitAnswer(i)}
-                  className="w-full text-left p-4 border border-border-primary rounded-md text-sm text-text-secondary bg-bg-secondary hover:border-border-secondary hover:text-text-primary transition-colors"
-                >
-                  <span className="text-text-muted mr-3">
-                    {String.fromCharCode(65 + i)}.
-                  </span>
-                  {opt}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {question.type === "short-answer" && (
-            <div className="space-y-4">
-              <textarea
-                className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
-                placeholder="Write your answer..."
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && e.metaKey) {
-                    submitAnswer((e.target as HTMLTextAreaElement).value);
-                  }
-                }}
-              />
-              <button
-                onClick={() => {
-                  const textarea = document.querySelector("textarea");
-                  if (textarea) submitAnswer(textarea.value);
-                }}
-                className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
-              >
-                Submit Answer
-              </button>
-            </div>
-          )}
-
-          {question.type === "reflection" && (
-            <div className="space-y-4">
-              <textarea
-                className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
-                placeholder="Reflect on what you've learned..."
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && e.metaKey) {
-                    submitAnswer((e.target as HTMLTextAreaElement).value);
-                  }
-                }}
-              />
-              <button
-                onClick={() => {
-                  const textarea = document.querySelector("textarea");
-                  if (textarea) submitAnswer(textarea.value);
-                }}
-                className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
-              >
-                Submit Reflection
-              </button>
-            </div>
-          )}
-        </div>
+        {question.type === "reflection" && (
+          <div className="space-y-4">
+            <textarea
+              className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
+              placeholder="Reflect on what you've learned..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.metaKey) {
+                  submitAnswer((e.target as HTMLTextAreaElement).value);
+                }
+              }}
+            />
+            <button
+              onClick={() => {
+                const textarea = document.querySelector("textarea");
+                if (textarea) submitAnswer(textarea.value);
+              }}
+              className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+            >
+              Submit Reflection
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

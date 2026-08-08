@@ -95,18 +95,7 @@ export default function CoursePage() {
   const progress = 0;
 
   return (
-    <div className="min-h-screen bg-[#0a0f0d]">
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0f0d]/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center">
-          <Link
-            href="/courses"
-            className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors duration-200"
-          >
-            ← Courses
-          </Link>
-        </div>
-      </nav>
-
+    <div>
       <div
         className="relative overflow-hidden"
         style={{

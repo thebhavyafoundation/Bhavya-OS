@@ -3,85 +3,23 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const nav = (
-  <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#1a2a1f] bg-[#0a0f0d]/80 backdrop-blur-md">
-    <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <Link href="/" className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-          <span className="text-[#c9a227] font-bold text-sm">B</span>
-        </div>
-        <span className="text-sm font-semibold text-[#f5f1e6]">
-          Bhavya AI Institute
-        </span>
-      </Link>
-      <div className="flex items-center gap-6">
-        <Link
-          href="/schools"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Schools
-        </Link>
-        <Link
-          href="/learning-paths"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Learning Paths
-        </Link>
-        <Link
-          href="/research"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Research
-        </Link>
-        <Link
-          href="/assessment"
-          className="px-4 py-2 text-sm font-medium bg-[#1a3a2a] text-[#f5f1e6] rounded-lg hover:bg-[#1a3a2a]/80 transition-colors"
-        >
-          Begin Journey
-        </Link>
-      </div>
-    </div>
-  </nav>
-);
-
-const footer = (
-  <footer className="py-12 px-6 border-t border-[#1a2a1f]">
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-      <div className="flex items-center gap-3 mb-4 md:mb-0">
-        <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-          <span className="text-[#c9a227] font-bold text-sm">B</span>
-        </div>
-        <span className="text-sm text-[#8a7359]">
-          Bhavya AI Institute — Building the future of AI education
-        </span>
-      </div>
-      <p className="text-xs text-[#8a7359]">
-        © 2026 Bhavya Foundation. Built for the next decade.
-      </p>
-    </div>
-  </footer>
-);
-
 const pillars = [
   {
     title: "Education",
     description:
       "World-class curriculum that builds deep understanding, not surface familiarity. From foundations to frontier research.",
-    stats: "100+ courses across 12 schools",
     icon: "◆",
   },
   {
     title: "Research",
     description:
       "Advancing the state of AI through rigorous investigation. Our research informs our curriculum, and our curriculum trains the next generation of researchers.",
-    stats: "50+ active research projects",
     icon: "◇",
   },
   {
     title: "Impact",
     description:
       "Transforming lives through accessible AI education. From career changers to entrepreneurs, our graduates are building the future.",
-    stats: "50K+ learners worldwide",
     icon: "◈",
   },
 ];
@@ -131,18 +69,9 @@ const milestones = [
   },
 ];
 
-const impactMetrics = [
-  { value: "50K+", label: "Active Learners" },
-  { value: "95%", label: "Completion Rate" },
-  { value: "87%", label: "Career Placement" },
-  { value: "20+", label: "Countries" },
-];
-
 export default function MissionPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f0d]">
-      {nav}
-
+    <>
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
@@ -234,9 +163,6 @@ export default function MissionPage() {
                 <p className="text-[#8a7359] leading-relaxed mb-4">
                   {pillar.description}
                 </p>
-                <p className="text-sm text-[#c9a227] font-medium">
-                  {pillar.stats}
-                </p>
               </motion.div>
             ))}
           </div>
@@ -289,42 +215,6 @@ export default function MissionPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-[#111916]/50 border-y border-[#1a2a1f]">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Impact
-            </p>
-            <h2 className="text-3xl font-bold text-[#f5f1e6]">
-              Measuring What Matters
-            </h2>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {impactMetrics.map((metric, i) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl font-bold text-[#c9a227] mb-2">
-                  {metric.value}
-                </div>
-                <div className="text-sm text-[#8a7359]">{metric.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -357,8 +247,6 @@ export default function MissionPage() {
           </motion.div>
         </div>
       </section>
-
-      {footer}
-    </div>
+    </>
   );
 }

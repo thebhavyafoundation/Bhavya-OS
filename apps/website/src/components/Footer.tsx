@@ -106,6 +106,7 @@ export function Footer() {
         <div>
           <div className="footer-col-title">Learn</div>
           <nav className="footer-links" aria-label="Learn navigation">
+            <a href="/programs">Programs</a>
             <a href="/knowledge/packages">Knowledge Packages</a>
             <a
               href="https://bhavya-foundation-bhavya-ai-lab.vercel.app"
@@ -115,6 +116,7 @@ export function Footer() {
               AI Lab
             </a>
             <a href="/knowledge">Digital Library</a>
+            <a href="/resources">Resources</a>
           </nav>
         </div>
         <div>
@@ -123,6 +125,7 @@ export function Footer() {
             <a href="/about">About</a>
             <a href="/transparency">Transparency</a>
             <a href="/mission">Constitution</a>
+            <a href="/donate">Donate</a>
           </nav>
         </div>
         <div>

@@ -3,65 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const nav = (
-  <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#1a2a1f] bg-[#0a0f0d]/80 backdrop-blur-md">
-    <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <Link href="/" className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-          <span className="text-[#c9a227] font-bold text-sm">B</span>
-        </div>
-        <span className="text-sm font-semibold text-[#f5f1e6]">
-          Bhavya AI Institute
-        </span>
-      </Link>
-      <div className="flex items-center gap-6">
-        <Link
-          href="/schools"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Schools
-        </Link>
-        <Link
-          href="/learning-paths"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Learning Paths
-        </Link>
-        <Link
-          href="/research"
-          className="text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors hidden md:block"
-        >
-          Research
-        </Link>
-        <Link
-          href="/assessment"
-          className="px-4 py-2 text-sm font-medium bg-[#1a3a2a] text-[#f5f1e6] rounded-lg hover:bg-[#1a3a2a]/80 transition-colors"
-        >
-          Begin Journey
-        </Link>
-      </div>
-    </div>
-  </nav>
-);
-
-const footer = (
-  <footer className="py-12 px-6 border-t border-[#1a2a1f]">
-    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
-      <div className="flex items-center gap-3 mb-4 md:mb-0">
-        <div className="w-8 h-8 rounded-lg bg-[#1a3a2a] flex items-center justify-center">
-          <span className="text-[#c9a227] font-bold text-sm">B</span>
-        </div>
-        <span className="text-sm text-[#8a7359]">
-          Bhavya AI Institute — Building the future of AI education
-        </span>
-      </div>
-      <p className="text-xs text-[#8a7359]">
-        © 2026 Bhavya Foundation. Built for the next decade.
-      </p>
-    </div>
-  </footer>
-);
-
 const contributionTypes = [
   {
     title: "Content",
@@ -183,9 +124,7 @@ const styleGuide = [
 
 export default function ContributingPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f0d]">
-      {nav}
-
+    <>
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
@@ -429,8 +368,6 @@ export default function ContributingPage() {
           </motion.div>
         </div>
       </section>
-
-      {footer}
-    </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
   const navItems = [
     { id: "nav-home", label: "Home", href: "/" },
     { id: "nav-mission", label: "Mission", href: "/mission" },
+    { id: "nav-programs", label: "Programs", href: "/programs" },
     { id: "nav-knowledge", label: "Knowledge", href: "/knowledge" },
     { id: "nav-heritage", label: "Heritage", href: "/heritage" },
     { id: "nav-community", label: "Community", href: "/community" },

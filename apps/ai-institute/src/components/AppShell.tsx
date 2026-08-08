@@ -15,25 +15,37 @@ import {
   Menu,
   X,
   ChevronRight,
+  User,
+  FolderOpen,
+  BarChart3,
+  MessageSquare,
+  Home,
 } from "lucide-react";
 
 const navLinks = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/", label: "Home", icon: Home },
   { href: "/schools", label: "Schools", icon: School },
-  { href: "/programs", label: "Programs", icon: BookOpen },
   { href: "/learning-paths", label: "Learning Paths", icon: Route },
-  { href: "/research", label: "Research", icon: FlaskConical },
+  { href: "/courses/foundations/lessons/1", label: "Courses", icon: BookOpen },
+  { href: "/lab", label: "Lab", icon: FlaskConical },
   { href: "/knowledge-graph", label: "Knowledge Graph", icon: Network },
+  { href: "/mentor", label: "Mentor", icon: MessageSquare },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/projects", label: "Projects", icon: FolderOpen },
+  { href: "/research", label: "Research", icon: FlaskConical },
+  { href: "/portfolio", label: "Portfolio", icon: BarChart3 },
 ];
 
 const footerLinks = [
   { href: "/about", label: "About" },
   { href: "/mission", label: "Mission" },
+  { href: "/programs", label: "Programs" },
+  { href: "/assessment", label: "Assessment" },
   { href: "/faq", label: "FAQ" },
-  { href: "/privacy", label: "Privacy" },
-  { href: "/terms", label: "Terms" },
   { href: "/contributing", label: "Contributing" },
   { href: "/press", label: "Press" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
 ];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
@@ -64,12 +76,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   const isActive = (href: string) => {
-    if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/") return pathname === "/";
     return pathname === href || pathname.startsWith(href + "/");
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-md focus:bg-accent-green focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg focus:outline-none"
+      >
+        Skip to content
+      </a>
+
       <motion.header
         initial={{ y: 0 }}
         animate={{ y: navVisible ? 0 : -100 }}
@@ -83,18 +102,18 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-14 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-gold to-accent-earth flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#c9a227] to-[#8a7359] flex items-center justify-center">
                 <span className="text-white font-bold text-xs tracking-tight">
                   AI
                 </span>
               </div>
               <span className="text-sm font-semibold text-text-primary hidden sm:block">
-                AI Institute
+                Bhavya AI Institute
               </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
+            <nav className="hidden lg:flex items-center gap-1">
+              {navLinks.slice(0, 7).map((link) => {
                 const active = isActive(link.href);
                 return (
                   <Link
@@ -109,7 +128,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     {active && (
                       <motion.div
                         layoutId="nav-active"
-                        className="absolute inset-0 bg-accent-gold/10 border border-accent-gold/20 rounded-md"
+                        className="absolute inset-0 bg-[#c9a227]/10 border border-[#c9a227]/20 rounded-md"
                         transition={{
                           type: "spring",
                           stiffness: 400,
@@ -138,14 +157,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 </kbd>
               </button>
 
-              <div className="w-8 h-8 rounded-full bg-accent-gold/20 border border-accent-gold/30 flex items-center justify-center text-accent-gold text-xs font-semibold">
-                B
-              </div>
+              <Link
+                href="/assessment"
+                className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-md bg-[#c9a227] text-[#0a0f0d] text-xs font-semibold hover:bg-[#c9a227]/90 transition-colors"
+              >
+                <User className="w-3.5 h-3.5" />
+                Begin Journey
+              </Link>
 
               <button
                 type="button"
-                className="md:hidden p-1.5 rounded-md text-text-tertiary hover:text-text-primary hover:bg-bg-tertiary transition-colors"
+                className="lg:hidden p-1.5 rounded-md text-text-tertiary hover:text-text-primary hover:bg-bg-tertiary transition-colors"
                 onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
               >
                 {mobileOpen ? (
                   <X className="w-5 h-5" />
@@ -165,9 +189,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-x-0 top-14 z-40 bg-bg-secondary border-b border-border-primary shadow-xl md:hidden"
+            className="fixed inset-x-0 top-14 z-40 bg-bg-secondary border-b border-border-primary shadow-xl lg:hidden"
           >
-            <nav className="max-w-7xl mx-auto px-4 py-3 space-y-1">
+            <nav className="max-w-7xl mx-auto px-4 py-3 space-y-1 max-h-[70vh] overflow-y-auto">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
@@ -176,7 +200,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     href={link.href}
                     className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-colors ${
                       active
-                        ? "bg-accent-gold/10 text-text-primary border border-accent-gold/20"
+                        ? "bg-[#c9a227]/10 text-text-primary border border-[#c9a227]/20"
                         : "text-text-tertiary hover:bg-bg-tertiary hover:text-text-secondary"
                     }`}
                   >
@@ -189,34 +213,32 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 );
               })}
               <div className="pt-2 mt-2 border-t border-border-primary">
-                <button
-                  type="button"
-                  className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm text-text-tertiary hover:bg-bg-tertiary hover:text-text-secondary transition-colors"
+                <Link
+                  href="/assessment"
+                  className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm bg-[#c9a227] text-[#0a0f0d] font-semibold hover:bg-[#c9a227]/90 transition-colors"
                 >
-                  <Search className="w-4 h-4" />
-                  Search
-                  <kbd className="ml-auto px-1.5 py-0.5 rounded bg-bg-tertiary text-text-muted text-[10px] font-mono border border-border-primary">
-                    ⌘K
-                  </kbd>
-                </button>
+                  Begin Your Journey
+                </Link>
               </div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <main className="flex-1 pt-14">{children}</main>
+      <main id="main-content" className="flex-1 pt-14">
+        {children}
+      </main>
 
       <footer className="border-t border-border-primary bg-bg-secondary/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="sm:col-span-2 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2.5 mb-3">
-                <div className="w-7 h-7 rounded-md bg-gradient-to-br from-accent-gold to-accent-earth flex items-center justify-center">
+                <div className="w-7 h-7 rounded-md bg-gradient-to-br from-[#c9a227] to-[#8a7359] flex items-center justify-center">
                   <span className="text-white font-bold text-[10px]">AI</span>
                 </div>
                 <span className="text-sm font-semibold text-text-primary">
-                  AI Institute
+                  Bhavya AI Institute
                 </span>
               </Link>
               <p className="text-xs text-text-tertiary leading-relaxed max-w-xs">
@@ -227,25 +249,95 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
             <div>
               <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
-                Navigate
+                Learn
               </h4>
               <ul className="space-y-2">
-                {navLinks.slice(0, 4).map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    href="/schools"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Schools
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/learning-paths"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Learning Paths
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/courses/foundations/lessons/1"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Courses
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/lab"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Lab
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/mentor"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Mentor
+                  </Link>
+                </li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
-                Resources
+                Build
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link
+                    href="/projects"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/portfolio"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Portfolio
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/research"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Research
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/knowledge-graph"
+                    className="text-xs text-text-tertiary hover:text-text-secondary transition-colors"
+                  >
+                    Knowledge Graph
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
+                Institution
               </h4>
               <ul className="space-y-2">
                 {footerLinks.map((link) => (
@@ -260,25 +352,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 ))}
               </ul>
             </div>
-
-            <div>
-              <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">
-                Connect
-              </h4>
-              <div className="flex items-center gap-2">
-                {["GitHub", "Twitter", "Discord"].map((platform) => (
-                  <span
-                    key={platform}
-                    className="px-2.5 py-1.5 rounded-md border border-border-primary bg-bg-tertiary text-[11px] text-text-muted cursor-default"
-                  >
-                    {platform}
-                  </span>
-                ))}
-              </div>
-              <p className="text-[11px] text-text-muted mt-3">
-                Open source under Bhavya Foundation
-              </p>
-            </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-border-primary flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -287,15 +360,22 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               reserved.
             </p>
             <div className="flex items-center gap-4">
-              {footerLinks.slice(0, 4).map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[11px] text-text-muted hover:text-text-tertiary transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <a
+                href="https://github.com/bhavya-foundation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-text-muted hover:text-text-tertiary transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/company/bhavya-ailab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-text-muted hover:text-text-tertiary transition-colors"
+              >
+                LinkedIn
+              </a>
             </div>
           </div>
         </div>
