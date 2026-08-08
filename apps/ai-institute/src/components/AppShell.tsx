@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "./AuthProvider";
 import {
   LayoutDashboard,
   School,
@@ -20,6 +21,8 @@ import {
   BarChart3,
   MessageSquare,
   Home,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 
 const navLinks = [
@@ -46,10 +49,13 @@ const footerLinks = [
   { href: "/press", label: "Press" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
+  { href: "/login", label: "Sign In" },
+  { href: "/register", label: "Register" },
 ];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { user, isAuthenticated, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
@@ -157,13 +163,37 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 </kbd>
               </button>
 
-              <Link
-                href="/assessment"
-                className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-md bg-[#c9a227] text-[#0a0f0d] text-xs font-semibold hover:bg-[#c9a227]/90 transition-colors"
-              >
-                <User className="w-3.5 h-3.5" />
-                Begin Journey
-              </Link>
+              {isAuthenticated ? (
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/dashboard"
+                    className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-secondary text-xs hover:border-border-secondary transition-colors"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#c9a227] to-[#8a7359] flex items-center justify-center">
+                      <span className="text-[9px] font-bold text-white">
+                        {user?.name?.charAt(0)?.toUpperCase() || "U"}
+                      </span>
+                    </div>
+                    {user?.name || "Dashboard"}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-md text-text-tertiary hover:text-text-secondary text-xs transition-colors"
+                    title="Sign out"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="hidden sm:flex items-center gap-2 px-4 py-1.5 rounded-md bg-[#c9a227] text-[#0a0f0d] text-xs font-semibold hover:bg-[#c9a227]/90 transition-colors"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  Sign In
+                </Link>
+              )}
 
               <button
                 type="button"
@@ -212,13 +242,34 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                   </Link>
                 );
               })}
-              <div className="pt-2 mt-2 border-t border-border-primary">
-                <Link
-                  href="/assessment"
-                  className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm bg-[#c9a227] text-[#0a0f0d] font-semibold hover:bg-[#c9a227]/90 transition-colors"
-                >
-                  Begin Your Journey
-                </Link>
+              <div className="pt-2 mt-2 border-t border-border-primary space-y-2">
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm bg-[#1a3a2a]/30 text-[#4ade80] font-medium hover:bg-[#1a3a2a]/50 transition-colors"
+                    >
+                      <User className="w-4 h-4" />
+                      {user?.name || "Dashboard"}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={logout}
+                      className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm bg-[#c9a227] text-[#0a0f0d] font-semibold hover:bg-[#c9a227]/90 transition-colors"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Sign In
+                  </Link>
+                )}
               </div>
             </nav>
           </motion.div>

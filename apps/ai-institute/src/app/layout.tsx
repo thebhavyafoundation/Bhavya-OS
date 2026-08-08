@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@bhavya/platform-ui";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "AI Institute — Bhavya Foundation",
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-bg-primary text-text-primary antialiased">
-        <AppShell>{children}</AppShell>
+        <AuthProvider>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
       </body>
     </html>
   );

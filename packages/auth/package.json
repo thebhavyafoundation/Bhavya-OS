@@ -1,0 +1,25 @@
+{
+  "name": "@bhavya/auth",
+  "version": "0.1.0",
+  "description": "Bhavya OS authentication — provider-agnostic auth with email/password, OAuth, RBAC",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts",
+    "./strategies": "./src/strategies.ts",
+    "./session": "./src/session.ts",
+    "./rbac": "./src/rbac.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bhavya/security": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "license": "MIT"
+}
