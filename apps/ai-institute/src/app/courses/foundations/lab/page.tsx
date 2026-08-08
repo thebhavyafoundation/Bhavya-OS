@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { selectAgent, getAgentResponse } from "@/lib/agents";
 
 const SAMPLE_CODE = `import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -148,21 +149,18 @@ R² Score: 0.9846
     setChatMessages((prev) => [...prev, userMsg]);
     setChatInput("");
     setIsTyping(true);
-    setTimeout(() => {
-      const responses: Record<string, string> = {
-        default:
-          "That's a great question! In linear regression, the goal is to find the best-fitting line through your data points. The model minimizes the sum of squared residuals — the vertical distances between each data point and the line. This is called Ordinary Least Squares (OLS).\n\nWant me to walk through the math, or would you prefer a code example?",
-      };
-      const key =
-        Object.keys(responses).find((k) =>
-          chatInput.toLowerCase().includes(k),
-        ) || "default";
-      setChatMessages((prev) => [
-        ...prev,
-        { role: "mentor", text: responses[key] },
-      ]);
-      setIsTyping(false);
-    }, 1800);
+    const agent = selectAgent(chatInput);
+    setTimeout(
+      () => {
+        const response = getAgentResponse(agent, chatInput);
+        setChatMessages((prev) => [
+          ...prev,
+          { role: "mentor", text: response },
+        ]);
+        setIsTyping(false);
+      },
+      800 + Math.random() * 700,
+    );
   }
 
   function handleSubmitLab() {
