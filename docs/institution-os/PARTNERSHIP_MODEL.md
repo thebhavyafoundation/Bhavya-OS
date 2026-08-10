@@ -7,6 +7,7 @@ The Partnership Model defines how Bhavya Foundation builds its ecosystem through
 ## Partnership Philosophy
 
 ### Core Principles
+
 1. **Mutual Value** — Both parties benefit
 2. **Mission Alignment** — Partners share our values
 3. **Long-term Relationship** — Partnerships endure
@@ -24,12 +25,15 @@ Every partnership strengthens the ecosystem.
 ## Partnership Types
 
 ### Industry Partnerships
+
 **Who:** Companies, startups, enterprises
 **Value Exchange:**
+
 - **They Provide:** Job opportunities, tools, funding, industry insights
 - **We Provide:** Skilled graduates, research, innovation, talent pipeline
 
 **Activities:**
+
 - Job placement
 - Tool access
 - Funding support
@@ -38,12 +42,15 @@ Every partnership strengthens the ecosystem.
 - Research partnerships
 
 ### Academic Partnerships
+
 **Who:** Universities, research institutions, schools
 **Value Exchange:**
+
 - **They Provide:** Research, credibility, academic resources
 - **We Provide:** Industry connections, practical skills, innovation
 
 **Activities:**
+
 - Research collaboration
 - Curriculum development
 - Student exchange
@@ -52,12 +59,15 @@ Every partnership strengthens the ecosystem.
 - Academic resources
 
 ### Non-profit Partnerships
+
 **Who:** NGOs, community organizations, social enterprises
 **Value Exchange:**
+
 - **They Provide:** Social impact, community access, real-world problems
 - **We Provide:** AI solutions, talent, research, innovation
 
 **Activities:**
+
 - Social impact projects
 - Community access
 - Problem identification
@@ -66,12 +76,15 @@ Every partnership strengthens the ecosystem.
 - Open source contribution
 
 ### Government Partnerships
+
 **Who:** Government agencies, policy organizations
 **Value Exchange:**
+
 - **They Provide:** Policy influence, funding, public access
 - **We Provide:** Research, innovation, public service
 
 **Activities:**
+
 - Policy research
 - Public service projects
 - Funding support
@@ -80,12 +93,15 @@ Every partnership strengthens the ecosystem.
 - Innovation labs
 
 ### Community Partnerships
+
 **Who:** Local communities, chapters, volunteer organizations
 **Value Exchange:**
+
 - **They Provide:** Local access, community engagement, volunteer support
 - **We Provide:** Resources, training, recognition, impact
 
 **Activities:**
+
 - Local chapters
 - Community events
 - Volunteer programs
@@ -96,7 +112,9 @@ Every partnership strengthens the ecosystem.
 ## Partnership Lifecycle
 
 ### 1. Discovery
+
 **Activities:**
+
 - Identify potential partners
 - Research partner needs
 - Assess mission alignment
@@ -104,13 +122,16 @@ Every partnership strengthens the ecosystem.
 - Initial outreach
 
 **Output:**
+
 - Partner profile
 - Mission alignment assessment
 - Mutual value proposition
 - Initial contact
 
 ### 2. Assessment
+
 **Activities:**
+
 - Deep partner research
 - Needs assessment
 - Value proposition design
@@ -118,6 +139,7 @@ Every partnership strengthens the ecosystem.
 - Feasibility analysis
 
 **Output:**
+
 - Partner assessment
 - Value proposition
 - Risk assessment
@@ -125,7 +147,9 @@ Every partnership strengthens the ecosystem.
 - Partnership proposal
 
 ### 3. Negotiation
+
 **Activities:**
+
 - Define partnership terms
 - Agree on value exchange
 - Set expectations
@@ -133,6 +157,7 @@ Every partnership strengthens the ecosystem.
 - Sign agreement
 
 **Output:**
+
 - Partnership agreement
 - Value exchange terms
 - Expectations document
@@ -140,7 +165,9 @@ Every partnership strengthens the ecosystem.
 - Signed contract
 
 ### 4. Implementation
+
 **Activities:**
+
 - Launch partnership
 - Execute activities
 - Monitor progress
@@ -148,6 +175,7 @@ Every partnership strengthens the ecosystem.
 - Celebrate successes
 
 **Output:**
+
 - Partnership launch
 - Activity execution
 - Progress reports
@@ -155,7 +183,9 @@ Every partnership strengthens the ecosystem.
 - Success stories
 
 ### 5. Evaluation
+
 **Activities:**
+
 - Measure impact
 - Assess value creation
 - Review partnership health
@@ -163,6 +193,7 @@ Every partnership strengthens the ecosystem.
 - Plan next phase
 
 **Output:**
+
 - Impact assessment
 - Value creation report
 - Health assessment
@@ -170,7 +201,9 @@ Every partnership strengthens the ecosystem.
 - Next phase plan
 
 ### 6. Renewal
+
 **Activities:**
+
 - Review partnership outcomes
 - Negotiate renewal terms
 - Update partnership agreement
@@ -178,6 +211,7 @@ Every partnership strengthens the ecosystem.
 - Continue relationship
 
 **Output:**
+
 - Renewal decision
 - Updated agreement
 - Next phase plan
@@ -187,6 +221,7 @@ Every partnership strengthens the ecosystem.
 ## Partnership Quality
 
 ### Standards
+
 - **Transparency** — Open communication and reporting
 - **Integrity** — Honest and ethical practices
 - **Accountability** — Clear responsibilities and outcomes
@@ -194,6 +229,7 @@ Every partnership strengthens the ecosystem.
 - **Impact** — Measurable value creation
 
 ### Governance
+
 - Regular meetings
 - Progress reporting
 - Issue resolution
@@ -201,6 +237,7 @@ Every partnership strengthens the ecosystem.
 - Continuous improvement
 
 ### Metrics
+
 - Value creation
 - Impact measurement
 - Relationship health
@@ -210,6 +247,7 @@ Every partnership strengthens the ecosystem.
 ## Partnership Metrics
 
 ### Individual Metrics
+
 - Value created
 - Impact measured
 - Relationship health
@@ -217,6 +255,7 @@ Every partnership strengthens the ecosystem.
 - Long-term sustainability
 
 ### Institutional Metrics
+
 - Number of partnerships
 - Total value created
 - Total impact measured
@@ -224,6 +263,7 @@ Every partnership strengthens the ecosystem.
 - Ecosystem strength
 
 ### Quality Metrics
+
 - Partner satisfaction
 - Community satisfaction
 - Impact quality
@@ -233,6 +273,7 @@ Every partnership strengthens the ecosystem.
 ## Partnership Governance
 
 ### Roles
+
 - **Partnership Manager** — Manage partnership activities
 - **Partnership Committee** — Oversee partnership strategy
 - **Community Liaison** — Connect partners to community
@@ -240,6 +281,7 @@ Every partnership strengthens the ecosystem.
 - **Career Liaison** — Connect partners to students
 
 ### Processes
+
 - Partner identification
 - Assessment
 - Negotiation
@@ -248,6 +290,7 @@ Every partnership strengthens the ecosystem.
 - Renewal
 
 ### Standards
+
 - Evidence-based
 - Transparent
 - Ethical

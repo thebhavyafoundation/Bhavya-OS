@@ -7,9 +7,11 @@
 ## What Was Built
 
 ### Vision
+
 Bhavya Foundation is not an AI academy. It is an institution that builds AI engineers, researchers, mentors, and community leaders through real problems, real impact, and real contribution.
 
 ### The Transformation
+
 ```
 Curious Visitor
   ↓
@@ -23,6 +25,7 @@ Institution Builder
 ```
 
 ### 16 Institutional Domains Designed
+
 1. Admissions
 2. Student Lifecycle
 3. Mentor Lifecycle
@@ -41,11 +44,13 @@ Institution Builder
 16. Partnerships
 
 ### Additional Domains Designed
+
 17. Scholarships
 18. Volunteers
 19. Social Impact
 
 ### Core Systems Designed
+
 20. Analytics Model
 21. Governance Model
 22. Mission Validation
@@ -53,6 +58,7 @@ Institution Builder
 ## Documentation Created
 
 ### `docs/institution-os/`
+
 - VISION.md — Institutional vision and philosophy
 - PRD.md — Product Requirements Document
 - STUDENT_LIFECYCLE.md — How students progress
@@ -76,35 +82,43 @@ Institution Builder
 ## Key Insights
 
 ### 1. The Institution Is the Product
+
 The institution itself — not the courses, not the software — is the product. MIT, Stanford, DeepLearning.AI, fast.ai, and 42 School are successful because of their institutional systems.
 
 ### 2. Every Domain Must Be a Runtime
+
 Just as we built Learning Runtime, Project Runtime, and Impact Runtime, every institutional domain must be designed as a reusable runtime.
 
 ### 3. Every Transition Must Be Verified
+
 Every progression (student → builder → contributor → mentor) must be verified through evidence, skills, projects, portfolio, contribution, and reflection.
 
 ### 4. Every Process Must Be Continuous
+
 No institutional process has a final state. Everything evolves through research, feedback, and improvement.
 
 ### 5. Mission Validation Is Essential
+
 Every workflow must be validated against the mission before implementation.
 
 ## Next Steps
 
 ### Phase 2: Core Runtimes (September — October 2026)
+
 1. Student Lifecycle Runtime
 2. Mentor Lifecycle Runtime
 3. Research OS Runtime
 4. Open Source Runtime
 
 ### Phase 3: Extended Runtimes (November — December 2026)
+
 1. Admissions Runtime
 2. Community Runtime
 3. Career Services Runtime
 4. Alumni Runtime
 
 ### Phase 4: Ecosystem Runtimes (January — March 2027)
+
 1. Partnerships Runtime
 2. Scholarships Runtime
 3. Volunteers Runtime

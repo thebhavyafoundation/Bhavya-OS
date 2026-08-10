@@ -13,6 +13,7 @@ Mission Validation ensures that every institutional workflow directly advances B
 For every institutional workflow, ask:
 
 ### 1. Does this directly advance Bhavya Foundation's mission?
+
 - Does it build AI engineers?
 - Does it build researchers?
 - Does it build mentors?
@@ -22,6 +23,7 @@ For every institutional workflow, ask:
 - Does it encourage real contribution?
 
 ### 2. Does this create long-term educational value?
+
 - Does it deepen learning?
 - Does it build lasting skills?
 - Does it create portfolio value?
@@ -29,6 +31,7 @@ For every institutional workflow, ask:
 - Does it create impact beyond the individual?
 
 ### 3. Can this be reused across future programs?
+
 - Is it program-agnostic?
 - Is it domain-independent?
 - Is it scalable?
@@ -36,6 +39,7 @@ For every institutional workflow, ask:
 - Is it sustainable?
 
 ### 4. Does it help someone become a better AI engineer, researcher, mentor, or community leader?
+
 - Does it build technical skills?
 - Does it build research skills?
 - Does it build teaching skills?
@@ -45,9 +49,11 @@ For every institutional workflow, ask:
 ## Validation Process
 
 ### Step 1: Mission Alignment Check
+
 **Question:** Does this workflow directly advance our mission?
 
 **Checklist:**
+
 - [ ] Builds AI engineers
 - [ ] Builds researchers
 - [ ] Builds mentors
@@ -59,9 +65,11 @@ For every institutional workflow, ask:
 **If any unchecked:** Redesign the workflow.
 
 ### Step 2: Long-term Value Check
+
 **Question:** Does this create long-term educational value?
 
 **Checklist:**
+
 - [ ] Deepens learning
 - [ ] Builds lasting skills
 - [ ] Creates portfolio value
@@ -71,9 +79,11 @@ For every institutional workflow, ask:
 **If any unchecked:** Redesign the workflow.
 
 ### Step 3: Reusability Check
+
 **Question:** Can this be reused across future programs?
 
 **Checklist:**
+
 - [ ] Program-agnostic
 - [ ] Domain-independent
 - [ ] Scalable
@@ -83,9 +93,11 @@ For every institutional workflow, ask:
 **If any unchecked:** Redesign the workflow.
 
 ### Step 4: Transformation Check
+
 **Question:** Does it help someone become a better AI engineer, researcher, mentor, or community leader?
 
 **Checklist:**
+
 - [ ] Builds technical skills
 - [ ] Builds research skills
 - [ ] Builds teaching skills
@@ -101,6 +113,7 @@ For every institutional workflow, ask:
 **Workflow:** Student progresses from Visitor to Community Leader
 
 **Mission Alignment:**
+
 - [x] Builds AI engineers (through learning)
 - [x] Builds researchers (through research)
 - [x] Builds mentors (through mentoring)
@@ -110,6 +123,7 @@ For every institutional workflow, ask:
 - [x] Encourages real contribution (through open source)
 
 **Long-term Value:**
+
 - [x] Deepens learning (through portfolio)
 - [x] Builds lasting skills (through practice)
 - [x] Creates portfolio value (through projects)
@@ -117,6 +131,7 @@ For every institutional workflow, ask:
 - [x] Creates impact beyond the individual (through teaching)
 
 **Reusability:**
+
 - [x] Program-agnostic (can apply to any program)
 - [x] Domain-independent (works for any domain)
 - [x] Scalable (grows with institution)
@@ -124,6 +139,7 @@ For every institutional workflow, ask:
 - [x] Sustainable (self-reinforcing)
 
 **Transformation:**
+
 - [x] Builds technical skills (through projects)
 - [x] Builds research skills (through research)
 - [x] Builds teaching skills (through mentoring)
@@ -137,6 +153,7 @@ For every institutional workflow, ask:
 **Workflow:** Student completes course, receives certificate
 
 **Mission Alignment:**
+
 - [ ] Builds AI engineers (partially — through learning)
 - [ ] Builds researchers (no)
 - [ ] Builds mentors (no)
@@ -146,6 +163,7 @@ For every institutional workflow, ask:
 - [ ] Encourages real contribution (no)
 
 **Long-term Value:**
+
 - [ ] Deepens learning (partially)
 - [ ] Builds lasting skills (partially)
 - [ ] Creates portfolio value (minimal)
@@ -153,6 +171,7 @@ For every institutional workflow, ask:
 - [ ] Creates impact beyond the individual (no)
 
 **Reusability:**
+
 - [x] Program-agnostic
 - [x] Domain-independent
 - [x] Scalable
@@ -160,6 +179,7 @@ For every institutional workflow, ask:
 - [x] Sustainable
 
 **Transformation:**
+
 - [ ] Builds technical skills (partially)
 - [ ] Builds research skills (no)
 - [ ] Builds teaching skills (no)
@@ -169,6 +189,7 @@ For every institutional workflow, ask:
 **Result:** FAIL — Redesign needed
 
 **Redesign:** Instead of certificate, create portfolio verification that includes:
+
 - Projects completed
 - Contributions made
 - Community impact
@@ -198,6 +219,7 @@ For every institutional workflow, ask:
 ## Validation Governance
 
 ### Who Validates
+
 - **Mission Committee** — Oversees mission alignment
 - **Program Directors** — Validate program workflows
 - **Community Council** — Validate community workflows
@@ -205,12 +227,14 @@ For every institutional workflow, ask:
 - **External Reviewers** — Validate overall mission alignment
 
 ### When Validation Occurs
+
 - **New workflows** — Before implementation
 - **Existing workflows** — Quarterly review
 - **Major changes** — Before implementation
 - **Annual review** — Comprehensive validation
 
 ### Validation Standards
+
 - Evidence-based
 - Transparent
 - Inclusive

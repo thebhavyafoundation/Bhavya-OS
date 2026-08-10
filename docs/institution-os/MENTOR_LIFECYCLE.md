@@ -32,6 +32,7 @@ Recognition
 ### Recruitment
 
 **Source:**
+
 - Active Contributors
 - Community Leaders
 - Industry Professionals
@@ -39,6 +40,7 @@ Recognition
 - Alumni
 
 **Criteria:**
+
 - Deep AI expertise
 - Teaching aptitude
 - Community standing
@@ -46,6 +48,7 @@ Recognition
 - Recommendation from existing mentors
 
 **Process:**
+
 - Self-nomination or community nomination
 - Portfolio review
 - Interview with existing mentors
@@ -55,6 +58,7 @@ Recognition
 ### Training
 
 **Program:**
+
 - Mentor philosophy and values
 - Teaching methods
 - Project review techniques
@@ -65,12 +69,14 @@ Recognition
 - Ethics and boundaries
 
 **Duration:**
+
 - 4 weeks (part-time)
 - Weekly sessions
 - Practice projects
 - Peer mentoring
 
 **Outcome:**
+
 - Mentor training certificate
 - Practice portfolio
 - Peer feedback
@@ -79,6 +85,7 @@ Recognition
 ### Certification
 
 **Requirements:**
+
 - Complete training program
 - Pass mentor assessment
 - Complete practice mentoring
@@ -86,6 +93,7 @@ Recognition
 - Demonstrate teaching competency
 
 **Assessment:**
+
 - Portfolio review
 - Teaching demonstration
 - Student feedback
@@ -93,6 +101,7 @@ Recognition
 - Mentor recommendation
 
 **Certification Levels:**
+
 - **Junior Mentor** — Can review beginner projects
 - **Senior Mentor** — Can review intermediate projects
 - **Lead Mentor** — Can review advanced projects and mentor other mentors
@@ -101,6 +110,7 @@ Recognition
 ### Office Hours
 
 **Format:**
+
 - Weekly office hours (2 hours minimum)
 - Student booking system
 - Individual or group sessions
@@ -108,6 +118,7 @@ Recognition
 - Career guidance sessions
 
 **Responsibilities:**
+
 - Be available during office hours
 - Provide constructive feedback
 - Guide student growth
@@ -115,6 +126,7 @@ Recognition
 - Follow up on action items
 
 **Quality Standards:**
+
 - Response time within 24 hours
 - Constructive feedback
 - Actionable suggestions
@@ -124,6 +136,7 @@ Recognition
 ### Project Review
 
 **Process:**
+
 - Student submits project for review
 - Mentor reviews project
 - Mentor provides feedback
@@ -132,6 +145,7 @@ Recognition
 - Project is approved or rejected
 
 **Review Criteria:**
+
 - Code quality
 - Documentation quality
 - Impact assessment
@@ -140,6 +154,7 @@ Recognition
 - Open source potential
 
 **Feedback Quality:**
+
 - Constructive and specific
 - Actionable suggestions
 - Positive reinforcement
@@ -149,6 +164,7 @@ Recognition
 ### Student Feedback
 
 **Format:**
+
 - Regular check-ins (weekly or biweekly)
 - Progress review
 - Goal setting
@@ -157,6 +173,7 @@ Recognition
 - Career guidance
 
 **Responsibilities:**
+
 - Track student progress
 - Identify challenges
 - Provide guidance
@@ -165,6 +182,7 @@ Recognition
 - Document feedback
 
 **Quality Standards:**
+
 - Regular and consistent
 - Specific and actionable
 - Positive and encouraging
@@ -174,6 +192,7 @@ Recognition
 ### Research
 
 **Activities:**
+
 - Contribute to Knowledge Packages
 - Review curriculum content
 - Design assessment criteria
@@ -182,6 +201,7 @@ Recognition
 - Present at events
 
 **Output:**
+
 - Knowledge Packages
 - Curriculum improvements
 - Teaching methods
@@ -190,6 +210,7 @@ Recognition
 - Community resources
 
 **Recognition:**
+
 - Attribution in Knowledge Packages
 - Publication credits
 - Community recognition
@@ -198,12 +219,14 @@ Recognition
 ### Promotion
 
 **Levels:**
+
 - **Junior Mentor** → **Senior Mentor**
 - **Senior Mentor** → **Lead Mentor**
 - **Lead Mentor** → **Principal Mentor**
 - **Principal Mentor** → **Program Director**
 
 **Criteria:**
+
 - Student outcomes
 - Portfolio quality
 - Community impact
@@ -212,6 +235,7 @@ Recognition
 - Peer recognition
 
 **Process:**
+
 - Self-nomination or nomination by peers
 - Portfolio review
 - Interview with promotion committee
@@ -221,6 +245,7 @@ Recognition
 ### Recognition
 
 **Types:**
+
 - **Mentor of the Month** — Outstanding monthly contribution
 - **Mentor of the Year** — Outstanding annual contribution
 - **Teaching Excellence** — Exceptional teaching quality
@@ -229,6 +254,7 @@ Recognition
 - **Lifetime Achievement** — Career-long contribution
 
 **Process:**
+
 - Community nomination
 - Review by recognition committee
 - Public announcement
@@ -238,6 +264,7 @@ Recognition
 ## Responsibilities
 
 ### Time Commitment
+
 - Minimum 2 hours per week
 - Office hours: 2 hours per week
 - Project reviews: 2-3 per week
@@ -245,6 +272,7 @@ Recognition
 - Research: As available
 
 ### Communication
+
 - Respond within 24 hours
 - Provide constructive feedback
 - Document interactions
@@ -252,6 +280,7 @@ Recognition
 - Maintain professional boundaries
 
 ### Quality
+
 - High standards for feedback
 - Constructive and specific
 - Growth-oriented
@@ -261,6 +290,7 @@ Recognition
 ## Support
 
 ### From Institution
+
 - Training and certification
 - Tools and resources
 - Community support
@@ -268,6 +298,7 @@ Recognition
 - Career development
 
 ### From Community
+
 - Peer mentoring
 - Knowledge sharing
 - Collaborative projects
@@ -277,18 +308,21 @@ Recognition
 ## Metrics
 
 ### Student Outcomes
+
 - Student retention rate
 - Student satisfaction
 - Student portfolio quality
 - Student career outcomes
 
 ### Mentor Activity
+
 - Office hours utilization
 - Project review quality
 - Student feedback quality
 - Research contribution
 
 ### Community Impact
+
 - Student help provided
 - Peer reviews conducted
 - Community discussions initiated

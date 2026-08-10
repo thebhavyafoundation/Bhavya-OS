@@ -7,6 +7,7 @@ The Scholarship Model defines how financial barriers are removed at Bhavya Found
 ## Scholarship Philosophy
 
 ### Core Principles
+
 1. **Potential Over Privilege** — Talent is evenly distributed, opportunity is not
 2. **Access Over Affordability** — Cost should not prevent learning
 3. **Merit Over Means** — Scholarships reward potential, not just need
@@ -24,8 +25,10 @@ Every scholarship creates future donors and mentors.
 ## Scholarship Types
 
 ### Merit-Based Scholarships
+
 **For:** Students with exceptional potential
 **Criteria:**
+
 - Outstanding portfolio
 - Strong community contribution
 - Exceptional learning outcomes
@@ -36,8 +39,10 @@ Every scholarship creates future donors and mentors.
 **Duration:** Program length
 
 ### Need-Based Scholarships
+
 **For:** Students with financial barriers
 **Criteria:**
+
 - Financial need
 - Learning commitment
 - Community potential
@@ -48,8 +53,10 @@ Every scholarship creates future donors and mentors.
 **Duration:** Program length
 
 ### Diversity Scholarships
+
 **For:** Underrepresented groups in AI
 **Criteria:**
+
 - Belonging to underrepresented group
 - Commitment to diversity
 - Community leadership
@@ -60,8 +67,10 @@ Every scholarship creates future donors and mentors.
 **Duration:** Program length
 
 ### Impact Scholarships
+
 **For:** Students solving social impact problems
 **Criteria:**
+
 - Social impact project
 - Community benefit
 - Innovation potential
@@ -72,8 +81,10 @@ Every scholarship creates future donors and mentors.
 **Duration:** Program length
 
 ### Community Scholarships
+
 **For:** Active community contributors
 **Criteria:**
+
 - Community contribution
 - Mentoring impact
 - Teaching impact
@@ -86,7 +97,9 @@ Every scholarship creates future donors and mentors.
 ## Scholarship Lifecycle
 
 ### 1. Application
+
 **Requirements:**
+
 - Application form
 - Portfolio submission
 - Essay submission
@@ -94,6 +107,7 @@ Every scholarship creates future donors and mentors.
 - Financial documentation (if need-based)
 
 **Process:**
+
 - Online application
 - Document upload
 - Essay submission
@@ -101,7 +115,9 @@ Every scholarship creates future donors and mentors.
 - Application fee waiver (if needed)
 
 ### 2. Review
+
 **Process:**
+
 - Application review
 - Portfolio assessment
 - Essay evaluation
@@ -109,6 +125,7 @@ Every scholarship creates future donors and mentors.
 - Financial assessment (if need-based)
 
 **Reviewers:**
+
 - Scholarship committee
 - Mentors
 - Alumni
@@ -116,7 +133,9 @@ Every scholarship creates future donors and mentors.
 - AI review
 
 ### 3. Interview
+
 **Process:**
+
 - Initial screening
 - Detailed interview
 - Portfolio presentation
@@ -124,13 +143,16 @@ Every scholarship creates future donors and mentors.
 - Final selection
 
 **Interviewers:**
+
 - Scholarship committee
 - Mentors
 - Alumni
 - Community leaders
 
 ### 4. Award
+
 **Process:**
+
 - Award notification
 - Acceptance confirmation
 - Payment processing
@@ -138,6 +160,7 @@ Every scholarship creates future donors and mentors.
 - Support assignment
 
 **Support:**
+
 - Assigned mentor
 - Peer group
 - Community access
@@ -145,7 +168,9 @@ Every scholarship creates future donors and mentors.
 - Alumni network
 
 ### 5. Support
+
 **Process:**
+
 - Regular check-ins
 - Academic support
 - Career guidance
@@ -153,6 +178,7 @@ Every scholarship creates future donors and mentors.
 - Challenge resolution
 
 **Support Providers:**
+
 - Assigned mentor
 - Peer group
 - Community
@@ -160,7 +186,9 @@ Every scholarship creates future donors and mentors.
 - Alumni network
 
 ### 6. Impact
+
 **Process:**
+
 - Learning outcomes
 - Project completion
 - Community contribution
@@ -168,6 +196,7 @@ Every scholarship creates future donors and mentors.
 - Donor impact
 
 **Impact Measurement:**
+
 - Portfolio quality
 - Community contribution
 - Career outcomes
@@ -177,6 +206,7 @@ Every scholarship creates future donors and mentors.
 ## Scholarship Quality
 
 ### Standards
+
 - **Fairness** — Equitable selection process
 - **Transparency** — Clear criteria and process
 - **Impact** — Measurable outcomes
@@ -184,6 +214,7 @@ Every scholarship creates future donors and mentors.
 - **Accountability** — Clear responsibilities
 
 ### Governance
+
 - Scholarship committee
 - Selection criteria
 - Review process
@@ -192,6 +223,7 @@ Every scholarship creates future donors and mentors.
 - Continuous improvement
 
 ### Metrics
+
 - Application quality
 - Selection accuracy
 - Student outcomes
@@ -201,6 +233,7 @@ Every scholarship creates future donors and mentors.
 ## Scholarship Metrics
 
 ### Individual Metrics
+
 - Learning outcomes
 - Portfolio quality
 - Community contribution
@@ -208,6 +241,7 @@ Every scholarship creates future donors and mentors.
 - Donation potential
 
 ### Institutional Metrics
+
 - Number of scholarships
 - Total award amount
 - Student outcomes
@@ -215,6 +249,7 @@ Every scholarship creates future donors and mentors.
 - Community impact
 
 ### Quality Metrics
+
 - Selection accuracy
 - Student satisfaction
 - Donor satisfaction
@@ -224,6 +259,7 @@ Every scholarship creates future donors and mentors.
 ## Scholarship Governance
 
 ### Roles
+
 - **Scholarship Committee** — Oversee scholarship program
 - **Selection Panel** — Review applications
 - **Mentors** — Support scholarship students
@@ -231,6 +267,7 @@ Every scholarship creates future donors and mentors.
 - **Donors** — Fund scholarships
 
 ### Processes
+
 - Application
 - Review
 - Interview
@@ -239,6 +276,7 @@ Every scholarship creates future donors and mentors.
 - Impact measurement
 
 ### Standards
+
 - Evidence-based
 - Transparent
 - Ethical

@@ -7,6 +7,7 @@ The Open Source Model defines how contribution creates value at Bhavya Foundatio
 ## Open Source Philosophy
 
 ### Core Principles
+
 1. **Contribution is Learning** — Contributing to open source is learning in action
 2. **Contribution is Community** — Open source builds connections and collaboration
 3. **Contribution is Impact** — Open source creates value beyond the individual
@@ -24,6 +25,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Types
 
 ### Code Contributions
+
 - Bug fixes
 - Feature additions
 - Performance improvements
@@ -32,6 +34,7 @@ Every cycle deepens understanding and strengthens community.
 - Refactoring
 
 ### Documentation Contributions
+
 - README improvements
 - API documentation
 - Tutorial creation
@@ -40,6 +43,7 @@ Every cycle deepens understanding and strengthens community.
 - Accessibility improvements
 
 ### Community Contributions
+
 - Issue triage
 - Code review
 - Mentorship
@@ -48,6 +52,7 @@ Every cycle deepens understanding and strengthens community.
 - Community building
 
 ### Design Contributions
+
 - UI/UX design
 - Accessibility design
 - Documentation design
@@ -55,6 +60,7 @@ Every cycle deepens understanding and strengthens community.
 - Motion design
 
 ### Research Contributions
+
 - Bug reports
 - Feature requests
 - Performance analysis
@@ -64,42 +70,49 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Lifecycle
 
 ### 1. Discovery
+
 - Find a project that interests you
 - Understand the project's needs
 - Identify contribution opportunities
 - Connect with maintainers
 
 ### 2. Learning
+
 - Understand the codebase
 - Learn the contribution guidelines
 - Set up the development environment
 - Understand the testing process
 
 ### 3. Planning
+
 - Define the contribution scope
 - Create a plan
 - Get feedback from maintainers
 - Set expectations
 
 ### 4. Implementation
+
 - Write code/documentation/design
 - Follow project standards
 - Write tests
 - Document changes
 
 ### 5. Review
+
 - Submit pull request
 - Address review feedback
 - Iterate on improvements
 - Get approval
 
 ### 6. Merge
+
 - Merge contribution
 - Update documentation
 - Celebrate achievement
 - Share with community
 
 ### 7. Recognition
+
 - Portfolio update
 - Community recognition
 - Mentor acknowledgment
@@ -108,6 +121,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Quality
 
 ### Standards
+
 - **Code Quality** — Clean, readable, maintainable
 - **Documentation Quality** — Clear, comprehensive, accurate
 - **Test Quality** — Thorough, reliable, maintainable
@@ -115,6 +129,7 @@ Every cycle deepens understanding and strengthens community.
 - **Process Quality** — Following guidelines, responding to feedback
 
 ### Review Criteria
+
 - Does it solve the problem?
 - Is the code clean and maintainable?
 - Is the documentation clear?
@@ -125,6 +140,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Portfolio
 
 ### What to Include
+
 - Project name and description
 - Your contribution
 - Impact of your contribution
@@ -133,6 +149,7 @@ Every cycle deepens understanding and strengthens community.
 - Community feedback
 
 ### Verification
+
 - Maintainer confirmation
 - Code review evidence
 - Community recognition
@@ -140,6 +157,7 @@ Every cycle deepens understanding and strengthens community.
 - Skill demonstration
 
 ### Portability
+
 - GitHub profile
 - Portfolio website
 - Resume/CV
@@ -149,6 +167,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Recognition
 
 ### Individual Recognition
+
 - **First Contribution** — Welcome to the community
 - **Regular Contributor** — Consistent value creation
 - **Core Contributor** — Significant project impact
@@ -156,11 +175,13 @@ Every cycle deepens understanding and strengthens community.
 - **Ambassador** — Community leadership
 
 ### Team Recognition
+
 - **Team Contribution** — Collaborative achievement
 - **Project Impact** — Significant project outcome
 - **Community Impact** — Significant community benefit
 
 ### Institutional Recognition
+
 - **Open Source Hero** — Exceptional contribution
 - **Community Builder** — Exceptional community building
 - **Research Contribution** — Exceptional research
@@ -169,6 +190,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Metrics
 
 ### Individual Metrics
+
 - Contributions made
 - Projects contributed to
 - Impact created
@@ -176,6 +198,7 @@ Every cycle deepens understanding and strengthens community.
 - Community recognition
 
 ### Project Metrics
+
 - Contributors
 - Contributions
 - Impact
@@ -183,6 +206,7 @@ Every cycle deepens understanding and strengthens community.
 - Sustainability
 
 ### Institutional Metrics
+
 - Total contributions
 - Total impact
 - Community growth
@@ -192,6 +216,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Tools
 
 ### Development Tools
+
 - Git
 - GitHub
 - Code editors
@@ -199,6 +224,7 @@ Every cycle deepens understanding and strengthens community.
 - CI/CD pipelines
 
 ### Collaboration Tools
+
 - Issue trackers
 - Pull request systems
 - Discussion forums
@@ -206,6 +232,7 @@ Every cycle deepens understanding and strengthens community.
 - Video conferencing
 
 ### Documentation Tools
+
 - Markdown
 - Wiki systems
 - Documentation generators
@@ -215,6 +242,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Governance
 
 ### Guidelines
+
 - Contribution guidelines
 - Code of conduct
 - Review process
@@ -222,12 +250,14 @@ Every cycle deepens understanding and strengthens community.
 - Release process
 
 ### Roles
+
 - **Contributors** — Make contributions
 - **Reviewers** — Review contributions
 - **Maintainers** — Manage project
 - **Community Leaders** — Build community
 
 ### Processes
+
 - Issue creation
 - Pull request creation
 - Code review
@@ -238,6 +268,7 @@ Every cycle deepens understanding and strengthens community.
 ## Contribution Ethics
 
 ### Principles
+
 - **Respect** — Respect for maintainers and community
 - **Integrity** — Honest and transparent contribution
 - **Inclusivity** — Welcoming to all contributors
@@ -245,6 +276,7 @@ Every cycle deepens understanding and strengthens community.
 - **Impact** — Contribution should create value
 
 ### Requirements
+
 - Follow code of conduct
 - Respect maintainers' decisions
 - Be patient and understanding

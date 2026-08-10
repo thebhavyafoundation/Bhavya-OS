@@ -1,0 +1,23 @@
+{
+  "name": "Bhavya Foundation",
+  "short_name": "Bhavya",
+  "description": "Restoring Nature. Empowering Humanity. Preserving Heritage.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f4ec",
+  "theme_color": "#0e382e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/brand/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/brand/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["education", "nonprofit", "environment"]
+}

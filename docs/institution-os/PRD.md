@@ -19,6 +19,7 @@ Design every institutional workflow before implementation. The institution — n
 ## Institutional Domains
 
 ### 1. Admissions
+
 **How people join Bhavya Foundation.**
 
 - Visitor exploration
@@ -30,11 +31,13 @@ Design every institutional workflow before implementation. The institution — n
 - Onboarding
 
 ### 2. Student Lifecycle
+
 **How students progress through the institution.**
 
 Visitor → Applicant → Student → Builder → Contributor → Mentor → Instructor → Research Fellow → Alumni → Community Leader
 
 Each transition requires:
+
 - Evidence
 - Skills
 - Projects
@@ -43,6 +46,7 @@ Each transition requires:
 - Reflection
 
 ### 3. Mentor Lifecycle
+
 **How mentors contribute to the institution.**
 
 - Recruitment
@@ -56,6 +60,7 @@ Each transition requires:
 - Recognition
 
 ### 4. Instructor Lifecycle
+
 **How instructors teach and evolve.**
 
 - Course creation
@@ -67,11 +72,13 @@ Each transition requires:
 - Continuous improvement
 
 ### 5. Curriculum Governance
+
 **How content evolves through research and feedback.**
 
 - Research → Knowledge Package → Proposal → Review → Approval → Publication → Feedback → Continuous Improvement
 
 ### 6. Content Governance
+
 **How quality is maintained across all content.**
 
 - Peer review
@@ -82,6 +89,7 @@ Each transition requires:
 - Continuous improvement
 
 ### 7. Research OS
+
 **How research becomes teaching.**
 
 Every lesson → Knowledge Package → Research → Experiment → Publication → Open Source → Teaching
@@ -89,6 +97,7 @@ Every lesson → Knowledge Package → Research → Experiment → Publication �
 Research becomes continuous.
 
 ### 8. Open Source
+
 **How contribution creates value.**
 
 - Project selection
@@ -98,6 +107,7 @@ Research becomes continuous.
 - Institutional impact
 
 ### 9. Community
+
 **How people connect and support each other.**
 
 - Discussions
@@ -108,6 +118,7 @@ Research becomes continuous.
 - Recognition
 
 ### 10. Events
+
 **How people gather and learn together.**
 
 - Workshops
@@ -117,6 +128,7 @@ Research becomes continuous.
 - Community building
 
 ### 11. Hackathons
+
 **How people build together under pressure.**
 
 - Team formation
@@ -128,6 +140,7 @@ Research becomes continuous.
 - Follow-through
 
 ### 12. Innovation Labs
+
 **How ideas become reality.**
 
 - Idea submission
@@ -139,6 +152,7 @@ Research becomes continuous.
 - Deployment
 
 ### 13. Certification
+
 **How skills are verified.**
 
 - Portfolio verification
@@ -149,6 +163,7 @@ Research becomes continuous.
 - Continuous verification
 
 ### 14. Career Services
+
 **How careers begin.**
 
 - Portfolio presentation
@@ -160,6 +175,7 @@ Research becomes continuous.
 - Capability timeline
 
 ### 15. Alumni
+
 **How relationships endure.**
 
 - Networking
@@ -171,6 +187,7 @@ Research becomes continuous.
 - Community building
 
 ### 16. Partnerships
+
 **How the ecosystem grows.**
 
 - Industry partnerships
@@ -182,6 +199,7 @@ Research becomes continuous.
 ## Additional Domains
 
 ### Scholarships
+
 **How financial barriers are removed.**
 
 - Application
@@ -191,6 +209,7 @@ Research becomes continuous.
 - Impact measurement
 
 ### Volunteers
+
 **How contribution is recognized.**
 
 - Recruitment
@@ -200,6 +219,7 @@ Research becomes continuous.
 - Career development
 
 ### Social Impact
+
 **How the institution creates value beyond education.**
 
 - Problem identification
@@ -211,23 +231,29 @@ Research becomes continuous.
 ## Core Requirements
 
 ### 1. Every Domain Must Be a Runtime
+
 Each institutional domain must be designed as a reusable runtime that can be applied to future programs.
 
 ### 2. Every Workflow Must Be Evidence-Based
+
 Every institutional decision must be backed by evidence, not intuition.
 
 ### 3. Every Transition Must Be Verified
+
 Every progression (student → builder → contributor → mentor) must be verified through evidence, skills, projects, portfolio, contribution, and reflection.
 
 ### 4. Every Process Must Be Continuous
+
 No institutional process has a final state. Everything evolves through research, feedback, and improvement.
 
 ### 5. Every Role Must Be Distinct
+
 Different roles (student, mentor, instructor, researcher, administrator, volunteer, partner) require different experiences.
 
 ## Success Metrics
 
 ### Institutional Health
+
 - Student retention rate
 - Mentor engagement rate
 - Instructor satisfaction
@@ -239,6 +265,7 @@ Different roles (student, mentor, instructor, researcher, administrator, volunte
 - Social impact
 
 ### Not Just Completion Rates
+
 - Learning depth (not just completion)
 - Contribution quality (not just quantity)
 - Community impact (not just individual success)
@@ -273,23 +300,27 @@ Institution Runtime
 ## Implementation Approach
 
 ### Phase 1: Discovery (Current)
+
 - Design all institutional workflows
 - Define success metrics
 - Create implementation roadmap
 
 ### Phase 2: Core Runtimes
+
 - Student Lifecycle Runtime
 - Mentor Lifecycle Runtime
 - Research OS Runtime
 - Open Source Runtime
 
 ### Phase 3: Extended Runtimes
+
 - Admissions Runtime
 - Community Runtime
 - Career Services Runtime
 - Alumni Runtime
 
 ### Phase 4: Ecosystem Runtimes
+
 - Partnerships Runtime
 - Scholarships Runtime
 - Volunteers Runtime

@@ -26,17 +26,18 @@
 
 ### Primary Application
 
-| Context | Color | Hex |
-|---------|-------|-----|
-| Primary buttons | Forest Green | #0e382e |
-| Backgrounds | Warm Ivory | #f7f4ec |
+| Context             | Color         | Hex     |
+| ------------------- | ------------- | ------- |
+| Primary buttons     | Forest Green  | #0e382e |
+| Backgrounds         | Warm Ivory    | #f7f4ec |
 | Accents, highlights | Heritage Gold | #d4af37 |
-| Secondary elements | Sage | #8a9a8b |
-| Nature elements | Earth | #6a7c52 |
+| Secondary elements  | Sage          | #8a9a8b |
+| Nature elements     | Earth         | #6a7c52 |
 
 ### Anti-Patterns
 
 **NEVER use:**
+
 - Gray placeholder mountains
 - Generic black/white cards
 - Random gradients/blobs/particles
@@ -45,6 +46,7 @@
 - Generic dashboard layouts
 
 **ALWAYS use:**
+
 - Bhavya brand colors from token system
 - Editorial typography (Playfair Display + Inter)
 - Purposeful motion with meaning
@@ -93,19 +95,19 @@
 
 ### Official Accounts
 
-| Platform | Username | Status |
-|----------|----------|--------|
-| Website | bhavyafoundation.org | Live |
-| GitHub | thebhavyafoundation | Live |
-| LinkedIn | Bhavya Foundation | Live |
-| X (Twitter) | @bhavyafoundation | Pending |
-| YouTube | @bhavyafoundation | Pending |
-| Instagram | @bhavyafoundation | Pending |
+| Platform    | Username             | Status  |
+| ----------- | -------------------- | ------- |
+| Website     | bhavyafoundation.org | Live    |
+| GitHub      | thebhavyafoundation  | Live    |
+| LinkedIn    | Bhavya Foundation    | Live    |
+| X (Twitter) | @bhavyafoundation    | Pending |
+| YouTube     | @bhavyafoundation    | Pending |
+| Instagram   | @bhavyafoundation    | Pending |
 
 ### Banner Sizes
 
-| Platform | Size | Content |
-|----------|------|---------|
-| LinkedIn | 1584 x 396 | Logo + "Building for Generations" + URL |
-| Twitter/X | 1500 x 500 | Logo + tagline |
-| YouTube | 2560 x 1440 | Logo + four missions + website |
+| Platform  | Size        | Content                                 |
+| --------- | ----------- | --------------------------------------- |
+| LinkedIn  | 1584 x 396  | Logo + "Building for Generations" + URL |
+| Twitter/X | 1500 x 500  | Logo + tagline                          |
+| YouTube   | 2560 x 1440 | Logo + four missions + website          |
