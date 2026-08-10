@@ -1,0 +1,17 @@
+
+╔═══════════════════════════════════════════════════╗
+║     Bhavya AI Lab OS Runtime API v3.0.0          ║
+║     Capability Execution Engine                   ║
+╚═══════════════════════════════════════════════════╝
+
+Runtime API v3 listening on http://localhost:3100
+
+Runtime ready at http://localhost:3100
+Health:   http://localhost:3100/health
+Caps:     http://localhost:3100/capabilities
+Courses:  http://localhost:3100/courses
+Lessons:  http://localhost:3100/lessons
+Example:  curl -X POST http://localhost:3100/capability/lesson_generation -H "Content-Type: application/json" -d '{"input":{"id":"test","title":"Test","concepts":[]}}'
+
+Press Ctrl+C to stop.
+

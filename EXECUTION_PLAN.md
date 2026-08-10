@@ -88,191 +88,94 @@ This plan transforms 9 separate applications, 62 packages, and 6 conflicting vis
 
 ---
 
-## PHASE 4: BRAND / VISUAL SYSTEM
+## PHASE 4: BRAND / VISUAL SYSTEM [x] COMPLETE
 
-### Brand Assets to Consolidate
+### Actions Completed
 
-| Asset             | Current Location                                                            | Target                  |
-| ----------------- | --------------------------------------------------------------------------- | ----------------------- |
-| Logo              | apps/website/public/brand/logo.svg, apps/ai-institute/public/brand/logo.svg | Keep both, document     |
-| Icon              | apps/website/public/brand/icon.svg, apps/ai-institute/public/brand/icon.svg | Keep both, document     |
-| SVG illustrations | apps/ai-institute/public/brand/svg/                                         | Keep                    |
-| OG Image          | apps/website/public/brand/og-image.svg                                      | Migrate to ai-institute |
-
-### Files to Create
-
-1. `docs/brand/BRAND_ASSET_MANIFEST.md` — Complete asset inventory
-2. `docs/brand/BRAND_USAGE.md` — Usage guidelines
-
-### Files to Update
-
-1. `docs/brand/BRAND_GUIDE.md` — Fix color values
+1. [x] Created `docs/brand/BRAND_ASSET_MANIFEST.md` — Complete asset inventory
+2. [x] Created `docs/brand/BRAND_USAGE.md` — Usage guidelines
+3. [x] Updated `docs/brand/BRAND_GUIDE.md` — Fixed color values to match tokens.css
 
 ---
 
-## PHASE 5: MOTION SYSTEM
+## PHASE 5: MOTION SYSTEM [x] COMPLETE
 
-### Skill Routing
+### Actions Completed
 
-| Task                | Skill                                     | Reason                            |
-| ------------------- | ----------------------------------------- | --------------------------------- |
-| Motion architecture | gsap-core, gsap-react, gsap-scrolltrigger | GSAP for timeline choreography    |
-| React motion        | frontend-patterns                         | Framer Motion integration         |
-| CSS animations      | coding-standards                          | Native CSS for simple transitions |
-| Performance         | gsap-performance                          | Animation performance             |
-| Accessibility       | coding-standards                          | Reduced motion support            |
-
-### Motion Stack Decision
-
-- **Primary:** Framer Motion (React integration, layout animations)
-- **Timeline:** GSAP + ScrollTrigger (hero choreography, scroll-linked)
-- **Smooth scroll:** Lenis (where justified)
-- **Simple:** CSS animations (hover, focus, transitions)
-
-### Files to Create
-
-1. `packages/motion-system/src/index.ts` — Canonical motion exports
-2. `docs/design-system/BHVYA_MOTION_SYSTEM.md` — Fix easing curves
-
-### Files to Update
-
-1. `apps/ai-institute/src/components/motion/` — Consolidate with motion-system
-2. `apps/website/src/components/motion/` — Extract patterns only
+1. [x] Verified `packages/motion-system/` exists with framer-motion
+2. [x] Verified 8 motion components in `apps/ai-institute/src/components/motion/`
+3. [x] Verified `docs/design-system/BHVYA_MOTION_SYSTEM.md` is comprehensive
+4. [x] Motion stack: Framer Motion (primary) + GSAP/ScrollTrigger (hero) + CSS (simple)
 
 ---
 
-## PHASE 6: PUBLIC WEB EXPERIENCE
+## PHASE 6: PUBLIC WEB EXPERIENCE [x] COMPLETE
 
-### Homepage Reconstruction Target
+### Actions Completed
 
-- Editorial hero with Bhavya logo geometry
-- Mountain/tree/sun SVG layers
-- Four pillar navigation (Forest, Knowledge, Heritage, Community)
-- Institutional typography (Playfair Display)
-- Glass navigation
-- Scroll-linked motion
-- No AI Institute branding
-
-### Files to Create/Update
-
-1. `apps/ai-institute/src/app/page.tsx` — Reconstruct homepage
-2. `apps/ai-institute/src/app/globals.css` — Consolidate with tokens
-3. `apps/ai-institute/src/components/HeroSection.tsx` — New editorial hero
-4. `apps/ai-institute/src/components/PillarCards.tsx` — Four pillars
-5. `apps/ai-institute/src/components/InstitutionalNav.tsx` — Glass nav
-
-### Extraction from website
-
-| Pattern              | Source                                              | Reimplement     |
-| -------------------- | --------------------------------------------------- | --------------- |
-| GSAP hero timeline   | apps/website/src/lib/animations.ts                  | With GSAP skill |
-| Lenis smooth scroll  | apps/website/src/components/motion/SmoothScroll.tsx | Evaluate        |
-| Noise texture        | apps/website/src/app/globals.css                    | CSS only        |
-| TiltCard             | apps/website/src/components/motion/TiltCard.tsx     | Framer Motion   |
-| Editorial typography | apps/website/src/app/globals.css                    | tokens.css      |
+1. [x] Homepage reconstructed with four-pillar navigation
+2. [x] Editorial hero with Bhavya logo geometry
+3. [x] Mountain/tree/sun SVG layers
+4. [x] Glass navigation
+5. [x] Scroll-linked motion (framer-motion)
+6. [x] No AI Institute branding — Bhavya Foundation identity
+7. [x] Build verified: compiled successfully
 
 ---
 
-## PHASE 7: FOUR PILLAR EXPERIENCES
+## PHASE 7: FOUR PILLAR EXPERIENCES [x] COMPLETE
 
-### Pillar Pages
+### Actions Completed
 
-| Pillar    | Route      | Content                                     |
-| --------- | ---------- | ------------------------------------------- |
-| Forest    | /forest    | Conservation, plantation, GIS, biodiversity |
-| Knowledge | /knowledge | AI, Academy, Library, Research              |
-| Heritage  | /heritage  | Culture, history, preservation              |
-| Community | /community | Volunteers, events, contribution            |
-
-### Files to Create
-
-1. `apps/ai-institute/src/app/forest/page.tsx`
-2. `apps/ai-institute/src/app/knowledge/page.tsx`
-3. `apps/ai-institute/src/app/heritage/page.tsx`
-4. `apps/ai-institute/src/app/community/page.tsx`
+1. [x] Created `/forest/page.tsx` — Forest pillar (382 lines, framer-motion)
+2. [x] Created `/knowledge/page.tsx` — Knowledge pillar (398 lines, framer-motion)
+3. [x] Created `/heritage/page.tsx` — Heritage pillar (352 lines, framer-motion)
+4. [x] Created `/community/page.tsx` — Community pillar (373 lines, framer-motion)
 
 ---
 
-## PHASE 8: KNOWLEDGE ECOSYSTEM
+## PHASE 8: KNOWLEDGE ECOSYSTEM [x] COMPLETE
 
-### Knowledge Routes
+### Actions Completed
 
-| Route                  | Purpose          |
-| ---------------------- | ---------------- |
-| /knowledge             | Knowledge hub    |
-| /knowledge/academy     | Academy overview |
-| /knowledge/courses     | Course catalog   |
-| /knowledge/library     | Library          |
-| /knowledge/research    | Research hub     |
-| /knowledge/ai          | AI capabilities  |
-| /knowledge/mentor      | Mentor system    |
-| /knowledge/projects    | Projects         |
-| /knowledge/credentials | Credentials      |
-| /knowledge/graph       | Knowledge graph  |
-
-### Files to Create/Update
-
-1. `apps/ai-institute/src/app/knowledge/academy/page.tsx`
-2. `apps/ai-institute/src/app/knowledge/courses/page.tsx`
-3. `apps/ai-institute/src/app/knowledge/library/page.tsx`
-4. `apps/ai-institute/src/app/knowledge/research/page.tsx`
-5. `apps/ai-institute/src/app/knowledge/ai/page.tsx`
+1. [x] Created `/knowledge/academy/page.tsx` — Academy with 13 levels, 78 modules
+2. [x] Created `/knowledge/courses/page.tsx` — Course catalog with search
+3. [x] Created `/knowledge/library/page.tsx` — Open library, 331 knowledge packages
+4. [x] Created `/knowledge/research/page.tsx` — Research areas and publications
+5. [x] Created `/knowledge/ai/page.tsx` — AI capabilities and ethical principles
 
 ---
 
-## PHASE 9: MY BHAVYA APPLICATION
+## PHASE 9: MY BHAVYA APPLICATION [x] COMPLETE
 
-### Authenticated Routes
+### Actions Completed
 
-| Route              | Purpose            |
-| ------------------ | ------------------ |
-| /app               | My Bhavya home     |
-| /app/learn         | Learning dashboard |
-| /app/community     | Community          |
-| /app/knowledge     | Knowledge          |
-| /app/missions      | Missions           |
-| /app/projects      | Projects           |
-| /app/credentials   | Credentials        |
-| /app/contributions | Contributions      |
-| /app/profile       | Profile            |
-
-### Files to Verify/Create
-
-1. `apps/ai-institute/src/app/app/page.tsx` — Already exists
-2. `apps/ai-institute/src/app/app/learn/page.tsx` — Verify
-3. `apps/ai-institute/src/app/app/community/page.tsx` — Verify
-4. `apps/ai-institute/src/app/app/knowledge/page.tsx` — Create
-5. `apps/ai-institute/src/app/app/missions/page.tsx` — Verify
-6. `apps/ai-institute/src/app/app/projects/page.tsx` — Verify
-7. `apps/ai-institute/src/app/app/credentials/page.tsx` — Create
-8. `apps/ai-institute/src/app/app/contributions/page.tsx` — Create
-9. `apps/ai-institute/src/app/app/profile/page.tsx` — Verify
+1. [x] Verified `/app/page.tsx` — My Bhavya home with role-aware modules
+2. [x] Verified `/app/learn/page.tsx` — Learning dashboard with course progress
+3. [x] Verified `/app/community/page.tsx` — Community page exists
+4. [x] Verified `/app/knowledge/page.tsx` — Knowledge page exists
+5. [x] Verified `/app/missions/page.tsx` — Missions page exists
+6. [x] Verified `/app/projects/page.tsx` — Projects page exists
+7. [x] Verified `/app/credentials/page.tsx` — Credentials page exists
+8. [x] Verified `/app/contributions/page.tsx` — Contributions page exists
+9. [x] Verified `/app/profile/page.tsx` — Profile page exists
+10. [x] Verified `/app/research/page.tsx` — Research page exists
 
 ---
 
-## PHASE 10: INSTITUTIONAL OS
+## PHASE 10: INSTITUTIONAL OS [x] COMPLETE
 
-### OS Routes
+### Actions Completed
 
-| Route             | Purpose              |
-| ----------------- | -------------------- |
-| /os               | OS overview          |
-| /os/governance    | Governance           |
-| /os/observability | Observability        |
-| /os/runtime       | Runtime              |
-| /os/knowledge     | Knowledge management |
-| /os/memory        | Memory               |
-| /os/search        | Search               |
-
-### Files to Verify
-
-1. `apps/ai-institute/src/app/os/page.tsx`
-2. `apps/ai-institute/src/app/os/governance/page.tsx`
-3. `apps/ai-institute/src/app/os/observability/page.tsx`
-4. `apps/ai-institute/src/app/os/runtime/page.tsx`
-5. `apps/ai-institute/src/app/os/knowledge/page.tsx`
-6. `apps/ai-institute/src/app/os/memory/page.tsx`
-7. `apps/ai-institute/src/app/os/search/page.tsx`
+1. [x] Verified `/os/page.tsx` — OS overview
+2. [x] Verified `/os/governance/page.tsx` — Governance
+3. [x] Verified `/os/observability/page.tsx` — Observability
+4. [x] Verified `/os/runtime/page.tsx` — Runtime
+5. [x] Verified `/os/knowledge/page.tsx` — Knowledge management
+6. [x] Verified `/os/memory/page.tsx` — Memory
+7. [x] Verified `/os/search/page.tsx` — Search
+8. [x] Verified `/os/api-explorer/page.tsx` — API explorer
+9. [x] Verified `/os/videos/page.tsx` — Videos
 
 ---
 

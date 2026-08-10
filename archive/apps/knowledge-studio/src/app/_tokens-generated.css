@@ -1,0 +1,396 @@
+/*
+ * AUTO-GENERATED FILE - DO NOT EDIT
+ * Source: packages/platform-ui/src/styles/tokens.css
+ * Run: node scripts/sync-tokens.mjs
+ */
+
+/*
+ * Bhavya OS Design Tokens — Canonical Source of Truth
+ *
+ * Brand: Forest #1a3a2a, Gold #c9a227, Earth #8a7359, Cream #f5f1e6
+ * All Bhavya apps MUST import this file. No app-level token overrides.
+ *
+ * Usage:
+ *   - Tailwind: bg-bg-primary, text-text-primary, border-border-primary
+ *   - CSS: var(--color-bg-primary), var(--color-text-primary)
+ *   - Direct: text-accent-gold, bg-accent-green
+ */
+
+@theme {
+  /* ============================================
+     BHAVYA BRAND COLORS
+     ============================================ */
+
+  /* Core brand */
+  --color-brand-forest: #1a3a2a;
+  --color-brand-gold: #c9a227;
+  --color-brand-earth: #8a7359;
+  --color-brand-cream: #f5f1e6;
+
+  /* Forest scale */
+  --color-forest-50: #f0fdf4;
+  --color-forest-100: #dcfce7;
+  --color-forest-200: #bbf7d0;
+  --color-forest-300: #86efac;
+  --color-forest-400: #4ade80;
+  --color-forest-500: #22c55e;
+  --color-forest-600: #16a34a;
+  --color-forest-700: #15803d;
+  --color-forest-800: #166534;
+  --color-forest-900: #14532d;
+  --color-forest-950: #052e16;
+
+  /* Gold scale */
+  --color-gold-50: #fefce8;
+  --color-gold-100: #fef9c3;
+  --color-gold-200: #fef08a;
+  --color-gold-300: #fde047;
+  --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
+  --color-gold-600: #ca8a04;
+  --color-gold-700: #a16207;
+  --color-gold-800: #854d0e;
+  --color-gold-900: #713f12;
+
+  /* Earth scale */
+  --color-earth-50: #faf8f5;
+  --color-earth-100: #f0ebe3;
+  --color-earth-200: #e0d5c7;
+  --color-earth-300: #c9b8a2;
+  --color-earth-400: #b09a7c;
+  --color-earth-500: #9a8265;
+  --color-earth-600: #8a7359;
+  --color-earth-700: #735f4b;
+  --color-earth-800: #5f4f40;
+  --color-earth-900: #4f4236;
+
+  /* ============================================
+     SEMANTIC COLORS (Dark Mode Default)
+     ============================================ */
+
+  /* Backgrounds */
+  --color-bg-primary: #0a0f0d;
+  --color-bg-secondary: #111916;
+  --color-bg-tertiary: #1a2420;
+  --color-bg-elevated: #1e2b26;
+  --color-bg-hover: #243029;
+  --color-bg-active: #2d3b33;
+  --color-bg-overlay: rgba(0, 0, 0, 0.6);
+
+  /* Text */
+  --color-text-primary: #f5f1e6;
+  --color-text-secondary: #b8b0a0;
+  --color-text-tertiary: #7a7268;
+  --color-text-muted: #4a4540;
+  --color-text-inverse: #0a0f0d;
+
+  /* Borders */
+  --color-border-primary: rgba(245, 241, 230, 0.08);
+  --color-border-secondary: rgba(245, 241, 230, 0.15);
+  --color-border-focus: #c9a227;
+
+  /* Accent (brand shortcuts) */
+  --color-accent-green: #1a3a2a;
+  --color-accent-green-hover: #245038;
+  --color-accent-green-light: #4ade80;
+  --color-accent-gold: #c9a227;
+  --color-accent-gold-hover: #b8921f;
+  --color-accent-gold-light: #facc15;
+  --color-accent-earth: #8a7359;
+  --color-accent-earth-hover: #735f4b;
+
+  /* Status (semantic using brand) */
+  --color-status-success: #22c55e;
+  --color-status-warning: #eab308;
+  --color-status-error: #ef4444;
+  --color-status-info: #3b82f6;
+
+  /* Score */
+  --color-score-excellent: #22c55e;
+  --color-score-good: #3b82f6;
+  --color-score-fair: #eab308;
+  --color-score-poor: #ef4444;
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", monospace;
+  --font-display:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* ============================================
+     SPACING
+     ============================================ */
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================ */
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ============================================
+     SHADOWS
+     ============================================ */
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow-gold:
+    0 0 20px rgba(201, 162, 39, 0.2), 0 0 60px rgba(201, 162, 39, 0.08);
+  --shadow-glow-green:
+    0 0 20px rgba(26, 58, 42, 0.3), 0 0 60px rgba(26, 58, 42, 0.1);
+
+  /* ============================================
+     TRANSITIONS
+     ============================================ */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* ============================================
+     Z-INDEX
+     ============================================ */
+
+  --z-dropdown: 50;
+  --z-modal: 100;
+  --z-toast: 150;
+  --z-tooltip: 200;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* ============================================
+   COMPONENT CLASSES
+   ============================================ */
+
+@layer components {
+  .glass {
+    background: rgba(17, 25, 22, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-primary);
+  }
+
+  .glass-gold {
+    background: rgba(201, 162, 39, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 162, 39, 0.15);
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--color-text-primary),
+      var(--color-accent-gold)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 162, 39, 0.3),
+      rgba(26, 58, 42, 0.3)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glow-green {
+    box-shadow: var(--shadow-glow-green);
+  }
+
+  .glow-gold {
+    box-shadow: var(--shadow-glow-gold);
+  }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-active);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-tertiary) 25%,
+    var(--color-bg-hover) 50%,
+    var(--color-bg-tertiary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 200ms ease-out;
+}
+
+.animate-slide-in {
+  animation: slide-in 200ms ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer,
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-pulse-soft {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ============================================
+   SCROLLBAR HIDE UTILITY
+   ============================================ */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

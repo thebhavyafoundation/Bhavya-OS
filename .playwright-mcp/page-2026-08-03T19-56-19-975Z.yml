@@ -1,0 +1,127 @@
+- generic [ref=f3e1]:
+  - alert [ref=f3e182]
+  - generic [ref=f3e546]:
+    - complementary [ref=f3e547]:
+      - link "B GitHub OS Engineering Mentor" [ref=f3e549] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e550]: B
+        - generic [ref=f3e551]:
+          - generic [ref=f3e552]: GitHub OS
+          - generic [ref=f3e553]: Engineering Mentor
+      - button [ref=f3e555]:
+        - text: Search...
+        - generic [ref=f3e559]: K
+      - navigation [ref=f3e562]:
+        - link "Dashboard" [ref=f3e564] [cursor=pointer]:
+          - /url: /
+        - link "Repositories" [ref=f3e569] [cursor=pointer]:
+          - /url: /repositories
+        - link "Knowledge" [ref=f3e576] [cursor=pointer]:
+          - /url: /knowledge
+        - link "Learning" [ref=f3e581] [cursor=pointer]:
+          - /url: /learning
+        - link "Settings" [ref=f3e586] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f3e591]:
+        - generic [ref=f3e592]: BV
+        - generic [ref=f3e593]:
+          - generic [ref=f3e594]: Bhavya Foundation
+          - generic [ref=f3e595]: Admin
+    - main [ref=f3e596]:
+      - generic [ref=f3e597]:
+        - navigation [ref=f3e598]:
+          - link "Repositories" [ref=f3e599] [cursor=pointer]:
+            - /url: /repositories
+          - text: bhavya-platform
+        - generic [ref=f3e602]:
+          - generic [ref=f3e603]:
+            - generic [ref=f3e604]:
+              - heading "bhavya-platform" [level=1] [ref=f3e605]
+              - text: matureadopt
+            - paragraph [ref=f3e606]: Core platform packages — types, security, database, events, workflows
+            - generic [ref=f3e607]:
+              - generic [ref=f3e608]: TypeScript
+              - generic [ref=f3e609]: "45"
+              - generic [ref=f3e612]: "8"
+              - text: MIT
+            - generic [ref=f3e618]: platforminfrastructurepackages
+          - generic [ref=f3e619]:
+            - generic [ref=f3e620]: "90"
+            - paragraph [ref=f3e624]: Bhavya Score
+        - generic [ref=f3e625]:
+          - button "Overview" [ref=f3e626]
+          - button "Architecture" [active] [ref=f3e631]
+          - button "Learning" [ref=f3e636]
+          - button "Advisor" [ref=f3e640]
+          - button "Activity" [ref=f3e643]
+        - generic [ref=f3e673]:
+          - generic [ref=f3e674]:
+            - heading "Architecture" [level=3] [ref=f3e675]
+            - paragraph [ref=f3e676]: Layered architecture with 11 shared packages. Foundation Layer (platform, types, security) → Data Layer (database) → Communication Layer (api, events, workflows) → Integration Layer (ai, providers, notifications) → Presentation Layer (platform-ui). Zero circular dependencies enforced.
+          - generic [ref=f3e677]:
+            - heading "Folder Structure" [level=3] [ref=f3e678]
+            - generic [ref=f3e679]: "{ \"packages\": { \"platform\": \"ID generation, fs utilities\", \"types\": \"30+ canonical domain types\", \"security\": \"Auth, rate limiting, crypto\", \"database\": \"SQLite abstraction, migrations\", \"api\": \"ApiClient, ApiError, middleware\", \"events\": \"EventBus with history, retry\", \"workflows\": \"DAG workflow engine\", \"ai\": \"AiProviderRegistry, PromptRegistry\", \"providers\": \"Git, Storage, Email, Search providers\", \"notifications\": \"NotificationManager, channels\", \"platform-ui\": \"10 shared React components\" } }"
+          - generic [ref=f3e680]:
+            - heading "Technology Stack" [level=3] [ref=f3e681]
+            - generic [ref=f3e682]:
+              - generic [ref=f3e683]: frameworkNext.js 15
+              - generic [ref=f3e684]: languageTypeScript
+              - generic [ref=f3e685]: databaseSQLite
+              - generic [ref=f3e686]: stylingTailwind CSS 4
+              - generic [ref=f3e687]: testingVitest
+              - generic [ref=f3e688]: buildTurborepo
+              - generic [ref=f3e689]: package managerpnpm
+          - generic [ref=f3e690]:
+            - heading "Detected Patterns (4)" [level=3] [ref=f3e691]
+            - generic [ref=f3e692]:
+              - generic [ref=f3e693]:
+                - generic [ref=f3e694]:
+                  - text: Provider Pattern
+                  - generic [ref=f3e695]: 95%
+                - paragraph [ref=f3e696]: Every external integration is abstracted behind a provider interface, enabling swappability and testability.
+              - generic [ref=f3e697]:
+                - generic [ref=f3e698]:
+                  - text: Event Bus
+                  - generic [ref=f3e699]: 92%
+                - paragraph [ref=f3e700]: Components communicate through domain events, enabling loose coupling and async processing.
+              - generic [ref=f3e701]:
+                - generic [ref=f3e702]:
+                  - text: Repository Pattern
+                  - generic [ref=f3e703]: 90%
+                - paragraph [ref=f3e704]: Data access is abstracted behind repository interfaces, separating domain logic from persistence.
+              - generic [ref=f3e705]:
+                - generic [ref=f3e706]:
+                  - text: Strategy Pattern
+                  - generic [ref=f3e707]: 85%
+                - paragraph [ref=f3e708]: Algorithms and behaviors are encapsulated behind interfaces, allowing runtime selection.
+          - generic [ref=f3e709]:
+            - heading "Architecture Decision Records (5)" [level=3] [ref=f3e710]
+            - generic [ref=f3e711]:
+              - generic [ref=f3e712]:
+                - generic [ref=f3e713]:
+                  - generic [ref=f3e714]: ADR-001
+                  - text: Package Promotion Ruleaccepted
+                - paragraph [ref=f3e715]: "Shared packages are earned, not planned. Promotion path: Application Module → Used Successfully → Required By Second App → Promote To Package."
+              - generic [ref=f3e716]:
+                - generic [ref=f3e717]:
+                  - generic [ref=f3e718]: ADR-002
+                  - text: API-Free Firstaccepted
+                - paragraph [ref=f3e719]: Prefer MCP > CLI > Browser > Official API > Build from scratch.
+              - generic [ref=f3e720]:
+                - generic [ref=f3e721]:
+                  - generic [ref=f3e722]: ADR-003
+                  - text: Dark Mode Firstaccepted
+                - paragraph [ref=f3e723]: Dark mode first, light mode later. Linear/Vercel aesthetic.
+              - generic [ref=f3e724]:
+                - generic [ref=f3e725]:
+                  - generic [ref=f3e726]: ADR-004
+                  - text: SQLite for Local Storageaccepted
+                - paragraph [ref=f3e727]: SQLite with better-sqlite3 for Windows compatibility.
+              - generic [ref=f3e728]:
+                - generic [ref=f3e729]:
+                  - generic [ref=f3e730]: ADR-005
+                  - text: Event-Driven Architectureaccepted
+                - paragraph [ref=f3e731]: Event-driven architecture with domain events.
+          - generic [ref=f3e732]:
+            - heading "Dependencies (4)" [level=3] [ref=f3e733]
+            - generic [ref=f3e734]: nextreactbetter-sqlite3lucide-react

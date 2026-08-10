@@ -6,9 +6,7 @@
   "capability": "video_generation",
   "execId": "exec-1785407048788-8b325b48",
   "sourceKnowledgeObject": "ko-ai-what-is-ai",
-  "parentArtifactIds": [
-    "visualSpec-1785407048781-6ca8a5"
-  ],
+  "parentArtifactIds": ["visualSpec-1785407048781-6ca8a5"],
   "qualityGate": "WARNING",
   "generatedAt": "2026-07-30T10:24:08.796Z"
 }

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="xMidYMid slice">
+  <!-- Sky gradient -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f4ee"/>
+      <stop offset="100%" stop-color="#e8ede6"/>
+    </linearGradient>
+    <linearGradient id="sunGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c9a227" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c9a227" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky -->
+  <rect width="1440" height="400" fill="url(#sky)"/>
+  
+  <!-- Sun glow -->
+  <circle cx="720" cy="100" r="200" fill="url(#sunGlow)"/>
+  <circle cx="720" cy="100" r="60" fill="#c9a227" opacity="0.3"/>
+  
+  <!-- Far mountains -->
+  <path d="M0 280 L120 200 L200 240 L320 160 L440 220 L520 180 L640 240 L720 140 L800 200 L880 160 L1000 220 L1080 180 L1200 240 L1320 180 L1440 220 L1440 400 L0 400Z" fill="#c5d1bf" opacity="0.6"/>
+  
+  <!-- Mid mountains -->
+  <path d="M0 320 L100 260 L200 290 L300 230 L420 280 L520 250 L640 300 L720 220 L840 280 L960 240 L1080 290 L1200 250 L1320 300 L1440 260 L1440 400 L0 400Z" fill="#a8b8a2" opacity="0.7"/>
+  
+  <!-- Near mountains -->
+  <path d="M0 350 L80 310 L180 340 L280 290 L380 330 L480 300 L600 350 L720 280 L840 330 L960 300 L1080 340 L1200 310 L1320 350 L1440 320 L1440 400 L0 400Z" fill="#8a9a84" opacity="0.8"/>
+  
+  <!-- Tree line -->
+  <path d="M0 380 L20 360 L40 380 L60 355 L80 375 L100 350 L120 370 L140 345 L160 365 L180 340 L200 360 L220 335 L240 355 L260 330 L280 350 L300 325 L320 345 L340 320 L360 340 L380 315 L400 335 L420 310 L440 330 L460 305 L480 325 L500 300 L520 320 L540 295 L560 315 L580 290 L600 310 L620 285 L640 305 L660 280 L680 300 L700 275 L720 295 L740 270 L760 290 L780 265 L800 285 L820 260 L840 280 L860 255 L880 275 L900 250 L920 270 L940 245 L960 265 L980 240 L1000 260 L1020 235 L1040 255 L1060 230 L1080 250 L1100 225 L1120 245 L1140 220 L1160 240 L1180 215 L1200 235 L1220 210 L1240 230 L1260 205 L1280 225 L1300 200 L1320 220 L1340 195 L1360 215 L1380 190 L1400 210 L1420 185 L1440 205 L1440 400 L0 400Z" fill="#1a3a2a" opacity="0.9"/>
+  
+  <!-- Ground -->
+  <rect y="380" width="1440" height="20" fill="#1a3a2a"/>
+</svg>

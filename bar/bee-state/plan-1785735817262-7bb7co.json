@@ -1,0 +1,613 @@
+{
+  "planId": "plan-1785735817262-7bb7co",
+  "goal": "Create a Grade 8 Biology lesson",
+  "status": "pending",
+  "nodes": [
+    {
+      "id": "node-001",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L1-001",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 1
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L1-001",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": {
+        "type": "rollback",
+        "handler": "default",
+        "params": {}
+      },
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-002",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L1-002",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 2
+      },
+      "outputs": null,
+      "preconditions": ["node-001"],
+      "dependencies": ["node-001"],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L1-002",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-003",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L1-003",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 3
+      },
+      "outputs": null,
+      "preconditions": ["node-002"],
+      "dependencies": ["node-002"],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L1-003",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-004",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L1-004",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 4
+      },
+      "outputs": null,
+      "preconditions": ["node-003"],
+      "dependencies": ["node-003"],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L1-004",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-005",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L3-001",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 5
+      },
+      "outputs": null,
+      "preconditions": ["node-004"],
+      "dependencies": ["node-004"],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L3-001",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-006",
+      "capabilityId": "D03-C02",
+      "workflowId": "WF-001",
+      "skillId": "SK-L3-002",
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        },
+        "step": 6
+      },
+      "outputs": null,
+      "preconditions": ["node-005"],
+      "dependencies": ["node-005"],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C02",
+        "workflowId": "WF-001",
+        "skillId": "SK-L3-002",
+        "agentId": "AG-EDU-001",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-007",
+      "capabilityId": "D03-C01",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C01",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-008",
+      "capabilityId": "D03-C04",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C04",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-009",
+      "capabilityId": "D03-C05",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-002",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C05",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-010",
+      "capabilityId": "D08-C01",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-MEDIA-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D08-C01",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-011",
+      "capabilityId": "D03-C03",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C03",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-012",
+      "capabilityId": "D03-C06",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C06",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-013",
+      "capabilityId": "D03-C07",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": null,
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C07",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-014",
+      "capabilityId": "D03-C08",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C08",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    },
+    {
+      "id": "node-015",
+      "capabilityId": "D03-C09",
+      "workflowId": null,
+      "skillId": null,
+      "agentId": "AG-EDU-001",
+      "inputs": {
+        "goal": "Create a Grade 8 Biology lesson",
+        "params": {
+          "gradeLevel": "8",
+          "subject": "biology"
+        }
+      },
+      "outputs": null,
+      "preconditions": [],
+      "dependencies": [],
+      "status": "pending",
+      "error": null,
+      "attempt": 0,
+      "startedAt": null,
+      "completedAt": null,
+      "provenance": {
+        "capabilityId": "D03-C09",
+        "actor": "bee-engine",
+        "source": "goal:create"
+      },
+      "retryPolicy": {
+        "maxAttempts": 3,
+        "backoffMs": 1000,
+        "strategy": "exponential"
+      },
+      "compensation": null,
+      "approval": null,
+      "timeoutMs": 300000
+    }
+  ],
+  "layers": [
+    [
+      "node-001",
+      "node-007",
+      "node-008",
+      "node-009",
+      "node-010",
+      "node-011",
+      "node-012",
+      "node-013",
+      "node-014",
+      "node-015"
+    ],
+    ["node-002"],
+    ["node-003"],
+    ["node-004"],
+    ["node-005"],
+    ["node-006"]
+  ],
+  "context": {
+    "goal": {
+      "text": "Create a Grade 8 Biology lesson",
+      "intent": "create",
+      "domain": "academics",
+      "subject": "biology",
+      "gradeLevel": "8",
+      "params": {
+        "gradeLevel": "8",
+        "subject": "biology"
+      },
+      "capabilities": [
+        "D03-C02",
+        "D03-C01",
+        "D03-C04",
+        "D03-C05",
+        "D08-C01",
+        "D03-C03",
+        "D03-C06",
+        "D03-C07",
+        "D03-C08",
+        "D03-C09"
+      ]
+    },
+    "createdAt": "2026-08-03T05:43:37.262Z"
+  },
+  "metrics": {
+    "totalNodes": 15,
+    "completed": 0,
+    "failed": 0,
+    "parallelized": 9,
+    "totalDurationMs": 0
+  },
+  "lastCheckpoint": "2026-08-03T05:43:37.262Z"
+}

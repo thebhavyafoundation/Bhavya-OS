@@ -1,0 +1,206 @@
+{
+  "version": "6.0",
+  "generated": "2026-08-06",
+  "applications": {
+    "APP-001": {
+      "name": "Foundation Website",
+      "metrics": {
+        "performance": {
+          "fcp": 1200,
+          "lcp": 2000,
+          "cls": 0.05,
+          "tbt": 150,
+          "score": 85
+        },
+        "accessibility": {
+          "score": 90,
+          "issues": 3,
+          "critical": 0
+        },
+        "seo": {
+          "score": 92,
+          "issues": 1,
+          "metaTags": 12,
+          "structuredData": true
+        },
+        "usage": {
+          "pageViews": 0,
+          "uniqueVisitors": 0,
+          "sessions": 0,
+          "bounceRate": 0,
+          "avgSessionDuration": 0
+        },
+        "errors": {
+          "total": 0,
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        },
+        "features": [
+          { "name": "hero", "adoption": 100, "usage": 100 },
+          { "name": "mission-cards", "adoption": 100, "usage": 95 },
+          { "name": "knowledge-packages", "adoption": 100, "usage": 80 },
+          { "name": "donation-form", "adoption": 0, "usage": 0 }
+        ],
+        "search": {
+          "queries": 0,
+          "topQueries": [],
+          "zeroResults": 0
+        },
+        "journeys": []
+      }
+    },
+    "APP-002": {
+      "name": "Transparency Portal",
+      "metrics": {
+        "performance": {
+          "fcp": 1100,
+          "lcp": 1800,
+          "cls": 0.03,
+          "tbt": 120,
+          "score": 88
+        },
+        "accessibility": {
+          "score": 85,
+          "issues": 5,
+          "critical": 0
+        },
+        "seo": {
+          "score": 88,
+          "issues": 2,
+          "metaTags": 8,
+          "structuredData": true
+        },
+        "usage": {
+          "pageViews": 0,
+          "uniqueVisitors": 0,
+          "sessions": 0,
+          "bounceRate": 0,
+          "avgSessionDuration": 0
+        },
+        "errors": {
+          "total": 0,
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        },
+        "features": [
+          { "name": "financials", "adoption": 100, "usage": 70 },
+          { "name": "governance", "adoption": 100, "usage": 60 },
+          { "name": "projects", "adoption": 100, "usage": 80 },
+          { "name": "policies", "adoption": 100, "usage": 50 }
+        ],
+        "search": {
+          "queries": 0,
+          "topQueries": [],
+          "zeroResults": 0
+        },
+        "journeys": []
+      }
+    },
+    "APP-003": {
+      "name": "Administration Platform",
+      "metrics": {
+        "performance": {
+          "fcp": 1300,
+          "lcp": 2200,
+          "cls": 0.04,
+          "tbt": 180,
+          "score": 82
+        },
+        "accessibility": {
+          "score": 85,
+          "issues": 4,
+          "critical": 0
+        },
+        "seo": {
+          "score": 85,
+          "issues": 3,
+          "metaTags": 6,
+          "structuredData": false
+        },
+        "usage": {
+          "pageViews": 0,
+          "uniqueVisitors": 0,
+          "sessions": 0,
+          "bounceRate": 0,
+          "avgSessionDuration": 0
+        },
+        "errors": {
+          "total": 0,
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        },
+        "features": [
+          { "name": "dashboard", "adoption": 100, "usage": 90 },
+          { "name": "content", "adoption": 100, "usage": 70 },
+          { "name": "users", "adoption": 100, "usage": 60 },
+          { "name": "audit", "adoption": 100, "usage": 50 }
+        ],
+        "search": {
+          "queries": 0,
+          "topQueries": [],
+          "zeroResults": 0
+        },
+        "journeys": []
+      }
+    },
+    "APP-004": {
+      "name": "Knowledge Platform",
+      "metrics": {
+        "performance": {
+          "fcp": 1150,
+          "lcp": 1900,
+          "cls": 0.04,
+          "tbt": 140,
+          "score": 86
+        },
+        "accessibility": {
+          "score": 85,
+          "issues": 4,
+          "critical": 0
+        },
+        "seo": {
+          "score": 87,
+          "issues": 2,
+          "metaTags": 8,
+          "structuredData": true
+        },
+        "usage": {
+          "pageViews": 0,
+          "uniqueVisitors": 0,
+          "sessions": 0,
+          "bounceRate": 0,
+          "avgSessionDuration": 0
+        },
+        "errors": {
+          "total": 0,
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        },
+        "features": [
+          { "name": "dashboard", "adoption": 100, "usage": 85 },
+          { "name": "ingest", "adoption": 100, "usage": 70 },
+          { "name": "packages", "adoption": 100, "usage": 75 },
+          { "name": "pipeline", "adoption": 100, "usage": 65 }
+        ],
+        "search": {
+          "queries": 0,
+          "topQueries": [],
+          "zeroResults": 0
+        },
+        "journeys": []
+      }
+    }
+  },
+  "summary": {
+    "totalApps": 4,
+    "avgPerformance": 85.25,
+    "avgAccessibility": 86.25,
+    "avgSeo": 88,
+    "totalErrors": 0,
+    "totalPageViews": 0
+  }
+}

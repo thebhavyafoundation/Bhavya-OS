@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "pages": [
+    {
+      "id": "website",
+      "name": "Main Website",
+      "path": "apps/website",
+      "status": "active",
+      "url": "https://bhavya-site-kohl.vercel.app"
+    },
+    {
+      "id": "admin",
+      "name": "Admin Dashboard",
+      "path": "apps/admin",
+      "status": "active"
+    },
+    {
+      "id": "docs",
+      "name": "Documentation",
+      "path": "apps/docs",
+      "status": "active"
+    },
+    {
+      "id": "forest",
+      "name": "Forest GIS",
+      "path": "apps/forest",
+      "status": "planned"
+    },
+    {
+      "id": "heritage",
+      "name": "Heritage Portal",
+      "path": "apps/heritage",
+      "status": "planned"
+    },
+    {
+      "id": "knowledge",
+      "name": "Knowledge Base",
+      "path": "apps/knowledge",
+      "status": "planned"
+    },
+    {
+      "id": "library",
+      "name": "Digital Library",
+      "path": "apps/library",
+      "status": "planned"
+    },
+    {
+      "id": "transparency",
+      "name": "Transparency Portal",
+      "path": "apps/transparency",
+      "status": "active"
+    },
+    {
+      "id": "volunteer",
+      "name": "Volunteer Portal",
+      "path": "apps/volunteer",
+      "status": "planned"
+    },
+    {
+      "id": "design-system",
+      "name": "Design System",
+      "path": "apps/design-system",
+      "status": "active"
+    }
+  ]
+}

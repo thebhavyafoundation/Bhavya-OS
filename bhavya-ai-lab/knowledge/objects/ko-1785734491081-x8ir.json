@@ -1,0 +1,115 @@
+{
+  "id": "ko-1785734491081-x8ir",
+  "title": "Introduction to Cell Biology",
+  "domain": "academics",
+  "subject": "biology",
+  "gradeLevel": "8",
+  "description": "The cell is the basic structural and functional unit of all living organisms. Cells are often called the building blocks of life. The study of cells is called cell biology. Cells consist of cytoplasm ",
+  "sourceType": "text",
+  "concepts": [
+    {
+      "name": "The cell is the basic",
+      "description": "The cell is the basic structural and functional unit of all living organisms",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Cells are often called the",
+      "description": "Cells are often called the building blocks of life",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "The study of cells is",
+      "description": "The study of cells is called cell biology",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Cells consist of cytoplasm enclosed",
+      "description": "Cells consist of cytoplasm enclosed within a membrane, which contains many biomolecules such as proteins and nucleic acids",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Cells can reproduce through cell",
+      "description": "Cells can reproduce through cell division",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "There are two main types",
+      "description": "There are two main types of cells: prokaryotic and eukaryotic",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Prokaryotic cells, such as bacteria,",
+      "description": "Prokaryotic cells, such as bacteria, lack a nucleus and membrane-bound organelles",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Eukaryotic cells, found in plants",
+      "description": "Eukaryotic cells, found in plants and animals, have a defined nucleus and specialized organelles like mitochondria, endoplasmic reticulum, and Golgi apparatus",
+      "difficulty": "intermediate"
+    }
+  ],
+  "definitions": [
+    {
+      "term": "The cell is",
+      "definition": "The cell is the basic structural and functional unit of all living organisms"
+    },
+    {
+      "term": "Cells are often",
+      "definition": "Cells are often called the building blocks of life"
+    },
+    {
+      "term": "The study of",
+      "definition": "The study of cells is called cell biology"
+    },
+    {
+      "term": "Cells consist of",
+      "definition": "Cells consist of cytoplasm enclosed within a membrane, which contains many biomolecules such as proteins and nucleic acids"
+    },
+    {
+      "term": "Cells can reproduce",
+      "definition": "Cells can reproduce through cell division"
+    },
+    {
+      "term": "There are two",
+      "definition": "There are two main types of cells: prokaryotic and eukaryotic"
+    }
+  ],
+  "examples": [
+    {
+      "scenario": "Application",
+      "explanation": "The cell is the basic structural and functional unit of all living organisms"
+    }
+  ],
+  "misconceptions": [
+    {
+      "misconception": "Surface understanding",
+      "correction": "Deep understanding needed"
+    }
+  ],
+  "exercises": [
+    {
+      "prompt": "Explain: The cell is the basic structural...",
+      "type": "short-answer",
+      "difficulty": "intermediate"
+    },
+    {
+      "prompt": "Explain: Cells are often called the building...",
+      "type": "short-answer",
+      "difficulty": "intermediate"
+    },
+    {
+      "prompt": "Explain: The study of cells is called...",
+      "type": "short-answer",
+      "difficulty": "intermediate"
+    },
+    {
+      "prompt": "Explain: Cells consist of cytoplasm enclosed within...",
+      "type": "short-answer",
+      "difficulty": "intermediate"
+    }
+  ],
+  "metadata": {
+    "wordCount": 130
+  },
+  "createdAt": "2026-08-03T05:21:31.082Z"
+}

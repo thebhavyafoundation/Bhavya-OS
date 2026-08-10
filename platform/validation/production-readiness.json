@@ -1,0 +1,144 @@
+{
+  "timestamp": "2026-08-06T05:59:15.129Z",
+  "overallScore": 100,
+  "scores": {
+    "platform": 100,
+    "engineering": 100,
+    "runtime": 100,
+    "architecture": 100,
+    "debt": 100
+  },
+  "checks": {
+    "platform": [
+      {
+        "name": "Core modules",
+        "passed": true,
+        "detail": "10/10 modules present",
+        "score": 1
+      },
+      {
+        "name": "Agent definitions",
+        "passed": true,
+        "detail": "10 agents defined",
+        "score": 1
+      },
+      {
+        "name": "Knowledge graphs",
+        "passed": true,
+        "detail": "7 graphs generated",
+        "score": 1
+      },
+      {
+        "name": "CLI",
+        "passed": true,
+        "detail": "CLI present",
+        "score": 1
+      },
+      {
+        "name": "Documentation",
+        "passed": true,
+        "detail": "6 handbooks",
+        "score": 1
+      }
+    ],
+    "engineering": [
+      {
+        "name": "Event types defined",
+        "passed": true,
+        "detail": "57 event type definitions",
+        "score": 1
+      },
+      {
+        "name": "Quality gates",
+        "passed": true,
+        "detail": "8 quality gates",
+        "score": 1
+      },
+      {
+        "name": "Memory structure",
+        "passed": true,
+        "detail": "8 memory categories",
+        "score": 1
+      },
+      {
+        "name": "Execution scheduler",
+        "passed": true,
+        "detail": "Present",
+        "score": 1
+      }
+    ],
+    "runtime": [
+      {
+        "name": "Event bus operational",
+        "passed": true,
+        "detail": "Events flowing",
+        "score": 1
+      },
+      {
+        "name": "Worker pool operational",
+        "passed": true,
+        "detail": "1 workers",
+        "score": 1
+      },
+      {
+        "name": "Scheduler operational",
+        "passed": true,
+        "detail": "Tasks accepted",
+        "score": 1
+      },
+      {
+        "name": "Memory operational",
+        "passed": true,
+        "detail": "Storage working",
+        "score": 1
+      }
+    ],
+    "architecture": [
+      {
+        "name": "Workspace structure",
+        "passed": true,
+        "detail": "apps:true packages:true platform:true",
+        "score": 2.3333333333333335
+      },
+      {
+        "name": "Build system",
+        "passed": true,
+        "detail": "turbo.json present",
+        "score": 1
+      },
+      {
+        "name": "Package manager",
+        "passed": true,
+        "detail": "pnpm-workspace.yaml present",
+        "score": 1
+      },
+      {
+        "name": "Shared packages",
+        "passed": true,
+        "detail": "50 packages",
+        "score": 1
+      }
+    ],
+    "debt": [
+      {
+        "name": "No duplicate event buses",
+        "passed": true,
+        "detail": "2 event-related files",
+        "score": 1
+      },
+      {
+        "name": "Memory populated",
+        "passed": true,
+        "detail": "12 entries",
+        "score": 1
+      },
+      {
+        "name": "Validation tests",
+        "passed": true,
+        "detail": "13 test files",
+        "score": 1
+      }
+    ]
+  },
+  "recommendations": []
+}

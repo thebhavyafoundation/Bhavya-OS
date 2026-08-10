@@ -4,7 +4,7 @@
  * Simple migration framework for SQLite databases.
  */
 
-import { getDatabase } from "./sqlite.js";
+import { getDatabase } from "./sqlite";
 
 export interface Migration {
   id: string;

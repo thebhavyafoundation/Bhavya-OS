@@ -12,6 +12,7 @@ import {
   ChevronRight,
   ArrowRight,
 } from "lucide-react";
+import { Card, Badge, Skeleton, Breadcrumb, AppLayout } from "@bhavya/platform-ui";
 
 interface Repository {
   id: string;
@@ -21,6 +22,20 @@ interface Repository {
   bhavya_score: number;
   engineering_maturity: string;
 }
+
+function getScoreColor(score: number) {
+  if (score >= 90) return "text-score-excellent";
+  if (score >= 80) return "text-score-good";
+  if (score >= 70) return "text-score-fair";
+  return "text-score-poor";
+}
+
+const maturityVariant: Record<string, "success" | "info" | "warning" | "purple"> = {
+  emerging: "warning",
+  developing: "info",
+  mature: "success",
+  exemplary: "purple",
+};
 
 export default function Dashboard() {
   const [cmdOpen, setCmdOpen] = useState(false);
@@ -48,230 +63,221 @@ export default function Dashboard() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  function getScoreColor(score: number) {
-    if (score >= 90) return "text-emerald-400";
-    if (score >= 80) return "text-blue-400";
-    if (score >= 70) return "text-amber-400";
-    return "text-red-400";
-  }
-
-  const maturityColors: Record<string, string> = {
-    emerging: "bg-amber-900/40 text-amber-300 border-amber-800",
-    developing: "bg-blue-900/40 text-blue-300 border-blue-800",
-    mature: "bg-emerald-900/40 text-emerald-300 border-emerald-800",
-    exemplary: "bg-purple-900/40 text-purple-300 border-purple-800",
-  };
-
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
-      <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
-        <div className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-semibold text-[#fafafa]">
-                  Engineering Mentor
-                </h1>
-                <p className="text-sm text-[#71717a] mt-1">
-                  Understand repositories like a senior engineer
-                </p>
-              </div>
-              <button
-                onClick={() => setCmdOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-[#111111] border border-[#27272a] rounded-lg text-sm text-[#71717a] hover:text-[#fafafa] hover:border-[#3f3f46] transition-colors"
-              >
-                <Search size={14} />
-                <span>Search</span>
-                <kbd className="ml-2 px-1.5 py-0.5 bg-[#1a1a1a] border border-[#27272a] rounded text-[10px] font-mono">
-                  ⌘K
-                </kbd>
-              </button>
-            </div>
-          </header>
-
-          <div className="bg-[#111111] border border-[#27272a] rounded-lg p-6 mb-8">
-            <h2 className="text-sm font-medium text-[#fafafa] mb-4">
-              What would you like to do?
-            </h2>
-            <div className="grid grid-cols-3 gap-4">
-              <Link
-                href="/repositories"
-                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
-              >
-                <FolderGit2 size={20} className="text-[#3b82f6]" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-[#fafafa]">
-                    Browse Repositories
-                  </p>
-                  <p className="text-[11px] text-[#52525b]">
-                    Discover and analyze codebases
-                  </p>
-                </div>
-                <ArrowRight
-                  size={14}
-                  className="text-[#52525b] group-hover:text-[#3b82f6] transition-colors"
-                />
-              </Link>
-              <Link
-                href="/knowledge"
-                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
-              >
-                <BookOpen size={20} className="text-[#f59e0b]" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-[#fafafa]">
-                    Explore Knowledge
-                  </p>
-                  <p className="text-[11px] text-[#52525b]">
-                    Patterns, packages, and insights
-                  </p>
-                </div>
-                <ArrowRight
-                  size={14}
-                  className="text-[#52525b] group-hover:text-[#f59e0b] transition-colors"
-                />
-              </Link>
-              <Link
-                href="/learning"
-                className="flex items-center gap-3 p-4 bg-[#0a0a0a] border border-[#27272a] rounded-lg hover:border-[#3b82f6] transition-colors group"
-              >
-                <GraduationCap size={20} className="text-emerald-400" />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-[#fafafa]">
-                    Start Learning
-                  </p>
-                  <p className="text-[11px] text-[#52525b]">
-                    Educational exports and materials
-                  </p>
-                </div>
-                <ArrowRight
-                  size={14}
-                  className="text-[#52525b] group-hover:text-[#22c55e] transition-colors"
-                />
-              </Link>
-            </div>
-          </div>
-
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-medium text-[#fafafa]">
-                Recent Repositories
-              </h2>
-              <Link
-                href="/repositories"
-                className="text-xs text-[#3b82f6] hover:text-[#60a5fa] transition-colors"
-              >
-                View all
-              </Link>
-            </div>
-            {loading ? (
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="bg-[#111111] border border-[#27272a] rounded-lg p-4 animate-pulse"
-                  >
-                    <div className="h-4 bg-[#27272a] rounded w-1/3 mb-2" />
-                    <div className="h-3 bg-[#27272a] rounded w-1/2" />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {repositories.slice(0, 5).map((repo) => (
-                  <Link
-                    key={repo.id}
-                    href={`/repositories/${repo.id}`}
-                    className="flex items-center justify-between p-4 bg-[#111111] border border-[#27272a] rounded-lg hover:border-[#3f3f46] transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <FolderGit2 size={16} className="text-[#52525b]" />
-                      <div>
-                        <p className="text-sm font-medium text-[#fafafa]">
-                          {repo.name}
-                        </p>
-                        <p className="text-xs text-[#52525b] truncate max-w-md">
-                          {repo.description || "No description"}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      {repo.language && (
-                        <span className="flex items-center gap-1.5 text-xs text-[#52525b]">
-                          <span className="w-2 h-2 rounded-full bg-[#3b82f6]" />
-                          {repo.language}
-                        </span>
-                      )}
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-medium border ${maturityColors[repo.engineering_maturity] || ""}`}
-                      >
-                        {repo.engineering_maturity}
-                      </span>
-                      <span
-                        className={`text-sm font-semibold ${getScoreColor(repo.bhavya_score)}`}
-                      >
-                        {repo.bhavya_score}
-                      </span>
-                      <ChevronRight size={14} className="text-[#52525b]" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-              <p className="text-xs text-[#52525b] mb-1">Repositories</p>
-              <p className="text-2xl font-semibold text-[#fafafa]">
-                {repositories.length}
+    <AppLayout sidebar={<Sidebar />}>
+      <div className="animate-fade-in">
+        {/* Header */}
+        <header className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold text-text-primary">
+                Engineering Mentor
+              </h1>
+              <p className="text-sm text-text-tertiary mt-1">
+                Understand repositories like a senior engineer
               </p>
             </div>
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-              <p className="text-xs text-[#52525b] mb-1">Avg Bhavya Score</p>
-              <p
-                className={`text-2xl font-semibold ${getScoreColor(
-                  repositories.length
-                    ? Math.round(
-                        repositories.reduce((a, r) => a + r.bhavya_score, 0) /
-                          repositories.length,
-                      )
-                    : 0,
-                )}`}
-              >
-                {repositories.length
+            <button
+              onClick={() => setCmdOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-bg-secondary border border-border-primary rounded-lg text-sm text-text-tertiary hover:text-text-primary hover:border-border-secondary transition-colors"
+            >
+              <Search size={14} />
+              <span className="hidden sm:inline">Search</span>
+              <kbd className="ml-2 px-1.5 py-0.5 bg-bg-tertiary border border-border-primary rounded text-[10px] font-mono">
+                ⌘K
+              </kbd>
+            </button>
+          </div>
+        </header>
+
+        {/* Quick Actions */}
+        <Card padding="lg" className="mb-8">
+          <h2 className="text-sm font-medium text-text-primary mb-4">
+            What would you like to do?
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Link
+              href="/repositories"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+            >
+              <FolderGit2 size={20} className="text-accent-blue" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary">
+                  Browse Repositories
+                </p>
+                <p className="text-[11px] text-text-muted truncate">
+                  Discover and analyze codebases
+                </p>
+              </div>
+              <ArrowRight
+                size={14}
+                className="text-text-muted group-hover:text-accent-blue transition-colors flex-shrink-0"
+              />
+            </Link>
+            <Link
+              href="/knowledge"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+            >
+              <BookOpen size={20} className="text-accent-yellow" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary">
+                  Explore Knowledge
+                </p>
+                <p className="text-[11px] text-text-muted truncate">
+                  Patterns, packages, and insights
+                </p>
+              </div>
+              <ArrowRight
+                size={14}
+                className="text-text-muted group-hover:text-accent-yellow transition-colors flex-shrink-0"
+              />
+            </Link>
+            <Link
+              href="/learning"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+            >
+              <GraduationCap size={20} className="text-accent-green" />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary">
+                  Start Learning
+                </p>
+                <p className="text-[11px] text-text-muted truncate">
+                  Educational exports and materials
+                </p>
+              </div>
+              <ArrowRight
+                size={14}
+                className="text-text-muted group-hover:text-accent-green transition-colors flex-shrink-0"
+              />
+            </Link>
+          </div>
+        </Card>
+
+        {/* Recent Repositories */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-medium text-text-primary">
+              Recent Repositories
+            </h2>
+            <Link
+              href="/repositories"
+              className="text-xs text-accent-blue hover:text-accent-blue-hover transition-colors"
+            >
+              View all
+            </Link>
+          </div>
+          {loading ? (
+            <div className="space-y-3">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} padding="md">
+                  <Skeleton width="30%" height={16} className="mb-2" />
+                  <Skeleton width="50%" height={12} />
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {repositories.slice(0, 5).map((repo, i) => (
+                <Link
+                  key={repo.id}
+                  href={`/repositories/${repo.id}`}
+                  className="block animate-fade-in"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                >
+                  <Card padding="md" hover>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <FolderGit2 size={16} className="text-text-muted flex-shrink-0" />
+                        <div className="min-w-0">
+                          <p className="text-sm font-medium text-text-primary truncate">
+                            {repo.name}
+                          </p>
+                          <p className="text-xs text-text-muted truncate max-w-md">
+                            {repo.description || "No description"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4 flex-shrink-0">
+                        {repo.language && (
+                          <span className="hidden sm:flex items-center gap-1.5 text-xs text-text-muted">
+                            <span className="w-2 h-2 rounded-full bg-accent-blue" />
+                            {repo.language}
+                          </span>
+                        )}
+                        <Badge
+                          variant={maturityVariant[repo.engineering_maturity] || "default"}
+                          size="sm"
+                        >
+                          {repo.engineering_maturity}
+                        </Badge>
+                        <span
+                          className={`text-sm font-semibold ${getScoreColor(repo.bhavya_score)}`}
+                        >
+                          {repo.bhavya_score}
+                        </span>
+                        <ChevronRight size={14} className="text-text-muted" />
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <Card padding="md">
+            <p className="text-xs text-text-muted mb-1">Repositories</p>
+            <p className="text-2xl font-semibold text-text-primary">
+              {repositories.length}
+            </p>
+          </Card>
+          <Card padding="md">
+            <p className="text-xs text-text-muted mb-1">Avg Bhavya Score</p>
+            <p
+              className={`text-2xl font-semibold ${getScoreColor(
+                repositories.length
                   ? Math.round(
                       repositories.reduce((a, r) => a + r.bhavya_score, 0) /
                         repositories.length,
                     )
-                  : "—"}
-              </p>
-            </div>
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-              <p className="text-xs text-[#52525b] mb-1">Maturity</p>
-              <p className="text-2xl font-semibold text-[#fafafa]">
-                {
-                  repositories.filter(
-                    (r) =>
-                      r.engineering_maturity === "mature" ||
-                      r.engineering_maturity === "exemplary",
-                  ).length
-                }
-                <span className="text-sm font-normal text-[#52525b]">
-                  {" "}
-                  / {repositories.length}
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <footer className="pt-8 border-t border-[#27272a] text-center text-xs text-[#52525b]">
-            GitHub OS v2.0 — Engineering Mentor — Bhavya Foundation
-          </footer>
+                  : 0,
+              )}`}
+            >
+              {repositories.length
+                ? Math.round(
+                    repositories.reduce((a, r) => a + r.bhavya_score, 0) /
+                      repositories.length,
+                  )
+                : "—"}
+            </p>
+          </Card>
+          <Card padding="md">
+            <p className="text-xs text-text-muted mb-1">Maturity</p>
+            <p className="text-2xl font-semibold text-text-primary">
+              {
+                repositories.filter(
+                  (r) =>
+                    r.engineering_maturity === "mature" ||
+                    r.engineering_maturity === "exemplary",
+                ).length
+              }
+              <span className="text-sm font-normal text-text-muted">
+                {" "}
+                / {repositories.length}
+              </span>
+            </p>
+          </Card>
         </div>
-      </main>
+
+        {/* Footer */}
+        <footer className="pt-8 border-t border-border-primary text-center text-xs text-text-muted">
+          GitHub OS v2.0 — Engineering Mentor — Bhavya Foundation
+        </footer>
+      </div>
 
       <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
-    </div>
+    </AppLayout>
   );
 }

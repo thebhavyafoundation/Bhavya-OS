@@ -22,24 +22,29 @@ The complete design system for Bhavya AI Institute. Built on existing platform c
 
 ## Color System
 
-### Brand Colors
+**IMPORTANT:** This document is outdated. The canonical color system is now defined in:
 
-| Color        | Hex     | Usage                     |
-| ------------ | ------- | ------------------------- |
-| Forest Green | #1a3a2a | Primary, headers, buttons |
-| Gold         | #c9a227 | Accents, badges, CTAs     |
-| Earth        | #8a7359 | Secondary actions         |
+- **Design System Board:** `apps/ai-institute/public/brand/assets/bhavya-design-system-board.png`
+- **Design Tokens:** `packages/platform-ui/src/styles/tokens.css`
+- **Web Experience Design System:** `docs/design-system/BHAVYA_WEB_EXPERIENCE.md`
 
-### Neutral Colors
+### Brand Colors (Updated)
 
-| Color     | Hex     | Usage             |
-| --------- | ------- | ----------------- |
-| Cream     | #f5f1e6 | Page background   |
-| Parchment | #f0ebe0 | Card background   |
-| Sand      | #e8e0d4 | Borders, dividers |
-| Charcoal  | #2d2d2d | Primary text      |
-| Warm Gray | #6b6b6b | Secondary text    |
-| Slate     | #4a4a4a | Body text         |
+| Color         | Hex     | Usage                     |
+| ------------- | ------- | ------------------------- |
+| Forest Green  | #0E382E | Primary, headers, buttons |
+| Heritage Gold | #D4AF37 | Accents, badges, CTAs     |
+| Warm Ivory    | #F7F4EC | Page background           |
+
+### Supporting Colors
+
+| Color      | Hex     | Usage            |
+| ---------- | ------- | ---------------- |
+| Sage       | #8A9A8B | Secondary text   |
+| Earth      | #6A7C52 | Nature elements  |
+| Stone      | #E6E0D3 | Card backgrounds |
+| Charcoal   | #1F1F1F | Dark text        |
+| Soft Black | #2A2A2A | Body text        |
 
 ### Status Colors
 

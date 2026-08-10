@@ -1,0 +1,20 @@
+{
+  "id": "task-1785999634145-9axhk",
+  "type": "review",
+  "priority": "normal",
+  "state": "pending",
+  "dependencies": ["Test: Add a hello world endpoint to the platform"],
+  "payload": {},
+  "result": null,
+  "error": null,
+  "attempts": 0,
+  "maxRetries": 3,
+  "assignedWorker": null,
+  "createdAt": "2026-08-06T07:00:34.145Z",
+  "updatedAt": "2026-08-06T07:00:34.145Z",
+  "startedAt": null,
+  "completedAt": null,
+  "failedAt": null,
+  "checkpoints": [],
+  "timeout": 300000
+}

@@ -1,0 +1,1193 @@
+{
+  "patterns": [
+    {
+      "type": "documentation",
+      "worker": "runtime",
+      "count": 10,
+      "avgQuality": 100,
+      "avgTime": 2,
+      "lastSeen": 1786000417214
+    },
+    {
+      "type": "review",
+      "worker": "runtime",
+      "count": 10,
+      "avgQuality": 100,
+      "avgTime": 2,
+      "lastSeen": 1786000417321
+    },
+    {
+      "type": "testing",
+      "worker": "runtime",
+      "count": 9,
+      "avgQuality": 100,
+      "avgTime": 2,
+      "lastSeen": 1786001029899
+    },
+    {
+      "type": "implementation",
+      "worker": "runtime",
+      "count": 8,
+      "avgQuality": 100,
+      "avgTime": 2,
+      "lastSeen": 1786000447762
+    },
+    {
+      "type": "unknown",
+      "count": 34,
+      "avgQuality": 100,
+      "lastSeen": 1786001024805,
+      "avgTime": null
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1785999398783-hxvxx",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999400211
+    },
+    {
+      "type": "review",
+      "worker": "worker-1785999398783-hxvxx",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999400263
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1785999512596-4mlbp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999513988
+    },
+    {
+      "type": "review",
+      "worker": "worker-1785999512596-4mlbp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999514038
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1785999632751-zi92k",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999634137
+    },
+    {
+      "type": "review",
+      "worker": "worker-1785999632751-zi92k",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999634207
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1785999632751-zi92k",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999648777
+    },
+    {
+      "type": "implementation",
+      "worker": "worker-1785999632751-zi92k",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999667461
+    },
+    {
+      "type": "design",
+      "worker": "worker-1785999632751-zi92k",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999691815
+    },
+    {
+      "type": "design",
+      "worker": "runtime",
+      "count": 4,
+      "avgQuality": 100,
+      "avgTime": 2,
+      "lastSeen": 1786000470114
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1785999762975-6l5r2",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999764561
+    },
+    {
+      "type": "review",
+      "worker": "worker-1785999762975-6l5r2",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999764643
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1785999762975-6l5r2",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999779200
+    },
+    {
+      "type": "implementation",
+      "worker": "worker-1785999762975-6l5r2",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999798284
+    },
+    {
+      "type": "design",
+      "worker": "worker-1785999762975-6l5r2",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1785999821224
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1786000015618-czv82",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000017175
+    },
+    {
+      "type": "review",
+      "worker": "worker-1786000015618-czv82",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000017252
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1786000015618-czv82",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000036551
+    },
+    {
+      "type": "implementation",
+      "worker": "worker-1786000015618-czv82",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000055921
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1786000167728-r91l9",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000168792
+    },
+    {
+      "type": "review",
+      "worker": "worker-1786000167728-r91l9",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000168887
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1786000167728-r91l9",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000184080
+    },
+    {
+      "type": "implementation",
+      "worker": "worker-1786000167728-r91l9",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000202517
+    },
+    {
+      "type": "design",
+      "worker": "worker-1786000167728-r91l9",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000225866
+    },
+    {
+      "type": "documentation",
+      "worker": "worker-1786000416253-e4jtp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000417204
+    },
+    {
+      "type": "review",
+      "worker": "worker-1786000416253-e4jtp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000417312
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1786000416253-e4jtp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000430833
+    },
+    {
+      "type": "implementation",
+      "worker": "worker-1786000416253-e4jtp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000447757
+    },
+    {
+      "type": "design",
+      "worker": "worker-1786000416253-e4jtp",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786000470104
+    },
+    {
+      "type": "testing",
+      "worker": "worker-1786001008835-w4hoq",
+      "count": 1,
+      "avgQuality": 100,
+      "lastSeen": 1786001029891
+    }
+  ],
+  "estimationHistory": [
+    {
+      "type": "documentation",
+      "category": "general",
+      "avgDiff": null,
+      "count": 17,
+      "confidence": 100,
+      "lastUpdated": 1786000417214
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "avgDiff": null,
+      "count": 17,
+      "confidence": 100,
+      "lastUpdated": 1786000417321
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "avgDiff": null,
+      "count": 15,
+      "confidence": 100,
+      "lastUpdated": 1786001029899
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "avgDiff": null,
+      "count": 13,
+      "confidence": 90,
+      "lastUpdated": 1786000447762
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "avgDiff": null,
+      "count": 34,
+      "confidence": 100,
+      "lastUpdated": 1786001024805
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "avgDiff": null,
+      "count": 8,
+      "confidence": 65,
+      "lastUpdated": 1786000470114
+    }
+  ],
+  "failurePatterns": [
+    {
+      "type": "unknown",
+      "category": "general",
+      "error": "Command failed: git commit -m \"Task: undefined\"",
+      "timestamp": 1785999419956,
+      "success": false,
+      "retryable": false,
+      "count": null,
+      "lastSeen": 1785999419956
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "error": "Command failed: git commit -m \"Task: undefined\"",
+      "timestamp": 1785999419992,
+      "success": false,
+      "retryable": false,
+      "count": null,
+      "lastSeen": 1785999419992
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "error": "hash is not defined",
+      "timestamp": 1785999529354,
+      "success": false,
+      "retryable": false,
+      "count": null,
+      "lastSeen": 1785999529354
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "error": "hash is not defined",
+      "timestamp": 1785999529389,
+      "success": false,
+      "retryable": false,
+      "count": null,
+      "lastSeen": 1785999529389
+    }
+  ],
+  "successPatterns": [
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998804306,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998804316,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998804322,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998804328,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998921904,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998921911,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998921919,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785998921945,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999029928,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999221249,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999400195,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1785999398783-hxvxx",
+      "qualityScore": 100,
+      "timestamp": 1785999400211,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999400214,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999400248,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1785999398783-hxvxx",
+      "qualityScore": 100,
+      "timestamp": 1785999400263,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999400267,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999416233,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999513972,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1785999512596-4mlbp",
+      "qualityScore": 100,
+      "timestamp": 1785999513988,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999513992,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999514027,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1785999512596-4mlbp",
+      "qualityScore": 100,
+      "timestamp": 1785999514038,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999514041,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999525364,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999634121,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1785999632751-zi92k",
+      "qualityScore": 100,
+      "timestamp": 1785999634137,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999634139,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999634184,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1785999632751-zi92k",
+      "qualityScore": 100,
+      "timestamp": 1785999634207,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999634217,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999644666,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1785999632751-zi92k",
+      "qualityScore": 100,
+      "timestamp": 1785999648777,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999648782,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999661148,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "worker": "worker-1785999632751-zi92k",
+      "qualityScore": 100,
+      "timestamp": 1785999667461,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999667473,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999680237,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "worker": "worker-1785999632751-zi92k",
+      "qualityScore": 100,
+      "timestamp": 1785999691815,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999691821,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999764539,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1785999762975-6l5r2",
+      "qualityScore": 100,
+      "timestamp": 1785999764560,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999764572,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999764623,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1785999762975-6l5r2",
+      "qualityScore": 100,
+      "timestamp": 1785999764643,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999764684,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999774810,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1785999762975-6l5r2",
+      "qualityScore": 100,
+      "timestamp": 1785999779200,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999779205,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999791871,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "worker": "worker-1785999762975-6l5r2",
+      "qualityScore": 100,
+      "timestamp": 1785999798284,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999798291,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1785999810143,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "worker": "worker-1785999762975-6l5r2",
+      "qualityScore": 100,
+      "timestamp": 1785999821224,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1785999821227,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000017124,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1786000015618-czv82",
+      "qualityScore": 100,
+      "timestamp": 1786000017175,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000017188,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000017236,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1786000015618-czv82",
+      "qualityScore": 100,
+      "timestamp": 1786000017252,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000017255,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000032659,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1786000015618-czv82",
+      "qualityScore": 100,
+      "timestamp": 1786000036551,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000036562,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000047722,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "worker": "worker-1786000015618-czv82",
+      "qualityScore": 100,
+      "timestamp": 1786000055921,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000055926,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000066388,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000168760,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1786000167728-r91l9",
+      "qualityScore": 100,
+      "timestamp": 1786000168792,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000168800,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000168866,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1786000167728-r91l9",
+      "qualityScore": 100,
+      "timestamp": 1786000168887,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000168890,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000179605,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1786000167728-r91l9",
+      "qualityScore": 100,
+      "timestamp": 1786000184080,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000184087,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000195160,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "worker": "worker-1786000167728-r91l9",
+      "qualityScore": 100,
+      "timestamp": 1786000202517,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000202527,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000214208,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "worker": "worker-1786000167728-r91l9",
+      "qualityScore": 100,
+      "timestamp": 1786000225866,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000225873,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000417163,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "worker": "worker-1786000416253-e4jtp",
+      "qualityScore": 100,
+      "timestamp": 1786000417204,
+      "success": true
+    },
+    {
+      "type": "documentation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000417214,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000417286,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "worker": "worker-1786000416253-e4jtp",
+      "qualityScore": 100,
+      "timestamp": 1786000417312,
+      "success": true
+    },
+    {
+      "type": "review",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000417321,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000427082,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1786000416253-e4jtp",
+      "qualityScore": 100,
+      "timestamp": 1786000430833,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000430842,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000441211,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "worker": "worker-1786000416253-e4jtp",
+      "qualityScore": 100,
+      "timestamp": 1786000447757,
+      "success": true
+    },
+    {
+      "type": "implementation",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000447762,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786000458475,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "worker": "worker-1786000416253-e4jtp",
+      "qualityScore": 100,
+      "timestamp": 1786000470104,
+      "success": true
+    },
+    {
+      "type": "design",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786000470114,
+      "success": true
+    },
+    {
+      "type": "unknown",
+      "category": "general",
+      "qualityScore": 100,
+      "timestamp": 1786001024805,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "worker": "worker-1786001008835-w4hoq",
+      "qualityScore": 100,
+      "timestamp": 1786001029891,
+      "success": true
+    },
+    {
+      "type": "testing",
+      "category": "general",
+      "estimatedMinutes": 5,
+      "actualMinutes": 2,
+      "worker": "runtime",
+      "qualityScore": 100,
+      "timestamp": 1786001029899,
+      "success": true
+    }
+  ],
+  "knowledgeBase": {
+    "concepts": {},
+    "relationships": [],
+    "recommendations": []
+  }
+}

@@ -9,7 +9,6 @@ const programs = [
     duration: "12 weeks",
     level: "Beginner",
     description: "Learn AI fundamentals",
-    enrolled: 2400,
     accent: "#1a3a2a",
     accentName: "green",
     curriculum: [
@@ -25,7 +24,6 @@ const programs = [
     duration: "16 weeks",
     level: "Intermediate",
     description: "Build real AI systems",
-    enrolled: 1800,
     accent: "#c9a227",
     accentName: "gold",
     curriculum: [
@@ -41,7 +39,6 @@ const programs = [
     duration: "24 weeks",
     level: "Advanced",
     description: "Push the boundaries",
-    enrolled: 950,
     accent: "#8a7359",
     accentName: "earth",
     curriculum: [
@@ -55,10 +52,10 @@ const programs = [
 ];
 
 const stats = [
-  { value: "8", label: "Programs" },
-  { value: "100+", label: "Courses" },
-  { value: "5,150", label: "Students" },
-  { value: "94%", label: "Completion Rate" },
+  { value: "3", label: "Programs" },
+  { value: "1", label: "Course" },
+  { value: "1", label: "School" },
+  { value: "Open", label: "Enrollment" },
 ];
 
 const container = {
@@ -70,12 +67,6 @@ const item = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
-
-function formatEnrolled(n: number) {
-  return n >= 1000
-    ? `${(n / 1000).toFixed(1).replace(/\.0$/, "")}k`
-    : String(n);
-}
 
 export default function ProgramsPage() {
   return (
@@ -182,7 +173,7 @@ export default function ProgramsPage() {
                   {prog.duration}
                 </span>
                 <span className="text-sm text-[#f5f1e6]/40">
-                  {formatEnrolled(prog.enrolled)} enrolled
+                  Opening soon
                 </span>
               </div>
 

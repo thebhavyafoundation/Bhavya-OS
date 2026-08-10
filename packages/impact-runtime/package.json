@@ -1,0 +1,15 @@
+{
+  "name": "@bhavya/impact-runtime",
+  "version": "0.1.0",
+  "description": "Impact Runtime — reusable engine for real-world problem solving",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "license": "MIT"
+}

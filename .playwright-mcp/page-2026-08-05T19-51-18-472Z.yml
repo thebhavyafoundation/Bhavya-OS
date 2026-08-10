@@ -1,0 +1,176 @@
+- generic [active] [ref=f5e1]:
+  - link "Skip to content":
+    - /url: "#geist-skip-nav"
+  - main [ref=f5e3]:
+    - generic [ref=f5e4]:
+      - generic [ref=f5e5]:
+        - generic [ref=f5e6]:
+          - generic [ref=f5e7]:
+            - generic [ref=f5e10]:
+              - link "Bhavya Foundation Hobby" [ref=f5e11] [cursor=pointer]:
+                - /url: /bhavya-foundation
+                - generic [ref=f5e13]:
+                  - generic [ref=f5e14]: Bhavya Foundation
+                  - generic [ref=f5e15]: Hobby
+              - button [ref=f5e17] [cursor=pointer]
+            - button "Find F" [ref=f5e22]:
+              - generic [ref=f5e24]:
+                - generic [ref=f5e28]: Find
+                - generic [ref=f5e29]: F
+          - navigation [ref=f5e32]:
+            - generic [ref=f5e35]:
+              - link "Overview" [ref=f5e36] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website
+              - link "Deployments" [ref=f5e41] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/deployments
+              - link "Logs" [ref=f5e47] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/logs
+              - link "Analytics" [ref=f5e53] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/analytics
+              - link "Speed Insights" [ref=f5e59] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/speed-insights
+              - link "Observability" [ref=f5e65] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/observability
+              - link "Firewall" [ref=f5e74] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/firewall
+              - link "CDN" [ref=f5e84] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/cdn
+              - separator [ref=f5e93]
+              - link "Environment Variables" [ref=f5e94] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/environment-variables
+              - link "Domains" [ref=f5e100] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/domains
+              - link "Connect Beta" [ref=f5e106] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/connect
+                - generic [ref=f5e110]:
+                  - generic [ref=f5e111]: Connect
+                  - generic [ref=f5e112]: Beta
+              - link "Integrations" [ref=f5e114] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/integrations
+              - link "Storage" [ref=f5e120] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/stores
+              - link "Flags" [ref=f5e126] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/flags
+              - link "Agent" [ref=f5e135] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/agent
+              - link "AI Gateway" [ref=f5e144] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/ai-gateway
+              - link "Sandboxes" [ref=f5e153] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/sandboxes
+              - link "Workflows" [ref=f5e162] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/workflows
+              - link "Images Beta" [ref=f5e168] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/images
+                - generic [ref=f5e172]:
+                  - generic [ref=f5e173]: Images
+                  - generic [ref=f5e174]: Beta
+              - separator [ref=f5e176]
+              - link "Usage" [ref=f5e177] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/usage
+              - link "Support" [ref=f5e183] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/support
+              - link "Settings" [ref=f5e189] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings
+          - generic [ref=f5e200]:
+            - button "Avatar for thebhavyafoundation thebhavyafoundation" [disabled]:
+              - img "Avatar for thebhavyafoundation":
+                - img "Avatar for thebhavyafoundation"
+              - generic: thebhavyafoundation
+        - button [ref=f5e206] [cursor=pointer]
+      - generic [ref=f5e210]:
+        - generic [ref=f5e211]:
+          - generic [ref=f5e214]:
+            - link "bhavya-foundation-website" [ref=f5e215] [cursor=pointer]:
+              - /url: /bhavya-foundation/bhavya-foundation-website
+            - button [ref=f5e219] [cursor=pointer]
+            - link "Back to team view" [ref=f5e225] [cursor=pointer]:
+              - /url: /bhavya-foundation
+          - navigation "Breadcrumb" [ref=f5e229]:
+            - generic [ref=f5e230]: Overview
+        - generic [ref=f5e234]:
+          - generic [ref=f5e238]:
+            - generic [ref=f5e239]:
+              - heading "Production Deployment" [level=3] [ref=f5e241]
+              - generic [ref=f5e250]:
+                - link "Visit Deployment" [ref=f5e253] [cursor=pointer]:
+                  - /url: https://bhavya-foundation-website.vercel.app
+                - generic [ref=f5e255]:
+                  - generic [ref=f5e256]:
+                    - generic [ref=f5e258]:
+                      - term [ref=f5e259]: Deployment
+                      - definition [ref=f5e260]:
+                        - link "bhavya-foundation-website-6t2z6ogtx-bhavya-foundation.vercel.app" [ref=f5e262] [cursor=pointer]:
+                          - /url: /bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t
+                    - progressbar [ref=f5e265]
+                  - generic [ref=f5e274]:
+                    - term [ref=f5e275]:
+                      - generic [ref=f5e277]:
+                        - text: Domains
+                        - button "Add a domain" [ref=f5e278] [cursor=pointer]
+                    - definition [ref=f5e281]:
+                      - link "bhavya-foundation-website.vercel.app" [ref=f5e285] [cursor=pointer]:
+                        - /url: https://bhavya-foundation-website.vercel.app
+                  - generic [ref=f5e289]:
+                    - generic [ref=f5e290]:
+                      - term [ref=f5e291]: Status
+                      - definition [ref=f5e292]:
+                        - generic "This deployment is ready." [ref=f5e295]: Ready
+                    - generic [ref=f5e301]:
+                      - term [ref=f5e302]: Created
+                      - definition [ref=f5e303]:
+                        - generic [ref=f5e305] [cursor=pointer]:
+                          - paragraph [ref=f5e306]: 15m ago by thebhavyafoundation
+                          - img "thebhavyafoundation Avatar" [ref=f5e307]:
+                            - img "thebhavyafoundation Avatar" [ref=f5e308]
+                  - generic [ref=f5e310]:
+                    - term [ref=f5e311]: Source
+                    - definition [ref=f5e312]:
+                      - generic [ref=f5e314]:
+                        - link [ref=f5e318] [cursor=pointer]:
+                          - /url: https://github.com/thebhavyafoundation/Bhavya-OS/tree/master
+                          - code [ref=f5e319]: master
+                        - 'link "0f48659 feat(website): launch sprint v2.0 — conversion, knowledge discovery, t…" [ref=f5e324] [cursor=pointer]':
+                          - /url: https://github.com/thebhavyafoundation/Bhavya-OS/commit/0f48659cc88658bedd139230effe153d30603715
+                          - code [ref=f5e325]: 0f48659
+                          - 'generic "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f5e326]': "feat(website): launch sprint v2.0 — conversion, knowledge discovery, t…"
+              - button "Deployment Settings" [ref=f5e329] [cursor=pointer]
+            - generic [ref=f5e337]:
+              - generic [ref=f5e338]: To update your Production Deployment, push to the master branch.
+              - generic [ref=f5e341]:
+                - link "Deployments" [ref=f5e342] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/deployments?environment=production
+                - link "Learn more" [ref=f5e347] [cursor=pointer]:
+                  - /url: /docs/git#production-branch
+          - generic [ref=f5e353]:
+            - generic [ref=f5e354]:
+              - generic [ref=f5e355]:
+                - generic [ref=f5e356]:
+                  - paragraph [ref=f5e357]:
+                    - strong [ref=f5e358]: Production Checklist
+                  - generic [ref=f5e359]: 1/5
+                - button "Go to page" [ref=f5e361] [cursor=pointer]
+                - button [ref=f5e365] [cursor=pointer]
+              - generic [ref=f5e369]:
+                - button "Connect Git Repository" [ref=f5e370] [cursor=pointer]
+                - button "Add Custom Domain" [ref=f5e376] [cursor=pointer]
+                - button "Preview Deployment" [ref=f5e380] [cursor=pointer]
+                - button "Enable Web Analytics" [ref=f5e384] [cursor=pointer]
+                - button "Enable Speed Insights" [ref=f5e388] [cursor=pointer]
+            - generic [ref=f5e392]:
+              - generic [ref=f5e393]:
+                - generic [ref=f5e394]:
+                  - paragraph [ref=f5e395]:
+                    - strong [ref=f5e396]: Observability
+                  - time [ref=f5e397]: 6h
+                - link "Go to page" [ref=f5e398] [cursor=pointer]:
+                  - /url: "#"
+                - link [ref=f5e402] [cursor=pointer]:
+                  - /url: "#"
+              - generic [ref=f5e404]:
+                - generic [ref=f5e405]: Edge Requests
+                - generic [ref=f5e410]: Function Invocations
+                - generic [ref=f5e415]: Error Rate
+            - generic [ref=f5e422]:
+              - paragraph [ref=f5e423]:
+                - strong [ref=f5e424]: Analytics
+              - time [ref=f5e425]: 1w

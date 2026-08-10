@@ -27,6 +27,8 @@
     "bhavya:task": "node packages/runtime/cli/bhavya.mjs task next",
     "bhavya:api": "node packages/runtime/cli/bhavya.mjs api start",
     "prepare": "husky",
+    "tokens:sync": "node scripts/sync-tokens.mjs",
+    "tokens:check": "node scripts/sync-tokens.mjs --check",
     "dev:admin": "turbo dev --filter=@bhavya/admin-app",
     "build:admin": "turbo build --filter=@bhavya/admin-app",
     "admin": "pnpm --filter @bhavya/admin-app dev",

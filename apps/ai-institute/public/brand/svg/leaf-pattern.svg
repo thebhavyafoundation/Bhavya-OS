@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none" preserveAspectRatio="none">
+  <!-- Leaf pattern for section dividers -->
+  <g opacity="0.15" fill="#1a3a2a">
+    <!-- Repeating leaf pattern -->
+    <path d="M0 20 Q10 10 20 20 Q10 30 0 20Z"/>
+    <path d="M25 20 Q35 10 45 20 Q35 30 25 20Z"/>
+    <path d="M50 20 Q60 10 70 20 Q60 30 50 20Z"/>
+    <path d="M75 20 Q85 10 95 20 Q85 30 75 20Z"/>
+    <path d="M100 20 Q110 10 120 20 Q110 30 100 20Z"/>
+    <path d="M125 20 Q135 10 145 20 Q135 30 125 20Z"/>
+    <path d="M150 20 Q160 10 170 20 Q160 30 150 20Z"/>
+    <path d="M175 20 Q185 10 195 20 Q185 30 175 20Z"/>
+  </g>
+  <!-- Central vine -->
+  <path d="M0 20 Q50 15 100 20 Q150 25 200 20" stroke="#1a3a2a" stroke-width="1" fill="none" opacity="0.2"/>
+</svg>

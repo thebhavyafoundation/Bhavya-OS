@@ -6,43 +6,129 @@
   "grade": 9,
   "subject": "Artificial Intelligence",
   "concepts": [
-    { "name": "Artificial Intelligence", "description": "The simulation of human intelligence by machines and computer systems", "difficulty": "beginner" },
-    { "name": "Machine Learning", "description": "A subset of AI where machines learn patterns from data without explicit programming", "difficulty": "intermediate" },
-    { "name": "Neural Networks", "description": "Computing systems inspired by biological neural networks that process information in layers", "difficulty": "advanced" },
-    { "name": "Natural Language Processing", "description": "The ability of computers to understand, interpret, and generate human language", "difficulty": "intermediate" },
-    { "name": "Computer Vision", "description": "The field of AI that enables machines to interpret and make decisions based on visual data", "difficulty": "intermediate" }
+    {
+      "name": "Artificial Intelligence",
+      "description": "The simulation of human intelligence by machines and computer systems",
+      "difficulty": "beginner"
+    },
+    {
+      "name": "Machine Learning",
+      "description": "A subset of AI where machines learn patterns from data without explicit programming",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Neural Networks",
+      "description": "Computing systems inspired by biological neural networks that process information in layers",
+      "difficulty": "advanced"
+    },
+    {
+      "name": "Natural Language Processing",
+      "description": "The ability of computers to understand, interpret, and generate human language",
+      "difficulty": "intermediate"
+    },
+    {
+      "name": "Computer Vision",
+      "description": "The field of AI that enables machines to interpret and make decisions based on visual data",
+      "difficulty": "intermediate"
+    }
   ],
   "definitions": [
-    { "term": "AI", "definition": "Artificial Intelligence — the ability of machines to perform tasks that typically require human intelligence" },
-    { "term": "Algorithm", "definition": "A step-by-step procedure or set of rules for solving a problem" },
-    { "term": "Data", "definition": "Facts, statistics, or information collected for analysis and reference" },
-    { "term": "Training Data", "definition": "The dataset used to teach a machine learning model to make predictions" },
-    { "term": "Inference", "definition": "The process of using a trained model to make predictions on new data" }
+    {
+      "term": "AI",
+      "definition": "Artificial Intelligence — the ability of machines to perform tasks that typically require human intelligence"
+    },
+    {
+      "term": "Algorithm",
+      "definition": "A step-by-step procedure or set of rules for solving a problem"
+    },
+    {
+      "term": "Data",
+      "definition": "Facts, statistics, or information collected for analysis and reference"
+    },
+    {
+      "term": "Training Data",
+      "definition": "The dataset used to teach a machine learning model to make predictions"
+    },
+    {
+      "term": "Inference",
+      "definition": "The process of using a trained model to make predictions on new data"
+    }
   ],
   "examples": [
-    { "title": "Smart Assistants", "description": "Siri, Alexa, and Google Assistant use AI to understand voice commands, answer questions, and control smart home devices" },
-    { "title": "Recommendation Systems", "description": "Netflix suggests movies, YouTube recommends videos, and Amazon shows products based on your past behavior and preferences" },
-    { "title": "Self-Driving Cars", "description": "Autonomous vehicles use computer vision, sensor fusion, and decision-making algorithms to navigate roads safely" },
-    { "title": "Healthcare Diagnosis", "description": "AI systems can analyze medical images like X-rays and MRIs to detect diseases with accuracy matching or exceeding human doctors" },
-    { "title": "Language Translation", "description": "Google Translate and DeepL use neural networks to translate text between hundreds of languages in real time" }
+    {
+      "title": "Smart Assistants",
+      "description": "Siri, Alexa, and Google Assistant use AI to understand voice commands, answer questions, and control smart home devices"
+    },
+    {
+      "title": "Recommendation Systems",
+      "description": "Netflix suggests movies, YouTube recommends videos, and Amazon shows products based on your past behavior and preferences"
+    },
+    {
+      "title": "Self-Driving Cars",
+      "description": "Autonomous vehicles use computer vision, sensor fusion, and decision-making algorithms to navigate roads safely"
+    },
+    {
+      "title": "Healthcare Diagnosis",
+      "description": "AI systems can analyze medical images like X-rays and MRIs to detect diseases with accuracy matching or exceeding human doctors"
+    },
+    {
+      "title": "Language Translation",
+      "description": "Google Translate and DeepL use neural networks to translate text between hundreds of languages in real time"
+    }
   ],
   "misconceptions": [
-    { "belief": "AI will replace all human jobs", "correction": "AI augments human capabilities and creates new job categories. It handles repetitive tasks while humans focus on creative and strategic work." },
-    { "belief": "AI is the same as robots", "correction": "AI is software that enables intelligence. Robots are physical machines that may or may not use AI. Not all AI is in robots, and not all robots use AI." },
-    { "belief": "AI can think and feel like humans", "correction": "AI processes data and makes decisions based on patterns, but it does not have consciousness, emotions, or genuine understanding like humans." },
-    { "belief": "AI is only for big tech companies", "correction": "AI tools and platforms are increasingly accessible. Students, small businesses, and educators can use AI through free tools and open-source libraries." }
+    {
+      "belief": "AI will replace all human jobs",
+      "correction": "AI augments human capabilities and creates new job categories. It handles repetitive tasks while humans focus on creative and strategic work."
+    },
+    {
+      "belief": "AI is the same as robots",
+      "correction": "AI is software that enables intelligence. Robots are physical machines that may or may not use AI. Not all AI is in robots, and not all robots use AI."
+    },
+    {
+      "belief": "AI can think and feel like humans",
+      "correction": "AI processes data and makes decisions based on patterns, but it does not have consciousness, emotions, or genuine understanding like humans."
+    },
+    {
+      "belief": "AI is only for big tech companies",
+      "correction": "AI tools and platforms are increasingly accessible. Students, small businesses, and educators can use AI through free tools and open-source libraries."
+    }
   ],
   "exercises": [
-    { "prompt": "List three applications of AI that you use in your daily life. Explain how AI is involved in each one.", "type": "reflection" },
-    { "prompt": "What is the difference between Artificial Intelligence and a regular computer program? Give an example of each.", "type": "short-answer" },
-    { "prompt": "You are designing an AI system to help farmers in Himachal Pradesh predict weather patterns. What data would you need? What challenges might you face?", "type": "project" },
-    { "prompt": "True or False: Machine Learning is a type of Artificial Intelligence. Explain your answer.", "type": "mcq", "solution": "True. Machine Learning is a subset of AI that focuses on learning from data." },
-    { "prompt": "Draw a diagram showing the relationship between AI, Machine Learning, and Deep Learning. Label each part with a brief description.", "type": "project" }
+    {
+      "prompt": "List three applications of AI that you use in your daily life. Explain how AI is involved in each one.",
+      "type": "reflection"
+    },
+    {
+      "prompt": "What is the difference between Artificial Intelligence and a regular computer program? Give an example of each.",
+      "type": "short-answer"
+    },
+    {
+      "prompt": "You are designing an AI system to help farmers in Himachal Pradesh predict weather patterns. What data would you need? What challenges might you face?",
+      "type": "project"
+    },
+    {
+      "prompt": "True or False: Machine Learning is a type of Artificial Intelligence. Explain your answer.",
+      "type": "mcq",
+      "solution": "True. Machine Learning is a subset of AI that focuses on learning from data."
+    },
+    {
+      "prompt": "Draw a diagram showing the relationship between AI, Machine Learning, and Deep Learning. Label each part with a brief description.",
+      "type": "project"
+    }
   ],
   "references": [
-    { "title": "AI for Everyone (Coursera) — Andrew Ng", "type": "video", "url": "https://www.coursera.org/learn/ai-for-everyone" },
+    {
+      "title": "AI for Everyone (Coursera) — Andrew Ng",
+      "type": "video",
+      "url": "https://www.coursera.org/learn/ai-for-everyone"
+    },
     { "title": "Introduction to AI — CBSE Class 9 Textbook", "type": "book" },
-    { "title": "Elements of AI — Free Online Course", "type": "video", "url": "https://www.elementsofai.com/" },
+    {
+      "title": "Elements of AI — Free Online Course",
+      "type": "video",
+      "url": "https://www.elementsofai.com/"
+    },
     { "title": "What is AI? — A Beginner's Guide (YouTube)", "type": "video" },
     { "title": "Artificial Intelligence in India — NITI Aayog Policy Paper", "type": "article" }
   ],

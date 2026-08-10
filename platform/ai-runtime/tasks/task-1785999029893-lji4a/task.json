@@ -1,0 +1,20 @@
+{
+  "id": "task-1785999029893-lji4a",
+  "type": "documentation",
+  "priority": "low",
+  "state": "pending",
+  "dependencies": ["Review: Add a hello world endpoint to the platform"],
+  "payload": {},
+  "result": null,
+  "error": null,
+  "attempts": 0,
+  "maxRetries": 3,
+  "assignedWorker": null,
+  "createdAt": "2026-08-06T06:50:29.893Z",
+  "updatedAt": "2026-08-06T06:50:29.893Z",
+  "startedAt": null,
+  "completedAt": null,
+  "failedAt": null,
+  "checkpoints": [],
+  "timeout": 300000
+}

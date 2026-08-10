@@ -1,0 +1,88 @@
+- generic [ref=f3e1]:
+  - alert [ref=f3e182]
+  - generic [ref=f3e546]:
+    - complementary [ref=f3e547]:
+      - link "B GitHub OS Engineering Mentor" [ref=f3e549] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e550]: B
+        - generic [ref=f3e551]:
+          - generic [ref=f3e552]: GitHub OS
+          - generic [ref=f3e553]: Engineering Mentor
+      - button [ref=f3e555]:
+        - text: Search...
+        - generic [ref=f3e559]: K
+      - navigation [ref=f3e562]:
+        - link "Dashboard" [ref=f3e564] [cursor=pointer]:
+          - /url: /
+        - link "Repositories" [ref=f3e569] [cursor=pointer]:
+          - /url: /repositories
+        - link "Knowledge" [ref=f3e576] [cursor=pointer]:
+          - /url: /knowledge
+        - link "Learning" [ref=f3e581] [cursor=pointer]:
+          - /url: /learning
+        - link "Settings" [ref=f3e586] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f3e591]:
+        - generic [ref=f3e592]: BV
+        - generic [ref=f3e593]:
+          - generic [ref=f3e594]: Bhavya Foundation
+          - generic [ref=f3e595]: Admin
+    - main [ref=f3e596]:
+      - generic [ref=f3e597]:
+        - navigation [ref=f3e598]:
+          - link "Repositories" [ref=f3e599] [cursor=pointer]:
+            - /url: /repositories
+          - text: bhavya-platform
+        - generic [ref=f3e602]:
+          - generic [ref=f3e603]:
+            - generic [ref=f3e604]:
+              - heading "bhavya-platform" [level=1] [ref=f3e605]
+              - text: matureadopt
+            - paragraph [ref=f3e606]: Core platform packages — types, security, database, events, workflows
+            - generic [ref=f3e607]:
+              - generic [ref=f3e608]: TypeScript
+              - generic [ref=f3e609]: "45"
+              - generic [ref=f3e612]: "8"
+              - text: MIT
+            - generic [ref=f3e618]: platforminfrastructurepackages
+          - generic [ref=f3e619]:
+            - generic [ref=f3e620]: "90"
+            - paragraph [ref=f3e624]: Bhavya Score
+        - generic [ref=f3e625]:
+          - button "Overview" [ref=f3e626]
+          - button "Architecture" [ref=f3e631]
+          - button "Learning" [ref=f3e636]
+          - button "Advisor" [active] [ref=f3e640]
+          - button "Activity" [ref=f3e643]
+        - generic [ref=f3e774]:
+          - generic [ref=f3e775]:
+            - heading "Engineering Advisor" [level=3] [ref=f3e779]
+            - paragraph [ref=f3e780]: Get a comprehensive engineering assessment of this repository.
+            - generic [ref=f3e781]:
+              - link [ref=f3e782] [cursor=pointer]:
+                - /url: /repositories/bhavya-platform/advisor
+                - generic [ref=f3e787]:
+                  - paragraph [ref=f3e788]: Full Assessment
+                  - paragraph [ref=f3e789]: Review, debt, recommendations
+              - link [ref=f3e790] [cursor=pointer]:
+                - /url: /repositories/bhavya-platform/debt
+                - generic [ref=f3e793]:
+                  - paragraph [ref=f3e794]: Technical Debt
+                  - paragraph [ref=f3e795]: Categorized debt register
+              - link [ref=f3e796] [cursor=pointer]:
+                - /url: /repositories/bhavya-platform/plan
+                - generic [ref=f3e799]:
+                  - paragraph [ref=f3e800]: Implementation Plan
+                  - paragraph [ref=f3e801]: Roadmap and milestones
+              - link [ref=f3e802] [cursor=pointer]:
+                - /url: /repositories/bhavya-platform/architecture-advisor
+                - generic [ref=f3e808]:
+                  - paragraph [ref=f3e809]: Compare Architecture
+                  - paragraph [ref=f3e810]: vs elite repositories
+          - generic [ref=f3e811]:
+            - heading "Quick Insights" [level=3] [ref=f3e815]
+            - generic [ref=f3e816]:
+              - generic [ref=f3e817]: Patterns Detected4
+              - generic [ref=f3e818]: ADRs Documented5
+              - generic [ref=f3e819]: Knowledge Packages1
+              - generic [ref=f3e820]: Dependencies4

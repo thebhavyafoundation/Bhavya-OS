@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import { Sidebar } from "./Sidebar.js";
+import { Sidebar } from "./Sidebar";
 
 interface PageLayoutProps {
   brand: string;

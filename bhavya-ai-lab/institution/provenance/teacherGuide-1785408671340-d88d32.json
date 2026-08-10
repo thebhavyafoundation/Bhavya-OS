@@ -6,9 +6,7 @@
   "capability": "lesson_generation",
   "execId": "exec-1785408671336-92205a24",
   "sourceKnowledgeObject": "ko-ai-what-is-ai",
-  "parentArtifactIds": [
-    "assessment-1785408671332-7e3b30"
-  ],
+  "parentArtifactIds": ["assessment-1785408671332-7e3b30"],
   "qualityGate": "WARNING",
   "generatedAt": "2026-07-30T10:51:11.340Z"
 }

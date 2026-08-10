@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "components": [
+    {
+      "id": "header",
+      "name": "Header",
+      "path": "apps/website/src/components/Header.tsx",
+      "status": "active"
+    },
+    {
+      "id": "footer",
+      "name": "Footer",
+      "path": "apps/website/src/components/Footer.tsx",
+      "status": "active"
+    },
+    {
+      "id": "hero-section",
+      "name": "Hero Section",
+      "path": "apps/website/src/components/HeroSection.tsx",
+      "status": "active"
+    },
+    {
+      "id": "mission-cards",
+      "name": "Mission Cards",
+      "path": "apps/website/src/components/MissionCards.tsx",
+      "status": "active"
+    },
+    {
+      "id": "stats-section",
+      "name": "Stats Section",
+      "path": "apps/website/src/components/StatsSection.tsx",
+      "status": "active"
+    },
+    {
+      "id": "cta-section",
+      "name": "CTA Section",
+      "path": "apps/website/src/components/CTASection.tsx",
+      "status": "active"
+    },
+    {
+      "id": "principles-section",
+      "name": "Principles Section",
+      "path": "apps/website/src/components/PrinciplesSection.tsx",
+      "status": "active"
+    }
+  ]
+}

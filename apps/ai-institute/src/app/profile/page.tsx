@@ -4,15 +4,23 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
+import { foundationCourse } from "@/data/course";
+import { BookOpen, FlaskConical, BarChart3, Trophy, Flame } from "lucide-react";
 
 export default function ProfilePage() {
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, student, logout, isAuthenticated } = useAuth();
   const router = useRouter();
 
   if (!isAuthenticated) {
     router.push("/login");
     return null;
   }
+
+  const totalLessons = foundationCourse.modules[0].lessons.length;
+  const completedLessons = student?.lessonsCompleted.length || 0;
+  const progressPercent = totalLessons > 0
+    ? Math.round((completedLessons / totalLessons) * 100)
+    : 0;
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
@@ -66,21 +74,49 @@ export default function ProfilePage() {
           <h2 className="text-sm font-semibold text-[#c9a227] uppercase tracking-wider">
             Learning Stats
           </h2>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#4ade80]">0</div>
-              <div className="text-xs text-[#8a7359]">Lessons Done</div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#1a3a2a]/15 border border-[#1a3a2a]/25">
+              <BookOpen className="w-5 h-5 text-[#4ade80]" />
+              <div>
+                <div className="text-lg font-bold text-[#f5f1e6]">{completedLessons}/{totalLessons}</div>
+                <div className="text-[10px] text-[#8a7359]">Lessons Completed</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#c9a227]">0</div>
-              <div className="text-xs text-[#8a7359]">Day Streak</div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#1a3a2a]/15 border border-[#1a3a2a]/25">
+              <FlaskConical className="w-5 h-5 text-[#c9a227]" />
+              <div>
+                <div className="text-lg font-bold text-[#f5f1e6]">{student?.labTasksCompleted.length || 0}</div>
+                <div className="text-[10px] text-[#8a7359]">Labs Completed</div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-[#f5f1e6]">0%</div>
-              <div className="text-xs text-[#8a7359]">Progress</div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#1a3a2a]/15 border border-[#1a3a2a]/25">
+              <BarChart3 className="w-5 h-5 text-[#c9a227]" />
+              <div>
+                <div className="text-lg font-bold text-[#f5f1e6]">{progressPercent}%</div>
+                <div className="text-[10px] text-[#8a7359]">Overall Progress</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#1a3a2a]/15 border border-[#1a3a2a]/25">
+              <Flame className="w-5 h-5 text-[#c9a227]" />
+              <div>
+                <div className="text-lg font-bold text-[#f5f1e6]">{student?.streak || 0} day{(student?.streak || 0) !== 1 ? "s" : ""}</div>
+                <div className="text-[10px] text-[#8a7359]">Learning Streak</div>
+              </div>
             </div>
           </div>
         </div>
+
+        {student?.badgeEarned && (
+          <div className="rounded-2xl border border-[#c9a227]/25 bg-[#c9a227]/10 p-6">
+            <div className="flex items-center gap-3">
+              <Trophy className="w-8 h-8 text-[#c9a227]" />
+              <div>
+                <h3 className="text-sm font-semibold text-[#c9a227]">Foundation Explorer</h3>
+                <p className="text-[10px] text-[#8a7359]">Completed the AI Foundations project</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <button
           onClick={() => {

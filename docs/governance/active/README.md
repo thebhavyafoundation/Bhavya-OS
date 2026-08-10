@@ -4,24 +4,57 @@
 
 These are the authoritative governance documents for Bhavya Foundation.
 
+**Single Source of Truth:** `packages/constitution/src/registry.mjs`
+
+All document metadata, content, and relationships are managed by the Constitution SDK (`@bhavya/constitution`).
+
 ## Documents
 
-| # | Document | File | Status |
-|---|----------|------|--------|
-| 01 | Constitution | `01-constitution.md` | Active |
-| 02 | Trust Deed | `02-trust-deed.md` | Active |
-| 03 | Founders Charter | `03-founders-charter.md` | Active |
-| 04 | Board Charter | `04-board-charter.md` | Active |
-| 05 | Governance Manual | `05-governance-manual.md` | Active |
-| 06 | Code of Ethics | `06-code-of-ethics.md` | Active |
-| 07 | Conflict of Interest | `07-conflict-of-interest.md` | Active |
-| 08 | Financial Management | `08-financial-management.md` | Active |
-| 09 | Donation Acceptance | `09-donation-acceptance.md` | Active |
-| 10 | Volunteer Policy | `10-volunteer-policy.md` | Active |
-| 11 | Child Protection | `11-child-protection.md` | Active |
-| 12 | Environmental Conservation | `12-environmental-conservation.md` | Active |
-| 13 | AI Ethics | `13-ai-ethics.md` | Active |
-| 14 | Digital Library | `14-digital-library.md` | Active |
+| #   | Document                                  | Authority   | Level | Status |
+| --- | ----------------------------------------- | ----------- | ----- | ------ |
+| 01  | The Constitution                          | Supreme     | 100   | Active |
+| 02  | Public Charitable Trust Deed              | Legal       | 95    | Active |
+| 03  | The Founder's Charter                     | Visionary   | 90    | Active |
+| 04  | Board of Trustees Charter                 | Governance  | 85    | Active |
+| 05  | Governance Manual                         | Operational | 80    | Active |
+| 06  | Code of Ethics & Professional Conduct     | Ethical     | 85    | Active |
+| 07  | Conflict of Interest Policy               | Compliance  | 80    | Active |
+| 08  | Financial Management & Procurement Policy | Financial   | 85    | Active |
+| 09  | Donation Acceptance Policy                | Financial   | 75    | Active |
+| 10  | Volunteer Management Policy               | Community   | 70    | Active |
+| 11  | Child Protection & Safeguarding Policy    | Protection  | 90    | Active |
+| 12  | Environmental Conservation Policy         | Mission     | 75    | Active |
+| 13  | AI Ethics & Responsible AI Policy         | Technology  | 85    | Active |
+| 14  | Digital Library Policy                    | Knowledge   | 75    | Active |
+| 15  | Brand Constitution                        | Identity    | 80    | Active |
+
+## Usage
+
+```javascript
+import {
+  initialize,
+  getConstitutionalDocument,
+  search,
+} from "@bhavya/constitution";
+
+// Initialize SDK
+await initialize();
+
+// Get a document
+const constitution = await getConstitutionalDocument("constitution");
+
+// Search across all documents
+const results = await search("conflict of interest");
+
+// Get a specific article
+const article = await getArticle("constitution", "7.2");
+
+// Search for definitions
+const defs = await searchDefinitions("Trust");
+
+// Generate a citation
+const citation = await cite("constitution", { format: "text" });
+```
 
 ## Rules
 
@@ -32,5 +65,6 @@ These are the authoritative governance documents for Bhavya Foundation.
 
 ## Related
 
-- Brand guidelines: `.ai/STYLE_GUIDE.md`
-- Operational policies: `.policies/`
+- Constitution SDK: `packages/constitution/`
+- Brand guidelines: `docs/brand/BRAND_GUIDE.md`
+- Governance registry: `docs/governance/governance-registry.json`

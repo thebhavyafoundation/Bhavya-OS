@@ -1,118 +1,482 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-07-27",
+  "version": "2.0.0",
+  "lastUpdated": "2026-08-04",
+  "totalDocuments": 15,
+  "sourceOfTruth": "packages/constitution/src/registry.mjs",
   "documents": [
     {
-      "id": "01",
-      "title": "The Constitution",
-      "file": "01-constitution.md",
+      "id": "constitution",
+      "number": "01",
+      "title": "The Constitution of Bhavya Foundation",
+      "filename": "01_The_Constitution.md",
       "status": "active",
+      "authority": "supreme",
+      "authorityLevel": 100,
       "category": "governance",
-      "owner": "Founder"
+      "owner": "Founder",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "The Supreme Document — the Master Constitution from which all other governing documents derive authority.",
+      "dependencies": [],
+      "tags": ["supreme", "governance", "identity", "values", "structure"],
+      "keyProvisions": [
+        "Supreme Document Clause (Article 2.1)",
+        "Non-Negotiable Values (Article 4.2)",
+        "Founder's Perpetual Authority (Article 7.2)",
+        "Financial Limits without Board Approval (Article 11.1)",
+        "Brand Protection (Article 13)",
+        "Constitutional Amendment Process (Article 17)",
+        "Dedication to God (Article 19)"
+      ]
     },
     {
-      "id": "02",
+      "id": "trust-deed",
+      "number": "02",
       "title": "Public Charitable Trust Deed",
-      "file": "02-trust-deed.md",
+      "filename": "02_Public_Charitable_Trust_Deed.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Founder"
+      "authority": "legal",
+      "authorityLevel": 95,
+      "category": "legal",
+      "owner": "Founder",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "The legal deed establishing Bhavya Foundation as a Public Charitable Trust under the Indian Trusts Act, 1882.",
+      "dependencies": ["constitution"],
+      "tags": ["legal", "trust", "registration", "compliance"],
+      "keyProvisions": [
+        "Trust Purpose and Objectives (Clause 3)",
+        "Trustee Powers and Duties (Clause 5)",
+        "Property and Assets (Clause 6)",
+        "Accounts and Audit (Clause 8)",
+        "Dissolution (Clause 10)",
+        "Irrevocability (Clause 12)"
+      ]
     },
     {
-      "id": "03",
-      "title": "The Founders Charter",
-      "file": "03-founders-charter.md",
+      "id": "founders-charter",
+      "number": "03",
+      "title": "The Founder's Charter",
+      "filename": "03_The_Founders_Charter.md",
       "status": "active",
+      "authority": "visionary",
+      "authorityLevel": 90,
       "category": "governance",
-      "owner": "Founder"
+      "owner": "Founder",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the perpetual authority, vision, and legacy of the Founder of Bhavya Foundation.",
+      "dependencies": ["constitution"],
+      "tags": ["founder", "vision", "legacy", "authority"],
+      "keyProvisions": [
+        "Founder's Perpetual Authority",
+        "Founder's Advisory Role",
+        "Founder's Veto Power",
+        "Vision Stewardship",
+        "Legacy Protection",
+        "Founder-Designate Process"
+      ]
     },
     {
-      "id": "04",
-      "title": "Board Of Trustees Charter",
-      "file": "04-board-charter.md",
+      "id": "board-charter",
+      "number": "04",
+      "title": "Board of Trustees Charter",
+      "filename": "04_Board_of_Trustees_Charter.md",
       "status": "active",
+      "authority": "governance",
+      "authorityLevel": 85,
       "category": "governance",
-      "owner": "Board"
+      "owner": "Board",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the composition, roles, responsibilities, and operational procedures of the Board of Trustees.",
+      "dependencies": ["constitution", "trust-deed"],
+      "tags": ["board", "trustees", "governance", "meetings"],
+      "keyProvisions": [
+        "Board Composition",
+        "Trustee Roles and Responsibilities",
+        "Board Committees",
+        "Meeting Procedures",
+        "Decision-Making Framework",
+        "Conflict of Interest Management"
+      ]
     },
     {
-      "id": "05",
+      "id": "governance-manual",
+      "number": "05",
       "title": "Governance Manual",
-      "file": "05-governance-manual.md",
+      "filename": "05_Governance_Manual.md",
       "status": "active",
+      "authority": "operational",
+      "authorityLevel": 80,
       "category": "governance",
-      "owner": "CEO"
+      "owner": "CEO",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Comprehensive guide for implementing governance policies and procedures at Bhavya Foundation.",
+      "dependencies": ["constitution", "board-charter"],
+      "tags": ["governance", "operations", "procedures", "compliance"],
+      "keyProvisions": [
+        "Decision-Making Framework",
+        "Approval Authorities",
+        "Meeting Calendar",
+        "Communication Protocols",
+        "Technology Governance",
+        "Compliance Monitoring",
+        "Operational Excellence"
+      ]
     },
     {
-      "id": "06",
-      "title": "Code Of Ethics",
-      "file": "06-code-of-ethics.md",
+      "id": "code-of-ethics",
+      "number": "06",
+      "title": "Code of Ethics & Professional Conduct",
+      "filename": "06_Code_of_Ethics.md",
       "status": "active",
-      "category": "governance",
-      "owner": "CEO"
+      "authority": "ethical",
+      "authorityLevel": 85,
+      "category": "ethics",
+      "owner": "CEO",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the ethical standards and professional conduct expected of all individuals associated with the Foundation.",
+      "dependencies": ["constitution"],
+      "tags": ["ethics", "conduct", "professional", "enforcement"],
+      "keyProvisions": [
+        "Core Ethical Principles",
+        "Conflict of Interest",
+        "Confidentiality",
+        "Anti-Corruption and Anti-Bribery",
+        "Data Protection",
+        "Whistleblower Protection",
+        "Enforcement and Discipline"
+      ]
     },
     {
-      "id": "07",
-      "title": "Conflict Of Interest Policy",
-      "file": "07-conflict-of-interest.md",
+      "id": "conflict-of-interest",
+      "number": "07",
+      "title": "Conflict of Interest Policy",
+      "filename": "07_Conflict_of_Interest_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Legal"
+      "authority": "compliance",
+      "authorityLevel": 80,
+      "category": "compliance",
+      "owner": "Legal",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Establishes the framework for identifying, managing, and resolving conflicts of interest.",
+      "dependencies": ["constitution", "code-of-ethics"],
+      "tags": ["conflict", "disclosure", "recusal", "compliance"],
+      "keyProvisions": [
+        "Definition of Conflict of Interest",
+        "Disclosure Requirements",
+        "Recusal Procedures",
+        "Management Strategies",
+        "Gifts and Hospitality",
+        "Related Party Transactions"
+      ]
     },
     {
-      "id": "08",
-      "title": "Financial Management And Procurement Policy",
-      "file": "08-financial-management.md",
+      "id": "financial-management",
+      "number": "08",
+      "title": "Financial Management & Procurement Policy",
+      "filename": "08_Financial_Management_and_Procurement_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "CTO"
+      "authority": "financial",
+      "authorityLevel": 85,
+      "category": "financial",
+      "owner": "CTO",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the financial management framework, procurement rules, and internal controls.",
+      "dependencies": ["constitution", "trust-deed"],
+      "tags": ["finance", "procurement", "budget", "controls"],
+      "keyProvisions": [
+        "Financial Authority Levels",
+        "Bank Account Management",
+        "Income and Revenue Management",
+        "Expenditure Management",
+        "Procurement Process",
+        "Budget and Planning",
+        "Internal Controls"
+      ]
     },
     {
-      "id": "09",
+      "id": "donation-acceptance",
+      "number": "09",
       "title": "Donation Acceptance Policy",
-      "file": "09-donation-acceptance.md",
+      "filename": "09_Donation_Acceptance_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Donation"
+      "authority": "financial",
+      "authorityLevel": 75,
+      "category": "financial",
+      "owner": "Donation",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Establishes the principles and procedures for accepting, processing, and managing donations.",
+      "dependencies": ["constitution", "financial-management"],
+      "tags": ["donations", "fundraising", "tax", "donors"],
+      "keyProvisions": [
+        "Types of Donations",
+        "Donation Limits",
+        "Acceptance Criteria",
+        "Restricted and Unrestricted Donations",
+        "Tax Benefits",
+        "Donor Recognition",
+        "Anonymous Donations",
+        "Foreign Contributions"
+      ]
     },
     {
-      "id": "10",
-      "title": "Volunteer Policy",
-      "file": "10-volunteer-policy.md",
+      "id": "volunteer-policy",
+      "number": "10",
+      "title": "Volunteer Management Policy",
+      "filename": "10_Volunteer_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Volunteer"
+      "authority": "community",
+      "authorityLevel": 70,
+      "category": "community",
+      "owner": "Volunteer",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Establishes the framework for recruiting, managing, and supporting volunteers.",
+      "dependencies": ["constitution"],
+      "tags": ["volunteers", "community", "recruitment", "training"],
+      "keyProvisions": [
+        "Recruitment and Selection",
+        "Code of Conduct",
+        "Training and Support",
+        "Risk Management",
+        "Recognition and Rewards",
+        "Termination and Exit"
+      ]
     },
     {
-      "id": "11",
-      "title": "Child Protection And Safeguarding Policy",
-      "file": "11-child-protection.md",
+      "id": "child-protection",
+      "number": "11",
+      "title": "Child Protection & Safeguarding Policy",
+      "filename": "11_Child_Protection_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Legal"
+      "authority": "protection",
+      "authorityLevel": 90,
+      "category": "protection",
+      "owner": "Legal",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Establishes a comprehensive framework for protecting children and vulnerable persons from harm.",
+      "dependencies": ["constitution", "volunteer-policy"],
+      "tags": [
+        "child-protection",
+        "safeguarding",
+        "safety",
+        "abuse-prevention"
+      ],
+      "keyProvisions": [
+        "Zero Tolerance for Abuse",
+        "Code of Conduct with Children",
+        "Recruitment Checks",
+        "Reporting Obligations",
+        "Response Procedures",
+        "Support for Victims",
+        "Training Requirements"
+      ]
     },
     {
-      "id": "12",
+      "id": "environmental-conservation",
+      "number": "12",
       "title": "Environmental Conservation Policy",
-      "file": "12-environmental-conservation.md",
+      "filename": "12_Environmental_Conservation_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Researcher"
+      "authority": "mission",
+      "authorityLevel": 75,
+      "category": "mission",
+      "owner": "Researcher",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the Foundation's commitment to environmental sustainability and conservation.",
+      "dependencies": ["constitution"],
+      "tags": ["environment", "sustainability", "conservation", "carbon"],
+      "keyProvisions": [
+        "Environmental Stewardship",
+        "Carbon Footprint Reduction",
+        "Sustainable Operations",
+        "Environmental Education",
+        "Conservation Partnerships",
+        "Environmental Reporting"
+      ]
     },
     {
-      "id": "13",
-      "title": "AI Ethics And Responsible AI Policy",
-      "file": "13-ai-ethics.md",
+      "id": "ai-ethics",
+      "number": "13",
+      "title": "AI Ethics & Responsible AI Policy",
+      "filename": "13_AI_Ethics_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "CTO"
+      "authority": "technology",
+      "authorityLevel": 85,
+      "category": "technology",
+      "owner": "CTO",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the ethical principles and responsible practices for AI development and deployment.",
+      "dependencies": ["constitution", "code-of-ethics"],
+      "tags": ["ai", "ethics", "transparency", "accountability"],
+      "keyProvisions": [
+        "Human-Centric AI Principles",
+        "Transparency and Explainability",
+        "Fairness and Non-Discrimination",
+        "Privacy and Data Protection",
+        "Accountability and Responsibility",
+        "AI Governance Framework",
+        "AI Ethics Committee"
+      ]
     },
     {
-      "id": "14",
+      "id": "digital-library",
+      "number": "14",
       "title": "Digital Library Policy",
-      "file": "14-digital-library.md",
+      "filename": "14_Digital_Library_Policy.md",
       "status": "active",
-      "category": "governance",
-      "owner": "Historian"
+      "authority": "knowledge",
+      "authorityLevel": 75,
+      "category": "knowledge",
+      "owner": "Historian",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the governance and operational framework for the Digital Library.",
+      "dependencies": ["constitution", "ai-ethics"],
+      "tags": ["digital-library", "knowledge", "content", "preservation"],
+      "keyProvisions": [
+        "Access and Usage",
+        "Content Curation",
+        "Knowledge Preservation",
+        "AI-Powered Features",
+        "Copyright and Licensing",
+        "Quality Assurance",
+        "Community Contribution"
+      ]
+    },
+    {
+      "id": "brand-constitution",
+      "number": "15",
+      "title": "Brand Constitution",
+      "filename": "15_Brand_Constitution.md",
+      "status": "active",
+      "authority": "identity",
+      "authorityLevel": 80,
+      "category": "identity",
+      "owner": "Brand",
+      "version": "1.0",
+      "effectiveDate": "2026-01-01",
+      "description": "Defines the visual identity, brand standards, and brand usage guidelines.",
+      "dependencies": ["constitution"],
+      "tags": ["brand", "identity", "visual", "messaging"],
+      "keyProvisions": [
+        "Brand Identity (Colors, Typography, Logo)",
+        "Brand Voice and Messaging",
+        "Brand Application",
+        "Digital Presence",
+        "Brand Governance",
+        "Brand Evolution",
+        "Cultural Sensitivity"
+      ]
     }
-  ]
+  ],
+  "authorityHierarchy": [
+    { "level": 100, "document": "constitution", "title": "The Constitution" },
+    { "level": 95, "document": "trust-deed", "title": "Trust Deed" },
+    {
+      "level": 90,
+      "document": "founders-charter",
+      "title": "Founder's Charter"
+    },
+    {
+      "level": 90,
+      "document": "child-protection",
+      "title": "Child Protection Policy"
+    },
+    { "level": 85, "document": "board-charter", "title": "Board Charter" },
+    { "level": 85, "document": "code-of-ethics", "title": "Code of Ethics" },
+    {
+      "level": 85,
+      "document": "financial-management",
+      "title": "Financial Management"
+    },
+    { "level": 85, "document": "ai-ethics", "title": "AI Ethics Policy" },
+    {
+      "level": 80,
+      "document": "governance-manual",
+      "title": "Governance Manual"
+    },
+    {
+      "level": 80,
+      "document": "conflict-of-interest",
+      "title": "Conflict of Interest"
+    },
+    {
+      "level": 80,
+      "document": "brand-constitution",
+      "title": "Brand Constitution"
+    },
+    {
+      "level": 75,
+      "document": "donation-acceptance",
+      "title": "Donation Policy"
+    },
+    {
+      "level": 75,
+      "document": "environmental-conservation",
+      "title": "Environmental Policy"
+    },
+    {
+      "level": 75,
+      "document": "digital-library",
+      "title": "Digital Library Policy"
+    },
+    { "level": 70, "document": "volunteer-policy", "title": "Volunteer Policy" }
+  ],
+  "categories": {
+    "governance": [
+      "constitution",
+      "trust-deed",
+      "founders-charter",
+      "board-charter",
+      "governance-manual"
+    ],
+    "legal": ["trust-deed"],
+    "ethics": ["code-of-ethics"],
+    "compliance": ["conflict-of-interest"],
+    "financial": ["financial-management", "donation-acceptance"],
+    "community": ["volunteer-policy"],
+    "protection": ["child-protection"],
+    "mission": ["environmental-conservation"],
+    "technology": ["ai-ethics"],
+    "knowledge": ["digital-library"],
+    "identity": ["brand-constitution"]
+  },
+  "sdk": {
+    "package": "@bhavya/constitution",
+    "entryPoint": "packages/constitution/src/sdk.mjs",
+    "apis": [
+      "getConstitutionalDocument(id)",
+      "getAllDocuments()",
+      "getArticles(docId)",
+      "getArticle(docId, articleNumber)",
+      "getDefinitions(docId)",
+      "searchDefinitions(term)",
+      "getPolicies(docId)",
+      "searchPolicies(keyword)",
+      "getResponsibilities(docId)",
+      "searchResponsibilities(role)",
+      "getPrinciples(docId)",
+      "getGovernanceHierarchyQuery()",
+      "getDocumentDependencies(docId)",
+      "getDocumentDependents(docId)",
+      "search(query, options)",
+      "searchByKeyword(keyword)",
+      "queryKnowledgeGraph(nodeId, options)",
+      "findRelationshipPath(sourceId, targetId)",
+      "cite(docId, options)",
+      "getDocumentSummary(docId)",
+      "getAllDocumentSummaries()"
+    ]
+  }
 }

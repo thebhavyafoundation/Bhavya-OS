@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getProgress } from "@/data/progress";
+import { useAuth } from "@/components/AuthProvider";
 import { problemLibrary } from "@bhavya/impact-runtime";
 import type { ProblemCategory } from "@bhavya/impact-runtime";
 
@@ -35,19 +35,18 @@ const categoryLabels: Record<ProblemCategory, string> = {
 
 export default function ImpactPage() {
   const router = useRouter();
-  const [enrolled, setEnrolled] = useState(false);
+  const { isAuthenticated, student } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState<
     ProblemCategory | "all"
   >("all");
 
+  const enrolled = isAuthenticated && !!student;
+
   useEffect(() => {
-    const p = getProgress();
-    if (!p.enrolled) {
+    if (!enrolled) {
       router.push("/assessment");
-      return;
     }
-    setEnrolled(true);
-  }, [router]);
+  }, [enrolled, router]);
 
   if (!enrolled) return null;
 

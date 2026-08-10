@@ -80,7 +80,7 @@ export default function AboutPage() {
                 Democratize AI Education for Everyone
               </h2>
               <p className="text-[#8a7359] leading-relaxed mb-4">
-                Our mission is to democratize AI education, making world-class
+                Our mission is to democratize AI education, making exceptional
                 learning accessible to anyone with curiosity and determination.
                 We believe that understanding AI is not a luxury — it is a
                 necessity for the 21st century.
@@ -216,8 +216,8 @@ export default function AboutPage() {
               Join Our Community
             </h2>
             <p className="text-[#8a7359] mb-10 text-lg">
-              50,000+ learners, researchers, and practitioners are building the
-              future of AI together.
+              A community of learners, researchers, and practitioners
+              building the future of AI together.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

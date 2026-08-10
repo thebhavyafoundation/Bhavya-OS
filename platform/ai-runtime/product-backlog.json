@@ -17,7 +17,11 @@
           "priority": "P1",
           "estimate": "3",
           "status": "ready",
-          "acceptanceCriteria": ["Toggle persists preference", "Respects system preference", "No flash on load"]
+          "acceptanceCriteria": [
+            "Toggle persists preference",
+            "Respects system preference",
+            "No flash on load"
+          ]
         },
         {
           "id": "STORY-002",
@@ -26,7 +30,11 @@
           "priority": "P2",
           "estimate": "5",
           "status": "ready",
-          "acceptanceCriteria": ["Shows project locations", "Interactive markers", "Mobile responsive"]
+          "acceptanceCriteria": [
+            "Shows project locations",
+            "Interactive markers",
+            "Mobile responsive"
+          ]
         },
         {
           "id": "STORY-003",
@@ -35,7 +43,11 @@
           "priority": "P0",
           "estimate": "8",
           "status": "ready",
-          "acceptanceCriteria": ["Payment processing", "Receipt generation", "Donor management"]
+          "acceptanceCriteria": [
+            "Payment processing",
+            "Receipt generation",
+            "Donor management"
+          ]
         },
         {
           "id": "STORY-004",
@@ -44,7 +56,11 @@
           "priority": "P1",
           "estimate": "5",
           "status": "ready",
-          "acceptanceCriteria": ["Registration form", "Email confirmation", "Profile creation"]
+          "acceptanceCriteria": [
+            "Registration form",
+            "Email confirmation",
+            "Profile creation"
+          ]
         },
         {
           "id": "STORY-005",
@@ -53,7 +69,11 @@
           "priority": "P1",
           "estimate": "2",
           "status": "ready",
-          "acceptanceCriteria": ["Bundle analyzer pass", "Code splitting", "Tree shaking"]
+          "acceptanceCriteria": [
+            "Bundle analyzer pass",
+            "Code splitting",
+            "Tree shaking"
+          ]
         }
       ]
     },
@@ -80,7 +100,11 @@
           "priority": "P1",
           "estimate": "3",
           "status": "ready",
-          "acceptanceCriteria": ["Version tracking", "Diff view", "Restore capability"]
+          "acceptanceCriteria": [
+            "Version tracking",
+            "Diff view",
+            "Restore capability"
+          ]
         },
         {
           "id": "STORY-008",
@@ -89,7 +113,11 @@
           "priority": "P1",
           "estimate": "5",
           "status": "ready",
-          "acceptanceCriteria": ["Chart.js integration", "Responsive", "Accessible"]
+          "acceptanceCriteria": [
+            "Chart.js integration",
+            "Responsive",
+            "Accessible"
+          ]
         },
         {
           "id": "STORY-009",
@@ -125,7 +153,11 @@
           "priority": "P0",
           "estimate": "13",
           "status": "ready",
-          "acceptanceCriteria": ["CRUD operations", "Version control", "Publishing workflow"]
+          "acceptanceCriteria": [
+            "CRUD operations",
+            "Version control",
+            "Publishing workflow"
+          ]
         },
         {
           "id": "STORY-012",
@@ -161,7 +193,11 @@
           "priority": "P1",
           "estimate": "5",
           "status": "ready",
-          "acceptanceCriteria": ["Action tracking", "User attribution", "Searchable logs"]
+          "acceptanceCriteria": [
+            "Action tracking",
+            "User attribution",
+            "Searchable logs"
+          ]
         }
       ]
     },
@@ -179,7 +215,11 @@
           "priority": "P0",
           "estimate": "8",
           "status": "ready",
-          "acceptanceCriteria": ["Interactive graph", "Node details", "Filtering"]
+          "acceptanceCriteria": [
+            "Interactive graph",
+            "Node details",
+            "Filtering"
+          ]
         },
         {
           "id": "STORY-017",
@@ -188,7 +228,11 @@
           "priority": "P0",
           "estimate": "5",
           "status": "ready",
-          "acceptanceCriteria": ["Full-text search", "Filters", "Relevance ranking"]
+          "acceptanceCriteria": [
+            "Full-text search",
+            "Filters",
+            "Relevance ranking"
+          ]
         },
         {
           "id": "STORY-018",
@@ -215,7 +259,11 @@
           "priority": "P2",
           "estimate": "3",
           "status": "ready",
-          "acceptanceCriteria": ["Template library", "Custom templates", "Auto-fill"]
+          "acceptanceCriteria": [
+            "Template library",
+            "Custom templates",
+            "Auto-fill"
+          ]
         }
       ]
     }

@@ -1,0 +1,20 @@
+{
+  "id": "task-1785999648793-6nauv",
+  "type": "implementation",
+  "priority": "normal",
+  "state": "pending",
+  "dependencies": ["Design: Add a hello world endpoint to the platform"],
+  "payload": {},
+  "result": null,
+  "error": null,
+  "attempts": 0,
+  "maxRetries": 3,
+  "assignedWorker": null,
+  "createdAt": "2026-08-06T07:00:48.793Z",
+  "updatedAt": "2026-08-06T07:00:48.793Z",
+  "startedAt": null,
+  "completedAt": null,
+  "failedAt": null,
+  "checkpoints": [],
+  "timeout": 300000
+}

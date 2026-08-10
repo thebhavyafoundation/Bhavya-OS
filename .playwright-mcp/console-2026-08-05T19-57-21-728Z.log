@@ -1,0 +1,58 @@
+[     632ms] [WARNING] iso_swr[warn] useIsomorphicSWRInfinite used without Provider. Fallbacking back to client-side render @ https://vercel.com/_next/static/immutable/chunks/3xoehc_5s648-.js:19
+[    1046ms] [WARNING] Deprecated API for given entry type. @ https://vercel.com/_next/static/immutable/chunks/3k3olixyw9_10.js:18
+[  158736ms] [LOG] %c
+▲
+
+ _____ _              _                    _   _             __
+|_   _| |__   ___    / \   __ _  ___ _ __ | |_(_) ___       / /
+  | | | '_ \ / _ \  / _ \ / _` |/ _ \ '_ \| __| |/ __|     / /
+  | | | | | |  __/ / ___ \ (_| |  __/ | | | |_| | (__     /_/
+  |_| |_| |_|\___|/_/   \_\__, |\___|_| |_|\__|_|\___|    (_)
+                           |___/
+ ___        __               _                   _                 _
+|_ _|_ __  / _|_ __ __ _ ___| |_ _ __ _   _  ___| |_ _   _ _ __ ___
+ | || '_ \| |_| '__/ _` / __| __| '__| | | |/ __| __| | | | '__/ _ \
+ | || | | |  _| | | (_| \__ \ |_| |  | |_| | (__| |_| |_| | | |  __/
+|___|_| |_|_| |_|  \__,_|___/\__|_|   \__,_|\___|\__|\__,_|_|  \___|
+  
+
+Hello!
+
+- Open Source https://vercel.com/oss
+- Careers https://vercel.com/careers
+- Status https://vercel-status.com
+
+ font-family: "Geist Mono", monospace; white-space: pre; line-height: 1; @ https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:78
+[  187416ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at r4 (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:47741)
+    at iC (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:101936)
+    at sG (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:144374)
+    at https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:144219
+    at sQ (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:144227)
+    at sI (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:139277)
+    at cy (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:174222)
+    at cp (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:172125)
+    at ch (https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:172482)
+    at https://vercel.com/_next/static/immutable/chunks/2x2g4glth1tba.js:109:174281
+[  203796ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/21rw_-yth3n_r.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  203797ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1lrt0kk_p9rdf.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  203799ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3flhcz7cw314y.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  203997ms] [WARNING] Deprecated API for given entry type. @ https://vercel.com/_next/static/immutable/chunks/1rn2gou589nch.js:18
+[  208245ms] [ERROR] Failed to load resource: the server responded with a status of 429 () @ https://o205439.ingest.sentry.io/api/1323670/envelope/?sentry_key=d00780d432ac4ccf882f60dd02062e14&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.111.0:0
+[  217326ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/21rw_-yth3n_r.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  217326ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1lrt0kk_p9rdf.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  217326ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3flhcz7cw314y.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223918ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/21rw_-yth3n_r.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223919ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1lrt0kk_p9rdf.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223919ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/32fn_23dei1yg.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223920ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3ltmde337_bn6.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223924ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/0_8v7yw2uwqpx.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223924ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1_zhxte94w_ni.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  223924ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3flhcz7cw314y.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260075ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/21rw_-yth3n_r.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260076ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1lrt0kk_p9rdf.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260078ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/32fn_23dei1yg.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260079ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3ltmde337_bn6.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260079ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/0_8v7yw2uwqpx.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260082ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/1_zhxte94w_ni.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0
+[  260084ms] [WARNING] The resource https://vercel.com/_next/static/immutable/chunks/3flhcz7cw314y.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://vercel.com/bhavya-foundation/bhavya-foundation-website/DRqbkpdY33VEy4dAx4gmXvsM3i1t/logs:0

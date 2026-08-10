@@ -46,7 +46,7 @@ const items: ResearchItem[] = [
     id: 3,
     title: "Building Neural Networks from Scratch",
     author: "Bhavya AI Institute",
-    date: "2024",
+    date: "2026",
     type: "Tutorial",
     topics: ["DL"],
     description:
@@ -364,10 +364,10 @@ export default function ResearchPage() {
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "247", label: "Total Items" },
-              { value: "89", label: "Papers" },
-              { value: "64", label: "Datasets" },
-              { value: "94", label: "Tutorials" },
+              { value: "8", label: "Total Items" },
+              { value: "3", label: "Papers" },
+              { value: "2", label: "Datasets" },
+              { value: "3", label: "Tutorials" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}

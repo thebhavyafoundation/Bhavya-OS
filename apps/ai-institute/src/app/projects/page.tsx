@@ -406,7 +406,7 @@ export default function ProjectsPage() {
           className="text-center py-8"
         >
           <Link
-            href="/projects/new"
+            href="/projects"
             className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold rounded-xl bg-[#1a3a2a] text-[#4ade80] hover:bg-[#1a3a2a]/80 transition-all duration-300 shadow-[0_0_24px_rgba(26,58,42,0.3)] hover:shadow-[0_0_32px_rgba(26,58,42,0.4)]"
           >
             <svg

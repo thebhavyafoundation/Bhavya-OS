@@ -1,0 +1,30 @@
+{
+  "planId": "plan-1785732282726-fsr4ym",
+  "goal": "Create a Grade 8 Biology lesson",
+  "status": "pending",
+  "nodes": [],
+  "layers": [],
+  "context": {
+    "goal": {
+      "text": "Create a Grade 8 Biology lesson",
+      "intent": "create",
+      "domain": "academics",
+      "subject": "biology",
+      "gradeLevel": "8",
+      "params": {
+        "gradeLevel": "8",
+        "subject": "biology"
+      },
+      "capabilities": []
+    },
+    "createdAt": "2026-08-03T04:44:42.726Z"
+  },
+  "metrics": {
+    "totalNodes": 0,
+    "completed": 0,
+    "failed": 0,
+    "parallelized": 0,
+    "totalDurationMs": 0
+  },
+  "lastCheckpoint": "2026-08-03T04:44:42.728Z"
+}

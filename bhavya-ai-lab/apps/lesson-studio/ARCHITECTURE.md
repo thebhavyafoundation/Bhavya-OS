@@ -331,54 +331,54 @@ User → Course → "Publish Full Course"
 
 ## 4. Builders Used
 
-| Builder | Capability | Input | Outputs | Skills |
-|---------|-----------|-------|---------|--------|
-| lesson | lesson_generation | Knowledge Object | lesson JSON | education, writing |
-| quiz | quiz_generation | Knowledge Object | quiz JSON, flashcards | education, qa |
-| teacher-guide | (direct) | lesson | teacher guide MD | education, writing |
-| workbook | (direct) | lesson | workbook PDF | education, writing |
-| video | video_generation | visual spec | MP4, WebM, GIF | remotion, animation, react |
-| website | website_generation | lessons | static site, offline package | deployment, react |
+| Builder       | Capability         | Input            | Outputs                      | Skills                     |
+| ------------- | ------------------ | ---------------- | ---------------------------- | -------------------------- |
+| lesson        | lesson_generation  | Knowledge Object | lesson JSON                  | education, writing         |
+| quiz          | quiz_generation    | Knowledge Object | quiz JSON, flashcards        | education, qa              |
+| teacher-guide | (direct)           | lesson           | teacher guide MD             | education, writing         |
+| workbook      | (direct)           | lesson           | workbook PDF                 | education, writing         |
+| video         | video_generation   | visual spec      | MP4, WebM, GIF               | remotion, animation, react |
+| website       | website_generation | lessons          | static site, offline package | deployment, react          |
 
 ---
 
 ## 5. Capabilities Used
 
-| Capability | Builder | When Used |
-|-----------|---------|-----------|
-| lesson_generation | lesson | Create/edit lesson from Knowledge Object |
-| quiz_generation | quiz | Generate assessments for a lesson |
-| slides_generation | slides | Generate presentation slides |
-| video_generation | video | Generate animated video from visual spec |
-| website_generation | website | Publish lesson to website |
+| Capability         | Builder | When Used                                |
+| ------------------ | ------- | ---------------------------------------- |
+| lesson_generation  | lesson  | Create/edit lesson from Knowledge Object |
+| quiz_generation    | quiz    | Generate assessments for a lesson        |
+| slides_generation  | slides  | Generate presentation slides             |
+| video_generation   | video   | Generate animated video from visual spec |
+| website_generation | website | Publish lesson to website                |
 
 ---
 
 ## 6. Packages Used
 
-| Package | Version | Usage |
-|---------|---------|-------|
-| `@bhavya/core` | 1.0.0 | Types, routing, context loading |
-| `@bhavya/education` | 1.0.0 | Curriculum patterns, lesson schemas |
-| `@bhavya/knowledge` | 1.0.0 | Knowledge Object access |
-| `@bhavya/assessment` | 1.0.0 | Quiz, rubric, worksheet generation |
-| `@bhavya/website` | 1.0.0 | Website publishing |
-| next | 15.5.20 | Application framework |
-| react | 19.x | UI components |
-| tailwindcss | latest | Styling |
-| shadcn/ui | latest | UI component library |
+| Package              | Version | Usage                               |
+| -------------------- | ------- | ----------------------------------- |
+| `@bhavya/core`       | 1.0.0   | Types, routing, context loading     |
+| `@bhavya/education`  | 1.0.0   | Curriculum patterns, lesson schemas |
+| `@bhavya/knowledge`  | 1.0.0   | Knowledge Object access             |
+| `@bhavya/assessment` | 1.0.0   | Quiz, rubric, worksheet generation  |
+| `@bhavya/website`    | 1.0.0   | Website publishing                  |
+| next                 | 15.5.20 | Application framework               |
+| react                | 19.x    | UI components                       |
+| tailwindcss          | latest  | Styling                             |
+| shadcn/ui            | latest  | UI component library                |
 
 ---
 
 ## 7. Skills Used
 
-| Skill | Workspace | Patterns Used |
-|-------|-----------|---------------|
-| education | curriculum | Lesson structure, learning objectives, pedagogical patterns |
-| writing | curriculum | Content generation, tone, voice |
-| qa | platform | Question validation, rubric generation |
-| remotion | production | Animation timing, scene composition |
-| deployment | platform | Static site generation, SEO, offline packaging |
+| Skill      | Workspace  | Patterns Used                                               |
+| ---------- | ---------- | ----------------------------------------------------------- |
+| education  | curriculum | Lesson structure, learning objectives, pedagogical patterns |
+| writing    | curriculum | Content generation, tone, voice                             |
+| qa         | platform   | Question validation, rubric generation                      |
+| remotion   | production | Animation timing, scene composition                         |
+| deployment | platform   | Static site generation, SEO, offline packaging              |
 
 ---
 
@@ -386,33 +386,33 @@ User → Course → "Publish Full Course"
 
 ### 8.1 Pre-Build Gates (Before Builder Execution)
 
-| Gate | Checks | Severity |
-|------|--------|----------|
-| Structure | Knowledge Object has all required fields | Error |
-| Schema | Knowledge Object matches schema | Error |
-| Assets | All referenced assets exist | Error |
-| Dependencies | Required skills available in registry | Error |
+| Gate         | Checks                                   | Severity |
+| ------------ | ---------------------------------------- | -------- |
+| Structure    | Knowledge Object has all required fields | Error    |
+| Schema       | Knowledge Object matches schema          | Error    |
+| Assets       | All referenced assets exist              | Error    |
+| Dependencies | Required skills available in registry    | Error    |
 
 ### 8.2 Post-Build Gates (After Builder Execution)
 
-| Gate | Checks | Severity |
-|------|--------|----------|
-| Structure | All required lesson sections present | Error |
-| Schema | Lesson JSON matches schema | Error |
-| Accessibility | Color contrast, alt text, semantic HTML | Warning |
-| Naming | File and component naming conventions | Warning |
-| Performance | Bundle size, image optimization | Warning |
-| Responsive | Mobile layout, breakpoints | Warning |
+| Gate          | Checks                                  | Severity |
+| ------------- | --------------------------------------- | -------- |
+| Structure     | All required lesson sections present    | Error    |
+| Schema        | Lesson JSON matches schema              | Error    |
+| Accessibility | Color contrast, alt text, semantic HTML | Warning  |
+| Naming        | File and component naming conventions   | Warning  |
+| Performance   | Bundle size, image optimization         | Warning  |
+| Responsive    | Mobile layout, breakpoints              | Warning  |
 
 ### 8.3 Pre-Publish Gates (Before Website Publishing)
 
-| Gate | Checks | Severity |
-|------|--------|----------|
-| Structure | All pages render correctly | Error |
-| Assets | All assets resolve | Error |
-| Accessibility | WCAG AA compliance | Warning |
-| SEO | Meta tags, headings, alt text | Warning |
-| Offline | Offline package complete | Warning |
+| Gate          | Checks                        | Severity |
+| ------------- | ----------------------------- | -------- |
+| Structure     | All pages render correctly    | Error    |
+| Assets        | All assets resolve            | Error    |
+| Accessibility | WCAG AA compliance            | Warning  |
+| SEO           | Meta tags, headings, alt text | Warning  |
+| Offline       | Offline package complete      | Warning  |
 
 ---
 
@@ -420,33 +420,33 @@ User → Course → "Publish Full Course"
 
 ### 9.1 Unit Tests
 
-| Test Suite | Tests | Coverage Target |
-|-----------|-------|-----------------|
-| Capability resolution | cap -> builder, skills, registries | 100% |
-| Lesson compilation | KO -> Lesson | 100% |
-| Assessment generation | KO -> Quiz | 100% |
-| Guide generation | Lesson -> Guide | 100% |
-| Workbook generation | Lesson -> Workbook | 100% |
-| Quality gates | Each gate validates correctly | 100% |
+| Test Suite            | Tests                              | Coverage Target |
+| --------------------- | ---------------------------------- | --------------- |
+| Capability resolution | cap -> builder, skills, registries | 100%            |
+| Lesson compilation    | KO -> Lesson                       | 100%            |
+| Assessment generation | KO -> Quiz                         | 100%            |
+| Guide generation      | Lesson -> Guide                    | 100%            |
+| Workbook generation   | Lesson -> Workbook                 | 100%            |
+| Quality gates         | Each gate validates correctly      | 100%            |
 
 ### 9.2 Integration Tests
 
-| Test | Description |
-|------|-------------|
-| Full lesson pipeline | KO → Lesson → Quiz → Guide → Workbook → Publish |
-| Error handling | Missing KO, invalid schema, missing skills |
-| Quality gate failures | Each gate type with failing input |
-| Builder timeout | Builder exceeding max duration |
+| Test                  | Description                                     |
+| --------------------- | ----------------------------------------------- |
+| Full lesson pipeline  | KO → Lesson → Quiz → Guide → Workbook → Publish |
+| Error handling        | Missing KO, invalid schema, missing skills      |
+| Quality gate failures | Each gate type with failing input               |
+| Builder timeout       | Builder exceeding max duration                  |
 
 ### 9.3 E2E Tests
 
-| Test | Description |
-|------|-------------|
-| Create course | Full course creation flow |
-| Create lesson | Full lesson creation from KO |
+| Test                | Description                        |
+| ------------------- | ---------------------------------- |
+| Create course       | Full course creation flow          |
+| Create lesson       | Full lesson creation from KO       |
 | Generate assessment | Assessment generation with editing |
-| Publish lesson | Lesson publish to website |
-| Full course publish | Multi-lesson course publish |
+| Publish lesson      | Lesson publish to website          |
+| Full course publish | Multi-lesson course publish        |
 
 ---
 
@@ -454,16 +454,16 @@ User → Course → "Publish Full Course"
 
 ### 10.1 Version Strategy
 
-| Version | Milestone | Timeline |
-|---------|-----------|----------|
-| 0.1.0 | Scaffold + Dashboard | Now |
-| 0.2.0 | Course + Lesson CRUD | Next |
-| 0.3.0 | Lesson Builder Integration | Next |
-| 0.4.0 | Assessment Generation | Next |
-| 0.5.0 | Teacher Guide + Workbook | Next |
-| 0.6.0 | Visual Spec + Video Pipeline | Next |
-| 0.7.0 | Website Publishing | Next |
-| 1.0.0 | Production Release | Final |
+| Version | Milestone                    | Timeline |
+| ------- | ---------------------------- | -------- |
+| 0.1.0   | Scaffold + Dashboard         | Now      |
+| 0.2.0   | Course + Lesson CRUD         | Next     |
+| 0.3.0   | Lesson Builder Integration   | Next     |
+| 0.4.0   | Assessment Generation        | Next     |
+| 0.5.0   | Teacher Guide + Workbook     | Next     |
+| 0.6.0   | Visual Spec + Video Pipeline | Next     |
+| 0.7.0   | Website Publishing           | Next     |
+| 1.0.0   | Production Release           | Final    |
 
 ### 10.2 Release Checklist
 
@@ -532,4 +532,4 @@ User → Course → "Publish Full Course"
 
 ---
 
-*This document describes Lesson Studio v0.1.0. The platform is ENGINEERING FROZEN. Any gaps exposed by application development should be filed as ADRs, not as platform changes.*
+_This document describes Lesson Studio v0.1.0. The platform is ENGINEERING FROZEN. Any gaps exposed by application development should be filed as ADRs, not as platform changes._

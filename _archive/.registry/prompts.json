@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "prompts": [
+    {
+      "id": "website",
+      "name": "Website Prompt",
+      "path": ".prompts/website.txt",
+      "status": "active"
+    },
+    {
+      "id": "writer",
+      "name": "Writer Prompt",
+      "path": ".prompts/writer.txt",
+      "status": "active"
+    },
+    {
+      "id": "designer",
+      "name": "Designer Prompt",
+      "path": ".prompts/designer.txt",
+      "status": "active"
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer Prompt",
+      "path": ".prompts/reviewer.txt",
+      "status": "active"
+    },
+    {
+      "id": "seo",
+      "name": "SEO Prompt",
+      "path": ".prompts/seo.txt",
+      "status": "active"
+    },
+    {
+      "id": "developer",
+      "name": "Developer Prompt",
+      "path": ".prompts/developer.txt",
+      "status": "active"
+    },
+    {
+      "id": "qa",
+      "name": "QA Prompt",
+      "path": ".prompts/qa.txt",
+      "status": "active"
+    },
+    {
+      "id": "translator",
+      "name": "Translator Prompt",
+      "path": ".prompts/translator.txt",
+      "status": "active"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import { StatsSection } from "../components/StatsSection";
 import { PrinciplesSection } from "../components/PrinciplesSection";
 import { TrustLayer } from "../components/TrustLayer";
 import { CTASection } from "../components/CTASection";
+import { SkipNavigation } from "../components/SkipNavigation";
 import { buildMetadata } from "../lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
@@ -21,6 +22,7 @@ export const metadata: Metadata = buildMetadata({
 export default function WebsiteHomepage() {
   return (
     <>
+      <SkipNavigation />
       <Header currentPath="/" />
       <main id="main-content" role="main">
         <HeroSection />

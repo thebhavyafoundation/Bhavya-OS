@@ -28,33 +28,17 @@ function AnimatedCounter({
 }
 
 const stats = [
-  { label: "Lessons Completed", value: 12, icon: "📚", color: "#1a3a2a" },
-  { label: "Labs Done", value: 3, icon: "🔬", color: "#c9a227" },
-  { label: "Projects", value: 2, icon: "🚀", color: "#8a7359" },
-  { label: "XP Earned", value: 2450, icon: "⭐", color: "#1a3a2a" },
+  { label: "Lessons Completed", value: 0, icon: "📚", color: "#1a3a2a" },
+  { label: "Labs Done", value: 0, icon: "🔬", color: "#c9a227" },
+  { label: "Projects", value: 0, icon: "🚀", color: "#8a7359" },
+  { label: "XP Earned", value: 0, icon: "⭐", color: "#1a3a2a" },
 ];
 
 const activity = [
   {
-    time: "2 min ago",
-    text: "Completed Linear Regression lesson",
-    type: "lesson",
-  },
-  {
-    time: "1 hour ago",
-    text: "Started Lab 1: Data Preprocessing",
-    type: "lab",
-  },
-  {
-    time: "3 hours ago",
-    text: "Submitted Project: Sentiment Analyzer",
-    type: "project",
-  },
-  { time: "Yesterday", text: "Earned 150 XP for streak bonus", type: "xp" },
-  {
-    time: "2 days ago",
-    text: "Completed Neural Networks Foundations",
-    type: "lesson",
+    time: "",
+    text: "No recent activity",
+    type: "none",
   },
 ];
 
@@ -298,7 +282,7 @@ export default function WorkspacePage() {
                             ? "bg-[#c9a227]/20 text-[#c9a227]"
                             : item.type === "project"
                               ? "bg-[#8a7359]/20 text-[#d4b896]"
-                              : "bg-[#1a3a2a]/30 text-[#4ade80]"
+                              : "bg-white/[0.06] text-white/30"
                       }`}
                     >
                       {item.type === "lesson"
@@ -307,7 +291,9 @@ export default function WorkspacePage() {
                           ? "🧪"
                           : item.type === "project"
                             ? "🛠"
-                            : "⭐"}
+                            : item.type === "xp"
+                              ? "⭐"
+                              : "—"}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-white/70">{item.text}</p>

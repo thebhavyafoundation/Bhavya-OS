@@ -1,1 +1,6 @@
 .vercel
+bhavya-ai-lab/
+node_modules/
+.next/
+.env*
+*.log

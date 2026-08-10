@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { selectAgent, getAgentResponse } from "@/lib/agents";
+import { useAuth } from "@/components/AuthProvider";
 
 const SAMPLE_CODE = `import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -73,6 +74,7 @@ const _CONVERSATION = [
 ];
 
 export default function LabPage() {
+  const { completeLab } = useAuth();
   const [code, setCode] = useState(SAMPLE_CODE);
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
@@ -171,6 +173,7 @@ R² Score: 0.9846
     setIsSubmitted(true);
     setShowSubmitConfirm(false);
     setIsTimerRunning(false);
+    completeLab("lab-linear-regression");
   }
 
   return (
@@ -293,7 +296,7 @@ R² Score: 0.9846
               ref={textareaRef}
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="flex-1 p-4 bg-transparent text-[#f5f1e6] font-mono text-[13px] leading-6 resize-none focus:outline-none min-h-[420px] selection:bg-[#1a3a2a]/50"
+              className="flex-1 p-4 bg-transparent text-[#f5f1e6] font-mono text-[13px] leading-6 resize-none focus:outline-none min-h-[200px] md:min-h-[420px] selection:bg-[#1a3a2a]/50"
               spellCheck={false}
             />
           </div>

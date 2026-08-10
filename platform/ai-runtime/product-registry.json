@@ -10,7 +10,13 @@
       "purpose": "Public-facing website for Bhavya Foundation",
       "maturity": "production",
       "architecture": "Next.js 15 App Router",
-      "dependencies": ["next", "react", "framer-motion", "gsap", "lucide-react"],
+      "dependencies": [
+        "next",
+        "react",
+        "framer-motion",
+        "gsap",
+        "lucide-react"
+      ],
       "technicalDebt": "low",
       "deploymentStatus": "deployed",
       "productionReadiness": "ready",

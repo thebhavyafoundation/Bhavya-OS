@@ -77,7 +77,7 @@ export function AITutor() {
   ]);
   const [input, setInput] = useState("");
   const [personality, setPersonality] = useState("socratic");
-  const [context, setContext] = useState<StudentContext>({
+  const [context, _setContext] = useState<StudentContext>({
     currentLesson: "attention",
     knowledgeLevel: "beginner",
     completedLessons: [],
@@ -91,7 +91,7 @@ export function AITutor() {
   );
 
   const generateTutorResponse = useCallback(
-    async (studentMessage: string) => {
+    async (_studentMessage: string) => {
       setIsTyping(true);
       await new Promise((resolve) =>
         setTimeout(resolve, 800 + Math.random() * 1200),

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * @bhavya/platform-ui — SearchBar
  *

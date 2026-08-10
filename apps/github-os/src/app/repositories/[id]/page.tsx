@@ -28,6 +28,14 @@ import {
   Zap,
 } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
+import {
+  Card,
+  Badge,
+  Skeleton,
+  Breadcrumb,
+  EmptyState,
+  AppLayout,
+} from "@bhavya/platform-ui";
 
 interface Repository {
   id: string;
@@ -98,19 +106,19 @@ const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: "activity", label: "Activity", icon: <Activity size={14} /> },
 ];
 
-const maturityColors: Record<string, string> = {
-  emerging: "bg-amber-900/40 text-amber-300 border-amber-800",
-  developing: "bg-blue-900/40 text-blue-300 border-blue-800",
-  mature: "bg-emerald-900/40 text-emerald-300 border-emerald-800",
-  exemplary: "bg-purple-900/40 text-purple-300 border-purple-800",
+const maturityVariant: Record<string, "warning" | "info" | "success" | "purple"> = {
+  emerging: "warning",
+  developing: "info",
+  mature: "success",
+  exemplary: "purple",
 };
 
-const recColors: Record<string, string> = {
-  adopt: "bg-emerald-900/40 text-emerald-300 border-emerald-800",
-  study: "bg-blue-900/40 text-blue-300 border-blue-800",
-  reference: "bg-violet-900/40 text-violet-300 border-violet-800",
-  monitor: "bg-amber-900/40 text-amber-300 border-amber-800",
-  archive: "bg-zinc-800/40 text-zinc-400 border-zinc-700",
+const recVariant: Record<string, "success" | "info" | "purple" | "warning" | "default"> = {
+  adopt: "success",
+  study: "info",
+  reference: "purple",
+  monitor: "warning",
+  archive: "default",
 };
 
 export default function RepositoryDetailPage() {
@@ -144,51 +152,44 @@ export default function RepositoryDetailPage() {
   }
 
   function getScoreColor(score: number) {
-    if (score >= 90) return "text-emerald-400";
-    if (score >= 80) return "text-blue-400";
-    if (score >= 70) return "text-amber-400";
-    return "text-red-400";
+    if (score >= 90) return "text-score-excellent";
+    if (score >= 80) return "text-score-good";
+    if (score >= 70) return "text-score-fair";
+    return "text-score-poor";
   }
 
   function getScoreRing(score: number) {
-    if (score >= 90) return "stroke-emerald-400";
-    if (score >= 80) return "stroke-blue-400";
-    if (score >= 70) return "stroke-amber-400";
-    return "stroke-red-400";
+    if (score >= 90) return "stroke-score-excellent";
+    if (score >= 80) return "stroke-score-good";
+    if (score >= 70) return "stroke-score-fair";
+    return "stroke-score-poor";
   }
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
-        <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
-          <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-4" />
-            <div className="h-4 bg-[#27272a] rounded w-1/2 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
-          </div>
-        </main>
-      </div>
+      <AppLayout sidebar={<Sidebar />}>
+        <div className="animate-fade-in">
+          <Skeleton width="33%" height={32} className="mb-4" />
+          <Skeleton width="50%" height={16} className="mb-8" />
+          <Skeleton width="100%" height={256} rounded="lg" />
+        </div>
+      </AppLayout>
     );
   }
 
   if (!repo) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
-        <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
-          <div className="max-w-4xl mx-auto text-center py-20">
-            <FileText size={24} className="mx-auto text-[#52525b] mb-3" />
-            <p className="text-sm text-[#71717a]">Repository not found</p>
-            <Link
-              href="/repositories"
-              className="text-sm text-[#3b82f6] hover:text-[#60a5fa] mt-2 inline-block"
-            >
-              Back to repositories
-            </Link>
-          </div>
-        </main>
-      </div>
+      <AppLayout sidebar={<Sidebar />}>
+        <EmptyState
+          icon={<FileText size={24} />}
+          title="Repository not found"
+          description="The repository you're looking for doesn't exist or has been removed."
+          action={{
+            label: "Back to repositories",
+            onClick: () => (window.location.href = "/repositories"),
+          }}
+        />
+      </AppLayout>
     );
   }
 
@@ -201,647 +202,630 @@ export default function RepositoryDetailPage() {
   const folderStructure = JSON.parse(repo.folder_structure || "{}");
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
-      <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
-        <div className="max-w-4xl mx-auto">
-          <nav className="flex items-center gap-2 text-xs text-[#52525b] mb-6">
-            <Link
-              href="/repositories"
-              className="hover:text-[#fafafa] transition-colors"
-            >
-              Repositories
-            </Link>
-            <ChevronRight size={12} />
-            <span className="text-[#71717a]">{repo.name}</span>
-          </nav>
+    <AppLayout sidebar={<Sidebar />}>
+      <div className="animate-fade-in">
+        <Breadcrumb
+          items={[
+            { label: "Repositories", href: "/repositories" },
+            { label: repo.name },
+          ]}
+          className="mb-6"
+        />
 
-          <div className="flex items-start justify-between mb-8">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-2xl font-semibold text-[#fafafa]">
-                  {repo.name}
-                </h1>
-                <span
-                  className={`px-2 py-0.5 rounded text-xs font-medium border ${maturityColors[repo.engineering_maturity]}`}
-                >
-                  {repo.engineering_maturity}
+        <div className="flex flex-col sm:flex-row items-start justify-between mb-8 gap-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-3 mb-2">
+              <h1 className="text-2xl font-semibold text-text-primary">
+                {repo.name}
+              </h1>
+              <Badge variant={maturityVariant[repo.engineering_maturity]}>
+                {repo.engineering_maturity}
+              </Badge>
+              <Badge variant={recVariant[repo.recommendation_type]}>
+                {repo.recommendation_type}
+              </Badge>
+            </div>
+            <p className="text-sm text-text-tertiary mb-3">{repo.description}</p>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted">
+              {repo.language && (
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-accent-blue" />
+                  {repo.language}
                 </span>
-                <span
-                  className={`px-2 py-0.5 rounded text-xs font-medium border ${recColors[repo.recommendation_type]}`}
-                >
-                  {repo.recommendation_type}
-                </span>
-              </div>
-              <p className="text-sm text-[#71717a] mb-3">{repo.description}</p>
-              <div className="flex items-center gap-4 text-xs text-[#52525b]">
-                {repo.language && (
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#3b82f6]" />
-                    {repo.language}
-                  </span>
-                )}
-                <span className="flex items-center gap-1">
-                  <Star size={12} />
-                  {repo.stars}
-                </span>
-                <span className="flex items-center gap-1">
-                  <GitFork size={12} />
-                  {repo.forks}
-                </span>
-                {repo.license && <span>{repo.license}</span>}
-              </div>
-              {topics.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {topics.map((topic: string) => (
-                    <span
-                      key={topic}
-                      className="px-2 py-0.5 bg-[#1a1a1a] border border-[#27272a] rounded text-[10px] text-[#71717a]"
-                    >
-                      {topic}
-                    </span>
-                  ))}
-                </div>
               )}
+              <span className="flex items-center gap-1">
+                <Star size={12} />
+                {repo.stars}
+              </span>
+              <span className="flex items-center gap-1">
+                <GitFork size={12} />
+                {repo.forks}
+              </span>
+              {repo.license && <span>{repo.license}</span>}
             </div>
-            <div className="ml-6">
-              <div className="relative">
-                <svg className="w-20 h-20" viewBox="0 0 36 36">
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="15.91549430918954"
-                    fill="none"
-                    stroke="#27272a"
-                    strokeWidth="3"
-                  />
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="15.91549430918954"
-                    fill="none"
-                    className={getScoreRing(repo.bhavya_score)}
-                    strokeWidth="3"
-                    strokeDasharray={`${repo.bhavya_score} 100`}
-                    strokeLinecap="round"
-                    transform="rotate(-90 18 18)"
-                  />
-                </svg>
-                <span
-                  className={`absolute inset-0 flex items-center justify-center text-lg font-semibold ${getScoreColor(repo.bhavya_score)}`}
-                >
-                  {repo.bhavya_score}
-                </span>
+            {topics.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-3">
+                {topics.map((topic: string) => (
+                  <Badge key={topic} variant="default" size="sm">
+                    {topic}
+                  </Badge>
+                ))}
               </div>
-              <p className="text-center text-[10px] text-[#52525b] mt-1">
-                Bhavya Score
-              </p>
-            </div>
+            )}
           </div>
-
-          <div className="flex gap-1 border-b border-[#27272a] mb-6 overflow-x-auto">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
-                  activeTab === tab.id
-                    ? "text-[#fafafa] border-b-2 border-[#3b82f6]"
-                    : "text-[#71717a] hover:text-[#fafafa]"
-                }`}
+          <div className="flex-shrink-0">
+            <div className="relative">
+              <svg className="w-20 h-20" viewBox="0 0 36 36">
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="15.91549430918954"
+                  fill="none"
+                  stroke="var(--color-border-primary)"
+                  strokeWidth="3"
+                />
+                <circle
+                  cx="18"
+                  cy="18"
+                  r="15.91549430918954"
+                  fill="none"
+                  className={getScoreRing(repo.bhavya_score)}
+                  strokeWidth="3"
+                  strokeDasharray={`${repo.bhavya_score} 100`}
+                  strokeLinecap="round"
+                  transform="rotate(-90 18 18)"
+                />
+              </svg>
+              <span
+                className={`absolute inset-0 flex items-center justify-center text-lg font-semibold ${getScoreColor(repo.bhavya_score)}`}
               >
-                {tab.icon}
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {activeTab === "overview" && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                  <p className="text-xs text-[#71717a] mb-1">Health</p>
-                  <p
-                    className={`text-2xl font-semibold ${getScoreColor(repo.health_score)}`}
-                  >
-                    {repo.health_score}
-                  </p>
-                </div>
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                  <p className="text-xs text-[#71717a] mb-1">Technology</p>
-                  <p
-                    className={`text-2xl font-semibold ${getScoreColor(repo.technology_score)}`}
-                  >
-                    {repo.technology_score}
-                  </p>
-                </div>
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                  <p className="text-xs text-[#71717a] mb-1">Difficulty</p>
-                  <p className="text-lg font-semibold text-[#fafafa] capitalize">
-                    {repo.learning_difficulty}
-                  </p>
-                </div>
-              </div>
-
-              {repo.why_bhavya_cares && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-2">
-                    Why Bhavya Cares
-                  </h3>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.why_bhavya_cares}
-                  </p>
-                </div>
-              )}
-
-              {repo.architecture_summary && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-2">
-                    Architecture Summary
-                  </h3>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.architecture_summary}
-                  </p>
-                </div>
-              )}
-
-              {repo.readme_summary && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-2">
-                    README Summary
-                  </h3>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.readme_summary}
-                  </p>
-                </div>
-              )}
-
-              {knowledge.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Knowledge Packages ({knowledge.length})
-                  </h3>
-                  <div className="space-y-2">
-                    {knowledge.slice(0, 3).map((kp) => (
-                      <div
-                        key={kp.id}
-                        className="flex items-center justify-between p-2 bg-[#0a0a0a] border border-[#27272a] rounded"
-                      >
-                        <div>
-                          <span className="text-[10px] text-[#52525b] uppercase">
-                            {kp.category}
-                          </span>
-                          <p className="text-sm text-[#fafafa]">{kp.title}</p>
-                        </div>
-                        <span className="text-xs text-[#71717a]">
-                          Q{kp.quality_score}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+                {repo.bhavya_score}
+              </span>
             </div>
-          )}
+            <p className="text-center text-[10px] text-text-muted mt-1">
+              Bhavya Score
+            </p>
+          </div>
+        </div>
 
-          {activeTab === "architecture" && (
-            <div className="space-y-6">
-              {repo.architecture_summary && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Architecture
-                  </h3>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.architecture_summary}
-                  </p>
-                </div>
-              )}
+        <div className="flex gap-1 border-b border-border-primary mb-6 overflow-x-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
+                activeTab === tab.id
+                  ? "text-text-primary border-b-2 border-accent-blue"
+                  : "text-text-tertiary hover:text-text-primary"
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
-              {Object.keys(folderStructure).length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Folder Structure
-                  </h3>
-                  <pre className="text-sm text-[#a1a1aa] font-mono leading-relaxed overflow-x-auto">
-                    {JSON.stringify(folderStructure, null, 2)}
-                  </pre>
-                </div>
-              )}
+        {activeTab === "overview" && (
+          <div className="space-y-6 animate-fade-in">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <Card padding="md">
+                <p className="text-xs text-text-tertiary mb-1">Health</p>
+                <p
+                  className={`text-2xl font-semibold ${getScoreColor(repo.health_score)}`}
+                >
+                  {repo.health_score}
+                </p>
+              </Card>
+              <Card padding="md">
+                <p className="text-xs text-text-tertiary mb-1">Technology</p>
+                <p
+                  className={`text-2xl font-semibold ${getScoreColor(repo.technology_score)}`}
+                >
+                  {repo.technology_score}
+                </p>
+              </Card>
+              <Card padding="md">
+                <p className="text-xs text-text-tertiary mb-1">Difficulty</p>
+                <p className="text-lg font-semibold text-text-primary capitalize">
+                  {repo.learning_difficulty}
+                </p>
+              </Card>
+            </div>
 
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                  Technology Stack
+            {repo.why_bhavya_cares && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-2">
+                  Why Bhavya Cares
                 </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {Object.entries(techStack).map(([key, value]) => (
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.why_bhavya_cares}
+                </p>
+              </Card>
+            )}
+
+            {repo.architecture_summary && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-2">
+                  Architecture Summary
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.architecture_summary}
+                </p>
+              </Card>
+            )}
+
+            {repo.readme_summary && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-2">
+                  README Summary
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.readme_summary}
+                </p>
+              </Card>
+            )}
+
+            {knowledge.length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Knowledge Packages ({knowledge.length})
+                </h3>
+                <div className="space-y-2">
+                  {knowledge.slice(0, 3).map((kp) => (
                     <div
-                      key={key}
-                      className="flex items-center justify-between border border-[#27272a] rounded-md p-2"
+                      key={kp.id}
+                      className="flex items-center justify-between p-2 bg-bg-primary border border-border-primary rounded"
                     >
-                      <span className="text-xs text-[#71717a] capitalize">
-                        {key.replace(/_/g, " ")}
-                      </span>
-                      <span className="text-xs text-[#fafafa] font-medium">
-                        {String(value)}
+                      <div>
+                        <span className="text-[10px] text-text-muted uppercase">
+                          {kp.category}
+                        </span>
+                        <p className="text-sm text-text-primary">{kp.title}</p>
+                      </div>
+                      <span className="text-xs text-text-tertiary">
+                        Q{kp.quality_score}
                       </span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
+            )}
+          </div>
+        )}
 
-              {patterns.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Detected Patterns ({patterns.length})
-                  </h3>
-                  <div className="space-y-2">
-                    {patterns.map((pat) => (
-                      <div
-                        key={pat.id}
-                        className="border border-[#27272a] rounded-md p-3"
-                      >
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-sm font-medium text-[#fafafa]">
-                            {pat.pattern_name}
-                          </span>
-                          <span className="text-xs text-[#71717a]">
-                            {pat.confidence}%
-                          </span>
-                        </div>
-                        {pat.description && (
-                          <p className="text-xs text-[#a1a1aa]">
-                            {pat.description}
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {adrs.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Architecture Decision Records ({adrs.length})
-                  </h3>
-                  <div className="space-y-3">
-                    {adrs.map((adr) => (
-                      <div
-                        key={adr.id}
-                        className="border border-[#27272a] rounded-md p-3"
-                      >
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="text-xs text-[#52525b] font-mono">
-                            ADR-{String(adr.number).padStart(3, "0")}
-                          </span>
-                          <span className="text-sm font-medium text-[#fafafa]">
-                            {adr.title}
-                          </span>
-                          <span
-                            className={`px-2 py-0.5 rounded text-[10px] font-medium ${
-                              adr.status === "accepted"
-                                ? "bg-emerald-900/40 text-emerald-300"
-                                : "bg-amber-900/40 text-amber-300"
-                            }`}
-                          >
-                            {adr.status}
-                          </span>
-                        </div>
-                        {adr.decision && (
-                          <p className="text-xs text-[#a1a1aa]">
-                            {adr.decision}
-                          </p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {deps.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Dependencies ({deps.length})
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {deps.map((dep: string) => (
-                      <span
-                        key={dep}
-                        className="px-2.5 py-1 bg-[#1a1a1a] border border-[#27272a] rounded text-xs text-[#a1a1aa] font-mono"
-                      >
-                        {dep}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "learning" && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                  <p className="text-xs text-[#71717a] mb-1">Difficulty</p>
-                  <p className="text-lg font-semibold text-[#fafafa] capitalize">
-                    {repo.learning_difficulty}
-                  </p>
-                </div>
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                  <p className="text-xs text-[#71717a] mb-1">Recommendation</p>
-                  <p className="text-lg font-semibold text-[#fafafa] capitalize">
-                    {repo.recommendation_type}
-                  </p>
-                </div>
-              </div>
-
-              {repo.why_bhavya_cares && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Target size={14} className="text-[#3b82f6]" />
-                    <h3 className="text-sm font-medium text-[#fafafa]">
-                      Why Learn This
-                    </h3>
-                  </div>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.why_bhavya_cares}
-                  </p>
-                </div>
-              )}
-
-              {prerequisites.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
-                    Prerequisites
-                  </h3>
-                  <div className="space-y-2">
-                    {prerequisites.map((prereq: string, i: number) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 text-sm text-[#a1a1aa]"
-                      >
-                        <span className="w-5 h-5 rounded-full bg-[#1a1a1a] border border-[#27272a] flex items-center justify-center text-[10px] text-[#71717a]">
-                          {i + 1}
-                        </span>
-                        {prereq}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {repo.learning_reading_order && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <BookOpen size={14} className="text-[#f59e0b]" />
-                    <h3 className="text-sm font-medium text-[#fafafa]">
-                      Reading Order
-                    </h3>
-                  </div>
-                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
-                    {repo.learning_reading_order}
-                  </p>
-                </div>
-              )}
-
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <GraduationCap size={14} className="text-emerald-400" />
-                  <h3 className="text-sm font-medium text-[#fafafa]">
-                    Start Learning
-                  </h3>
-                </div>
-                <p className="text-sm text-[#a1a1aa] mb-3">
-                  Ready to dive in? Explore the architecture, study the
-                  patterns, and build something.
+        {activeTab === "architecture" && (
+          <div className="space-y-6 animate-fade-in">
+            {repo.architecture_summary && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Architecture
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.architecture_summary}
                 </p>
+              </Card>
+            )}
+
+            {Object.keys(folderStructure).length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Folder Structure
+                </h3>
+                <pre className="text-sm text-text-secondary font-mono leading-relaxed overflow-x-auto">
+                  {JSON.stringify(folderStructure, null, 2)}
+                </pre>
+              </Card>
+            )}
+
+            <Card padding="lg">
+              <h3 className="text-sm font-medium text-text-primary mb-3">
+                Technology Stack
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(techStack).map(([key, value]) => (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between border border-border-primary rounded-md p-2"
+                  >
+                    <span className="text-xs text-text-tertiary capitalize">
+                      {key.replace(/_/g, " ")}
+                    </span>
+                    <span className="text-xs text-text-primary font-medium">
+                      {String(value)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {patterns.length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Detected Patterns ({patterns.length})
+                </h3>
+                <div className="space-y-2">
+                  {patterns.map((pat) => (
+                    <div
+                      key={pat.id}
+                      className="border border-border-primary rounded-md p-3"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-sm font-medium text-text-primary">
+                          {pat.pattern_name}
+                        </span>
+                        <span className="text-xs text-text-tertiary">
+                          {pat.confidence}%
+                        </span>
+                      </div>
+                      {pat.description && (
+                        <p className="text-xs text-text-secondary">
+                          {pat.description}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {adrs.length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Architecture Decision Records ({adrs.length})
+                </h3>
+                <div className="space-y-3">
+                  {adrs.map((adr) => (
+                    <div
+                      key={adr.id}
+                      className="border border-border-primary rounded-md p-3"
+                    >
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <span className="text-xs text-text-muted font-mono">
+                          ADR-{String(adr.number).padStart(3, "0")}
+                        </span>
+                        <span className="text-sm font-medium text-text-primary">
+                          {adr.title}
+                        </span>
+                        <Badge
+                          variant={
+                            adr.status === "accepted" ? "success" : "warning"
+                          }
+                          size="sm"
+                        >
+                          {adr.status}
+                        </Badge>
+                      </div>
+                      {adr.decision && (
+                        <p className="text-xs text-text-secondary">
+                          {adr.decision}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {deps.length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Dependencies ({deps.length})
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {deps.map((dep: string) => (
+                    <Badge key={dep} variant="default" size="sm" className="font-mono">
+                      {dep}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
+            )}
+          </div>
+        )}
+
+        {activeTab === "learning" && (
+          <div className="space-y-6 animate-fade-in">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Card padding="md">
+                <p className="text-xs text-text-tertiary mb-1">Difficulty</p>
+                <p className="text-lg font-semibold text-text-primary capitalize">
+                  {repo.learning_difficulty}
+                </p>
+              </Card>
+              <Card padding="md">
+                <p className="text-xs text-text-tertiary mb-1">Recommendation</p>
+                <p className="text-lg font-semibold text-text-primary capitalize">
+                  {repo.recommendation_type}
+                </p>
+              </Card>
+            </div>
+
+            {repo.why_bhavya_cares && (
+              <Card padding="lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <Target size={14} className="text-accent-blue" />
+                  <h3 className="text-sm font-medium text-text-primary">
+                    Why Learn This
+                  </h3>
+                </div>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.why_bhavya_cares}
+                </p>
+              </Card>
+            )}
+
+            {prerequisites.length > 0 && (
+              <Card padding="lg">
+                <h3 className="text-sm font-medium text-text-primary mb-3">
+                  Prerequisites
+                </h3>
+                <div className="space-y-2">
+                  {prerequisites.map((prereq: string, i: number) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-3 text-sm text-text-secondary"
+                    >
+                      <span className="w-5 h-5 rounded-full bg-bg-tertiary border border-border-primary flex items-center justify-center text-[10px] text-text-tertiary">
+                        {i + 1}
+                      </span>
+                      {prereq}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {repo.learning_reading_order && (
+              <Card padding="lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <BookOpen size={14} className="text-accent-yellow" />
+                  <h3 className="text-sm font-medium text-text-primary">
+                    Reading Order
+                  </h3>
+                </div>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  {repo.learning_reading_order}
+                </p>
+              </Card>
+            )}
+
+            <Card padding="lg">
+              <div className="flex items-center gap-2 mb-2">
+                <GraduationCap size={14} className="text-score-excellent" />
+                <h3 className="text-sm font-medium text-text-primary">
+                  Start Learning
+                </h3>
+              </div>
+              <p className="text-sm text-text-secondary mb-3">
+                Ready to dive in? Explore the architecture, study the
+                patterns, and build something.
+              </p>
+              <Link
+                href={`/repositories/${repo.id}/learning`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-accent-blue text-white text-sm rounded-md hover:bg-accent-blue-hover transition-colors"
+              >
+                Open Learning Mode
+                <ChevronRight size={14} />
+              </Link>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === "advisor" && (
+          <div className="space-y-6 animate-fade-in">
+            <Card padding="lg">
+              <div className="flex items-center gap-2 mb-3">
+                <Shield size={14} className="text-accent-blue" />
+                <h3 className="text-sm font-medium text-text-primary">
+                  Engineering Advisor
+                </h3>
+              </div>
+              <p className="text-sm text-text-secondary mb-4">
+                Get a comprehensive engineering assessment of this repository.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
-                  href={`/repositories/${repo.id}/learning`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#3b82f6] text-white text-sm rounded-md hover:bg-[#2563eb] transition-colors"
+                  href={`/repositories/${repo.id}/advisor`}
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
                 >
-                  Open Learning Mode
-                  <ChevronRight size={14} />
+                  <ClipboardCheck size={16} className="text-accent-blue" />
+                  <div>
+                    <p className="text-sm text-text-primary">Full Assessment</p>
+                    <p className="text-[10px] text-text-muted">
+                      Review, debt, recommendations
+                    </p>
+                  </div>
+                </Link>
+                <Link
+                  href={`/repositories/${repo.id}/debt`}
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                >
+                  <AlertTriangle size={16} className="text-score-fair" />
+                  <div>
+                    <p className="text-sm text-text-primary">Technical Debt</p>
+                    <p className="text-[10px] text-text-muted">
+                      Categorized debt register
+                    </p>
+                  </div>
+                </Link>
+                <Link
+                  href={`/repositories/${repo.id}/plan`}
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                >
+                  <Map size={16} className="text-accent-purple" />
+                  <div>
+                    <p className="text-sm text-text-primary">
+                      Implementation Plan
+                    </p>
+                    <p className="text-[10px] text-text-muted">
+                      Roadmap and milestones
+                    </p>
+                  </div>
+                </Link>
+                <Link
+                  href={`/repositories/${repo.id}/architecture-advisor`}
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                >
+                  <GitCompare size={16} className="text-accent-green" />
+                  <div>
+                    <p className="text-sm text-text-primary">
+                      Compare Architecture
+                    </p>
+                    <p className="text-[10px] text-text-muted">
+                      vs elite repositories
+                    </p>
+                  </div>
                 </Link>
               </div>
-            </div>
-          )}
+            </Card>
 
-          {activeTab === "advisor" && (
-            <div className="space-y-6">
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Shield size={14} className="text-[#3b82f6]" />
-                  <h3 className="text-sm font-medium text-[#fafafa]">
-                    Engineering Advisor
+            <Card padding="lg">
+              <div className="flex items-center gap-2 mb-2">
+                <Zap size={14} className="text-accent-yellow" />
+                <h3 className="text-sm font-medium text-text-primary">
+                  Quick Insights
+                </h3>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-bg-primary border border-border-primary rounded">
+                  <span className="text-sm text-text-secondary">
+                    Patterns Detected
+                  </span>
+                  <span className="text-sm font-medium text-text-primary">
+                    {patterns.length}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-bg-primary border border-border-primary rounded">
+                  <span className="text-sm text-text-secondary">
+                    ADRs Documented
+                  </span>
+                  <span className="text-sm font-medium text-text-primary">
+                    {adrs.length}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-bg-primary border border-border-primary rounded">
+                  <span className="text-sm text-text-secondary">
+                    Knowledge Packages
+                  </span>
+                  <span className="text-sm font-medium text-text-primary">
+                    {knowledge.length}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-bg-primary border border-border-primary rounded">
+                  <span className="text-sm text-text-secondary">Dependencies</span>
+                  <span className="text-sm font-medium text-text-primary">
+                    {deps.length}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === "activity" && (
+          <div className="space-y-6 animate-fade-in">
+            {repo.latest_commit && (
+              <Card padding="lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <Activity size={14} className="text-accent-blue" />
+                  <h3 className="text-sm font-medium text-text-primary">
+                    Latest Commit
                   </h3>
                 </div>
-                <p className="text-sm text-[#a1a1aa] mb-4">
-                  Get a comprehensive engineering assessment of this repository.
+                <p className="text-sm text-text-secondary font-mono">
+                  {repo.latest_commit}
                 </p>
-                <div className="grid grid-cols-2 gap-3">
-                  <Link
-                    href={`/repositories/${repo.id}/advisor`}
-                    className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded hover:border-[#3b82f6] transition-colors"
-                  >
-                    <ClipboardCheck size={16} className="text-[#3b82f6]" />
-                    <div>
-                      <p className="text-sm text-[#fafafa]">Full Assessment</p>
-                      <p className="text-[10px] text-[#52525b]">
-                        Review, debt, recommendations
-                      </p>
-                    </div>
-                  </Link>
-                  <Link
-                    href={`/repositories/${repo.id}/debt`}
-                    className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded hover:border-[#3b82f6] transition-colors"
-                  >
-                    <AlertTriangle size={16} className="text-amber-400" />
-                    <div>
-                      <p className="text-sm text-[#fafafa]">Technical Debt</p>
-                      <p className="text-[10px] text-[#52525b]">
-                        Categorized debt register
-                      </p>
-                    </div>
-                  </Link>
-                  <Link
-                    href={`/repositories/${repo.id}/plan`}
-                    className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded hover:border-[#3b82f6] transition-colors"
-                  >
-                    <Map size={16} className="text-[#a855f7]" />
-                    <div>
-                      <p className="text-sm text-[#fafafa]">
-                        Implementation Plan
-                      </p>
-                      <p className="text-[10px] text-[#52525b]">
-                        Roadmap and milestones
-                      </p>
-                    </div>
-                  </Link>
-                  <Link
-                    href={`/repositories/${repo.id}/architecture-advisor`}
-                    className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded hover:border-[#3b82f6] transition-colors"
-                  >
-                    <GitCompare size={16} className="text-[#22c55e]" />
-                    <div>
-                      <p className="text-sm text-[#fafafa]">
-                        Compare Architecture
-                      </p>
-                      <p className="text-[10px] text-[#52525b]">
-                        vs elite repositories
-                      </p>
-                    </div>
-                  </Link>
-                </div>
-              </div>
+              </Card>
+            )}
 
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+            {repo.latest_release && (
+              <Card padding="lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <Zap size={14} className="text-[#f59e0b]" />
-                  <h3 className="text-sm font-medium text-[#fafafa]">
-                    Quick Insights
+                  <Zap size={14} className="text-score-excellent" />
+                  <h3 className="text-sm font-medium text-text-primary">
+                    Latest Release
                   </h3>
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-[#0a0a0a] border border-[#27272a] rounded">
-                    <span className="text-sm text-[#a1a1aa]">
-                      Patterns Detected
-                    </span>
-                    <span className="text-sm font-medium text-[#fafafa]">
-                      {patterns.length}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-[#0a0a0a] border border-[#27272a] rounded">
-                    <span className="text-sm text-[#a1a1aa]">
-                      ADRs Documented
-                    </span>
-                    <span className="text-sm font-medium text-[#fafafa]">
-                      {adrs.length}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-[#0a0a0a] border border-[#27272a] rounded">
-                    <span className="text-sm text-[#a1a1aa]">
-                      Knowledge Packages
-                    </span>
-                    <span className="text-sm font-medium text-[#fafafa]">
-                      {knowledge.length}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-[#0a0a0a] border border-[#27272a] rounded">
-                    <span className="text-sm text-[#a1a1aa]">Dependencies</span>
-                    <span className="text-sm font-medium text-[#fafafa]">
-                      {deps.length}
-                    </span>
-                  </div>
-                </div>
+                <p className="text-sm text-text-secondary">
+                  {repo.latest_release}
+                </p>
+              </Card>
+            )}
+
+            <Card padding="lg">
+              <div className="flex items-center gap-2 mb-2">
+                <Wrench size={14} className="text-accent-yellow" />
+                <h3 className="text-sm font-medium text-text-primary">
+                  MCP Recommendations
+                </h3>
               </div>
-            </div>
-          )}
-
-          {activeTab === "activity" && (
-            <div className="space-y-6">
-              {repo.latest_commit && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Activity size={14} className="text-[#3b82f6]" />
-                    <h3 className="text-sm font-medium text-[#fafafa]">
-                      Latest Commit
-                    </h3>
-                  </div>
-                  <p className="text-sm text-[#a1a1aa] font-mono">
-                    {repo.latest_commit}
-                  </p>
-                </div>
-              )}
-
-              {repo.latest_release && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Zap size={14} className="text-emerald-400" />
-                    <h3 className="text-sm font-medium text-[#fafafa]">
-                      Latest Release
-                    </h3>
-                  </div>
-                  <p className="text-sm text-[#a1a1aa]">
-                    {repo.latest_release}
-                  </p>
-                </div>
-              )}
-
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <Wrench size={14} className="text-[#f59e0b]" />
-                  <h3 className="text-sm font-medium text-[#fafafa]">
-                    MCP Recommendations
-                  </h3>
-                </div>
-                {mcpRecs.length > 0 ? (
-                  <div className="space-y-2">
-                    {mcpRecs.map((mcp: string) => (
-                      <div
-                        key={mcp}
-                        className="flex items-center gap-2 text-xs text-[#a1a1aa]"
-                      >
-                        <ExternalLink size={10} />
-                        {mcp}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-[#52525b]">
-                    No MCP recommendations
-                  </p>
-                )}
-              </div>
-
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <div className="flex items-center gap-2 mb-2">
-                  <Wrench size={14} className="text-[#3b82f6]" />
-                  <h3 className="text-sm font-medium text-[#fafafa]">
-                    CLI Recommendations
-                  </h3>
-                </div>
-                {cliRecs.length > 0 ? (
-                  <div className="space-y-2">
-                    {cliRecs.map((cli: string) => (
-                      <div
-                        key={cli}
-                        className="flex items-center gap-2 text-xs text-[#a1a1aa] font-mono"
-                      >
-                        <ChevronRight size={10} />
-                        {cli}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-xs text-[#52525b]">
-                    No CLI recommendations
-                  </p>
-                )}
-              </div>
-
-              {repo.readme_content && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-medium text-[#fafafa]">
-                      README
-                    </h3>
-                    <button
-                      onClick={() => copyToClipboard(repo.readme_content || "")}
-                      className="flex items-center gap-1.5 text-xs text-[#71717a] hover:text-[#fafafa] transition-colors"
+              {mcpRecs.length > 0 ? (
+                <div className="space-y-2">
+                  {mcpRecs.map((mcp: string) => (
+                    <div
+                      key={mcp}
+                      className="flex items-center gap-2 text-xs text-text-secondary"
                     >
-                      {copied ? <Check size={12} /> : <Copy size={12} />}
-                      {copied ? "Copied" : "Copy"}
-                    </button>
-                  </div>
-                  <pre className="text-sm text-[#a1a1aa] whitespace-pre-wrap font-mono leading-relaxed max-h-96 overflow-y-auto">
-                    {repo.readme_content}
-                  </pre>
+                      <ExternalLink size={10} />
+                      {mcp}
+                    </div>
+                  ))}
                 </div>
+              ) : (
+                <p className="text-xs text-text-muted">
+                  No MCP recommendations
+                </p>
               )}
-            </div>
-          )}
-        </div>
-      </main>
-    </div>
+            </Card>
+
+            <Card padding="lg">
+              <div className="flex items-center gap-2 mb-2">
+                <Wrench size={14} className="text-accent-blue" />
+                <h3 className="text-sm font-medium text-text-primary">
+                  CLI Recommendations
+                </h3>
+              </div>
+              {cliRecs.length > 0 ? (
+                <div className="space-y-2">
+                  {cliRecs.map((cli: string) => (
+                    <div
+                      key={cli}
+                      className="flex items-center gap-2 text-xs text-text-secondary font-mono"
+                    >
+                      <ChevronRight size={10} />
+                      {cli}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-text-muted">
+                  No CLI recommendations
+                </p>
+              )}
+            </Card>
+
+            {repo.readme_content && (
+              <Card padding="lg">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-medium text-text-primary">
+                    README
+                  </h3>
+                  <button
+                    onClick={() => copyToClipboard(repo.readme_content || "")}
+                    className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors"
+                  >
+                    {copied ? <Check size={12} /> : <Copy size={12} />}
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                </div>
+                <pre className="text-sm text-text-secondary whitespace-pre-wrap font-mono leading-relaxed max-h-96 overflow-y-auto">
+                  {repo.readme_content}
+                </pre>
+              </Card>
+            )}
+          </div>
+        )}
+      </div>
+    </AppLayout>
   );
 }

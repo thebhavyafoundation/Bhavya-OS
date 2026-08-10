@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { getProgress } from "@/data/progress";
+import { useAuth } from "@/components/AuthProvider";
 import { problemLibrary, ImpactEngine } from "@bhavya/impact-runtime";
 import type { ImpactProject, OpenSourcePath } from "@bhavya/impact-runtime";
 
@@ -21,6 +21,7 @@ const engine = new ImpactEngine();
 export default function ImpactWorkspacePage() {
   const params = useParams();
   const router = useRouter();
+  const { isAuthenticated, student } = useAuth();
   const problemId = params.id as string;
   const [project, setProject] = useState<ImpactProject | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("problem");
@@ -68,8 +69,7 @@ export default function ImpactWorkspacePage() {
   });
 
   useEffect(() => {
-    const p = getProgress();
-    if (!p.enrolled) {
+    if (!isAuthenticated || !student) {
       router.push("/assessment");
       return;
     }

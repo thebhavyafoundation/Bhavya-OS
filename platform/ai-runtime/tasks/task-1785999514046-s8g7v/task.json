@@ -1,0 +1,20 @@
+{
+  "id": "task-1785999514046-s8g7v",
+  "type": "testing",
+  "priority": "normal",
+  "state": "pending",
+  "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+  "payload": {},
+  "result": null,
+  "error": null,
+  "attempts": 0,
+  "maxRetries": 3,
+  "assignedWorker": null,
+  "createdAt": "2026-08-06T06:58:34.046Z",
+  "updatedAt": "2026-08-06T06:58:34.046Z",
+  "startedAt": null,
+  "completedAt": null,
+  "failedAt": null,
+  "checkpoints": [],
+  "timeout": 300000
+}

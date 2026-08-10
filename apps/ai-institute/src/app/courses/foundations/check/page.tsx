@@ -1,29 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getProgress, saveProgress } from "@/data/progress";
+import { motion } from "framer-motion";
+import { useAuth } from "@/components/AuthProvider";
 import { foundationCourse } from "@/data/course";
 
 export default function KnowledgeCheckPage() {
   const router = useRouter();
-  const [progress, setProgress] = useState<ReturnType<typeof getProgress>>(() =>
-    getProgress(),
-  );
+  const { student, submitQuiz, isAuthenticated } = useAuth();
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
-
-  useEffect(() => {
-    const p = getProgress();
-    if (!p.enrolled) {
-      router.push("/assessment");
-      return;
-    }
-    setProgress(p);
-  }, [router]);
 
   const check = foundationCourse.modules[0].knowledgeCheck;
   const question = check.questions[currentQ];
@@ -36,7 +26,6 @@ export default function KnowledgeCheckPage() {
     if (currentQ < check.questions.length - 1) {
       setCurrentQ((prev) => prev + 1);
     } else {
-      // Calculate score
       let correct = 0;
       let total = 0;
       for (const q of check.questions) {
@@ -47,11 +36,7 @@ export default function KnowledgeCheckPage() {
       }
       const finalScore = total > 0 ? Math.round((correct / total) * 100) : 0;
       setScore(finalScore);
-      const p = { ...progress };
-      p.knowledgeCheckAnswers = newAnswers;
-      p.knowledgeCheckScore = finalScore;
-      saveProgress(p);
-      setProgress(p);
+      submitQuiz(newAnswers, finalScore);
       setSubmitted(true);
     }
   }
@@ -63,61 +48,31 @@ export default function KnowledgeCheckPage() {
           <div
             className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl ${
               score >= 80
-                ? "bg-accent-green/10 text-accent-green"
-                : "bg-accent-yellow/10 text-accent-yellow"
+                ? "bg-[#4ade80]/10 text-[#4ade80]"
+                : "bg-[#c9a227]/10 text-[#c9a227]"
             }`}
           >
             {score >= 80 ? "🎉" : "📚"}
           </div>
-          <h1 className="text-2xl font-bold text-text-primary mb-2">
+          <h1 className="text-2xl font-bold text-[#f5f1e6] mb-2">
             {score >= 80 ? "Great Job!" : "Keep Learning!"}
           </h1>
-          <p className="text-text-secondary mb-2">Your score: {score}%</p>
-          <p className="text-sm text-text-tertiary mb-8">
+          <p className="text-[#8a7359] mb-2">Your score: {score}%</p>
+          <p className="text-sm text-[#8a7359]/60 mb-8">
             {score >= 80
               ? "You've demonstrated solid understanding. Ready for the next challenge."
               : "Review the lesson material and try again. Learning takes time."}
           </p>
-
-          <div className="space-y-3">
-            {check.questions.map((q) => {
-              const userAnswer = answers[q.id];
-              const isCorrect =
-                q.type === "multiple-choice" && userAnswer === q.correct;
-              return (
-                <div
-                  key={q.id}
-                  className="text-left p-3 border border-border-primary rounded-md bg-bg-secondary"
-                >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span
-                      className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
-                        isCorrect
-                          ? "bg-accent-green text-white"
-                          : "bg-accent-red text-white"
-                      }`}
-                    >
-                      {isCorrect ? "✓" : "✗"}
-                    </span>
-                    <span className="text-xs text-text-secondary line-clamp-1">
-                      {q.question}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-4">
             <Link
               href="/dashboard"
-              className="px-5 py-2 text-sm font-medium border border-border-primary rounded-md text-text-secondary hover:text-text-primary transition-colors"
+              className="px-5 py-2 text-sm font-medium border border-[#1a3a2a]/60 rounded-xl text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
             >
               Dashboard
             </Link>
             <Link
               href="/courses/foundations/project"
-              className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+              className="px-5 py-2 text-sm font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-xl hover:bg-[#c9a227]/90 transition-colors"
             >
               Next: Project →
             </Link>
@@ -132,42 +87,43 @@ export default function KnowledgeCheckPage() {
       <div className="flex items-center justify-between mb-6">
         <Link
           href="/dashboard"
-          className="inline-flex items-center gap-1 text-sm text-text-secondary hover:text-text-primary transition-colors"
+          className="inline-flex items-center gap-1 text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
         >
           ← Back to Dashboard
         </Link>
-        <span className="text-xs text-text-tertiary">
+        <span className="text-xs text-[#8a7359]/60">
           Question {currentQ + 1} of {check.questions.length}
         </span>
       </div>
-      {/* Progress */}
       <div className="mb-8">
-        <div className="h-1 bg-bg-tertiary rounded-full overflow-hidden">
+        <div className="h-1 bg-[#1a3a2a]/30 rounded-full overflow-hidden">
           <div
-            className="h-full bg-accent-blue transition-all duration-300"
+            className="h-full bg-[#c9a227] transition-all duration-300"
             style={{ width: `${progressPct}%` }}
           />
         </div>
       </div>
-
-      {/* Question */}
-      <div className="animate-fade-in">
-        <p className="text-[10px] text-text-muted uppercase tracking-wider mb-2">
+      <motion.div
+        key={currentQ}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="animate-fade-in"
+      >
+        <p className="text-[10px] text-[#8a7359]/60 uppercase tracking-wider mb-2">
           {question.type.replace("-", " ")}
         </p>
-        <h2 className="text-lg font-semibold text-text-primary mb-6">
+        <h2 className="text-lg font-semibold text-[#f5f1e6] mb-6">
           {question.question}
         </h2>
-
         {question.type === "multiple-choice" && question.options && (
           <div className="space-y-3">
             {question.options.map((opt, i) => (
               <button
                 key={i}
                 onClick={() => submitAnswer(i)}
-                className="w-full text-left p-4 border border-border-primary rounded-md text-sm text-text-secondary bg-bg-secondary hover:border-border-secondary hover:text-text-primary transition-colors"
+                className="w-full text-left p-4 border border-[#1a3a2a]/40 rounded-xl text-sm text-[#8a7359] bg-[#0d1410] hover:border-[#c9a227]/40 hover:text-[#f5f1e6] transition-all"
               >
-                <span className="text-text-muted mr-3">
+                <span className="text-[#8a7359]/40 mr-3">
                   {String.fromCharCode(65 + i)}.
                 </span>
                 {opt}
@@ -175,11 +131,10 @@ export default function KnowledgeCheckPage() {
             ))}
           </div>
         )}
-
         {question.type === "short-answer" && (
           <div className="space-y-4">
             <textarea
-              className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
+              className="w-full h-32 p-3 bg-[#0d1410] border border-[#1a3a2a]/40 rounded-xl text-sm text-[#f5f1e6] placeholder-[#8a7359]/40 focus:outline-none focus:border-[#c9a227]/40 resize-none"
               placeholder="Write your answer..."
               onKeyDown={(e) => {
                 if (e.key === "Enter" && e.metaKey) {
@@ -192,17 +147,16 @@ export default function KnowledgeCheckPage() {
                 const textarea = document.querySelector("textarea");
                 if (textarea) submitAnswer(textarea.value);
               }}
-              className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+              className="px-5 py-2 text-sm font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-xl hover:bg-[#c9a227]/90 transition-colors"
             >
               Submit Answer
             </button>
           </div>
         )}
-
         {question.type === "reflection" && (
           <div className="space-y-4">
             <textarea
-              className="w-full h-32 p-3 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary resize-none"
+              className="w-full h-32 p-3 bg-[#0d1410] border border-[#1a3a2a]/40 rounded-xl text-sm text-[#f5f1e6] placeholder-[#8a7359]/40 focus:outline-none focus:border-[#c9a227]/40 resize-none"
               placeholder="Reflect on what you've learned..."
               onKeyDown={(e) => {
                 if (e.key === "Enter" && e.metaKey) {
@@ -215,13 +169,13 @@ export default function KnowledgeCheckPage() {
                 const textarea = document.querySelector("textarea");
                 if (textarea) submitAnswer(textarea.value);
               }}
-              className="px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+              className="px-5 py-2 text-sm font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-xl hover:bg-[#c9a227]/90 transition-colors"
             >
               Submit Reflection
             </button>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

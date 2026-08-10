@@ -4,7 +4,7 @@
  * Generic repository interface and base implementation for type-safe data access.
  */
 
-import { getDatabase } from "./sqlite.js";
+import { getDatabase } from "./sqlite";
 
 export interface Repository<T, TCreate = T> {
   findById(id: string): T | null;

@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "mem-1785994746482-rumu2",
+    "category": "general",
+    "title": "Test lesson",
+    "description": "Testing memory system",
+    "applicability": "general",
+    "tags": [],
+    "createdAt": "2026-08-06T05:39:06.482Z",
+    "updatedAt": "2026-08-06T05:39:06.482Z"
+  },
+  {
+    "id": "mem-1785995533653-gu3gn",
+    "category": "lessons-learned",
+    "title": "Test lesson",
+    "description": "Testing memory",
+    "tags": ["test"],
+    "createdAt": "2026-08-06T05:52:13.653Z",
+    "updatedAt": "2026-08-06T05:52:13.653Z"
+  },
+  {
+    "id": "mem-1785995533659-wopp7",
+    "category": "lessons-learned",
+    "title": "React hooks are useful",
+    "tags": ["react"],
+    "createdAt": "2026-08-06T05:52:13.659Z",
+    "updatedAt": "2026-08-06T05:52:13.659Z"
+  },
+  {
+    "id": "mem-1785995533661-17eqp",
+    "category": "lessons-learned",
+    "title": "TypeScript improves quality",
+    "tags": ["typescript"],
+    "createdAt": "2026-08-06T05:52:13.661Z",
+    "updatedAt": "2026-08-06T05:52:13.661Z"
+  },
+  {
+    "id": "mem-1785995642380-iln2e",
+    "category": "lessons-learned",
+    "title": "Test lesson",
+    "description": "Testing memory",
+    "tags": ["test"],
+    "createdAt": "2026-08-06T05:54:02.380Z",
+    "updatedAt": "2026-08-06T05:54:02.380Z"
+  },
+  {
+    "id": "mem-1785995642385-2m27e",
+    "category": "lessons-learned",
+    "title": "React hooks are useful",
+    "tags": ["react"],
+    "createdAt": "2026-08-06T05:54:02.385Z",
+    "updatedAt": "2026-08-06T05:54:02.385Z"
+  },
+  {
+    "id": "mem-1785995642386-x0qoj",
+    "category": "lessons-learned",
+    "title": "TypeScript improves quality",
+    "tags": ["typescript"],
+    "createdAt": "2026-08-06T05:54:02.386Z",
+    "updatedAt": "2026-08-06T05:54:02.386Z"
+  }
+]

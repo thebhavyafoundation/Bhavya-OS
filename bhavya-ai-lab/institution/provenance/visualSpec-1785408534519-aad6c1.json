@@ -6,9 +6,7 @@
   "capability": "visual_spec_generation",
   "execId": "exec-1785408534516-010ae45a",
   "sourceKnowledgeObject": "ko-ai-what-is-ai",
-  "parentArtifactIds": [
-    "workbook-1785408534512-f939bd"
-  ],
+  "parentArtifactIds": ["workbook-1785408534512-f939bd"],
   "qualityGate": "WARNING",
   "generatedAt": "2026-07-30T10:48:54.519Z"
 }

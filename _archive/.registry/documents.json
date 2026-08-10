@@ -1,0 +1,110 @@
+{
+  "version": "1.0",
+  "documents": [
+    {
+      "id": "constitution",
+      "name": "The Constitution",
+      "path": "01_The_Constitution.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "trust-deed",
+      "name": "Trust Deed",
+      "path": "02_Public_Charitable_Trust_Deed.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "founders-charter",
+      "name": "Founder's Charter",
+      "path": "03_The_Founders_Charter.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "board-charter",
+      "name": "Board of Trustees Charter",
+      "path": "04_Board_Of_Trustees_Charter.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "governance-manual",
+      "name": "Governance Manual",
+      "path": "05_Governance_Manual.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "code-of-ethics",
+      "name": "Code of Ethics",
+      "path": "06_Code_Of_Ethics.md",
+      "type": "governance",
+      "status": "active"
+    },
+    {
+      "id": "conflict-of-interest",
+      "name": "Conflict of Interest Policy",
+      "path": "07_Conflict_Of_Interest_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "financial-management",
+      "name": "Financial Management Policy",
+      "path": "08_Financial_Management_And_Procurement_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "donation-policy",
+      "name": "Donation Acceptance Policy",
+      "path": "09_Donation_Acceptance_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "volunteer-policy",
+      "name": "Volunteer Policy",
+      "path": "10_Volunteer_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "child-protection",
+      "name": "Child Protection Policy",
+      "path": "11_Child_Protection_And_Safeguarding_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "environmental-policy",
+      "name": "Environmental Conservation Policy",
+      "path": "12_Environmental_Conservation_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "ai-ethics",
+      "name": "AI Ethics Policy",
+      "path": "13_AI_Ethics_And_Responsible_AI_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "digital-library",
+      "name": "Digital Library Policy",
+      "path": "14_Digital_Library_Policy.md",
+      "type": "policy",
+      "status": "active"
+    },
+    {
+      "id": "brand-constitution",
+      "name": "Brand Constitution",
+      "path": "15_Brand_Constitution.md",
+      "type": "brand",
+      "status": "active"
+    }
+  ]
+}

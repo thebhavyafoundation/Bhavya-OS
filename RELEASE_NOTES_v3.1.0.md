@@ -27,6 +27,7 @@ Every pipeline execution emits a build manifest at `bhavya-ai-lab/institution/ma
 ### Animation Studio
 
 A dedicated full-page timeline editor at `/animation/[id]` that visualizes the scene graph from visual specs:
+
 - **Scene timeline**: horizontal bars showing per-element animation timing with color-coded animation types (fade-in, slide-up, scale-in, etc.)
 - **Element timeline**: detailed per-element animation chart with start/end times
 - **Video spec**: compositions, frame counts, resolution, FPS, formats
@@ -43,16 +44,16 @@ All runtime path resolution now flows through a single `packages/runtime/engine/
 
 ## Regression Tests
 
-| Component | Status |
-|-----------|--------|
-| Pipeline (7 stages) | ✅ All pass (<200ms) |
-| Quality Gates (10 gates) | ✅ Loaded and executed |
-| Provenance (write/read/graph) | ✅ All endpoints |
-| Build Manifests (write/read) | ✅ All endpoints |
-| Knowledge CRUD (API) | ✅ Create/Read/Update/Delete |
-| Lesson Studio (TypeScript) | ✅ Compiles (pre-existing errors only) |
-| Animation Studio (TypeScript) | ✅ Compiles |
-| API startup | ✅ Health check passes |
+| Component                     | Status                                 |
+| ----------------------------- | -------------------------------------- |
+| Pipeline (7 stages)           | ✅ All pass (<200ms)                   |
+| Quality Gates (10 gates)      | ✅ Loaded and executed                 |
+| Provenance (write/read/graph) | ✅ All endpoints                       |
+| Build Manifests (write/read)  | ✅ All endpoints                       |
+| Knowledge CRUD (API)          | ✅ Create/Read/Update/Delete           |
+| Lesson Studio (TypeScript)    | ✅ Compiles (pre-existing errors only) |
+| Animation Studio (TypeScript) | ✅ Compiles                            |
+| API startup                   | ✅ Health check passes                 |
 
 ## Files Changed
 

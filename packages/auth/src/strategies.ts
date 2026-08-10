@@ -2,12 +2,12 @@
  * @bhavya/auth — Auth Strategies
  *
  * Provider-agnostic authentication strategies:
- * - Email/Password (bcrypt)
+ * - Email/Password (real bcrypt via bcryptjs)
  * - Google OAuth (token exchange)
  * - GitHub OAuth (token exchange)
  */
 
-import { createHash, randomBytes } from "crypto";
+import bcrypt from "bcryptjs";
 import type {
   AuthProvider,
   AuthResult,
@@ -21,19 +21,15 @@ import { createSession } from "./session.js";
 
 const BCRYPT_ROUNDS = 12;
 
-export function hashPassword(password: string): string {
-  let hash = password;
-  for (let i = 0; i < BCRYPT_ROUNDS; i++) {
-    hash = createHash("sha256")
-      .update(`${hash}:${randomBytes(16).toString("hex")}`)
-      .digest("hex");
-  }
-  return `$2b$${BCRYPT_ROUNDS}$${hash.slice(0, 53)}`;
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, BCRYPT_ROUNDS);
 }
 
-export function verifyPassword(password: string, hash: string): boolean {
-  const computed = hashPassword(password);
-  return computed === hash;
+export async function verifyPassword(
+  password: string,
+  hash: string,
+): Promise<boolean> {
+  return bcrypt.compare(password, hash);
 }
 
 export async function registerWithEmail(
@@ -59,7 +55,7 @@ export async function registerWithEmail(
     return { success: false, error: "Email already registered" };
   }
 
-  const passwordHash = hashPassword(input.password);
+  const passwordHash = await hashPassword(input.password);
   const user = store.createUser({
     email: input.email,
     name: input.name,

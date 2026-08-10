@@ -1,0 +1,2519 @@
+{
+  "tasks": {
+    "ENG-MSH56N1A-DJA": {
+      "id": "ENG-MSH56N1A-DJA",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:35:48.382Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:35:48.382Z",
+      "updatedAt": "2026-08-06T06:35:48.382Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH56N1D-JUM": {
+      "id": "ENG-MSH56N1D-JUM",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:35:48.385Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:35:48.385Z",
+      "updatedAt": "2026-08-06T06:35:48.385Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH56N1G-E89": {
+      "id": "ENG-MSH56N1G-E89",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:35:48.388Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:35:48.388Z",
+      "updatedAt": "2026-08-06T06:35:48.388Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH56N1I-C9J": {
+      "id": "ENG-MSH56N1I-C9J",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:35:48.390Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:35:48.390Z",
+      "updatedAt": "2026-08-06T06:35:48.390Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH56N1M-U09": {
+      "id": "ENG-MSH56N1M-U09",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:35:48.394Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:35:48.394Z",
+      "updatedAt": "2026-08-06T06:35:48.394Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH571WE-C3P": {
+      "id": "ENG-MSH571WE-C3P",
+      "title": "Design: Add a hello world endpoint",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:36:07.646Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:36:07.646Z",
+      "updatedAt": "2026-08-06T06:36:07.646Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH571WK-IYN": {
+      "id": "ENG-MSH571WK-IYN",
+      "title": "Implement: Add a hello world endpoint",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:36:07.652Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:36:07.652Z",
+      "updatedAt": "2026-08-06T06:36:07.652Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH571WM-QQA": {
+      "id": "ENG-MSH571WM-QQA",
+      "title": "Test: Add a hello world endpoint",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:36:07.654Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:36:07.654Z",
+      "updatedAt": "2026-08-06T06:36:07.654Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH571WN-W5Q": {
+      "id": "ENG-MSH571WN-W5Q",
+      "title": "Review: Add a hello world endpoint",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:36:07.655Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:36:07.655Z",
+      "updatedAt": "2026-08-06T06:36:07.655Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH571WN-TRN": {
+      "id": "ENG-MSH571WN-TRN",
+      "title": "Document: Add a hello world endpoint",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:36:07.655Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:36:07.655Z",
+      "updatedAt": "2026-08-06T06:36:07.655Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH58PAF-U01": {
+      "id": "ENG-MSH58PAF-U01",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:37:24.615Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:37:24.615Z",
+      "updatedAt": "2026-08-06T06:37:24.615Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH58PAI-6GR": {
+      "id": "ENG-MSH58PAI-6GR",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:37:24.618Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:37:24.618Z",
+      "updatedAt": "2026-08-06T06:37:24.618Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH58PAN-8J7": {
+      "id": "ENG-MSH58PAN-8J7",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:37:24.623Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:37:24.623Z",
+      "updatedAt": "2026-08-06T06:37:24.623Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH58PAR-5H2": {
+      "id": "ENG-MSH58PAR-5H2",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:37:24.627Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:37:24.627Z",
+      "updatedAt": "2026-08-06T06:37:24.627Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH58PAT-O7L": {
+      "id": "ENG-MSH58PAT-O7L",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:37:24.629Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:37:24.629Z",
+      "updatedAt": "2026-08-06T06:37:24.629Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5FN9B-GMU": {
+      "id": "ENG-MSH5FN9B-GMU",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:42:48.575Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:42:48.575Z",
+      "updatedAt": "2026-08-06T06:42:48.575Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5FN9D-J84": {
+      "id": "ENG-MSH5FN9D-J84",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:42:48.578Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:42:48.578Z",
+      "updatedAt": "2026-08-06T06:42:48.578Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5FN9G-B4R": {
+      "id": "ENG-MSH5FN9G-B4R",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:42:48.580Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:42:48.580Z",
+      "updatedAt": "2026-08-06T06:42:48.580Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5FN9K-TFT": {
+      "id": "ENG-MSH5FN9K-TFT",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:42:48.584Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:42:48.584Z",
+      "updatedAt": "2026-08-06T06:42:48.584Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5FN9M-MDM": {
+      "id": "ENG-MSH5FN9M-MDM",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:42:48.587Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:42:48.587Z",
+      "updatedAt": "2026-08-06T06:42:48.587Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5KP4G-NTZ": {
+      "id": "ENG-MSH5KP4G-NTZ",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:46:44.272Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:46:44.272Z",
+      "updatedAt": "2026-08-06T06:46:44.272Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5KP4K-STK": {
+      "id": "ENG-MSH5KP4K-STK",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:46:44.276Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:46:44.276Z",
+      "updatedAt": "2026-08-06T06:46:44.276Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5KP4M-R4C": {
+      "id": "ENG-MSH5KP4M-R4C",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:46:44.278Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:46:44.278Z",
+      "updatedAt": "2026-08-06T06:46:44.278Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5KP4W-6A4": {
+      "id": "ENG-MSH5KP4W-6A4",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:46:44.288Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:46:44.288Z",
+      "updatedAt": "2026-08-06T06:46:44.288Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5KP4Z-EM3": {
+      "id": "ENG-MSH5KP4Z-EM3",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:46:44.291Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:46:44.291Z",
+      "updatedAt": "2026-08-06T06:46:44.291Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5N7UY-ED2": {
+      "id": "ENG-MSH5N7UY-ED2",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:48:41.866Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:48:41.866Z",
+      "updatedAt": "2026-08-06T06:48:41.866Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5N7V3-G2Y": {
+      "id": "ENG-MSH5N7V3-G2Y",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:48:41.871Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:48:41.871Z",
+      "updatedAt": "2026-08-06T06:48:41.871Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5N7VB-VUK": {
+      "id": "ENG-MSH5N7VB-VUK",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:48:41.879Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:48:41.879Z",
+      "updatedAt": "2026-08-06T06:48:41.879Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5N7VF-3OA": {
+      "id": "ENG-MSH5N7VF-3OA",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:48:41.883Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:48:41.883Z",
+      "updatedAt": "2026-08-06T06:48:41.883Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5N7VJ-P4C": {
+      "id": "ENG-MSH5N7VJ-P4C",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:48:41.887Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:48:41.887Z",
+      "updatedAt": "2026-08-06T06:48:41.887Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5PJ73-6B3": {
+      "id": "ENG-MSH5PJ73-6B3",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:50:29.871Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:50:29.871Z",
+      "updatedAt": "2026-08-06T06:50:29.871Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5PJ76-L8W": {
+      "id": "ENG-MSH5PJ76-L8W",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:50:29.874Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:50:29.874Z",
+      "updatedAt": "2026-08-06T06:50:29.874Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5PJ78-NJ2": {
+      "id": "ENG-MSH5PJ78-NJ2",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:50:29.876Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:50:29.876Z",
+      "updatedAt": "2026-08-06T06:50:29.876Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5PJ7B-BML": {
+      "id": "ENG-MSH5PJ7B-BML",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:50:29.880Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:50:29.880Z",
+      "updatedAt": "2026-08-06T06:50:29.880Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5PJ7H-B6I": {
+      "id": "ENG-MSH5PJ7H-B6I",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:50:29.885Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:50:29.885Z",
+      "updatedAt": "2026-08-06T06:50:29.885Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5TMTG-SCF": {
+      "id": "ENG-MSH5TMTG-SCF",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:53:41.188Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:53:41.188Z",
+      "updatedAt": "2026-08-06T06:53:41.188Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5TMTJ-7KV": {
+      "id": "ENG-MSH5TMTJ-7KV",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:53:41.191Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:53:41.191Z",
+      "updatedAt": "2026-08-06T06:53:41.191Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5TMTN-KYY": {
+      "id": "ENG-MSH5TMTN-KYY",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:53:41.195Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:53:41.195Z",
+      "updatedAt": "2026-08-06T06:53:41.195Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5TMTT-A3T": {
+      "id": "ENG-MSH5TMTT-A3T",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:53:41.201Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:53:41.201Z",
+      "updatedAt": "2026-08-06T06:53:41.201Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5TMTW-5RH": {
+      "id": "ENG-MSH5TMTW-5RH",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:53:41.204Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:53:41.204Z",
+      "updatedAt": "2026-08-06T06:53:41.204Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5XGWA-PL8": {
+      "id": "ENG-MSH5XGWA-PL8",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:56:40.138Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:56:40.138Z",
+      "updatedAt": "2026-08-06T06:56:40.138Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5XGWG-SO2": {
+      "id": "ENG-MSH5XGWG-SO2",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:56:40.144Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:56:40.144Z",
+      "updatedAt": "2026-08-06T06:56:40.144Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5XGWJ-573": {
+      "id": "ENG-MSH5XGWJ-573",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:56:40.147Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:56:40.147Z",
+      "updatedAt": "2026-08-06T06:56:40.147Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5XGWM-A74": {
+      "id": "ENG-MSH5XGWM-A74",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:56:40.150Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:56:40.150Z",
+      "updatedAt": "2026-08-06T06:56:40.150Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5XGWQ-VIR": {
+      "id": "ENG-MSH5XGWQ-VIR",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:56:40.154Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:56:40.154Z",
+      "updatedAt": "2026-08-06T06:56:40.154Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH5ZWOI-M9F": {
+      "id": "ENG-MSH5ZWOI-M9F",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:58:33.907Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:58:33.907Z",
+      "updatedAt": "2026-08-06T06:58:33.907Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH5ZWON-CXH": {
+      "id": "ENG-MSH5ZWON-CXH",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:58:33.911Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:58:33.911Z",
+      "updatedAt": "2026-08-06T06:58:33.911Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH5ZWOQ-WIQ": {
+      "id": "ENG-MSH5ZWOQ-WIQ",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:58:33.914Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:58:33.914Z",
+      "updatedAt": "2026-08-06T06:58:33.914Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH5ZWOW-BC5": {
+      "id": "ENG-MSH5ZWOW-BC5",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:58:33.920Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:58:33.920Z",
+      "updatedAt": "2026-08-06T06:58:33.920Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH5ZWP0-7WU": {
+      "id": "ENG-MSH5ZWP0-7WU",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T06:58:33.924Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T06:58:33.924Z",
+      "updatedAt": "2026-08-06T06:58:33.924Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH62HDR-Y09": {
+      "id": "ENG-MSH62HDR-Y09",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:00:34.048Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:00:34.048Z",
+      "updatedAt": "2026-08-06T07:00:34.048Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH62HDW-HNW": {
+      "id": "ENG-MSH62HDW-HNW",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:00:34.052Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:00:34.052Z",
+      "updatedAt": "2026-08-06T07:00:34.052Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH62HE0-SHJ": {
+      "id": "ENG-MSH62HE0-SHJ",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:00:34.056Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:00:34.056Z",
+      "updatedAt": "2026-08-06T07:00:34.056Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH62HE6-R8D": {
+      "id": "ENG-MSH62HE6-R8D",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:00:34.062Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:00:34.062Z",
+      "updatedAt": "2026-08-06T07:00:34.062Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH62HEA-MCE": {
+      "id": "ENG-MSH62HEA-MCE",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:00:34.066Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:00:34.066Z",
+      "updatedAt": "2026-08-06T07:00:34.066Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH659ZA-H7X": {
+      "id": "ENG-MSH659ZA-H7X",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:02:44.422Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:02:44.422Z",
+      "updatedAt": "2026-08-06T07:02:44.422Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH659ZG-6YS": {
+      "id": "ENG-MSH659ZG-6YS",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:02:44.428Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:02:44.428Z",
+      "updatedAt": "2026-08-06T07:02:44.428Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH659ZP-OGJ": {
+      "id": "ENG-MSH659ZP-OGJ",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:02:44.437Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:02:44.437Z",
+      "updatedAt": "2026-08-06T07:02:44.437Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH659ZV-MMP": {
+      "id": "ENG-MSH659ZV-MMP",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:02:44.444Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:02:44.444Z",
+      "updatedAt": "2026-08-06T07:02:44.444Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH65A07-NGH": {
+      "id": "ENG-MSH65A07-NGH",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:02:44.455Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:02:44.455Z",
+      "updatedAt": "2026-08-06T07:02:44.455Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH6AOW6-MJ4": {
+      "id": "ENG-MSH6AOW6-MJ4",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:06:57.030Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:06:57.030Z",
+      "updatedAt": "2026-08-06T07:06:57.030Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH6AOWD-B34": {
+      "id": "ENG-MSH6AOWD-B34",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:06:57.037Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:06:57.037Z",
+      "updatedAt": "2026-08-06T07:06:57.037Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH6AOWI-MRC": {
+      "id": "ENG-MSH6AOWI-MRC",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:06:57.042Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:06:57.042Z",
+      "updatedAt": "2026-08-06T07:06:57.042Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH6AOWQ-7FK": {
+      "id": "ENG-MSH6AOWQ-7FK",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:06:57.050Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:06:57.050Z",
+      "updatedAt": "2026-08-06T07:06:57.050Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH6AOWX-KOM": {
+      "id": "ENG-MSH6AOWX-KOM",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:06:57.057Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:06:57.057Z",
+      "updatedAt": "2026-08-06T07:06:57.057Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH6DXVD-XJU": {
+      "id": "ENG-MSH6DXVD-XJU",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:09:28.633Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:09:28.633Z",
+      "updatedAt": "2026-08-06T07:09:28.633Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH6DXVJ-NDY": {
+      "id": "ENG-MSH6DXVJ-NDY",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:09:28.640Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:09:28.640Z",
+      "updatedAt": "2026-08-06T07:09:28.640Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH6DXVR-AVV": {
+      "id": "ENG-MSH6DXVR-AVV",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:09:28.647Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:09:28.647Z",
+      "updatedAt": "2026-08-06T07:09:28.647Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH6DXVY-8FL": {
+      "id": "ENG-MSH6DXVY-8FL",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:09:28.654Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:09:28.654Z",
+      "updatedAt": "2026-08-06T07:09:28.654Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH6DXW4-OX0": {
+      "id": "ENG-MSH6DXW4-OX0",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:09:28.660Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:09:28.660Z",
+      "updatedAt": "2026-08-06T07:09:28.660Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH6J9J1-YLG": {
+      "id": "ENG-MSH6J9J1-YLG",
+      "title": "Design: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "design",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:13:37.022Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:13:37.022Z",
+      "updatedAt": "2026-08-06T07:13:37.022Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["design"],
+      "acceptanceCriteria": ["Design document created", "Architecture reviewed"]
+    },
+    "ENG-MSH6J9J9-5V7": {
+      "id": "ENG-MSH6J9J9-5V7",
+      "title": "Implement: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 1,
+      "status": "backlog",
+      "dependencies": ["Design: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "implementation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 60,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:13:37.029Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:13:37.029Z",
+      "updatedAt": "2026-08-06T07:13:37.029Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["implementation"],
+      "acceptanceCriteria": ["Code implemented", "Unit tests written"]
+    },
+    "ENG-MSH6J9JG-LKD": {
+      "id": "ENG-MSH6J9JG-LKD",
+      "title": "Test: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Implement: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 30,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:13:37.036Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:13:37.036Z",
+      "updatedAt": "2026-08-06T07:13:37.036Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["testing"],
+      "acceptanceCriteria": ["All tests pass", "Coverage > 80%"]
+    },
+    "ENG-MSH6J9JP-WY6": {
+      "id": "ENG-MSH6J9JP-WY6",
+      "title": "Review: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": ["Test: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "review",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 20,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:13:37.045Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:13:37.045Z",
+      "updatedAt": "2026-08-06T07:13:37.045Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["review"],
+      "acceptanceCriteria": ["Code review approved", "No critical issues"]
+    },
+    "ENG-MSH6J9JW-5H4": {
+      "id": "ENG-MSH6J9JW-5H4",
+      "title": "Document: Add a hello world endpoint to the platform",
+      "description": "",
+      "priority": 3,
+      "status": "backlog",
+      "dependencies": ["Review: Add a hello world endpoint to the platform"],
+      "owner": null,
+      "worker": null,
+      "type": "documentation",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 15,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:13:37.052Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:13:37.052Z",
+      "updatedAt": "2026-08-06T07:13:37.052Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": ["documentation"],
+      "acceptanceCriteria": ["README updated", "API docs generated"]
+    },
+    "ENG-MSH6VZ9T-FJR": {
+      "id": "ENG-MSH6VZ9T-FJR",
+      "title": "Audit test: verify runtime capabilities",
+      "description": "",
+      "priority": 2,
+      "status": "backlog",
+      "dependencies": [],
+      "owner": null,
+      "worker": null,
+      "type": "testing",
+      "scope": null,
+      "evidence": [],
+      "artifacts": [],
+      "review": null,
+      "metrics": {
+        "estimatedMinutes": 40,
+        "actualMinutes": 0,
+        "complexity": "medium"
+      },
+      "history": [
+        {
+          "status": "backlog",
+          "timestamp": "2026-08-06T07:23:30.257Z",
+          "action": "created"
+        }
+      ],
+      "createdAt": "2026-08-06T07:23:30.257Z",
+      "updatedAt": "2026-08-06T07:23:30.257Z",
+      "startedAt": null,
+      "completedAt": null,
+      "tags": [],
+      "acceptanceCriteria": ["Task completed successfully"]
+    }
+  },
+  "metrics": {
+    "totalCreated": 76,
+    "totalCompleted": 0,
+    "totalFailed": 0,
+    "avgCycleTime": 0
+  },
+  "savedAt": "2026-08-06T07:23:30.267Z"
+}

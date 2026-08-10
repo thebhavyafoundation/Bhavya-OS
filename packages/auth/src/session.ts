@@ -23,6 +23,16 @@ export function isSessionValid(session: Session): boolean {
   return new Date(session.expiresAt) > new Date();
 }
 
-export function validateSessionToken(token: string, secret: string): boolean {
-  return verify(token, secret);
+export function validateSessionToken(
+  token: string,
+  signature: string,
+  secret: string,
+): boolean {
+  const expectedSignature = sign(token, secret);
+  if (signature.length !== expectedSignature.length) return false;
+  let result = 0;
+  for (let i = 0; i < signature.length; i++) {
+    result |= signature.charCodeAt(i) ^ expectedSignature.charCodeAt(i);
+  }
+  return result === 0;
 }

@@ -1,0 +1,16 @@
+{
+  "architectureDecisions": [
+    {
+      "id": "adr-1785991753881",
+      "title": "test",
+      "description": "test decision",
+      "timestamp": "2026-08-06T04:49:13.881Z"
+    }
+  ],
+  "engineeringDecisions": [],
+  "completedWork": [],
+  "knownIssues": [],
+  "technicalDebt": [],
+  "releaseNotes": [],
+  "lessonsLearned": []
+}

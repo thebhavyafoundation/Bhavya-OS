@@ -1,0 +1,209 @@
+{
+  "version": "6.0",
+  "generated": "2026-08-06",
+  "roadmaps": {
+    "roadmap-001": {
+      "id": "roadmap-001",
+      "name": "Foundation Website Roadmap",
+      "appId": "APP-001",
+      "items": [
+        {
+          "id": "item-001",
+          "title": "Implement payment gateway",
+          "description": "Integrate Razorpay or Stripe for donation processing",
+          "appId": "APP-001",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 9,
+          "effort": 8,
+          "businessValue": 9,
+          "risk": "medium",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-002",
+          "title": "Add dark mode toggle",
+          "description": "System-preference-aware dark mode with persistence",
+          "appId": "APP-001",
+          "type": "feature",
+          "priority": "P1",
+          "roi": 7,
+          "effort": 3,
+          "businessValue": 6,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-003",
+          "title": "Implement unit tests",
+          "description": "Add Jest and React Testing Library for component tests",
+          "appId": "APP-001",
+          "type": "improvement",
+          "priority": "P1",
+          "roi": 8,
+          "effort": 5,
+          "businessValue": 7,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-004",
+          "title": "Optimize bundle size",
+          "description": "Reduce bundle from 205kB to under 200kB",
+          "appId": "APP-001",
+          "type": "improvement",
+          "priority": "P2",
+          "roi": 6,
+          "effort": 2,
+          "businessValue": 5,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        }
+      ],
+      "createdAt": "2026-08-06T00:00:00Z",
+      "updatedAt": "2026-08-06T00:00:00Z"
+    },
+    "roadmap-002": {
+      "id": "roadmap-002",
+      "name": "Transparency Portal Roadmap",
+      "appId": "APP-002",
+      "items": [
+        {
+          "id": "item-005",
+          "title": "Implement search functionality",
+          "description": "Full-text search across all documents",
+          "appId": "APP-002",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 8,
+          "effort": 5,
+          "businessValue": 8,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-006",
+          "title": "Add document viewer",
+          "description": "In-browser PDF viewing capability",
+          "appId": "APP-002",
+          "type": "feature",
+          "priority": "P1",
+          "roi": 7,
+          "effort": 4,
+          "businessValue": 7,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        }
+      ],
+      "createdAt": "2026-08-06T00:00:00Z",
+      "updatedAt": "2026-08-06T00:00:00Z"
+    },
+    "roadmap-003": {
+      "id": "roadmap-003",
+      "name": "Administration Platform Roadmap",
+      "appId": "APP-003",
+      "items": [
+        {
+          "id": "item-007",
+          "title": "Implement user authentication",
+          "description": "Login, roles, and permissions system",
+          "appId": "APP-003",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 9,
+          "effort": 8,
+          "businessValue": 9,
+          "risk": "medium",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-008",
+          "title": "Build content management system",
+          "description": "CRUD operations with version control",
+          "appId": "APP-003",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 8,
+          "effort": 13,
+          "businessValue": 8,
+          "risk": "medium",
+          "dependencies": ["item-007"],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        }
+      ],
+      "createdAt": "2026-08-06T00:00:00Z",
+      "updatedAt": "2026-08-06T00:00:00Z"
+    },
+    "roadmap-004": {
+      "id": "roadmap-004",
+      "name": "Knowledge Platform Roadmap",
+      "appId": "APP-004",
+      "items": [
+        {
+          "id": "item-009",
+          "title": "Implement knowledge graph visualization",
+          "description": "Interactive graph showing knowledge relationships",
+          "appId": "APP-004",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 8,
+          "effort": 8,
+          "businessValue": 8,
+          "risk": "medium",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        },
+        {
+          "id": "item-010",
+          "title": "Add document search",
+          "description": "Full-text search with relevance ranking",
+          "appId": "APP-004",
+          "type": "feature",
+          "priority": "P0",
+          "roi": 7,
+          "effort": 5,
+          "businessValue": 7,
+          "risk": "low",
+          "dependencies": [],
+          "status": "planned",
+          "createdAt": "2026-08-06T00:00:00Z",
+          "updatedAt": "2026-08-06T00:00:00Z"
+        }
+      ],
+      "createdAt": "2026-08-06T00:00:00Z",
+      "updatedAt": "2026-08-06T00:00:00Z"
+    }
+  },
+  "summary": {
+    "totalRoadmaps": 4,
+    "totalItems": 10,
+    "completedItems": 0,
+    "inProgressItems": 0,
+    "plannedItems": 10
+  }
+}

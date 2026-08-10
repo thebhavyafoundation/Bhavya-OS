@@ -4,25 +4,54 @@
  * Re-exports all shared UI components for convenient single-import usage.
  */
 
-export { StatusBadge } from "./components/StatusBadge.js";
-export type { BadgeVariant } from "./components/StatusBadge.js";
+// === Design Tokens ===
+import "./styles/tokens.css";
 
-export { StatCard } from "./components/StatCard.js";
+// === Components ===
+export { StatusBadge } from "./components/StatusBadge";
+export type { BadgeVariant } from "./components/StatusBadge";
 
-export { EmptyState } from "./components/EmptyState.js";
+export { StatCard } from "./components/StatCard";
 
-export { LoadingSpinner, LoadingSkeleton } from "./components/LoadingState.js";
+export { EmptyState } from "./components/EmptyState";
 
-export { ErrorState } from "./components/ErrorState.js";
+export { LoadingSpinner, LoadingSkeleton } from "./components/LoadingState";
 
-export { Modal } from "./components/Modal.js";
+export { ErrorState } from "./components/ErrorState";
 
-export { SearchBar } from "./components/SearchBar.js";
+export { Modal } from "./components/Modal";
 
-export { Sidebar } from "./components/Sidebar.js";
+export { SearchBar } from "./components/SearchBar";
 
-export { PageLayout } from "./components/PageLayout.js";
+export { Sidebar } from "./components/Sidebar";
 
-export { Tabs } from "./components/Tabs.js";
+export { PageLayout } from "./components/PageLayout";
 
-export { DataTable } from "./components/DataTable.js";
+export { Tabs } from "./components/Tabs";
+
+export { DataTable } from "./components/DataTable";
+
+export { Button } from "./components/Button";
+
+export { Card } from "./components/Card";
+
+export { Badge } from "./components/Badge";
+
+export { Avatar } from "./components/Avatar";
+
+export { Breadcrumb } from "./components/Breadcrumb";
+
+export { Skeleton, CardSkeleton, ListSkeleton, TableSkeleton, TabSkeleton } from "./components/Skeleton";
+
+export { Toast } from "./components/Toast";
+
+export { AppLayout } from "./components/AppLayout";
+
+export { AppSidebar } from "./components/AppSidebar";
+export type { SidebarItem } from "./components/AppSidebar";
+
+export { AppFooter } from "./components/AppFooter";
+export type { FooterLink, FooterColumn } from "./components/AppFooter";
+
+export { BhavyaNav } from "./components/BhavyaNav";
+export type { NavItem, BhavyaNavUser, BhavyaNavProps } from "./components/BhavyaNav";

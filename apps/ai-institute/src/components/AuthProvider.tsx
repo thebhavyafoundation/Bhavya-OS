@@ -15,12 +15,43 @@ interface User {
   name: string;
   avatar?: string;
   role: string;
+  provider: string;
   interests: string[];
   onboardingComplete: boolean;
+  createdAt: string;
+}
+
+interface StudentProfile {
+  id: string;
+  userId: string;
+  name: string;
+  email: string;
+  role: "student" | "researcher" | "builder" | "mentor";
+  interests: string[];
+  currentCourse: string;
+  currentLessonIndex: number;
+  lessonsCompleted: string[];
+  assessmentScore: number;
+  assessmentCompleted: boolean;
+  labTasksCompleted: string[];
+  labScore: number;
+  knowledgeCheckAnswers: Record<string, string | number>;
+  knowledgeCheckScore: number;
+  projectSubmitted: boolean;
+  projectScore: number;
+  badgeEarned: boolean;
+  reflectionEntries: { lessonId: string; content: string; date: string }[];
+  streak: number;
+  lastActiveDate: string;
+  enrolledCourses: string[];
+  onboardingComplete: boolean;
+  enrolledAt: string;
+  updatedAt: string;
 }
 
 interface AuthContextType {
   user: User | null;
+  student: StudentProfile | null;
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (
@@ -32,65 +63,64 @@ interface AuthContextType {
     password: string,
     name: string,
   ) => Promise<{ success: boolean; error?: string }>;
-  loginWithProvider: (provider: "google" | "github") => void;
   logout: () => void;
   updateProfile: (data: Partial<User>) => void;
+  updateStudent: (data: Partial<StudentProfile>) => void;
+  enrollInCourse: (courseId: string) => void;
+  completeLesson: (lessonId: string) => void;
+  completeLab: (taskId: string) => void;
+  submitQuiz: (
+    answers: Record<string, string | number>,
+    score: number,
+  ) => void;
+  submitProject: (score: number) => void;
+  addReflection: (lessonId: string, content: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const STORAGE_KEY = "ai-institute-auth";
-
-function getStoredUser(): User | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : null;
-  } catch {
-    return null;
-  }
-}
-
-function storeUser(user: User | null): void {
-  if (typeof window === "undefined") return;
-  if (user) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-  } else {
-    localStorage.removeItem(STORAGE_KEY);
-  }
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [student, setStudent] = useState<StudentProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setUser(getStoredUser());
-    setIsLoading(false);
+    fetch("/api/auth/me")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.user) {
+          setUser(data.user);
+          setStudent(data.student);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsLoading(false));
   }, []);
 
   const login = useCallback(
     async (
       email: string,
-      _password: string,
+      password: string,
     ): Promise<{ success: boolean; error?: string }> => {
-      const stored = getStoredUser();
-      if (stored && stored.email === email) {
-        setUser(stored);
-        storeUser(stored);
-        return { success: true };
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error };
       }
 
-      const newUser: User = {
-        id: `u_${Date.now().toString(36)}`,
-        email,
-        name: email.split("@")[0],
-        role: "student",
-        interests: [],
-        onboardingComplete: false,
-      };
-      setUser(newUser);
-      storeUser(newUser);
+      setUser(data.user);
+
+      const studentRes = await fetch("/api/student");
+      if (studentRes.ok) {
+        const studentData = await studentRes.json();
+        setStudent(studentData.student);
+      }
+
       return { success: true };
     },
     [],
@@ -99,63 +129,190 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = useCallback(
     async (
       email: string,
-      _password: string,
+      password: string,
       name: string,
     ): Promise<{ success: boolean; error?: string }> => {
-      const newUser: User = {
-        id: `u_${Date.now().toString(36)}`,
-        email,
-        name,
-        role: "student",
-        interests: [],
-        onboardingComplete: false,
-      };
-      setUser(newUser);
-      storeUser(newUser);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, name }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error };
+      }
+
+      setUser(data.user);
+
+      const studentRes = await fetch("/api/student");
+      if (studentRes.ok) {
+        const studentData = await studentRes.json();
+        setStudent(studentData.student);
+      }
+
       return { success: true };
     },
     [],
   );
 
-  const loginWithProvider = useCallback((provider: "google" | "github") => {
-    const mockUser: User = {
-      id: `u_${provider}_${Date.now().toString(36)}`,
-      email: `learner@${provider}.com`,
-      name: `${provider.charAt(0).toUpperCase() + provider.slice(1)} Learner`,
-      role: "student",
-      interests: [],
-      onboardingComplete: false,
-    };
-    setUser(mockUser);
-    storeUser(mockUser);
-  }, []);
-
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
     setUser(null);
-    storeUser(null);
+    setStudent(null);
   }, []);
 
   const updateProfile = useCallback(
-    (data: Partial<User>) => {
+    async (data: Partial<User>) => {
       if (!user) return;
       const updated = { ...user, ...data };
       setUser(updated);
-      storeUser(updated);
+
+      if (student) {
+        const studentRes = await fetch("/api/student", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: updated.name, email: updated.email, interests: updated.interests }),
+        });
+        if (studentRes.ok) {
+          const studentData = await studentRes.json();
+          setStudent(studentData.student);
+        }
+      }
     },
-    [user],
+    [user, student],
+  );
+
+  const updateStudent = useCallback(
+    async (data: Partial<StudentProfile>) => {
+      if (!student) return;
+      const res = await fetch("/api/student", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const enrollInCourse = useCallback(
+    async (courseId: string) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "enroll", data: { courseId } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const completeLesson = useCallback(
+    async (lessonId: string) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "completeLesson", data: { lessonId } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const completeLab = useCallback(
+    async (taskId: string) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "completeLab", data: { taskId } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const submitQuiz = useCallback(
+    async (answers: Record<string, string | number>, score: number) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "submitQuiz", data: { answers, score } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const submitProject = useCallback(
+    async (score: number) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "submitProject", data: { score } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
+  );
+
+  const addReflection = useCallback(
+    async (lessonId: string, content: string) => {
+      if (!student) return;
+      const res = await fetch("/api/student/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "addReflection", data: { lessonId, content } }),
+      });
+      if (res.ok) {
+        const studentData = await res.json();
+        setStudent(studentData.student);
+      }
+    },
+    [student],
   );
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        student,
         isLoading,
         isAuthenticated: !!user,
         login,
         register,
-        loginWithProvider,
         logout,
         updateProfile,
+        updateStudent,
+        enrollInCourse,
+        completeLesson,
+        completeLab,
+        submitQuiz,
+        submitProject,
+        addReflection,
       }}
     >
       {children}

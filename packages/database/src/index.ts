@@ -1,12 +1,12 @@
-export { getDatabase, closeDatabase, transaction, exec } from "./sqlite.js";
-export type { DatabaseConfig } from "./sqlite.js";
+export { getDatabase, closeDatabase, transaction, exec } from "./sqlite";
+export type { DatabaseConfig } from "./sqlite";
 export {
   ensureMigrationsTable,
   getAppliedMigrations,
   applyMigration,
   rollbackMigration,
   migrate,
-} from "./migrate.js";
-export type { Migration } from "./migrate.js";
-export { SqliteRepository } from "./repository.js";
-export type { Repository } from "./repository.js";
+} from "./migrate";
+export type { Migration } from "./migrate";
+export { SqliteRepository } from "./repository";
+export type { Repository } from "./repository";

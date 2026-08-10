@@ -6,11 +6,18 @@ import { Sidebar } from "@/components/Sidebar";
 import {
   GraduationCap,
   Search,
-  ChevronRight,
   BookOpen,
   Clock,
   BarChart3,
 } from "lucide-react";
+import {
+  Card,
+  Badge,
+  Skeleton,
+  Breadcrumb,
+  EmptyState,
+  AppLayout,
+} from "@bhavya/platform-ui";
 
 interface EducationalExport {
   id: string;
@@ -58,139 +65,134 @@ export default function LearningPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
-      <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
-        <div className="max-w-4xl mx-auto">
-          <nav className="flex items-center gap-2 text-xs text-[#52525b] mb-6">
-            <Link href="/" className="hover:text-[#fafafa] transition-colors">
-              Dashboard
-            </Link>
-            <ChevronRight size={12} />
-            <span className="text-[#71717a]">Learning</span>
-          </nav>
+    <AppLayout sidebar={<Sidebar />}>
+      <div className="animate-fade-in">
+        <Breadcrumb
+          items={[
+            { label: "Dashboard", href: "/" },
+            { label: "Learning" },
+          ]}
+          className="mb-6"
+        />
 
-          <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">Learning</h1>
-            <p className="text-sm text-[#71717a] mt-1">
-              Educational materials generated from repositories
-            </p>
+        <div className="mb-8">
+          <h1 className="text-2xl font-semibold text-text-primary">
+            Learning
+          </h1>
+          <p className="text-sm text-text-tertiary mt-1">
+            Educational materials generated from repositories
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+          <div className="flex-1 relative w-full">
+            <Search
+              size={14}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
+            />
+            <input
+              type="text"
+              placeholder="Search learning materials..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-9 pr-4 py-2 bg-bg-secondary border border-border-primary rounded-md text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-border-secondary transition-colors"
+            />
           </div>
-
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex-1 relative">
-              <Search
-                size={14}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#52525b]"
-              />
-              <input
-                type="text"
-                placeholder="Search learning materials..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-[#111111] border border-[#27272a] rounded-md text-sm text-[#fafafa] placeholder-[#52525b] focus:outline-none focus:border-[#3f3f46]"
-              />
-            </div>
-            <div className="flex gap-1 bg-[#111111] border border-[#27272a] rounded-md p-1">
-              {types.map((type) => (
-                <button
-                  key={type}
-                  onClick={() => setTypeFilter(type)}
-                  className={`px-3 py-1.5 text-xs rounded capitalize transition-colors ${
-                    typeFilter === type
-                      ? "bg-[#27272a] text-[#fafafa]"
-                      : "text-[#71717a] hover:text-[#fafafa]"
-                  }`}
-                >
-                  {type === "all" ? "All" : type}
-                </button>
-              ))}
-            </div>
+          <div className="flex gap-1 bg-bg-secondary border border-border-primary rounded-md p-1 overflow-x-auto">
+            {types.map((type) => (
+              <button
+                key={type}
+                onClick={() => setTypeFilter(type)}
+                className={`px-3 py-1.5 text-xs rounded capitalize transition-colors whitespace-nowrap ${
+                  typeFilter === type
+                    ? "bg-bg-hover text-text-primary"
+                    : "text-text-tertiary hover:text-text-primary"
+                }`}
+              >
+                {type === "all" ? "All" : type}
+              </button>
+            ))}
           </div>
+        </div>
 
-          <div className="flex gap-6">
-            <div className="flex-1">
-              {loading ? (
-                <div className="space-y-3">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="bg-[#111111] border border-[#27272a] rounded-lg p-5 animate-pulse"
-                    >
-                      <div className="h-4 bg-[#27272a] rounded w-1/3 mb-2" />
-                      <div className="h-3 bg-[#27272a] rounded w-2/3" />
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div className="flex-1 min-w-0">
+            {loading ? (
+              <div className="space-y-3">
+                {[1, 2, 3].map((i) => (
+                  <Card key={i} padding="lg">
+                    <Skeleton width="30%" height={16} className="mb-2" />
+                    <Skeleton width="60%" height={12} />
+                  </Card>
+                ))}
+              </div>
+            ) : filtered.length === 0 ? (
+              <EmptyState
+                icon={<GraduationCap size={24} />}
+                title={
+                  search || typeFilter !== "all"
+                    ? "No materials match your filters"
+                    : "No learning materials yet"
+                }
+                description="Learning materials are generated when you analyze repositories"
+              />
+            ) : (
+              <div className="space-y-3">
+                {filtered.map((exp, i) => (
+                  <button
+                    key={exp.id}
+                    onClick={() => setSelected(exp)}
+                    className={`w-full text-left border rounded-lg p-5 transition-all duration-fast animate-fade-in ${
+                      selected?.id === exp.id
+                        ? "bg-bg-secondary border-accent-blue"
+                        : "bg-bg-secondary border-border-primary hover:border-border-secondary"
+                    }`}
+                    style={{ animationDelay: `${i * 40}ms` }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-text-tertiary">
+                        {typeIcons[exp.export_type] || <BookOpen size={14} />}
+                      </span>
+                      <Badge variant="default" size="sm">
+                        {exp.export_type}
+                      </Badge>
                     </div>
-                  ))}
-                </div>
-              ) : filtered.length === 0 ? (
-                <div className="text-center py-20">
-                  <GraduationCap
-                    size={24}
-                    className="mx-auto text-[#52525b] mb-3"
-                  />
-                  <p className="text-sm text-[#71717a]">
-                    {search || typeFilter !== "all"
-                      ? "No materials match your filters"
-                      : "No learning materials yet"}
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {filtered.map((exp) => (
-                    <button
-                      key={exp.id}
-                      onClick={() => setSelected(exp)}
-                      className={`w-full text-left bg-[#111111] border rounded-lg p-5 transition-colors ${
-                        selected?.id === exp.id
-                          ? "border-[#3b82f6]"
-                          : "border-[#27272a] hover:border-[#3f3f46]"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-[#71717a]">
-                          {typeIcons[exp.export_type] || <BookOpen size={14} />}
-                        </span>
-                        <span className="px-2 py-0.5 text-[10px] rounded bg-[#27272a] text-[#a1a1aa] capitalize">
-                          {exp.export_type}
-                        </span>
-                      </div>
-                      <h3 className="text-sm font-medium text-[#fafafa] mb-1">
-                        {exp.title}
-                      </h3>
-                      <p className="text-xs text-[#52525b] truncate">
-                        {exp.content.substring(0, 100)}...
-                      </p>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {selected && (
-              <div className="w-[400px] flex-shrink-0">
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 sticky top-8">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[#71717a]">
-                      {typeIcons[selected.export_type] || (
-                        <BookOpen size={14} />
-                      )}
-                    </span>
-                    <span className="px-2 py-0.5 text-[10px] rounded bg-[#27272a] text-[#a1a1aa] capitalize">
-                      {selected.export_type}
-                    </span>
-                  </div>
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
-                    {selected.title}
-                  </h3>
-                  <pre className="text-xs text-[#a1a1aa] whitespace-pre-wrap font-mono leading-relaxed max-h-[60vh] overflow-y-auto">
-                    {selected.content}
-                  </pre>
-                </div>
+                    <h3 className="text-sm font-medium text-text-primary mb-1">
+                      {exp.title}
+                    </h3>
+                    <p className="text-xs text-text-muted truncate">
+                      {exp.content.substring(0, 100)}...
+                    </p>
+                  </button>
+                ))}
               </div>
             )}
           </div>
+
+          {selected && (
+            <div className="w-full lg:w-[400px] flex-shrink-0">
+              <Card padding="lg" className="sticky top-8 animate-fade-in">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-text-tertiary">
+                    {typeIcons[selected.export_type] || (
+                      <BookOpen size={14} />
+                    )}
+                  </span>
+                  <Badge variant="default" size="sm">
+                    {selected.export_type}
+                  </Badge>
+                </div>
+                <h3 className="text-sm font-medium text-text-primary mb-4">
+                  {selected.title}
+                </h3>
+                <pre className="text-xs text-text-secondary whitespace-pre-wrap font-mono leading-relaxed max-h-[60vh] overflow-y-auto">
+                  {selected.content}
+                </pre>
+              </Card>
+            </div>
+          )}
         </div>
-      </main>
-    </div>
+      </div>
+    </AppLayout>
   );
 }

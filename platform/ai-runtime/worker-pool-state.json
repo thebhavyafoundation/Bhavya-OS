@@ -1,0 +1,70 @@
+{
+  "workers": [
+    {
+      "id": "worker-1786001008835-w4hoq",
+      "name": "frontend-engineer",
+      "type": "frontend",
+      "state": "idle",
+      "capabilities": ["frontend", "ui", "css", "react"],
+      "currentTask": null,
+      "worktreePath": null,
+      "stats": {
+        "tasksCompleted": 0,
+        "tasksFailed": 0,
+        "totalExecutionTime": 0,
+        "checkpoints": 0,
+        "retries": 0
+      }
+    },
+    {
+      "id": "worker-1786001008850-0mzvh",
+      "name": "backend-engineer",
+      "type": "backend",
+      "state": "idle",
+      "capabilities": ["backend", "api", "database", "server"],
+      "currentTask": null,
+      "worktreePath": null,
+      "stats": {
+        "tasksCompleted": 0,
+        "tasksFailed": 0,
+        "totalExecutionTime": 0,
+        "checkpoints": 0,
+        "retries": 0
+      }
+    },
+    {
+      "id": "worker-1786001008857-r3is1",
+      "name": "qa-engineer",
+      "type": "testing",
+      "state": "idle",
+      "capabilities": ["testing", "qa", "validation"],
+      "currentTask": null,
+      "worktreePath": null,
+      "stats": {
+        "tasksCompleted": 0,
+        "tasksFailed": 0,
+        "totalExecutionTime": 0,
+        "checkpoints": 0,
+        "retries": 0
+      }
+    },
+    {
+      "id": "worker-1786001008882-sw0ct",
+      "name": "devops-engineer",
+      "type": "devops",
+      "state": "idle",
+      "capabilities": ["deployment", "ci", "infrastructure"],
+      "currentTask": null,
+      "worktreePath": null,
+      "stats": {
+        "tasksCompleted": 0,
+        "tasksFailed": 0,
+        "totalExecutionTime": 0,
+        "checkpoints": 0,
+        "retries": 0
+      }
+    }
+  ],
+  "queuedTasks": 0,
+  "timestamp": "2026-08-06T07:23:28.889Z"
+}

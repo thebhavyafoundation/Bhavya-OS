@@ -1,0 +1,192 @@
+[
+  {
+    "id": "wt-worker-1785994688522-rzft4-1785994689456",
+    "workerId": "worker-1785994688522-rzft4",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785994688522-rzft4-1785994689456",
+    "branch": "worker/worker-1785994688522-rzft4/1785994689456",
+    "createdAt": "2026-08-06T05:38:37.130Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999398783-hxvxx-1785999400276",
+    "workerId": "worker-1785999398783-hxvxx",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999398783-hxvxx-1785999400276",
+    "branch": "worker/worker-1785999398783-hxvxx/1785999400276",
+    "createdAt": "2026-08-06T06:56:56.211Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999512596-4mlbp-1785999514056",
+    "workerId": "worker-1785999512596-4mlbp",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999512596-4mlbp-1785999514056",
+    "branch": "worker/worker-1785999512596-4mlbp/1785999514056",
+    "createdAt": "2026-08-06T06:58:45.336Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999632751-zi92k-1785999634237",
+    "workerId": "worker-1785999632751-zi92k",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999632751-zi92k-1785999634237",
+    "branch": "worker/worker-1785999632751-zi92k/1785999634237",
+    "createdAt": "2026-08-06T07:00:44.631Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999632751-zi92k-1785999648800",
+    "workerId": "worker-1785999632751-zi92k",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999632751-zi92k-1785999648800",
+    "branch": "worker/worker-1785999632751-zi92k/1785999648800",
+    "createdAt": "2026-08-06T07:01:01.113Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999632751-zi92k-1785999667496",
+    "workerId": "worker-1785999632751-zi92k",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999632751-zi92k-1785999667496",
+    "branch": "worker/worker-1785999632751-zi92k/1785999667495",
+    "createdAt": "2026-08-06T07:01:20.205Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999762975-6l5r2-1785999764703",
+    "workerId": "worker-1785999762975-6l5r2",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999762975-6l5r2-1785999764703",
+    "branch": "worker/worker-1785999762975-6l5r2/1785999764703",
+    "createdAt": "2026-08-06T07:02:54.776Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999762975-6l5r2-1785999779218",
+    "workerId": "worker-1785999762975-6l5r2",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999762975-6l5r2-1785999779218",
+    "branch": "worker/worker-1785999762975-6l5r2/1785999779218",
+    "createdAt": "2026-08-06T07:03:11.831Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1785999762975-6l5r2-1785999798308",
+    "workerId": "worker-1785999762975-6l5r2",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1785999762975-6l5r2-1785999798308",
+    "branch": "worker/worker-1785999762975-6l5r2/1785999798308",
+    "createdAt": "2026-08-06T07:03:30.098Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000015618-czv82-1786000017271",
+    "workerId": "worker-1786000015618-czv82",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000015618-czv82-1786000017271",
+    "branch": "worker/worker-1786000015618-czv82/1786000017271",
+    "createdAt": "2026-08-06T07:07:12.615Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000015618-czv82-1786000036581",
+    "workerId": "worker-1786000015618-czv82",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000015618-czv82-1786000036581",
+    "branch": "worker/worker-1786000015618-czv82/1786000036581",
+    "createdAt": "2026-08-06T07:07:27.674Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000015618-czv82-1786000055950",
+    "workerId": "worker-1786000015618-czv82",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000015618-czv82-1786000055950",
+    "branch": "worker/worker-1786000015618-czv82/1786000055950",
+    "createdAt": "2026-08-06T07:07:46.350Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000167728-r91l9-1786000168915",
+    "workerId": "worker-1786000167728-r91l9",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000167728-r91l9-1786000168915",
+    "branch": "worker/worker-1786000167728-r91l9/1786000168915",
+    "createdAt": "2026-08-06T07:09:39.559Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000167728-r91l9-1786000184101",
+    "workerId": "worker-1786000167728-r91l9",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000167728-r91l9-1786000184101",
+    "branch": "worker/worker-1786000167728-r91l9/1786000184101",
+    "createdAt": "2026-08-06T07:09:55.101Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000167728-r91l9-1786000202561",
+    "workerId": "worker-1786000167728-r91l9",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000167728-r91l9-1786000202561",
+    "branch": "worker/worker-1786000167728-r91l9/1786000202561",
+    "createdAt": "2026-08-06T07:10:14.162Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000416253-e4jtp-1786000417339",
+    "workerId": "worker-1786000416253-e4jtp",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000416253-e4jtp-1786000417339",
+    "branch": "worker/worker-1786000416253-e4jtp/1786000417339",
+    "createdAt": "2026-08-06T07:13:47.030Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000416253-e4jtp-1786000430858",
+    "workerId": "worker-1786000416253-e4jtp",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000416253-e4jtp-1786000430858",
+    "branch": "worker/worker-1786000416253-e4jtp/1786000430858",
+    "createdAt": "2026-08-06T07:14:01.158Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786000416253-e4jtp-1786000447791",
+    "workerId": "worker-1786000416253-e4jtp",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786000416253-e4jtp-1786000447791",
+    "branch": "worker/worker-1786000416253-e4jtp/1786000447791",
+    "createdAt": "2026-08-06T07:14:18.422Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  },
+  {
+    "id": "wt-worker-1786001008835-w4hoq-1786001010313",
+    "workerId": "worker-1786001008835-w4hoq",
+    "path": "F:\\Bhavya Foundation\\.worktrees\\wt-worker-1786001008835-w4hoq-1786001010313",
+    "branch": "worker/worker-1786001008835-w4hoq/1786001010313",
+    "createdAt": "2026-08-06T07:23:44.743Z",
+    "status": "active",
+    "filesModified": [],
+    "lastCommit": null
+  }
+]

@@ -521,13 +521,13 @@ export type TaskStatus =
 
 // ─── Educational Knowledge ────────────────────────────────────────
 
-/** Knowledge Object — a unit of educational content */
+/** Knowledge Object — a unit of educational content. Canonical source for all KO types. */
 export interface KnowledgeObject {
   id: string;
   title: string;
   domain: string;
   subject?: string;
-  gradeLevel?: string;
+  grade: number;
   description?: string;
   sourceType: SourceType;
   sourceContent?: string;
@@ -537,11 +537,23 @@ export interface KnowledgeObject {
   examples: Example[];
   misconceptions: Misconception[];
   exercises: Exercise[];
-  metadata: Record<string, unknown>;
+  prerequisites: string[];
+  related: string[];
+  metadata: KnowledgeObjectMetadata;
   status: EntityStatus;
   userId: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface KnowledgeObjectMetadata {
+  author?: string;
+  targetAudience?: string;
+  language?: string;
+  estimatedDuration?: string;
+  bloomTaxonomy?: string[];
+  tags?: string[];
+  [key: string]: unknown;
 }
 
 export interface Concept {
@@ -603,17 +615,106 @@ export interface EducationalPackage {
   updatedAt: string;
 }
 
+/** Lesson — a structured learning unit within a course. Canonical source for all Lesson types. */
 export interface Lesson {
+  id: string;
+  courseId: string;
   title: string;
+  subject: string;
+  grade: number;
+  duration: number;
+  status: LessonStatus;
+  learningOutcomes: LearningOutcome[];
   sections: LessonSection[];
-  learningOutcomes: string[];
   vocabulary: Vocabulary[];
+  prerequisites: string[];
+  createdAt: string;
+  updatedAt: string;
+  version: number;
 }
 
+export type LessonStatus = "draft" | "ready" | "published";
+
+export interface LearningOutcome {
+  id: string;
+  description: string;
+  bloomLevel: BloomLevel;
+}
+
+export type BloomLevel =
+  | "remember"
+  | "understand"
+  | "apply"
+  | "analyze"
+  | "evaluate"
+  | "create";
+
 export interface LessonSection {
+  id: string;
+  type: LessonSectionType;
   title: string;
   content: string;
-  duration?: number;
+  order: number;
+}
+
+export type LessonSectionType =
+  | "introduction"
+  | "key-concepts"
+  | "visual-explanation"
+  | "examples"
+  | "exercises"
+  | "summary";
+
+/** Course — a structured learning path containing modules and lessons. Canonical source for all Course types. */
+export interface Course {
+  id: string;
+  title: string;
+  description: string;
+  domain: string;
+  subject: string;
+  grade: number;
+  level: CourseLevel;
+  status: LessonStatus;
+  modules: CourseModule[];
+  prerequisites: string[];
+  estimatedDuration: number;
+  tags: string[];
+  metadata: Record<string, unknown>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type CourseLevel =
+  | "foundation"
+  | "beginner"
+  | "intermediate"
+  | "advanced"
+  | "expert";
+
+export interface CourseModule {
+  id: string;
+  title: string;
+  description: string;
+  order: number;
+  lessons: CourseModuleLesson[];
+}
+
+export interface CourseModuleLesson {
+  id: string;
+  title: string;
+  order: number;
+  duration: number;
+}
+
+/** StudentProgress — tracks learner progress through courses and lessons */
+export interface StudentProgress {
+  userId: string;
+  courseId: string;
+  lessonId: string;
+  completed: boolean;
+  score?: number;
+  timeSpent: number;
+  completedAt?: string;
 }
 
 export interface Vocabulary {
@@ -1110,12 +1211,25 @@ export interface User {
   name: string;
   role: UserRole;
   avatar?: string;
+  interests?: string[];
+  onboardingComplete?: boolean;
   metadata: Record<string, unknown>;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export type UserRole = "admin" | "editor" | "viewer" | "volunteer";
+/** User roles — canonical source for all auth systems */
+export type UserRole =
+  | "guest"
+  | "viewer"
+  | "student"
+  | "editor"
+  | "mentor"
+  | "instructor"
+  | "admin"
+  | "security"
+  | "cto"
+  | "founder";
 
 export interface Session {
   id: string;

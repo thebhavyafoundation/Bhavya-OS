@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none">
+  <!-- Tree trunk -->
+  <rect x="55" y="80" width="10" height="80" fill="#5a4a3a" rx="2"/>
+  
+  <!-- Tree canopy layers -->
+  <ellipse cx="60" cy="60" rx="45" ry="35" fill="#2d5a3d"/>
+  <ellipse cx="60" cy="50" rx="38" ry="30" fill="#3a6b4a"/>
+  <ellipse cx="60" cy="40" rx="30" ry="25" fill="#4a7d5a"/>
+  
+  <!-- Highlights -->
+  <ellipse cx="55" cy="45" rx="12" ry="10" fill="#5a8d6a" opacity="0.6"/>
+  
+  <!-- Roots hint -->
+  <path d="M50 155 Q40 160 30 158" stroke="#5a4a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M70 155 Q80 160 90 158" stroke="#5a4a3a" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

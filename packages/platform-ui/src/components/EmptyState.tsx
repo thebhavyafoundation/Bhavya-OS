@@ -2,6 +2,7 @@
  * @bhavya/platform-ui — EmptyState
  *
  * Reusable empty state component with icon, title, description, and action.
+ * Uses design tokens for consistent theming.
  */
 
 import React from "react";
@@ -11,6 +12,7 @@ interface EmptyStateProps {
   title: string;
   description?: string;
   action?: { label: string; onClick: () => void };
+  className?: string;
 }
 
 export function EmptyState({
@@ -18,58 +20,39 @@ export function EmptyState({
   title,
   description,
   action,
+  className = "",
 }: EmptyStateProps) {
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "60px 20px",
-        textAlign: "center",
-      }}
+      className={`
+        flex flex-col items-center justify-center
+        py-16 px-5 text-center
+        animate-fade-in
+        ${className}
+      `}
     >
       {icon && (
-        <div style={{ fontSize: 48, color: "#475569", marginBottom: 16 }}>
+        <div className="text-text-muted mb-4 opacity-50">
           {icon}
         </div>
       )}
-      <h3
-        style={{
-          fontSize: 18,
-          fontWeight: 600,
-          color: "#f8fafc",
-          marginBottom: 8,
-        }}
-      >
+      <h3 className="text-base font-semibold text-text-primary mb-2">
         {title}
       </h3>
       {description && (
-        <p
-          style={{
-            fontSize: 14,
-            color: "#94a3b8",
-            maxWidth: 400,
-            marginBottom: action ? 24 : 0,
-          }}
-        >
+        <p className="text-sm text-text-secondary max-w-sm mb-6">
           {description}
         </p>
       )}
       {action && (
         <button
           onClick={action.onClick}
-          style={{
-            padding: "10px 20px",
-            borderRadius: 8,
-            border: "none",
-            background: "#3b82f6",
-            color: "#fff",
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
+          className="
+            px-4 py-2 bg-accent-blue text-white text-sm font-medium
+            rounded-md hover:bg-accent-blue-hover
+            transition-colors duration-fast
+            cursor-pointer
+          "
         >
           {action.label}
         </button>

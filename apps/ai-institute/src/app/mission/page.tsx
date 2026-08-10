@@ -7,7 +7,7 @@ const pillars = [
   {
     title: "Education",
     description:
-      "World-class curriculum that builds deep understanding, not surface familiarity. From foundations to frontier research.",
+      "Deep curriculum that builds deep understanding, not surface familiarity. From foundations to frontier research.",
     icon: "◆",
   },
   {
@@ -19,7 +19,7 @@ const pillars = [
   {
     title: "Impact",
     description:
-      "Transforming lives through accessible AI education. From career changers to entrepreneurs, our graduates are building the future.",
+      "Transforming lives through accessible AI education. From career changers to entrepreneurs, we are building the future of AI education.",
     icon: "◈",
   },
 ];
@@ -33,15 +33,15 @@ const milestones = [
   },
   {
     year: "2026",
-    title: "12 Schools Launched",
+    title: "12 Schools Designed",
     description:
-      "Academic structure established with 12 specialized schools covering the full spectrum of AI.",
+      "Academic structure designed with 12 specialized schools covering the full spectrum of AI.",
   },
   {
     year: "2026",
     title: "First Cohort",
     description:
-      "Inaugural class of 5,000 students begins their journey through our flagship learning paths.",
+      "Target: Inaugural class of students begins their journey through our flagship learning paths.",
   },
   {
     year: "2027",
@@ -53,13 +53,13 @@ const milestones = [
     year: "2028",
     title: "Global Expansion",
     description:
-      "Partnerships with institutions in 20+ countries. Localization in 15 languages.",
+      "Target: Partnerships with institutions in multiple countries. Localization in multiple languages.",
   },
   {
     year: "2030",
     title: "50K Graduates",
     description:
-      "Milestone of 50,000 graduates working in AI across industry, academia, and government.",
+      "Target: Significant number of graduates working in AI across industry, academia, and government.",
   },
   {
     year: "2036",

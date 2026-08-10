@@ -24,7 +24,7 @@ const graphNodes: GraphNode[] = [
     x: 400,
     y: 300,
     color: "#1a3a2a",
-    mastery: 85,
+    mastery: 0,
     prerequisites: [],
     relatedLessons: ["AI Fundamentals", "History of AI"],
     relatedLabs: ["Lab 0: Setup"],
@@ -37,7 +37,7 @@ const graphNodes: GraphNode[] = [
     x: 250,
     y: 180,
     color: "#c9a227",
-    mastery: 72,
+    mastery: 0,
     prerequisites: ["ai"],
     relatedLessons: ["Linear Regression", "Decision Trees"],
     relatedLabs: ["Lab 1: Data Prep"],
@@ -50,7 +50,7 @@ const graphNodes: GraphNode[] = [
     x: 550,
     y: 180,
     color: "#8a7359",
-    mastery: 45,
+    mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Neural Networks", "Backpropagation"],
     relatedLabs: ["Lab 2: Neural Nets"],
@@ -63,7 +63,7 @@ const graphNodes: GraphNode[] = [
     x: 150,
     y: 350,
     color: "#4ade80",
-    mastery: 60,
+    mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Text Processing", "Sentiment Analysis"],
     relatedLabs: ["Lab 3: NLP"],
@@ -76,7 +76,7 @@ const graphNodes: GraphNode[] = [
     x: 650,
     y: 350,
     color: "#60a5fa",
-    mastery: 38,
+    mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Image Classification", "Object Detection"],
     relatedLabs: ["Lab 4: Computer Vision"],
@@ -89,7 +89,7 @@ const graphNodes: GraphNode[] = [
     x: 150,
     y: 500,
     color: "#f472b6",
-    mastery: 20,
+    mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Reinforcement Learning", "Q-Learning"],
     relatedLabs: ["Lab 5: RL"],
@@ -102,7 +102,7 @@ const graphNodes: GraphNode[] = [
     x: 700,
     y: 220,
     color: "#60a5fa",
-    mastery: 30,
+    mastery: 0,
     prerequisites: ["dl", "cv"],
     relatedLessons: ["Convolutional Layers", "Image Nets"],
     relatedLabs: ["Lab 4: CNN"],
@@ -115,7 +115,7 @@ const graphNodes: GraphNode[] = [
     x: 350,
     y: 480,
     color: "#a78bfa",
-    mastery: 25,
+    mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Sequential Data", "LSTM"],
     relatedLabs: ["Lab 6: RNN"],
@@ -128,7 +128,7 @@ const graphNodes: GraphNode[] = [
     x: 450,
     y: 120,
     color: "#fbbf24",
-    mastery: 55,
+    mastery: 0,
     prerequisites: ["dl", "nlp"],
     relatedLessons: ["Attention Mechanism", "Self-Attention"],
     relatedLabs: ["Lab 7: Transformers"],
@@ -141,7 +141,7 @@ const graphNodes: GraphNode[] = [
     x: 600,
     y: 480,
     color: "#f472b6",
-    mastery: 15,
+    mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Generative Models", "Adversarial Training"],
     relatedLabs: ["Lab 8: GANs"],
@@ -154,7 +154,7 @@ const graphNodes: GraphNode[] = [
     x: 250,
     y: 100,
     color: "#34d399",
-    mastery: 40,
+    mastery: 0,
     prerequisites: ["transformers", "nlp"],
     relatedLessons: ["Bidirectional Encoding", "Fine-tuning"],
     relatedLabs: ["Lab 9: BERT"],
@@ -167,7 +167,7 @@ const graphNodes: GraphNode[] = [
     x: 550,
     y: 60,
     color: "#fbbf24",
-    mastery: 65,
+    mastery: 0,
     prerequisites: ["transformers"],
     relatedLessons: ["Language Models", "Prompt Engineering"],
     relatedLabs: ["Lab 10: GPT"],
@@ -412,11 +412,44 @@ export default function KnowledgeGraphPage() {
       scaleRef.current = newScale;
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      e.preventDefault();
+      if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        const node = getNodeAtPos(touch.clientX, touch.clientY);
+        if (node) {
+          setSelectedNode(node);
+          return;
+        }
+        isPanning.current = true;
+        lastMouse.current = { x: touch.clientX, y: touch.clientY };
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault();
+      if (e.touches.length === 1 && isPanning.current) {
+        const touch = e.touches[0];
+        const dx = touch.clientX - lastMouse.current.x;
+        const dy = touch.clientY - lastMouse.current.y;
+        offsetRef.current.x += dx;
+        offsetRef.current.y += dy;
+        lastMouse.current = { x: touch.clientX, y: touch.clientY };
+      }
+    };
+
+    const handleTouchEnd = (_e: TouchEvent) => {
+      isPanning.current = false;
+    };
+
     canvas.addEventListener("mousedown", handleMouseDown);
     canvas.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseup", handleMouseUp);
     canvas.addEventListener("mouseleave", handleMouseUp);
     canvas.addEventListener("wheel", handleWheel, { passive: false });
+    canvas.addEventListener("touchstart", handleTouchStart, { passive: false });
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+    canvas.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       canvas.removeEventListener("mousedown", handleMouseDown);
@@ -424,6 +457,9 @@ export default function KnowledgeGraphPage() {
       canvas.removeEventListener("mouseup", handleMouseUp);
       canvas.removeEventListener("mouseleave", handleMouseUp);
       canvas.removeEventListener("wheel", handleWheel);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
     };
   }, [getNodeAtPos]);
 
@@ -538,7 +574,7 @@ export default function KnowledgeGraphPage() {
           <div className="lg:col-span-2" ref={containerRef}>
             <div
               className="relative bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden"
-              style={{ height: "600px" }}
+              style={{ height: "min(600px, 60vh)" }}
             >
               <canvas ref={canvasRef} className="absolute inset-0" />
               <div className="absolute bottom-4 left-4 flex items-center gap-4 px-4 py-2.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl border border-white/[0.06]">

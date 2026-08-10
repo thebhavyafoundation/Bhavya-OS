@@ -1,29 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/AuthProvider";
 import {
-  getProgress,
-  saveProgress,
   assessmentQuestions,
   calculateAssessmentScore,
 } from "@/data/progress";
 
 export default function AssessmentPage() {
   const router = useRouter();
+  const { isAuthenticated, student } = useAuth();
   const [step, setStep] = useState<"intro" | "quiz" | "result">("intro");
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [result, setResult] = useState<ReturnType<
     typeof calculateAssessmentScore
   > | null>(null);
-
-  useEffect(() => {
-    const p = getProgress();
-    if (p.assessmentCompleted) {
-      router.push("/dashboard");
-    }
-  }, [router]);
 
   function startQuiz() {
     setStep("quiz");
@@ -37,13 +30,24 @@ export default function AssessmentPage() {
     } else {
       const r = calculateAssessmentScore(answers);
       setResult(r);
-      const p = getProgress();
-      p.enrolled = true;
-      p.assessmentCompleted = true;
-      p.assessmentScore = r.score;
-      p.streak = 1;
-      p.lastActiveDate = new Date().toISOString().split("T")[0];
-      saveProgress(p);
+      if (student) {
+        fetch("/api/student/progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "submitQuiz",
+            data: { answers, score: r.score },
+          }),
+        });
+        fetch("/api/student/progress", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "enroll",
+            data: { courseId: "ai-foundations" },
+          }),
+        });
+      }
       setStep("result");
     }
   }
@@ -60,7 +64,7 @@ export default function AssessmentPage() {
               AI Readiness Assessment
             </h1>
             <p className="text-sm text-text-secondary">
-              8 questions. 3 minutes. We'll figure out where you should start.
+              8 questions. 3 minutes. We&apos;ll figure out where you should start.
             </p>
           </div>
 
@@ -106,7 +110,6 @@ export default function AssessmentPage() {
     return (
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="max-w-lg w-full animate-fade-in">
-          {/* Progress */}
           <div className="mb-8">
             <div className="flex items-center justify-between text-xs text-text-tertiary mb-2">
               <span>
@@ -122,7 +125,6 @@ export default function AssessmentPage() {
             </div>
           </div>
 
-          {/* Question */}
           <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
             <p className="text-[10px] text-text-muted uppercase tracking-wider mb-2">
               {q.category.replace("_", " ")}

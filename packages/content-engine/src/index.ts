@@ -16,3 +16,7 @@ export {
   contentImporter,
 } from "./export.js";
 export { CurriculumOrganizer, curriculumOrganizer } from "./organizer.js";
+export {
+  ConstitutionEnforcementRuntime,
+  constitutionEnforcement,
+} from "./constitution.js";

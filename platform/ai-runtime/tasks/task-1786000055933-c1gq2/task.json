@@ -1,0 +1,20 @@
+{
+  "id": "task-1786000055933-c1gq2",
+  "type": "design",
+  "priority": "normal",
+  "state": "queued",
+  "dependencies": [],
+  "payload": {},
+  "result": null,
+  "error": null,
+  "attempts": 0,
+  "maxRetries": 3,
+  "assignedWorker": null,
+  "createdAt": "2026-08-06T07:07:35.933Z",
+  "updatedAt": "2026-08-06T07:07:35.940Z",
+  "startedAt": null,
+  "completedAt": null,
+  "failedAt": null,
+  "checkpoints": [],
+  "timeout": 300000
+}

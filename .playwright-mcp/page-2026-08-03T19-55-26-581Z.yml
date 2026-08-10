@@ -1,0 +1,83 @@
+- generic [active] [ref=f3e1]:
+  - alert [ref=f3e182]
+  - generic [ref=f3e546]:
+    - complementary [ref=f3e547]:
+      - link "B GitHub OS Engineering Mentor" [ref=f3e549] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e550]: B
+        - generic [ref=f3e551]:
+          - generic [ref=f3e552]: GitHub OS
+          - generic [ref=f3e553]: Engineering Mentor
+      - button [ref=f3e555]:
+        - text: Search...
+        - generic [ref=f3e559]: K
+      - navigation [ref=f3e562]:
+        - link "Dashboard" [ref=f3e564] [cursor=pointer]:
+          - /url: /
+        - link "Repositories" [ref=f3e569] [cursor=pointer]:
+          - /url: /repositories
+        - link "Knowledge" [ref=f3e576] [cursor=pointer]:
+          - /url: /knowledge
+        - link "Learning" [ref=f3e581] [cursor=pointer]:
+          - /url: /learning
+        - link "Settings" [ref=f3e586] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f3e591]:
+        - generic [ref=f3e592]: BV
+        - generic [ref=f3e593]:
+          - generic [ref=f3e594]: Bhavya Foundation
+          - generic [ref=f3e595]: Admin
+    - main [ref=f3e596]:
+      - generic [ref=f3e597]:
+        - navigation [ref=f3e598]:
+          - link "Repositories" [ref=f3e599] [cursor=pointer]:
+            - /url: /repositories
+          - text: bhavya-platform
+        - generic [ref=f3e602]:
+          - generic [ref=f3e603]:
+            - generic [ref=f3e604]:
+              - heading "bhavya-platform" [level=1] [ref=f3e605]
+              - text: matureadopt
+            - paragraph [ref=f3e606]: Core platform packages — types, security, database, events, workflows
+            - generic [ref=f3e607]:
+              - generic [ref=f3e608]: TypeScript
+              - generic [ref=f3e609]: "45"
+              - generic [ref=f3e612]: "8"
+              - text: MIT
+            - generic [ref=f3e618]: platforminfrastructurepackages
+          - generic [ref=f3e619]:
+            - generic [ref=f3e620]: "90"
+            - paragraph [ref=f3e624]: Bhavya Score
+        - generic [ref=f3e625]:
+          - button "Overview" [ref=f3e626]
+          - button "Architecture" [ref=f3e631]
+          - button "Learning" [ref=f3e636]
+          - button "Advisor" [ref=f3e640]
+          - button "Activity" [ref=f3e643]
+        - generic [ref=f3e646]:
+          - generic [ref=f3e647]:
+            - generic [ref=f3e648]:
+              - paragraph [ref=f3e649]: Health
+              - paragraph [ref=f3e650]: "92"
+            - generic [ref=f3e651]:
+              - paragraph [ref=f3e652]: Technology
+              - paragraph [ref=f3e653]: "88"
+            - generic [ref=f3e654]:
+              - paragraph [ref=f3e655]: Difficulty
+              - paragraph [ref=f3e656]: intermediate
+          - generic [ref=f3e657]:
+            - heading "Why Bhavya Cares" [level=3] [ref=f3e658]
+            - paragraph [ref=f3e659]: Core infrastructure that all other packages depend on. Defines the architectural patterns and conventions for the entire ecosystem.
+          - generic [ref=f3e660]:
+            - heading "Architecture Summary" [level=3] [ref=f3e661]
+            - paragraph [ref=f3e662]: Layered architecture with 11 shared packages. Foundation Layer (platform, types, security) → Data Layer (database) → Communication Layer (api, events, workflows) → Integration Layer (ai, providers, notifications) → Presentation Layer (platform-ui). Zero circular dependencies enforced.
+          - generic [ref=f3e663]:
+            - heading "README Summary" [level=3] [ref=f3e664]
+            - paragraph [ref=f3e665]: Foundation layer providing 11 shared packages for the Bhavya OS ecosystem. Implements layered architecture with zero circular dependencies.
+          - generic [ref=f3e666]:
+            - heading "Knowledge Packages (1)" [level=3] [ref=f3e667]
+            - generic [ref=f3e669]:
+              - generic [ref=f3e670]:
+                - text: architecture
+                - paragraph [ref=f3e671]: Platform Foundation v2.0 — 11 shared packages
+              - generic [ref=f3e672]: Q95

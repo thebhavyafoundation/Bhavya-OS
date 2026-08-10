@@ -1,0 +1,216 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content":
+    - /url: "#geist-skip-nav"
+  - main [ref=f6e3]:
+    - generic [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - generic [ref=f6e6]:
+          - generic [ref=f6e7]:
+            - generic [ref=f6e10]:
+              - link "Bhavya Foundation Hobby" [ref=f6e11] [cursor=pointer]:
+                - /url: /bhavya-foundation
+                - generic [ref=f6e13]:
+                  - generic [ref=f6e14]: Bhavya Foundation
+                  - generic [ref=f6e15]: Hobby
+              - button [ref=f6e17] [cursor=pointer]
+            - button "Find F" [ref=f6e22]:
+              - generic [ref=f6e24]:
+                - generic [ref=f6e28]: Find
+                - generic [ref=f6e29]: F
+          - navigation [ref=f6e32]:
+            - generic [ref=f6e35]:
+              - link "Overview" [ref=f6e968] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website
+              - link "Deployments" [ref=f6e973] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/deployments
+              - link "Logs" [ref=f6e979] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/logs
+              - link "Analytics" [ref=f6e985] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/analytics
+              - link "Speed Insights" [ref=f6e991] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/speed-insights
+              - link "Observability" [ref=f6e997] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/observability
+              - link "Firewall" [ref=f6e1006] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/firewall
+              - link "CDN" [ref=f6e1016] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/cdn
+              - separator [ref=f6e88]
+              - link "Environment Variables" [ref=f6e1025] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/environment-variables
+              - link "Domains" [ref=f6e1031] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/domains
+              - link "Connect Beta" [ref=f6e1037] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/connect
+                - generic [ref=f6e1041]:
+                  - generic [ref=f6e1042]: Connect
+                  - generic [ref=f6e1043]: Beta
+              - link "Integrations" [ref=f6e1045] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings/integrations
+              - link "Storage" [ref=f6e1051] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/stores
+              - link "Flags" [ref=f6e1057] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/flags
+              - link "Agent" [ref=f6e1066] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/agent
+              - link "AI Gateway" [ref=f6e1075] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/ai-gateway
+              - link "Sandboxes" [ref=f6e1084] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/sandboxes
+              - link "Workflows" [ref=f6e1093] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/workflows
+              - link "Images Beta" [ref=f6e1099] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/images
+                - generic [ref=f6e1103]:
+                  - generic [ref=f6e1104]: Images
+                  - generic [ref=f6e1105]: Beta
+              - separator [ref=f6e168]
+              - link "Usage" [ref=f6e1107] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/usage
+              - link "Support" [ref=f6e1113] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/support
+              - link "Settings" [ref=f6e1119] [cursor=pointer]:
+                - /url: /bhavya-foundation/bhavya-foundation-website/settings
+          - generic [ref=f6e195]:
+            - button "Avatar for thebhavyafoundation thebhavyafoundation" [ref=f6e196] [cursor=pointer]:
+              - img "Avatar for thebhavyafoundation" [ref=f6e197]:
+                - img "Avatar for thebhavyafoundation" [ref=f6e198]
+              - generic [ref=f6e199]: thebhavyafoundation
+            - button "28 unseen notifications" [ref=f6e963] [cursor=pointer]
+        - button [ref=f6e209] [cursor=pointer]
+      - generic [ref=f6e213]:
+        - generic [ref=f6e1128]:
+          - generic [ref=f6e1131]:
+            - link "bhavya-foundation-website" [ref=f6e1132] [cursor=pointer]:
+              - /url: /bhavya-foundation/bhavya-foundation-website
+            - button [ref=f6e1136] [cursor=pointer]
+            - link "Back to team view" [ref=f6e1142] [cursor=pointer]:
+              - /url: /bhavya-foundation
+          - navigation "Breadcrumb" [ref=f6e1146]:
+            - generic [ref=f6e1147]: Overview
+          - button "Vercel Agent is available on Pro" [ref=f6e1151] [cursor=pointer]:
+            - generic [ref=f6e1164]: Agent
+        - generic [ref=f6e1167]:
+          - generic [ref=f6e1171]:
+            - generic [ref=f6e1172]:
+              - generic [ref=f6e1173]:
+                - heading "Production Deployment" [level=3] [ref=f6e1174]
+                - generic [ref=f6e1176]:
+                  - link "Repository" [ref=f6e1177] [cursor=pointer]:
+                    - /url: https://github.com/thebhavyafoundation/Bhavya-OS
+                  - button "Instant Rollback" [ref=f6e1183] [cursor=pointer]
+                  - generic [ref=f6e1190]:
+                    - link "Visit" [ref=f6e1191] [cursor=pointer]:
+                      - /url: https://bhavya-foundation-website.vercel.app
+                    - button "Visit with" [ref=f6e1193] [cursor=pointer]
+                  - button "Project Menu" [ref=f6e1198] [cursor=pointer]
+              - generic [ref=f6e1204]:
+                - link "Visit Deployment" [ref=f6e1207] [cursor=pointer]:
+                  - /url: https://bhavya-foundation-website.vercel.app
+                - generic [ref=f6e1209]:
+                  - generic [ref=f6e1210]:
+                    - generic [ref=f6e1212]:
+                      - term [ref=f6e1213]: Deployment
+                      - definition [ref=f6e1214]:
+                        - link "bhavya-foundation-website-8dz05lcol-bhavya-foundation.vercel.app" [ref=f6e1216] [cursor=pointer]:
+                          - /url: /bhavya-foundation/bhavya-foundation-website/4WvEmDopDm4jyqr9KXhS8jknmene
+                    - link [ref=f6e1218] [cursor=pointer]:
+                      - /url: /bhavya-foundation/bhavya-foundation-website/speed-insights
+                      - progressbar [ref=f6e1220]
+                  - generic [ref=f6e1229]:
+                    - term [ref=f6e1230]:
+                      - generic [ref=f6e1232]:
+                        - text: Domains
+                        - button "Add a domain" [ref=f6e1233] [cursor=pointer]
+                    - definition [ref=f6e1236]:
+                      - link "bhavya-foundation-website.vercel.app" [ref=f6e1240] [cursor=pointer]:
+                        - /url: https://bhavya-foundation-website.vercel.app
+                  - generic [ref=f6e1244]:
+                    - generic [ref=f6e1245]:
+                      - term [ref=f6e1246]: Status
+                      - definition [ref=f6e1247]:
+                        - generic "This deployment is ready." [ref=f6e1250]: Ready
+                    - generic [ref=f6e1256]:
+                      - term [ref=f6e1257]: Created
+                      - definition [ref=f6e1258]:
+                        - generic [ref=f6e1260] [cursor=pointer]:
+                          - paragraph [ref=f6e1261]: 15m ago by thebhavyafoundation
+                          - img "github/thebhavyafoundation" [ref=f6e1263]:
+                            - img "github/thebhavyafoundation" [ref=f6e1264]
+                  - generic [ref=f6e1266]:
+                    - term [ref=f6e1267]: Source
+                    - definition [ref=f6e1268]:
+                      - generic [ref=f6e1270]:
+                        - link [ref=f6e1274] [cursor=pointer]:
+                          - /url: https://github.com/thebhavyafoundation/Bhavya-OS/tree/master
+                          - code [ref=f6e1275]: master
+                        - 'link "0f48659 feat(website): launch sprint v2.0 — conversion, knowledge discovery, t…" [ref=f6e1280] [cursor=pointer]':
+                          - /url: https://github.com/thebhavyafoundation/Bhavya-OS/commit/0f48659cc88658bedd139230effe153d30603715
+                          - code [ref=f6e1281]: 0f48659
+                          - 'generic "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e1282]': "feat(website): launch sprint v2.0 — conversion, knowledge discovery, t…"
+              - button "Deployment Settings 3 Recommendations" [ref=f6e1285] [cursor=pointer]:
+                - generic [ref=f6e1289]:
+                  - generic [ref=f6e1290]: Deployment Settings
+                  - generic [ref=f6e1291]: 3 Recommendations
+            - generic [ref=f6e1299]:
+              - generic [ref=f6e1300]: To update your Production Deployment, push to the master branch.
+              - generic [ref=f6e1303]:
+                - link "Deployments" [ref=f6e1304] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/deployments?environment=production
+                - link "Learn more" [ref=f6e1309] [cursor=pointer]:
+                  - /url: /docs/git#production-branch
+          - generic [ref=f6e1315]:
+            - generic [ref=f6e1316]:
+              - generic [ref=f6e1317]:
+                - generic [ref=f6e1318]:
+                  - paragraph [ref=f6e1319]:
+                    - strong [ref=f6e1320]: Production Checklist
+                  - generic [ref=f6e1321]: 1/5
+                - button "Go to page" [ref=f6e1323] [cursor=pointer]
+                - button [ref=f6e1327] [cursor=pointer]
+              - generic [ref=f6e1331]:
+                - button "Connect Git Repository" [ref=f6e1332] [cursor=pointer]
+                - button "Add Custom Domain" [ref=f6e1338] [cursor=pointer]
+                - button "Preview Deployment" [ref=f6e1342] [cursor=pointer]
+                - button "Enable Web Analytics" [ref=f6e1346] [cursor=pointer]
+                - button "Enable Speed Insights" [ref=f6e1350] [cursor=pointer]
+            - generic [ref=f6e1354]:
+              - generic [ref=f6e1355]:
+                - generic [ref=f6e1356]:
+                  - paragraph [ref=f6e1357]:
+                    - strong [ref=f6e1358]: Observability
+                  - time [ref=f6e1359]: 6h
+                - link "Go to page" [ref=f6e1360] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/observability?period=6h
+                - link [ref=f6e1364] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/observability?period=6h
+              - generic [ref=f6e1366]:
+                - generic [ref=f6e1367]:
+                  - generic [ref=f6e1368]: Edge Requests
+                  - generic [ref=f6e1369]: "25"
+                - generic [ref=f6e1379]:
+                  - generic [ref=f6e1380]: Function Invocations
+                  - generic [ref=f6e1381]: "4"
+                - generic [ref=f6e1391]:
+                  - generic [ref=f6e1392]: Error Rate
+                  - generic [ref=f6e1393]: 100%
+            - generic [ref=f6e1399]:
+              - generic [ref=f6e1400]:
+                - paragraph [ref=f6e1402]:
+                  - strong [ref=f6e1403]: Analytics
+                - link "Go to page" [ref=f6e1404] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/analytics
+                - link [ref=f6e1408] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/analytics
+              - generic [ref=f6e1410]:
+                - generic [ref=f6e1414]:
+                  - paragraph [ref=f6e1415]: Track Visitors and Page Views
+                  - paragraph [ref=f6e1416]: See real-time traffic, top pages, and audience trends.
+                - link "Enable Analytics" [ref=f6e1417] [cursor=pointer]:
+                  - /url: /bhavya-foundation/bhavya-foundation-website/analytics?enable=1&source=project-overview-analytics-card
+          - generic [ref=f6e1419]:
+            - paragraph [ref=f6e1423]: Active Branches
+            - generic [ref=f6e1427]:
+              - heading "No Active Branches" [level=3] [ref=f6e1428]
+              - paragraph [ref=f6e1430]: Commit using our Git connections.
+  - alert [ref=f6e961]: bhavya-foundation-website - Overview – Vercel

@@ -53,13 +53,13 @@ const papers = [
     title:
       "Efficient Fine-Tuning of Small Language Models for Domain-Specific Tasks",
     venue: "arXiv preprint",
-    year: "2025",
+    year: "2026",
   },
   {
     title:
       "Data Augmentation Strategies for Low-Resource NLP in South Asian Languages",
-    venue: "Bhavya AI Workshop",
-    year: "2025",
+    venue: "Bhavya Foundation",
+    year: "2026",
   },
 ];
 

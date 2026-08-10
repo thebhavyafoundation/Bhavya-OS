@@ -3,7 +3,13 @@
  *
  * 8 AI agents that power the learning experience.
  * Each agent has a distinct personality, domain, and teaching approach.
+ *
+ * M6: Observable — all agent selections and responses are logged for observability.
  */
+
+import { createLogger } from "./logger";
+
+const log = createLogger("agents");
 
 export interface Agent {
   id: string;
@@ -196,77 +202,87 @@ export function getAgent(id: string): Agent | undefined {
 }
 
 export function getAgentResponse(agent: Agent, userMessage: string): string {
+  const startTime = Date.now();
   const msg = userMessage.toLowerCase();
+
+  let response: string;
 
   if (agent.id === "athena") {
     if (msg.includes("architecture") || msg.includes("design"))
-      return "Architecture is about making the right tradeoffs. Before we design, let me ask: what are your constraints? What matters most — performance, maintainability, or speed to market?";
-    if (msg.includes("scale"))
-      return "Scaling is not about technology alone — it's about understanding what scales and what doesn't. Tell me about your current bottleneck. What breaks first?";
-    return "Interesting question. Before I answer, let me ask: what have you already considered? What tradeoffs do you see?";
-  }
-
-  if (agent.id === "atlas") {
+      response = "Architecture is about making the right tradeoffs. Before we design, let me ask: what are your constraints? What matters most — performance, maintainability, or speed to market?";
+    else if (msg.includes("scale"))
+      response = "Scaling is not about technology alone — it's about understanding what scales and what doesn't. Tell me about your current bottleneck. What breaks first?";
+    else
+      response = "Interesting question. Before I answer, let me ask: what have you already considered? What tradeoffs do you see?";
+  } else if (agent.id === "atlas") {
     if (msg.includes("deploy") || msg.includes("docker"))
-      return "Let's get you deployed. First, tell me: what's your stack? Do you have a Dockerfile yet? If not, let's start there — it's the foundation of reproducible deployments.";
-    if (msg.includes("database"))
-      return "Choosing the right database is crucial. For most AI applications, PostgreSQL is excellent. Are you storing structured data, embeddings, or both? That determines our approach.";
-    return "Let's break this down into concrete steps. What's the first thing you need to get working?";
-  }
-
-  if (agent.id === "forge") {
+      response = "Let's get you deployed. First, tell me: what's your stack? Do you have a Dockerfile yet? If not, let's start there — it's the foundation of reproducible deployments.";
+    else if (msg.includes("database"))
+      response = "Choosing the right database is crucial. For most AI applications, PostgreSQL is excellent. Are you storing structured data, embeddings, or both? That determines our approach.";
+    else
+      response = "Let's break this down into concrete steps. What's the first thing you need to get working?";
+  } else if (agent.id === "forge") {
     if (msg.includes("code") || msg.includes("build"))
-      return "I love building things! Let's start with the simplest possible version. What's the core feature you need? Let's write that first, then iterate.";
-    if (msg.includes("debug") || msg.includes("error"))
-      return "Debugging is detective work. Let's start with the error message — what does it say? Then we'll trace back to find the root cause.";
-    return "That's a great project idea! Let's break it down into manageable pieces. What's the first piece you want to build?";
-  }
-
-  if (agent.id === "tensor") {
+      response = "I love building things! Let's start with the simplest possible version. What's the core feature you need? Let's write that first, then iterate.";
+    else if (msg.includes("debug") || msg.includes("error"))
+      response = "Debugging is detective work. Let's start with the error message — what does it say? Then we'll trace back to find the root cause.";
+    else
+      response = "That's a great project idea! Let's break it down into manageable pieces. What's the first piece you want to build?";
+  } else if (agent.id === "tensor") {
     if (msg.includes("math") || msg.includes("equation"))
-      return "Mathematics is the language of AI. Let me help you see the beauty in it. What specific concept are you struggling with? Can you write down what you understand so far?";
-    if (msg.includes("neural") || msg.includes("network"))
-      return "Neural networks are function approximators. The key insight is: each layer applies a linear transformation followed by a non-linear activation. Let's derive this from scratch.";
-    return "Let's approach this systematically. What's the mathematical foundation you're building on?";
-  }
-
-  if (agent.id === "echo") {
+      response = "Mathematics is the language of AI. Let me help you see the beauty in it. What specific concept are you struggling with? Can you write down what you understand so far?";
+    else if (msg.includes("neural") || msg.includes("network"))
+      response = "Neural networks are function approximators. The key insight is: each layer applies a linear transformation followed by a non-linear activation. Let's derive this from scratch.";
+    else
+      response = "Let's approach this systematically. What's the mathematical foundation you're building on?";
+  } else if (agent.id === "echo") {
     if (msg.includes("write") || msg.includes("blog"))
-      return "Writing is thinking made visible. Before you write, ask yourself: who is this for? What do they need to know? What action should they take after reading?";
-    if (msg.includes("readme") || msg.includes("documentation"))
-      return "A great README answers three questions: What is this? How do I use it? How do I contribute? Let's structure yours around these questions.";
-    return "Clear communication is a superpower. Let me help you craft your message. Who's your audience?";
-  }
-
-  if (agent.id === "nexus") {
+      response = "Writing is thinking made visible. Before you write, ask yourself: who is this for? What do they need to know? What action should they take after reading?";
+    else if (msg.includes("readme") || msg.includes("documentation"))
+      response = "A great README answers three questions: What is this? How do I use it? How do I contribute? Let's structure yours around these questions.";
+    else
+      response = "Clear communication is a superpower. Let me help you craft your message. Who's your audience?";
+  } else if (agent.id === "nexus") {
     if (msg.includes("data") || msg.includes("analysis"))
-      return "Data analysis starts with a question, not with code. What question are you trying to answer? Once we have that, we can figure out what data you need and how to analyze it.";
-    if (msg.includes("sql") || msg.includes("query"))
-      return "SQL is incredibly powerful for data analysis. Let's start with the basics: what data do you have, and what insights are you looking for?";
-    return "Every dataset has a story. What's yours about? Let's explore it together.";
-  }
-
-  if (agent.id === "spark") {
+      response = "Data analysis starts with a question, not with code. What question are you trying to answer? Once we have that, we can figure out what data you need and how to analyze it.";
+    else if (msg.includes("sql") || msg.includes("query"))
+      response = "SQL is incredibly powerful for data analysis. Let's start with the basics: what data do you have, and what insights are you looking for?";
+    else
+      response = "Every dataset has a story. What's yours about? Let's explore it together.";
+  } else if (agent.id === "spark") {
     if (msg.includes("idea") || msg.includes("creative"))
-      return "What if we flipped this entirely? Instead of asking 'how do we solve this problem,' let's ask 'what if the problem was actually an opportunity?' What would that look like?";
-    if (msg.includes("innovate") || msg.includes("创新"))
-      return "Innovation happens at the intersection of disciplines. What fields are adjacent to yours? What can we borrow from them?";
-    return "I love that thinking! Let's push it further. What's the most ambitious version of this idea?";
-  }
-
-  if (agent.id === "sentinel") {
+      response = "What if we flipped this entirely? Instead of asking 'how do we solve this problem,' let's ask 'what if the problem was actually an opportunity?' What would that look like?";
+    else if (msg.includes("innovate") || msg.includes("创新"))
+      response = "Innovation happens at the intersection of disciplines. What fields are adjacent to yours? What can we borrow from them?";
+    else
+      response = "I love that thinking! Let's push it further. What's the most ambitious version of this idea?";
+  } else if (agent.id === "sentinel") {
     if (msg.includes("ethics") || msg.includes("safety"))
-      return "Ethics is not a checkbox — it's a practice. Let's think about this systematically: who could be harmed by this system? How would they be harmed? What safeguards can we build?";
-    if (msg.includes("bias") || msg.includes("fairness"))
-      return "Bias in AI comes from bias in data and design. Let's audit your system: What data was it trained on? Who collected it? What perspectives might be missing?";
-    return "Every AI decision has consequences. Let's think about this carefully. Who is affected, and how?";
+      response = "Ethics is not a checkbox — it's a practice. Let's think about this systematically: who could be harmed by this system? How would they be harmed? What safeguards can we build?";
+    else if (msg.includes("bias") || msg.includes("fairness"))
+      response = "Bias in AI comes from bias in data and design. Let's audit your system: What data was it trained on? Who collected it? What perspectives might be missing?";
+    else
+      response = "Every AI decision has consequences. Let's think about this carefully. Who is affected, and how?";
+  } else {
+    response = "That's a great question. Let me think about the best way to approach this. What's your current understanding?";
   }
 
-  return "That's a great question. Let me think about the best way to approach this. What's your current understanding?";
+  const elapsed = Date.now() - startTime;
+  log.info("Agent response generated", {
+    agentId: agent.id,
+    inputLength: userMessage.length,
+    outputLength: response.length,
+    elapsed,
+  });
+
+  return response;
 }
 
 export function selectAgent(userMessage: string): Agent {
   const msg = userMessage.toLowerCase();
+  const startTime = Date.now();
+
+  let selected: Agent;
 
   if (
     msg.includes("architecture") ||
@@ -274,56 +290,66 @@ export function selectAgent(userMessage: string): Agent {
     msg.includes("scale") ||
     msg.includes("system")
   )
-    return agents.find((a) => a.id === "athena")!;
-  if (
+    selected = agents.find((a) => a.id === "athena")!;
+  else if (
     msg.includes("deploy") ||
     msg.includes("docker") ||
     msg.includes("database") ||
     msg.includes("infra")
   )
-    return agents.find((a) => a.id === "atlas")!;
-  if (
+    selected = agents.find((a) => a.id === "atlas")!;
+  else if (
     msg.includes("code") ||
     msg.includes("build") ||
     msg.includes("debug") ||
     msg.includes("project")
   )
-    return agents.find((a) => a.id === "forge")!;
-  if (
+    selected = agents.find((a) => a.id === "forge")!;
+  else if (
     msg.includes("math") ||
     msg.includes("neural") ||
     msg.includes("model") ||
     msg.includes("train")
   )
-    return agents.find((a) => a.id === "tensor")!;
-  if (
+    selected = agents.find((a) => a.id === "tensor")!;
+  else if (
     msg.includes("write") ||
     msg.includes("blog") ||
     msg.includes("readme") ||
     msg.includes("document")
   )
-    return agents.find((a) => a.id === "echo")!;
-  if (
+    selected = agents.find((a) => a.id === "echo")!;
+  else if (
     msg.includes("data") ||
     msg.includes("sql") ||
     msg.includes("analytics") ||
     msg.includes("chart")
   )
-    return agents.find((a) => a.id === "nexus")!;
-  if (
+    selected = agents.find((a) => a.id === "nexus")!;
+  else if (
     msg.includes("idea") ||
     msg.includes("creative") ||
     msg.includes("innovate") ||
     msg.includes("brainstorm")
   )
-    return agents.find((a) => a.id === "spark")!;
-  if (
+    selected = agents.find((a) => a.id === "spark")!;
+  else if (
     msg.includes("ethics") ||
     msg.includes("safety") ||
     msg.includes("bias") ||
     msg.includes("responsible")
   )
-    return agents.find((a) => a.id === "sentinel")!;
+    selected = agents.find((a) => a.id === "sentinel")!;
+  else
+    selected = agents.find((a) => a.id === "forge")!;
 
-  return agents.find((a) => a.id === "forge")!;
+  const elapsed = Date.now() - startTime;
+  log.info("Agent selected", {
+    agentId: selected.id,
+    agentName: selected.name,
+    inputLength: userMessage.length,
+    elapsed,
+  });
+
+  return selected;
 }

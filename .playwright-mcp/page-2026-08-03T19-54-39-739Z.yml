@@ -1,0 +1,178 @@
+- generic [active] [ref=f3e1]:
+  - alert [ref=f3e182]
+  - generic [ref=f3e183]:
+    - complementary [ref=f3e184]:
+      - link "B GitHub OS Engineering Mentor" [ref=f3e186] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f3e187]: B
+        - generic [ref=f3e188]:
+          - generic [ref=f3e189]: GitHub OS
+          - generic [ref=f3e190]: Engineering Mentor
+      - button [ref=f3e192]:
+        - text: Search...
+        - generic [ref=f3e196]: K
+      - navigation [ref=f3e199]:
+        - link "Dashboard" [ref=f3e201] [cursor=pointer]:
+          - /url: /
+        - link "Repositories" [ref=f3e206] [cursor=pointer]:
+          - /url: /repositories
+        - link "Knowledge" [ref=f3e213] [cursor=pointer]:
+          - /url: /knowledge
+        - link "Learning" [ref=f3e218] [cursor=pointer]:
+          - /url: /learning
+        - link "Settings" [ref=f3e223] [cursor=pointer]:
+          - /url: /settings
+      - generic [ref=f3e228]:
+        - generic [ref=f3e229]: BV
+        - generic [ref=f3e230]:
+          - generic [ref=f3e231]: Bhavya Foundation
+          - generic [ref=f3e232]: Admin
+    - main [ref=f3e233]:
+      - generic [ref=f3e234]:
+        - navigation [ref=f3e235]:
+          - link "Dashboard" [ref=f3e236] [cursor=pointer]:
+            - /url: /
+          - text: Repositories
+        - generic [ref=f3e239]:
+          - generic [ref=f3e240]:
+            - heading "Repositories" [level=1] [ref=f3e241]
+            - paragraph [ref=f3e242]: 8 repositories in your ecosystem
+          - generic [ref=f3e243]:
+            - button "Filters" [ref=f3e244]
+            - combobox [ref=f3e251]:
+              - option "Bhavya Score" [selected]
+              - option "Name"
+              - option "Stars"
+              - option "Health Score"
+              - option "Technology Score"
+              - option "Last Updated"
+        - textbox "Search repositories by name, description, language, or topics..." [ref=f3e256]
+        - generic [ref=f3e257]:
+          - link "bhavya-platform Core platform packages — types, security, database, events, workflows 90 TypeScript 45 8 matureadoptintermediate Core infrastructure that all other packages depend on. Defines the architectural patterns and conventions for the entire ecosystem. Health 92 Tech 88" [ref=f3e258] [cursor=pointer]:
+            - /url: /repositories/bhavya-platform
+            - generic [ref=f3e259]:
+              - generic [ref=f3e260]:
+                - heading "bhavya-platform" [level=3] [ref=f3e261]
+                - paragraph [ref=f3e262]: Core platform packages — types, security, database, events, workflows
+              - generic [ref=f3e263]: "90"
+            - generic [ref=f3e268]:
+              - generic [ref=f3e269]: TypeScript
+              - generic [ref=f3e270]: "45"
+              - generic [ref=f3e273]: "8"
+            - generic [ref=f3e279]: matureadoptintermediate
+            - paragraph [ref=f3e280]: Core infrastructure that all other packages depend on. Defines the architectural patterns and conventions for the entire ecosystem.
+            - generic [ref=f3e282]:
+              - generic [ref=f3e283]: Health 92
+              - generic [ref=f3e287]: Tech 88
+          - link "design-system Shared UI components and design tokens 90 TypeScript 40 7 matureadoptbeginner Visual foundation for all Bhavya applications. Ensures consistency across the ecosystem. Health 88 Tech 92" [ref=f3e294] [cursor=pointer]:
+            - /url: /repositories/design-system
+            - generic [ref=f3e295]:
+              - generic [ref=f3e296]:
+                - heading "design-system" [level=3] [ref=f3e297]
+                - paragraph [ref=f3e298]: Shared UI components and design tokens
+              - generic [ref=f3e299]: "90"
+            - generic [ref=f3e304]:
+              - generic [ref=f3e305]: TypeScript
+              - generic [ref=f3e306]: "40"
+              - generic [ref=f3e309]: "7"
+            - generic [ref=f3e315]: matureadoptbeginner
+            - paragraph [ref=f3e316]: Visual foundation for all Bhavya applications. Ensures consistency across the ecosystem.
+            - generic [ref=f3e318]:
+              - generic [ref=f3e319]: Health 88
+              - generic [ref=f3e323]: Tech 92
+          - link "runtime-engine Capability engine, knowledge pipeline, course and lesson managers 88 JavaScript 55 9 matureadoptexpert Core engine that powers all capability resolution and lesson generation. Health 90 Tech 85" [ref=f3e330] [cursor=pointer]:
+            - /url: /repositories/runtime-engine
+            - generic [ref=f3e331]:
+              - generic [ref=f3e332]:
+                - heading "runtime-engine" [level=3] [ref=f3e333]
+                - paragraph [ref=f3e334]: Capability engine, knowledge pipeline, course and lesson managers
+              - generic [ref=f3e335]: "88"
+            - generic [ref=f3e340]:
+              - generic [ref=f3e341]: JavaScript
+              - generic [ref=f3e342]: "55"
+              - generic [ref=f3e345]: "9"
+            - generic [ref=f3e351]: matureadoptexpert
+            - paragraph [ref=f3e352]: Core engine that powers all capability resolution and lesson generation.
+            - generic [ref=f3e354]:
+              - generic [ref=f3e355]: Health 90
+              - generic [ref=f3e359]: Tech 85
+          - link "bhavya-intelligence-network Autonomous intelligence loop — discover, analyze, recommend 85 TypeScript 35 6 matureadoptexpert Core intelligence engine that powers all automated analysis and recommendations. Health 80 Tech 90" [ref=f3e366] [cursor=pointer]:
+            - /url: /repositories/bhavya-intelligence-network
+            - generic [ref=f3e367]:
+              - generic [ref=f3e368]:
+                - heading "bhavya-intelligence-network" [level=3] [ref=f3e369]
+                - paragraph [ref=f3e370]: Autonomous intelligence loop — discover, analyze, recommend
+              - generic [ref=f3e371]: "85"
+            - generic [ref=f3e376]:
+              - generic [ref=f3e377]: TypeScript
+              - generic [ref=f3e378]: "35"
+              - generic [ref=f3e381]: "6"
+            - generic [ref=f3e387]: matureadoptexpert
+            - paragraph [ref=f3e388]: Core intelligence engine that powers all automated analysis and recommendations.
+            - generic [ref=f3e390]:
+              - generic [ref=f3e391]: Health 80
+              - generic [ref=f3e395]: Tech 90
+          - link "knowledge-studio Knowledge management and lesson creation IDE 84 TypeScript 32 5 developingadoptbeginner Primary tool for creating educational content. Demonstrates the knowledge extraction and management patterns. Health 85 Tech 82" [ref=f3e402] [cursor=pointer]:
+            - /url: /repositories/knowledge-studio
+            - generic [ref=f3e403]:
+              - generic [ref=f3e404]:
+                - heading "knowledge-studio" [level=3] [ref=f3e405]
+                - paragraph [ref=f3e406]: Knowledge management and lesson creation IDE
+              - generic [ref=f3e407]: "84"
+            - generic [ref=f3e412]:
+              - generic [ref=f3e413]: TypeScript
+              - generic [ref=f3e414]: "32"
+              - generic [ref=f3e417]: "5"
+            - generic [ref=f3e423]: developingadoptbeginner
+            - paragraph [ref=f3e424]: Primary tool for creating educational content. Demonstrates the knowledge extraction and management patterns.
+            - generic [ref=f3e426]:
+              - generic [ref=f3e427]: Health 85
+              - generic [ref=f3e431]: Tech 82
+          - link "capability-center Capability registry — score, recommend, and manage engineering capabilities 81 TypeScript 18 2 developingmonitorintermediate Central registry for evaluating and recommending engineering capabilities. Health 82 Tech 80" [ref=f3e438] [cursor=pointer]:
+            - /url: /repositories/capability-center
+            - generic [ref=f3e439]:
+              - generic [ref=f3e440]:
+                - heading "capability-center" [level=3] [ref=f3e441]
+                - paragraph [ref=f3e442]: Capability registry — score, recommend, and manage engineering capabilities
+              - generic [ref=f3e443]: "81"
+            - generic [ref=f3e448]:
+              - generic [ref=f3e449]: TypeScript
+              - generic [ref=f3e450]: "18"
+              - generic [ref=f3e453]: "2"
+            - generic [ref=f3e459]: developingmonitorintermediate
+            - paragraph [ref=f3e460]: Central registry for evaluating and recommending engineering capabilities.
+            - generic [ref=f3e462]:
+              - generic [ref=f3e463]: Health 82
+              - generic [ref=f3e467]: Tech 80
+          - link "github-intelligence-lab GitHub research modules — UI, architecture, automation, courses 80 TypeScript 28 3 developingstudyadvanced Research backbone that feeds intelligence into the platform. Demonstrates how to structure research modules. Health 78 Tech 85" [ref=f3e474] [cursor=pointer]:
+            - /url: /repositories/github-intelligence-lab
+            - generic [ref=f3e475]:
+              - generic [ref=f3e476]:
+                - heading "github-intelligence-lab" [level=3] [ref=f3e477]
+                - paragraph [ref=f3e478]: GitHub research modules — UI, architecture, automation, courses
+              - generic [ref=f3e479]: "80"
+            - generic [ref=f3e484]:
+              - generic [ref=f3e485]: TypeScript
+              - generic [ref=f3e486]: "28"
+              - generic [ref=f3e489]: "3"
+            - generic [ref=f3e495]: developingstudyadvanced
+            - paragraph [ref=f3e496]: Research backbone that feeds intelligence into the platform. Demonstrates how to structure research modules.
+            - generic [ref=f3e498]:
+              - generic [ref=f3e499]: Health 78
+              - generic [ref=f3e503]: Tech 85
+          - link "open-source-intelligence OSIP — open source project analysis and recommendations 76 TypeScript 22 4 developingstudyintermediate Source of external intelligence that feeds into technology radar and recommendations. Health 75 Tech 78" [ref=f3e510] [cursor=pointer]:
+            - /url: /repositories/open-source-intelligence
+            - generic [ref=f3e511]:
+              - generic [ref=f3e512]:
+                - heading "open-source-intelligence" [level=3] [ref=f3e513]
+                - paragraph [ref=f3e514]: OSIP — open source project analysis and recommendations
+              - generic [ref=f3e515]: "76"
+            - generic [ref=f3e520]:
+              - generic [ref=f3e521]: TypeScript
+              - generic [ref=f3e522]: "22"
+              - generic [ref=f3e525]: "4"
+            - generic [ref=f3e531]: developingstudyintermediate
+            - paragraph [ref=f3e532]: Source of external intelligence that feeds into technology radar and recommendations.
+            - generic [ref=f3e534]:
+              - generic [ref=f3e535]: Health 75
+              - generic [ref=f3e539]: Tech 78

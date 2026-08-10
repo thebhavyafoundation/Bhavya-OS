@@ -8,6 +8,7 @@ import { WorkflowExecutor } from './engines/workflow-executor.mjs';
 import { PermissionEngine } from './engines/permission-engine.mjs';
 import { ProvenanceEngine } from './engines/provenance-engine.mjs';
 import { QueryEngine } from './engines/query-engine.mjs';
+import { ConstitutionEngine } from './engines/constitution-engine.mjs';
 
 /**
  * Bhavya Runtime SDK — single entry point for all runtime operations.
@@ -28,6 +29,9 @@ import { QueryEngine } from './engines/query-engine.mjs';
  *
  *   // Trace provenance
  *   const lineage = rt.trace.lineage('artifact-123');
+ *
+ *   // Constitution queries
+ *   const citation = await rt.constitution.generateCitation('constitution');
  */
 export class BhavyaRuntime {
   #registry;
@@ -39,6 +43,7 @@ export class BhavyaRuntime {
   #permit;
   #provenance;
   #query;
+  #constitution;
   #loaded = false;
 
   /**
@@ -60,11 +65,13 @@ export class BhavyaRuntime {
     this.#permit = new PermissionEngine(this.#registry);
     this.#provenance = new ProvenanceEngine(this.#registry, provenanceDir);
     this.#query = new QueryEngine(this.#registry);
+    this.#constitution = new ConstitutionEngine();
   }
 
-  /** Load the registry (must be called before any operations) */
-  load() {
+  /** Load the registry and initialize constitution (must be called before any operations) */
+  async load() {
     this.#registry.load();
+    await this.#constitution.initialize();
     this.#loaded = true;
     return this;
   }
@@ -308,6 +315,9 @@ export class BhavyaRuntime {
     this.#ensure();
     return this.#registry.counts();
   }
+
+  /** Constitution sub-API */
+  get constitution() { return this.#constitution; }
 
   #log(msg) {
     // Quiet by default, can be overridden

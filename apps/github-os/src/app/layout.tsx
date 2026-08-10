@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@bhavya/platform-ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-[#0a0a0a] text-[#fafafa] antialiased">
+      <body className="bg-bg-primary text-text-primary antialiased">
         {children}
       </body>
     </html>

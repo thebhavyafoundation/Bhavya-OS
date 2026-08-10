@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- B-Tree Icon -->
+  <g transform="translate(20, 10)">
+    <!-- Tree trunk -->
+    <rect x="45" y="60" width="10" height="40" fill="#1a3a2a"/>
+    
+    <!-- Tree branches -->
+    <path d="M50 60 L30 40 M50 60 L70 40 M50 50 L35 35 M50 50 L65 35" stroke="#1a3a2a" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Leaves -->
+    <circle cx="30" cy="35" r="8" fill="#4a7c59"/>
+    <circle cx="70" cy="35" r="8" fill="#4a7c59"/>
+    <circle cx="35" cy="28" r="6" fill="#8fbc8f"/>
+    <circle cx="65" cy="28" r="6" fill="#8fbc8f"/>
+    <circle cx="50" cy="20" r="10" fill="#1a3a2a"/>
+    
+    <!-- Sun behind tree -->
+    <circle cx="50" cy="15" r="15" fill="#c9a227" opacity="0.8"/>
+    
+    <!-- Book at bottom -->
+    <rect x="30" y="85" width="40" height="8" rx="2" fill="#c9a227"/>
+    <line x1="50" y1="85" x2="50" y2="93" stroke="#1a3a2a" stroke-width="1"/>
+  </g>
+  
+  <!-- Wordmark -->
+  <g transform="translate(120, 25)">
+    <text x="0" y="35" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#1a3a2a">BHAVYA</text>
+    <text x="0" y="65" font-family="Georgia, serif" font-size="18" fill="#c9a227">FOUNDATION</text>
+    <text x="0" y="85" font-family="Arial, sans-serif" font-size="10" fill="#6b6b6b" letter-spacing="2">NATURE. KNOWLEDGE. HERITAGE.</text>
+  </g>
+</svg>

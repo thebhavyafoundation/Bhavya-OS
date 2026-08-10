@@ -13,6 +13,7 @@
   "dependencies": {
     "@bhavya/events": "workspace:*",
     "@bhavya/platform": "workspace:*",
+    "@bhavya/platform-ui": "workspace:*",
     "@bhavya/types": "workspace:*",
     "better-sqlite3": "^13.0.2",
     "lucide-react": "^0.400.0",

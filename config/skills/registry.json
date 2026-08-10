@@ -1,0 +1,496 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-08-10",
+  "totalSkills": 29,
+  "categories": {
+    "design": [
+      "banner-design",
+      "brand",
+      "design",
+      "design-system",
+      "slides",
+      "ui-styling",
+      "ui-ux-pro-max"
+    ],
+    "frontend": [
+      "gsap-core",
+      "gsap-frameworks",
+      "gsap-performance",
+      "gsap-plugins",
+      "gsap-react",
+      "gsap-scrolltrigger",
+      "gsap-timeline",
+      "gsap-utils"
+    ],
+    "agent": ["icm-architect"]
+  },
+  "skills": {
+    "banner-design": {
+      "path": ".opencode/skills/banner-design",
+      "category": "design",
+      "purpose": "Multi-format banner design for social, ads, web, print with AI-generated visuals",
+      "capabilities": [
+        "banner-creation",
+        "multi-platform-layout",
+        "ai-image-generation",
+        "html-css-composition",
+        "png-export"
+      ],
+      "triggers": [
+        "banner",
+        "cover",
+        "header",
+        "ad banner",
+        "hero section",
+        "campaign creative"
+      ],
+      "inputs": [
+        "purpose",
+        "platform-dimensions",
+        "content",
+        "brand-guidelines",
+        "style-preference"
+      ],
+      "outputs": ["html-css-banner", "png-images"],
+      "prerequisites": ["ui-ux-pro-max"],
+      "dependencies": ["ui-ux-pro-max"],
+      "validationSkills": ["browser-automation", "verification-loop"],
+      "format": "SKILL.md",
+      "version": "1.0.0"
+    },
+    "brand": {
+      "path": ".opencode/skills/brand",
+      "category": "design",
+      "purpose": "Brand voice, visual identity, messaging frameworks, asset management",
+      "capabilities": [
+        "brand-voice",
+        "visual-identity",
+        "messaging-framework",
+        "brand-audit",
+        "asset-management",
+        "color-palette",
+        "typography-specs"
+      ],
+      "triggers": [
+        "brand voice",
+        "visual identity",
+        "messaging",
+        "brand review",
+        "style guide"
+      ],
+      "inputs": ["brand-guidelines", "brand-assets"],
+      "outputs": [
+        "design-tokens-json-css",
+        "brand-context",
+        "color-palette",
+        "asset-validation"
+      ],
+      "prerequisites": [],
+      "dependencies": [],
+      "validationSkills": [],
+      "format": "SKILL.md",
+      "version": "1.0.0",
+      "scripts": [
+        "inject-brand-context.cjs",
+        "sync-brand-to-tokens.cjs",
+        "validate-asset.cjs",
+        "extract-colors.cjs"
+      ]
+    },
+    "design": {
+      "path": ".opencode/skills/design",
+      "category": "design",
+      "purpose": "Unified design skill: brand, tokens, UI, logo (55 styles), CIP (50 deliverables), slides, banners, social photos, icons",
+      "capabilities": [
+        "logo-design",
+        "corporate-identity",
+        "presentations",
+        "banner-design",
+        "icon-design",
+        "social-photos",
+        "design-system-tokens"
+      ],
+      "triggers": [
+        "logo",
+        "CIP",
+        "presentation",
+        "banner",
+        "icon set",
+        "brand identity",
+        "design system"
+      ],
+      "inputs": [
+        "brand-name",
+        "industry",
+        "style-preference",
+        "deliverable-type",
+        "platform-dimensions"
+      ],
+      "outputs": [
+        "logo-png",
+        "cip-mockups",
+        "html-presentations",
+        "banner-pngs",
+        "social-images",
+        "svg-icons"
+      ],
+      "prerequisites": ["python3", "GEMINI_API_KEY"],
+      "dependencies": ["brand", "design-system", "ui-styling"],
+      "validationSkills": ["browser-automation"],
+      "format": "SKILL.md",
+      "version": "2.1.0",
+      "subSkills": ["logo", "cip", "slides", "banner", "icon", "social-photos"]
+    },
+    "design-system": {
+      "path": ".opencode/skills/design-system",
+      "category": "design",
+      "purpose": "Three-layer token architecture, component specs, CSS variables, Tailwind integration, slide generation",
+      "capabilities": [
+        "token-architecture",
+        "css-variable-generation",
+        "component-state-definitions",
+        "spacing-typography-scales",
+        "tailwind-config",
+        "slide-generation"
+      ],
+      "triggers": [
+        "design tokens",
+        "CSS variables",
+        "component states",
+        "spacing scale",
+        "typography scale",
+        "Tailwind config"
+      ],
+      "inputs": ["token-config-json", "brand-colors-typography"],
+      "outputs": [
+        "design-tokens-json",
+        "design-tokens-css",
+        "validated-html",
+        "slide-decks"
+      ],
+      "prerequisites": ["brand"],
+      "dependencies": ["brand", "ui-styling"],
+      "validationSkills": [],
+      "format": "SKILL.md",
+      "version": "1.0.0"
+    },
+    "icm-architect": {
+      "path": ".opencode/skills/icm-architect",
+      "category": "agent",
+      "purpose": "Design/restructure workspaces where folder structure = agent architecture (ICM methodology)",
+      "capabilities": [
+        "icm-workspace-design",
+        "folder-restructuring",
+        "stage-contracts",
+        "context-routing",
+        "walk-test-validation"
+      ],
+      "triggers": [
+        "make this an ICM",
+        "ICM this",
+        "build workspace",
+        "structure for agents",
+        "recurring workflow"
+      ],
+      "inputs": [
+        "process-description",
+        "existing-folder-structure",
+        "knowledge-domain"
+      ],
+      "outputs": [
+        "icm-workspace",
+        "CLAUDE.md",
+        "CONTEXT.md",
+        "numbered-stage-folders",
+        "contracts"
+      ],
+      "prerequisites": [],
+      "dependencies": [],
+      "validationSkills": [],
+      "format": "SKILL.md",
+      "references": ["core.md", "forms.md"]
+    },
+    "slides": {
+      "path": ".opencode/skills/slides",
+      "category": "design",
+      "purpose": "Strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas",
+      "capabilities": [
+        "presentation-creation",
+        "data-visualization",
+        "chart-js-integration",
+        "copywriting-optimization"
+      ],
+      "triggers": [
+        "presentation",
+        "pitch deck",
+        "data slides",
+        "marketing deck"
+      ],
+      "inputs": ["topic", "slide-count", "brand-context"],
+      "outputs": ["html-presentation", "chart-js-embeds"],
+      "prerequisites": ["design-system"],
+      "dependencies": ["design-system"],
+      "validationSkills": [],
+      "format": "SKILL.md",
+      "version": "1.0.0"
+    },
+    "ui-styling": {
+      "path": ".opencode/skills/ui-styling",
+      "category": "frontend",
+      "purpose": "Beautiful, accessible UIs with shadcn/ui, Tailwind CSS, canvas-based visual design",
+      "capabilities": [
+        "shadcn-components",
+        "tailwind-styling",
+        "canvas-design",
+        "responsive-layouts",
+        "dark-mode",
+        "accessibility-patterns"
+      ],
+      "triggers": [
+        "UI building",
+        "React components",
+        "Tailwind styling",
+        "responsive layout",
+        "dark mode",
+        "accessibility"
+      ],
+      "inputs": [
+        "component-requirements",
+        "framework-choice",
+        "theme-preferences",
+        "brand-tokens"
+      ],
+      "outputs": [
+        "react-tsx-components",
+        "tailwind-classes",
+        "responsive-layouts"
+      ],
+      "prerequisites": ["nodejs", "react-framework"],
+      "dependencies": [],
+      "validationSkills": ["browser-automation"],
+      "format": "SKILL.md",
+      "version": "1.0.0"
+    },
+    "ui-ux-pro-max": {
+      "path": ".opencode/skills/ui-ux-pro-max",
+      "category": "design",
+      "purpose": "UI/UX design intelligence with searchable database (67 styles, 161 palettes, 57 fonts, 99 UX guidelines)",
+      "capabilities": [
+        "bm25-search",
+        "design-system-generation",
+        "style-recommendation",
+        "color-palette-selection",
+        "font-pairing",
+        "ux-guidelines",
+        "anti-pattern-detection"
+      ],
+      "triggers": [
+        "project design",
+        "component creation",
+        "style selection",
+        "color selection",
+        "font selection",
+        "UI review",
+        "design system generation"
+      ],
+      "inputs": [
+        "product-type",
+        "industry",
+        "style-keywords",
+        "target-audience",
+        "tech-stack"
+      ],
+      "outputs": [
+        "complete-design-system",
+        "stack-guidelines",
+        "ux-recommendations"
+      ],
+      "prerequisites": ["python3"],
+      "dependencies": [],
+      "validationSkills": [],
+      "format": "SKILL.md",
+      "dataDomains": [
+        "style",
+        "color",
+        "typography",
+        "product",
+        "landing",
+        "chart",
+        "ux",
+        "gsap",
+        "prompt",
+        "web",
+        "react"
+      ],
+      "stackData": 22
+    },
+    "gsap-core": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-core",
+      "category": "frontend",
+      "purpose": "Core GSAP API — gsap.to(), from(), fromTo(), easing, duration, stagger, matchMedia()",
+      "capabilities": [
+        "gsap-tweens",
+        "easing",
+        "duration",
+        "stagger",
+        "matchMedia"
+      ],
+      "triggers": ["GSAP animation", "tween", "easing", "stagger"],
+      "inputs": ["animation-target", "properties", "timing"],
+      "outputs": ["gsap-animation-code"],
+      "prerequisites": ["gsap"],
+      "dependencies": [],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-react": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-react",
+      "category": "frontend",
+      "purpose": "GSAP with React — useGSAP hook, refs, gsap.context(), cleanup",
+      "capabilities": [
+        "useGSAP-hook",
+        "refs-integration",
+        "context-cleanup",
+        "react-animation"
+      ],
+      "triggers": ["GSAP React", "useGSAP", "animation in React"],
+      "inputs": ["react-component", "animation-requirements"],
+      "outputs": ["react-gsap-component"],
+      "prerequisites": ["gsap", "react"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-scrolltrigger": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-scrolltrigger",
+      "category": "frontend",
+      "purpose": "Scroll-linked animations, pinning, scrub, triggers",
+      "capabilities": [
+        "scroll-animations",
+        "pinning",
+        "scrub",
+        "scroll-triggers"
+      ],
+      "triggers": [
+        "scroll animation",
+        "parallax",
+        "pinned section",
+        "scroll-driven"
+      ],
+      "inputs": ["scroll-target", "animation-requirements"],
+      "outputs": ["scrolltrigger-code"],
+      "prerequisites": ["gsap", "ScrollTrigger plugin"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-timeline": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-timeline",
+      "category": "frontend",
+      "purpose": "Sequencing — gsap.timeline(), position parameter, nesting",
+      "capabilities": [
+        "animation-sequencing",
+        "timeline-management",
+        "position-parameter",
+        "nested-timelines"
+      ],
+      "triggers": ["animation sequence", "timeline", "choreography"],
+      "inputs": ["sequence-steps", "timing"],
+      "outputs": ["timeline-code"],
+      "prerequisites": ["gsap"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-utils": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-utils",
+      "category": "frontend",
+      "purpose": "Utilities — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap",
+      "capabilities": [
+        "clamp",
+        "mapRange",
+        "normalize",
+        "interpolate",
+        "random",
+        "snap",
+        "toArray",
+        "wrap"
+      ],
+      "triggers": ["GSAP utils", "clamp", "mapRange", "normalize"],
+      "inputs": ["value", "range"],
+      "outputs": ["computed-value"],
+      "prerequisites": ["gsap"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-frameworks": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-frameworks",
+      "category": "frontend",
+      "purpose": "GSAP with Vue, Svelte, non-React frameworks — lifecycle, scoping, cleanup",
+      "capabilities": [
+        "vue-animation",
+        "svelte-animation",
+        "framework-lifecycle",
+        "scoped-selectors"
+      ],
+      "triggers": ["GSAP Vue", "GSAP Svelte", "animation in Vue/Svelte"],
+      "inputs": ["framework-component", "animation-requirements"],
+      "outputs": ["framework-gsap-component"],
+      "prerequisites": ["gsap", "vue-or-svelte"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-plugins": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-plugins",
+      "category": "frontend",
+      "purpose": "Plugin registration — ScrollTo, ScrollSmoother, Flip, Draggable, Observer, SplitText, etc.",
+      "capabilities": [
+        "plugin-registration",
+        "ScrollTo",
+        "ScrollSmoother",
+        "Flip",
+        "Draggable",
+        "Observer",
+        "SplitText"
+      ],
+      "triggers": [
+        "GSAP plugin",
+        "scroll-to",
+        "flip animation",
+        "draggable",
+        "text splitting"
+      ],
+      "inputs": ["plugin-name", "configuration"],
+      "outputs": ["plugin-integration-code"],
+      "prerequisites": ["gsap"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    },
+    "gsap-performance": {
+      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-performance",
+      "category": "frontend",
+      "purpose": "Animation performance — transforms, will-change, batching, 60fps",
+      "capabilities": [
+        "performance-optimization",
+        "transform-only-animation",
+        "will-change",
+        "batching"
+      ],
+      "triggers": [
+        "animation performance",
+        "60fps",
+        "jank",
+        "layout thrashing"
+      ],
+      "inputs": ["animation-code"],
+      "outputs": ["optimized-animation-code"],
+      "prerequisites": ["gsap"],
+      "dependencies": ["gsap-core"],
+      "validationSkills": [],
+      "format": "SKILL.md"
+    }
+  }
+}

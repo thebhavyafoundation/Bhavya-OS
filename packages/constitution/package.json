@@ -1,0 +1,43 @@
+{
+  "name": "@bhavya/constitution",
+  "version": "1.0.0",
+  "description": "Bhavya Foundation Constitutional Documents SDK — The single source of truth for all governing documents",
+  "type": "module",
+  "main": "src/sdk.mjs",
+  "exports": {
+    ".": "./src/sdk.mjs",
+    "./registry": "./src/registry.mjs",
+    "./loader": "./src/loader.mjs",
+    "./parser": "./src/parser.mjs",
+    "./indexer": "./src/indexer.mjs",
+    "./knowledge-graph": "./src/knowledge-graph.mjs",
+    "./startup": "./src/startup.mjs"
+  },
+  "scripts": {
+    "start": "node src/startup.mjs",
+    "test": "node --test src/**/*.mjs",
+    "validate": "node src/startup.mjs --validate-only",
+    "index": "node src/indexer.mjs --build"
+  },
+  "keywords": [
+    "bhavya",
+    "constitution",
+    "governance",
+    "policy",
+    "knowledge-graph",
+    "search"
+  ],
+  "author": "Bhavya Foundation",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bhavya-Foundation/Bhavya-Foundation"
+  }
+}

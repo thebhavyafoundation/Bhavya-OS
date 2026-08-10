@@ -1,0 +1,503 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content":
+    - /url: "#geist-skip-nav"
+  - main [ref=f6e3]:
+    - generic [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - generic [ref=f6e6]:
+          - generic [ref=f6e7]:
+            - generic [ref=f6e10]:
+              - link "Bhavya Foundation Hobby" [ref=f6e11] [cursor=pointer]:
+                - /url: /bhavya-foundation
+                - generic [ref=f6e13]:
+                  - generic [ref=f6e14]: Bhavya Foundation
+                  - generic [ref=f6e15]: Hobby
+              - button [ref=f6e17] [cursor=pointer]
+            - button "Find F" [ref=f6e22]:
+              - generic [ref=f6e24]:
+                - generic [ref=f6e28]: Find
+                - generic [ref=f6e29]: F
+          - navigation [ref=f6e32]:
+            - generic [ref=f6e35]:
+              - link "Projects" [ref=f6e36] [cursor=pointer]:
+                - /url: /bhavya-foundation
+              - link "Deployments" [ref=f6e42] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/deployments
+              - link "Logs" [ref=f6e48] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/logs
+              - link "Analytics" [ref=f6e54] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/analytics
+              - link "Speed Insights" [ref=f6e60] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/speed-insights
+              - link "Observability" [ref=f6e66] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/observability
+              - link "Firewall" [ref=f6e75] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/firewall
+              - link "CDN" [ref=f6e82] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/cdn
+              - separator [ref=f6e88]
+              - link "Environment Variables" [ref=f6e89] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/settings/environment-variables
+              - link "Domains" [ref=f6e95] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/domains
+              - link "Connect Beta" [ref=f6e101] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/connect
+                - generic [ref=f6e105]:
+                  - generic [ref=f6e106]: Connect
+                  - generic [ref=f6e107]: Beta
+              - link "Integrations" [ref=f6e109] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/integrations
+              - link "Storage" [ref=f6e115] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/stores
+              - link "Flags" [ref=f6e121] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/experimentation/collections
+              - link "Agent" [ref=f6e127] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/agent
+              - link "AI Gateway" [ref=f6e136] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/ai-gateway
+              - link "Sandboxes" [ref=f6e145] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/sandboxes
+              - link "Workflows" [ref=f6e154] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/workflows
+              - link "Images Beta" [ref=f6e160] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/images
+                - generic [ref=f6e164]:
+                  - generic [ref=f6e165]: Images
+                  - generic [ref=f6e166]: Beta
+              - separator [ref=f6e168]
+              - link "Usage" [ref=f6e169] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/usage
+              - link "Support" [ref=f6e175] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/support
+              - link "Settings" [ref=f6e181] [cursor=pointer]:
+                - /url: /bhavya-foundation/~/settings
+          - button "Avatar for thebhavyafoundation thebhavyafoundation" [ref=f6e196] [cursor=pointer]:
+            - img "Avatar for thebhavyafoundation" [ref=f6e197]:
+              - img "Avatar for thebhavyafoundation" [ref=f6e198]
+            - generic [ref=f6e199]: thebhavyafoundation
+        - button [ref=f6e209] [cursor=pointer]
+      - generic [ref=f6e213]:
+        - generic [ref=f6e214]:
+          - button "All projects" [ref=f6e218] [cursor=pointer]
+          - navigation "Breadcrumb" [ref=f6e223]:
+            - generic [ref=f6e224]: Overview
+          - button "Vercel Agent is available on Pro" [ref=f6e228] [cursor=pointer]:
+            - generic [ref=f6e241]: Agent
+        - generic [ref=f6e245]:
+          - generic [ref=f6e247]:
+            - generic [ref=f6e248]:
+              - searchbox "Search" [ref=f6e249]
+              - generic [ref=f6e255]:
+                - generic [ref=f6e256]: Press slash to focus search
+                - generic [ref=f6e257]: /
+            - button "Filter and Sort Projects" [ref=f6e258] [cursor=pointer]
+            - generic [ref=f6e263]:
+              - generic [ref=f6e264]:
+                - radio "grid" [checked] [ref=f6e265]
+                - generic [ref=f6e266] [cursor=pointer]: grid
+              - generic [ref=f6e270]:
+                - radio "list" [ref=f6e271]
+                - generic [ref=f6e272] [cursor=pointer]: list
+            - button "Add New" [ref=f6e276] [cursor=pointer]
+          - generic [ref=f6e282]:
+            - generic [ref=f6e285]:
+              - generic [ref=f6e286]:
+                - link "Usage" [ref=f6e288] [cursor=pointer]:
+                  - /url: /bhavya-foundation/~/usage
+                - generic [ref=f6e289]:
+                  - generic [ref=f6e290]:
+                    - link "Last 30 days" [ref=f6e292] [cursor=pointer]:
+                      - /url: /bhavya-foundation/~/usage
+                    - button "Upgrade" [ref=f6e293] [cursor=pointer]
+                  - list [ref=f6e295]:
+                    - listitem [ref=f6e296]:
+                      - link "0.20826388888888886 Fluid Active CPU 30s / 4h 16h" [ref=f6e297] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/vercel-functions-fluid-cpu-duration
+                        - progressbar [ref=f6e298]
+                        - generic [ref=f6e302]: Fluid Active CPU
+                        - generic [ref=f6e309]:
+                          - text: 30s /
+                          - generic [ref=f6e310]: 4h
+                        - generic: 16h
+                    - listitem [ref=f6e311]:
+                      - link "0.1595 Edge Requests 1.6K / 1M 10M" [ref=f6e312] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-edge-requests
+                        - progressbar [ref=f6e313]
+                        - generic [ref=f6e317]: Edge Requests
+                        - generic [ref=f6e324]:
+                          - text: 1.6K /
+                          - generic [ref=f6e325]: 1M
+                        - generic: 10M
+                    - listitem [ref=f6e326]:
+                      - link "0.0834 ISR Reads 834 / 1M 10M" [ref=f6e327] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/isr-reads
+                        - progressbar [ref=f6e328]
+                        - generic [ref=f6e332]: ISR Reads
+                        - generic [ref=f6e339]:
+                          - text: 834 /
+                          - generic [ref=f6e340]: 1M
+                        - generic: 10M
+                    - listitem [ref=f6e341]:
+                      - link "0.06390871000000001 Fast Origin Transfer 6.39 MB / 10 GB 100 GB" [ref=f6e342] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-fast-origin-transfer
+                        - progressbar [ref=f6e343]
+                        - generic [ref=f6e347]: Fast Origin Transfer
+                        - generic [ref=f6e354]:
+                          - text: 6.39 MB /
+                          - generic [ref=f6e355]: 10 GB
+                        - generic: 100 GB
+                    - listitem [ref=f6e356]:
+                      - link "0.0224 Function Invocations 224 / 1M" [ref=f6e357] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/vercel-functions-invocations
+                        - progressbar [ref=f6e358]
+                        - generic [ref=f6e362]: Function Invocations
+                        - generic [ref=f6e369]: 224 / 1M
+                    - listitem [ref=f6e370]:
+                      - link "0.017915874000000002 Fast Data Transfer 17.92 MB / 100 GB 1 TB" [ref=f6e371] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-fast-data-transfer
+                        - progressbar [ref=f6e372]
+                        - generic [ref=f6e376]: Fast Data Transfer
+                        - generic [ref=f6e383]:
+                          - text: 17.92 MB /
+                          - generic [ref=f6e384]: 100 GB
+                        - generic: 1 TB
+                    - listitem [ref=f6e385]:
+                      - link "0.006485491358024691 Fluid Provisioned Memory 0.02 GB-Hrs / 360 GB-Hrs 1,440 GB-Hrs" [ref=f6e386] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/vercel-functions-fluid-duration
+                        - progressbar [ref=f6e387]
+                        - generic [ref=f6e391]: Fluid Provisioned Memory
+                        - generic [ref=f6e398]:
+                          - text: 0.02 GB-Hrs /
+                          - generic [ref=f6e399]: 360 GB-Hrs
+                        - generic: 1,440 GB-Hrs
+                    - listitem [ref=f6e400]:
+                      - link "0.004166666666666666 Edge Request CPU Duration 0s / 1h" [ref=f6e401] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-edge-request-cpu-duration
+                        - progressbar [ref=f6e402]
+                        - generic [ref=f6e406]: Edge Request CPU Duration
+                        - generic [ref=f6e413]: 0s / 1h
+                    - listitem [ref=f6e414]:
+                      - link "Private Data Transfer 0 B" [ref=f6e415] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-private-data-transfer
+                        - generic [ref=f6e417]: Private Data Transfer
+                        - generic [ref=f6e424]: 0 B
+                    - listitem [ref=f6e425]:
+                      - link "0 Microfrontends Routing 0 / 50K" [ref=f6e426] [cursor=pointer]:
+                        - /url: /bhavya-foundation/~/usage/networking-microfrontends-routing
+                        - progressbar [ref=f6e427]
+                        - generic [ref=f6e431]: Microfrontends Routing
+                        - generic [ref=f6e438]: 0 / 50K
+                - button "Show More Usage" [ref=f6e439] [cursor=pointer]
+              - generic [ref=f6e444]:
+                - link "Alerts" [ref=f6e446] [cursor=pointer]:
+                  - /url: /bhavya-foundation/~/observability/alerts
+                - generic [ref=f6e451]:
+                  - generic [ref=f6e452]:
+                    - generic [ref=f6e453]: Get alerted for anomalies
+                    - generic [ref=f6e454]: Automatically monitor your projects for anomalies and get notified.
+                  - button "Upgrade to Pro" [ref=f6e455] [cursor=pointer]
+              - generic [ref=f6e458]:
+                - generic [ref=f6e459]: Recent Previews
+                - list [ref=f6e461]:
+                  - listitem [ref=f6e462]:
+                    - generic [ref=f6e463]:
+                      - generic [ref=f6e465]:
+                        - generic [ref=f6e466]:
+                          - img "github/thebhavyafoundation" [ref=f6e470]:
+                            - img "github/thebhavyafoundation" [ref=f6e471]
+                          - 'generic "master / feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer - HeroSection: primary CTA ''Start Learning'', secondary ''Explore Knowledge Packages'' - Hero: rewritten for 10-second clarity, real stats (13 levels, 78 modules, 331 KPs) - Header: nav reduced to 7 items, removed external AI Lab link, added Start Learning CTA - Footer: added Learn column, GitHub/LinkedIn/Twitter links, newsletter section - KnowledgePackages: new component — 3 featured KP cards (KP-002, KP-003, KP-004) - TrustLayer: new component — Constitution, Engineering Standards, Roadmap, Metrics - knowledge/packages: new page — full KP listing with learning outcomes, concepts - knowledge: added ''Browse Knowledge Packages'' CTA linking to /knowledge/packages - WEBSITE_AUDIT.md: Phase 1 audit findings documented CPDP v1.0 compliant. Typecheck, lint, build all passing. 27 pages generated." [ref=f6e475]': "masterfeat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer - HeroSection: primary CTA 'Start Learning', secondary 'Explore Knowledge Packages' - Hero: rewritten for 10-second clarity, real stats (13 levels, 78 modules, 331 KPs) - Header: nav reduced to 7 items, removed external AI Lab link, added Start Learning CTA - Footer: added Learn column, GitHub/LinkedIn/Twitter links, newsletter section - KnowledgePackages: new component — 3 featured KP cards (KP-002, KP-003, KP-004) - TrustLayer: new component — Constitution, Engineering Standards, Roadmap, Metrics - knowledge/packages: new page — full KP listing with learning outcomes, concepts - knowledge: added 'Browse Knowledge Packages' CTA linking to /knowledge/packages - WEBSITE_AUDIT.md: Phase 1 audit findings documented CPDP v1.0 compliant. Typecheck, lint, build all passing. 27 pages generated."
+                        - generic [ref=f6e476]:
+                          - generic [ref=f6e477] [cursor=pointer]: Preview
+                          - link "View Source" [ref=f6e482] [cursor=pointer]:
+                            - /url: https://github.com/thebhavyafoundation/Bhavya-OS/tree/master
+                            - generic [ref=f6e483]: Source
+                          - link "View Deployment" [ref=f6e486] [cursor=pointer]:
+                            - /url: /bhavya-foundation/bhavya-ai-lab/2gdF6ZQS7rs81WDephmkCoNxZhvy
+                            - generic [ref=f6e487]: 2gdF6ZQS7
+                      - button "Preview Menu" [ref=f6e495] [cursor=pointer]
+                      - link [ref=f6e500] [cursor=pointer]:
+                        - /url: https://bhavya-ai-lab-git-master-bhavya-foundation.vercel.app
+                  - listitem [ref=f6e501]:
+                    - generic [ref=f6e502]:
+                      - generic [ref=f6e504]:
+                        - generic [ref=f6e505]:
+                          - img "thebhavyafoundation Avatar" [ref=f6e508]:
+                            - img "thebhavyafoundation Avatar" [ref=f6e509]
+                          - generic "https://website-p5ntsyron-bhavya-foundation.vercel.app" [ref=f6e513]: website-p5ntsyron-bhavya-foundation.vercel.app
+                        - generic [ref=f6e514]:
+                          - generic [ref=f6e515] [cursor=pointer]: Preview
+                          - link "View Source" [ref=f6e520] [cursor=pointer]:
+                            - /url: /bhavya-foundation/website/GnWrhQRzj28M35JnADZVNqPpdhS3/source
+                            - generic [ref=f6e521]: Source
+                          - link "View Deployment" [ref=f6e525] [cursor=pointer]:
+                            - /url: /bhavya-foundation/website/GnWrhQRzj28M35JnADZVNqPpdhS3
+                            - generic [ref=f6e526]: Error
+                      - button "Preview Menu" [ref=f6e533] [cursor=pointer]
+                      - link [ref=f6e538] [cursor=pointer]:
+                        - /url: https://website-p5ntsyron-bhavya-foundation.vercel.app
+            - generic [ref=f6e540]:
+              - generic [ref=f6e541]:
+                - generic [ref=f6e542]: Projects
+                - list [ref=f6e544]:
+                  - listitem [ref=f6e545]:
+                    - link [ref=f6e546] [cursor=pointer]:
+                      - /url: /bhavya-foundation/website
+                    - generic [ref=f6e547]:
+                      - link [ref=f6e548] [cursor=pointer]:
+                        - /url: /bhavya-foundation/website
+                      - generic [ref=f6e551]:
+                        - link "website" [ref=f6e552] [cursor=pointer]:
+                          - /url: /bhavya-foundation/website
+                        - link "website-ten-vert-90.vercel.app" [ref=f6e555] [cursor=pointer]:
+                          - /url: https://website-ten-vert-90.vercel.app
+                      - link [ref=f6e556] [cursor=pointer]:
+                        - /url: /bhavya-foundation/website#production-checklist
+                        - progressbar [ref=f6e558]
+                    - generic [ref=f6e566]:
+                      - link "Connect Git Repository" [ref=f6e567] [cursor=pointer]:
+                        - /url: /bhavya-foundation/website/settings/git
+                      - generic [ref=f6e568]: 1d ago
+                  - listitem [ref=f6e573]:
+                    - link [ref=f6e574] [cursor=pointer]:
+                      - /url: /bhavya-foundation/library
+                    - generic [ref=f6e575]:
+                      - link [ref=f6e576] [cursor=pointer]:
+                        - /url: /bhavya-foundation/library
+                      - generic [ref=f6e579]:
+                        - link "library" [ref=f6e580] [cursor=pointer]:
+                          - /url: /bhavya-foundation/library
+                        - generic [ref=f6e583]: No Production Deployment
+                      - link [ref=f6e584] [cursor=pointer]:
+                        - /url: /bhavya-foundation/library#production-checklist
+                        - progressbar [ref=f6e586]
+                    - generic [ref=f6e594]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e595] [cursor=pointer]':
+                        - /url: /bhavya-foundation/library/ELZYkF3bCEXgiPCtVKLNC9yMGp7z
+                      - generic [ref=f6e600]:
+                        - img "github" [ref=f6e601]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e603] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e605]: 12m ago
+                  - listitem [ref=f6e608]:
+                    - link [ref=f6e609] [cursor=pointer]:
+                      - /url: /bhavya-foundation/volunteer
+                    - generic [ref=f6e610]:
+                      - link [ref=f6e611] [cursor=pointer]:
+                        - /url: /bhavya-foundation/volunteer
+                      - generic [ref=f6e614]:
+                        - link "volunteer" [ref=f6e615] [cursor=pointer]:
+                          - /url: /bhavya-foundation/volunteer
+                        - generic [ref=f6e618]: No Production Deployment
+                      - link [ref=f6e619] [cursor=pointer]:
+                        - /url: /bhavya-foundation/volunteer#production-checklist
+                        - progressbar [ref=f6e621]
+                    - generic [ref=f6e629]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e630] [cursor=pointer]':
+                        - /url: /bhavya-foundation/volunteer/ETcr3RnWxBzLC1RaHe58jYnY47dQ
+                      - generic [ref=f6e635]:
+                        - img "github" [ref=f6e636]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e638] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e640]: 12m ago
+                  - listitem [ref=f6e643]:
+                    - link [ref=f6e644] [cursor=pointer]:
+                      - /url: /bhavya-foundation/heritage
+                    - generic [ref=f6e645]:
+                      - link [ref=f6e646] [cursor=pointer]:
+                        - /url: /bhavya-foundation/heritage
+                      - generic [ref=f6e649]:
+                        - link "heritage" [ref=f6e650] [cursor=pointer]:
+                          - /url: /bhavya-foundation/heritage
+                        - generic [ref=f6e653]: No Production Deployment
+                      - link [ref=f6e654] [cursor=pointer]:
+                        - /url: /bhavya-foundation/heritage#production-checklist
+                        - progressbar [ref=f6e656]
+                    - generic [ref=f6e664]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e665] [cursor=pointer]':
+                        - /url: /bhavya-foundation/heritage/2DjXpRzEa8FLpWZy5Dr91hdLDBij
+                      - generic [ref=f6e670]:
+                        - img "github" [ref=f6e671]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e673] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e675]: 12m ago
+                  - listitem [ref=f6e678]:
+                    - link [ref=f6e679] [cursor=pointer]:
+                      - /url: /bhavya-foundation/research
+                    - generic [ref=f6e680]:
+                      - link [ref=f6e681] [cursor=pointer]:
+                        - /url: /bhavya-foundation/research
+                      - generic [ref=f6e684]:
+                        - link "research" [ref=f6e685] [cursor=pointer]:
+                          - /url: /bhavya-foundation/research
+                        - generic [ref=f6e688]: No Production Deployment
+                      - link [ref=f6e689] [cursor=pointer]:
+                        - /url: /bhavya-foundation/research#production-checklist
+                        - progressbar [ref=f6e691]
+                    - generic [ref=f6e699]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e700] [cursor=pointer]':
+                        - /url: /bhavya-foundation/research/22W3K7V3UVymeAcuwLKLj5fNmhx3
+                      - generic [ref=f6e705]:
+                        - img "github" [ref=f6e706]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e708] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e710]: 12m ago
+                  - listitem [ref=f6e713]:
+                    - link [ref=f6e714] [cursor=pointer]:
+                      - /url: /bhavya-foundation/design-system
+                    - generic [ref=f6e715]:
+                      - link [ref=f6e716] [cursor=pointer]:
+                        - /url: /bhavya-foundation/design-system
+                      - generic [ref=f6e719]:
+                        - link "design-system" [ref=f6e720] [cursor=pointer]:
+                          - /url: /bhavya-foundation/design-system
+                        - generic [ref=f6e723]: No Production Deployment
+                      - link [ref=f6e724] [cursor=pointer]:
+                        - /url: /bhavya-foundation/design-system#production-checklist
+                        - progressbar [ref=f6e726]
+                    - generic [ref=f6e734]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e735] [cursor=pointer]':
+                        - /url: /bhavya-foundation/design-system/9RW9u16HsSsyubmUku3KbKxPgZXw
+                      - generic [ref=f6e740]:
+                        - img "github" [ref=f6e741]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e743] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e745]: 12m ago
+                  - listitem [ref=f6e748]:
+                    - link [ref=f6e749] [cursor=pointer]:
+                      - /url: /bhavya-foundation/bhavya-foundation-dashboard
+                    - generic [ref=f6e750]:
+                      - link [ref=f6e751] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-foundation-dashboard
+                      - generic [ref=f6e754]:
+                        - link "bhavya-foundation-dashboard" [ref=f6e755] [cursor=pointer]:
+                          - /url: /bhavya-foundation/bhavya-foundation-dashboard
+                        - generic [ref=f6e758]: No Production Deployment
+                      - link [ref=f6e759] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-foundation-dashboard#production-checklist
+                        - progressbar [ref=f6e761]
+                    - generic [ref=f6e769]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e770] [cursor=pointer]':
+                        - /url: /bhavya-foundation/bhavya-foundation-dashboard/2163VHwwJFnyQ6LxZuHCVSR43LEA
+                      - generic [ref=f6e775]:
+                        - img "github" [ref=f6e776]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e778] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e780]: 12m ago
+                  - listitem [ref=f6e783]:
+                    - link [ref=f6e784] [cursor=pointer]:
+                      - /url: /bhavya-foundation/bhavya-foundation-website
+                    - generic [ref=f6e785]:
+                      - link [ref=f6e786] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-foundation-website
+                      - generic [ref=f6e789]:
+                        - link "bhavya-foundation-website" [ref=f6e790] [cursor=pointer]:
+                          - /url: /bhavya-foundation/bhavya-foundation-website
+                        - generic [ref=f6e793]: No Production Deployment
+                      - link [ref=f6e794] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-foundation-website#production-checklist
+                        - progressbar [ref=f6e796]
+                    - generic [ref=f6e804]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e805] [cursor=pointer]':
+                        - /url: /bhavya-foundation/bhavya-foundation-website/4WvEmDopDm4jyqr9KXhS8jknmene
+                      - generic [ref=f6e810]:
+                        - img "github" [ref=f6e811]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e813] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e815]: 12m ago
+                  - listitem [ref=f6e818]:
+                    - link [ref=f6e819] [cursor=pointer]:
+                      - /url: /bhavya-foundation/dashboard
+                    - generic [ref=f6e820]:
+                      - link [ref=f6e821] [cursor=pointer]:
+                        - /url: /bhavya-foundation/dashboard
+                      - generic [ref=f6e824]:
+                        - link "dashboard" [ref=f6e825] [cursor=pointer]:
+                          - /url: /bhavya-foundation/dashboard
+                        - generic [ref=f6e828]: No Production Deployment
+                      - link [ref=f6e829] [cursor=pointer]:
+                        - /url: /bhavya-foundation/dashboard#production-checklist
+                        - progressbar [ref=f6e831]
+                    - generic [ref=f6e839]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e840] [cursor=pointer]':
+                        - /url: /bhavya-foundation/dashboard/6AaBSQLQanJQ6xYP2yKS5HCqeKHi
+                      - generic [ref=f6e845]:
+                        - img "github" [ref=f6e846]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e848] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e850]: 12m ago
+                  - listitem [ref=f6e853]:
+                    - link [ref=f6e854] [cursor=pointer]:
+                      - /url: /bhavya-foundation/transparency
+                    - generic [ref=f6e855]:
+                      - link [ref=f6e856] [cursor=pointer]:
+                        - /url: /bhavya-foundation/transparency
+                      - generic [ref=f6e859]:
+                        - link "transparency" [ref=f6e860] [cursor=pointer]:
+                          - /url: /bhavya-foundation/transparency
+                        - generic [ref=f6e863]: No Production Deployment
+                      - link [ref=f6e864] [cursor=pointer]:
+                        - /url: /bhavya-foundation/transparency#production-checklist
+                        - progressbar [ref=f6e866]
+                    - generic [ref=f6e874]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e875] [cursor=pointer]':
+                        - /url: /bhavya-foundation/transparency/BBtmZf3YXCZDCCPFX1Y85rYcvf4v
+                      - generic [ref=f6e880]:
+                        - img "github" [ref=f6e881]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e883] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e885]: 12m ago
+                  - listitem [ref=f6e888]:
+                    - link [ref=f6e889] [cursor=pointer]:
+                      - /url: /bhavya-foundation/bhavya-ai-lab
+                    - generic [ref=f6e890]:
+                      - link [ref=f6e891] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-ai-lab
+                      - generic [ref=f6e894]:
+                        - link "bhavya-ai-lab" [ref=f6e895] [cursor=pointer]:
+                          - /url: /bhavya-foundation/bhavya-ai-lab
+                        - generic [ref=f6e898]: No Production Deployment
+                      - link [ref=f6e899] [cursor=pointer]:
+                        - /url: /bhavya-foundation/bhavya-ai-lab#production-checklist
+                        - progressbar [ref=f6e901]
+                    - generic [ref=f6e909]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e910] [cursor=pointer]':
+                        - /url: /bhavya-foundation/bhavya-ai-lab/2gdF6ZQS7rs81WDephmkCoNxZhvy
+                      - generic [ref=f6e915]:
+                        - img "github" [ref=f6e916]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e918] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e920]: 12m ago
+                  - listitem [ref=f6e923]:
+                    - link [ref=f6e924] [cursor=pointer]:
+                      - /url: /bhavya-foundation/docs
+                    - generic [ref=f6e925]:
+                      - link [ref=f6e926] [cursor=pointer]:
+                        - /url: /bhavya-foundation/docs
+                      - generic [ref=f6e929]:
+                        - link "docs" [ref=f6e930] [cursor=pointer]:
+                          - /url: /bhavya-foundation/docs
+                        - generic [ref=f6e933]: No Production Deployment
+                      - link [ref=f6e934] [cursor=pointer]:
+                        - /url: /bhavya-foundation/docs#production-checklist
+                        - progressbar [ref=f6e936]
+                    - generic [ref=f6e944]:
+                      - 'link "feat(website): launch sprint v2.0 — conversion, knowledge discovery, trust layer" [ref=f6e945] [cursor=pointer]':
+                        - /url: /bhavya-foundation/docs/yUeRT6xziBExUYWsqH46zJHF22g7
+                      - generic [ref=f6e950]:
+                        - img "github" [ref=f6e951]
+                        - link "thebhavyafoundation/Bhavya-OS" [ref=f6e953] [cursor=pointer]:
+                          - /url: /bhavya-foundation?repo=https%3A%2F%2Fgithub.com%2Fthebhavyafoundation%2FBhavya-OS
+                        - text: ·
+                        - generic [ref=f6e955]: 12m ago
+              - button "Show More" [ref=f6e959] [cursor=pointer]
+  - alert [ref=f6e961]
