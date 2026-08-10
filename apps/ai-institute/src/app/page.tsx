@@ -1,719 +1,1004 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+  useInView,
+  AnimatePresence,
+} from "framer-motion";
+import {
+  TreePine,
+  Brain,
+  Building2,
+  HeartHandshake,
+  ArrowRight,
+  BookOpen,
+  FlaskConical,
+  Users,
+  GraduationCap,
+  Shield,
+  Search,
+  Menu,
+  X,
+  ChevronRight,
+  Play,
+} from "lucide-react";
+import { BhavyaLogo } from "@/components/BhavyaLogo";
 
-function KnowledgeGraphAnimation() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+/* ============================================
+   NAV DATA
+   ============================================ */
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+const navLinks = [
+  { label: "Forest", href: "/forest" },
+  { label: "Knowledge", href: "/knowledge" },
+  { label: "Heritage", href: "/heritage" },
+  { label: "Community", href: "/community" },
+];
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+/* ============================================
+   MISSION DATA
+   ============================================ */
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener("resize", resize);
+const missions = [
+  {
+    key: "forest",
+    icon: TreePine,
+    label: "Forest",
+    title: "Bhavya Forest Mission",
+    desc: "Restore ecosystems, protect biodiversity, and secure water for generations.",
+    stat: "230+",
+    statLabel: "Hectares Restored",
+    gradient: "linear-gradient(135deg, #0E382E 0%, #1a6b30 50%, #2d8a45 100%)",
+  },
+  {
+    key: "knowledge",
+    icon: Brain,
+    label: "Knowledge",
+    title: "Bhavya Knowledge Mission",
+    desc: "Advance education, research, and innovation. Making learning accessible to all.",
+    stat: "331",
+    statLabel: "Knowledge Packages",
+    gradient: "linear-gradient(135deg, #1a3a2a 0%, #2d5a3d 50%, #4a7c59 100%)",
+  },
+  {
+    key: "heritage",
+    icon: Building2,
+    label: "Heritage",
+    title: "Bhavya Heritage Mission",
+    desc: "Preserve our traditions, architecture, arts, and living heritage for future generations.",
+    stat: "75+",
+    statLabel: "Sites Documented",
+    gradient: "linear-gradient(135deg, #3d2b1f 0%, #6A7C52 50%, #8A9A8B 100%)",
+  },
+  {
+    key: "community",
+    icon: HeartHandshake,
+    label: "Community",
+    title: "Bhavya Community Mission",
+    desc: "Empower youth, women and communities to build a stronger Bhavya Bharat.",
+    stat: "500+",
+    statLabel: "Volunteers",
+    gradient: "linear-gradient(135deg, #0E382E 0%, #0a2a21 50%, #143828 100%)",
+  },
+];
 
-    interface Node {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      radius: number;
-      label: string;
-      color: string;
-    }
+const stats = [
+  { value: "230+", label: "Hectares Restored" },
+  { value: "331", label: "Knowledge Packages" },
+  { value: "500+", label: "Volunteers" },
+  { value: "75+", label: "Heritage Sites" },
+];
 
-    interface Edge {
-      from: number;
-      to: number;
-      strength: number;
-    }
+const principles = [
+  {
+    number: "01",
+    title: "Nature First",
+    desc: "Every decision considers its environmental impact. We restore before we extract.",
+  },
+  {
+    number: "02",
+    title: "Knowledge as Commons",
+    desc: "Education is a right, not a privilege. All our content is free and open.",
+  },
+  {
+    number: "03",
+    title: "Transparency",
+    desc: "Every donation, every decision, every outcome is publicly documented.",
+  },
+  {
+    number: "04",
+    title: "Generational Thinking",
+    desc: "We build for decades, not quarters. Our constitution binds us to long-term impact.",
+  },
+  {
+    number: "05",
+    title: "Community Sovereignty",
+    desc: "The people we serve guide our priorities. Community voice shapes our mission.",
+  },
+];
 
-    const nodes: Node[] = [
-      {
-        x: 0,
-        y: 0,
-        vx: 0.2,
-        vy: 0.1,
-        radius: 4,
-        label: "AI",
-        color: "#c9a227",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.1,
-        vy: 0.2,
-        radius: 3,
-        label: "ML",
-        color: "#1a3a2a",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: 0.15,
-        vy: -0.1,
-        radius: 3,
-        label: "DL",
-        color: "#1a3a2a",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.2,
-        vy: -0.15,
-        radius: 2.5,
-        label: "NLP",
-        color: "#8a7359",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: 0.1,
-        vy: 0.2,
-        radius: 2.5,
-        label: "CV",
-        color: "#8a7359",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.15,
-        vy: 0.1,
-        radius: 2,
-        label: "RL",
-        color: "#1a3a2a",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: 0.2,
-        vy: -0.2,
-        radius: 2,
-        label: "LLM",
-        color: "#c9a227",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.1,
-        vy: -0.2,
-        radius: 2,
-        label: "Agents",
-        color: "#c9a227",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: 0.15,
-        vy: 0.15,
-        radius: 1.5,
-        label: "RAG",
-        color: "#8a7359",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.2,
-        vy: 0.2,
-        radius: 1.5,
-        label: "Transformers",
-        color: "#1a3a2a",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: 0.1,
-        vy: -0.15,
-        radius: 1.5,
-        label: "Embeddings",
-        color: "#8a7359",
-      },
-      {
-        x: 0,
-        y: 0,
-        vx: -0.15,
-        vy: -0.1,
-        radius: 1.5,
-        label: "Attention",
-        color: "#1a3a2a",
-      },
-    ];
+const participateCards = [
+  {
+    icon: GraduationCap,
+    title: "Learn",
+    desc: "13 levels, 78 modules, 331 knowledge packages. Free and open.",
+    href: "/academy",
+  },
+  {
+    icon: Users,
+    title: "Volunteer",
+    desc: "Join the Bhavya Volunteer Corps. Make hands-on impact.",
+    href: "/community",
+  },
+  {
+    icon: FlaskConical,
+    title: "Research",
+    desc: "Open research on ecology, heritage, and education.",
+    href: "/research",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Support",
+    desc: "Fund a mission. Every donation is publicly documented.",
+    href: "/donate",
+  },
+];
 
-    const edges: Edge[] = [
-      { from: 0, to: 1, strength: 1 },
-      { from: 0, to: 2, strength: 1 },
-      { from: 0, to: 3, strength: 0.8 },
-      { from: 0, to: 4, strength: 0.8 },
-      { from: 1, to: 2, strength: 0.9 },
-      { from: 1, to: 5, strength: 0.7 },
-      { from: 2, to: 9, strength: 0.9 },
-      { from: 3, to: 6, strength: 0.8 },
-      { from: 4, to: 6, strength: 0.7 },
-      { from: 6, to: 7, strength: 0.9 },
-      { from: 6, to: 8, strength: 0.8 },
-      { from: 9, to: 10, strength: 0.9 },
-      { from: 9, to: 11, strength: 0.9 },
-      { from: 10, to: 11, strength: 0.8 },
-      { from: 7, to: 8, strength: 0.7 },
-    ];
+/* ============================================
+   PROCEDURAL SVG LANDSCAPE
+   ============================================ */
 
-    const w = canvas.offsetWidth;
-    const h = canvas.offsetHeight;
-
-    nodes.forEach((node) => {
-      node.x = Math.random() * w;
-      node.y = Math.random() * h;
-    });
-
-    let mouseX = w / 2;
-    let mouseY = h / 2;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
-    };
-    canvas.addEventListener("mousemove", handleMouseMove);
-
-    let animationId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, w, h);
-
-      nodes.forEach((node) => {
-        node.x += node.vx;
-        node.y += node.vy;
-        if (node.x < 0 || node.x > w) node.vx *= -1;
-        if (node.y < 0 || node.y > h) node.vy *= -1;
-        node.x = Math.max(0, Math.min(w, node.x));
-        node.y = Math.max(0, Math.min(h, node.y));
-      });
-
-      edges.forEach((edge) => {
-        const from = nodes[edge.from];
-        const to = nodes[edge.to];
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 200) {
-          const opacity = (1 - dist / 200) * 0.3 * edge.strength;
-          ctx.beginPath();
-          ctx.moveTo(from.x, from.y);
-          ctx.lineTo(to.x, to.y);
-          ctx.strokeStyle = `rgba(201, 162, 39, ${opacity})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      });
-
-      nodes.forEach((node) => {
-        const dx = mouseX - node.x;
-        const dy = mouseY - node.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const glow = dist < 100 ? (1 - dist / 100) * 0.5 : 0;
-
-        if (glow > 0) {
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
-          ctx.fillStyle = `${node.color}${Math.floor(glow * 255)
-            .toString(16)
-            .padStart(2, "0")}`;
-          ctx.fill();
-        }
-
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.fill();
-
-        if (dist < 150 || node.radius >= 3) {
-          ctx.font = "11px Inter, sans-serif";
-          ctx.fillStyle = `rgba(245, 241, 230, ${dist < 150 ? 1 - dist / 150 : 0.6})`;
-          ctx.textAlign = "center";
-          ctx.fillText(node.label, node.x, node.y - node.radius - 8);
-        }
-      });
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
+function BhavyaLandscape() {
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.6 }}
-    />
+    <div className="hero-landscape" aria-hidden="true">
+      <div className="hero-sky" />
+      <motion.div
+        className="hero-sun"
+        animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.8, 0.6] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Far mountains — light, atmospheric */}
+      <motion.div
+        className="hero-mountains hero-mountains-far"
+        style={{ y: useTransform(useMotionValue(0), [0, 1], [0, 30]) }}
+      >
+        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mtn-far" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#8A9A8B" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#8A9A8B" stopOpacity="0.2" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,320 L80,280 L160,300 L280,220 L400,260 L520,200 L640,240 L760,180 L880,220 L1000,260 L1120,200 L1240,240 L1360,220 L1440,260 L1440,400 L0,400Z"
+            fill="url(#mtn-far)"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Mid mountains — sage */}
+      <div className="hero-mountains hero-mountains-mid">
+        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mtn-mid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#6A7C52" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#6A7C52" stopOpacity="0.3" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,340 L120,290 L240,310 L360,250 L480,280 L600,230 L720,270 L840,220 L960,260 L1080,240 L1200,280 L1320,250 L1440,270 L1440,400 L0,400Z"
+            fill="url(#mtn-mid)"
+          />
+        </svg>
+      </div>
+
+      {/* Near mountains — dark forest */}
+      <div className="hero-mountains hero-mountains-near">
+        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mtn-near" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0E382E" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#0E382E" stopOpacity="0.5" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,360 L100,320 L200,340 L340,280 L480,310 L620,270 L760,300 L900,260 L1040,290 L1180,270 L1320,300 L1440,280 L1440,400 L0,400Z"
+            fill="url(#mtn-near)"
+          />
+        </svg>
+      </div>
+
+      {/* Forest tree line */}
+      <div className="hero-trees">
+        <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="tree-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#0E382E" />
+              <stop offset="100%" stopColor="#071c16" />
+            </linearGradient>
+          </defs>
+          {/* Dense forest silhouette */}
+          <g fill="url(#tree-fill)">
+            {Array.from({ length: 50 }).map((_, i) => {
+              const x = (i / 50) * 1440;
+              const h = 60 + Math.sin(i * 0.8) * 30 + Math.cos(i * 1.3) * 20;
+              const w = 12 + Math.sin(i * 1.2) * 6;
+              return (
+                <g key={i}>
+                  <polygon
+                    points={`${x},180 ${x - w},${180 - h} ${x + w},${180 - h}`}
+                  />
+                  <ellipse
+                    cx={x}
+                    cy={180 - h - 15}
+                    rx={w * 1.8}
+                    ry={20 + Math.sin(i) * 8}
+                  />
+                </g>
+              );
+            })}
+          </g>
+          {/* Ground */}
+          <rect
+            y="170"
+            width="1440"
+            height="10"
+            fill="var(--color-bg-primary)"
+          />
+        </svg>
+      </div>
+
+      {/* Fog layer */}
+      <div className="hero-fog" />
+    </div>
   );
 }
 
-function SchoolCard({
-  name,
-  icon,
-  description,
-  color,
-}: {
-  name: string;
-  icon: string;
-  description: string;
-  color: string;
-}) {
-  const [hovered, setHovered] = useState(false);
+/* ============================================
+   BOTANICAL MOTIF — SECTION DIVIDER
+   ============================================ */
 
+function BotanicalDivider() {
   return (
     <div
-      className="relative p-6 rounded-xl border border-[#1a2a1f] bg-[#111916] transition-all duration-300 cursor-pointer group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        borderColor: hovered ? color : undefined,
-        boxShadow: hovered ? `0 0 30px ${color}20` : undefined,
+        width: "100%",
+        height: "80px",
+        position: "relative",
+        overflow: "hidden",
       }}
+      aria-hidden="true"
     >
-      <div
-        className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-4 transition-colors duration-300"
-        style={{ backgroundColor: `${color}20` }}
+      <svg
+        viewBox="0 0 1200 80"
+        preserveAspectRatio="none"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
       >
-        {icon}
-      </div>
-      <h3 className="text-lg font-semibold text-[#f5f1e6] mb-2">{name}</h3>
-      <p className="text-sm text-[#8a7359] leading-relaxed mb-4">
-        {description}
-      </p>
-      <span
-        className="text-xs font-medium transition-colors duration-300"
-        style={{ color: hovered ? color : "#8a7359" }}
-      >
-        Explore →
-      </span>
+        {/* Organic vine curve */}
+        <path
+          d="M0,40 Q150,20 300,40 Q450,60 600,40 Q750,20 900,40 Q1050,60 1200,40"
+          stroke="var(--color-accent-gold)"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.3"
+        />
+        {/* Leaf nodes */}
+        <g opacity="0.2" fill="var(--color-brand-forest)">
+          <path d="M300,40 Q310,30 320,40 Q310,50 300,40Z" />
+          <path d="M600,40 Q610,30 620,40 Q610,50 600,40Z" />
+          <path d="M900,40 Q910,30 920,40 Q910,50 900,40Z" />
+        </g>
+      </svg>
     </div>
   );
 }
 
-function PathCard({
-  title,
-  duration,
-  difficulty,
-  modules,
-}: {
-  title: string;
-  duration: string;
-  difficulty: string;
-  modules: number;
-}) {
-  return (
-    <div className="min-w-[280px] p-6 rounded-xl border border-[#1a2a1f] bg-[#111916] hover:border-[#1a3a2a] transition-all duration-300">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-xs px-2 py-1 rounded-full bg-[#1a3a2a]/20 text-[#1a3a2a]">
-          {difficulty}
-        </span>
-        <span className="text-xs text-[#8a7359]">{duration}</span>
-      </div>
-      <h3 className="text-base font-semibold text-[#f5f1e6] mb-3">{title}</h3>
-      <div className="flex items-center justify-between text-xs text-[#8a7359]">
-        <span>{modules} modules</span>
-        <span className="text-[#c9a227]">View →</span>
-      </div>
-    </div>
-  );
-}
+/* ============================================
+   MAIN PAGE
+   ============================================ */
 
-function RoadmapStage({
-  number,
-  title,
-  description,
-  skills,
-  active,
-}: {
-  number: string;
-  title: string;
-  description: string;
-  skills: string[];
-  active: boolean;
-}) {
-  return (
-    <div className="relative flex flex-col items-center text-center">
-      <div
-        className={`w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold mb-4 transition-all duration-500 ${
-          active
-            ? "bg-[#c9a227] text-[#0a0f0d] scale-110"
-            : "bg-[#1a2a1f] text-[#8a7359]"
-        }`}
-      >
-        {number}
-      </div>
-      <h3 className="text-base font-semibold text-[#f5f1e6] mb-2">{title}</h3>
-      <p className="text-sm text-[#8a7359] mb-3 max-w-[200px]">{description}</p>
-      <div className="flex flex-wrap justify-center gap-1">
-        {skills.map((skill) => (
-          <span
-            key={skill}
-            className="text-[10px] px-2 py-0.5 rounded-full bg-[#1a2a1f] text-[#8a7359]"
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default function FlagshipHomepage() {
-  const [activeStage, setActiveStage] = useState(0);
+export default function HomePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef });
+  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStage((prev) => (prev + 1) % 5);
-    }, 3000);
-    return () => clearInterval(interval);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const schools = [
-    {
-      name: "AI Foundations",
-      icon: "🧠",
-      description: "Core AI concepts, Python, mathematics",
-      color: "#1a3a2a",
-    },
-    {
-      name: "Machine Learning",
-      icon: "📊",
-      description: "Supervised, unsupervised, reinforcement",
-      color: "#1a3a2a",
-    },
-    {
-      name: "Deep Learning",
-      icon: "🔬",
-      description: "Neural networks, architectures, optimization",
-      color: "#1a3a2a",
-    },
-    {
-      name: "LLM Engineering",
-      icon: "💬",
-      description: "Large language models, fine-tuning, deployment",
-      color: "#c9a227",
-    },
-    {
-      name: "AI Agents",
-      icon: "🤖",
-      description: "Autonomous systems, tool use, planning",
-      color: "#c9a227",
-    },
-    {
-      name: "Robotics",
-      icon: "🦾",
-      description: "Embodied AI, control systems, perception",
-      color: "#8a7359",
-    },
-    {
-      name: "Data Engineering",
-      icon: "🗄️",
-      description: "Pipelines, infrastructure, MLOps",
-      color: "#8a7359",
-    },
-    {
-      name: "Mathematics",
-      icon: "📐",
-      description: "Linear algebra, calculus, probability",
-      color: "#1a3a2a",
-    },
-    {
-      name: "Research",
-      icon: "📝",
-      description: "Methodology, papers, reproducibility",
-      color: "#c9a227",
-    },
-    {
-      name: "AI Systems",
-      icon: "⚙️",
-      description: "Infrastructure, deployment, scaling",
-      color: "#8a7359",
-    },
-    {
-      name: "AI Safety",
-      icon: "🛡️",
-      description: "Alignment, ethics, governance",
-      color: "#c9a227",
-    },
-    {
-      name: "Open Source",
-      icon: "🌐",
-      description: "Contributing, maintaining, community",
-      color: "#1a3a2a",
-    },
-  ];
-
-  const learningPaths = [
-    {
-      title: "AI Foundations",
-      duration: "12 weeks",
-      difficulty: "Beginner",
-      modules: 8,
-    },
-    {
-      title: "Machine Learning Engineer",
-      duration: "16 weeks",
-      difficulty: "Intermediate",
-      modules: 12,
-    },
-    {
-      title: "Deep Learning Specialist",
-      duration: "20 weeks",
-      difficulty: "Advanced",
-      modules: 15,
-    },
-    {
-      title: "LLM Engineer",
-      duration: "14 weeks",
-      difficulty: "Intermediate",
-      modules: 10,
-    },
-    {
-      title: "AI Agent Developer",
-      duration: "10 weeks",
-      difficulty: "Advanced",
-      modules: 8,
-    },
-    {
-      title: "MLOps Engineer",
-      duration: "12 weeks",
-      difficulty: "Intermediate",
-      modules: 9,
-    },
-    {
-      title: "Research Scientist",
-      duration: "24 weeks",
-      difficulty: "Expert",
-      modules: 18,
-    },
-    {
-      title: "AI Safety Researcher",
-      duration: "16 weeks",
-      difficulty: "Advanced",
-      modules: 12,
-    },
-  ];
-
-  const roadmapStages = [
-    {
-      number: "01",
-      title: "Visitor",
-      description: "Explore the institution",
-      skills: ["Browse", "Assess"],
-      active: activeStage === 0,
-    },
-    {
-      number: "02",
-      title: "Learner",
-      description: "Begin your journey",
-      skills: ["Python", "Math"],
-      active: activeStage === 1,
-    },
-    {
-      number: "03",
-      title: "Practitioner",
-      description: "Build real systems",
-      skills: ["Projects", "Labs"],
-      active: activeStage === 2,
-    },
-    {
-      number: "04",
-      title: "Researcher",
-      description: "Advance the field",
-      skills: ["Papers", "Innovation"],
-      active: activeStage === 3,
-    },
-    {
-      number: "05",
-      title: "Mentor",
-      description: "Teach others",
-      skills: ["Lead", "Inspire"],
-      active: activeStage === 4,
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#0a0f0d]">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <KnowledgeGraphAnimation />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <p className="text-sm text-[#c9a227] font-medium mb-6 tracking-widest uppercase">
-            Bhavya Foundation
-          </p>
-          <h1 className="text-5xl md:text-7xl font-bold text-[#f5f1e6] mb-6 leading-tight">
-            The Institution Where AI Is
-            <br />
-            <span className="text-[#c9a227]">Understood</span>, Not Just Used
-          </h1>
-          <p className="text-lg md:text-xl text-[#8a7359] mb-10 max-w-2xl mx-auto leading-relaxed">
-            A 10-year mission to become the global benchmark for AI education.
-            Not another course platform. A lasting institution.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/assessment"
-              className="px-8 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
-            >
-              Begin Your Journey
-            </Link>
-            <Link
-              href="/knowledge-graph"
-              className="px-8 py-4 text-base font-medium text-[#f5f1e6] border border-[#1a2a1f] rounded-lg hover:border-[#1a3a2a] transition-colors"
-            >
-              Explore the Knowledge Graph
-            </Link>
-          </div>
-        </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <span className="text-[#8a7359] text-sm">Scroll to explore</span>
-        </div>
-      </section>
-
-      {/* 12 Schools */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Academic Structure
-            </p>
-            <h2 className="text-4xl font-bold text-[#f5f1e6] mb-4">
-              12 Schools of AI
-            </h2>
-            <p className="text-[#8a7359] max-w-2xl mx-auto">
-              Each school is a complete academic unit with its own curriculum,
-              faculty, and research focus. Together, they form the most
-              comprehensive AI education institution in the world.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {schools.map((school) => (
-              <SchoolCard key={school.name} {...school} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Learning Paths */}
-      <section className="py-24 px-6 bg-[#111916]/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Curriculum
-            </p>
-            <h2 className="text-4xl font-bold text-[#f5f1e6] mb-4">
-              Flagship Learning Paths
-            </h2>
-            <p className="text-[#8a7359] max-w-2xl mx-auto">
-              Complete, structured journeys from beginner to expert. Every path
-              includes interactive lessons, labs, projects, and AI mentor
-              support.
-            </p>
-          </div>
-          <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
-            {learningPaths.map((path) => (
-              <PathCard key={path.title} {...path} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Student Success Roadmap */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Your Journey
-            </p>
-            <h2 className="text-4xl font-bold text-[#f5f1e6] mb-4">
-              Student Success Roadmap
-            </h2>
-            <p className="text-[#8a7359] max-w-2xl mx-auto">
-              From curiosity to mastery. Five stages of transformation.
-            </p>
-          </div>
-          <div className="relative">
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[#1a2a1f] -translate-y-1/2" />
-            <div className="relative grid grid-cols-5 gap-4">
-              {roadmapStages.map((stage) => (
-                <RoadmapStage key={stage.number} {...stage} />
-              ))}
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      {/* ====== NAVIGATION ====== */}
+      <nav className={`site-nav ${scrolled ? "scrolled" : ""}`}>
+        <div className="site-nav-inner">
+          <a href="/" className="nav-logo">
+            <BhavyaLogo size="sm" />
+            <div className="nav-logo-text">
+              <span className="nav-logo-name">Bhavya</span>
+              <span className="nav-logo-tagline">
+                Nature. Knowledge. Heritage.
+              </span>
             </div>
+          </a>
+
+          <div className="nav-links">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="nav-link">
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="nav-actions">
+            <button className="nav-search" aria-label="Search">
+              <Search size={16} />
+              <span>Search</span>
+            </button>
+            <a href="/app" className="nav-cta">
+              My Bhavya
+              <ChevronRight size={16} />
+            </a>
+            <button
+              className="nav-mobile-trigger"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <Menu size={24} />
+            </button>
           </div>
         </div>
-      </section>
+      </nav>
 
-      {/* Vision */}
-      <section className="py-24 px-6 bg-[#111916]/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-            Vision
-          </p>
-          <h2 className="text-4xl font-bold text-[#f5f1e6] mb-8">
-            Built for the Next Decade
-          </h2>
-          <blockquote className="text-xl text-[#8a7359] leading-relaxed mb-8 italic">
-            &ldquo;We are not building another course platform. We are building
-            an institution that will produce the AI researchers, engineers, and
-            leaders of the next decade. Every decision we make increases
-            Bhavya&apos;s long-term institutional value.&rdquo;
-          </blockquote>
-          <p className="text-sm text-[#8a7359]">— Bhavya Foundation</p>
-        </div>
-      </section>
-
-      {/* Stats — Real structural counts only */}
-      <section className="py-24 px-6 border-y border-[#1a2a1f]">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { label: "Schools", value: "12" },
-            { label: "Learning Paths", value: "8" },
-            { label: "Courses", value: "65+" },
-            { label: "Interactive Labs", value: "100+" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-4xl font-bold text-[#c9a227] mb-2">
-                {stat.value}
+      {/* ====== MOBILE MENU ====== */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              className="mobile-menu-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              className="mobile-menu-drawer"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            >
+              <div className="mobile-menu-header">
+                <BhavyaLogo size="sm" />
+                <button
+                  className="mobile-menu-close"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X size={20} />
+                </button>
               </div>
-              <div className="text-sm text-[#8a7359]">{stat.label}</div>
-            </div>
-          ))}
+              <div className="mobile-menu-nav">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="mobile-menu-link"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <div className="mobile-menu-divider" />
+                <a
+                  href="/app"
+                  className="mobile-menu-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  My Bhavya
+                </a>
+                <a
+                  href="/donate"
+                  className="mobile-menu-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Support Us
+                </a>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ====== HERO ====== */}
+      <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
+        <BhavyaLandscape />
+
+        <motion.div
+          className="hero-content"
+          style={{ y: contentY, opacity: contentOpacity }}
+        >
+          <motion.div
+            className="hero-badge"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Shield size={12} />
+            Building India&apos;s Digital Institution
+          </motion.div>
+
+          <h1 id="hero-heading" className="hero-title">
+            <motion.span
+              style={{ display: "block" }}
+              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              A Living Institution for
+            </motion.span>
+            <motion.span
+              style={{ display: "block" }}
+              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                delay: 0.65,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              Knowledge, Nature,
+            </motion.span>
+            <motion.span
+              style={{ display: "block" }}
+              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                delay: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              and <span className="hero-highlight">Community.</span>
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="hero-desc"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Bhavya Foundation is building a nation-scale institution where
+            knowledge is open, forests are restored, heritage is preserved, and
+            community leads.
+          </motion.p>
+
+          <motion.div
+            className="hero-actions"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <a href="/academy" className="btn btn-primary">
+              Explore Bhavya
+              <ArrowRight size={16} />
+            </a>
+            <a href="/app" className="btn btn-secondary">
+              Enter My Bhavya
+              <ArrowRight size={16} />
+            </a>
+          </motion.div>
+
+          <motion.div
+            className="hero-proof"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+          >
+            <span>
+              <span className="hero-proof-dot" /> Open knowledge
+            </span>
+            <span>
+              <span className="hero-proof-dot" /> Community governed
+            </span>
+            <span>
+              <span className="hero-proof-dot" /> Constitution bound
+            </span>
+          </motion.div>
+        </motion.div>
+
+        {/* Watch Our Story button — right side */}
+        <motion.div
+          style={{
+            position: "absolute",
+            right: "var(--space-8)",
+            bottom: "20%",
+            zIndex: 1,
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <a
+            href="/mission"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-3)",
+              padding: "var(--space-4) var(--space-6)",
+              borderRadius: "var(--radius-full)",
+              background: "rgba(14, 56, 46, 0.8)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(247, 244, 236, 0.1)",
+              color: "var(--color-text-inverse)",
+              textDecoration: "none",
+              fontSize: "var(--text-sm)",
+              fontWeight: 600,
+              transition: "all var(--duration-normal) var(--ease-out)",
+            }}
+          >
+            <Play size={16} fill="currentColor" />
+            Watch Our Story
+          </a>
+        </motion.div>
+      </section>
+
+      {/* ====== FOUR MISSIONS — GLASS PANELS ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-bg-primary)",
+        }}
+        id="missions"
+      >
+        <div className="container">
+          <div style={{ marginBottom: "var(--space-12)" }}>
+            <span className="editorial-label">Our Four Missions</span>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                marginTop: "var(--space-4)",
+              }}
+            >
+              Four Pillars. One Purpose.
+            </h2>
+          </div>
+
+          <div className="missions-grid">
+            {missions.map((m, i) => (
+              <motion.a
+                key={m.key}
+                href={`/${m.key}`}
+                className="mission-card"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <div
+                  className="mission-card-image"
+                  style={{ background: m.gradient }}
+                >
+                  <div className="mission-card-overlay" />
+                  <div className="mission-card-icon">
+                    <m.icon size={24} color="var(--color-brand-forest)" />
+                  </div>
+                </div>
+                <div className="mission-card-body">
+                  <span className="mission-card-label">{m.label}</span>
+                  <h3 className="mission-card-title">{m.title}</h3>
+                  <p className="mission-card-desc">{m.desc}</p>
+                  <div className="mission-card-stat">
+                    <div>
+                      <span className="mission-card-stat-value">{m.stat}</span>
+                      <span className="mission-card-stat-label">
+                        {m.statLabel}
+                      </span>
+                    </div>
+                    <div className="mission-card-arrow">
+                      <ArrowRight size={16} />
+                    </div>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-[#f5f1e6] mb-6">
-            Ready to Begin?
-          </h2>
-          <p className="text-[#8a7359] mb-10 text-lg">
-            5-minute assessment. Personalized roadmap. Start building today.
-          </p>
-          <Link
-            href="/assessment"
-            className="inline-block px-10 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
-          >
-            Start Your Journey
-          </Link>
+      <BotanicalDivider />
+
+      {/* ====== KNOWLEDGE ECOSYSTEM ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+        id="knowledge"
+      >
+        <div className="container">
+          <div style={{ marginBottom: "var(--space-12)" }}>
+            <span className="editorial-label">Knowledge Ecosystem</span>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                marginTop: "var(--space-4)",
+              }}
+            >
+              Connected Knowledge.
+              <br />
+              Infinite Possibilities.
+            </h2>
+          </div>
+
+          <div className="knowledge-grid">
+            {[
+              {
+                icon: Shield,
+                title: "AI Labs",
+                desc: "Hands-on artificial intelligence education. Build, experiment, and understand the technology shaping our future.",
+                href: "/labs",
+              },
+              {
+                icon: BookOpen,
+                title: "Digital Libraries",
+                desc: "Curated collections of knowledge. Traditional wisdom meets modern research in a searchable, open archive.",
+                href: "/knowledge-graph",
+              },
+              {
+                icon: FlaskConical,
+                title: "Research",
+                desc: "Open research on ecology, heritage, education, and technology. All findings published freely.",
+                href: "/research",
+              },
+            ].map((card, i) => (
+              <motion.div
+                key={card.title}
+                className="knowledge-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <div className="knowledge-card-icon">
+                  <card.icon size={24} />
+                </div>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+                <a href={card.href} className="knowledge-card-link">
+                  Explore <ArrowRight size={14} />
+                </a>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* ====== STATS — FOREST SECTION ====== */}
+      <section
+        className="section-forest"
+        style={{ padding: "var(--space-24) 0" }}
+      >
+        <div className="container">
+          <div className="stats-grid">
+            {stats.map((s, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <div className="stat-value">{s.value}</div>
+                <div className="stat-label">{s.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== PRINCIPLES ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-bg-primary)",
+        }}
+      >
+        <div className="container">
+          <div style={{ marginBottom: "var(--space-12)" }}>
+            <span className="editorial-label">Constitutional Principles</span>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                marginTop: "var(--space-4)",
+              }}
+            >
+              Bound by constitution.
+              <br />
+              Guided by principle.
+            </h2>
+          </div>
+
+          <div className="principles-grid">
+            {principles.map((p, i) => (
+              <motion.div
+                key={p.number}
+                className="principle-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.08,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <span className="principle-number">{p.number}</span>
+                <h3 className="principle-title">{p.title}</h3>
+                <p className="principle-desc">{p.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <BotanicalDivider />
+
+      {/* ====== PARTICIPATE ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <div style={{ marginBottom: "var(--space-12)" }}>
+            <span className="editorial-label">Participate</span>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                marginTop: "var(--space-4)",
+              }}
+            >
+              Be part of the institution.
+            </h2>
+          </div>
+
+          <div className="participate-grid">
+            {participateCards.map((card, i) => (
+              <motion.a
+                key={card.title}
+                href={card.href}
+                className="participate-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{
+                  duration: 0.6,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <div className="participate-card-icon">
+                  <card.icon size={24} />
+                </div>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+                <span className="participate-link">
+                  Learn more <ArrowRight size={14} />
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== FINAL CTA ====== */}
+      <section
+        className="section-forest"
+        style={{
+          padding: "var(--space-32) 0",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Background SVG landscape */}
+        <div
+          style={{ position: "absolute", inset: 0, opacity: 0.15 }}
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 400"
+            preserveAspectRatio="xMidYMid slice"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <defs>
+              <linearGradient id="cta-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0E382E" />
+                <stop offset="100%" stopColor="#071c16" />
+              </linearGradient>
+            </defs>
+            <rect width="1440" height="400" fill="url(#cta-bg)" />
+            <g opacity="0.3" fill="#D4AF37">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <circle
+                  key={i}
+                  cx={72 + i * 72}
+                  cy={40 + Math.sin(i * 1.5) * 30}
+                  r={1 + Math.random()}
+                />
+              ))}
+            </g>
+            <path
+              d="M0,300 L200,250 L400,280 L600,220 L800,260 L1000,200 L1200,240 L1440,210 L1440,400 L0,400Z"
+              fill="#071c16"
+              opacity="0.5"
+            />
+          </svg>
+        </div>
+
+        <div
+          className="container"
+          style={{ position: "relative", zIndex: 1, textAlign: "center" }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                color: "var(--color-text-inverse)",
+                marginBottom: "var(--space-8)",
+              }}
+            >
+              The institution is being built.
+              <br />
+              <span style={{ color: "var(--color-accent-gold)" }}>
+                Be part of it.
+              </span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              display: "flex",
+              gap: "var(--space-4)",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <a href="/donate" className="btn btn-gold">
+              <HeartHandshake size={16} />
+              Support the mission
+            </a>
+            <a
+              href="/academy"
+              className="btn btn-secondary"
+              style={{
+                color: "var(--color-text-inverse)",
+                borderColor: "rgba(247, 244, 236, 0.3)",
+              }}
+            >
+              Start learning
+              <ArrowRight size={16} />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ====== FOOTER ====== */}
+      <footer className="site-footer">
+        <div className="footer-grid">
+          <div>
+            <BhavyaLogo size="sm" />
+            <p
+              className="footer-brand-name"
+              style={{ marginTop: "var(--space-4)" }}
+            >
+              Bhavya Foundation
+            </p>
+            <p className="footer-brand-desc">
+              A nation-scale institution for knowledge, nature, and community.
+              Constitution bound. Community governed. Transparency first.
+            </p>
+            <div className="footer-status">
+              <div className="footer-status-dot" />
+              Building in the open
+            </div>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Missions</h4>
+            <nav>
+              <a href="/missions/forest">Forest</a>
+              <a href="/missions/knowledge">Knowledge</a>
+              <a href="/missions/heritage">Heritage</a>
+              <a href="/community">Community</a>
+            </nav>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Learn</h4>
+            <nav>
+              <a href="/academy">Academy</a>
+              <a href="/knowledge-graph">Knowledge Graph</a>
+              <a href="/labs">AI Labs</a>
+              <a href="/research">Research</a>
+            </nav>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Institution</h4>
+            <nav>
+              <a href="/about">About</a>
+              <a href="/transparency">Transparency</a>
+              <a href="/donate">Donate</a>
+              <a href="/constitution">Constitution</a>
+            </nav>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Connect</h4>
+            <nav>
+              <a href="/community">Community</a>
+              <a href="https://github.com/thebhavyafoundation">GitHub</a>
+              <a href="mailto:hello@bhavyafoundation.org">Email</a>
+            </nav>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>Bhavya Foundation. Constitution of Bhavya Foundation.</p>
+          <div style={{ display: "flex", gap: "var(--space-4)" }}>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
