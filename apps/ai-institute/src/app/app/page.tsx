@@ -38,14 +38,14 @@ export default function MyAppPage() {
   const modules = getHomeModules(userRoles);
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px" }}>
-        <header style={{ marginBottom: 48 }}>
+    <div style={{ minHeight: "100vh", background: "var(--color-bg-primary)" }}>
+      <div style={{ maxWidth: "var(--max-w)", margin: "0 auto", padding: "var(--space-12) var(--space-6)" }}>
+        <header style={{ marginBottom: "var(--space-12)" }}>
           <h1
             style={{
               fontSize: "var(--text-3xl)",
               fontWeight: 800,
-              color: "var(--text)",
+              color: "var(--color-text-primary)",
               letterSpacing: "-0.03em",
               lineHeight: 1.2,
             }}
@@ -55,21 +55,21 @@ export default function MyAppPage() {
           <p
             style={{
               fontSize: "var(--text-lg)",
-              color: "var(--text-secondary)",
-              marginTop: 12,
+              color: "var(--color-text-secondary)",
+              marginTop: "var(--space-3)",
             }}
           >
             Your institutional home. Everything you need, one place.
           </p>
-          <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+          <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-4)" }}>
             {userRoles.map((role) => (
               <span
                 key={role}
                 style={{
-                  padding: "4px 12px",
-                  background: "var(--forest)",
-                  color: "var(--bg)",
-                  borderRadius: 6,
+                  padding: "var(--space-1) var(--space-3)",
+                  background: "var(--color-brand-forest)",
+                  color: "var(--color-text-inverse)",
+                  borderRadius: "var(--radius-sm)",
                   fontSize: "var(--text-xs)",
                   fontWeight: 600,
                   textTransform: "capitalize",
@@ -85,7 +85,7 @@ export default function MyAppPage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: 20,
+            gap: "var(--space-5)",
           }}
         >
           {modules.map((mod) => {
@@ -96,24 +96,24 @@ export default function MyAppPage() {
                 href={mod.href}
                 style={{
                   display: "block",
-                  padding: 24,
-                  background: "var(--bg-raised)",
-                  border: "1px solid var(--border)",
-                  borderRadius: 12,
+                  padding: "var(--space-6)",
+                  background: "var(--color-bg-elevated)",
+                  border: "1px solid var(--color-border-primary)",
+                  borderRadius: "var(--radius-md)",
                   textDecoration: "none",
                   transition: "all 0.2s ease",
                 }}
               >
                 <Icon
                   size={24}
-                  style={{ color: "var(--forest)", marginBottom: 12 }}
+                  style={{ color: "var(--color-brand-forest)", marginBottom: "var(--space-3)" }}
                 />
                 <h2
                   style={{
                     fontSize: "var(--text-lg)",
                     fontWeight: 700,
-                    color: "var(--text)",
-                    marginBottom: 8,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-2)",
                   }}
                 >
                   {mod.title}
@@ -121,7 +121,7 @@ export default function MyAppPage() {
                 <p
                   style={{
                     fontSize: "var(--text-sm)",
-                    color: "var(--text-secondary)",
+                    color: "var(--color-text-secondary)",
                     lineHeight: 1.6,
                   }}
                 >

@@ -9,35 +9,21 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
-import Link from "next/link";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
-
-const libraryStats = [
-  { value: "331", label: "Knowledge Packages" },
-  { value: "1,200+", label: "Documents" },
-  { value: "50+", label: "Collections" },
-  { value: "100%", label: "Open Access" },
-];
-
 const collections = [
   {
     title: "Ecology & Environment",
-    count: 89,
     desc: "Research papers, field reports, and data on forest restoration and biodiversity.",
   },
   {
     title: "Heritage & Culture",
-    count: 67,
     desc: "Documentation of architectural heritage, manuscripts, and living traditions.",
   },
   {
     title: "AI & Technology",
-    count: 112,
     desc: "Technical documentation, research papers, and educational materials on AI.",
   },
   {
     title: "Education & Pedagogy",
-    count: 63,
     desc: "Curriculum materials, teaching guides, and learning resources.",
   },
 ];
@@ -45,19 +31,7 @@ const collections = [
 export default function LibraryPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <nav className="site-nav">
-        <div className="nav-inner">
-          <Link href="/" className="nav-logo">
-            <BhavyaLogo width={32} height={32} />
-            <span>Bhavya Library</span>
-          </Link>
-          <Link href="/knowledge" className="nav-link">
-            Back to Knowledge
-          </Link>
-        </div>
-      </nav>
-
-      <main className="pt-24 pb-16">
+      <main className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -68,29 +42,10 @@ export default function LibraryPage() {
               Open Library
             </h1>
             <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mb-12">
-              331 knowledge packages and growing. Free, open-access repository
-              of institutional knowledge.
+              Free, open-access repository of institutional knowledge. Growing
+              every day.
             </p>
           </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            {libraryStats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-[var(--color-bg-secondary)]"
-              >
-                <div className="text-3xl font-bold text-[var(--color-brand-forest)]">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-[var(--color-text-secondary)] mt-1">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
 
           <div className="relative mb-12">
             <Search
@@ -99,7 +54,7 @@ export default function LibraryPage() {
             />
             <input
               type="text"
-              placeholder="Search 331 knowledge packages..."
+              placeholder="Search knowledge packages..."
               className="w-full pl-12 pr-4 py-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] text-lg"
             />
           </div>
@@ -128,9 +83,6 @@ export default function LibraryPage() {
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-1">
                   {col.title}
                 </h3>
-                <p className="text-sm text-[var(--color-brand-forest)] mb-2">
-                  {col.count} packages
-                </p>
                 <p className="text-[var(--color-text-secondary)]">{col.desc}</p>
               </motion.div>
             ))}

@@ -10,16 +10,6 @@ import {
   Clock,
   Star,
 } from "lucide-react";
-import Link from "next/link";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
-
-const academyStats = [
-  { value: "13", label: "Learning Levels" },
-  { value: "78", label: "Modules" },
-  { value: "331", label: "Knowledge Packages" },
-  { value: "100%", label: "Free & Open" },
-];
-
 const levels = [
   {
     level: "Foundations",
@@ -50,19 +40,7 @@ const levels = [
 export default function AcademyPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <nav className="site-nav">
-        <div className="nav-inner">
-          <Link href="/" className="nav-logo">
-            <BhavyaLogo width={32} height={32} />
-            <span>Bhavya Academy</span>
-          </Link>
-          <Link href="/knowledge" className="nav-link">
-            Back to Knowledge
-          </Link>
-        </div>
-      </nav>
-
-      <main className="pt-24 pb-16">
+      <main className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -73,29 +51,9 @@ export default function AcademyPage() {
               Bhavya Academy
             </h1>
             <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mb-12">
-              13 levels, 78 modules, 331 knowledge packages. Free and open to
-              all. From foundations to expert research.
+              Free and open learning paths. From foundations to expert research.
             </p>
           </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-            {academyStats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center p-6 rounded-2xl bg-[var(--color-bg-secondary)]"
-              >
-                <div className="text-3xl font-bold text-[var(--color-brand-forest)]">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-[var(--color-text-secondary)] mt-1">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
 
           <h2 className="text-2xl font-serif text-[var(--color-text-primary)] mb-8">
             Learning Levels

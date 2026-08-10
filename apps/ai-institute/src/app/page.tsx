@@ -1,15 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValue,
-  useSpring,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   TreePine,
   Brain,
@@ -21,24 +13,13 @@ import {
   Users,
   GraduationCap,
   Shield,
-  Search,
-  Menu,
-  X,
-  ChevronRight,
   Play,
 } from "lucide-react";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
-
-/* ============================================
-   NAV DATA
-   ============================================ */
-
-const navLinks = [
-  { label: "Forest", href: "/forest" },
-  { label: "Knowledge", href: "/knowledge" },
-  { label: "Heritage", href: "/heritage" },
-  { label: "Community", href: "/community" },
-];
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { Reveal } from "@/components/motion/Reveal";
+import { HeroBackground } from "@/components/HeroBackground";
+import { VineDivider, BotanicalCorner } from "@/components/BotanicalMotifs";
 
 /* ============================================
    MISSION DATA
@@ -50,48 +31,29 @@ const missions = [
     icon: TreePine,
     label: "Forest",
     title: "Bhavya Forest Mission",
-    desc: "Restore ecosystems, protect biodiversity, and secure water for generations.",
-    stat: "230+",
-    statLabel: "Hectares Restored",
-    gradient: "linear-gradient(135deg, #0E382E 0%, #1a6b30 50%, #2d8a45 100%)",
+    desc: "Restoring ecosystems, protecting biodiversity, and conserving water through long-term ecological stewardship.",
   },
   {
     key: "knowledge",
     icon: Brain,
     label: "Knowledge",
     title: "Bhavya Knowledge Mission",
-    desc: "Advance education, research, and innovation. Making learning accessible to all.",
-    stat: "331",
-    statLabel: "Knowledge Packages",
-    gradient: "linear-gradient(135deg, #1a3a2a 0%, #2d5a3d 50%, #4a7c59 100%)",
+    desc: "Open education, AI, research, digital libraries, and practical learning for everyone.",
   },
   {
     key: "heritage",
     icon: Building2,
     label: "Heritage",
     title: "Bhavya Heritage Mission",
-    desc: "Preserve our traditions, architecture, arts, and living heritage for future generations.",
-    stat: "75+",
-    statLabel: "Sites Documented",
-    gradient: "linear-gradient(135deg, #3d2b1f 0%, #6A7C52 50%, #8A9A8B 100%)",
+    desc: "Preserving traditional knowledge, architecture, history, arts, and living heritage.",
   },
   {
     key: "community",
     icon: HeartHandshake,
     label: "Community",
     title: "Bhavya Community Mission",
-    desc: "Empower youth, women and communities to build a stronger Bhavya Bharat.",
-    stat: "500+",
-    statLabel: "Volunteers",
-    gradient: "linear-gradient(135deg, #0E382E 0%, #0a2a21 50%, #143828 100%)",
+    desc: "Empowering young people, women, schools, and communities through education and participation.",
   },
-];
-
-const stats = [
-  { value: "230+", label: "Hectares Restored" },
-  { value: "331", label: "Knowledge Packages" },
-  { value: "500+", label: "Volunteers" },
-  { value: "75+", label: "Heritage Sites" },
 ];
 
 const principles = [
@@ -126,8 +88,8 @@ const participateCards = [
   {
     icon: GraduationCap,
     title: "Learn",
-    desc: "13 levels, 78 modules, 331 knowledge packages. Free and open.",
-    href: "/academy",
+    desc: "Structured learning paths from foundations to advanced research. Free and open.",
+    href: "/knowledge/academy",
   },
   {
     icon: Users,
@@ -139,7 +101,7 @@ const participateCards = [
     icon: FlaskConical,
     title: "Research",
     desc: "Open research on ecology, heritage, and education.",
-    href: "/research",
+    href: "/knowledge/research",
   },
   {
     icon: HeartHandshake,
@@ -150,284 +112,24 @@ const participateCards = [
 ];
 
 /* ============================================
-   PROCEDURAL SVG LANDSCAPE
-   ============================================ */
-
-function BhavyaLandscape() {
-  return (
-    <div className="hero-landscape" aria-hidden="true">
-      <div className="hero-sky" />
-      <motion.div
-        className="hero-sun"
-        animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.8, 0.6] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Far mountains — light, atmospheric */}
-      <motion.div
-        className="hero-mountains hero-mountains-far"
-        style={{ y: useTransform(useMotionValue(0), [0, 1], [0, 30]) }}
-      >
-        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="mtn-far" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#8A9A8B" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#8A9A8B" stopOpacity="0.2" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,320 L80,280 L160,300 L280,220 L400,260 L520,200 L640,240 L760,180 L880,220 L1000,260 L1120,200 L1240,240 L1360,220 L1440,260 L1440,400 L0,400Z"
-            fill="url(#mtn-far)"
-          />
-        </svg>
-      </motion.div>
-
-      {/* Mid mountains — sage */}
-      <div className="hero-mountains hero-mountains-mid">
-        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="mtn-mid" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#6A7C52" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#6A7C52" stopOpacity="0.3" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,340 L120,290 L240,310 L360,250 L480,280 L600,230 L720,270 L840,220 L960,260 L1080,240 L1200,280 L1320,250 L1440,270 L1440,400 L0,400Z"
-            fill="url(#mtn-mid)"
-          />
-        </svg>
-      </div>
-
-      {/* Near mountains — dark forest */}
-      <div className="hero-mountains hero-mountains-near">
-        <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="mtn-near" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0E382E" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#0E382E" stopOpacity="0.5" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,360 L100,320 L200,340 L340,280 L480,310 L620,270 L760,300 L900,260 L1040,290 L1180,270 L1320,300 L1440,280 L1440,400 L0,400Z"
-            fill="url(#mtn-near)"
-          />
-        </svg>
-      </div>
-
-      {/* Forest tree line */}
-      <div className="hero-trees">
-        <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="tree-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0E382E" />
-              <stop offset="100%" stopColor="#071c16" />
-            </linearGradient>
-          </defs>
-          {/* Dense forest silhouette */}
-          <g fill="url(#tree-fill)">
-            {Array.from({ length: 50 }).map((_, i) => {
-              const x = (i / 50) * 1440;
-              const h = 60 + Math.sin(i * 0.8) * 30 + Math.cos(i * 1.3) * 20;
-              const w = 12 + Math.sin(i * 1.2) * 6;
-              return (
-                <g key={i}>
-                  <polygon
-                    points={`${x},180 ${x - w},${180 - h} ${x + w},${180 - h}`}
-                  />
-                  <ellipse
-                    cx={x}
-                    cy={180 - h - 15}
-                    rx={w * 1.8}
-                    ry={20 + Math.sin(i) * 8}
-                  />
-                </g>
-              );
-            })}
-          </g>
-          {/* Ground */}
-          <rect
-            y="170"
-            width="1440"
-            height="10"
-            fill="var(--color-bg-primary)"
-          />
-        </svg>
-      </div>
-
-      {/* Fog layer */}
-      <div className="hero-fog" />
-    </div>
-  );
-}
-
-/* ============================================
-   BOTANICAL MOTIF — SECTION DIVIDER
-   ============================================ */
-
-function BotanicalDivider() {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "80px",
-        position: "relative",
-        overflow: "hidden",
-      }}
-      aria-hidden="true"
-    >
-      <svg
-        viewBox="0 0 1200 80"
-        preserveAspectRatio="none"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {/* Organic vine curve */}
-        <path
-          d="M0,40 Q150,20 300,40 Q450,60 600,40 Q750,20 900,40 Q1050,60 1200,40"
-          stroke="var(--color-accent-gold)"
-          strokeWidth="1"
-          fill="none"
-          opacity="0.3"
-        />
-        {/* Leaf nodes */}
-        <g opacity="0.2" fill="var(--color-brand-forest)">
-          <path d="M300,40 Q310,30 320,40 Q310,50 300,40Z" />
-          <path d="M600,40 Q610,30 620,40 Q610,50 600,40Z" />
-          <path d="M900,40 Q910,30 920,40 Q910,50 900,40Z" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-/* ============================================
    MAIN PAGE
    ============================================ */
 
 export default function HomePage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef });
   const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      {/* ====== NAVIGATION ====== */}
-      <nav className={`site-nav ${scrolled ? "scrolled" : ""}`}>
-        <div className="site-nav-inner">
-          <a href="/" className="nav-logo">
-            <BhavyaLogo size="sm" />
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">Bhavya</span>
-              <span className="nav-logo-tagline">
-                Nature. Knowledge. Heritage.
-              </span>
-            </div>
-          </a>
-
-          <div className="nav-links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="nav-link">
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="nav-actions">
-            <button className="nav-search" aria-label="Search">
-              <Search size={16} />
-              <span>Search</span>
-            </button>
-            <a href="/app" className="nav-cta">
-              My Bhavya
-              <ChevronRight size={16} />
-            </a>
-            <button
-              className="nav-mobile-trigger"
-              onClick={() => setMobileMenuOpen(true)}
-              aria-label="Open menu"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* ====== MOBILE MENU ====== */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              className="mobile-menu-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <motion.div
-              className="mobile-menu-drawer"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            >
-              <div className="mobile-menu-header">
-                <BhavyaLogo size="sm" />
-                <button
-                  className="mobile-menu-close"
-                  onClick={() => setMobileMenuOpen(false)}
-                  aria-label="Close menu"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              <div className="mobile-menu-nav">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="mobile-menu-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <div className="mobile-menu-divider" />
-                <a
-                  href="/app"
-                  className="mobile-menu-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  My Bhavya
-                </a>
-                <a
-                  href="/donate"
-                  className="mobile-menu-link"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Support Us
-                </a>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <SiteHeader />
 
       {/* ====== HERO ====== */}
       <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
-        <BhavyaLandscape />
+        <HeroBackground pillar="home" />
+        <BotanicalCorner position="top-right" size={160} opacity={0.1} />
+        <BotanicalCorner position="bottom-left" size={120} opacity={0.08} />
 
         <motion.div
           className="hero-content"
@@ -443,7 +145,7 @@ export default function HomePage() {
             Building India&apos;s Digital Institution
           </motion.div>
 
-          <h1 id="hero-heading" className="hero-title">
+          <h1 id="hero-heading" className="hero-title" style={{ color: "var(--color-text-inverse)" }}>
             <motion.span
               style={{ display: "block" }}
               initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -454,7 +156,7 @@ export default function HomePage() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              A Living Institution for
+              Building for
             </motion.span>
             <motion.span
               style={{ display: "block" }}
@@ -466,29 +168,18 @@ export default function HomePage() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              Knowledge, Nature,
-            </motion.span>
-            <motion.span
-              style={{ display: "block" }}
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 0.8,
-                delay: 0.8,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              and <span className="hero-highlight">Community.</span>
+              Generations
             </motion.span>
           </h1>
 
           <motion.p
             className="hero-desc"
+            style={{ color: "rgba(247, 244, 236, 0.85)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
-            Bhavya Foundation is building a nation-scale institution where
+            We are building an institution for future generations — where
             knowledge is open, forests are restored, heritage is preserved, and
             community leads.
           </motion.p>
@@ -499,11 +190,11 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <a href="/academy" className="btn btn-primary">
+            <a href="/knowledge/academy" className="btn btn-gold">
               Explore Bhavya
               <ArrowRight size={16} />
             </a>
-            <a href="/app" className="btn btn-secondary">
+            <a href="/app" className="btn btn-secondary-inverse">
               Enter My Bhavya
               <ArrowRight size={16} />
             </a>
@@ -547,9 +238,9 @@ export default function HomePage() {
               gap: "var(--space-3)",
               padding: "var(--space-4) var(--space-6)",
               borderRadius: "var(--radius-full)",
-              background: "rgba(14, 56, 46, 0.8)",
+              background: "rgba(14, 56, 46, 0.6)",
               backdropFilter: "blur(12px)",
-              border: "1px solid rgba(247, 244, 236, 0.1)",
+              border: "1px solid rgba(247, 244, 236, 0.15)",
               color: "var(--color-text-inverse)",
               textDecoration: "none",
               fontSize: "var(--text-sm)",
@@ -562,6 +253,8 @@ export default function HomePage() {
           </a>
         </motion.div>
       </section>
+
+      <VineDivider />
 
       {/* ====== FOUR MISSIONS — GLASS PANELS ====== */}
       <section
@@ -587,147 +280,106 @@ export default function HomePage() {
 
           <div className="missions-grid">
             {missions.map((m, i) => (
-              <motion.a
+              <Reveal
                 key={m.key}
-                href={`/${m.key}`}
-                className="mission-card"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={40}
               >
-                <div
-                  className="mission-card-image"
-                  style={{ background: m.gradient }}
+                <a
+                  href={`/${m.key}`}
+                  className="mission-card"
                 >
-                  <div className="mission-card-overlay" />
-                  <div className="mission-card-icon">
-                    <m.icon size={24} color="var(--color-brand-forest)" />
-                  </div>
-                </div>
-                <div className="mission-card-body">
-                  <span className="mission-card-label">{m.label}</span>
-                  <h3 className="mission-card-title">{m.title}</h3>
-                  <p className="mission-card-desc">{m.desc}</p>
-                  <div className="mission-card-stat">
-                    <div>
-                      <span className="mission-card-stat-value">{m.stat}</span>
-                      <span className="mission-card-stat-label">
-                        {m.statLabel}
-                      </span>
+                  <div
+                    className="mission-card-image"
+                    style={{
+                      background: "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-700) 100%)",
+                    }}
+                  >
+                    <div className="mission-card-overlay" />
+                    <div className="mission-card-icon">
+                      <m.icon size={24} color="var(--color-brand-gold)" />
                     </div>
+                  </div>
+                  <div className="mission-card-body">
+                    <span className="mission-card-label">{m.label}</span>
+                    <h3 className="mission-card-title">{m.title}</h3>
+                    <p className="mission-card-desc">{m.desc}</p>
                     <div className="mission-card-arrow">
                       <ArrowRight size={16} />
                     </div>
                   </div>
-                </div>
-              </motion.a>
+                </a>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <BotanicalDivider />
+      <VineDivider />
 
-      {/* ====== KNOWLEDGE ECOSYSTEM ====== */}
+      {/* ====== MISSION STATEMENT ====== */}
       <section
         style={{
           padding: "var(--space-24) 0",
-          background: "var(--color-ivory-200)",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 100%)",
+          position: "relative",
+          overflow: "hidden",
         }}
-        id="knowledge"
       >
-        <div className="container">
-          <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">Knowledge Ecosystem</span>
-            <h2
-              className="editorial-heading"
+        {/* Botanical SVG decoration */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.06,
+            pointerEvents: "none",
+          }}
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1200 400"
+            preserveAspectRatio="xMidYMid slice"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <g fill="none" stroke="var(--color-accent-gold)" strokeWidth="1">
+              <path d="M100,200 Q200,100 300,200 Q400,300 500,200 Q600,100 700,200 Q800,300 900,200 Q1000,100 1100,200" />
+              <path d="M150,150 Q250,50 350,150 Q450,250 550,150 Q650,50 750,150 Q850,250 950,150" />
+              <path d="M200,250 Q300,150 400,250 Q500,350 600,250 Q700,150 800,250 Q900,350 1000,250" />
+            </g>
+          </svg>
+        </div>
+
+        <div className="container" style={{ maxWidth: "800px", position: "relative", zIndex: 1 }}>
+          <Reveal variant="fade">
+            <blockquote
               style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-                marginTop: "var(--space-4)",
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                fontWeight: 400,
+                fontStyle: "italic",
+                lineHeight: 1.5,
+                color: "var(--color-text-inverse)",
+                margin: 0,
+                textAlign: "center",
               }}
             >
-              Connected Knowledge.
-              <br />
-              Infinite Possibilities.
-            </h2>
-          </div>
-
-          <div className="knowledge-grid">
-            {[
-              {
-                icon: Shield,
-                title: "AI Labs",
-                desc: "Hands-on artificial intelligence education. Build, experiment, and understand the technology shaping our future.",
-                href: "/labs",
-              },
-              {
-                icon: BookOpen,
-                title: "Digital Libraries",
-                desc: "Curated collections of knowledge. Traditional wisdom meets modern research in a searchable, open archive.",
-                href: "/knowledge-graph",
-              },
-              {
-                icon: FlaskConical,
-                title: "Research",
-                desc: "Open research on ecology, heritage, education, and technology. All findings published freely.",
-                href: "/research",
-              },
-            ].map((card, i) => (
-              <motion.div
-                key={card.title}
-                className="knowledge-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                <div className="knowledge-card-icon">
-                  <card.icon size={24} />
-                </div>
-                <h3>{card.title}</h3>
-                <p>{card.desc}</p>
-                <a href={card.href} className="knowledge-card-link">
-                  Explore <ArrowRight size={14} />
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ====== STATS — FOREST SECTION ====== */}
-      <section
-        className="section-forest"
-        style={{ padding: "var(--space-24) 0" }}
-      >
-        <div className="container">
-          <div className="stats-grid">
-            {stats.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                <div className="stat-value">{s.value}</div>
-                <div className="stat-label">{s.label}</div>
-              </motion.div>
-            ))}
-          </div>
+              &ldquo;We build institutions for generations, not quarters.
+              Our constitution binds us to long-term impact.&rdquo;
+            </blockquote>
+            <p
+              style={{
+                marginTop: "var(--space-6)",
+                color: "var(--color-brand-gold)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 500,
+                textAlign: "center",
+              }}
+            >
+              — Bhavya Foundation
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -756,28 +408,23 @@ export default function HomePage() {
 
           <div className="principles-grid">
             {principles.map((p, i) => (
-              <motion.div
+              <Reveal
                 key={p.number}
-                className="principle-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
+                variant="slide-up"
+                delay={i * 0.08}
               >
-                <span className="principle-number">{p.number}</span>
-                <h3 className="principle-title">{p.title}</h3>
-                <p className="principle-desc">{p.desc}</p>
-              </motion.div>
+                <div className="principle-card">
+                  <span className="principle-number">{p.number}</span>
+                  <h3 className="principle-title">{p.title}</h3>
+                  <p className="principle-desc">{p.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <BotanicalDivider />
+      <VineDivider />
 
       {/* ====== PARTICIPATE ====== */}
       <section
@@ -802,28 +449,26 @@ export default function HomePage() {
 
           <div className="participate-grid">
             {participateCards.map((card, i) => (
-              <motion.a
+              <Reveal
                 key={card.title}
-                href={card.href}
-                className="participate-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
               >
-                <div className="participate-card-icon">
-                  <card.icon size={24} />
-                </div>
-                <h3>{card.title}</h3>
-                <p>{card.desc}</p>
-                <span className="participate-link">
-                  Learn more <ArrowRight size={14} />
-                </span>
-              </motion.a>
+                <a
+                  href={card.href}
+                  className="participate-card"
+                >
+                  <div className="participate-card-icon">
+                    <card.icon size={24} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.desc}</p>
+                  <span className="participate-link">
+                    Learn more <ArrowRight size={14} />
+                  </span>
+                </a>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -831,58 +476,19 @@ export default function HomePage() {
 
       {/* ====== FINAL CTA ====== */}
       <section
-        className="section-forest"
         style={{
           padding: "var(--space-32) 0",
           position: "relative",
           overflow: "hidden",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 50%, var(--color-forest-700) 100%)",
         }}
       >
-        {/* Background SVG landscape */}
-        <div
-          style={{ position: "absolute", inset: 0, opacity: 0.15 }}
-          aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 1440 400"
-            preserveAspectRatio="xMidYMid slice"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <defs>
-              <linearGradient id="cta-bg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0E382E" />
-                <stop offset="100%" stopColor="#071c16" />
-              </linearGradient>
-            </defs>
-            <rect width="1440" height="400" fill="url(#cta-bg)" />
-            <g opacity="0.3" fill="#D4AF37">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <circle
-                  key={i}
-                  cx={72 + i * 72}
-                  cy={40 + Math.sin(i * 1.5) * 30}
-                  r={1 + Math.random()}
-                />
-              ))}
-            </g>
-            <path
-              d="M0,300 L200,250 L400,280 L600,220 L800,260 L1000,200 L1200,240 L1440,210 L1440,400 L0,400Z"
-              fill="#071c16"
-              opacity="0.5"
-            />
-          </svg>
-        </div>
-
         <div
           className="container"
           style={{ position: "relative", zIndex: 1, textAlign: "center" }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <Reveal variant="slide-up">
             <h2
               className="editorial-heading"
               style={{
@@ -897,108 +503,34 @@ export default function HomePage() {
                 Be part of it.
               </span>
             </h2>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              display: "flex",
-              gap: "var(--space-4)",
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a href="/donate" className="btn btn-gold">
-              <HeartHandshake size={16} />
-              Support the mission
-            </a>
-            <a
-              href="/academy"
-              className="btn btn-secondary"
+          <Reveal variant="slide-up" delay={0.2}>
+            <div
               style={{
-                color: "var(--color-text-inverse)",
-                borderColor: "rgba(247, 244, 236, 0.3)",
+                display: "flex",
+                gap: "var(--space-4)",
+                justifyContent: "center",
+                flexWrap: "wrap",
               }}
             >
-              Start learning
-              <ArrowRight size={16} />
-            </a>
-          </motion.div>
+              <a href="/donate" className="btn btn-gold">
+                <HeartHandshake size={16} />
+                Support the mission
+              </a>
+              <a
+                href="/knowledge/academy"
+                className="btn btn-secondary-inverse"
+              >
+                Start learning
+                <ArrowRight size={16} />
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ====== FOOTER ====== */}
-      <footer className="site-footer">
-        <div className="footer-grid">
-          <div>
-            <BhavyaLogo size="sm" />
-            <p
-              className="footer-brand-name"
-              style={{ marginTop: "var(--space-4)" }}
-            >
-              Bhavya Foundation
-            </p>
-            <p className="footer-brand-desc">
-              A nation-scale institution for knowledge, nature, and community.
-              Constitution bound. Community governed. Transparency first.
-            </p>
-            <div className="footer-status">
-              <div className="footer-status-dot" />
-              Building in the open
-            </div>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-col-title">Missions</h4>
-            <nav>
-              <a href="/missions/forest">Forest</a>
-              <a href="/missions/knowledge">Knowledge</a>
-              <a href="/missions/heritage">Heritage</a>
-              <a href="/community">Community</a>
-            </nav>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-col-title">Learn</h4>
-            <nav>
-              <a href="/academy">Academy</a>
-              <a href="/knowledge-graph">Knowledge Graph</a>
-              <a href="/labs">AI Labs</a>
-              <a href="/research">Research</a>
-            </nav>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-col-title">Institution</h4>
-            <nav>
-              <a href="/about">About</a>
-              <a href="/transparency">Transparency</a>
-              <a href="/donate">Donate</a>
-              <a href="/constitution">Constitution</a>
-            </nav>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-col-title">Connect</h4>
-            <nav>
-              <a href="/community">Community</a>
-              <a href="https://github.com/thebhavyafoundation">GitHub</a>
-              <a href="mailto:hello@bhavyafoundation.org">Email</a>
-            </nav>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>Bhavya Foundation. Constitution of Bhavya Foundation.</p>
-          <div style={{ display: "flex", gap: "var(--space-4)" }}>
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

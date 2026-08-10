@@ -422,6 +422,17 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-secondary-inverse {
+  background: transparent;
+  color: var(--color-text-inverse);
+  border: 1px solid rgba(247, 244, 236, 0.3);
+}
+
+.btn-secondary-inverse:hover {
+  background: rgba(247, 244, 236, 0.1);
+  border-color: rgba(247, 244, 236, 0.5);
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--color-text-primary);

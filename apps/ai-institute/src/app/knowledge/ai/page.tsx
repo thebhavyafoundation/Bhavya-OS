@@ -11,8 +11,6 @@ import {
   BookOpen,
 } from "lucide-react";
 import Link from "next/link";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
-
 const aiCapabilities = [
   {
     icon: Brain,
@@ -22,7 +20,7 @@ const aiCapabilities = [
   {
     icon: Database,
     title: "Knowledge Graphs",
-    desc: "Connecting ideas, concepts, and relationships across 331 knowledge packages.",
+    desc: "Connecting ideas, concepts, and relationships across our knowledge library.",
   },
   {
     icon: Globe,
@@ -58,19 +56,7 @@ const principles = [
 export default function AIPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <nav className="site-nav">
-        <div className="nav-inner">
-          <Link href="/" className="nav-logo">
-            <BhavyaLogo width={32} height={32} />
-            <span>Bhavya AI</span>
-          </Link>
-          <Link href="/knowledge" className="nav-link">
-            Back to Knowledge
-          </Link>
-        </div>
-      </nav>
-
-      <main className="pt-24 pb-16">
+      <main className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -151,7 +137,7 @@ export default function AIPage() {
               AI system at Bhavya Foundation operates under these guidelines.
             </p>
             <Link
-              href="/ai-ethics"
+              href="/mission"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-[var(--color-brand-forest)] font-medium hover:bg-white/90 transition-colors"
             >
               Read Policy <ArrowRight size={18} />

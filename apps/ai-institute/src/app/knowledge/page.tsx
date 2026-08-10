@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   Brain,
   BookOpen,
@@ -8,86 +8,82 @@ import {
   GraduationCap,
   ArrowRight,
   Library,
-  Users,
-  Award,
+  ExternalLink,
 } from "lucide-react";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
+import { Reveal } from "@/components/motion/Reveal";
+import { HeroBackground } from "@/components/HeroBackground";
 
-const knowledgeAreas = [
+const knowledgeTabs = [
   {
+    id: "academy",
+    icon: GraduationCap,
+    title: "Academy",
+    desc: "Structured learning paths from foundations to advanced research. Free and open.",
+    href: "/knowledge/academy",
+  },
+  {
+    id: "ai",
     icon: Brain,
-    title: "AI",
+    title: "AI Institute",
     desc: "Artificial intelligence research, education, and ethical deployment.",
     href: "/knowledge/ai",
   },
   {
-    icon: GraduationCap,
-    title: "Academy",
-    desc: "Structured learning paths from foundations to advanced research.",
+    id: "library",
+    icon: Library,
+    title: "Library",
+    desc: "Open-access knowledge repository. Curated collections of traditional wisdom and modern research.",
+    href: "/knowledge/library",
+  },
+  {
+    id: "research",
+    icon: FlaskConical,
+    title: "Research",
+    desc: "Open research on ecology, heritage, education, and technology. All findings published freely.",
+    href: "/knowledge/research",
+  },
+  {
+    id: "courses",
+    icon: BookOpen,
+    title: "Courses",
+    desc: "Free, structured courses across multiple disciplines. No prerequisites. No fees.",
     href: "/knowledge/academy",
   },
   {
-    icon: Library,
-    title: "Library",
-    desc: "Open-access knowledge repository. 331 knowledge packages and growing.",
+    id: "knowledge-graph",
+    icon: Brain,
+    title: "Knowledge Graph",
+    desc: "Interconnected knowledge map linking concepts across disciplines.",
+    href: "/knowledge-graph",
+  },
+];
+
+const ecosystemCards = [
+  {
+    icon: Brain,
+    title: "AI Labs",
+    desc: "Hands-on artificial intelligence education. Build, experiment, and understand the technology shaping our future.",
+    href: "/knowledge/ai",
+  },
+  {
+    icon: BookOpen,
+    title: "Digital Libraries",
+    desc: "Curated collections of knowledge. Traditional wisdom meets modern research in a searchable, open archive.",
     href: "/knowledge/library",
   },
   {
     icon: FlaskConical,
     title: "Research",
-    desc: "Open research on ecology, heritage, education, and technology.",
+    desc: "Open research on ecology, heritage, education, and technology. All findings published freely.",
     href: "/knowledge/research",
   },
 ];
 
-const knowledgeStats = [
-  { value: "331", label: "Knowledge Packages" },
-  { value: "13", label: "Learning Levels" },
-  { value: "78", label: "Modules" },
-  { value: "100%", label: "Free & Open" },
-];
-
 export default function KnowledgePage() {
+  const [activeTab, setActiveTab] = useState("academy");
+
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      {/* Navigation */}
-      <nav className="site-nav">
-        <div className="site-nav-inner">
-          <a href="/" className="nav-logo">
-            <BhavyaLogo size="sm" />
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">Bhavya</span>
-              <span className="nav-logo-tagline">
-                Nature. Knowledge. Heritage.
-              </span>
-            </div>
-          </a>
-          <div className="nav-links">
-            <a href="/forest" className="nav-link">
-              Forest
-            </a>
-            <a
-              href="/knowledge"
-              className="nav-link"
-              style={{ color: "var(--color-brand-forest)" }}
-            >
-              Knowledge
-            </a>
-            <a href="/heritage" className="nav-link">
-              Heritage
-            </a>
-            <a href="/community" className="nav-link">
-              Community
-            </a>
-          </div>
-          <div className="nav-actions">
-            <a href="/app" className="nav-cta">
-              My Bhavya
-              <ArrowRight size={16} />
-            </a>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero */}
       <section
@@ -100,52 +96,21 @@ export default function KnowledgePage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, #1a3a2a 0%, #2d5a3d 50%, #4a7c59 100%)",
-          }}
-        />
-        <div style={{ position: "absolute", inset: 0, opacity: 0.1 }}>
-          <svg
-            viewBox="0 0 1440 600"
-            preserveAspectRatio="none"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <defs>
-              <pattern
-                id="grid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 40 0 L 0 0 0 40"
-                  fill="none"
-                  stroke="rgba(247,244,236,0.2)"
-                  strokeWidth="0.5"
-                />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
+        <HeroBackground pillar="knowledge" />
 
         <div
           className="container"
           style={{
             position: "relative",
-            zIndex: 1,
+            zIndex: 2,
             color: "var(--color-text-inverse)",
+            display: "grid",
+            gridTemplateColumns: "1fr 340px",
+            gap: "var(--space-12)",
+            alignItems: "center",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <Reveal variant="slide-up" delay={0.2}>
             <span
               className="editorial-label"
               style={{ color: "var(--color-brand-gold)" }}
@@ -184,98 +149,198 @@ export default function KnowledgePage() {
                 marginTop: "var(--space-8)",
               }}
             >
-              <a
-                href="/knowledge/academy"
-                className="btn btn-primary"
-                style={{
-                  background: "var(--color-brand-gold)",
-                  color: "var(--color-brand-forest)",
-                }}
-              >
+              <a href="/knowledge/academy" className="btn btn-gold">
                 Explore Academy
                 <ArrowRight size={16} />
               </a>
-              <a
-                href="/knowledge/library"
-                className="btn btn-secondary"
-                style={{
-                  borderColor: "rgba(247, 244, 236, 0.3)",
-                  color: "var(--color-text-inverse)",
-                }}
-              >
+              <a href="/knowledge/library" className="btn btn-secondary-inverse">
                 Browse Library
                 <ArrowRight size={16} />
               </a>
             </div>
-          </motion.div>
+          </Reveal>
+
+          {/* By the Numbers sidebar */}
+          <Reveal variant="slide-up" delay={0.4}>
+            <div
+              style={{
+                background: "rgba(247, 244, 236, 0.08)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(247, 244, 236, 0.12)",
+                borderRadius: "var(--radius-lg)",
+                padding: "var(--space-8)",
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  marginBottom: "var(--space-6)",
+                  color: "var(--color-brand-gold)",
+                }}
+              >
+                By the Numbers
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+                {[
+                  { label: "Learning levels", note: "structured curriculum" },
+                  { label: "Knowledge packages", note: "open and growing" },
+                  { label: "AI-powered tools", note: "for learning" },
+                  { label: "Community contributors", note: "building together" },
+                ].map((item, i) => (
+                  <div key={i} style={{ borderBottom: "1px solid rgba(247, 244, 236, 0.08)", paddingBottom: "var(--space-4)" }}>
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-text-inverse)",
+                      }}
+                    >
+                      {item.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "rgba(247, 244, 236, 0.6)",
+                        marginTop: "var(--space-1)",
+                      }}
+                    >
+                      {item.note}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Stats */}
-      <section
-        style={{
-          padding: "var(--space-16) 0",
-          background: "var(--color-brand-forest)",
-        }}
-      >
+      {/* Navigation Tabs */}
+      <section style={{ padding: "var(--space-16) 0 0" }}>
         <div className="container">
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "var(--space-8)",
-              textAlign: "center",
+              display: "flex",
+              gap: "var(--space-2)",
+              overflowX: "auto",
+              paddingBottom: "var(--space-4)",
+              borderBottom: "1px solid var(--color-border-primary)",
             }}
           >
-            {knowledgeStats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{ color: "var(--color-text-inverse)" }}
+            {knowledgeTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--space-2)",
+                  padding: "var(--space-3) var(--space-5)",
+                  borderRadius: "var(--radius-sm)",
+                  background:
+                    activeTab === tab.id
+                      ? "var(--color-brand-forest)"
+                      : "transparent",
+                  color:
+                    activeTab === tab.id
+                      ? "var(--color-text-inverse)"
+                      : "var(--color-text-secondary)",
+                  border: "none",
+                  fontSize: "var(--text-sm)",
+                  fontWeight: 500,
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "all var(--duration-fast) ease",
+                }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-4xl)",
-                    fontWeight: 400,
-                    color: "var(--color-brand-gold)",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    opacity: 0.8,
-                    marginTop: "var(--space-2)",
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
+                <tab.icon size={16} />
+                {tab.title}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Knowledge Areas */}
-      <section style={{ padding: "var(--space-24) 0" }}>
+      {/* Active Tab Content */}
+      <section style={{ padding: "var(--space-16) 0" }}>
         <div className="container">
-          <span className="editorial-label">Knowledge Domains</span>
+          {knowledgeTabs
+            .filter((tab) => tab.id === activeTab)
+            .map((tab) => (
+              <div
+                key={tab.id}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "var(--space-12)",
+                  alignItems: "center",
+                }}
+              >
+                <div>
+                  <span className="editorial-label">{tab.title}</span>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+                      fontWeight: 400,
+                      marginTop: "var(--space-4)",
+                      marginBottom: "var(--space-6)",
+                    }}
+                  >
+                    {tab.desc}
+                  </h2>
+                  <a
+                    href={tab.href}
+                    className="btn btn-primary"
+                    style={{ display: "inline-flex" }}
+                  >
+                    Explore {tab.title}
+                    <ExternalLink size={16} />
+                  </a>
+                </div>
+                <div
+                  style={{
+                    background: "var(--color-ivory-200)",
+                    borderRadius: "var(--radius-lg)",
+                    padding: "var(--space-12)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <tab.icon
+                    size={80}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      opacity: 0.3,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+        </div>
+      </section>
+
+      {/* Knowledge Ecosystem */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <span className="editorial-label">Knowledge Ecosystem</span>
           <h2
+            className="editorial-heading"
             style={{
-              fontFamily: "var(--font-display)",
               fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 400,
               marginTop: "var(--space-4)",
             }}
           >
-            Explore Knowledge
+            Connected Knowledge.
+            <br />
+            Infinite Possibilities.
           </h2>
           <div
             style={{
@@ -285,64 +350,66 @@ export default function KnowledgePage() {
               marginTop: "var(--space-12)",
             }}
           >
-            {knowledgeAreas.map((area, i) => (
-              <motion.a
-                key={area.title}
-                href={area.href}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="glass"
-                style={{
-                  padding: "var(--space-8)",
-                  borderRadius: "var(--radius-lg)",
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                  transition: "all var(--duration-normal) var(--ease-out)",
-                }}
+            {ecosystemCards.map((card, i) => (
+              <Reveal
+                key={card.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
               >
-                <area.icon
-                  size={32}
+                <a
+                  href={card.href}
+                  className="glass"
                   style={{
-                    color: "var(--color-brand-forest)",
-                    marginBottom: "var(--space-4)",
-                  }}
-                />
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-xl)",
-                    fontWeight: 400,
-                    marginBottom: "var(--space-3)",
+                    padding: "var(--space-8)",
+                    borderRadius: "var(--radius-lg)",
+                    textDecoration: "none",
+                    color: "inherit",
+                    display: "block",
+                    transition: "all var(--duration-normal) var(--ease-out)",
                   }}
                 >
-                  {area.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {area.desc}
-                </p>
-                <div
-                  style={{
-                    marginTop: "var(--space-4)",
-                    color: "var(--color-brand-forest)",
-                    fontSize: "var(--text-sm)",
-                    fontWeight: 600,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
-                  }}
-                >
-                  Explore <ArrowRight size={14} />
-                </div>
-              </motion.a>
+                  <card.icon
+                    size={32}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-xl)",
+                      fontWeight: 400,
+                      marginBottom: "var(--space-3)",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {card.desc}
+                  </p>
+                  <div
+                    style={{
+                      marginTop: "var(--space-4)",
+                      color: "var(--color-brand-forest)",
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 600,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                    }}
+                  >
+                    Explore <ArrowRight size={14} />
+                  </div>
+                </a>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -352,7 +419,8 @@ export default function KnowledgePage() {
       <section
         style={{
           padding: "var(--space-24) 0",
-          background: "var(--color-brand-forest)",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-sage-800) 100%)",
           textAlign: "center",
           color: "var(--color-text-inverse)",
         }}
@@ -380,19 +448,13 @@ export default function KnowledgePage() {
             Free courses, open knowledge, community research. No prerequisites.
             No fees.
           </p>
-          <a
-            href="/knowledge/academy"
-            className="btn btn-primary"
-            style={{
-              background: "var(--color-brand-gold)",
-              color: "var(--color-brand-forest)",
-            }}
-          >
+          <a href="/knowledge/academy" className="btn btn-gold">
             Explore Academy
             <ArrowRight size={16} />
           </a>
         </div>
       </section>
+
     </div>
   );
 }

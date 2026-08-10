@@ -1,9 +1,9 @@
 # CANONICAL ROUTE MAP
 
-**Date:** 2026-08-10
+**Date:** 2026-08-11
 **Status:** ACTIVE
 **Owner:** Bhavya Foundation Architecture
-**Last updated:** 2026-08-10
+**Last updated:** 2026-08-11
 **Applies To:** All routes in `apps/ai-institute`
 
 ---

@@ -9,31 +9,24 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
-import Link from "next/link";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
-
 const researchAreas = [
   {
     title: "Ecology & Conservation",
-    projects: 12,
     desc: "Forest restoration monitoring, biodiversity assessment, and climate impact studies.",
     status: "Active",
   },
   {
     title: "Heritage Documentation",
-    projects: 8,
     desc: "Architectural preservation, manuscript digitization, and cultural mapping.",
     status: "Active",
   },
   {
     title: "AI for Good",
-    projects: 15,
     desc: "Ethical AI development, bias mitigation, and responsible innovation.",
     status: "Active",
   },
   {
     title: "Education Research",
-    projects: 6,
     desc: "Pedagogical methods, learning outcomes, and curriculum development.",
     status: "Active",
   },
@@ -63,19 +56,7 @@ const publications = [
 export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <nav className="site-nav">
-        <div className="nav-inner">
-          <Link href="/" className="nav-logo">
-            <BhavyaLogo width={32} height={32} />
-            <span>Bhavya Research</span>
-          </Link>
-          <Link href="/knowledge" className="nav-link">
-            Back to Knowledge
-          </Link>
-        </div>
-      </nav>
-
-      <main className="pt-24 pb-16">
+      <main className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -114,9 +95,6 @@ export default function ResearchPage() {
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-1">
                   {area.title}
                 </h3>
-                <p className="text-sm text-[var(--color-brand-forest)] mb-2">
-                  {area.projects} active projects
-                </p>
                 <p className="text-[var(--color-text-secondary)]">{area.desc}</p>
               </motion.div>
             ))}

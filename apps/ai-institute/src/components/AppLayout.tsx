@@ -35,8 +35,8 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
       <aside
         style={{
           width: 240,
-          background: "var(--bg-raised)",
-          borderRight: "1px solid var(--border)",
+          background: "var(--color-bg-elevated)",
+          borderRight: "1px solid var(--color-border-primary)",
           padding: "var(--space-6) 0",
           display: "flex",
           flexDirection: "column",
@@ -69,7 +69,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
             style={{
               fontSize: "var(--text-lg)",
               fontWeight: 800,
-              color: "var(--text)",
+              color: "var(--color-text-primary)",
               letterSpacing: "-0.02em",
             }}
           >
@@ -89,12 +89,12 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
                   alignItems: "center",
                   gap: "var(--space-3)",
                   padding: "var(--space-3) var(--space-6)",
-                  color: isActive ? "var(--forest)" : "var(--text-secondary)",
-                  background: isActive ? "var(--forest-glow)" : "transparent",
+                  color: isActive ? "var(--color-brand-forest)" : "var(--color-text-secondary)",
+                  background: isActive ? "var(--color-accent-green-glow)" : "transparent",
                   textDecoration: "none",
                   fontSize: "var(--text-sm)",
                   fontWeight: isActive ? 600 : 400,
-                  borderLeft: isActive ? "3px solid var(--forest)" : "3px solid transparent",
+                  borderLeft: isActive ? "3px solid var(--color-brand-forest)" : "3px solid transparent",
                   transition: "all 0.15s ease",
                 }}
               >
@@ -105,7 +105,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        <div style={{ padding: "0 var(--space-6)", borderTop: "1px solid var(--border)", paddingTop: "var(--space-4)" }}>
+        <div style={{ padding: "0 var(--space-6)", borderTop: "1px solid var(--color-border-primary)", paddingTop: "var(--space-4)" }}>
           <Link
             href="/"
             style={{
@@ -113,7 +113,7 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               alignItems: "center",
               gap: "var(--space-3)",
               padding: "var(--space-3) 0",
-              color: "var(--text-tertiary)",
+              color: "var(--color-text-tertiary)",
               textDecoration: "none",
               fontSize: "var(--text-sm)",
             }}

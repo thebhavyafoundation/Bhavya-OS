@@ -1,5 +1,33 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "default_agent": "bhavya",
+  "agent": {
+    "bhavya": {
+      "mode": "primary",
+      "description": "Autonomous Bhavya Foundation principal engineering agent",
+      "steps": 150
+    },
+    "build": {
+      "mode": "primary",
+      "description": "Standard engineering fallback — full tool access for implementation tasks"
+    },
+    "plan": {
+      "mode": "primary",
+      "description": "Read-only planning and research agent. Analysis only, no implementation.",
+      "permission": {
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "edit": "deny",
+        "bash": "deny",
+        "task": "deny",
+        "todowrite": "allow",
+        "webfetch": "allow",
+        "websearch": "allow"
+      }
+    }
+  },
   "mcp": {
     "context7": {
       "type": "remote",

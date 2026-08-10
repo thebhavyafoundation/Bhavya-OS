@@ -202,7 +202,14 @@ No application evolves independently. All changes are research-backed.
 
 - **Created:** mountain-layer.svg, sun.svg, tree.svg, leaf-pattern.svg
 - **Mission-specific SVGs:** mission-*.svg series
+- **Botanical motifs:** VineDivider, BotanicalCorner, MountainSilhouette components in `src/components/BotanicalMotifs.tsx`
 - **Visual language:** Nature-inspired motifs reinforcing Bhavya Foundation's forest ecosystem metaphor
+
+#### Hero Background System
+
+- **Component:** `HeroBackground` in `src/components/HeroBackground.tsx`
+- **Pillars:** home, forest, knowledge, heritage, community — each with unique gradient treatment
+- **Layers:** base gradient → accent light → mid-tone depth → noise texture → mountain silhouettes → vignette → bottom fade
 
 #### Motion System (8 Components)
 
@@ -221,12 +228,12 @@ No application evolves independently. All changes are research-backed.
 
 #### Homepage Sections (Editorial Layout)
 
-1. **Hero** � Full-viewport editorial hero with typography
-2. **Visual Story** � Scroll-driven narrative with SVG motifs
-3. **Missions** � Card-based mission showcase
-4. **Knowledge Ecosystem** � Interconnected knowledge visualization
-5. **Forest Section** � Nature-metaphor ecosystem
-6. **Heritage Section** � Cultural roots and traditions
+1. **Hero** — Full-viewport dark gradient hero with botanical corner accents, "Building for Generations" headline
+2. **Four Missions** — Card-based mission showcase (Forest, Knowledge, Heritage, Community)
+3. **Mission Statement** — Editorial blockquote on dark forest background
+4. **Principles** — Constitutional principles grid
+5. **Participate** — Call-to-action cards (Learn, Volunteer, Research, Support)
+6. **Final CTA** — Closing call-to-action on dark gradient
 7. **Principles** � Core values display
 8. **Stats** � Animated counter section (NumberReveal)
 9. **Participate** � Call-to-action engagement

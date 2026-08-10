@@ -1,90 +1,63 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   TreePine,
   Droplets,
   Leaf,
   MapPin,
   ArrowRight,
-  Shield,
+  Globe,
+  Sprout,
+  Bird,
 } from "lucide-react";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
+import { Reveal } from "@/components/motion/Reveal";
+import { HeroBackground } from "@/components/HeroBackground";
 
-const forestStats = [
-  { value: "230+", label: "Hectares Restored" },
-  { value: "50,000+", label: "Trees Planted" },
-  { value: "12", label: "Active Sites" },
-  { value: "3", label: "River Basins" },
-];
-
-const forestMissions = [
+const focusAreas = [
   {
+    icon: TreePine,
     title: "Ecosystem Restoration",
     desc: "Restoring degraded forests across India through community-led plantation drives and scientific monitoring.",
-    icon: TreePine,
   },
   {
+    icon: Droplets,
     title: "Water Security",
     desc: "Protecting watersheds and river basins through forest cover restoration and sustainable water management.",
-    icon: Droplets,
   },
   {
+    icon: Leaf,
     title: "Biodiversity Conservation",
     desc: "Documenting and protecting native species through field surveys and habitat restoration programs.",
-    icon: Leaf,
   },
   {
+    icon: MapPin,
     title: "GIS Monitoring",
     desc: "Real-time satellite monitoring of forest cover, plantation growth, and ecosystem health.",
-    icon: MapPin,
+  },
+];
+
+const initiatives = [
+  {
+    icon: Sprout,
+    title: "Community Plantation Drives",
+    desc: "Engaging local communities in large-scale tree planting across degraded landscapes.",
+  },
+  {
+    icon: Globe,
+    title: "Watershed Protection",
+    desc: "Restoring forest cover in critical watershed areas to ensure water security for downstream communities.",
+  },
+  {
+    icon: Bird,
+    title: "Wildlife Habitat Corridors",
+    desc: "Creating connected habitats for wildlife through strategic reforestation of migration routes.",
   },
 ];
 
 export default function ForestPage() {
-  const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
-
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      {/* Navigation */}
-      <nav className="site-nav">
-        <div className="site-nav-inner">
-          <a href="/" className="nav-logo">
-            <BhavyaLogo size="sm" />
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">Bhavya</span>
-              <span className="nav-logo-tagline">
-                Nature. Knowledge. Heritage.
-              </span>
-            </div>
-          </a>
-          <div className="nav-links">
-            <a
-              href="/forest"
-              className="nav-link"
-              style={{ color: "var(--color-brand-forest)" }}
-            >
-              Forest
-            </a>
-            <a href="/knowledge" className="nav-link">
-              Knowledge
-            </a>
-            <a href="/heritage" className="nav-link">
-              Heritage
-            </a>
-            <a href="/community" className="nav-link">
-              Community
-            </a>
-          </div>
-          <div className="nav-actions">
-            <a href="/app" className="nav-cta">
-              My Bhavya
-              <ArrowRight size={16} />
-            </a>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero */}
       <section
@@ -97,56 +70,21 @@ export default function ForestPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, #0E382E 0%, #1a6b30 50%, #2d8a45 100%)",
-          }}
-        />
-        <motion.div style={{ position: "absolute", inset: 0, y: heroY }}>
-          <svg
-            viewBox="0 0 1440 600"
-            preserveAspectRatio="none"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <g fill="rgba(247, 244, 236, 0.05)">
-              {Array.from({ length: 40 }).map((_, i) => {
-                const x = (i / 40) * 1440;
-                const h = 80 + Math.sin(i * 0.7) * 40;
-                const w = 15 + Math.sin(i * 1.1) * 8;
-                return (
-                  <g key={i}>
-                    <polygon
-                      points={`${x},600 ${x - w},${600 - h} ${x + w},${600 - h}`}
-                    />
-                    <ellipse
-                      cx={x}
-                      cy={600 - h - 20}
-                      rx={w * 2}
-                      ry={25 + Math.sin(i) * 10}
-                    />
-                  </g>
-                );
-              })}
-            </g>
-          </svg>
-        </motion.div>
+        <HeroBackground pillar="forest" />
 
         <div
           className="container"
           style={{
             position: "relative",
-            zIndex: 1,
+            zIndex: 2,
             color: "var(--color-text-inverse)",
+            display: "grid",
+            gridTemplateColumns: "1fr 340px",
+            gap: "var(--space-12)",
+            alignItems: "center",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <Reveal variant="slide-up" delay={0.2}>
             <span
               className="editorial-label"
               style={{ color: "var(--color-brand-gold)" }}
@@ -186,86 +124,74 @@ export default function ForestPage() {
                 marginTop: "var(--space-8)",
               }}
             >
-              <a
-                href="/app"
-                className="btn btn-primary"
-                style={{
-                  background: "var(--color-brand-gold)",
-                  color: "var(--color-brand-forest)",
-                }}
-              >
+              <a href="/app" className="btn btn-gold">
                 Join the Mission
                 <ArrowRight size={16} />
               </a>
-              <a
-                href="/app/missions"
-                className="btn btn-secondary"
-                style={{
-                  borderColor: "rgba(247, 244, 236, 0.3)",
-                  color: "var(--color-text-inverse)",
-                }}
-              >
+              <a href="/app/missions" className="btn btn-secondary-inverse">
                 View Projects
                 <ArrowRight size={16} />
               </a>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </Reveal>
 
-      {/* Stats */}
-      <section
-        style={{
-          padding: "var(--space-16) 0",
-          background: "var(--color-brand-forest)",
-        }}
-      >
-        <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "var(--space-8)",
-              textAlign: "center",
-            }}
-          >
-            {forestStats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{ color: "var(--color-text-inverse)" }}
+          {/* Our Impact sidebar */}
+          <Reveal variant="slide-up" delay={0.4}>
+            <div
+              style={{
+                background: "rgba(247, 244, 236, 0.08)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(247, 244, 236, 0.12)",
+                borderRadius: "var(--radius-lg)",
+                padding: "var(--space-8)",
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  marginBottom: "var(--space-6)",
+                  color: "var(--color-brand-gold)",
+                }}
               >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-4xl)",
-                    fontWeight: 400,
-                    color: "var(--color-brand-gold)",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    opacity: 0.8,
-                    marginTop: "var(--space-2)",
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                Our Impact
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+                {[
+                  { label: "Forest cover restored", note: "across multiple states" },
+                  { label: "Community-led plantations", note: "with local participation" },
+                  { label: "Species documented", note: "through field surveys" },
+                  { label: "Watersheds protected", note: "for downstream communities" },
+                ].map((item, i) => (
+                  <div key={i} style={{ borderBottom: "1px solid rgba(247, 244, 236, 0.08)", paddingBottom: "var(--space-4)" }}>
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-text-inverse)",
+                      }}
+                    >
+                      {item.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "rgba(247, 244, 236, 0.6)",
+                        marginTop: "var(--space-1)",
+                      }}
+                    >
+                      {item.note}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Mission Areas */}
+      {/* Focus Areas */}
       <section style={{ padding: "var(--space-24) 0" }}>
         <div className="container">
           <span className="editorial-label">What We Do</span>
@@ -287,46 +213,123 @@ export default function ForestPage() {
               marginTop: "var(--space-12)",
             }}
           >
-            {forestMissions.map((mission, i) => (
-              <motion.div
-                key={mission.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="glass"
-                style={{
-                  padding: "var(--space-8)",
-                  borderRadius: "var(--radius-lg)",
-                }}
+            {focusAreas.map((area, i) => (
+              <Reveal
+                key={area.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
               >
-                <mission.icon
-                  size={32}
+                <div
+                  className="glass"
                   style={{
-                    color: "var(--color-brand-forest)",
-                    marginBottom: "var(--space-4)",
-                  }}
-                />
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-xl)",
-                    fontWeight: 400,
-                    marginBottom: "var(--space-3)",
+                    padding: "var(--space-8)",
+                    borderRadius: "var(--radius-lg)",
                   }}
                 >
-                  {mission.title}
-                </h3>
-                <p
+                  <area.icon
+                    size={32}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-xl)",
+                      fontWeight: 400,
+                      marginBottom: "var(--space-3)",
+                    }}
+                  >
+                    {area.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {area.desc}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Active Initiatives */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <span className="editorial-label">Active Initiatives</span>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 400,
+              marginTop: "var(--space-4)",
+            }}
+          >
+            On the Ground
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "var(--space-6)",
+              marginTop: "var(--space-12)",
+            }}
+          >
+            {initiatives.map((init, i) => (
+              <Reveal
+                key={init.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
+              >
+                <div
                   style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
+                    background: "var(--color-bg-primary)",
+                    borderRadius: "var(--radius-lg)",
+                    padding: "var(--space-8)",
+                    border: "1px solid var(--color-border-primary)",
                   }}
                 >
-                  {mission.desc}
-                </p>
-              </motion.div>
+                  <init.icon
+                    size={28}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-lg)",
+                      fontWeight: 400,
+                      marginBottom: "var(--space-3)",
+                    }}
+                  >
+                    {init.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {init.desc}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -336,7 +339,8 @@ export default function ForestPage() {
       <section
         style={{
           padding: "var(--space-24) 0",
-          background: "var(--color-brand-forest)",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 100%)",
           textAlign: "center",
           color: "var(--color-text-inverse)",
         }}
@@ -364,19 +368,13 @@ export default function ForestPage() {
             Volunteer for plantation drives, monitor forest health, or support
             ecosystem restoration.
           </p>
-          <a
-            href="/app"
-            className="btn btn-primary"
-            style={{
-              background: "var(--color-brand-gold)",
-              color: "var(--color-brand-forest)",
-            }}
-          >
+          <a href="/app" className="btn btn-gold">
             Get Involved
             <ArrowRight size={16} />
           </a>
         </div>
       </section>
+
     </div>
   );
 }

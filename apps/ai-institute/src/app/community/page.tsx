@@ -1,17 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   HeartHandshake,
   Users,
   Calendar,
-  MapPin,
-  ArrowRight,
   HandHeart,
-  Award,
   BookOpen,
+  ArrowRight,
+  Sparkles,
+  Megaphone,
 } from "lucide-react";
-import { BhavyaLogo } from "@/components/BhavyaLogo";
+import { Reveal } from "@/components/motion/Reveal";
+import { HeroBackground } from "@/components/HeroBackground";
 
 const communityAreas = [
   {
@@ -40,54 +40,27 @@ const communityAreas = [
   },
 ];
 
-const communityStats = [
-  { value: "500+", label: "Active Volunteers" },
-  { value: "50+", label: "Events Per Year" },
-  { value: "12", label: "States Active" },
-  { value: "100%", label: "Transparent" },
+const involvementCards = [
+  {
+    icon: Sparkles,
+    title: "Local Chapters",
+    desc: "Start or join a Bhavya chapter in your city. Lead local missions for forest, heritage, and knowledge.",
+  },
+  {
+    icon: Megaphone,
+    title: "Ambassador Program",
+    desc: "Spread awareness about Bhavya Foundation's missions in your network and community.",
+  },
+  {
+    icon: HandHeart,
+    title: "Monthly Giving",
+    desc: "Sustained support for long-term missions. Every contribution is publicly documented.",
+  },
 ];
 
 export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      {/* Navigation */}
-      <nav className="site-nav">
-        <div className="site-nav-inner">
-          <a href="/" className="nav-logo">
-            <BhavyaLogo size="sm" />
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">Bhavya</span>
-              <span className="nav-logo-tagline">
-                Nature. Knowledge. Heritage.
-              </span>
-            </div>
-          </a>
-          <div className="nav-links">
-            <a href="/forest" className="nav-link">
-              Forest
-            </a>
-            <a href="/knowledge" className="nav-link">
-              Knowledge
-            </a>
-            <a href="/heritage" className="nav-link">
-              Heritage
-            </a>
-            <a
-              href="/community"
-              className="nav-link"
-              style={{ color: "var(--color-brand-forest)" }}
-            >
-              Community
-            </a>
-          </div>
-          <div className="nav-actions">
-            <a href="/app" className="nav-cta">
-              My Bhavya
-              <ArrowRight size={16} />
-            </a>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero */}
       <section
@@ -100,27 +73,17 @@ export default function CommunityPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, #0E382E 0%, #0a2a21 50%, #143828 100%)",
-          }}
-        />
+        <HeroBackground pillar="community" />
+
         <div
           className="container"
           style={{
             position: "relative",
-            zIndex: 1,
+            zIndex: 2,
             color: "var(--color-text-inverse)",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <Reveal variant="slide-up" delay={0.2}>
             <span
               className="editorial-label"
               style={{ color: "var(--color-brand-gold)" }}
@@ -159,82 +122,55 @@ export default function CommunityPage() {
                 marginTop: "var(--space-8)",
               }}
             >
-              <a
-                href="/community/volunteer"
-                className="btn btn-primary"
-                style={{
-                  background: "var(--color-brand-gold)",
-                  color: "var(--color-brand-forest)",
-                }}
-              >
+              <a href="/community/volunteer" className="btn btn-gold">
                 Volunteer Now
                 <ArrowRight size={16} />
               </a>
-              <a
-                href="/app/community"
-                className="btn btn-secondary"
-                style={{
-                  borderColor: "rgba(247, 244, 236, 0.3)",
-                  color: "var(--color-text-inverse)",
-                }}
-              >
+              <a href="/app/community" className="btn btn-secondary-inverse">
                 Join Community
                 <ArrowRight size={16} />
               </a>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Mission Statement */}
       <section
         style={{
-          padding: "var(--space-16) 0",
-          background: "var(--color-brand-forest)",
+          padding: "var(--space-24) 0",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 100%)",
+          textAlign: "center",
         }}
       >
-        <div className="container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "var(--space-8)",
-              textAlign: "center",
-            }}
-          >
-            {communityStats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                style={{ color: "var(--color-text-inverse)" }}
-              >
-                <div
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-4xl)",
-                    fontWeight: 400,
-                    color: "var(--color-brand-gold)",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    opacity: 0.8,
-                    marginTop: "var(--space-2)",
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="container" style={{ maxWidth: "800px" }}>
+          <Reveal variant="fade">
+            <blockquote
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
+                fontWeight: 400,
+                fontStyle: "italic",
+                lineHeight: 1.5,
+                color: "var(--color-text-inverse)",
+                margin: 0,
+              }}
+            >
+              &ldquo;Community is not a beneficiary. It is the architect of its
+              own future.&rdquo;
+            </blockquote>
+            <p
+              style={{
+                marginTop: "var(--space-6)",
+                color: "var(--color-brand-gold)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 500,
+              }}
+            >
+              — Bhavya Foundation
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -261,63 +197,140 @@ export default function CommunityPage() {
             }}
           >
             {communityAreas.map((area, i) => (
-              <motion.a
+              <Reveal
                 key={area.title}
-                href={area.href}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="glass"
-                style={{
-                  padding: "var(--space-8)",
-                  borderRadius: "var(--radius-lg)",
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                  transition: "all var(--duration-normal) var(--ease-out)",
-                }}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
               >
-                <area.icon
-                  size={32}
+                <a
+                  href={area.href}
+                  className="glass"
                   style={{
-                    color: "var(--color-brand-forest)",
-                    marginBottom: "var(--space-4)",
-                  }}
-                />
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-xl)",
-                    fontWeight: 400,
-                    marginBottom: "var(--space-3)",
+                    padding: "var(--space-8)",
+                    borderRadius: "var(--radius-lg)",
+                    textDecoration: "none",
+                    color: "inherit",
+                    display: "block",
+                    transition: "all var(--duration-normal) var(--ease-out)",
                   }}
                 >
-                  {area.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {area.desc}
-                </p>
+                  <area.icon
+                    size={32}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-xl)",
+                      fontWeight: 400,
+                      marginBottom: "var(--space-3)",
+                    }}
+                  >
+                    {area.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {area.desc}
+                  </p>
+                  <div
+                    style={{
+                      marginTop: "var(--space-4)",
+                      color: "var(--color-brand-forest)",
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 600,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                    }}
+                  >
+                    Learn More <ArrowRight size={14} />
+                  </div>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Involvement Cards */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <span className="editorial-label">Deeper Involvement</span>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 400,
+              marginTop: "var(--space-4)",
+            }}
+          >
+            Go Further
+          </h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "var(--space-6)",
+              marginTop: "var(--space-12)",
+            }}
+          >
+            {involvementCards.map((card, i) => (
+              <Reveal
+                key={card.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
+              >
                 <div
                   style={{
-                    marginTop: "var(--space-4)",
-                    color: "var(--color-brand-forest)",
-                    fontSize: "var(--text-sm)",
-                    fontWeight: 600,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
+                    background: "var(--color-bg-primary)",
+                    borderRadius: "var(--radius-lg)",
+                    padding: "var(--space-8)",
+                    border: "1px solid var(--color-border-primary)",
                   }}
                 >
-                  Learn More <ArrowRight size={14} />
+                  <card.icon
+                    size={28}
+                    style={{
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-lg)",
+                      fontWeight: 400,
+                      marginBottom: "var(--space-3)",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {card.desc}
+                  </p>
                 </div>
-              </motion.a>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -327,7 +340,8 @@ export default function CommunityPage() {
       <section
         style={{
           padding: "var(--space-24) 0",
-          background: "var(--color-brand-forest)",
+          background:
+            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 100%)",
           textAlign: "center",
           color: "var(--color-text-inverse)",
         }}
@@ -355,19 +369,13 @@ export default function CommunityPage() {
             Volunteer, donate, or simply participate. Every contribution
             matters.
           </p>
-          <a
-            href="/app"
-            className="btn btn-primary"
-            style={{
-              background: "var(--color-brand-gold)",
-              color: "var(--color-brand-forest)",
-            }}
-          >
+          <a href="/app" className="btn btn-gold">
             Get Involved
             <ArrowRight size={16} />
           </a>
         </div>
       </section>
+
     </div>
   );
 }

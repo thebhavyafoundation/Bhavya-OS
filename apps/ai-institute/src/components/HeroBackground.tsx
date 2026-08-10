@@ -1,26 +1,18 @@
 "use client";
 
 /**
- * HeroBackground — Real photography + atmospheric overlay system
+ * HeroBackground — Atmospheric gradient layer system
  *
- * When a `photo` prop is provided, renders a real photograph with
- * subtle gradient overlay for text readability. Falls back to
- * multi-layer gradient system when no photo is available.
+ * Replaces solid gradients with multi-layer depth that simulates photography.
+ * Each pillar gets a unique color treatment while maintaining visual consistency.
  *
- * Layers (photo mode): photograph → dark overlay → vignette → bottom fade
- * Layers (fallback): base gradient → accent → mid-tone → noise → mountains → vignette → fade
+ * Layers: base gradient → noise texture → vignette → bottom fade
  */
 
 type PillarType = "forest" | "knowledge" | "heritage" | "community" | "home";
 
 interface HeroBackgroundProps {
   pillar: PillarType;
-  /** Path to real photograph in /photography/ directory */
-  photo?: string;
-  /** Custom overlay opacity (default: 0.45) */
-  overlayOpacity?: number;
-  /** Custom object-position for the photo */
-  photoPosition?: string;
   children?: React.ReactNode;
 }
 
@@ -65,68 +57,9 @@ const pillarConfigs: Record<
   },
 };
 
-export function HeroBackground({ pillar, photo, overlayOpacity = 0.45, photoPosition = "center 40%", children }: HeroBackgroundProps) {
+export function HeroBackground({ pillar, children }: HeroBackgroundProps) {
   const config = pillarConfigs[pillar];
 
-  /* When a real photograph is provided, render it with overlay */
-  if (photo) {
-    return (
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        {/* Layer 1: Real photograph */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${photo})`,
-            backgroundSize: "cover",
-            backgroundPosition: photoPosition,
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-
-        {/* Layer 2: Dark gradient overlay for text readability */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `linear-gradient(
-              to bottom,
-              rgba(14, 56, 46, ${overlayOpacity * 0.6}) 0%,
-              rgba(14, 56, 46, ${overlayOpacity * 0.8}) 40%,
-              rgba(14, 56, 46, ${overlayOpacity}) 100%
-            )`,
-          }}
-        />
-
-        {/* Layer 3: Vignette */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.25) 100%)",
-          }}
-        />
-
-        {/* Layer 4: Bottom fade to page background */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "150px",
-            background:
-              "linear-gradient(to top, var(--color-bg-primary) 0%, transparent 100%)",
-          }}
-        />
-
-        {children}
-      </div>
-    );
-  }
-
-  /* Fallback: Multi-layer gradient system */
   return (
     <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
       {/* Layer 1: Base gradient */}

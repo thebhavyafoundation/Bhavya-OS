@@ -7,7 +7,7 @@ import { BhavyaLogo } from "./BhavyaLogo";
 
 const navItems = [
   { label: "Mission", href: "/mission" },
-  { label: "Academy", href: "/academy" },
+  { label: "Academy", href: "/knowledge/academy" },
   { label: "Knowledge", href: "/knowledge-graph" },
   { label: "Research", href: "/research" },
   { label: "Community", href: "/community" },

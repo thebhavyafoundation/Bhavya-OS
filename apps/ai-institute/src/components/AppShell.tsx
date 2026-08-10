@@ -7,10 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "./AuthProvider";
 import { AppFooter } from "@bhavya/platform-ui";
 import {
-  School,
   BookOpen,
   FlaskConical,
-  Network,
   Search,
   Menu,
   X,
@@ -21,17 +19,19 @@ import {
   LogOut,
   TreePine,
   Landmark,
+  Brain,
+  HeartHandshake,
+  GraduationCap,
   Terminal,
 } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/schools", label: "Schools", icon: School },
-  { href: "/courses", label: "Academy", icon: BookOpen },
-  { href: "/courses/foundations/lab", label: "Lab", icon: FlaskConical },
-  { href: "/knowledge-graph", label: "Knowledge", icon: Network },
-  { href: "/missions/forest", label: "Forest", icon: TreePine },
-  { href: "/missions/heritage", label: "Heritage", icon: Landmark },
+  { href: "/forest", label: "Forest", icon: TreePine },
+  { href: "/knowledge", label: "Knowledge", icon: Brain },
+  { href: "/heritage", label: "Heritage", icon: Landmark },
+  { href: "/community", label: "Community", icon: HeartHandshake },
+  { href: "/knowledge/academy", label: "Academy", icon: GraduationCap },
   { href: "/os", label: "OS", icon: Terminal },
 ];
 
@@ -39,25 +39,27 @@ const footerColumns = [
   {
     title: "Missions",
     links: [
-      { label: "Forest Restoration", href: "/missions/forest" },
-      { label: "Heritage Preservation", href: "/missions/heritage" },
+      { label: "Forest", href: "/forest" },
+      { label: "Knowledge", href: "/knowledge" },
+      { label: "Heritage", href: "/heritage" },
+      { label: "Community", href: "/community" },
     ],
   },
   {
     title: "Learn",
     links: [
-      { label: "Academy", href: "/courses" },
-      { label: "Programs", href: "/programs" },
-      { label: "Research", href: "/research" },
-      { label: "Library", href: "/library" },
-      { label: "Schools", href: "/schools" },
+      { label: "Academy", href: "/knowledge/academy" },
+      { label: "Library", href: "/knowledge/library" },
+      { label: "AI Labs", href: "/knowledge/ai" },
+      { label: "Research", href: "/knowledge/research" },
+      { label: "Courses", href: "/knowledge/courses" },
     ],
   },
   {
     title: "Governance",
     links: [
       { label: "About", href: "/about" },
-      { label: "OS Governance", href: "/os/governance" },
+      { label: "Constitution", href: "/mission" },
       { label: "Transparency", href: "/transparency" },
       { label: "Contributing", href: "/contributing" },
     ],
@@ -65,7 +67,7 @@ const footerColumns = [
   {
     title: "Platform",
     links: [
-      { label: "Institutional OS", href: "/os" },
+      { label: "Bhavya OS", href: "/os" },
       { label: "Observability", href: "/os/observability" },
       { label: "Runtime", href: "/os/runtime" },
       { label: "API Explorer", href: "/os/api-explorer" },
