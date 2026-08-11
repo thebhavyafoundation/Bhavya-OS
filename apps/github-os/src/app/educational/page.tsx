@@ -35,13 +35,34 @@ const typeIcons: Record<string, React.ReactNode> = {
   capstone: <GraduationCap size={14} />,
 };
 
-const typeColors: Record<string, string> = {
-  lesson: "bg-blue-900/40 text-blue-300 border-blue-800",
-  workshop: "bg-emerald-900/40 text-emerald-300 border-emerald-800",
-  lab: "bg-amber-900/40 text-amber-300 border-amber-800",
-  reading: "bg-violet-900/40 text-violet-300 border-violet-800",
-  capstone: "bg-pink-900/40 text-pink-300 border-pink-800",
-};
+const typeColors: Record<string, { bg: string; text: string; border: string }> =
+  {
+    lesson: {
+      bg: "var(--color-viz-forest-bg)",
+      text: "var(--color-viz-forest-light)",
+      border: "var(--color-viz-forest-border)",
+    },
+    workshop: {
+      bg: "var(--color-viz-earth-bg)",
+      text: "var(--color-viz-earth-light)",
+      border: "var(--color-viz-earth-border)",
+    },
+    lab: {
+      bg: "var(--color-viz-gold-bg)",
+      text: "var(--color-viz-gold-light)",
+      border: "var(--color-viz-gold-border)",
+    },
+    reading: {
+      bg: "var(--color-viz-sage-bg)",
+      text: "var(--color-viz-sage-light)",
+      border: "var(--color-viz-sage-border)",
+    },
+    capstone: {
+      bg: "var(--color-viz-gold-light-bg)",
+      text: "var(--color-viz-gold-light)",
+      border: "var(--color-viz-gold-light-border)",
+    },
+  };
 
 export default function EducationalPage() {
   const [exports, setExports] = useState<EducationalExport[]>([]);
@@ -89,15 +110,24 @@ export default function EducationalPage() {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Educational Exports
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Reusable learning materials generated from repositories
             </p>
           </div>
@@ -106,20 +136,32 @@ export default function EducationalPage() {
             <div className="relative flex-1">
               <Search
                 size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#71717a]"
+                className="absolute left-3 top-1/2 -translate-y-1/2"
+                style={{ color: "var(--color-text-tertiary)" }}
               />
               <input
                 type="text"
                 placeholder="Search exports..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-[#111111] border border-[#27272a] rounded-lg text-sm text-[#fafafa] placeholder:text-[#52525b] focus:outline-none focus:border-[#3b82f6] transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm focus:outline-none transition-colors"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-bg-tertiary)",
+                  color: "var(--color-text-primary)",
+                }}
               />
             </div>
             <select
               value={exportType}
               onChange={(e) => setExportType(e.target.value)}
-              className="px-3 py-2.5 bg-[#111111] border border-[#27272a] rounded-lg text-sm text-[#a1a1aa] appearance-none cursor-pointer"
+              className="px-3 py-2.5 rounded-lg text-sm appearance-none cursor-pointer"
+              style={{
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-bg-tertiary)",
+                color: "var(--color-text-secondary)",
+              }}
+              aria-label="Filter by export type"
             >
               <option value="">All Types</option>
               {filters.types.map((t) => (
@@ -131,7 +173,13 @@ export default function EducationalPage() {
             <select
               value={repository}
               onChange={(e) => setRepository(e.target.value)}
-              className="px-3 py-2.5 bg-[#111111] border border-[#27272a] rounded-lg text-sm text-[#a1a1aa] appearance-none cursor-pointer"
+              className="px-3 py-2.5 rounded-lg text-sm appearance-none cursor-pointer"
+              style={{
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-bg-tertiary)",
+                color: "var(--color-text-secondary)",
+              }}
+              aria-label="Filter by repository"
             >
               <option value="">All Repositories</option>
               {filters.repositories.map((r) => (
@@ -149,10 +197,20 @@ export default function EducationalPage() {
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="bg-[#111111] border border-[#27272a] rounded-lg p-5 animate-pulse"
+                      className="rounded-lg p-5 animate-pulse"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-bg-tertiary)",
+                      }}
                     >
-                      <div className="h-5 bg-[#27272a] rounded w-1/3 mb-3" />
-                      <div className="h-4 bg-[#27272a] rounded w-1/2" />
+                      <div
+                        className="h-5 rounded w-1/3 mb-3"
+                        style={{ background: "var(--color-bg-tertiary)" }}
+                      />
+                      <div
+                        className="h-4 rounded w-1/2"
+                        style={{ background: "var(--color-bg-tertiary)" }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -160,9 +218,13 @@ export default function EducationalPage() {
                 <div className="text-center py-20">
                   <GraduationCap
                     size={24}
-                    className="mx-auto text-[#52525b] mb-3"
+                    className="mx-auto mb-3"
+                    style={{ color: "var(--color-text-muted)" }}
                   />
-                  <p className="text-sm text-[#71717a]">
+                  <p
+                    className="text-sm"
+                    style={{ color: "var(--color-text-tertiary)" }}
+                  >
                     No educational exports found
                   </p>
                 </div>
@@ -174,35 +236,63 @@ export default function EducationalPage() {
                       <button
                         key={exp.id}
                         onClick={() => setSelectedExport(exp)}
-                        className={`w-full text-left bg-[#111111] border rounded-lg p-5 transition-all duration-200 ${
-                          selectedExport?.id === exp.id
-                            ? "border-[#3b82f6] ring-1 ring-[#3b82f6]/50"
-                            : "border-[#27272a] hover:border-[#3b82f6]/50"
-                        }`}
+                        className="w-full text-left border rounded-lg p-5 transition-all duration-200"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor:
+                            selectedExport?.id === exp.id
+                              ? "var(--color-accent-gold)"
+                              : "var(--color-bg-tertiary)",
+                        }}
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-3">
                             <span
-                              className={`p-1.5 rounded ${typeColors[exp.export_type] || "bg-zinc-800 text-zinc-400"}`}
+                              className="p-1.5 rounded"
+                              style={{
+                                background:
+                                  typeColors[exp.export_type]?.bg ||
+                                  "var(--color-bg-tertiary)",
+                                color:
+                                  typeColors[exp.export_type]?.text ||
+                                  "var(--color-text-tertiary)",
+                                border: `1px solid ${typeColors[exp.export_type]?.border || "var(--color-bg-tertiary)"}`,
+                              }}
                             >
                               {typeIcons[exp.export_type] || (
                                 <FileText size={14} />
                               )}
                             </span>
                             <div>
-                              <h3 className="text-sm font-medium text-[#fafafa]">
+                              <h3
+                                className="text-sm font-medium"
+                                style={{ color: "var(--color-text-primary)" }}
+                              >
                                 {exp.title}
                               </h3>
                               <div className="flex items-center gap-2 mt-0.5">
-                                <span className="text-xs text-[#52525b] capitalize">
+                                <span
+                                  className="text-xs capitalize"
+                                  style={{ color: "var(--color-text-muted)" }}
+                                >
                                   {exp.export_type}
                                 </span>
                                 {exp.repository_name && (
                                   <>
-                                    <span className="text-xs text-[#52525b]">
+                                    <span
+                                      className="text-xs"
+                                      style={{
+                                        color: "var(--color-text-muted)",
+                                      }}
+                                    >
                                       ·
                                     </span>
-                                    <span className="text-xs text-[#52525b]">
+                                    <span
+                                      className="text-xs"
+                                      style={{
+                                        color: "var(--color-text-muted)",
+                                      }}
+                                    >
                                       {exp.repository_name}
                                     </span>
                                   </>
@@ -211,12 +301,18 @@ export default function EducationalPage() {
                             </div>
                           </div>
                           {meta.duration && (
-                            <span className="text-xs text-[#71717a]">
+                            <span
+                              className="text-xs"
+                              style={{ color: "var(--color-text-tertiary)" }}
+                            >
                               {meta.duration}
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-[#71717a] line-clamp-2 ml-10">
+                        <p
+                          className="text-xs line-clamp-2 ml-10"
+                          style={{ color: "var(--color-text-tertiary)" }}
+                        >
                           {exp.content.split("\n")[0]}
                         </p>
                       </button>
@@ -228,34 +324,60 @@ export default function EducationalPage() {
 
             {selectedExport && (
               <div className="w-[400px] flex-shrink-0">
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 sticky top-8 max-h-[calc(100vh-120px)] overflow-y-auto">
+                <div
+                  className="rounded-lg p-5 sticky top-8 max-h-[calc(100vh-120px)] overflow-y-auto"
+                  style={{
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-bg-tertiary)",
+                  }}
+                >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <span
-                        className={`p-1.5 rounded ${typeColors[selectedExport.export_type] || "bg-zinc-800 text-zinc-400"}`}
+                        className="p-1.5 rounded"
+                        style={{
+                          background:
+                            typeColors[selectedExport.export_type]?.bg ||
+                            "var(--color-bg-tertiary)",
+                          color:
+                            typeColors[selectedExport.export_type]?.text ||
+                            "var(--color-text-tertiary)",
+                          border: `1px solid ${typeColors[selectedExport.export_type]?.border || "var(--color-bg-tertiary)"}`,
+                        }}
                       >
                         {typeIcons[selectedExport.export_type] || (
                           <FileText size={14} />
                         )}
                       </span>
                       <div>
-                        <h2 className="text-lg font-semibold text-[#fafafa]">
+                        <h2
+                          className="text-lg font-semibold"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {selectedExport.title}
                         </h2>
-                        <span className="text-xs text-[#52525b] capitalize">
+                        <span
+                          className="text-xs capitalize"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           {selectedExport.export_type}
                         </span>
                       </div>
                     </div>
                     <button
                       onClick={() => setSelectedExport(null)}
-                      className="text-[#71717a] hover:text-[#fafafa] transition-colors"
+                      className="transition-colors"
+                      style={{ color: "var(--color-text-tertiary)" }}
+                      aria-label="Close detail panel"
                     >
                       ✕
                     </button>
                   </div>
 
-                  <pre className="text-sm text-[#a1a1aa] whitespace-pre-wrap font-mono leading-relaxed">
+                  <pre
+                    className="text-sm whitespace-pre-wrap font-mono leading-relaxed"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
                     {selectedExport.content}
                   </pre>
                 </div>

@@ -61,7 +61,6 @@ const involvementCards = [
 export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-
       {/* Hero */}
       <section
         style={{
@@ -73,7 +72,11 @@ export default function CommunityPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground pillar="community" />
+        <HeroBackground
+          pillar="community"
+          photo="/photography/community/community-village-gathering.jpg"
+          photoPosition="center center"
+        />
 
         <div
           className="container"
@@ -375,7 +378,6 @@ export default function CommunityPage() {
           </a>
         </div>
       </section>
-
     </div>
   );
 }

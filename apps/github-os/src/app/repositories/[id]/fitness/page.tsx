@@ -33,17 +33,17 @@ const dimensions = [
 ];
 
 function getScoreColor(score: number) {
-  if (score >= 90) return "text-emerald-400";
-  if (score >= 80) return "text-blue-400";
-  if (score >= 70) return "text-amber-400";
-  return "text-red-400";
+  if (score >= 90) return "var(--color-accent-green-light)";
+  if (score >= 80) return "var(--color-accent-gold)";
+  if (score >= 70) return "var(--color-accent-earth)";
+  return "var(--color-status-error)";
 }
 
 function getScoreBg(score: number) {
-  if (score >= 90) return "bg-emerald-500";
-  if (score >= 80) return "bg-blue-500";
-  if (score >= 70) return "bg-amber-500";
-  return "bg-red-500";
+  if (score >= 90) return "var(--color-accent-green-light)";
+  if (score >= 80) return "var(--color-accent-gold)";
+  if (score >= 70) return "var(--color-accent-earth)";
+  return "var(--color-status-error)";
 }
 
 export default function FitnessPage() {
@@ -66,12 +66,21 @@ export default function FitnessPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -80,17 +89,28 @@ export default function FitnessPage() {
 
   if (!fitness) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto text-center py-20">
-            <Activity size={24} className="mx-auto text-[#52525b] mb-3" />
-            <p className="text-sm text-[#71717a]">
+            <Activity
+              size={24}
+              className="mx-auto mb-3"
+              style={{ color: "var(--color-text-muted)" }}
+            />
+            <p
+              className="text-sm"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               No fitness report available for this repository
             </p>
             <Link
               href={`/repositories/${id}`}
-              className="text-sm text-[#3b82f6] hover:text-[#60a5fa] mt-2 inline-block"
+              className="text-sm mt-2 inline-block hover:text-[var(--color-accent-gold)]"
+              style={{ color: "var(--color-accent-gold)" }}
             >
               Back to repository
             </Link>
@@ -109,13 +129,17 @@ export default function FitnessPage() {
   })();
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
@@ -123,10 +147,16 @@ export default function FitnessPage() {
 
           <div className="flex items-start justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-semibold text-[#fafafa]">
+              <h1
+                className="text-2xl font-semibold"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Repository Fitness Report
               </h1>
-              <p className="text-sm text-[#71717a] mt-1">
+              <p
+                className="text-sm mt-1"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 Multi-dimensional quality analysis with explanations
               </p>
             </div>
@@ -138,7 +168,7 @@ export default function FitnessPage() {
                     cy="18"
                     r="15.91549430918954"
                     fill="none"
-                    stroke="#27272a"
+                    stroke="var(--color-bg-tertiary)"
                     strokeWidth="3"
                   />
                   <circle
@@ -146,7 +176,7 @@ export default function FitnessPage() {
                     cy="18"
                     r="15.91549430918954"
                     fill="none"
-                    className={`stroke-current ${getScoreColor(fitness.bhavya_score)}`}
+                    stroke={getScoreColor(fitness.bhavya_score)}
                     strokeWidth="3"
                     strokeDasharray={`${fitness.bhavya_score} 100`}
                     strokeLinecap="round"
@@ -154,12 +184,18 @@ export default function FitnessPage() {
                   />
                 </svg>
                 <span
-                  className={`absolute inset-0 flex items-center justify-center text-lg font-semibold ${getScoreColor(fitness.bhavya_score)}`}
+                  className="absolute inset-0 flex items-center justify-center text-lg font-semibold"
+                  style={{ color: getScoreColor(fitness.bhavya_score) }}
                 >
                   {fitness.bhavya_score}
                 </span>
               </div>
-              <p className="text-[10px] text-[#52525b] mt-1">Bhavya Score</p>
+              <p
+                className="text-[10px] mt-1"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Bhavya Score
+              </p>
             </div>
           </div>
 
@@ -170,24 +206,43 @@ export default function FitnessPage() {
               return (
                 <div
                   key={dim.key}
-                  className="bg-[#111111] border border-[#27272a] rounded-lg p-4"
+                  className="rounded-lg p-4"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm text-[#fafafa]">{dim.label}</span>
                     <span
-                      className={`text-lg font-semibold ${getScoreColor(score)}`}
+                      className="text-sm"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
+                      {dim.label}
+                    </span>
+                    <span
+                      className="text-lg font-semibold"
+                      style={{ color: getScoreColor(score) }}
                     >
                       {score}
                     </span>
                   </div>
-                  <div className="w-full h-2 bg-[#27272a] rounded-full overflow-hidden">
+                  <div
+                    className="w-full h-2 rounded-full overflow-hidden"
+                    style={{ background: "var(--color-bg-tertiary)" }}
+                  >
                     <div
-                      className={`h-full rounded-full transition-all duration-500 ${getScoreBg(score)}`}
-                      style={{ width: `${score}%` }}
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{
+                        width: `${score}%`,
+                        background: getScoreBg(score),
+                      }}
                     />
                   </div>
                   {explanations[dim.key] && (
-                    <p className="text-xs text-[#52525b] mt-2">
+                    <p
+                      className="text-xs mt-2"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
                       {explanations[dim.key]}
                     </p>
                   )}
@@ -198,14 +253,31 @@ export default function FitnessPage() {
 
           {/* Overall Explanation */}
           {explanations.overall && (
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+            <div
+              className="rounded-lg p-5"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border-primary)",
+              }}
+            >
               <div className="flex items-center gap-2 mb-2">
-                <Lightbulb size={14} className="text-[#3b82f6]" />
-                <h3 className="text-sm font-medium text-[#fafafa]">
+                <Lightbulb
+                  size={14}
+                  style={{ color: "var(--color-accent-gold)" }}
+                />
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Overall Assessment
                 </h3>
               </div>
-              <p className="text-sm text-[#a1a1aa]">{explanations.overall}</p>
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {explanations.overall}
+              </p>
             </div>
           )}
         </div>

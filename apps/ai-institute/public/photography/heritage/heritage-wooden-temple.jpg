@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="heritage2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d1a0e"/>
+      <stop offset="50%" stop-color="#1a0f08"/>
+      <stop offset="100%" stop-color="#0a0604"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#heritage2)"/>
+  <!-- Wooden temple silhouette -->
+  <g fill="#1a0f08" opacity="0.5">
+    <rect x="600" y="350" width="720" height="730"/>
+    <polygon points="600,350 960,150 1320,350"/>
+    <polygon points="650,350 960,200 1270,350"/>
+    <rect x="700" y="450" width="120" height="250"/>
+    <rect x="1100" y="450" width="120" height="250"/>
+  </g>
+  <!-- Mountains -->
+  <polygon points="0,1080 200,600 400,750 600,500 800,650 1000,400 1200,550 1400,350 1600,500 1800,450 1920,600 1920,1080" fill="#0a0604" opacity="0.4"/>
+  <!-- Prayer flags -->
+  <g opacity="0.3">
+    <line x1="960" y1="150" x2="1100" y2="300" stroke="#d4af37" stroke-width="2"/>
+    <rect x="1000" y="200" width="15" height="20" fill="#2980b9" opacity="0.5"/>
+    <rect x="1030" y="220" width="15" height="20" fill="#F7F4EC" opacity="0.5"/>
+    <rect x="1060" y="240" width="15" height="20" fill="#c0392b" opacity="0.5"/>
+  </g>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: heritage-wooden-temple.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Heritage Alternative</text>
+</svg>

@@ -82,17 +82,32 @@ export default function TimelinePage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-3xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex gap-4 mb-8">
-                <div className="w-12 h-12 bg-[#27272a] rounded-full" />
+                <div
+                  className="w-12 h-12 rounded-full"
+                  style={{ background: "var(--color-bg-tertiary)" }}
+                />
                 <div className="flex-1">
-                  <div className="h-5 bg-[#27272a] rounded w-1/3 mb-2" />
-                  <div className="h-4 bg-[#27272a] rounded w-1/2" />
+                  <div
+                    className="h-5 rounded w-1/3 mb-2"
+                    style={{ background: "var(--color-bg-tertiary)" }}
+                  />
+                  <div
+                    className="h-4 rounded w-1/2"
+                    style={{ background: "var(--color-bg-tertiary)" }}
+                  />
                 </div>
               </div>
             ))}
@@ -103,33 +118,57 @@ export default function TimelinePage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-3xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">Timeline</h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              Timeline
+            </h1>
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Engineering history of {repository?.name}
             </p>
           </div>
 
           {timeline.length === 0 ? (
             <div className="text-center py-20">
-              <Clock size={24} className="mx-auto text-[#52525b] mb-3" />
-              <p className="text-sm text-[#71717a]">No timeline events yet</p>
+              <Clock
+                size={24}
+                className="mx-auto mb-3"
+                style={{ color: "var(--color-text-muted)" }}
+              />
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
+                No timeline events yet
+              </p>
             </div>
           ) : (
             <div className="relative">
-              <div className="absolute left-[23px] top-0 bottom-0 w-px bg-[#27272a]" />
+              <div
+                className="absolute left-[23px] top-0 bottom-0 w-px"
+                style={{ background: "var(--color-bg-tertiary)" }}
+              />
 
               <div className="space-y-8">
                 {timeline.map((event, i) => {
@@ -152,15 +191,24 @@ export default function TimelinePage() {
                           >
                             {event.event_type}
                           </span>
-                          <span className="text-xs text-[#52525b]">
+                          <span
+                            className="text-xs"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
                             {formatDate(event.event_date)}
                           </span>
                         </div>
-                        <h3 className="text-sm font-medium text-[#fafafa] mb-1">
+                        <h3
+                          className="text-sm font-medium mb-1"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {event.title}
                         </h3>
                         {event.description && (
-                          <p className="text-xs text-[#71717a]">
+                          <p
+                            className="text-xs"
+                            style={{ color: "var(--color-text-tertiary)" }}
+                          >
                             {event.description}
                           </p>
                         )}

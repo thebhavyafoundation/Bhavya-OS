@@ -28,14 +28,14 @@ interface Filters {
 }
 
 const nodeColors: Record<string, string> = {
-  repository: "#3b82f6",
-  pattern: "#a855f7",
-  technology: "#22c55e",
-  course: "#f59e0b",
-  mcp: "#ec4899",
-  plugin: "#06b6d4",
-  framework: "#14b8a6",
-  documentation: "#64748b",
+  repository: "var(--color-accent-gold)",
+  pattern: "var(--color-viz-forest-light)",
+  technology: "var(--color-accent-green-light)",
+  course: "var(--color-accent-earth)",
+  mcp: "var(--color-viz-gold)",
+  plugin: "var(--color-viz-sage)",
+  framework: "var(--color-viz-earth)",
+  documentation: "var(--color-viz-sage-light)",
 };
 
 const nodeShapes: Record<string, string> = {
@@ -138,17 +138,26 @@ export default function KnowledgeGraphPage() {
 
   return (
     <div
-      className={`flex min-h-screen bg-[#0a0a0a] ${isFullscreen ? "fixed inset-0 z-50" : ""}`}
+      className={`flex min-h-screen ${isFullscreen ? "fixed inset-0 z-50" : ""}`}
+      style={{ background: "var(--color-bg-primary)" }}
     >
       {!isFullscreen && <Sidebar />}
-      <main className={`${isFullscreen ? "w-full" : "ml-[240px]"} flex-1 p-8`}>
+      <main
+        className={`${isFullscreen ? "w-full" : "ml-[var(--sidebar-width)]"} flex-1 p-8`}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-semibold text-[#fafafa]">
+              <h1
+                className="text-2xl font-semibold"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Knowledge Graph
               </h1>
-              <p className="text-sm text-[#71717a] mt-1">
+              <p
+                className="text-sm mt-1"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 Visualize relationships between repositories, patterns,
                 technologies, and courses
               </p>
@@ -157,7 +166,12 @@ export default function KnowledgeGraphPage() {
               <select
                 value={nodeType}
                 onChange={(e) => setNodeType(e.target.value)}
-                className="px-3 py-1.5 bg-[#111111] border border-[#27272a] rounded-md text-sm text-[#a1a1aa] appearance-none cursor-pointer"
+                className="px-3 py-1.5 rounded-md text-sm appearance-none cursor-pointer"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-bg-tertiary)",
+                  color: "var(--color-text-secondary)",
+                }}
               >
                 <option value="">All Node Types</option>
                 {filters.nodeTypes.map((t) => (
@@ -170,13 +184,25 @@ export default function KnowledgeGraphPage() {
                 onClick={() => {
                   initializePositions();
                 }}
-                className="p-2 bg-[#111111] border border-[#27272a] rounded-md text-[#71717a] hover:text-[#fafafa] transition-colors"
+                className="p-2 rounded-md transition-colors"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-bg-tertiary)",
+                  color: "var(--color-text-tertiary)",
+                }}
+                aria-label="Reset layout"
               >
                 <RotateCcw size={14} />
               </button>
               <button
                 onClick={() => setIsFullscreen(!isFullscreen)}
-                className="p-2 bg-[#111111] border border-[#27272a] rounded-md text-[#71717a] hover:text-[#fafafa] transition-colors"
+                className="p-2 rounded-md transition-colors"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-bg-tertiary)",
+                  color: "var(--color-text-tertiary)",
+                }}
+                aria-label="Toggle fullscreen"
               >
                 {isFullscreen ? (
                   <Minimize2 size={14} />
@@ -188,10 +214,21 @@ export default function KnowledgeGraphPage() {
           </div>
 
           <div className="flex gap-6">
-            <div className="flex-1 bg-[#111111] border border-[#27272a] rounded-lg overflow-hidden">
+            <div
+              className="flex-1 rounded-lg overflow-hidden"
+              style={{
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-bg-tertiary)",
+              }}
+            >
               {loading ? (
                 <div className="h-[600px] flex items-center justify-center">
-                  <div className="text-sm text-[#71717a]">Loading graph...</div>
+                  <div
+                    className="text-sm"
+                    style={{ color: "var(--color-text-tertiary)" }}
+                  >
+                    Loading graph...
+                  </div>
                 </div>
               ) : (
                 <svg
@@ -199,7 +236,9 @@ export default function KnowledgeGraphPage() {
                   width="100%"
                   height={isFullscreen ? "calc(100vh - 160px)" : "600"}
                   viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-                  className="bg-[#0a0a0a]"
+                  style={{ background: "var(--color-bg-primary)" }}
+                  role="img"
+                  aria-label="Knowledge Graph Visualization"
                 >
                   <defs>
                     <marker
@@ -210,7 +249,10 @@ export default function KnowledgeGraphPage() {
                       refY="3.5"
                       orient="auto"
                     >
-                      <polygon points="0 0, 10 3.5, 0 7" fill="#52525b" />
+                      <polygon
+                        points="0 0, 10 3.5, 0 7"
+                        fill="var(--color-text-muted)"
+                      />
                     </marker>
                   </defs>
 
@@ -229,7 +271,11 @@ export default function KnowledgeGraphPage() {
                           y1={source.y}
                           x2={target.x}
                           y2={target.y}
-                          stroke={isHighlighted ? "#3b82f6" : "#27272a"}
+                          stroke={
+                            isHighlighted
+                              ? "var(--color-accent-gold)"
+                              : "var(--color-bg-tertiary)"
+                          }
                           strokeWidth={isHighlighted ? 2 : 1}
                           strokeDasharray={isHighlighted ? "none" : "4"}
                           markerEnd="url(#arrowhead)"
@@ -242,7 +288,7 @@ export default function KnowledgeGraphPage() {
                             x={(source.x + target.x) / 2}
                             y={(source.y + target.y) / 2 - 5}
                             textAnchor="middle"
-                            fill="#71717a"
+                            fill="var(--color-text-tertiary)"
                             fontSize="10"
                           >
                             {edge.relationship}
@@ -255,7 +301,9 @@ export default function KnowledgeGraphPage() {
                   {nodes.map((node) => {
                     const isSelected = selectedNode?.id === node.id;
                     const isConnected = connectedNodes.has(node.id);
-                    const color = nodeColors[node.node_type] || "#71717a";
+                    const color =
+                      nodeColors[node.node_type] ||
+                      "var(--color-text-tertiary)";
                     const size = isSelected ? 24 : isConnected ? 20 : 16;
 
                     return (
@@ -265,6 +313,9 @@ export default function KnowledgeGraphPage() {
                           setSelectedNode(isSelected ? null : node)
                         }
                         className="cursor-pointer"
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`${node.label} - ${node.node_type}`}
                         opacity={
                           selectedNode
                             ? isSelected || isConnected
@@ -281,14 +332,18 @@ export default function KnowledgeGraphPage() {
                             height={size}
                             rx={4}
                             fill={color}
-                            stroke={isSelected ? "#fafafa" : "none"}
+                            stroke={
+                              isSelected ? "var(--color-text-primary)" : "none"
+                            }
                             strokeWidth={2}
                           />
                         ) : node.node_type === "technology" ? (
                           <polygon
                             points={`${node.x || 0},${(node.y || 0) - size / 2} ${(node.x || 0) + size / 2},${node.y || 0} ${node.x || 0},${(node.y || 0) + size / 2} ${(node.x || 0) - size / 2},${node.y || 0}`}
                             fill={color}
-                            stroke={isSelected ? "#fafafa" : "none"}
+                            stroke={
+                              isSelected ? "var(--color-text-primary)" : "none"
+                            }
                             strokeWidth={2}
                           />
                         ) : (
@@ -297,7 +352,9 @@ export default function KnowledgeGraphPage() {
                             cy={node.y || 0}
                             r={size / 2}
                             fill={color}
-                            stroke={isSelected ? "#fafafa" : "none"}
+                            stroke={
+                              isSelected ? "var(--color-text-primary)" : "none"
+                            }
                             strokeWidth={2}
                           />
                         )}
@@ -305,7 +362,7 @@ export default function KnowledgeGraphPage() {
                           x={node.x || 0}
                           y={(node.y || 0) + size / 2 + 14}
                           textAnchor="middle"
-                          fill="#a1a1aa"
+                          fill="var(--color-text-secondary)"
                           fontSize="10"
                         >
                           {node.label.length > 15
@@ -321,26 +378,36 @@ export default function KnowledgeGraphPage() {
 
             {selectedNode && (
               <div className="w-[320px] flex-shrink-0">
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 sticky top-8">
+                <div
+                  className="rounded-lg p-5 sticky top-8"
+                  style={{
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-bg-tertiary)",
+                  }}
+                >
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <span
                         className="inline-block px-2 py-0.5 rounded text-[10px] font-medium mb-2"
                         style={{
-                          backgroundColor:
-                            nodeColors[selectedNode.node_type] + "33",
+                          backgroundColor: `color-mix(in srgb, ${nodeColors[selectedNode.node_type]} 20%, transparent)`,
                           color: nodeColors[selectedNode.node_type],
                         }}
                       >
                         {selectedNode.node_type}
                       </span>
-                      <h2 className="text-lg font-semibold text-[#fafafa]">
+                      <h2
+                        className="text-lg font-semibold"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         {selectedNode.label}
                       </h2>
                     </div>
                     <button
                       onClick={() => setSelectedNode(null)}
-                      className="text-[#71717a] hover:text-[#fafafa] transition-colors"
+                      className="transition-colors"
+                      style={{ color: "var(--color-text-tertiary)" }}
+                      aria-label="Close node details"
                     >
                       ✕
                     </button>
@@ -348,7 +415,10 @@ export default function KnowledgeGraphPage() {
 
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xs text-[#71717a] uppercase tracking-wider mb-2">
+                      <h3
+                        className="text-xs uppercase tracking-wider mb-2"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
                         Connections
                       </h3>
                       <div className="space-y-2">
@@ -373,12 +443,22 @@ export default function KnowledgeGraphPage() {
                                   connectedNode &&
                                   setSelectedNode(connectedNode)
                                 }
-                                className="w-full flex items-center justify-between p-2 bg-[#0a0a0a] border border-[#27272a] rounded text-left hover:border-[#3b82f6] transition-colors"
+                                className="w-full flex items-center justify-between p-2 rounded text-left transition-colors"
+                                style={{
+                                  background: "var(--color-bg-primary)",
+                                  border: "1px solid var(--color-bg-tertiary)",
+                                }}
                               >
-                                <span className="text-xs text-[#fafafa]">
+                                <span
+                                  className="text-xs"
+                                  style={{ color: "var(--color-text-primary)" }}
+                                >
                                   {connectedNode?.label}
                                 </span>
-                                <span className="text-[10px] text-[#52525b]">
+                                <span
+                                  className="text-[10px]"
+                                  style={{ color: "var(--color-text-muted)" }}
+                                >
                                   {edge.relationship}
                                 </span>
                               </button>
@@ -388,10 +468,20 @@ export default function KnowledgeGraphPage() {
                     </div>
 
                     <div>
-                      <h3 className="text-xs text-[#71717a] uppercase tracking-wider mb-2">
+                      <h3
+                        className="text-xs uppercase tracking-wider mb-2"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
                         Metadata
                       </h3>
-                      <pre className="text-xs text-[#a1a1aa] bg-[#0a0a0a] border border-[#27272a] rounded p-2 overflow-x-auto">
+                      <pre
+                        className="text-xs rounded p-2 overflow-x-auto font-mono"
+                        style={{
+                          color: "var(--color-text-secondary)",
+                          background: "var(--color-bg-primary)",
+                          border: "1px solid var(--color-bg-tertiary)",
+                        }}
+                      >
                         {JSON.stringify(
                           JSON.parse(selectedNode.metadata),
                           null,
@@ -413,7 +503,10 @@ export default function KnowledgeGraphPage() {
                     className="w-3 h-3 rounded"
                     style={{ backgroundColor: color }}
                   />
-                  <span className="text-xs text-[#71717a] capitalize">
+                  <span
+                    className="text-xs capitalize"
+                    style={{ color: "var(--color-text-tertiary)" }}
+                  >
                     {type}
                   </span>
                 </div>

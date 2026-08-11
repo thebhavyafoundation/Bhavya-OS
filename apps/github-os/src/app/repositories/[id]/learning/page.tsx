@@ -118,12 +118,21 @@ export default function LearningModePage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-4" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-4"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -132,14 +141,20 @@ export default function LearningModePage() {
 
   if (!repository || !learningPath) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto text-center py-20">
-            <p className="text-[#71717a]">Learning path not found</p>
+            <p style={{ color: "var(--color-text-tertiary)" }}>
+              Learning path not found
+            </p>
             <Link
               href="/repositories"
-              className="text-sm text-[#3b82f6] hover:text-[#60a5fa] mt-2 inline-block"
+              className="text-sm mt-2 inline-block hover:text-[var(--color-accent-gold)]"
+              style={{ color: "var(--color-accent-gold)" }}
             >
               Back to repositories
             </Link>
@@ -165,13 +180,17 @@ export default function LearningModePage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
@@ -180,7 +199,10 @@ export default function LearningModePage() {
           <div className="flex items-start justify-between mb-8">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <h1 className="text-2xl font-semibold text-[#fafafa]">
+                <h1
+                  className="text-2xl font-semibold"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Learning Mode: {repository.name}
                 </h1>
                 <span
@@ -189,15 +211,26 @@ export default function LearningModePage() {
                   {learningPath.difficulty}
                 </span>
               </div>
-              <p className="text-sm text-[#71717a]">{repository.description}</p>
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
+                {repository.description}
+              </p>
             </div>
             <div className="text-right">
-              <div className="flex items-center gap-2 text-sm text-[#71717a]">
+              <div
+                className="flex items-center gap-2 text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 <Clock size={14} />
                 {learningPath.estimated_hours} hours
               </div>
               {health && (
-                <div className="flex items-center gap-2 text-sm text-[#71717a] mt-1">
+                <div
+                  className="flex items-center gap-2 text-sm mt-1"
+                  style={{ color: "var(--color-text-tertiary)" }}
+                >
                   <Star size={14} />
                   Educational completeness:{" "}
                   {health.educational_completeness_score}%
@@ -215,9 +248,19 @@ export default function LearningModePage() {
                     onClick={() => setActiveSection(section.id)}
                     className={`w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors ${
                       activeSection === section.id
-                        ? "bg-[#1a1a1a] text-[#fafafa]"
-                        : "text-[#71717a] hover:text-[#fafafa] hover:bg-[#111111]"
+                        ? "text-[var(--color-text-primary)]"
+                        : "hover:text-[var(--color-text-primary)]"
                     }`}
+                    style={{
+                      background:
+                        activeSection === section.id
+                          ? "var(--color-bg-secondary)"
+                          : "transparent",
+                      color:
+                        activeSection === section.id
+                          ? "var(--color-text-primary)"
+                          : "var(--color-text-tertiary)",
+                    }}
                   >
                     {section.icon}
                     {section.label}
@@ -230,34 +273,86 @@ export default function LearningModePage() {
               {activeSection === "overview" && (
                 <div className="space-y-6">
                   {repository.why_bhavya_cares && (
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                      <h3 className="text-sm font-medium text-[#fafafa] mb-2">
+                    <div
+                      className="rounded-lg p-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <h3
+                        className="text-sm font-medium mb-2"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         Why Learn This
                       </h3>
-                      <p className="text-sm text-[#a1a1aa] leading-relaxed">
+                      <p
+                        className="text-sm leading-relaxed"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {repository.why_bhavya_cares}
                       </p>
                     </div>
                   )}
 
                   <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                      <p className="text-xs text-[#71717a] mb-1">
+                    <div
+                      className="rounded-lg p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <p
+                        className="text-xs mb-1"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
                         Estimated Hours
                       </p>
-                      <p className="text-2xl font-semibold text-[#fafafa]">
+                      <p
+                        className="text-2xl font-semibold"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         {learningPath.estimated_hours}
                       </p>
                     </div>
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                      <p className="text-xs text-[#71717a] mb-1">Difficulty</p>
-                      <p className="text-2xl font-semibold text-[#fafafa] capitalize">
+                    <div
+                      className="rounded-lg p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <p
+                        className="text-xs mb-1"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
+                        Difficulty
+                      </p>
+                      <p
+                        className="text-2xl font-semibold capitalize"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         {learningPath.difficulty}
                       </p>
                     </div>
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-4">
-                      <p className="text-xs text-[#71717a] mb-1">Concepts</p>
-                      <p className="text-2xl font-semibold text-[#fafafa]">
+                    <div
+                      className="rounded-lg p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <p
+                        className="text-xs mb-1"
+                        style={{ color: "var(--color-text-tertiary)" }}
+                      >
+                        Concepts
+                      </p>
+                      <p
+                        className="text-2xl font-semibold"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         {
                           parseJsonArray(learningPath.concepts_demonstrated)
                             .length
@@ -267,15 +362,29 @@ export default function LearningModePage() {
                   </div>
 
                   {patterns.length > 0 && (
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                      <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                    <div
+                      className="rounded-lg p-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <h3
+                        className="text-sm font-medium mb-3"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         Patterns You'll Learn
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {patterns.map((p, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1 bg-[#1a1a1a] border border-[#27272a] rounded text-xs text-[#a1a1aa]"
+                            className="px-3 py-1 rounded text-xs"
+                            style={{
+                              background: "var(--color-bg-secondary)",
+                              borderColor: "var(--color-border-primary)",
+                              color: "var(--color-text-secondary)",
+                            }}
                           >
                             {p.pattern_name} ({p.confidence}%)
                           </span>
@@ -285,23 +394,42 @@ export default function LearningModePage() {
                   )}
 
                   {exports.length > 0 && (
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                      <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                    <div
+                      className="rounded-lg p-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <h3
+                        className="text-sm font-medium mb-3"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         Educational Materials
                       </h3>
                       <div className="space-y-2">
                         {exports.map((e) => (
                           <div
                             key={e.id}
-                            className="flex items-center gap-3 p-2 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-center gap-3 p-2 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
                             {exportTypeIcons[e.export_type] || (
                               <FileText size={14} />
                             )}
-                            <span className="text-sm text-[#fafafa]">
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-primary)" }}
+                            >
                               {e.title}
                             </span>
-                            <span className="ml-auto text-xs text-[#52525b] capitalize">
+                            <span
+                              className="ml-auto text-xs capitalize"
+                              style={{ color: "var(--color-text-muted)" }}
+                            >
                               {e.export_type}
                             </span>
                           </div>
@@ -313,18 +441,37 @@ export default function LearningModePage() {
               )}
 
               {activeSection === "prerequisites" && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-4"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Prerequisites
                   </h3>
                   <div className="space-y-3">
                     {parseJsonArray(learningPath.prerequisites).map(
                       (prereq, i) => (
                         <div key={i} className="flex items-center gap-3">
-                          <span className="w-6 h-6 rounded-full bg-[#1a1a1a] border border-[#27272a] flex items-center justify-center text-xs text-[#71717a]">
+                          <span
+                            className="w-6 h-6 rounded-full flex items-center justify-center text-xs"
+                            style={{
+                              background: "var(--color-bg-secondary)",
+                              borderColor: "var(--color-border-primary)",
+                              color: "var(--color-text-tertiary)",
+                            }}
+                          >
                             {i + 1}
                           </span>
-                          <span className="text-sm text-[#a1a1aa]">
+                          <span
+                            className="text-sm"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
                             {prereq}
                           </span>
                         </div>
@@ -335,8 +482,17 @@ export default function LearningModePage() {
               )}
 
               {activeSection === "objectives" && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-4"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Learning Objectives
                   </h3>
                   <div className="space-y-3">
@@ -345,9 +501,15 @@ export default function LearningModePage() {
                         <div key={i} className="flex items-start gap-3">
                           <Target
                             size={14}
-                            className="text-[#3b82f6] mt-0.5 flex-shrink-0"
+                            className="mt-0.5 flex-shrink-0"
+                            style={{ color: "var(--color-accent-gold)" }}
                           />
-                          <span className="text-sm text-[#a1a1aa]">{obj}</span>
+                          <span
+                            className="text-sm"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
+                            {obj}
+                          </span>
                         </div>
                       ),
                     )}
@@ -356,18 +518,33 @@ export default function LearningModePage() {
               )}
 
               {activeSection === "reading" && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-4"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Suggested Reading Order
                   </h3>
                   <div className="space-y-3">
                     {parseJsonArray(learningPath.reading_order).map(
                       (step, i) => (
                         <div key={i} className="flex items-start gap-3">
-                          <div className="w-6 h-6 rounded bg-[#3b82f6] flex items-center justify-center text-xs text-white font-medium flex-shrink-0">
+                          <div
+                            className="w-6 h-6 rounded flex items-center justify-center text-xs text-white font-medium flex-shrink-0"
+                            style={{ background: "var(--color-accent-gold)" }}
+                          >
                             {i + 1}
                           </div>
-                          <span className="text-sm text-[#a1a1aa] font-mono">
+                          <span
+                            className="text-sm font-mono"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
                             {step}
                           </span>
                         </div>
@@ -379,8 +556,17 @@ export default function LearningModePage() {
 
               {activeSection === "files" && (
                 <div className="space-y-6">
-                  <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                    <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                  <div
+                    className="rounded-lg p-5"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
+                  >
+                    <h3
+                      className="text-sm font-medium mb-4"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Important Folders
                     </h3>
                     <div className="space-y-2">
@@ -388,10 +574,20 @@ export default function LearningModePage() {
                         (folder, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-3 p-2 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-center gap-3 p-2 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
-                            <Folder size={14} className="text-[#f59e0b]" />
-                            <span className="text-sm text-[#a1a1aa] font-mono">
+                            <Folder
+                              size={14}
+                              style={{ color: "var(--color-accent-earth)" }}
+                            />
+                            <span
+                              className="text-sm font-mono"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
                               {folder}
                             </span>
                           </div>
@@ -400,18 +596,37 @@ export default function LearningModePage() {
                     </div>
                   </div>
 
-                  <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                    <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                  <div
+                    className="rounded-lg p-5"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
+                  >
+                    <h3
+                      className="text-sm font-medium mb-4"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Key Files
                     </h3>
                     <div className="space-y-2">
                       {parseJsonArray(learningPath.key_files).map((file, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-3 p-2 bg-[#0a0a0a] border border-[#27272a] rounded"
+                          className="flex items-center gap-3 p-2 rounded"
+                          style={{
+                            background: "var(--color-bg-primary)",
+                            borderColor: "var(--color-border-primary)",
+                          }}
                         >
-                          <FileText size={14} className="text-[#3b82f6]" />
-                          <span className="text-sm text-[#a1a1aa] font-mono">
+                          <FileText
+                            size={14}
+                            style={{ color: "var(--color-accent-gold)" }}
+                          />
+                          <span
+                            className="text-sm font-mono"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
                             {file}
                           </span>
                         </div>
@@ -422,8 +637,17 @@ export default function LearningModePage() {
               )}
 
               {activeSection === "concepts" && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-4"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Concepts Demonstrated
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
@@ -431,13 +655,23 @@ export default function LearningModePage() {
                       (concept, i) => (
                         <div
                           key={i}
-                          className="p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                          className="p-3 rounded"
+                          style={{
+                            background: "var(--color-bg-primary)",
+                            borderColor: "var(--color-border-primary)",
+                          }}
                         >
                           <Lightbulb
                             size={14}
-                            className="text-[#f59e0b] mb-2"
+                            className="mb-2"
+                            style={{ color: "var(--color-accent-earth)" }}
                           />
-                          <p className="text-sm text-[#fafafa]">{concept}</p>
+                          <p
+                            className="text-sm"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
+                            {concept}
+                          </p>
                         </div>
                       ),
                     )}
@@ -446,8 +680,17 @@ export default function LearningModePage() {
               )}
 
               {activeSection === "exercises" && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-4"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Suggested Exercises
                   </h3>
                   <div className="space-y-3">
@@ -455,13 +698,21 @@ export default function LearningModePage() {
                       (exercise, i) => (
                         <div
                           key={i}
-                          className="flex items-start gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                          className="flex items-start gap-3 p-3 rounded"
+                          style={{
+                            background: "var(--color-bg-primary)",
+                            borderColor: "var(--color-border-primary)",
+                          }}
                         >
                           <Wrench
                             size={14}
-                            className="text-[#22c55e] mt-0.5 flex-shrink-0"
+                            className="mt-0.5 flex-shrink-0"
+                            style={{ color: "var(--color-accent-green-light)" }}
                           />
-                          <span className="text-sm text-[#a1a1aa]">
+                          <span
+                            className="text-sm"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
                             {exercise}
                           </span>
                         </div>
@@ -473,8 +724,17 @@ export default function LearningModePage() {
 
               {activeSection === "projects" && (
                 <div className="space-y-6">
-                  <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                    <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                  <div
+                    className="rounded-lg p-5"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
+                  >
+                    <h3
+                      className="text-sm font-medium mb-4"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Mini Projects
                     </h3>
                     <div className="space-y-3">
@@ -482,12 +742,24 @@ export default function LearningModePage() {
                         (project, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-start gap-3 p-3 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
-                            <div className="w-6 h-6 rounded bg-[#22c55e] flex items-center justify-center text-xs text-white font-medium flex-shrink-0">
+                            <div
+                              className="w-6 h-6 rounded flex items-center justify-center text-xs text-white font-medium flex-shrink-0"
+                              style={{
+                                background: "var(--color-accent-green-light)",
+                              }}
+                            >
                               {i + 1}
                             </div>
-                            <span className="text-sm text-[#a1a1aa]">
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
                               {project}
                             </span>
                           </div>
@@ -496,8 +768,17 @@ export default function LearningModePage() {
                     </div>
                   </div>
 
-                  <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                    <h3 className="text-sm font-medium text-[#fafafa] mb-4">
+                  <div
+                    className="rounded-lg p-5"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
+                  >
+                    <h3
+                      className="text-sm font-medium mb-4"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Capstone Ideas
                     </h3>
                     <div className="space-y-3">
@@ -505,13 +786,21 @@ export default function LearningModePage() {
                         (idea, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-start gap-3 p-3 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
                             <GraduationCap
                               size={14}
-                              className="text-[#a855f7] mt-0.5 flex-shrink-0"
+                              className="mt-0.5 flex-shrink-0"
+                              style={{ color: "var(--color-accent-purple)" }}
                             />
-                            <span className="text-sm text-[#a1a1aa]">
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
                               {idea}
                             </span>
                           </div>

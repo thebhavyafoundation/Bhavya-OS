@@ -6,7 +6,7 @@
  * Reusable modal dialog component.
  */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface ModalProps {
   open: boolean;
@@ -25,14 +25,72 @@ export function Modal({
   children,
   size = "md",
 }: ModalProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const titleId = title ? `modal-title-${React.useId()}` : undefined;
+
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = "";
-      };
+    if (!open) return;
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+    document.body.style.overflow = "hidden";
+
+    const dialogEl = dialogRef.current;
+    if (dialogEl) {
+      const focusableSelector =
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusable =
+        dialogEl.querySelectorAll<HTMLElement>(focusableSelector);
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      }
     }
+
+    return () => {
+      document.body.style.overflow = "";
+      previousFocusRef.current?.focus();
+    };
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const dialogEl = dialogRef.current;
+      if (!dialogEl) return;
+
+      const focusableSelector =
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusable =
+        dialogEl.querySelectorAll<HTMLElement>(focusableSelector);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -51,6 +109,10 @@ export function Modal({
       }}
     >
       <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "#1e293b",
@@ -74,6 +136,7 @@ export function Modal({
             }}
           >
             <h2
+              id={titleId}
               style={{
                 fontSize: 18,
                 fontWeight: 600,
@@ -85,6 +148,7 @@ export function Modal({
             </h2>
             <button
               onClick={onClose}
+              aria-label="Close modal"
               style={{
                 background: "none",
                 border: "none",

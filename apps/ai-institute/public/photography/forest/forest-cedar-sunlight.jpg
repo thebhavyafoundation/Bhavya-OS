@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="forest" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e382e"/>
+      <stop offset="50%" stop-color="#166044"/>
+      <stop offset="100%" stop-color="#021a12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#forest)"/>
+  <!-- Tree silhouettes -->
+  <g fill="#0a2a21" opacity="0.7">
+    <polygon points="200,1080 220,400 240,1080"/>
+    <polygon points="400,1080 430,300 460,1080"/>
+    <polygon points="600,1080 625,350 650,1080"/>
+    <polygon points="800,1080 835,250 870,1080"/>
+    <polygon points="1000,1080 1030,320 1060,1080"/>
+    <polygon points="1200,1080 1225,380 1250,1080"/>
+    <polygon points="1400,1080 1440,280 1480,1080"/>
+    <polygon points="1600,1080 1630,350 1660,1080"/>
+  </g>
+  <!-- Sunlight -->
+  <circle cx="1000" cy="200" r="100" fill="#d4af37" opacity="0.15"/>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: forest-cedar-sunlight.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Forest Background</text>
+</svg>

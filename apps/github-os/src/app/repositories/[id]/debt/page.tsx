@@ -79,12 +79,21 @@ export default function DebtPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -92,23 +101,33 @@ export default function DebtPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Technical Debt Center
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Categorized debt register with severity, effort, and solutions
             </p>
           </div>
@@ -138,14 +157,26 @@ export default function DebtPage() {
                       : s.label.toLowerCase(),
                   )
                 }
-                className={`bg-[#111111] border rounded-lg p-3 text-left transition-colors ${
+                className={`border rounded-lg p-3 text-left transition-colors ${
                   filter === s.label.toLowerCase()
-                    ? "border-[#3b82f6]"
-                    : "border-[#27272a] hover:border-[#3f3f46]"
+                    ? "border-[var(--color-border-focus)]"
+                    : "hover:border-[var(--color-border-focus)]"
                 }`}
+                style={{
+                  background: "var(--color-surface)",
+                  borderColor:
+                    filter === s.label.toLowerCase()
+                      ? "var(--color-border-focus)"
+                      : "var(--color-border-primary)",
+                }}
               >
                 <p className={`text-2xl font-bold ${s.color}`}>{s.count}</p>
-                <p className="text-xs text-[#52525b]">{s.label}</p>
+                <p
+                  className="text-xs"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  {s.label}
+                </p>
               </button>
             ))}
           </div>
@@ -155,9 +186,13 @@ export default function DebtPage() {
             <div className="text-center py-20">
               <AlertTriangle
                 size={24}
-                className="mx-auto text-[#52525b] mb-3"
+                className="mx-auto mb-3"
+                style={{ color: "var(--color-text-muted)" }}
               />
-              <p className="text-sm text-[#71717a]">
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 {filter === "all"
                   ? "No technical debt items found"
                   : `No ${filter} severity items`}
@@ -168,18 +203,28 @@ export default function DebtPage() {
               {filteredDebt.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-[#111111] border border-[#27272a] rounded-lg p-5"
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <span className="text-[#71717a]">
+                      <span style={{ color: "var(--color-text-tertiary)" }}>
                         {categoryIcons[item.category] || <Code size={14} />}
                       </span>
                       <div>
-                        <h3 className="text-sm font-medium text-[#fafafa]">
+                        <h3
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {item.title}
                         </h3>
-                        <p className="text-xs text-[#52525b] capitalize">
+                        <p
+                          className="text-xs capitalize"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           {item.category}
                         </p>
                       </div>
@@ -193,24 +238,39 @@ export default function DebtPage() {
                     </span>
                   </div>
 
-                  <p className="text-sm text-[#a1a1aa] mb-4">
+                  <p
+                    className="text-sm mb-4"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
                     {item.description}
                   </p>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <p className="text-xs text-[#52525b] mb-1">
+                      <p
+                        className="text-xs mb-1"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
                         Business Impact
                       </p>
-                      <p className="text-sm text-[#a1a1aa]">
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {item.business_impact}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-[#52525b] mb-1">
+                      <p
+                        className="text-xs mb-1"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
                         Engineering Impact
                       </p>
-                      <p className="text-sm text-[#a1a1aa]">
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {item.engineering_impact}
                       </p>
                     </div>
@@ -218,14 +278,26 @@ export default function DebtPage() {
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Clock size={12} className="text-[#52525b]" />
-                      <span className="text-xs text-[#52525b]">
+                      <Clock
+                        size={12}
+                        style={{ color: "var(--color-text-muted)" }}
+                      />
+                      <span
+                        className="text-xs"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
                         {item.estimated_effort}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Zap size={12} className="text-[#3b82f6]" />
-                      <span className="text-xs text-[#3b82f6]">
+                      <Zap
+                        size={12}
+                        style={{ color: "var(--color-accent-gold)" }}
+                      />
+                      <span
+                        className="text-xs"
+                        style={{ color: "var(--color-accent-gold)" }}
+                      >
                         {item.suggested_solution}
                       </span>
                     </div>

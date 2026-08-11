@@ -265,6 +265,66 @@
   --z-modal: 100;
   --z-toast: 150;
   --z-tooltip: 200;
+
+  /* ============================================
+     DATA VISUALIZATION — Brand-Compliant Palette
+     ============================================ */
+
+  /* Score colors */
+  --color-score-excellent: #2d8a45;
+  --color-score-excellent-bg: rgba(45, 138, 69, 0.15);
+  --color-score-excellent-border: rgba(45, 138, 69, 0.3);
+  --color-score-good: #d4af37;
+  --color-score-good-bg: rgba(212, 175, 55, 0.15);
+  --color-score-good-border: rgba(212, 175, 55, 0.3);
+  --color-score-moderate: #6a7c52;
+  --color-score-moderate-bg: rgba(106, 124, 82, 0.15);
+  --color-score-moderate-border: rgba(106, 124, 82, 0.3);
+  --color-score-poor: #c0392b;
+  --color-score-poor-bg: rgba(192, 57, 43, 0.15);
+  --color-score-poor-border: rgba(192, 57, 43, 0.3);
+
+  /* Category/node type colors — 8 distinct brand-compliant hues */
+  --color-viz-forest: #2d8a45;
+  --color-viz-gold: #d4af37;
+  --color-viz-earth: #6a7c52;
+  --color-viz-sage: #8a9a8b;
+  --color-viz-forest-light: #7cba8d;
+  --color-viz-gold-light: #e8c04a;
+  --color-viz-earth-light: #a8bc8a;
+  --color-viz-sage-light: #94ab96;
+
+  /* Category backgrounds (15% opacity) */
+  --color-viz-forest-bg: rgba(45, 138, 69, 0.15);
+  --color-viz-gold-bg: rgba(212, 175, 55, 0.15);
+  --color-viz-earth-bg: rgba(106, 124, 82, 0.15);
+  --color-viz-sage-bg: rgba(138, 154, 139, 0.15);
+  --color-viz-forest-light-bg: rgba(124, 186, 141, 0.15);
+  --color-viz-gold-light-bg: rgba(232, 192, 74, 0.15);
+  --color-viz-earth-light-bg: rgba(168, 188, 138, 0.15);
+  --color-viz-sage-light-bg: rgba(148, 171, 150, 0.15);
+
+  /* Category borders (30% opacity) */
+  --color-viz-forest-border: rgba(45, 138, 69, 0.3);
+  --color-viz-gold-border: rgba(212, 175, 55, 0.3);
+  --color-viz-earth-border: rgba(106, 124, 82, 0.3);
+  --color-viz-sage-border: rgba(138, 154, 139, 0.3);
+  --color-viz-forest-light-border: rgba(124, 186, 141, 0.3);
+  --color-viz-gold-light-border: rgba(232, 192, 74, 0.3);
+  --color-viz-earth-light-border: rgba(168, 188, 138, 0.3);
+  --color-viz-sage-light-border: rgba(148, 171, 150, 0.3);
+
+  /* Surface opacity variants */
+  --color-surface-forest-subtle: rgba(14, 56, 46, 0.15);
+  --color-surface-forest-medium: rgba(14, 56, 46, 0.3);
+  --color-surface-forest-strong: rgba(14, 56, 46, 0.5);
+
+  /* Focus ring */
+  --ring-focus: 0 0 0 2px var(--color-border-focus);
+  --ring-focus-inset: inset 0 0 0 2px var(--color-border-focus);
+
+  /* Layout */
+  --sidebar-width: 240px;
 }
 
 /* ============================================
@@ -314,6 +374,10 @@
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
   --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.35), 0 8px 16px rgba(0, 0, 0, 0.2);
   --shadow-2xl: 0 48px 96px rgba(0, 0, 0, 0.4);
+
+  --color-surface-forest-subtle: rgba(247, 244, 236, 0.08);
+  --color-surface-forest-medium: rgba(247, 244, 236, 0.15);
+  --color-surface-forest-strong: rgba(247, 244, 236, 0.25);
 }
 
 /* ============================================

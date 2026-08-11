@@ -70,21 +70,31 @@ export default function MemoryPage() {
   }
 
   function getConfidenceColor(confidence: number) {
-    if (confidence >= 0.9) return "text-emerald-400";
-    if (confidence >= 0.8) return "text-blue-400";
-    if (confidence >= 0.7) return "text-amber-400";
-    return "text-red-400";
+    if (confidence >= 0.9) return "var(--color-accent-green-light)";
+    if (confidence >= 0.8) return "var(--color-accent-gold)";
+    if (confidence >= 0.7) return "var(--color-accent-earth)";
+    return "var(--color-status-error)";
   }
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-32 bg-[#111111] rounded-lg mb-4" />
+              <div
+                key={i}
+                className="h-32 rounded-lg mb-4"
+                style={{ background: "var(--color-surface)" }}
+              />
             ))}
           </div>
         </main>
@@ -93,35 +103,55 @@ export default function MemoryPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Institutional Memory
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               What we know about {repository?.name}
             </p>
           </div>
 
           <div className="space-y-6 mb-8">
-            <h2 className="text-lg font-medium text-[#fafafa]">
+            <h2
+              className="text-lg font-medium"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Questions & Answers
             </h2>
             {memory.length === 0 ? (
               <div className="text-center py-12">
-                <Brain size={24} className="mx-auto text-[#52525b] mb-3" />
-                <p className="text-sm text-[#71717a]">
+                <Brain
+                  size={24}
+                  className="mx-auto mb-3"
+                  style={{ color: "var(--color-text-muted)" }}
+                />
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--color-text-tertiary)" }}
+                >
                   No institutional memory yet
                 </p>
               </div>
@@ -130,24 +160,36 @@ export default function MemoryPage() {
                 {memory.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-[#111111] border border-[#27272a] rounded-lg p-5"
+                    className="rounded-lg p-5"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
                   >
                     <div className="flex items-start gap-3 mb-3">
                       <HelpCircle
                         size={16}
-                        className="text-[#3b82f6] mt-0.5 flex-shrink-0"
+                        className="mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--color-accent-gold)" }}
                       />
-                      <h3 className="text-sm font-medium text-[#fafafa]">
+                      <h3
+                        className="text-sm font-medium"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         {item.question}
                       </h3>
                       <span
-                        className={`ml-auto text-xs ${getConfidenceColor(item.confidence)}`}
+                        className="ml-auto text-xs"
+                        style={{ color: getConfidenceColor(item.confidence) }}
                       >
                         {Math.round(item.confidence * 100)}% confidence
                       </span>
                     </div>
                     <div className="ml-7">
-                      <p className="text-sm text-[#a1a1aa] leading-relaxed mb-3">
+                      <p
+                        className="text-sm leading-relaxed mb-3"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {item.answer}
                       </p>
                       <div className="space-y-1.5">
@@ -155,9 +197,16 @@ export default function MemoryPage() {
                           <div key={i} className="flex items-center gap-2">
                             <CheckCircle
                               size={10}
-                              className="text-emerald-400"
+                              style={{
+                                color: "var(--color-accent-green-light)",
+                              }}
                             />
-                            <span className="text-xs text-[#71717a]">{e}</span>
+                            <span
+                              className="text-xs"
+                              style={{ color: "var(--color-text-tertiary)" }}
+                            >
+                              {e}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -169,16 +218,23 @@ export default function MemoryPage() {
           </div>
 
           <div>
-            <h2 className="text-lg font-medium text-[#fafafa] mb-4">
+            <h2
+              className="text-lg font-medium mb-4"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Similar Repositories
             </h2>
             {crossRepo.length === 0 ? (
               <div className="text-center py-12">
                 <AlertTriangle
                   size={24}
-                  className="mx-auto text-[#52525b] mb-3"
+                  className="mx-auto mb-3"
+                  style={{ color: "var(--color-text-muted)" }}
                 />
-                <p className="text-sm text-[#71717a]">
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--color-text-tertiary)" }}
+                >
                   No similar repositories found
                 </p>
               </div>
@@ -188,16 +244,26 @@ export default function MemoryPage() {
                   <Link
                     key={repo.id}
                     href={`/repositories/${repo.id}`}
-                    className="bg-[#111111] border border-[#27272a] rounded-lg p-4 hover:border-[#3b82f6]/50 transition-colors"
+                    className="rounded-lg p-4 transition-colors hover:border-[var(--color-accent-gold)]"
+                    style={{
+                      background: "var(--color-surface)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="text-sm font-medium text-[#fafafa]">
+                        <h3
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {repo.name}
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           {repo.language && (
-                            <span className="text-xs text-[#71717a]">
+                            <span
+                              className="text-xs"
+                              style={{ color: "var(--color-text-tertiary)" }}
+                            >
                               {repo.language}
                             </span>
                           )}
@@ -209,10 +275,16 @@ export default function MemoryPage() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <span className="text-lg font-semibold text-[#fafafa]">
+                        <span
+                          className="text-lg font-semibold"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {repo.bhavya_score}
                         </span>
-                        <p className="text-[10px] text-[#52525b]">
+                        <p
+                          className="text-[10px]"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           Bhavya Score
                         </p>
                       </div>

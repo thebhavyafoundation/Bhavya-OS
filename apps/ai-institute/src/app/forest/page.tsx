@@ -58,7 +58,6 @@ const initiatives = [
 export default function ForestPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-
       {/* Hero */}
       <section
         style={{
@@ -70,7 +69,11 @@ export default function ForestPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground pillar="forest" />
+        <HeroBackground
+          pillar="forest"
+          photo="/photography/forest/forest-cedar-sunlight.jpg"
+          photoPosition="center center"
+        />
 
         <div
           className="container"
@@ -157,14 +160,38 @@ export default function ForestPage() {
               >
                 Our Impact
               </h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-5)",
+                }}
+              >
                 {[
-                  { label: "Forest cover restored", note: "across multiple states" },
-                  { label: "Community-led plantations", note: "with local participation" },
-                  { label: "Species documented", note: "through field surveys" },
-                  { label: "Watersheds protected", note: "for downstream communities" },
+                  {
+                    label: "Forest cover restored",
+                    note: "across multiple states",
+                  },
+                  {
+                    label: "Community-led plantations",
+                    note: "with local participation",
+                  },
+                  {
+                    label: "Species documented",
+                    note: "through field surveys",
+                  },
+                  {
+                    label: "Watersheds protected",
+                    note: "for downstream communities",
+                  },
                 ].map((item, i) => (
-                  <div key={i} style={{ borderBottom: "1px solid rgba(247, 244, 236, 0.08)", paddingBottom: "var(--space-4)" }}>
+                  <div
+                    key={i}
+                    style={{
+                      borderBottom: "1px solid rgba(247, 244, 236, 0.08)",
+                      paddingBottom: "var(--space-4)",
+                    }}
+                  >
                     <div
                       style={{
                         fontSize: "var(--text-sm)",
@@ -374,7 +401,6 @@ export default function ForestPage() {
           </a>
         </div>
       </section>
-
     </div>
   );
 }

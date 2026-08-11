@@ -64,12 +64,21 @@ export default function AdvisorPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -78,17 +87,28 @@ export default function AdvisorPage() {
 
   if (!advisor) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto text-center py-20">
-            <Shield size={24} className="mx-auto text-[#52525b] mb-3" />
-            <p className="text-sm text-[#71717a]">
+            <Shield
+              size={24}
+              className="mx-auto mb-3"
+              style={{ color: "var(--color-text-muted)" }}
+            />
+            <p
+              className="text-sm"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               No advisor data available for this repository
             </p>
             <Link
               href={`/repositories/${id}`}
-              className="text-sm text-[#3b82f6] hover:text-[#60a5fa] mt-2 inline-block"
+              className="text-sm mt-2 inline-block hover:text-[var(--color-accent-gold)]"
+              style={{ color: "var(--color-accent-gold)" }}
             >
               Back to repository
             </Link>
@@ -99,13 +119,17 @@ export default function AdvisorPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
@@ -113,40 +137,80 @@ export default function AdvisorPage() {
 
           <div className="flex items-start justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-semibold text-[#fafafa]">
+              <h1
+                className="text-2xl font-semibold"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Engineering Advisor
               </h1>
-              <p className="text-sm text-[#71717a] mt-1">
+              <p
+                className="text-sm mt-1"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 {advisor.repository.name}
               </p>
             </div>
             {advisor.review && (
               <div className="text-right">
-                <span className="text-3xl font-bold text-[#fafafa]">
+                <span
+                  className="text-3xl font-bold"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   {advisor.review.overall_score}
                 </span>
-                <p className="text-[10px] text-[#52525b]">Overall Score</p>
+                <p
+                  className="text-[10px]"
+                  style={{ color: "var(--color-text-muted)" }}
+                >
+                  Overall Score
+                </p>
               </div>
             )}
           </div>
 
           {/* Verdict */}
-          <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-6">
+          <div
+            className="rounded-lg p-5 mb-6"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border-primary)",
+            }}
+          >
             <div className="flex items-center gap-2 mb-2">
-              <Target size={14} className="text-[#3b82f6]" />
-              <h3 className="text-sm font-medium text-[#fafafa]">Verdict</h3>
+              <Target size={14} style={{ color: "var(--color-accent-gold)" }} />
+              <h3
+                className="text-sm font-medium"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Verdict
+              </h3>
             </div>
-            <p className="text-sm text-[#a1a1aa] leading-relaxed">
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
               {advisor.verdict}
             </p>
           </div>
 
           {/* Strengths & Weaknesses */}
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+            <div
+              className="rounded-lg p-5"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border-primary)",
+              }}
+            >
               <div className="flex items-center gap-2 mb-3">
-                <CheckCircle size={14} className="text-emerald-400" />
-                <h3 className="text-sm font-medium text-[#fafafa]">
+                <CheckCircle
+                  size={14}
+                  style={{ color: "var(--color-accent-green-light)" }}
+                />
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Strengths
                 </h3>
               </div>
@@ -154,18 +218,36 @@ export default function AdvisorPage() {
                 {advisor.strengths.map((s, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
                   >
-                    <span className="text-emerald-400 mt-0.5">+</span>
+                    <span
+                      className="mt-0.5"
+                      style={{ color: "var(--color-accent-green-light)" }}
+                    >
+                      +
+                    </span>
                     {s}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+            <div
+              className="rounded-lg p-5"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border-primary)",
+              }}
+            >
               <div className="flex items-center gap-2 mb-3">
-                <AlertTriangle size={14} className="text-amber-400" />
-                <h3 className="text-sm font-medium text-[#fafafa]">
+                <AlertTriangle
+                  size={14}
+                  style={{ color: "var(--color-accent-earth)" }}
+                />
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Weaknesses
                 </h3>
               </div>
@@ -173,9 +255,15 @@ export default function AdvisorPage() {
                 {advisor.weaknesses.map((w, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                    className="flex items-start gap-2 text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
                   >
-                    <span className="text-amber-400 mt-0.5">-</span>
+                    <span
+                      className="mt-0.5"
+                      style={{ color: "var(--color-accent-earth)" }}
+                    >
+                      -
+                    </span>
                     {w}
                   </div>
                 ))}
@@ -185,10 +273,22 @@ export default function AdvisorPage() {
 
           {/* Missing Patterns */}
           {advisor.missingPatterns.length > 0 && (
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-6">
+            <div
+              className="rounded-lg p-5 mb-6"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border-primary)",
+              }}
+            >
               <div className="flex items-center gap-2 mb-3">
-                <Lightbulb size={14} className="text-[#f59e0b]" />
-                <h3 className="text-sm font-medium text-[#fafafa]">
+                <Lightbulb
+                  size={14}
+                  style={{ color: "var(--color-accent-earth)" }}
+                />
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Missing Patterns
                 </h3>
               </div>
@@ -206,10 +306,22 @@ export default function AdvisorPage() {
           )}
 
           {/* Recommendations */}
-          <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-6">
+          <div
+            className="rounded-lg p-5 mb-6"
+            style={{
+              background: "var(--color-surface)",
+              borderColor: "var(--color-border-primary)",
+            }}
+          >
             <div className="flex items-center gap-2 mb-3">
-              <TrendingUp size={14} className="text-[#3b82f6]" />
-              <h3 className="text-sm font-medium text-[#fafafa]">
+              <TrendingUp
+                size={14}
+                style={{ color: "var(--color-accent-gold)" }}
+              />
+              <h3
+                className="text-sm font-medium"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Recommendations
               </h3>
             </div>
@@ -217,12 +329,24 @@ export default function AdvisorPage() {
               {advisor.recommendations.map((rec, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                  className="flex items-start gap-3 p-3 rounded"
+                  style={{
+                    background: "var(--color-bg-primary)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
-                  <span className="text-[#3b82f6] font-mono text-xs mt-0.5">
+                  <span
+                    className="font-mono text-xs mt-0.5"
+                    style={{ color: "var(--color-accent-gold)" }}
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm text-[#a1a1aa]">{rec}</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {rec}
+                  </span>
                 </div>
               ))}
             </div>
@@ -230,15 +354,28 @@ export default function AdvisorPage() {
 
           {/* Debt Summary */}
           {advisor.debt.length > 0 && (
-            <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-              <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+            <div
+              className="rounded-lg p-5"
+              style={{
+                background: "var(--color-surface)",
+                borderColor: "var(--color-border-primary)",
+              }}
+            >
+              <h3
+                className="text-sm font-medium mb-3"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Technical Debt ({advisor.debt.length} items)
               </h3>
               <div className="space-y-2">
                 {advisor.debt.slice(0, 5).map((d) => (
                   <div
                     key={d.id}
-                    className="flex items-center justify-between p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                    className="flex items-center justify-between p-3 rounded"
+                    style={{
+                      background: "var(--color-bg-primary)",
+                      borderColor: "var(--color-border-primary)",
+                    }}
                   >
                     <div className="flex items-center gap-3">
                       <span
@@ -252,9 +389,17 @@ export default function AdvisorPage() {
                       >
                         {d.severity}
                       </span>
-                      <span className="text-sm text-[#fafafa]">{d.title}</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
+                        {d.title}
+                      </span>
                     </div>
-                    <span className="text-xs text-[#52525b]">
+                    <span
+                      className="text-xs"
+                      style={{ color: "var(--color-text-muted)" }}
+                    >
                       {d.estimated_effort}
                     </span>
                   </div>

@@ -53,12 +53,21 @@ export default function StudentPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -67,17 +76,28 @@ export default function StudentPage() {
 
   if (!student) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto text-center py-20">
-            <GraduationCap size={24} className="mx-auto text-[#52525b] mb-3" />
-            <p className="text-sm text-[#71717a]">
+            <GraduationCap
+              size={24}
+              className="mx-auto mb-3"
+              style={{ color: "var(--color-text-muted)" }}
+            />
+            <p
+              className="text-sm"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               No student mode available for this repository
             </p>
             <Link
               href={`/repositories/${id}`}
-              className="text-sm text-[#3b82f6] hover:text-[#60a5fa] mt-2 inline-block"
+              className="text-sm mt-2 inline-block hover:text-[var(--color-accent-gold)]"
+              style={{ color: "var(--color-accent-gold)" }}
             >
               Back to repository
             </Link>
@@ -108,13 +128,17 @@ export default function StudentPage() {
   const challenges = JSON.parse(student.engineering_challenges || "[]");
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
@@ -122,32 +146,60 @@ export default function StudentPage() {
 
           <div className="flex items-start justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-semibold text-[#fafafa]">
+              <h1
+                className="text-2xl font-semibold"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Student Mode
               </h1>
-              <p className="text-sm text-[#71717a] mt-1">
+              <p
+                className="text-sm mt-1"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 Study guide, exercises, and engineering challenges
               </p>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-bold text-[#fafafa]">
+              <span
+                className="text-2xl font-bold"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 {student.difficulty_score}
               </span>
-              <p className="text-[10px] text-[#52525b]">Difficulty</p>
+              <p
+                className="text-[10px]"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Difficulty
+              </p>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1 mb-6 border-b border-[#27272a] pb-px">
+          <div
+            className="flex gap-1 mb-6 pb-px"
+            style={{ borderBottom: "1px solid var(--color-border-primary)" }}
+          >
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 text-sm rounded-t transition-colors ${
-                  activeTab === tab.id
-                    ? "text-[#fafafa] bg-[#111111] border border-[#27272a] border-b-transparent -mb-px"
-                    : "text-[#71717a] hover:text-[#a1a1aa]"
-                }`}
+                className="flex items-center gap-2 px-4 py-2 text-sm rounded-t transition-colors"
+                style={{
+                  background:
+                    activeTab === tab.id
+                      ? "var(--color-surface)"
+                      : "transparent",
+                  color:
+                    activeTab === tab.id
+                      ? "var(--color-text-primary)"
+                      : "var(--color-text-tertiary)",
+                  borderBottom:
+                    activeTab === tab.id
+                      ? "1px solid var(--color-border-primary)"
+                      : "1px solid transparent",
+                  marginBottom: activeTab === tab.id ? "-1px" : "0",
+                }}
               >
                 {tab.icon}
                 {tab.label}
@@ -158,24 +210,49 @@ export default function StudentPage() {
           {/* Tab Content */}
           {activeTab === "guide" && (
             <div className="space-y-4">
-              <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+              <div
+                className="rounded-lg p-5"
+                style={{
+                  background: "var(--color-surface)",
+                  borderColor: "var(--color-border-primary)",
+                }}
+              >
+                <h3
+                  className="text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Study Guide
                 </h3>
-                <p className="text-sm text-[#a1a1aa] leading-relaxed">
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "var(--color-text-secondary)" }}
+                >
                   {student.study_guide}
                 </p>
               </div>
               {prerequisites.length > 0 && (
-                <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                  <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                <div
+                  className="rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
+                >
+                  <h3
+                    className="text-sm font-medium mb-3"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Prerequisites
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {prerequisites.map((p: string, i: number) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-[#27272a] text-[#a1a1aa] text-xs rounded-full"
+                        className="px-3 py-1 text-xs rounded-full"
+                        style={{
+                          background: "var(--color-bg-tertiary)",
+                          color: "var(--color-text-secondary)",
+                        }}
                       >
                         {p}
                       </span>
@@ -191,12 +268,24 @@ export default function StudentPage() {
               {roadmap.map((r: string, i: number) => (
                 <div
                   key={i}
-                  className="flex items-center gap-3 p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                  className="flex items-center gap-3 p-4 rounded-lg"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
-                  <span className="text-[#3b82f6] font-mono text-sm">
+                  <span
+                    className="font-mono text-sm"
+                    style={{ color: "var(--color-accent-gold)" }}
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm text-[#a1a1aa]">{r}</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {r}
+                  </span>
                 </div>
               ))}
             </div>
@@ -207,13 +296,23 @@ export default function StudentPage() {
               {exercises.map((e: string, i: number) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                  className="flex items-start gap-3 p-4 rounded-lg"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
                   <Code
                     size={14}
-                    className="text-emerald-400 mt-0.5 flex-shrink-0"
+                    className="mt-0.5 flex-shrink-0"
+                    style={{ color: "var(--color-accent-green-light)" }}
                   />
-                  <span className="text-sm text-[#a1a1aa]">{e}</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {e}
+                  </span>
                 </div>
               ))}
             </div>
@@ -222,39 +321,65 @@ export default function StudentPage() {
           {activeTab === "projects" && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                <h3
+                  className="text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Mini Projects
                 </h3>
                 <div className="space-y-2">
                   {miniProjects.map((p: string, i: number) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                      className="flex items-start gap-3 p-4 rounded-lg"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
                     >
                       <FolderOpen
                         size={14}
-                        className="text-[#3b82f6] mt-0.5 flex-shrink-0"
+                        className="mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--color-accent-gold)" }}
                       />
-                      <span className="text-sm text-[#a1a1aa]">{p}</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
+                        {p}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                <h3
+                  className="text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Capstone Projects
                 </h3>
                 <div className="space-y-2">
                   {capstoneProjects.map((p: string, i: number) => (
                     <div
                       key={i}
-                      className="flex items-start gap-3 p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                      className="flex items-start gap-3 p-4 rounded-lg"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
                     >
                       <Target
                         size={14}
-                        className="text-[#f59e0b] mt-0.5 flex-shrink-0"
+                        className="mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--color-accent-earth)" }}
                       />
-                      <span className="text-sm text-[#a1a1aa]">{p}</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
+                        {p}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -265,31 +390,55 @@ export default function StudentPage() {
           {activeTab === "interview" && (
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                <h3
+                  className="text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Interview Questions
                 </h3>
                 <div className="space-y-2">
                   {interviewQuestions.map((q: string, i: number) => (
                     <div
                       key={i}
-                      className="p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                      className="p-4 rounded-lg"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
                     >
-                      <span className="text-sm text-[#a1a1aa]">{q}</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
+                        {q}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-[#fafafa] mb-3">
+                <h3
+                  className="text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Discussion Questions
                 </h3>
                 <div className="space-y-2">
                   {discussionQuestions.map((q: string, i: number) => (
                     <div
                       key={i}
-                      className="p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                      className="p-4 rounded-lg"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
                     >
-                      <span className="text-sm text-[#a1a1aa]">{q}</span>
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
+                        {q}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -302,9 +451,18 @@ export default function StudentPage() {
               {reflectionNotes.map((n: string, i: number) => (
                 <div
                   key={i}
-                  className="p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                  className="p-4 rounded-lg"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
-                  <span className="text-sm text-[#a1a1aa]">{n}</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {n}
+                  </span>
                 </div>
               ))}
             </div>
@@ -315,13 +473,23 @@ export default function StudentPage() {
               {challenges.map((c: string, i: number) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 p-4 bg-[#111111] border border-[#27272a] rounded-lg"
+                  className="flex items-start gap-3 p-4 rounded-lg"
+                  style={{
+                    background: "var(--color-surface)",
+                    borderColor: "var(--color-border-primary)",
+                  }}
                 >
                   <Wrench
                     size={14}
-                    className="text-[#f59e0b] mt-0.5 flex-shrink-0"
+                    className="mt-0.5 flex-shrink-0"
+                    style={{ color: "var(--color-accent-earth)" }}
                   />
-                  <span className="text-sm text-[#a1a1aa]">{c}</span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {c}
+                  </span>
                 </div>
               ))}
             </div>

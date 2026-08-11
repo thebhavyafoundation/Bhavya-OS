@@ -60,6 +60,7 @@ export function SearchBar({
           setInternalValue(e.target.value);
           debouncedOnChange(e.target.value);
         }}
+        aria-label={placeholder}
         style={{
           width: "100%",
           padding: "10px 12px 10px 36px",
@@ -68,7 +69,6 @@ export function SearchBar({
           background: "#0f172a",
           color: "#f8fafc",
           fontSize: 14,
-          outline: "none",
         }}
       />
     </div>

@@ -12,7 +12,13 @@ import {
   ChevronRight,
   ArrowRight,
 } from "lucide-react";
-import { Card, Badge, Skeleton, Breadcrumb, AppLayout } from "@bhavya/platform-ui";
+import {
+  Card,
+  Badge,
+  Skeleton,
+  Breadcrumb,
+  AppLayout,
+} from "@bhavya/platform-ui";
 
 interface Repository {
   id: string;
@@ -30,7 +36,10 @@ function getScoreColor(score: number) {
   return "text-score-poor";
 }
 
-const maturityVariant: Record<string, "success" | "info" | "warning" | "purple"> = {
+const maturityVariant: Record<
+  string,
+  "success" | "info" | "warning" | "purple"
+> = {
   emerging: "warning",
   developing: "info",
   mature: "success",
@@ -100,7 +109,10 @@ export default function Dashboard() {
               href="/repositories"
               className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
             >
-              <FolderGit2 size={20} className="text-accent-blue" />
+              <FolderGit2
+                size={20}
+                className="text-[var(--color-accent-gold)]"
+              />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-text-primary">
                   Browse Repositories
@@ -111,14 +123,14 @@ export default function Dashboard() {
               </div>
               <ArrowRight
                 size={14}
-                className="text-text-muted group-hover:text-accent-blue transition-colors flex-shrink-0"
+                className="text-text-muted group-hover:text-[var(--color-accent-gold)] transition-colors flex-shrink-0"
               />
             </Link>
             <Link
               href="/knowledge"
               className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
             >
-              <BookOpen size={20} className="text-accent-yellow" />
+              <BookOpen size={20} className="text-[var(--color-accent-gold)]" />
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-text-primary">
                   Explore Knowledge
@@ -129,7 +141,7 @@ export default function Dashboard() {
               </div>
               <ArrowRight
                 size={14}
-                className="text-text-muted group-hover:text-accent-yellow transition-colors flex-shrink-0"
+                className="text-text-muted group-hover:text-[var(--color-accent-gold)] transition-colors flex-shrink-0"
               />
             </Link>
             <Link
@@ -161,7 +173,7 @@ export default function Dashboard() {
             </h2>
             <Link
               href="/repositories"
-              className="text-xs text-accent-blue hover:text-accent-blue-hover transition-colors"
+              className="text-xs text-[var(--color-accent-gold)] hover:text-[var(--color-accent-gold-hover)] transition-colors"
             >
               View all
             </Link>
@@ -187,7 +199,10 @@ export default function Dashboard() {
                   <Card padding="md" hover>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3 min-w-0">
-                        <FolderGit2 size={16} className="text-text-muted flex-shrink-0" />
+                        <FolderGit2
+                          size={16}
+                          className="text-text-muted flex-shrink-0"
+                        />
                         <div className="min-w-0">
                           <p className="text-sm font-medium text-text-primary truncate">
                             {repo.name}
@@ -200,12 +215,15 @@ export default function Dashboard() {
                       <div className="flex items-center gap-4 flex-shrink-0">
                         {repo.language && (
                           <span className="hidden sm:flex items-center gap-1.5 text-xs text-text-muted">
-                            <span className="w-2 h-2 rounded-full bg-accent-blue" />
+                            <span className="w-2 h-2 rounded-full bg-[var(--color-accent-green)]" />
                             {repo.language}
                           </span>
                         )}
                         <Badge
-                          variant={maturityVariant[repo.engineering_maturity] || "default"}
+                          variant={
+                            maturityVariant[repo.engineering_maturity] ||
+                            "default"
+                          }
                           size="sm"
                         >
                           {repo.engineering_maturity}

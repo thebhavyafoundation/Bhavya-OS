@@ -43,12 +43,21 @@ export default function ArchitectureAdvisorPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -56,31 +65,48 @@ export default function ArchitectureAdvisorPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Architecture Advisor
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Compare against elite repositories and identify improvements
             </p>
           </div>
 
           {advisors.length === 0 ? (
             <div className="text-center py-20">
-              <GitCompare size={24} className="mx-auto text-[#52525b] mb-3" />
-              <p className="text-sm text-[#71717a]">
+              <GitCompare
+                size={24}
+                className="mx-auto mb-3"
+                style={{ color: "var(--color-text-muted)" }}
+              />
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 No architecture comparisons available
               </p>
             </div>
@@ -101,22 +127,40 @@ export default function ArchitectureAdvisorPage() {
 
                 return (
                   <div key={advisor.id}>
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-3">
-                        <GitCompare size={14} className="text-[#3b82f6]" />
-                        <h3 className="text-sm font-medium text-[#fafafa]">
+                        <GitCompare
+                          size={14}
+                          style={{ color: "var(--color-accent-gold)" }}
+                        />
+                        <h3
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Compared to{" "}
-                          <span className="text-[#3b82f6]">
+                          <span style={{ color: "var(--color-accent-gold)" }}>
                             {advisor.comparison_repo}
                           </span>
                         </h3>
                       </div>
                       <div className="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                          <p className="text-xs text-[#52525b] mb-1">
+                          <p
+                            className="text-xs mb-1"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
                             Migration Effort
                           </p>
-                          <p className="text-sm text-[#a1a1aa]">
+                          <p
+                            className="text-sm"
+                            style={{ color: "var(--color-text-secondary)" }}
+                          >
                             {advisor.migration_effort}
                           </p>
                         </div>
@@ -125,10 +169,22 @@ export default function ArchitectureAdvisorPage() {
 
                     {/* Missing Layers */}
                     {missingLayers.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <AlertTriangle size={14} className="text-amber-400" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <AlertTriangle
+                            size={14}
+                            style={{ color: "var(--color-accent-earth)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Missing Layers
                           </h4>
                         </div>
@@ -147,10 +203,22 @@ export default function ArchitectureAdvisorPage() {
 
                     {/* Architectural Drift */}
                     {drift.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <TrendingUp size={14} className="text-[#f59e0b]" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <TrendingUp
+                            size={14}
+                            style={{ color: "var(--color-accent-earth)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Architectural Drift
                           </h4>
                         </div>
@@ -158,9 +226,15 @@ export default function ArchitectureAdvisorPage() {
                           {drift.map((d: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-[#f59e0b] mt-0.5">~</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-accent-earth)" }}
+                              >
+                                ~
+                              </span>
                               {d}
                             </div>
                           ))}
@@ -170,10 +244,22 @@ export default function ArchitectureAdvisorPage() {
 
                     {/* Duplicated Concepts */}
                     {duplicated.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <Copy size={14} className="text-red-400" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <Copy
+                            size={14}
+                            style={{ color: "var(--color-status-error)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Duplicated Concepts
                           </h4>
                         </div>
@@ -181,9 +267,15 @@ export default function ArchitectureAdvisorPage() {
                           {duplicated.map((d: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-red-400 mt-0.5">x</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-status-error)" }}
+                              >
+                                x
+                              </span>
                               {d}
                             </div>
                           ))}
@@ -192,20 +284,41 @@ export default function ArchitectureAdvisorPage() {
                     )}
 
                     {/* Improvement Recommendations */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
-                      <h4 className="text-sm font-medium text-[#fafafa] mb-3">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
+                      <h4
+                        className="text-sm font-medium mb-3"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         Improvement Recommendations
                       </h4>
                       <div className="space-y-2">
                         {improvements.map((r: string, i: number) => (
                           <div
                             key={i}
-                            className="flex items-start gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-start gap-3 p-3 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
-                            <span className="text-[#3b82f6] font-mono text-xs mt-0.5">
+                            <span
+                              className="font-mono text-xs mt-0.5"
+                              style={{ color: "var(--color-accent-gold)" }}
+                            >
                               {String(i + 1).padStart(2, "0")}
                             </span>
-                            <span className="text-sm text-[#a1a1aa]">{r}</span>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
+                              {r}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -213,17 +326,30 @@ export default function ArchitectureAdvisorPage() {
 
                     {/* Tradeoffs */}
                     {tradeoffs.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
-                        <h4 className="text-sm font-medium text-[#fafafa] mb-3">
+                      <div
+                        className="rounded-lg p-5"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
+                        <h4
+                          className="text-sm font-medium mb-3"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Tradeoffs to Consider
                         </h4>
                         <div className="space-y-2">
                           {tradeoffs.map((t: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-[#71717a] mt-0.5">
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-text-tertiary)" }}
+                              >
                                 &lt;&gt;
                               </span>
                               {t}

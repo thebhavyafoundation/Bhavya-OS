@@ -127,7 +127,11 @@ export default function HomePage() {
 
       {/* ====== HERO ====== */}
       <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
-        <HeroBackground pillar="home" />
+        <HeroBackground
+          pillar="home"
+          photo="/photography/hero/hero-himalayan-sunset.jpg"
+          photoPosition="center 40%"
+        />
         <BotanicalCorner position="top-right" size={160} opacity={0.1} />
         <BotanicalCorner position="bottom-left" size={120} opacity={0.08} />
 
@@ -145,7 +149,11 @@ export default function HomePage() {
             Building India&apos;s Digital Institution
           </motion.div>
 
-          <h1 id="hero-heading" className="hero-title" style={{ color: "var(--color-text-inverse)" }}>
+          <h1
+            id="hero-heading"
+            className="hero-title"
+            style={{ color: "var(--color-text-inverse)" }}
+          >
             <motion.span
               style={{ display: "block" }}
               initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -286,14 +294,12 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={40}
               >
-                <a
-                  href={`/${m.key}`}
-                  className="mission-card"
-                >
+                <a href={`/${m.key}`} className="mission-card">
                   <div
                     className="mission-card-image"
                     style={{
-                      background: "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-700) 100%)",
+                      background:
+                        "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-700) 100%)",
                     }}
                   >
                     <div className="mission-card-overlay" />
@@ -351,7 +357,10 @@ export default function HomePage() {
           </svg>
         </div>
 
-        <div className="container" style={{ maxWidth: "800px", position: "relative", zIndex: 1 }}>
+        <div
+          className="container"
+          style={{ maxWidth: "800px", position: "relative", zIndex: 1 }}
+        >
           <Reveal variant="fade">
             <blockquote
               style={{
@@ -365,8 +374,8 @@ export default function HomePage() {
                 textAlign: "center",
               }}
             >
-              &ldquo;We build institutions for generations, not quarters.
-              Our constitution binds us to long-term impact.&rdquo;
+              &ldquo;We build institutions for generations, not quarters. Our
+              constitution binds us to long-term impact.&rdquo;
             </blockquote>
             <p
               style={{
@@ -408,11 +417,7 @@ export default function HomePage() {
 
           <div className="principles-grid">
             {principles.map((p, i) => (
-              <Reveal
-                key={p.number}
-                variant="slide-up"
-                delay={i * 0.08}
-              >
+              <Reveal key={p.number} variant="slide-up" delay={i * 0.08}>
                 <div className="principle-card">
                   <span className="principle-number">{p.number}</span>
                   <h3 className="principle-title">{p.title}</h3>
@@ -455,10 +460,7 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={30}
               >
-                <a
-                  href={card.href}
-                  className="participate-card"
-                >
+                <a href={card.href} className="participate-card">
                   <div className="participate-card-icon">
                     <card.icon size={24} />
                   </div>

@@ -84,7 +84,6 @@ export default function KnowledgePage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-
       {/* Hero */}
       <section
         style={{
@@ -96,7 +95,11 @@ export default function KnowledgePage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground pillar="knowledge" />
+        <HeroBackground
+          pillar="knowledge"
+          photo="/photography/knowledge/knowledge-school-children.jpg"
+          photoPosition="center 30%"
+        />
 
         <div
           className="container"
@@ -153,7 +156,10 @@ export default function KnowledgePage() {
                 Explore Academy
                 <ArrowRight size={16} />
               </a>
-              <a href="/knowledge/library" className="btn btn-secondary-inverse">
+              <a
+                href="/knowledge/library"
+                className="btn btn-secondary-inverse"
+              >
                 Browse Library
                 <ArrowRight size={16} />
               </a>
@@ -182,14 +188,29 @@ export default function KnowledgePage() {
               >
                 By the Numbers
               </h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-5)",
+                }}
+              >
                 {[
                   { label: "Learning levels", note: "structured curriculum" },
                   { label: "Knowledge packages", note: "open and growing" },
                   { label: "AI-powered tools", note: "for learning" },
-                  { label: "Community contributors", note: "building together" },
+                  {
+                    label: "Community contributors",
+                    note: "building together",
+                  },
                 ].map((item, i) => (
-                  <div key={i} style={{ borderBottom: "1px solid rgba(247, 244, 236, 0.08)", paddingBottom: "var(--space-4)" }}>
+                  <div
+                    key={i}
+                    style={{
+                      borderBottom: "1px solid rgba(247, 244, 236, 0.08)",
+                      paddingBottom: "var(--space-4)",
+                    }}
+                  >
                     <div
                       style={{
                         fontSize: "var(--text-sm)",
@@ -454,7 +475,6 @@ export default function KnowledgePage() {
           </a>
         </div>
       </section>
-
     </div>
   );
 }

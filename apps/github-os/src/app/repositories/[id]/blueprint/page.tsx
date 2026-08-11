@@ -51,12 +51,21 @@ export default function BlueprintPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -64,31 +73,48 @@ export default function BlueprintPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Build Blueprint Generator
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Project blueprint from repository analysis
             </p>
           </div>
 
           {blueprints.length === 0 ? (
             <div className="text-center py-20">
-              <FileText size={24} className="mx-auto text-[#52525b] mb-3" />
-              <p className="text-sm text-[#71717a]">
+              <FileText
+                size={24}
+                className="mx-auto mb-3"
+                style={{ color: "var(--color-text-muted)" }}
+              />
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 No blueprints available for this repository
               </p>
             </div>
@@ -103,21 +129,45 @@ export default function BlueprintPage() {
 
                 return (
                   <div key={bp.id}>
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-medium text-[#fafafa]">
+                        <h3
+                          className="text-lg font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {bp.title}
                         </h3>
-                        <span className="px-2 py-0.5 text-xs rounded bg-[#27272a] text-[#a1a1aa] capitalize">
+                        <span
+                          className="px-2 py-0.5 text-xs rounded capitalize"
+                          style={{
+                            background: "var(--color-bg-tertiary)",
+                            color: "var(--color-text-secondary)",
+                          }}
+                        >
                           {bp.blueprint_type}
                         </span>
                       </div>
-                      <p className="text-sm text-[#a1a1aa] mb-3">
+                      <p
+                        className="text-sm mb-3"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {bp.overview}
                       </p>
                       <div className="flex items-center gap-2">
-                        <Clock size={12} className="text-[#52525b]" />
-                        <span className="text-xs text-[#52525b]">
+                        <Clock
+                          size={12}
+                          style={{ color: "var(--color-text-muted)" }}
+                        />
+                        <span
+                          className="text-xs"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           {bp.estimated_effort}
                         </span>
                       </div>
@@ -125,14 +175,33 @@ export default function BlueprintPage() {
 
                     {/* Folder Structure */}
                     {folderStructure.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <FolderOpen size={14} className="text-[#3b82f6]" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <FolderOpen
+                            size={14}
+                            style={{ color: "var(--color-accent-gold)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Folder Structure
                           </h4>
                         </div>
-                        <div className="bg-[#0a0a0a] border border-[#27272a] rounded p-3 font-mono text-xs text-[#a1a1aa] space-y-1">
+                        <div
+                          className="rounded p-3 font-mono text-xs space-y-1"
+                          style={{
+                            background: "var(--color-bg-primary)",
+                            borderColor: "var(--color-border-primary)",
+                            color: "var(--color-text-secondary)",
+                          }}
+                        >
                           {folderStructure.map((f: string, i: number) => (
                             <div key={i}>{f}</div>
                           ))}
@@ -142,10 +211,22 @@ export default function BlueprintPage() {
 
                     {/* Tech Stack */}
                     {techStack.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <Layers size={14} className="text-[#f59e0b]" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <Layers
+                            size={14}
+                            style={{ color: "var(--color-accent-earth)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Tech Stack
                           </h4>
                         </div>
@@ -153,7 +234,11 @@ export default function BlueprintPage() {
                           {techStack.map((t: string, i: number) => (
                             <span
                               key={i}
-                              className="px-3 py-1 bg-[#27272a] text-[#a1a1aa] text-xs rounded-full"
+                              className="px-3 py-1 text-xs rounded-full"
+                              style={{
+                                background: "var(--color-bg-tertiary)",
+                                color: "var(--color-text-secondary)",
+                              }}
                             >
                               {t}
                             </span>
@@ -164,10 +249,22 @@ export default function BlueprintPage() {
 
                     {/* Implementation Roadmap */}
                     {roadmap.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <Route size={14} className="text-emerald-400" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <Route
+                            size={14}
+                            style={{ color: "var(--color-accent-green-light)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Implementation Roadmap
                           </h4>
                         </div>
@@ -175,12 +272,24 @@ export default function BlueprintPage() {
                           {roadmap.map((r: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                              className="flex items-center gap-3 p-3 rounded"
+                              style={{
+                                background: "var(--color-bg-primary)",
+                                borderColor: "var(--color-border-primary)",
+                              }}
                             >
-                              <span className="text-emerald-400 font-mono text-xs">
+                              <span
+                                className="font-mono text-xs"
+                                style={{
+                                  color: "var(--color-accent-green-light)",
+                                }}
+                              >
                                 {String(i + 1).padStart(2, "0")}
                               </span>
-                              <span className="text-sm text-[#a1a1aa]">
+                              <span
+                                className="text-sm"
+                                style={{ color: "var(--color-text-secondary)" }}
+                              >
                                 {r}
                               </span>
                             </div>
@@ -191,17 +300,32 @@ export default function BlueprintPage() {
 
                     {/* Key Decisions */}
                     {keyDecisions.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
-                        <h4 className="text-sm font-medium text-[#fafafa] mb-3">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
+                        <h4
+                          className="text-sm font-medium mb-3"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Key Decisions
                         </h4>
                         <div className="space-y-2">
                           {keyDecisions.map((d: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-[#3b82f6] mt-0.5">~</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-accent-gold)" }}
+                              >
+                                ~
+                              </span>
                               {d}
                             </div>
                           ))}
@@ -211,10 +335,22 @@ export default function BlueprintPage() {
 
                     {/* Pitfalls */}
                     {pitfalls.length > 0 && (
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                      <div
+                        className="rounded-lg p-5 mb-4"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <AlertTriangle size={14} className="text-amber-400" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <AlertTriangle
+                            size={14}
+                            style={{ color: "var(--color-accent-earth)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Common Pitfalls
                           </h4>
                         </div>
@@ -222,9 +358,15 @@ export default function BlueprintPage() {
                           {pitfalls.map((p: string, i: number) => (
                             <div
                               key={i}
-                              className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                              className="flex items-start gap-2 text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-amber-400 mt-0.5">!</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-accent-earth)" }}
+                              >
+                                !
+                              </span>
                               {p}
                             </div>
                           ))}
@@ -233,27 +375,57 @@ export default function BlueprintPage() {
                     )}
 
                     {/* Testing Strategy */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-2">
-                        <TestTube size={14} className="text-[#3b82f6]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <TestTube
+                          size={14}
+                          style={{ color: "var(--color-accent-gold)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Testing Strategy
                         </h4>
                       </div>
-                      <p className="text-sm text-[#a1a1aa]">
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {bp.testing_strategy}
                       </p>
                     </div>
 
                     {/* Deployment Guide */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+                    <div
+                      className="rounded-lg p-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-2">
-                        <BookOpen size={14} className="text-[#3b82f6]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <BookOpen
+                          size={14}
+                          style={{ color: "var(--color-accent-gold)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Deployment Guide
                         </h4>
                       </div>
-                      <p className="text-sm text-[#a1a1aa]">
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {bp.deployment_guide}
                       </p>
                     </div>

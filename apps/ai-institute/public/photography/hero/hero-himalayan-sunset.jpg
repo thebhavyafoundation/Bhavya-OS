@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3358"/>
+      <stop offset="40%" stop-color="#d4af37"/>
+      <stop offset="70%" stop-color="#c09a2a"/>
+      <stop offset="100%" stop-color="#0e382e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <!-- Mountain silhouettes -->
+  <polygon points="0,1080 200,600 400,750 600,500 800,650 1000,400 1200,550 1400,350 1600,500 1800,450 1920,600 1920,1080" fill="#0a2a21" opacity="0.8"/>
+  <polygon points="0,1080 100,700 300,800 500,650 700,750 900,550 1100,700 1300,500 1500,650 1700,550 1920,700 1920,1080" fill="#0e382e" opacity="0.6"/>
+  <!-- Sun -->
+  <circle cx="1400" cy="350" r="60" fill="#d4af37" opacity="0.9"/>
+  <circle cx="1400" cy="350" r="80" fill="#d4af37" opacity="0.3"/>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: hero-himalayan-sunset.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Hero Background</text>
+</svg>

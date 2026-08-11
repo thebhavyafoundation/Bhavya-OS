@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Sidebar } from "@/components/Sidebar";
-import {
-  BookOpen,
-  Layers,
-  Search,
-  ExternalLink,
-} from "lucide-react";
+import { BookOpen, Layers, Search, ExternalLink } from "lucide-react";
 import {
   Card,
   Badge,
@@ -80,10 +75,7 @@ export default function KnowledgePage() {
     <AppLayout sidebar={<Sidebar />}>
       <div className="animate-fade-in">
         <Breadcrumb
-          items={[
-            { label: "Dashboard", href: "/" },
-            { label: "Knowledge" },
-          ]}
+          items={[{ label: "Dashboard", href: "/" }, { label: "Knowledge" }]}
           className="mb-6"
         />
 
@@ -147,47 +139,51 @@ export default function KnowledgePage() {
           filteredPackages.length === 0 ? (
             <EmptyState
               icon={<BookOpen size={24} />}
-              title={search ? "No packages match your search" : "No knowledge packages yet"}
+              title={
+                search
+                  ? "No packages match your search"
+                  : "No knowledge packages yet"
+              }
               description="Knowledge packages are generated when you analyze repositories"
             />
           ) : (
             <div className="space-y-3">
               {filteredPackages.map((kp, i) => (
-                <Card
+                <div
                   key={kp.id}
-                  padding="lg"
-                  hover
                   className="animate-fade-in"
                   style={{ animationDelay: `${i * 40}ms` }}
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <span className="text-[10px] text-text-muted uppercase tracking-wider">
-                        {kp.category}
+                  <Card padding="lg" hover>
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <span className="text-[10px] text-text-muted uppercase tracking-wider">
+                          {kp.category}
+                        </span>
+                        <h3 className="text-sm font-medium text-text-primary mt-1">
+                          {kp.title}
+                        </h3>
+                      </div>
+                      <span className="text-xs text-text-tertiary">
+                        Quality {kp.quality_score}
                       </span>
-                      <h3 className="text-sm font-medium text-text-primary mt-1">
-                        {kp.title}
-                      </h3>
                     </div>
-                    <span className="text-xs text-text-tertiary">
-                      Quality {kp.quality_score}
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-3">
-                    {kp.content}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    {kp.repository_id && (
-                      <Link
-                        href={`/repositories/${kp.repository_id}`}
-                        className="flex items-center gap-1.5 text-xs text-accent-blue hover:text-accent-blue-hover transition-colors"
-                      >
-                        <ExternalLink size={10} />
-                        View repository
-                      </Link>
-                    )}
-                  </div>
-                </Card>
+                    <p className="text-sm text-text-secondary leading-relaxed mb-3">
+                      {kp.content}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      {kp.repository_id && (
+                        <Link
+                          href={`/repositories/${kp.repository_id}`}
+                          className="flex items-center gap-1.5 text-xs text-[var(--color-accent-gold)] hover:text-[var(--color-accent-gold-hover)] transition-colors"
+                        >
+                          <ExternalLink size={10} />
+                          View repository
+                        </Link>
+                      )}
+                    </div>
+                  </Card>
+                </div>
               ))}
             </div>
           )
@@ -200,35 +196,35 @@ export default function KnowledgePage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {filteredPatterns.map((pat, i) => (
-              <Card
+              <div
                 key={pat.id}
-                padding="lg"
-                hover
                 className="animate-fade-in"
                 style={{ animationDelay: `${i * 40}ms` }}
               >
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-medium text-text-primary">
-                    {pat.name}
-                  </h3>
-                  <Badge variant="default" size="sm">
-                    {pat.category}
-                  </Badge>
-                </div>
-                <p className="text-xs text-text-secondary mb-3 line-clamp-2">
-                  {pat.explanation}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-text-muted capitalize">
-                    {pat.difficulty}
-                  </span>
-                  {pat.bhavya_recommendation && (
-                    <span className="text-[10px] text-accent-blue">
-                      Bhavya recommends
+                <Card padding="lg" hover>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-sm font-medium text-text-primary">
+                      {pat.name}
+                    </h3>
+                    <Badge variant="default" size="sm">
+                      {pat.category}
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-text-secondary mb-3 line-clamp-2">
+                    {pat.explanation}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] text-text-muted capitalize">
+                      {pat.difficulty}
                     </span>
-                  )}
-                </div>
-              </Card>
+                    {pat.bhavya_recommendation && (
+                      <span className="text-[10px] text-[var(--color-accent-gold)]">
+                        Bhavya recommends
+                      </span>
+                    )}
+                  </div>
+                </Card>
+              </div>
             ))}
           </div>
         )}

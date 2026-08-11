@@ -2,67 +2,177 @@
   "version": "1.0.0",
   "created": "2026-08-12",
   "description": "Bhavya Foundation — Real Photography Archive. All images are contextual documentary photographs from Himachal Pradesh, India.",
-  "legal_notice": "These are contextual real photographs. They do not imply Bhavya Foundation activities unless verified by repository evidence.",
+  "legal_notice": "These are contextual real photographs. They do not imply Bhavya Foundation activities unless verified by repository evidence. Use language like 'Across the Himalayan communities we seek to serve' or 'Representative photograph — Himachal Pradesh.'",
   "photos": [
     {
       "id": "hero-himalayan-sunset",
       "filename": "hero-himalayan-sunset.jpg",
       "category": "hero",
       "page": "home",
-      "description": "Himalayan mountain range at sunset with golden light, forest silhouettes, and atmospheric mist.",
+      "description": "Himalayan mountain range at sunset with golden light, forest silhouettes, and atmospheric mist. Used as primary hero background.",
+      "subject": "Himalayan mountains, sunset, forest, valley",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": [
+          "golden",
+          "deep blue",
+          "forest green",
+          "warm orange"
+        ],
+        "mood": "cinematic, warm, aspirational",
+        "text_readability": "high — dark foreground with bright sky",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.3) 0%, rgba(14,56,46,0.6) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center 40%",
+        "overlay": true,
+        "overlay_opacity": 0.4
+      }
     },
     {
       "id": "forest-cedar-sunlight",
       "filename": "forest-cedar-sunlight.jpg",
       "category": "forest",
       "page": "forest",
-      "description": "Sunlight filtering through tall cedar/pine trees on a grassy Himalayan slope.",
+      "description": "Sunlight filtering through tall cedar/pine trees on a grassy Himalayan slope. Golden hour light.",
+      "subject": "Forest, cedar trees, sunlight, grassy slope",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": ["forest green", "golden yellow", "dark brown"],
+        "mood": "serene, natural, warm",
+        "text_readability": "medium — use overlay for text areas",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.4) 0%, rgba(14,56,46,0.7) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center center",
+        "overlay": true,
+        "overlay_opacity": 0.45
+      }
     },
     {
       "id": "knowledge-school-children",
       "filename": "knowledge-school-children.jpg",
       "category": "knowledge",
       "page": "knowledge",
-      "description": "Himachali school children in uniform with snowy Himalayan mountains in background.",
+      "description": "Himachali school children in uniform with snowy Himalayan mountains in background. Documentary photography.",
+      "subject": "School children, uniforms, snowy mountains, education",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": ["red", "white", "blue sky", "snow white"],
+        "mood": "hopeful, authentic, human",
+        "text_readability": "medium — use overlay for text areas",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center 30%",
+        "overlay": true,
+        "overlay_opacity": 0.4
+      }
     },
     {
       "id": "heritage-stone-temple",
       "filename": "heritage-stone-temple.jpg",
       "category": "heritage",
       "page": "heritage",
-      "description": "Traditional Himachali stone temple architecture with intricate carvings.",
+      "description": "Traditional Himachali stone temple architecture with intricate carvings and slate roof. Blue sky backdrop.",
+      "subject": "Stone temple, Himachali architecture, carvings, slate roof",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": [
+          "stone gray",
+          "warm brown",
+          "blue sky",
+          "gold accent"
+        ],
+        "mood": "ancient, cultural, reverent",
+        "text_readability": "medium — use overlay for text areas",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center 30%",
+        "overlay": true,
+        "overlay_opacity": 0.4
+      }
     },
     {
       "id": "heritage-wooden-temple",
       "filename": "heritage-wooden-temple.jpg",
       "category": "heritage",
       "page": "heritage",
-      "description": "Traditional Himachali wooden temple with mountain backdrop.",
+      "description": "Traditional Himachali wooden temple with multi-tiered roof and mountain backdrop. Prayer flags visible.",
+      "subject": "Wooden temple, mountains, prayer flags, Himachali architecture",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": [
+          "dark wood",
+          "mountain gray",
+          "green",
+          "prayer flag colors"
+        ],
+        "mood": "spiritual, mountainous, authentic",
+        "text_readability": "medium — use overlay for text areas",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center 40%",
+        "overlay": true,
+        "overlay_opacity": 0.4
+      }
     },
     {
       "id": "community-village-gathering",
       "filename": "community-village-gathering.jpg",
       "category": "community",
       "page": "community",
-      "description": "Himachali village women and children gathered in traditional stone courtyard.",
+      "description": "Himachali village women and children gathered in a traditional stone courtyard. Slate-roofed houses in background.",
+      "subject": "Village women, children, community gathering, traditional houses",
       "location": "Himachal Pradesh, India",
+      "photographer": "Unknown",
       "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation"
+      "license": "Used with permission — Bhavya Foundation",
+      "original_source_url": null,
+      "visual_characteristics": {
+        "dominant_colors": [
+          "colorful clothing",
+          "stone gray",
+          "slate blue",
+          "green"
+        ],
+        "mood": "communal, authentic, warm",
+        "text_readability": "medium — use overlay for text areas",
+        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+      },
+      "treatment": {
+        "object_fit": "cover",
+        "object_position": "center center",
+        "overlay": true,
+        "overlay_opacity": 0.4
+      }
     }
   ]
 }

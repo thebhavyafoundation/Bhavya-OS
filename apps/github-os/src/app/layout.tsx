@@ -3,8 +3,9 @@ import "@bhavya/platform-ui";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GitHub OS — Engineering Workspace",
-  description: "AI-native engineering operating system for Bhavya Foundation",
+  title: "Bhavya OS — Design & Web Intelligence",
+  description:
+    "Design intelligence, pattern library, and web analysis engine for Bhavya Foundation",
 };
 
 export default function RootLayout({
@@ -14,7 +15,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-bg-primary text-text-primary antialiased">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        className="bg-bg-primary text-text-primary antialiased"
+        style={{ fontFamily: "var(--font-sans)" }}
+      >
         {children}
       </body>
     </html>

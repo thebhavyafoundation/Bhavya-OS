@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="knowledge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3358"/>
+      <stop offset="50%" stop-color="#122240"/>
+      <stop offset="100%" stop-color="#0a1628"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#knowledge)"/>
+  <!-- Mountains -->
+  <polygon points="0,1080 300,500 600,700 900,400 1200,600 1500,350 1920,550 1920,1080" fill="#0a1628" opacity="0.6"/>
+  <!-- Snow caps -->
+  <polygon points="850,420 900,400 950,430" fill="#F7F4EC" opacity="0.4"/>
+  <polygon points="1450,370 1500,350 1550,380" fill="#F7F4EC" opacity="0.4"/>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: knowledge-school-children.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Knowledge Background</text>
+</svg>

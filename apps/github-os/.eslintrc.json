@@ -1,6 +1,55 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "@typescript-eslint/triple-slash-reference": "off"
-  }
+    "@typescript-eslint/triple-slash-reference": "off",
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/^#[0-9a-fA-F]{3,8}$/]",
+        "message": "Hardcoded hex color detected. Use Bhavya design tokens from tokens.css instead."
+      },
+      {
+        "selector": "Literal[value=/^rgba?\\(/]",
+        "message": "Hardcoded rgba color detected. Use Bhavya design tokens from tokens.css instead."
+      },
+      {
+        "selector": "Literal[value=/^hsla?\\(/]",
+        "message": "Hardcoded hsla color detected. Use Bhavya design tokens from tokens.css instead."
+      },
+      {
+        "selector": "Literal[value=/\\bml-\\[?240px\\b/]",
+        "message": "Hardcoded sidebar margin. Use ml-[var(--sidebar-width)] instead."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/app/**", "src/components/**"],
+      "rules": {
+        "no-restricted-syntax": [
+          "warn",
+          {
+            "selector": "Literal[value=/^#[0-9a-fA-F]{3,8}$/]",
+            "message": "Hardcoded hex color detected. Use Bhavya design tokens from tokens.css instead."
+          },
+          {
+            "selector": "Literal[value=/^rgba?\\(/]",
+            "message": "Hardcoded rgba color detected. Use Bhavya design tokens from tokens.css instead."
+          },
+          {
+            "selector": "Literal[value=/^hsla?\\(/]",
+            "message": "Hardcoded hsla color detected. Use Bhavya design tokens from tokens.css instead."
+          },
+          {
+            "selector": "Literal[value=/\\bml-\\[?240px\\b/]",
+            "message": "Hardcoded sidebar margin. Use ml-[var(--sidebar-width)] instead."
+          },
+          {
+            "selector": "Literal[value='none']",
+            "message": "outline: 'none' removes keyboard focus. Use focus-visible styles instead."
+          }
+        ]
+      }
+    }
+  ]
 }

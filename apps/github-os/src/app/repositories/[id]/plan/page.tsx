@@ -51,12 +51,21 @@ export default function PlanPage() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-[#0a0a0a]">
+      <div
+        className="flex min-h-screen"
+        style={{ background: "var(--color-bg-primary)" }}
+      >
         <Sidebar />
-        <main className="ml-[240px] flex-1 p-8">
+        <main className="ml-[var(--sidebar-width)] flex-1 p-8">
           <div className="max-w-4xl mx-auto animate-pulse">
-            <div className="h-8 bg-[#27272a] rounded w-1/3 mb-8" />
-            <div className="h-64 bg-[#111111] rounded-lg" />
+            <div
+              className="h-8 rounded w-1/3 mb-8"
+              style={{ background: "var(--color-bg-tertiary)" }}
+            />
+            <div
+              className="h-64 rounded-lg"
+              style={{ background: "var(--color-surface)" }}
+            />
           </div>
         </main>
       </div>
@@ -64,31 +73,48 @@ export default function PlanPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div
+      className="flex min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <Sidebar />
-      <main className="ml-[240px] flex-1 p-8">
+      <main className="ml-[var(--sidebar-width)] flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/repositories/${id}`}
-            className="inline-flex items-center gap-2 text-sm text-[#71717a] hover:text-[#fafafa] transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-sm transition-colors mb-6 hover:text-[var(--color-text-primary)]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             <ArrowLeft size={14} />
             Back to repository
           </Link>
 
           <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-[#fafafa]">
+            <h1
+              className="text-2xl font-semibold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               Implementation Planner
             </h1>
-            <p className="text-sm text-[#71717a] mt-1">
+            <p
+              className="text-sm mt-1"
+              style={{ color: "var(--color-text-tertiary)" }}
+            >
               Roadmap, epics, milestones, and risk analysis
             </p>
           </div>
 
           {plans.length === 0 ? (
             <div className="text-center py-20">
-              <Map size={24} className="mx-auto text-[#52525b] mb-3" />
-              <p className="text-sm text-[#71717a]">
+              <Map
+                size={24}
+                className="mx-auto mb-3"
+                style={{ color: "var(--color-text-muted)" }}
+              />
+              <p
+                className="text-sm"
+                style={{ color: "var(--color-text-tertiary)" }}
+              >
                 No implementation plans available
               </p>
             </div>
@@ -107,25 +133,55 @@ export default function PlanPage() {
 
                 return (
                   <div key={plan.id}>
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-medium text-[#fafafa]">
+                        <h3
+                          className="text-lg font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           {plan.title}
                         </h3>
-                        <span className="px-2 py-0.5 text-xs rounded bg-[#27272a] text-[#a1a1aa] capitalize">
+                        <span
+                          className="px-2 py-0.5 text-xs rounded capitalize"
+                          style={{
+                            background: "var(--color-bg-tertiary)",
+                            color: "var(--color-text-secondary)",
+                          }}
+                        >
                           {plan.plan_type}
                         </span>
                       </div>
-                      <p className="text-xs text-[#52525b]">
+                      <p
+                        className="text-xs"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
                         Status: {plan.status}
                       </p>
                     </div>
 
                     {/* Roadmap */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-3">
-                        <Route size={14} className="text-[#3b82f6]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <Route
+                          size={14}
+                          style={{ color: "var(--color-accent-gold)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Roadmap
                         </h4>
                       </div>
@@ -133,22 +189,46 @@ export default function PlanPage() {
                         {roadmap.map((r: string, i: number) => (
                           <div
                             key={i}
-                            className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-center gap-3 p-3 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
-                            <span className="text-[#3b82f6] font-mono text-xs">
+                            <span
+                              className="font-mono text-xs"
+                              style={{ color: "var(--color-accent-gold)" }}
+                            >
                               {String(i + 1).padStart(2, "0")}
                             </span>
-                            <span className="text-sm text-[#a1a1aa]">{r}</span>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
+                              {r}
+                            </span>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* Phases */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-3">
-                        <Layers size={14} className="text-[#f59e0b]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <Layers
+                          size={14}
+                          style={{ color: "var(--color-accent-earth)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Phases
                         </h4>
                       </div>
@@ -156,11 +236,13 @@ export default function PlanPage() {
                         {phases.map((p: string, i: number) => (
                           <div
                             key={i}
-                            className="flex items-start gap-2 text-sm text-[#a1a1aa]"
+                            className="flex items-start gap-2 text-sm"
+                            style={{ color: "var(--color-text-secondary)" }}
                           >
                             <ArrowRight
                               size={14}
-                              className="text-[#f59e0b] mt-0.5 flex-shrink-0"
+                              className="mt-0.5 flex-shrink-0"
+                              style={{ color: "var(--color-accent-earth)" }}
                             />
                             {p}
                           </div>
@@ -169,10 +251,22 @@ export default function PlanPage() {
                     </div>
 
                     {/* Epics */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-3">
-                        <Target size={14} className="text-emerald-400" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <Target
+                          size={14}
+                          style={{ color: "var(--color-accent-green-light)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Epics
                         </h4>
                       </div>
@@ -189,10 +283,22 @@ export default function PlanPage() {
                     </div>
 
                     {/* Milestones */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5 mb-4">
+                    <div
+                      className="rounded-lg p-5 mb-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-3">
-                        <Target size={14} className="text-[#3b82f6]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <Target
+                          size={14}
+                          style={{ color: "var(--color-accent-gold)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Milestones
                         </h4>
                       </div>
@@ -200,12 +306,24 @@ export default function PlanPage() {
                         {milestones.map((m: string, i: number) => (
                           <div
                             key={i}
-                            className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#27272a] rounded"
+                            className="flex items-center gap-3 p-3 rounded"
+                            style={{
+                              background: "var(--color-bg-primary)",
+                              borderColor: "var(--color-border-primary)",
+                            }}
                           >
-                            <span className="text-[#3b82f6] font-mono text-xs">
+                            <span
+                              className="font-mono text-xs"
+                              style={{ color: "var(--color-accent-gold)" }}
+                            >
                               M{i + 1}
                             </span>
-                            <span className="text-sm text-[#a1a1aa]">{m}</span>
+                            <span
+                              className="text-sm"
+                              style={{ color: "var(--color-text-secondary)" }}
+                            >
+                              {m}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -213,10 +331,22 @@ export default function PlanPage() {
 
                     {/* Dependencies & Learning */}
                     <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+                      <div
+                        className="rounded-lg p-5"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <Link2 size={14} className="text-amber-400" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <Link2
+                            size={14}
+                            style={{ color: "var(--color-accent-earth)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Dependencies
                           </h4>
                         </div>
@@ -224,18 +354,36 @@ export default function PlanPage() {
                           {dependencies.map((d: string, i: number) => (
                             <div
                               key={i}
-                              className="text-sm text-[#a1a1aa] flex items-start gap-2"
+                              className="text-sm flex items-start gap-2"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-amber-400 mt-0.5">-</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-accent-earth)" }}
+                              >
+                                -
+                              </span>
                               {d}
                             </div>
                           ))}
                         </div>
                       </div>
-                      <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+                      <div
+                        className="rounded-lg p-5"
+                        style={{
+                          background: "var(--color-surface)",
+                          borderColor: "var(--color-border-primary)",
+                        }}
+                      >
                         <div className="flex items-center gap-2 mb-3">
-                          <BookOpen size={14} className="text-[#3b82f6]" />
-                          <h4 className="text-sm font-medium text-[#fafafa]">
+                          <BookOpen
+                            size={14}
+                            style={{ color: "var(--color-accent-gold)" }}
+                          />
+                          <h4
+                            className="text-sm font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             Learning Prerequisites
                           </h4>
                         </div>
@@ -243,9 +391,15 @@ export default function PlanPage() {
                           {learningPrereqs.map((l: string, i: number) => (
                             <div
                               key={i}
-                              className="text-sm text-[#a1a1aa] flex items-start gap-2"
+                              className="text-sm flex items-start gap-2"
+                              style={{ color: "var(--color-text-secondary)" }}
                             >
-                              <span className="text-[#3b82f6] mt-0.5">-</span>
+                              <span
+                                className="mt-0.5"
+                                style={{ color: "var(--color-accent-gold)" }}
+                              >
+                                -
+                              </span>
                               {l}
                             </div>
                           ))}
@@ -254,14 +408,29 @@ export default function PlanPage() {
                     </div>
 
                     {/* Risk Analysis */}
-                    <div className="bg-[#111111] border border-[#27272a] rounded-lg p-5">
+                    <div
+                      className="rounded-lg p-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        borderColor: "var(--color-border-primary)",
+                      }}
+                    >
                       <div className="flex items-center gap-2 mb-2">
-                        <AlertTriangle size={14} className="text-[#f59e0b]" />
-                        <h4 className="text-sm font-medium text-[#fafafa]">
+                        <AlertTriangle
+                          size={14}
+                          style={{ color: "var(--color-accent-earth)" }}
+                        />
+                        <h4
+                          className="text-sm font-medium"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Risk Analysis
                         </h4>
                       </div>
-                      <p className="text-sm text-[#a1a1aa]">
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {plan.risk_analysis}
                       </p>
                     </div>

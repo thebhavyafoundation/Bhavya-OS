@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="community" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b3528"/>
+      <stop offset="50%" stop-color="#0e382e"/>
+      <stop offset="100%" stop-color="#041f16"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#community)"/>
+  <!-- Village silhouettes -->
+  <g fill="#041f16" opacity="0.5">
+    <rect x="200" y="600" width="300" height="480"/>
+    <polygon points="200,600 350,450 500,600"/>
+    <rect x="600" y="650" width="250" height="430"/>
+    <polygon points="600,650 725,520 850,650"/>
+    <rect x="1100" y="580" width="350" height="500"/>
+    <polygon points="1100,580 1275,420 1450,580"/>
+    <rect x="1550" y="620" width="270" height="460"/>
+    <polygon points="1550,620 1685,480 1820,620"/>
+  </g>
+  <!-- People silhouettes -->
+  <g fill="#0e382e" opacity="0.4">
+    <circle cx="400" cy="750" r="20"/>
+    <rect x="385" y="770" width="30" height="60"/>
+    <circle cx="500" cy="760" r="18"/>
+    <rect x="487" y="778" width="26" height="55"/>
+    <circle cx="700" cy="740" r="22"/>
+    <rect x="683" y="762" width="34" height="65"/>
+  </g>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: community-village-gathering.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Community Background</text>
+</svg>

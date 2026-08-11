@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="heritage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d2516"/>
+      <stop offset="50%" stop-color="#2d1a0e"/>
+      <stop offset="100%" stop-color="#1a0f08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#heritage)"/>
+  <!-- Temple silhouette -->
+  <g fill="#1a0f08" opacity="0.5">
+    <rect x="700" y="400" width="520" height="680"/>
+    <polygon points="700,400 960,200 1220,400"/>
+    <rect x="750" y="500" width="100" height="200"/>
+    <rect x="1070" y="500" width="100" height="200"/>
+  </g>
+  <!-- Gold accent -->
+  <circle cx="960" cy="200" r="30" fill="#d4af37" opacity="0.4"/>
+  <!-- Text -->
+  <text x="960" y="950" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#F7F4EC" opacity="0.8">PLACEHOLDER — Replace with: heritage-stone-temple.jpg</text>
+  <text x="960" y="990" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#8A9A8B" opacity="0.6">Bhavya Real Photo Archive — Heritage Background</text>
+</svg>

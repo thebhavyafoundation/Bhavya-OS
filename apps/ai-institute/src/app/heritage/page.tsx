@@ -56,7 +56,6 @@ const heritageProjects = [
 export default function HeritagePage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-
       {/* Hero */}
       <section
         style={{
@@ -68,7 +67,11 @@ export default function HeritagePage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground pillar="heritage" />
+        <HeroBackground
+          pillar="heritage"
+          photo="/photography/heritage/heritage-stone-temple.jpg"
+          photoPosition="center 30%"
+        />
 
         <div
           className="container"
@@ -353,7 +356,6 @@ export default function HeritagePage() {
           </a>
         </div>
       </section>
-
     </div>
   );
 }
