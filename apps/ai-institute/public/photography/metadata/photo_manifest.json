@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "created": "2026-08-12",
+  "description": "Bhavya Foundation — Real Photography Archive. All images are contextual documentary photographs from Himachal Pradesh, India.",
+  "legal_notice": "These are contextual real photographs. They do not imply Bhavya Foundation activities unless verified by repository evidence.",
+  "photos": [
+    {
+      "id": "hero-himalayan-sunset",
+      "filename": "hero-himalayan-sunset.jpg",
+      "category": "hero",
+      "page": "home",
+      "description": "Himalayan mountain range at sunset with golden light, forest silhouettes, and atmospheric mist.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    },
+    {
+      "id": "forest-cedar-sunlight",
+      "filename": "forest-cedar-sunlight.jpg",
+      "category": "forest",
+      "page": "forest",
+      "description": "Sunlight filtering through tall cedar/pine trees on a grassy Himalayan slope.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    },
+    {
+      "id": "knowledge-school-children",
+      "filename": "knowledge-school-children.jpg",
+      "category": "knowledge",
+      "page": "knowledge",
+      "description": "Himachali school children in uniform with snowy Himalayan mountains in background.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    },
+    {
+      "id": "heritage-stone-temple",
+      "filename": "heritage-stone-temple.jpg",
+      "category": "heritage",
+      "page": "heritage",
+      "description": "Traditional Himachali stone temple architecture with intricate carvings.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    },
+    {
+      "id": "heritage-wooden-temple",
+      "filename": "heritage-wooden-temple.jpg",
+      "category": "heritage",
+      "page": "heritage",
+      "description": "Traditional Himachali wooden temple with mountain backdrop.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    },
+    {
+      "id": "community-village-gathering",
+      "filename": "community-village-gathering.jpg",
+      "category": "community",
+      "page": "community",
+      "description": "Himachali village women and children gathered in traditional stone courtyard.",
+      "location": "Himachal Pradesh, India",
+      "source": "Bhavya Real Photo Archive",
+      "license": "Used with permission — Bhavya Foundation"
+    }
+  ]
+}
