@@ -186,7 +186,7 @@ export default function KnowledgePage() {
                   color: "var(--color-brand-gold)",
                 }}
               >
-                By the Numbers
+                What We Offer
               </h3>
               <div
                 style={{

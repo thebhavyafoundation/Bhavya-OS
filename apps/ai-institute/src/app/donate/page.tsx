@@ -11,22 +11,22 @@ const impacts = [
   {
     icon: TreePine,
     amount: "₹100",
-    description: "Plants 10 native trees in degraded forests",
+    description: "Helps plant native trees in degraded forests",
   },
   {
     icon: GraduationCap,
     amount: "₹500",
-    description: "Supports 1 child's AI education for a month",
+    description: "Supports a child's AI education for a month",
   },
   {
     icon: Landmark,
     amount: "₹1,000",
-    description: "Documents 1 heritage site for preservation",
+    description: "Helps document heritage sites for preservation",
   },
   {
     icon: Heart,
     amount: "₹5,000",
-    description: "Establishes 1 AI lab in a rural school",
+    description: "Helps establish AI labs in rural schools",
   },
 ];
 

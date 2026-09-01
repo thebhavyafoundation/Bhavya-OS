@@ -11,7 +11,7 @@ const faqs: Record<string, { question: string; answer: string }[]> = {
     {
       question: "What is Bhavya AI Institute?",
       answer:
-        "Bhavya AI Institute is a comprehensive AI education institution with 12 specialized schools (in development), 1 course, and a 10-year mission to become the global benchmark for AI education. We offer structured learning paths from beginner to expert level.",
+        "Bhavya AI Institute is a comprehensive AI education institution with 12 specialized schools, 10 published courses, and a 10-year mission to become the global benchmark for AI education. We offer structured learning paths from beginner to expert level.",
     },
     {
       question: "Who can join Bhavya AI Institute?",
@@ -33,7 +33,7 @@ const faqs: Record<string, { question: string; answer: string }[]> = {
     {
       question: "How many courses are available?",
       answer:
-        "We currently offer 1 course across 12 specialized schools (in development). Each course is part of a structured learning path, ensuring you build knowledge systematically from foundations to advanced topics.",
+        "We currently offer 10 published courses across 12 specialized schools. Each course is part of a structured learning path, ensuring you build knowledge systematically from foundations to advanced topics.",
     },
     {
       question: "What format are the courses in?",

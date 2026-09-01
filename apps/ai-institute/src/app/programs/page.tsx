@@ -53,8 +53,8 @@ const programs = [
 
 const stats = [
   { value: "3", label: "Programs" },
-  { value: "1", label: "Course" },
-  { value: "1", label: "School" },
+  { value: "10", label: "Courses" },
+  { value: "12", label: "Schools" },
   { value: "Open", label: "Enrollment" },
 ];
 

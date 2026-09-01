@@ -333,7 +333,7 @@ export default function LearningPathsPage() {
             <div className="flex items-center justify-center gap-8 mb-10">
               {[
                 { label: "Weeks", value: `${totalWeeks}` },
-                { label: "Stages", value: "8" },
+                { label: "Stages", value: `${flagshipPath.length}` },
                 { label: "Modules", value: `${totalModules}+` },
               ].map((stat, i) => (
                 <motion.div
