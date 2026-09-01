@@ -23,7 +23,7 @@
  *   metrics failure is logged, response includes `partialProcessing: true`
  *
  * Canonical state is NEVER rolled back because a derived artifact failed.
- * Reconciliation is possible via rebuildMetricsFromEvidence().
+ * Reconciliation is possible via rebuildForestMetricsFromEvidence().
  *
  * ## Validation
  *
@@ -181,7 +181,7 @@ export async function GET() {
  *   3. Metric update — best effort, failure logged
  *
  * Canonical state is never rolled back. Reconciliation via
- * rebuildMetricsFromEvidence() is possible.
+ * rebuildForestMetricsFromEvidence() is possible.
  */
 export async function POST(request: NextRequest) {
   // Auth check
@@ -257,7 +257,7 @@ export async function POST(request: NextRequest) {
     recordMissionCreated();
   } catch (e) {
     sideEffects.push("metrics-update-failed");
-    // Metrics failure is observable; reconciliation via rebuildMetricsFromEvidence()
+    // Metrics failure is observable; reconciliation via rebuildForestMetricsFromEvidence()
   }
 
   const response: Mission & { warnings?: string[]; partialProcessing?: boolean } = { ...mission };
