@@ -1,34 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findSessionByToken, findUserById } from "@/lib/api-auth";
-import { getStudentByUserId, updateStudent, completeLesson } from "@/lib/student-store";
+import { requireAuth } from "@/lib/api-auth";
+import {
+  getStudentByUserId,
+  updateStudent,
+  completeLesson,
+} from "@/lib/student-store";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
+import { roleIsAllowed, type Role } from "@/lib/roles";
 
 const VALID_LESSON_IDS = ["what-is-ai", "how-ai-works", "building-with-ai"];
 const VALID_COURSE_IDS = ["ai-foundations"];
-const VALID_LAB_TASKS = ["lab-linear-regression", "lab-data-cleaning", "lab-neural-network", "lab-image-classification", "lab-sentiment-analysis"];
+const VALID_LAB_TASKS = [
+  "lab-linear-regression",
+  "lab-data-cleaning",
+  "lab-neural-network",
+  "lab-image-classification",
+  "lab-sentiment-analysis",
+];
 
 export async function POST(request: NextRequest) {
   const correlationId = extractCorrelationId(request);
   const log = createLogger("student:progress", correlationId);
 
   try {
-    const token = request.cookies.get("session-token")?.value;
-    if (!token) {
+    const user = await requireAuth(request);
+    if (!user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const session = await findSessionByToken(token);
-    if (!session) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+    // Only students and builders can submit progress
+    if (!roleIsAllowed(user.role as Role, ["student", "builder"])) {
+      return NextResponse.json(
+        { error: "Insufficient permissions" },
+        { status: 403 },
+      );
     }
 
-    const user = await findUserById(session.userId);
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
-    const rateLimit = checkRateLimit(`progress:${user.id}`, RateLimits.progress);
+    const rateLimit = checkRateLimit(
+      `progress:${user.id}`,
+      RateLimits.progress,
+    );
     if (rateLimit.limited) {
       log.warn("Rate limit exceeded", { userId: user.id });
       return NextResponse.json(
@@ -36,7 +48,9 @@ export async function POST(request: NextRequest) {
         {
           status: 429,
           headers: {
-            "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetAt - Date.now()) / 1000),
+            ),
           },
         },
       );
@@ -57,26 +71,45 @@ export async function POST(request: NextRequest) {
     switch (action) {
       case "completeLesson": {
         if (!data?.lessonId || !VALID_LESSON_IDS.includes(data.lessonId)) {
-          return NextResponse.json({ error: "Invalid lesson ID" }, { status: 400 });
+          return NextResponse.json(
+            { error: "Invalid lesson ID" },
+            { status: 400 },
+          );
         }
         student = await completeLesson(user.id, data.lessonId);
-        log.info("Lesson completed", { userId: user.id, lessonId: data.lessonId });
+        log.info("Lesson completed", {
+          userId: user.id,
+          lessonId: data.lessonId,
+        });
         break;
       }
       case "completeLab": {
         if (!data?.taskId || !VALID_LAB_TASKS.includes(data.taskId)) {
-          return NextResponse.json({ error: "Invalid task ID" }, { status: 400 });
+          return NextResponse.json(
+            { error: "Invalid task ID" },
+            { status: 400 },
+          );
         }
         const completed = student.labTasksCompleted.includes(data.taskId)
           ? student.labTasksCompleted
           : [...student.labTasksCompleted, data.taskId];
-        student = await updateStudent(user.id, { labTasksCompleted: completed });
+        student = await updateStudent(user.id, {
+          labTasksCompleted: completed,
+        });
         log.info("Lab completed", { userId: user.id, taskId: data.taskId });
         break;
       }
       case "submitQuiz": {
-        if (!data?.answers || typeof data.score !== "number" || data.score < 0 || data.score > 100) {
-          return NextResponse.json({ error: "Invalid quiz data" }, { status: 400 });
+        if (
+          !data?.answers ||
+          typeof data.score !== "number" ||
+          data.score < 0 ||
+          data.score > 100
+        ) {
+          return NextResponse.json(
+            { error: "Invalid quiz data" },
+            { status: 400 },
+          );
         }
         student = await updateStudent(user.id, {
           knowledgeCheckAnswers: data.answers,
@@ -86,8 +119,15 @@ export async function POST(request: NextRequest) {
         break;
       }
       case "submitProject": {
-        if (typeof data?.score !== "number" || data.score < 0 || data.score > 100) {
-          return NextResponse.json({ error: "Invalid project score" }, { status: 400 });
+        if (
+          typeof data?.score !== "number" ||
+          data.score < 0 ||
+          data.score > 100
+        ) {
+          return NextResponse.json(
+            { error: "Invalid project score" },
+            { status: 400 },
+          );
         }
         student = await updateStudent(user.id, {
           projectSubmitted: true,
@@ -99,7 +139,10 @@ export async function POST(request: NextRequest) {
       }
       case "enroll": {
         if (!data?.courseId || !VALID_COURSE_IDS.includes(data.courseId)) {
-          return NextResponse.json({ error: "Invalid course ID" }, { status: 400 });
+          return NextResponse.json(
+            { error: "Invalid course ID" },
+            { status: 400 },
+          );
         }
         const enrolled = student.enrolledCourses.includes(data.courseId)
           ? student.enrolledCourses
@@ -108,12 +151,23 @@ export async function POST(request: NextRequest) {
           enrolledCourses: enrolled,
           currentCourse: data.courseId,
         });
-        log.info("Course enrolled", { userId: user.id, courseId: data.courseId });
+        log.info("Course enrolled", {
+          userId: user.id,
+          courseId: data.courseId,
+        });
         break;
       }
       case "addReflection": {
-        if (!data?.lessonId || !data?.content || typeof data.content !== "string" || data.content.length > 5000) {
-          return NextResponse.json({ error: "Invalid reflection data" }, { status: 400 });
+        if (
+          !data?.lessonId ||
+          !data?.content ||
+          typeof data.content !== "string" ||
+          data.content.length > 5000
+        ) {
+          return NextResponse.json(
+            { error: "Invalid reflection data" },
+            { status: 400 },
+          );
         }
         const entry = {
           lessonId: data.lessonId,
@@ -123,18 +177,30 @@ export async function POST(request: NextRequest) {
         student = await updateStudent(user.id, {
           reflectionEntries: [...student.reflectionEntries, entry],
         });
-        log.info("Reflection added", { userId: user.id, lessonId: data.lessonId });
+        log.info("Reflection added", {
+          userId: user.id,
+          lessonId: data.lessonId,
+        });
         break;
       }
       default:
         return NextResponse.json({ error: "Unknown action" }, { status: 400 });
     }
 
-    return NextResponse.json({ student }, {
-      headers: { "X-Correlation-Id": correlationId },
-    });
+    return NextResponse.json(
+      { student },
+      {
+        headers: { "X-Correlation-Id": correlationId },
+      },
+    );
   } catch (err) {
-    log.error("Progress update failed", err instanceof Error ? err : new Error(String(err)));
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    log.error(
+      "Progress update failed",
+      err instanceof Error ? err : new Error(String(err)),
+    );
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

@@ -36,7 +36,7 @@ async function ensureDb(): Promise<void> {
 
 export async function hashPassword(password: string): Promise<string> {
   const { default: bcrypt } = await import("bcryptjs");
-  return bcrypt.hashSync(password, 12);
+  return bcrypt.hash(password, 12);
 }
 
 export async function verifyPassword(
@@ -44,7 +44,7 @@ export async function verifyPassword(
   stored: string,
 ): Promise<boolean> {
   const { default: bcrypt } = await import("bcryptjs");
-  return bcrypt.compareSync(password, stored);
+  return bcrypt.compare(password, stored);
 }
 
 export async function findUserByEmail(email: string): Promise<ApiUser | null> {
@@ -85,10 +85,16 @@ export async function createSession(user: ApiUser): Promise<ApiSession> {
   await ensureDb();
   const sessionRepo = getSessionRepository();
   const session = await sessionRepo.create(user.id);
-  return { userId: user.id, token: session.token, expiresAt: session.expiresAt };
+  return {
+    userId: user.id,
+    token: session.token,
+    expiresAt: session.expiresAt,
+  };
 }
 
-export async function findSessionByToken(token: string): Promise<ApiSession | null> {
+export async function findSessionByToken(
+  token: string,
+): Promise<ApiSession | null> {
   await ensureDb();
   const sessionRepo = getSessionRepository();
   const session = await sessionRepo.findByToken(token);
@@ -113,7 +119,9 @@ export function stripSensitive(user: ApiUser) {
  * Usage: const user = await requireAuth(request);
  * if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
  */
-export async function requireAuth(request: NextRequest): Promise<ApiUser | null> {
+export async function requireAuth(
+  request: NextRequest,
+): Promise<ApiUser | null> {
   const token = request.cookies.get("session-token")?.value;
   if (!token) return null;
   const session = await findSessionByToken(token);

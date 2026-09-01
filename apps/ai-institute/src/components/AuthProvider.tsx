@@ -69,10 +69,7 @@ interface AuthContextType {
   enrollInCourse: (courseId: string) => void;
   completeLesson: (lessonId: string) => void;
   completeLab: (taskId: string) => void;
-  submitQuiz: (
-    answers: Record<string, string | number>,
-    score: number,
-  ) => void;
+  submitQuiz: (answers: Record<string, string | number>, score: number) => void;
   submitProject: (score: number) => void;
   addReflection: (lessonId: string, content: string) => void;
 }
@@ -172,7 +169,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const studentRes = await fetch("/api/student", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: updated.name, email: updated.email, interests: updated.interests }),
+          body: JSON.stringify({
+            name: updated.name,
+            email: updated.email,
+            interests: updated.interests,
+            onboardingComplete: data.onboardingComplete,
+          }),
         });
         if (studentRes.ok) {
           const studentData = await studentRes.json();
@@ -253,7 +255,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/student/progress", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "submitQuiz", data: { answers, score } }),
+        body: JSON.stringify({
+          action: "submitQuiz",
+          data: { answers, score },
+        }),
       });
       if (res.ok) {
         const studentData = await res.json();
@@ -285,7 +290,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const res = await fetch("/api/student/progress", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "addReflection", data: { lessonId, content } }),
+        body: JSON.stringify({
+          action: "addReflection",
+          data: { lessonId, content },
+        }),
       });
       if (res.ok) {
         const studentData = await res.json();
