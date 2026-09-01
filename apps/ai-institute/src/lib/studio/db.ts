@@ -1,8 +1,8 @@
 /**
  * Studio Database Layer
  *
- * SQLite persistence for courses, lessons, and knowledge objects.
- * This is the canonical data store. Runtime engine is optional.
+ * SQLite persistence for courses and lessons.
+ * Knowledge Objects use the filesystem-based knowledge-repository.ts (canonical).
  */
 
 import { initDatabase } from "../db";
@@ -47,22 +47,6 @@ export async function ensureStudioDb(): Promise<void> {
       FOREIGN KEY (course_id) REFERENCES studio_courses(id) ON DELETE SET NULL
     );
 
-    CREATE TABLE IF NOT EXISTS studio_knowledge (
-      id TEXT PRIMARY KEY,
-      domain TEXT NOT NULL,
-      title TEXT NOT NULL,
-      description TEXT DEFAULT '',
-      grade INTEGER DEFAULT 9,
-      subject TEXT DEFAULT 'AI',
-      concepts TEXT DEFAULT '[]',
-      definitions TEXT DEFAULT '[]',
-      examples TEXT DEFAULT '[]',
-      misconceptions TEXT DEFAULT '[]',
-      exercises TEXT DEFAULT '[]',
-      references_list TEXT DEFAULT '[]',
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
-    );
   `);
 
   initialized = true;
@@ -292,127 +276,4 @@ export async function dbDeleteLesson(id: string) {
   await ensureStudioDb();
   const { getDb } = await import("../db");
   getDb().prepare("DELETE FROM studio_lessons WHERE id = ?").run(id);
-}
-
-// ── Knowledge Object CRUD ──────────────────────────────────────────
-
-export interface DbKnowledge {
-  id: string;
-  domain: string;
-  title: string;
-  description: string;
-  grade: number;
-  subject: string;
-  concepts: string;
-  definitions: string;
-  examples: string;
-  misconceptions: string;
-  exercises: string;
-  references_list: string;
-  created_at: string;
-  updated_at: string;
-}
-
-function dbKnowledgeToApi(row: DbKnowledge) {
-  return {
-    id: row.id,
-    domain: row.domain,
-    title: row.title,
-    description: row.description,
-    grade: row.grade,
-    subject: row.subject,
-    concepts: JSON.parse(row.concepts || "[]"),
-    definitions: JSON.parse(row.definitions || "[]"),
-    examples: JSON.parse(row.examples || "[]"),
-    misconceptions: JSON.parse(row.misconceptions || "[]"),
-    exercises: JSON.parse(row.exercises || "[]"),
-    references: JSON.parse(row.references_list || "[]"),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-  };
-}
-
-export async function dbListKnowledge() {
-  await ensureStudioDb();
-  const { getDb } = await import("../db");
-  const rows = getDb().prepare("SELECT * FROM studio_knowledge ORDER BY updated_at DESC").all() as unknown as DbKnowledge[];
-  return rows.map(dbKnowledgeToApi);
-}
-
-export async function dbGetKnowledge(id: string) {
-  await ensureStudioDb();
-  const { getDb } = await import("../db");
-  const row = getDb().prepare("SELECT * FROM studio_knowledge WHERE id = ?").get(id) as DbKnowledge | undefined;
-  return row ? dbKnowledgeToApi(row) : null;
-}
-
-export async function dbCreateKnowledge(data: {
-  id: string;
-  domain: string;
-  title: string;
-  description?: string;
-  grade?: number;
-  subject?: string;
-  concepts?: object[];
-  definitions?: object[];
-}) {
-  await ensureStudioDb();
-  const { getDb } = await import("../db");
-  const now = new Date().toISOString();
-  getDb().prepare(
-    "INSERT INTO studio_knowledge (id, domain, title, description, grade, subject, concepts, definitions, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-  ).run(
-    data.id, data.domain, data.title, data.description || "",
-    data.grade || 9, data.subject || "AI",
-    JSON.stringify(data.concepts || []), JSON.stringify(data.definitions || []),
-    now, now,
-  );
-  return dbGetKnowledge(data.id);
-}
-
-export async function dbUpdateKnowledge(id: string, data: Partial<{
-  domain: string;
-  title: string;
-  description: string;
-  grade: number;
-  subject: string;
-  concepts: object[];
-  definitions: object[];
-  examples: object[];
-  misconceptions: object[];
-  exercises: object[];
-  references: object[];
-}>) {
-  await ensureStudioDb();
-  const { getDb } = await import("../db");
-  const existing = getDb().prepare("SELECT * FROM studio_knowledge WHERE id = ?").get(id) as DbKnowledge | undefined;
-  if (!existing) return null;
-  const now = new Date().toISOString();
-  getDb().prepare(
-    `UPDATE studio_knowledge SET
-      domain = ?, title = ?, description = ?, grade = ?, subject = ?,
-      concepts = ?, definitions = ?, examples = ?, misconceptions = ?,
-      exercises = ?, references_list = ?, updated_at = ?
-    WHERE id = ?`
-  ).run(
-    data.domain ?? existing.domain,
-    data.title ?? existing.title,
-    data.description ?? existing.description,
-    data.grade ?? existing.grade,
-    data.subject ?? existing.subject,
-    data.concepts ? JSON.stringify(data.concepts) : existing.concepts,
-    data.definitions ? JSON.stringify(data.definitions) : existing.definitions,
-    data.examples ? JSON.stringify(data.examples) : existing.examples,
-    data.misconceptions ? JSON.stringify(data.misconceptions) : existing.misconceptions,
-    data.exercises ? JSON.stringify(data.exercises) : existing.exercises,
-    data.references ? JSON.stringify(data.references) : existing.references_list,
-    now, id,
-  );
-  return dbGetKnowledge(id);
-}
-
-export async function dbDeleteKnowledge(id: string) {
-  await ensureStudioDb();
-  const { getDb } = await import("../db");
-  getDb().prepare("DELETE FROM studio_knowledge WHERE id = ?").run(id);
 }

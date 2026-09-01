@@ -117,12 +117,7 @@ async function main() {
   }
   console.log("✓ Created progress records");
 
-  console.log("\n✓ Seed complete");
-  console.log("\nDemo credentials:");
-  console.log("  Admin:       admin@ai-institute.com / admin123");
-  console.log("  Student:     student@ai-institute.com / student123");
-  console.log("  Researcher:  researcher@ai-institute.com / student123");
-  console.log("\nTest session token:", sessionToken);
+  console.log("\n✓ Seed complete. See db-seed.ts source for demo credentials.");
 }
 
 main().catch((e) => {

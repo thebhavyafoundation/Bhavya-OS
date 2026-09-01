@@ -27,9 +27,9 @@ import type {
   AgentStatus,
   Task,
   TaskStatus,
-  Event as BhavyaEvent,
+  BhavyaEvent,
   EventHandler,
-  Memory as MemoryEntry,
+  Memory,
   MemoryType,
   Goal,
   Priority,
@@ -75,8 +75,8 @@ export type {
 
 // Re-export shared types under kernel-preferred aliases
 export type Event = BhavyaEvent;
-export type EventHandler_ = EventHandler;
-export type MemoryEntry = MemoryEntry;
+export type { EventHandler, EventHandler as EventHandler_ };
+export type MemoryEntry = Memory;
 
 // ─── BRP-Specific Types (not in @bhavya/shared) ────────────────────
 
@@ -135,6 +135,7 @@ export interface RegistryEntry {
   id: string;
   type: RegistryType;
   name: string;
+  role?: string;
   path: string;
   metadata: Record<string, unknown>;
   discoveredAt: Date;

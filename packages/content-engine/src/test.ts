@@ -1,10 +1,10 @@
 import { contentEngine } from "./engine.js";
-import { _lessonPipeline } from "./pipeline.js";
-import { _knowledgeAcquisition } from "./acquisition.js";
+import { lessonPipeline } from "./pipeline.js";
+import { knowledgeAcquisition } from "./acquisition.js";
 import { contentCatalog } from "./catalog.js";
 import { qualityValidator } from "./validation.js";
 import { contentVersioning } from "./versioning.js";
-import { contentExporter, _contentImporter } from "./export.js";
+import { contentExporter, contentImporter } from "./export.js";
 import { curriculumOrganizer } from "./organizer.js";
 
 async function testContentEngine() {
@@ -193,7 +193,7 @@ async function testContentEngine() {
   console.log("5. Exporting package...");
   const exported = await contentExporter.exportPackage(pkg.id, "markdown");
   console.log(
-    `   Exported as ${exported.type} (${exported.content.length} chars)\n`,
+    `   Exported as ${exported.type} (${typeof exported.content === 'string' ? exported.content.length : 0} chars)\n`,
   );
 
   // Test 6: Create a school structure

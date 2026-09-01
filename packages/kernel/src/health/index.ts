@@ -8,7 +8,7 @@ export class Health {
 
   async initialize(): Promise<void> {
     // Register kernel self
-n    this.components.set('kernel', {
+    this.components.set('kernel', {
       name: 'kernel',
       status: 'healthy',
     });

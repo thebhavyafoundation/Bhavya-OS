@@ -8,9 +8,28 @@
  * - notifications
  * - recommendations
  * - available actions
+ *
+ * Canonical role source: users.role column in SQLite.
+ * Onboarding roles: student, builder, researcher.
+ * Extended roles: volunteer, donor, mentor, educator.
  */
 
-export type Role = "student" | "volunteer" | "donor" | "researcher" | "mentor" | "educator";
+export type Role = "student" | "builder" | "researcher" | "volunteer" | "donor" | "mentor" | "educator" | "admin" | "instructor";
+
+/** All roles a user can select during onboarding */
+export const ONBOARDING_ROLES: Role[] = ["student", "builder", "researcher"];
+
+/** Roles that grant institutional access (non-student) */
+export const INSTITUTIONAL_ROLES: Role[] = ["volunteer", "donor", "researcher", "mentor", "educator"];
+
+/** Roles that can author content */
+export const AUTHOR_ROLES: Role[] = ["educator", "researcher", "builder", "instructor"];
+
+/** Roles that can access Bhavya OS */
+export const OS_ROLES: Role[] = ["educator", "researcher", "builder", "mentor", "admin"];
+
+/** Roles that can manage content (create/update/delete KOs, courses, lessons) */
+export const CONTENT_MANAGEMENT_ROLES: Role[] = ["admin", "instructor", "educator"];
 
 export interface Permission {
   id: string;
@@ -74,6 +93,7 @@ export const ROLES: Record<Role, RoleConfig> = {
       { href: "/app/knowledge", label: "Knowledge", icon: "Compass" },
       { href: "/app/credentials", label: "Credentials", icon: "Award" },
       { href: "/app/contributions", label: "Contributions", icon: "Heart" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "continue-learning", title: "Continue Learning", description: "Pick up where you left off.", href: "/app/learn", icon: "BookOpen", priority: 1, roles: ["student"] },
@@ -86,6 +106,42 @@ export const ROLES: Record<Role, RoleConfig> = {
       { type: "assignment_due", enabled: true, roles: ["student"] },
       { type: "grade_posted", enabled: true, roles: ["student"] },
       { type: "discussion_reply", enabled: true, roles: ["student", "volunteer", "researcher", "mentor", "educator"] },
+    ],
+  },
+
+  builder: {
+    role: "builder",
+    label: "Builder",
+    description: "Building AI-powered projects",
+    permissions: [
+      { id: "courses:read", action: "read", resource: "courses" },
+      { id: "courses:enroll", action: "enroll", resource: "courses" },
+      { id: "lessons:complete", action: "complete", resource: "lessons" },
+      { id: "assessments:submit", action: "submit", resource: "assessments" },
+      { id: "projects:create", action: "create", resource: "projects" },
+      { id: "projects:submit", action: "submit", resource: "projects" },
+      { id: "credentials:view", action: "view", resource: "credentials" },
+      { id: "community:post", action: "post", resource: "community" },
+      { id: "knowledge:read", action: "read", resource: "knowledge" },
+    ],
+    navItems: [
+      { href: "/app/learn", label: "Learn", icon: "BookOpen" },
+      { href: "/app/projects", label: "Projects", icon: "FlaskConical" },
+      { href: "/app/community", label: "Community", icon: "Users" },
+      { href: "/app/knowledge", label: "Knowledge", icon: "Compass" },
+      { href: "/app/credentials", label: "Credentials", icon: "Award" },
+      { href: "/app/contributions", label: "Contributions", icon: "Heart" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
+    ],
+    homeModules: [
+      { id: "continue-learning", title: "Continue Learning", description: "Pick up where you left off.", href: "/app/learn", icon: "BookOpen", priority: 1, roles: ["builder"] },
+      { id: "my-projects", title: "My Projects", description: "Active and completed projects.", href: "/app/projects", icon: "FlaskConical", priority: 2, roles: ["builder"] },
+      { id: "community", title: "Community", description: "Connect with peers.", href: "/app/community", icon: "Users", priority: 3, roles: ["builder"] },
+    ],
+    notifications: [
+      { type: "course_start", enabled: true, roles: ["builder"] },
+      { type: "project_review", enabled: true, roles: ["builder"] },
+      { type: "discussion_reply", enabled: true, roles: ["builder"] },
     ],
   },
 
@@ -105,6 +161,7 @@ export const ROLES: Record<Role, RoleConfig> = {
       { href: "/app/community", label: "Community", icon: "Users" },
       { href: "/app/contributions", label: "Contributions", icon: "Heart" },
       { href: "/app/credentials", label: "Credentials", icon: "Award" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "current-opportunities", title: "Current Opportunities", description: "Volunteer activities needing your help.", href: "/app/missions", icon: "TreePine", priority: 1, roles: ["volunteer"] },
@@ -133,6 +190,8 @@ export const ROLES: Record<Role, RoleConfig> = {
       { href: "/app", label: "Giving Overview", icon: "Home" },
       { href: "/app/missions", label: "Impact", icon: "TreePine" },
       { href: "/app/credentials", label: "Receipts", icon: "Award" },
+      { href: "/app/community", label: "Community", icon: "Users" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "giving-overview", title: "Giving Overview", description: "Your donations and their impact.", href: "/app", icon: "Heart", priority: 1, roles: ["donor"] },
@@ -161,9 +220,11 @@ export const ROLES: Record<Role, RoleConfig> = {
     ],
     navItems: [
       { href: "/app/research", label: "Research", icon: "FlaskConical" },
+      { href: "/app/projects", label: "Projects", icon: "FlaskConical" },
       { href: "/app/knowledge", label: "Knowledge", icon: "Compass" },
       { href: "/app/community", label: "Community", icon: "Users" },
       { href: "/app/contributions", label: "Contributions", icon: "Heart" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "active-research", title: "Active Research", description: "Projects you're contributing to.", href: "/app/research", icon: "FlaskConical", priority: 1, roles: ["researcher"] },
@@ -193,6 +254,7 @@ export const ROLES: Record<Role, RoleConfig> = {
       { href: "/app/learn", label: "Mentoring", icon: "BookOpen" },
       { href: "/app/community", label: "Community", icon: "Users" },
       { href: "/app/credentials", label: "Credentials", icon: "Award" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "my-mentees", title: "My Mentees", description: "Students you're currently mentoring.", href: "/app/learn", icon: "Users", priority: 1, roles: ["mentor"] },
@@ -222,12 +284,13 @@ export const ROLES: Record<Role, RoleConfig> = {
       { href: "/app/learn", label: "Courses", icon: "BookOpen" },
       { href: "/app/community", label: "Community", icon: "Users" },
       { href: "/app/contributions", label: "Contributions", icon: "Heart" },
-      { href: "/os/studio", label: "Studio", icon: "FlaskConical" },
+      { href: "/studio", label: "Studio", icon: "FlaskConical" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
     ],
     homeModules: [
       { id: "my-courses", title: "My Courses", description: "Courses you've created.", href: "/app/learn", icon: "BookOpen", priority: 1, roles: ["educator"] },
       { id: "student-progress", title: "Student Progress", description: "How your students are doing.", href: "/app/learn", icon: "Users", priority: 2, roles: ["educator"] },
-      { id: "content-studio", title: "Content Studio", description: "Create and manage educational content.", href: "/os/studio", icon: "FlaskConical", priority: 3, roles: ["educator"] },
+      { id: "content-studio", title: "Content Studio", description: "Create and manage educational content.", href: "/studio", icon: "FlaskConical", priority: 3, roles: ["educator"] },
     ],
     notifications: [
       { type: "course_published", enabled: true, roles: ["educator"] },
@@ -235,13 +298,99 @@ export const ROLES: Record<Role, RoleConfig> = {
       { type: "assessment_submitted", enabled: true, roles: ["educator"] },
     ],
   },
+
+  instructor: {
+    role: "instructor",
+    label: "Instructor",
+    description: "Can create and manage educational content",
+    permissions: [
+      { id: "courses:read", action: "read", resource: "courses" },
+      { id: "courses:create", action: "create", resource: "courses" },
+      { id: "courses:update", action: "update", resource: "courses" },
+      { id: "lessons:create", action: "create", resource: "lessons" },
+      { id: "lessons:update", action: "update", resource: "lessons" },
+      { id: "knowledge:create", action: "create", resource: "knowledge" },
+      { id: "knowledge:update", action: "update", resource: "knowledge" },
+      { id: "students:read", action: "read", resource: "students" },
+      { id: "assessments:read", action: "read", resource: "assessments" },
+    ],
+    navItems: [
+      { href: "/studio", label: "Studio", icon: "FlaskConical" },
+      { href: "/app/learn", label: "Courses", icon: "BookOpen" },
+      { href: "/app/knowledge", label: "Knowledge", icon: "Compass" },
+      { href: "/app/community", label: "Community", icon: "Users" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
+    ],
+    homeModules: [
+      { id: "content-studio", title: "Content Studio", description: "Create and manage educational content.", href: "/studio", icon: "FlaskConical", priority: 1, roles: ["instructor"] },
+      { id: "student-progress", title: "Student Progress", description: "How your students are doing.", href: "/app/learn", icon: "Users", priority: 2, roles: ["instructor"] },
+    ],
+    notifications: [
+      { type: "course_published", enabled: true, roles: ["instructor"] },
+      { type: "student_enrolled", enabled: true, roles: ["instructor"] },
+      { type: "assessment_submitted", enabled: true, roles: ["instructor"] },
+    ],
+  },
+
+  admin: {
+    role: "admin",
+    label: "Administrator",
+    description: "Full institutional access and management",
+    permissions: [
+      { id: "courses:read", action: "read", resource: "courses" },
+      { id: "courses:create", action: "create", resource: "courses" },
+      { id: "courses:update", action: "update", resource: "courses" },
+      { id: "courses:delete", action: "delete", resource: "courses" },
+      { id: "lessons:create", action: "create", resource: "lessons" },
+      { id: "lessons:update", action: "update", resource: "lessons" },
+      { id: "knowledge:create", action: "create", resource: "knowledge" },
+      { id: "knowledge:update", action: "update", resource: "knowledge" },
+      { id: "knowledge:delete", action: "delete", resource: "knowledge" },
+      { id: "users:read", action: "read", resource: "users" },
+      { id: "users:update", action: "update", resource: "users" },
+      { id: "users:delete", action: "delete", resource: "users" },
+      { id: "roles:assign", action: "assign", resource: "roles" },
+      { id: "os:admin", action: "admin", resource: "os" },
+      { id: "governance:manage", action: "manage", resource: "governance" },
+    ],
+    navItems: [
+      { href: "/os", label: "OS Dashboard", icon: "LayoutDashboard" },
+      { href: "/os/admin", label: "Admin", icon: "Settings" },
+      { href: "/studio", label: "Studio", icon: "FlaskConical" },
+      { href: "/os/governance", label: "Governance", icon: "Scale" },
+      { href: "/app/community", label: "Community", icon: "Users" },
+      { href: "/app/profile", label: "Profile", icon: "User" },
+    ],
+    homeModules: [
+      { id: "os-overview", title: "OS Overview", description: "Institutional operating system.", href: "/os", icon: "LayoutDashboard", priority: 1, roles: ["admin"] },
+      { id: "admin-panel", title: "Admin Panel", description: "Manage users, roles, and content.", href: "/os/admin", icon: "Settings", priority: 2, roles: ["admin"] },
+      { id: "content-studio", title: "Content Studio", description: "Create and manage educational content.", href: "/studio", icon: "FlaskConical", priority: 3, roles: ["admin"] },
+    ],
+    notifications: [
+      { type: "course_published", enabled: true, roles: ["admin"] },
+      { type: "user_registered", enabled: true, roles: ["admin"] },
+      { type: "system_alert", enabled: true, roles: ["admin"] },
+    ],
+  },
 };
 
 // ── Engine Functions ────────────────────────────────────────
 
-export function getUserRoles(userId: string): Role[] {
-  // TODO: Fetch from database
-  return ["student"];
+/**
+ * Check if a user role has a specific permission.
+ * Canonical authorization check for API routes.
+ */
+export function roleHasPermission(role: Role, permissionId: string): boolean {
+  const config = ROLES[role];
+  return config?.permissions.some((p) => p.id === permissionId) ?? false;
+}
+
+/**
+ * Check if a user role is in a list of allowed roles.
+ * Canonical role check for API routes.
+ */
+export function roleIsAllowed(role: Role, allowedRoles: Role[]): boolean {
+  return allowedRoles.includes(role);
 }
 
 export function hasPermission(roles: Role[], permissionId: string): boolean {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { courses, getTotalLessons } from "@/data/academy-courses";
+import { loadPublishedCourses, getTotalLessonsAsync } from "@/data/academy-courses";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -15,7 +15,17 @@ export const metadata = {
     "Explore our AI curriculum — from foundations to advanced topics. Learn by building real projects.",
 };
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  // Load from SQLite first, fall back to static data
+  const courses = await loadPublishedCourses();
+
+  // Resolve lesson counts (SQLite or static)
+  const lessonCounts = new Map<string, number>();
+  await Promise.all(
+    courses.map(async (c) => {
+      lessonCounts.set(c.id, await getTotalLessonsAsync(c.id));
+    })
+  );
   return (
     <main className="min-h-screen bg-[#f5f1e6]">
       <div className="mx-auto max-w-6xl px-6 py-16">
@@ -60,7 +70,7 @@ export default function CoursesPage() {
 
               <div className="mt-4 flex items-center gap-4 text-xs text-[#1a3a2a]/50">
                 <span>{course.modules.length} modules</span>
-                <span>{getTotalLessons(course.id)} lessons</span>
+                <span>{lessonCounts.get(course.id) ?? 0} lessons</span>
                 <span>{Math.round(course.estimatedDuration / 60)}h total</span>
               </div>
 

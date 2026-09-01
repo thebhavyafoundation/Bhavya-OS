@@ -13,7 +13,7 @@ export interface StudentProfile {
   userId: string;
   name: string;
   email: string;
-  role: "student" | "researcher" | "builder" | "mentor";
+  role: "student" | "researcher" | "builder" | "mentor" | "volunteer" | "donor" | "educator";
   interests: string[];
   currentCourse: string;
   currentLessonIndex: number;

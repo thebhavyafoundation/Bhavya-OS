@@ -134,9 +134,9 @@ export class ImpactRegistry {
     return {
       success: true,
       comparison: {
-        missions: missionIds.length,
+        totalMissions: missionIds.length,
         totalReports: allReports.length,
-        missions: missionIds.map((id) => ({
+        missionDetails: missionIds.map((id) => ({
           id,
           reports: allReports.filter((r) => r.missionId === id).length,
         })),

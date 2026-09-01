@@ -1,5 +1,5 @@
 import { BaseCrawler } from "./base.js";
-import type { Source, RawItem, FetchOpts } from "@bhavya/intelligence";
+import type { Source, RawItem, NormalizedItem, FetchOpts } from "@bhavya/intelligence";
 
 // ─── GitHub Crawler ────────────────────────────────────────────────────────
 // Monitors trending repos, releases, discussions, topics, organizations.
@@ -75,14 +75,14 @@ export class GitHubCrawler extends BaseCrawler {
     return items;
   }
 
-  normalize(item: RawItem): RawItem {
+  normalize(item: RawItem): NormalizedItem {
     return {
       ...item,
       data: {
         ...item.data,
         normalizedType: item.data.type || "repository",
       },
-    };
+    } as unknown as NormalizedItem;
   }
 
   private async fetchTrending(

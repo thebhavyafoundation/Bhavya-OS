@@ -38,12 +38,12 @@ export class NotificationManager {
     enabled: boolean,
   ) {
     const idx = this.preferences.findIndex(
-      (p) => p.userId === userId && p.channel === channel && p.type === type,
+      (p) => p.userId === userId && p.channel === channel && p.types.includes(type),
     );
     if (idx >= 0) {
       this.preferences[idx].enabled = enabled;
     } else {
-      this.preferences.push({ userId, channel, type, enabled });
+      this.preferences.push({ userId, channel, types: [type], enabled });
     }
   }
 
@@ -73,20 +73,20 @@ export class NotificationManager {
         type: params.type,
         channel,
         recipient: params.recipient,
-        subject: params.subject,
+        title: params.subject,
         body: params.body,
-        data: params.data,
+        metadata: params.data ?? {},
         status: "pending",
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
       };
 
       try {
         const result = await handler.send(notification);
         results.set(channel, result);
         notification.status = result.success ? "sent" : "failed";
-        if (result.success) notification.sentAt = new Date().toISOString();
+        if (result.success) notification.sentAt = new Date();
       } catch (err: unknown) {
-        results.set(channel, { success: false, error: err.message });
+        results.set(channel, { success: false, error: err instanceof Error ? err.message : String(err) });
         notification.status = "failed";
       }
 
@@ -109,7 +109,7 @@ export class NotificationManager {
     type: NotificationType,
   ): boolean {
     const pref = this.preferences.find(
-      (p) => p.userId === userId && p.channel === channel && p.type === type,
+      (p) => p.userId === userId && p.channel === channel && p.types.includes(type),
     );
     return pref?.enabled ?? true;
   }

@@ -22,7 +22,7 @@ export interface RuntimeContext {
   health: Health;
   scheduler: Scheduler;
   planner: Planner;
-  api: Api;
+  api?: Api;
 }
 
 export class Runtime {
@@ -44,7 +44,7 @@ export class Runtime {
     this.status = 'stopping';
 
     // Shutdown in reverse order
-    await this.context.api.shutdown();
+    await this.context.api?.shutdown();
     await this.context.planner.shutdown();
     await this.context.scheduler.shutdown();
     await this.context.health.shutdown();

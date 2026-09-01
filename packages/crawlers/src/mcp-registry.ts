@@ -1,5 +1,5 @@
 import { BaseCrawler } from "./base.js";
-import type { Source, RawItem, FetchOpts } from "@bhavya/intelligence";
+import type { Source, RawItem, NormalizedItem, FetchOpts } from "@bhavya/intelligence";
 
 // ─── MCP Registry Crawler ──────────────────────────────────────────────────
 // Monitors official MCP Registry, popular servers, new additions.
@@ -45,14 +45,14 @@ export class MCPRegistryCrawler extends BaseCrawler {
     return items;
   }
 
-  normalize(item: RawItem): RawItem {
+  normalize(item: RawItem): NormalizedItem {
     return {
       ...item,
       data: {
         ...item.data,
         normalizedType: "mcp_server",
       },
-    };
+    } as unknown as NormalizedItem;
   }
 
   private async fetchRegistry(

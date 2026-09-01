@@ -166,7 +166,7 @@ export class KnowledgeAcquisitionEngine {
         sources = sources.filter((s) => s.status === filters.status);
       }
       if (filters.minScore) {
-        sources = sources.filter((s) => s.scores.overall >= filters.minScore);
+        sources = sources.filter((s) => s.scores.overall >= filters.minScore!);
       }
     }
 

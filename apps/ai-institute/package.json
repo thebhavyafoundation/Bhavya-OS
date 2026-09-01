@@ -13,6 +13,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@bhavya/content-core": "workspace:*",
     "@bhavya/database": "workspace:*",
     "@bhavya/impact-runtime": "workspace:*",
     "@bhavya/platform-ui": "workspace:*",

@@ -25,7 +25,7 @@ export interface StudentProfile {
   userId: string;
   name: string;
   email: string;
-  role: "student" | "researcher" | "builder" | "mentor";
+  role: "student" | "researcher" | "builder" | "mentor" | "volunteer" | "donor" | "educator";
   interests: string[];
   currentCourse: string;
   currentLessonIndex: number;
@@ -60,6 +60,7 @@ export interface UserRepository {
   findByEmail(email: string): Promise<User | null>;
   findById(id: string): Promise<User | null>;
   create(data: CreateUserInput): Promise<User>;
+  updateRole(userId: string, role: string): Promise<User | null>;
 }
 
 export interface StudentRepository {

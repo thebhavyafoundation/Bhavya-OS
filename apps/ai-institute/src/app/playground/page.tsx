@@ -79,6 +79,12 @@ export default function PlaygroundPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Experimental notice — Wave O: orphan route, not in canonical navigation */}
+      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
+        <p className="text-xs text-[#c9a227]/70 font-medium">
+          Experimental — not yet part of the canonical learning experience
+        </p>
+      </div>
       {/* Header */}
       <div className="border-b border-white/10 px-6 py-6">
         <div className="max-w-7xl mx-auto">

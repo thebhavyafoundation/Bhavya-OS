@@ -366,3 +366,210 @@ export type EliteCategory =
   | "devops"
   | "performance"
   | "security";
+
+// Design Intelligence — Website Intelligence
+
+export interface WebsiteIntelligence {
+  id: string;
+  source_url: string;
+  repository_id: string | null;
+  name: string;
+  description: string | null;
+  framework: string | null;
+  runtime: string | null;
+  design_system: string | null;
+  component_system: string | null;
+  layout_system: string | null;
+  navigation_architecture: string | null;
+  typography: string | null;
+  color_system: string | null;
+  spacing_system: string | null;
+  motion_system: string | null;
+  interaction_patterns: string;
+  responsive_patterns: string;
+  accessibility_characteristics: string;
+  performance_observations: string;
+  seo_observations: string;
+  screenshots: string;
+  extracted_pattern_ids: string;
+  bhavya_relevance_score: number;
+  quality_score: number;
+  provenance: string;
+  analyzed_at: string;
+  created_at: string;
+}
+
+export type WebsiteCategory =
+  | "institutional"
+  | "saas"
+  | "portfolio"
+  | "ecommerce"
+  | "education"
+  | "news"
+  | "government"
+  | "nonprofit"
+  | "other";
+
+// Design Intelligence — Design Intelligence Record
+
+export interface DesignIntelligence {
+  id: string;
+  source_id: string;
+  source_type: string;
+  typography: string;
+  color: string;
+  spacing: string;
+  imagery: string;
+  surfaces: string;
+  grid: string;
+  container: string;
+  section_structure: string;
+  responsive_behavior: string;
+  primary_nav: string;
+  secondary_nav: string;
+  contextual_nav: string;
+  command_nav: string;
+  hover: string;
+  focus: string;
+  scroll: string;
+  transitions: string;
+  motion_library: string;
+  motion_techniques: string;
+  motion_intensity: string;
+  semantics: string;
+  keyboard: string;
+  contrast: string;
+  reduced_motion: string;
+  image_strategy: string;
+  loading: string;
+  javascript: string;
+  rendering: string;
+  extracted_pattern_ids: string;
+  bhavya_relevance: string;
+  recommended_use: string;
+  risks: string;
+  adaptation_notes: string;
+  analyzed_at: string;
+  created_at: string;
+}
+
+// Design Intelligence — Design Genome
+
+export interface DesignGenome {
+  id: string;
+  category: string;
+  pattern_name: string;
+  frequency: number;
+  avg_quality_score: number;
+  avg_bhavya_relevance: number;
+  source_ids: string;
+  mission_relevance: string;
+  accessibility_rating: string;
+  performance_rating: string;
+  mobile_rating: string;
+  institutional_fit: string;
+  recommended_for: string;
+  evidence: string;
+  calculated_at: string;
+  created_at: string;
+}
+
+// Design Intelligence — Design Score
+
+export interface DesignScore {
+  id: string;
+  source_id: string;
+  source_type: string;
+  institutional_relevance: number;
+  ux_quality: number;
+  accessibility: number;
+  performance: number;
+  visual_quality: number;
+  reusability: number;
+  technical_quality: number;
+  innovation: number;
+  maintainability: number;
+  bhavya_brand_compatibility: number;
+  overall_score: number;
+  explanation: string;
+  calculated_at: string;
+  created_at: string;
+}
+
+// Extended Pattern Library categories
+
+export type PatternCategory =
+  | "creational"
+  | "structural"
+  | "behavioral"
+  | "architectural"
+  | "design-hero"
+  | "design-navigation"
+  | "design-storytelling"
+  | "design-editorial"
+  | "design-cards"
+  | "design-forms"
+  | "design-dashboard"
+  | "design-dataviz"
+  | "design-maps"
+  | "design-timeline"
+  | "design-search"
+  | "design-filters"
+  | "design-responsive"
+  | "design-accessibility"
+  | "design-interaction"
+  | "motion-scroll"
+  | "motion-reveal"
+  | "motion-parallax"
+  | "motion-hover"
+  | "motion-transition"
+  | "motion-cursor"
+  | "motion-page-transition"
+  | "institutional-mission"
+  | "institutional-impact"
+  | "institutional-transparency"
+  | "institutional-research"
+  | "institutional-publication"
+  | "institutional-program"
+  | "institutional-project"
+  | "institutional-governance";
+
+// Knowledge Graph extended node types
+
+export type KnowledgeGraphNodeKind =
+  | "repository"
+  | "pattern"
+  | "technology"
+  | "course"
+  | "mcp"
+  | "plugin"
+  | "framework"
+  | "documentation"
+  | "website"
+  | "design_system"
+  | "component"
+  | "mission"
+  | "program"
+  | "page"
+  | "knowledge_package"
+  | "recommendation";
+
+// Knowledge Graph extended relationship types
+
+export type KnowledgeGraphRelationship =
+  | "implements"
+  | "uses"
+  | "contains"
+  | "inspires"
+  | "similar_to"
+  | "recommended_for"
+  | "derived_from"
+  | "supports"
+  | "depends_on"
+  | "compatible_with"
+  | "replaces"
+  | "evolves_from"
+  | "extracted_from"
+  | "analyzed_by"
+  | "scored_by"
+  | "recommended_by";

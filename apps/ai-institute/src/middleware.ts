@@ -16,12 +16,30 @@ const ALLOWED_ORIGINS = [
 
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return true;
-  return ALLOWED_ORIGINS.some((allowed) => origin.startsWith(allowed));
+  try {
+    const url = new URL(origin);
+    const originNoPort = `${url.protocol}//${url.hostname}`;
+    const originFull = `${url.protocol}//${url.hostname}${url.port ? `:${url.port}` : ""}`;
+    return ALLOWED_ORIGINS.some((allowed) => {
+      const allowedUrl = new URL(allowed);
+      const allowedNoPort = `${allowedUrl.protocol}//${allowedUrl.hostname}`;
+      const allowedFull = `${allowedUrl.protocol}//${allowedUrl.hostname}${allowedUrl.port ? `:${allowedUrl.port}` : ""}`;
+      return originFull === allowedFull || originNoPort === allowedNoPort;
+    });
+  } catch {
+    return false;
+  }
 }
 
 function isAllowedReferer(referer: string | null): boolean {
   if (!referer) return true;
-  return ALLOWED_ORIGINS.some((allowed) => referer.startsWith(allowed));
+  try {
+    const url = new URL(referer);
+    const refererOrigin = `${url.protocol}//${url.hostname}${url.port ? `:${url.port}` : ""}`;
+    return ALLOWED_ORIGINS.some((allowed) => refererOrigin === allowed || referer.startsWith(allowed));
+  } catch {
+    return false;
+  }
 }
 
 function isMutatingMethod(method: string): boolean {
@@ -35,6 +53,7 @@ function hasSessionCookie(request: NextRequest): boolean {
 
 function isProtectedRoute(pathname: string): boolean {
   return (
+    pathname.startsWith("/app") ||
     pathname.startsWith("/os") ||
     pathname.startsWith("/studio") ||
     pathname.startsWith("/api/studio")

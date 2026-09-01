@@ -10,6 +10,7 @@ import {
   PlantingStatus,
   MonitoringType,
   ForestStats,
+  RecordProvenance,
 } from "./models";
 import { readJSON, writeJSON, listDir, ensureDir } from "./io";
 import { publishFieldReport, publishSurveyResult, publishMonitoringLog, publishImpactReport } from "./publish";
@@ -73,6 +74,7 @@ export function createMission(data: {
   region: string;
   goals?: string[];
   tags?: string[];
+  provenance?: RecordProvenance;
 }): Mission {
   const now = new Date().toISOString();
   const mission: Mission = {
@@ -85,6 +87,7 @@ export function createMission(data: {
     goals: data.goals || [],
     tags: data.tags || [],
     siteIds: [],
+    provenance: data.provenance || "institutional",
     created: now,
     updated: now,
   };
@@ -147,6 +150,7 @@ export function createSite(data: {
   longitude?: number;
   areaHectares?: number;
   terrainType?: string;
+  provenance?: RecordProvenance;
 }): Site {
   const now = new Date().toISOString();
   const site: Site = {
@@ -160,6 +164,7 @@ export function createSite(data: {
     terrainType: data.terrainType,
     surveyIds: [],
     plantingIds: [],
+    provenance: data.provenance,
     created: now,
     updated: now,
   };
@@ -219,6 +224,7 @@ export function createSurvey(data: {
   findings?: string[];
   speciesObserved?: string[];
   conditionRating?: number;
+  provenance?: RecordProvenance;
 }): Survey {
   const now = new Date().toISOString();
   const survey: Survey = {
@@ -234,6 +240,7 @@ export function createSurvey(data: {
     speciesObserved: data.speciesObserved || [],
     conditionRating: data.conditionRating,
     photos: [],
+    provenance: data.provenance,
     created: now,
   };
   saveItem("survey", survey);
@@ -294,6 +301,7 @@ export function createPlanting(data: {
   targetCount: number;
   startDate: string;
   notes?: string;
+  provenance?: RecordProvenance;
 }): Planting {
   const now = new Date().toISOString();
   const planting: Planting = {
@@ -307,6 +315,7 @@ export function createPlanting(data: {
     plantedCount: 0,
     startDate: data.startDate,
     notes: data.notes || "",
+    provenance: data.provenance,
     created: now,
     updated: now,
   };
@@ -388,6 +397,7 @@ export function createMonitoring(data: {
   metrics?: Record<string, number>;
   conductedBy: string;
   conductedDate: string;
+  provenance?: RecordProvenance;
 }): Monitoring {
   const now = new Date().toISOString();
   const entry: Monitoring = {
@@ -402,6 +412,7 @@ export function createMonitoring(data: {
     photos: [],
     conductedBy: data.conductedBy,
     conductedDate: data.conductedDate,
+    provenance: data.provenance,
     created: now,
   };
   saveItem("monitoring", entry);
@@ -449,6 +460,7 @@ export function createImpact(data: {
   carbonSequestrationTonnes?: number;
   communityMembers?: number;
   period: string;
+  provenance?: RecordProvenance;
 }): Impact {
   const now = new Date().toISOString();
   const impact: Impact = {
@@ -464,6 +476,7 @@ export function createImpact(data: {
     carbonSequestrationTonnes: data.carbonSequestrationTonnes,
     communityMembers: data.communityMembers,
     period: data.period,
+    provenance: data.provenance,
     created: now,
   };
   saveItem("impact", impact);

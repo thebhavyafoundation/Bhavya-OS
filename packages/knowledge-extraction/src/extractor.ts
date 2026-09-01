@@ -15,7 +15,7 @@ export class KnowledgeExtractor {
   private packages = new Map<string, KnowledgePackage>();
 
   extract(item: NormalizedItem): KnowledgePackage {
-    const id = generateId();
+    const id = generateId("kp");
     const category = this.classifyCategory(item);
 
     const pkg: KnowledgePackage = {
@@ -59,7 +59,7 @@ export class KnowledgeExtractor {
     return Array.from(this.packages.values()).filter(
       (p) =>
         p.id !== pkg.id &&
-        (p.tags.some((t) => pkg.tags.includes(t)) ||
+        (p.tags.some((t: string) => pkg.tags.includes(t)) ||
           p.sourceKind === pkg.sourceKind),
     );
   }

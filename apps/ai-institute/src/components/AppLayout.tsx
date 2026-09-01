@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "./AuthProvider";
+import { getNavItems } from "@/lib/useNavigation";
+import { OS_ROLES, type Role } from "@/lib/roles";
 import {
   Home,
   BookOpen,
@@ -13,22 +16,42 @@ import {
   Award,
   Heart,
   LogOut,
+  Terminal,
 } from "lucide-react";
 
-const navItems = [
-  { href: "/app", label: "Home", icon: Home },
-  { href: "/app/learn", label: "Learn", icon: BookOpen },
-  { href: "/app/community", label: "Community", icon: Users },
-  { href: "/app/knowledge", label: "Knowledge", icon: Compass },
-  { href: "/app/missions", label: "Missions", icon: TreePine },
-  { href: "/app/research", label: "Research", icon: FlaskConical },
-  { href: "/app/credentials", label: "Credentials", icon: Award },
-  { href: "/app/contributions", label: "Contributions", icon: Heart },
-  { href: "/app/profile", label: "Profile", icon: User },
-];
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Home,
+  BookOpen,
+  Users,
+  Compass,
+  User,
+  TreePine,
+  FlaskConical,
+  Award,
+  Heart,
+  Terminal,
+};
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  // Get nav items from canonical registry
+  const userRoles = user ? [user.role as Role] : undefined;
+  const appNavItems = getNavItems("app", userRoles);
+
+  // Add OS link for users with OS access roles
+  const userRole = user ? (user.role as Role) : undefined;
+  const hasOsAccess = userRole ? OS_ROLES.includes(userRole) : false;
+  const navItems = [
+    ...appNavItems.map((item) => ({
+      ...item,
+      icon: iconMap[item.icon] || Home,
+    })),
+    ...(hasOsAccess
+      ? [{ id: "os", label: "OS", href: "/os", icon: Terminal }]
+      : []),
+  ];
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
@@ -106,8 +129,9 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
 
         <div style={{ padding: "0 var(--space-6)", borderTop: "1px solid var(--color-border-primary)", paddingTop: "var(--space-4)" }}>
-          <Link
-            href="/"
+          <button
+            type="button"
+            onClick={logout}
             style={{
               display: "flex",
               alignItems: "center",
@@ -116,11 +140,15 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
               color: "var(--color-text-tertiary)",
               textDecoration: "none",
               fontSize: "var(--text-sm)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              width: "100%",
             }}
           >
             <LogOut size={18} />
             Sign Out
-          </Link>
+          </button>
         </div>
       </aside>
 

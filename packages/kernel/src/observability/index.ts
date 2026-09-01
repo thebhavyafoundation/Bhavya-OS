@@ -50,6 +50,8 @@ export interface WorkflowStatusEntry {
   lastRun?: Date;
 }
 
+export type WorkflowStatus = WorkflowStatusEntry;
+
 export interface MemoryStatus {
   totalEntries: number;
   byType: Record<string, number>;
@@ -104,7 +106,7 @@ export class Observability {
       this.errors.push({
         timestamp: new Date(),
         module: event.source,
-        message: (event.payload.message as string) ?? 'Unknown error',
+        message: ((event.payload as Record<string, unknown>)?.message as string) ?? 'Unknown error',
       });
     });
 
@@ -112,7 +114,7 @@ export class Observability {
       this.warnings.push({
         timestamp: new Date(),
         module: event.source,
-        message: (event.payload.message as string) ?? 'Unknown warning',
+        message: ((event.payload as Record<string, unknown>)?.message as string) ?? 'Unknown warning',
       });
     });
   }
@@ -134,7 +136,7 @@ export class Observability {
       agents: agents.map((a) => ({
         id: a.id,
         name: a.name,
-        role: a.role,
+        role: a.role ?? 'agent',
         status: 'idle',
       })),
       workflows: workflows.map((w) => ({
@@ -153,7 +155,7 @@ export class Observability {
         totalEmitted: eventHistory.length,
         handlersRegistered: 0, // Would need to track this
         lastEvent: eventHistory.length > 0
-          ? eventHistory[eventHistory.length - 1].timestamp
+          ? new Date(eventHistory[eventHistory.length - 1].timestamp)
           : undefined,
       },
       scheduler: {

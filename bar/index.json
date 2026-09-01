@@ -2,7 +2,7 @@
   "name": "Bhavya Architecture Registry",
   "version": "1.0.0",
   "description": "Machine-readable source of truth for Bhavya OS architecture",
-  "generatedAt": "2026-08-03T00:00:00Z",
+  "generatedAt": "2026-08-12T00:00:00Z",
   "source": ["ADR-001", "ADR-002", "ADR-003", "ADR-004", "ADR-005", "ADR-006"],
   "counts": {
     "domains": 21,
@@ -11,13 +11,23 @@
     "skills": 36,
     "agents": 22,
     "services": 25,
-    "packages": 17,
+    "packages": 31,
     "applications": 18,
     "events": 90,
     "permissions": 131,
     "knowledgeObjects": 20,
     "uiSurfaces": 77,
-    "total": 618
+    "total": 639
+  },
+  "deployment": {
+    "status": "production-ready",
+    "packages": {
+      "total": 31,
+      "deployed": 18,
+      "new": 13,
+      "cycles": 4
+    },
+    "lastUpdated": "2026-08-12"
   },
   "validation": {
     "errors": 0,

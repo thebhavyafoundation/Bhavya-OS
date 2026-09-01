@@ -13,24 +13,27 @@ const resources = [
     category: "Field Notes",
     title: "AI in Rural Education",
     description:
-      "Lessons from deploying AI tools in rural Indian schools. What works, what doesn't, and what we learned.",
+      "Planned: Lessons from deploying AI tools in rural Indian schools. Content pending real deployment activity.",
     tag: "Education",
+    status: "planned" as const,
   },
   {
     icon: FileText,
     category: "Playbook",
     title: "Community-Led Conservation",
     description:
-      "A practical guide to building community stewardship for forest restoration projects.",
+      "Planned: A practical guide to building community stewardship for forest restoration projects.",
     tag: "Conservation",
+    status: "planned" as const,
   },
   {
     icon: Video,
     category: "Research",
     title: "Heritage Documentation Methods",
     description:
-      "Digital preservation techniques for cultural heritage sites using AI-assisted documentation.",
+      "Planned: Digital preservation techniques for cultural heritage sites using AI-assisted documentation.",
     tag: "Heritage",
+    status: "planned" as const,
   },
   {
     icon: Code,
@@ -39,6 +42,7 @@ const resources = [
     description:
       "The KO specification for structured educational content. Open standard for AI-ready learning materials.",
     tag: "Platform",
+    status: "available" as const,
   },
 ];
 
@@ -48,70 +52,66 @@ export default function ResourcesPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="text-center mb-16">
           <p className="text-xs font-semibold text-accent-gold uppercase tracking-wider mb-3">
-            Bhavya AI Lab
+            Resources
           </p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Resources for a more capable future
+          <h1
+            className="text-4xl sm:text-5xl font-bold text-text-primary mb-6"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Field Notes &amp; Playbooks
           </h1>
-          <p className="text-base text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            Field notes, playbooks, and research — making AI more useful,
-            accessible, and human.
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            Practical knowledge from Bhavya Foundation&apos;s work across
+            education, conservation, and heritage. Content is generated from
+            real institutional activity — not speculative claims.
           </p>
         </div>
 
-        <div className="glass-gold rounded-xl p-8 mb-16 text-center">
-          <p className="text-xs font-semibold text-accent-gold uppercase tracking-wider mb-2">
-            Our Point of View
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-text-primary mb-3">
-            AI should widen the circle of who gets to make.
-          </h2>
-          <p className="text-sm text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            Bhavya AI Lab is a public-interest studio for learning,
-            experimentation, and responsible technology. We translate complexity
-            into confidence — for classrooms, communities, and the curious.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
-          {resources.map((r) => (
-            <div key={r.title} className="glass rounded-lg p-5 flex items-start gap-4">
-              <div className="w-9 h-9 rounded-lg bg-accent-gold/10 flex items-center justify-center shrink-0">
-                <r.icon className="w-4.5 h-4.5 text-accent-gold" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-[10px] font-semibold text-accent-gold uppercase tracking-wider">
-                    {r.category}
-                  </span>
-                  <span className="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-bg-tertiary text-text-muted border border-border-primary">
-                    {r.tag}
-                  </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {resources.map((resource) => (
+            <div
+              key={resource.title}
+              className="rounded-xl border border-border bg-bg-raised p-6 hover:border-accent-gold/30 transition-colors"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-2 rounded-lg bg-forest/10">
+                  <resource.icon size={20} className="text-forest" />
                 </div>
-                <div className="text-sm font-semibold text-text-primary mb-0.5">
-                  {r.title}
-                </div>
-                <div className="text-xs text-text-tertiary leading-relaxed">
-                  {r.description}
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-medium text-accent-gold uppercase tracking-wider">
+                      {resource.category}
+                    </span>
+                    <span className="text-xs text-text-secondary">·</span>
+                    <span className="text-xs text-text-secondary">
+                      {resource.tag}
+                    </span>
+                    {resource.status === "planned" && (
+                      <span className="text-xs text-text-secondary italic ml-auto">
+                        Planned
+                      </span>
+                    )}
+                  </div>
+                  <h3
+                    className="text-lg font-semibold text-text-primary mb-2"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {resource.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    {resource.description}
+                  </p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center">
-          <p className="text-xs text-text-muted uppercase tracking-wider mb-2">
-            Stay curious
+        <div className="mt-12 text-center">
+          <p className="text-sm text-text-secondary">
+            Resources are published as real institutional activity produces
+            verifiable content. No speculative claims.
           </p>
-          <h2 className="text-lg font-bold text-text-primary mb-4">
-            Bring a better question.
-          </h2>
-          <a
-            href="mailto:hello@bhavya.foundation"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent-gold text-text-inverse font-semibold text-sm hover:bg-accent-gold-hover transition-colors"
-          >
-            Join the lab
-          </a>
         </div>
       </section>
     </div>

@@ -170,8 +170,12 @@ export class Dashboard {
     await this.loadStaticData();
 
     this.server = createServer((req, res) => {
-      // CORS
-      res.setHeader("Access-Control-Allow-Origin", "*");
+      // CORS — strict allowlist: unknown origin → no header (browser blocks)
+      const origin = req.headers.origin || "";
+      const allowedOrigins = (process.env.CORS_ORIGINS || "http://localhost:3020,http://localhost:3030,http://localhost:3101").split(",").map(s => s.trim()).filter(Boolean);
+      if (origin && allowedOrigins.includes(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+      }
       res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 

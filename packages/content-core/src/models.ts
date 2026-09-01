@@ -258,6 +258,11 @@ export interface ResearchStats {
 export type MissionStatus =
   "planning" | "active" | "monitoring" | "completed" | "on-hold" | "archived";
 
+export type RecordProvenance =
+  | "institutional"   // Created via authorized API with evidence recording
+  | "test-seed"       // Created during development/testing
+  | "imported";       // Imported from external source
+
 export interface Mission {
   id: string;
   name: string;
@@ -269,6 +274,7 @@ export interface Mission {
   goals: string[];
   tags: string[];
   siteIds: string[];
+  provenance?: RecordProvenance;
   created: string;
   updated: string;
 }
@@ -285,6 +291,7 @@ export interface Site {
   currentCondition?: string;
   surveyIds: string[];
   plantingIds: string[];
+  provenance?: RecordProvenance;
   created: string;
   updated: string;
 }
@@ -306,6 +313,7 @@ export interface Survey {
   conditionRating?: number;
   photos: string[];
   documentId?: string;
+  provenance?: RecordProvenance;
   created: string;
 }
 
@@ -326,6 +334,7 @@ export interface Planting {
   endDate?: string;
   notes: string;
   documentId?: string;
+  provenance?: RecordProvenance;
   created: string;
   updated: string;
 }
@@ -346,6 +355,7 @@ export interface Monitoring {
   conductedBy: string;
   conductedDate: string;
   documentId?: string;
+  provenance?: RecordProvenance;
   created: string;
 }
 
@@ -363,6 +373,7 @@ export interface Impact {
   communityMembers?: number;
   period: string;
   documentId?: string;
+  provenance?: RecordProvenance;
   created: string;
 }
 

@@ -12,6 +12,7 @@ export class Scheduler {
   private config: SchedulerConfig;
   private queue: Task[] = [];
   private running = new Map<TaskId, Task>();
+  private completedCount = 0;
 
   constructor(config: SchedulerConfig) {
     this.config = config;
@@ -39,6 +40,7 @@ export class Scheduler {
         // Execute task (would call agent engine in production)
         task.status = 'completed';
         task.completedAt = new Date();
+        this.completedCount++;
         await this.config.events.emit('scheduler.task.completed', { taskId: task.id });
       } catch (error) {
         task.status = 'failed';
@@ -70,5 +72,13 @@ export class Scheduler {
   async shutdown(): Promise<void> {
     this.queue = [];
     this.running.clear();
+  }
+
+  getStats(): { queued: number; running: number; completed: number } {
+    return {
+      queued: this.queue.length,
+      running: this.running.size,
+      completed: this.completedCount,
+    };
   }
 }

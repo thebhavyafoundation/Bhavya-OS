@@ -27,10 +27,18 @@ export class Planner {
   async createPlan(goal: Goal): Promise<Plan> {
     const plan: Plan = {
       id: `plan:${crypto.randomUUID()}`,
+      name: goal.name ?? 'Unnamed Plan',
+      description: goal.description ?? '',
       goalId: goal.id,
       steps: [],
       status: 'draft',
+      milestones: [],
+      resources: [],
+      timeline: { startDate: new Date().toISOString(), endDate: new Date().toISOString(), phases: [] },
+      dependencies: [],
+      metadata: {},
       createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     this.plans.set(plan.id, plan);

@@ -239,7 +239,7 @@ describe('${input.title} Page', () => {
 
   private toPascalCase(str: string): string {
     return str
-n      .split('-')
+      .split('-')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join('');
   }

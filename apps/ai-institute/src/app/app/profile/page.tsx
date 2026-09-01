@@ -143,9 +143,9 @@ export default function ProfilePage() {
                 }}
               >
                 {[
-                  { label: "Courses", value: "3", icon: BookOpen },
-                  { label: "Contributions", value: "28", icon: TreePine },
-                  { label: "Credentials", value: "3", icon: Award },
+                  { label: "Courses", value: "—", icon: BookOpen },
+                  { label: "Contributions", value: "—", icon: TreePine },
+                  { label: "Credentials", value: "—", icon: Award },
                 ].map((stat) => (
                   <div key={stat.label} style={{ textAlign: "center" }}>
                     <stat.icon size={20} style={{ color: "var(--forest)", marginBottom: "var(--space-2)" }} />
@@ -154,6 +154,9 @@ export default function ProfilePage() {
                   </div>
                 ))}
               </div>
+              <p style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginTop: "var(--space-3)", textAlign: "center" }}>
+                No verified activity recorded yet.
+              </p>
             </div>
 
             <div

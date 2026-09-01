@@ -1,22 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findSessionByToken, findUserById, stripSensitive } from "@/lib/api-auth";
+import { requireAuth, stripSensitive } from "@/lib/api-auth";
 import { getStudentByUserId } from "@/lib/student-store";
 
 export async function GET(request: NextRequest) {
   try {
-    const token = request.cookies.get("session-token")?.value;
-    if (!token) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-    }
-
-    const session = await findSessionByToken(token);
-    if (!session) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
-
-    const user = await findUserById(session.userId);
+    const user = await requireAuth(request);
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
     const student = await getStudentByUserId(user.id);

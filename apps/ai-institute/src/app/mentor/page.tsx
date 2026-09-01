@@ -4,11 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  agents,
-  selectAgent,
-  getAgentResponse,
-  type Agent,
-} from "@/lib/agents";
+  publicAgents,
+  selectPublicAgent,
+  getPublicAgentResponse,
+  type PublicAgent,
+} from "@/lib/public-agents";
 
 interface Message {
   id: number;
@@ -39,7 +39,7 @@ export default function MentorPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedAgent, setSelectedAgent] = useState<Agent>(agents[0]);
+  const [selectedAgent, setSelectedAgent] = useState<PublicAgent>(publicAgents[0]);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [nextId, setNextId] = useState(1);
@@ -74,7 +74,7 @@ export default function MentorPage() {
       minute: "2-digit",
     });
 
-    const agent = selectAgent(text);
+    const agent = selectPublicAgent(text);
     if (agent.id !== selectedAgent.id) {
       setSelectedAgent(agent);
     }
@@ -92,7 +92,7 @@ export default function MentorPage() {
 
     setTimeout(
       () => {
-        const response = getAgentResponse(agent, text);
+        const response = getPublicAgentResponse(agent, text);
         const mentorMsg: Message = {
           id: nextId + 1,
           role: "mentor",
@@ -157,7 +157,7 @@ export default function MentorPage() {
                 Choose a Mentor
               </h3>
               <div className="space-y-2">
-                {agents.map((agent) => (
+                {publicAgents.map((agent) => (
                   <button
                     key={agent.id}
                     onClick={() => {
@@ -255,7 +255,7 @@ export default function MentorPage() {
               >
                 {msg.role === "mentor" && (
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a3a2a] to-[#1a4a35] flex items-center justify-center flex-shrink-0 text-base">
-                    {agents.find((a) => a.id === msg.agentId)?.avatar || "🤖"}
+                    {publicAgents.find((a) => a.id === msg.agentId)?.avatar || "🤖"}
                   </div>
                 )}
                 <div

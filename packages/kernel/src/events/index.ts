@@ -15,10 +15,18 @@ export class EventBus {
     const event: Event = {
       id: crypto.randomUUID(),
       type,
+      name: type,
+      version: 1,
       source,
+      producer: source,
       payload,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
+      priority: 'medium',
+      status: 'pending',
       metadata: {},
+      retryCount: 0,
+      maxRetries: 3,
+      createdAt: new Date(),
     };
 
     this.history.push(event);

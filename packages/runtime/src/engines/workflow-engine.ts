@@ -8,6 +8,8 @@
  * @license MIT
  */
 
+import { evaluateCondition, ExpressionError } from "../expression";
+
 // ─── Types (imported from @bhavya/shared) ────────────────────────────────────
 
 import type {
@@ -396,17 +398,14 @@ export class WorkflowEngine {
     step: WorkflowStep,
     execution: WorkflowExecution,
   ): Promise<boolean> {
-    // Simple condition evaluation (would use a proper expression engine in production)
     const condition = step.config.condition || "true";
 
-    // Evaluate condition against variables
     try {
-      const func = new Function(
-        ...Object.keys(execution.variables),
-        `return ${condition}`,
-      );
-      return func(...Object.values(execution.variables));
-    } catch {
+      return evaluateCondition(condition, execution.variables);
+    } catch (error) {
+      if (error instanceof ExpressionError) {
+        throw new Error(`Invalid condition: ${condition} — ${error.message}`);
+      }
       throw new Error(`Invalid condition: ${condition}`);
     }
   }

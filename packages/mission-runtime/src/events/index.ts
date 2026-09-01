@@ -10,14 +10,18 @@ export function createEvent<T>(
 ): BhavyaEvent<T> {
   return {
     id: crypto.randomUUID(),
+    type: name,
     name,
     version,
+    source: producer,
     producer,
     timestamp: new Date().toISOString(),
     payload,
     priority: "medium",
     status: "pending",
+    metadata: {},
     retryCount: 0,
     maxRetries: 3,
+    createdAt: new Date(),
   };
 }

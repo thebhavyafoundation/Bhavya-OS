@@ -235,6 +235,20 @@ function StageCard({
                     </div>
                   </div>
                 </div>
+
+                {stage.courseId && (
+                  <Link
+                    href={`/courses/${stage.courseId}`}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    style={{
+                      backgroundColor: stage.color + "20",
+                      color: stage.color,
+                      border: `1px solid ${stage.color}40`,
+                    }}
+                  >
+                    View Course →
+                  </Link>
+                )}
               </div>
             </motion.div>
           )}
@@ -262,6 +276,13 @@ export default function LearningPathsPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
+      {/* Fully connected — Wave Q: all 8 stages linked to published courses */}
+      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
+        <p className="text-xs text-[#c9a227]/70 font-medium">
+          Structured Curriculum — 8 stages, each backed by a published course.
+          Follow the path or jump to any stage.
+        </p>
+      </div>
       <div className="border-b border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-6 py-8">
           <Link
@@ -370,8 +391,8 @@ export default function LearningPathsPage() {
             >
               <h2 className="text-2xl font-bold mb-2">The Path</h2>
               <p className="text-sm text-white/30">
-                8 stages from foundations to frontier AI. Click any stage to
-                explore.
+                8 stages from foundations to frontier AI. Stages with published
+                courses link directly to course content.
               </p>
             </motion.div>
 
@@ -545,7 +566,7 @@ export default function LearningPathsPage() {
             </p>
             <div className="flex items-center justify-center gap-4">
               <Link
-                href="/courses/foundations"
+                href="/courses/ai-foundations"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors"
               >
                 Start Stage 1

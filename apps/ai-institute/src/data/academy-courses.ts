@@ -224,6 +224,186 @@ const ethicsModules: CourseModule[] = [
   },
 ];
 
+const mathematicsForAiModules: CourseModule[] = [
+  {
+    id: "math-mod-1",
+    title: "Linear Algebra & Vectors",
+    description: "Master the language of high-dimensional spaces that powers every AI model.",
+    order: 1,
+    lessons: [
+      { id: "math-1-1", title: "Vectors and Vector Spaces", order: 1, duration: 30 },
+      { id: "math-1-2", title: "Matrices and Transformations", order: 2, duration: 35 },
+      { id: "math-1-3", title: "Eigenvalues and Decomposition", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "math-mod-2",
+    title: "Calculus & Optimization",
+    description: "Learn how calculus drives learning through gradients and optimization.",
+    order: 2,
+    lessons: [
+      { id: "math-2-1", title: "Derivatives and Gradients", order: 1, duration: 30 },
+      { id: "math-2-2", title: "Multivariable Calculus", order: 2, duration: 35 },
+      { id: "math-2-3", title: "Optimization and Gradient Descent", order: 3, duration: 35 },
+    ],
+  },
+  {
+    id: "math-mod-3",
+    title: "Probability, Statistics & Information",
+    description: "Understand uncertainty, inference, and the information-theoretic foundations of intelligence.",
+    order: 3,
+    lessons: [
+      { id: "math-3-1", title: "Probability Theory", order: 1, duration: 30 },
+      { id: "math-3-2", title: "Statistics and Inference", order: 2, duration: 35 },
+      { id: "math-3-3", title: "Information Theory", order: 3, duration: 30 },
+    ],
+  },
+];
+
+const machineLearningModules: CourseModule[] = [
+  {
+    id: "ml-mod-1",
+    title: "Supervised Learning",
+    description: "Teach machines to learn from labeled data and evaluate their performance.",
+    order: 1,
+    lessons: [
+      { id: "ml-1-1", title: "Linear and Logistic Regression", order: 1, duration: 30 },
+      { id: "ml-1-2", title: "Decision Trees and k-NN", order: 2, duration: 35 },
+      { id: "ml-1-3", title: "Model Evaluation and Validation", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "ml-mod-2",
+    title: "Unsupervised & Feature Engineering",
+    description: "Discover hidden patterns and craft features that unlock model performance.",
+    order: 2,
+    lessons: [
+      { id: "ml-2-1", title: "Clustering and Dimensionality Reduction", order: 1, duration: 35 },
+      { id: "ml-2-2", title: "Feature Engineering Techniques", order: 2, duration: 30 },
+      { id: "ml-2-3", title: "Data Preprocessing at Scale", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "ml-mod-3",
+    title: "Ensemble & Production ML",
+    description: "Combine models and ship machine learning systems to production.",
+    order: 3,
+    lessons: [
+      { id: "ml-3-1", title: "Ensemble Methods", order: 1, duration: 35 },
+      { id: "ml-3-2", title: "Hyperparameter Tuning", order: 2, duration: 30 },
+      { id: "ml-3-3", title: "ML Pipelines and Production", order: 3, duration: 35 },
+    ],
+  },
+];
+
+const transformersModules: CourseModule[] = [
+  {
+    id: "trans-mod-1",
+    title: "Attention Foundations",
+    description: "Understand the attention mechanism that underpins every modern language model.",
+    order: 1,
+    lessons: [
+      { id: "trans-1-1", title: "The Attention Mechanism", order: 1, duration: 30 },
+      { id: "trans-1-2", title: "Self-Attention in Depth", order: 2, duration: 35 },
+      { id: "trans-1-3", title: "Scaled Dot-Product Attention", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "trans-mod-2",
+    title: "Transformer Architecture",
+    description: "Build a complete understanding of the transformer block from the inside out.",
+    order: 2,
+    lessons: [
+      { id: "trans-2-1", title: "Multi-Head Attention", order: 1, duration: 35 },
+      { id: "trans-2-2", title: "Positional Encoding and Normalization", order: 2, duration: 30 },
+      { id: "trans-2-3", title: "Encoder-Decoder Architecture", order: 3, duration: 35 },
+    ],
+  },
+  {
+    id: "trans-mod-3",
+    title: "Modern Transformers",
+    description: "Explore the models that reshaped AI — from BERT and GPT to vision transformers.",
+    order: 3,
+    lessons: [
+      { id: "trans-3-1", title: "BERT and Encoder Models", order: 1, duration: 35 },
+      { id: "trans-3-2", title: "GPT and Decoder Models", order: 2, duration: 35 },
+      { id: "trans-3-3", title: "Vision Transformers", order: 3, duration: 30 },
+    ],
+  },
+];
+
+const llmEngineeringModules: CourseModule[] = [
+  {
+    id: "llme-mod-1",
+    title: "Prompt Engineering & RAG",
+    description: "Steer language models with precision and ground them with retrieval.",
+    order: 1,
+    lessons: [
+      { id: "llme-1-1", title: "Advanced Prompt Engineering", order: 1, duration: 30 },
+      { id: "llme-1-2", title: "RAG Systems Architecture", order: 2, duration: 35 },
+      { id: "llme-1-3", title: "Vector Databases and Retrieval", order: 3, duration: 35 },
+    ],
+  },
+  {
+    id: "llme-mod-2",
+    title: "Fine-Tuning & Evaluation",
+    description: "Adapt models to your domain and measure what matters.",
+    order: 2,
+    lessons: [
+      { id: "llme-2-1", title: "Fine-Tuning Strategies", order: 1, duration: 35 },
+      { id: "llme-2-2", title: "Instruction Tuning and RLHF", order: 2, duration: 35 },
+      { id: "llme-2-3", title: "Evaluation and Benchmarking", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "llme-mod-3",
+    title: "Production Deployment",
+    description: "Take LLM systems from prototype to reliable production at scale.",
+    order: 3,
+    lessons: [
+      { id: "llme-3-1", title: "LLM Inference Optimization", order: 1, duration: 35 },
+      { id: "llme-3-2", title: "Safety and Guardrails", order: 2, duration: 30 },
+      { id: "llme-3-3", title: "Deploying at Scale", order: 3, duration: 35 },
+    ],
+  },
+];
+
+const aiAgentsModules: CourseModule[] = [
+  {
+    id: "agent-mod-1",
+    title: "Agent Foundations",
+    description: "Design autonomous agents with tools, memory, and context.",
+    order: 1,
+    lessons: [
+      { id: "agent-1-1", title: "Agent Architecture and Design", order: 1, duration: 35 },
+      { id: "agent-1-2", title: "Tool Use and Function Calling", order: 2, duration: 35 },
+      { id: "agent-1-3", title: "Memory and Context Management", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "agent-mod-2",
+    title: "Planning & Reasoning",
+    description: "Give agents the ability to plan, reason, and self-correct.",
+    order: 2,
+    lessons: [
+      { id: "agent-2-1", title: "Chain-of-Thought Reasoning", order: 1, duration: 35 },
+      { id: "agent-2-2", title: "Planning and Task Decomposition", order: 2, duration: 35 },
+      { id: "agent-2-3", title: "Reflection and Self-Correction", order: 3, duration: 30 },
+    ],
+  },
+  {
+    id: "agent-mod-3",
+    title: "Multi-Agent Systems & Safety",
+    description: "Orchestrate teams of agents and ensure they remain safe and aligned.",
+    order: 3,
+    lessons: [
+      { id: "agent-3-1", title: "Multi-Agent Collaboration", order: 1, duration: 35 },
+      { id: "agent-3-2", title: "Agent Communication Protocols", order: 2, duration: 30 },
+      { id: "agent-3-3", title: "Safety and Alignment for Agents", order: 3, duration: 35 },
+    ],
+  },
+];
+
 // ═══════════════════════════════════════════════════════════════════
 // EXPORTED COURSES
 // ═══════════════════════════════════════════════════════════════════
@@ -339,6 +519,116 @@ export const courses: Course[] = [
     createdAt: "2026-05-01T00:00:00Z",
     updatedAt: "2026-08-01T00:00:00Z",
   },
+  {
+    id: "mathematics-for-ai",
+    title: "Mathematics for AI",
+    description:
+      "The mathematical foundations of intelligence. Master linear algebra, calculus, probability, statistics, and information theory — the language every AI system is built upon.",
+    domain: "Artificial Intelligence",
+    subject: "Mathematics for AI",
+    grade: 10,
+    level: "intermediate",
+    status: "published",
+    modules: mathematicsForAiModules,
+    prerequisites: ["python-for-ai"],
+    estimatedDuration: 290,
+    tags: ["mathematics", "linear-algebra", "calculus", "probability", "statistics"],
+    metadata: {
+      instructor: "Bhavya AI Faculty",
+      cohortSize: 25,
+      certificationAvailable: true,
+    },
+    createdAt: "2026-08-29T00:00:00Z",
+    updatedAt: "2026-08-29T00:00:00Z",
+  },
+  {
+    id: "machine-learning",
+    title: "Machine Learning",
+    description:
+      "Teach machines to learn from data. From supervised and unsupervised learning to feature engineering and ensemble methods — build models that generalize.",
+    domain: "Artificial Intelligence",
+    subject: "Machine Learning",
+    grade: 11,
+    level: "intermediate",
+    status: "published",
+    modules: machineLearningModules,
+    prerequisites: ["mathematics-for-ai"],
+    estimatedDuration: 290,
+    tags: ["machine-learning", "supervised-learning", "unsupervised-learning", "feature-engineering", "ensemble"],
+    metadata: {
+      instructor: "Bhavya AI Faculty",
+      cohortSize: 20,
+      certificationAvailable: true,
+    },
+    createdAt: "2026-08-29T00:00:00Z",
+    updatedAt: "2026-08-29T00:00:00Z",
+  },
+  {
+    id: "transformers",
+    title: "Transformers",
+    description:
+      "The architecture that changed everything. Dive deep into attention, self-attention, multi-head attention, BERT, GPT, and vision transformers.",
+    domain: "Artificial Intelligence",
+    subject: "Transformers",
+    grade: 11,
+    level: "advanced",
+    status: "published",
+    modules: transformersModules,
+    prerequisites: ["deep-learning"],
+    estimatedDuration: 295,
+    tags: ["transformers", "attention", "bert", "gpt", "vision-transformers"],
+    metadata: {
+      instructor: "Bhavya AI Faculty",
+      cohortSize: 20,
+      certificationAvailable: true,
+    },
+    createdAt: "2026-08-29T00:00:00Z",
+    updatedAt: "2026-08-29T00:00:00Z",
+  },
+  {
+    id: "llm-engineering",
+    title: "LLM Engineering",
+    description:
+      "Build with large language models. Master prompt engineering, RAG systems, fine-tuning, evaluation, and production deployment at scale.",
+    domain: "Artificial Intelligence",
+    subject: "LLM Engineering",
+    grade: 12,
+    level: "advanced",
+    status: "published",
+    modules: llmEngineeringModules,
+    prerequisites: ["transformers"],
+    estimatedDuration: 300,
+    tags: ["llm", "prompt-engineering", "rag", "fine-tuning", "deployment"],
+    metadata: {
+      instructor: "Bhavya AI Faculty",
+      cohortSize: 15,
+      certificationAvailable: true,
+    },
+    createdAt: "2026-08-29T00:00:00Z",
+    updatedAt: "2026-08-29T00:00:00Z",
+  },
+  {
+    id: "ai-agents",
+    title: "AI Agents",
+    description:
+      "Autonomous systems that reason and act. Design agent architectures, tool use, planning and reasoning, multi-agent systems, and safety and alignment.",
+    domain: "Artificial Intelligence",
+    subject: "AI Agents",
+    grade: 12,
+    level: "expert",
+    status: "published",
+    modules: aiAgentsModules,
+    prerequisites: ["llm-engineering"],
+    estimatedDuration: 300,
+    tags: ["agents", "tool-use", "planning", "multi-agent", "safety"],
+    metadata: {
+      instructor: "Bhavya AI Faculty",
+      cohortSize: 12,
+      certificationAvailable: true,
+    },
+    createdAt: "2026-08-29T00:00:00Z",
+    updatedAt: "2026-08-29T00:00:00Z",
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -403,4 +693,168 @@ export function getPreviousLesson(
 export function getTotalLessons(courseId: string): number {
   const course = getCourseById(courseId);
   return course?.modules.reduce((sum: number, m) => sum + m.lessons.length, 0) ?? 0;
+}
+
+/**
+ * Async version that checks SQLite for lesson count.
+ * Falls back to static count when SQLite has no data.
+ */
+export async function getTotalLessonsAsync(courseId: string): Promise<number> {
+  try {
+    const { ensureStudioDb } = await import("@/lib/studio/db");
+    await ensureStudioDb();
+    const { getDb } = await import("@/lib/db");
+
+    const row = getDb()
+      .prepare("SELECT lessons FROM studio_courses WHERE id = ?")
+      .get(courseId) as { lessons: string } | undefined;
+
+    if (row) {
+      return JSON.parse(row.lessons || "[]").length;
+    }
+  } catch {
+    // SQLite not available
+  }
+  return getTotalLessons(courseId);
+}
+
+/**
+ * Get the first lesson ID for a course.
+ * Checks SQLite first, falls back to static data.
+ */
+export async function getFirstLessonId(courseId: string): Promise<string | null> {
+  try {
+    const { ensureStudioDb } = await import("@/lib/studio/db");
+    await ensureStudioDb();
+    const { getDb } = await import("@/lib/db");
+
+    const row = getDb()
+      .prepare("SELECT lessons FROM studio_courses WHERE id = ?")
+      .get(courseId) as { lessons: string } | undefined;
+
+    if (row) {
+      const lessonIds: string[] = JSON.parse(row.lessons || "[]");
+      return lessonIds[0] || null;
+    }
+  } catch {
+    // SQLite not available
+  }
+  // Static fallback
+  const course = getCourseById(courseId);
+  return course?.modules[0]?.lessons[0]?.id || null;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SQLITE-BACKED COURSE LOADING (with static fallback)
+// ═══════════════════════════════════════════════════════════════════
+
+/**
+ * Load published courses from Studio SQLite.
+ * Falls back to static course data when SQLite has no published courses.
+ *
+ * This ensures the public /courses page always has content,
+ * while allowing Studio-created courses to take precedence.
+ */
+export async function loadPublishedCourses(): Promise<Course[]> {
+  try {
+    const { ensureStudioDb } = await import("@/lib/studio/db");
+    await ensureStudioDb();
+    const { getDb } = await import("@/lib/db");
+
+    const rows = getDb()
+      .prepare("SELECT * FROM studio_courses WHERE status = 'published' ORDER BY updated_at DESC")
+      .all() as Array<{
+      id: string;
+      title: string;
+      description: string;
+      subject: string;
+      grade: number;
+      lessons: string;
+      status: string;
+      created_at: string;
+      updated_at: string;
+    }>;
+
+    if (rows.length === 0) {
+      // No published courses in SQLite — fall back to static data
+      return courses;
+    }
+
+    // Map SQLite courses to the Course type
+    return rows.map((row) => {
+      const lessonIds: string[] = JSON.parse(row.lessons || "[]");
+      return {
+        id: row.id,
+        title: row.title,
+        description: row.description,
+        domain: row.subject,
+        subject: row.subject,
+        grade: row.grade,
+        level: "beginner" as CourseLevel,
+        status: "published" as const,
+        modules: [],
+        prerequisites: [],
+        estimatedDuration: lessonIds.length * 30, // estimate 30min per lesson
+        tags: [row.subject.toLowerCase()],
+        metadata: {},
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+      };
+    });
+  } catch {
+    // SQLite not available — fall back to static data
+    return courses;
+  }
+}
+
+/**
+ * Load a single published course by ID.
+ * Tries SQLite first, falls back to static data.
+ */
+export async function loadPublishedCourseById(id: string): Promise<Course | undefined> {
+  try {
+    const { ensureStudioDb } = await import("@/lib/studio/db");
+    await ensureStudioDb();
+    const { getDb } = await import("@/lib/db");
+
+    const row = getDb()
+      .prepare("SELECT * FROM studio_courses WHERE id = ? AND status = 'published'")
+      .get(id) as {
+      id: string;
+      title: string;
+      description: string;
+      subject: string;
+      grade: number;
+      lessons: string;
+      status: string;
+      created_at: string;
+      updated_at: string;
+    } | undefined;
+
+    if (row) {
+      const lessonIds: string[] = JSON.parse(row.lessons || "[]");
+      return {
+        id: row.id,
+        title: row.title,
+        description: row.description,
+        domain: row.subject,
+        subject: row.subject,
+        grade: row.grade,
+        level: "beginner",
+        status: "published",
+        modules: [],
+        prerequisites: [],
+        estimatedDuration: lessonIds.length * 30,
+        tags: [row.subject.toLowerCase()],
+        metadata: {},
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+      };
+    }
+
+    // Not in SQLite — fall back to static data
+    return getCourseById(id);
+  } catch {
+    return getCourseById(id);
+  }
 }

@@ -807,6 +807,87 @@ export interface WebsitePage {
   content: string;
 }
 
+// ─── Institutional Missions ───────────────────────────────────────
+
+/** Mission — a permanent institutional mission of Bhavya Foundation. Canonical source for all Mission types. */
+export interface Mission {
+  id: MissionId;
+  name: string;
+  slug: MissionSlug;
+  purpose: string;
+  description: string;
+  status: MissionStatus;
+  domain: MissionDomain;
+  programs: Program[];
+  projects: ProjectRef[];
+  knowledge: KnowledgeRef[];
+  evidence: EvidenceRef[];
+  impact: ImpactMetrics;
+  participation: ParticipationInfo;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type MissionId = "forest" | "knowledge" | "heritage" | "community";
+
+export type MissionSlug = "forest" | "knowledge" | "heritage" | "community";
+
+export type MissionStatus = "active" | "on-hold" | "completed" | "archived";
+
+export type MissionDomain =
+  | "environment"
+  | "education"
+  | "heritage"
+  | "community"
+  | "research";
+
+export interface Program {
+  id: string;
+  name: string;
+  description: string;
+  missionId: MissionId;
+  status: EntityStatus;
+}
+
+export interface ProjectRef {
+  id: string;
+  name: string;
+  programId?: string;
+  status: EntityStatus;
+}
+
+export interface KnowledgeRef {
+  id: string;
+  title: string;
+  koId: string;
+  type: "lesson" | "assessment" | "guide" | "workbook" | "video";
+}
+
+export interface EvidenceRef {
+  id: string;
+  type: "impact" | "research" | "testimonial" | "metric";
+  title: string;
+  url?: string;
+}
+
+export interface ImpactMetrics {
+  metrics: ImpactMetric[];
+}
+
+export interface ImpactMetric {
+  id: string;
+  name: string;
+  unit: string;
+  target: number;
+  current: number;
+}
+
+export interface ParticipationInfo {
+  ways: string[];
+  ctaLabel: string;
+  ctaUrl: string;
+}
+
 // ─── Technology Knowledge ─────────────────────────────────────────
 
 /** Technology Knowledge Package — discovered tech item with analysis */
@@ -956,7 +1037,15 @@ export type EntityType =
   | "media"
   | "organization"
   | "location"
-  | "asset";
+  | "asset"
+  | "beneficiary"
+  | "evidence"
+  | "activity"
+  | "event"
+  | "outcome"
+  | "metric"
+  | "document"
+  | "report";
 
 /** Typed relationship between entities */
 export interface EntityRelation {
@@ -983,7 +1072,13 @@ export type RelationType =
   | "extends"
   | "contradicts"
   | "supports"
-  | "supersedes";
+  | "supersedes"
+  | "produces"
+  | "participates_in"
+  | "benefits_from"
+  | "measures"
+  | "documents"
+  | "verified_by";
 
 // ═══════════════════════════════════════════════════════════════════
 // ARTIFACTS

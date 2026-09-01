@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "./AuthProvider";
 import { AppFooter } from "@bhavya/platform-ui";
+import { getNavItems, getFooterColumns } from "@/lib/useNavigation";
+import type { Role } from "@/lib/roles";
 import {
   BookOpen,
   FlaskConical,
@@ -23,58 +25,42 @@ import {
   HeartHandshake,
   GraduationCap,
   Terminal,
+  TrendingUp,
+  Users,
+  Compass,
+  Award,
+  LayoutDashboard,
+  Scale,
+  Zap,
+  Eye,
+  Settings,
+  FileText,
+  Network,
 } from "lucide-react";
 
-const navLinks = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/forest", label: "Forest", icon: TreePine },
-  { href: "/knowledge", label: "Knowledge", icon: Brain },
-  { href: "/heritage", label: "Heritage", icon: Landmark },
-  { href: "/community", label: "Community", icon: HeartHandshake },
-  { href: "/knowledge/academy", label: "Academy", icon: GraduationCap },
-  { href: "/os", label: "OS", icon: Terminal },
-];
-
-const footerColumns = [
-  {
-    title: "Missions",
-    links: [
-      { label: "Forest", href: "/forest" },
-      { label: "Knowledge", href: "/knowledge" },
-      { label: "Heritage", href: "/heritage" },
-      { label: "Community", href: "/community" },
-    ],
-  },
-  {
-    title: "Learn",
-    links: [
-      { label: "Academy", href: "/knowledge/academy" },
-      { label: "Library", href: "/knowledge/library" },
-      { label: "AI Labs", href: "/knowledge/ai" },
-      { label: "Research", href: "/knowledge/research" },
-      { label: "Courses", href: "/knowledge/courses" },
-    ],
-  },
-  {
-    title: "Governance",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Constitution", href: "/mission" },
-      { label: "Transparency", href: "/transparency" },
-      { label: "Contributing", href: "/contributing" },
-    ],
-  },
-  {
-    title: "Platform",
-    links: [
-      { label: "Bhavya OS", href: "/os" },
-      { label: "Observability", href: "/os/observability" },
-      { label: "Runtime", href: "/os/runtime" },
-      { label: "API Explorer", href: "/os/api-explorer" },
-      { label: "Sign In", href: "/login" },
-    ],
-  },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Home,
+  TreePine,
+  Brain,
+  Landmark,
+  HeartHandshake,
+  GraduationCap,
+  FlaskConical,
+  TrendingUp,
+  BookOpen,
+  Users,
+  Compass,
+  Award,
+  User: User,
+  LayoutDashboard,
+  Scale,
+  Zap,
+  Eye,
+  Settings,
+  FileText,
+  Network,
+  Terminal,
+};
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -83,6 +69,24 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Get nav items from canonical registry
+  const userRoles = user ? [user.role as Role] : undefined;
+  const publicNavItems = getNavItems("public", userRoles);
+
+  // Add OS link for authenticated users with appropriate roles
+  const navLinks = [
+    ...publicNavItems.map((item) => ({
+      ...item,
+      icon: iconMap[item.icon] || Home,
+    })),
+    ...(isAuthenticated
+      ? [{ id: "os", label: "OS", href: "/os", icon: Terminal }]
+      : []),
+  ];
+
+  // Get footer columns from registry
+  const footerColumns = getFooterColumns();
 
   const handleScroll = useCallback(() => {
     const currentScrollY = window.scrollY;

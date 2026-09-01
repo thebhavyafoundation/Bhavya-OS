@@ -203,19 +203,19 @@ export class ContentVersioning {
 
     compare(
       "metadata",
-      snapshot1.snapshot.metadata,
-      snapshot2.snapshot.metadata,
+      snapshot1.snapshot.metadata as unknown as Record<string, unknown>,
+      snapshot2.snapshot.metadata as unknown as Record<string, unknown>,
     );
-    compare("content", snapshot1.snapshot.content, snapshot2.snapshot.content);
+    compare("content", snapshot1.snapshot.content as unknown as Record<string, unknown>, snapshot2.snapshot.content as unknown as Record<string, unknown>);
     compare(
       "assessment",
-      snapshot1.snapshot.assessment,
-      snapshot2.snapshot.assessment,
+      snapshot1.snapshot.assessment as unknown as Record<string, unknown>,
+      snapshot2.snapshot.assessment as unknown as Record<string, unknown>,
     );
     compare(
       "resources",
-      snapshot1.snapshot.resources,
-      snapshot2.snapshot.resources,
+      snapshot1.snapshot.resources as unknown as Record<string, unknown>,
+      snapshot2.snapshot.resources as unknown as Record<string, unknown>,
     );
 
     return diffs;

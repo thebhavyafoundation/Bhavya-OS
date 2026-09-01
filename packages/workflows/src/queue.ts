@@ -131,7 +131,7 @@ export class JobQueue {
       job.status = "completed";
       job.completedAt = new Date().toISOString();
     } catch (err: unknown) {
-      job.error = err.message;
+      job.error = err instanceof Error ? err.message : String(err);
       if (job.attempts < job.maxAttempts) {
         job.status = "pending";
       } else {

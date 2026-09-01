@@ -2,6 +2,7 @@ import type {
   Source,
   SourceProvider,
   RawItem,
+  NormalizedItem,
   FetchOpts,
 } from "@bhavya/intelligence";
 
@@ -13,7 +14,7 @@ export abstract class BaseCrawler implements SourceProvider {
   abstract readonly kind: Source["kind"];
 
   abstract fetch(opts: FetchOpts): Promise<RawItem[]>;
-  abstract normalize(item: RawItem): RawItem;
+  abstract normalize(item: RawItem): NormalizedItem;
 
   canFetch(source: Source): boolean {
     return source.enabled && source.kind === this.kind;

@@ -61,4 +61,11 @@ export class SqliteUserRepository implements UserRepository {
 
     return this.findById(id) as Promise<User>;
   }
+
+  async updateRole(userId: string, role: string): Promise<User | null> {
+    const db = getDatabase({ path: "" });
+    const now = new Date().toISOString();
+    db.prepare("UPDATE users SET role = ?, updated_at = ? WHERE id = ?").run(role, now, userId);
+    return this.findById(userId);
+  }
 }

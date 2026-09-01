@@ -214,7 +214,16 @@ export default async function LessonPage({
   );
 }
 
-// Simple markdown to HTML converter
+// Simple markdown to HTML converter with XSS protection
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function markdownToHtml(md: string): string {
   return md
     .split("\n\n")
@@ -222,18 +231,18 @@ function markdownToHtml(md: string): string {
       const trimmed = block.trim();
       if (!trimmed) return "";
 
-      if (trimmed.startsWith("## ")) return `<h2>${trimmed.slice(3)}</h2>`;
-      if (trimmed.startsWith("### ")) return `<h3>${trimmed.slice(4)}</h3>`;
+      if (trimmed.startsWith("## ")) return `<h2>${escapeHtml(trimmed.slice(3))}</h2>`;
+      if (trimmed.startsWith("### ")) return `<h3>${escapeHtml(trimmed.slice(4))}</h3>`;
 
       if (trimmed.startsWith("```")) {
         const code = trimmed.slice(3, -3).replace(/^\w+\n/, "");
-        return `<pre><code>${code}</code></pre>`;
+        return `<pre><code>${escapeHtml(code)}</code></pre>`;
       }
 
       if (trimmed.startsWith("- ")) {
         const items = trimmed
           .split("\n")
-          .map((l) => `<li>${l.slice(2).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}</li>`)
+          .map((l) => `<li>${escapeHtml(l.slice(2)).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}</li>`)
           .join("");
         return `<ul>${items}</ul>`;
       }
@@ -242,7 +251,7 @@ function markdownToHtml(md: string): string {
         const items = trimmed
           .split("\n")
           .map((l) => {
-            const text = l.replace(/^\d+\.\s*/, "").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+            const text = escapeHtml(l.replace(/^\d+\.\s*/, "")).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
             return `<li>${text}</li>`;
           })
           .join("");
@@ -257,14 +266,14 @@ function markdownToHtml(md: string): string {
           const headerCells = header
             .split("|")
             .filter(Boolean)
-            .map((c) => `<th>${c.trim()}</th>`)
+            .map((c) => `<th>${escapeHtml(c.trim())}</th>`)
             .join("");
           const bodyRows = body
             .map((r) => {
               const cells = r
                 .split("|")
                 .filter(Boolean)
-                .map((c) => `<td>${c.trim()}</td>`)
+                .map((c) => `<td>${escapeHtml(c.trim())}</td>`)
                 .join("");
               return `<tr>${cells}</tr>`;
             })
@@ -273,7 +282,7 @@ function markdownToHtml(md: string): string {
         }
       }
 
-      return `<p>${trimmed.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br/>")}</p>`;
+      return `<p>${escapeHtml(trimmed).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br/>")}</p>`;
     })
     .join("\n");
 }

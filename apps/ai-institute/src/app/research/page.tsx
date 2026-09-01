@@ -1,393 +1,343 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/components/AuthProvider";
+import Link from "next/link";
 
-const TYPES = ["All", "Paper", "Dataset", "Tutorial"] as const;
-const TOPICS = ["All", "ML", "DL", "NLP", "CV", "Robotics"] as const;
-
-type FilterType = (typeof TYPES)[number];
-type FilterTopic = (typeof TOPICS)[number];
-
-interface ResearchItem {
-  id: number;
+interface Paper {
+  id: string;
   title: string;
-  author: string;
-  date: string;
-  type: "Paper" | "Dataset" | "Tutorial";
-  topics: string[];
-  description: string;
-  metric?: string;
+  authors: string[];
+  year: number;
+  abstract: string;
+  tags: string[];
+  url: string;
+  source: "external";
 }
 
-const items: ResearchItem[] = [
+const referencePapers: Paper[] = [
   {
-    id: 1,
+    id: "attention",
     title: "Attention Is All You Need",
-    author: "Vaswani et al.",
-    date: "2017",
-    type: "Paper",
-    topics: ["NLP", "DL"],
-    description:
-      "Introduced the Transformer architecture, now foundational to modern NLP and large language models.",
+    authors: ["Vaswani", "Shazeer", "Parmar", "et al."],
+    year: 2017,
+    abstract:
+      "Introduced the Transformer architecture, which has become the foundation for modern large language models.",
+    tags: ["Transformers", "Architecture"],
+    url: "https://arxiv.org/abs/1706.03762",
+    source: "external",
   },
   {
-    id: 2,
-    title: "ImageNet Large Scale Visual Recognition Challenge",
-    author: "ImageNet Team",
-    date: "2015",
-    type: "Dataset",
-    topics: ["CV"],
-    description:
-      "Benchmark dataset with 1M+ labeled images across 1000 categories, catalyzing breakthroughs in computer vision.",
-    metric: "1M+ images",
-  },
-  {
-    id: 3,
-    title: "Building Neural Networks from Scratch",
-    author: "Bhavya AI Institute",
-    date: "2026",
-    type: "Tutorial",
-    topics: ["DL"],
-    description:
-      "Hands-on walkthrough of forward propagation, backpropagation, and gradient descent without frameworks.",
-    metric: "45 min · Beginner",
-  },
-  {
-    id: 4,
+    id: "bert",
     title: "BERT: Pre-training of Deep Bidirectional Transformers",
-    author: "Devlin et al.",
-    date: "2018",
-    type: "Paper",
-    topics: ["NLP", "DL"],
-    description:
-      "Bidirectional pre-training approach that set new benchmarks on eleven NLP tasks simultaneously.",
+    authors: ["Devlin", "Chang", "Lee", "Toutanova"],
+    year: 2018,
+    abstract:
+      "Bidirectional encoder representation model that revolutionized NLU tasks.",
+    tags: ["NLU", "Pre-training"],
+    url: "https://arxiv.org/abs/1810.04805",
+    source: "external",
   },
   {
-    id: 5,
-    title: "Generative Adversarial Networks",
-    author: "Goodfellow et al.",
-    date: "2014",
-    type: "Paper",
-    topics: ["DL"],
-    description:
-      "Proposed the GAN framework where two neural networks compete, enabling realistic data generation.",
+    id: "gpt3",
+    title: "Language Models are Few-Shot Learners",
+    authors: ["Brown", "Mann", "Ryder", "et al."],
+    year: 2020,
+    abstract:
+      "Demonstrated GPT-3's ability to perform tasks with minimal examples.",
+    tags: ["LLM", "Few-shot"],
+    url: "https://arxiv.org/abs/2005.14165",
+    source: "external",
   },
   {
-    id: 6,
-    title: "Deep Residual Learning",
-    author: "He et al.",
-    date: "2015",
-    type: "Paper",
-    topics: ["CV", "DL"],
-    description:
-      "Introduced skip connections enabling training of networks 152+ layers deep, winning ImageNet 2015.",
+    id: "dalle",
+    title: "Zero-Shot Text-to-Image Generation",
+    authors: ["Ramesh", "Pavlov", "Goh", "et al."],
+    year: 2021,
+    abstract: "Introduced DALL-E for text-to-image generation using a diffusion model.",
+    tags: ["Multimodal", "Image Generation"],
+    url: "https://arxiv.org/abs/2102.12092",
+    source: "external",
   },
   {
-    id: 7,
-    title: "Reinforcement Learning: An Introduction",
-    author: "Sutton & Barto",
-    date: "2018",
-    type: "Tutorial",
-    topics: ["ML"],
-    description:
-      "The definitive textbook covering MDPs, Q-learning, policy gradients, and modern RL algorithms.",
-    metric: "Textbook · Advanced",
+    id: "scaling-laws",
+    title: "Scaling Laws for Neural Language Models",
+    authors: ["Kaplan", "McCandlish", "Henighan", "et al."],
+    year: 2020,
+    abstract:
+      "Explored how model performance scales with compute, data, and parameters.",
+    tags: ["Scaling", "LLM"],
+    url: "https://arxiv.org/abs/2001.08361",
+    source: "external",
   },
   {
-    id: 8,
-    title: "GPT-4 Technical Report",
-    author: "OpenAI",
-    date: "2023",
-    type: "Paper",
-    topics: ["ML", "DL", "NLP"],
-    description:
-      "Technical report on GPT-4, a large multimodal model achieving human-level performance on benchmarks.",
+    id: "rlhf",
+    title:
+      "Training Language Models to Follow Instructions with Human Feedback",
+    authors: ["Ouyang", "Wu", "Jiang", "et al."],
+    year: 2022,
+    abstract:
+      "Introduced InstructGPT and RLHF for aligning language models with human intent.",
+    tags: ["Alignment", "RLHF"],
+    url: "https://arxiv.org/abs/2203.02155",
+    source: "external",
+  },
+  {
+    id: "diffusion",
+    title: "Denoising Diffusion Probabilistic Models",
+    authors: ["Ho", "Jain", "Abbeel"],
+    year: 2020,
+    abstract:
+      "Foundational paper on diffusion models for high-quality image generation.",
+    tags: ["Diffusion", "Image Generation"],
+    url: "https://arxiv.org/abs/2006.11239",
+    source: "external",
+  },
+  {
+    id: "rag",
+    title:
+      "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    authors: ["Lewis", "Perez", "Piktus", "et al."],
+    year: 2020,
+    abstract:
+      "Combined retrieval and generation for more accurate, fact-based outputs.",
+    tags: ["RAG", "Knowledge"],
+    url: "https://arxiv.org/abs/2005.11401",
+    source: "external",
+  },
+  {
+    id: "chain-of-thought",
+    title:
+      "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+    authors: ["Wei", "Wang", "Schuurmans", "et al."],
+    year: 2022,
+    abstract:
+      "Showed how step-by-step reasoning improves LLM performance on complex tasks.",
+    tags: ["Reasoning", "Prompting"],
+    url: "https://arxiv.org/abs/2201.11903",
+    source: "external",
+  },
+  {
+    id: "mixture-of-experts",
+    title: "Scaling Sparse Mixture of Experts",
+    authors: ["Fedus", "Zoph", "Shazeer"],
+    year: 2022,
+    abstract:
+      "Demonstrated how sparse MoE architectures enable efficient scaling of LLMs.",
+    tags: ["MoE", "Scaling"],
+    url: "https://arxiv.org/abs/2101.03961",
+    source: "external",
   },
 ];
 
-const typeColors: Record<string, string> = {
-  Paper: "bg-[#1a3a2a] text-[#c9a227] border border-[#c9a227]/30",
-  Dataset: "bg-[#8a7359]/20 text-[#f5f1e6] border border-[#8a7359]/40",
-  Tutorial: "bg-[#c9a227]/15 text-[#c9a227] border border-[#c9a227]/25",
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
-
 export default function ResearchPage() {
-  const [typeFilter, setTypeFilter] = useState<FilterType>("All");
-  const [topicFilter, setTopicFilter] = useState<FilterTopic>("All");
-  const [query, setQuery] = useState("");
+  const { user } = useAuth();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [papers, setPapers] = useState<Paper[]>(referencePapers);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = items.filter((item) => {
-    if (typeFilter !== "All" && item.type !== typeFilter) return false;
-    if (topicFilter !== "All" && !item.topics.includes(topicFilter))
-      return false;
-    if (query) {
-      const q = query.toLowerCase();
-      return (
-        item.title.toLowerCase().includes(q) ||
-        item.author.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q)
+  useEffect(() => {
+    const fetchPapers = async () => {
+      try {
+        const res = await fetch("/api/research/papers");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.papers && data.papers.length > 0) {
+            setPapers(data.papers.map((p: Paper) => ({ ...p, source: "external" })));
+          }
+        }
+      } catch {
+        // Use reference papers
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPapers();
+  }, []);
+
+  const allTags = [...new Set(papers.flatMap((p) => p.tags))].sort();
+
+  const filteredPapers = papers.filter((paper) => {
+    const matchesSearch =
+      !searchQuery ||
+      paper.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      paper.authors.some((a) =>
+        a.toLowerCase().includes(searchQuery.toLowerCase())
       );
-    }
-    return true;
+    const matchesTag = !selectedTag || paper.tags.includes(selectedTag);
+    return matchesSearch && matchesTag;
   });
 
   return (
-    <div className="py-8 px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
-            Research{" "}
-            <span className="bg-gradient-to-r from-[#1a3a2a] via-[#c9a227] to-[#8a7359] bg-clip-text text-transparent">
-              Library
-            </span>
+    <div className="min-h-screen bg-[#0a0f1a] text-white">
+      {/* Hero */}
+      <section className="relative pt-32 pb-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            AI Research Library
           </h1>
-          <p className="text-lg md:text-xl text-[#f5f1e6]/50 max-w-2xl mx-auto">
-            Explore papers, datasets, and resources curated for the next
-            generation of AI builders.
+          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+            Foundational research papers and publications that inform AI
+            education and industry practice.
           </p>
-        </motion.div>
+        </div>
+      </section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="max-w-3xl mx-auto mb-10"
-        >
-          <div className="relative">
-            <svg
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#f5f1e6]/30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      {/* Stats */}
+      <section className="px-6 pb-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-white mb-1">
+              {papers.length}
+            </div>
+            <div className="text-sm text-white/50">Reference Papers</div>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-white mb-1">
+              {allTags.length}
+            </div>
+            <div className="text-sm text-white/50">Topic Areas</div>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-white mb-1">
+              {new Set(papers.flatMap((p) => p.authors)).size}
+            </div>
+            <div className="text-sm text-white/50">Contributing Authors</div>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+            <div className="text-3xl font-bold text-white mb-1">
+              {new Set(papers.map((p) => p.year)).size}
+            </div>
+            <div className="text-sm text-white/50">Years Covered</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Search & Filter */}
+      <section className="px-6 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                placeholder="Search papers by title, author, or keyword..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/20"
               />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search papers, datasets, tutorials..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-4 rounded-2xl bg-[#1a3a2a]/30 border border-white/10 text-[#f5f1e6] placeholder:text-[#f5f1e6]/30 focus:outline-none focus:border-[#c9a227]/50 focus:ring-1 focus:ring-[#c9a227]/25 transition-all text-base"
-            />
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 max-w-3xl mx-auto"
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-[#f5f1e6]/40 uppercase tracking-wider mr-1">
-              Type
-            </span>
-            <div className="flex flex-wrap gap-1.5">
-              {TYPES.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTypeFilter(t)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                    typeFilter === t
-                      ? "bg-[#c9a227] text-[#0a0f0d]"
-                      : "bg-white/5 text-[#f5f1e6]/50 hover:bg-white/10 hover:text-[#f5f1e6]/80"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
+              <span className="absolute right-4 top-4 text-white/40">🔍</span>
             </div>
           </div>
-          <div className="hidden sm:block w-px h-5 bg-white/10" />
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-[#f5f1e6]/40 uppercase tracking-wider mr-1">
-              Topic
-            </span>
-            <div className="flex flex-wrap gap-1.5">
-              {TOPICS.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTopicFilter(t)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                    topicFilter === t
-                      ? "bg-[#1a3a2a] text-[#c9a227] border border-[#c9a227]/30"
-                      : "bg-white/5 text-[#f5f1e6]/50 hover:bg-white/10 hover:text-[#f5f1e6]/80"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.45, duration: 0.4 }}
-          className="flex items-center gap-3 mb-10 max-w-7xl mx-auto"
-        >
-          <span className="text-sm text-[#f5f1e6]/40">
-            <span className="text-[#c9a227] font-semibold">
-              {filtered.length}
-            </span>{" "}
-            of <span className="font-semibold">{items.length}</span> items
-          </span>
-          <div className="flex-1 h-px bg-gradient-to-r from-[#c9a227]/30 to-transparent" />
-        </motion.div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${typeFilter}-${topicFilter}-${query}`}
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-4"
-          >
-            {filtered.map((item) => (
-              <motion.div
-                key={item.id}
-                variants={fadeUp}
-                className="group relative rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.03] to-transparent p-6 hover:border-[#c9a227]/20 hover:bg-[#1a3a2a]/10 transition-all duration-300"
+          <div className="flex gap-2 mt-4 flex-wrap">
+            <button
+              onClick={() => setSelectedTag(null)}
+              className={`px-4 py-2 rounded-lg text-sm transition-all ${
+                selectedTag === null
+                  ? "bg-white text-black"
+                  : "bg-white/5 text-white/60 hover:bg-white/10"
+              }`}
+            >
+              All Topics
+            </button>
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() =>
+                  setSelectedTag(selectedTag === tag ? null : tag)
+                }
+                className={`px-4 py-2 rounded-lg text-sm transition-all ${
+                  selectedTag === tag
+                    ? "bg-white text-black"
+                    : "bg-white/5 text-white/60 hover:bg-white/10"
+                }`}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <span
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wider ${typeColors[item.type]}`}
-                  >
-                    {item.type}
-                  </span>
-                  {item.metric && (
-                    <span className="text-xs text-[#8a7359] font-medium">
-                      {item.metric}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="text-lg font-bold text-[#f5f1e6] mb-1.5 group-hover:text-[#c9a227] transition-colors leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-[#f5f1e6]/40 mb-3">
-                  {item.author} · {item.date}
-                </p>
-                <p className="text-sm text-[#f5f1e6]/50 leading-relaxed mb-4 line-clamp-2">
-                  {item.description}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1.5">
-                    {item.topics.map((topic) => (
-                      <span
-                        key={topic}
-                        className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#f5f1e6]/5 text-[#f5f1e6]/40"
-                      >
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <button className="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1a3a2a] text-[#c9a227] border border-[#c9a227]/20 hover:bg-[#c9a227]/20 transition-colors">
-                      Read
-                    </button>
-                    <button className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 text-[#f5f1e6]/60 hover:bg-white/10 transition-colors">
-                      Save
-                    </button>
-                    <button className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/5 text-[#f5f1e6]/60 hover:bg-white/10 transition-colors">
-                      Cite
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
+                {tag}
+              </button>
             ))}
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        </div>
+      </section>
 
-        {filtered.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-24"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-4">
-              <svg
-                className="w-7 h-7 text-[#f5f1e6]/20"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+      {/* Papers List */}
+      <section className="px-6 pb-20">
+        <div className="max-w-6xl mx-auto">
+          {loading ? (
+            <div className="text-center py-20 text-white/40">
+              Loading research library...
             </div>
-            <p className="text-[#f5f1e6]/40 text-lg">No results found</p>
-            <p className="text-[#f5f1e6]/25 text-sm mt-1">
-              Try adjusting your filters or search query
+          ) : filteredPapers.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="text-4xl mb-4">📚</div>
+              <h3 className="text-xl font-semibold mb-2">No papers found</h3>
+              <p className="text-white/50">
+                Try adjusting your search or filter criteria.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredPapers.map((paper) => (
+                <a
+                  key={paper.id}
+                  href={paper.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-white/5 border border-white/10 rounded-xl p-6 hover:border-white/20 transition-all group"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-[#22c55e] transition-colors">
+                        {paper.title}
+                      </h3>
+                      <p className="text-sm text-white/60 mb-2">
+                        {paper.authors.join(", ")}
+                      </p>
+                      <p className="text-xs text-white/40 mb-3">
+                        {paper.year}
+                      </p>
+                      <p className="text-sm text-white/50 mb-4">
+                        {paper.abstract}
+                      </p>
+                      <div className="flex gap-2 flex-wrap">
+                        {paper.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/60"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-6 pb-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-gradient-to-r from-[#0E382E] to-[#1a5c4a] rounded-2xl p-12 border border-white/10">
+            <h2 className="text-3xl font-bold mb-4">
+              Interested in Contributing?
+            </h2>
+            <p className="text-white/60 mb-6 max-w-xl mx-auto">
+              We maintain this library as a reference for students and
+              researchers. If you know of foundational papers that should be
+              included, let us know.
             </p>
-          </motion.div>
-        )}
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mt-20 rounded-3xl border border-white/[0.06] bg-gradient-to-br from-[#1a3a2a]/20 to-[#0a0f0d] p-10 md:p-14"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "8", label: "Total Items" },
-              { value: "3", label: "Papers" },
-              { value: "2", label: "Datasets" },
-              { value: "3", label: "Tutorials" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-b from-[#c9a227] to-[#8a7359] bg-clip-text text-transparent mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-[#f5f1e6]/35 uppercase tracking-wider font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+            <Link
+              href="/community"
+              className="inline-flex items-center gap-2 bg-white text-[#0E382E] px-8 py-3 rounded-xl font-semibold hover:bg-white/90 transition-colors"
+            >
+              Join the Community
+            </Link>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

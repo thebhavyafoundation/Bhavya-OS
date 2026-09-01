@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbListCourses, dbCreateCourse } from "@/lib/studio/db";
 import { requireAuth } from "@/lib/api-auth";
+import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const user = await requireAuth(request);
+  if (!user) {
+    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+  }
   try {
     const courses = await dbListCourses();
     return NextResponse.json(courses);
@@ -19,7 +24,7 @@ export async function POST(request: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   }
-  if (user.role !== "admin" && user.role !== "instructor") {
+  if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
     return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
   }
   try {

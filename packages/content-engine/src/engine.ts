@@ -181,9 +181,6 @@ export class ContentEngine {
         pkg.metadata.description.toLowerCase().includes(lowerQuery) ||
         pkg.metadata.tags.some((tag) =>
           tag.toLowerCase().includes(lowerQuery),
-        ) ||
-        pkg.metadata.concepts?.some((concept) =>
-          concept.toLowerCase().includes(lowerQuery),
         )
       );
     });

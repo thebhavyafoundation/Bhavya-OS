@@ -9,7 +9,7 @@
  * @version 1.0.0
  */
 
-import { writeJSON, readJSON, ensureDir, listDir } from "./io.js";
+import { writeJSON, readJSON, ensureDir, listDir } from "./io";
 import { resolve } from "path";
 
 // ═══════════════════════════════════════════════════════════════════

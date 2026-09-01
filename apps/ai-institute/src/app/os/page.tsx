@@ -323,6 +323,32 @@ export default async function OSPage() {
         </div>
       )}
 
+      {/* Domain Status — Institutional Pillars */}
+      <div className="mb-12">
+        <Section title="Institutional Domains" icon={<Network className="w-4 h-4" />} href="/missions">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 p-4">
+            {[
+              { name: "Knowledge", status: "active", detail: `${data.stats.knowledgeObjects} KOs`, color: "bg-green-500" },
+              { name: "Forest", status: "active", detail: "Infrastructure ready", color: "bg-green-500" },
+              { name: "Heritage", status: "infrastructure-ready", detail: "No verified records", color: "bg-amber-500" },
+              { name: "Community", status: "not-yet-active", detail: "No verified records", color: "bg-text-muted" },
+            ].map((domain) => (
+              <div
+                key={domain.name}
+                className="p-4 bg-bg-primary border border-border-primary rounded-lg"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <div className={`w-2 h-2 rounded-full ${domain.color}`} />
+                  <span className="text-sm font-semibold text-text-primary">{domain.name}</span>
+                </div>
+                <div className="text-xs text-text-tertiary capitalize">{domain.status.replace(/-/g, " ")}</div>
+                <div className="text-xs text-text-muted mt-1">{domain.detail}</div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      </div>
+
       {/* Footer */}
       <div className="py-6 border-t border-border-primary text-xs text-text-muted flex justify-between">
         <span>AI Lab OS v3.0.0 · Bhavya Foundation</span>

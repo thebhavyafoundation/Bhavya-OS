@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGetCourse, dbUpdateCourse, dbDeleteCourse } from "@/lib/studio/db";
 import { requireAuth } from "@/lib/api-auth";
+import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const user = await requireAuth(request);
+  if (!user) {
+    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+  }
   const { id } = await params;
   const course = await dbGetCourse(id);
   if (!course) {
@@ -22,7 +27,7 @@ export async function PUT(
   if (!user) {
     return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   }
-  if (user.role !== "admin" && user.role !== "instructor") {
+  if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
     return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
   }
   const { id } = await params;
@@ -42,7 +47,7 @@ export async function DELETE(
   if (!user) {
     return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   }
-  if (user.role !== "admin") {
+  if (!roleIsAllowed(user.role as Role, ["admin"])) {
     return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
   }
   const { id } = await params;

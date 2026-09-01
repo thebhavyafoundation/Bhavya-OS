@@ -1,5 +1,5 @@
 {
-  "name": "@bhavya/ioc",
+  "name": "@bhavya/app-ioc",
   "version": "0.1.0",
   "private": true,
   "scripts": {

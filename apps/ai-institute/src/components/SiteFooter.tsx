@@ -27,39 +27,39 @@ export function SiteFooter() {
         <div className="footer-col">
           <h4 className="footer-col-title">Missions</h4>
           <nav>
-            <a href="/forest">Forest</a>
-            <a href="/knowledge">Knowledge</a>
-            <a href="/heritage">Heritage</a>
-            <a href="/community">Community</a>
+            <a href="/missions/forest">Forest</a>
+            <a href="/missions/knowledge">Knowledge</a>
+            <a href="/missions/heritage">Heritage</a>
+            <a href="/missions/community">Community</a>
           </nav>
         </div>
 
         <div className="footer-col">
           <h4 className="footer-col-title">Learn</h4>
           <nav>
-            <a href="/knowledge/academy">Academy</a>
-            <a href="/knowledge/library">Library</a>
-            <a href="/knowledge/ai">AI Labs</a>
-            <a href="/knowledge/research">Research</a>
+            <a href="/courses">Courses</a>
+            <a href="/research">Research</a>
+            <a href="/impact">Impact</a>
+            <a href="/library">Library</a>
           </nav>
         </div>
 
         <div className="footer-col">
-          <h4 className="footer-col-title">Institution</h4>
+          <h4 className="footer-col-title">Governance</h4>
           <nav>
             <a href="/about">About</a>
             <a href="/transparency">Transparency</a>
-            <a href="/donate">Donate</a>
-            <a href="/mission">Constitution</a>
+            <a href="/contributing">Contributing</a>
+            <a href="/accessibility">Accessibility</a>
           </nav>
         </div>
 
         <div className="footer-col">
-          <h4 className="footer-col-title">Connect</h4>
+          <h4 className="footer-col-title">Platform</h4>
           <nav>
-            <a href="/community">Community</a>
-            <a href="https://github.com/thebhavyafoundation">GitHub</a>
-            <a href="mailto:hello@bhavyafoundation.org">Email</a>
+            <a href="/os">Bhavya OS</a>
+            <a href="/os/api-explorer">API Explorer</a>
+            <a href="/login">Sign In</a>
           </nav>
         </div>
       </div>

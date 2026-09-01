@@ -9,7 +9,7 @@ const schools = [
     name: "School of AI Foundations",
     description: "Start here. Learn what AI is, how it works, and how to build with it.",
     icon: "Building blocks of AI",
-    href: "/courses/foundations/lessons/1",
+    href: "/courses/ai-foundations",
     courseCount: 1,
   },
 ];

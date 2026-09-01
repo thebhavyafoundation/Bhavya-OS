@@ -71,6 +71,13 @@ const item = {
 export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-[#0a0f0d] text-[#f5f1e6]">
+      {/* Editorial notice — Wave P: programs are curriculum descriptions, not verified institutional activity */}
+      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
+        <p className="text-xs text-[#c9a227]/70 font-medium">
+          Curriculum Guidance — recommended learning sequences, not enrolled
+          programs
+        </p>
+      </div>
       <section className="relative overflow-hidden pt-32 pb-20 px-6">
         <div className="absolute inset-0 opacity-15">
           <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-[#c9a227] rounded-full blur-[160px]" />
@@ -198,7 +205,7 @@ export default function ProgramsPage() {
               </div>
 
               <Link
-                href={`/programs/${prog.title.toLowerCase().replace(/ /g, "-")}`}
+                href="/courses"
                 className="block w-full text-center py-3.5 rounded-xl font-medium text-sm transition-all"
                 style={{
                   backgroundColor: `${prog.accent}20`,

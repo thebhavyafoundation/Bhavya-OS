@@ -29,15 +29,14 @@ const projects: Project[] = [
       "Create a conversational AI assistant with context memory and tool calling.",
     skills: ["Prompt Engineering", "API Integration", "Conversation Design"],
     estimatedHours: 8,
-    status: "completed",
+    status: "not-started",
     milestones: [
-      { id: "m1", title: "Set up API connection", completed: true },
-      { id: "m2", title: "Implement basic chat", completed: true },
-      { id: "m3", title: "Add context memory", completed: true },
-      { id: "m4", title: "Add tool calling", completed: true },
-      { id: "m5", title: "Write README", completed: true },
+      { id: "m1", title: "Set up API connection", completed: false },
+      { id: "m2", title: "Implement basic chat", completed: false },
+      { id: "m3", title: "Add context memory", completed: false },
+      { id: "m4", title: "Add tool calling", completed: false },
+      { id: "m5", title: "Write README", completed: false },
     ],
-    portfolioArtifact: "chatbot-demo.md",
   },
   {
     id: "rag-system",
@@ -47,10 +46,10 @@ const projects: Project[] = [
       "Build a RAG system that answers questions about uploaded documents.",
     skills: ["RAG", "Vector Databases", "Embeddings", "Chunking"],
     estimatedHours: 15,
-    status: "in-progress",
+    status: "not-started",
     milestones: [
-      { id: "m1", title: "Implement document ingestion", completed: true },
-      { id: "m2", title: "Set up vector database", completed: true },
+      { id: "m1", title: "Implement document ingestion", completed: false },
+      { id: "m2", title: "Set up vector database", completed: false },
       { id: "m3", title: "Build retrieval pipeline", completed: false },
       { id: "m4", title: "Implement generation", completed: false },
       { id: "m5", title: "Add evaluation metrics", completed: false },
@@ -170,7 +169,11 @@ export function ProjectStudio() {
 
   return (
     <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-      <h3 className="text-lg font-bold mb-4">Project Studio</h3>
+      <h3 className="text-lg font-bold mb-1">Curriculum Projects</h3>
+      <p className="text-xs text-white/40 mb-4">
+        Complete these projects as you progress through the curriculum. Each
+        builds on skills from the previous.
+      </p>
 
       {/* Filters */}
       <div className="flex gap-2 mb-4 flex-wrap">
@@ -318,7 +321,7 @@ export function ProjectStudio() {
 
           {/* Skills */}
           <div className="mb-4">
-            <h5 className="text-sm font-semibold mb-2">Skills</h5>
+            <h5 className="text-sm font-semibold mb-2">Skills Developed</h5>
             <div className="flex flex-wrap gap-2">
               {selectedProject.skills.map((skill) => (
                 <span
@@ -331,24 +334,8 @@ export function ProjectStudio() {
             </div>
           </div>
 
-          {/* Portfolio */}
-          {selectedProject.portfolioArtifact && (
-            <div className="bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg p-3">
-              <div className="flex items-center gap-2">
-                <span className="text-[#22c55e]">📁</span>
-                <span className="text-sm text-[#22c55e]">
-                  Portfolio Artifact: {selectedProject.portfolioArtifact}
-                </span>
-              </div>
-            </div>
-          )}
-
           <button className="mt-4 w-full py-3 bg-[#22c55e] text-black font-semibold rounded-lg hover:bg-[#16a34a]">
-            {selectedProject.status === "not-started"
-              ? "Start Project"
-              : selectedProject.status === "in-progress"
-                ? "Continue Project"
-                : "View Portfolio"}
+            Start Project
           </button>
         </div>
       )}

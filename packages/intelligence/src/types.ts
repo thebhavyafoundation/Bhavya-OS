@@ -118,6 +118,9 @@ export interface TechnologyKnowledgePackage {
   version: number;
 }
 
+/** Alias for backward compatibility */
+export type KnowledgePackage = TechnologyKnowledgePackage;
+
 // ─── Analysis ──────────────────────────────────────────────────────────────
 
 export interface Analysis {

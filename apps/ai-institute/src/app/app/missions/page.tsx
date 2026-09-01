@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TreePine, Landmark, ArrowRight } from "lucide-react";
+import { TreePine, Landmark } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Missions — My Bhavya",
@@ -13,10 +13,6 @@ const missions = [
     description: "Restoring degraded forest across India.",
     icon: TreePine,
     color: "var(--forest)",
-    progress: 0,
-    target: "1000 hectares (Goal)",
-    current: "In progress",
-    myContribution: "12 trees planted",
   },
   {
     id: "heritage",
@@ -24,10 +20,6 @@ const missions = [
     description: "Documenting and preserving India's cultural heritage for future generations.",
     icon: Landmark,
     color: "var(--earth)",
-    progress: 0,
-    target: "500 sites documented (Goal)",
-    current: "In progress",
-    myContribution: "3 sites documented",
   },
 ];
 
@@ -108,63 +100,40 @@ export default function MissionsPage() {
 
                   <div
                     style={{
-                      height: 6,
-                      background: "var(--border)",
-                      borderRadius: 3,
-                      marginBottom: "var(--space-4)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: "100%",
-                        width: `${mission.progress}%`,
-                        background: mission.color,
-                        borderRadius: 3,
-                      }}
-                    />
-                  </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(3, 1fr)",
-                      gap: "var(--space-4)",
-                      marginBottom: "var(--space-4)",
-                    }}
-                  >
-                    <div>
-                      <div style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-1)" }}>Target</div>
-                      <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>{mission.target}</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-1)" }}>Current</div>
-                      <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>{mission.current}</div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: "var(--text-xs)", color: "var(--text-tertiary)", marginBottom: "var(--space-1)" }}>My Contribution</div>
-                      <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: mission.color }}>{mission.myContribution}</div>
-                    </div>
-                  </div>
-
-                  <button
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "var(--space-2)",
-                      padding: "var(--space-2) var(--space-4)",
-                      background: "transparent",
-                      color: mission.color,
-                      border: `1px solid ${mission.color}`,
+                      padding: "var(--space-6)",
+                      background: "var(--bg)",
+                      border: "1px solid var(--border)",
                       borderRadius: "var(--radius-md)",
-                      fontSize: "var(--text-sm)",
-                      fontWeight: 600,
-                      cursor: "pointer",
+                      textAlign: "center",
                     }}
                   >
-                    View Mission
-                    <ArrowRight size={14} />
-                  </button>
+                    <p
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        color: "var(--text-tertiary)",
+                        marginBottom: "var(--space-3)",
+                      }}
+                    >
+                      Start contributing to this mission by volunteering, donating, or participating in related projects.
+                    </p>
+                    <a
+                      href="/app/community"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "var(--space-2)",
+                        padding: "var(--space-2) var(--space-4)",
+                        background: mission.color,
+                        color: "var(--bg)",
+                        borderRadius: "var(--radius-md)",
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        textDecoration: "none",
+                      }}
+                    >
+                      Get Involved
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

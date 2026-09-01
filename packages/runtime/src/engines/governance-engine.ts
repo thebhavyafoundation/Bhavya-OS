@@ -97,6 +97,8 @@ export interface GovernanceMetrics {
   criticalFindings: number;
 }
 
+import { evaluateRule, ExpressionError } from "../expression";
+
 // ─── Engine ───────────────────────────────────────────────────────────────────
 
 export class GovernanceEngine {
@@ -166,7 +168,7 @@ export class GovernanceEngine {
     const findings: ComplianceFinding[] = [];
 
     for (const rule of policy.rules) {
-      const finding = this.evaluateRule(rule, context);
+      const finding = this.evaluateRuleCondition(rule, context);
       findings.push(finding);
     }
 
@@ -343,17 +345,12 @@ export class GovernanceEngine {
     return `gov_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   }
 
-  private evaluateRule(
+  private evaluateRuleCondition(
     rule: PolicyRule,
     context: Record<string, unknown>,
   ): ComplianceFinding {
-    // Simple rule evaluation - would use a proper rule engine in production
     try {
-      const func = new Function(
-        ...Object.keys(context),
-        `return ${rule.condition}`,
-      );
-      const passed = func(...Object.values(context));
+      const passed = evaluateRule(rule.condition, context);
 
       return {
         id: this.generateId(),
@@ -368,13 +365,14 @@ export class GovernanceEngine {
           : `Ensure compliance with: ${rule.description}`,
         severity: rule.severity,
       };
-    } catch {
+    } catch (error) {
+      const message = error instanceof ExpressionError ? error.message : "Evaluation error";
       return {
         id: this.generateId(),
         ruleId: rule.id,
         status: "warning",
-        description: `Could not evaluate rule "${rule.name}"`,
-        evidence: "Evaluation error",
+        description: `Could not evaluate rule "${rule.name}": ${message}`,
+        evidence: message,
         recommendation: `Review rule condition: ${rule.condition}`,
         severity: rule.severity,
       };

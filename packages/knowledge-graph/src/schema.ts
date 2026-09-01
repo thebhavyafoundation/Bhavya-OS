@@ -5,13 +5,15 @@
  * and graph operations. Every package that touches the knowledge graph
  * imports from here.
  *
- * Entity types: 17 (Concept, Course, Project, Publication, Research,
+ * Entity types: 25 (Concept, Course, Project, Publication, Research,
  * Person, Institution, Tool, Technology, Forest, Species, Grant,
- * Policy, Media, Organization, Location, Asset)
+ * Policy, Media, Organization, Location, Asset, Beneficiary,
+ * Evidence, Activity, Event, Outcome, Metric, Document, Report)
  *
- * Relation types: 14 (prerequisite, related_to, depends_on, part_of,
+ * Relation types: 20 (prerequisite, related_to, depends_on, part_of,
  * teaches, uses, created_by, funded_by, located_in, cites, extends,
- * contradicts, supports, supersedes)
+ * contradicts, supports, supersedes, produces, participates_in,
+ * benefits_from, measures, documents, verified_by)
  *
  * @version 1.0.0
  * @license MIT
@@ -331,6 +333,181 @@ export type AssetCategory =
 export type AssetCondition =
   "excellent" | "good" | "fair" | "poor" | "critical";
 
+// ─── Beneficiary ──────────────────────────────────────────────
+
+export interface BeneficiaryEntity extends BaseEntity {
+  type: "beneficiary";
+  beneficiaryType: BeneficiaryType;
+  location?: string;
+  programs: string[];
+  outcomes: string[];
+  joinedAt?: Date;
+}
+
+export type BeneficiaryType =
+  | "individual"
+  | "family"
+  | "community"
+  | "school"
+  | "organization";
+
+// ─── Evidence ─────────────────────────────────────────────────
+
+export interface EvidenceEntity extends BaseEntity {
+  type: "evidence";
+  evidenceType: EvidenceType;
+  source: string;
+  verificationStatus: VerificationStatus;
+  relatedOutcomeId?: string;
+  relatedImpactId?: string;
+  collectedAt?: Date;
+  verifiedAt?: Date;
+}
+
+export type EvidenceType =
+  | "photo"
+  | "video"
+  | "document"
+  | "testimonial"
+  | "data"
+  | "audit";
+
+export type VerificationStatus =
+  | "pending"
+  | "verified"
+  | "rejected"
+  | "disputed";
+
+// ─── Activity ─────────────────────────────────────────────────
+
+export interface ActivityEntity extends BaseEntity {
+  type: "activity";
+  activityType: ActivityType;
+  location?: string;
+  participants: string[];
+  startDate: Date;
+  endDate?: Date;
+  impact?: string;
+}
+
+export type ActivityType =
+  | "volunteer"
+  | "training"
+  | "planting"
+  | "cleanup"
+  | "workshop"
+  | "event"
+  | "research";
+
+// ─── Event ────────────────────────────────────────────────────
+
+export interface EventEntity extends BaseEntity {
+  type: "event";
+  eventType: EventType;
+  location?: string;
+  startDate: Date;
+  endDate?: Date;
+  attendees: number;
+  organizers: string[];
+  relatedActivities: string[];
+}
+
+export type EventType =
+  | "conference"
+  | "workshop"
+  | "ceremony"
+  | "launch"
+  | "fundraiser"
+  | "community-gathering";
+
+// ─── Outcome ──────────────────────────────────────────────────
+
+export interface OutcomeEntity extends BaseEntity {
+  type: "outcome";
+  outcomeType: OutcomeType;
+  targetBeneficiaries: string[];
+  metrics: string[];
+  evidence: string[];
+  startDate?: Date;
+  endDate?: Date;
+  achievedAt?: Date;
+}
+
+export type OutcomeType =
+  | "educational"
+  | "environmental"
+  | "social"
+  | "economic"
+  | "health"
+  | "cultural";
+
+// ─── Metric ───────────────────────────────────────────────────
+
+export interface MetricEntity extends BaseEntity {
+  type: "metric";
+  metricType: MetricType;
+  value: number;
+  unit: string;
+  target?: number;
+  period: string;
+  source: string;
+  relatedOutcomeId?: string;
+}
+
+export type MetricType =
+  | "impact"
+  | "performance"
+  | "financial"
+  | "operational"
+  | "engagement";
+
+// ─── Document ─────────────────────────────────────────────────
+
+export interface DocumentEntity extends BaseEntity {
+  type: "document";
+  documentType: DocumentType;
+  author: string;
+  version: string;
+  fileUrl?: string;
+  publishedAt?: Date;
+  expiresAt?: Date;
+}
+
+export type DocumentType =
+  | "policy"
+  | "report"
+  | "proposal"
+  | "manual"
+  | "guide"
+  | "contract"
+  | "certificate";
+
+// ─── Report ───────────────────────────────────────────────────
+
+export interface ReportEntity extends BaseEntity {
+  type: "report";
+  reportType: ReportType;
+  author: string;
+  period: string;
+  publishedAt?: Date;
+  sections: ReportSection[];
+  relatedMetrics: string[];
+}
+
+export type ReportType =
+  | "annual"
+  | "quarterly"
+  | "monthly"
+  | "impact"
+  | "financial"
+  | "progress";
+
+export interface ReportSection {
+  title: string;
+  content: string;
+  metrics?: string[];
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // UNION TYPE — Any entity in the graph
 // ═══════════════════════════════════════════════════════════════════
@@ -352,7 +529,15 @@ export type KnowledgeEntity =
   | MediaEntity
   | OrganizationEntity
   | LocationEntity
-  | AssetEntity;
+  | AssetEntity
+  | BeneficiaryEntity
+  | EvidenceEntity
+  | ActivityEntity
+  | EventEntity
+  | OutcomeEntity
+  | MetricEntity
+  | DocumentEntity
+  | ReportEntity;
 
 // ═══════════════════════════════════════════════════════════════════
 // GRAPH STORE — In-memory knowledge graph
@@ -1007,6 +1192,14 @@ export const ENTITY_TYPES: EntityType[] = [
   "organization",
   "location",
   "asset",
+  "beneficiary",
+  "evidence",
+  "activity",
+  "event",
+  "outcome",
+  "metric",
+  "document",
+  "report",
 ];
 
 export const RELATION_TYPES: RelationType[] = [
@@ -1024,6 +1217,12 @@ export const RELATION_TYPES: RelationType[] = [
   "contradicts",
   "supports",
   "supersedes",
+  "produces",
+  "participates_in",
+  "benefits_from",
+  "measures",
+  "documents",
+  "verified_by",
 ];
 
 const VALID_STATUSES: EntityStatus[] = [

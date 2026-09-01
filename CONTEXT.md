@@ -2,7 +2,7 @@
 
 One sentence: Bhavya is a digital institution — one application, many roles, one shared knowledge graph, one contribution graph, one community. This monorepo contains the canonical web application, 65 shared packages, and the governance architecture.
 
-**Last updated:** 2026-08-10
+**Last updated:** 2026-08-11
 
 ## Product Definition
 

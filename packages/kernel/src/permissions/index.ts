@@ -8,7 +8,7 @@ export class Permissions {
 
   async initialize(): Promise<void> {
     // Default permissions
-n  }
+  }
 
   async grant(agentId: string, permission: Permission): Promise<void> {
     const existing = this.permissions.get(agentId) ?? [];

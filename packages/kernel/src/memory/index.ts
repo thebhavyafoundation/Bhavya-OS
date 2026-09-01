@@ -33,8 +33,15 @@ export class MemoryEngine {
       const entry: MemoryEntry = {
         id: `memory:${file}`,
         type: this.inferType(file),
+        priority: 'medium',
+        status: 'active',
         content,
+        summary: '',
         tags: [],
+        metadata: {},
+        relations: [],
+        accessCount: 0,
+        lastAccessedAt: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
       };

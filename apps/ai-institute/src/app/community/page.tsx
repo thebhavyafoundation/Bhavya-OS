@@ -7,8 +7,6 @@ import {
   HandHeart,
   BookOpen,
   ArrowRight,
-  Sparkles,
-  Megaphone,
 } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroBackground } from "@/components/HeroBackground";
@@ -16,45 +14,27 @@ import { HeroBackground } from "@/components/HeroBackground";
 const communityAreas = [
   {
     icon: Users,
-    title: "Volunteer Corps",
-    desc: "Join the Bhavya Volunteer Corps. Make hands-on impact in forest, heritage, and knowledge missions.",
-    href: "/community/volunteer",
+    title: "Volunteer",
+    desc: "Contribute your time and skills to forest restoration, heritage documentation, or knowledge education missions.",
+    href: "/app/community",
   },
   {
     icon: Calendar,
     title: "Events",
-    desc: "Community events, workshops, and gatherings that bring people together for shared purpose.",
-    href: "/community",
+    desc: "Participate in community events, workshops, and gatherings that bring people together for shared purpose.",
+    href: "/app/community",
   },
   {
     icon: HandHeart,
-    title: "Donations",
-    desc: "Support Bhavya Foundation's missions. Every donation is publicly documented and tracked.",
-    href: "/donate",
+    title: "Donate",
+    desc: "Support Bhavya Foundation's missions. Every donation is publicly documented and tracked for transparency.",
+    href: "/app",
   },
   {
     icon: BookOpen,
-    title: "Stories",
-    desc: "Real stories from community members, volunteers, and the people we serve.",
-    href: "/community",
-  },
-];
-
-const involvementCards = [
-  {
-    icon: Sparkles,
-    title: "Local Chapters",
-    desc: "Start or join a Bhavya chapter in your city. Lead local missions for forest, heritage, and knowledge.",
-  },
-  {
-    icon: Megaphone,
-    title: "Ambassador Program",
-    desc: "Spread awareness about Bhavya Foundation's missions in your network and community.",
-  },
-  {
-    icon: HandHeart,
-    title: "Monthly Giving",
-    desc: "Sustained support for long-term missions. Every contribution is publicly documented.",
+    title: "Share Stories",
+    desc: "Share your experience with Bhavya Foundation. Real stories from volunteers and community members inspire others.",
+    href: "/app/community",
   },
 ];
 
@@ -125,12 +105,12 @@ export default function CommunityPage() {
                 marginTop: "var(--space-8)",
               }}
             >
-              <a href="/community/volunteer" className="btn btn-gold">
-                Volunteer Now
+              <a href="/app/community" className="btn btn-gold">
+                Join Community
                 <ArrowRight size={16} />
               </a>
-              <a href="/app/community" className="btn btn-secondary-inverse">
-                Join Community
+              <a href="/app" className="btn btn-secondary-inverse">
+                Learn More
                 <ArrowRight size={16} />
               </a>
             </div>
@@ -264,78 +244,44 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* Involvement Cards */}
+      {/* Transparency Note */}
       <section
         style={{
           padding: "var(--space-24) 0",
           background: "var(--color-ivory-200)",
         }}
       >
-        <div className="container">
-          <span className="editorial-label">Deeper Involvement</span>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 400,
-              marginTop: "var(--space-4)",
-            }}
-          >
-            Go Further
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "var(--space-6)",
-              marginTop: "var(--space-12)",
-            }}
-          >
-            {involvementCards.map((card, i) => (
-              <Reveal
-                key={card.title}
-                variant="slide-up"
-                delay={i * 0.1}
-                distance={30}
-              >
-                <div
-                  style={{
-                    background: "var(--color-bg-primary)",
-                    borderRadius: "var(--radius-lg)",
-                    padding: "var(--space-8)",
-                    border: "1px solid var(--color-border-primary)",
-                  }}
-                >
-                  <card.icon
-                    size={28}
-                    style={{
-                      color: "var(--color-brand-forest)",
-                      marginBottom: "var(--space-4)",
-                    }}
-                  />
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-lg)",
-                      fontWeight: 400,
-                      marginBottom: "var(--space-3)",
-                    }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {card.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+        <div className="container" style={{ maxWidth: "700px", textAlign: "center" }}>
+          <Reveal variant="fade">
+            <HeartHandshake
+              size={40}
+              style={{
+                color: "var(--color-brand-forest)",
+                marginBottom: "var(--space-6)",
+              }}
+            />
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                fontWeight: 400,
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Transparency First
+            </h2>
+            <p
+              style={{
+                fontSize: "var(--text-base)",
+                color: "var(--color-text-secondary)",
+                lineHeight: 1.7,
+              }}
+            >
+              Every donation, volunteer hour, and project outcome is publicly
+              documented. We believe trust is built through radical transparency,
+              not marketing claims.
+            </p>
+          </Reveal>
         </div>
       </section>
 

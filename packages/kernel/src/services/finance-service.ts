@@ -241,7 +241,7 @@ export class FinanceService {
   }
 
   private async generateReport(input: FinanceInput): Promise<{ success: boolean; report?: FinancialReport }> {
-    if (!input.period || !input.type) return { success: false };
+    if (!input.period || !input.action) return { success: false };
 
     const totalIncome = Array.from(this.donations.values()).reduce((sum, d) => sum + d.amount, 0)
       + Array.from(this.grants.values()).reduce((sum, g) => sum + g.amount, 0);
@@ -250,9 +250,9 @@ export class FinanceService {
 
     const report: FinancialReport = {
       id: `report:${crypto.randomUUID()}`,
-      title: `${input.type} Financial Report - ${input.period}`,
+      title: `${input.action} Financial Report - ${input.period}`,
       period: input.period,
-      type: input.type as any,
+      type: input.action as any,
       totalIncome,
       totalExpenses,
       netBalance: totalIncome - totalExpenses,

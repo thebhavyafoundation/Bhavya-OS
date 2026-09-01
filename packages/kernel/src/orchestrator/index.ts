@@ -76,13 +76,13 @@ export class EventDrivenOrchestrator {
     }
 
     // Check condition
-    if (trigger.condition && !trigger.condition(event.payload)) {
+    if (trigger.condition && !trigger.condition(event.payload as Record<string, unknown>)) {
       return;
     }
 
     // Execute workflow
     try {
-      const input = trigger.workflowInput(event.payload);
+      const input = trigger.workflowInput(event.payload as Record<string, unknown>);
       await this.config.workflows.start(trigger.workflowId, input);
 
       trigger.lastTriggered = new Date();

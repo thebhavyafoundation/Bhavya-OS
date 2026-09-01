@@ -5,6 +5,7 @@
 export interface PublicAPIConfig {
   baseUrl: string;
   cors: boolean;
+  corsOrigins?: string[];
   rateLimit: number;
   authRequired: boolean;
 }
@@ -105,14 +106,22 @@ export class PublicAPI {
     return { endpoints: [...this.endpoints], config: this.config };
   }
 
-  // CORS headers
-  getCORSHeaders(): Record<string, string> {
+  // CORS — strict allowlist (no wildcard)
+  getCORSHeaders(origin?: string): Record<string, string> {
     if (!this.config.cors) return {};
-    return {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    };
+    // If allowlist configured, only return header for allowlisted origin
+    const allowed = (this.config.corsOrigins as string[] | undefined) || (process.env.CORS_ORIGINS || "").split(",").map(s=>s.trim()).filter(Boolean);
+    if (origin && allowed.length > 0 && !allowed.includes(origin)) return {};
+    if (origin && allowed.includes(origin)) {
+      return {
+        'Access-Control-Allow-Origin': origin,
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      };
+    }
+    // No origin or no allowlist → no CORS header (strict, not wildcard)
+    if (!origin && allowed.length === 0) return {};
+    return {};
   }
 
   private checkRateLimit(): boolean {

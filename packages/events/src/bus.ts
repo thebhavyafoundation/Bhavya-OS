@@ -47,7 +47,9 @@ export class EventBus {
       eventType,
       handler,
       priority,
+      once: false,
       active: true,
+      createdAt: new Date(),
     };
     const subs = this.subscriptions.get(eventType) || [];
     subs.push(subscription);
@@ -140,7 +142,7 @@ export class EventBus {
       event.status = "processing";
       await subscription.handler(event);
     } catch (err: unknown) {
-      event.error = err.message;
+      event.error = err instanceof Error ? err.message : String(err);
       if (event.retryCount < event.maxRetries) {
         event.retryCount++;
         event.status = "retrying";

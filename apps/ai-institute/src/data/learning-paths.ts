@@ -12,6 +12,8 @@ export interface LearningStage {
   prerequisites: string[];
   skills: string[];
   projectIdea: string;
+  /** Reference to a published course ID in academy-courses.ts, if one exists. */
+  courseId?: string;
 }
 
 export const flagshipPath: LearningStage[] = [
@@ -37,6 +39,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["AI Literacy", "Data Thinking", "Problem Framing"],
     projectIdea:
       "Build an AI-powered quiz app that adapts to your knowledge level",
+    courseId: "ai-foundations",
   },
   {
     id: "python-for-ai",
@@ -60,6 +63,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["Python", "NumPy", "Pandas", "Matplotlib"],
     projectIdea:
       "Build a data analysis pipeline that cleans and visualizes real-world datasets",
+    courseId: "python-for-ai",
   },
   {
     id: "mathematics-for-ai",
@@ -83,6 +87,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["Linear Algebra", "Calculus", "Probability", "Statistics"],
     projectIdea:
       "Implement gradient descent from scratch and visualize convergence",
+    courseId: "mathematics-for-ai",
   },
   {
     id: "machine-learning",
@@ -105,6 +110,7 @@ export const flagshipPath: LearningStage[] = [
     prerequisites: ["mathematics-for-ai"],
     skills: ["Scikit-learn", "Regression", "Classification", "Clustering"],
     projectIdea: "Build a house price predictor and deploy it as a web API",
+    courseId: "machine-learning",
   },
   {
     id: "deep-learning",
@@ -128,6 +134,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["PyTorch", "TensorFlow", "CNNs", "RNNs"],
     projectIdea:
       "Build an image classifier that identifies 100+ object categories",
+    courseId: "deep-learning",
   },
   {
     id: "transformers",
@@ -150,6 +157,7 @@ export const flagshipPath: LearningStage[] = [
     prerequisites: ["deep-learning"],
     skills: ["Transformers", "Attention", "Hugging Face", "BERT", "GPT"],
     projectIdea: "Fine-tune a pre-trained transformer for text classification",
+    courseId: "transformers",
   },
   {
     id: "llm-engineering",
@@ -173,6 +181,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["OpenAI API", "LangChain", "RAG", "Prompt Engineering"],
     projectIdea:
       "Build a RAG-powered knowledge base with conversational interface",
+    courseId: "llm-engineering",
   },
   {
     id: "ai-agents",
@@ -196,6 +205,7 @@ export const flagshipPath: LearningStage[] = [
     skills: ["Agent Frameworks", "Tool Integration", "Planning", "Memory"],
     projectIdea:
       "Build a multi-agent system that researches, writes, and edits articles",
+    courseId: "ai-agents",
   },
 ];
 
@@ -237,6 +247,18 @@ export interface PathProject {
   estimatedHours: number;
 }
 
+/**
+ * Editorial learning-path catalog — NOT canonical course content.
+ *
+ * Each entry contains invented lesson IDs (e.g., "what-is-ai", "prompt-anatomy")
+ * that do NOT resolve to real lessons in `academy-courses.ts` / `academy-lessons.ts`.
+ * Used only for search indexing (`/learning-paths#slug`). The canonical
+ * curriculum is `flagshipPath` (8 stages, each with a `courseId` reference).
+ *
+ * Wave Q audit: verified unused helpers (getPathBySlug etc. have no callers
+ * outside this file except search). Retained for search; do not promote to
+ * course claims. See CURRICULUM_GRAPH.md.
+ */
 export const learningPaths: LearningPath[] = [
   {
     id: "ai-beginner",

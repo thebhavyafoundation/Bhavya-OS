@@ -44,17 +44,18 @@ export class Coordinator {
   async initialize(): Promise<void> {
     // Listen for events to track execution state
     this.config.events.on('task.completed', async (event) => {
-      const executionId = event.payload.executionId as string;
+      const payload = event.payload as Record<string, unknown>;
+      const executionId = payload.executionId as string;
       if (executionId) {
         const execution = this.executions.get(executionId);
         if (execution) {
           // Update agent execution status
           const agentExec = execution.agents.find(
-            (a) => a.task.id === event.payload.taskId,
+            (a) => a.task.id === payload.taskId,
           );
           if (agentExec) {
             agentExec.status = 'completed';
-            agentExec.result = event.payload.result;
+            agentExec.result = payload.result;
           }
 
           // Check if all agents are done
@@ -183,3 +184,5 @@ export class Coordinator {
     this.executions.clear();
   }
 }
+
+export type { ExecutionReport } from '../types/index.js';

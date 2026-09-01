@@ -32,6 +32,7 @@ export interface KnowledgeObject {
   references: Reference[];
   prerequisites: string[];
   related: string[];
+  metadata?: Record<string, unknown>;
 }
 
 export interface Concept {

@@ -1,27 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findSessionByToken, findUserById } from "@/lib/api-auth";
+import { requireAuth } from "@/lib/api-auth";
 import { getStudentByUserId, createStudent, updateStudent } from "@/lib/student-store";
+import { getUserRepository } from "@/lib/repositories";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
+import { ONBOARDING_ROLES, type Role } from "@/lib/roles";
 
 export async function GET(request: NextRequest) {
   const correlationId = extractCorrelationId(request);
   const log = createLogger("student:get", correlationId);
 
   try {
-    const token = request.cookies.get("session-token")?.value;
-    if (!token) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-    }
-
-    const session = await findSessionByToken(token);
-    if (!session) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
-
-    const user = await findUserById(session.userId);
+    const user = await requireAuth(request);
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
     const rateLimit = checkRateLimit(`api:${user.id}`, RateLimits.api);
@@ -59,19 +51,9 @@ export async function PUT(request: NextRequest) {
   const log = createLogger("student:update", correlationId);
 
   try {
-    const token = request.cookies.get("session-token")?.value;
-    if (!token) {
-      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
-    }
-
-    const session = await findSessionByToken(token);
-    if (!session) {
-      return NextResponse.json({ error: "Invalid session" }, { status: 401 });
-    }
-
-    const user = await findUserById(session.userId);
+    const user = await requireAuth(request);
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
     const rateLimit = checkRateLimit(`api:${user.id}`, RateLimits.api);
@@ -84,10 +66,32 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, interests } = body;
-    const updated = await updateStudent(user.id, { name, interests });
+    const { name, interests, role, onboardingComplete } = body;
+    const updateData: Record<string, unknown> = {};
+    if (name !== undefined) updateData.name = name;
+    if (interests !== undefined) updateData.interests = interests;
+    if (onboardingComplete !== undefined) updateData.onboardingComplete = onboardingComplete;
+
+    // Role assignment: only allow onboarding roles for self-assignment
+    // Admin/instructor roles must be assigned by an admin via a separate endpoint
+    if (role !== undefined) {
+      if (ONBOARDING_ROLES.includes(role as Role)) {
+        updateData.role = role;
+      } else {
+        log.warn("Unauthorized role self-assignment attempt", { userId: user.id, requestedRole: role });
+        // Silently ignore non-onboarding role assignments
+      }
+    }
+
+    const updated = await updateStudent(user.id, updateData);
     if (!updated) {
       return NextResponse.json({ error: "Student not found" }, { status: 404 });
+    }
+
+    // Persist role to the users table so it's available across auth checks
+    if (updateData.role !== undefined && updateData.role !== user.role) {
+      const userRepo = getUserRepository();
+      await userRepo.updateRole(user.id, updateData.role as string);
     }
 
     log.info("Student profile updated", { userId: user.id });

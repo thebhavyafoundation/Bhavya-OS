@@ -6,8 +6,6 @@ import {
   Scroll,
   Globe,
   ArrowRight,
-  Landmark,
-  BookOpen,
 } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroBackground } from "@/components/HeroBackground";
@@ -16,40 +14,22 @@ const heritageAreas = [
   {
     icon: Building2,
     title: "Architecture",
-    desc: "Documenting and preserving India's architectural heritage, from ancient temples to colonial structures.",
+    desc: "Documenting India's architectural heritage — from ancient temples to colonial structures — to inform preservation and inspire future design.",
   },
   {
     icon: Palette,
     title: "Arts & Crafts",
-    desc: "Supporting traditional artisans and preserving indigenous art forms for future generations.",
+    desc: "Supporting traditional artisans and preserving indigenous art forms that carry centuries of cultural knowledge.",
   },
   {
     icon: Scroll,
     title: "Manuscripts",
-    desc: "Digitizing and preserving ancient manuscripts, texts, and historical documents.",
+    desc: "Digitizing ancient manuscripts, texts, and historical documents to make them accessible for research and education.",
   },
   {
     icon: Globe,
     title: "Living Heritage",
-    desc: "Recording and celebrating intangible cultural heritage — traditions, rituals, and folk knowledge.",
-  },
-];
-
-const heritageProjects = [
-  {
-    icon: Landmark,
-    title: "Temple Documentation",
-    desc: "Systematic 3D scanning and documentation of ancient temple architecture across India.",
-  },
-  {
-    icon: BookOpen,
-    title: "Manuscript Digitization",
-    desc: "Converting fragile manuscripts into searchable digital archives for global access.",
-  },
-  {
-    icon: Palette,
-    title: "Artisan Support Program",
-    desc: "Connecting traditional artisans with markets and preserving endangered craft techniques.",
+    desc: "Recording intangible cultural heritage — traditions, rituals, and folk knowledge — before they are lost.",
   },
 ];
 
@@ -185,7 +165,7 @@ export default function HeritagePage() {
               marginTop: "var(--space-4)",
             }}
           >
-            Our Heritage Initiatives
+            Our Heritage Focus Areas
           </h2>
           <div
             style={{
@@ -242,7 +222,7 @@ export default function HeritagePage() {
         </div>
       </section>
 
-      {/* Heritage Projects */}
+      {/* How to Contribute */}
       <section
         style={{
           padding: "var(--space-24) 0",
@@ -250,7 +230,7 @@ export default function HeritagePage() {
         }}
       >
         <div className="container">
-          <span className="editorial-label">Active Projects</span>
+          <span className="editorial-label">Get Involved</span>
           <h2
             style={{
               fontFamily: "var(--font-display)",
@@ -259,7 +239,7 @@ export default function HeritagePage() {
               marginTop: "var(--space-4)",
             }}
           >
-            On the Ground
+            Support Heritage Preservation
           </h2>
           <div
             style={{
@@ -269,50 +249,102 @@ export default function HeritagePage() {
               marginTop: "var(--space-12)",
             }}
           >
-            {heritageProjects.map((project, i) => (
-              <Reveal
-                key={project.title}
-                variant="slide-up"
-                delay={i * 0.1}
-                distance={30}
+            <Reveal variant="slide-up" delay={0} distance={30}>
+              <div
+                style={{
+                  background: "var(--color-bg-primary)",
+                  borderRadius: "var(--radius-lg)",
+                  padding: "var(--space-8)",
+                  border: "1px solid var(--color-border-primary)",
+                }}
               >
-                <div
+                <h3
                   style={{
-                    background: "var(--color-bg-primary)",
-                    borderRadius: "var(--radius-lg)",
-                    padding: "var(--space-8)",
-                    border: "1px solid var(--color-border-primary)",
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-lg)",
+                    fontWeight: 400,
+                    marginBottom: "var(--space-3)",
                   }}
                 >
-                  <project.icon
-                    size={28}
-                    style={{
-                      color: "var(--color-brand-forest)",
-                      marginBottom: "var(--space-4)",
-                    }}
-                  />
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-lg)",
-                      fontWeight: 400,
-                      marginBottom: "var(--space-3)",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {project.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+                  Volunteer
+                </h3>
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Contribute your skills to heritage documentation, research, or
+                  community outreach. Help us record and preserve cultural
+                  knowledge.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal variant="slide-up" delay={0.1} distance={30}>
+              <div
+                style={{
+                  background: "var(--color-bg-primary)",
+                  borderRadius: "var(--radius-lg)",
+                  padding: "var(--space-8)",
+                  border: "1px solid var(--color-border-primary)",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-lg)",
+                    fontWeight: 400,
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
+                  Donate
+                </h3>
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Support heritage preservation initiatives. Your contribution
+                  funds documentation equipment, research travel, and community
+                  programs.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal variant="slide-up" delay={0.2} distance={30}>
+              <div
+                style={{
+                  background: "var(--color-bg-primary)",
+                  borderRadius: "var(--radius-lg)",
+                  padding: "var(--space-8)",
+                  border: "1px solid var(--color-border-primary)",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-lg)",
+                    fontWeight: 400,
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
+                  Collaborate
+                </h3>
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Partner with us if you work in heritage preservation,
+                  archaeology, cultural studies, or museum technology. We welcome
+                  institutional collaborations.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -347,8 +379,8 @@ export default function HeritagePage() {
               lineHeight: 1.7,
             }}
           >
-            Volunteer for heritage documentation, support artisans, or help
-            digitize historical records.
+            Every culture carries irreplaceable knowledge. Help us document,
+            preserve, and share it with the world.
           </p>
           <a href="/app" className="btn btn-gold">
             Get Involved

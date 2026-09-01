@@ -102,7 +102,7 @@ export async function executeWorkflow(
               stepResults.push({
                 stepId: step.id,
                 status: "failed",
-                error: err.message,
+                error: err instanceof Error ? err.message : String(err),
                 durationMs: Date.now() - stepStart,
               });
               if (step.onError === "fail") break;
@@ -113,7 +113,7 @@ export async function executeWorkflow(
         stepResults.push({
           stepId: step.id,
           status: "failed",
-          error: err.message,
+          error: err instanceof Error ? err.message : String(err),
           durationMs: Date.now() - stepStart,
         });
         if (step.onError === "fail") break;

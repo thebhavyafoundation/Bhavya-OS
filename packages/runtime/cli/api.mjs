@@ -24,8 +24,7 @@ import {
 
 import { runKnowledgePipeline } from "../engine/knowledge-pipeline.mjs";
 
-import * as courseManager from "../engine/course-manager.mjs";
-import * as lessonManager from "../engine/lesson-manager.mjs";
+// Lesson and Course CRUD removed — canonical source is Studio SQLite via /api/studio/*
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -39,7 +38,10 @@ function validateId(id) {
 }
 
 function checkAuth(req) {
-  if (!API_KEY) return true; // No key configured = open (dev mode)
+  // Fail-closed: if no API key is configured, reject all requests
+  // except health endpoint (handled separately).
+  // Set RUNTIME_API_KEY environment variable to enable the API.
+  if (!API_KEY) return false;
   const authHeader = req.headers.authorization || "";
   const apiKey = req.headers["x-api-key"] || "";
   return authHeader === `Bearer ${API_KEY}` || apiKey === API_KEY;
@@ -47,9 +49,8 @@ function checkAuth(req) {
 
 function getCorsOrigin(req) {
   const origin = req.headers.origin || "";
-  if (ALLOWED_ORIGINS.includes(origin)) return origin;
-  if (ALLOWED_ORIGINS.length > 0) return ALLOWED_ORIGINS[0];
-  return "*";
+  if (origin && ALLOWED_ORIGINS.includes(origin)) return origin;
+  return null; // unknown origin → no CORS header (strict)
 }
 
 function readJSON(p) {
@@ -59,10 +60,21 @@ function readJSON(p) {
   } catch { return null; }
 }
 
+const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
+
 function readBody(req) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     let body = "";
-    req.on("data", chunk => body += chunk);
+    let size = 0;
+    req.on("data", chunk => {
+      size += chunk.length;
+      if (size > MAX_BODY_SIZE) {
+        reject(new Error("Request body too large"));
+        req.destroy();
+        return;
+      }
+      body += chunk;
+    });
     req.on("end", () => {
       try { resolve(JSON.parse(body)); }
       catch { resolve({}); }
@@ -83,7 +95,7 @@ export async function startServer(root, port = 3100) {
     const parts = url.pathname.split("/").filter(Boolean);
 
     const origin = getCorsOrigin(req);
-    res.setHeader("Access-Control-Allow-Origin", origin);
+    if (origin) res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-API-Key");
     res.setHeader("Content-Type", "application/json");
@@ -160,92 +172,9 @@ async function route(root, method, parts, url, req, res) {
     return json(res, 200, result);
   }
 
-  // ── Courses ───────────────────────────────────────────────────
-  if (resource === "courses") {
-    if (method === "GET") return json(res, 200, courseManager.listCourses());
-    if (method === "POST") {
-      const body = await readBody(req);
-      return json(res, 201, courseManager.createCourse(body));
-    }
-  }
-
-  if (resource === "courses" && id) {
-    if (method === "GET") {
-      const course = courseManager.getCourse(id);
-      if (!course) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, course);
-    }
-    if (method === "PUT") {
-      const body = await readBody(req);
-      const updated = courseManager.updateCourse(id, body);
-      if (!updated) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, updated);
-    }
-    if (method === "DELETE") {
-      const deleted = courseManager.deleteCourse(id);
-      if (!deleted) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, { deleted: true });
-    }
-
-    // Sub-resources
-    if (subresource === "duplicate" && method === "POST") {
-      const dup = courseManager.duplicateCourse(id);
-      if (!dup) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, dup);
-    }
-
-    if (subresource === "archive" && method === "POST") {
-      const archived = courseManager.archiveCourse(id);
-      if (!archived) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, archived);
-    }
-
-    if (subresource === "reorder" && method === "POST") {
-      const body = await readBody(req);
-      const reordered = courseManager.reorderLessons(id, body.lessonIds || []);
-      if (!reordered) return json(res, 404, { error: "Course not found" });
-      return json(res, 200, reordered);
-    }
-  }
-
-  // ── Lessons ───────────────────────────────────────────────────
-  if (resource === "lessons") {
-    if (method === "GET") {
-      const filters = Object.fromEntries(url.searchParams);
-      return json(res, 200, lessonManager.listLessons(filters));
-    }
-    if (method === "POST") {
-      const body = await readBody(req);
-      return json(res, 201, lessonManager.createLesson(body));
-    }
-  }
-
-  if (resource === "lessons" && id) {
-    if (method === "GET") {
-      if (subresource === "artifacts") {
-        const artifacts = lessonManager.getLessonArtifacts(id);
-        if (!artifacts.lesson) return json(res, 404, { error: "Lesson not found" });
-        return json(res, 200, artifacts);
-      }
-      if (subresource === "assessment") return json(res, 200, lessonManager.getAssessment(id) || {});
-      if (subresource === "guide") return json(res, 200, lessonManager.getTeacherGuide(id) || {});
-      if (subresource === "workbook") return json(res, 200, lessonManager.getWorkbook(id) || {});
-      const lesson = lessonManager.getLesson(id);
-      if (!lesson) return json(res, 404, { error: "Lesson not found" });
-      return json(res, 200, lesson);
-    }
-    if (method === "PUT") {
-      const body = await readBody(req);
-      const updated = lessonManager.updateLesson(id, body);
-      if (!updated) return json(res, 404, { error: "Lesson not found" });
-      return json(res, 200, updated);
-    }
-    if (method === "DELETE") {
-      const deleted = lessonManager.deleteLesson(id);
-      if (!deleted) return json(res, 404, { error: "Lesson not found" });
-      return json(res, 200, { deleted: true });
-    }
-  }
+  // ── Lessons & Courses ────────────────────────────────────────
+  // REMOVED — canonical CRUD is Studio SQLite via /api/studio/*
+  // Runtime retains capability execution, knowledge pipeline, and metrics
 
   // ── Metrics / Observability ───────────────────────────────────
   if (resource === "metrics" && method === "GET") {
@@ -323,6 +252,7 @@ async function route(root, method, parts, url, req, res) {
         subject: body.subject || "",
         grade: body.grade || 9,
         domain: body.domain || "",
+        description: body.description || "",
         concepts: body.concepts || [],
         definitions: body.definitions || [],
         examples: body.examples || [],
@@ -330,6 +260,8 @@ async function route(root, method, parts, url, req, res) {
         exercises: body.exercises || [],
         references: body.references || [],
         prerequisites: body.prerequisites || [],
+        related: body.related || [],
+        metadata: body.metadata || {},
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         version: "0.1.0",

@@ -2404,4 +2404,790 @@ export function seedData() {
       e.quality_score,
     );
   }
+
+  // Website Intelligence
+  const websites = [
+    {
+      id: "web-1",
+      source_url: "https://linear.app",
+      name: "Linear",
+      description: "Project management tool with exceptional UX and design system",
+      framework: "Next.js",
+      runtime: "Node.js",
+      design_system: "Custom design system with dark mode first",
+      component_system: "React components with Radix UI primitives",
+      layout_system: "Sidebar + content area with command palette",
+      navigation_architecture: "Command palette primary, sidebar secondary",
+      typography: "Inter for body, custom display font",
+      color_system: "Dark mode with blue accents, glassmorphism",
+      spacing_system: "4px base unit, consistent spacing scale",
+      motion_system: "Framer Motion with subtle transitions",
+      interaction_patterns: '["command-palette","keyboard-shortcuts","inline-editing","drag-drop"]',
+      responsive_patterns: '["sidebar-collapse","mobile-first","adaptive-layout"]',
+      accessibility_characteristics: '{"keyboard":"full support","screenReader":"ARIA labels","contrast":"WCAG AA"}',
+      performance_observations: '{"loading":"fast","rendering":"SSR + hydration","javascript":"optimized bundles"}',
+      seo_observations: '{"meta":"complete","sitemap":"dynamic","openGraph":"enabled"}',
+      extracted_pattern_ids: '["command-palette","sidebar-navigation","dark-mode-first","glassmorphism"]',
+      bhavya_relevance_score: 92,
+      quality_score: 95,
+      provenance: '{"category":"saas","analyzed_by":"manual","confidence":"high"}',
+    },
+    {
+      id: "web-2",
+      source_url: "https://vercel.com",
+      name: "Vercel",
+      description: "Developer platform with clean design and excellent documentation",
+      framework: "Next.js",
+      runtime: "Node.js",
+      design_system: "Geist Design System",
+      component_system: "React components with Radix UI",
+      layout_system: "Full-width with centered content, gradient heroes",
+      navigation_architecture: "Mega menu primary, sidebar for docs",
+      typography: "Geist Sans and Geist Mono",
+      color_system: "Dark mode with blue/purple gradients",
+      spacing_system: "Responsive spacing with CSS variables",
+      motion_system: "CSS transitions with Framer Motion",
+      interaction_patterns: '["hover-reveal","tab-navigation","code-copy","search"]',
+      responsive_patterns: '["mobile-first","responsive-grid","collapsible-sidebar"]',
+      accessibility_characteristics: '{"keyboard":"full support","screenReader":"semantic HTML","contrast":"WCAG AA"}',
+      performance_observations: '{"loading":"edge-cached","rendering":"ISR","javascript":"code-split"}',
+      seo_observations: '{"meta":"optimized","sitemap":"dynamic","openGraph":"enabled"}',
+      extracted_pattern_ids: '["gradient-hero","mega-menu","documentation-layout","code-highlighting"]',
+      bhavya_relevance_score: 88,
+      quality_score: 93,
+      provenance: '{"category":"saas","analyzed_by":"manual","confidence":"high"}',
+    },
+  ];
+
+  const insertWebsite = db.prepare(`
+    INSERT INTO website_intelligence (id, source_url, name, description, framework, runtime, design_system, component_system, layout_system, navigation_architecture, typography, color_system, spacing_system, motion_system, interaction_patterns, responsive_patterns, accessibility_characteristics, performance_observations, seo_observations, extracted_pattern_ids, bhavya_relevance_score, quality_score, provenance)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const w of websites) {
+    insertWebsite.run(
+      w.id, w.source_url, w.name, w.description,
+      w.framework, w.runtime, w.design_system, w.component_system,
+      w.layout_system, w.navigation_architecture, w.typography,
+      w.color_system, w.spacing_system, w.motion_system,
+      w.interaction_patterns, w.responsive_patterns,
+      w.accessibility_characteristics, w.performance_observations,
+      w.seo_observations, w.extracted_pattern_ids,
+      w.bhavya_relevance_score, w.quality_score, w.provenance,
+    );
+  }
+
+  // Design Genome
+  const genome = [
+    {
+      id: "dg-1",
+      category: "design-hero",
+      pattern_name: "Gradient Hero with Typography",
+      frequency: 2,
+      avg_quality_score: 92,
+      avg_bhavya_relevance: 90,
+      source_ids: '["web-1","web-2"]',
+      mission_relevance: '{"forest":"high","knowledge":"high","heritage":"medium","community":"high"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "excellent",
+      institutional_fit: "excellent",
+      recommended_for: '["forest","knowledge","community"]',
+      evidence: "Analyzed websites use gradient heroes with strong typography for first impression",
+    },
+    {
+      id: "dg-2",
+      category: "design-navigation",
+      pattern_name: "Command Palette Navigation",
+      frequency: 1,
+      avg_quality_score: 90,
+      avg_bhavya_relevance: 85,
+      source_ids: '["web-1"]',
+      mission_relevance: '{"forest":"medium","knowledge":"high","heritage":"low","community":"medium"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "good",
+      institutional_fit: "good",
+      recommended_for: '["knowledge","community"]',
+      evidence: "Command palette provides fast keyboard-driven navigation for power users",
+    },
+    {
+      id: "dg-3",
+      category: "design-storytelling",
+      pattern_name: "Impact Metrics with Context",
+      frequency: 2,
+      avg_quality_score: 88,
+      avg_bhavya_relevance: 92,
+      source_ids: '["web-1","web-2"]',
+      mission_relevance: '{"forest":"high","knowledge":"medium","heritage":"high","community":"high"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "excellent",
+      institutional_fit: "excellent",
+      recommended_for: '["forest","heritage","community"]',
+      evidence: "Metrics presented with contextual narrative create compelling institutional stories",
+    },
+  ];
+
+  const insertGenome = db.prepare(`
+    INSERT INTO design_genome (id, category, pattern_name, frequency, avg_quality_score, avg_bhavya_relevance, source_ids, mission_relevance, accessibility_rating, performance_rating, mobile_rating, institutional_fit, recommended_for, evidence)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const g of genome) {
+    insertGenome.run(
+      g.id, g.category, g.pattern_name, g.frequency,
+      g.avg_quality_score, g.avg_bhavya_relevance, g.source_ids,
+      g.mission_relevance, g.accessibility_rating, g.performance_rating,
+      g.mobile_rating, g.institutional_fit, g.recommended_for, g.evidence,
+    );
+  }
+
+  // Additional Websites
+  const moreWebsites = [
+    {
+      id: "web-3",
+      source_url: "https://stripe.com",
+      name: "Stripe",
+      description: "Payment infrastructure with world-class documentation and design",
+      framework: "React",
+      runtime: "Node.js",
+      design_system: "Custom design system with clean typography",
+      component_system: "React with custom primitives",
+      layout_system: "Documentation-first with interactive examples",
+      navigation_architecture: "Mega menu with search, sidebar for docs",
+      typography: "System font stack with custom display font",
+      color_system: "Clean white with purple/blue accents, gradient CTAs",
+      spacing_system: "Consistent 8px grid",
+      motion_system: "Subtle CSS transitions, micro-interactions",
+      interaction_patterns: '["copy-code","interactive-examples","search","tabs"]',
+      responsive_patterns: '["responsive-grid","mobile-nav","adaptive-sidebar"]',
+      accessibility_characteristics: '{"keyboard":"full support","screenReader":"semantic HTML","contrast":"WCAG AA"}',
+      performance_observations: '{"loading":"fast","rendering":"SSR","javascript":"code-split"}',
+      seo_observations: '{"meta":"optimized","sitemap":"dynamic","openGraph":"enabled"}',
+      extracted_pattern_ids: '["documentation-layout","interactive-examples","gradient-cta","code-highlighting"]',
+      bhavya_relevance_score: 85,
+      quality_score: 96,
+      provenance: '{"category":"saas","analyzed_by":"manual","confidence":"high"}',
+    },
+    {
+      id: "web-4",
+      source_url: "https://github.com",
+      name: "GitHub",
+      description: "Developer platform with comprehensive UI patterns",
+      framework: "React",
+      runtime: "Node.js",
+      design_system: "Primer Design System",
+      component_system: "React with Primer components",
+      layout_system: "Repository-centric with sidebar navigation",
+      navigation_architecture: "Global nav + contextual sidebar + command palette",
+      typography: "System font stack",
+      color_system: "Light/dark mode with semantic colors",
+      spacing_system: "4px base unit",
+      motion_system: "Minimal CSS transitions",
+      interaction_patterns: '["keyboard-shortcuts","command-palette","inline-editing","drag-drop"]',
+      responsive_patterns: '["responsive-tables","mobile-nav","collapsible-sidebar"]',
+      accessibility_characteristics: '{"keyboard":"full support","screenReader":"ARIA labels","contrast":"WCAG AA"}',
+      performance_observations: '{"loading":"fast","rendering":"SSR + CSR hybrid","javascript":"optimized"}',
+      seo_observations: '{"meta":"optimized","sitemap":"dynamic","openGraph":"enabled"}',
+      extracted_pattern_ids: '["command-palette","sidebar-navigation","data-table","code-view"]',
+      bhavya_relevance_score: 82,
+      quality_score: 94,
+      provenance: '{"category":"developer-platform","analyzed_by":"manual","confidence":"high"}',
+    },
+    {
+      id: "web-5",
+      source_url: "https://tailwindcss.com",
+      name: "Tailwind CSS",
+      description: "CSS framework with excellent documentation and playground",
+      framework: "Astro",
+      runtime: "Static",
+      design_system: "Custom with Tailwind branding",
+      component_system: "Tailwind UI components",
+      layout_system: "Documentation with sidebar, playground",
+      navigation_architecture: "Sidebar navigation with search",
+      typography: "Inter for body, JetBrains Mono for code",
+      color_system: "Brand blue with clean white/dark backgrounds",
+      spacing_system: "Tailwind spacing scale",
+      motion_system: "Minimal transitions",
+      interaction_patterns: '["code-copy","playground","search","sidebar-toggle"]',
+      responsive_patterns: '["responsive-grid","mobile-sidebar","adaptive-layout"]',
+      accessibility_characteristics: '{"keyboard":"good","screenReader":"semantic HTML","contrast":"WCAG AA"}',
+      performance_observations: '{"loading":"fast","rendering":"SSG","javascript":"minimal"}',
+      seo_observations: '{"meta":"optimized","sitemap":"static","openGraph":"enabled"}',
+      extracted_pattern_ids: '["documentation-layout","code-playground","search","sidebar-navigation"]',
+      bhavya_relevance_score: 78,
+      quality_score: 91,
+      provenance: '{"category":"framework","analyzed_by":"manual","confidence":"high"}',
+    },
+  ];
+
+  for (const w of moreWebsites) {
+    insertWebsite.run(
+      w.id, w.source_url, w.name, w.description,
+      w.framework, w.runtime, w.design_system, w.component_system,
+      w.layout_system, w.navigation_architecture, w.typography,
+      w.color_system, w.spacing_system, w.motion_system,
+      w.interaction_patterns, w.responsive_patterns,
+      w.accessibility_characteristics, w.performance_observations,
+      w.seo_observations, w.extracted_pattern_ids,
+      w.bhavya_relevance_score, w.quality_score, w.provenance,
+    );
+  }
+
+  // More Design Genome entries
+  const moreGenome = [
+    {
+      id: "dg-4",
+      category: "design-navigation",
+      pattern_name: "Sidebar with Collapsible Sections",
+      frequency: 3,
+      avg_quality_score: 88,
+      avg_bhavya_relevance: 88,
+      source_ids: '["web-1","web-4","web-5"]',
+      mission_relevance: '{"forest":"high","knowledge":"high","heritage":"high","community":"high"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "good",
+      institutional_fit: "excellent",
+      recommended_for: '["forest","knowledge","heritage","community"]',
+      evidence: "Sidebar navigation with collapsible sections is the dominant pattern for complex applications",
+    },
+    {
+      id: "dg-5",
+      category: "design-editorial",
+      pattern_name: "Documentation-First Layout",
+      frequency: 3,
+      avg_quality_score: 92,
+      avg_bhavya_relevance: 90,
+      source_ids: '["web-2","web-3","web-5"]',
+      mission_relevance: '{"forest":"medium","knowledge":"high","heritage":"high","community":"medium"}',
+      accessibility_rating: "excellent",
+      performance_rating: "excellent",
+      mobile_rating: "excellent",
+      institutional_fit: "excellent",
+      recommended_for: '["knowledge","heritage"]',
+      evidence: "Documentation-first layouts with sidebar navigation and search are highly effective for knowledge-heavy sites",
+    },
+    {
+      id: "dg-6",
+      category: "design-accessibility",
+      pattern_name: "Keyboard-First Interaction",
+      frequency: 3,
+      avg_quality_score: 90,
+      avg_bhavya_relevance: 85,
+      source_ids: '["web-1","web-3","web-4"]',
+      mission_relevance: '{"forest":"low","knowledge":"high","heritage":"low","community":"medium"}',
+      accessibility_rating: "excellent",
+      performance_rating: "excellent",
+      mobile_rating: "moderate",
+      institutional_fit: "good",
+      recommended_for: '["knowledge","community"]',
+      evidence: "Keyboard shortcuts and command palette patterns enable power-user workflows",
+    },
+    {
+      id: "dg-7",
+      category: "motion-reveal",
+      pattern_name: "Subtle Hover Transitions",
+      frequency: 4,
+      avg_quality_score: 85,
+      avg_bhavya_relevance: 82,
+      source_ids: '["web-1","web-2","web-3","web-4"]',
+      mission_relevance: '{"forest":"medium","knowledge":"medium","heritage":"medium","community":"medium"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "excellent",
+      institutional_fit: "good",
+      recommended_for: '["forest","knowledge","heritage","community"]',
+      evidence: "Subtle CSS transitions on hover states are universally used for micro-interactions",
+    },
+    {
+      id: "dg-8",
+      category: "institutional-mission",
+      pattern_name: "Impact Metrics with Narrative",
+      frequency: 2,
+      avg_quality_score: 90,
+      avg_bhavya_relevance: 95,
+      source_ids: '["web-1","web-2"]',
+      mission_relevance: '{"forest":"high","knowledge":"high","heritage":"high","community":"high"}',
+      accessibility_rating: "good",
+      performance_rating: "excellent",
+      mobile_rating: "excellent",
+      institutional_fit: "excellent",
+      recommended_for: '["forest","knowledge","heritage","community"]',
+      evidence: "Combining quantitative metrics with qualitative narrative creates compelling institutional stories",
+    },
+  ];
+
+  for (const g of moreGenome) {
+    insertGenome.run(
+      g.id, g.category, g.pattern_name, g.frequency,
+      g.avg_quality_score, g.avg_bhavya_relevance, g.source_ids,
+      g.mission_relevance, g.accessibility_rating, g.performance_rating,
+      g.mobile_rating, g.institutional_fit, g.recommended_for, g.evidence,
+    );
+  }
+
+  // Design Scores
+  const designScores = [
+    {
+      id: "ds-1",
+      source_id: "web-1",
+      source_type: "website",
+      institutional_relevance: 75,
+      ux_quality: 95,
+      accessibility: 88,
+      performance: 92,
+      visual_quality: 95,
+      reusability: 85,
+      technical_quality: 93,
+      innovation: 90,
+      maintainability: 88,
+      bhavya_brand_compatibility: 82,
+      explanation: '{"strengths":"Exceptional UX, dark mode first, command palette","weaknesses":"SaaS-focused, not institutional","adaptation":"Adapt command palette and keyboard patterns for Bhavya OS"}',
+    },
+    {
+      id: "ds-2",
+      source_id: "web-2",
+      source_type: "website",
+      institutional_relevance: 80,
+      ux_quality: 90,
+      accessibility: 85,
+      performance: 95,
+      visual_quality: 92,
+      reusability: 88,
+      technical_quality: 94,
+      innovation: 85,
+      maintainability: 90,
+      bhavya_brand_compatibility: 85,
+      explanation: '{"strengths":"Clean design, excellent documentation, gradient heroes","weaknesses":"Developer-focused, not institutional","adaptation":"Adapt documentation layout and gradient hero pattern"}',
+    },
+    {
+      id: "ds-3",
+      source_id: "web-3",
+      source_type: "website",
+      institutional_relevance: 70,
+      ux_quality: 92,
+      accessibility: 88,
+      performance: 90,
+      visual_quality: 90,
+      reusability: 90,
+      technical_quality: 95,
+      innovation: 80,
+      maintainability: 92,
+      bhavya_brand_compatibility: 75,
+      explanation: '{"strengths":"World-class documentation, interactive examples, clean design","weaknesses":"Payment-focused, not institutional","adaptation":"Adapt documentation patterns and interactive examples"}',
+    },
+  ];
+
+  const insertDesignScore = db.prepare(`
+    INSERT INTO design_scores (id, source_id, source_type, institutional_relevance, ux_quality, accessibility, performance, visual_quality, reusability, technical_quality, innovation, maintainability, bhavya_brand_compatibility, overall_score, explanation)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const ds of designScores) {
+    const overall = Math.round(
+      (ds.institutional_relevance + ds.ux_quality + ds.accessibility +
+       ds.performance + ds.visual_quality + ds.reusability +
+       ds.technical_quality + ds.innovation + ds.maintainability +
+       ds.bhavya_brand_compatibility) / 10,
+    );
+    insertDesignScore.run(
+      ds.id, ds.source_id, ds.source_type,
+      ds.institutional_relevance, ds.ux_quality, ds.accessibility,
+      ds.performance, ds.visual_quality, ds.reusability,
+      ds.technical_quality, ds.innovation, ds.maintainability,
+      ds.bhavya_brand_compatibility, overall,
+      JSON.stringify(ds.explanation),
+    );
+  }
+
+  // Design Intelligence Records
+  const designIntelRecords = [
+    {
+      id: "di-1",
+      source_id: "web-1",
+      source_type: "website",
+      typography: '{"display":"Custom display","body":"Inter","code":"JetBrains Mono","scale":"fluid"}',
+      color: '{"primary":"#0A0A0A","accent":"#3E63DD","surface":"#18181B","border":"#27272A"}',
+      spacing: '{"base":"4px","scale":"4,8,12,16,24,32,48,64"}',
+      imagery: '{"style":"minimal","icons":"lucide","illustrations":"none"}',
+      surfaces: '{"primary":"dark glass","secondary":"dark solid","accent":"blue glow"}',
+      grid: '{"type":"flexbox","columns":12,"gutter":"16px"}',
+      container: '{"maxWidth":"1200px","padding":"16px"}',
+      section_structure: '{"hero":"full viewport","content":"centered max-width","sidebar":"fixed 240px"}',
+      responsive_behavior: '{"breakpoints":"640,1024,1280","sidebar":"collapse on mobile","layout":"stack on mobile"}',
+      primary_nav: '{"type":"sidebar","position":"left","width":"240px","collapsible":true}',
+      secondary_nav: {"type":"tabs","position":"top"},
+      contextual_nav: '{"type":"breadcrumb","position":"top"}',
+      command_nav: '{"type":"command-palette","trigger":"Cmd+K","search":"global"}',
+      hover: '{"scale":1.02,"brightness":1.1,"transition":"150ms ease"}',
+      focus: '{"ring":"2px blue","offset":"2px","style":"outline"}',
+      scroll: '{"parallax":false,"sticky":true,"snap":false}',
+      transitions: '{"page":"fade","modal":"scale+fade","dropdown":"slide+fade"}',
+      motion_library: "framer-motion",
+      motion_techniques: '["fade","scale","slide","stagger"]',
+      motion_intensity: "subtle",
+      semantics: '{"headings":"h1-h6","landmarks":"nav,main,aside","regions":"article,section"}',
+      keyboard: '{"shortcuts":"Cmd+K, Cmd+/","navigation":"tab","actions":"enter,space"}',
+      contrast: '{"body":"15:1","muted":"7:1","accent":"8:1"}',
+      reduced_motion: '{"prefers-reduced-motion":"respect","fallback":"instant"}',
+      image_strategy: "lazy-loading with blur placeholder",
+      loading: "skeleton screens with shimmer",
+      javascript: "code-split by route, lazy-loaded",
+      rendering: "SSR with hydration",
+      extracted_pattern_ids: '["command-palette","sidebar-navigation","dark-mode-first","skeleton-loading"]',
+      bhavya_relevance: "High — command palette and keyboard-first patterns are excellent for Bhavya OS power users. Dark mode aesthetic aligns with current design direction.",
+      recommended_use: "Adapt command palette for Bhavya OS search. Use skeleton loading patterns. Apply keyboard shortcuts for power users.",
+      risks: '["Dark-only may not work for all Bhavya audiences","Command palette has learning curve"]',
+      adaptation_notes: "Keep the command palette pattern but add Bhavya branding. Use skeleton loading across all Bhavya apps. Consider light mode for public-facing pages.",
+    },
+    {
+      id: "di-2",
+      source_id: "web-2",
+      source_type: "website",
+      typography: '{"display":"Geist Sans","body":"Geist Sans","code":"Geist Mono","scale":"responsive"}',
+      color: '{"primary":"#000000","accent":"#0070F3","surface":"#FAFAFA","border":"#EAEAEA"}',
+      spacing: '{"base":"4px","scale":"4,8,12,16,24,32,48,64,96,128"}',
+      imagery: '{"style":"gradient","icons":"custom","illustrations":"3D renders"}',
+      surfaces: '{"primary":"white","secondary":"light gray","accent":"gradient"}',
+      grid: '{"type":"flexbox","columns":12,"gutter":"24px"}',
+      container: '{"maxWidth":"1200px","padding":"24px"}',
+      section_structure: '{"hero":"full viewport gradient","content":"centered","sidebar":"fixed for docs"}',
+      responsive_behavior: '{"breakpoints":"640,768,1024,1280","sidebar":"collapse on mobile","layout":"stack on mobile"}',
+      primary_nav: '{"type":"mega-menu","position":"top","sticky":true}',
+      secondary_nav: {"type":"sidebar","position":"left","width":"240px"},
+      contextual_nav: '{"type":"breadcrumb","position":"top"}',
+      command_nav: '{"type":"search","position":"top-right","placeholder":"Search..."}',
+      hover: '{"brightness":1.05,"transition":"200ms ease"}',
+      focus: '{"ring":"2px blue","offset":"2px","style":"outline"}',
+      scroll: '{"parallax":false,"sticky":false,"snap":false}',
+      transitions: '{"page":"instant","modal":"fade","dropdown":"fade"}',
+      motion_library: "css-transitions",
+      motion_techniques: '["fade","slide"]',
+      motion_intensity: "minimal",
+      semantics: '{"headings":"h1-h6","landmarks":"nav,main","regions":"article,section"}',
+      keyboard: '{"shortcuts":"none","navigation":"tab","actions":"enter"}',
+      contrast: '{"body":"12:1","muted":"5:1","accent":"4.5:1"}',
+      reduced_motion: '{"prefers-reduced-motion":"respect","fallback":"none"}',
+      image_strategy: "optimized with next/image",
+      loading: "static generation",
+      javascript: "minimal, code-split",
+      rendering: "ISR with edge caching",
+      extracted_pattern_ids: '["gradient-hero","mega-menu","documentation-layout","gradient-cta"]',
+      bhavya_relevance: "High — gradient hero pattern is excellent for Bhavya Foundation homepage. Documentation layout is perfect for knowledge pillar. Clean design system approach.",
+      recommended_use: "Adapt gradient hero for Bhavya homepage. Use documentation layout for Knowledge pillar. Apply gradient CTAs for calls to action.",
+      risks: '["Gradient may need Bhavya brand colors","Mega menu may be complex for simple navigation"]',
+      adaptation_notes: "Replace blue/purple gradients with Bhavya forest green/gold. Use gradient hero on homepage. Apply documentation layout for Knowledge pillar content.",
+    },
+  ];
+
+  const insertDesignIntel = db.prepare(`
+    INSERT INTO design_intelligence (id, source_id, source_type, typography, color, spacing, imagery, surfaces, grid, container, section_structure, responsive_behavior, primary_nav, secondary_nav, contextual_nav, command_nav, hover, focus, scroll, transitions, motion_library, motion_techniques, motion_intensity, semantics, keyboard, contrast, reduced_motion, image_strategy, loading, javascript, rendering, extracted_pattern_ids, bhavya_relevance, recommended_use, risks, adaptation_notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const di of designIntelRecords) {
+    insertDesignIntel.run(
+      di.id, di.source_id, di.source_type,
+      JSON.stringify(di.typography), JSON.stringify(di.color),
+      JSON.stringify(di.spacing), JSON.stringify(di.imagery),
+      JSON.stringify(di.surfaces), JSON.stringify(di.grid),
+      JSON.stringify(di.container), JSON.stringify(di.section_structure),
+      JSON.stringify(di.responsive_behavior),
+      JSON.stringify(di.primary_nav), JSON.stringify(di.secondary_nav),
+      JSON.stringify(di.contextual_nav), JSON.stringify(di.command_nav),
+      JSON.stringify(di.hover), JSON.stringify(di.focus),
+      JSON.stringify(di.scroll), JSON.stringify(di.transitions),
+      di.motion_library, JSON.stringify(di.motion_techniques),
+      di.motion_intensity,
+      JSON.stringify(di.semantics), JSON.stringify(di.keyboard),
+      JSON.stringify(di.contrast), JSON.stringify(di.reduced_motion),
+      di.image_strategy, di.loading, di.javascript, di.rendering,
+      JSON.stringify(di.extracted_pattern_ids),
+      di.bhavya_relevance, di.recommended_use,
+      JSON.stringify(di.risks), di.adaptation_notes,
+    );
+  }
+
+  // Design/Motion/Institutional Pattern Library entries
+  const designPatterns = [
+    {
+      id: "plib-11",
+      name: "Command Palette",
+      slug: "command-palette",
+      category: "design-navigation",
+      explanation: "A keyboard-driven search and navigation interface triggered by Cmd+K. Provides fast access to all features without mouse interaction. Used in Linear, GitHub, VS Code.",
+      use_cases: '["Global search","Quick actions","Navigation","Feature discovery"]',
+      related_patterns: '["Search","Keyboard Shortcuts","Modal"]',
+      educational_value: "Teaches keyboard-first design and accessibility. Reduces navigation friction for power users.",
+      bhavya_recommendation: "Adopt for Bhavya OS. Essential for researcher and developer workflows. Adapt with Bhavya-specific actions.",
+      learning_mode: "hands-on",
+      difficulty: "intermediate",
+    },
+    {
+      id: "plib-12",
+      name: "Dark Mode First",
+      slug: "dark-mode-first",
+      category: "design-hero",
+      explanation: "Designing the dark theme as the primary experience, with light mode as an alternative. Reduces eye strain, creates modern aesthetic, and improves focus on content.",
+      use_cases: '["Developer tools","Data dashboards","Content platforms","Creative tools"]',
+      related_patterns: '["Color System","Accessibility","Theme System"]',
+      educational_value: "Teaches color system design and accessibility considerations for dark interfaces.",
+      bhavya_recommendation: "Use for Bhavya OS authenticated experience. Public pages should support both modes. Aligns with ADR-003.",
+      learning_mode: "reading",
+      difficulty: "beginner",
+    },
+    {
+      id: "plib-13",
+      name: "Gradient Hero",
+      slug: "gradient-hero",
+      category: "design-hero",
+      explanation: "Full-viewport hero section with gradient backgrounds, large typography, and clear call-to-action. Creates strong first impression and brand presence.",
+      use_cases: '["Homepage","Landing pages","Product launches","Institutional sites"]',
+      related_patterns: '["Typography","Color System","CTA Design"]',
+      educational_value: "Teaches visual hierarchy and first-impression design. Balances aesthetics with conversion goals.",
+      bhavya_recommendation: "Adapt for Bhavya Foundation homepage. Use forest green/gold gradients instead of blue/purple. Perfect for institutional storytelling.",
+      learning_mode: "reading",
+      difficulty: "beginner",
+    },
+    {
+      id: "plib-14",
+      name: "Sidebar Navigation",
+      slug: "sidebar-navigation",
+      category: "design-navigation",
+      explanation: "Fixed sidebar with hierarchical navigation, collapsible sections, and active state indicators. Provides persistent navigation context for complex applications.",
+      use_cases: '["Dashboard apps","Documentation sites","Admin panels","IDE-like tools"]',
+      related_patterns: '["Command Palette","Breadcrumb","Tab Navigation"]',
+      educational_value: "Teaches information architecture and navigation hierarchy. Balances discoverability with screen real estate.",
+      bhavya_recommendation: "Use for all Bhavya authenticated apps. Collapsible for mobile. Use for Git OS, AI Institute, IOC.",
+      learning_mode: "hands-on",
+      difficulty: "beginner",
+    },
+    {
+      id: "plib-15",
+      name: "Skeleton Loading",
+      slug: "skeleton-loading",
+      category: "design-interaction",
+      explanation: "Placeholder UI that mimics the shape of content before it loads. Reduces perceived loading time and prevents layout shift. Better than spinners for content-heavy pages.",
+      use_cases: '["Data tables","Card grids","Feed layouts","Dashboard widgets"]',
+      related_patterns: '["Loading States","Progressive Enhancement","Optimistic Updates"]',
+      educational_value: "Teaches perceived performance and user experience during loading states.",
+      bhavya_recommendation: "Use across all Bhavya apps. Replace generic spinners with skeleton screens. Improves perceived performance significantly.",
+      learning_mode: "hands-on",
+      difficulty: "beginner",
+    },
+    {
+      id: "plib-16",
+      name: "Documentation Layout",
+      slug: "documentation-layout",
+      category: "design-editorial",
+      explanation: "Sidebar navigation + main content area + table of contents. Optimized for reading, learning, and reference. Used by every major documentation site.",
+      use_cases: '["Documentation","Knowledge bases","Learning platforms","Reference sites"]',
+      related_patterns: '["Sidebar Navigation","Search","Code Highlighting"]',
+      educational_value: "Teaches content-first design and reading experience optimization. Essential for knowledge-heavy applications.",
+      bhavya_recommendation: "Use for Knowledge pillar and AI Institute. Perfect for curriculum, research papers, and institutional documentation.",
+      learning_mode: "reading",
+      difficulty: "beginner",
+    },
+    {
+      id: "plib-17",
+      name: "Impact Metrics",
+      slug: "impact-metrics",
+      category: "institutional-impact",
+      explanation: "Quantitative metrics presented with qualitative context. Numbers tell the story, narrative provides meaning. Used by nonprofits, governments, and institutions.",
+      use_cases: '["Homepage","About page","Annual reports","Impact pages"]',
+      related_patterns: '["Data Visualization","Storytelling","Editorial Design"]',
+      educational_value: "Teaches data storytelling and institutional communication. Balances credibility with engagement.",
+      bhavya_recommendation: "Essential for Bhavya Foundation homepage and mission pages. Show trees planted, students reached, communities served.",
+      learning_mode: "reading",
+      difficulty: "intermediate",
+    },
+    {
+      id: "plib-18",
+      name: "Keyboard Shortcuts",
+      slug: "keyboard-shortcuts",
+      category: "design-accessibility",
+      explanation: "Keyboard-driven interactions that bypass mouse navigation. Reduces friction for power users and improves accessibility for users with motor disabilities.",
+      use_cases: '["Developer tools","Dashboard apps","Content editors","Navigation"]',
+      related_patterns: '["Command Palette","Focus Management","ARIA Labels"]',
+      educational_value: "Teaches accessibility-first design and power-user workflows. Essential for inclusive applications.",
+      bhavya_recommendation: "Implement in Bhavya OS for all authenticated experiences. Document shortcuts clearly. Essential for researcher workflows.",
+      learning_mode: "hands-on",
+      difficulty: "intermediate",
+    },
+  ];
+
+  const insertDesignPatternLib = db.prepare(`
+    INSERT INTO pattern_library (id, name, slug, category, explanation, use_cases, related_patterns, educational_value, bhavya_recommendation, learning_mode, difficulty)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  for (const p of designPatterns) {
+    insertDesignPatternLib.run(
+      p.id, p.name, p.slug, p.category, p.explanation,
+      p.use_cases, p.related_patterns, p.educational_value,
+      p.bhavya_recommendation, p.learning_mode, p.difficulty,
+    );
+  }
+
+  // Design-related Knowledge Graph nodes
+  const designGraphNodes = [
+    { id: "gn-16", node_type: "website", label: "Linear", metadata: '{"score":95,"category":"saas"}' },
+    { id: "gn-17", node_type: "website", label: "Vercel", metadata: '{"score":93,"category":"saas"}' },
+    { id: "gn-18", node_type: "website", label: "Stripe", metadata: '{"score":96,"category":"saas"}' },
+    { id: "gn-19", node_type: "design_system", label: "Primer", metadata: '{"owner":"GitHub","components":50}' },
+    { id: "gn-20", node_type: "design_system", label: "Geist", metadata: '{"owner":"Vercel","components":30}' },
+    { id: "gn-21", node_type: "pattern", label: "Command Palette", metadata: '{"category":"design-navigation","difficulty":"intermediate"}' },
+    { id: "gn-22", node_type: "pattern", label: "Dark Mode First", metadata: '{"category":"design-hero","difficulty":"beginner"}' },
+    { id: "gn-23", node_type: "pattern", label: "Gradient Hero", metadata: '{"category":"design-hero","difficulty":"beginner"}' },
+    { id: "gn-24", node_type: "mission", label: "Forest", metadata: '{"focus":"ecological restoration"}' },
+    { id: "gn-25", node_type: "mission", label: "Knowledge", metadata: '{"focus":"AI education"}' },
+    { id: "gn-26", node_type: "mission", label: "Heritage", metadata: '{"focus":"cultural preservation"}' },
+    { id: "gn-27", node_type: "mission", label: "Community", metadata: '{"focus":"social impact"}' },
+    { id: "gn-28", node_type: "knowledge_package", label: "Design Genome Synthesis", metadata: '{"category":"design","quality":90}' },
+    { id: "gn-29", node_type: "recommendation", label: "Adopt Command Palette", metadata: '{"priority":"high","type":"design-pattern"}' },
+  ];
+
+  for (const n of designGraphNodes) {
+    insertGraphNode.run(n.id, n.node_type, n.label, n.metadata);
+  }
+
+  // Design-related Knowledge Graph edges
+  const designGraphEdges = [
+    { id: "ge-20", source_id: "gn-16", target_id: "gn-21", relationship: "implements", weight: 0.95 },
+    { id: "ge-21", source_id: "gn-21", target_id: "gn-29", relationship: "inspires", weight: 0.9 },
+    { id: "ge-22", source_id: "gn-29", target_id: "gn-24", relationship: "recommended_for", weight: 0.8 },
+    { id: "ge-23", source_id: "gn-29", target_id: "gn-25", relationship: "recommended_for", weight: 0.9 },
+    { id: "ge-24", source_id: "gn-16", target_id: "gn-22", relationship: "implements", weight: 0.9 },
+    { id: "ge-25", source_id: "gn-17", target_id: "gn-23", relationship: "implements", weight: 0.85 },
+    { id: "ge-26", source_id: "gn-17", target_id: "gn-20", relationship: "uses", weight: 0.95 },
+    { id: "ge-27", source_id: "gn-18", target_id: "gn-28", relationship: "inspires", weight: 0.8 },
+    { id: "ge-28", source_id: "gn-28", target_id: "gn-24", relationship: "supports", weight: 0.7 },
+    { id: "ge-29", source_id: "gn-28", target_id: "gn-25", relationship: "supports", weight: 0.9 },
+    { id: "ge-30", source_id: "gn-28", target_id: "gn-26", relationship: "supports", weight: 0.7 },
+    { id: "ge-31", source_id: "gn-28", target_id: "gn-27", relationship: "supports", weight: 0.8 },
+  ];
+
+  for (const e of designGraphEdges) {
+    insertGraphEdge.run(e.id, e.source_id, e.target_id, e.relationship, e.weight);
+  }
+
+  // Design-related Recommendations
+  const designRecommendations = [
+    {
+      id: "rec-6",
+      type: "design-pattern",
+      title: "Adopt Command Palette for Bhavya OS",
+      description: "Implement Cmd+K command palette for global search and navigation in all authenticated Bhavya apps. Based on analysis of Linear, GitHub, and VS Code.",
+      priority: "high",
+      status: "pending",
+    },
+    {
+      id: "rec-7",
+      type: "design-pattern",
+      title: "Implement Skeleton Loading Across Bhavya Apps",
+      description: "Replace generic spinners with skeleton loading screens. Based on analysis of Linear, Vercel, and Stripe. Improves perceived performance by 40%.",
+      priority: "medium",
+      status: "pending",
+    },
+    {
+      id: "rec-8",
+      type: "design-pattern",
+      title: "Adapt Gradient Hero for Bhavya Homepage",
+      description: "Use forest green/gold gradient hero on Bhavya Foundation homepage. Based on Vercel's gradient hero pattern. Adapted for Bhavya brand colors.",
+      priority: "high",
+      status: "pending",
+    },
+    {
+      id: "rec-9",
+      type: "design-pattern",
+      title: "Use Documentation Layout for Knowledge Pillar",
+      description: "Apply sidebar + content + TOC layout for Knowledge pillar and AI Institute. Based on Vercel, Stripe, and Tailwind CSS documentation patterns.",
+      priority: "high",
+      status: "pending",
+    },
+    {
+      id: "rec-10",
+      type: "design-pattern",
+      title: "Implement Keyboard Shortcuts for Research Workflows",
+      description: "Add keyboard shortcuts for researcher and developer workflows in Bhavya OS. Based on GitHub and Linear keyboard interaction patterns.",
+      priority: "medium",
+      status: "pending",
+    },
+  ];
+
+  for (const r of designRecommendations) {
+    insertRec.run(r.id, r.type, r.title, r.description, r.priority, r.status);
+  }
+
+  // Constitutional Validation seed data
+  const insertValidation = db.prepare(`
+    INSERT INTO constitutional_validations (id, source_id, source_type, description, brand_alignment, mission_alignment, tone_compliance, anti_pattern_score, accessibility_compliance, evidence_quality, overall_constitutional_score, violations, recommendations, anti_patterns_detected, mission_relevance)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  const validations = [
+    {
+      id: "val-1",
+      source_id: "bhavya-platform",
+      source_type: "repository",
+      description: "Bhavya Platform core packages — uses brand tokens, Forest Green #0E382E primary, editorial typography, minimal design",
+      brand_alignment: 95,
+      mission_alignment: 88,
+      tone_compliance: 92,
+      anti_pattern_score: 90,
+      accessibility_compliance: 85,
+      evidence_quality: 90,
+      overall_constitutional_score: 90,
+      violations: JSON.stringify([]),
+      recommendations: JSON.stringify([{ rule: "accessibility", message: "Add prefers-reduced-motion support to animation components", priority: "medium" }]),
+      anti_patterns_detected: JSON.stringify([]),
+      mission_relevance: JSON.stringify({ forest: 0.7, knowledge: 0.95, heritage: 0.6, community: 0.8 }),
+    },
+    {
+      id: "val-2",
+      source_id: "ai-institute",
+      source_type: "repository",
+      description: "AI Institute canonical app — uses platform-ui tokens, editorial typography, institutional layout",
+      brand_alignment: 92,
+      mission_alignment: 95,
+      tone_compliance: 88,
+      anti_pattern_score: 95,
+      accessibility_compliance: 82,
+      evidence_quality: 88,
+      overall_constitutional_score: 90,
+      violations: JSON.stringify([{ rule: "brand-typography", message: "Some headings use sans-serif instead of serif", severity: "minor" }]),
+      recommendations: JSON.stringify([{ rule: "brand-typography", message: "Use serif font for all headings per Brand Constitution Chapter 18", priority: "high" }]),
+      anti_patterns_detected: JSON.stringify([]),
+      mission_relevance: JSON.stringify({ forest: 0.6, knowledge: 0.98, heritage: 0.7, community: 0.85 }),
+    },
+    {
+      id: "val-3",
+      source_id: "github-os",
+      source_type: "repository",
+      description: "GitHub OS Design Intelligence — now using brand tokens, Forest Green, Heritage Gold palette",
+      brand_alignment: 88,
+      mission_alignment: 82,
+      tone_compliance: 90,
+      anti_pattern_score: 92,
+      accessibility_compliance: 78,
+      evidence_quality: 85,
+      overall_constitutional_score: 86,
+      violations: JSON.stringify([{ rule: "accessibility", message: "Score bars need aria-labels", severity: "minor" }]),
+      recommendations: JSON.stringify([{ rule: "accessibility", message: "Add aria-label to all progress bars and score indicators", priority: "medium" }]),
+      anti_patterns_detected: JSON.stringify([]),
+      mission_relevance: JSON.stringify({ forest: 0.5, knowledge: 0.9, heritage: 0.6, community: 0.7 }),
+    },
+  ];
+
+  for (const v of validations) {
+    insertValidation.run(
+      v.id, v.source_id, v.source_type, v.description,
+      v.brand_alignment, v.mission_alignment, v.tone_compliance,
+      v.anti_pattern_score, v.accessibility_compliance, v.evidence_quality,
+      v.overall_constitutional_score,
+      v.violations, v.recommendations, v.anti_patterns_detected, v.mission_relevance
+    );
+  }
 }

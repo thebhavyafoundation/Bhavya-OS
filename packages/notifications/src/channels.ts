@@ -26,7 +26,7 @@ export class ConsoleChannel implements NotificationChannelHandler {
 
   async send(notification: Notification): Promise<ChannelResult> {
     console.log(
-      `[NOTIFICATION] ${notification.type}: ${notification.subject} → ${notification.recipient}`,
+      `[NOTIFICATION] ${notification.type}: ${notification.title} → ${notification.recipient}`,
     );
     return { success: true };
   }
@@ -57,7 +57,7 @@ export class InAppChannel implements NotificationChannelHandler {
   markRead(notificationId: string): boolean {
     const n = this.notifications.find((n) => n.id === notificationId);
     if (!n) return false;
-    n.readAt = new Date().toISOString();
+    n.readAt = new Date();
     return true;
   }
 

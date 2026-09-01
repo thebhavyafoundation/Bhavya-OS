@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCourseById, getTotalLessons } from "@/data/academy-courses";
+import { loadPublishedCourseById, getTotalLessonsAsync, getFirstLessonId } from "@/data/academy-courses";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const course = getCourseById(id);
+  const course = await loadPublishedCourseById(id);
   if (!course) return { title: "Course Not Found" };
   return {
     title: `${course.title} | Bhavya AI Institute`,
@@ -30,10 +30,11 @@ export default async function CourseDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const course = getCourseById(id);
+  const course = await loadPublishedCourseById(id);
   if (!course) notFound();
 
-  const totalLessons = getTotalLessons(course.id);
+  const totalLessons = await getTotalLessonsAsync(course.id);
+  const firstLessonId = await getFirstLessonId(course.id);
 
   return (
     <main className="min-h-screen bg-[#f5f1e6]">
@@ -161,14 +162,16 @@ export default async function CourseDetailPage({
           </div>
         )}
 
-        <div className="mt-12 flex justify-center">
-          <Link
-            href={`/courses/${course.id}/lessons/${course.modules[0]?.lessons[0]?.id}`}
-            className="rounded-lg bg-[#1a3a2a] px-8 py-3 text-sm font-medium text-white hover:bg-[#1a3a2a]/80 transition"
-          >
-            Start Course
-          </Link>
-        </div>
+        {firstLessonId && (
+          <div className="mt-12 flex justify-center">
+            <Link
+              href={`/courses/${course.id}/lessons/${firstLessonId}`}
+              className="rounded-lg bg-[#1a3a2a] px-8 py-3 text-sm font-medium text-white hover:bg-[#1a3a2a]/80 transition"
+            >
+              Start Course
+            </Link>
+          </div>
+        )}
       </div>
     </main>
   );

@@ -400,5 +400,152 @@ function initializeDatabase(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_fitness_repo ON repository_fitness(repository_id);
     CREATE INDEX IF NOT EXISTS idx_student_repo ON student_mode(repository_id);
     CREATE INDEX IF NOT EXISTS idx_elite_category ON elite_engineering_library(category);
+
+    -- Design Intelligence: Website Intelligence
+    CREATE TABLE IF NOT EXISTS website_intelligence (
+      id TEXT PRIMARY KEY,
+      source_url TEXT NOT NULL,
+      repository_id TEXT,
+      name TEXT NOT NULL,
+      description TEXT,
+      framework TEXT,
+      runtime TEXT,
+      design_system TEXT,
+      component_system TEXT,
+      layout_system TEXT,
+      navigation_architecture TEXT,
+      typography TEXT,
+      color_system TEXT,
+      spacing_system TEXT,
+      motion_system TEXT,
+      interaction_patterns TEXT DEFAULT '[]',
+      responsive_patterns TEXT DEFAULT '[]',
+      accessibility_characteristics TEXT DEFAULT '{}',
+      performance_observations TEXT DEFAULT '{}',
+      seo_observations TEXT DEFAULT '{}',
+      screenshots TEXT DEFAULT '[]',
+      extracted_pattern_ids TEXT DEFAULT '[]',
+      bhavya_relevance_score REAL DEFAULT 0,
+      quality_score REAL DEFAULT 0,
+      provenance TEXT DEFAULT '{}',
+      analyzed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (repository_id) REFERENCES repositories(id)
+    );
+
+    -- Design Intelligence: Design Intelligence Record
+    CREATE TABLE IF NOT EXISTS design_intelligence (
+      id TEXT PRIMARY KEY,
+      source_id TEXT NOT NULL,
+      source_type TEXT NOT NULL,
+      typography TEXT DEFAULT '{}',
+      color TEXT DEFAULT '{}',
+      spacing TEXT DEFAULT '{}',
+      imagery TEXT DEFAULT '{}',
+      surfaces TEXT DEFAULT '{}',
+      grid TEXT DEFAULT '{}',
+      container TEXT DEFAULT '{}',
+      section_structure TEXT DEFAULT '{}',
+      responsive_behavior TEXT DEFAULT '{}',
+      primary_nav TEXT DEFAULT '{}',
+      secondary_nav TEXT DEFAULT '{}',
+      contextual_nav TEXT DEFAULT '{}',
+      command_nav TEXT DEFAULT '{}',
+      hover TEXT DEFAULT '{}',
+      focus TEXT DEFAULT '{}',
+      scroll TEXT DEFAULT '{}',
+      transitions TEXT DEFAULT '{}',
+      motion_library TEXT,
+      motion_techniques TEXT DEFAULT '[]',
+      motion_intensity TEXT,
+      semantics TEXT DEFAULT '{}',
+      keyboard TEXT DEFAULT '{}',
+      contrast TEXT DEFAULT '{}',
+      reduced_motion TEXT DEFAULT '{}',
+      image_strategy TEXT,
+      loading TEXT,
+      javascript TEXT,
+      rendering TEXT,
+      extracted_pattern_ids TEXT DEFAULT '[]',
+      bhavya_relevance TEXT,
+      recommended_use TEXT,
+      risks TEXT DEFAULT '[]',
+      adaptation_notes TEXT,
+      analyzed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Design Intelligence: Design Genome
+    CREATE TABLE IF NOT EXISTS design_genome (
+      id TEXT PRIMARY KEY,
+      category TEXT NOT NULL,
+      pattern_name TEXT NOT NULL,
+      frequency INTEGER DEFAULT 0,
+      avg_quality_score REAL DEFAULT 0,
+      avg_bhavya_relevance REAL DEFAULT 0,
+      source_ids TEXT DEFAULT '[]',
+      mission_relevance TEXT DEFAULT '{}',
+      accessibility_rating TEXT DEFAULT 'unknown',
+      performance_rating TEXT DEFAULT 'unknown',
+      mobile_rating TEXT DEFAULT 'unknown',
+      institutional_fit TEXT DEFAULT 'unknown',
+      recommended_for TEXT DEFAULT '[]',
+      evidence TEXT,
+      calculated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Design Intelligence: Design Score
+    CREATE TABLE IF NOT EXISTS design_scores (
+      id TEXT PRIMARY KEY,
+      source_id TEXT NOT NULL,
+      source_type TEXT NOT NULL,
+      institutional_relevance REAL DEFAULT 0,
+      ux_quality REAL DEFAULT 0,
+      accessibility REAL DEFAULT 0,
+      performance REAL DEFAULT 0,
+      visual_quality REAL DEFAULT 0,
+      reusability REAL DEFAULT 0,
+      technical_quality REAL DEFAULT 0,
+      innovation REAL DEFAULT 0,
+      maintainability REAL DEFAULT 0,
+      bhavya_brand_compatibility REAL DEFAULT 0,
+      overall_score REAL DEFAULT 0,
+      explanation TEXT DEFAULT '{}',
+      calculated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_website_intelligence_url ON website_intelligence(source_url);
+    CREATE INDEX IF NOT EXISTS idx_website_intelligence_repo ON website_intelligence(repository_id);
+    CREATE INDEX IF NOT EXISTS idx_website_intelligence_relevance ON website_intelligence(bhavya_relevance_score);
+    CREATE INDEX IF NOT EXISTS idx_design_intelligence_source ON design_intelligence(source_id, source_type);
+    CREATE INDEX IF NOT EXISTS idx_design_genome_category ON design_genome(category);
+    CREATE INDEX IF NOT EXISTS idx_design_genome_relevance ON design_genome(avg_bhavya_relevance);
+    CREATE INDEX IF NOT EXISTS idx_design_scores_source ON design_scores(source_id, source_type);
+    CREATE INDEX IF NOT EXISTS idx_design_scores_overall ON design_scores(overall_score);
+
+    -- Constitutional Design Validator
+    CREATE TABLE IF NOT EXISTS constitutional_validations (
+      id TEXT PRIMARY KEY,
+      source_id TEXT NOT NULL,
+      source_type TEXT NOT NULL,
+      brand_alignment REAL DEFAULT 0,
+      mission_alignment REAL DEFAULT 0,
+      tone_compliance REAL DEFAULT 0,
+      anti_pattern_score REAL DEFAULT 0,
+      accessibility_compliance REAL DEFAULT 0,
+      evidence_quality REAL DEFAULT 0,
+      overall_constitutional_score REAL DEFAULT 0,
+      violations TEXT DEFAULT '[]',
+      recommendations TEXT DEFAULT '[]',
+      anti_patterns_detected TEXT DEFAULT '[]',
+      mission_relevance TEXT DEFAULT '{}',
+      validated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_constitutional_source ON constitutional_validations(source_id, source_type);
+    CREATE INDEX IF NOT EXISTS idx_constitutional_score ON constitutional_validations(overall_constitutional_score);
   `);
 }

@@ -75,7 +75,7 @@ export class ReplayEngine {
     let replayedEvents = 0;
     for (const event of executionEvents) {
       try {
-        await this.config.events.emit(event.type, event.payload);
+        await this.config.events.emit(event.type, event.payload as Record<string, unknown>);
         replayedEvents++;
       } catch {
         // Skip failed events

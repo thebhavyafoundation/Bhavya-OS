@@ -28,6 +28,8 @@ export interface SelfOrganizingAgent {
   performance: number; // 0-1 score
 }
 
+export type Agent = SelfOrganizingAgent;
+
 export interface SelfOrganizingConfig {
   events: {
     emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
