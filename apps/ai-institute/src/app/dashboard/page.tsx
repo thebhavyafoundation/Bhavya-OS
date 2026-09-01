@@ -8,14 +8,13 @@ import {
   BookOpen,
   FlaskConical,
   FolderOpen,
-  BarChart3,
   Network,
   Flame,
   Trophy,
   ArrowRight,
   LogIn,
 } from "lucide-react";
-import { foundationCourse } from "@/data/course";
+import { getCourseById } from "@/data/academy-courses";
 
 export default function DashboardPage() {
   const { user, student, isAuthenticated } = useAuth();
@@ -33,7 +32,8 @@ export default function DashboardPage() {
             Your Learning Dashboard
           </h1>
           <p className="text-sm text-[#8a7359] mb-8 max-w-md mx-auto">
-            Sign in to access your courses, track progress, and continue your AI learning journey.
+            Sign in to access your courses, track progress, and continue your AI
+            learning journey.
           </p>
           <Link
             href="/login"
@@ -47,19 +47,16 @@ export default function DashboardPage() {
     );
   }
 
-  const totalLessons = foundationCourse.modules[0].lessons.length;
+  const course = getCourseById("ai-foundations");
+  const allLessons = course?.modules.flatMap((m) => m.lessons) ?? [];
+  const totalLessons = allLessons.length;
   const completedLessons = student?.lessonsCompleted.length || 0;
-  const progressPercent = totalLessons > 0
-    ? Math.round((completedLessons / totalLessons) * 100)
-    : 0;
+  const progressPercent =
+    totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   const currentLessonIdx = student?.currentLessonIndex || 0;
-  const currentLesson = foundationCourse.modules[0].lessons[
-    Math.min(currentLessonIdx, totalLessons - 1)
-  ];
-
-  const completedLabs = student?.labTasksCompleted.length || 0;
-  const totalLabs = 4;
+  const currentLesson =
+    allLessons[Math.min(currentLessonIdx, totalLessons - 1)];
 
   return (
     <div className="max-w-[1600px] mx-auto px-6 py-8">
@@ -94,10 +91,15 @@ export default function DashboardPage() {
                 Start Your First Course
               </h2>
               <p className="text-sm text-[#8a7359] mb-6 max-w-sm mx-auto">
-                Enroll in AI Foundations to begin learning. You&apos;ll explore what AI is, how it learns, and build your first AI project.
+                Enroll in AI Foundations to begin learning. You&apos;ll explore
+                what AI is, how it learns, and build your first AI project.
               </p>
               <Link
-                href="/courses/foundations/lessons/1"
+                href={
+                  allLessons.length > 0
+                    ? `/courses/ai-foundations/lessons/${allLessons[0].id}`
+                    : "/courses/ai-foundations"
+                }
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] text-sm font-semibold hover:bg-[#c9a227]/90 transition-colors"
               >
                 Begin AI Foundations
@@ -118,24 +120,25 @@ export default function DashboardPage() {
                       {currentLesson.title}
                     </h2>
                     <p className="text-sm text-[#8a7359] mt-1">
-                      {currentLesson.description}
+                      Lesson {currentLesson.order} in AI Foundations
                     </p>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-[#8a7359]">
                     <BookOpen className="w-3.5 h-3.5" />
-                    {currentLesson.estimatedTime} min
+                    {currentLesson.duration} min
                   </div>
                 </div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className="px-2 py-1 rounded-md bg-[#1a3a2a]/30 text-[#4ade80] text-[10px] font-semibold uppercase">
-                    {currentLesson.difficulty}
-                  </span>
-                  <span className="text-xs text-[#8a7359]">
-                    {currentLesson.objectives.length} objectives
+                    Lesson {currentLesson.order}
                   </span>
                 </div>
                 <Link
-                  href={`/courses/foundations/lessons/${currentLessonIdx + 1}`}
+                  href={
+                    currentLesson
+                      ? `/courses/ai-foundations/lessons/${currentLesson.id}`
+                      : "/courses/ai-foundations"
+                  }
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#c9a227] text-[#0a0f0d] text-sm font-semibold hover:bg-[#c9a227]/90 transition-colors"
                 >
                   Continue Learning
@@ -156,7 +159,9 @@ export default function DashboardPage() {
                   <div>
                     <div className="flex items-center justify-between text-xs mb-1.5">
                       <span className="text-[#8a7359]">Overall</span>
-                      <span className="text-[#c9a227] font-mono">{progressPercent}%</span>
+                      <span className="text-[#c9a227] font-mono">
+                        {progressPercent}%
+                      </span>
                     </div>
                     <div className="h-2 bg-[#1a3a2a]/30 rounded-full overflow-hidden">
                       <motion.div
@@ -177,19 +182,9 @@ export default function DashboardPage() {
                     <div className="h-2 bg-[#1a3a2a]/30 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-[#4ade80] rounded-full transition-all"
-                        style={{ width: `${totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="text-[#8a7359]">Lab Tasks</span>
-                      <span className="text-[#4ade80] font-mono">{completedLabs} / {totalLabs}</span>
-                    </div>
-                    <div className="h-2 bg-[#1a3a2a]/30 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-[#4ade80] rounded-full transition-all"
-                        style={{ width: `${totalLabs > 0 ? (completedLabs / totalLabs) * 100 : 0}%` }}
+                        style={{
+                          width: `${totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0}%`,
+                        }}
                       />
                     </div>
                   </div>
@@ -206,71 +201,58 @@ export default function DashboardPage() {
                   Module Outline
                 </h3>
                 <div className="space-y-2">
-                  {foundationCourse.modules[0].lessons.map((lesson, i) => {
-                    const isCompleted = student?.lessonsCompleted.includes(lesson.id);
-                    const isCurrent = i === currentLessonIdx;
-                    return (
-                      <Link
-                        key={lesson.id}
-                        href={`/courses/foundations/lessons/${i + 1}`}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1a3a2a]/20 transition-colors group"
-                      >
-                        <div
-                          className={`w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors ${
-                            isCompleted
-                              ? "bg-[#4ade80]/20 text-[#4ade80] border border-[#4ade80]/40"
-                              : isCurrent
-                                ? "bg-[#c9a227]/20 text-[#c9a227] border border-[#c9a227]/40"
-                                : "border border-[#1a3a2a]/60 text-[#8a7359] group-hover:border-[#c9a227]/40"
-                          }`}
+                  {course?.modules.map((mod) =>
+                    mod.lessons.map((lesson, i) => {
+                      const isCompleted = student?.lessonsCompleted.includes(
+                        lesson.id,
+                      );
+                      const isCurrent =
+                        allLessons.findIndex((l) => l.id === lesson.id) ===
+                        currentLessonIdx;
+                      return (
+                        <Link
+                          key={lesson.id}
+                          href={`/courses/ai-foundations/lessons/${lesson.id}`}
+                          className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1a3a2a]/20 transition-colors group"
                         >
-                          {isCompleted ? "✓" : i + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm text-[#f5f1e6] truncate">
-                            {lesson.title}
+                          <div
+                            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors ${
+                              isCompleted
+                                ? "bg-[#4ade80]/20 text-[#4ade80] border border-[#4ade80]/40"
+                                : isCurrent
+                                  ? "bg-[#c9a227]/20 text-[#c9a227] border border-[#c9a227]/40"
+                                  : "border border-[#1a3a2a]/60 text-[#8a7359] group-hover:border-[#c9a227]/40"
+                            }`}
+                          >
+                            {isCompleted ? "✓" : lesson.order}
                           </div>
-                          <div className="text-[10px] text-[#8a7359]">
-                            {lesson.estimatedTime} min
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm text-[#f5f1e6] truncate">
+                              {lesson.title}
+                            </div>
+                            <div className="text-[10px] text-[#8a7359]">
+                              {lesson.duration} min · {mod.title}
+                            </div>
                           </div>
-                        </div>
-                      </Link>
-                    );
-                  })}
+                        </Link>
+                      );
+                    }),
+                  )}
                   <Link
-                    href="/courses/foundations/lab"
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1a3a2a]/20 transition-colors group"
-                  >
-                    <div className="w-7 h-7 rounded-full border border-[#1a3a2a]/60 flex items-center justify-center group-hover:border-[#c9a227]/40 transition-colors">
-                      <FlaskConical className="w-3.5 h-3.5 text-[#8a7359] group-hover:text-[#c9a227]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm text-[#f5f1e6]">Prompt Engineering Lab</div>
-                      <div className="text-[10px] text-[#8a7359]">45 min</div>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/courses/foundations/check"
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1a3a2a]/20 transition-colors group"
-                  >
-                    <div className="w-7 h-7 rounded-full border border-[#1a3a2a]/60 flex items-center justify-center group-hover:border-[#c9a227]/40 transition-colors">
-                      <BarChart3 className="w-3.5 h-3.5 text-[#8a7359] group-hover:text-[#c9a227]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm text-[#f5f1e6]">Knowledge Check</div>
-                      <div className="text-[10px] text-[#8a7359]">4 questions</div>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/courses/foundations/project"
+                    href="/courses/ai-foundations"
                     className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1a3a2a]/20 transition-colors group"
                   >
                     <div className="w-7 h-7 rounded-full border border-[#1a3a2a]/60 flex items-center justify-center group-hover:border-[#c9a227]/40 transition-colors">
                       <FolderOpen className="w-3.5 h-3.5 text-[#8a7359] group-hover:text-[#c9a227]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm text-[#f5f1e6]">Build Your AI Assistant</div>
-                      <div className="text-[10px] text-[#8a7359]">Mini Project</div>
+                      <div className="text-sm text-[#f5f1e6]">
+                        View Full Course
+                      </div>
+                      <div className="text-[10px] text-[#8a7359]">
+                        {totalLessons} lessons · {course?.modules.length}{" "}
+                        modules
+                      </div>
                     </div>
                   </Link>
                 </div>
@@ -293,7 +275,9 @@ export default function DashboardPage() {
               <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#c9a227]/10 border border-[#c9a227]/25">
                 <Trophy className="w-8 h-8 text-[#c9a227]" />
                 <div>
-                  <div className="text-sm text-[#c9a227] font-semibold">Foundation Explorer</div>
+                  <div className="text-sm text-[#c9a227] font-semibold">
+                    Foundation Explorer
+                  </div>
                   <div className="text-[10px] text-[#8a7359]">
                     Completed the AI Foundations project
                   </div>
@@ -325,7 +309,8 @@ export default function DashboardPage() {
               <Flame className="w-8 h-8 text-[#c9a227]" />
               <div>
                 <div className="text-2xl font-bold text-[#f5f1e6]">
-                  {student?.streak || 0} day{(student?.streak || 0) !== 1 ? "s" : ""}
+                  {student?.streak || 0} day
+                  {(student?.streak || 0) !== 1 ? "s" : ""}
                 </div>
                 <div className="text-[10px] text-[#8a7359]">
                   {(student?.streak || 0) === 0
@@ -347,11 +332,17 @@ export default function DashboardPage() {
             </h3>
             <div className="space-y-2">
               <Link
-                href="/courses/foundations/lessons/1"
+                href={
+                  allLessons.length > 0
+                    ? `/courses/ai-foundations/lessons/${allLessons[0].id}`
+                    : "/courses"
+                }
                 className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#1a3a2a]/15 border border-[#1a3a2a]/25 text-sm text-[#8a7359] hover:bg-[#1a3a2a]/25 hover:text-[#f5f1e6] transition-all"
               >
                 <BookOpen className="w-4 h-4" />
-                {student?.enrolledCourses.length ? "Continue Lesson" : "Start Learning"}
+                {student?.enrolledCourses.length
+                  ? "Continue Lesson"
+                  : "Start Learning"}
               </Link>
               <Link
                 href="/mentor"

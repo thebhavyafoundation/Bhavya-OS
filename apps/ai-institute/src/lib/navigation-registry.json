@@ -1,0 +1,370 @@
+{
+  "version": "1.3.0",
+  "description": "Bhavya Foundation — Canonical Navigation Registry",
+  "lastUpdated": "2026-09-01",
+  "waveO": {
+    "note": "Wave O orphan classification. Deferred routes are NOT in canonical navigation.",
+    "redirected": [
+      {
+        "from": "/portfolio",
+        "to": "/app/profile",
+        "reason": "Overlaps /app/profile, hardcoded stats, no inbound links"
+      }
+    ],
+    "deferred": [
+      {
+        "route": "/playground",
+        "reason": "8-tab lab, 8 component libs, needs architectural decision"
+      },
+      {
+        "route": "/programs",
+        "reason": "Editorial programs, broken sub-routes, needs product decision"
+      }
+    ],
+    "promoted": [
+      {
+        "route": "/learning-paths",
+        "reason": "Wave Q: 8/8 flagship stages connected to published courses. Canonical curriculum graph.",
+        "wave": "Q"
+      }
+    ],
+    "legacyRedirects": [
+      {
+        "from": "/courses/foundations",
+        "to": "/courses/ai-foundations",
+        "reason": "Legacy single-course data system consolidated into canonical curriculum",
+        "wave": "R"
+      },
+      {
+        "from": "/courses/foundations/lessons/:id",
+        "to": "/courses/ai-foundations",
+        "reason": "Numeric lesson IDs do not map to canonical string IDs",
+        "wave": "R"
+      },
+      {
+        "from": "/courses/foundations/lab",
+        "to": "/courses/ai-foundations",
+        "reason": "Interactive lab not part of canonical course system",
+        "wave": "R"
+      },
+      {
+        "from": "/courses/foundations/check",
+        "to": "/courses/ai-foundations",
+        "reason": "Knowledge check not part of canonical course system",
+        "wave": "R"
+      },
+      {
+        "from": "/courses/foundations/project",
+        "to": "/courses/ai-foundations",
+        "reason": "Capstone project not part of canonical course system",
+        "wave": "R"
+      }
+    ]
+  },
+  "layers": {
+    "public": {
+      "description": "Public institutional experience — no auth required",
+      "items": [
+        { "id": "home", "label": "Home", "href": "/", "icon": "Home" },
+        {
+          "id": "missions",
+          "label": "Missions",
+          "href": "/missions",
+          "icon": "Target"
+        },
+        {
+          "id": "forest",
+          "label": "Forest",
+          "href": "/missions/forest",
+          "icon": "TreePine",
+          "pillar": "forest"
+        },
+        {
+          "id": "knowledge",
+          "label": "Knowledge",
+          "href": "/missions/knowledge",
+          "icon": "Brain",
+          "pillar": "knowledge"
+        },
+        {
+          "id": "heritage",
+          "label": "Heritage",
+          "href": "/missions/heritage",
+          "icon": "Landmark",
+          "pillar": "heritage"
+        },
+        {
+          "id": "community",
+          "label": "Community",
+          "href": "/missions/community",
+          "icon": "HeartHandshake",
+          "pillar": "community"
+        },
+        {
+          "id": "courses",
+          "label": "Courses",
+          "href": "/courses",
+          "icon": "GraduationCap"
+        },
+        {
+          "id": "learning-paths",
+          "label": "Learning Paths",
+          "href": "/learning-paths",
+          "icon": "Route"
+        },
+        {
+          "id": "research",
+          "label": "Research",
+          "href": "/research",
+          "icon": "FlaskConical"
+        },
+        {
+          "id": "impact",
+          "label": "Impact",
+          "href": "/impact",
+          "icon": "TrendingUp"
+        }
+      ]
+    },
+    "app": {
+      "description": "Authenticated personal experience — role-aware",
+      "items": [
+        { "id": "app-home", "label": "Home", "href": "/app", "icon": "Home" },
+        {
+          "id": "app-learn",
+          "label": "Learn",
+          "href": "/app/learn",
+          "icon": "BookOpen",
+          "roles": ["student", "builder", "researcher", "mentor", "educator"]
+        },
+        {
+          "id": "app-forest",
+          "label": "Forest",
+          "href": "/app/forest",
+          "icon": "TreePine",
+          "roles": ["admin", "instructor", "educator", "volunteer"]
+        },
+        {
+          "id": "app-projects",
+          "label": "Projects",
+          "href": "/app/projects",
+          "icon": "FlaskConical",
+          "roles": ["builder", "researcher"]
+        },
+        {
+          "id": "app-community",
+          "label": "Community",
+          "href": "/app/community",
+          "icon": "Users"
+        },
+        {
+          "id": "app-knowledge",
+          "label": "Knowledge",
+          "href": "/app/knowledge",
+          "icon": "Compass"
+        },
+        {
+          "id": "app-missions",
+          "label": "Missions",
+          "href": "/app/missions",
+          "icon": "Target",
+          "roles": ["volunteer", "donor"]
+        },
+        {
+          "id": "app-research",
+          "label": "Research",
+          "href": "/app/research",
+          "icon": "FlaskConical",
+          "roles": ["researcher"]
+        },
+        {
+          "id": "app-credentials",
+          "label": "Credentials",
+          "href": "/app/credentials",
+          "icon": "Award"
+        },
+        {
+          "id": "app-contributions",
+          "label": "Contributions",
+          "href": "/app/contributions",
+          "icon": "Heart"
+        },
+        {
+          "id": "app-profile",
+          "label": "Profile",
+          "href": "/app/profile",
+          "icon": "User"
+        }
+      ]
+    },
+    "os": {
+      "description": "Institutional operating system — operational surface",
+      "sections": [
+        {
+          "id": "institution",
+          "label": "Institution",
+          "items": [
+            {
+              "id": "os-overview",
+              "label": "Overview",
+              "href": "/os",
+              "icon": "LayoutDashboard"
+            },
+            {
+              "id": "os-forest",
+              "label": "Forest",
+              "href": "/os/forest",
+              "icon": "TreePine"
+            },
+            {
+              "id": "os-knowledge",
+              "label": "Knowledge",
+              "href": "/os/knowledge",
+              "icon": "Brain"
+            },
+            {
+              "id": "os-governance",
+              "label": "Governance",
+              "href": "/os/governance",
+              "icon": "Scale"
+            },
+            {
+              "id": "os-memory",
+              "label": "Memory",
+              "href": "/os/memory",
+              "icon": "FileText"
+            }
+          ]
+        },
+        {
+          "id": "operations",
+          "label": "Operations",
+          "items": [
+            {
+              "id": "os-runtime",
+              "label": "Runtime",
+              "href": "/os/runtime",
+              "icon": "Zap"
+            },
+            {
+              "id": "os-observability",
+              "label": "Observability",
+              "href": "/os/observability",
+              "icon": "Eye"
+            },
+            {
+              "id": "os-api-explorer",
+              "label": "API Explorer",
+              "href": "/os/api-explorer",
+              "icon": "Terminal"
+            },
+            {
+              "id": "os-ioc",
+              "label": "IOC",
+              "href": "/os/ioc",
+              "icon": "Shield",
+              "note": "Institute of Compliance — migrating"
+            },
+            {
+              "id": "os-social",
+              "label": "Social",
+              "href": "/os/social",
+              "icon": "MessageSquare",
+              "note": "Communication Operations — migrating"
+            },
+            {
+              "id": "os-search",
+              "label": "Search",
+              "href": "/os/search",
+              "icon": "Search"
+            },
+            {
+              "id": "os-videos",
+              "label": "Videos",
+              "href": "/os/videos",
+              "icon": "Video"
+            }
+          ]
+        },
+        {
+          "id": "content",
+          "label": "Content",
+          "items": [
+            {
+              "id": "os-studio",
+              "label": "Studio",
+              "href": "/studio",
+              "icon": "FlaskConical",
+              "roles": ["educator", "instructor", "admin"]
+            }
+          ]
+        },
+        {
+          "id": "administration",
+          "label": "Administration",
+          "items": [
+            {
+              "id": "os-admin",
+              "label": "Admin",
+              "href": "/os/admin",
+              "icon": "Settings",
+              "roles": ["admin"]
+            },
+            {
+              "id": "os-docs",
+              "label": "Docs",
+              "href": "/os/docs",
+              "icon": "BookOpen"
+            },
+            {
+              "id": "os-github",
+              "label": "GitHub",
+              "href": "/os/github",
+              "icon": "Network"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "footer": {
+    "columns": [
+      {
+        "title": "Missions",
+        "links": [
+          { "label": "Forest", "href": "/missions/forest" },
+          { "label": "Knowledge", "href": "/missions/knowledge" },
+          { "label": "Heritage", "href": "/missions/heritage" },
+          { "label": "Community", "href": "/missions/community" }
+        ]
+      },
+      {
+        "title": "Learn",
+        "links": [
+          { "label": "Courses", "href": "/courses" },
+          { "label": "Learning Paths", "href": "/learning-paths" },
+          { "label": "Research", "href": "/research" },
+          { "label": "Impact", "href": "/impact" },
+          { "label": "Library", "href": "/library" }
+        ]
+      },
+      {
+        "title": "Governance",
+        "links": [
+          { "label": "About", "href": "/about" },
+          { "label": "Transparency", "href": "/transparency" },
+          { "label": "Contributing", "href": "/contributing" },
+          { "label": "Accessibility", "href": "/accessibility" }
+        ]
+      },
+      {
+        "title": "Platform",
+        "links": [
+          { "label": "Bhavya OS", "href": "/os" },
+          { "label": "API Explorer", "href": "/os/api-explorer" },
+          { "label": "Sign In", "href": "/login" }
+        ]
+      }
+    ]
+  }
+}
