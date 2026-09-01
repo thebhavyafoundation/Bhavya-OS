@@ -20,7 +20,15 @@ import { listEvidence, getEvidenceCounts } from "@/lib/institutional-evidence";
 
 export async function GET() {
   try {
-    const kos = listKOs();
+    const allKos = listKOs();
+
+    // Filter to published + institutional only (same filter as public-projection.ts)
+    const publicKos = allKos.filter((ko) => {
+      const status = ko.status || "draft";
+      const provenance = ko.provenance || "institutional";
+      return status === "published" && provenance === "institutional";
+    });
+
     const metrics = getKnowledgeMetrics();
 
     const evidence = listEvidence(10); // Latest 10 evidence entries
@@ -28,7 +36,7 @@ export async function GET() {
 
     return NextResponse.json({
       // Counts — derived from actual filesystem state where possible
-      totalKos: kos.length, // Authoritative: live directory scan
+      totalKos: publicKos.length, // Filtered: published + institutional only
       totalLessons: metrics.totalLessons,
       totalPublications: metrics.totalPublications,
 
