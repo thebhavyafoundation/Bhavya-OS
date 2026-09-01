@@ -107,22 +107,6 @@ export async function getForestMissions(): Promise<ForestMission[]> {
     .filter(Boolean);
 }
 
-export async function getForestStats() {
-  const missions = await getForestMissions();
-  const sites = listDir("content/forest").filter((f) => f.startsWith("site-"));
-  const plantings = listDir("content/forest").filter((f) =>
-    f.startsWith("planting-"),
-  );
-  return {
-    totalMissions: missions.length,
-    activeMissions: missions.filter(
-      (m) => m.status === "active" || m.status === "in-progress",
-    ).length,
-    totalSites: sites.length,
-    totalPlantings: plantings.length,
-  };
-}
-
 // --- Governance ---
 
 export interface GovernanceDoc {

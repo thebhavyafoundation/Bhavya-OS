@@ -3,24 +3,114 @@ import { Plug } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 const apiEndpoints = [
-  { method: "GET", path: "/api/knowledge", description: "List all Knowledge Objects", returns: "KnowledgeObject[]" },
-  { method: "GET", path: "/api/content", description: "List all content documents", returns: "ContentDocument[]" },
-  { method: "GET", path: "/api/governance", description: "List governance documents", returns: "GovernanceDoc[]" },
-  { method: "GET", path: "/api/policies", description: "List institutional policies", returns: "Policy[]" },
-  { method: "GET", path: "/api/forest/missions", description: "List forest restoration missions", returns: "ForestMission[]" },
-  { method: "GET", path: "/api/forest/stats", description: "Get forest mission statistics", returns: "ForestStats" },
-  { method: "GET", path: "/api/research", description: "List research projects", returns: "ResearchProject[]" },
-  { method: "GET", path: "/api/projects", description: "List institutional projects", returns: "Project[]" },
-  { method: "GET", path: "/api/memory/decisions", description: "List architectural decision records", returns: "DecisionMeta" },
-  { method: "GET", path: "/api/registry/services", description: "List registered services", returns: "Service[]" },
-  { method: "GET", path: "/api/registry/apps", description: "List registered applications", returns: "App[]" },
-  { method: "GET", path: "/api/registry/knowledge-graph", description: "Get knowledge graph nodes and edges", returns: "KnowledgeGraph" },
-  { method: "GET", path: "/api/registry/standards", description: "List institutional standards", returns: "Standards" },
-  { method: "GET", path: "/api/registry/workflows", description: "List institutional workflows", returns: "Workflows" },
-  { method: "GET", path: "/api/runtime", description: "Get runtime configuration and components", returns: "Runtime" },
-  { method: "GET", path: "/api/builders", description: "List registered builders", returns: "Builder[]" },
-  { method: "GET", path: "/api/navigation/:name", description: "Get navigation structure by name", returns: "Navigation" },
-  { method: "GET", path: "/api/stats", description: "Get aggregated content statistics", returns: "ContentStats" },
+  {
+    method: "GET",
+    path: "/api/knowledge",
+    description: "List all Knowledge Objects",
+    returns: "KnowledgeObject[]",
+  },
+  {
+    method: "GET",
+    path: "/api/content",
+    description: "List all content documents",
+    returns: "ContentDocument[]",
+  },
+  {
+    method: "GET",
+    path: "/api/governance",
+    description: "List governance documents",
+    returns: "GovernanceDoc[]",
+  },
+  {
+    method: "GET",
+    path: "/api/policies",
+    description: "List institutional policies",
+    returns: "Policy[]",
+  },
+  {
+    method: "GET",
+    path: "/api/forest/missions",
+    description: "List forest restoration missions",
+    returns: "ForestMission[]",
+  },
+  {
+    method: "GET",
+    path: "/api/forest/stats",
+    description: "Get forest mission statistics",
+    returns: "ForestStats",
+  },
+  {
+    method: "GET",
+    path: "/api/research",
+    description: "List research projects",
+    returns: "ResearchProject[]",
+  },
+  {
+    method: "GET",
+    path: "/api/projects",
+    description: "List institutional projects",
+    returns: "Project[]",
+  },
+  {
+    method: "GET",
+    path: "/api/memory/decisions",
+    description: "List architectural decision records",
+    returns: "DecisionMeta",
+  },
+  {
+    method: "GET",
+    path: "/api/registry/services",
+    description: "List registered services",
+    returns: "Service[]",
+  },
+  {
+    method: "GET",
+    path: "/api/registry/apps",
+    description: "List registered applications",
+    returns: "App[]",
+  },
+  {
+    method: "GET",
+    path: "/api/registry/knowledge-graph",
+    description: "Get knowledge graph nodes and edges",
+    returns: "KnowledgeGraph",
+  },
+  {
+    method: "GET",
+    path: "/api/registry/standards",
+    description: "List institutional standards",
+    returns: "Standards",
+  },
+  {
+    method: "GET",
+    path: "/api/registry/workflows",
+    description: "List institutional workflows",
+    returns: "Workflows",
+  },
+  {
+    method: "GET",
+    path: "/api/runtime",
+    description: "Get runtime configuration and components",
+    returns: "Runtime",
+  },
+  {
+    method: "GET",
+    path: "/api/builders",
+    description: "List registered builders",
+    returns: "Builder[]",
+  },
+  {
+    method: "GET",
+    path: "/api/navigation/:name",
+    description: "Get navigation structure by name",
+    returns: "Navigation",
+  },
+  {
+    method: "GET",
+    path: "/api/stats",
+    description: "Get aggregated content statistics",
+    returns: "ContentStats",
+  },
 ];
 
 const methodColors: Record<string, string> = {
@@ -31,13 +121,26 @@ const methodColors: Record<string, string> = {
 };
 
 const dataFunctions = [
-  "getKnowledgeObjects", "getContentDocuments", "getGovernanceDocs",
-  "getPolicies", "getForestMissions", "getForestStats",
-  "getResearchProjects", "getProjects", "getDecisions",
-  "getRuntime", "getBuilders", "getServices",
-  "getApps", "getRegistry", "getKnowledgeGraph",
-  "getStandards", "getWorkflows", "getNavigation",
-  "getContentStats", "getMDXContent", "getBBLLessons",
+  "getKnowledgeObjects",
+  "getContentDocuments",
+  "getGovernanceDocs",
+  "getPolicies",
+  "getForestMissions",
+  "getResearchProjects",
+  "getProjects",
+  "getDecisions",
+  "getRuntime",
+  "getBuilders",
+  "getServices",
+  "getApps",
+  "getRegistry",
+  "getKnowledgeGraph",
+  "getStandards",
+  "getWorkflows",
+  "getNavigation",
+  "getContentStats",
+  "getMDXContent",
+  "getBBLLessons",
 ];
 
 export default function ApiExplorerPage() {
@@ -74,7 +177,8 @@ export default function ApiExplorerPage() {
           >
             <span
               className={`text-[11px] font-bold px-2 py-0.5 rounded text-center font-mono ${
-                methodColors[endpoint.method] || "bg-bg-tertiary text-text-tertiary"
+                methodColors[endpoint.method] ||
+                "bg-bg-tertiary text-text-tertiary"
               }`}
             >
               {endpoint.method}
