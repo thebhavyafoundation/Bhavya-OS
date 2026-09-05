@@ -33,9 +33,9 @@ const milestones = [
   },
   {
     year: "2026",
-    title: "12 Schools Designed",
+    title: "Academic Structure Designed",
     description:
-      "Academic structure designed with 12 specialized schools covering the full spectrum of AI.",
+      "Multi-pillar academic structure designed to cover the full spectrum of AI education.",
   },
   {
     year: "2026",

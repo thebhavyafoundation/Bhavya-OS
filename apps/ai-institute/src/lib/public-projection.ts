@@ -60,6 +60,17 @@ export function isPublicClassification(classification: DataClassification): bool
   return classification === "PUBLIC";
 }
 
+/**
+ * Check if a Knowledge Object summary is eligible for public projection.
+ * Requires status="published" AND provenance="institutional".
+ * Used by both the stats API and the full projection functions.
+ */
+export function isKOPublicEligible(summary: { status?: string; provenance?: string }): boolean {
+  const status = summary.status || "draft";
+  const provenance = summary.provenance || "institutional";
+  return status === "published" && provenance === "institutional";
+}
+
 // ── Public DTO Types ───────────────────────────────────────────
 
 /**
@@ -298,12 +309,8 @@ export function getPublicKnowledgeObjects(): PublicKnowledgeObject[] {
   const { listKOs, getKO } = require("./knowledge-repository");
   const kos = listKOs() as Array<{ id: string; provenance?: string; status?: string }>;
   return kos
-    // Filter: only published + institutional
-    .filter((summary: { provenance?: string; status?: string }) => {
-      const status = summary.status || "draft";
-      const provenance = summary.provenance || "institutional";
-      return status === "published" && provenance === "institutional";
-    })
+    // Filter: only published + institutional (shared predicate)
+    .filter(isKOPublicEligible)
     .map((summary: { id: string }) => getKO(summary.id))
     .filter((ko: KnowledgeObject | null): ko is KnowledgeObject => ko !== null)
     .map(projectKnowledgeObject);

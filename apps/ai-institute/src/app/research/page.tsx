@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useAuth } from "@/components/AuthProvider";
+import { useState } from "react";
 import Link from "next/link";
 
 interface Paper {
@@ -131,30 +130,9 @@ const referencePapers: Paper[] = [
 ];
 
 export default function ResearchPage() {
-  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [papers, setPapers] = useState<Paper[]>(referencePapers);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPapers = async () => {
-      try {
-        const res = await fetch("/api/research/papers");
-        if (res.ok) {
-          const data = await res.json();
-          if (data.papers && data.papers.length > 0) {
-            setPapers(data.papers.map((p: Paper) => ({ ...p, source: "external" })));
-          }
-        }
-      } catch {
-        // Use reference papers
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPapers();
-  }, []);
+  const papers = referencePapers;
 
   const allTags = [...new Set(papers.flatMap((p) => p.tags))].sort();
 
@@ -262,11 +240,7 @@ export default function ResearchPage() {
       {/* Papers List */}
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
-          {loading ? (
-            <div className="text-center py-20 text-white/40">
-              Loading research library...
-            </div>
-          ) : filteredPapers.length === 0 ? (
+          {filteredPapers.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-4xl mb-4">📚</div>
               <h3 className="text-xl font-semibold mb-2">No papers found</h3>

@@ -101,7 +101,7 @@ export default function HeritagePage() {
                 marginTop: "var(--space-8)",
               }}
             >
-              <a href="/heritage" className="btn btn-gold">
+              <a href="/missions/heritage" className="btn btn-gold">
                 Explore Heritage
                 <ArrowRight size={16} />
               </a>

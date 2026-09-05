@@ -17,17 +17,14 @@ import { NextResponse } from "next/server";
 import { listKOs } from "@/lib/knowledge-repository";
 import { getKnowledgeMetrics } from "@/lib/knowledge-metrics";
 import { listEvidence, getEvidenceCounts } from "@/lib/institutional-evidence";
+import { isKOPublicEligible } from "@/lib/public-projection";
 
 export async function GET() {
   try {
     const allKos = listKOs();
 
-    // Filter to published + institutional only (same filter as public-projection.ts)
-    const publicKos = allKos.filter((ko) => {
-      const status = ko.status || "draft";
-      const provenance = ko.provenance || "institutional";
-      return status === "published" && provenance === "institutional";
-    });
+    // Filter to public-eligible only (shared predicate with public-projection.ts)
+    const publicKos = allKos.filter(isKOPublicEligible);
 
     const metrics = getKnowledgeMetrics();
 

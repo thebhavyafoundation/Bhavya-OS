@@ -38,6 +38,7 @@ export function SiteFooter() {
           <h4 className="footer-col-title">Learn</h4>
           <nav>
             <a href="/courses">Courses</a>
+            <a href="/learning-paths">Learning Paths</a>
             <a href="/research">Research</a>
             <a href="/impact">Impact</a>
             <a href="/library">Library</a>

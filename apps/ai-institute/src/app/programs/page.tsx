@@ -43,7 +43,7 @@ const programs = [
     accentName: "earth",
     curriculum: [
       "Research Methodology & Paper Writing",
-      "前沿 Topics in AI Safety",
+      "Advanced Topics in AI Safety",
       "Experimental Design & Benchmarking",
       "Novel Architecture Development",
       "Capstone: Publish a Research Paper",
@@ -51,10 +51,11 @@ const programs = [
   },
 ];
 
+// Stats computed from verified data — no fabricated institutional scale
 const stats = [
   { value: "3", label: "Programs" },
   { value: "10", label: "Courses" },
-  { value: "12", label: "Schools" },
+  { value: "8", label: "Learning Stages" },
   { value: "Open", label: "Enrollment" },
 ];
 

@@ -456,4 +456,95 @@ describe("Knowledge Mutation Loop", () => {
       }
     });
   });
+
+  // ── [id]/route.ts Evidence Recording (Wave 10B) ──────────────
+
+  describe("PUT/DELETE evidence recording", () => {
+    it("updateKO should produce a modifiable canonical record", () => {
+      const ko = repo.createKO({
+        title: "Update Evidence Test",
+        domain: "AI",
+        status: "draft",
+        provenance: "institutional",
+      });
+      const updated = repo.updateKO(ko.id, { title: "Updated Title" });
+      expect(updated).not.toBeNull();
+      expect(updated!.title).toBe("Updated Title");
+      // ID and createdAt should be preserved
+      expect(updated!.id).toBe(ko.id);
+      expect(updated!.createdAt).toBe(ko.createdAt);
+    });
+
+    it("deleteKO should remove the canonical record", () => {
+      const ko = repo.createKO({
+        title: "Delete Evidence Test",
+        domain: "AI",
+        status: "draft",
+        provenance: "institutional",
+      });
+      const deleted = repo.deleteKO(ko.id);
+      expect(deleted).toBe(true);
+      // Verify it's gone
+      const retrieved = repo.getKO(ko.id);
+      expect(retrieved).toBeNull();
+    });
+
+    it("updateKO with invalid ID should return null (no mutation)", () => {
+      const result = repo.updateKO("nonexistent-id", { title: "No-op" });
+      expect(result).toBeNull();
+    });
+
+    it("deleteKO with invalid ID should return false (no mutation)", () => {
+      const result = repo.deleteKO("nonexistent-id");
+      expect(result).toBe(false);
+    });
+
+    it("metrics should remain semantically correct after delete (cumulative counter)", () => {
+      const before = metricsMod.getKnowledgeMetrics();
+      const initialTotal = before.totalKos;
+
+      // Create and delete a KO
+      const ko = repo.createKO({
+        title: "Metrics Delete Test",
+        domain: "AI",
+        status: "draft",
+        provenance: "institutional",
+      });
+      metricsMod.recordKoCreated();
+      repo.deleteKO(ko.id);
+
+      const after = metricsMod.getKnowledgeMetrics();
+      // totalKos should have incremented (cumulative), NOT decremented
+      expect(after.totalKos).toBe(initialTotal + 1);
+    });
+  });
+
+  // ── isKOPublicEligible (Wave 10C) ────────────────────────────
+
+  describe("isKOPublicEligible", () => {
+    it("should be exported from public-projection", () => {
+      expect(projectionMod.isKOPublicEligible).toBeDefined();
+      expect(typeof projectionMod.isKOPublicEligible).toBe("function");
+    });
+
+    it("should return true for published + institutional", () => {
+      expect(projectionMod.isKOPublicEligible({ status: "published", provenance: "institutional" })).toBe(true);
+    });
+
+    it("should return false for draft + institutional", () => {
+      expect(projectionMod.isKOPublicEligible({ status: "draft", provenance: "institutional" })).toBe(false);
+    });
+
+    it("should return false for published + test-seed", () => {
+      expect(projectionMod.isKOPublicEligible({ status: "published", provenance: "test-seed" })).toBe(false);
+    });
+
+    it("should default missing status to draft", () => {
+      expect(projectionMod.isKOPublicEligible({ provenance: "institutional" })).toBe(false);
+    });
+
+    it("should default missing provenance to institutional", () => {
+      expect(projectionMod.isKOPublicEligible({ status: "published" })).toBe(true);
+    });
+  });
 });
