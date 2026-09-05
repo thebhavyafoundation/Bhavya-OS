@@ -164,7 +164,7 @@ describe("Curriculum Integrity", () => {
 
   describe("Public projection", () => {
     it("all 10 static courses would be visible via public projection", async () => {
-      const { loadPublishedCourses } = await import("@/data/academy-courses");
+      const { loadPublishedCourses } = await import("@/lib/studio/courses");
       const published = await loadPublishedCourses();
       // With no published SQLite rows, fallback returns all 10 static courses
       // If SQLite has published rows, it returns those instead — either is valid

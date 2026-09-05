@@ -42,8 +42,12 @@ afterAll(() => {
   // Clean up test data
   if (dbInitialized) {
     try {
-      getDb().prepare("DELETE FROM studio_courses WHERE id LIKE 'test_%'").run();
-    } catch { /* ignore */ }
+      getDb()
+        .prepare("DELETE FROM studio_courses WHERE id LIKE 'test_%'")
+        .run();
+    } catch {
+      /* ignore */
+    }
   }
 });
 
@@ -55,10 +59,18 @@ describe("Course Pipeline — SQLite-First Loading", () => {
       // Insert a published course
       const db = getDb();
       db.prepare(
-        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
-      ).run("test_published_1", "Test Published Course", "A test course", "AI", 9, '["lesson-1","lesson-2"]', "published");
+        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      ).run(
+        "test_published_1",
+        "Test Published Course",
+        "A test course",
+        "AI",
+        9,
+        '["lesson-1","lesson-2"]',
+        "published",
+      );
 
-      const { loadPublishedCourses } = await import("@/data/academy-courses");
+      const { loadPublishedCourses } = await import("@/lib/studio/courses");
       const courses = await loadPublishedCourses();
 
       // Should include the SQLite course
@@ -70,7 +82,7 @@ describe("Course Pipeline — SQLite-First Loading", () => {
     it("should return published course by ID from SQLite", async () => {
       if (!dbInitialized) return;
 
-      const { loadPublishedCourseById } = await import("@/data/academy-courses");
+      const { loadPublishedCourseById } = await import("@/lib/studio/courses");
       const course = await loadPublishedCourseById("test_published_1");
       expect(course).toBeDefined();
       expect(course!.title).toBe("Test Published Course");
@@ -83,10 +95,18 @@ describe("Course Pipeline — SQLite-First Loading", () => {
 
       const db = getDb();
       db.prepare(
-        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
-      ).run("test_draft_1", "Test Draft Course", "A draft course", "AI", 9, "[]", "draft");
+        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      ).run(
+        "test_draft_1",
+        "Test Draft Course",
+        "A draft course",
+        "AI",
+        9,
+        "[]",
+        "draft",
+      );
 
-      const { loadPublishedCourses } = await import("@/data/academy-courses");
+      const { loadPublishedCourses } = await import("@/lib/studio/courses");
       const courses = await loadPublishedCourses();
 
       const found = courses.find((c) => c.id === "test_draft_1");
@@ -96,7 +116,7 @@ describe("Course Pipeline — SQLite-First Loading", () => {
     it("should NOT return draft course by ID", async () => {
       if (!dbInitialized) return;
 
-      const { loadPublishedCourseById } = await import("@/data/academy-courses");
+      const { loadPublishedCourseById } = await import("@/lib/studio/courses");
       const course = await loadPublishedCourseById("test_draft_1");
       // Should fall back to static data, which doesn't have this ID
       expect(course).toBeUndefined();
@@ -107,7 +127,8 @@ describe("Course Pipeline — SQLite-First Loading", () => {
     it("should fall back to static data when no published courses exist", async () => {
       // This test verifies the fallback logic exists by checking that
       // loadPublishedCourses returns an array (either SQLite or static)
-      const { loadPublishedCourses, courses: staticCourses } = await import("@/data/academy-courses");
+      const { courses: staticCourses } = await import("@/data/academy-courses");
+      const { loadPublishedCourses } = await import("@/lib/studio/courses");
       const courses = await loadPublishedCourses();
 
       // Should always return at least one course (either from SQLite or static fallback)
@@ -131,13 +152,13 @@ describe("Course Pipeline — SQLite-First Loading", () => {
     it("should resolve lesson count from SQLite", async () => {
       if (!dbInitialized) return;
 
-      const { getTotalLessonsAsync } = await import("@/data/academy-courses");
+      const { getTotalLessonsAsync } = await import("@/lib/studio/courses");
       const count = await getTotalLessonsAsync("test_published_1");
       expect(count).toBe(2); // 2 lessons in the JSON array
     });
 
     it("should fall back to static count for unknown course", async () => {
-      const { getTotalLessonsAsync } = await import("@/data/academy-courses");
+      const { getTotalLessonsAsync } = await import("@/lib/studio/courses");
       const count = await getTotalLessonsAsync("nonexistent-course");
       expect(count).toBe(0);
     });
@@ -147,7 +168,7 @@ describe("Course Pipeline — SQLite-First Loading", () => {
     it("should resolve first lesson ID from SQLite", async () => {
       if (!dbInitialized) return;
 
-      const { getFirstLessonId } = await import("@/data/academy-courses");
+      const { getFirstLessonId } = await import("@/lib/studio/courses");
       const lessonId = await getFirstLessonId("test_published_1");
       expect(lessonId).toBe("lesson-1");
     });
@@ -157,10 +178,18 @@ describe("Course Pipeline — SQLite-First Loading", () => {
 
       const db = getDb();
       db.prepare(
-        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
-      ).run("test_empty_lessons", "Empty Lessons Course", "No lessons", "AI", 9, "[]", "published");
+        "INSERT OR REPLACE INTO studio_courses (id, title, description, subject, grade, lessons, status) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      ).run(
+        "test_empty_lessons",
+        "Empty Lessons Course",
+        "No lessons",
+        "AI",
+        9,
+        "[]",
+        "published",
+      );
 
-      const { getFirstLessonId } = await import("@/data/academy-courses");
+      const { getFirstLessonId } = await import("@/lib/studio/courses");
       const lessonId = await getFirstLessonId("test_empty_lessons");
       expect(lessonId).toBeNull();
     });

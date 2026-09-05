@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { loadPublishedCourses, getTotalLessonsAsync } from "@/data/academy-courses";
+import {
+  loadPublishedCourses,
+  getTotalLessonsAsync,
+} from "@/lib/studio/courses";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -24,7 +27,7 @@ export default async function CoursesPage() {
   await Promise.all(
     courses.map(async (c) => {
       lessonCounts.set(c.id, await getTotalLessonsAsync(c.id));
-    })
+    }),
   );
   return (
     <main className="min-h-screen bg-[#f5f1e6]">
@@ -89,9 +92,7 @@ export default async function CoursesPage() {
         </div>
 
         <div className="mt-16 rounded-xl border border-[#1a3a2a]/10 bg-white p-8">
-          <h2 className="text-2xl font-bold text-[#1a3a2a]">
-            Learning Path
-          </h2>
+          <h2 className="text-2xl font-bold text-[#1a3a2a]">Learning Path</h2>
           <p className="mt-2 text-[#1a3a2a]/60">
             Follow the recommended sequence for the best learning experience.
           </p>

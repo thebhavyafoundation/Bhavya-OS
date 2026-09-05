@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { loadPublishedCourseById, getTotalLessonsAsync, getFirstLessonId } from "@/data/academy-courses";
+import {
+  loadPublishedCourseById,
+  getTotalLessonsAsync,
+  getFirstLessonId,
+} from "@/lib/studio/courses";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -75,9 +79,7 @@ export default async function CourseDetailPage({
             modules
           </div>
           <div>
-            <span className="font-semibold text-[#1a3a2a]">
-              {totalLessons}
-            </span>{" "}
+            <span className="font-semibold text-[#1a3a2a]">{totalLessons}</span>{" "}
             lessons
           </div>
           <div>
@@ -153,7 +155,9 @@ export default async function CourseDetailPage({
                   >
                     {preqId
                       .split("-")
-                      .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+                      .map(
+                        (w: string) => w.charAt(0).toUpperCase() + w.slice(1),
+                      )
                       .join(" ")}
                   </Link>
                 </li>
