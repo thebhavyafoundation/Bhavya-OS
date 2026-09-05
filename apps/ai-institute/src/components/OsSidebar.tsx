@@ -47,6 +47,10 @@ const osNavItems: OsNavItem[] = [
   { id: "runtime", label: "Runtime", href: "/os/runtime", icon: Zap, section: "Operations" },
   { id: "observability", label: "Observability", href: "/os/observability", icon: Eye, section: "Operations" },
   { id: "api-explorer", label: "API Explorer", href: "/os/api-explorer", icon: Terminal, section: "Operations" },
+  { id: "ioc", label: "IOC", href: "/os/ioc", icon: Scale, section: "Operations" },
+  { id: "social", label: "Social", href: "/os/social", icon: Users, section: "Operations" },
+  { id: "search", label: "Search", href: "/os/search", icon: Search, section: "Operations" },
+  { id: "videos", label: "Videos", href: "/os/videos", icon: Network, section: "Operations" },
 
   // Studio
   { id: "studio", label: "Studio", href: "/studio", icon: FlaskConical, section: "Content", roles: ["educator", "instructor", "admin"] },
