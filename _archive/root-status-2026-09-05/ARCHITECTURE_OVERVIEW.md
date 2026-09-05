@@ -65,6 +65,7 @@ Mission Apps → content-core → Knowledge → intelligence → Presentation
 ```
 
 **Never:**
+
 - Intelligence writing to content-core
 - Mission apps importing from other mission apps
 - Presentation layer importing from mission apps
@@ -83,12 +84,12 @@ Mission Apps → content-core → Knowledge → intelligence → Presentation
 
 ### Content Types
 
-| Type | Source | Storage |
-|------|--------|---------|
-| Documents | Mission apps, governance | `content/` directory |
-| Entities | Extracted from documents | `data/entities.json` |
-| Relationships | Knowledge graph | `registry/knowledge-graph.json` |
-| Collections | Curated groupings | `data/collections.json` |
+| Type          | Source                   | Storage                         |
+| ------------- | ------------------------ | ------------------------------- |
+| Documents     | Mission apps, governance | `content/` directory            |
+| Entities      | Extracted from documents | `data/entities.json`            |
+| Relationships | Knowledge graph          | `registry/knowledge-graph.json` |
+| Collections   | Curated groupings        | `data/collections.json`         |
 
 ## Package Architecture
 
@@ -97,6 +98,7 @@ Mission Apps → content-core → Knowledge → intelligence → Presentation
 **Responsibility:** Canonical content platform
 
 **Provides:**
+
 - Document repository
 - Entity repository
 - Knowledge graph
@@ -105,12 +107,13 @@ Mission Apps → content-core → Knowledge → intelligence → Presentation
 - Validation framework
 
 **Key Functions:**
+
 ```typescript
-getDocuments()           // All documents
-getEntities()            // All entities
-getKnowledgeGraph()      // Knowledge graph nodes
-getSearchIndex()         // Search index
-publishKnowledge()       // Publish to Knowledge
+getDocuments(); // All documents
+getEntities(); // All entities
+getKnowledgeGraph(); // Knowledge graph nodes
+getSearchIndex(); // Search index
+publishKnowledge(); // Publish to Knowledge
 ```
 
 ### @bhavya/intelligence
@@ -120,29 +123,31 @@ publishKnowledge()       // Publish to Knowledge
 **Invariant:** Never mutates institutional data
 
 **Provides:**
+
 - Global search
 - Graph exploration
 - Cross-mission analytics
 - Explainable recommendations
 
 **Key Functions:**
+
 ```typescript
-search()                 // Unified search
-getGraphNodeById()       // Graph exploration
-getOperationalMetrics()  // Operational analytics
-getRecommendations()     // Related content
+search(); // Unified search
+getGraphNodeById(); // Graph exploration
+getOperationalMetrics(); // Operational analytics
+getRecommendations(); // Related content
 ```
 
 ## Knowledge API
 
 The Knowledge app exposes intelligence through a stable API:
 
-| Endpoint | Purpose | Returns |
-|----------|---------|---------|
-| `GET /api/search?q=query` | Discovery | SearchInsight |
-| `GET /api/recommendations` | Related content | RecommendationInsight |
-| `GET /api/graph` | Relationship exploration | GraphInsight |
-| `GET /api/analytics` | Institutional metrics | AnalyticsInsight |
+| Endpoint                   | Purpose                  | Returns               |
+| -------------------------- | ------------------------ | --------------------- |
+| `GET /api/search?q=query`  | Discovery                | SearchInsight         |
+| `GET /api/recommendations` | Related content          | RecommendationInsight |
+| `GET /api/graph`           | Relationship exploration | GraphInsight          |
+| `GET /api/analytics`       | Institutional metrics    | AnalyticsInsight      |
 
 ## Insight<T> Type
 
@@ -153,10 +158,10 @@ interface Insight<T> {
   id: string;
   title: string;
   description: string;
-  confidence: number;      // 0-1 based on data quality
-  evidence: Evidence[];    // Supporting sources
-  generatedAt: string;     // ISO timestamp
-  data: T;                 // Typed payload
+  confidence: number; // 0-1 based on data quality
+  evidence: Evidence[]; // Supporting sources
+  generatedAt: string; // ISO timestamp
+  data: T; // Typed payload
 }
 ```
 
@@ -165,12 +170,14 @@ interface Insight<T> {
 Analytics distinguishes two types:
 
 ### Operational Metrics
+
 - Active missions
 - Volunteer activity
 - Publication activity
 - Restoration progress
 
 ### Knowledge Metrics
+
 - Entity growth
 - Relationship density
 - Citation coverage
@@ -184,12 +191,12 @@ Every merge must pass:
 pnpm lint && pnpm test && pnpm validate && pnpm build
 ```
 
-| Gate | Purpose |
-|------|---------|
-| `pnpm lint` | Code style |
-| `pnpm test` | Behavioral verification (55 tests) |
-| `pnpm validate` | Data integrity (21 checks) |
-| `pnpm build` | Compilation |
+| Gate            | Purpose                            |
+| --------------- | ---------------------------------- |
+| `pnpm lint`     | Code style                         |
+| `pnpm test`     | Behavioral verification (55 tests) |
+| `pnpm validate` | Data integrity (21 checks)         |
+| `pnpm build`    | Compilation                        |
 
 ## Extension Guidelines
 
@@ -216,25 +223,25 @@ pnpm lint && pnpm test && pnpm validate && pnpm build
 
 ## Version History
 
-| Version | Milestone |
-|---------|-----------|
-| v0.6.0 | Shared content platform |
-| v0.7.0–v0.9.0 | Mission applications |
-| v1.0.0 | Stable architecture |
-| v1.0.1 | Engineering excellence |
-| v1.1.0 | Institution intelligence |
-| v1.2.0 | Operational intelligence |
-| v1.3.0 | Decision support |
-| v2.0.0 | Phase II: Governance operations |
-| v2.1.0 | Phase II: Resolution lifecycle, policy versioning |
-| v2.2.0 | Phase II: Action items, operational health |
-| v2.3.0 | Phase II: Traceability, evidence, snapshot/trend metrics |
-| v2.4.0 | Phase II: Impact reporting |
-| v2.5.0 | Phase II: Cross-domain reporting |
-| v3.0.0 | Phase III: Institutional memory |
-| v3.1.0 | Phase III: Organizational learning |
-| v3.2.0 | Phase III: Predictive intelligence |
-| v3.3.0 | Phase III: Institutional playbooks |
+| Version       | Milestone                                                |
+| ------------- | -------------------------------------------------------- |
+| v0.6.0        | Shared content platform                                  |
+| v0.7.0–v0.9.0 | Mission applications                                     |
+| v1.0.0        | Stable architecture                                      |
+| v1.0.1        | Engineering excellence                                   |
+| v1.1.0        | Institution intelligence                                 |
+| v1.2.0        | Operational intelligence                                 |
+| v1.3.0        | Decision support                                         |
+| v2.0.0        | Phase II: Governance operations                          |
+| v2.1.0        | Phase II: Resolution lifecycle, policy versioning        |
+| v2.2.0        | Phase II: Action items, operational health               |
+| v2.3.0        | Phase II: Traceability, evidence, snapshot/trend metrics |
+| v2.4.0        | Phase II: Impact reporting                               |
+| v2.5.0        | Phase II: Cross-domain reporting                         |
+| v3.0.0        | Phase III: Institutional memory                          |
+| v3.1.0        | Phase III: Organizational learning                       |
+| v3.2.0        | Phase III: Predictive intelligence                       |
+| v3.3.0        | Phase III: Institutional playbooks                       |
 
 ## Institutional Cycle
 
@@ -285,24 +292,24 @@ Every stage consumes the outputs of the previous stage instead of introducing an
 
 The platform supports six levels of institutional knowledge:
 
-| Level | Question Answered | Source |
-|-------|-------------------|--------|
-| Records | What happened? | Canonical data in content-core |
-| Evidence | How do we know? | Verification, traceability |
-| Memory | Why did it happen? | Decision context, lessons |
-| Patterns | What tends to happen? | Organizational learning |
-| Predictions | What is likely to happen? | Predictive intelligence |
-| Playbooks | What should we do? | Validated institutional experience |
+| Level       | Question Answered         | Source                             |
+| ----------- | ------------------------- | ---------------------------------- |
+| Records     | What happened?            | Canonical data in content-core     |
+| Evidence    | How do we know?           | Verification, traceability         |
+| Memory      | Why did it happen?        | Decision context, lessons          |
+| Patterns    | What tends to happen?     | Organizational learning            |
+| Predictions | What is likely to happen? | Predictive intelligence            |
+| Playbooks   | What should we do?        | Validated institutional experience |
 
 This progression moves from descriptive knowledge to prescriptive guidance.
 
 ## Four Eras of Development
 
-| Era | Central Question | Outcome |
-|-----|------------------|---------|
-| Platform Foundation | How do we represent the institution consistently? | Canonical models, mission applications, engineering quality |
-| Operational Intelligence | How do we understand current institutional state? | Knowledge, analytics, dashboards, decision support |
-| Institutional Operations | How do we govern and execute work? | Governance, evidence, traceability, reporting |
-| Institutional Learning | How do we improve because of accumulated experience? | Memory, predictive intelligence, organizational learning, playbooks |
+| Era                      | Central Question                                     | Outcome                                                             |
+| ------------------------ | ---------------------------------------------------- | ------------------------------------------------------------------- |
+| Platform Foundation      | How do we represent the institution consistently?    | Canonical models, mission applications, engineering quality         |
+| Operational Intelligence | How do we understand current institutional state?    | Knowledge, analytics, dashboards, decision support                  |
+| Institutional Operations | How do we govern and execute work?                   | Governance, evidence, traceability, reporting                       |
+| Institutional Learning   | How do we improve because of accumulated experience? | Memory, predictive intelligence, organizational learning, playbooks |
 
 Each era builds on the previous one without replacing it.

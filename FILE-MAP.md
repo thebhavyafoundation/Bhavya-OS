@@ -1,0 +1,804 @@
+# FILE-MAP — generated index
+
+> DO NOT HAND-EDIT. Rebuild with `node scripts/generate-file-map.mjs`.
+> Output is byte-deterministic: regenerate → `git diff` must be empty when sources are unchanged.
+
+## Entry + routers
+
+- `AGENTS.md` — present
+- `CONTEXT.md` — present
+- `apps/CONTEXT.md` — present
+- `apps/ai-institute/CONTEXT.md` — present
+- `packages/CONTEXT.md` — present
+- `docs/CONTEXT.md` — present
+- `.ai/CONTEXT.md` — present
+- `rfcs/CONTEXT.md` — present
+- `_shared/factory-map.md` — present
+- `_system/schema.md` — present
+
+## RFC pipeline status (frontmatter scan)
+
+- `rfcs/RFC-0001-Volunteer-Portal.md` — published
+- `rfcs/RFC-0002-Forest-GIS.md` — published
+- `rfcs/RFC-0003-AI-Gateway.md` — Accepted
+- `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — `body line |`published` (no content change needed beyond frontmatter, when approved) |
+
+## Top-level tree (depth 2, generated)
+
+- `.agents`/
+  - `.agents\CEO.md`
+  - `.agents\CTO.md`
+  - `.agents\Designer.md`
+  - `.agents\Developer.md`
+  - `.agents\Donation.md`
+  - `.agents\Founder.md`
+  - `.agents\Historian.md`
+  - `.agents\Legal.md`
+  - `.agents\QA.md`
+  - `.agents\Release.md`
+  - `.agents\Researcher.md`
+  - `.agents\Reviewer.md`
+  - `.agents\SEO.md`
+  - `.agents\Security.md`
+  - `.agents\SocialMedia.md`
+  - `.agents\Translator.md`
+  - `.agents\Volunteer.md`
+  - `.agents\Writer.md`
+  - `.agents\documentation.agent.json`
+  - `.agents\founder.agent.json`
+  - `.agents\governance.agent.json`
+  - `.agents\registry.json`
+  - `.agents\release.agent.json`
+  - `.agents\skills`/
+- `.ai`/
+  - `.ai\CODING_STANDARD.md`
+  - `.ai\CONSTRAINTS.md`
+  - `.ai\CONTEXT.md`
+  - `.ai\DECISION_RULES.md`
+  - `.ai\EVENTS.md`
+  - `.ai\KPIS.md`
+  - `.ai\MASTER_CONTEXT.md`
+  - `.ai\MEMORY.md`
+  - `.ai\MISSION.md`
+  - `.ai\STYLE_GUIDE.md`
+  - `.ai\TOOLS.md`
+  - `.ai\VALUES.md`
+  - `.ai\VISION.md`
+  - `.ai\WORKFLOWS.md`
+  - `.ai\agents`/
+  - `.ai\architecture.md`
+  - `.ai\architecture.summary.md`
+  - `.ai\bootstrap.md`
+  - `.ai\build`/
+  - `.ai\cache`/
+  - `.ai\capabilities`/
+  - `.ai\coding-standards.md`
+  - `.ai\context-loader.md`
+  - `.ai\conventions.md`
+  - `.ai\current-release.md`
+  - `.ai\current-task.md`
+  - `.ai\decision-log.md`
+  - `.ai\dependencies.md`
+  - `.ai\dependencies.yaml`
+  - `.ai\design-system.md`
+  - `.ai\design-system.summary.md`
+  - `.ai\events`/
+  - `.ai\glossary.md`
+  - `.ai\graph`/
+  - `.ai\history`/
+  - `.ai\index.yaml`
+  - `.ai\manifest.yaml`
+  - `.ai\memory`/
+  - `.ai\project-summary.md`
+  - `.ai\prompts`/
+  - `.ai\releases`/
+  - `.ai\repository-map.md`
+  - `.ai\retrieval.md`
+  - `.ai\roadmap.md`
+  - `.ai\runtime.json`
+  - `.ai\snapshots`/
+  - `.ai\state`/
+  - `.ai\tasks`/
+  - `.ai\templates`/
+  - `.ai\validation.md`
+- `.analytics`/
+  - `.analytics\accessibility.md`
+  - `.analytics\broken-links.md`
+  - `.analytics\lighthouse.md`
+  - `.analytics\performance.md`
+  - `.analytics\seo.md`
+  - `.analytics\traffic.md`
+- `.changeset`/
+  - `.changeset\README.md`
+  - `.changeset\config.json`
+- `.codex`/
+- `.commands`/
+  - `.commands\audit.md`
+  - `.commands\create-article.md`
+  - `.commands\create-event.md`
+  - `.commands\create-page.md`
+  - `.commands\generate-report.md`
+  - `.commands\improve-design.md`
+  - `.commands\publish.md`
+  - `.commands\release.md`
+  - `.commands\research.md`
+- `.dockerignore`
+- `.events`/
+  - `.events\donation.received.md`
+  - `.events\page.created.md`
+  - `.events\release.created.md`
+  - `.events\research.finished.md`
+  - `.events\volunteer.joined.md`
+  - `.events\website.updated.md`
+- `.github`/
+  - `.github\workflows`/
+- `.gitignore`
+- `.gstack`/
+  - `.gstack\security-reports`/
+- `.husky`/
+  - `.husky\_`/
+  - `.husky\commit-msg`
+  - `.husky\pre-commit`
+- `.lintstagedrc.json`
+- `.logs`/
+  - `.logs\designer.log`
+  - `.logs\developer.log`
+  - `.logs\research.log`
+  - `.logs\reviewer.log`
+- `.memory`/
+  - `.memory\architecture.md`
+  - `.memory\bugs.md`
+  - `.memory\history.md`
+  - `.memory\knowledge.md`
+  - `.memory\lessons.md`
+  - `.memory\people.md`
+  - `.memory\projects.md`
+- `.metrics`/
+  - `.metrics\coverage.json`
+  - `.metrics\engineering.json`
+  - `.metrics\institution.json`
+  - `.metrics\performance.json`
+  - `.metrics\quality.json`
+  - `.metrics\seo.json`
+- `.opencode`/
+  - `.opencode\.gitignore`
+  - `.opencode\agents`/
+  - `.opencode\bun.lock`
+  - `.opencode\package.json`
+  - `.opencode\skills`/
+  - `.opencode\skills.zip`
+- `.playwright-mcp`/
+  - `.playwright-mcp\console-2026-07-26T17-15-20-137Z.log`
+  - `.playwright-mcp\console-2026-07-26T17-24-44-387Z.log`
+  - `.playwright-mcp\console-2026-07-26T17-25-49-135Z.log`
+  - `.playwright-mcp\console-2026-07-26T17-37-10-541Z.log`
+  - `.playwright-mcp\console-2026-07-27T15-36-57-276Z.log`
+  - `.playwright-mcp\console-2026-07-27T15-38-07-786Z.log`
+  - `.playwright-mcp\console-2026-07-27T16-07-52-889Z.log`
+  - `.playwright-mcp\console-2026-07-27T16-15-53-960Z.log`
+  - `.playwright-mcp\console-2026-07-27T16-20-28-024Z.log`
+  - `.playwright-mcp\console-2026-07-27T16-26-16-059Z.log`
+  - `.playwright-mcp\console-2026-07-27T16-45-43-556Z.log`
+  - `.playwright-mcp\console-2026-08-03T19-38-34-885Z.log`
+  - `.playwright-mcp\console-2026-08-03T19-51-38-689Z.log`
+  - `.playwright-mcp\console-2026-08-03T19-52-04-474Z.log`
+  - `.playwright-mcp\console-2026-08-03T19-53-25-687Z.log`
+  - `.playwright-mcp\console-2026-08-03T19-54-08-222Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-30-17-428Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-33-45-317Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-34-15-133Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-38-11-332Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-43-04-226Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-45-46-815Z.log`
+  - `.playwright-mcp\console-2026-08-05T18-58-43-266Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-18-00-347Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-23-10-776Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-31-42-992Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-50-58-205Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-54-17-322Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-55-50-565Z.log`
+  - `.playwright-mcp\console-2026-08-05T19-57-21-728Z.log`
+  - `.playwright-mcp\console-2026-08-05T20-01-06-777Z.log`
+  - `.playwright-mcp\console-2026-08-05T20-09-30-898Z.log`
+  - `.playwright-mcp\page-2026-07-26T17-15-20-499Z.yml`
+  - `.playwright-mcp\page-2026-07-26T17-24-47-414Z.yml`
+  - `.playwright-mcp\page-2026-07-26T17-25-50-565Z.yml`
+  - `.playwright-mcp\page-2026-07-26T17-37-10-959Z.yml`
+  - `.playwright-mcp\page-2026-07-27T15-37-01-260Z.yml`
+  - `.playwright-mcp\page-2026-07-27T15-38-09-990Z.yml`
+  - `.playwright-mcp\page-2026-07-27T16-07-58-450Z.yml`
+  - `.playwright-mcp\page-2026-07-27T16-12-39-271Z.yml`
+  - `.playwright-mcp\page-2026-07-27T16-20-30-092Z.yml`
+  - `.playwright-mcp\page-2026-07-27T16-20-47-436Z.png`
+  - `.playwright-mcp\page-2026-07-27T16-45-53-352Z.yml`
+  - `.playwright-mcp\page-2026-07-27T16-46-11-868Z.png`
+  - `.playwright-mcp\page-2026-08-03T19-51-40-511Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-52-04-746Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-53-25-849Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-54-08-455Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-54-39-739Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-55-26-581Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-56-19-975Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-56-51-902Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-57-18-079Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-57-51-844Z.yml`
+  - `.playwright-mcp\page-2026-08-03T19-58-24-098Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-30-20-051Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-34-01-445Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-38-28-215Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-41-27-305Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-43-06-327Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-45-57-673Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-53-05-994Z.yml`
+  - `.playwright-mcp\page-2026-08-05T18-58-59-149Z.yml`
+  - `.playwright-mcp\page-2026-08-05T19-51-18-472Z.yml`
+  - `.playwright-mcp\page-2026-08-05T19-54-40-818Z.yml`
+  - `.playwright-mcp\page-2026-08-05T19-56-32-311Z.yml`
+- `.policies`/
+  - `.policies\ACCESS_POLICY.md`
+  - `.policies\AI_POLICY.md`
+  - `.policies\CONTENT_POLICY.md`
+  - `.policies\DATA_POLICY.md`
+  - `.policies\RELEASE_POLICY.md`
+  - `.policies\SECURITY_POLICY.md`
+- `.prompts`/
+  - `.prompts\designer.txt`
+  - `.prompts\developer.txt`
+  - `.prompts\qa.txt`
+  - `.prompts\reviewer.txt`
+  - `.prompts\seo.txt`
+  - `.prompts\translator.txt`
+  - `.prompts\website.txt`
+  - `.prompts\writer.txt`
+- `.security`/
+  - `.security\dependency-audit.md`
+  - `.security\permissions.md`
+  - `.security\secrets-policy.md`
+  - `.security\threat-model.md`
+- `.snapshots`/
+  - `.snapshots\daily.md`
+- `.tasks`/
+  - `.tasks\completed`/
+  - `.tasks\doing`/
+  - `.tasks\review`/
+  - `.tasks\todo`/
+- `.templates`/
+  - `.templates\adr.md`
+  - `.templates\blog.md`
+  - `.templates\meeting.md`
+  - `.templates\mission.md`
+  - `.templates\newsletter.md`
+  - `.templates\page.md`
+  - `.templates\policy.md`
+  - `.templates\report.md`
+  - `.templates\research.md`
+  - `.templates\rfc.md`
+  - `.templates\volunteer.md`
+- `.tests`/
+  - `.tests\accessibility`/
+  - `.tests\integration`/
+  - `.tests\performance`/
+  - `.tests\playwright`/
+  - `.tests\seo`/
+  - `.tests\unit`/
+  - `.tests\visual-regression`/
+- `.turbo`/
+  - `.turbo\cache`/
+- `.vercel`/
+  - `.vercel\README.txt`
+  - `.vercel\project.json`
+- `.vscode`/
+  - `.vscode\settings.json`
+- `.workflows`/
+  - `.workflows\create-page.md`
+  - `.workflows\deploy.md`
+  - `.workflows\fundraising.md`
+  - `.workflows\generate-report.md`
+  - `.workflows\research-forest.md`
+  - `.workflows\research-heritage.md`
+  - `.workflows\review-pr.md`
+  - `.workflows\upload-documents.md`
+  - `.workflows\volunteer-onboarding.md`
+  - `.workflows\write-blog.md`
+- `.worktrees`/
+  - `.worktrees\worktrees.json`
+- `AGENTS.md`
+- `Bhavya_Foundation_Governance_Manual_Draft_v1.pdf`
+- `CHANGELOG.md`
+- `CODEOWNERS`
+- `CONTEXT.md`
+- `CONTRIBUTING.md`
+- `Dockerfile`
+- `FILE-MAP.md`
+- `README.md`
+- `VERCEL.md`
+- `_archive`/
+  - `_archive\.registry`/
+  - `_archive\.schemas`/
+  - `_archive\ICM-ARCHIVE-MANIFEST.md`
+  - `_archive\bhavya-foundation-home-page (1).zip`
+  - `_archive\bhavya-foundation-home-page.pdf`
+  - `_archive\bhavya-foundation-home-page.zip`
+  - `_archive\bhavya-page-1.pdf`
+  - `_archive\bhavya-page-2.pdf`
+  - `_archive\competitor-analysis.md`
+  - `_archive\constitution-2026-09-05`/
+  - `_archive\dashboard.png`
+  - `_archive\extracted_pages`/
+  - `_archive\foundation-snapshot-v0.1.0`/
+  - `_archive\foundation-snapshot-v0.2.0`/
+  - `_archive\foundation-snapshot-v0.3.0`/
+  - `_archive\foundation-snapshot-v0.4.0`/
+  - `_archive\github-readme.md`
+  - `_archive\https-github.com-Alishahryar1-free-claude-code`/
+  - `_archive\logs-2026-09-05`/
+  - `_archive\repositories.png`
+  - `_archive\repository-detail.png`
+  - `_archive\root-status-2026-09-05`/
+  - `_archive\runtime-stderr.log`
+  - `_archive\runtime-stdout.log`
+  - `_archive\test-artifacts-2026-09-05`/
+  - `_archive\v1.0.0_ARCHIVE.md`
+- `_shared`/
+  - `_shared\factory-map.md`
+- `_system`/
+  - `_system\icm-restructure-proposal.md`
+  - `_system\proposed-AGENTS.md`
+  - `_system\proposed-CONTEXT.md`
+  - `_system\schema.md`
+- `_templates`/
+  - `_templates\README.md`
+  - `_templates\node.md`
+  - `_templates\rfc-record.md`
+  - `_templates\stage-CONTEXT.md`
+- `apps`/
+  - `apps\CONTEXT.md`
+  - `apps\admin`/
+  - `apps\ai-institute`/
+  - `apps\bhavya-intelligence-network`/
+  - `apps\design-system`/
+  - `apps\docs`/
+  - `apps\github-os`/
+  - `apps\github-os.zip`
+  - `apps\ioc`/
+  - `apps\social-os`/
+  - `apps\website`/
+- `archive`/
+  - `archive\apps`/
+  - `archive\website-starlight`/
+- `bar`/
+  - `bar\agents`/
+  - `bar\applications`/
+  - `bar\bee-state`/
+  - `bar\capabilities`/
+  - `bar\domains`/
+  - `bar\events`/
+  - `bar\generated`/
+  - `bar\index.json`
+  - `bar\knowledge-objects`/
+  - `bar\packages`/
+  - `bar\permissions`/
+  - `bar\provenance`/
+  - `bar\schema.json`
+  - `bar\scripts`/
+  - `bar\services`/
+  - `bar\skills`/
+  - `bar\traceability-report.json`
+  - `bar\ui-surfaces`/
+  - `bar\validation-report.json`
+  - `bar\workflows`/
+- `bhavya-ai-lab`/
+  - `bhavya-ai-lab\.prettierrc`
+  - `bhavya-ai-lab\ARCHITECTURE.md`
+  - `bhavya-ai-lab\CLAUDE.md`
+  - `bhavya-ai-lab\INSTALL.md`
+  - `bhavya-ai-lab\_config`/
+  - `bhavya-ai-lab\adr`/
+  - `bhavya-ai-lab\agents`/
+  - `bhavya-ai-lab\apps`/
+  - `bhavya-ai-lab\assessments`/
+  - `bhavya-ai-lab\bbl`/
+  - `bhavya-ai-lab\build`/
+  - `bhavya-ai-lab\builders`/
+  - `bhavya-ai-lab\cli`/
+  - `bhavya-ai-lab\compilers`/
+  - `bhavya-ai-lab\curriculum`/
+  - `bhavya-ai-lab\dashboard`/
+  - `bhavya-ai-lab\dependency-graph`/
+  - `bhavya-ai-lab\docs-gen`/
+  - `bhavya-ai-lab\eslint.config.js`
+  - `bhavya-ai-lab\examples`/
+  - `bhavya-ai-lab\institution`/
+  - `bhavya-ai-lab\knowledge`/
+  - `bhavya-ai-lab\knowledge-studio`/
+  - `bhavya-ai-lab\metrics`/
+  - `bhavya-ai-lab\observability`/
+  - `bhavya-ai-lab\orchestrator`/
+  - `bhavya-ai-lab\package-lock.json`
+  - `bhavya-ai-lab\package.json`
+  - `bhavya-ai-lab\packages`/
+  - `bhavya-ai-lab\platform`/
+  - `bhavya-ai-lab\plugins`/
+  - `bhavya-ai-lab\production`/
+  - `bhavya-ai-lab\providers`/
+  - `bhavya-ai-lab\quality-gates`/
+  - `bhavya-ai-lab\registries`/
+  - `bhavya-ai-lab\release`/
+  - `bhavya-ai-lab\research`/
+  - `bhavya-ai-lab\runtime.json`
+  - `bhavya-ai-lab\scripts`/
+  - `bhavya-ai-lab\security`/
+  - `bhavya-ai-lab\skills`/
+  - `bhavya-ai-lab\teachers`/
+  - `bhavya-ai-lab\tests`/
+  - `bhavya-ai-lab\tsconfig.json`
+  - `bhavya-ai-lab\vitest.config.ts`
+- `commitlint.config.js`
+- `config`/
+  - `config\apps.json`
+  - `config\environment.json`
+  - `config\ports.json`
+  - `config\skills`/
+- `content`/
+  - `content\community.mdx`
+  - `content\constitution`/
+  - `content\financials`/
+  - `content\forest`/
+  - `content\governance`/
+  - `content\heritage`/
+  - `content\heritage.mdx`
+  - `content\homepage.mdx`
+  - `content\knowledge`/
+  - `content\knowledge.mdx`
+  - `content\media`/
+  - `content\mission.mdx`
+  - `content\nature.mdx`
+  - `content\pages`/
+  - `content\pillars.mdx`
+  - `content\policies`/
+  - `content\programs`/
+  - `content\projects`/
+  - `content\releases`/
+  - `content\reports`/
+  - `content\research`/
+  - `content\transparency.mdx`
+  - `content\volunteer`/
+- `contracts`/
+  - `contracts\agents`/
+  - `contracts\content-core`/
+  - `contracts\events`/
+  - `contracts\kernel`/
+  - `contracts\knowledge-graph`/
+  - `contracts\mission-runtime`/
+  - `contracts\platform-ui`/
+  - `contracts\plugins`/
+  - `contracts\runtime`/
+  - `contracts\services`/
+  - `contracts\shared`/
+- `design-system`/
+  - `design-system\bhavya-foundation`/
+- `docs`/
+  - `docs\Books`/
+  - `docs\CONTEXT.md`
+  - `docs\MIGRATION-PLAN.md`
+  - `docs\README.md`
+  - `docs\REORGANIZATION-SUMMARY.md`
+  - `docs\VERCEL_DEPLOYMENT.md`
+  - `docs\adr`/
+  - `docs\agent-platform.md`
+  - `docs\ai-institute`/
+  - `docs\applications`/
+  - `docs\architecture`/
+  - `docs\archive`/
+  - `docs\audit`/
+  - `docs\brand`/
+  - `docs\component-matrix.md`
+  - `docs\constitution`/
+  - `docs\content-factory`/
+  - `docs\contributor-guide.md`
+  - `docs\curriculum-intelligence`/
+  - `docs\decisions`/
+  - `docs\deployment.md`
+  - `docs\design-intelligence.md`
+  - `docs\design-inventory.md`
+  - `docs\design-principles.md`
+  - `docs\design-system`/
+  - `docs\developer`/
+  - `docs\ecosystem`/
+  - `docs\github-os`/
+  - `docs\governance`/
+  - `docs\institution-ops`/
+  - `docs\institution-os`/
+  - `docs\ioc`/
+  - `docs\knowledge-review`/
+  - `docs\launch`/
+  - `docs\master-curriculum`/
+  - `docs\motion-specification.md`
+  - `docs\operations`/
+  - `docs\platform`/
+  - `docs\platform-foundation`/
+  - `docs\platform-hardening`/
+  - `docs\product`/
+  - `docs\production`/
+  - `docs\products`/
+  - `docs\project-phoenix`/
+  - `docs\releases`/
+  - `docs\research`/
+  - `docs\security`/
+  - `docs\social-campaigns`/
+  - `docs\social-os`/
+  - `docs\social-os-v2`/
+  - `docs\standards`/
+  - `docs\system`/
+  - `docs\testing.md`
+  - `docs\token-reference.md`
+  - `docs\v7`/
+  - `docs\validation`/
+  - `docs\wave-10`/
+  - `docs\wave-9`/
+  - `docs\website`/
+- `eslint.config.mjs`
+- `evolution`/
+  - `evolution\CLAUDE.md`
+  - `evolution\CONTEXT.md`
+  - `evolution\_archive`/
+  - `evolution\_shared`/
+  - `evolution\_templates`/
+  - `evolution\dashboard.html`
+  - `evolution\images`/
+  - `evolution\stages`/
+- `governance`/
+  - `governance\BAR-001.md`
+  - `governance\BDL-001.md`
+  - `governance\BGS-001.md`
+  - `governance\BOM-001.md`
+  - `governance\BPS-001.md`
+  - `governance\adr`/
+  - `governance\architecture.md`
+  - `governance\bdl-governance.md`
+  - `governance\coding-standards.md`
+  - `governance\constitution.md`
+  - `governance\decision-framework.md`
+  - `governance\decision-log.md`
+  - `governance\design-language.md`
+  - `governance\design-principles.md`
+  - `governance\documentation-governance.md`
+  - `governance\governance-model.md`
+  - `governance\ownership.md`
+  - `governance\platform-lifecycle.md`
+  - `governance\product-principles.md`
+  - `governance\quality-governance.md`
+  - `governance\release-governance.md`
+  - `governance\rfc`/
+  - `governance\roadmap.md`
+  - `governance\security-governance.md`
+  - `governance\security.md`
+  - `governance\succession.md`
+- `history`/
+  - `history\founder-notes.md`
+  - `history\major-decisions.md`
+  - `history\milestones.md`
+  - `history\release-history.md`
+  - `history\timeline.md`
+- `knowledge`/
+  - `knowledge\engineering-graphs`/
+- `knowledge-packages`/
+  - `knowledge-packages\level-1`/
+- `memory`/
+  - `memory\agents`/
+  - `memory\decisions`/
+  - `memory\engineering`/
+  - `memory\knowledge`/
+  - `memory\projects`/
+  - `memory\releases`/
+  - `memory\research`/
+  - `memory\tasks`/
+- `navigation`/
+  - `navigation\admin.json`
+  - `navigation\mission.json`
+  - `navigation\public.json`
+- `opencode.json`
+- `package.json`
+- `packages`/
+  - `packages\API_DOCUMENTATION.md`
+  - `packages\CONTEXT.md`
+  - `packages\DEPENDENCY_MAP.md`
+  - `packages\DEPLOYMENT.md`
+  - `packages\INTEGRATION_TESTS.md`
+  - `packages\ONBOARDING_GUIDE.md`
+  - `packages\agent-engine`/
+  - `packages\agent-platform`/
+  - `packages\agent-workflow`/
+  - `packages\ai`/
+  - `packages\ai-orchestration`/
+  - `packages\analyzers`/
+  - `packages\api`/
+  - `packages\auth`/
+  - `packages\bar`/
+  - `packages\bdl`/
+  - `packages\bdx`/
+  - `packages\bee`/
+  - `packages\bhavya-ai-lab`/
+  - `packages\branding`/
+  - `packages\browser-automation`/
+  - `packages\capability-registry`/
+  - `packages\charts`/
+  - `packages\cli`/
+  - `packages\code-intelligence-mcp`/
+  - `packages\config`/
+  - `packages\constitution`/
+  - `packages\content-board`/
+  - `packages\content-core`/
+  - `packages\content-engine`/
+  - `packages\context-optimizer`/
+  - `packages\crawlers`/
+  - `packages\database`/
+  - `packages\design-system`/
+  - `packages\docs`/
+  - `packages\edge-ml`/
+  - `packages\eslint`/
+  - `packages\events`/
+  - `packages\github-intelligence`/
+  - `packages\github-os`/
+  - `packages\icons`/
+  - `packages\impact-runtime`/
+  - `packages\intelligence`/
+  - `packages\interactive-components`/
+  - `packages\ioc`/
+  - `packages\kernel`/
+  - `packages\knowledge-engine`/
+  - `packages\knowledge-extraction`/
+  - `packages\knowledge-graph`/
+  - `packages\learning-runtime`/
+  - `packages\maps`/
+  - `packages\mcp-manager`/
+  - `packages\memory-engine`/
+  - `packages\mentor-engine`/
+  - `packages\mission-runtime`/
+  - `packages\ml-serving`/
+  - `packages\motion-system`/
+  - `packages\notifications`/
+  - `packages\observability`/
+  - `packages\planner-engine`/
+  - `packages\platform`/
+  - `packages\platform-ui`/
+  - `packages\plugin-manager`/
+  - `packages\plugin-runtime`/
+  - `packages\project-runtime`/
+  - `packages\providers`/
+  - `packages\runtime`/
+  - `packages\scheduler-engine`/
+  - `packages\sdk`/
+  - `packages\search-engine`/
+  - `packages\security`/
+  - `packages\shared`/
+  - `packages\skill-tree`/
+  - `packages\social-os`/
+  - `packages\technology-radar`/
+  - `packages\types`/
+  - `packages\typescript`/
+  - `packages\ui`/
+  - `packages\video-engine`/
+  - `packages\workflow-engine`/
+  - `packages\workflows`/
+  - `packages\zk-privacy`/
+- `platform`/
+  - `platform\agents`/
+  - `platform\ai-runtime`/
+  - `platform\dashboard`/
+  - `platform\ecosystem`/
+  - `platform\mission-runtime`/
+  - `platform\repo-intelligence`/
+  - `platform\v7`/
+  - `platform\validation`/
+- `pnpm-lock.yaml`
+- `pnpm-workspace.yaml`
+- `prototypes`/
+  - `prototypes\astro-starlight`/
+  - `prototypes\brand-assets`/
+  - `prototypes\nextjs-fumadocs`/
+  - `prototypes\nextra`/
+- `registry`/
+  - `registry\agents.json`
+  - `registry\apps.json`
+  - `registry\capability-registry.json`
+  - `registry\components.json`
+  - `registry\core-manifest.json`
+  - `registry\documents.json`
+  - `registry\index.json`
+  - `registry\knowledge-graph.json`
+  - `registry\mcp.json`
+  - `registry\models.json`
+  - `registry\packages.json`
+  - `registry\pages.json`
+  - `registry\prompts.json`
+  - `registry\search-index.json`
+  - `registry\search.json`
+  - `registry\services.json`
+  - `registry\standards.json`
+  - `registry\workflows.json`
+- `rfcs`/
+  - `rfcs\CONTEXT.md`
+  - `rfcs\RFC-0001-Volunteer-Portal.md`
+  - `rfcs\RFC-0002-Forest-GIS.md`
+  - `rfcs\RFC-0003-AI-Gateway.md`
+  - `rfcs\STATUS-VOCABULARY-PROPOSAL.md`
+- `schemas`/
+  - `schemas\agent.schema.json`
+  - `schemas\document.schema.json`
+  - `schemas\event.schema.json`
+  - `schemas\knowledge-graph.schema.json`
+  - `schemas\memory.schema.json`
+  - `schemas\registry.schema.json`
+  - `schemas\search-index.schema.json`
+  - `schemas\task.schema.json`
+  - `schemas\workflow.schema.json`
+- `scripts`/
+  - `scripts\_archive`/
+  - `scripts\deploy-all-vercel.sh`
+  - `scripts\deploy-all.ps1`
+  - `scripts\deploy-vercel-all.ps1`
+  - `scripts\deploy-vercel.sh`
+  - `scripts\enforce-deps.mjs`
+  - `scripts\enforce-design-system.mjs`
+  - `scripts\generate-file-map.mjs`
+  - `scripts\quality-gates.mjs`
+  - `scripts\sync-tokens.mjs`
+  - `scripts\vercel-build-app.mjs`
+  - `scripts\vercel-build.mjs`
+  - `scripts\vercel-deploy-app.mjs`
+- `setup`/
+  - `setup\questionnaire.md`
+- `skills-lock.json`
+- `specs`/
+  - `specs\SKILL-ARCHITECTURE.md`
+  - `specs\data-model.md`
+  - `specs\design-system.md`
+  - `specs\documents.md`
+  - `specs\governance.md`
+  - `specs\information-architecture.md`
+  - `specs\missions.md`
+  - `specs\product.md`
+- `standards`/
+  - `standards\BAR-001.md`
+  - `standards\BDL-001.md`
+  - `standards\BGS-001.md`
+  - `standards\BOM-001.md`
+  - `standards\BPS-001.md`
+  - `standards\README.md`
+  - `standards\accessibility.md`
+  - `standards\api.md`
+  - `standards\architecture.md`
+  - `standards\backend.md`
+  - `standards\database.md`
+  - `standards\design.md`
+  - `standards\documentation.md`
+  - `standards\engineering.md`
+  - `standards\frontend.md`
+  - `standards\git.md`
+  - `standards\observability.md`
+  - `standards\performance.md`
+  - `standards\release.md`
+  - `standards\security.md`
+  - `standards\testing.md`
+- `tsconfig.base.json`
+- `turbo.json`
+- `validation`/
+  - `validation\week-1-staging.md`
+  - `validation\week-2-uat.md`
+  - `validation\week-3-operations.md`
+  - `validation\week-4-readiness.md`
+- `vercel-projects.json`
+- `vercel.json`
+- `vercel.website.json`
+- `videos`/
+  - `videos\bhavya-foundation-intro`/
+
+## Canonical homes (links, not copies)
+
+- tokens: `packages/platform-ui/src/styles/tokens.css`
+- components: `packages/platform-ui/src/components/`
+- brand: `docs/brand/BRAND_GUIDE.md`
+- routes: `docs/architecture/CANONICAL_ROUTE_MAP.md`
+- ownership: `docs/architecture/DOMAIN_OWNERSHIP.md`
+- constitution: `packages/constitution/` (SDK `@bhavya/constitution`)

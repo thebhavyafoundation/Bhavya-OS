@@ -25,10 +25,10 @@
 
 ## Post-GA Metrics
 
-| Area | Metrics |
-|------|---------|
-| Reliability | Uptime, successful deployments, recovery time |
-| Performance | Response times, Core Web Vitals, error rates |
-| Content | Published documents, update frequency, search success |
-| Adoption | Active contributors, document views, stakeholder feedback |
-| Maintenance | Time to resolve issues, patch release cadence |
+| Area        | Metrics                                                   |
+| ----------- | --------------------------------------------------------- |
+| Reliability | Uptime, successful deployments, recovery time             |
+| Performance | Response times, Core Web Vitals, error rates              |
+| Content     | Published documents, update frequency, search success     |
+| Adoption    | Active contributors, document views, stakeholder feedback |
+| Maintenance | Time to resolve issues, patch release cadence             |

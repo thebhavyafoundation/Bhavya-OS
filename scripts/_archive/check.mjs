@@ -1,0 +1,11 @@
+import fs from 'fs';
+const c = fs.readFileSync('apps/ai-institute/src/data/academy-lessons.ts','utf8');
+const idx = c.indexOf('"agent-3-3"');
+const snippet = c.slice(idx, idx+6000);
+const closePos = snippet.indexOf('  },');
+console.log('closePos', closePos);
+console.log(JSON.stringify(snippet.slice(3000, 4000)));
+console.log('---found close---');
+const lastClose = c.indexOf('// HELPER');
+console.log('lastClose index', lastClose);
+console.log(JSON.stringify(c.slice(lastClose-800, lastClose+200)));

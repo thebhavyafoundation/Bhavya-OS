@@ -14,12 +14,12 @@ Bhavya Foundation is a public institution committed to building a better tomorro
 
 ### Four Missions
 
-| Mission | Focus | Impact |
-|---------|-------|--------|
-| 🌱 **Forest** | Restore ecosystems, conserve biodiversity | 8+ hectares restored |
-| 📚 **Knowledge** | AI labs, digital libraries, STEM education | 10K+ students empowered |
-| 🏛️ **Heritage** | Document and preserve traditional knowledge | Active preservation |
-| 👥 **Community** | Youth empowerment, village development | 50+ communities engaged |
+| Mission          | Focus                                       | Impact                  |
+| ---------------- | ------------------------------------------- | ----------------------- |
+| 🌱 **Forest**    | Restore ecosystems, conserve biodiversity   | 8+ hectares restored    |
+| 📚 **Knowledge** | AI labs, digital libraries, STEM education  | 10K+ students empowered |
+| 🏛️ **Heritage**  | Document and preserve traditional knowledge | Active preservation     |
+| 👥 **Community** | Youth empowerment, village development      | 50+ communities engaged |
 
 ---
 
@@ -52,15 +52,15 @@ packages/
 The single source of truth for all 15 Constitutional Documents:
 
 ```javascript
-import { initialize, search, cite } from '@bhavya/constitution';
+import { initialize, search, cite } from "@bhavya/constitution";
 
 await initialize();
 
 // Search across all constitutional documents
-const results = await search('conflict of interest');
+const results = await search("conflict of interest");
 
 // Generate a citation
-const citation = await cite('constitution', { format: 'text' });
+const citation = await cite("constitution", { format: "text" });
 // => Bhavya Foundation, "The Constitution" (01), Article 01 (effective 2026-01-01)
 ```
 
@@ -74,14 +74,14 @@ Structured educational content following the KP Standard.
 
 ### KP-001: How Large Language Models Work
 
-| Artifact | Description |
-|----------|-------------|
-| Lesson | 6 sections, 5 learning outcomes |
-| Assessment | 15 questions (8 MCQ, 4 short-answer, 3 reflection) |
-| Teacher Guide | Objectives, materials, discussion prompts |
-| Workbook | 8 pages with exercises and reflection |
-| Visual Spec | 8 scenes, subject-aware palette |
-| Website | 4 pages with HTML/CSS |
+| Artifact      | Description                                        |
+| ------------- | -------------------------------------------------- |
+| Lesson        | 6 sections, 5 learning outcomes                    |
+| Assessment    | 15 questions (8 MCQ, 4 short-answer, 3 reflection) |
+| Teacher Guide | Objectives, materials, discussion prompts          |
+| Workbook      | 8 pages with exercises and reflection              |
+| Visual Spec   | 8 scenes, subject-aware palette                    |
+| Website       | 4 pages with HTML/CSS                              |
 
 ---
 
@@ -110,17 +110,17 @@ pnpm lint
 
 Bhavya Foundation operates under 15 Constitutional Documents that define governance, policy, ethics, compliance, and institutional authority.
 
-**View the Constitution:** [01_The_Constitution.md](01_The_Constitution.md)
+**View the Constitution:** [01_The_Constitution.md](_archive/constitution-2026-09-05/01_The_Constitution.md) (canonical access via the `@bhavya/constitution` SDK)
 
 **Constitutional Hierarchy:**
 
-| Level | Document | Authority |
-|-------|----------|-----------|
-| 100 | The Constitution | Supreme |
-| 95 | Trust Deed | Legal |
-| 90 | Founder's Charter | Visionary |
-| 85 | Board Charter, Code of Ethics, Financial Management | Governance |
-| 80 | Governance Manual, Conflict of Interest, Brand | Operational |
+| Level | Document                                            | Authority   |
+| ----- | --------------------------------------------------- | ----------- |
+| 100   | The Constitution                                    | Supreme     |
+| 95    | Trust Deed                                          | Legal       |
+| 90    | Founder's Charter                                   | Visionary   |
+| 85    | Board Charter, Code of Ethics, Financial Management | Governance  |
+| 80    | Governance Manual, Conflict of Interest, Brand      | Operational |
 
 ---
 

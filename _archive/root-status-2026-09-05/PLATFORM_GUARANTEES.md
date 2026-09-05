@@ -61,10 +61,10 @@ interface Insight<T> {
   id: string;
   title: string;
   description: string;
-  confidence: number;      // 0-1 based on data quality
-  evidence: Evidence[];    // Supporting sources
-  generatedAt: string;     // ISO timestamp
-  data: T;                 // Typed payload
+  confidence: number; // 0-1 based on data quality
+  evidence: Evidence[]; // Supporting sources
+  generatedAt: string; // ISO timestamp
+  data: T; // Typed payload
 }
 ```
 
@@ -203,12 +203,14 @@ Mission App → content-core → Knowledge → Library → Website
 **Applications own UI and interaction, not data models.**
 
 Applications own:
+
 - UI presentation
 - User interaction
 - Route handling
 - Application-specific workflows
 
 Applications do not own:
+
 - Content models
 - Publication logic
 - Entity extraction
@@ -227,8 +229,8 @@ Applications do not own:
 
 ## Version History
 
-| Version | Date | Change |
-|---------|------|--------|
-| 1.0.0 | 2025 | Initial platform guarantees |
-| 2.0.0 | 2025 | Phase II: Governance operations |
-| 3.0.0 | 2026 | Phase III: Institutional learning — frozen architectural invariants |
+| Version | Date | Change                                                              |
+| ------- | ---- | ------------------------------------------------------------------- |
+| 1.0.0   | 2025 | Initial platform guarantees                                         |
+| 2.0.0   | 2025 | Phase II: Governance operations                                     |
+| 3.0.0   | 2026 | Phase III: Institutional learning — frozen architectural invariants |

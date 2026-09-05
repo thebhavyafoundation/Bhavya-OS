@@ -1,8 +1,10 @@
 /**
  * Constitution Loader — Reads and caches constitutional document content
- * 
- * Loads .md files from the project root and provides access to document content.
- * All content is cached after first load for performance.
+ *
+ * Loads .md files from the archived constitution store and provides access
+ * to document content. All content is cached after first load for performance.
+ * Store location (ICM migration 2026-09-05): `_archive/constitution-2026-09-05/`
+ * — see `_archive/ICM-ARCHIVE-MANIFEST.md` for provenance.
  */
 
 import { readFile } from 'fs/promises';
@@ -13,8 +15,9 @@ import { DOCUMENTS, getDocument } from './registry.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Project root (two levels up from packages/constitution/src/)
-const PROJECT_ROOT = join(__dirname, '..', '..', '..');
+// Document store: archived constitution directory (moved from root 2026-09-05).
+// `meta.filename` values in registry.mjs resolve against this directory.
+const DOCUMENT_DIR = join(__dirname, '..', '..', '..', '_archive', 'constitution-2026-09-05');
 
 // Cache for loaded documents
 const contentCache = new Map();
@@ -34,7 +37,7 @@ export async function loadDocument(id) {
     throw new Error(`Document not found in registry: ${id}`);
   }
 
-  const filePath = join(PROJECT_ROOT, meta.filename);
+  const filePath = join(DOCUMENT_DIR, meta.filename);
   
   try {
     const content = await readFile(filePath, 'utf-8');
