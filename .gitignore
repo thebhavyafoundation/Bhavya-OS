@@ -48,3 +48,17 @@ https-github.com-Alishahryar1-free-claude-code/
 
 .vercel
 .gstack/
+
+# Execution artifacts (generated)
+dev-server.log
+dev-server-err.log
+check.mjs
+verify.mjs
+verify2.mjs
+insert.mjs
+insert2.mjs
+insert3.mjs
+videos/
+evolution/
+bar/bee-state/
+bhavya-ai-lab/metrics/
