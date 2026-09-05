@@ -48,13 +48,14 @@
     },
     "vercel": {
       "type": "remote",
-      "url": "https://mcp.vercel.com/mcp",
+      "url": "https://mcp.vercel.com",
       "enabled": true
     },
     "playwright": {
       "type": "local",
       "command": ["npx", "-y", "@playwright/mcp@latest"],
-      "enabled": true
+      "enabled": true,
+      "timeout": 30000
     }
   }
 }
