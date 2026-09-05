@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { Shield } from "lucide-react";
 
 export const metadata = {
@@ -5,7 +6,8 @@ export const metadata = {
   description: "OKR tracking, risk management, and compliance operations",
 };
 
-export default function IOCPage() {
+export default async function IOCPage() {
+  await requirePolicy("/os/ioc");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
@@ -42,7 +44,9 @@ export default function IOCPage() {
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
             <Shield className="w-4 h-4 text-purple-400" />
-            <span className="text-xs text-text-tertiary">Actions This Week</span>
+            <span className="text-xs text-text-tertiary">
+              Actions This Week
+            </span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>
         </div>
@@ -52,11 +56,15 @@ export default function IOCPage() {
         <div className="px-4 py-3.5 border-b border-border-primary">
           <div className="flex items-center gap-2">
             <Shield className="w-4 h-4 text-accent-gold" />
-            <span className="text-sm font-semibold text-text-primary">Compliance Overview</span>
+            <span className="text-sm font-semibold text-text-primary">
+              Compliance Overview
+            </span>
           </div>
         </div>
         <div className="p-8 text-center">
-          <p className="text-sm text-text-muted">Full IOC will be integrated from standalone app.</p>
+          <p className="text-sm text-text-muted">
+            Full IOC will be integrated from standalone app.
+          </p>
         </div>
       </div>
     </div>

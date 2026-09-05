@@ -1,14 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
+import { getIntent } from "@/lib/participation-intents";
 
 export default function RegisterPage() {
+  return (
+    <Suspense>
+      <RegisterForm />
+    </Suspense>
+  );
+}
+
+function RegisterForm() {
   const { register } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const intent = getIntent(searchParams.get("intent"));
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +37,11 @@ export default function RegisterPage() {
     const result = await register(email, password, name);
     setLoading(false);
     if (result.success) {
-      router.push("/onboarding");
+      router.push(
+        intent.id === "learn"
+          ? "/onboarding"
+          : `/onboarding?intent=${intent.id}`,
+      );
     } else {
       setError(result.error || "Registration failed");
     }
@@ -46,10 +61,12 @@ export default function RegisterPage() {
             </div>
           </Link>
           <h1 className="text-2xl font-bold text-[#f5f1e6]">
-            Create your account
+            {intent.id === "learn" ? "Create your account" : intent.headline}
           </h1>
           <p className="text-sm text-[#8a7359] mt-1">
-            Start your AI learning journey
+            {intent.id === "learn"
+              ? "Start your AI learning journey"
+              : intent.sub}
           </p>
         </div>
 

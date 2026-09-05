@@ -7,12 +7,26 @@
 
 import { NextRequest, NextResponse } from "next/server";
 
-const ALLOWED_ORIGINS = [
+/**
+ * Origins permitted to make state-changing cross-origin requests.
+ * Same-origin requests are always allowed (checked per request).
+ * Additional origins come from the environment — never hardcoded
+ * preview URLs (stale allows are a CSRF risk if domains are reassigned).
+ * Set ALLOWED_ORIGINS="https://example.org,https://www.example.org".
+ */
+const BASE_ORIGINS = [
+  "http://localhost:3000",
   "http://localhost:3020",
   "http://localhost:3030",
-  "https://ai-institute-nine.vercel.app",
-  "https://ai-institute-kmkdql49t-bhavya-foundation.vercel.app",
 ];
+
+function getAllowedOrigins(): string[] {
+  const env = (process.env.ALLOWED_ORIGINS || "").split(",");
+  const extra = env.map((s) => s.trim()).filter(Boolean);
+  return [...BASE_ORIGINS, ...extra];
+}
+
+const ALLOWED_ORIGINS = getAllowedOrigins();
 
 function isAllowedOrigin(origin: string | null): boolean {
   if (!origin) return true;
@@ -36,7 +50,18 @@ function isAllowedReferer(referer: string | null): boolean {
   try {
     const url = new URL(referer);
     const refererOrigin = `${url.protocol}//${url.hostname}${url.port ? `:${url.port}` : ""}`;
-    return ALLOWED_ORIGINS.some((allowed) => refererOrigin === allowed || referer.startsWith(allowed));
+    return ALLOWED_ORIGINS.some(
+      (allowed) => refererOrigin === allowed || referer.startsWith(allowed),
+    );
+  } catch {
+    return false;
+  }
+}
+
+function isSameOrigin(origin: string | null, request: NextRequest): boolean {
+  if (!origin) return false;
+  try {
+    return new URL(origin).host === request.nextUrl.host;
   } catch {
     return false;
   }
@@ -56,6 +81,7 @@ function isProtectedRoute(pathname: string): boolean {
     pathname.startsWith("/app") ||
     pathname.startsWith("/os") ||
     pathname.startsWith("/studio") ||
+    pathname.startsWith("/onboarding") ||
     pathname.startsWith("/api/studio")
   );
 }
@@ -74,7 +100,11 @@ export function middleware(request: NextRequest): NextResponse {
       const origin = request.headers.get("origin");
       const referer = request.headers.get("referer");
 
-      if (origin && !isAllowedOrigin(origin)) {
+      if (
+        origin &&
+        !isSameOrigin(origin, request) &&
+        !isAllowedOrigin(origin)
+      ) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }
       if (!origin && referer && !isAllowedReferer(referer)) {
@@ -94,12 +124,21 @@ export function middleware(request: NextRequest): NextResponse {
     }
     // Require session for ALL studio API requests (GET and mutations)
     if (!hasSessionCookie(request)) {
-      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 },
+      );
     }
   }
 
-  // Auth enforcement on protected page routes
-  if (isProtectedRoute(pathname) && !isPublicOsRoute(pathname)) {
+  // Auth enforcement on protected page routes. API routes under /os/*
+  // (e.g. /os/admin/api/*) are excluded: their handlers own auth and
+  // respond with JSON 401/403, which a login redirect would break.
+  if (
+    isProtectedRoute(pathname) &&
+    !isPublicOsRoute(pathname) &&
+    !pathname.includes("/api/")
+  ) {
     if (!hasSessionCookie(request)) {
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("redirect", pathname);
@@ -108,6 +147,24 @@ export function middleware(request: NextRequest): NextResponse {
   }
 
   const response = NextResponse.next();
+
+  // Keep authenticated/internal surfaces out of search indexes.
+  // Public knowledge stays indexable: /os itself plus /os/knowledge
+  // and /os/search are explicitly public (see isPublicOsRoute).
+  if (
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/app") ||
+    pathname.startsWith("/studio") ||
+    pathname.startsWith("/dashboard") ||
+    pathname.startsWith("/profile") ||
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname === "/onboarding" ||
+    pathname === "/forbidden" ||
+    (pathname.startsWith("/os") && !isPublicOsRoute(pathname))
+  ) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  }
 
   // Security headers
   response.headers.set("X-Content-Type-Options", "nosniff");

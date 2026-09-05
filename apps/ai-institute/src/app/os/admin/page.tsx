@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { OverviewCards } from "./components/OverviewCards";
 import { ActivityFeed } from "./components/ActivityFeed";
 import { SystemHealth } from "./components/SystemHealth";
@@ -9,7 +10,10 @@ export const metadata = {
   description: "Platform overview and operations status",
 };
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  // Server-side gate: only the admin role may view this workspace.
+  // Session presence alone (middleware) is not sufficient.
+  await requirePolicy("/os/admin");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
@@ -26,11 +30,15 @@ export default function AdminPage() {
         <SystemHealth />
       </div>
       <div className="mt-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">Recent Content</h2>
+        <h2 className="text-xl font-semibold text-text-primary mb-4">
+          Recent Content
+        </h2>
         <ContentList />
       </div>
       <div className="mt-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">Recent Releases</h2>
+        <h2 className="text-xl font-semibold text-text-primary mb-4">
+          Recent Releases
+        </h2>
         <ReleaseList />
       </div>
     </div>

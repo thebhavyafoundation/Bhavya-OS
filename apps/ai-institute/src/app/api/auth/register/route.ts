@@ -8,6 +8,7 @@ import {
 } from "@/lib/api-auth";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
+import { recordAuditEvent } from "@/lib/audit-repository";
 
 export async function POST(request: NextRequest) {
   const correlationId = extractCorrelationId(request);
@@ -27,7 +28,9 @@ export async function POST(request: NextRequest) {
         {
           status: 429,
           headers: {
-            "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetAt - Date.now()) / 1000),
+            ),
             "X-Correlation-Id": correlationId,
           },
         },
@@ -38,7 +41,11 @@ export async function POST(request: NextRequest) {
     const { email, password, name } = body;
 
     if (!email || !password || !name) {
-      log.warn("Validation failed", { hasEmail: !!email, hasPassword: !!password, hasName: !!name });
+      log.warn("Validation failed", {
+        hasEmail: !!email,
+        hasPassword: !!password,
+        hasName: !!name,
+      });
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400, headers: { "X-Correlation-Id": correlationId } },
@@ -73,11 +80,22 @@ export async function POST(request: NextRequest) {
     const session = await createSession(user);
 
     log.info("User registered", { userId: user.id });
+    await recordAuditEvent({
+      actorId: user.id,
+      actorEmail: user.email,
+      action: "register",
+      resource: "user",
+      resourceId: user.id,
+      result: "success",
+    });
 
-    const response = NextResponse.json({
-      success: true,
-      user: stripSensitive(user),
-    }, { headers: { "X-Correlation-Id": correlationId } });
+    const response = NextResponse.json(
+      {
+        success: true,
+        user: stripSensitive(user),
+      },
+      { headers: { "X-Correlation-Id": correlationId } },
+    );
 
     response.cookies.set("session-token", session.token, {
       httpOnly: true,
@@ -89,7 +107,10 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (err) {
-    log.error("Registration failed", err instanceof Error ? err : new Error(String(err)));
+    log.error(
+      "Registration failed",
+      err instanceof Error ? err : new Error(String(err)),
+    );
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500, headers: { "X-Correlation-Id": correlationId } },

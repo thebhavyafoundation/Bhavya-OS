@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
-import { getStudentByUserId, createStudent, updateStudent } from "@/lib/student-store";
+import {
+  getStudentByUserId,
+  createStudent,
+  updateStudent,
+} from "@/lib/student-store";
 import { getUserRepository } from "@/lib/repositories";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
+import { recordAuditEvent } from "@/lib/audit-repository";
 import { ONBOARDING_ROLES, type Role } from "@/lib/roles";
 
 export async function GET(request: NextRequest) {
@@ -19,10 +24,7 @@ export async function GET(request: NextRequest) {
     const rateLimit = checkRateLimit(`api:${user.id}`, RateLimits.api);
     if (rateLimit.limited) {
       log.warn("Rate limit exceeded", { userId: user.id });
-      return NextResponse.json(
-        { error: "Too many requests" },
-        { status: 429 },
-      );
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
     let student = await getStudentByUserId(user.id);
@@ -37,12 +39,21 @@ export async function GET(request: NextRequest) {
       log.info("Student profile created", { userId: user.id });
     }
 
-    return NextResponse.json({ student }, {
-      headers: { "X-Correlation-Id": correlationId },
-    });
+    return NextResponse.json(
+      { student },
+      {
+        headers: { "X-Correlation-Id": correlationId },
+      },
+    );
   } catch (err) {
-    log.error("Failed to get student", err instanceof Error ? err : new Error(String(err)));
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    log.error(
+      "Failed to get student",
+      err instanceof Error ? err : new Error(String(err)),
+    );
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }
 
@@ -59,10 +70,7 @@ export async function PUT(request: NextRequest) {
     const rateLimit = checkRateLimit(`api:${user.id}`, RateLimits.api);
     if (rateLimit.limited) {
       log.warn("Rate limit exceeded", { userId: user.id });
-      return NextResponse.json(
-        { error: "Too many requests" },
-        { status: 429 },
-      );
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
 
     const body = await request.json();
@@ -70,7 +78,8 @@ export async function PUT(request: NextRequest) {
     const updateData: Record<string, unknown> = {};
     if (name !== undefined) updateData.name = name;
     if (interests !== undefined) updateData.interests = interests;
-    if (onboardingComplete !== undefined) updateData.onboardingComplete = onboardingComplete;
+    if (onboardingComplete !== undefined)
+      updateData.onboardingComplete = onboardingComplete;
 
     // Role assignment: only allow onboarding roles for self-assignment
     // Admin/instructor roles must be assigned by an admin via a separate endpoint
@@ -78,7 +87,10 @@ export async function PUT(request: NextRequest) {
       if (ONBOARDING_ROLES.includes(role as Role)) {
         updateData.role = role;
       } else {
-        log.warn("Unauthorized role self-assignment attempt", { userId: user.id, requestedRole: role });
+        log.warn("Unauthorized role self-assignment attempt", {
+          userId: user.id,
+          requestedRole: role,
+        });
         // Silently ignore non-onboarding role assignments
       }
     }
@@ -92,15 +104,33 @@ export async function PUT(request: NextRequest) {
     if (updateData.role !== undefined && updateData.role !== user.role) {
       const userRepo = getUserRepository();
       await userRepo.updateRole(user.id, updateData.role as string);
+      await recordAuditEvent({
+        actorId: user.id,
+        actorEmail: user.email,
+        action: "role-change",
+        resource: "user",
+        resourceId: user.id,
+        result: "success",
+        metadata: { from: user.role, to: updateData.role },
+      });
     }
 
     log.info("Student profile updated", { userId: user.id });
 
-    return NextResponse.json({ student: updated }, {
-      headers: { "X-Correlation-Id": correlationId },
-    });
+    return NextResponse.json(
+      { student: updated },
+      {
+        headers: { "X-Correlation-Id": correlationId },
+      },
+    );
   } catch (err) {
-    log.error("Failed to update student", err instanceof Error ? err : new Error(String(err)));
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    log.error(
+      "Failed to update student",
+      err instanceof Error ? err : new Error(String(err)),
+    );
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

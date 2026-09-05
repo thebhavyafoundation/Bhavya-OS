@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { getBuilders } from "@/lib/os-data";
 import { Video } from "lucide-react";
 
@@ -18,6 +19,7 @@ const VIDEO_CATEGORIES = [
 ];
 
 export default async function VideosPage() {
+  await requirePolicy("/os/videos");
   const builders = await getBuilders();
   const videoBuilder = (builders as AnyRecord[]).find(
     (b) => b.id === "video",

@@ -51,6 +51,9 @@ BHAVYA FOUNDATION (product)
 | `/transparency/releases`   | Release history            | Public   | No   | —         |
 | `/resources`               | Resource library           | Public   | No   | —         |
 | `/donate`                  | Donation page              | Public   | No   | —         |
+| `/volunteer`               | Volunteer pathways         | Public   | No   | community |
+| `/get-involved`            | Participation paths        | Public   | No   | —         |
+| `/forbidden`               | Not-permitted notice       | Public   | No   | —         |
 | `/privacy`                 | Privacy policy             | Public   | No   | —         |
 | `/accessibility`           | Accessibility statement    | Public   | No   | —         |
 
@@ -87,15 +90,19 @@ BHAVYA FOUNDATION (product)
 
 ## OS Routes (Internal)
 
-| Route               | Purpose              | Audience | Auth |
-| ------------------- | -------------------- | -------- | ---- |
-| `/os`               | OS overview          | Admin    | Yes  |
-| `/os/governance`    | Governance           | Admin    | Yes  |
-| `/os/observability` | Observability        | Admin    | Yes  |
-| `/os/runtime`       | Runtime              | Admin    | Yes  |
-| `/os/knowledge`     | Knowledge management | Admin    | Yes  |
-| `/os/memory`        | Memory               | Admin    | Yes  |
-| `/os/search`        | Search               | Admin    | Yes  |
+| Route               | Purpose              | Audience  | Auth |
+| ------------------- | -------------------- | --------- | ---- |
+| `/os`               | OS overview          | Admin     | Yes  |
+| `/os/governance`    | Governance           | Admin     | Yes  |
+| `/os/observability` | Observability        | Admin     | Yes  |
+| `/os/runtime`       | Runtime              | Admin     | Yes  |
+| `/os/knowledge`     | Knowledge management | Admin     | Yes  |
+| `/os/memory`        | Memory               | Admin     | Yes  |
+| `/os/search`        | Search               | Admin     | Yes  |
+| `/os/student`       | Student workspace    | Student   | Yes  |
+| `/os/volunteer`     | Volunteer workspace  | Volunteer | Yes  |
+| `/os/donor`         | Donor workspace      | Donor     | Yes  |
+| `/os/trustee`       | Trustee workspace    | Trustee   | Yes  |
 
 ---
 

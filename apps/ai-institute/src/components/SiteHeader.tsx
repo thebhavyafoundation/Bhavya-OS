@@ -17,7 +17,10 @@ interface SiteHeaderProps {
   variant?: "default" | "dark";
 }
 
-export function SiteHeader({ activePillar, variant = "default" }: SiteHeaderProps) {
+export function SiteHeader({
+  activePillar,
+  variant = "default",
+}: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,13 +51,17 @@ export function SiteHeader({ activePillar, variant = "default" }: SiteHeaderProp
             <div className="nav-logo-text">
               <span
                 className="nav-logo-name"
-                style={isDark ? { color: "var(--color-text-inverse)" } : undefined}
+                style={
+                  isDark ? { color: "var(--color-text-inverse)" } : undefined
+                }
               >
                 Bhavya
               </span>
               <span
                 className="nav-logo-tagline"
-                style={isDark ? { color: "var(--color-brand-gold)" } : undefined}
+                style={
+                  isDark ? { color: "var(--color-brand-gold)" } : undefined
+                }
               >
                 Nature. Knowledge. Heritage.
               </span>
@@ -167,6 +174,20 @@ export function SiteHeader({ activePillar, variant = "default" }: SiteHeaderProp
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Support Us
+                </a>
+                <a
+                  href="/get-involved"
+                  className="mobile-menu-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get Involved
+                </a>
+                <a
+                  href="/login"
+                  className="mobile-menu-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
                 </a>
               </div>
             </motion.div>

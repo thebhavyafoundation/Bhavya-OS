@@ -25,7 +25,14 @@ export interface StudentProfile {
   userId: string;
   name: string;
   email: string;
-  role: "student" | "researcher" | "builder" | "mentor" | "volunteer" | "donor" | "educator";
+  role:
+    | "student"
+    | "researcher"
+    | "builder"
+    | "mentor"
+    | "volunteer"
+    | "donor"
+    | "educator";
   interests: string[];
   currentCourse: string;
   currentLessonIndex: number;
@@ -61,25 +68,43 @@ export interface UserRepository {
   findById(id: string): Promise<User | null>;
   create(data: CreateUserInput): Promise<User>;
   updateRole(userId: string, role: string): Promise<User | null>;
+  updatePassword(userId: string, passwordHash: string): Promise<User | null>;
+  findAll(): Promise<User[]>;
 }
 
 export interface StudentRepository {
   findByUserId(userId: string): Promise<StudentProfile | null>;
   create(data: CreateStudentInput): Promise<StudentProfile>;
-  update(userId: string, data: Partial<StudentProfile>): Promise<StudentProfile | null>;
+  update(
+    userId: string,
+    data: Partial<StudentProfile>,
+  ): Promise<StudentProfile | null>;
 }
 
 export interface ProgressRepository {
-  completeLesson(userId: string, lessonId: string): Promise<StudentProfile | null>;
+  completeLesson(
+    userId: string,
+    lessonId: string,
+  ): Promise<StudentProfile | null>;
   completeLab(userId: string, taskId: string): Promise<StudentProfile | null>;
-  submitQuiz(userId: string, answers: Record<string, string | number>, score: number): Promise<StudentProfile | null>;
+  submitQuiz(
+    userId: string,
+    answers: Record<string, string | number>,
+    score: number,
+  ): Promise<StudentProfile | null>;
   submitProject(userId: string, score: number): Promise<StudentProfile | null>;
   enroll(userId: string, courseId: string): Promise<StudentProfile | null>;
-  addReflection(userId: string, lessonId: string, content: string): Promise<StudentProfile | null>;
+  addReflection(
+    userId: string,
+    lessonId: string,
+    content: string,
+  ): Promise<StudentProfile | null>;
 }
 
 export interface SessionRepository {
   create(userId: string): Promise<{ token: string; expiresAt: string }>;
-  findByToken(token: string): Promise<{ userId: string; expiresAt: string } | null>;
+  findByToken(
+    token: string,
+  ): Promise<{ userId: string; expiresAt: string } | null>;
   delete(token: string): Promise<void>;
 }

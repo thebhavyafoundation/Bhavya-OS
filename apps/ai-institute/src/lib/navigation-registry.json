@@ -300,6 +300,40 @@
           ]
         },
         {
+          "id": "workspaces",
+          "label": "Workspaces",
+          "items": [
+            {
+              "id": "os-student",
+              "label": "Student",
+              "href": "/os/student",
+              "icon": "GraduationCap",
+              "roles": ["student", "builder", "researcher", "admin"]
+            },
+            {
+              "id": "os-volunteer",
+              "label": "Volunteer",
+              "href": "/os/volunteer",
+              "icon": "HeartHandshake",
+              "roles": ["volunteer", "admin"]
+            },
+            {
+              "id": "os-donor",
+              "label": "Donor",
+              "href": "/os/donor",
+              "icon": "Heart",
+              "roles": ["donor", "admin"]
+            },
+            {
+              "id": "os-trustee",
+              "label": "Trustee",
+              "href": "/os/trustee",
+              "icon": "Scale",
+              "roles": ["trustee", "admin"]
+            }
+          ]
+        },
+        {
           "id": "administration",
           "label": "Administration",
           "items": [
@@ -355,6 +389,15 @@
           { "label": "Transparency", "href": "/transparency" },
           { "label": "Contributing", "href": "/contributing" },
           { "label": "Accessibility", "href": "/accessibility" }
+        ]
+      },
+      {
+        "title": "Participate",
+        "links": [
+          { "label": "Get Involved", "href": "/get-involved" },
+          { "label": "Volunteer", "href": "/volunteer" },
+          { "label": "Donate", "href": "/donate" },
+          { "label": "Community", "href": "/community" }
         ]
       },
       {

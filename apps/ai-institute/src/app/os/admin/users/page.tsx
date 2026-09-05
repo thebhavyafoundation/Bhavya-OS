@@ -1,4 +1,5 @@
 import { Users as UsersIcon } from "lucide-react";
+import { requirePolicy } from "@/lib/require-role";
 import { UserRoles } from "../components/UserRoles";
 
 export const metadata = {
@@ -6,7 +7,8 @@ export const metadata = {
   description: "Manage platform users and roles",
 };
 
-export default function UsersPage() {
+export default async function UsersPage() {
+  await requirePolicy("/os/admin/users");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">

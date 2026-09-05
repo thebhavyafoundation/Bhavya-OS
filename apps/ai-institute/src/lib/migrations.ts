@@ -72,4 +72,29 @@ DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS users;
 `,
   },
+  {
+    id: "002_audit_events",
+    name: "Audit events — actor/action/resource log for sensitive actions",
+    up: `
+-- Audit events table (append-only; never updated or deleted by the app)
+CREATE TABLE IF NOT EXISTS audit_events (
+  id TEXT PRIMARY KEY,
+  actor_id TEXT,
+  actor_email TEXT NOT NULL DEFAULT '',
+  action TEXT NOT NULL,
+  resource TEXT NOT NULL DEFAULT '',
+  resource_id TEXT NOT NULL DEFAULT '',
+  result TEXT NOT NULL DEFAULT 'success',
+  metadata TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_audit_events_actor ON audit_events(actor_id);
+CREATE INDEX IF NOT EXISTS idx_audit_events_action ON audit_events(action);
+CREATE INDEX IF NOT EXISTS idx_audit_events_created ON audit_events(created_at);
+`,
+    down: `
+DROP TABLE IF EXISTS audit_events;
+`,
+  },
 ];

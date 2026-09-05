@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { getServices, getRuntime } from "@/lib/os-data";
 import { Activity, Server } from "lucide-react";
 
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 type AnyRecord = Record<string, any>;
 
 export default async function ObservabilityPage() {
+  await requirePolicy("/os/observability");
   const [services, runtime] = await Promise.all([getServices(), getRuntime()]);
 
   const components: [string, AnyRecord][] = runtime?.components

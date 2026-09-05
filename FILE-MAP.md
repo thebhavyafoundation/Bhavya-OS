@@ -312,6 +312,7 @@
 - `FILE-MAP.md`
 - `README.md`
 - `VERCEL.md`
+- `__test_io_dir__`/
 - `_archive`/
   - `_archive\.registry`/
   - `_archive\.schemas`/
@@ -343,8 +344,6 @@
   - `_shared\factory-map.md`
 - `_system`/
   - `_system\icm-restructure-proposal.md`
-  - `_system\proposed-AGENTS.md`
-  - `_system\proposed-CONTEXT.md`
   - `_system\schema.md`
 - `_templates`/
   - `_templates\README.md`

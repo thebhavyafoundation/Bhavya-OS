@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { getDecisions } from "@/lib/os-data";
 import { Brain } from "lucide-react";
 
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 type DecisionRecord = Record<string, any>;
 
 export default async function MemoryPage() {
+  await requirePolicy("/os/memory");
   const decisionsMeta = await getDecisions();
   const records: DecisionRecord[] = decisionsMeta?.records || [];
 
@@ -64,9 +66,7 @@ export default async function MemoryPage() {
                   {record.payload?.status || "recorded"}
                 </span>
               </div>
-              <div className="text-xs text-text-tertiary">
-                {record.author}
-              </div>
+              <div className="text-xs text-text-tertiary">{record.author}</div>
               <div className="text-xs text-text-muted font-mono">
                 {record.timestamp
                   ? record.timestamp.slice(0, 16).replace("T", " ")

@@ -7,6 +7,7 @@ import {
 } from "@/lib/api-auth";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
+import { recordAuditEvent } from "@/lib/audit-repository";
 
 export async function POST(request: NextRequest) {
   const correlationId = extractCorrelationId(request);
@@ -26,7 +27,9 @@ export async function POST(request: NextRequest) {
         {
           status: 429,
           headers: {
-            "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+            "Retry-After": String(
+              Math.ceil((rateLimit.resetAt - Date.now()) / 1000),
+            ),
             "X-Correlation-Id": correlationId,
           },
         },
@@ -37,7 +40,10 @@ export async function POST(request: NextRequest) {
     const { email, password } = body;
 
     if (!email || !password) {
-      log.warn("Validation failed", { hasEmail: !!email, hasPassword: !!password });
+      log.warn("Validation failed", {
+        hasEmail: !!email,
+        hasPassword: !!password,
+      });
       return NextResponse.json(
         { error: "Email and password are required" },
         { status: 400, headers: { "X-Correlation-Id": correlationId } },
@@ -47,6 +53,12 @@ export async function POST(request: NextRequest) {
     const user = await findUserByEmail(email);
     if (!user) {
       log.warn("Login failed — unknown email");
+      await recordAuditEvent({
+        actorEmail: email,
+        action: "login",
+        resource: "session",
+        result: "failure",
+      });
       return NextResponse.json(
         { error: "Invalid email or password" },
         { status: 401, headers: { "X-Correlation-Id": correlationId } },
@@ -56,6 +68,13 @@ export async function POST(request: NextRequest) {
     const valid = await verifyPassword(password, user.passwordHash);
     if (!valid) {
       log.warn("Login failed — invalid password", { userId: user.id });
+      await recordAuditEvent({
+        actorId: user.id,
+        actorEmail: user.email,
+        action: "login",
+        resource: "session",
+        result: "failure",
+      });
       return NextResponse.json(
         { error: "Invalid email or password" },
         { status: 401, headers: { "X-Correlation-Id": correlationId } },
@@ -65,11 +84,21 @@ export async function POST(request: NextRequest) {
     const session = await createSession(user);
 
     log.info("Login successful", { userId: user.id });
+    await recordAuditEvent({
+      actorId: user.id,
+      actorEmail: user.email,
+      action: "login",
+      resource: "session",
+      result: "success",
+    });
 
-    const response = NextResponse.json({
-      success: true,
-      user: stripSensitive(user),
-    }, { headers: { "X-Correlation-Id": correlationId } });
+    const response = NextResponse.json(
+      {
+        success: true,
+        user: stripSensitive(user),
+      },
+      { headers: { "X-Correlation-Id": correlationId } },
+    );
 
     response.cookies.set("session-token", session.token, {
       httpOnly: true,
@@ -81,7 +110,10 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (err) {
-    log.error("Login failed", err instanceof Error ? err : new Error(String(err)));
+    log.error(
+      "Login failed",
+      err instanceof Error ? err : new Error(String(err)),
+    );
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500, headers: { "X-Correlation-Id": correlationId } },

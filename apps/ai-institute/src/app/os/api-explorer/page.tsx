@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { Plug } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -143,7 +144,8 @@ const dataFunctions = [
   "getBBLLessons",
 ];
 
-export default function ApiExplorerPage() {
+export default async function ApiExplorerPage() {
+  await requirePolicy("/os/api-explorer");
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-10">

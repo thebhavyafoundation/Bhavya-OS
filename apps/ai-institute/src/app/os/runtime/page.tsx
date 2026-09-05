@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { getRuntime, getBuilders } from "@/lib/os-data";
 import { Zap, Server, Workflow, Compass } from "lucide-react";
 
@@ -7,6 +8,7 @@ export const dynamic = "force-dynamic";
 type AnyRecord = Record<string, any>;
 
 export default async function RuntimePage() {
+  await requirePolicy("/os/runtime");
   const [runtime, builders] = await Promise.all([getRuntime(), getBuilders()]);
 
   const components: [string, AnyRecord][] = runtime?.components
@@ -127,10 +129,7 @@ export default async function RuntimePage() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
             {(builders as AnyRecord[]).map((builder) => (
-              <div
-                key={builder.id}
-                className="glass rounded-xl p-5"
-              >
+              <div key={builder.id} className="glass rounded-xl p-5">
                 <div className="text-sm font-semibold text-text-primary mb-1">
                   {builder.name}
                 </div>

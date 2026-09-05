@@ -1,3 +1,4 @@
+import { requirePolicy } from "@/lib/require-role";
 import { GitBranch } from "lucide-react";
 
 export const metadata = {
@@ -5,7 +6,8 @@ export const metadata = {
   description: "Repository analysis, patterns, and code intelligence",
 };
 
-export default function GitHubPage() {
+export default async function GitHubPage() {
+  await requirePolicy("/os/github");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
@@ -52,11 +54,15 @@ export default function GitHubPage() {
         <div className="px-4 py-3.5 border-b border-border-primary">
           <div className="flex items-center gap-2">
             <GitBranch className="w-4 h-4 text-accent-gold" />
-            <span className="text-sm font-semibold text-text-primary">Repository Overview</span>
+            <span className="text-sm font-semibold text-text-primary">
+              Repository Overview
+            </span>
           </div>
         </div>
         <div className="p-8 text-center">
-          <p className="text-sm text-text-muted">Full GitHub OS will be integrated from standalone app.</p>
+          <p className="text-sm text-text-muted">
+            Full GitHub OS will be integrated from standalone app.
+          </p>
         </div>
       </div>
     </div>
