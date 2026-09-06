@@ -184,9 +184,7 @@ export default function ResearchPage() {
             <div className="text-3xl font-bold text-text-primary mb-1">
               {new Set(papers.flatMap((p) => p.authors)).size}
             </div>
-            <div className="text-sm text-text-tertiary">
-              Contributing Authors
-            </div>
+            <div className="text-sm text-text-tertiary">Referenced Authors</div>
           </div>
           <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
             <div className="text-3xl font-bold text-text-primary mb-1">

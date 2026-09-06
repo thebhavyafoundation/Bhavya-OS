@@ -1,10 +1,12 @@
 import { getGovernanceDocs, getPolicies } from "@/lib/os-data";
+import { requirePolicy } from "@/lib/require-role";
 import { Scale, FileText } from "lucide-react";
 import { EmptyState } from "@bhavya/platform-ui";
 
 export const dynamic = "force-dynamic";
 
 export default async function GovernancePage() {
+  await requirePolicy("/os/governance");
   const [governanceDocs, policies] = await Promise.all([
     getGovernanceDocs(),
     getPolicies(),
@@ -99,9 +101,7 @@ export default async function GovernancePage() {
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <div className="text-sm font-semibold text-text-primary">
-                        {pol.icon && (
-                          <span className="mr-1.5">{pol.icon}</span>
-                        )}
+                        {pol.icon && <span className="mr-1.5">{pol.icon}</span>}
                         {pol.title}
                       </div>
                     </div>

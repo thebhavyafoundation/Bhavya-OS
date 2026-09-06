@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { requirePolicy } from "@/lib/require-role";
 import {
   getContentStats,
   getKnowledgeObjects,
@@ -63,6 +64,7 @@ async function getHomeData() {
 }
 
 export default async function OSPage() {
+  await requirePolicy("/os");
   const data = await getHomeData();
 
   const recentDocs = data.contentDocs.slice(0, 5);
@@ -71,8 +73,7 @@ export default async function OSPage() {
   const recentPolicies = data.policies.slice(0, 3);
   const recentDecisions: AnyRecord[] =
     data.decisions?.records?.slice(0, 5) || [];
-  const graphNodes: AnyRecord[] =
-    data.knowledgeGraph?.nodes?.slice(0, 6) || [];
+  const graphNodes: AnyRecord[] = data.knowledgeGraph?.nodes?.slice(0, 6) || [];
   const runtimeComponents: [string, AnyRecord][] = data.runtime?.components
     ? Object.entries(data.runtime.components)
     : [];
@@ -125,7 +126,11 @@ export default async function OSPage() {
 
       {/* Knowledge + Documents */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-        <Section title="Knowledge Objects" icon={<Brain className="w-4 h-4" />} href="/os/knowledge">
+        <Section
+          title="Knowledge Objects"
+          icon={<Brain className="w-4 h-4" />}
+          href="/os/knowledge"
+        >
           {recentKO.length > 0 ? (
             recentKO.map((ko) => (
               <div
@@ -136,8 +141,8 @@ export default async function OSPage() {
                   {ko.title}
                 </div>
                 <div className="text-xs text-text-tertiary mt-0.5">
-                  {ko.domain} · Grade {ko.grade} ·{" "}
-                  {ko.concepts?.length || 0} concepts
+                  {ko.domain} · Grade {ko.grade} · {ko.concepts?.length || 0}{" "}
+                  concepts
                 </div>
               </div>
             ))
@@ -146,7 +151,11 @@ export default async function OSPage() {
           )}
         </Section>
 
-        <Section title="Recent Documents" icon={<FileText className="w-4 h-4" />} href="/os/knowledge">
+        <Section
+          title="Recent Documents"
+          icon={<FileText className="w-4 h-4" />}
+          href="/os/knowledge"
+        >
           {recentDocs.length > 0 ? (
             recentDocs.map((doc) => (
               <div
@@ -169,7 +178,11 @@ export default async function OSPage() {
 
       {/* Runtime + Knowledge Graph */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-        <Section title="Runtime" icon={<Zap className="w-4 h-4" />} href="/os/runtime">
+        <Section
+          title="Runtime"
+          icon={<Zap className="w-4 h-4" />}
+          href="/os/runtime"
+        >
           {runtimeComponents.length > 0 ? (
             runtimeComponents.map(([key, comp]) => (
               <div
@@ -192,7 +205,11 @@ export default async function OSPage() {
           )}
         </Section>
 
-        <Section title="Knowledge Graph" icon={<Network className="w-4 h-4" />} href="/os/knowledge">
+        <Section
+          title="Knowledge Graph"
+          icon={<Network className="w-4 h-4" />}
+          href="/os/knowledge"
+        >
           {graphNodes.length > 0 ? (
             graphNodes.map((node) => (
               <div
@@ -228,7 +245,11 @@ export default async function OSPage() {
 
       {/* Governance + Policies + Decisions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-        <Section title="Governance" icon={<Scale className="w-4 h-4" />} href="/os/governance">
+        <Section
+          title="Governance"
+          icon={<Scale className="w-4 h-4" />}
+          href="/os/governance"
+        >
           {recentGovernance.length > 0 ? (
             recentGovernance.map((doc) => (
               <div
@@ -248,7 +269,11 @@ export default async function OSPage() {
           )}
         </Section>
 
-        <Section title="Policies" icon={<FileText className="w-4 h-4" />} href="/os/governance">
+        <Section
+          title="Policies"
+          icon={<FileText className="w-4 h-4" />}
+          href="/os/governance"
+        >
           {recentPolicies.length > 0 ? (
             recentPolicies.map((pol) => (
               <div
@@ -256,9 +281,7 @@ export default async function OSPage() {
                 className="px-4 py-3 border-b border-border-primary"
               >
                 <div className="text-sm font-medium text-text-primary">
-                  {pol.icon && (
-                    <span className="mr-1.5">{pol.icon}</span>
-                  )}
+                  {pol.icon && <span className="mr-1.5">{pol.icon}</span>}
                   {pol.title}
                 </div>
                 <div className="text-xs text-text-muted">{pol.status}</div>
@@ -269,7 +292,11 @@ export default async function OSPage() {
           )}
         </Section>
 
-        <Section title="Decisions" icon={<Brain className="w-4 h-4" />} href="/os/memory">
+        <Section
+          title="Decisions"
+          icon={<Brain className="w-4 h-4" />}
+          href="/os/memory"
+        >
           {recentDecisions.length > 0 ? (
             recentDecisions.map((dec) => (
               <div
@@ -293,7 +320,11 @@ export default async function OSPage() {
       {/* Builders */}
       {data.builders.length > 0 && (
         <div className="mb-12">
-          <Section title="Builders" icon={<Server className="w-4 h-4" />} href="/os/runtime">
+          <Section
+            title="Builders"
+            icon={<Server className="w-4 h-4" />}
+            href="/os/runtime"
+          >
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 p-4">
               {data.builders.map((builder: AnyRecord) => (
                 <div
@@ -325,13 +356,37 @@ export default async function OSPage() {
 
       {/* Domain Status — Institutional Pillars */}
       <div className="mb-12">
-        <Section title="Institutional Domains" icon={<Network className="w-4 h-4" />} href="/missions">
+        <Section
+          title="Institutional Domains"
+          icon={<Network className="w-4 h-4" />}
+          href="/missions"
+        >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 p-4">
             {[
-              { name: "Knowledge", status: "active", detail: `${data.stats.knowledgeObjects} KOs`, color: "bg-green-500" },
-              { name: "Forest", status: "active", detail: "Infrastructure ready", color: "bg-green-500" },
-              { name: "Heritage", status: "infrastructure-ready", detail: "No verified records", color: "bg-amber-500" },
-              { name: "Community", status: "not-yet-active", detail: "No verified records", color: "bg-text-muted" },
+              {
+                name: "Knowledge",
+                status: "active",
+                detail: `${data.stats.knowledgeObjects} KOs`,
+                color: "bg-green-500",
+              },
+              {
+                name: "Forest",
+                status: "active",
+                detail: "Infrastructure ready",
+                color: "bg-green-500",
+              },
+              {
+                name: "Heritage",
+                status: "infrastructure-ready",
+                detail: "No verified records",
+                color: "bg-amber-500",
+              },
+              {
+                name: "Community",
+                status: "not-yet-active",
+                detail: "No verified records",
+                color: "bg-text-muted",
+              },
             ].map((domain) => (
               <div
                 key={domain.name}
@@ -339,10 +394,16 @@ export default async function OSPage() {
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className={`w-2 h-2 rounded-full ${domain.color}`} />
-                  <span className="text-sm font-semibold text-text-primary">{domain.name}</span>
+                  <span className="text-sm font-semibold text-text-primary">
+                    {domain.name}
+                  </span>
                 </div>
-                <div className="text-xs text-text-tertiary capitalize">{domain.status.replace(/-/g, " ")}</div>
-                <div className="text-xs text-text-muted mt-1">{domain.detail}</div>
+                <div className="text-xs text-text-tertiary capitalize">
+                  {domain.status.replace(/-/g, " ")}
+                </div>
+                <div className="text-xs text-text-muted mt-1">
+                  {domain.detail}
+                </div>
               </div>
             ))}
           </div>

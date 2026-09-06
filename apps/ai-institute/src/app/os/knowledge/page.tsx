@@ -1,5 +1,10 @@
 import { getContentDocuments } from "@/lib/os-data";
-import { listKOs, getKO, type KnowledgeObject } from "@/lib/knowledge-repository";
+import { requirePolicy } from "@/lib/require-role";
+import {
+  listKOs,
+  getKO,
+  type KnowledgeObject,
+} from "@/lib/knowledge-repository";
 import { listEvidence, getEvidenceCounts } from "@/lib/institutional-evidence";
 import { getKnowledgeMetrics } from "@/lib/knowledge-metrics";
 import { BookOpen } from "lucide-react";
@@ -7,6 +12,7 @@ import { BookOpen } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function KnowledgePage() {
+  await requirePolicy("/os/knowledge");
   // Fetch KO summaries from canonical repository (has provenance + status)
   const koSummaries = listKOs();
 
@@ -24,11 +30,21 @@ export default async function KnowledgePage() {
   ]);
 
   // Compute breakdowns
-  const publishedCount = koSummaries.filter((ko) => ko.status === "published").length;
-  const draftCount = koSummaries.filter((ko) => ko.status === "draft" || !ko.status).length;
-  const institutionalCount = koSummaries.filter((ko) => ko.provenance === "institutional" || !ko.provenance).length;
-  const testSeededCount = koSummaries.filter((ko) => ko.provenance === "test-seed").length;
-  const importedCount = koSummaries.filter((ko) => ko.provenance === "imported").length;
+  const publishedCount = koSummaries.filter(
+    (ko) => ko.status === "published",
+  ).length;
+  const draftCount = koSummaries.filter(
+    (ko) => ko.status === "draft" || !ko.status,
+  ).length;
+  const institutionalCount = koSummaries.filter(
+    (ko) => ko.provenance === "institutional" || !ko.provenance,
+  ).length;
+  const testSeededCount = koSummaries.filter(
+    (ko) => ko.provenance === "test-seed",
+  ).length;
+  const importedCount = koSummaries.filter(
+    (ko) => ko.provenance === "imported",
+  ).length;
 
   const docsByCategory = contentDocs.reduce(
     (acc, doc) => {
@@ -50,26 +66,35 @@ export default async function KnowledgePage() {
           </h1>
         </div>
         <p className="text-sm text-text-tertiary">
-          {koSummaries.length} Knowledge Objects · {contentDocs.length} Content Documents · {evidence.length} Evidence Records
+          {koSummaries.length} Knowledge Objects · {contentDocs.length} Content
+          Documents · {evidence.length} Evidence Records
         </p>
       </div>
 
       {/* Metrics Overview */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
         <div className="glass rounded-xl p-5 text-center">
-          <div className="text-2xl font-bold text-accent-gold mb-1">{metrics.totalKos}</div>
+          <div className="text-2xl font-bold text-accent-gold mb-1">
+            {metrics.totalKos}
+          </div>
           <div className="text-xs text-text-tertiary">Total KOs</div>
         </div>
         <div className="glass rounded-xl p-5 text-center">
-          <div className="text-2xl font-bold text-accent-gold mb-1">{metrics.totalLessons}</div>
+          <div className="text-2xl font-bold text-accent-gold mb-1">
+            {metrics.totalLessons}
+          </div>
           <div className="text-xs text-text-tertiary">Lessons</div>
         </div>
         <div className="glass rounded-xl p-5 text-center">
-          <div className="text-2xl font-bold text-accent-gold mb-1">{metrics.totalPublications}</div>
+          <div className="text-2xl font-bold text-accent-gold mb-1">
+            {metrics.totalPublications}
+          </div>
           <div className="text-xs text-text-tertiary">Publications</div>
         </div>
         <div className="glass rounded-xl p-5 text-center">
-          <div className="text-2xl font-bold text-accent-gold mb-1">{metrics.koCreatedThisMonth}</div>
+          <div className="text-2xl font-bold text-accent-gold mb-1">
+            {metrics.koCreatedThisMonth}
+          </div>
           <div className="text-xs text-text-tertiary">New This Month</div>
         </div>
       </div>
@@ -77,32 +102,46 @@ export default async function KnowledgePage() {
       {/* Publication + Provenance Breakdown */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
         <div className="glass rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-text-primary mb-4">Publication State</h2>
+          <h2 className="text-lg font-semibold text-text-primary mb-4">
+            Publication State
+          </h2>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Published</span>
-              <span className="text-sm font-medium text-green-400">{publishedCount}</span>
+              <span className="text-sm font-medium text-green-400">
+                {publishedCount}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Draft</span>
-              <span className="text-sm font-medium text-text-tertiary">{draftCount}</span>
+              <span className="text-sm font-medium text-text-tertiary">
+                {draftCount}
+              </span>
             </div>
           </div>
         </div>
         <div className="glass rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-text-primary mb-4">Provenance</h2>
+          <h2 className="text-lg font-semibold text-text-primary mb-4">
+            Provenance
+          </h2>
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Institutional</span>
-              <span className="text-sm font-medium text-green-400">{institutionalCount}</span>
+              <span className="text-sm font-medium text-green-400">
+                {institutionalCount}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Test-Seeded</span>
-              <span className="text-sm font-medium text-yellow-400">{testSeededCount}</span>
+              <span className="text-sm font-medium text-yellow-400">
+                {testSeededCount}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Imported</span>
-              <span className="text-sm font-medium text-text-tertiary">{importedCount}</span>
+              <span className="text-sm font-medium text-text-tertiary">
+                {importedCount}
+              </span>
             </div>
           </div>
         </div>
@@ -110,12 +149,19 @@ export default async function KnowledgePage() {
 
       {/* Evidence Counts */}
       <div className="glass rounded-xl p-6 mb-10">
-        <h2 className="text-lg font-semibold text-text-primary mb-4">Evidence Summary</h2>
+        <h2 className="text-lg font-semibold text-text-primary mb-4">
+          Evidence Summary
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {Object.entries(evidenceCounts).map(([type, count]) => (
-            <div key={type} className="flex justify-between items-center px-4 py-2 bg-bg-secondary rounded-lg">
+            <div
+              key={type}
+              className="flex justify-between items-center px-4 py-2 bg-bg-secondary rounded-lg"
+            >
               <span className="text-xs text-text-secondary">{type}</span>
-              <span className="text-xs font-medium text-text-primary">{count as number}</span>
+              <span className="text-xs font-medium text-text-primary">
+                {count as number}
+              </span>
             </div>
           ))}
           {Object.keys(evidenceCounts).length === 0 && (
@@ -128,16 +174,24 @@ export default async function KnowledgePage() {
 
       {/* Recent Evidence */}
       <div className="glass rounded-xl p-6 mb-10">
-        <h2 className="text-lg font-semibold text-text-primary mb-4">Recent Evidence</h2>
+        <h2 className="text-lg font-semibold text-text-primary mb-4">
+          Recent Evidence
+        </h2>
         {evidence.length > 0 ? (
           <div className="space-y-2">
             {evidence.slice(0, 10).map((e) => (
-              <div key={e.id} className="flex items-start gap-3 px-4 py-3 bg-bg-secondary rounded-lg">
+              <div
+                key={e.id}
+                className="flex items-start gap-3 px-4 py-3 bg-bg-secondary rounded-lg"
+              >
                 <div className="w-2 h-2 rounded-full bg-accent-gold mt-2 shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-text-primary truncate">{e.description}</p>
+                  <p className="text-sm text-text-primary truncate">
+                    {e.description}
+                  </p>
                   <p className="text-xs text-text-tertiary mt-0.5">
-                    {e.activityType} · {new Date(e.timestamp).toLocaleDateString()}
+                    {e.activityType} ·{" "}
+                    {new Date(e.timestamp).toLocaleDateString()}
                   </p>
                 </div>
               </div>
@@ -172,11 +226,13 @@ export default async function KnowledgePage() {
                     </div>
                   </div>
                   <div className="flex gap-1.5">
-                    <span className={`text-[11px] px-2 py-0.5 rounded-md font-medium ${
-                      ko.status === "published"
-                        ? "bg-green-900/30 text-green-400"
-                        : "bg-bg-tertiary text-text-tertiary"
-                    }`}>
+                    <span
+                      className={`text-[11px] px-2 py-0.5 rounded-md font-medium ${
+                        ko.status === "published"
+                          ? "bg-green-900/30 text-green-400"
+                          : "bg-bg-tertiary text-text-tertiary"
+                      }`}
+                    >
                       {ko.status || "draft"}
                     </span>
                     <span className="text-[11px] px-2 py-0.5 rounded-md bg-green-900/30 text-green-400 font-medium">

@@ -17,7 +17,7 @@ const brandAssets = [
   {
     name: "Primary Logo",
     description:
-      "Bhavya AI Institute wordmark with emblem. Use on light and dark backgrounds.",
+      "Bhavya Foundation wordmark with emblem. Use on light and dark backgrounds.",
     format: "SVG, PNG",
   },
   {
@@ -59,7 +59,7 @@ const contacts = [
 ];
 
 const guidelines = [
-  "Always use the official Bhavya AI Institute name — never abbreviate to BAI or similar",
+  "Always use the official Bhavya Foundation name — never abbreviate to BAI or similar",
   "Use approved brand colors and typography in any visual representations",
   "Include a link to bhavya.ai when mentioning us in online publications",
   "Do not alter, crop, or recolor logos without written permission",
@@ -245,14 +245,14 @@ export default function PressPage() {
             >
               <h3
                 className="text-3xl text-text-primary mb-4"
-                style={{ fontFamily: "Georgia, serif" }}
+                style={{ fontFamily: "Playfair Display, Georgia, serif" }}
               >
-                Georgia
+                Playfair Display
               </h3>
               <p className="text-sm text-text-tertiary mb-2">
-                Secondary typeface for body text and editorial content
+                Editorial typeface for headings and display text
               </p>
-              <p className="text-xs text-accent-gold">Weights: 400, 700</p>
+              <p className="text-xs text-accent-gold">Weights: 400, 700, 900</p>
             </motion.div>
           </div>
         </div>
@@ -318,7 +318,7 @@ export default function PressPage() {
               Brand Guidelines Summary
             </h2>
             <p className="text-text-tertiary leading-relaxed">
-              When referencing Bhavya AI Institute in media, please follow these
+              When referencing Bhavya Foundation in media, please follow these
               guidelines to ensure consistent and accurate representation of our
               brand:
             </p>

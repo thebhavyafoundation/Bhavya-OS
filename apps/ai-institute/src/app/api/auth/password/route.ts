@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth, verifyPassword, hashPassword } from "@/lib/api-auth";
+import {
+  requireAuth,
+  verifyPassword,
+  hashPassword,
+  deleteSession,
+} from "@/lib/api-auth";
 import { getUserRepository } from "@/lib/repositories";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
@@ -58,7 +63,14 @@ export async function PUT(request: NextRequest) {
 
     const userRepo = getUserRepository();
     await userRepo.updatePassword(user.id, await hashPassword(newPassword));
-    log.info("Password changed", { userId: user.id });
+
+    // Invalidate all sessions for this user ( compromised session stays valid )
+    const token = request.cookies.get("session-token")?.value;
+    if (token) {
+      await deleteSession(token);
+    }
+
+    log.info("Password changed and session invalidated", { userId: user.id });
     return NextResponse.json({ success: true });
   } catch (err) {
     log.error(

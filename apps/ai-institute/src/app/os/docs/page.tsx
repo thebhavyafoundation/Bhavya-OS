@@ -1,11 +1,14 @@
 import { BookOpen } from "lucide-react";
+import { requirePolicy } from "@/lib/require-role";
 
 export const metadata = {
   title: "Institutional Knowledge Platform | Bhavya Foundation",
-  description: "Canonical source for governance, decisions, standards, and releases",
+  description:
+    "Canonical source for governance, decisions, standards, and releases",
 };
 
-export default function DocsPage() {
+export default async function DocsPage() {
+  await requirePolicy("/os/docs");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
@@ -13,7 +16,8 @@ export default function DocsPage() {
           Institutional Knowledge Platform
         </h1>
         <p className="text-sm text-text-tertiary mt-2">
-          Canonical source for governance, decisions, standards, and releases across Bhavya Foundation
+          Canonical source for governance, decisions, standards, and releases
+          across Bhavya Foundation
         </p>
       </div>
 
@@ -52,11 +56,15 @@ export default function DocsPage() {
         <div className="px-4 py-3.5 border-b border-border-primary">
           <div className="flex items-center gap-2">
             <BookOpen className="w-4 h-4 text-accent-gold" />
-            <span className="text-sm font-semibold text-text-primary">Knowledge Base</span>
+            <span className="text-sm font-semibold text-text-primary">
+              Knowledge Base
+            </span>
           </div>
         </div>
         <div className="p-8 text-center">
-          <p className="text-sm text-text-muted">Full docs platform will be integrated from standalone docs app.</p>
+          <p className="text-sm text-text-muted">
+            Full docs platform will be integrated from standalone docs app.
+          </p>
         </div>
       </div>
     </div>

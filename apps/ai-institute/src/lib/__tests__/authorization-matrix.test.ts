@@ -190,7 +190,9 @@ describe("redirect parameter hardening", () => {
 describe("policy registry integrity", () => {
   it("every policy entry names real roles with real permissions", () => {
     for (const [path, policy] of Object.entries(ROUTE_POLICIES)) {
-      expect(path.startsWith("/os/")).toBe(true);
+      expect(
+        path.startsWith("/os/") || path.startsWith("/studio") || path === "/os",
+      ).toBe(true);
       expect(policy.roles.length).toBeGreaterThan(0);
     }
   });

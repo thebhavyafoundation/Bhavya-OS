@@ -11,17 +11,17 @@ const categories = ["General", "Courses", "Pricing", "Technical"] as const;
 const faqs: Record<string, { question: string; answer: string }[]> = {
   General: [
     {
-      question: "What is Bhavya AI Institute?",
+      question: "What is Bhavya Foundation?",
       answer:
-        "Bhavya AI Institute is a comprehensive AI education institution with 10 published courses and a 10-year mission to become the global benchmark for AI education. We offer structured learning paths from beginner to expert level.",
+        "Bhavya Foundation is a comprehensive AI education institution with a 10-year mission to become the global benchmark for AI education. We offer structured learning paths from beginner to expert level.",
     },
     {
-      question: "Who can join Bhavya AI Institute?",
+      question: "Who can join Bhavya Foundation?",
       answer:
         "Anyone with curiosity and determination. Whether you're a complete beginner, a working professional looking to transition into AI, or an experienced researcher — we have a path for you. Our programs span from introductory to expert level.",
     },
     {
-      question: "How is Bhavya AI Institute different from other platforms?",
+      question: "How is Bhavya Foundation different from other platforms?",
       answer:
         "We are not a course marketplace — we are an institution. Our curriculum is built on foundational research, our governance ensures long-term quality, and our multi-pillar academic structure covers the full spectrum of AI. Every decision is guided by institutional value, not short-term metrics.",
     },
@@ -35,7 +35,7 @@ const faqs: Record<string, { question: string; answer: string }[]> = {
     {
       question: "How many courses are available?",
       answer:
-        "We currently offer 10 published courses. Each course is part of a structured learning path, ensuring you build knowledge systematically from foundations to advanced topics.",
+        "Our courses are part of structured learning paths, ensuring you build knowledge systematically from foundations to advanced topics.",
     },
     {
       question: "What format are the courses in?",
@@ -167,8 +167,8 @@ export default function FAQPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-text-tertiary max-w-2xl mx-auto"
           >
-            Everything you need to know about Bhavya AI Institute. Can&apos;t
-            find your answer? Contact us below.
+            Everything you need to know about Bhavya Foundation. Can&apos;t find
+            your answer? Contact us below.
           </motion.p>
         </div>
       </section>

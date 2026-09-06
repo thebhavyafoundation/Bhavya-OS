@@ -78,10 +78,10 @@ export default function PlaygroundPage() {
   const [activeSimulation, setActiveSimulation] = useState("attention");
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
       {/* Experimental notice — Wave O: orphan route, not in canonical navigation */}
-      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
-        <p className="text-xs text-[#c9a227]/70 font-medium">
+      <div className="bg-accent-gold/10 border-b border-accent-gold/20 px-6 py-2 text-center">
+        <p className="text-xs text-accent-gold/70 font-medium">
           Experimental — not yet part of the canonical learning experience
         </p>
       </div>

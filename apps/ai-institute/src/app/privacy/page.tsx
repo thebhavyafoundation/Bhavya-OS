@@ -98,7 +98,7 @@ export default function PrivacyPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-text-tertiary leading-relaxed mb-12"
           >
-            At Bhavya AI Institute, we are committed to protecting your privacy
+            At Bhavya Foundation, we are committed to protecting your privacy
             and ensuring transparency in how we collect, use, and safeguard your
             information. This Privacy Policy explains our practices when you use
             our platform, courses, and services.

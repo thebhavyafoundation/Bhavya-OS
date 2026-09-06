@@ -13,7 +13,7 @@ const levelColors: Record<string, string> = {
 };
 
 export const metadata = {
-  title: "Courses | Bhavya AI Institute",
+  title: "Courses | Bhavya Foundation",
   description:
     "Explore our AI curriculum — from foundations to advanced topics. Learn by building real projects.",
 };

@@ -31,7 +31,7 @@ const milestones = [
     year: "2026",
     title: "Foundation",
     description:
-      "Bhavya AI Institute founded with a 10-year mission to become the global benchmark for AI education.",
+      "Bhavya Foundation founded with a 10-year mission to become the global benchmark for AI education.",
   },
   {
     year: "2026",

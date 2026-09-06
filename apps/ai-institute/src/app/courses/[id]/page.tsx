@@ -23,7 +23,7 @@ export async function generateMetadata({
   const course = await loadPublishedCourseById(id);
   if (!course) return { title: "Course Not Found" };
   return {
-    title: `${course.title} | Bhavya AI Institute`,
+    title: `${course.title} | Bhavya Foundation`,
     description: course.description,
   };
 }

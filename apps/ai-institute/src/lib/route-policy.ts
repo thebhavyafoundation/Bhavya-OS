@@ -25,14 +25,24 @@ function tools(): RoutePolicy {
 
 export const ROUTE_POLICIES: Record<string, RoutePolicy> = {
   // Institutional administration
+  "/os": { roles: ["admin", "trustee", "staff"] },
   "/os/admin": { roles: ["admin"] },
   "/os/admin/users": { roles: ["admin"] },
   "/os/admin/audit": { roles: ["admin"] },
+  "/os/admin/content": { roles: ["admin"] },
+  "/os/admin/releases": { roles: ["admin"] },
+  // Governance & knowledge
+  "/os/governance": { roles: ["admin", "trustee", "staff"] },
+  "/os/knowledge": { roles: ["admin", "trustee", "staff", "educator"] },
+  "/os/docs": { roles: ["admin", "trustee", "staff"] },
+  "/os/forest": { roles: ["admin", "trustee", "staff"] },
   // Role workspaces
   "/os/trustee": { roles: ["trustee", "admin"] },
   "/os/student": { roles: ["student", "builder", "researcher", "admin"] },
   "/os/volunteer": { roles: ["volunteer", "admin"] },
   "/os/donor": { roles: ["donor", "admin"] },
+  // Content studio
+  "/studio": { roles: ["admin", "educator", "instructor"] },
   // Operational tools
   "/os/runtime": tools(),
   "/os/observability": tools(),
