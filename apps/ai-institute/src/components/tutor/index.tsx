@@ -215,7 +215,7 @@ export function AITutor() {
               onClick={() => setPersonality(p.id)}
               className={`px-3 py-1 text-xs rounded-lg ${
                 personality === p.id
-                  ? "bg-[#22c55e] text-black"
+                  ? "bg-accent-green text-text-primary"
                   : "bg-white/10 text-white/60"
               }`}
               title={p.description}
@@ -227,7 +227,7 @@ export function AITutor() {
       </div>
 
       {/* Context Bar */}
-      <div className="flex items-center gap-4 mb-4 p-3 bg-black/30 rounded-lg">
+      <div className="flex items-center gap-4 mb-4 p-3 bg-bg-primary/30 rounded-lg">
         <div>
           <span className="text-xs text-white/40">Lesson: </span>
           <span className="text-xs text-white/80">{currentLesson?.title}</span>
@@ -253,7 +253,7 @@ export function AITutor() {
       </div>
 
       {/* Chat */}
-      <div className="bg-black/30 rounded-lg p-4 h-80 overflow-y-auto mb-4 space-y-3">
+      <div className="bg-bg-primary/30 rounded-lg p-4 h-80 overflow-y-auto mb-4 space-y-3">
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -262,7 +262,7 @@ export function AITutor() {
             <div
               className={`max-w-[85%] rounded-lg px-4 py-3 ${
                 msg.role === "student"
-                  ? "bg-[#3b82f6] text-white"
+                  ? "bg-blue-500 text-white"
                   : "bg-white/10 text-white/80"
               }`}
             >
@@ -304,14 +304,14 @@ export function AITutor() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm"
+          className="flex-1 bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm"
           placeholder="Ask your tutor a question..."
           disabled={isTyping}
         />
         <button
           onClick={sendMessage}
           disabled={isTyping || !input.trim()}
-          className="px-6 py-3 bg-[#22c55e] text-black font-semibold rounded-lg hover:bg-[#16a34a] disabled:opacity-50"
+          className="px-6 py-3 bg-accent-green text-text-primary font-semibold rounded-lg hover:bg-accent-green/80 disabled:opacity-50"
         >
           Ask
         </button>

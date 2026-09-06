@@ -30,16 +30,16 @@ export default async function CoursesPage() {
     }),
   );
   return (
-    <main className="min-h-screen bg-[#f5f1e6]">
+    <main className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <header className="mb-12">
-          <p className="text-sm font-medium tracking-widest text-[#c9a227] uppercase">
+          <p className="text-sm font-medium tracking-widest text-accent-gold uppercase">
             Curriculum
           </p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-[#1a3a2a]">
+          <h1 className="mt-2 text-4xl font-bold tracking-tight text-text-primary">
             Courses
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-[#1a3a2a]/70">
+          <p className="mt-4 max-w-2xl text-lg text-text-primary/70">
             Learn AI from the ground up. Each course is designed to build on the
             previous one, taking you from curiosity to capability.
           </p>
@@ -50,7 +50,7 @@ export default async function CoursesPage() {
             <Link
               key={course.id}
               href={`/courses/${course.id}`}
-              className="group rounded-xl border border-[#1a3a2a]/10 bg-white p-6 shadow-sm transition hover:shadow-md"
+              className="group rounded-xl border border-border-primary bg-white p-6 shadow-sm transition hover:shadow-md"
             >
               <div className="mb-4 flex items-center gap-2">
                 <span
@@ -58,20 +58,20 @@ export default async function CoursesPage() {
                 >
                   {course.level}
                 </span>
-                <span className="text-xs text-[#1a3a2a]/50">
+                <span className="text-xs text-text-primary/50">
                   Grade {course.grade}
                 </span>
               </div>
 
-              <h2 className="text-xl font-semibold text-[#1a3a2a] group-hover:text-[#c9a227] transition-colors">
+              <h2 className="text-xl font-semibold text-text-primary group-hover:text-accent-gold transition-colors">
                 {course.title}
               </h2>
 
-              <p className="mt-2 text-sm text-[#1a3a2a]/60 line-clamp-3">
+              <p className="mt-2 text-sm text-text-primary/60 line-clamp-3">
                 {course.description}
               </p>
 
-              <div className="mt-4 flex items-center gap-4 text-xs text-[#1a3a2a]/50">
+              <div className="mt-4 flex items-center gap-4 text-xs text-text-primary/50">
                 <span>{course.modules.length} modules</span>
                 <span>{lessonCounts.get(course.id) ?? 0} lessons</span>
                 <span>{Math.round(course.estimatedDuration / 60)}h total</span>
@@ -81,7 +81,7 @@ export default async function CoursesPage() {
                 {course.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-md bg-[#f5f1e6] px-2 py-0.5 text-xs text-[#1a3a2a]/60"
+                    className="rounded-md bg-bg-secondary px-2 py-0.5 text-xs text-text-primary/60"
                   >
                     {tag}
                   </span>
@@ -91,9 +91,11 @@ export default async function CoursesPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-xl border border-[#1a3a2a]/10 bg-white p-8">
-          <h2 className="text-2xl font-bold text-[#1a3a2a]">Learning Path</h2>
-          <p className="mt-2 text-[#1a3a2a]/60">
+        <div className="mt-16 rounded-xl border border-border-primary bg-white p-8">
+          <h2 className="text-2xl font-bold text-text-primary">
+            Learning Path
+          </h2>
+          <p className="mt-2 text-text-primary/60">
             Follow the recommended sequence for the best learning experience.
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -106,7 +108,7 @@ export default async function CoursesPage() {
                   {course.title}
                 </Link>
                 {i < courses.length - 1 && (
-                  <span className="text-[#1a3a2a]/30">→</span>
+                  <span className="text-text-primary/30">→</span>
                 )}
               </div>
             ))}

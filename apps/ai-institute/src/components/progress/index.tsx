@@ -28,10 +28,16 @@ interface SkillProgressProps {
 
 // --- Subcomponents ---
 
-function SkillBar({ skill, confidence }: { skill: string; confidence: number }) {
+function SkillBar({
+  skill,
+  confidence,
+}: {
+  skill: string;
+  confidence: number;
+}) {
   const getColor = (conf: number) => {
-    if (conf >= 70) return "#22c55e";
-    if (conf >= 40) return "#f59e0b";
+    if (conf >= 70) return "var(--color-accent-green, #22c55e)";
+    if (conf >= 40) return "var(--color-accent-gold, #f59e0b)";
     return "#ef4444";
   };
 
@@ -55,16 +61,16 @@ function SkillBar({ skill, confidence }: { skill: string; confidence: number }) 
 
 function DayBlock({ day, minutes, streak }: DayData) {
   const getIntensity = (min: number) => {
-    if (min >= 30) return "bg-[#22c55e]";
-    if (min >= 15) return "bg-[#22c55e]/60";
-    if (min > 0) return "bg-[#22c55e]/30";
+    if (min >= 30) return "bg-accent-green";
+    if (min >= 15) return "bg-accent-green/60";
+    if (min > 0) return "bg-accent-green/30";
     return "bg-white/5";
   };
 
   return (
     <div className="flex flex-col items-center gap-1">
       <div
-        className={`w-8 h-8 rounded-md flex items-center justify-center text-[10px] font-medium text-white/80 ${getIntensity(minutes)} ${streak ? "ring-1 ring-[#22c55e]/50" : ""}`}
+        className={`w-8 h-8 rounded-md flex items-center justify-center text-[10px] font-medium text-white/80 ${getIntensity(minutes)} ${streak ? "ring-1 ring-accent-green/50" : ""}`}
       >
         {minutes > 0 ? `${minutes}m` : "-"}
       </div>
@@ -75,13 +81,17 @@ function DayBlock({ day, minutes, streak }: DayData) {
 
 function SkillTag({ skill, level }: { skill: string; level: string }) {
   const getColor = (lev: string) => {
-    if (lev === "strong") return "bg-[#22c55e]/20 text-[#22c55e] border-[#22c55e]/30";
-    if (lev === "developing") return "bg-[#f59e0b]/20 text-[#f59e0b] border-[#f59e0b]/30";
+    if (lev === "strong")
+      return "bg-accent-green/20 text-accent-green border-accent-green/30";
+    if (lev === "developing")
+      return "bg-amber-500/20 text-amber-500 border-amber-500/30";
     return "bg-white/10 text-white/50 border-white/20";
   };
 
   return (
-    <span className={`text-xs px-2 py-1 rounded-full border ${getColor(level)}`}>
+    <span
+      className={`text-xs px-2 py-1 rounded-full border ${getColor(level)}`}
+    >
       {skill}
     </span>
   );
@@ -107,8 +117,10 @@ export function ProgressIntelligence({ user }: SkillProgressProps) {
         const activityRes = await fetch("/api/student/activity");
         if (activityRes.ok) {
           const activityJson = await activityRes.json();
-          if (activityJson.data?.weekly) setWeeklyActivity(activityJson.data.weekly);
-          if (activityJson.data?.streak) setStreakCount(activityJson.data.streak);
+          if (activityJson.data?.weekly)
+            setWeeklyActivity(activityJson.data.weekly);
+          if (activityJson.data?.streak)
+            setStreakCount(activityJson.data.streak);
         }
       } catch {
         // Use empty defaults
@@ -123,7 +135,9 @@ export function ProgressIntelligence({ user }: SkillProgressProps) {
 
   const skillsByLevel = {
     strong: skillData.filter((s) => s.confidence >= 70),
-    developing: skillData.filter((s) => s.confidence >= 40 && s.confidence < 70),
+    developing: skillData.filter(
+      (s) => s.confidence >= 40 && s.confidence < 70,
+    ),
     beginner: skillData.filter((s) => s.confidence < 40),
   };
 
@@ -133,7 +147,7 @@ export function ProgressIntelligence({ user }: SkillProgressProps) {
         <h3 className="text-lg font-bold">Your Progress</h3>
         <div className="flex items-center gap-2 text-xs text-white/50">
           <span>Streak: {streakCount} days</span>
-          <span className="text-[#22c55e]">
+          <span className="text-accent-green">
             {streakCount > 0 ? "🔥" : "—"}
           </span>
         </div>
@@ -148,7 +162,8 @@ export function ProgressIntelligence({ user }: SkillProgressProps) {
             No progress data yet
           </h4>
           <p className="text-xs text-white/50 max-w-[240px]">
-            Start learning and your skills, activity, and streak will appear here.
+            Start learning and your skills, activity, and streak will appear
+            here.
           </p>
         </div>
       )}
@@ -164,7 +179,11 @@ export function ProgressIntelligence({ user }: SkillProgressProps) {
               {skillData
                 .sort((a, b) => b.confidence - a.confidence)
                 .map((s) => (
-                  <SkillBar key={s.id} skill={s.skill} confidence={s.confidence} />
+                  <SkillBar
+                    key={s.id}
+                    skill={s.skill}
+                    confidence={s.confidence}
+                  />
                 ))}
             </div>
           )}

@@ -80,7 +80,7 @@ export default function OnboardingWizard({
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0f0d] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <AnimatePresence mode="wait">
           {step === 0 && (
@@ -91,19 +91,19 @@ export default function OnboardingWizard({
               exit={{ opacity: 0, y: -20 }}
               className="text-center space-y-6"
             >
-              <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-[#c9a227] to-[#8a7359] flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-accent-gold to-text-tertiary flex items-center justify-center">
                 <span className="text-3xl font-bold text-white">AI</span>
               </div>
-              <h1 className="text-3xl font-bold text-[#f5f1e6]">
+              <h1 className="text-3xl font-bold text-text-primary">
                 Welcome to AI Institute
               </h1>
-              <p className="text-[#8a7359] text-sm leading-relaxed max-w-sm mx-auto">
+              <p className="text-text-tertiary text-sm leading-relaxed max-w-sm mx-auto">
                 Learn AI by building real things. Let&apos;s set up your
                 learning experience in just a few steps.
               </p>
               <button
                 onClick={nextStep}
-                className="px-8 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] font-semibold text-sm hover:bg-[#c9a227]/90 transition-colors"
+                className="px-8 py-3 rounded-xl bg-accent-gold text-text-primary font-semibold text-sm hover:bg-accent-gold/90 transition-colors"
               >
                 Get Started
               </button>
@@ -119,10 +119,10 @@ export default function OnboardingWizard({
               className="space-y-6"
             >
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-[#f5f1e6] mb-2">
+                <h2 className="text-2xl font-bold text-text-primary mb-2">
                   What best describes you?
                 </h2>
-                <p className="text-sm text-[#8a7359]">
+                <p className="text-sm text-text-tertiary">
                   Choose your learning path
                 </p>
               </div>
@@ -133,8 +133,8 @@ export default function OnboardingWizard({
                     onClick={() => setSelectedRole(role.id)}
                     className={`w-full flex items-center gap-4 p-4 rounded-xl border transition-all text-left ${
                       selectedRole === role.id
-                        ? "bg-[#c9a227]/10 border-[#c9a227]/40 text-[#f5f1e6]"
-                        : "bg-[#0d1410] border-[#1a3a2a]/40 text-[#8a7359] hover:border-[#1a3a2a]/60"
+                        ? "bg-accent-gold/10 border-accent-gold/40 text-text-primary"
+                        : "bg-bg-secondary border-border-primary/40 text-text-tertiary hover:border-border-primary/60"
                     }`}
                   >
                     <span className="text-2xl">{role.icon}</span>
@@ -145,9 +145,9 @@ export default function OnboardingWizard({
                       </div>
                     </div>
                     {selectedRole === role.id && (
-                      <div className="ml-auto w-5 h-5 rounded-full bg-[#c9a227] flex items-center justify-center">
+                      <div className="ml-auto w-5 h-5 rounded-full bg-accent-gold flex items-center justify-center">
                         <svg
-                          className="w-3 h-3 text-[#0a0f0d]"
+                          className="w-3 h-3 text-text-primary"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
@@ -161,14 +161,14 @@ export default function OnboardingWizard({
               <div className="flex gap-3">
                 <button
                   onClick={prevStep}
-                  className="px-6 py-3 rounded-xl border border-[#1a3a2a]/40 text-[#8a7359] text-sm hover:bg-[#1a3a2a]/20 transition-colors"
+                  className="px-6 py-3 rounded-xl border border-border-primary/40 text-text-tertiary text-sm hover:bg-bg-tertiary/20 transition-colors"
                 >
                   Back
                 </button>
                 <button
                   onClick={nextStep}
                   disabled={!selectedRole}
-                  className="flex-1 px-6 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] font-semibold text-sm hover:bg-[#c9a227]/90 transition-colors disabled:opacity-30"
+                  className="flex-1 px-6 py-3 rounded-xl bg-accent-gold text-text-primary font-semibold text-sm hover:bg-accent-gold/90 transition-colors disabled:opacity-30"
                 >
                   Continue
                 </button>
@@ -185,10 +185,10 @@ export default function OnboardingWizard({
               className="space-y-6"
             >
               <div className="text-center">
-                <h2 className="text-2xl font-bold text-[#f5f1e6] mb-2">
+                <h2 className="text-2xl font-bold text-text-primary mb-2">
                   What interests you?
                 </h2>
-                <p className="text-sm text-[#8a7359]">
+                <p className="text-sm text-text-tertiary">
                   Select at least 3 topics
                 </p>
               </div>
@@ -199,8 +199,8 @@ export default function OnboardingWizard({
                     onClick={() => toggleInterest(interest)}
                     className={`px-4 py-2 rounded-full text-xs font-medium border transition-all ${
                       selectedInterests.includes(interest)
-                        ? "bg-[#c9a227]/15 border-[#c9a227]/40 text-[#c9a227]"
-                        : "bg-[#0d1410] border-[#1a3a2a]/40 text-[#8a7359] hover:border-[#1a3a2a]/60"
+                        ? "bg-accent-gold/15 border-accent-gold/40 text-accent-gold"
+                        : "bg-bg-secondary border-border-primary/40 text-text-tertiary hover:border-border-primary/60"
                     }`}
                   >
                     {interest}
@@ -210,14 +210,14 @@ export default function OnboardingWizard({
               <div className="flex gap-3">
                 <button
                   onClick={prevStep}
-                  className="px-6 py-3 rounded-xl border border-[#1a3a2a]/40 text-[#8a7359] text-sm hover:bg-[#1a3a2a]/20 transition-colors"
+                  className="px-6 py-3 rounded-xl border border-border-primary/40 text-text-tertiary text-sm hover:bg-bg-tertiary/20 transition-colors"
                 >
                   Back
                 </button>
                 <button
                   onClick={nextStep}
                   disabled={selectedInterests.length < 3}
-                  className="flex-1 px-6 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] font-semibold text-sm hover:bg-[#c9a227]/90 transition-colors disabled:opacity-30"
+                  className="flex-1 px-6 py-3 rounded-xl bg-accent-gold text-text-primary font-semibold text-sm hover:bg-accent-gold/90 transition-colors disabled:opacity-30"
                 >
                   Continue ({selectedInterests.length}/3+)
                 </button>
@@ -233,9 +233,9 @@ export default function OnboardingWizard({
               exit={{ opacity: 0, y: -20 }}
               className="text-center space-y-6"
             >
-              <div className="w-20 h-20 mx-auto rounded-full bg-[#1a3a2a]/30 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto rounded-full bg-bg-tertiary/30 flex items-center justify-center">
                 <svg
-                  className="w-10 h-10 text-[#4ade80]"
+                  className="w-10 h-10 text-accent-green"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -248,17 +248,17 @@ export default function OnboardingWizard({
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-[#f5f1e6]">
+              <h2 className="text-2xl font-bold text-text-primary">
                 You&apos;re all set!
               </h2>
-              <p className="text-sm text-[#8a7359] max-w-sm mx-auto">
+              <p className="text-sm text-text-tertiary max-w-sm mx-auto">
                 Welcome to the AI Institute,{" "}
-                <span className="text-[#c9a227]">{user?.name}</span>. Your
+                <span className="text-accent-gold">{user?.name}</span>. Your
                 learning journey begins now.
               </p>
               <button
                 onClick={handleComplete}
-                className="px-8 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] font-semibold text-sm hover:bg-[#c9a227]/90 transition-colors"
+                className="px-8 py-3 rounded-xl bg-accent-gold text-text-primary font-semibold text-sm hover:bg-accent-gold/90 transition-colors"
               >
                 Start Learning
               </button>
@@ -271,7 +271,7 @@ export default function OnboardingWizard({
             <div
               key={i}
               className={`w-2 h-2 rounded-full transition-colors ${
-                i <= step ? "bg-[#c9a227]" : "bg-[#1a3a2a]/40"
+                i <= step ? "bg-accent-gold" : "bg-bg-tertiary/40"
               }`}
             />
           ))}

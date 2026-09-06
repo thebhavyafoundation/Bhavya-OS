@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const sections = [
   {
@@ -58,13 +60,14 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <>
+      <SiteHeader />
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-sm text-[#c9a227] font-medium mb-4 tracking-widest uppercase"
+            className="text-sm text-accent-gold font-medium mb-4 tracking-widest uppercase"
           >
             Legal
           </motion.p>
@@ -138,14 +141,15 @@ export default function PrivacyPage() {
               please contact our privacy team.
             </p>
             <a
-              href="mailto:privacy@bhavya.ai"
-              className="inline-block px-8 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
+              href="mailto:privacy@bhavyafoundation.org"
+              className="inline-block px-8 py-4 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold/90 transition-colors"
             >
               Contact Privacy Team
             </a>
           </motion.div>
         </div>
       </section>
+      <SiteFooter />
     </>
   );
 }

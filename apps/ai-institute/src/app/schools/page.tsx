@@ -22,7 +22,7 @@ const fadeUp = {
 
 export default function SchoolsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-bg-primary text-white">
       <div className="border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <motion.div
@@ -33,7 +33,7 @@ export default function SchoolsPage() {
             <h1
               className="text-4xl md:text-5xl font-bold tracking-tight mb-2"
               style={{
-                background: "linear-gradient(135deg, #f5f1e6 0%, #c9a227 100%)",
+                background: "linear-gradient(135deg, #f7f4ec 0%, #d4af37 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -58,7 +58,7 @@ export default function SchoolsPage() {
             <Link
               key={school.tag}
               href={school.href}
-              className="group block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-[#c9a227]/30 transition-all"
+              className="group block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-accent-gold/30 transition-all"
             >
               <h3 className="text-lg font-semibold text-text-primary mb-2 group-hover:text-accent-gold transition-colors">
                 {school.name}
@@ -80,7 +80,7 @@ export default function SchoolsPage() {
           className="mt-12 text-center"
         >
           <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
-            <div className="w-2 h-2 rounded-full bg-[#c9a227] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-accent-gold animate-pulse" />
             <p className="text-sm text-white/40">
               More schools are being developed. Each school will launch with
               real courses and real content.

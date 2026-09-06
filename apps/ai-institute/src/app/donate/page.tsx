@@ -73,11 +73,11 @@ export default function DonatePage() {
             Every contribution makes a difference
           </h2>
           <p className="text-sm text-text-secondary mb-6 max-w-lg mx-auto">
-            Bhavya Foundation is a registered charitable trust. All donations are
-            tax-deductible under Section 80G of the Income Tax Act.
+            Bhavya Foundation is a registered charitable trust. All donations
+            are tax-deductible under Section 80G of the Income Tax Act.
           </p>
           <a
-            href="mailto:donate@bhavya.foundation"
+            href="mailto:donate@bhavyafoundation.org"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-accent-gold text-text-inverse font-semibold text-sm hover:bg-accent-gold-hover transition-colors"
           >
             <Heart className="w-4 h-4" />

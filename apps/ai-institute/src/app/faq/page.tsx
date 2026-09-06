@@ -228,7 +228,7 @@ export default function FAQPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="mailto:support@bhavya.ai"
+                href="mailto:support@bhavyafoundation.org"
                 className="px-8 py-4 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold-hover transition-colors"
               >
                 Contact Support

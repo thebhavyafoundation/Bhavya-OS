@@ -33,7 +33,12 @@ export function VineDivider({
       <svg
         viewBox="0 0 1200 80"
         preserveAspectRatio="none"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
       >
         {/* Main vine curve */}
         <path
@@ -114,7 +119,11 @@ export function BotanicalCorner({
     >
       <svg
         viewBox="0 0 120 120"
-        style={{ width: "100%", height: "100%", transform: transforms[position] }}
+        style={{
+          width: "100%",
+          height: "100%",
+          transform: transforms[position],
+        }}
       >
         <g opacity={opacity} fill="none" stroke={color} strokeWidth="1">
           {/* Main stem */}
@@ -128,10 +137,34 @@ export function BotanicalCorner({
         </g>
         <g opacity={opacity * 0.8} fill={color}>
           {/* Leaves */}
-          <ellipse cx="50" cy="60" rx="8" ry="14" transform="rotate(-30 50 60)" />
-          <ellipse cx="70" cy="35" rx="6" ry="11" transform="rotate(-20 70 35)" />
-          <ellipse cx="35" cy="80" rx="7" ry="12" transform="rotate(-40 35 80)" />
-          <ellipse cx="80" cy="15" rx="5" ry="9" transform="rotate(-15 80 15)" />
+          <ellipse
+            cx="50"
+            cy="60"
+            rx="8"
+            ry="14"
+            transform="rotate(-30 50 60)"
+          />
+          <ellipse
+            cx="70"
+            cy="35"
+            rx="6"
+            ry="11"
+            transform="rotate(-20 70 35)"
+          />
+          <ellipse
+            cx="35"
+            cy="80"
+            rx="7"
+            ry="12"
+            transform="rotate(-40 35 80)"
+          />
+          <ellipse
+            cx="80"
+            cy="15"
+            rx="5"
+            ry="9"
+            transform="rotate(-15 80 15)"
+          />
         </g>
         {/* Leaf veins */}
         <g opacity={opacity * 0.4} stroke={color} strokeWidth="0.5" fill="none">
@@ -156,7 +189,7 @@ interface MountainSilhouetteProps {
  */
 export function MountainSilhouette({
   opacity = 0.08,
-  color = "rgba(247, 244, 236, 0.5)",
+  color = "rgba(var(--color-brand-ivory-rgb, 247, 244, 236), 0.5)",
   className,
 }: MountainSilhouetteProps) {
   return (

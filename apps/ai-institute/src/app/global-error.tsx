@@ -16,8 +16,8 @@ export default function GlobalError({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#0a0f0d",
-            color: "#f5f1e6",
+            backgroundColor: "var(--color-bg-primary, #0a0f0d)",
+            color: "var(--color-text-primary, #f5f1e6)",
             padding: "2rem",
           }}
         >
@@ -27,8 +27,9 @@ export default function GlobalError({
                 width: "48px",
                 height: "48px",
                 borderRadius: "8px",
-                backgroundColor: "rgba(220, 38, 38, 0.1)",
-                color: "#dc2626",
+                backgroundColor:
+                  "rgba(var(--color-status-error-rgb, 220, 38, 38), 0.1)",
+                color: "var(--color-status-error, #dc2626)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -50,7 +51,8 @@ export default function GlobalError({
             <p
               style={{
                 fontSize: "14px",
-                color: "rgba(245, 241, 230, 0.6)",
+                color:
+                  "rgba(var(--color-text-primary-rgb, 245, 241, 230), 0.6)",
                 marginBottom: "24px",
               }}
             >
@@ -62,9 +64,10 @@ export default function GlobalError({
                 padding: "10px 24px",
                 fontSize: "14px",
                 fontWeight: "600",
-                backgroundColor: "#1a3a2a",
-                color: "#f5f1e6",
-                border: "1px solid rgba(245, 241, 230, 0.2)",
+                backgroundColor: "var(--color-bg-tertiary, #1a3a2a)",
+                color: "var(--color-text-primary, #f5f1e6)",
+                border:
+                  "1px solid rgba(var(--color-text-primary-rgb, 245, 241, 230), 0.2)",
                 borderRadius: "8px",
                 cursor: "pointer",
               }}

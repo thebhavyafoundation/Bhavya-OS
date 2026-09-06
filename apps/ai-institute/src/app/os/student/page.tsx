@@ -96,7 +96,7 @@ export default async function StudentWorkspacePage() {
       <div className="flex flex-wrap gap-3 mt-8">
         <Link
           href="/courses"
-          className="px-5 py-2.5 rounded-xl bg-[#c9a227] text-[#0a0f0d] text-sm font-semibold hover:bg-[#c9a227]/90 transition-colors"
+          className="px-5 py-2.5 rounded-xl bg-accent-gold text-text-primary text-sm font-semibold hover:bg-accent-gold/90 transition-colors"
         >
           Browse courses
         </Link>

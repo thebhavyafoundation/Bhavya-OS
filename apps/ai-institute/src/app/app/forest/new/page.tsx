@@ -41,8 +41,18 @@ export default function NewForestMissionPage() {
           name,
           description,
           region,
-          goals: goals ? goals.split(",").map((g) => g.trim()).filter(Boolean) : [],
-          tags: tags ? tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
+          goals: goals
+            ? goals
+                .split(",")
+                .map((g) => g.trim())
+                .filter(Boolean)
+            : [],
+          tags: tags
+            ? tags
+                .split(",")
+                .map((t) => t.trim())
+                .filter(Boolean)
+            : [],
         }),
       });
       if (!res.ok) {
@@ -101,10 +111,11 @@ export default function NewForestMissionPage() {
         <div
           style={{
             padding: "var(--space-4)",
-            background: "rgba(239, 68, 68, 0.1)",
-            border: "1px solid rgba(239, 68, 68, 0.3)",
+            background: "rgba(var(--color-status-error-rgb, 239, 68, 68), 0.1)",
+            border:
+              "1px solid rgba(var(--color-status-error-rgb, 239, 68, 68), 0.3)",
             borderRadius: "var(--radius-md)",
-            color: "#ef4444",
+            color: "var(--color-status-error, #ef4444)",
             fontSize: "var(--text-sm)",
             marginBottom: "var(--space-6)",
           }}
@@ -113,7 +124,13 @@ export default function NewForestMissionPage() {
         </div>
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--space-6)",
+        }}
+      >
         {/* Name */}
         <div>
           <label
@@ -206,7 +223,9 @@ export default function NewForestMissionPage() {
           >
             <option value="">Select a region</option>
             {REGIONS.map((r) => (
-              <option key={r} value={r}>{r}</option>
+              <option key={r} value={r}>
+                {r}
+              </option>
             ))}
           </select>
         </div>
@@ -284,8 +303,12 @@ export default function NewForestMissionPage() {
             justifyContent: "center",
             gap: "var(--space-2)",
             padding: "var(--space-3) var(--space-6)",
-            background: creating || !name || !region ? "var(--border)" : "var(--forest)",
-            color: creating || !name || !region ? "var(--text-secondary)" : "#fff",
+            background:
+              creating || !name || !region ? "var(--border)" : "var(--forest)",
+            color:
+              creating || !name || !region
+                ? "var(--text-secondary)"
+                : "var(--color-text-inverse, #fff)",
             borderRadius: "var(--radius-md)",
             fontSize: "var(--text-sm)",
             fontWeight: 600,

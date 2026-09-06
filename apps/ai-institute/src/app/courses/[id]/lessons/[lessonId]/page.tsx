@@ -44,19 +44,22 @@ export default async function LessonPage({
   const prev = getPreviousLesson(id, lessonId);
 
   return (
-    <main className="min-h-screen bg-[#f5f1e6]">
+    <main className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-4xl px-6 py-16">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-[#1a3a2a]/50">
-          <Link href="/courses" className="hover:text-[#c9a227]">
+        <nav className="flex items-center gap-2 text-sm text-text-primary/50">
+          <Link href="/courses" className="hover:text-accent-gold">
             Courses
           </Link>
           <span>/</span>
-          <Link href={`/courses/${course.id}`} className="hover:text-[#c9a227]">
+          <Link
+            href={`/courses/${course.id}`}
+            className="hover:text-accent-gold"
+          >
             {course.title}
           </Link>
           <span>/</span>
-          <span className="text-[#1a3a2a]">{lesson.title}</span>
+          <span className="text-text-primary">{lesson.title}</span>
         </nav>
 
         {/* Module context */}
@@ -66,10 +69,10 @@ export default async function LessonPage({
         </div>
 
         {/* Lesson title */}
-        <h1 className="mt-6 text-3xl font-bold tracking-tight text-[#1a3a2a]">
+        <h1 className="mt-6 text-3xl font-bold tracking-tight text-text-primary">
           {lesson.title}
         </h1>
-        <p className="mt-2 text-sm text-[#1a3a2a]/50">
+        <p className="mt-2 text-sm text-text-primary/50">
           {lesson.duration} minutes
         </p>
 
@@ -87,16 +90,16 @@ export default async function LessonPage({
             {/* Key Concepts */}
             {content.keyConcepts.length > 0 && (
               <section className="mt-12">
-                <h2 className="text-2xl font-bold text-[#1a3a2a]">
+                <h2 className="text-2xl font-bold text-text-primary">
                   Key Concepts
                 </h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   {content.keyConcepts.map((concept) => (
                     <div
                       key={concept.term}
-                      className="rounded-xl border border-[#1a3a2a]/10 bg-white p-4"
+                      className="rounded-xl border border-border-primary bg-white p-4"
                     >
-                      <h3 className="font-semibold text-[#1a3a2a]">
+                      <h3 className="font-semibold text-text-primary">
                         {concept.term}
                       </h3>
                       <p className="mt-1 text-sm text-text-tertiary/60">
@@ -111,19 +114,23 @@ export default async function LessonPage({
             {/* Examples */}
             {content.examples.length > 0 && (
               <section className="mt-12">
-                <h2 className="text-2xl font-bold text-[#1a3a2a]">Examples</h2>
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Examples
+                </h2>
                 {content.examples.map((ex) => (
                   <div
                     key={ex.title}
-                    className="mt-4 rounded-xl border border-[#1a3a2a]/10 bg-white p-6"
+                    className="mt-4 rounded-xl border border-border-primary bg-white p-6"
                   >
-                    <h3 className="font-semibold text-[#1a3a2a]">{ex.title}</h3>
+                    <h3 className="font-semibold text-text-primary">
+                      {ex.title}
+                    </h3>
                     {ex.code && (
                       <pre className="mt-3 rounded-lg bg-bg-tertiary/5 p-4 text-sm overflow-x-auto">
                         <code>{ex.code}</code>
                       </pre>
                     )}
-                    <p className="mt-3 text-sm text-[#1a3a2a]/70">
+                    <p className="mt-3 text-sm text-text-primary/70">
                       {ex.explanation}
                     </p>
                   </div>
@@ -134,22 +141,24 @@ export default async function LessonPage({
             {/* Exercises */}
             {content.exercises.length > 0 && (
               <section className="mt-12">
-                <h2 className="text-2xl font-bold text-[#1a3a2a]">Exercises</h2>
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Exercises
+                </h2>
                 <div className="mt-4 space-y-4">
                   {content.exercises.map((ex) => (
                     <div
                       key={ex.id}
-                      className="rounded-xl border border-[#c9a227]/30 bg-[#c9a227]/5 p-6"
+                      className="rounded-xl border border-accent-gold/30 bg-accent-gold/5 p-6"
                     >
                       <div className="flex items-center gap-2">
                         <span className="rounded-full bg-accent-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-tertiary">
                           {ex.type}
                         </span>
-                        <h3 className="font-semibold text-[#1a3a2a]">
+                        <h3 className="font-semibold text-text-primary">
                           {ex.title}
                         </h3>
                       </div>
-                      <p className="mt-2 text-sm text-[#1a3a2a]/70">
+                      <p className="mt-2 text-sm text-text-primary/70">
                         {ex.instructions}
                       </p>
                     </div>
@@ -159,9 +168,9 @@ export default async function LessonPage({
             )}
 
             {/* Reflection */}
-            <section className="mt-12 rounded-xl border border-[#1a3a2a]/10 bg-white p-6">
-              <h2 className="text-2xl font-bold text-[#1a3a2a]">Reflect</h2>
-              <p className="mt-3 text-[#1a3a2a]/70">
+            <section className="mt-12 rounded-xl border border-border-primary bg-white p-6">
+              <h2 className="text-2xl font-bold text-text-primary">Reflect</h2>
+              <p className="mt-3 text-text-primary/70">
                 {content.reflection.prompt}
               </p>
               {content.reflection.followUp.length > 0 && (
@@ -171,7 +180,7 @@ export default async function LessonPage({
                       key={i}
                       className="flex items-start gap-2 text-sm text-text-tertiary/60"
                     >
-                      <span className="mt-0.5 text-[#c9a227]">→</span>
+                      <span className="mt-0.5 text-accent-gold">→</span>
                       {q}
                     </li>
                   ))}
@@ -180,7 +189,7 @@ export default async function LessonPage({
             </section>
           </article>
         ) : (
-          <div className="mt-10 rounded-xl border border-[#1a3a2a]/10 bg-white p-8 text-center">
+          <div className="mt-10 rounded-xl border border-border-primary bg-white p-8 text-center">
             <p className="text-text-tertiary/60">
               Lesson content is being prepared. Check back soon.
             </p>
@@ -188,11 +197,11 @@ export default async function LessonPage({
         )}
 
         {/* Navigation */}
-        <div className="mt-16 flex items-center justify-between border-t border-[#1a3a2a]/10 pt-8">
+        <div className="mt-16 flex items-center justify-between border-t border-border-primary pt-8">
           {prev ? (
             <Link
               href={`/courses/${prev.courseId}/lessons/${prev.lessonId}`}
-              className="rounded-lg border border-[#1a3a2a]/10 px-6 py-3 text-sm font-medium text-[#1a3a2a] hover:bg-white transition"
+              className="rounded-lg border border-border-primary px-6 py-3 text-sm font-medium text-text-primary hover:bg-bg-secondary transition"
             >
               ← Previous Lesson
             </Link>
@@ -210,7 +219,7 @@ export default async function LessonPage({
           ) : (
             <Link
               href={`/courses/${course.id}`}
-              className="rounded-lg bg-[#c9a227] px-6 py-3 text-sm font-medium text-text-primary hover:bg-[#c9a227]/80 transition"
+              className="rounded-lg bg-accent-gold hover:bg-accent-gold/80 transition"
             >
               Course Complete ✓
             </Link>

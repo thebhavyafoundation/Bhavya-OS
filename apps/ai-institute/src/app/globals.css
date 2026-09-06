@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+/* Global focus-visible indicator for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-accent-gold, #d4af37);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 4px);
+}
+
+/* Remove default outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* ============================================
    BHAVYA FOUNDATION — VISUAL SYSTEM
    The institution's digital identity.
@@ -1113,6 +1125,16 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-8);
   }
+  .mission-hero-grid {
+    grid-template-columns: 1fr 340px;
+    gap: var(--space-12);
+    align-items: center;
+  }
+  .mission-tab-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
   .footer-brand {
     grid-column: 1 / -1;
   }
@@ -1165,5 +1187,13 @@ body {
     flex-direction: column;
     gap: var(--space-2);
     text-align: center;
+  }
+  .mission-hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .mission-tab-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 }

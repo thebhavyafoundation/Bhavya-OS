@@ -145,6 +145,8 @@ export function SiteHeader({
                 >
                   <button
                     className="nav-link nav-dropdown-trigger"
+                    aria-expanded={activeDropdown === group.id}
+                    aria-haspopup="true"
                     style={{
                       color: isDark ? "rgba(247, 244, 236, 0.7)" : undefined,
                     }}
@@ -226,6 +228,7 @@ export function SiteHeader({
               className="nav-mobile-trigger"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open menu"
+              aria-expanded={mobileMenuOpen}
             >
               <Menu size={24} />
             </button>

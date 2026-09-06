@@ -42,11 +42,31 @@ const features = [
 ];
 
 const config = [
-  { property: "skipLinkTarget", value: "#main-content", description: "Skip navigation target anchor" },
-  { property: "aria-label", value: "Skip to main content", description: "Screen reader skip link label" },
-  { property: "landmarks", value: "banner, navigation, main, contentinfo", description: "Semantic HTML5 landmarks used" },
-  { property: "focusIndicator", value: "3:1 contrast ratio", description: "Visible focus ring on interactive elements" },
-  { property: "contrastRatio", value: "WCAG AA 4.5:1", description: "Minimum text contrast ratio" },
+  {
+    property: "skipLinkTarget",
+    value: "#main-content",
+    description: "Skip navigation target anchor",
+  },
+  {
+    property: "aria-label",
+    value: "Skip to main content",
+    description: "Screen reader skip link label",
+  },
+  {
+    property: "landmarks",
+    value: "banner, navigation, main, contentinfo",
+    description: "Semantic HTML5 landmarks used",
+  },
+  {
+    property: "focusIndicator",
+    value: "3:1 contrast ratio",
+    description: "Visible focus ring on interactive elements",
+  },
+  {
+    property: "contrastRatio",
+    value: "WCAG AA 4.5:1",
+    description: "Minimum text contrast ratio",
+  },
 ];
 
 export default function AccessibilityPage() {
@@ -77,7 +97,10 @@ export default function AccessibilityPage() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((f) => (
-              <div key={f.title} className="glass rounded-lg p-5 flex items-start gap-4">
+              <div
+                key={f.title}
+                className="glass rounded-lg p-5 flex items-start gap-4"
+              >
                 <div className="w-9 h-9 rounded-lg bg-accent-gold/10 flex items-center justify-center shrink-0">
                   <f.icon className="w-4.5 h-4.5 text-accent-gold" />
                 </div>
@@ -118,7 +141,10 @@ export default function AccessibilityPage() {
               </thead>
               <tbody>
                 {config.map((row) => (
-                  <tr key={row.property} className="border-b border-border-primary last:border-0">
+                  <tr
+                    key={row.property}
+                    className="border-b border-border-primary last:border-0"
+                  >
                     <td className="px-5 py-3">
                       <code className="text-xs text-accent-gold font-mono">
                         {row.property}
@@ -152,7 +178,7 @@ export default function AccessibilityPage() {
             work to resolve issues promptly.
           </p>
           <a
-            href="mailto:accessibility@bhavya.foundation"
+            href="mailto:accessibility@bhavyafoundation.org"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent-gold text-text-inverse font-semibold text-sm hover:bg-accent-gold-hover transition-colors"
           >
             <Mail className="w-4 h-4" />

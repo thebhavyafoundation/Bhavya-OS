@@ -109,6 +109,7 @@ export function SemanticSearch() {
     paper: "📄",
   };
 
+  // TODO: reference design tokens
   const typeColors: Record<string, string> = {
     concept: "#22c55e",
     path: "#3b82f6",
@@ -129,7 +130,7 @@ export function SemanticSearch() {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pl-10 text-white placeholder-white/40 focus:outline-none focus:border-[#22c55e]/50"
+          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pl-10 text-white placeholder-white/40 focus:outline-none focus:border-accent-green/50"
           placeholder="Search concepts, paths, glossary..."
         />
         <svg
@@ -184,7 +185,7 @@ export function SemanticSearch() {
 
       {/* Results */}
       {isOpen && query && filteredResults.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 max-h-96 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-bg-primary border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50 max-h-96 overflow-y-auto">
           {filteredResults.map((result) => (
             <Link
               key={result.id}
@@ -219,7 +220,7 @@ export function SemanticSearch() {
 
       {/* No Results */}
       {isOpen && query && filteredResults.length === 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl p-6 text-center z-50">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-bg-primary border border-white/10 rounded-xl shadow-2xl p-6 text-center z-50">
           <div className="text-2xl mb-2">🔍</div>
           <div className="text-sm text-white/50">
             No results for &quot;{query}&quot;

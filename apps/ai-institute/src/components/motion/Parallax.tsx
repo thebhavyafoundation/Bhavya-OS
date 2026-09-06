@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 interface ParallaxProps {
@@ -16,7 +16,25 @@ export function Parallax({
   direction = "up",
   className,
 }: ParallaxProps) {
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const ref = useRef<HTMLDivElement>(null);
+
+  if (reducedMotion) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],

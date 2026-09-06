@@ -150,7 +150,7 @@ export default function MentorPage() {
               color: "var(--color-status-success)",
             }}
           >
-            Mentors Online
+            AI Mentors
           </span>
         </div>
       </div>
@@ -178,7 +178,8 @@ export default function MentorPage() {
             color: "var(--color-text-tertiary)",
           }}
         >
-          8 specialized mentors for every aspect of your learning journey
+          {publicAgents.length} specialized mentors for every aspect of your
+          learning journey
         </p>
       </motion.div>
 
@@ -431,7 +432,7 @@ export default function MentorPage() {
                   color: "var(--color-status-success)",
                 }}
               >
-                Active
+                Available
               </span>
             </div>
           </div>

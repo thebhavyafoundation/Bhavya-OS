@@ -59,6 +59,7 @@ insert.mjs
 insert2.mjs
 insert3.mjs
 videos/
+!apps/ai-institute/src/app/os/videos/
 evolution/
 bar/bee-state/
 bhavya-ai-lab/metrics/

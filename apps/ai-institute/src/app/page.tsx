@@ -123,6 +123,12 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-md focus:bg-accent-green focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg focus:outline-none"
+      >
+        Skip to content
+      </a>
       <SiteHeader />
 
       {/* ====== HERO ====== */}
@@ -268,11 +274,11 @@ export default function HomePage() {
 
       {/* ====== FOUR MISSIONS — GLASS PANELS ====== */}
       <section
+        id="main-content"
         style={{
           padding: "var(--space-24) 0",
           background: "var(--color-bg-primary)",
         }}
-        id="missions"
       >
         <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>

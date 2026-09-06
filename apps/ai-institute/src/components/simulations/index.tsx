@@ -146,7 +146,7 @@ export function AttentionSimulator() {
           step="0.1"
           value={temperature}
           onChange={(e) => setTemperature(parseFloat(e.target.value))}
-          className="w-full accent-[#22c55e]"
+          className="w-full accent-accent-green"
         />
         <div className="flex justify-between text-[10px] text-white/30 mt-1">
           <span>Focused</span>
@@ -162,7 +162,7 @@ export function AttentionSimulator() {
             onClick={() => setSelectedToken(token.id)}
             className={`px-4 py-2 rounded-lg font-mono text-sm transition-all ${
               selectedToken === token.id
-                ? "bg-[#22c55e] text-black font-bold"
+                ? "bg-accent-green text-text-primary font-bold"
                 : "bg-white/10 text-white/70 hover:bg-white/20"
             }`}
           >
@@ -184,7 +184,7 @@ export function AttentionSimulator() {
               </span>
               <div className="flex-1 h-8 bg-white/5 rounded-lg overflow-hidden relative">
                 <div
-                  className="h-full bg-gradient-to-r from-[#22c55e] to-[#3b82f6] rounded-lg transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-accent-green to-blue-500 rounded-lg transition-all duration-500"
                   style={{ width: `${w.weight * 100}%` }}
                 />
                 <span className="absolute inset-0 flex items-center px-3 text-xs font-mono text-white/80">
@@ -197,7 +197,7 @@ export function AttentionSimulator() {
       </div>
 
       {/* Visual Connections */}
-      <div className="bg-black/30 rounded-lg p-4">
+      <div className="bg-bg-primary/30 rounded-lg p-4">
         <h4 className="text-sm font-semibold text-white/80 mb-3">
           Attention Flow
         </h4>
@@ -301,6 +301,7 @@ export function TokenizationSimulator() {
     return result;
   }, [input, strategy]);
 
+  // TODO: reference design tokens
   const colors = [
     "#22c55e",
     "#3b82f6",
@@ -320,7 +321,7 @@ export function TokenizationSimulator() {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white font-mono mb-4"
+        className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-3 text-white font-mono mb-4"
         placeholder="Type something..."
       />
 
@@ -329,7 +330,7 @@ export function TokenizationSimulator() {
           <button
             key={s}
             onClick={() => setStrategy(s)}
-            className={`px-3 py-1 text-xs rounded-lg ${strategy === s ? "bg-[#22c55e] text-black" : "bg-white/10 text-white/60"}`}
+            className={`px-3 py-1 text-xs rounded-lg ${strategy === s ? "bg-accent-green text-text-primary" : "bg-white/10 text-white/60"}`}
           >
             {s.toUpperCase()}
           </button>
@@ -342,6 +343,7 @@ export function TokenizationSimulator() {
             key={t.id}
             className="px-3 py-1.5 rounded-lg font-mono text-sm border"
             style={{
+              // TODO: reference design tokens
               backgroundColor: colors[t.id % colors.length] + "20",
               borderColor: colors[t.id % colors.length] + "40",
               color: colors[t.id % colors.length],
@@ -393,6 +395,7 @@ export function EmbeddingSpaceExplorer() {
   const [selectedWord, setSelectedWord] = useState<string | null>(null);
   const [showVectors, setShowVectors] = useState(false);
 
+  // TODO: reference design tokens
   const categoryColors: Record<string, string> = {
     royalty: "#f59e0b",
     animals: "#22c55e",
@@ -437,7 +440,7 @@ export function EmbeddingSpaceExplorer() {
 
       {/* 2D Projection */}
       <div
-        className="bg-black/30 rounded-lg p-4 mb-4 relative"
+        className="bg-bg-primary/30 rounded-lg p-4 mb-4 relative"
         style={{ height: 320 }}
       >
         <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -643,7 +646,7 @@ export function VectorSearchSimulator() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm"
+          className="flex-1 bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm"
           placeholder="Search query..."
         />
         <div className="flex items-center gap-2">
@@ -654,7 +657,7 @@ export function VectorSearchSimulator() {
             max="10"
             value={topK}
             onChange={(e) => setTopK(parseInt(e.target.value) || 3)}
-            className="w-16 bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-white text-sm text-center"
+            className="w-16 bg-bg-primary/30 border border-white/10 rounded-lg px-2 py-2 text-white text-sm text-center"
           />
         </div>
       </div>
@@ -681,7 +684,7 @@ export function VectorSearchSimulator() {
             </div>
             <div className="w-16 h-2 bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#22c55e] rounded-full transition-all duration-500"
+                className="h-full bg-accent-green rounded-full transition-all duration-500"
                 style={{ width: `${r.score * 100}%` }}
               />
             </div>
@@ -719,7 +722,7 @@ export function TransformerPipelineVisualizer() {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm mb-4 font-mono"
+        className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm mb-4 font-mono"
         placeholder="Enter tokens..."
       />
 
@@ -731,7 +734,7 @@ export function TransformerPipelineVisualizer() {
             onClick={() => setStep(i)}
             className={`w-full text-left p-3 rounded-lg border transition-all ${
               step === i
-                ? "border-[#22c55e] bg-[#22c55e]/10"
+                ? "border-accent-green bg-accent-green/10"
                 : "border-white/10 bg-white/5 hover:border-white/20"
             }`}
           >
@@ -739,7 +742,7 @@ export function TransformerPipelineVisualizer() {
               <span
                 className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                   i <= step
-                    ? "bg-[#22c55e] text-black"
+                    ? "bg-accent-green text-text-primary"
                     : "bg-white/10 text-white/40"
                 }`}
               >
@@ -755,7 +758,7 @@ export function TransformerPipelineVisualizer() {
       </div>
 
       {/* Current Step Visualization */}
-      <div className="bg-black/30 rounded-lg p-4">
+      <div className="bg-bg-primary/30 rounded-lg p-4">
         <h4 className="text-sm font-semibold text-white/80 mb-3">
           {layers[step].name}
         </h4>
@@ -764,7 +767,7 @@ export function TransformerPipelineVisualizer() {
             {tokens.map((t, i) => (
               <span
                 key={i}
-                className="px-3 py-2 bg-[#22c55e]/20 border border-[#22c55e]/40 rounded-lg font-mono text-sm text-[#22c55e]"
+                className="px-3 py-2 bg-accent-green/20 border border-accent-green/40 rounded-lg font-mono text-sm text-accent-green"
               >
                 [{i}] {t}
               </span>
@@ -775,12 +778,12 @@ export function TransformerPipelineVisualizer() {
           <div className="grid grid-cols-3 gap-2">
             {tokens.map((t, i) => (
               <div key={i} className="bg-white/5 rounded-lg p-2">
-                <div className="text-xs font-mono text-[#3b82f6] mb-1">{t}</div>
+                <div className="text-xs font-mono text-blue-500 mb-1">{t}</div>
                 <div className="flex gap-1">
                   {[...Array(6)].map((_, j) => (
                     <div
                       key={j}
-                      className="w-3 h-3 rounded-sm bg-[#3b82f6]"
+                      className="w-3 h-3 rounded-sm bg-blue-500"
                       style={{ opacity: 0.3 + Math.random() * 0.7 }}
                     />
                   ))}
@@ -848,7 +851,7 @@ export function TransformerPipelineVisualizer() {
                   <span className="w-10 text-right font-mono text-xs">{w}</span>
                   <div className="flex-1 h-4 bg-white/10 rounded overflow-hidden">
                     <div
-                      className="h-full bg-[#22c55e] rounded"
+                      className="h-full bg-accent-green rounded"
                       style={{
                         width: `${Math.max(5, 40 - i * 8 + Math.random() * 10)}%`,
                       }}
@@ -925,7 +928,7 @@ export function RAGPipelineSimulator() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm mb-4"
+        className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-2 text-white text-sm mb-4"
         placeholder="Ask a question..."
       />
 
@@ -940,7 +943,7 @@ export function RAGPipelineSimulator() {
             max="100"
             value={chunkSize}
             onChange={(e) => setChunkSize(parseInt(e.target.value))}
-            className="w-full accent-[#22c55e]"
+            className="w-full accent-accent-green"
           />
         </div>
         <div>
@@ -953,7 +956,7 @@ export function RAGPipelineSimulator() {
             max="5"
             value={topK}
             onChange={(e) => setTopK(parseInt(e.target.value))}
-            className="w-full accent-[#3b82f6]"
+            className="w-full accent-blue-500"
           />
         </div>
       </div>
@@ -961,7 +964,7 @@ export function RAGPipelineSimulator() {
       {/* Pipeline Flow */}
       <div className="grid grid-cols-3 gap-4">
         {/* Documents */}
-        <div className="bg-black/30 rounded-lg p-3">
+        <div className="bg-bg-primary/30 rounded-lg p-3">
           <h4 className="text-xs font-semibold text-white/60 mb-2">
             📚 Documents
           </h4>
@@ -979,7 +982,7 @@ export function RAGPipelineSimulator() {
         </div>
 
         {/* Retrieved Chunks */}
-        <div className="bg-black/30 rounded-lg p-3">
+        <div className="bg-bg-primary/30 rounded-lg p-3">
           <h4 className="text-xs font-semibold text-white/60 mb-2">
             🔍 Retrieved
           </h4>
@@ -987,9 +990,9 @@ export function RAGPipelineSimulator() {
             {retrieved.map((r, i) => (
               <div
                 key={r.id}
-                className="text-xs bg-[#22c55e]/10 border border-[#22c55e]/30 rounded p-1.5"
+                className="text-xs bg-accent-green/10 border border-accent-green/30 rounded p-1.5"
               >
-                <div className="text-[#22c55e] font-mono">
+                <div className="text-accent-green font-mono">
                   #{i + 1} (score: {r.score.toFixed(2)})
                 </div>
                 <div className="text-white/50 mt-0.5 line-clamp-2">
@@ -1001,7 +1004,7 @@ export function RAGPipelineSimulator() {
         </div>
 
         {/* Generated Answer */}
-        <div className="bg-black/30 rounded-lg p-3">
+        <div className="bg-bg-primary/30 rounded-lg p-3">
           <h4 className="text-xs font-semibold text-white/60 mb-2">
             🤖 Generated
           </h4>

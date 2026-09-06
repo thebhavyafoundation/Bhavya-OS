@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 interface MagneticButtonProps {
@@ -12,7 +12,21 @@ export function MagneticButton({
   children,
   strength = 0.3,
 }: MagneticButtonProps) {
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const ref = useRef<HTMLDivElement>(null);
+
+  if (reducedMotion) {
+    return <div className="inline-block">{children}</div>;
+  }
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 

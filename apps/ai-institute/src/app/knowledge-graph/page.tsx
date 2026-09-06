@@ -23,7 +23,7 @@ const graphNodes: GraphNode[] = [
     label: "AI",
     x: 400,
     y: 300,
-    color: "#1a3a2a",
+    color: "var(--color-brand-forest, #0e382e)",
     mastery: 0,
     prerequisites: [],
     relatedLessons: ["AI Fundamentals", "History of AI"],
@@ -36,7 +36,7 @@ const graphNodes: GraphNode[] = [
     label: "ML",
     x: 250,
     y: 180,
-    color: "#c9a227",
+    color: "var(--color-brand-gold, #d4af37)",
     mastery: 0,
     prerequisites: ["ai"],
     relatedLessons: ["Linear Regression", "Decision Trees"],
@@ -49,7 +49,7 @@ const graphNodes: GraphNode[] = [
     label: "DL",
     x: 550,
     y: 180,
-    color: "#8a7359",
+    color: "var(--color-text-tertiary, #8a7359)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Neural Networks", "Backpropagation"],
@@ -62,7 +62,7 @@ const graphNodes: GraphNode[] = [
     label: "NLP",
     x: 150,
     y: 350,
-    color: "#4ade80",
+    color: "var(--color-accent-green, #4ade80)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Text Processing", "Sentiment Analysis"],
@@ -75,7 +75,7 @@ const graphNodes: GraphNode[] = [
     label: "CV",
     x: 650,
     y: 350,
-    color: "#60a5fa",
+    color: "var(--color-accent-blue, #60a5fa)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Image Classification", "Object Detection"],
@@ -88,7 +88,7 @@ const graphNodes: GraphNode[] = [
     label: "RL",
     x: 150,
     y: 500,
-    color: "#f472b6",
+    color: "var(--color-accent-pink, #f472b6)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Reinforcement Learning", "Q-Learning"],
@@ -101,7 +101,7 @@ const graphNodes: GraphNode[] = [
     label: "CNN",
     x: 700,
     y: 220,
-    color: "#60a5fa",
+    color: "var(--color-accent-blue, #60a5fa)",
     mastery: 0,
     prerequisites: ["dl", "cv"],
     relatedLessons: ["Convolutional Layers", "Image Nets"],
@@ -114,7 +114,7 @@ const graphNodes: GraphNode[] = [
     label: "RNN",
     x: 350,
     y: 480,
-    color: "#a78bfa",
+    color: "var(--color-accent-purple, #a78bfa)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Sequential Data", "LSTM"],
@@ -127,7 +127,7 @@ const graphNodes: GraphNode[] = [
     label: "Transformers",
     x: 450,
     y: 120,
-    color: "#fbbf24",
+    color: "var(--color-accent-amber, #fbbf24)",
     mastery: 0,
     prerequisites: ["dl", "nlp"],
     relatedLessons: ["Attention Mechanism", "Self-Attention"],
@@ -140,7 +140,7 @@ const graphNodes: GraphNode[] = [
     label: "GANs",
     x: 600,
     y: 480,
-    color: "#f472b6",
+    color: "var(--color-accent-pink, #f472b6)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Generative Models", "Adversarial Training"],
@@ -153,7 +153,7 @@ const graphNodes: GraphNode[] = [
     label: "BERT",
     x: 250,
     y: 100,
-    color: "#34d399",
+    color: "var(--color-accent-emerald, #34d399)",
     mastery: 0,
     prerequisites: ["transformers", "nlp"],
     relatedLessons: ["Bidirectional Encoding", "Fine-tuning"],
@@ -166,7 +166,7 @@ const graphNodes: GraphNode[] = [
     label: "GPT",
     x: 550,
     y: 60,
-    color: "#fbbf24",
+    color: "var(--color-accent-amber, #fbbf24)",
     mastery: 0,
     prerequisites: ["transformers"],
     relatedLessons: ["Language Models", "Prompt Engineering"],
@@ -197,9 +197,9 @@ const edges: [string, string][] = [
 ];
 
 function getMasteryColor(mastery: number): string {
-  if (mastery < 40) return "#ef4444";
-  if (mastery < 70) return "#eab308";
-  return "#22c55e";
+  if (mastery < 40) return "var(--color-status-error, #ef4444)";
+  if (mastery < 70) return "var(--color-status-warning, #eab308)";
+  return "var(--color-status-success, #22c55e)";
 }
 
 export default function KnowledgeGraphPage() {
@@ -285,7 +285,7 @@ export default function KnowledgeGraphPage() {
         hoveredNode === toId ||
         selectedNode?.id === fromId ||
         selectedNode?.id === toId
-          ? "rgba(201, 162, 39, 0.4)"
+          ? "rgba(var(--color-brand-gold-rgb, 201, 162, 39), 0.4)"
           : "rgba(255, 255, 255, 0.06)";
       ctx.lineWidth =
         hoveredNode === fromId ||
@@ -332,11 +332,11 @@ export default function KnowledgeGraphPage() {
       ctx.beginPath();
       ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
       ctx.strokeStyle = isSelected
-        ? "#c9a227"
+        ? "var(--color-brand-gold, #d4af37)"
         : isPrereq
-          ? "#ef4444"
+          ? "var(--color-status-error, #ef4444)"
           : isRelated
-            ? "#4ade80"
+            ? "var(--color-accent-green, #4ade80)"
             : "rgba(255,255,255,0.1)";
       ctx.lineWidth = isSelected ? 2.5 : 1.5;
       ctx.stroke();
@@ -346,7 +346,7 @@ export default function KnowledgeGraphPage() {
       ctx.fillStyle = mColor;
       ctx.fill();
 
-      ctx.fillStyle = "#f5f1e6";
+      ctx.fillStyle = "var(--color-brand-ivory, #f7f4ec)";
       ctx.font = `${isSelected ? "bold " : ""}${radius < 28 ? 11 : 13}px system-ui, sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -479,7 +479,7 @@ export default function KnowledgeGraphPage() {
     });
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-bg-primary text-white">
       <div className="border-b border-white/[0.06]">
         <div className="max-w-7xl mx-auto px-6 py-10">
           <motion.div
@@ -506,7 +506,8 @@ export default function KnowledgeGraphPage() {
             <h1
               className="text-4xl md:text-5xl font-bold tracking-tight mt-4 mb-2"
               style={{
-                background: "linear-gradient(135deg, #f5f1e6 0%, #c9a227 100%)",
+                background:
+                  "linear-gradient(135deg, var(--color-brand-ivory, #f7f4ec) 0%, var(--color-brand-gold, #d4af37) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -542,7 +543,7 @@ export default function KnowledgeGraphPage() {
               placeholder="Search concepts..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#c9a227]/40 transition-all"
+              className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-accent-gold/40 transition-all"
             />
           </div>
           <div className="flex gap-2">
@@ -577,7 +578,7 @@ export default function KnowledgeGraphPage() {
               style={{ height: "min(600px, 60vh)" }}
             >
               <canvas ref={canvasRef} className="absolute inset-0" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-4 px-4 py-2.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl border border-white/[0.06]">
+              <div className="absolute bottom-4 left-4 flex items-center gap-4 px-4 py-2.5 bg-bg-primary/80 backdrop-blur-sm rounded-xl border border-white/[0.06]">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
                   <span className="text-[10px] text-white/40">&lt; 40%</span>
@@ -591,7 +592,7 @@ export default function KnowledgeGraphPage() {
                   <span className="text-[10px] text-white/40">&gt; 70%</span>
                 </div>
               </div>
-              <div className="absolute top-4 right-4 px-3 py-1.5 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-lg border border-white/[0.06] text-[10px] text-white/30">
+              <div className="absolute top-4 right-4 px-3 py-1.5 bg-bg-primary/80 backdrop-blur-sm rounded-lg border border-white/[0.06] text-[10px] text-white/30">
                 Scroll to zoom • Drag to pan • Click node for details
               </div>
             </div>
@@ -692,7 +693,7 @@ export default function KnowledgeGraphPage() {
                           key={lesson}
                           className="flex items-center gap-2 text-sm text-white/50"
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent-green" />
                           {lesson}
                         </div>
                       ))}
@@ -709,7 +710,7 @@ export default function KnowledgeGraphPage() {
                           key={lab}
                           className="flex items-center gap-2 text-sm text-white/50"
                         >
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#c9a227]" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent-gold" />
                           {lab}
                         </div>
                       ))}

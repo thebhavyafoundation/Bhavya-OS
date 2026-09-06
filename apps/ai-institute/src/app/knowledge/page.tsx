@@ -102,15 +102,11 @@ export default function KnowledgePage() {
         />
 
         <div
-          className="container"
+          className="container mission-hero-grid"
           style={{
             position: "relative",
             zIndex: 2,
             color: "var(--color-text-inverse)",
-            display: "grid",
-            gridTemplateColumns: "1fr 340px",
-            gap: "var(--space-12)",
-            alignItems: "center",
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>
@@ -170,9 +166,11 @@ export default function KnowledgePage() {
           <Reveal variant="slide-up" delay={0.4}>
             <div
               style={{
-                background: "rgba(247, 244, 236, 0.08)",
+                background:
+                  "rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.08)",
                 backdropFilter: "blur(16px)",
-                border: "1px solid rgba(247, 244, 236, 0.12)",
+                border:
+                  "1px solid rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.12)",
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-8)",
               }}
@@ -207,7 +205,8 @@ export default function KnowledgePage() {
                   <div
                     key={i}
                     style={{
-                      borderBottom: "1px solid rgba(247, 244, 236, 0.08)",
+                      borderBottom:
+                        "1px solid rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.08)",
                       paddingBottom: "var(--space-4)",
                     }}
                   >
@@ -223,7 +222,8 @@ export default function KnowledgePage() {
                     <div
                       style={{
                         fontSize: "var(--text-xs)",
-                        color: "rgba(247, 244, 236, 0.6)",
+                        color:
+                          "rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.6)",
                         marginTop: "var(--space-1)",
                       }}
                     >
@@ -241,6 +241,7 @@ export default function KnowledgePage() {
       <section style={{ padding: "var(--space-16) 0 0" }}>
         <div className="container">
           <div
+            role="tablist"
             style={{
               display: "flex",
               gap: "var(--space-2)",
@@ -252,6 +253,10 @@ export default function KnowledgePage() {
             {knowledgeTabs.map((tab) => (
               <button
                 key={tab.id}
+                role="tab"
+                id={`tab-${tab.id}`}
+                aria-selected={tab.id === activeTab}
+                aria-controls={`panel-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
                 style={{
                   display: "flex",
@@ -291,11 +296,12 @@ export default function KnowledgePage() {
             .map((tab) => (
               <div
                 key={tab.id}
+                role="tabpanel"
+                id={`panel-${tab.id}`}
+                aria-labelledby={`tab-${tab.id}`}
+                className="mission-tab-grid"
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "var(--space-12)",
-                  alignItems: "center",
                 }}
               >
                 <div>

@@ -5,7 +5,7 @@ export default function Loading() {
         <div className="animate-pulse space-y-6">
           <div className="flex items-center justify-between">
             <div className="h-7 w-48 bg-bg-tertiary/30 rounded-lg" />
-            <div className="h-5 w-20 bg-[#c9a227]/20 rounded-full" />
+            <div className="h-5 w-20 bg-accent-gold/20 rounded-full" />
           </div>
           <div className="h-3 w-full bg-bg-tertiary/15 rounded-full">
             <div className="h-3 w-1/3 bg-bg-tertiary/30 rounded-full" />

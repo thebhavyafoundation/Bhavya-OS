@@ -43,17 +43,17 @@ const brandAssets = [
 const contacts = [
   {
     role: "Press Inquiries",
-    email: "press@bhavya.ai",
+    email: "press@bhavyafoundation.org",
     description: "Interviews, quotes, and media requests",
   },
   {
     role: "Partnerships",
-    email: "partnerships@bhavya.ai",
+    email: "partnerships@bhavyafoundation.org",
     description: "Institutional and corporate partnerships",
   },
   {
     role: "General Inquiries",
-    email: "hello@bhavya.ai",
+    email: "hello@bhavyafoundation.org",
     description: "General questions and information",
   },
 ];
@@ -143,7 +143,7 @@ export default function PressPage() {
                     {asset.format}
                   </span>
                 </div>
-                <button className="px-4 py-2 text-xs font-medium border border-border-primary rounded-lg text-text-tertiary hover:border-[#1a3a2a] hover:text-text-primary transition-colors shrink-0 ml-4">
+                <button className="px-4 py-2 text-xs font-medium border border-border-primary rounded-lg text-text-tertiary hover:border-border-primary hover:text-text-primary transition-colors shrink-0 ml-4">
                   Download
                 </button>
               </motion.div>
@@ -357,7 +357,7 @@ export default function PressPage() {
               detailed information requests.
             </p>
             <a
-              href="mailto:press@bhavya.ai"
+              href="mailto:press@bhavyafoundation.org"
               className="inline-block px-8 py-4 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold-hover transition-colors"
             >
               Contact Press Team

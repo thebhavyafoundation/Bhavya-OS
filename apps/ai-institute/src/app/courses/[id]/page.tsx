@@ -41,11 +41,11 @@ export default async function CourseDetailPage({
   const firstLessonId = await getFirstLessonId(course.id);
 
   return (
-    <main className="min-h-screen bg-[#f5f1e6]">
+    <main className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-4xl px-6 py-16">
         <Link
           href="/courses"
-          className="text-sm text-[#c9a227] hover:underline"
+          className="text-sm text-accent-gold hover:underline"
         >
           ← All Courses
         </Link>
@@ -57,33 +57,35 @@ export default async function CourseDetailPage({
             >
               {course.level}
             </span>
-            <span className="text-xs text-[#1a3a2a]/50">
+            <span className="text-xs text-text-primary/50">
               Grade {course.grade} · {course.domain}
             </span>
           </div>
 
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-[#1a3a2a]">
+          <h1 className="mt-3 text-4xl font-bold tracking-tight text-text-primary">
             {course.title}
           </h1>
 
-          <p className="mt-4 text-lg text-[#1a3a2a]/70 max-w-2xl">
+          <p className="mt-4 text-lg text-text-primary/70 max-w-2xl">
             {course.description}
           </p>
         </header>
 
         <div className="mt-8 flex flex-wrap gap-6 text-sm text-text-tertiary/60">
           <div>
-            <span className="font-semibold text-[#1a3a2a]">
+            <span className="font-semibold text-text-primary">
               {course.modules.length}
             </span>{" "}
             modules
           </div>
           <div>
-            <span className="font-semibold text-[#1a3a2a]">{totalLessons}</span>{" "}
+            <span className="font-semibold text-text-primary">
+              {totalLessons}
+            </span>{" "}
             lessons
           </div>
           <div>
-            <span className="font-semibold text-[#1a3a2a]">
+            <span className="font-semibold text-text-primary">
               {Math.round(course.estimatedDuration / 60)}
             </span>{" "}
             hours
@@ -91,19 +93,19 @@ export default async function CourseDetailPage({
         </div>
 
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-[#1a3a2a]">Modules</h2>
+          <h2 className="text-2xl font-bold text-text-primary">Modules</h2>
           <div className="mt-6 space-y-4">
             {course.modules.map((mod) => (
               <div
                 key={mod.id}
-                className="rounded-xl border border-[#1a3a2a]/10 bg-white p-6"
+                className="rounded-xl border border-border-primary bg-white p-6"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-xs font-medium text-[#c9a227]">
+                    <span className="text-xs font-medium text-accent-gold">
                       Module {mod.order}
                     </span>
-                    <h3 className="mt-1 text-lg font-semibold text-[#1a3a2a]">
+                    <h3 className="mt-1 text-lg font-semibold text-text-primary">
                       {mod.title}
                     </h3>
                     <p className="mt-1 text-sm text-text-tertiary/60">
@@ -117,17 +119,17 @@ export default async function CourseDetailPage({
                     <Link
                       key={lesson.id}
                       href={`/courses/${course.id}/lessons/${lesson.id}`}
-                      className="flex items-center justify-between rounded-lg border border-[#1a3a2a]/5 px-4 py-3 hover:bg-[#f5f1e6] transition group"
+                      className="flex items-center justify-between rounded-lg border border-border-primary/5 px-4 py-3 hover:bg-bg-primary transition group"
                     >
                       <div className="flex items-center gap-3">
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bg-tertiary/5 text-xs font-medium text-text-tertiary/60">
                           {lesson.order}
                         </span>
-                        <span className="text-sm font-medium text-[#1a3a2a] group-hover:text-[#c9a227] transition">
+                        <span className="text-sm font-medium text-text-primary group-hover:text-accent-gold transition">
                           {lesson.title}
                         </span>
                       </div>
-                      <span className="text-xs text-[#1a3a2a]/40">
+                      <span className="text-xs text-text-primary/40">
                         {lesson.duration} min
                       </span>
                     </Link>
@@ -139,8 +141,8 @@ export default async function CourseDetailPage({
         </div>
 
         {course.prerequisites.length > 0 && (
-          <div className="mt-12 rounded-xl border border-[#1a3a2a]/10 bg-white p-6">
-            <h2 className="text-lg font-semibold text-[#1a3a2a]">
+          <div className="mt-12 rounded-xl border border-border-primary bg-white p-6">
+            <h2 className="text-lg font-semibold text-text-primary">
               Prerequisites
             </h2>
             <p className="mt-2 text-sm text-text-tertiary/60">
@@ -151,7 +153,7 @@ export default async function CourseDetailPage({
                 <li key={preqId}>
                   <Link
                     href={`/courses/${preqId}`}
-                    className="text-sm font-medium text-[#c9a227] hover:underline"
+                    className="text-sm font-medium text-accent-gold hover:underline"
                   >
                     {preqId
                       .split("-")

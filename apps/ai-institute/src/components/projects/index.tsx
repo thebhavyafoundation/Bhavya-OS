@@ -144,6 +144,7 @@ const projects: Project[] = [
   },
 ];
 
+// TODO: reference design tokens
 const difficultyConfig = {
   guided: { color: "#22c55e", label: "Guided", icon: "📋" },
   independent: { color: "#3b82f6", label: "Independent", icon: "🔧" },
@@ -209,7 +210,7 @@ export function ProjectStudio() {
               onClick={() => setSelectedProject(project)}
               className={`text-left p-4 rounded-xl border transition-all ${
                 selectedProject?.id === project.id
-                  ? "border-[#22c55e]/50 bg-[#22c55e]/10"
+                  ? "border-accent-green/50 bg-accent-green/10"
                   : "border-white/10 bg-white/5 hover:border-white/20"
               }`}
             >
@@ -272,7 +273,7 @@ export function ProjectStudio() {
 
       {/* Project Detail */}
       {selectedProject && (
-        <div className="mt-6 bg-black/30 rounded-xl p-6">
+        <div className="mt-6 bg-bg-primary/30 rounded-xl p-6">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h4 className="text-xl font-bold mb-1">
@@ -303,7 +304,7 @@ export function ProjectStudio() {
                   <span
                     className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
                       milestone.completed
-                        ? "bg-[#22c55e] text-black"
+                        ? "bg-accent-green text-text-primary"
                         : "bg-white/10 text-white/40"
                     }`}
                   >
@@ -334,7 +335,7 @@ export function ProjectStudio() {
             </div>
           </div>
 
-          <button className="mt-4 w-full py-3 bg-[#22c55e] text-black font-semibold rounded-lg hover:bg-[#16a34a]">
+          <button className="mt-4 w-full py-3 bg-accent-green text-text-primary font-semibold rounded-lg hover:bg-accent-green/80">
             Start Project
           </button>
         </div>

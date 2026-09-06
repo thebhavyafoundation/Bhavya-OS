@@ -190,7 +190,7 @@ export default function MissionPage() {
               </h2>
             </motion.div>
             <div className="relative">
-              <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#1a2a1f] -translate-x-1/2" />
+              <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-bg-tertiary -translate-x-1/2" />
               <div className="space-y-12">
                 {milestones.map((milestone, i) => (
                   <motion.div
@@ -245,7 +245,7 @@ export default function MissionPage() {
                 </Link>
                 <Link
                   href="/research"
-                  className="px-8 py-4 text-base font-medium text-text-primary border border-border-primary rounded-lg hover:border-[#1a3a2a] transition-colors"
+                  className="px-8 py-4 text-base font-medium text-text-primary border border-border-primary rounded-lg hover:border-border-primary transition-colors"
                 >
                   Explore Research
                 </Link>

@@ -142,7 +142,7 @@ export function AIPromptPlayground() {
               onChange={(e) =>
                 setConfig((prev) => ({ ...prev, model: e.target.value }))
               }
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-white text-sm"
+              className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-3 py-2 text-white text-sm"
             >
               {models.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -169,7 +169,7 @@ export function AIPromptPlayground() {
                   temperature: parseFloat(e.target.value),
                 }))
               }
-              className="w-full accent-[#22c55e]"
+              className="w-full accent-accent-green"
             />
             <div className="flex justify-between text-[10px] text-white/30 mt-1">
               <span>Precise</span>
@@ -194,7 +194,7 @@ export function AIPromptPlayground() {
                   topP: parseFloat(e.target.value),
                 }))
               }
-              className="w-full accent-[#3b82f6]"
+              className="w-full accent-blue-500"
             />
           </div>
 
@@ -215,7 +215,7 @@ export function AIPromptPlayground() {
                   maxTokens: parseInt(e.target.value),
                 }))
               }
-              className="w-full accent-[#8b5cf6]"
+              className="w-full accent-purple-500"
             />
           </div>
 
@@ -229,7 +229,7 @@ export function AIPromptPlayground() {
               onChange={(e) =>
                 setConfig((prev) => ({ ...prev, systemPrompt: e.target.value }))
               }
-              className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-white text-sm h-20 resize-none"
+              className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-3 py-2 text-white text-sm h-20 resize-none"
             />
           </div>
 
@@ -245,7 +245,7 @@ export function AIPromptPlayground() {
                   onClick={() => applyTemplate(t.id)}
                   className={`w-full text-left px-3 py-1.5 text-xs rounded-lg ${
                     selectedTemplate === t.id
-                      ? "bg-[#22c55e] text-black"
+                      ? "bg-accent-green text-text-primary"
                       : "bg-white/5 text-white/60 hover:bg-white/10"
                   }`}
                 >
@@ -259,7 +259,7 @@ export function AIPromptPlayground() {
         {/* Chat Area */}
         <div className="lg:col-span-3 flex flex-col">
           {/* Messages */}
-          <div className="flex-1 bg-black/30 rounded-lg p-4 mb-4 h-80 overflow-y-auto space-y-3">
+          <div className="flex-1 bg-bg-primary/30 rounded-lg p-4 mb-4 h-80 overflow-y-auto space-y-3">
             {messages.length === 0 && (
               <div className="text-center text-white/30 text-sm py-12">
                 Start a conversation to see how different parameters affect the
@@ -274,7 +274,7 @@ export function AIPromptPlayground() {
                 <div
                   className={`max-w-[80%] rounded-lg px-4 py-2 ${
                     msg.role === "user"
-                      ? "bg-[#3b82f6] text-white"
+                      ? "bg-blue-500 text-white"
                       : "bg-white/10 text-white/80"
                   }`}
                 >
@@ -328,14 +328,14 @@ export function AIPromptPlayground() {
               onKeyDown={(e) =>
                 e.key === "Enter" && !e.shiftKey && generateResponse()
               }
-              className="flex-1 bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm"
+              className="flex-1 bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm"
               placeholder="Type your prompt..."
               disabled={isGenerating}
             />
             <button
               onClick={generateResponse}
               disabled={isGenerating || !input.trim()}
-              className="px-6 py-3 bg-[#22c55e] text-black font-semibold rounded-lg hover:bg-[#16a34a] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 bg-accent-green text-text-primary font-semibold rounded-lg hover:bg-accent-green/80 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isGenerating ? "..." : "Send"}
             </button>

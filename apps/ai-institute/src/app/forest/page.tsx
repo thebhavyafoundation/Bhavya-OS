@@ -76,15 +76,11 @@ export default function ForestPage() {
         />
 
         <div
-          className="container"
+          className="container mission-hero-grid"
           style={{
             position: "relative",
             zIndex: 2,
             color: "var(--color-text-inverse)",
-            display: "grid",
-            gridTemplateColumns: "1fr 340px",
-            gap: "var(--space-12)",
-            alignItems: "center",
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>

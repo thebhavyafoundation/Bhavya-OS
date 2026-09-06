@@ -190,7 +190,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="h-2 bg-bg-tertiary/30 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-[#4ade80] rounded-full transition-all"
+                          className="h-full bg-accent-green rounded-full transition-all"
                           style={{
                             width: `${totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0}%`,
                           }}
@@ -281,7 +281,7 @@ export default function DashboardPage() {
                 Achievements
               </h3>
               {student?.badgeEarned ? (
-                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent-gold/10 border border-[#c9a227]/25">
+                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent-gold/10 border border-accent-gold/25">
                   <Trophy className="w-8 h-8 text-accent-gold" />
                   <div>
                     <div className="text-sm text-accent-gold font-semibold">

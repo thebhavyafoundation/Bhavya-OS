@@ -72,11 +72,15 @@ export default function NewKnowledgeObjectPage() {
   const validate = (): boolean => {
     const errors: Record<string, string> = {};
     if (!form.title.trim()) errors.title = "Title is required";
-    if (form.title.length > 200) errors.title = "Title must be 200 characters or fewer";
+    if (form.title.length > 200)
+      errors.title = "Title must be 200 characters or fewer";
     if (!form.domain.trim()) errors.domain = "Domain is required";
-    if (form.domain.length > 100) errors.domain = "Domain must be 100 characters or fewer";
-    if (form.description.length > 2000) errors.description = "Description must be 2000 characters or fewer";
-    if (form.grade < 1 || form.grade > 12) errors.grade = "Grade must be between 1 and 12";
+    if (form.domain.length > 100)
+      errors.domain = "Domain must be 100 characters or fewer";
+    if (form.description.length > 2000)
+      errors.description = "Description must be 2000 characters or fewer";
+    if (form.grade < 1 || form.grade > 12)
+      errors.grade = "Grade must be between 1 and 12";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -98,7 +102,10 @@ export default function NewKnowledgeObjectPage() {
 
       if (!res.ok) {
         if (data.errors && Array.isArray(data.errors)) {
-          const msgs = data.errors.map((e: { field: string; message: string }) => `${e.field}: ${e.message}`);
+          const msgs = data.errors.map(
+            (e: { field: string; message: string }) =>
+              `${e.field}: ${e.message}`,
+          );
           setError(msgs.join("; "));
         } else {
           setError(data.error || "Failed to create knowledge object");
@@ -118,7 +125,10 @@ export default function NewKnowledgeObjectPage() {
   const addConcept = () => {
     setForm({
       ...form,
-      concepts: [...form.concepts, { name: "", description: "", difficulty: "beginner" }],
+      concepts: [
+        ...form.concepts,
+        { name: "", description: "", difficulty: "beginner" },
+      ],
     });
   };
 
@@ -133,11 +143,17 @@ export default function NewKnowledgeObjectPage() {
   };
 
   const addDefinition = () => {
-    setForm({ ...form, definitions: [...form.definitions, { term: "", definition: "" }] });
+    setForm({
+      ...form,
+      definitions: [...form.definitions, { term: "", definition: "" }],
+    });
   };
 
   const removeDefinition = (i: number) => {
-    setForm({ ...form, definitions: form.definitions.filter((_, idx) => idx !== i) });
+    setForm({
+      ...form,
+      definitions: form.definitions.filter((_, idx) => idx !== i),
+    });
   };
 
   const updateDefinition = (i: number, patch: Partial<Definition>) => {
@@ -147,7 +163,10 @@ export default function NewKnowledgeObjectPage() {
   };
 
   const addExample = () => {
-    setForm({ ...form, examples: [...form.examples, { title: "", description: "" }] });
+    setForm({
+      ...form,
+      examples: [...form.examples, { title: "", description: "" }],
+    });
   };
 
   const removeExample = (i: number) => {
@@ -209,8 +228,15 @@ export default function NewKnowledgeObjectPage() {
           >
             Create Knowledge Object
           </h1>
-          <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)", marginTop: "var(--space-2)" }}>
-            Create a new knowledge object. It will be saved as a draft until published.
+          <p
+            style={{
+              fontSize: "var(--text-sm)",
+              color: "var(--text-secondary)",
+              marginTop: "var(--space-2)",
+            }}
+          >
+            Create a new knowledge object. It will be saved as a draft until
+            published.
           </p>
         </div>
 
@@ -219,10 +245,10 @@ export default function NewKnowledgeObjectPage() {
           <div
             style={{
               padding: "var(--space-4)",
-              background: "#fef2f2",
-              border: "1px solid #fecaca",
+              background: "var(--color-status-error-bg, #fef2f2)",
+              border: "1px solid var(--color-status-error-border, #fecaca)",
               borderRadius: "var(--radius-md)",
-              color: "#991b1b",
+              color: "var(--color-status-error-text, #991b1b)",
               fontSize: "var(--text-sm)",
               marginBottom: "var(--space-6)",
             }}
@@ -242,16 +268,33 @@ export default function NewKnowledgeObjectPage() {
               placeholder="e.g., Introduction to Artificial Intelligence"
               style={{
                 ...inputStyle,
-                borderColor: fieldErrors.title ? "#ef4444" : undefined,
+                borderColor: fieldErrors.title
+                  ? "var(--color-status-error, #ef4444)"
+                  : undefined,
               }}
             />
             {fieldErrors.title && (
-              <div style={{ fontSize: "var(--text-xs)", color: "#ef4444", marginTop: "var(--space-1)" }}>{fieldErrors.title}</div>
+              <div
+                style={{
+                  fontSize: "var(--text-xs)",
+                  color: "var(--color-status-error, #ef4444)",
+                  marginTop: "var(--space-1)",
+                }}
+              >
+                {fieldErrors.title}
+              </div>
             )}
           </div>
 
           {/* Domain + Subject */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-4)", marginBottom: "var(--space-6)" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--space-4)",
+              marginBottom: "var(--space-6)",
+            }}
+          >
             <div>
               <label style={labelStyle}>Domain *</label>
               <input
@@ -261,11 +304,21 @@ export default function NewKnowledgeObjectPage() {
                 placeholder="e.g., AI, Forest, Heritage"
                 style={{
                   ...inputStyle,
-                  borderColor: fieldErrors.domain ? "#ef4444" : undefined,
+                  borderColor: fieldErrors.domain
+                    ? "var(--color-status-error, #ef4444)"
+                    : undefined,
                 }}
               />
               {fieldErrors.domain && (
-                <div style={{ fontSize: "var(--text-xs)", color: "#ef4444", marginTop: "var(--space-1)" }}>{fieldErrors.domain}</div>
+                <div
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    color: "var(--color-status-error, #ef4444)",
+                    marginTop: "var(--space-1)",
+                  }}
+                >
+                  {fieldErrors.domain}
+                </div>
               )}
             </div>
             <div>
@@ -285,17 +338,29 @@ export default function NewKnowledgeObjectPage() {
             <label style={labelStyle}>Description</label>
             <textarea
               value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
               placeholder="Brief description of this knowledge object..."
               rows={3}
               style={{
                 ...inputStyle,
                 resize: "vertical",
-                borderColor: fieldErrors.description ? "#ef4444" : undefined,
+                borderColor: fieldErrors.description
+                  ? "var(--color-status-error, #ef4444)"
+                  : undefined,
               }}
             />
             {fieldErrors.description && (
-              <div style={{ fontSize: "var(--text-xs)", color: "#ef4444", marginTop: "var(--space-1)" }}>{fieldErrors.description}</div>
+              <div
+                style={{
+                  fontSize: "var(--text-xs)",
+                  color: "var(--color-status-error, #ef4444)",
+                  marginTop: "var(--space-1)",
+                }}
+              >
+                {fieldErrors.description}
+              </div>
             )}
           </div>
 
@@ -307,21 +372,40 @@ export default function NewKnowledgeObjectPage() {
               min={1}
               max={12}
               value={form.grade}
-              onChange={(e) => setForm({ ...form, grade: parseInt(e.target.value) || 9 })}
+              onChange={(e) =>
+                setForm({ ...form, grade: parseInt(e.target.value) || 9 })
+              }
               style={{
                 ...inputStyle,
                 width: 120,
-                borderColor: fieldErrors.grade ? "#ef4444" : undefined,
+                borderColor: fieldErrors.grade
+                  ? "var(--color-status-error, #ef4444)"
+                  : undefined,
               }}
             />
             {fieldErrors.grade && (
-              <div style={{ fontSize: "var(--text-xs)", color: "#ef4444", marginTop: "var(--space-1)" }}>{fieldErrors.grade}</div>
+              <div
+                style={{
+                  fontSize: "var(--text-xs)",
+                  color: "var(--color-status-error, #ef4444)",
+                  marginTop: "var(--space-1)",
+                }}
+              >
+                {fieldErrors.grade}
+              </div>
             )}
           </div>
 
           {/* Concepts */}
           <div style={{ marginBottom: "var(--space-6)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-3)" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "var(--space-3)",
+              }}
+            >
               <label style={{ ...labelStyle, marginBottom: 0 }}>Concepts</label>
               <button
                 type="button"
@@ -343,7 +427,15 @@ export default function NewKnowledgeObjectPage() {
               </button>
             </div>
             {form.concepts.map((concept, i) => (
-              <div key={i} style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-2)", alignItems: "center" }}>
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  gap: "var(--space-2)",
+                  marginBottom: "var(--space-2)",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   type="text"
                   value={concept.name}
@@ -354,13 +446,19 @@ export default function NewKnowledgeObjectPage() {
                 <input
                   type="text"
                   value={concept.description}
-                  onChange={(e) => updateConcept(i, { description: e.target.value })}
+                  onChange={(e) =>
+                    updateConcept(i, { description: e.target.value })
+                  }
                   placeholder="Description"
                   style={{ ...inputStyle, flex: 3 }}
                 />
                 <select
                   value={concept.difficulty}
-                  onChange={(e) => updateConcept(i, { difficulty: e.target.value as Concept["difficulty"] })}
+                  onChange={(e) =>
+                    updateConcept(i, {
+                      difficulty: e.target.value as Concept["difficulty"],
+                    })
+                  }
                   style={{ ...inputStyle, flex: 1 }}
                 >
                   <option value="beginner">Beginner</option>
@@ -370,7 +468,13 @@ export default function NewKnowledgeObjectPage() {
                 <button
                   type="button"
                   onClick={() => removeConcept(i)}
-                  style={{ padding: "var(--space-2)", color: "#ef4444", background: "none", border: "none", cursor: "pointer" }}
+                  style={{
+                    padding: "var(--space-2)",
+                    color: "var(--color-status-error, #ef4444)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -380,8 +484,17 @@ export default function NewKnowledgeObjectPage() {
 
           {/* Definitions */}
           <div style={{ marginBottom: "var(--space-6)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-3)" }}>
-              <label style={{ ...labelStyle, marginBottom: 0 }}>Definitions</label>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "var(--space-3)",
+              }}
+            >
+              <label style={{ ...labelStyle, marginBottom: 0 }}>
+                Definitions
+              </label>
               <button
                 type="button"
                 onClick={addDefinition}
@@ -402,25 +515,43 @@ export default function NewKnowledgeObjectPage() {
               </button>
             </div>
             {form.definitions.map((def, i) => (
-              <div key={i} style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-2)", alignItems: "center" }}>
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  gap: "var(--space-2)",
+                  marginBottom: "var(--space-2)",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   type="text"
                   value={def.term}
-                  onChange={(e) => updateDefinition(i, { term: e.target.value })}
+                  onChange={(e) =>
+                    updateDefinition(i, { term: e.target.value })
+                  }
                   placeholder="Term"
                   style={{ ...inputStyle, flex: 1 }}
                 />
                 <input
                   type="text"
                   value={def.definition}
-                  onChange={(e) => updateDefinition(i, { definition: e.target.value })}
+                  onChange={(e) =>
+                    updateDefinition(i, { definition: e.target.value })
+                  }
                   placeholder="Definition"
                   style={{ ...inputStyle, flex: 3 }}
                 />
                 <button
                   type="button"
                   onClick={() => removeDefinition(i)}
-                  style={{ padding: "var(--space-2)", color: "#ef4444", background: "none", border: "none", cursor: "pointer" }}
+                  style={{
+                    padding: "var(--space-2)",
+                    color: "var(--color-status-error, #ef4444)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -430,7 +561,14 @@ export default function NewKnowledgeObjectPage() {
 
           {/* Examples */}
           <div style={{ marginBottom: "var(--space-6)" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "var(--space-3)" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginBottom: "var(--space-3)",
+              }}
+            >
               <label style={{ ...labelStyle, marginBottom: 0 }}>Examples</label>
               <button
                 type="button"
@@ -452,7 +590,15 @@ export default function NewKnowledgeObjectPage() {
               </button>
             </div>
             {form.examples.map((ex, i) => (
-              <div key={i} style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-2)", alignItems: "center" }}>
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  gap: "var(--space-2)",
+                  marginBottom: "var(--space-2)",
+                  alignItems: "center",
+                }}
+              >
                 <input
                   type="text"
                   value={ex.title}
@@ -463,14 +609,22 @@ export default function NewKnowledgeObjectPage() {
                 <input
                   type="text"
                   value={ex.description}
-                  onChange={(e) => updateExample(i, { description: e.target.value })}
+                  onChange={(e) =>
+                    updateExample(i, { description: e.target.value })
+                  }
                   placeholder="Description"
                   style={{ ...inputStyle, flex: 3 }}
                 />
                 <button
                   type="button"
                   onClick={() => removeExample(i)}
-                  style={{ padding: "var(--space-2)", color: "#ef4444", background: "none", border: "none", cursor: "pointer" }}
+                  style={{
+                    padding: "var(--space-2)",
+                    color: "var(--color-status-error, #ef4444)",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   <Trash2 size={14} />
                 </button>
@@ -479,7 +633,13 @@ export default function NewKnowledgeObjectPage() {
           </div>
 
           {/* Submit */}
-          <div style={{ display: "flex", gap: "var(--space-3)", justifyContent: "flex-end" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-3)",
+              justifyContent: "flex-end",
+            }}
+          >
             <Link
               href="/app/knowledge"
               style={{
@@ -499,7 +659,9 @@ export default function NewKnowledgeObjectPage() {
               disabled={submitting}
               style={{
                 padding: "var(--space-3) var(--space-6)",
-                background: submitting ? "var(--text-tertiary)" : "var(--forest)",
+                background: submitting
+                  ? "var(--text-tertiary)"
+                  : "var(--forest)",
                 color: "var(--bg)",
                 border: "none",
                 borderRadius: "var(--radius-md)",

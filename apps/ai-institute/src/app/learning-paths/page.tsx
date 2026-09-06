@@ -275,10 +275,10 @@ export default function LearningPathsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-bg-primary text-white">
       {/* Fully connected — Wave Q: all 8 stages linked to published courses */}
-      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
-        <p className="text-xs text-[#c9a227]/70 font-medium">
+      <div className="bg-accent-gold/10 border-b border-accent-gold/20 px-6 py-2 text-center">
+        <p className="text-xs text-accent-gold/70 font-medium">
           Structured Curriculum — 8 stages, each backed by a published course.
           Follow the path or jump to any stage.
         </p>

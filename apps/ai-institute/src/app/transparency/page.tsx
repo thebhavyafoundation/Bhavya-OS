@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 interface TransparencyData {
   financials?: unknown[];
@@ -21,6 +23,7 @@ export default function TransparencyPage() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
+      <SiteHeader />
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-primary mb-2">
@@ -37,7 +40,9 @@ export default function TransparencyPage() {
               Financial Disclosures
             </h2>
             <p className="text-sm text-text-secondary">
-              Financial data will be published here.
+              This section will be populated as Bhavya Foundation publishes its
+              financial reports. Check back for audited financial statements,
+              fund allocation details, and expenditure breakdowns.
             </p>
           </div>
 
@@ -46,7 +51,9 @@ export default function TransparencyPage() {
               Governance
             </h2>
             <p className="text-sm text-text-secondary">
-              Governance documents and decisions.
+              Governance documents including board meeting minutes,
+              constitutional amendments, and policy decisions will be published
+              here as they are formalized.
             </p>
           </div>
 
@@ -55,7 +62,8 @@ export default function TransparencyPage() {
               Projects
             </h2>
             <p className="text-sm text-text-secondary">
-              Active and completed projects.
+              Active and completed projects will be listed here with timelines,
+              milestones, and impact metrics as they become available.
             </p>
           </div>
 
@@ -64,11 +72,13 @@ export default function TransparencyPage() {
               Policies
             </h2>
             <p className="text-sm text-text-secondary">
-              Institutional policies and standards.
+              Institutional policies, standards, and procedural documents will
+              be published here for public review.
             </p>
           </div>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }

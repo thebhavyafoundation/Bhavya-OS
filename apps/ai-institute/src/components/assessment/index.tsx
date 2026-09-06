@@ -274,20 +274,20 @@ export function AssessmentEngine() {
         <h3 className="text-lg font-bold mb-6">Assessment Results</h3>
 
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-[#22c55e]">
+          <div className="bg-bg-primary/30 rounded-lg p-4 text-center">
+            <div className="text-3xl font-bold text-accent-green">
               {averageScore}%
             </div>
             <div className="text-xs text-white/40">Overall Score</div>
           </div>
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-[#3b82f6]">
+          <div className="bg-bg-primary/30 rounded-lg p-4 text-center">
+            <div className="text-3xl font-bold text-blue-500">
               {results.length}
             </div>
             <div className="text-xs text-white/40">Questions Completed</div>
           </div>
-          <div className="bg-black/30 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-[#8b5cf6]">
+          <div className="bg-bg-primary/30 rounded-lg p-4 text-center">
+            <div className="text-3xl font-bold text-purple-500">
               {Math.round(
                 Object.values(timeSpent).reduce((a, b) => a + b, 0) /
                   results.length,
@@ -302,11 +302,14 @@ export function AssessmentEngine() {
           {results.map((r, i) => {
             const q = assessments.find((a) => a.id === r.questionId);
             return (
-              <div key={r.questionId} className="bg-black/30 rounded-lg p-4">
+              <div
+                key={r.questionId}
+                className="bg-bg-primary/30 rounded-lg p-4"
+              >
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-medium">{q?.title}</span>
                   <span
-                    className={`text-sm font-bold ${r.score >= 80 ? "text-[#22c55e]" : r.score >= 60 ? "text-[#f59e0b]" : "text-red-400"}`}
+                    className={`text-sm font-bold ${r.score >= 80 ? "text-accent-green" : r.score >= 60 ? "text-amber-500" : "text-red-400"}`}
                   >
                     {r.score}%
                   </span>
@@ -334,16 +337,16 @@ export function AssessmentEngine() {
           <span
             className={`text-xs px-2 py-0.5 rounded-full ${
               question.type === "architecture"
-                ? "bg-[#22c55e]/20 text-[#22c55e]"
+                ? "bg-accent-green/20 text-accent-green"
                 : question.type === "debugging"
                   ? "bg-red-500/20 text-red-400"
                   : question.type === "design"
-                    ? "bg-[#8b5cf6]/20 text-[#8b5cf6]"
+                    ? "bg-purple-500/20 text-purple-500"
                     : question.type === "prompt"
-                      ? "bg-[#3b82f6]/20 text-[#3b82f6]"
+                      ? "bg-blue-500/20 text-blue-500"
                       : question.type === "code"
-                        ? "bg-[#f59e0b]/20 text-[#f59e0b]"
-                        : "bg-[#06b6d4]/20 text-[#06b6d4]"
+                        ? "bg-amber-500/20 text-amber-500"
+                        : "bg-cyan-500/20 text-cyan-500"
             }`}
           >
             {question.type}
@@ -355,13 +358,13 @@ export function AssessmentEngine() {
       <p className="text-white/60 text-sm mb-4">{question.description}</p>
 
       {question.context && (
-        <pre className="bg-black/50 rounded-lg p-4 mb-4 text-sm text-[#22c55e] font-mono overflow-x-auto">
+        <pre className="bg-bg-primary/50 rounded-lg p-4 mb-4 text-sm text-accent-green font-mono overflow-x-auto">
           {question.context}
         </pre>
       )}
 
       {question.starterCode && (
-        <pre className="bg-black/50 rounded-lg p-4 mb-4 text-sm text-[#22c55e] font-mono overflow-x-auto">
+        <pre className="bg-bg-primary/50 rounded-lg p-4 mb-4 text-sm text-accent-green font-mono overflow-x-auto">
           {question.starterCode}
         </pre>
       )}
@@ -374,7 +377,7 @@ export function AssessmentEngine() {
           <div className="grid grid-cols-2 gap-2">
             {question.rubric.map((r) => (
               <div key={r.dimension} className="bg-white/5 rounded-lg p-3">
-                <div className="text-xs font-medium text-[#22c55e] mb-1">
+                <div className="text-xs font-medium text-accent-green mb-1">
                   {r.dimension}
                 </div>
                 <ul className="space-y-0.5">
@@ -395,7 +398,7 @@ export function AssessmentEngine() {
         onChange={(e) =>
           setAnswers((prev) => ({ ...prev, [question.id]: e.target.value }))
         }
-        className="w-full bg-black/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm h-40 resize-none mb-4"
+        className="w-full bg-bg-primary/30 border border-white/10 rounded-lg px-4 py-3 text-white text-sm h-40 resize-none mb-4"
         placeholder="Write your answer here..."
       />
 
@@ -409,7 +412,7 @@ export function AssessmentEngine() {
         </button>
         <button
           onClick={submitAnswer}
-          className="px-6 py-2 text-sm bg-[#22c55e] text-black font-semibold rounded-lg hover:bg-[#16a34a]"
+          className="px-6 py-2 text-sm bg-accent-green text-text-primary font-semibold rounded-lg hover:bg-accent-green/80"
         >
           {currentQuestion === assessments.length - 1
             ? "Submit Assessment"

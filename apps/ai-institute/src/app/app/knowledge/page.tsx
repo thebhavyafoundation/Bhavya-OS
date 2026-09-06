@@ -70,6 +70,7 @@ interface KOListSummary {
   status?: string;
 }
 
+// TODO: reference design tokens — these hex values are data-mapped for runtime use
 const domainColors: Record<string, string> = {
   AI: "#3b82f6",
   Forest: "#22c55e",
@@ -89,7 +90,9 @@ const provenanceLabels: Record<string, string> = {
 };
 
 export default function KnowledgePage() {
-  const [knowledgeObjects, setKnowledgeObjects] = useState<KnowledgeObject[]>([]);
+  const [knowledgeObjects, setKnowledgeObjects] = useState<KnowledgeObject[]>(
+    [],
+  );
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
@@ -107,7 +110,9 @@ export default function KnowledgePage() {
         const fullKos = await Promise.all(
           summaries.map(async (summary) => {
             try {
-              const detailRes = await fetch(`/api/studio/knowledge/${summary.id}`);
+              const detailRes = await fetch(
+                `/api/studio/knowledge/${summary.id}`,
+              );
               if (detailRes.ok) {
                 return await detailRes.json();
               }
@@ -115,7 +120,7 @@ export default function KnowledgePage() {
             } catch {
               return summary as unknown as KnowledgeObject;
             }
-          })
+          }),
         );
 
         setKnowledgeObjects(fullKos);
@@ -136,7 +141,7 @@ export default function KnowledgePage() {
       ko.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       ko.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       ko.concepts?.some((c) =>
-        c.name.toLowerCase().includes(searchQuery.toLowerCase())
+        c.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     const matchesDomain = !selectedDomain || ko.domain === selectedDomain;
     return matchesSearch && matchesDomain;
@@ -220,7 +225,14 @@ export default function KnowledgePage() {
         </div>
 
         {/* Domain filter */}
-        <div style={{ display: "flex", gap: "var(--space-2)", marginBottom: "var(--space-8)", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--space-2)",
+            marginBottom: "var(--space-8)",
+            flexWrap: "wrap",
+          }}
+        >
           <button
             onClick={() => setSelectedDomain(null)}
             style={{
@@ -229,8 +241,10 @@ export default function KnowledgePage() {
               fontSize: "var(--text-sm)",
               fontWeight: 600,
               border: "1px solid var(--border)",
-              background: selectedDomain === null ? "var(--forest)" : "transparent",
-              color: selectedDomain === null ? "var(--bg)" : "var(--text-secondary)",
+              background:
+                selectedDomain === null ? "var(--forest)" : "transparent",
+              color:
+                selectedDomain === null ? "var(--bg)" : "var(--text-secondary)",
               cursor: "pointer",
             }}
           >
@@ -239,15 +253,23 @@ export default function KnowledgePage() {
           {domains.map((domain) => (
             <button
               key={domain}
-              onClick={() => setSelectedDomain(selectedDomain === domain ? null : domain)}
+              onClick={() =>
+                setSelectedDomain(selectedDomain === domain ? null : domain)
+              }
               style={{
                 padding: "var(--space-2) var(--space-4)",
                 borderRadius: "var(--radius-md)",
                 fontSize: "var(--text-sm)",
                 fontWeight: 600,
                 border: "1px solid var(--border)",
-                background: selectedDomain === domain ? (domainColors[domain] || "var(--forest)") : "transparent",
-                color: selectedDomain === domain ? "var(--bg)" : "var(--text-secondary)",
+                background:
+                  selectedDomain === domain
+                    ? domainColors[domain] || "var(--forest)"
+                    : "transparent",
+                color:
+                  selectedDomain === domain
+                    ? "var(--bg)"
+                    : "var(--text-secondary)",
                 cursor: "pointer",
               }}
             >
@@ -258,7 +280,13 @@ export default function KnowledgePage() {
 
         {/* Content */}
         {loading ? (
-          <div style={{ textAlign: "center", padding: "var(--space-12)", color: "var(--text-secondary)" }}>
+          <div
+            style={{
+              textAlign: "center",
+              padding: "var(--space-12)",
+              color: "var(--text-secondary)",
+            }}
+          >
             Loading knowledge objects...
           </div>
         ) : filteredKos.length === 0 ? (
@@ -326,7 +354,13 @@ export default function KnowledgePage() {
             </Link>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-4)",
+            }}
+          >
             {filteredKos.map((ko) => {
               const isExpanded = expandedKo === ko.id;
               const color = domainColors[ko.domain] || "var(--forest)";
@@ -372,7 +406,14 @@ export default function KnowledgePage() {
                     </div>
 
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-1)" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "var(--space-2)",
+                          marginBottom: "var(--space-1)",
+                        }}
+                      >
                         <h3
                           style={{
                             fontSize: "var(--text-base)",
@@ -398,8 +439,12 @@ export default function KnowledgePage() {
                         <span
                           style={{
                             padding: "2px 8px",
-                            background: (statusColors[ko.status || "draft"] || "var(--text-tertiary)") + "20",
-                            color: statusColors[ko.status || "draft"] || "var(--text-tertiary)",
+                            background:
+                              (statusColors[ko.status || "draft"] ||
+                                "var(--text-tertiary)") + "20",
+                            color:
+                              statusColors[ko.status || "draft"] ||
+                              "var(--text-tertiary)",
                             borderRadius: "var(--radius-sm)",
                             fontSize: "var(--text-xs)",
                             fontWeight: 600,
@@ -437,7 +482,15 @@ export default function KnowledgePage() {
                           {ko.description}
                         </p>
                       )}
-                      <div style={{ display: "flex", gap: "var(--space-4)", marginTop: "var(--space-2)", fontSize: "var(--text-xs)", color: "var(--text-tertiary)" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          gap: "var(--space-4)",
+                          marginTop: "var(--space-2)",
+                          fontSize: "var(--text-xs)",
+                          color: "var(--text-tertiary)",
+                        }}
+                      >
                         <span>{ko.concepts?.length || 0} concepts</span>
                         <span>{ko.definitions?.length || 0} definitions</span>
                         <span>{ko.examples?.length || 0} examples</span>
@@ -451,9 +504,15 @@ export default function KnowledgePage() {
                     </div>
 
                     {isExpanded ? (
-                      <ChevronDown size={16} style={{ color: "var(--text-tertiary)" }} />
+                      <ChevronDown
+                        size={16}
+                        style={{ color: "var(--text-tertiary)" }}
+                      />
                     ) : (
-                      <ChevronRight size={16} style={{ color: "var(--text-tertiary)" }} />
+                      <ChevronRight
+                        size={16}
+                        style={{ color: "var(--text-tertiary)" }}
+                      />
                     )}
                   </button>
 
@@ -465,19 +524,65 @@ export default function KnowledgePage() {
                         borderTop: "1px solid var(--border)",
                       }}
                     >
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-5)", marginTop: "var(--space-5)" }}>
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "1fr 1fr",
+                          gap: "var(--space-5)",
+                          marginTop: "var(--space-5)",
+                        }}
+                      >
                         {/* Concepts */}
                         {ko.concepts && ko.concepts.length > 0 && (
                           <div>
-                            <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-3)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                            <h4
+                              style={{
+                                fontSize: "var(--text-sm)",
+                                fontWeight: 700,
+                                color: "var(--text)",
+                                marginBottom: "var(--space-3)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               <Target size={14} />
                               Concepts
                             </h4>
-                            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               {ko.concepts.map((concept, i) => (
-                                <div key={i} style={{ padding: "var(--space-3)", background: "var(--bg)", borderRadius: "var(--radius-md)" }}>
-                                  <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>{concept.name}</div>
-                                  <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginTop: "var(--space-1)" }}>{concept.description}</div>
+                                <div
+                                  key={i}
+                                  style={{
+                                    padding: "var(--space-3)",
+                                    background: "var(--bg)",
+                                    borderRadius: "var(--radius-md)",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-sm)",
+                                      fontWeight: 600,
+                                      color: "var(--text)",
+                                    }}
+                                  >
+                                    {concept.name}
+                                  </div>
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-xs)",
+                                      color: "var(--text-secondary)",
+                                      marginTop: "var(--space-1)",
+                                    }}
+                                  >
+                                    {concept.description}
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -487,15 +592,54 @@ export default function KnowledgePage() {
                         {/* Definitions */}
                         {ko.definitions && ko.definitions.length > 0 && (
                           <div>
-                            <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-3)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                            <h4
+                              style={{
+                                fontSize: "var(--text-sm)",
+                                fontWeight: 700,
+                                color: "var(--text)",
+                                marginBottom: "var(--space-3)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               <BookOpen size={14} />
                               Definitions
                             </h4>
-                            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               {ko.definitions.map((def, i) => (
-                                <div key={i} style={{ padding: "var(--space-3)", background: "var(--bg)", borderRadius: "var(--radius-md)" }}>
-                                  <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>{def.term}</div>
-                                  <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginTop: "var(--space-1)" }}>{def.definition}</div>
+                                <div
+                                  key={i}
+                                  style={{
+                                    padding: "var(--space-3)",
+                                    background: "var(--bg)",
+                                    borderRadius: "var(--radius-md)",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-sm)",
+                                      fontWeight: 600,
+                                      color: "var(--text)",
+                                    }}
+                                  >
+                                    {def.term}
+                                  </div>
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-xs)",
+                                      color: "var(--text-secondary)",
+                                      marginTop: "var(--space-1)",
+                                    }}
+                                  >
+                                    {def.definition}
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -505,15 +649,54 @@ export default function KnowledgePage() {
                         {/* Examples */}
                         {ko.examples && ko.examples.length > 0 && (
                           <div>
-                            <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-3)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                            <h4
+                              style={{
+                                fontSize: "var(--text-sm)",
+                                fontWeight: 700,
+                                color: "var(--text)",
+                                marginBottom: "var(--space-3)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               <Lightbulb size={14} />
                               Examples
                             </h4>
-                            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               {ko.examples.map((ex, i) => (
-                                <div key={i} style={{ padding: "var(--space-3)", background: "var(--bg)", borderRadius: "var(--radius-md)" }}>
-                                  <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>{ex.title}</div>
-                                  <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginTop: "var(--space-1)" }}>{ex.description}</div>
+                                <div
+                                  key={i}
+                                  style={{
+                                    padding: "var(--space-3)",
+                                    background: "var(--bg)",
+                                    borderRadius: "var(--radius-md)",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-sm)",
+                                      fontWeight: 600,
+                                      color: "var(--text)",
+                                    }}
+                                  >
+                                    {ex.title}
+                                  </div>
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-xs)",
+                                      color: "var(--text-secondary)",
+                                      marginTop: "var(--space-1)",
+                                    }}
+                                  >
+                                    {ex.description}
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -523,15 +706,56 @@ export default function KnowledgePage() {
                         {/* Misconceptions */}
                         {ko.misconceptions && ko.misconceptions.length > 0 && (
                           <div>
-                            <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-3)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                            <h4
+                              style={{
+                                fontSize: "var(--text-sm)",
+                                fontWeight: 700,
+                                color: "var(--text)",
+                                marginBottom: "var(--space-3)",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               <AlertTriangle size={14} />
                               Common Misconceptions
                             </h4>
-                            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "var(--space-2)",
+                              }}
+                            >
                               {ko.misconceptions.map((mc, i) => (
-                                <div key={i} style={{ padding: "var(--space-3)", background: "var(--bg)", borderRadius: "var(--radius-md)" }}>
-                                  <div style={{ fontSize: "var(--text-xs)", color: "#ef4444", fontWeight: 600 }}>Misconception: {mc.belief}</div>
-                                  <div style={{ fontSize: "var(--text-xs)", color: "#22c55e", marginTop: "var(--space-1)" }}>Correction: {mc.correction}</div>
+                                <div
+                                  key={i}
+                                  style={{
+                                    padding: "var(--space-3)",
+                                    background: "var(--bg)",
+                                    borderRadius: "var(--radius-md)",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-xs)",
+                                      color:
+                                        "var(--color-status-error, #ef4444)",
+                                      fontWeight: 600,
+                                    }}
+                                  >
+                                    Misconception: {mc.belief}
+                                  </div>
+                                  <div
+                                    style={{
+                                      fontSize: "var(--text-xs)",
+                                      color:
+                                        "var(--color-accent-green, #22c55e)",
+                                      marginTop: "var(--space-1)",
+                                    }}
+                                  >
+                                    Correction: {mc.correction}
+                                  </div>
                                 </div>
                               ))}
                             </div>
@@ -540,33 +764,95 @@ export default function KnowledgePage() {
                       </div>
 
                       {/* Prerequisites and Related */}
-                      {((ko.prerequisites && ko.prerequisites.length > 0) || (ko.related && ko.related.length > 0)) && (
-                        <div style={{ marginTop: "var(--space-5)", paddingTop: "var(--space-5)", borderTop: "1px solid var(--border)" }}>
-                          <div style={{ display: "flex", gap: "var(--space-6)" }}>
-                            {ko.prerequisites && ko.prerequisites.length > 0 && (
-                              <div>
-                                <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-2)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
-                                  <GraduationCap size={14} />
-                                  Prerequisites
-                                </h4>
-                                <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                                  {ko.prerequisites.map((prereq, i) => (
-                                    <span key={i} style={{ padding: "var(--space-1) var(--space-3)", background: "var(--border)", borderRadius: "var(--radius-sm)", fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>
-                                      {prereq}
-                                    </span>
-                                  ))}
+                      {((ko.prerequisites && ko.prerequisites.length > 0) ||
+                        (ko.related && ko.related.length > 0)) && (
+                        <div
+                          style={{
+                            marginTop: "var(--space-5)",
+                            paddingTop: "var(--space-5)",
+                            borderTop: "1px solid var(--border)",
+                          }}
+                        >
+                          <div
+                            style={{ display: "flex", gap: "var(--space-6)" }}
+                          >
+                            {ko.prerequisites &&
+                              ko.prerequisites.length > 0 && (
+                                <div>
+                                  <h4
+                                    style={{
+                                      fontSize: "var(--text-sm)",
+                                      fontWeight: 700,
+                                      color: "var(--text)",
+                                      marginBottom: "var(--space-2)",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: "var(--space-2)",
+                                    }}
+                                  >
+                                    <GraduationCap size={14} />
+                                    Prerequisites
+                                  </h4>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      gap: "var(--space-2)",
+                                      flexWrap: "wrap",
+                                    }}
+                                  >
+                                    {ko.prerequisites.map((prereq, i) => (
+                                      <span
+                                        key={i}
+                                        style={{
+                                          padding:
+                                            "var(--space-1) var(--space-3)",
+                                          background: "var(--border)",
+                                          borderRadius: "var(--radius-sm)",
+                                          fontSize: "var(--text-xs)",
+                                          color: "var(--text-secondary)",
+                                        }}
+                                      >
+                                        {prereq}
+                                      </span>
+                                    ))}
+                                  </div>
                                 </div>
-                              </div>
-                            )}
+                              )}
                             {ko.related && ko.related.length > 0 && (
                               <div>
-                                <h4 style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text)", marginBottom: "var(--space-2)", display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                                <h4
+                                  style={{
+                                    fontSize: "var(--text-sm)",
+                                    fontWeight: 700,
+                                    color: "var(--text)",
+                                    marginBottom: "var(--space-2)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "var(--space-2)",
+                                  }}
+                                >
                                   <Link2 size={14} />
                                   Related
                                 </h4>
-                                <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    gap: "var(--space-2)",
+                                    flexWrap: "wrap",
+                                  }}
+                                >
                                   {ko.related.map((rel, i) => (
-                                    <span key={i} style={{ padding: "var(--space-1) var(--space-3)", background: "var(--border)", borderRadius: "var(--radius-sm)", fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>
+                                    <span
+                                      key={i}
+                                      style={{
+                                        padding:
+                                          "var(--space-1) var(--space-3)",
+                                        background: "var(--border)",
+                                        borderRadius: "var(--radius-sm)",
+                                        fontSize: "var(--text-xs)",
+                                        color: "var(--text-secondary)",
+                                      }}
+                                    >
                                       {rel}
                                     </span>
                                   ))}

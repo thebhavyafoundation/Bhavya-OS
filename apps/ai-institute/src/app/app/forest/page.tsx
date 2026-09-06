@@ -62,7 +62,7 @@ export default function ForestMissionsPage() {
               gap: "var(--space-2)",
               padding: "var(--space-3) var(--space-5)",
               background: "var(--forest)",
-              color: "#fff",
+              color: "var(--color-text-inverse, #fff)",
               borderRadius: "var(--radius-md)",
               fontSize: "var(--text-sm)",
               fontWeight: 600,
@@ -134,7 +134,13 @@ export default function ForestMissionsPage() {
             </p>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-4)" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-4)",
+            }}
+          >
             {missions.map((mission) => (
               <Link
                 key={mission.id}
@@ -164,8 +170,14 @@ export default function ForestMissionsPage() {
                       fontSize: "var(--text-xs)",
                       padding: "2px 8px",
                       borderRadius: "var(--radius-sm)",
-                      background: mission.status === "active" ? "var(--forest)" : "var(--border)",
-                      color: mission.status === "active" ? "#fff" : "var(--text-secondary)",
+                      background:
+                        mission.status === "active"
+                          ? "var(--forest)"
+                          : "var(--border)",
+                      color:
+                        mission.status === "active"
+                          ? "var(--color-text-inverse, #fff)"
+                          : "var(--text-secondary)",
                     }}
                   >
                     {mission.status}
@@ -182,7 +194,13 @@ export default function ForestMissionsPage() {
                     {mission.description}
                   </p>
                 )}
-                <div className="flex items-center gap-4" style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>
+                <div
+                  className="flex items-center gap-4"
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    color: "var(--text-secondary)",
+                  }}
+                >
                   <span className="flex items-center gap-1">
                     <MapPin size={12} />
                     {mission.region}
@@ -192,7 +210,10 @@ export default function ForestMissionsPage() {
                     {new Date(mission.created).toLocaleDateString()}
                   </span>
                   {mission.siteIds && mission.siteIds.length > 0 && (
-                    <span>{mission.siteIds.length} site{mission.siteIds.length !== 1 ? "s" : ""}</span>
+                    <span>
+                      {mission.siteIds.length} site
+                      {mission.siteIds.length !== 1 ? "s" : ""}
+                    </span>
                   )}
                 </div>
               </Link>
