@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const programs = [
   {
@@ -71,17 +73,18 @@ const item = {
 
 export default function ProgramsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f0d] text-[#f5f1e6]">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
+      <SiteHeader />
       {/* Editorial notice — Wave P: programs are curriculum descriptions, not verified institutional activity */}
-      <div className="bg-[#c9a227]/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
-        <p className="text-xs text-[#c9a227]/70 font-medium">
+      <div className="bg-accent-gold/10 border-b border-[#c9a227]/20 px-6 py-2 text-center">
+        <p className="text-xs text-accent-gold/70 font-medium">
           Curriculum Guidance — recommended learning sequences, not enrolled
           programs
         </p>
       </div>
       <section className="relative overflow-hidden pt-32 pb-20 px-6">
         <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-[#c9a227] rounded-full blur-[160px]" />
+          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-accent-gold rounded-full blur-[160px]" />
           <div className="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-[#1a3a2a] rounded-full blur-[140px]" />
         </div>
         <div className="relative max-w-7xl mx-auto text-center">
@@ -90,7 +93,7 @@ export default function ProgramsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full border border-[#c9a227]/30 bg-[#c9a227]/10 text-[#c9a227] text-sm font-medium tracking-wide mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full border border-[#c9a227]/30 bg-accent-gold/10 text-accent-gold text-sm font-medium tracking-wide mb-6">
               Structured Learning Paths
             </span>
           </motion.div>
@@ -106,7 +109,7 @@ export default function ProgramsPage() {
             </span>
           </motion.h1>
           <motion.p
-            className="text-lg md:text-xl text-[#f5f1e6]/60 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-text-primary/60 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -127,7 +130,7 @@ export default function ProgramsPage() {
             <motion.div
               key={prog.title}
               variants={item}
-              className="group relative bg-[#0f1a14] border border-[#1a3a2a]/20 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:scale-[1.01]"
+              className="group relative bg-[#0f1a14] border border-border-primary/20 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:scale-[1.01]"
               style={{
                 boxShadow: `0 0 0 0px ${prog.accent}00`,
               }}
@@ -141,7 +144,7 @@ export default function ProgramsPage() {
               }}
             >
               {i === 1 && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#c9a227] text-[#0a0f0d] text-xs font-bold rounded-full uppercase tracking-wider">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-accent-gold text-text-primary text-xs font-bold rounded-full uppercase tracking-wider">
                   Most Popular
                 </div>
               )}
@@ -157,10 +160,10 @@ export default function ProgramsPage() {
                   {prog.level[0]}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#f5f1e6]">
+                  <h3 className="text-xl font-bold text-text-primary">
                     {prog.title}
                   </h3>
-                  <p className="text-sm text-[#f5f1e6]/40">
+                  <p className="text-sm text-text-primary/40">
                     {prog.description}
                   </p>
                 </div>
@@ -177,23 +180,23 @@ export default function ProgramsPage() {
                 >
                   {prog.level}
                 </span>
-                <span className="text-sm text-[#f5f1e6]/50">
+                <span className="text-sm text-text-primary/50">
                   {prog.duration}
                 </span>
-                <span className="text-sm text-[#f5f1e6]/40">
+                <span className="text-sm text-text-primary/40">
                   Opening soon
                 </span>
               </div>
 
               <div className="flex-1 mb-8">
-                <p className="text-xs uppercase tracking-wider text-[#f5f1e6]/30 mb-3 font-medium">
+                <p className="text-xs uppercase tracking-wider text-text-primary/30 mb-3 font-medium">
                   Curriculum
                 </p>
                 <ul className="space-y-2.5">
                   {prog.curriculum.map((c, ci) => (
                     <li
                       key={ci}
-                      className="flex items-start gap-3 text-sm text-[#f5f1e6]/60"
+                      className="flex items-start gap-3 text-sm text-text-primary/60"
                     >
                       <span
                         className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
@@ -229,23 +232,23 @@ export default function ProgramsPage() {
 
       <section className="max-w-7xl mx-auto px-6 pb-20">
         <motion.div
-          className="bg-[#0f1a14] border border-[#1a3a2a]/20 rounded-2xl p-8 md:p-12"
+          className="bg-[#0f1a14] border border-border-primary/20 rounded-2xl p-8 md:p-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12">
             <div className="flex-1">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#f5f1e6] mb-3">
+              <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-3">
                 Custom Path
               </h2>
-              <p className="text-[#f5f1e6]/50 text-base">
+              <p className="text-text-primary/50 text-base">
                 Mix and match courses from any school to create your own program
               </p>
             </div>
             <Link
               href="/schools"
-              className="px-8 py-4 bg-[#1a3a2a] hover:bg-[#1a3a2a]/80 text-[#4ade80] rounded-xl font-medium transition-all hover:shadow-[0_0_25px_-5px_#1a3a2a] whitespace-nowrap"
+              className="px-8 py-4 bg-bg-tertiary hover:bg-bg-tertiary/80 text-accent-green-light rounded-xl font-medium transition-all hover:shadow-md whitespace-nowrap"
             >
               Browse Schools
             </Link>
@@ -264,16 +267,17 @@ export default function ProgramsPage() {
             <motion.div
               key={s.label}
               variants={item}
-              className="bg-[#0f1a14] border border-[#1a3a2a]/20 rounded-2xl p-6 text-center"
+              className="bg-[#0f1a14] border border-border-primary/20 rounded-2xl p-6 text-center"
             >
-              <div className="text-3xl md:text-4xl font-bold text-[#f5f1e6] mb-1">
+              <div className="text-3xl md:text-4xl font-bold text-text-primary mb-1">
                 {s.value}
               </div>
-              <div className="text-sm text-[#f5f1e6]/40">{s.label}</div>
+              <div className="text-sm text-text-primary/40">{s.label}</div>
             </motion.div>
           ))}
         </motion.div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

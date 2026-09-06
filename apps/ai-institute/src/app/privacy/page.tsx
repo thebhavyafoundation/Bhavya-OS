@@ -72,7 +72,7 @@ export default function PrivacyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold text-[#f5f1e6] mb-6"
+            className="text-5xl md:text-6xl font-bold text-text-primary mb-6"
           >
             Privacy Policy
           </motion.h1>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[#8a7359]"
+            className="text-text-tertiary"
           >
             Last updated: August 7, 2026
           </motion.p>
@@ -93,7 +93,7 @@ export default function PrivacyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-[#8a7359] leading-relaxed mb-12"
+            className="text-text-tertiary leading-relaxed mb-12"
           >
             At Bhavya AI Institute, we are committed to protecting your privacy
             and ensuring transparency in how we collect, use, and safeguard your
@@ -110,10 +110,10 @@ export default function PrivacyPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
               >
-                <h2 className="text-xl font-bold text-[#f5f1e6] mb-4">
+                <h2 className="text-xl font-bold text-text-primary mb-4">
                   {section.title}
                 </h2>
-                <p className="text-sm text-[#8a7359] leading-relaxed">
+                <p className="text-sm text-text-tertiary leading-relaxed">
                   {section.content}
                 </p>
               </motion.div>
@@ -130,10 +130,10 @@ export default function PrivacyPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-bold text-[#f5f1e6] mb-4">
+            <h2 className="text-2xl font-bold text-text-primary mb-4">
               Questions About Privacy?
             </h2>
-            <p className="text-[#8a7359] mb-8">
+            <p className="text-text-tertiary mb-8">
               If you have questions about this policy or our data practices,
               please contact our privacy team.
             </p>

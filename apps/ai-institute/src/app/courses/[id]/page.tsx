@@ -71,7 +71,7 @@ export default async function CourseDetailPage({
           </p>
         </header>
 
-        <div className="mt-8 flex flex-wrap gap-6 text-sm text-[#1a3a2a]/60">
+        <div className="mt-8 flex flex-wrap gap-6 text-sm text-text-tertiary/60">
           <div>
             <span className="font-semibold text-[#1a3a2a]">
               {course.modules.length}
@@ -106,7 +106,7 @@ export default async function CourseDetailPage({
                     <h3 className="mt-1 text-lg font-semibold text-[#1a3a2a]">
                       {mod.title}
                     </h3>
-                    <p className="mt-1 text-sm text-[#1a3a2a]/60">
+                    <p className="mt-1 text-sm text-text-tertiary/60">
                       {mod.description}
                     </p>
                   </div>
@@ -120,7 +120,7 @@ export default async function CourseDetailPage({
                       className="flex items-center justify-between rounded-lg border border-[#1a3a2a]/5 px-4 py-3 hover:bg-[#f5f1e6] transition group"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1a3a2a]/5 text-xs font-medium text-[#1a3a2a]/60">
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bg-tertiary/5 text-xs font-medium text-text-tertiary/60">
                           {lesson.order}
                         </span>
                         <span className="text-sm font-medium text-[#1a3a2a] group-hover:text-[#c9a227] transition">
@@ -143,7 +143,7 @@ export default async function CourseDetailPage({
             <h2 className="text-lg font-semibold text-[#1a3a2a]">
               Prerequisites
             </h2>
-            <p className="mt-2 text-sm text-[#1a3a2a]/60">
+            <p className="mt-2 text-sm text-text-tertiary/60">
               Before taking this course, complete:
             </p>
             <ul className="mt-3 space-y-2">
@@ -170,7 +170,7 @@ export default async function CourseDetailPage({
           <div className="mt-12 flex justify-center">
             <Link
               href={`/courses/${course.id}/lessons/${firstLessonId}`}
-              className="rounded-lg bg-[#1a3a2a] px-8 py-3 text-sm font-medium text-white hover:bg-[#1a3a2a]/80 transition"
+              className="rounded-lg bg-bg-tertiary px-8 py-3 text-sm font-medium text-text-primary hover:bg-bg-tertiary/80 transition"
             >
               Start Course
             </Link>

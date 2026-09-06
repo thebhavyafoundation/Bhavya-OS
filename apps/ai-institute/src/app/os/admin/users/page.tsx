@@ -1,4 +1,3 @@
-import { Users as UsersIcon } from "lucide-react";
 import { requirePolicy } from "@/lib/require-role";
 import { UserRoles } from "../components/UserRoles";
 

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 interface EvidenceEntry {
   id: string;
@@ -43,7 +45,8 @@ export default function KnowledgeMissionPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-white">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
+      <SiteHeader />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -55,7 +58,7 @@ export default function KnowledgeMissionPage() {
               Knowledge Mission
             </h1>
           </div>
-          <p className="text-xl text-white/60 max-w-2xl">
+          <p className="text-xl text-text-secondary max-w-2xl">
             Open education, AI literacy, research, digital libraries, and
             practical learning for everyone.
           </p>
@@ -67,29 +70,33 @@ export default function KnowledgeMissionPage() {
         <section className="px-6 pb-12">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-1">
                   {stats.totalKos}
                 </div>
-                <div className="text-sm text-white/50">Knowledge Objects</div>
+                <div className="text-sm text-text-primary/50">
+                  Knowledge Objects
+                </div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-1">
                   {stats.totalLessons}
                 </div>
-                <div className="text-sm text-white/50">Lessons</div>
+                <div className="text-sm text-text-primary/50">Lessons</div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-1">
                   {stats.totalPublications}
                 </div>
-                <div className="text-sm text-white/50">Publications</div>
+                <div className="text-sm text-text-primary/50">Publications</div>
               </div>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-1">
                   {stats.koCreatedThisMonth}
                 </div>
-                <div className="text-sm text-white/50">New This Month</div>
+                <div className="text-sm text-text-primary/50">
+                  New This Month
+                </div>
               </div>
             </div>
           </div>
@@ -100,7 +107,7 @@ export default function KnowledgeMissionPage() {
       <section className="px-6 pb-12">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">Purpose</h2>
-          <p className="text-white/60 leading-relaxed">
+          <p className="text-text-secondary leading-relaxed">
             The Knowledge Mission exists to make AI education accessible,
             practical, and connected to real-world impact. We build knowledge
             objects, lessons, and courses that bridge theory and practice —
@@ -138,10 +145,12 @@ export default function KnowledgeMissionPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
+                className="bg-bg-secondary border border-border-primary rounded-xl p-6"
               >
                 <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-white/50">{item.description}</p>
+                <p className="text-sm text-text-primary/50">
+                  {item.description}
+                </p>
               </div>
             ))}
           </div>
@@ -157,12 +166,14 @@ export default function KnowledgeMissionPage() {
               {stats.recentEvidence.map((e) => (
                 <div
                   key={e.id}
-                  className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-start gap-3"
+                  className="bg-bg-secondary border border-border-primary rounded-xl p-4 flex items-start gap-3"
                 >
                   <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
                   <div>
-                    <p className="text-sm text-white/80">{e.description}</p>
-                    <p className="text-xs text-white/40 mt-1">
+                    <p className="text-sm text-text-primary/80">
+                      {e.description}
+                    </p>
+                    <p className="text-xs text-text-tertiary mt-1">
                       {new Date(e.timestamp).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
@@ -174,8 +185,8 @@ export default function KnowledgeMissionPage() {
               ))}
             </div>
           ) : (
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <p className="text-white/50 text-sm">
+            <div className="bg-bg-secondary border border-border-primary rounded-xl p-6">
+              <p className="text-text-primary/50 text-sm">
                 No institutional activity recorded yet. Knowledge objects and
                 lessons will appear here once created and published.
               </p>
@@ -194,7 +205,7 @@ export default function KnowledgeMissionPage() {
               className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Learn</div>
-              <div className="text-sm text-white/50">
+              <div className="text-sm text-text-primary/50">
                 Start with our foundational courses
               </div>
             </Link>
@@ -203,7 +214,7 @@ export default function KnowledgeMissionPage() {
               className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Contribute</div>
-              <div className="text-sm text-white/50">
+              <div className="text-sm text-text-primary/50">
                 Create knowledge objects for the community
               </div>
             </Link>
@@ -212,13 +223,14 @@ export default function KnowledgeMissionPage() {
               className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Research</div>
-              <div className="text-sm text-white/50">
+              <div className="text-sm text-text-primary/50">
                 Explore foundational AI research
               </div>
             </Link>
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

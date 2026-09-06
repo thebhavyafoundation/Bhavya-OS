@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export default function CommunityMissionPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-white">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
+      <SiteHeader />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -16,7 +19,7 @@ export default function CommunityMissionPage() {
               Community Mission
             </h1>
           </div>
-          <p className="text-xl text-white/60 max-w-2xl">
+          <p className="text-xl text-text-secondary max-w-2xl">
             Empowering young people, women, schools, and communities through
             education, leadership, and participation.
           </p>
@@ -27,7 +30,7 @@ export default function CommunityMissionPage() {
       <section className="px-6 pb-12">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">Purpose</h2>
-          <p className="text-white/60 leading-relaxed">
+          <p className="text-text-secondary leading-relaxed">
             The Community Mission exists to ensure that Bhavya Foundation&apos;s
             work creates genuine, lasting impact in the communities it serves.
             We believe that sustainable change comes from empowering people —
@@ -65,7 +68,7 @@ export default function CommunityMissionPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-white/5 border border-white/10 rounded-xl p-6"
+                className="bg-bg-secondary border border-border-primary rounded-xl p-6"
               >
                 <h3 className="font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-white/50">{item.description}</p>
@@ -79,7 +82,7 @@ export default function CommunityMissionPage() {
       <section className="px-6 pb-12">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-4">Impact</h2>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+          <div className="bg-bg-secondary border border-border-primary rounded-xl p-6">
             <p className="text-white/50 text-sm">
               The Community Mission tracks: communities engaged, volunteers
               active, schools partnered, and programs delivered. Impact is
@@ -125,6 +128,7 @@ export default function CommunityMissionPage() {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

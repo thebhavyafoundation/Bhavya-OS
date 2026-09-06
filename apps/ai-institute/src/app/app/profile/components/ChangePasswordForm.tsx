@@ -45,14 +45,14 @@ export function ChangePasswordForm() {
   }
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl bg-[#0d1410] border border-[#1a3a2a]/40 text-[#f5f1e6] text-sm placeholder-[#8a7359]/40 focus:outline-none focus:border-[#c9a227]/40 transition-colors";
+    "w-full px-4 py-3 rounded-xl bg-bg-secondary border border-border-primary text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-border-focus transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label
           htmlFor="current-password"
-          className="block text-xs font-medium text-[#8a7359] mb-1.5"
+          className="block text-xs font-medium text-text-tertiary mb-1.5"
         >
           Current password
         </label>
@@ -69,7 +69,7 @@ export function ChangePasswordForm() {
       <div>
         <label
           htmlFor="new-password"
-          className="block text-xs font-medium text-[#8a7359] mb-1.5"
+          className="block text-xs font-medium text-text-tertiary mb-1.5"
         >
           New password
         </label>
@@ -98,7 +98,7 @@ export function ChangePasswordForm() {
       <button
         type="submit"
         disabled={loading}
-        className="px-5 py-2.5 rounded-xl bg-[#c9a227] text-[#0a0f0d] text-sm font-semibold hover:bg-[#c9a227]/90 transition-colors disabled:opacity-30"
+        className="px-5 py-2.5 rounded-xl bg-accent-gold text-text-primary text-sm font-semibold hover:bg-accent-gold-hover transition-colors disabled:opacity-30"
       >
         {loading ? "Changing…" : "Change password"}
       </button>

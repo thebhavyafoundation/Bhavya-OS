@@ -69,13 +69,13 @@ export default async function VolunteerWorkspacePage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/missions"
-              className="px-4 py-2 rounded-lg bg-[#c9a227] text-[#0a0f0d] text-xs font-semibold hover:bg-[#c9a227]/90 transition-colors"
+              className="px-4 py-2 rounded-lg bg-accent-gold text-text-primary text-xs font-semibold hover:bg-accent-gold-hover transition-colors"
             >
               Explore missions
             </Link>
             <Link
               href="/app/missions"
-              className="px-4 py-2 rounded-lg border border-[#1a3a2a]/40 text-xs text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
+              className="px-4 py-2 rounded-lg border border-border-primary text-xs text-text-tertiary hover:text-text-primary transition-colors"
             >
               My missions
             </Link>

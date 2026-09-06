@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const categories = ["General", "Courses", "Pricing", "Technical"] as const;
 
@@ -100,16 +102,16 @@ const faqs: Record<string, { question: string; answer: string }[]> = {
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-[#1a2a1f] rounded-xl overflow-hidden">
+    <div className="border border-border-primary rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full px-6 py-5 text-left flex items-center justify-between bg-[#111916] hover:bg-[#111916]/80 transition-colors"
+        className="w-full px-6 py-5 text-left flex items-center justify-between bg-bg-secondary hover:bg-bg-secondary/80 transition-colors"
       >
-        <span className="text-base font-medium text-[#f5f1e6] pr-4">
+        <span className="text-base font-medium text-text-primary pr-4">
           {question}
         </span>
         <span
-          className={`text-[#c9a227] text-xl transition-transform duration-300 ${open ? "rotate-45" : ""}`}
+          className={`text-accent-gold text-xl transition-transform duration-300 ${open ? "rotate-45" : ""}`}
         >
           +
         </span>
@@ -123,8 +125,10 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-5 bg-[#111916]">
-              <p className="text-sm text-[#8a7359] leading-relaxed">{answer}</p>
+            <div className="px-6 pb-5 bg-bg-secondary">
+              <p className="text-sm text-text-tertiary leading-relaxed">
+                {answer}
+              </p>
             </div>
           </motion.div>
         )}
@@ -138,13 +142,14 @@ export default function FAQPage() {
 
   return (
     <>
+      <SiteHeader />
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-sm text-[#c9a227] font-medium mb-4 tracking-widest uppercase"
+            className="text-sm text-accent-gold font-medium mb-4 tracking-widest uppercase"
           >
             Help Center
           </motion.p>
@@ -152,7 +157,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold text-[#f5f1e6] mb-6"
+            className="text-5xl md:text-6xl font-bold text-text-primary mb-6"
           >
             Frequently Asked Questions
           </motion.h1>
@@ -160,7 +165,7 @@ export default function FAQPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-[#8a7359] max-w-2xl mx-auto"
+            className="text-lg text-text-tertiary max-w-2xl mx-auto"
           >
             Everything you need to know about Bhavya AI Institute. Can&apos;t
             find your answer? Contact us below.
@@ -182,8 +187,8 @@ export default function FAQPage() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   activeCategory === cat
-                    ? "bg-[#c9a227] text-[#0a0f0d]"
-                    : "bg-[#111916] text-[#8a7359] hover:text-[#f5f1e6] border border-[#1a2a1f]"
+                    ? "bg-accent-gold text-text-primary"
+                    : "bg-bg-secondary text-text-tertiary hover:text-text-primary border border-border-primary"
                 }`}
               >
                 {cat}
@@ -214,23 +219,23 @@ export default function FAQPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-[#f5f1e6] mb-4">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
               Still Have Questions?
             </h2>
-            <p className="text-[#8a7359] mb-8">
+            <p className="text-text-tertiary mb-8">
               Our team is here to help. Reach out and we&apos;ll get back to you
               within 24 hours.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:support@bhavya.ai"
-                className="px-8 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
+                className="px-8 py-4 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold-hover transition-colors"
               >
                 Contact Support
               </a>
               <Link
                 href="/assessment"
-                className="px-8 py-4 text-base font-medium text-[#f5f1e6] border border-[#1a2a1f] rounded-lg hover:border-[#1a3a2a] transition-colors"
+                className="px-8 py-4 text-base font-medium text-text-primary border border-border-primary rounded-lg hover:border-border-focus transition-colors"
               >
                 Start Free
               </Link>
@@ -238,6 +243,7 @@ export default function FAQPage() {
           </motion.div>
         </div>
       </section>
+      <SiteFooter />
     </>
   );
 }

@@ -8,6 +8,8 @@ import {
   FlaskConical,
   ArrowRight,
 } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Get Involved — Bhavya Foundation",
@@ -21,7 +23,7 @@ const paths = [
     name: "Learn",
     text: "Browse free courses, lessons, and learning paths. Create an account to track progress and earn credentials.",
     icon: BookOpen,
-    color: "#3b82f6",
+    color: "var(--color-accent-gold)",
     href: "/courses",
     cta: "Browse courses",
   },
@@ -30,7 +32,7 @@ const paths = [
     name: "Volunteer",
     text: "Give time and skill to forest, knowledge, heritage, and community missions.",
     icon: HeartHandshake,
-    color: "#22c55e",
+    color: "var(--color-forest-500)",
     href: "/volunteer",
     cta: "Volunteer pathways",
   },
@@ -39,7 +41,7 @@ const paths = [
     name: "Donate",
     text: "Fund restoration, education, and preservation. Confirmed donations are recorded and receipted by the institution.",
     icon: Heart,
-    color: "#c9a227",
+    color: "var(--color-accent-gold)",
     href: "/donate",
     cta: "Donate",
   },
@@ -48,7 +50,7 @@ const paths = [
     name: "Join the community",
     text: "Connect with learners, volunteers, mentors, and researchers across all four missions.",
     icon: Users,
-    color: "#8b5cf6",
+    color: "var(--color-brand-sage)",
     href: "/community",
     cta: "Community",
   },
@@ -57,7 +59,7 @@ const paths = [
     name: "Research",
     text: "Contribute to open research, knowledge objects, and evidence-backed institutional learning.",
     icon: FlaskConical,
-    color: "#f59e0b",
+    color: "var(--color-accent-earth)",
     href: "/research",
     cta: "Research",
   },
@@ -65,11 +67,12 @@ const paths = [
 
 export default function GetInvolvedPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-white">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
+      <SiteHeader />
       <section className="relative pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Get Involved</h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
             One account. Every way to participate. Start anywhere — learning,
             volunteering, donating, researching, or simply belonging.
           </p>
@@ -84,7 +87,7 @@ export default function GetInvolvedPage() {
               <Link
                 key={path.id}
                 href={path.href}
-                className="group block bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all"
+                className="group block bg-bg-secondary border border-border-primary rounded-2xl p-8 hover:border-white/20 transition-all"
               >
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
@@ -93,7 +96,9 @@ export default function GetInvolvedPage() {
                   <Icon size={28} style={{ color: path.color }} />
                 </div>
                 <h2 className="text-2xl font-bold mb-3">{path.name}</h2>
-                <p className="text-white/60 leading-relaxed">{path.text}</p>
+                <p className="text-text-secondary leading-relaxed">
+                  {path.text}
+                </p>
                 <div
                   className="mt-6 flex items-center gap-2 text-sm font-semibold"
                   style={{ color: path.color }}
@@ -109,14 +114,14 @@ export default function GetInvolvedPage() {
 
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-            <p className="text-white/60 text-sm mb-5">
+          <div className="bg-bg-secondary border border-border-primary rounded-2xl p-8 text-center">
+            <p className="text-text-secondary text-sm mb-5">
               New here? Create one Bhavya identity and choose how you want to
               participate — you can hold more than one role.
             </p>
             <Link
               href="/register"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#c9a227] text-[#0a0f0d] text-sm font-semibold hover:bg-[#c9a227]/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-gold text-text-primary text-sm font-semibold hover:bg-accent-gold-hover transition-colors"
             >
               Create account
               <ArrowRight className="w-4 h-4" />
@@ -124,6 +129,7 @@ export default function GetInvolvedPage() {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 }

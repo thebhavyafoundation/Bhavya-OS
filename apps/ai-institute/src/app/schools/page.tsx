@@ -7,7 +7,8 @@ const schools = [
   {
     tag: "foundations",
     name: "School of AI Foundations",
-    description: "Start here. Learn what AI is, how it works, and how to build with it.",
+    description:
+      "Start here. Learn what AI is, how it works, and how to build with it.",
     icon: "Building blocks of AI",
     href: "/courses/ai-foundations",
     courseCount: 1,
@@ -29,7 +30,8 @@ export default function SchoolsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2"
+            <h1
+              className="text-4xl md:text-5xl font-bold tracking-tight mb-2"
               style={{
                 background: "linear-gradient(135deg, #f5f1e6 0%, #c9a227 100%)",
                 WebkitBackgroundClip: "text",
@@ -58,7 +60,7 @@ export default function SchoolsPage() {
               href={school.href}
               className="group block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 hover:bg-white/[0.04] hover:border-[#c9a227]/30 transition-all"
             >
-              <h3 className="text-lg font-semibold text-[#f5f1e6] mb-2 group-hover:text-[#c9a227] transition-colors">
+              <h3 className="text-lg font-semibold text-text-primary mb-2 group-hover:text-accent-gold transition-colors">
                 {school.name}
               </h3>
               <p className="text-sm text-white/40 mb-4">{school.description}</p>
@@ -80,7 +82,8 @@ export default function SchoolsPage() {
           <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
             <div className="w-2 h-2 rounded-full bg-[#c9a227] animate-pulse" />
             <p className="text-sm text-white/40">
-              More schools are being developed. Each school will launch with real courses and real content.
+              More schools are being developed. Each school will launch with
+              real courses and real content.
             </p>
           </div>
         </motion.div>

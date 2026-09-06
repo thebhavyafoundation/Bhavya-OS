@@ -182,7 +182,7 @@ export default function HomePage() {
 
           <motion.p
             className="hero-desc"
-            style={{ color: "rgba(247, 244, 236, 0.85)" }}
+            style={{ color: "var(--color-text-secondary)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
@@ -246,9 +246,11 @@ export default function HomePage() {
               gap: "var(--space-3)",
               padding: "var(--space-4) var(--space-6)",
               borderRadius: "var(--radius-full)",
-              background: "rgba(14, 56, 46, 0.6)",
+              background:
+                "color-mix(in srgb, var(--color-forest-900) 60%, transparent)",
               backdropFilter: "blur(12px)",
-              border: "1px solid rgba(247, 244, 236, 0.15)",
+              border:
+                "1px solid color-mix(in srgb, var(--color-text-inverse) 15%, transparent)",
               color: "var(--color-text-inverse)",
               textDecoration: "none",
               fontSize: "var(--text-sm)",

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TreePine, Brain, Landmark, HeartHandshake } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Missions — Bhavya Foundation",
@@ -13,44 +15,54 @@ const missions = [
     id: "forest",
     name: "Forest Mission",
     slug: "/missions/forest",
-    purpose: "Restore ecosystems, protect biodiversity, and conserve water through long-term ecological stewardship.",
+    purpose:
+      "Restore ecosystems, protect biodiversity, and conserve water through long-term ecological stewardship.",
     icon: TreePine,
-    color: "#22c55e",
+    color: "var(--color-forest-500)",
+    colorBg: "var(--color-forest-500)",
   },
   {
     id: "knowledge",
     name: "Knowledge Mission",
     slug: "/missions/knowledge",
-    purpose: "Open education, AI literacy, research, digital libraries, and practical learning for everyone.",
+    purpose:
+      "Open education, AI literacy, research, digital libraries, and practical learning for everyone.",
     icon: Brain,
-    color: "#3b82f6",
+    color: "var(--color-accent-gold)",
+    colorBg: "var(--color-accent-gold)",
   },
   {
     id: "heritage",
     name: "Heritage Mission",
     slug: "/missions/heritage",
-    purpose: "Document, preserve, and promote traditional knowledge, architecture, history, arts, and living heritage.",
+    purpose:
+      "Document, preserve, and promote traditional knowledge, architecture, history, arts, and living heritage.",
     icon: Landmark,
-    color: "#f59e0b",
+    color: "var(--color-accent-earth)",
+    colorBg: "var(--color-accent-earth)",
   },
   {
     id: "community",
     name: "Community Mission",
     slug: "/missions/community",
-    purpose: "Empower young people, women, schools, and communities through education, leadership, and participation.",
+    purpose:
+      "Empower young people, women, schools, and communities through education, leadership, and participation.",
     icon: HeartHandshake,
-    color: "#8b5cf6",
+    color: "var(--color-brand-sage)",
+    colorBg: "var(--color-brand-sage)",
   },
 ];
 
 export default function MissionsPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-white">
+    <div className="min-h-screen bg-bg-primary text-text-primary">
+      <SiteHeader />
+
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Missions</h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
             Four permanent missions. One institution. Every action connects to
             something larger.
           </p>
@@ -66,23 +78,30 @@ export default function MissionsPage() {
               <Link
                 key={mission.id}
                 href={mission.slug}
-                className="group block bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all"
+                className="group block glass border border-border-primary rounded-2xl p-8 hover:border-border-focus transition-all"
               >
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: mission.color + "20" }}
+                  style={{
+                    backgroundColor: `color-mix(in srgb, ${mission.colorBg} 15%, transparent)`,
+                  }}
                 >
                   <Icon size={28} style={{ color: mission.color }} />
                 </div>
-                <h2 className="text-2xl font-bold mb-3 group-hover:text-white transition-colors">
+                <h2 className="text-2xl font-bold mb-3 text-text-primary group-hover:text-accent-gold transition-colors">
                   {mission.name}
                 </h2>
-                <p className="text-white/60 leading-relaxed">
+                <p className="text-text-secondary leading-relaxed">
                   {mission.purpose}
                 </p>
-                <div className="mt-6 flex items-center gap-2 text-sm font-semibold" style={{ color: mission.color }}>
+                <div
+                  className="mt-6 flex items-center gap-2 text-sm font-semibold"
+                  style={{ color: mission.color }}
+                >
                   Learn more
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                 </div>
               </Link>
             );
@@ -93,21 +112,23 @@ export default function MissionsPage() {
       {/* Constitution Reference */}
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-            <p className="text-white/40 text-sm mb-2">
+          <div className="glass border border-border-primary rounded-2xl p-8 text-center">
+            <p className="text-text-tertiary text-sm mb-2">
               These four missions are defined in the{" "}
-              <span className="text-white/60 font-semibold">
+              <span className="text-text-secondary font-semibold">
                 Bhavya Foundation Constitution
               </span>
               , Article 2.
             </p>
-            <p className="text-white/30 text-xs">
-              They are permanent. They do not change with trends, funding cycles,
-              or leadership transitions.
+            <p className="text-text-muted text-xs">
+              They are permanent. They do not change with trends, funding
+              cycles, or leadership transitions.
             </p>
           </div>
         </div>
       </section>
+
+      <SiteFooter />
     </div>
   );
 }

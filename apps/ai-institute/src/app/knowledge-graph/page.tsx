@@ -553,7 +553,7 @@ export default function KnowledgeGraphPage() {
                   onClick={() => setFilter(f)}
                   className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
                     filter === f
-                      ? "bg-[#1a3a2a] text-[#4ade80]"
+                      ? "bg-bg-tertiary text-accent-green-light"
                       : "bg-white/[0.04] text-white/40 hover:bg-white/[0.08]"
                   }`}
                 >
@@ -613,7 +613,7 @@ export default function KnowledgeGraphPage() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h2 className="text-xl font-bold text-[#f5f1e6]">
+                      <h2 className="text-xl font-bold text-text-primary">
                         {selectedNode.label}
                       </h2>
                       <p className="text-xs text-white/30 mt-1">
@@ -718,7 +718,7 @@ export default function KnowledgeGraphPage() {
 
                   <Link
                     href={`/concepts/${selectedNode.id}`}
-                    className="block w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-[#1a3a2a] text-[#4ade80] hover:bg-[#1a3a2a]/80 transition-colors"
+                    className="block w-full text-center py-2.5 text-sm font-semibold rounded-lg bg-bg-tertiary text-accent-green-light hover:bg-bg-tertiary/80 transition-colors"
                   >
                     Learn This Concept →
                   </Link>

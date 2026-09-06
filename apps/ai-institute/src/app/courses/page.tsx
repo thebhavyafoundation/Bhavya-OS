@@ -101,7 +101,7 @@ export default async function CoursesPage() {
               <div key={course.id} className="flex items-center gap-3">
                 <Link
                   href={`/courses/${course.id}`}
-                  className="rounded-lg bg-[#1a3a2a] px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a2a]/80 transition"
+                  className="rounded-lg bg-bg-tertiary px-4 py-2 text-sm font-medium text-text-primary hover:bg-bg-tertiary/80 transition"
                 >
                   {course.title}
                 </Link>

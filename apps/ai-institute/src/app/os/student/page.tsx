@@ -102,7 +102,7 @@ export default async function StudentWorkspacePage() {
         </Link>
         <Link
           href="/app/learn"
-          className="px-5 py-2.5 rounded-xl border border-[#1a3a2a]/40 text-sm text-[#8a7359] hover:text-[#f5f1e6] transition-colors"
+          className="px-5 py-2.5 rounded-xl border border-border-primary text-sm text-text-tertiary hover:text-text-primary transition-colors"
         >
           Learning dashboard
         </Link>

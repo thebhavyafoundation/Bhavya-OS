@@ -6,7 +6,10 @@ import {
   getNextLesson,
   getPreviousLesson,
 } from "@/data/academy-courses";
-import { getLessonContent, getPublishedLessonContent } from "@/data/academy-lessons";
+import {
+  getLessonContent,
+  getPublishedLessonContent,
+} from "@/data/academy-lessons";
 
 export async function generateMetadata({
   params,
@@ -34,7 +37,8 @@ export default async function LessonPage({
 
   const { course, module: mod, lessonIndex } = result;
   const lesson = mod.lessons[lessonIndex];
-  const content = (await getPublishedLessonContent(lessonId)) || getLessonContent(lessonId);
+  const content =
+    (await getPublishedLessonContent(lessonId)) || getLessonContent(lessonId);
 
   const next = getNextLesson(id, lessonId);
   const prev = getPreviousLesson(id, lessonId);
@@ -56,7 +60,7 @@ export default async function LessonPage({
         </nav>
 
         {/* Module context */}
-        <div className="mt-4 rounded-lg bg-[#1a3a2a]/5 px-4 py-2 text-xs text-[#1a3a2a]/60">
+        <div className="mt-4 rounded-lg bg-bg-tertiary/5 px-4 py-2 text-xs text-text-tertiary/60">
           Module {mod.order}: {mod.title} · Lesson {lesson.order} of{" "}
           {mod.lessons.length}
         </div>
@@ -75,7 +79,9 @@ export default async function LessonPage({
             {/* Reading */}
             <div
               className="lesson-content"
-              dangerouslySetInnerHTML={{ __html: markdownToHtml(content.reading) }}
+              dangerouslySetInnerHTML={{
+                __html: markdownToHtml(content.reading),
+              }}
             />
 
             {/* Key Concepts */}
@@ -93,7 +99,7 @@ export default async function LessonPage({
                       <h3 className="font-semibold text-[#1a3a2a]">
                         {concept.term}
                       </h3>
-                      <p className="mt-1 text-sm text-[#1a3a2a]/60">
+                      <p className="mt-1 text-sm text-text-tertiary/60">
                         {concept.definition}
                       </p>
                     </div>
@@ -107,10 +113,13 @@ export default async function LessonPage({
               <section className="mt-12">
                 <h2 className="text-2xl font-bold text-[#1a3a2a]">Examples</h2>
                 {content.examples.map((ex) => (
-                  <div key={ex.title} className="mt-4 rounded-xl border border-[#1a3a2a]/10 bg-white p-6">
+                  <div
+                    key={ex.title}
+                    className="mt-4 rounded-xl border border-[#1a3a2a]/10 bg-white p-6"
+                  >
                     <h3 className="font-semibold text-[#1a3a2a]">{ex.title}</h3>
                     {ex.code && (
-                      <pre className="mt-3 rounded-lg bg-[#1a3a2a]/5 p-4 text-sm overflow-x-auto">
+                      <pre className="mt-3 rounded-lg bg-bg-tertiary/5 p-4 text-sm overflow-x-auto">
                         <code>{ex.code}</code>
                       </pre>
                     )}
@@ -125,9 +134,7 @@ export default async function LessonPage({
             {/* Exercises */}
             {content.exercises.length > 0 && (
               <section className="mt-12">
-                <h2 className="text-2xl font-bold text-[#1a3a2a]">
-                  Exercises
-                </h2>
+                <h2 className="text-2xl font-bold text-[#1a3a2a]">Exercises</h2>
                 <div className="mt-4 space-y-4">
                   {content.exercises.map((ex) => (
                     <div
@@ -135,7 +142,7 @@ export default async function LessonPage({
                       className="rounded-xl border border-[#c9a227]/30 bg-[#c9a227]/5 p-6"
                     >
                       <div className="flex items-center gap-2">
-                        <span className="rounded-full bg-[#c9a227]/20 px-2.5 py-0.5 text-xs font-medium text-[#8a7359]">
+                        <span className="rounded-full bg-accent-gold/20 px-2.5 py-0.5 text-xs font-medium text-text-tertiary">
                           {ex.type}
                         </span>
                         <h3 className="font-semibold text-[#1a3a2a]">
@@ -162,7 +169,7 @@ export default async function LessonPage({
                   {content.reflection.followUp.map((q: string, i: number) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-sm text-[#1a3a2a]/60"
+                      className="flex items-start gap-2 text-sm text-text-tertiary/60"
                     >
                       <span className="mt-0.5 text-[#c9a227]">→</span>
                       {q}
@@ -174,7 +181,7 @@ export default async function LessonPage({
           </article>
         ) : (
           <div className="mt-10 rounded-xl border border-[#1a3a2a]/10 bg-white p-8 text-center">
-            <p className="text-[#1a3a2a]/60">
+            <p className="text-text-tertiary/60">
               Lesson content is being prepared. Check back soon.
             </p>
           </div>
@@ -196,14 +203,14 @@ export default async function LessonPage({
           {next ? (
             <Link
               href={`/courses/${next.courseId}/lessons/${next.lessonId}`}
-              className="rounded-lg bg-[#1a3a2a] px-6 py-3 text-sm font-medium text-white hover:bg-[#1a3a2a]/80 transition"
+              className="rounded-lg bg-bg-tertiary px-6 py-3 text-sm font-medium text-text-primary hover:bg-bg-tertiary/80 transition"
             >
               Next Lesson →
             </Link>
           ) : (
             <Link
               href={`/courses/${course.id}`}
-              className="rounded-lg bg-[#c9a227] px-6 py-3 text-sm font-medium text-white hover:bg-[#c9a227]/80 transition"
+              className="rounded-lg bg-[#c9a227] px-6 py-3 text-sm font-medium text-text-primary hover:bg-[#c9a227]/80 transition"
             >
               Course Complete ✓
             </Link>
@@ -231,8 +238,10 @@ function markdownToHtml(md: string): string {
       const trimmed = block.trim();
       if (!trimmed) return "";
 
-      if (trimmed.startsWith("## ")) return `<h2>${escapeHtml(trimmed.slice(3))}</h2>`;
-      if (trimmed.startsWith("### ")) return `<h3>${escapeHtml(trimmed.slice(4))}</h3>`;
+      if (trimmed.startsWith("## "))
+        return `<h2>${escapeHtml(trimmed.slice(3))}</h2>`;
+      if (trimmed.startsWith("### "))
+        return `<h3>${escapeHtml(trimmed.slice(4))}</h3>`;
 
       if (trimmed.startsWith("```")) {
         const code = trimmed.slice(3, -3).replace(/^\w+\n/, "");
@@ -242,7 +251,10 @@ function markdownToHtml(md: string): string {
       if (trimmed.startsWith("- ")) {
         const items = trimmed
           .split("\n")
-          .map((l) => `<li>${escapeHtml(l.slice(2)).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}</li>`)
+          .map(
+            (l) =>
+              `<li>${escapeHtml(l.slice(2)).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}</li>`,
+          )
           .join("");
         return `<ul>${items}</ul>`;
       }
@@ -251,7 +263,10 @@ function markdownToHtml(md: string): string {
         const items = trimmed
           .split("\n")
           .map((l) => {
-            const text = escapeHtml(l.replace(/^\d+\.\s*/, "")).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+            const text = escapeHtml(l.replace(/^\d+\.\s*/, "")).replace(
+              /\*\*(.*?)\*\*/g,
+              "<strong>$1</strong>",
+            );
             return `<li>${text}</li>`;
           })
           .join("");
@@ -282,7 +297,9 @@ function markdownToHtml(md: string): string {
         }
       }
 
-      return `<p>${escapeHtml(trimmed).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br/>")}</p>`;
+      return `<p>${escapeHtml(trimmed)
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n/g, "<br/>")}</p>`;
     })
     .join("\n");
 }
