@@ -1,9 +1,9 @@
 # CANONICAL ROUTE MAP
 
-**Date:** 2026-08-11
+**Date:** 2026-09-06
 **Status:** ACTIVE
 **Owner:** Bhavya Foundation Architecture
-**Last updated:** 2026-08-11
+**Last updated:** 2026-09-06
 **Applies To:** All routes in `apps/ai-institute`
 
 ---
@@ -31,6 +31,45 @@ BHAVYA FOUNDATION (product)
 
 ---
 
+## Navigation Structure
+
+Public navigation is organized into four institutional groups:
+
+### Explore
+
+- Missions (`/missions`)
+- Nature (`/forest`)
+- Knowledge (`/knowledge`)
+- Heritage (`/heritage`)
+- Community (`/community`)
+
+### Learn
+
+- Open Knowledge (`/knowledge`)
+- Research (`/research`)
+- Library (`/knowledge/library`)
+- Public Resources (`/resources`)
+
+### Participate
+
+- Volunteer (`/volunteer`)
+- Become a Student (`/register?intent=student`)
+- Teach (`/register?intent=educator`)
+- Research With Us (`/register?intent=researcher`)
+- Partner (`/get-involved`)
+- Donate (`/donate`)
+
+### About
+
+- Our Story (`/about`)
+- Vision (`/mission`)
+- Governance (`/transparency`)
+- Constitution (`/mission#constitution`)
+- Reports (`/transparency`)
+- Contact (`/contact`)
+
+---
+
 ## Public Routes — Four Pillars
 
 | Route                      | Purpose                    | Audience | Auth | Pillar    |
@@ -53,6 +92,7 @@ BHAVYA FOUNDATION (product)
 | `/donate`                  | Donation page              | Public   | No   | —         |
 | `/volunteer`               | Volunteer pathways         | Public   | No   | community |
 | `/get-involved`            | Participation paths        | Public   | No   | —         |
+| `/contact`                 | Institutional contact      | Public   | No   | —         |
 | `/forbidden`               | Not-permitted notice       | Public   | No   | —         |
 | `/privacy`                 | Privacy policy             | Public   | No   | —         |
 | `/accessibility`           | Accessibility statement    | Public   | No   | —         |
@@ -99,6 +139,7 @@ BHAVYA FOUNDATION (product)
 | `/os/knowledge`     | Knowledge management | Admin     | Yes  |
 | `/os/memory`        | Memory               | Admin     | Yes  |
 | `/os/search`        | Search               | Admin     | Yes  |
+| `/os/videos`        | Video management     | Admin     | Yes  |
 | `/os/student`       | Student workspace    | Student   | Yes  |
 | `/os/volunteer`     | Volunteer workspace  | Volunteer | Yes  |
 | `/os/donor`         | Donor workspace      | Donor     | Yes  |

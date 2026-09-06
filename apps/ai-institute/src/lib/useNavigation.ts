@@ -6,6 +6,7 @@
  * - filtered items by role
  * - active state (prefix matching)
  * - breadcrumbs
+ * - dropdown groups for public navigation
  */
 
 "use client";
@@ -24,6 +25,13 @@ export interface NavItem {
   icon: string;
   roles?: Role[];
   pillar?: string;
+  description?: string;
+}
+
+export interface NavGroup {
+  id: string;
+  label: string;
+  items: NavItem[];
 }
 
 export interface OsSection {
@@ -37,8 +45,14 @@ export interface Breadcrumb {
   href: string;
 }
 
+export interface FooterColumn {
+  title: string;
+  links: { label: string; href: string }[];
+}
+
 /**
  * Get navigation items for a given layer, filtered by user roles.
+ * For public layer, returns flat items from the groups (for mobile/simple nav).
  */
 export function getNavItems(layer: NavLayer, userRoles?: Role[]): NavItem[] {
   const layerConfig = registry.layers[layer];
@@ -51,8 +65,26 @@ export function getNavItems(layer: NavLayer, userRoles?: Role[]): NavItem[] {
     return filterByRoles(allItems, userRoles);
   }
 
+  if (layer === "public") {
+    // Public uses groups, flatten all items
+    const groups = (layerConfig as { groups?: NavGroup[] }).groups || [];
+    const allItems = groups.flatMap((g) => g.items);
+    // Always include home
+    const homeItem = (layerConfig as { items?: NavItem[] }).items || [];
+    return [...homeItem, ...filterByRoles(allItems, userRoles)];
+  }
+
   const items = (layerConfig as { items?: NavItem[] }).items || [];
   return filterByRoles(items, userRoles);
+}
+
+/**
+ * Get navigation groups for public dropdown menus.
+ */
+export function getPublicNavGroups(): NavGroup[] {
+  const layerConfig = registry.layers.public;
+  if (!layerConfig) return [];
+  return (layerConfig as { groups?: NavGroup[] }).groups || [];
 }
 
 /**
@@ -70,7 +102,7 @@ export function getOsSections(userRoles?: Role[]): OsSection[] {
 /**
  * Get footer columns from the registry.
  */
-export function getFooterColumns() {
+export function getFooterColumns(): FooterColumn[] {
   return registry.footer.columns;
 }
 
@@ -115,7 +147,15 @@ export function computeBreadcrumbs(pathname: string): Breadcrumb[] {
 export function useNavigation(layer: NavLayer, userRoles?: Role[]) {
   const pathname = usePathname();
 
-  const items = useMemo(() => getNavItems(layer, userRoles), [layer, userRoles]);
+  const items = useMemo(
+    () => getNavItems(layer, userRoles),
+    [layer, userRoles],
+  );
+
+  const groups = useMemo(
+    () => (layer === "public" ? getPublicNavGroups() : []),
+    [layer],
+  );
 
   const osSections = useMemo(
     () => (layer === "os" ? getOsSections(userRoles) : []),
@@ -132,5 +172,5 @@ export function useNavigation(layer: NavLayer, userRoles?: Role[]) {
     [pathname],
   );
 
-  return { items, osSections, breadcrumbs, isActive, pathname };
+  return { items, groups, osSections, breadcrumbs, isActive, pathname };
 }

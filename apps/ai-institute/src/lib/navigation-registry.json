@@ -1,7 +1,7 @@
 {
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Bhavya Foundation — Canonical Navigation Registry",
-  "lastUpdated": "2026-09-01",
+  "lastUpdated": "2026-09-06",
   "waveO": {
     "note": "Wave O orphan classification. Deferred routes are NOT in canonical navigation.",
     "redirected": [
@@ -63,68 +63,185 @@
   },
   "layers": {
     "public": {
-      "description": "Public institutional experience — no auth required",
-      "items": [
-        { "id": "home", "label": "Home", "href": "/", "icon": "Home" },
+      "description": "Public institutional experience — institution-first navigation",
+      "groups": [
         {
-          "id": "missions",
-          "label": "Missions",
-          "href": "/missions",
-          "icon": "Target"
+          "id": "explore",
+          "label": "Explore",
+          "items": [
+            {
+              "id": "missions",
+              "label": "Missions",
+              "href": "/missions",
+              "icon": "Target",
+              "description": "Our four institutional missions"
+            },
+            {
+              "id": "forest",
+              "label": "Nature",
+              "href": "/forest",
+              "icon": "TreePine",
+              "pillar": "forest",
+              "description": "Restoring ecosystems and biodiversity"
+            },
+            {
+              "id": "knowledge",
+              "label": "Knowledge",
+              "href": "/knowledge",
+              "icon": "Brain",
+              "pillar": "knowledge",
+              "description": "Open research and learning"
+            },
+            {
+              "id": "heritage",
+              "label": "Heritage",
+              "href": "/heritage",
+              "icon": "Landmark",
+              "pillar": "heritage",
+              "description": "Preserving cultural memory"
+            },
+            {
+              "id": "community",
+              "label": "Community",
+              "href": "/community",
+              "icon": "HeartHandshake",
+              "pillar": "community",
+              "description": "Empowering people and participation"
+            }
+          ]
         },
         {
-          "id": "forest",
-          "label": "Forest",
-          "href": "/missions/forest",
-          "icon": "TreePine",
-          "pillar": "forest"
+          "id": "learn",
+          "label": "Learn",
+          "items": [
+            {
+              "id": "open-knowledge",
+              "label": "Open Knowledge",
+              "href": "/knowledge",
+              "icon": "BookOpen",
+              "description": "Freely accessible research and resources"
+            },
+            {
+              "id": "research",
+              "label": "Research",
+              "href": "/research",
+              "icon": "FlaskConical",
+              "description": "Institutional research and publications"
+            },
+            {
+              "id": "library",
+              "label": "Library",
+              "href": "/knowledge/library",
+              "icon": "Library",
+              "description": "Digital library and archives"
+            },
+            {
+              "id": "resources",
+              "label": "Public Resources",
+              "href": "/resources",
+              "icon": "Download",
+              "description": "Open educational materials"
+            }
+          ]
         },
         {
-          "id": "knowledge",
-          "label": "Knowledge",
-          "href": "/missions/knowledge",
-          "icon": "Brain",
-          "pillar": "knowledge"
+          "id": "participate",
+          "label": "Participate",
+          "items": [
+            {
+              "id": "volunteer",
+              "label": "Volunteer",
+              "href": "/volunteer",
+              "icon": "HeartHandshake",
+              "description": "Contribute your time and skills"
+            },
+            {
+              "id": "become-student",
+              "label": "Become a Student",
+              "href": "/register?intent=student",
+              "icon": "GraduationCap",
+              "description": "Begin your learning journey"
+            },
+            {
+              "id": "teach",
+              "label": "Teach",
+              "href": "/register?intent=educator",
+              "icon": "Users",
+              "description": "Share your knowledge with others"
+            },
+            {
+              "id": "research-with-us",
+              "label": "Research With Us",
+              "href": "/register?intent=researcher",
+              "icon": "FlaskConical",
+              "description": "Collaborate on institutional research"
+            },
+            {
+              "id": "partner",
+              "label": "Partner",
+              "href": "/get-involved",
+              "icon": "Handshake",
+              "description": "Institutional partnerships"
+            },
+            {
+              "id": "donate",
+              "label": "Donate",
+              "href": "/donate",
+              "icon": "Heart",
+              "description": "Support our mission"
+            }
+          ]
         },
         {
-          "id": "heritage",
-          "label": "Heritage",
-          "href": "/missions/heritage",
-          "icon": "Landmark",
-          "pillar": "heritage"
-        },
-        {
-          "id": "community",
-          "label": "Community",
-          "href": "/missions/community",
-          "icon": "HeartHandshake",
-          "pillar": "community"
-        },
-        {
-          "id": "courses",
-          "label": "Courses",
-          "href": "/courses",
-          "icon": "GraduationCap"
-        },
-        {
-          "id": "learning-paths",
-          "label": "Learning Paths",
-          "href": "/learning-paths",
-          "icon": "Route"
-        },
-        {
-          "id": "research",
-          "label": "Research",
-          "href": "/research",
-          "icon": "FlaskConical"
-        },
-        {
-          "id": "impact",
-          "label": "Impact",
-          "href": "/impact",
-          "icon": "TrendingUp"
+          "id": "about",
+          "label": "About",
+          "items": [
+            {
+              "id": "our-story",
+              "label": "Our Story",
+              "href": "/about",
+              "icon": "BookOpen",
+              "description": "The institution's journey"
+            },
+            {
+              "id": "vision",
+              "label": "Vision",
+              "href": "/mission",
+              "icon": "Eye",
+              "description": "Our constitutional purpose"
+            },
+            {
+              "id": "governance",
+              "label": "Governance",
+              "href": "/transparency",
+              "icon": "Scale",
+              "description": "Transparency and accountability"
+            },
+            {
+              "id": "constitution",
+              "label": "Constitution",
+              "href": "/mission#constitution",
+              "icon": "FileText",
+              "description": "Institutional governing principles"
+            },
+            {
+              "id": "reports",
+              "label": "Reports",
+              "href": "/transparency",
+              "icon": "BarChart3",
+              "description": "Impact and financial reports"
+            },
+            {
+              "id": "contact",
+              "label": "Contact",
+              "href": "/contact",
+              "icon": "Mail",
+              "description": "Reach the institution"
+            }
+          ]
         }
-      ]
+      ],
+      "items": [{ "id": "home", "label": "Home", "href": "/", "icon": "Home" }]
     },
     "app": {
       "description": "Authenticated personal experience — role-aware",
@@ -366,46 +483,46 @@
       {
         "title": "Missions",
         "links": [
-          { "label": "Forest", "href": "/missions/forest" },
-          { "label": "Knowledge", "href": "/missions/knowledge" },
-          { "label": "Heritage", "href": "/missions/heritage" },
-          { "label": "Community", "href": "/missions/community" }
+          { "label": "Nature", "href": "/forest" },
+          { "label": "Knowledge", "href": "/knowledge" },
+          { "label": "Heritage", "href": "/heritage" },
+          { "label": "Community", "href": "/community" }
         ]
       },
       {
         "title": "Learn",
         "links": [
-          { "label": "Courses", "href": "/courses" },
-          { "label": "Learning Paths", "href": "/learning-paths" },
+          { "label": "Open Knowledge", "href": "/knowledge" },
           { "label": "Research", "href": "/research" },
-          { "label": "Impact", "href": "/impact" },
-          { "label": "Library", "href": "/library" }
-        ]
-      },
-      {
-        "title": "Governance",
-        "links": [
-          { "label": "About", "href": "/about" },
-          { "label": "Transparency", "href": "/transparency" },
-          { "label": "Contributing", "href": "/contributing" },
-          { "label": "Accessibility", "href": "/accessibility" }
+          { "label": "Library", "href": "/knowledge/library" },
+          { "label": "Public Resources", "href": "/resources" }
         ]
       },
       {
         "title": "Participate",
         "links": [
-          { "label": "Get Involved", "href": "/get-involved" },
           { "label": "Volunteer", "href": "/volunteer" },
-          { "label": "Donate", "href": "/donate" },
-          { "label": "Community", "href": "/community" }
+          { "label": "Become a Student", "href": "/register?intent=student" },
+          { "label": "Teach", "href": "/register?intent=educator" },
+          { "label": "Donate", "href": "/donate" }
         ]
       },
       {
-        "title": "Platform",
+        "title": "About",
         "links": [
-          { "label": "Bhavya OS", "href": "/os" },
-          { "label": "API Explorer", "href": "/os/api-explorer" },
-          { "label": "Sign In", "href": "/login" }
+          { "label": "Our Story", "href": "/about" },
+          { "label": "Vision", "href": "/mission" },
+          { "label": "Governance", "href": "/transparency" },
+          { "label": "Contact", "href": "/contact" }
+        ]
+      },
+      {
+        "title": "Connect",
+        "links": [
+          { "label": "Sign In", "href": "/login" },
+          { "label": "Create Account", "href": "/register" },
+          { "label": "Privacy", "href": "/privacy" },
+          { "label": "Accessibility", "href": "/accessibility" }
         ]
       }
     ]
