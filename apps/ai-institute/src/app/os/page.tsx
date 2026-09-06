@@ -380,11 +380,8 @@ export default async function OSPage() {
         {/* ====== WORKSPACE GRID ====== */}
         <div style={{ marginBottom: "var(--space-10)" }}>
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(5, 1fr)",
-              gap: "var(--space-3)",
-            }}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+            style={{ gap: "var(--space-3)" }}
           >
             {workspaces.map((ws) => (
               <Link
@@ -469,11 +466,8 @@ export default async function OSPage() {
             </span>
           </div>
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "var(--space-3)",
-            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            style={{ gap: "var(--space-3)" }}
           >
             {[
               {
@@ -557,12 +551,8 @@ export default async function OSPage() {
 
         {/* ====== PROJECT LOCATIONS + RECENT ACTIVITY ====== */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--space-6)",
-            marginBottom: "var(--space-10)",
-          }}
+          className="grid grid-cols-1 lg:grid-cols-2"
+          style={{ gap: "var(--space-6)", marginBottom: "var(--space-10)" }}
         >
           {/* Project Locations */}
           <div
@@ -758,11 +748,8 @@ export default async function OSPage() {
             </p>
           </div>
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "var(--space-3)",
-            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            style={{ gap: "var(--space-3)" }}
           >
             {workspaces.slice(0, 9).map((ws) => (
               <Link
@@ -815,12 +802,8 @@ export default async function OSPage() {
 
         {/* ====== RECENT DOCUMENTS + QUOTE ====== */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--space-6)",
-            marginBottom: "var(--space-10)",
-          }}
+          className="grid grid-cols-1 lg:grid-cols-2"
+          style={{ gap: "var(--space-6)", marginBottom: "var(--space-10)" }}
         >
           {/* Recent Documents */}
           <div
@@ -978,11 +961,8 @@ export default async function OSPage() {
         {/* ====== DOMAIN STATUS ====== */}
         <div style={{ marginBottom: "var(--space-10)" }}>
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "var(--space-3)",
-            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            style={{ gap: "var(--space-3)" }}
           >
             {[
               {

@@ -18,9 +18,8 @@ export function SiteFooter() {
       <div className="container">
         {/* Top section — logo + tagline */}
         <div
+          className="flex flex-col sm:flex-row sm:justify-between"
           style={{
-            display: "flex",
-            justifyContent: "space-between",
             alignItems: "flex-start",
             marginBottom: "var(--space-12)",
             paddingBottom: "var(--space-8)",
@@ -66,9 +65,8 @@ export function SiteFooter() {
 
         {/* Columns grid — from registry */}
         <div
+          className="footer-grid"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
             gap: "var(--space-8)",
             marginBottom: "var(--space-12)",
           }}
