@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const values = [
   {
     title: "Excellence",
     description:
-      "We pursue the highest standards in AI education, research, and mentorship. Every course, every lesson, every interaction reflects our commitment to quality.",
+      "We pursue the highest standards in education, research, and mentorship. Every course, every lesson, every interaction reflects our commitment to quality.",
     icon: "✦",
   },
   {
     title: "Accessibility",
     description:
-      "AI education should be available to everyone, regardless of background, location, or financial means. We design for inclusion from the ground up.",
+      "Education should be available to everyone, regardless of background, location, or financial means. We design for inclusion from the ground up.",
     icon: "◇",
   },
   {
@@ -25,21 +27,24 @@ const values = [
   {
     title: "Innovation",
     description:
-      "We push the boundaries of what AI education can be. From interactive labs to AI mentors, we pioneer new approaches to learning.",
+      "We push the boundaries of what education can be. From interactive labs to AI mentors, we pioneer new approaches to learning.",
     icon: "◈",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <SiteHeader />
+
+      {/* ====== HERO ====== */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-sm text-[#c9a227] font-medium mb-4 tracking-widest uppercase"
+            className="editorial-label"
           >
             About Us
           </motion.p>
@@ -47,22 +52,29 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold text-[#f5f1e6] mb-6"
+            className="editorial-heading"
+            style={{
+              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
+              marginTop: "var(--space-4)",
+              marginBottom: "var(--space-6)",
+            }}
           >
-            About Bhavya AI Institute
+            About Bhavya Foundation
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-[#8a7359] max-w-2xl mx-auto"
+            className="editorial-lead"
+            style={{ maxWidth: "640px", margin: "0 auto" }}
           >
-            A 10-year mission to become the global benchmark for AI education.
-            Not another course platform. A lasting institution.
+            A multi-decade mission to build one of the world&apos;s most trusted
+            public institutions. Not another platform. A lasting institution.
           </motion.p>
         </div>
       </section>
 
+      {/* ====== MISSION ====== */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -73,32 +85,76 @@ export default function AboutPage() {
             className="grid md:grid-cols-2 gap-12 items-center"
           >
             <div>
-              <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-                Our Mission
-              </p>
-              <h2 className="text-3xl font-bold text-[#f5f1e6] mb-6">
-                Democratize AI Education for Everyone
+              <p className="editorial-label">Our Mission</p>
+              <h2
+                className="editorial-heading"
+                style={{
+                  fontSize: "var(--text-3xl)",
+                  marginTop: "var(--space-4)",
+                  marginBottom: "var(--space-6)",
+                }}
+              >
+                Restore Nature. Advance Knowledge. Preserve Heritage.
               </h2>
-              <p className="text-[#8a7359] leading-relaxed mb-4">
-                Our mission is to democratize AI education, making exceptional
-                learning accessible to anyone with curiosity and determination.
-                We believe that understanding AI is not a luxury — it is a
-                necessity for the 21st century.
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                  marginBottom: "var(--space-4)",
+                }}
+              >
+                Our mission is to build an institution that restores ecosystems,
+                advances open knowledge, preserves cultural heritage, and
+                empowers communities — guided by a constitution that binds us to
+                long-term impact.
               </p>
-              <p className="text-[#8a7359] leading-relaxed">
-                Through rigorous curriculum, hands-on labs, and personalized
-                mentorship, we transform learners into practitioners,
-                researchers, and leaders who will shape the future of artificial
-                intelligence.
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                }}
+              >
+                Through forest restoration, open education, heritage
+                documentation, and community programs, we work for decades — not
+                quarters — to create lasting institutional value.
               </p>
             </div>
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-[#1a3a2a]/40 to-[#0a0f0d] border border-[#1a2a1f] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-6xl font-bold text-[#c9a227] mb-2">
-                    10
+              <div
+                style={{
+                  aspectRatio: "1/1",
+                  borderRadius: "var(--radius-2xl)",
+                  background:
+                    "linear-gradient(135deg, var(--color-forest-800) 0%, var(--color-forest-950) 100%)",
+                  border: "1px solid var(--color-border-primary)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-7xl)",
+                      fontWeight: 400,
+                      color: "var(--color-accent-gold)",
+                      lineHeight: 1,
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    4
                   </div>
-                  <div className="text-sm text-[#8a7359]">Year Mission</div>
+                  <div
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-tertiary)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                    }}
+                  >
+                    Missions. One Purpose.
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,7 +162,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-[#111916]/50">
+      {/* ====== STORY ====== */}
+      <section className="py-20 px-6 section-ivory">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -114,10 +171,15 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Our Story
-            </p>
-            <h2 className="text-3xl font-bold text-[#f5f1e6] mb-8">
+            <p className="editorial-label">Our Story</p>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "var(--text-3xl)",
+                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-8)",
+              }}
+            >
               The Founding Story
             </h2>
           </motion.div>
@@ -128,18 +190,28 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <p className="text-[#8a7359] leading-relaxed mb-4">
-                Bhavya AI Institute was born from a simple observation: the
-                world&apos;s most transformative technology — artificial
-                intelligence — was being taught as a series of disconnected
-                tutorials and bootcamps. There was no institution dedicated to
-                building deep, lasting understanding.
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                  marginBottom: "var(--space-4)",
+                }}
+              >
+                Bhavya Foundation was born from a simple observation: the
+                world&apos;s most important work — restoring forests, preserving
+                heritage, advancing knowledge — was being done in fragments,
+                without an institution to unify and sustain it.
               </p>
-              <p className="text-[#8a7359] leading-relaxed">
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                }}
+              >
                 In 2026, the Bhavya Foundation set out to change that. We
-                envisioned an institution that would produce not just
-                practitioners, but researchers, educators, and leaders who truly
-                understand AI at its core.
+                envisioned an institution that would produce not just individual
+                projects, but lasting institutional value — guided by a
+                constitution that binds us to decades of impact.
               </p>
             </motion.div>
             <motion.div
@@ -148,21 +220,33 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <p className="text-[#8a7359] leading-relaxed mb-4">
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                  marginBottom: "var(--space-4)",
+                }}
+              >
                 Every decision we make is guided by one principle: build
-                institutional value that compounds over decades. Our curriculum
-                is built on foundational research. Our governance ensures
-                independence. Our mission demands excellence.
+                institutional value that compounds over decades. Our forest
+                restoration work, our open curriculum, our heritage
+                documentation — all of it compounds.
               </p>
-              <p className="text-[#8a7359] leading-relaxed">
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                }}
+              >
                 This is not a startup. This is an institution — built to last,
-                built to lead, and built for the next decade of AI.
+                built to lead, and built for generations to come.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* ====== VALUES ====== */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -172,10 +256,14 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <p className="text-sm text-[#c9a227] font-medium mb-4 tracking-wide uppercase">
-              Core Values
-            </p>
-            <h2 className="text-3xl font-bold text-[#f5f1e6]">
+            <p className="editorial-label">Core Values</p>
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "var(--text-3xl)",
+                marginTop: "var(--space-4)",
+              }}
+            >
               What We Stand For
             </h2>
           </motion.div>
@@ -187,15 +275,48 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 rounded-xl border border-[#1a2a1f] bg-[#111916] hover:border-[#c9a227]/30 transition-colors"
+                style={{
+                  padding: "var(--space-6)",
+                  borderRadius: "var(--radius-lg)",
+                  border: "1px solid var(--color-border-primary)",
+                  background: "var(--color-surface)",
+                  transition: "all var(--duration-normal) var(--ease-out)",
+                }}
               >
-                <div className="w-12 h-12 rounded-lg bg-[#1a3a2a]/30 flex items-center justify-center text-[#c9a227] text-xl mb-4">
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: "var(--radius-md)",
+                    background: "var(--color-surface-forest-light)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "var(--color-accent-gold)",
+                    fontSize: "var(--text-xl)",
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
                   {value.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-[#f5f1e6] mb-3">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
                   {value.title}
                 </h3>
-                <p className="text-sm text-[#8a7359] leading-relaxed">
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
                   {value.description}
                 </p>
               </motion.div>
@@ -204,6 +325,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ====== CTA ====== */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div
@@ -212,30 +334,45 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl font-bold text-[#f5f1e6] mb-6">
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "var(--text-4xl)",
+                marginBottom: "var(--space-6)",
+              }}
+            >
               Join Our Community
             </h2>
-            <p className="text-[#8a7359] mb-10 text-lg">
-              A community of learners, researchers, and practitioners
-              building the future of AI together.
+            <p
+              style={{
+                color: "var(--color-text-secondary)",
+                marginBottom: "var(--space-10)",
+                fontSize: "var(--text-lg)",
+              }}
+            >
+              A community of learners, researchers, and practitioners building
+              the future together.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/assessment"
-                className="px-8 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
-              >
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--space-4)",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Link href="/register" className="btn btn-gold">
                 Begin Your Journey
               </Link>
-              <Link
-                href="/schools"
-                className="px-8 py-4 text-base font-medium text-[#f5f1e6] border border-[#1a2a1f] rounded-lg hover:border-[#1a3a2a] transition-colors"
-              >
-                Explore Schools
+              <Link href="/missions" className="btn btn-secondary">
+                Explore Missions
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
-    </>
+
+      <SiteFooter />
+    </div>
   );
 }

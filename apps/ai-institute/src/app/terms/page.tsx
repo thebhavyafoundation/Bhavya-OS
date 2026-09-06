@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const sections = [
   {
     title: "Acceptance of Terms",
     content:
-      "By accessing or using Bhavya AI Institute's platform, courses, labs, and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our services. We reserve the right to modify these terms at any time, with material changes communicated at least 30 days before taking effect. Continued use after changes take effect constitutes acceptance.",
+      "By accessing or using Bhavya Foundation's platform, courses, labs, and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, you may not use our services. We reserve the right to modify these terms at any time, with material changes communicated at least 30 days before taking effect. Continued use after changes take effect constitutes acceptance.",
   },
   {
     title: "User Accounts",
@@ -16,7 +18,7 @@ const sections = [
   {
     title: "Content and Intellectual Property",
     content:
-      "All course content, materials, and resources provided through Bhavya AI Institute are owned by us or our licensors and are protected by intellectual property laws. You may access and use content for personal, non-commercial educational purposes. You may not reproduce, distribute, modify, create derivative works of, publicly display, or commercially exploit any content without express written permission. Course completion certificates are granted for personal use and professional advancement.",
+      "All course content, materials, and resources provided through Bhavya Foundation are owned by us or our licensors and are protected by intellectual property laws. You may access and use content for personal, non-commercial educational purposes. You may not reproduce, distribute, modify, create derivative works of, publicly display, or commercially exploit any content without express written permission. Course completion certificates are granted for personal use and professional advancement.",
   },
   {
     title: "User Conduct",
@@ -26,7 +28,7 @@ const sections = [
   {
     title: "Disclaimers and Limitation of Liability",
     content:
-      "Our platform and content are provided 'as is' without warranties of any kind. While we strive for accuracy, we do not warrant that content is error-free or complete. Bhavya AI Institute shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the platform. Our total liability shall not exceed the amount paid by you in the 12 months preceding the claim. Educational outcomes depend on individual effort and circumstances.",
+      "Our platform and content are provided 'as is' without warranties of any kind. While we strive for accuracy, we do not warrant that content is error-free or complete. Bhavya Foundation shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the platform. Our total liability shall not exceed the amount paid by you in the 12 months preceding the claim. Educational outcomes depend on individual effort and circumstances.",
   },
   {
     title: "Termination",
@@ -47,14 +49,16 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <>
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <SiteHeader />
+
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-sm text-[#c9a227] font-medium mb-4 tracking-widest uppercase"
+            className="editorial-label"
           >
             Legal
           </motion.p>
@@ -62,7 +66,12 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold text-[#f5f1e6] mb-6"
+            className="editorial-heading"
+            style={{
+              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
+              marginTop: "var(--space-4)",
+              marginBottom: "var(--space-6)",
+            }}
           >
             Terms of Service
           </motion.h1>
@@ -70,7 +79,7 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[#8a7359]"
+            style={{ color: "var(--color-text-tertiary)" }}
           >
             Last updated: August 7, 2026
           </motion.p>
@@ -83,11 +92,15 @@ export default function TermsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-[#8a7359] leading-relaxed mb-12"
+            style={{
+              color: "var(--color-text-secondary)",
+              lineHeight: 1.7,
+              marginBottom: "var(--space-12)",
+            }}
           >
-            Welcome to Bhavya AI Institute. These Terms of Service govern your
-            use of our platform, courses, and services. Please read them
-            carefully before using our services.
+            Welcome to Bhavya Foundation. These Terms of Service govern your use
+            of our platform, courses, and services. Please read them carefully
+            before using our services.
           </motion.p>
 
           <div className="space-y-10">
@@ -99,10 +112,24 @@ export default function TermsPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
               >
-                <h2 className="text-xl font-bold text-[#f5f1e6] mb-4">
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
                   {section.title}
                 </h2>
-                <p className="text-sm text-[#8a7359] leading-relaxed">
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
                   {section.content}
                 </p>
               </motion.div>
@@ -119,22 +146,35 @@ export default function TermsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-bold text-[#f5f1e6] mb-4">
+            <h2
+              className="editorial-heading"
+              style={{
+                fontSize: "var(--text-2xl)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
               Questions About These Terms?
             </h2>
-            <p className="text-[#8a7359] mb-8">
+            <p
+              style={{
+                color: "var(--color-text-secondary)",
+                marginBottom: "var(--space-8)",
+              }}
+            >
               Contact our legal team if you have questions about these Terms of
               Service.
             </p>
             <a
-              href="mailto:legal@bhavya.ai"
-              className="inline-block px-8 py-4 text-base font-semibold bg-[#c9a227] text-[#0a0f0d] rounded-lg hover:bg-[#c9a227]/90 transition-colors"
+              href="mailto:legal@bhavyafoundation.org"
+              className="btn btn-gold"
             >
               Contact Legal Team
             </a>
           </motion.div>
         </div>
       </section>
-    </>
+
+      <SiteFooter />
+    </div>
   );
 }

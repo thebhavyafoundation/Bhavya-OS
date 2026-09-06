@@ -6,27 +6,29 @@ import {
   getNodeBySlug,
   getPrerequisites,
   getRelated,
-  knowledgeGraph,
   getNodesByCategory,
 } from "@/data/knowledge-graph";
 import { useState } from "react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
+/* Category colors — mapped to brand-compliant palette */
 const categoryColors: Record<string, string> = {
-  fundamentals: "#22c55e",
-  "machine-learning": "#3b82f6",
-  "deep-learning": "#8b5cf6",
-  nlp: "#06b6d4",
-  "computer-vision": "#f59e0b",
-  "generative-ai": "#ec4899",
-  llm: "#6366f1",
-  agents: "#ef4444",
-  rag: "#14b8a6",
-  embeddings: "#a855f7",
-  infrastructure: "#64748b",
-  deployment: "#0ea5e9",
-  ethics: "#f97316",
-  product: "#e11d48",
-  research: "#7c3aed",
+  fundamentals: "var(--color-accent-green)",
+  "machine-learning": "var(--color-status-info)",
+  "deep-learning": "var(--color-viz-sage)",
+  nlp: "var(--color-viz-sage-light)",
+  "computer-vision": "var(--color-accent-gold)",
+  "generative-ai": "var(--color-viz-gold-light)",
+  llm: "var(--color-accent-earth)",
+  agents: "var(--color-status-error)",
+  rag: "var(--color-viz-earth-light)",
+  embeddings: "var(--color-viz-forest-light)",
+  infrastructure: "var(--color-text-tertiary)",
+  deployment: "var(--color-status-info)",
+  ethics: "var(--color-accent-gold)",
+  product: "var(--color-accent-earth)",
+  research: "var(--color-viz-sage)",
 };
 
 export default function ConceptPage() {
@@ -39,16 +41,39 @@ export default function ConceptPage() {
 
   if (!node) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Concept Not Found</h1>
-          <Link
-            href="/knowledge-graph"
-            className="text-[#22c55e] hover:underline"
-          >
-            ← Back to Knowledge Graph
-          </Link>
+      <div className="min-h-screen bg-[var(--color-bg-primary)]">
+        <SiteHeader />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "60vh",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-2xl)",
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Concept Not Found
+            </h1>
+            <Link
+              href="/knowledge-graph"
+              style={{
+                color: "var(--color-accent-gold)",
+                textDecoration: "none",
+              }}
+            >
+              ← Back to Knowledge Graph
+            </Link>
+          </div>
         </div>
+        <SiteFooter />
       </div>
     );
   }
@@ -60,34 +85,87 @@ export default function ConceptPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <SiteHeader />
+
       {/* Header */}
-      <div className="border-b border-white/10 px-6 py-8">
+      <div
+        style={{
+          borderBottom: "1px solid var(--color-border-primary)",
+          padding: "var(--space-8) var(--space-6)",
+        }}
+      >
         <div className="max-w-4xl mx-auto">
           <Link
             href="/knowledge-graph"
-            className="text-sm text-white/50 hover:text-white/70 mb-4 inline-block"
+            style={{
+              fontSize: "var(--text-sm)",
+              color: "var(--color-text-muted)",
+              textDecoration: "none",
+              display: "inline-block",
+              marginBottom: "var(--space-4)",
+            }}
           >
             ← Back to Knowledge Graph
           </Link>
-          <div className="flex items-start gap-4">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "var(--space-4)",
+            }}
+          >
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold"
               style={{
-                backgroundColor: categoryColors[node.category] + "30",
+                width: 48,
+                height: 48,
+                borderRadius: "var(--radius-lg)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "var(--text-lg)",
+                fontWeight: 700,
+                background: `color-mix(in srgb, ${categoryColors[node.category]} 15%, transparent)`,
                 color: categoryColors[node.category],
               }}
             >
               {node.title.charAt(0)}
             </div>
             <div>
-              <h1 className="text-3xl font-bold mb-2">{node.title}</h1>
-              <p className="text-white/60 text-lg">{node.description}</p>
-              <div className="flex items-center gap-3 mt-3">
+              <h1
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-3xl)",
+                  fontWeight: 400,
+                  color: "var(--color-text-primary)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
+                {node.title}
+              </h1>
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  fontSize: "var(--text-lg)",
+                }}
+              >
+                {node.description}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--space-3)",
+                  marginTop: "var(--space-3)",
+                }}
+              >
                 <span
-                  className="text-xs px-2 py-0.5 rounded-full font-medium"
                   style={{
-                    backgroundColor: categoryColors[node.category] + "20",
+                    fontSize: "var(--text-xs)",
+                    padding: "2px 8px",
+                    borderRadius: "var(--radius-full)",
+                    fontWeight: 500,
+                    background: `color-mix(in srgb, ${categoryColors[node.category]} 15%, transparent)`,
                     color: categoryColors[node.category],
                   }}
                 >
@@ -96,7 +174,12 @@ export default function ConceptPage() {
                     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
                     .join(" ")}
                 </span>
-                <span className="text-xs text-white/40">
+                <span
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    color: "var(--color-text-muted)",
+                  }}
+                >
                   {node.estimatedMinutes} min read
                 </span>
               </div>
@@ -107,7 +190,16 @@ export default function ConceptPage() {
 
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 bg-white/5 rounded-lg p-1">
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--space-1)",
+            marginBottom: "var(--space-8)",
+            background: "var(--color-surface-2)",
+            borderRadius: "var(--radius-md)",
+            padding: "var(--space-1)",
+          }}
+        >
           {(
             [
               "overview",
@@ -120,11 +212,23 @@ export default function ConceptPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                activeTab === tab
-                  ? "bg-white text-black"
-                  : "text-white/60 hover:text-white"
-              }`}
+              style={{
+                flex: 1,
+                padding: "var(--space-2) var(--space-4)",
+                borderRadius: "var(--radius-sm)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 500,
+                border: "none",
+                cursor: "pointer",
+                transition: "all var(--duration-fast) ease",
+                background:
+                  activeTab === tab ? "var(--color-surface)" : "transparent",
+                color:
+                  activeTab === tab
+                    ? "var(--color-text-primary)"
+                    : "var(--color-text-muted)",
+                boxShadow: activeTab === tab ? "var(--shadow-sm)" : "none",
+              }}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
@@ -134,59 +238,160 @@ export default function ConceptPage() {
         {/* Tab Content */}
         {activeTab === "overview" && (
           <div className="space-y-8">
-            {/* Why It Exists */}
             <section>
-              <h2 className="text-xl font-bold mb-3">Why It Exists</h2>
-              <p className="text-white/60 leading-relaxed">
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  color: "var(--color-text-primary)",
+                  marginBottom: "var(--space-3)",
+                }}
+              >
+                Why It Exists
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                }}
+              >
                 {node.whyItExists}
               </p>
             </section>
 
-            {/* History */}
             <section>
-              <h2 className="text-xl font-bold mb-3">History</h2>
-              <p className="text-white/60 leading-relaxed">{node.history}</p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  color: "var(--color-text-primary)",
+                  marginBottom: "var(--space-3)",
+                }}
+              >
+                History
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-text-secondary)",
+                  lineHeight: 1.7,
+                }}
+              >
+                {node.history}
+              </p>
             </section>
 
-            {/* Real-World Use Cases */}
             <section>
-              <h2 className="text-xl font-bold mb-3">Real-World Use Cases</h2>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  color: "var(--color-text-primary)",
+                  marginBottom: "var(--space-3)",
+                }}
+              >
+                Real-World Use Cases
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {node.realWorldUseCases.map((use, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 bg-white/5 rounded-lg p-4"
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "var(--space-3)",
+                      background: "var(--color-surface)",
+                      borderRadius: "var(--radius-md)",
+                      padding: "var(--space-4)",
+                      border: "1px solid var(--color-border-secondary)",
+                    }}
                   >
-                    <span className="text-[#22c55e] mt-0.5">▸</span>
-                    <span className="text-white/70 text-sm">{use}</span>
+                    <span
+                      style={{
+                        color: "var(--color-accent-gold)",
+                        marginTop: 2,
+                      }}
+                    >
+                      ▸
+                    </span>
+                    <span
+                      style={{
+                        color: "var(--color-text-secondary)",
+                        fontSize: "var(--text-sm)",
+                      }}
+                    >
+                      {use}
+                    </span>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* Prerequisites */}
             {prerequisites.length > 0 && (
               <section>
-                <h2 className="text-xl font-bold mb-3">Prerequisites</h2>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
+                  Prerequisites
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {prerequisites.map((pre) => (
                     <Link
                       key={pre.id}
                       href={`/concepts/${pre.slug}`}
-                      className="flex items-center gap-3 bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "var(--space-3)",
+                        background: "var(--color-surface)",
+                        borderRadius: "var(--radius-md)",
+                        padding: "var(--space-4)",
+                        border: "1px solid var(--color-border-secondary)",
+                        textDecoration: "none",
+                        color: "inherit",
+                        transition: "all var(--duration-fast) ease",
+                      }}
                     >
                       <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold"
                         style={{
-                          backgroundColor: categoryColors[pre.category] + "30",
+                          width: 32,
+                          height: 32,
+                          borderRadius: "var(--radius-sm)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "var(--text-xs)",
+                          fontWeight: 700,
+                          background: `color-mix(in srgb, ${categoryColors[pre.category]} 15%, transparent)`,
                           color: categoryColors[pre.category],
                         }}
                       >
                         {pre.title.charAt(0)}
                       </div>
                       <div>
-                        <div className="text-sm font-medium">{pre.title}</div>
-                        <div className="text-xs text-white/40">
+                        <div
+                          style={{
+                            fontSize: "var(--text-sm)",
+                            fontWeight: 500,
+                            color: "var(--color-text-primary)",
+                          }}
+                        >
+                          {pre.title}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: "var(--text-xs)",
+                            color: "var(--color-text-muted)",
+                          }}
+                        >
                           {pre.difficulty}
                         </div>
                       </div>
@@ -196,28 +401,68 @@ export default function ConceptPage() {
               </section>
             )}
 
-            {/* Related Concepts */}
             <section>
-              <h2 className="text-xl font-bold mb-3">Related Concepts</h2>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-xl)",
+                  fontWeight: 400,
+                  color: "var(--color-text-primary)",
+                  marginBottom: "var(--space-3)",
+                }}
+              >
+                Related Concepts
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {related.map((rel) => (
                   <Link
                     key={rel.id}
                     href={`/concepts/${rel.slug}`}
-                    className="flex items-center gap-3 bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--space-3)",
+                      background: "var(--color-surface)",
+                      borderRadius: "var(--radius-md)",
+                      padding: "var(--space-4)",
+                      border: "1px solid var(--color-border-secondary)",
+                      textDecoration: "none",
+                      color: "inherit",
+                      transition: "all var(--duration-fast) ease",
+                    }}
                   >
                     <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold"
                       style={{
-                        backgroundColor: categoryColors[rel.category] + "30",
+                        width: 32,
+                        height: 32,
+                        borderRadius: "var(--radius-sm)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "var(--text-xs)",
+                        fontWeight: 700,
+                        background: `color-mix(in srgb, ${categoryColors[rel.category]} 15%, transparent)`,
                         color: categoryColors[rel.category],
                       }}
                     >
                       {rel.title.charAt(0)}
                     </div>
                     <div>
-                      <div className="text-sm font-medium">{rel.title}</div>
-                      <div className="text-xs text-white/40">
+                      <div
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          fontWeight: 500,
+                          color: "var(--color-text-primary)",
+                        }}
+                      >
+                        {rel.title}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "var(--color-text-muted)",
+                        }}
+                      >
                         {rel.difficulty}
                       </div>
                     </div>
@@ -230,16 +475,57 @@ export default function ConceptPage() {
 
         {activeTab === "examples" && (
           <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-4">Examples</h2>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Examples
+            </h2>
             {node.examples.map((ex, i) => (
               <div
                 key={i}
-                className="bg-white/5 rounded-xl p-6 border border-white/10"
+                style={{
+                  background: "var(--color-surface)",
+                  borderRadius: "var(--radius-lg)",
+                  padding: "var(--space-6)",
+                  border: "1px solid var(--color-border-primary)",
+                }}
               >
-                <h3 className="font-semibold mb-2">{ex.title}</h3>
-                <p className="text-white/60 text-sm mb-4">{ex.description}</p>
+                <h3
+                  style={{
+                    fontWeight: 600,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-2)",
+                  }}
+                >
+                  {ex.title}
+                </h3>
+                <p
+                  style={{
+                    color: "var(--color-text-secondary)",
+                    fontSize: "var(--text-sm)",
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
+                  {ex.description}
+                </p>
                 {ex.code && (
-                  <pre className="bg-black/50 rounded-lg p-4 overflow-x-auto text-sm text-[#22c55e] font-mono">
+                  <pre
+                    style={{
+                      background: "var(--color-surface-2)",
+                      borderRadius: "var(--radius-md)",
+                      padding: "var(--space-4)",
+                      overflowX: "auto",
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-accent-green)",
+                      fontFamily: "var(--font-mono)",
+                    }}
+                  >
                     {ex.code}
                   </pre>
                 )}
@@ -250,28 +536,90 @@ export default function ConceptPage() {
 
         {activeTab === "mistakes" && (
           <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-4">Common Mistakes</h2>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Common Mistakes
+            </h2>
             <div className="space-y-3">
               {node.commonMistakes.map((mistake, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 bg-red-500/10 border border-red-500/20 rounded-lg p-4"
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "var(--space-3)",
+                    background: "rgba(192, 57, 43, 0.08)",
+                    border: "1px solid rgba(192, 57, 43, 0.2)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--space-4)",
+                  }}
                 >
-                  <span className="text-red-400 mt-0.5">✗</span>
-                  <span className="text-white/70 text-sm">{mistake}</span>
+                  <span
+                    style={{ color: "var(--color-status-error)", marginTop: 2 }}
+                  >
+                    ✗
+                  </span>
+                  <span
+                    style={{
+                      color: "var(--color-text-secondary)",
+                      fontSize: "var(--text-sm)",
+                    }}
+                  >
+                    {mistake}
+                  </span>
                 </div>
               ))}
             </div>
 
-            <h2 className="text-xl font-bold mt-8 mb-4">Interview Questions</h2>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginTop: "var(--space-8)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Interview Questions
+            </h2>
             <div className="space-y-3">
               {node.interviewQuestions.map((q, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4"
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "var(--space-3)",
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-border-primary)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--space-4)",
+                  }}
                 >
-                  <span className="text-blue-400 mt-0.5">Q</span>
-                  <span className="text-white/70 text-sm">{q}</span>
+                  <span
+                    style={{
+                      color: "var(--color-accent-gold)",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Q
+                  </span>
+                  <span
+                    style={{
+                      color: "var(--color-text-secondary)",
+                      fontSize: "var(--text-sm)",
+                    }}
+                  >
+                    {q}
+                  </span>
                 </div>
               ))}
             </div>
@@ -280,16 +628,50 @@ export default function ConceptPage() {
 
         {activeTab === "interview" && (
           <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-4">Interview Questions</h2>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Interview Questions
+            </h2>
             <div className="space-y-3">
               {node.interviewQuestions.map((q, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-border-primary)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--space-5)",
+                  }}
                 >
-                  <div className="flex items-start gap-3">
-                    <span className="text-[#3b82f6] font-bold">{i + 1}</span>
-                    <span className="text-white/80">{q}</span>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "var(--space-3)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "var(--color-accent-gold)",
+                        fontWeight: 700,
+                      }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span
+                      style={{
+                        color: "var(--color-text-primary)",
+                      }}
+                    >
+                      {q}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -299,24 +681,63 @@ export default function ConceptPage() {
 
         {activeTab === "glossary" && (
           <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-4">Key Terms</h2>
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              Key Terms
+            </h2>
             <div className="space-y-3">
               {node.glossary.map((term, i) => (
                 <div
                   key={i}
-                  className="bg-white/5 border border-white/10 rounded-lg p-5"
+                  style={{
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-border-primary)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--space-5)",
+                  }}
                 >
-                  <dt className="font-semibold text-[#22c55e] mb-1">
+                  <dt
+                    style={{
+                      fontWeight: 600,
+                      color: "var(--color-accent-gold)",
+                      marginBottom: "var(--space-1)",
+                    }}
+                  >
                     {term.term}
                   </dt>
-                  <dd className="text-white/60 text-sm">{term.definition}</dd>
+                  <dd
+                    style={{
+                      color: "var(--color-text-secondary)",
+                      fontSize: "var(--text-sm)",
+                    }}
+                  >
+                    {term.definition}
+                  </dd>
                 </div>
               ))}
             </div>
 
             {node.references.length > 0 && (
               <>
-                <h2 className="text-xl font-bold mt-8 mb-4">References</h2>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginTop: "var(--space-8)",
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
+                  References
+                </h2>
                 <div className="space-y-3">
                   {node.references.map((ref, i) => (
                     <a
@@ -324,13 +745,41 @@ export default function ConceptPage() {
                       href={ref.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block bg-white/5 border border-white/10 rounded-lg p-5 hover:bg-white/10 transition-colors"
+                      style={{
+                        display: "block",
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border-primary)",
+                        borderRadius: "var(--radius-md)",
+                        padding: "var(--space-5)",
+                        textDecoration: "none",
+                        color: "inherit",
+                        transition: "all var(--duration-fast) ease",
+                      }}
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-[#22c55e] font-medium">
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <span
+                          style={{
+                            color: "var(--color-accent-gold)",
+                            fontWeight: 500,
+                          }}
+                        >
                           {ref.title}
                         </span>
-                        <span className="text-xs text-white/40 px-2 py-0.5 rounded-full bg-white/10">
+                        <span
+                          style={{
+                            fontSize: "var(--text-xs)",
+                            color: "var(--color-text-muted)",
+                            padding: "2px 8px",
+                            borderRadius: "var(--radius-full)",
+                            background: "var(--color-surface-2)",
+                          }}
+                        >
                           {ref.type}
                         </span>
                       </div>
@@ -344,8 +793,22 @@ export default function ConceptPage() {
 
         {/* Same Category */}
         {sameCategory.length > 0 && (
-          <section className="mt-12 pt-8 border-t border-white/10">
-            <h2 className="text-xl font-bold mb-4">
+          <section
+            style={{
+              marginTop: "var(--space-12)",
+              paddingTop: "var(--space-8)",
+              borderTop: "1px solid var(--color-border-primary)",
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-xl)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
               More in{" "}
               {node.category
                 .split("-")
@@ -357,20 +820,51 @@ export default function ConceptPage() {
                 <Link
                   key={n.id}
                   href={`/concepts/${n.slug}`}
-                  className="flex items-center gap-3 bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-3)",
+                    background: "var(--color-surface)",
+                    borderRadius: "var(--radius-md)",
+                    padding: "var(--space-4)",
+                    border: "1px solid var(--color-border-secondary)",
+                    textDecoration: "none",
+                    color: "inherit",
+                    transition: "all var(--duration-fast) ease",
+                  }}
                 >
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold"
                     style={{
-                      backgroundColor: categoryColors[n.category] + "30",
+                      width: 32,
+                      height: 32,
+                      borderRadius: "var(--radius-sm)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: "var(--text-xs)",
+                      fontWeight: 700,
+                      background: `color-mix(in srgb, ${categoryColors[n.category]} 15%, transparent)`,
                       color: categoryColors[n.category],
                     }}
                   >
                     {n.title.charAt(0)}
                   </div>
                   <div>
-                    <div className="text-sm font-medium">{n.title}</div>
-                    <div className="text-xs text-white/40">
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 500,
+                        color: "var(--color-text-primary)",
+                      }}
+                    >
+                      {n.title}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "var(--color-text-muted)",
+                      }}
+                    >
                       {n.difficulty} • {n.estimatedMinutes} min
                     </div>
                   </div>
@@ -380,6 +874,8 @@ export default function ConceptPage() {
           </section>
         )}
       </div>
+
+      <SiteFooter />
     </div>
   );
 }

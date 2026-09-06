@@ -39,7 +39,9 @@ export default function MentorPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedAgent, setSelectedAgent] = useState<PublicAgent>(publicAgents[0]);
+  const [selectedAgent, setSelectedAgent] = useState<PublicAgent>(
+    publicAgents[0],
+  );
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [nextId, setNextId] = useState(1);
@@ -120,13 +122,36 @@ export default function MentorPage() {
       <div className="flex items-center justify-between mb-6">
         <Link
           href="/dashboard"
-          className="text-sm text-[#8a7359] hover:text-[#c9a227] transition-colors flex items-center gap-2"
+          style={{
+            fontSize: "var(--text-sm)",
+            color: "var(--color-text-tertiary)",
+            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--space-2)",
+            transition: "color var(--duration-fast) ease",
+          }}
         >
-          <span className="text-lg">&larr;</span> Dashboard
+          <span style={{ fontSize: "var(--text-lg)" }}>&larr;</span> Dashboard
         </Link>
         <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
-          <span className="text-xs text-[#4ade80]">Mentors Online</span>
+          <div
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: "var(--color-status-success)",
+              animation: "pulse-soft 2s infinite",
+            }}
+          />
+          <span
+            style={{
+              fontSize: "var(--text-xs)",
+              color: "var(--color-status-success)",
+            }}
+          >
+            Mentors Online
+          </span>
         </div>
       </div>
 
@@ -136,10 +161,23 @@ export default function MentorPage() {
         transition={{ duration: 0.5 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold text-[#f5f1e6] tracking-tight mb-1">
+        <h1
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "var(--text-3xl)",
+            fontWeight: 400,
+            color: "var(--color-text-primary)",
+            marginBottom: "var(--space-1)",
+          }}
+        >
           AI Mentors
         </h1>
-        <p className="text-sm text-[#8a7359]">
+        <p
+          style={{
+            fontSize: "var(--text-sm)",
+            color: "var(--color-text-tertiary)",
+          }}
+        >
           8 specialized mentors for every aspect of your learning journey
         </p>
       </motion.div>
@@ -149,14 +187,45 @@ export default function MentorPage() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-4"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-4)",
+          }}
         >
-          <div className="rounded-2xl border border-[#1a3a2a]/40 bg-[#0d1410] overflow-hidden">
-            <div className="p-4 border-b border-[#1a3a2a]/30">
-              <h3 className="text-[10px] uppercase tracking-[0.15em] text-[#c9a227] font-semibold mb-3">
+          <div
+            style={{
+              borderRadius: "var(--radius-xl)",
+              border: "1px solid var(--color-border-primary)",
+              background: "var(--color-surface)",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                padding: "var(--space-4)",
+                borderBottom: "1px solid var(--color-border-secondary)",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "10px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.15em",
+                  color: "var(--color-text-gold)",
+                  fontWeight: 600,
+                  marginBottom: "var(--space-3)",
+                }}
+              >
                 Choose a Mentor
               </h3>
-              <div className="space-y-2">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-2)",
+                }}
+              >
                 {publicAgents.map((agent) => (
                   <button
                     key={agent.id}
@@ -176,23 +245,60 @@ export default function MentorPage() {
                       ]);
                       setNextId(Date.now() + 1);
                     }}
-                    className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left ${
-                      selectedAgent.id === agent.id
-                        ? "bg-[#1a3a2a]/40 border border-[#1a3a2a]"
-                        : "bg-[#1a3a2a]/10 border border-transparent hover:bg-[#1a3a2a]/20"
-                    }`}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "var(--space-3)",
+                      padding: "var(--space-3)",
+                      borderRadius: "var(--radius-lg)",
+                      border: "none",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      transition: "all var(--duration-fast) ease",
+                      background:
+                        selectedAgent.id === agent.id
+                          ? "var(--color-surface-forest-light)"
+                          : "transparent",
+                      color: "inherit",
+                    }}
                   >
-                    <span className="text-xl">{agent.avatar}</span>
-                    <div className="flex-1 min-w-0">
+                    <span style={{ fontSize: "var(--text-xl)" }}>
+                      {agent.avatar}
+                    </span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-[#f5f1e6]">
+                        <span
+                          style={{
+                            fontSize: "var(--text-xs)",
+                            fontWeight: 600,
+                            color: "var(--color-text-primary)",
+                          }}
+                        >
                           {agent.name}
                         </span>
-                        <span className="text-[9px] text-[#8a7359] bg-[#1a3a2a]/40 px-1.5 py-0.5 rounded">
+                        <span
+                          style={{
+                            fontSize: "9px",
+                            color: "var(--color-text-tertiary)",
+                            background: "var(--color-surface-2)",
+                            padding: "1px 6px",
+                            borderRadius: "var(--radius-sm)",
+                          }}
+                        >
                           {agent.role}
                         </span>
                       </div>
-                      <p className="text-[10px] text-[#8a7359] truncate mt-0.5">
+                      <p
+                        style={{
+                          fontSize: "10px",
+                          color: "var(--color-text-muted)",
+                          marginTop: 2,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
                         {agent.personality}
                       </p>
                     </div>
@@ -201,16 +307,42 @@ export default function MentorPage() {
               </div>
             </div>
 
-            <div className="p-4">
-              <h4 className="text-[10px] uppercase tracking-[0.15em] text-[#c9a227] font-semibold mb-3">
+            <div style={{ padding: "var(--space-4)" }}>
+              <h4
+                style={{
+                  fontSize: "10px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.15em",
+                  color: "var(--color-text-gold)",
+                  fontWeight: 600,
+                  marginBottom: "var(--space-3)",
+                }}
+              >
                 Suggested Topics
               </h4>
-              <div className="space-y-2">
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-2)",
+                }}
+              >
                 {SUGGESTIONS.map((s) => (
                   <button
                     key={s}
                     onClick={() => sendMessage(s)}
-                    className="w-full text-left px-3 py-2.5 rounded-lg bg-[#c9a227]/5 border border-[#c9a227]/15 text-xs text-[#8a7359] hover:bg-[#c9a227]/10 hover:border-[#c9a227]/25 transition-all"
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "10px 12px",
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--color-surface-2)",
+                      border: "1px solid var(--color-border-secondary)",
+                      fontSize: "var(--text-xs)",
+                      color: "var(--color-text-tertiary)",
+                      cursor: "pointer",
+                      transition: "all var(--duration-fast) ease",
+                    }}
                   >
                     {s}
                   </button>
@@ -224,53 +356,165 @@ export default function MentorPage() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="rounded-2xl border border-[#1a3a2a]/40 bg-[#0d1410] overflow-hidden flex flex-col"
+          style={{
+            borderRadius: "var(--radius-xl)",
+            border: "1px solid var(--color-border-primary)",
+            background: "var(--color-surface)",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          <div className="flex items-center gap-3 px-5 py-4 border-b border-[#1a3a2a]/30">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1a3a2a] to-[#1a4a35] flex items-center justify-center text-lg">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-3)",
+              padding: "16px 20px",
+              borderBottom: "1px solid var(--color-border-secondary)",
+            }}
+          >
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: "var(--radius-lg)",
+                background:
+                  "linear-gradient(135deg, var(--color-forest-800), var(--color-forest-700))",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "var(--text-lg)",
+              }}
+            >
               {selectedAgent.avatar}
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-[#f5f1e6]">
+              <h3
+                style={{
+                  fontSize: "var(--text-sm)",
+                  fontWeight: 600,
+                  color: "var(--color-text-primary)",
+                }}
+              >
                 {selectedAgent.name}
               </h3>
-              <p className="text-[11px] text-[#8a7359]/60">
+              <p
+                style={{
+                  fontSize: "11px",
+                  color: "var(--color-text-muted)",
+                }}
+              >
                 {selectedAgent.role} — {selectedAgent.teachingStyle} style
               </p>
             </div>
-            <div className="ml-auto flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
-              <span className="text-[10px] text-[#4ade80]">Active</span>
+            <div
+              style={{
+                marginLeft: "auto",
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <div
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "var(--color-status-success)",
+                  animation: "pulse-soft 2s infinite",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: "10px",
+                  color: "var(--color-status-success)",
+                }}
+              >
+                Active
+              </span>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-5 py-5 space-y-5 max-h-[520px] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#1a3a2a]">
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "var(--space-5)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-5)",
+              maxHeight: 520,
+            }}
+          >
             {messages.map((msg) => (
               <motion.div
                 key={msg.id}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
+                style={{
+                  display: "flex",
+                  gap: "var(--space-3)",
+                  flexDirection: msg.role === "user" ? "row-reverse" : "row",
+                }}
               >
                 {msg.role === "mentor" && (
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a3a2a] to-[#1a4a35] flex items-center justify-center flex-shrink-0 text-base">
-                    {publicAgents.find((a) => a.id === msg.agentId)?.avatar || "🤖"}
+                  <div
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "var(--radius-lg)",
+                      background:
+                        "linear-gradient(135deg, var(--color-forest-800), var(--color-forest-700))",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      fontSize: "var(--text-base)",
+                    }}
+                  >
+                    {publicAgents.find((a) => a.id === msg.agentId)?.avatar ||
+                      "🤖"}
                   </div>
                 )}
                 <div
-                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: msg.role === "user" ? "flex-end" : "flex-start",
+                  }}
                 >
                   <div
-                    className={`max-w-[85%] px-4 py-3 rounded-2xl text-[13px] leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-[#c9a227]/15 text-[#f5f1e6] rounded-tr-sm"
-                        : "bg-[#1a3a2a]/30 text-[#8a7359] rounded-tl-sm"
-                    }`}
+                    style={{
+                      maxWidth: "85%",
+                      padding: "12px 16px",
+                      borderRadius:
+                        msg.role === "user"
+                          ? "16px 16px 4px 16px"
+                          : "16px 16px 16px 4px",
+                      fontSize: "13px",
+                      lineHeight: 1.6,
+                      background:
+                        msg.role === "user"
+                          ? "var(--color-surface-forest-light)"
+                          : "var(--color-surface-2)",
+                      color:
+                        msg.role === "user"
+                          ? "var(--color-text-primary)"
+                          : "var(--color-text-secondary)",
+                    }}
                   >
-                    <p className="whitespace-pre-wrap">{msg.text}</p>
+                    <p style={{ whiteSpace: "pre-wrap" }}>{msg.text}</p>
                   </div>
-                  <span className="text-[10px] text-[#8a7359]/40 mt-1 px-1">
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      color: "var(--color-text-muted)",
+                      marginTop: 4,
+                      padding: "0 4px",
+                    }}
+                  >
                     {msg.time}
                   </span>
                 </div>
@@ -280,26 +524,52 @@ export default function MentorPage() {
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex gap-3"
+                style={{ display: "flex", gap: "var(--space-3)" }}
               >
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#1a3a2a] to-[#1a4a35] flex items-center justify-center flex-shrink-0 text-base">
+                <div
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: "var(--radius-lg)",
+                    background:
+                      "linear-gradient(135deg, var(--color-forest-800), var(--color-forest-700))",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    fontSize: "var(--text-base)",
+                  }}
+                >
                   {selectedAgent.avatar}
                 </div>
-                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-[#1a3a2a]/30">
+                <div
+                  style={{
+                    padding: "12px 16px",
+                    borderRadius: "16px 16px 16px 4px",
+                    background: "var(--color-surface-2)",
+                  }}
+                >
                   <div className="flex gap-1.5 items-center">
+                    {[0, 150, 300].map((delay) => (
+                      <span
+                        key={delay}
+                        style={{
+                          width: 8,
+                          height: 8,
+                          borderRadius: "50%",
+                          background: "var(--color-status-success)",
+                          animation: "bounce 1s infinite",
+                          animationDelay: `${delay}ms`,
+                        }}
+                      />
+                    ))}
                     <span
-                      className="w-2 h-2 rounded-full bg-[#4ade80] animate-bounce"
-                      style={{ animationDelay: "0ms" }}
-                    />
-                    <span
-                      className="w-2 h-2 rounded-full bg-[#4ade80] animate-bounce"
-                      style={{ animationDelay: "150ms" }}
-                    />
-                    <span
-                      className="w-2 h-2 rounded-full bg-[#4ade80] animate-bounce"
-                      style={{ animationDelay: "300ms" }}
-                    />
-                    <span className="text-[10px] text-[#4ade80]/60 ml-1">
+                      style={{
+                        fontSize: "10px",
+                        color: "var(--color-text-muted)",
+                        marginLeft: 4,
+                      }}
+                    >
                       {selectedAgent.name} is thinking...
                     </span>
                   </div>
@@ -309,13 +579,32 @@ export default function MentorPage() {
             <div ref={chatEndRef} />
           </div>
 
-          <div className="px-5 py-3 border-t border-[#1a3a2a]/30">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <div
+            style={{
+              padding: "12px 20px",
+              borderTop: "1px solid var(--color-border-secondary)",
+            }}
+          >
+            <div className="flex gap-2 overflow-x-auto pb-2">
               {QUICK_ACTIONS.map((action) => (
                 <button
                   key={action.label}
                   onClick={() => sendMessage(action.label)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1a3a2a]/20 border border-[#1a3a2a]/40 text-[11px] text-[#8a7359] hover:bg-[#1a3a2a]/40 hover:text-[#f5f1e6] transition-all whitespace-nowrap flex-shrink-0"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "6px 12px",
+                    borderRadius: "var(--radius-full)",
+                    background: "var(--color-surface-2)",
+                    border: "1px solid var(--color-border-secondary)",
+                    fontSize: "11px",
+                    color: "var(--color-text-tertiary)",
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
+                    transition: "all var(--duration-fast) ease",
+                  }}
                 >
                   <span>{action.icon}</span>
                   {action.label}
@@ -324,7 +613,12 @@ export default function MentorPage() {
             </div>
           </div>
 
-          <div className="px-5 py-4 border-t border-[#1a3a2a]/30">
+          <div
+            style={{
+              padding: "16px 20px",
+              borderTop: "1px solid var(--color-border-secondary)",
+            }}
+          >
             <div className="flex items-center gap-3">
               <input
                 ref={inputRef}
@@ -333,15 +627,39 @@ export default function MentorPage() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={`Ask ${selectedAgent.name} anything...`}
-                className="flex-1 px-4 py-3 rounded-xl bg-[#0a0f0d] border border-[#1a3a2a]/40 text-[#f5f1e6] text-sm placeholder-[#8a7359]/40 focus:outline-none focus:border-[#c9a227]/40 transition-colors"
+                style={{
+                  flex: 1,
+                  padding: "12px 16px",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-bg-secondary)",
+                  border: "1px solid var(--color-border-primary)",
+                  color: "var(--color-text-primary)",
+                  fontSize: "var(--text-sm)",
+                  outline: "none",
+                  transition: "border-color var(--duration-fast) ease",
+                }}
               />
               <button
                 onClick={() => sendMessage(input)}
                 disabled={!input.trim()}
-                className="w-11 h-11 rounded-xl bg-gradient-to-r from-[#1a3a2a] to-[#1a4a35] flex items-center justify-center text-[#4ade80] hover:from-[#1a4a35] hover:to-[#1a5a40] transition-all disabled:opacity-30 flex-shrink-0"
+                style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-brand-forest)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--color-text-inverse)",
+                  border: "none",
+                  cursor: "pointer",
+                  flexShrink: 0,
+                  transition: "all var(--duration-fast) ease",
+                  opacity: input.trim() ? 1 : 0.3,
+                }}
               >
                 <svg
-                  className="w-5 h-5"
+                  style={{ width: 20, height: 20 }}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -356,13 +674,29 @@ export default function MentorPage() {
               </button>
             </div>
             <div className="flex items-center justify-center mt-2">
-              <span className="text-[10px] text-[#8a7359]/30">
+              <span
+                style={{ fontSize: "10px", color: "var(--color-text-muted)" }}
+              >
                 Press{" "}
-                <kbd className="px-1.5 py-0.5 rounded bg-[#1a3a2a]/30 text-[#8a7359]/50 font-mono">
+                <kbd
+                  style={{
+                    padding: "2px 6px",
+                    borderRadius: "var(--radius-sm)",
+                    background: "var(--color-surface-2)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
                   ⌘
                 </kbd>{" "}
                 +{" "}
-                <kbd className="px-1.5 py-0.5 rounded bg-[#1a3a2a]/30 text-[#8a7359]/50 font-mono">
+                <kbd
+                  style={{
+                    padding: "2px 6px",
+                    borderRadius: "var(--radius-sm)",
+                    background: "var(--color-surface-2)",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
                   Enter
                 </kbd>{" "}
                 to send

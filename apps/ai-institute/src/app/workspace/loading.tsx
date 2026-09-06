@@ -1,25 +1,110 @@
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-[#0a0f0d] px-6 py-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="animate-pulse space-y-6">
-          <div className="h-8 w-48 bg-[#1a3a2a]/30 rounded-lg" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-24 bg-[#1a3a2a]/15 rounded-xl border border-[#1a3a2a]/20 p-4 space-y-2">
-                <div className="h-3 w-20 bg-[#1a3a2a]/25 rounded" />
-                <div className="h-7 w-12 bg-[#1a3a2a]/30 rounded" />
-                <div className="h-2 w-full bg-[#1a3a2a]/15 rounded-full" />
-              </div>
-            ))}
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 h-48 bg-[#1a3a2a]/10 rounded-xl border border-[#1a3a2a]/20" />
-            <div className="space-y-4">
-              <div className="h-20 bg-[#1a3a2a]/15 rounded-xl border border-[#1a3a2a]/20" />
-              <div className="h-20 bg-[#1a3a2a]/15 rounded-xl border border-[#1a3a2a]/20" />
-              <div className="h-20 bg-[#1a3a2a]/15 rounded-xl border border-[#1a3a2a]/20" />
+    <div
+      className="animate-pulse"
+      style={{
+        minHeight: "100vh",
+        background: "var(--color-bg-primary)",
+        padding: "var(--space-8) var(--space-6)",
+      }}
+    >
+      <div
+        className="max-w-6xl mx-auto"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--space-6)",
+        }}
+      >
+        <div
+          style={{
+            height: 32,
+            width: 192,
+            borderRadius: "var(--radius-md)",
+            background: "var(--color-surface-2)",
+          }}
+        />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "var(--space-4)",
+          }}
+        >
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={i}
+              style={{
+                height: 96,
+                borderRadius: "var(--radius-lg)",
+                border: "1px solid var(--color-border-secondary)",
+                padding: "var(--space-4)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--space-2)",
+                background: "var(--color-surface)",
+              }}
+            >
+              <div
+                style={{
+                  height: 12,
+                  width: 80,
+                  borderRadius: "var(--radius-sm)",
+                  background: "var(--color-surface-2)",
+                }}
+              />
+              <div
+                style={{
+                  height: 28,
+                  width: 48,
+                  borderRadius: "var(--radius-sm)",
+                  background: "var(--color-surface-2)",
+                }}
+              />
+              <div
+                style={{
+                  height: 8,
+                  width: "100%",
+                  borderRadius: "var(--radius-full)",
+                  background: "var(--color-surface-2)",
+                }}
+              />
             </div>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr",
+            gap: "var(--space-6)",
+          }}
+        >
+          <div
+            style={{
+              height: 192,
+              borderRadius: "var(--radius-lg)",
+              border: "1px solid var(--color-border-secondary)",
+              background: "var(--color-surface)",
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-4)",
+            }}
+          >
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  height: 80,
+                  borderRadius: "var(--radius-lg)",
+                  border: "1px solid var(--color-border-secondary)",
+                  background: "var(--color-surface)",
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

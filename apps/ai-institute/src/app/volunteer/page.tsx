@@ -7,6 +7,8 @@ import {
   HeartHandshake,
   ArrowRight,
 } from "lucide-react";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Volunteer — Bhavya Foundation",
@@ -21,7 +23,7 @@ const pathways = [
     slug: "/missions/forest",
     text: "Plantations, biodiversity surveys, water conservation, and long-term stewardship of restoration sites.",
     icon: TreePine,
-    color: "#22c55e",
+    colorToken: "var(--color-accent-green)",
   },
   {
     id: "knowledge",
@@ -29,7 +31,7 @@ const pathways = [
     slug: "/missions/knowledge",
     text: "Mentor learners, review lessons, contribute research, and help keep public knowledge accurate.",
     icon: Brain,
-    color: "#3b82f6",
+    colorToken: "var(--color-status-info)",
   },
   {
     id: "heritage",
@@ -37,7 +39,7 @@ const pathways = [
     slug: "/missions/heritage",
     text: "Document traditions, architecture, and living heritage alongside the communities that carry them.",
     icon: Landmark,
-    color: "#f59e0b",
+    colorToken: "var(--color-accent-gold)",
   },
   {
     id: "community",
@@ -45,7 +47,7 @@ const pathways = [
     slug: "/missions/community",
     text: "Support education programs, events, and local leadership in the communities we serve.",
     icon: HeartHandshake,
-    color: "#8b5cf6",
+    colorToken: "var(--color-accent-earth)",
   },
 ];
 
@@ -75,13 +77,24 @@ const steps = [
 
 export default function VolunteerPage() {
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-white">
+    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+      <SiteHeader />
+
       <section className="relative pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1
+            className="editorial-heading"
+            style={{
+              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
+              marginBottom: "var(--space-6)",
+            }}
+          >
             Volunteer with Bhavya
           </h1>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p
+            className="editorial-lead"
+            style={{ maxWidth: "640px", margin: "0 auto" }}
+          >
             Give your time and skill to work that outlives trends — forests that
             take decades, knowledge that compounds, heritage that must be
             carried.
@@ -97,24 +110,65 @@ export default function VolunteerPage() {
               <Link
                 key={pathway.id}
                 href={pathway.slug}
-                className="group block bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all"
+                className="group block"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-border-primary)",
+                  borderRadius: "var(--radius-xl)",
+                  padding: "var(--space-8)",
+                  textDecoration: "none",
+                  color: "inherit",
+                  transition: "all var(--duration-normal) var(--ease-out)",
+                }}
               >
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: pathway.color + "20" }}
+                  style={{
+                    width: 56,
+                    height: 56,
+                    borderRadius: "var(--radius-lg)",
+                    background: `color-mix(in srgb, ${pathway.colorToken} 15%, transparent)`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "var(--space-6)",
+                    color: pathway.colorToken,
+                  }}
                 >
-                  <Icon size={28} style={{ color: pathway.color }} />
+                  <Icon size={28} />
                 </div>
-                <h2 className="text-2xl font-bold mb-3">{pathway.name}</h2>
-                <p className="text-white/60 leading-relaxed">{pathway.text}</p>
-                <div
-                  className="mt-6 flex items-center gap-2 text-sm font-semibold"
-                  style={{ color: pathway.color }}
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-2xl)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-3)",
+                  }}
                 >
-                  Learn more
-                  <span className="group-hover:translate-x-1 transition-transform">
-                    →
-                  </span>
+                  {pathway.name}
+                </h2>
+                <p
+                  style={{
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {pathway.text}
+                </p>
+                <div
+                  className="group-hover:translate-x-1"
+                  style={{
+                    marginTop: "var(--space-6)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    fontSize: "var(--text-sm)",
+                    fontWeight: 600,
+                    color: "var(--color-accent-gold)",
+                    transition: "transform var(--duration-fast) ease",
+                  }}
+                >
+                  Learn more <ArrowRight size={16} />
                 </div>
               </Link>
             );
@@ -124,34 +178,80 @@ export default function VolunteerPage() {
 
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-10">
+          <h2
+            className="editorial-heading"
+            style={{
+              fontSize: "var(--text-3xl)",
+              textAlign: "center",
+              marginBottom: "var(--space-10)",
+            }}
+          >
             How volunteering works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {steps.map((step) => (
               <div
                 key={step.n}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-border-primary)",
+                  borderRadius: "var(--radius-xl)",
+                  padding: "var(--space-6)",
+                }}
               >
-                <div className="text-sm font-mono text-white/40 mb-3">
+                <div
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    fontFamily: "var(--font-mono)",
+                    color: "var(--color-text-muted)",
+                    marginBottom: "var(--space-3)",
+                  }}
+                >
                   Step {step.n}
                 </div>
-                <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-                <p className="text-sm text-white/60 leading-relaxed mb-5">
+                <h3
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-lg)",
+                    fontWeight: 400,
+                    color: "var(--color-text-primary)",
+                    marginBottom: "var(--space-2)",
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                    marginBottom: "var(--space-5)",
+                  }}
+                >
                   {step.text}
                 </p>
                 <Link
                   href={step.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#c9a227] hover:underline"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    fontSize: "var(--text-sm)",
+                    fontWeight: 600,
+                    color: "var(--color-accent-gold)",
+                    textDecoration: "none",
+                  }}
                 >
                   {step.cta}
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight size={14} />
                 </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      <SiteFooter />
     </div>
   );
 }
