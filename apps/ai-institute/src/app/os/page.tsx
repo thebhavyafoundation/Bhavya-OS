@@ -600,24 +600,7 @@ export default async function OSPage() {
                 position: "relative",
               }}
             >
-              {/* Map placeholder */}
-              <div style={{ textAlign: "center" }}>
-                <Globe
-                  size={32}
-                  style={{
-                    color: "rgba(247, 244, 236, 0.15)",
-                    marginBottom: "var(--space-2)",
-                  }}
-                />
-                <p
-                  style={{
-                    fontSize: "var(--text-xs)",
-                    color: "rgba(247, 244, 236, 0.3)",
-                  }}
-                >
-                  Map integration coming soon
-                </p>
-              </div>
+              {/* Map not yet implemented */}
               {/* Legend */}
               <div
                 style={{

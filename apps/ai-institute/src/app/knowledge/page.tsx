@@ -386,7 +386,7 @@ export default function KnowledgePage() {
               >
                 <a
                   href={card.href}
-                  className="glass"
+                  className="bg-bg-secondary border border-border-primary rounded-xl"
                   style={{
                     padding: "var(--space-8)",
                     borderRadius: "var(--radius-lg)",

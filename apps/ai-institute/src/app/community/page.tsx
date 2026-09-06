@@ -188,7 +188,7 @@ export default function CommunityPage() {
               >
                 <a
                   href={area.href}
-                  className="glass"
+                  className="bg-bg-secondary border border-border-primary rounded-xl"
                   style={{
                     padding: "var(--space-8)",
                     borderRadius: "var(--radius-lg)",
@@ -251,7 +251,10 @@ export default function CommunityPage() {
           background: "var(--color-ivory-200)",
         }}
       >
-        <div className="container" style={{ maxWidth: "700px", textAlign: "center" }}>
+        <div
+          className="container"
+          style={{ maxWidth: "700px", textAlign: "center" }}
+        >
           <Reveal variant="fade">
             <HeartHandshake
               size={40}
@@ -278,8 +281,8 @@ export default function CommunityPage() {
               }}
             >
               Every donation, volunteer hour, and project outcome is publicly
-              documented. We believe trust is built through radical transparency,
-              not marketing claims.
+              documented. We believe trust is built through radical
+              transparency, not marketing claims.
             </p>
           </Reveal>
         </div>

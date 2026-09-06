@@ -17,7 +17,10 @@ export default function OsLayout({ children }: { children: React.ReactNode }) {
       }}
     >
       <OsSidebar />
-      <main className="flex-1 ml-0 lg:ml-64 pt-14 min-h-screen">
+      <main
+        id="main-content"
+        className="flex-1 ml-0 lg:ml-64 pt-14 min-h-screen"
+      >
         {children}
       </main>
     </div>

@@ -99,7 +99,7 @@ export default function AccessibilityPage() {
             {features.map((f) => (
               <div
                 key={f.title}
-                className="glass rounded-lg p-5 flex items-start gap-4"
+                className="bg-bg-secondary border border-border-primary rounded-lg p-5 flex items-start gap-4"
               >
                 <div className="w-9 h-9 rounded-lg bg-accent-gold/10 flex items-center justify-center shrink-0">
                   <f.icon className="w-4.5 h-4.5 text-accent-gold" />
@@ -124,7 +124,7 @@ export default function AccessibilityPage() {
           <p className="text-sm text-text-secondary text-center mb-8">
             Accessibility API configuration reference.
           </p>
-          <div className="glass rounded-lg overflow-hidden">
+          <div className="bg-bg-secondary border border-border-primary rounded-lg overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border-primary">
@@ -165,7 +165,7 @@ export default function AccessibilityPage() {
           </div>
         </div>
 
-        <div className="glass-gold rounded-xl p-8 text-center">
+        <div className="bg-bg-secondary border border-accent-gold/20 rounded-xl p-8 text-center">
           <div className="w-10 h-10 rounded-lg bg-accent-gold/10 flex items-center justify-center mx-auto mb-3">
             <AlertCircle className="w-5 h-5 text-accent-gold" />
           </div>

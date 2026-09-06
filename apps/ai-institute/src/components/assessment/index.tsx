@@ -287,7 +287,7 @@ export function AssessmentEngine() {
             <div className="text-xs text-white/40">Questions Completed</div>
           </div>
           <div className="bg-bg-primary/30 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-purple-500">
+            <div className="text-3xl font-bold text-accent-gold">
               {Math.round(
                 Object.values(timeSpent).reduce((a, b) => a + b, 0) /
                   results.length,
@@ -341,7 +341,7 @@ export function AssessmentEngine() {
                 : question.type === "debugging"
                   ? "bg-red-500/20 text-red-400"
                   : question.type === "design"
-                    ? "bg-purple-500/20 text-purple-500"
+                    ? "bg-accent-gold/20 text-accent-gold"
                     : question.type === "prompt"
                       ? "bg-blue-500/20 text-blue-500"
                       : question.type === "code"

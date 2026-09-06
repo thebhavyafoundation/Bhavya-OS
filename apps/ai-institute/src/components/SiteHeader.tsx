@@ -146,6 +146,9 @@ export function SiteHeader({
               >
                 <button
                   className="nav-link nav-dropdown-trigger"
+                  aria-expanded={activeDropdown === group.id}
+                  aria-haspopup="true"
+                  aria-controls={`menu-${group.id}`}
                   style={
                     isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
                   }
@@ -167,7 +170,9 @@ export function SiteHeader({
                 <AnimatePresence>
                   {activeDropdown === group.id && (
                     <motion.div
+                      id={`menu-${group.id}`}
                       className="nav-dropdown-menu"
+                      role="menu"
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}

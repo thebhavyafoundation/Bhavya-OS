@@ -51,7 +51,7 @@ export default function DonatePage() {
           {impacts.map((item) => (
             <div
               key={item.amount}
-              className="glass rounded-xl p-6 flex items-start gap-4"
+              className="bg-bg-secondary border border-border-primary rounded-xl p-6 flex items-start gap-4"
             >
               <div className="w-10 h-10 rounded-lg bg-accent-gold/10 flex items-center justify-center shrink-0">
                 <item.icon className="w-5 h-5 text-accent-gold" />
@@ -68,7 +68,7 @@ export default function DonatePage() {
           ))}
         </div>
 
-        <div className="glass-gold rounded-xl p-8 text-center">
+        <div className="bg-bg-secondary border border-accent-gold/20 rounded-xl p-8 text-center">
           <h2 className="text-xl font-bold text-text-primary mb-3">
             Every contribution makes a difference
           </h2>

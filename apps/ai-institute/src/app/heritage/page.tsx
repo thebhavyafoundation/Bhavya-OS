@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Building2,
-  Palette,
-  Scroll,
-  Globe,
-  ArrowRight,
-} from "lucide-react";
+import { Building2, Palette, Scroll, Globe, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroBackground } from "@/components/HeroBackground";
 
@@ -183,7 +177,7 @@ export default function HeritagePage() {
                 distance={30}
               >
                 <div
-                  className="glass"
+                  className="bg-bg-secondary border border-border-primary rounded-xl"
                   style={{
                     padding: "var(--space-8)",
                     borderRadius: "var(--radius-lg)",
@@ -340,8 +334,8 @@ export default function HeritagePage() {
                   }}
                 >
                   Partner with us if you work in heritage preservation,
-                  archaeology, cultural studies, or museum technology. We welcome
-                  institutional collaborations.
+                  archaeology, cultural studies, or museum technology. We
+                  welcome institutional collaborations.
                 </p>
               </div>
             </Reveal>

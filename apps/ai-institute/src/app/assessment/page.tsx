@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
-import {
-  assessmentQuestions,
-  calculateAssessmentScore,
-} from "@/data/progress";
+import { assessmentQuestions, calculateAssessmentScore } from "@/data/progress";
 
 export default function AssessmentPage() {
   const router = useRouter();
@@ -64,7 +61,8 @@ export default function AssessmentPage() {
               AI Readiness Assessment
             </h1>
             <p className="text-sm text-text-secondary">
-              8 questions. 3 minutes. We&apos;ll figure out where you should start.
+              8 questions. 3 minutes. We&apos;ll figure out where you should
+              start.
             </p>
           </div>
 
@@ -86,7 +84,7 @@ export default function AssessmentPage() {
                 AI familiarity
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-purple" />
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-gold" />
                 Your goals
               </div>
             </div>

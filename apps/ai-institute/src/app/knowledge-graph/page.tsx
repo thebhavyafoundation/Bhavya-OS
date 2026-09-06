@@ -114,7 +114,7 @@ const graphNodes: GraphNode[] = [
     label: "RNN",
     x: 350,
     y: 480,
-    color: "var(--color-accent-purple, #a78bfa)",
+    color: "var(--color-accent-gold, #c8a94e)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Sequential Data", "LSTM"],

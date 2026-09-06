@@ -11,7 +11,7 @@ const levelColors: Record<string, string> = {
   beginner: "bg-blue-100 text-blue-800",
   intermediate: "bg-amber-100 text-amber-800",
   advanced: "bg-rose-100 text-rose-800",
-  expert: "bg-purple-100 text-purple-800",
+  expert: "bg-accent-gold/10 text-accent-gold",
 };
 
 export async function generateMetadata({

@@ -41,7 +41,9 @@ export default function StudioPage() {
         if (k.status === "fulfilled") setKos(k.value as AnyRecord[]);
         if (cap.status === "fulfilled")
           setCapabilities(
-            Array.isArray(cap.value) ? cap.value : Object.keys(cap.value || {}).map((name) => ({ name })),
+            Array.isArray(cap.value)
+              ? cap.value
+              : Object.keys(cap.value || {}).map((name) => ({ name })),
           );
       } finally {
         setLoading(false);
@@ -65,7 +67,10 @@ export default function StudioPage() {
       {loading ? (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-12">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="glass rounded-xl p-5 animate-pulse">
+            <div
+              key={i}
+              className="bg-bg-secondary border border-border-primary rounded-xl p-5 animate-pulse"
+            >
               <div className="h-4 bg-bg-tertiary rounded w-20 mb-3" />
               <div className="h-8 bg-bg-tertiary rounded w-12" />
             </div>
@@ -95,7 +100,7 @@ export default function StudioPage() {
             label="Capabilities"
             value={capabilities.length}
             icon={<Zap className="w-4 h-4" />}
-            colorClass="text-purple-400"
+            colorClass="text-accent-gold"
           />
         </div>
       )}
@@ -104,7 +109,7 @@ export default function StudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
         <Link
           href="/studio/courses/new"
-          className="glass rounded-xl p-6 hover:border-border-secondary transition-colors group"
+          className="bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-secondary transition-colors group"
         >
           <GraduationCap className="w-8 h-8 text-accent-gold mb-3" />
           <div className="text-base font-semibold text-text-primary mb-1">
@@ -120,7 +125,7 @@ export default function StudioPage() {
 
         <Link
           href="/studio/lessons/new"
-          className="glass rounded-xl p-6 hover:border-border-secondary transition-colors group"
+          className="bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-secondary transition-colors group"
         >
           <BookOpen className="w-8 h-8 text-accent-gold mb-3" />
           <div className="text-base font-semibold text-text-primary mb-1">
@@ -136,7 +141,7 @@ export default function StudioPage() {
 
         <Link
           href="/studio/knowledge"
-          className="glass rounded-xl p-6 hover:border-border-secondary transition-colors group"
+          className="bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-secondary transition-colors group"
         >
           <Brain className="w-8 h-8 text-accent-gold mb-3" />
           <div className="text-base font-semibold text-text-primary mb-1">
@@ -153,7 +158,7 @@ export default function StudioPage() {
 
       {/* Recent Items */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="glass rounded-xl overflow-hidden">
+        <div className="bg-bg-secondary border border-border-primary rounded-xl overflow-hidden">
           <div className="px-5 py-3.5 border-b border-border-primary flex justify-between items-center">
             <span className="text-sm font-semibold text-text-primary">
               Recent Courses
@@ -190,7 +195,7 @@ export default function StudioPage() {
           )}
         </div>
 
-        <div className="glass rounded-xl overflow-hidden">
+        <div className="bg-bg-secondary border border-border-primary rounded-xl overflow-hidden">
           <div className="px-5 py-3.5 border-b border-border-primary flex justify-between items-center">
             <span className="text-sm font-semibold text-text-primary">
               Recent Lessons
@@ -254,7 +259,7 @@ function StatCard({
   colorClass: string;
 }) {
   return (
-    <div className="glass rounded-xl p-4">
+    <div className="bg-bg-secondary border border-border-primary rounded-xl p-4">
       <div className="flex items-center gap-2 mb-2">
         <span className={colorClass}>{icon}</span>
         <span className="text-xs text-text-tertiary">{label}</span>

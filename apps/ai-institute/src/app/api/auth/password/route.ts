@@ -7,6 +7,7 @@ import {
 } from "@/lib/api-auth";
 import { getUserRepository } from "@/lib/repositories";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
+import { recordAuditEvent } from "@/lib/audit-repository";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
 
 /**
@@ -63,6 +64,10 @@ export async function PUT(request: NextRequest) {
 
     const userRepo = getUserRepository();
     await userRepo.updatePassword(user.id, await hashPassword(newPassword));
+    await recordAuditEvent({
+      action: "password-change",
+      actorId: user.id,
+    });
 
     // Invalidate all sessions for this user ( compromised session stays valid )
     const token = request.cookies.get("session-token")?.value;

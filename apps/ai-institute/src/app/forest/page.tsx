@@ -244,7 +244,7 @@ export default function ForestPage() {
                 distance={30}
               >
                 <div
-                  className="glass"
+                  className="bg-bg-secondary border border-border-primary rounded-xl"
                   style={{
                     padding: "var(--space-8)",
                     borderRadius: "var(--radius-lg)",

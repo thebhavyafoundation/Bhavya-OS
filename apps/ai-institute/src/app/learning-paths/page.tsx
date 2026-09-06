@@ -20,9 +20,9 @@ const difficultyConfig: Record<
     border: "border-amber-500/20",
   },
   Advanced: {
-    bg: "bg-purple-500/10",
-    text: "text-purple-400",
-    border: "border-purple-500/20",
+    bg: "bg-accent-gold/10",
+    text: "text-accent-gold",
+    border: "border-accent-gold/20",
   },
   Expert: {
     bg: "bg-red-500/10",

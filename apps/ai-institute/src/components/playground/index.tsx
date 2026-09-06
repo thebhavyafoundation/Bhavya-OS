@@ -215,7 +215,7 @@ export function AIPromptPlayground() {
                   maxTokens: parseInt(e.target.value),
                 }))
               }
-              className="w-full accent-purple-500"
+              className="w-full accent-gold"
             />
           </div>
 

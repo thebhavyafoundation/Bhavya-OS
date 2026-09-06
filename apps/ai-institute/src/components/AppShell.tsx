@@ -146,13 +146,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-md focus:bg-accent-green focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg focus:outline-none"
-      >
-        Skip to content
-      </a>
-
       <motion.header
         initial={{ y: 0 }}
         animate={{ y: navVisible ? 0 : -100 }}

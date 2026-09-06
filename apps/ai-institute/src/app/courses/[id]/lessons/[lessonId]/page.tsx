@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getCourseById,
   getLessonById,
@@ -10,6 +10,8 @@ import {
   getLessonContent,
   getPublishedLessonContent,
 } from "@/data/academy-lessons";
+import { requireSessionUser } from "@/lib/require-role";
+import { getStudentByUserId } from "@/lib/student-store";
 
 export async function generateMetadata({
   params,
@@ -32,6 +34,13 @@ export default async function LessonPage({
   params: Promise<{ id: string; lessonId: string }>;
 }) {
   const { id, lessonId } = await params;
+
+  const user = await requireSessionUser(`/courses/${id}/lessons/${lessonId}`);
+  const student = await getStudentByUserId(user.id);
+  if (!student || !student.enrolledCourses.includes(id)) {
+    redirect(`/courses/${id}`);
+  }
+
   const result = getLessonById(id, lessonId);
   if (!result) notFound();
 

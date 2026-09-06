@@ -8,6 +8,7 @@ import {
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
 import { roleIsAllowed, type Role } from "@/lib/roles";
+import { recordAuditEvent } from "@/lib/audit-repository";
 
 const VALID_LESSON_IDS = ["what-is-ai", "how-ai-works", "building-with-ai"];
 const VALID_COURSE_IDS = ["ai-foundations"];
@@ -77,6 +78,12 @@ export async function POST(request: NextRequest) {
           );
         }
         student = await completeLesson(user.id, data.lessonId);
+        await recordAuditEvent({
+          action: "lesson-complete",
+          actorId: user.id,
+          resource: "lesson",
+          resourceId: data.lessonId,
+        });
         log.info("Lesson completed", {
           userId: user.id,
           lessonId: data.lessonId,
@@ -115,6 +122,12 @@ export async function POST(request: NextRequest) {
           knowledgeCheckAnswers: data.answers,
           knowledgeCheckScore: data.score,
         });
+        await recordAuditEvent({
+          action: "quiz-submit",
+          actorId: user.id,
+          resource: "quiz",
+          resourceId: "knowledge-check",
+        });
         log.info("Quiz submitted", { userId: user.id, score: data.score });
         break;
       }
@@ -134,6 +147,12 @@ export async function POST(request: NextRequest) {
           projectScore: data.score,
           badgeEarned: data.score >= 80,
         });
+        await recordAuditEvent({
+          action: "project-submit",
+          actorId: user.id,
+          resource: "project",
+          resourceId: "final-project",
+        });
         log.info("Project submitted", { userId: user.id, score: data.score });
         break;
       }
@@ -150,6 +169,12 @@ export async function POST(request: NextRequest) {
         student = await updateStudent(user.id, {
           enrolledCourses: enrolled,
           currentCourse: data.courseId,
+        });
+        await recordAuditEvent({
+          action: "enroll",
+          actorId: user.id,
+          resource: "course",
+          resourceId: data.courseId,
         });
         log.info("Course enrolled", {
           userId: user.id,

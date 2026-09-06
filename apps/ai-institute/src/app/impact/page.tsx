@@ -9,13 +9,13 @@ import type { ProblemCategory } from "@bhavya/impact-runtime";
 
 const categoryColors: Record<ProblemCategory, string> = {
   education: "bg-accent-blue/10 text-accent-blue",
-  accessibility: "bg-accent-purple/10 text-accent-purple",
+  accessibility: "bg-accent-gold/10 text-accent-gold",
   healthcare: "bg-accent-green/10 text-accent-green",
   agriculture: "bg-accent-yellow/10 text-accent-yellow",
   environment: "bg-accent-green/10 text-accent-green",
   "local-government": "bg-accent-blue/10 text-accent-blue",
   "small-business": "bg-accent-yellow/10 text-accent-yellow",
-  ngos: "bg-accent-purple/10 text-accent-purple",
+  ngos: "bg-accent-gold/10 text-accent-gold",
   "open-source": "bg-accent-blue/10 text-accent-blue",
   "bhavya-foundation": "bg-accent-blue/10 text-accent-blue",
 };
