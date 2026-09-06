@@ -26,15 +26,6 @@ export function Parallax({
   }, []);
 
   const ref = useRef<HTMLDivElement>(null);
-
-  if (reducedMotion) {
-    return (
-      <div ref={ref} className={className}>
-        {children}
-      </div>
-    );
-  }
-
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -60,6 +51,14 @@ export function Parallax({
         ? [-distance, distance]
         : [0, 0],
   );
+
+  if (reducedMotion) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div ref={ref} style={{ x, y }} className={className}>

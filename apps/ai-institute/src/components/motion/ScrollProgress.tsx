@@ -17,16 +17,16 @@ export function ScrollProgress({ className = "" }: ScrollProgressProps) {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  if (reducedMotion) {
-    return null;
-  }
-
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
+  if (reducedMotion) {
+    return null;
+  }
 
   return (
     <motion.div

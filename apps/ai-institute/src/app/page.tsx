@@ -14,12 +14,19 @@ import {
   GraduationCap,
   Shield,
   Play,
+  Search,
+  ArrowUpRight,
+  Leaf,
+  Globe,
+  Landmark,
+  Compass,
+  Target,
+  Zap,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroBackground } from "@/components/HeroBackground";
-import { VineDivider, BotanicalCorner } from "@/components/BotanicalMotifs";
 
 /* ============================================
    MISSION DATA
@@ -30,82 +37,89 @@ const missions = [
     key: "forest",
     icon: TreePine,
     label: "Forest",
-    title: "Bhavya Forest Mission",
-    desc: "Restoring ecosystems, protecting biodiversity, and conserving water through long-term ecological stewardship.",
+    title: "Forest",
+    desc: "Restore ecosystems. Protect biodiversity. Conserve water.",
+    photo: "/photography/forest/forest-cedar-sunlight.jpg",
+    color: "var(--color-brand-forest)",
   },
   {
     key: "knowledge",
     icon: Brain,
     label: "Knowledge",
-    title: "Bhavya Knowledge Mission",
-    desc: "Open education, AI, research, digital libraries, and practical learning for everyone.",
+    title: "Knowledge",
+    desc: "Expand learning. Research. Innovation. Digital access.",
+    photo: "/photography/knowledge/knowledge-school-children.jpg",
+    color: "var(--color-brand-forest)",
   },
   {
     key: "heritage",
     icon: Building2,
     label: "Heritage",
-    title: "Bhavya Heritage Mission",
-    desc: "Preserving traditional knowledge, architecture, history, arts, and living heritage.",
+    title: "Heritage",
+    desc: "Preserve traditions. Document history. Protect living heritage.",
+    photo: "/photography/heritage/heritage-stone-temple.jpg",
+    color: "var(--color-brand-forest)",
   },
   {
     key: "community",
     icon: HeartHandshake,
     label: "Community",
-    title: "Bhavya Community Mission",
-    desc: "Empowering young people, women, schools, and communities through education and participation.",
+    title: "Community",
+    desc: "Empower people. Strengthen communities. Develop leadership.",
+    photo: "/photography/community/community-village-gathering.jpg",
+    color: "var(--color-brand-forest)",
   },
 ];
 
-const principles = [
+const realWork = [
   {
-    number: "01",
-    title: "Nature First",
-    desc: "Every decision considers its environmental impact. We restore before we extract.",
+    title: "Restoration Initiatives in the Western Himalayas",
+    category: "Forest",
+    photo: "/photography/forest/forest-cedar-sunlight.jpg",
+    href: "/missions/forest",
   },
   {
-    number: "02",
-    title: "Knowledge as Commons",
-    desc: "Education is a right, not a privilege. All our content is free and open.",
+    title: "Digital Learning for Rural Schools",
+    category: "Knowledge",
+    photo: "/photography/knowledge/knowledge-school-children.jpg",
+    href: "/missions/knowledge",
   },
   {
-    number: "03",
-    title: "Transparency",
-    desc: "Every donation, every decision, every outcome is publicly documented.",
+    title: "Documenting Living Heritage",
+    category: "Heritage",
+    photo: "/photography/heritage/heritage-wooden-temple.jpg",
+    href: "/missions/heritage",
   },
   {
-    number: "04",
-    title: "Generational Thinking",
-    desc: "We build for decades, not quarters. Our constitution binds us to long-term impact.",
-  },
-  {
-    number: "05",
-    title: "Community Sovereignty",
-    desc: "The people we serve guide our priorities. Community voice shapes our mission.",
+    title: "Women's Leadership in Mountain Communities",
+    category: "Community",
+    photo: "/photography/community/community-village-gathering.jpg",
+    href: "/missions/community",
   },
 ];
 
-const participateCards = [
-  {
-    icon: GraduationCap,
-    title: "Learn",
-    desc: "Structured learning paths from foundations to advanced research. Free and open.",
-    href: "/knowledge/academy",
-  },
+const getInvolved = [
   {
     icon: Users,
     title: "Volunteer",
     desc: "Join the Bhavya Volunteer Corps. Make hands-on impact.",
-    href: "/community",
-  },
-  {
-    icon: FlaskConical,
-    title: "Research",
-    desc: "Open research on ecology, heritage, and education.",
-    href: "/knowledge/research",
+    href: "/volunteer",
   },
   {
     icon: HeartHandshake,
-    title: "Support",
+    title: "Partner with Us",
+    desc: "Collaborate on institutional research and programmes.",
+    href: "/get-involved",
+  },
+  {
+    icon: GraduationCap,
+    title: "Learn",
+    desc: "Structured learning paths from foundations to advanced research.",
+    href: "/knowledge/academy",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Support Our Work",
     desc: "Fund a mission. Every donation is publicly documented.",
     href: "/donate",
   },
@@ -131,15 +145,13 @@ export default function HomePage() {
       </a>
       <SiteHeader />
 
-      {/* ====== HERO ====== */}
+      {/* ====== HERO — CINEMATIC INSTITUTIONAL ====== */}
       <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
         <HeroBackground
           pillar="home"
           photo="/photography/hero/hero-himalayan-sunset.jpg"
           photoPosition="center 40%"
         />
-        <BotanicalCorner position="top-right" size={160} opacity={0.1} />
-        <BotanicalCorner position="bottom-left" size={120} opacity={0.08} />
 
         <motion.div
           className="hero-content"
@@ -151,8 +163,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Shield size={12} />
-            Building India&apos;s Digital Institution
+            <Shield size={12} />A PUBLIC INSTITUTION
           </motion.div>
 
           <h1
@@ -182,7 +193,7 @@ export default function HomePage() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              Generations
+              Generations.
             </motion.span>
           </h1>
 
@@ -193,9 +204,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
-            We are building an institution for future generations — where
-            knowledge is open, forests are restored, heritage is preserved, and
-            community leads.
+            Bhavya is a public institution working across nature, knowledge,
+            heritage, and communities.
           </motion.p>
 
           <motion.div
@@ -204,13 +214,13 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <a href="/knowledge/academy" className="btn btn-gold">
-              Explore Bhavya
+            <a href="/missions" className="btn btn-gold">
+              Explore Our Missions
               <ArrowRight size={16} />
             </a>
-            <a href="/app" className="btn btn-secondary-inverse">
-              Enter My Bhavya
-              <ArrowRight size={16} />
+            <a href="/about" className="btn btn-secondary-inverse">
+              <Play size={14} fill="currentColor" />
+              Watch Our Story
             </a>
           </motion.div>
 
@@ -221,18 +231,18 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 1.5 }}
           >
             <span>
-              <span className="hero-proof-dot" /> Open knowledge
+              <span className="hero-proof-dot" /> Healthier forests
             </span>
             <span>
-              <span className="hero-proof-dot" /> Community governed
+              <span className="hero-proof-dot" /> Stronger communities
             </span>
             <span>
-              <span className="hero-proof-dot" /> Constitution bound
+              <span className="hero-proof-dot" /> A brighter tomorrow
             </span>
           </motion.div>
         </motion.div>
 
-        {/* Watch Our Story button — right side */}
+        {/* Bhavya OS link — right side */}
         <motion.div
           style={{
             position: "absolute",
@@ -245,7 +255,7 @@ export default function HomePage() {
           transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
-            href="/mission"
+            href="/os"
             style={{
               display: "flex",
               alignItems: "center",
@@ -264,25 +274,124 @@ export default function HomePage() {
               transition: "all var(--duration-normal) var(--ease-out)",
             }}
           >
-            <Play size={16} fill="currentColor" />
-            Watch Our Story
+            <Zap size={14} />
+            Enter Bhavya OS
+            <ArrowRight size={14} />
           </a>
         </motion.div>
       </section>
 
-      <VineDivider />
-
-      {/* ====== FOUR MISSIONS — GLASS PANELS ====== */}
+      {/* ====== INSTITUTIONAL INTRODUCTION ====== */}
       <section
-        id="main-content"
         style={{
           padding: "var(--space-24) 0",
           background: "var(--color-bg-primary)",
         }}
       >
         <div className="container">
+          <div
+            className="home-intro-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--space-16)",
+              alignItems: "center",
+            }}
+          >
+            <Reveal variant="slide-up">
+              <div>
+                <span className="editorial-label">
+                  AN INSTITUTION, NOT A CAMPAIGN
+                </span>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  Long-term thinking.
+                  <br />
+                  Real-world impact.
+                </h2>
+                <p
+                  style={{
+                    marginTop: "var(--space-6)",
+                    fontSize: "var(--text-lg)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Bhavya is being built as a long-term institution — not a
+                  collection of short-term projects. We work with patience,
+                  evidence and integrity to create enduring change.
+                </p>
+                <a
+                  href="/about"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    marginTop: "var(--space-8)",
+                    color: "var(--color-brand-forest)",
+                    fontWeight: 600,
+                    fontSize: "var(--text-sm)",
+                    textDecoration: "none",
+                  }}
+                >
+                  Our Approach
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+            </Reveal>
+            <Reveal variant="slide-up" delay={0.2}>
+              <div
+                style={{
+                  padding: "var(--space-8)",
+                  background: "var(--color-ivory-200)",
+                  borderRadius: "var(--radius-lg)",
+                  borderLeft: "3px solid var(--color-brand-gold)",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-xl)",
+                    fontStyle: "italic",
+                    color: "var(--color-text-primary)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  &ldquo;A tree planted today becomes the forest that protects
+                  tomorrow.&rdquo;
+                </p>
+                <p
+                  style={{
+                    marginTop: "var(--space-4)",
+                    fontSize: "var(--text-sm)",
+                    color: "var(--color-text-muted)",
+                  }}
+                >
+                  — Bhavya Foundation
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ====== FOUR MISSIONS — IMAGE CARDS ====== */}
+      <section
+        id="main-content"
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">Our Four Missions</span>
+            <span className="editorial-label">OUR MISSIONS</span>
             <h2
               className="editorial-heading"
               style={{
@@ -290,11 +399,29 @@ export default function HomePage() {
                 marginTop: "var(--space-4)",
               }}
             >
-              Four Pillars. One Purpose.
+              Four missions. A shared tomorrow.
             </h2>
+            <p
+              style={{
+                marginTop: "var(--space-4)",
+                fontSize: "var(--text-lg)",
+                color: "var(--color-text-secondary)",
+                maxWidth: "600px",
+              }}
+            >
+              Bhavya works across four permanent missions to create lasting
+              impact for people and the planet.
+            </p>
           </div>
 
-          <div className="missions-grid">
+          <div
+            className="home-missions-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "var(--space-6)",
+            }}
+          >
             {missions.map((m, i) => (
               <Reveal
                 key={m.key}
@@ -302,26 +429,95 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={40}
               >
-                <a href={`/${m.key}`} className="mission-card">
+                <a
+                  href={`/${m.key}`}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                    borderRadius: "var(--radius-lg)",
+                    overflow: "hidden",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
                   <div
-                    className="mission-card-image"
                     style={{
-                      background:
-                        "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-700) 100%)",
+                      height: "200px",
+                      overflow: "hidden",
+                      position: "relative",
                     }}
                   >
-                    <div className="mission-card-overlay" />
-                    <div className="mission-card-icon">
-                      <m.icon size={24} color="var(--color-brand-gold)" />
+                    <img
+                      src={m.photo}
+                      alt={m.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transition:
+                          "transform var(--duration-slow) var(--ease-out)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(14, 56, 46, 0.6) 0%, transparent 60%)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "var(--space-4)",
+                        left: "var(--space-4)",
+                        padding: "var(--space-1) var(--space-3)",
+                        borderRadius: "var(--radius-full)",
+                        background: "rgba(255, 255, 255, 0.15)",
+                        backdropFilter: "blur(8px)",
+                        fontSize: "var(--text-xs)",
+                        color: "white",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {m.label}
                     </div>
                   </div>
-                  <div className="mission-card-body">
-                    <span className="mission-card-label">{m.label}</span>
-                    <h3 className="mission-card-title">{m.title}</h3>
-                    <p className="mission-card-desc">{m.desc}</p>
-                    <div className="mission-card-arrow">
-                      <ArrowRight size={16} />
-                    </div>
+                  <div style={{ padding: "var(--space-6)" }}>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--text-xl)",
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        marginBottom: "var(--space-2)",
+                      }}
+                    >
+                      {m.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        color: "var(--color-text-secondary)",
+                        lineHeight: 1.6,
+                        marginBottom: "var(--space-4)",
+                      }}
+                    >
+                      {m.desc}
+                    </p>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "var(--space-2)",
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-brand-forest)",
+                      }}
+                    >
+                      Explore <ArrowRight size={14} />
+                    </span>
                   </div>
                 </a>
               </Reveal>
@@ -330,9 +526,282 @@ export default function HomePage() {
         </div>
       </section>
 
-      <VineDivider />
+      {/* ====== REAL WORK — PEOPLE, PLACES, PROGRESS ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-bg-primary)",
+        }}
+      >
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              marginBottom: "var(--space-12)",
+            }}
+          >
+            <div>
+              <span className="editorial-label">
+                OUR WORK IN THE REAL WORLD
+              </span>
+              <h2
+                className="editorial-heading"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  marginTop: "var(--space-4)",
+                }}
+              >
+                People. Places. Progress.
+              </h2>
+            </div>
+            <a
+              href="/programs"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "var(--space-2)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 600,
+                color: "var(--color-brand-forest)",
+                textDecoration: "none",
+              }}
+            >
+              View All <ArrowRight size={14} />
+            </a>
+          </div>
 
-      {/* ====== MISSION STATEMENT ====== */}
+          <div
+            className="home-realwork-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "var(--space-6)",
+            }}
+          >
+            {realWork.map((item, i) => (
+              <Reveal
+                key={item.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
+              >
+                <a
+                  href={item.href}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                    borderRadius: "var(--radius-lg)",
+                    overflow: "hidden",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: "180px",
+                      overflow: "hidden",
+                      position: "relative",
+                    }}
+                  >
+                    <img
+                      src={item.photo}
+                      alt={item.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(14, 56, 46, 0.5) 0%, transparent 50%)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: "var(--space-4)",
+                        left: "var(--space-4)",
+                        right: "var(--space-4)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: "inline-block",
+                          padding: "2px var(--space-2)",
+                          borderRadius: "var(--radius-full)",
+                          background: "rgba(255, 255, 255, 0.2)",
+                          backdropFilter: "blur(4px)",
+                          fontSize: "10px",
+                          color: "white",
+                          fontWeight: 600,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.05em",
+                          marginBottom: "var(--space-2)",
+                        }}
+                      >
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div style={{ padding: "var(--space-5)" }}>
+                    <h3
+                      style={{
+                        fontSize: "var(--text-base)",
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                        lineHeight: 1.4,
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                  </div>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== BHAVYA ECOSYSTEM ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <Reveal variant="slide-up">
+            <div
+              style={{ textAlign: "center", marginBottom: "var(--space-12)" }}
+            >
+              <span className="editorial-label">THE BHAVYA ECOSYSTEM</span>
+              <h2
+                className="editorial-heading"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  marginTop: "var(--space-4)",
+                }}
+              >
+                A connected ecosystem for greater impact.
+              </h2>
+            </div>
+          </Reveal>
+
+          <Reveal variant="slide-up" delay={0.2}>
+            <div
+              className="home-ecosystem-flow"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "var(--space-4)",
+                flexWrap: "wrap",
+                padding: "var(--space-8) 0",
+              }}
+            >
+              {[
+                {
+                  label: "Foundation",
+                  sublabel: "Institutional Home",
+                  icon: Landmark,
+                },
+                {
+                  label: "Missions",
+                  sublabel: "Four Focus Areas",
+                  icon: Target,
+                },
+                {
+                  label: "Programs",
+                  sublabel: "On-Ground Work",
+                  icon: Compass,
+                },
+                { label: "Impact", sublabel: "Measurable Change", icon: Globe },
+                {
+                  label: "Bhavya OS",
+                  sublabel: "The Operating System",
+                  icon: Zap,
+                },
+              ].map((step, i, arr) => (
+                <div
+                  key={step.label}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-4)",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                      minWidth: "100px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "48px",
+                        height: "48px",
+                        borderRadius: "var(--radius-full)",
+                        background:
+                          i === arr.length - 1
+                            ? "var(--color-brand-forest)"
+                            : "var(--color-bg-primary)",
+                        border: "1px solid var(--color-border-primary)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color:
+                          i === arr.length - 1
+                            ? "white"
+                            : "var(--color-brand-forest)",
+                      }}
+                    >
+                      <step.icon size={20} />
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                      }}
+                    >
+                      {step.label}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "var(--color-text-muted)",
+                      }}
+                    >
+                      {step.sublabel}
+                    </span>
+                  </div>
+                  {i < arr.length - 1 && (
+                    <ArrowRight
+                      size={20}
+                      style={{
+                        color: "var(--color-text-muted)",
+                        flexShrink: 0,
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ====== BHAVYA OS INTRODUCTION — DARK PANEL ====== */}
       <section
         style={{
           padding: "var(--space-24) 0",
@@ -342,65 +811,146 @@ export default function HomePage() {
           overflow: "hidden",
         }}
       >
-        {/* Botanical SVG decoration */}
+        {/* Subtle grid texture */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            opacity: 0.06,
+            opacity: 0.05,
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
             pointerEvents: "none",
           }}
           aria-hidden="true"
-        >
-          <svg
-            viewBox="0 0 1200 400"
-            preserveAspectRatio="xMidYMid slice"
-            style={{ width: "100%", height: "100%" }}
-          >
-            <g fill="none" stroke="var(--color-accent-gold)" strokeWidth="1">
-              <path d="M100,200 Q200,100 300,200 Q400,300 500,200 Q600,100 700,200 Q800,300 900,200 Q1000,100 1100,200" />
-              <path d="M150,150 Q250,50 350,150 Q450,250 550,150 Q650,50 750,150 Q850,250 950,150" />
-              <path d="M200,250 Q300,150 400,250 Q500,350 600,250 Q700,150 800,250 Q900,350 1000,250" />
-            </g>
-          </svg>
-        </div>
+        />
 
-        <div
-          className="container"
-          style={{ maxWidth: "800px", position: "relative", zIndex: 1 }}
-        >
-          <Reveal variant="fade">
-            <blockquote
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                fontWeight: 400,
-                fontStyle: "italic",
-                lineHeight: 1.5,
-                color: "var(--color-text-inverse)",
-                margin: 0,
-                textAlign: "center",
-              }}
-            >
-              &ldquo;We build institutions for generations, not quarters. Our
-              constitution binds us to long-term impact.&rdquo;
-            </blockquote>
-            <p
-              style={{
-                marginTop: "var(--space-6)",
-                color: "var(--color-brand-gold)",
-                fontSize: "var(--text-sm)",
-                fontWeight: 500,
-                textAlign: "center",
-              }}
-            >
-              — Bhavya Foundation
-            </p>
-          </Reveal>
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <div
+            className="home-os-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--space-16)",
+              alignItems: "center",
+            }}
+          >
+            <Reveal variant="slide-up">
+              <div>
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontSize: "var(--text-xs)",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    color: "var(--color-brand-gold)",
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
+                  THE SYSTEM BEHIND THE INSTITUTION
+                </span>
+                <h2
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    fontWeight: 400,
+                    lineHeight: 1.2,
+                    color: "var(--color-text-inverse)",
+                    marginBottom: "var(--space-6)",
+                  }}
+                >
+                  From knowledge
+                  <br />
+                  to action.
+                </h2>
+                <p
+                  style={{
+                    fontSize: "var(--text-lg)",
+                    color: "rgba(247, 244, 236, 0.7)",
+                    lineHeight: 1.7,
+                    marginBottom: "var(--space-8)",
+                  }}
+                >
+                  Bhavya OS connects programs, projects, people, documents,
+                  evidence, research and impact in one institutional system.
+                </p>
+                <a
+                  href="/os"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    padding: "var(--space-3) var(--space-6)",
+                    borderRadius: "var(--radius-full)",
+                    background: "var(--color-brand-gold)",
+                    color: "var(--color-forest-950)",
+                    fontWeight: 600,
+                    fontSize: "var(--text-sm)",
+                    textDecoration: "none",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
+                  Explore Bhavya OS
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal variant="slide-up" delay={0.2}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "var(--space-4)",
+                }}
+              >
+                {[
+                  {
+                    label: "Programs",
+                    desc: "Manage institutional programmes",
+                  },
+                  { label: "Projects", desc: "Track on-ground initiatives" },
+                  { label: "People", desc: "Volunteers, researchers, teams" },
+                  { label: "Documents", desc: "Evidence, reports, policies" },
+                  { label: "Impact", desc: "Metrics and verification" },
+                  { label: "Research", desc: "Knowledge and publications" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    style={{
+                      padding: "var(--space-4)",
+                      borderRadius: "var(--radius-md)",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-text-inverse)",
+                        marginBottom: "var(--space-1)",
+                      }}
+                    >
+                      {item.label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "rgba(247, 244, 236, 0.5)",
+                      }}
+                    >
+                      {item.desc}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* ====== PRINCIPLES ====== */}
+      {/* ====== GET INVOLVED ====== */}
       <section
         style={{
           padding: "var(--space-24) 0",
@@ -409,7 +959,7 @@ export default function HomePage() {
       >
         <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">Constitutional Principles</span>
+            <span className="editorial-label">JOIN THE MOVEMENT</span>
             <h2
               className="editorial-heading"
               style={{
@@ -417,65 +967,94 @@ export default function HomePage() {
                 marginTop: "var(--space-4)",
               }}
             >
-              Bound by constitution.
-              <br />
-              Guided by principle.
+              Be part of a better tomorrow.
             </h2>
-          </div>
-
-          <div className="principles-grid">
-            {principles.map((p, i) => (
-              <Reveal key={p.number} variant="slide-up" delay={i * 0.08}>
-                <div className="principle-card">
-                  <span className="principle-number">{p.number}</span>
-                  <h3 className="principle-title">{p.title}</h3>
-                  <p className="principle-desc">{p.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <VineDivider />
-
-      {/* ====== PARTICIPATE ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-ivory-200)",
-        }}
-      >
-        <div className="container">
-          <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">Participate</span>
-            <h2
-              className="editorial-heading"
+            <p
               style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
                 marginTop: "var(--space-4)",
+                fontSize: "var(--text-lg)",
+                color: "var(--color-text-secondary)",
+                maxWidth: "600px",
               }}
             >
-              Be part of the institution.
-            </h2>
+              Whether you want to volunteer, partner, research, or support our
+              work, there are many ways to get involved.
+            </p>
           </div>
 
-          <div className="participate-grid">
-            {participateCards.map((card, i) => (
+          <div
+            className="home-involved-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "var(--space-6)",
+            }}
+          >
+            {getInvolved.map((card, i) => (
               <Reveal
                 key={card.title}
                 variant="slide-up"
                 delay={i * 0.1}
                 distance={30}
               >
-                <a href={card.href} className="participate-card">
-                  <div className="participate-card-icon">
-                    <card.icon size={24} />
+                <a
+                  href={card.href}
+                  style={{
+                    display: "block",
+                    padding: "var(--space-6)",
+                    borderRadius: "var(--radius-lg)",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    textDecoration: "none",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--color-forest-50)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--color-brand-forest)",
+                      marginBottom: "var(--space-4)",
+                    }}
+                  >
+                    <card.icon size={20} />
                   </div>
-                  <h3>{card.title}</h3>
-                  <p>{card.desc}</p>
-                  <span className="participate-link">
-                    Learn more <ArrowRight size={14} />
+                  <h3
+                    style={{
+                      fontSize: "var(--text-lg)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.6,
+                      marginBottom: "var(--space-4)",
+                    }}
+                  >
+                    {card.desc}
+                  </p>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 600,
+                      color: "var(--color-brand-forest)",
+                    }}
+                  >
+                    {card.title} <ArrowRight size={14} />
                   </span>
                 </a>
               </Reveal>
@@ -528,11 +1107,8 @@ export default function HomePage() {
                 <HeartHandshake size={16} />
                 Support the mission
               </a>
-              <a
-                href="/knowledge/academy"
-                className="btn btn-secondary-inverse"
-              >
-                Start learning
+              <a href="/missions" className="btn btn-secondary-inverse">
+                Explore Missions
                 <ArrowRight size={16} />
               </a>
             </div>

@@ -1138,6 +1138,16 @@ body {
   .footer-brand {
     grid-column: 1 / -1;
   }
+  /* Responsive grids for new homepage sections */
+  .home-missions-grid,
+  .home-realwork-grid,
+  .home-involved-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .home-ecosystem-flow {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* ============================================
@@ -1195,5 +1205,19 @@ body {
   .mission-tab-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+  /* Responsive grids for new homepage sections */
+  .home-missions-grid,
+  .home-realwork-grid,
+  .home-involved-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .home-intro-grid,
+  .home-os-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .home-ecosystem-flow {
+    flex-direction: column;
+    align-items: center;
   }
 }
