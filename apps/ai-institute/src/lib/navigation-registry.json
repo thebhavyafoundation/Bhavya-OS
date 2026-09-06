@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "description": "Bhavya Foundation — Canonical Navigation Registry",
+  "version": "2.1.0",
+  "description": "Bhavya Foundation — Canonical Navigation Registry. Single source of truth for all navigation rendering.",
   "lastUpdated": "2026-09-06",
   "waveO": {
     "note": "Wave O orphan classification. Deferred routes are NOT in canonical navigation.",
@@ -115,11 +115,11 @@
           "label": "Learn",
           "items": [
             {
-              "id": "open-knowledge",
-              "label": "Open Knowledge",
-              "href": "/knowledge",
-              "icon": "BookOpen",
-              "description": "Freely accessible research and resources"
+              "id": "courses",
+              "label": "Courses",
+              "href": "/courses",
+              "icon": "GraduationCap",
+              "description": "AI curriculum from foundations to advanced"
             },
             {
               "id": "research",
@@ -513,6 +513,7 @@
           { "label": "Our Story", "href": "/about" },
           { "label": "Vision", "href": "/mission" },
           { "label": "Governance", "href": "/transparency" },
+          { "label": "Impact", "href": "/impact" },
           { "label": "Contact", "href": "/contact" }
         ]
       },
@@ -521,6 +522,9 @@
         "links": [
           { "label": "Sign In", "href": "/login" },
           { "label": "Create Account", "href": "/register" },
+          { "label": "Bhavya OS", "href": "/os" },
+          { "label": "AI Lab", "href": "/knowledge/ai" },
+          { "label": "Terms", "href": "/terms" },
           { "label": "Privacy", "href": "/privacy" },
           { "label": "Accessibility", "href": "/accessibility" }
         ]

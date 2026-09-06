@@ -1,56 +1,12 @@
 "use client";
 
 import { BhavyaLogo } from "./BhavyaLogo";
-
-const footerColumns = [
-  {
-    title: "Bhavya",
-    links: [
-      { label: "Forest", href: "/forest" },
-      { label: "Knowledge", href: "/knowledge" },
-      { label: "Heritage", href: "/heritage" },
-      { label: "Community", href: "/community" },
-    ],
-  },
-  {
-    title: "Institution",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Governance", href: "/transparency" },
-      { label: "Research", href: "/knowledge/research" },
-      { label: "Publications", href: "/resources" },
-      { label: "Impact", href: "/impact" },
-    ],
-  },
-  {
-    title: "Participate",
-    links: [
-      { label: "Volunteer", href: "/volunteer" },
-      { label: "Partner", href: "/get-involved" },
-      { label: "Learn", href: "/knowledge/academy" },
-      { label: "Support", href: "/donate" },
-    ],
-  },
-  {
-    title: "Technology",
-    links: [
-      { label: "Bhavya OS", href: "/os" },
-      { label: "AI Lab", href: "/knowledge/ai" },
-      { label: "Open Data", href: "/transparency" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-      { label: "Accessibility", href: "/accessibility" },
-      { label: "Contact", href: "/contact" },
-    ],
-  },
-];
+import { getFooterColumns } from "@/lib/useNavigation";
 
 export function SiteFooter() {
+  // Read footer columns from canonical registry
+  const footerColumns = getFooterColumns();
+
   return (
     <footer
       style={{
@@ -108,7 +64,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Columns grid */}
+        {/* Columns grid — from registry */}
         <div
           style={{
             display: "grid",

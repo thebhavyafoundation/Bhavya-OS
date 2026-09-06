@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -29,6 +29,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { BhavyaLogo } from "./BhavyaLogo";
+import { getPublicNavGroups, type NavGroup } from "@/lib/useNavigation";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   TreePine,
@@ -51,17 +52,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Mail,
 };
 
-/* ============================================
-   SIMPLIFIED PUBLIC NAV — per reference
-   ============================================ */
-const publicNavLinks = [
-  { label: "About", href: "/about" },
-  { label: "Missions", href: "/missions" },
-  { label: "Our Work", href: "/programs" },
-  { label: "Research", href: "/knowledge/research" },
-  { label: "Get Involved", href: "/get-involved" },
-];
-
 interface SiteHeaderProps {
   activePillar?: string;
   variant?: "default" | "dark";
@@ -73,11 +63,37 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Read navigation groups from canonical registry
+  const navGroups = getPublicNavGroups();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleDropdownEnter = useCallback((groupId: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setActiveDropdown(groupId);
+  }, []);
+
+  const handleDropdownLeave = useCallback(() => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
   }, []);
 
   const isDark = variant === "dark";
@@ -119,19 +135,77 @@ export function SiteHeader({
             </div>
           </a>
 
-          {/* Desktop Navigation — simplified per reference */}
+          {/* Desktop Navigation — dropdown groups from registry */}
           <div className="nav-links">
-            {publicNavLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="nav-link"
-                style={
-                  isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
-                }
+            {navGroups.map((group) => (
+              <div
+                key={group.id}
+                className="nav-dropdown"
+                onMouseEnter={() => handleDropdownEnter(group.id)}
+                onMouseLeave={handleDropdownLeave}
               >
-                {link.label}
-              </a>
+                <button
+                  className="nav-link nav-dropdown-trigger"
+                  style={
+                    isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
+                  }
+                >
+                  {group.label}
+                  <ChevronDown
+                    size={12}
+                    style={{
+                      display: "inline-block",
+                      marginLeft: "4px",
+                      transition: "transform 150ms ease",
+                      transform:
+                        activeDropdown === group.id
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                    }}
+                  />
+                </button>
+                <AnimatePresence>
+                  {activeDropdown === group.id && (
+                    <motion.div
+                      className="nav-dropdown-menu"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                    >
+                      {group.items.map((item) => {
+                        const ItemIcon = iconMap[item.icon] || Target;
+                        return (
+                          <a
+                            key={item.id}
+                            href={item.href}
+                            className="nav-dropdown-item"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            <ItemIcon className="w-4 h-4 shrink-0 text-text-muted" />
+                            <div>
+                              <div style={{ fontWeight: 500 }}>
+                                {item.label}
+                              </div>
+                              {item.description && (
+                                <div
+                                  style={{
+                                    fontSize: "var(--text-xs)",
+                                    opacity: 0.6,
+                                    marginTop: "2px",
+                                  }}
+                                >
+                                  {item.description}
+                                </div>
+                              )}
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </div>
 
@@ -214,15 +288,24 @@ export function SiteHeader({
               </div>
 
               <div className="mobile-menu-nav">
-                {publicNavLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="mobile-menu-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
+                {navGroups.map((group) => (
+                  <div key={group.id} className="mobile-menu-group">
+                    <div className="mobile-menu-group-label">{group.label}</div>
+                    {group.items.map((item) => {
+                      const ItemIcon = iconMap[item.icon] || Target;
+                      return (
+                        <a
+                          key={item.id}
+                          href={item.href}
+                          className="mobile-menu-link"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <ItemIcon className="w-4 h-4 text-text-muted" />
+                          {item.label}
+                        </a>
+                      );
+                    })}
+                  </div>
                 ))}
 
                 <div className="mobile-menu-divider" />

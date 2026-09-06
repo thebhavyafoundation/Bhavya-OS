@@ -26,153 +26,51 @@ import {
   Target,
   Globe,
   BarChart3,
+  Shield,
+  MessageSquare,
+  Video,
+  GraduationCap,
+  HeartHandshake,
+  Heart,
+  Download,
+  Library,
+  Handshake,
+  Mail,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { OS_ROLES, type Role } from "@/lib/roles";
+import { getOsSections, type OsSection } from "@/lib/useNavigation";
 
-interface OsNavItem {
-  id: string;
-  label: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  section?: string;
-  roles?: Role[];
-}
-
-const osNavItems: OsNavItem[] = [
-  // Foundation
-  {
-    id: "overview",
-    label: "Foundation",
-    href: "/os",
-    icon: Landmark,
-    section: "Foundation",
-  },
-  {
-    id: "governance",
-    label: "Governance",
-    href: "/os/governance",
-    icon: Scale,
-    section: "Foundation",
-  },
-  {
-    id: "memory",
-    label: "Memory",
-    href: "/os/memory",
-    icon: FileText,
-    section: "Foundation",
-  },
-
-  // Missions
-  {
-    id: "forest",
-    label: "Forest",
-    href: "/os/forest",
-    icon: TreePine,
-    section: "Missions",
-  },
-  {
-    id: "knowledge",
-    label: "Knowledge",
-    href: "/os/knowledge",
-    icon: Brain,
-    section: "Missions",
-  },
-  {
-    id: "heritage",
-    label: "Heritage",
-    href: "/missions/heritage",
-    icon: Landmark,
-    section: "Missions",
-  },
-  {
-    id: "community",
-    label: "Community",
-    href: "/missions/community",
-    icon: Users,
-    section: "Missions",
-  },
-
-  // Operations
-  {
-    id: "runtime",
-    label: "Runtime",
-    href: "/os/runtime",
-    icon: Zap,
-    section: "Operations",
-  },
-  {
-    id: "observability",
-    label: "Observability",
-    href: "/os/observability",
-    icon: Eye,
-    section: "Operations",
-  },
-  {
-    id: "ioc",
-    label: "IOC",
-    href: "/os/ioc",
-    icon: Scale,
-    section: "Operations",
-  },
-  {
-    id: "social",
-    label: "Social",
-    href: "/os/social",
-    icon: Globe,
-    section: "Operations",
-  },
-  {
-    id: "search",
-    label: "Search",
-    href: "/os/search",
-    icon: Search,
-    section: "Operations",
-  },
-
-  // Content
-  {
-    id: "studio",
-    label: "Studio",
-    href: "/studio",
-    icon: FlaskConical,
-    section: "Content",
-    roles: ["educator", "instructor", "admin"],
-  },
-  {
-    id: "videos",
-    label: "Videos",
-    href: "/os/videos",
-    icon: Network,
-    section: "Content",
-  },
-
-  // Administration
-  {
-    id: "admin",
-    label: "Admin",
-    href: "/os/admin",
-    icon: Settings,
-    section: "Admin",
-    roles: ["admin"],
-  },
-  {
-    id: "docs",
-    label: "Docs",
-    href: "/os/docs",
-    icon: BookOpen,
-    section: "Admin",
-  },
-  {
-    id: "github",
-    label: "GitHub",
-    href: "/os/github",
-    icon: Network,
-    section: "Admin",
-  },
-];
-
-const sections = ["Foundation", "Missions", "Operations", "Content", "Admin"];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  LayoutDashboard,
+  Brain,
+  Scale,
+  Zap,
+  FlaskConical,
+  Settings,
+  BookOpen,
+  Users,
+  FileText,
+  Search,
+  Terminal,
+  Eye,
+  Network,
+  TreePine,
+  Landmark,
+  Target,
+  Globe,
+  BarChart3,
+  Shield,
+  MessageSquare,
+  Video,
+  GraduationCap,
+  HeartHandshake,
+  Heart,
+  Download,
+  Library,
+  Handshake,
+  Mail,
+};
 
 export function OsSidebar() {
   const pathname = usePathname();
@@ -183,10 +81,8 @@ export function OsSidebar() {
   const userRole = (user?.role || "student") as Role;
   const hasOsAccess = OS_ROLES.includes(userRole);
 
-  const filteredNavItems = osNavItems.filter((item) => {
-    if (!item.roles) return true;
-    return item.roles.includes(userRole);
-  });
+  // Get OS sections from canonical registry, filtered by user roles
+  const sections = getOsSections([userRole]);
 
   const isActive = (href: string) => {
     if (href === "/os") return pathname === "/os";
@@ -288,12 +184,9 @@ export function OsSidebar() {
           </div>
         ) : (
           sections.map((section) => {
-            const items = filteredNavItems.filter(
-              (item) => item.section === section,
-            );
-            if (items.length === 0) return null;
+            if (section.items.length === 0) return null;
             return (
-              <div key={section} style={{ marginBottom: "var(--space-4)" }}>
+              <div key={section.id} style={{ marginBottom: "var(--space-4)" }}>
                 {!collapsed && (
                   <div
                     style={{
@@ -306,7 +199,7 @@ export function OsSidebar() {
                       color: "rgba(247, 244, 236, 0.3)",
                     }}
                   >
-                    {section}
+                    {section.label}
                   </div>
                 )}
                 <div
@@ -316,8 +209,9 @@ export function OsSidebar() {
                     gap: "1px",
                   }}
                 >
-                  {items.map((item) => {
+                  {section.items.map((item) => {
                     const active = isActive(item.href);
+                    const ItemIcon = iconMap[item.icon] || Target;
                     return (
                       <Link
                         key={item.id}
@@ -344,7 +238,7 @@ export function OsSidebar() {
                         }}
                         title={collapsed ? item.label : undefined}
                       >
-                        <item.icon
+                        <ItemIcon
                           className={`w-4 h-4 shrink-0 ${active ? "text-accent-gold" : ""}`}
                         />
                         {!collapsed && (
