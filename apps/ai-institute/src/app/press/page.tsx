@@ -5,12 +5,42 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
 const brandColors = [
-  { name: "Deep Forest", hex: "#0a0f0d", usage: "Primary background" },
-  { name: "Emerald", hex: "#1a3a2a", usage: "Primary accent, buttons" },
-  { name: "Gold", hex: "#c9a227", usage: "Highlights, CTAs" },
-  { name: "Bronze", hex: "#8a7359", usage: "Secondary text" },
-  { name: "Ivory", hex: "#f5f1e6", usage: "Primary text" },
-  { name: "Forest Border", hex: "#1a2a1f", usage: "Borders, dividers" },
+  {
+    name: "Deep Forest",
+    hex: "var(--color-forest-950)",
+    displayHex: "#0a0f0d",
+    usage: "Primary background",
+  },
+  {
+    name: "Emerald",
+    hex: "var(--color-forest-900)",
+    displayHex: "#1a3a2a",
+    usage: "Primary accent, buttons",
+  },
+  {
+    name: "Gold",
+    hex: "var(--color-brand-gold)",
+    displayHex: "#c9a227",
+    usage: "Highlights, CTAs",
+  },
+  {
+    name: "Bronze",
+    hex: "var(--color-ivory-700)",
+    displayHex: "#8a7359",
+    usage: "Secondary text",
+  },
+  {
+    name: "Ivory",
+    hex: "var(--color-ivory-100)",
+    displayHex: "#f5f1e6",
+    usage: "Primary text",
+  },
+  {
+    name: "Forest Border",
+    hex: "var(--color-forest-900)",
+    displayHex: "#1a2a1f",
+    usage: "Borders, dividers",
+  },
 ];
 
 const brandAssets = [
@@ -187,7 +217,7 @@ export default function PressPage() {
                     {color.name}
                   </p>
                   <p className="text-[10px] text-text-tertiary font-mono">
-                    {color.hex}
+                    {color.displayHex}
                   </p>
                   <p className="text-[10px] text-text-tertiary mt-1">
                     {color.usage}

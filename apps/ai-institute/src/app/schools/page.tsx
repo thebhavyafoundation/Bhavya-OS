@@ -33,7 +33,8 @@ export default function SchoolsPage() {
             <h1
               className="text-4xl md:text-5xl font-bold tracking-tight mb-2"
               style={{
-                background: "linear-gradient(135deg, #f7f4ec 0%, #d4af37 100%)",
+                background:
+                  "linear-gradient(135deg, var(--color-ivory-100) 0%, var(--color-brand-gold) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}

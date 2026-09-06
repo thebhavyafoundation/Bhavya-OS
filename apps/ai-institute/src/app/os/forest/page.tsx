@@ -78,8 +78,12 @@ export default function OsForestPage() {
   }, []);
 
   const totalInstitutional = stats
-    ? stats.totalMissions + stats.totalSites + stats.totalPlantings +
-      stats.totalSurveys + stats.totalMonitoring + stats.totalImpactReports
+    ? stats.totalMissions +
+      stats.totalSites +
+      stats.totalPlantings +
+      stats.totalSurveys +
+      stats.totalMonitoring +
+      stats.totalImpactReports
     : 0;
 
   const totalTestSeed = stats?.testSeedRecords?.total ?? 0;
@@ -153,8 +157,16 @@ export default function OsForestPage() {
             textAlign: "center",
           }}
         >
-          <AlertTriangle size={32} style={{ color: "var(--text-secondary)", margin: "0 auto var(--space-4)" }} />
-          <p style={{ color: "var(--text-secondary)" }}>Unable to load Forest data.</p>
+          <AlertTriangle
+            size={32}
+            style={{
+              color: "var(--text-secondary)",
+              margin: "0 auto var(--space-4)",
+            }}
+          />
+          <p style={{ color: "var(--text-secondary)" }}>
+            Unable to load Forest data.
+          </p>
         </div>
       ) : (
         <>
@@ -168,12 +180,42 @@ export default function OsForestPage() {
             }}
           >
             {[
-              { label: "Missions", value: stats.totalMissions, icon: TreePine, color: "var(--forest)" },
-              { label: "Sites", value: stats.totalSites, icon: MapPin, color: "var(--earth)" },
-              { label: "Plantings", value: stats.totalPlantings, icon: Leaf, color: "var(--forest)" },
-              { label: "Surveys", value: stats.totalSurveys, icon: ClipboardCheck, color: "var(--earth)" },
-              { label: "Monitoring", value: stats.totalMonitoring, icon: Activity, color: "var(--forest)" },
-              { label: "Impact", value: stats.totalImpactReports, icon: TrendingUp, color: "var(--earth)" },
+              {
+                label: "Missions",
+                value: stats.totalMissions,
+                icon: TreePine,
+                color: "var(--forest)",
+              },
+              {
+                label: "Sites",
+                value: stats.totalSites,
+                icon: MapPin,
+                color: "var(--earth)",
+              },
+              {
+                label: "Plantings",
+                value: stats.totalPlantings,
+                icon: Leaf,
+                color: "var(--forest)",
+              },
+              {
+                label: "Surveys",
+                value: stats.totalSurveys,
+                icon: ClipboardCheck,
+                color: "var(--earth)",
+              },
+              {
+                label: "Monitoring",
+                value: stats.totalMonitoring,
+                icon: Activity,
+                color: "var(--forest)",
+              },
+              {
+                label: "Impact",
+                value: stats.totalImpactReports,
+                icon: TrendingUp,
+                color: "var(--earth)",
+              },
             ].map((card) => (
               <div
                 key={card.label}
@@ -186,9 +228,22 @@ export default function OsForestPage() {
               >
                 <div className="flex items-center gap-2 mb-2">
                   <card.icon size={16} style={{ color: card.color }} />
-                  <span style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>{card.label}</span>
+                  <span
+                    style={{
+                      fontSize: "var(--text-xs)",
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    {card.label}
+                  </span>
                 </div>
-                <div style={{ fontSize: "var(--text-2xl)", fontWeight: 800, color: "var(--text)" }}>
+                <div
+                  style={{
+                    fontSize: "var(--text-2xl)",
+                    fontWeight: 800,
+                    color: "var(--text)",
+                  }}
+                >
                   {card.value}
                 </div>
               </div>
@@ -217,18 +272,42 @@ export default function OsForestPage() {
             </h2>
             <div style={{ display: "flex", gap: "var(--space-8)" }}>
               <div>
-                <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginBottom: "var(--space-1)" }}>
+                <div
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    color: "var(--text-secondary)",
+                    marginBottom: "var(--space-1)",
+                  }}
+                >
                   Institutional (public-eligible)
                 </div>
-                <div style={{ fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--forest)" }}>
+                <div
+                  style={{
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 700,
+                    color: "var(--forest)",
+                  }}
+                >
                   {totalInstitutional}
                 </div>
               </div>
               <div>
-                <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginBottom: "var(--space-1)" }}>
+                <div
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    color: "var(--text-secondary)",
+                    marginBottom: "var(--space-1)",
+                  }}
+                >
                   Test-seeded (not public)
                 </div>
-                <div style={{ fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--text-secondary)" }}>
+                <div
+                  style={{
+                    fontSize: "var(--text-xl)",
+                    fontWeight: 700,
+                    color: "var(--text-secondary)",
+                  }}
+                >
                   {totalTestSeed}
                 </div>
               </div>
@@ -256,11 +335,22 @@ export default function OsForestPage() {
               Recent Evidence
             </h2>
             {stats.recentEvidence.length === 0 ? (
-              <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)" }}>
+              <p
+                style={{
+                  fontSize: "var(--text-sm)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 No evidence recorded yet.
               </p>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-3)",
+                }}
+              >
                 {stats.recentEvidence.map((e) => (
                   <div
                     key={e.id}
@@ -271,13 +361,32 @@ export default function OsForestPage() {
                       borderRadius: "var(--radius-md)",
                     }}
                   >
-                    <CheckCircle size={14} style={{ color: "var(--forest)", marginTop: 2, flexShrink: 0 }} />
+                    <CheckCircle
+                      size={14}
+                      style={{
+                        color: "var(--forest)",
+                        marginTop: 2,
+                        flexShrink: 0,
+                      }}
+                    />
                     <div>
-                      <div style={{ fontSize: "var(--text-sm)", color: "var(--text)" }}>
+                      <div
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          color: "var(--text)",
+                        }}
+                      >
                         {e.description}
                       </div>
-                      <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)", marginTop: 2 }}>
-                        {e.activityType} — {new Date(e.timestamp).toLocaleString()}
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "var(--text-secondary)",
+                          marginTop: 2,
+                        }}
+                      >
+                        {e.activityType} —{" "}
+                        {new Date(e.timestamp).toLocaleString()}
                       </div>
                     </div>
                   </div>
@@ -306,12 +415,26 @@ export default function OsForestPage() {
               Active Missions
             </h2>
             {missions.length === 0 ? (
-              <p style={{ fontSize: "var(--text-sm)", color: "var(--text-secondary)" }}>
+              <p
+                style={{
+                  fontSize: "var(--text-sm)",
+                  color: "var(--text-secondary)",
+                }}
+              >
                 No institutional missions yet. Create one from{" "}
-                <a href="/app/forest/new" style={{ color: "var(--forest)" }}>Forest Missions</a>.
+                <a href="/app/forest/new" style={{ color: "var(--forest)" }}>
+                  Forest Missions
+                </a>
+                .
               </p>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "var(--space-3)",
+                }}
+              >
                 {missions.map((m) => (
                   <div
                     key={m.id}
@@ -323,11 +446,23 @@ export default function OsForestPage() {
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: "var(--text-sm)", fontWeight: 600, color: "var(--text)" }}>
+                      <div
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          fontWeight: 600,
+                          color: "var(--text)",
+                        }}
+                      >
                         {m.name}
                       </div>
-                      <div style={{ fontSize: "var(--text-xs)", color: "var(--text-secondary)" }}>
-                        {m.region} — {m.status} — {new Date(m.created).toLocaleDateString()}
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "var(--text-secondary)",
+                        }}
+                      >
+                        {m.region} — {m.status} —{" "}
+                        {new Date(m.created).toLocaleDateString()}
                       </div>
                     </div>
                     <span
@@ -335,8 +470,14 @@ export default function OsForestPage() {
                         fontSize: "var(--text-xs)",
                         padding: "2px 8px",
                         borderRadius: "var(--radius-sm)",
-                        background: m.provenance === "institutional" ? "var(--forest)" : "var(--border)",
-                        color: m.provenance === "institutional" ? "#fff" : "var(--text-secondary)",
+                        background:
+                          m.provenance === "institutional"
+                            ? "var(--forest)"
+                            : "var(--border)",
+                        color:
+                          m.provenance === "institutional"
+                            ? "var(--color-text-inverse, #fff)"
+                            : "var(--text-secondary)",
                       }}
                     >
                       {m.provenance || "test-seed"}
@@ -367,22 +508,61 @@ export default function OsForestPage() {
             >
               Metric Health
             </h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-              <div className="flex items-center justify-between" style={{ fontSize: "var(--text-sm)" }}>
-                <span style={{ color: "var(--text-secondary)" }}>Last updated</span>
-                <span style={{ color: "var(--text)" }}>{stats.lastUpdated ? new Date(stats.lastUpdated).toLocaleString() : "Never"}</span>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--space-2)",
+              }}
+            >
+              <div
+                className="flex items-center justify-between"
+                style={{ fontSize: "var(--text-sm)" }}
+              >
+                <span style={{ color: "var(--text-secondary)" }}>
+                  Last updated
+                </span>
+                <span style={{ color: "var(--text)" }}>
+                  {stats.lastUpdated
+                    ? new Date(stats.lastUpdated).toLocaleString()
+                    : "Never"}
+                </span>
               </div>
-              <div className="flex items-center justify-between" style={{ fontSize: "var(--text-sm)" }}>
-                <span style={{ color: "var(--text-secondary)" }}>Missions this month</span>
-                <span style={{ color: "var(--text)" }}>{stats.missionsCreatedThisMonth}</span>
+              <div
+                className="flex items-center justify-between"
+                style={{ fontSize: "var(--text-sm)" }}
+              >
+                <span style={{ color: "var(--text-secondary)" }}>
+                  Missions this month
+                </span>
+                <span style={{ color: "var(--text)" }}>
+                  {stats.missionsCreatedThisMonth}
+                </span>
               </div>
-              <div className="flex items-center justify-between" style={{ fontSize: "var(--text-sm)" }}>
-                <span style={{ color: "var(--text-secondary)" }}>Plantings this month</span>
-                <span style={{ color: "var(--text)" }}>{stats.plantingsCreatedThisMonth}</span>
+              <div
+                className="flex items-center justify-between"
+                style={{ fontSize: "var(--text-sm)" }}
+              >
+                <span style={{ color: "var(--text-secondary)" }}>
+                  Plantings this month
+                </span>
+                <span style={{ color: "var(--text)" }}>
+                  {stats.plantingsCreatedThisMonth}
+                </span>
               </div>
-              <div className="flex items-center justify-between" style={{ fontSize: "var(--text-sm)" }}>
-                <span style={{ color: "var(--text-secondary)" }}>Evidence entries</span>
-                <span style={{ color: "var(--text)" }}>{Object.values(stats.evidenceCounts).reduce((a, b) => a + b, 0)}</span>
+              <div
+                className="flex items-center justify-between"
+                style={{ fontSize: "var(--text-sm)" }}
+              >
+                <span style={{ color: "var(--text-secondary)" }}>
+                  Evidence entries
+                </span>
+                <span style={{ color: "var(--text)" }}>
+                  {Object.values(stats.evidenceCounts).reduce(
+                    (a, b) => a + b,
+                    0,
+                  )}
+                </span>
               </div>
             </div>
           </div>

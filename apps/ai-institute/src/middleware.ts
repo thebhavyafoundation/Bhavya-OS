@@ -79,6 +79,7 @@ function hasSessionCookie(request: NextRequest): boolean {
 function isProtectedRoute(pathname: string): boolean {
   return (
     pathname.startsWith("/app") ||
+    pathname.startsWith("/dashboard") ||
     pathname.startsWith("/os") ||
     pathname.startsWith("/studio") ||
     pathname.startsWith("/onboarding") ||

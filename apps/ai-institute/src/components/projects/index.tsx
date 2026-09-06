@@ -146,12 +146,28 @@ const projects: Project[] = [
 
 // TODO: reference design tokens
 const difficultyConfig = {
-  guided: { color: "#22c55e", label: "Guided", icon: "📋" },
-  independent: { color: "#3b82f6", label: "Independent", icon: "🔧" },
-  production: { color: "#8b5cf6", label: "Production", icon: "🚀" },
-  client: { color: "#f59e0b", label: "Client", icon: "🤝" },
-  opensource: { color: "#06b6d4", label: "Open Source", icon: "🌐" },
-  capstone: { color: "#ef4444", label: "Capstone", icon: "🏆" },
+  guided: { color: "var(--color-forest-500)", label: "Guided", icon: "📋" },
+  independent: {
+    color: "var(--color-brand-forest)",
+    label: "Independent",
+    icon: "🔧",
+  },
+  production: {
+    color: "var(--color-brand-gold)",
+    label: "Production",
+    icon: "🚀",
+  },
+  client: { color: "var(--color-brand-gold)", label: "Client", icon: "🤝" },
+  opensource: {
+    color: "var(--color-brand-sage)",
+    label: "Open Source",
+    icon: "🌐",
+  },
+  capstone: {
+    color: "var(--color-accent-red, #ef4444)",
+    label: "Capstone",
+    icon: "🏆",
+  },
 };
 
 export function ProjectStudio() {

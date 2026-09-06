@@ -12,13 +12,14 @@ import {
   Download,
 } from "lucide-react";
 import { getHomeModules, type Role } from "@/lib/roles";
+import { requireSessionUser } from "@/lib/require-role";
 
 export const metadata: Metadata = {
   title: "My Bhavya — Bhavya Foundation",
   description: "Your institutional home at Bhavya Foundation.",
 };
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, typeof BookOpen> = {
   BookOpen,
   Users,
   TreePine,
@@ -31,15 +32,20 @@ const iconMap: Record<string, any> = {
   Home: BookOpen,
 };
 
-// Simulated user roles — in production, fetch from auth + database
-const userRoles: Role[] = ["student", "volunteer"];
-
-export default function MyAppPage() {
+export default async function MyAppPage() {
+  const user = await requireSessionUser("/app");
+  const userRoles: Role[] = [user.role as Role];
   const modules = getHomeModules(userRoles);
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--color-bg-primary)" }}>
-      <div style={{ maxWidth: "var(--max-w)", margin: "0 auto", padding: "var(--space-12) var(--space-6)" }}>
+      <div
+        style={{
+          maxWidth: "var(--max-w)",
+          margin: "0 auto",
+          padding: "var(--space-12) var(--space-6)",
+        }}
+      >
         <header style={{ marginBottom: "var(--space-12)" }}>
           <h1
             style={{
@@ -61,23 +67,38 @@ export default function MyAppPage() {
           >
             Your institutional home. Everything you need, one place.
           </p>
-          <div style={{ display: "flex", gap: "var(--space-2)", marginTop: "var(--space-4)" }}>
-            {userRoles.map((role) => (
-              <span
-                key={role}
-                style={{
-                  padding: "var(--space-1) var(--space-3)",
-                  background: "var(--color-brand-forest)",
-                  color: "var(--color-text-inverse)",
-                  borderRadius: "var(--radius-sm)",
-                  fontSize: "var(--text-xs)",
-                  fontWeight: 600,
-                  textTransform: "capitalize",
-                }}
-              >
-                {role}
-              </span>
-            ))}
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-2)",
+              marginTop: "var(--space-4)",
+            }}
+          >
+            <span
+              style={{
+                padding: "var(--space-1) var(--space-3)",
+                background: "var(--color-brand-forest)",
+                color: "var(--color-text-inverse)",
+                borderRadius: "var(--radius-sm)",
+                fontSize: "var(--text-xs)",
+                fontWeight: 600,
+                textTransform: "capitalize",
+              }}
+            >
+              {user.role}
+            </span>
+            <span
+              style={{
+                padding: "var(--space-1) var(--space-3)",
+                background: "var(--color-bg-secondary)",
+                color: "var(--color-text-secondary)",
+                borderRadius: "var(--radius-sm)",
+                fontSize: "var(--text-xs)",
+                fontWeight: 500,
+              }}
+            >
+              {user.name}
+            </span>
           </div>
         </header>
 
@@ -106,7 +127,10 @@ export default function MyAppPage() {
               >
                 <Icon
                   size={24}
-                  style={{ color: "var(--color-brand-forest)", marginBottom: "var(--space-3)" }}
+                  style={{
+                    color: "var(--color-brand-forest)",
+                    marginBottom: "var(--space-3)",
+                  }}
                 />
                 <h2
                   style={{

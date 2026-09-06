@@ -212,7 +212,7 @@ export function AttentionSimulator() {
                   y1={20}
                   x2={x}
                   y2={100}
-                  stroke={`rgba(34, 197, 94, ${weight})`}
+                  stroke={`var(--color-forest-500, rgba(34, 197, 94, ${weight}))`}
                   strokeWidth={weight * 8}
                   className="transition-all duration-500"
                 />
@@ -222,8 +222,8 @@ export function AttentionSimulator() {
                   r={16 + weight * 12}
                   fill={
                     i === selectedToken
-                      ? "#22c55e"
-                      : `rgba(59, 130, 246, ${0.3 + weight * 0.7})`
+                      ? "var(--color-forest-500)"
+                      : `var(--color-brand-forest, rgba(59, 130, 246, ${0.3 + weight * 0.7}))`
                   }
                   className="transition-all duration-500"
                 />
@@ -303,14 +303,14 @@ export function TokenizationSimulator() {
 
   // TODO: reference design tokens
   const colors = [
-    "#22c55e",
-    "#3b82f6",
-    "#8b5cf6",
-    "#f59e0b",
-    "#ef4444",
-    "#ec4899",
-    "#06b6d4",
-    "#14b8a6",
+    "var(--color-forest-500)",
+    "var(--color-brand-forest)",
+    "var(--color-brand-gold)",
+    "var(--color-brand-gold)",
+    "var(--color-accent-red, #ef4444)",
+    "var(--color-accent-gold, #d4af37)",
+    "var(--color-brand-sage)",
+    "var(--color-forest-400)",
   ];
 
   return (
@@ -397,12 +397,12 @@ export function EmbeddingSpaceExplorer() {
 
   // TODO: reference design tokens
   const categoryColors: Record<string, string> = {
-    royalty: "#f59e0b",
-    animals: "#22c55e",
-    places: "#3b82f6",
-    actions: "#8b5cf6",
-    adjectives: "#ef4444",
-    emotions: "#ec4899",
+    royalty: "var(--color-brand-gold)",
+    animals: "var(--color-forest-500)",
+    places: "var(--color-brand-forest)",
+    actions: "var(--color-brand-gold)",
+    adjectives: "var(--color-accent-red, #ef4444)",
+    emotions: "var(--color-accent-gold, #d4af37)",
   };
 
   const selected = words.find((w) => w.word === selectedWord);
@@ -819,7 +819,7 @@ export function TransformerPipelineVisualizer() {
                       key={j}
                       className="p-1 rounded"
                       style={{
-                        backgroundColor: `rgba(34, 197, 94, ${i === j ? 0.5 : 0.1 + Math.random() * 0.3})`,
+                        backgroundColor: `var(--color-forest-500, rgba(34, 197, 94, ${i === j ? 0.5 : 0.1 + Math.random() * 0.3}))`,
                       }}
                     >
                       {t1.slice(0, 2)}→{t2.slice(0, 2)}

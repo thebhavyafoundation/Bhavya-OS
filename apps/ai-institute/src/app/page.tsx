@@ -8,15 +8,10 @@ import {
   Building2,
   HeartHandshake,
   ArrowRight,
-  BookOpen,
-  FlaskConical,
   Users,
   GraduationCap,
   Shield,
   Play,
-  Search,
-  ArrowUpRight,
-  Leaf,
   Globe,
   Landmark,
   Compass,
@@ -557,7 +552,7 @@ export default function HomePage() {
               </h2>
             </div>
             <a
-              href="/programs"
+              href="/missions"
               style={{
                 display: "inline-flex",
                 alignItems: "center",

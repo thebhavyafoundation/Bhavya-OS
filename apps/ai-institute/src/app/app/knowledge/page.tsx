@@ -70,17 +70,16 @@ interface KOListSummary {
   status?: string;
 }
 
-// TODO: reference design tokens — these hex values are data-mapped for runtime use
 const domainColors: Record<string, string> = {
-  AI: "#3b82f6",
-  Forest: "#22c55e",
-  Heritage: "#f59e0b",
-  Community: "#8b5cf6",
+  AI: "var(--color-brand-forest)",
+  Forest: "var(--color-forest-500)",
+  Heritage: "var(--color-brand-gold)",
+  Community: "var(--color-brand-gold)",
 };
 
 const statusColors: Record<string, string> = {
   draft: "var(--text-tertiary)",
-  published: "#22c55e",
+  published: "var(--color-forest-500)",
 };
 
 const provenanceLabels: Record<string, string> = {

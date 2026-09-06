@@ -111,11 +111,11 @@ export function SemanticSearch() {
 
   // TODO: reference design tokens
   const typeColors: Record<string, string> = {
-    concept: "#22c55e",
-    path: "#3b82f6",
-    project: "#8b5cf6",
-    glossary: "#f59e0b",
-    paper: "#ef4444",
+    concept: "var(--color-forest-500)",
+    path: "var(--color-brand-forest)",
+    project: "var(--color-brand-gold)",
+    glossary: "var(--color-brand-gold)",
+    paper: "var(--color-accent-red, #ef4444)",
   };
 
   return (

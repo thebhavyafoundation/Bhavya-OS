@@ -11,6 +11,8 @@
  * Layers (fallback): base gradient → accent → mid-tone → noise → mountains → vignette → fade
  */
 
+import { useMemo } from "react";
+
 type PillarType = "forest" | "knowledge" | "heritage" | "community" | "home";
 
 interface HeroBackgroundProps {
@@ -31,47 +33,89 @@ const pillarConfigs: Record<
     accent: string;
     mid: string;
     noise: string;
+    customProperties?: Record<string, string>;
   }
 > = {
   home: {
-    base: "linear-gradient(160deg, #041f16 0%, #0a3025 25%, #0e382e 50%, #14543e 75%, #1a6b4f 100%)",
+    base: `linear-gradient(160deg,
+      color-mix(in srgb, var(--color-forest-900) 70%, var(--color-forest-950)) 0%,
+      color-mix(in srgb, var(--color-forest-800) 75%, var(--color-forest-900)) 25%,
+      var(--color-brand-forest) 50%,
+      color-mix(in srgb, var(--color-brand-forest) 55%, var(--color-forest-600)) 75%,
+      color-mix(in srgb, var(--color-forest-600) 80%, var(--color-forest-500)) 100%)`,
     accent:
-      "radial-gradient(ellipse at 70% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%)",
-    mid: "radial-gradient(ellipse at 30% 80%, rgba(14, 56, 46, 0.6) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 70% 20%, color-mix(in srgb, var(--color-brand-gold) 8%, transparent) 0%, transparent 60%)",
+    mid: "radial-gradient(ellipse at 30% 80%, color-mix(in srgb, var(--color-brand-forest) 60%, transparent) 0%, transparent 50%)",
     noise:
-      "repeating-conic-gradient(rgba(247,244,236,0.015) 0% 25%, transparent 0% 50%)",
+      "repeating-conic-gradient(color-mix(in srgb, var(--color-brand-ivory) 1.5%, transparent) 0% 25%, transparent 0% 50%)",
   },
   forest: {
-    base: "linear-gradient(160deg, #021a12 0%, #062e1f 25%, #0e382e 50%, #166044 75%, #1a7a52 100%)",
+    base: `linear-gradient(160deg,
+      color-mix(in srgb, var(--color-forest-950) 60%, var(--color-forest-900)) 0%,
+      color-mix(in srgb, var(--color-forest-900) 70%, var(--color-forest-800)) 25%,
+      var(--color-brand-forest) 50%,
+      color-mix(in srgb, var(--color-brand-forest) 55%, var(--color-forest-600)) 75%,
+      color-mix(in srgb, var(--color-forest-600) 55%, var(--color-forest-500)) 100%)`,
     accent:
-      "radial-gradient(ellipse at 60% 30%, rgba(34, 139, 87, 0.12) 0%, transparent 55%)",
-    mid: "radial-gradient(ellipse at 20% 70%, rgba(6, 46, 31, 0.7) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 60% 30%, color-mix(in srgb, var(--color-forest-500) 12%, transparent) 0%, transparent 55%)",
+    mid: "radial-gradient(ellipse at 20% 70%, color-mix(in srgb, var(--color-forest-800) 70%, transparent) 0%, transparent 50%)",
     noise:
-      "repeating-conic-gradient(rgba(247,244,236,0.012) 0% 25%, transparent 0% 50%)",
+      "repeating-conic-gradient(color-mix(in srgb, var(--color-brand-ivory) 1.2%, transparent) 0% 25%, transparent 0% 50%)",
   },
   knowledge: {
-    base: "linear-gradient(160deg, #0a1628 0%, #122240 25%, #1a3358 50%, #1e3d6a 75%, #234a7a 100%)",
+    customProperties: {
+      "--hero-knowledge-1": "#0a1628",
+      "--hero-knowledge-2": "#122240",
+      "--hero-knowledge-3": "#1a3358",
+      "--hero-knowledge-4": "#1e3d6a",
+      "--hero-knowledge-5": "#234a7a",
+      "--hero-knowledge-mid": "rgba(18, 34, 64, 0.7)",
+    },
+    base: `linear-gradient(160deg,
+      var(--hero-knowledge-1) 0%,
+      var(--hero-knowledge-2) 25%,
+      var(--hero-knowledge-3) 50%,
+      var(--hero-knowledge-4) 75%,
+      var(--hero-knowledge-5) 100%)`,
     accent:
-      "radial-gradient(ellipse at 65% 25%, rgba(212, 175, 55, 0.06) 0%, transparent 55%)",
-    mid: "radial-gradient(ellipse at 25% 75%, rgba(18, 34, 64, 0.7) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 65% 25%, color-mix(in srgb, var(--color-brand-gold) 6%, transparent) 0%, transparent 55%)",
+    mid: "radial-gradient(ellipse at 25% 75%, var(--hero-knowledge-mid) 0%, transparent 50%)",
     noise:
-      "repeating-conic-gradient(rgba(247,244,236,0.01) 0% 25%, transparent 0% 50%)",
+      "repeating-conic-gradient(color-mix(in srgb, var(--color-brand-ivory) 1%, transparent) 0% 25%, transparent 0% 50%)",
   },
   heritage: {
-    base: "linear-gradient(160deg, #1a0f08 0%, #2d1a0e 25%, #3d2516 50%, #4d301e 75%, #5d3c26 100%)",
+    customProperties: {
+      "--hero-heritage-1": "#1a0f08",
+      "--hero-heritage-2": "#2d1a0e",
+      "--hero-heritage-3": "#3d2516",
+      "--hero-heritage-4": "#4d301e",
+      "--hero-heritage-5": "#5d3c26",
+      "--hero-heritage-mid": "rgba(45, 26, 14, 0.7)",
+    },
+    base: `linear-gradient(160deg,
+      var(--hero-heritage-1) 0%,
+      var(--hero-heritage-2) 25%,
+      var(--hero-heritage-3) 50%,
+      var(--hero-heritage-4) 75%,
+      var(--hero-heritage-5) 100%)`,
     accent:
-      "radial-gradient(ellipse at 55% 35%, rgba(212, 175, 55, 0.08) 0%, transparent 55%)",
-    mid: "radial-gradient(ellipse at 30% 65%, rgba(45, 26, 14, 0.7) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 55% 35%, color-mix(in srgb, var(--color-brand-gold) 8%, transparent) 0%, transparent 55%)",
+    mid: "radial-gradient(ellipse at 30% 65%, var(--hero-heritage-mid) 0%, transparent 50%)",
     noise:
-      "repeating-conic-gradient(rgba(247,244,236,0.012) 0% 25%, transparent 0% 50%)",
+      "repeating-conic-gradient(color-mix(in srgb, var(--color-brand-ivory) 1.2%, transparent) 0% 25%, transparent 0% 50%)",
   },
   community: {
-    base: "linear-gradient(160deg, #041f16 0%, #0b3528 25%, #0e382e 50%, #14503c 75%, #1a684e 100%)",
+    base: `linear-gradient(160deg,
+      color-mix(in srgb, var(--color-forest-900) 70%, var(--color-forest-950)) 0%,
+      color-mix(in srgb, var(--color-forest-800) 60%, var(--color-forest-900)) 25%,
+      var(--color-brand-forest) 50%,
+      color-mix(in srgb, var(--color-brand-forest) 55%, var(--color-forest-600)) 75%,
+      color-mix(in srgb, var(--color-forest-600) 90%, var(--color-forest-500)) 100%)`,
     accent:
-      "radial-gradient(ellipse at 70% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 55%)",
-    mid: "radial-gradient(ellipse at 25% 80%, rgba(11, 53, 40, 0.6) 0%, transparent 50%)",
+      "radial-gradient(ellipse at 70% 20%, color-mix(in srgb, var(--color-brand-gold) 6%, transparent) 0%, transparent 55%)",
+    mid: "radial-gradient(ellipse at 25% 80%, color-mix(in srgb, var(--color-forest-800) 60%, transparent) 0%, transparent 50%)",
     noise:
-      "repeating-conic-gradient(rgba(247,244,236,0.015) 0% 25%, transparent 0% 50%)",
+      "repeating-conic-gradient(color-mix(in srgb, var(--color-brand-ivory) 1.5%, transparent) 0% 25%, transparent 0% 50%)",
   },
 };
 
@@ -84,10 +128,27 @@ export function HeroBackground({
 }: HeroBackgroundProps) {
   const config = pillarConfigs[pillar];
 
+  const customVars = useMemo(() => {
+    const vars: Record<string, string> = {};
+    for (const cfg of Object.values(pillarConfigs)) {
+      if (cfg.customProperties) {
+        Object.assign(vars, cfg.customProperties);
+      }
+    }
+    return vars;
+  }, []);
+
+  const containerStyle = {
+    position: "absolute" as const,
+    inset: 0,
+    zIndex: 0,
+    ...customVars,
+  };
+
   /* When a real photograph is provided, render it with overlay */
   if (photo) {
     return (
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <div style={containerStyle}>
         {/* Layer 1: Real photograph */}
         <div
           style={{
@@ -107,9 +168,9 @@ export function HeroBackground({
             inset: 0,
             background: `linear-gradient(
               to bottom,
-              rgba(14, 56, 46, ${overlayOpacity * 0.6}) 0%,
-              rgba(14, 56, 46, ${overlayOpacity * 0.8}) 40%,
-              rgba(14, 56, 46, ${overlayOpacity}) 100%
+              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 60)}%, transparent) 0%,
+              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 80)}%, transparent) 40%,
+              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 100)}%, transparent) 100%
             )`,
           }}
         />
@@ -120,7 +181,7 @@ export function HeroBackground({
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.25) 100%)",
+              "radial-gradient(ellipse at center, transparent 30%, rgba(4, 15, 11, 0.25) 100%)",
           }}
         />
 
@@ -144,7 +205,7 @@ export function HeroBackground({
 
   /* Fallback: Multi-layer gradient system */
   return (
-    <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+    <div style={containerStyle}>
       {/* Layer 1: Base gradient */}
       <div
         style={{
@@ -223,7 +284,7 @@ export function HeroBackground({
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%)",
+            "radial-gradient(ellipse at center, transparent 40%, rgba(4, 15, 11, 0.3) 100%)",
         }}
       />
 
