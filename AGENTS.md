@@ -29,3 +29,183 @@ Community. AI Institute never replaces the Foundation identity.
 - No app-to-app dependencies; one concept → one route (`docs/architecture/CANONICAL_ROUTE_MAP.md`)
 - Never hand-edit generated indexes (`registry/`, `bar/`, `FILE-MAP.md`) or create a new Vercel project
 - Nothing moves forward until a person has read the last output
+
+---
+
+# Bhavya Engineering Constitution
+
+## PRINCIPLE 1 — INSPECT FIRST
+
+Never implement against assumptions.
+
+Before making structural changes, inspect:
+
+- Repository structure and existing code
+- Architecture decisions and conventions
+- Data models and type definitions
+- Routes and navigation
+- Tests and verification
+- Deployment configuration
+
+Use `bhavya-architecture` skill for structural changes.
+
+## PRINCIPLE 2 — EXISTING SYSTEM FIRST
+
+Search for existing functionality before creating new functionality.
+
+Prefer:
+
+- Reuse of existing packages, components, and patterns
+- Extension of existing types and interfaces
+- Refactoring of existing code over duplication
+
+Before creating anything, search:
+
+- `packages/platform-ui/` for UI components
+- `packages/shared/` for type definitions
+- `packages/` for existing package capabilities
+- `.opencode/skills/` for existing skills
+
+## PRINCIPLE 3 — ONE ECOSYSTEM
+
+Bhavya Foundation and Bhavya OS are parts of one ecosystem.
+
+Do not create:
+
+- Separate repositories
+- Duplicate entities or types
+- Duplicate authentication systems
+- Duplicate design systems
+- Duplicate data models
+
+One canonical app. One design system. One auth system. One database.
+
+## PRINCIPLE 4 — SOURCE OF TRUTH
+
+GitHub is the canonical source of code.
+
+Production deployment is derived from the repository.
+Do not treat a local machine as the authoritative production state.
+
+- `master` branch deploys to production
+- PRs target `main` or `master`
+- CI validates all changes
+- Vercel deploys from GitHub
+
+## PRINCIPLE 5 — TRUTH OVER APPEARANCE
+
+Never fabricate institutional impact.
+
+Do not invent:
+
+- Tree counts or hectares planted
+- Beneficiary numbers
+- Student or volunteer counts
+- Funding amounts
+- Partner organizations
+- Government relationships
+- Certifications or awards
+- Research results
+- Project completion dates
+
+If data does not exist, say that it does not exist.
+
+Use `bhavya-content-truth` skill for content verification.
+
+## PRINCIPLE 6 — EVIDENCE
+
+Institutional claims should support:
+
+- Value — what was achieved
+- Source — where the data comes from
+- Date — when the data was recorded
+- Verification state — how confident we are
+
+Verification states:
+
+- `verified` — Confirmed by authoritative source
+- `reported` — Stated by institution, not independently verified
+- `estimated` — Approximate or calculated value
+- `pending verification` — Submitted but not yet confirmed
+- `demo` — Sample data, not real
+
+## PRINCIPLE 7 — AI IS NOT THE SOURCE OF TRUTH
+
+AI can:
+
+- Research and gather information
+- Draft and summarize content
+- Analyze and classify data
+- Recommend actions
+- Transform and format data
+
+AI must not silently invent institutional facts.
+
+Consequential actions (publishing, submitting, financial decisions) require appropriate human approval.
+
+## PRINCIPLE 8 — TEST BEFORE CLAIMING COMPLETE
+
+Never report "complete" merely because implementation exists.
+
+Completion requires evidence:
+
+- Typecheck passing
+- Lint passing
+- Tests passing
+- Build succeeding
+- Route audit clean
+- Security check passed
+- Git status clean
+- CI passing
+
+Use `bhavya-production-verification` skill for completion gates.
+
+---
+
+# Bhavya Skills
+
+Project-local skills live in `.opencode/skills/`. Use the `skill` tool to load them.
+
+| Skill                            | Purpose                                             |
+| -------------------------------- | --------------------------------------------------- |
+| `bhavya-architecture`            | Inspect and evolve architecture without duplication |
+| `bhavya-design-system`           | Enforce dual-mode design system (Foundation + OS)   |
+| `bhavya-content-truth`           | Prevent fabrication of institutional data           |
+| `bhavya-data-model`              | Manage canonical entity definitions                 |
+| `bhavya-route-audit`             | Audit routes, navigation, and links                 |
+| `bhavya-ui-verification`         | Verify UI against design system and a11y            |
+| `bhavya-security`                | Verify security practices                           |
+| `bhavya-github-workflow`         | Follow Git workflow conventions                     |
+| `bhavya-production-verification` | Verify production readiness                         |
+| `bhavya-ai-development`          | Guide AI agent development                          |
+| `bhavya-qa`                      | Browser-driven QA testing                           |
+| `bhavya-autoplan`                | Auto-review pipeline                                |
+| `bhavya-canary`                  | Post-deploy monitoring                              |
+| `bhavya-freeze`                  | Scope lock for debugging                            |
+| `bhavya-investigate`             | Systematic debugging                                |
+| `bhavya-learn`                   | Persistent engineering knowledge                    |
+| `bhavya-plan-review`             | Structured plan review                              |
+| `bhavya-retro`                   | Weekly engineering retrospective                    |
+| `bhavya-review`                  | Pre-landing code review                             |
+| `bhavya-security-audit`          | CSO mode for security audit                         |
+| `bhavya-ship`                    | Ship workflow                                       |
+| `bhavya-spec`                    | Structured specification development                |
+
+## Skill Precedence
+
+1. Project skills (`.opencode/skills/`) — highest priority
+2. Personal skills (`~/.config/opencode/skills/`)
+3. Superpowers skills (via plugin) — lowest priority
+
+## Execution Workflow
+
+For substantive engineering tasks:
+
+1. **Brainstorm** — Explore intent and requirements
+2. **Specification** — Define what to build
+3. **Plan** — Design the approach
+4. **TDD** — Write tests first
+5. **Implementation** — Build the solution
+6. **Review** — Verify against requirements
+7. **Verification** — Run all checks
+8. **Git** — Commit with evidence
