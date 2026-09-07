@@ -504,6 +504,7 @@
   - `docs\design-system`/
   - `docs\developer`/
   - `docs\ecosystem`/
+  - `docs\engineering`/
   - `docs\github-os`/
   - `docs\governance`/
   - `docs\institution-ops`/
