@@ -889,6 +889,116 @@ export interface IOCData {
   risks: { id: string; title: string; severity: string; status: string }[];
 }
 
+export interface IOCObjective {
+  id: string;
+  title: string;
+  description: string;
+  department: string;
+  quarter: string;
+  status: string;
+  progress: number;
+  key_results: string;
+  initiatives: string;
+}
+
+export interface IOCRisk {
+  id: string;
+  title: string;
+  description: string;
+  severity: string;
+  status: string;
+  category: string;
+  mitigation: string;
+  owner: string;
+}
+
+export interface IOCActionItem {
+  id: string;
+  title: string;
+  description: string;
+  assignee: string;
+  due_date: string;
+  priority: string;
+  status: string;
+  related_objective_id: string;
+}
+
+export interface IOCWeeklyReview {
+  id: string;
+  week_start: string;
+  week_end: string;
+  period: string;
+  summary: string;
+  metrics: string;
+  risks: string;
+  action_items: string;
+  next_week_plan: string;
+  status: string;
+  created_at: string;
+}
+
+export interface IOCAlert {
+  id: string;
+  title: string;
+  message: string;
+  severity: string;
+  status: string;
+  source: string;
+  created_at: string;
+}
+
+export interface IOCEvent {
+  id: string;
+  type: string;
+  source: string;
+  payload: string;
+  created_at: string;
+}
+
+export interface IOCKpi {
+  id: string;
+  name: string;
+  category: string;
+  value: number;
+  unit: string;
+  target: number;
+  trend: string;
+  change_percent: number;
+  period: string;
+  source: string;
+}
+
+export interface IOCSystemHealth {
+  system: string;
+  status: string;
+  last_checked: string;
+  api_available: number;
+  dashboard_available: number;
+  events_produced: number;
+  events_consumed: number;
+}
+
+export interface IOCDecision {
+  id: string;
+  title: string;
+  description: string;
+  context: string;
+  selected_option: string;
+  rationale: string;
+  decided_by: string;
+  decided_at: string;
+  status: string;
+}
+
+export interface IOCData {
+  activeOKRs: number;
+  openRisks: number;
+  pendingReviews: number;
+  actionsThisWeek: number;
+  okrs: { id: string; title: string; status: string; progress: number }[];
+  risks: { id: string; title: string; severity: string; status: string }[];
+}
+
 export function getIOCData(): IOCData {
   const dbPath = path.join(ROOT, "apps/ioc/data/ioc.db");
   if (!fs.existsSync(dbPath)) {
@@ -960,5 +1070,180 @@ export function getIOCData(): IOCData {
       okrs: [],
       risks: [],
     };
+  }
+}
+
+function getIOCDb() {
+  const dbPath = path.join(ROOT, "apps/ioc/data/ioc.db");
+  if (!fs.existsSync(dbPath)) return null;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    return new Database(dbPath, { readonly: true });
+  } catch {
+    return null;
+  }
+}
+
+export function getIOCObjectives(): IOCObjective[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    const rows = db
+      .prepare(
+        `SELECT id, title, description, department, quarter, status, progress,
+         key_results, initiatives FROM objectives ORDER BY
+         CASE status WHEN 'in_progress' THEN 0 WHEN 'not_started' THEN 1 ELSE 2 END`,
+      )
+      .all() as IOCObjective[];
+    return rows;
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCRisks(): IOCRisk[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, title, description, severity, status, category, mitigation, owner
+         FROM risks ORDER BY
+         CASE severity WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END`,
+      )
+      .all() as IOCRisk[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCActions(): IOCActionItem[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, title, description, assignee, due_date, priority, status, related_objective_id
+         FROM action_items ORDER BY
+         CASE status WHEN 'pending' THEN 0 WHEN 'in_progress' THEN 1 ELSE 2 END,
+         CASE priority WHEN 'urgent' THEN 0 WHEN 'high' THEN 1 WHEN 'normal' THEN 2 ELSE 3 END`,
+      )
+      .all() as IOCActionItem[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCReviews(): IOCWeeklyReview[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, week_start, week_end, period, summary, metrics, risks,
+         action_items, next_week_plan, status, created_at
+         FROM weekly_reviews ORDER BY created_at DESC LIMIT 20`,
+      )
+      .all() as IOCWeeklyReview[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCAlerts(): IOCAlert[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, title, message, severity, status, source, created_at
+         FROM alerts WHERE status = 'active'
+         ORDER BY
+         CASE severity WHEN 'critical' THEN 0 WHEN 'warning' THEN 1 ELSE 2 END`,
+      )
+      .all() as IOCAlert[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCEvents(): IOCEvent[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, type, source, payload, created_at
+         FROM institution_events ORDER BY created_at DESC LIMIT 50`,
+      )
+      .all() as IOCEvent[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCKpis(): IOCKpi[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, name, category, value, unit, target, trend, change_percent, period, source
+         FROM institution_kpis ORDER BY collected_at DESC LIMIT 30`,
+      )
+      .all() as IOCKpi[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCHealth(): IOCSystemHealth[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT system, status, last_checked, api_available, dashboard_available,
+         events_produced, events_consumed
+         FROM system_health ORDER BY system`,
+      )
+      .all() as IOCSystemHealth[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
+  }
+}
+
+export function getIOCDecisions(): IOCDecision[] {
+  const db = getIOCDb();
+  if (!db) return [];
+  try {
+    return db
+      .prepare(
+        `SELECT id, title, description, context, selected_option, rationale,
+         decided_by, decided_at, status
+         FROM decisions ORDER BY created_at DESC`,
+      )
+      .all() as IOCDecision[];
+  } catch {
+    return [];
+  } finally {
+    db?.close();
   }
 }
