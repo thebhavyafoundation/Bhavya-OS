@@ -281,7 +281,7 @@ export function AssessmentEngine() {
             <div className="text-xs text-white/40">Overall Score</div>
           </div>
           <div className="bg-bg-primary/30 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-blue-500">
+            <div className="text-3xl font-bold text-accent-gold">
               {results.length}
             </div>
             <div className="text-xs text-white/40">Questions Completed</div>
@@ -343,7 +343,7 @@ export function AssessmentEngine() {
                   : question.type === "design"
                     ? "bg-accent-gold/20 text-accent-gold"
                     : question.type === "prompt"
-                      ? "bg-blue-500/20 text-blue-500"
+                      ? "bg-accent-gold/20 text-accent-gold"
                       : question.type === "code"
                         ? "bg-amber-500/20 text-amber-500"
                         : "bg-cyan-500/20 text-cyan-500"

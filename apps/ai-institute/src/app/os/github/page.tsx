@@ -29,14 +29,14 @@ export default async function GitHubPage() {
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <GitBranch className="w-4 h-4 text-blue-400" />
+            <GitBranch className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Patterns</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <GitBranch className="w-4 h-4 text-purple-400" />
+            <GitBranch className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Commits Today</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>

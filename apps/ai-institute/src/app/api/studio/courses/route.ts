@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbListCourses, dbCreateCourse } from "@/lib/studio/db";
 import { requireAuth } from "@/lib/api-auth";
-import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
+import {
+  roleIsAllowed,
+  CONTENT_MANAGEMENT_ROLES,
+  type Role,
+} from "@/lib/roles";
+import { recordAuditEvent } from "@/lib/audit-repository";
 
 export async function GET(request: NextRequest) {
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   try {
     const courses = await dbListCourses();
@@ -22,10 +30,16 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
-    return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Insufficient permissions" },
+      { status: 403 },
+    );
   }
   try {
     const body = await request.json();
@@ -36,10 +50,23 @@ export async function POST(request: NextRequest) {
     const course = await dbCreateCourse({
       id,
       title: body.title,
-      description: typeof body.description === "string" ? body.description : undefined,
+      description:
+        typeof body.description === "string" ? body.description : undefined,
       subject: typeof body.subject === "string" ? body.subject : undefined,
       grade: typeof body.grade === "number" ? body.grade : undefined,
     });
+
+    // Record audit event for course creation
+    await recordAuditEvent({
+      actorId: user.id,
+      actorEmail: user.email,
+      action: "course.create",
+      resource: "course",
+      resourceId: id,
+      result: "success",
+      metadata: { title: body.title },
+    });
+
     return NextResponse.json(course, { status: 201 });
   } catch {
     return NextResponse.json(

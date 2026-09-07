@@ -82,7 +82,7 @@ export default function StudioPage() {
             label="Courses"
             value={courses.length}
             icon={<GraduationCap className="w-4 h-4" />}
-            colorClass="text-blue-400"
+            colorClass="text-accent-gold"
           />
           <StatCard
             label="Lessons"
@@ -225,7 +225,7 @@ export default function StudioPage() {
                         lesson.status === "published"
                           ? "text-green-400"
                           : lesson.status === "ready"
-                            ? "text-blue-400"
+                            ? "text-accent-gold"
                             : "text-amber-400"
                       }
                     >

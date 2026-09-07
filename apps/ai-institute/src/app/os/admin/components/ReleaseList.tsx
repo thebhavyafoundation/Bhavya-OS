@@ -12,7 +12,7 @@ interface Release {
 
 const channelStyles: Record<string, { bg: string; text: string }> = {
   stable: { bg: "bg-green-900/30", text: "text-green-400" },
-  rc: { bg: "bg-blue-900/30", text: "text-blue-400" },
+  rc: { bg: "bg-forest/30", text: "text-accent-gold" },
   beta: { bg: "bg-amber-900/30", text: "text-amber-400" },
   alpha: { bg: "bg-bg-tertiary", text: "text-text-muted" },
 };

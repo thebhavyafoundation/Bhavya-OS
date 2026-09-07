@@ -36,14 +36,14 @@ export default async function IOCPage() {
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <Shield className="w-4 h-4 text-blue-400" />
+            <Shield className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Pending Reviews</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <Shield className="w-4 h-4 text-purple-400" />
+            <Shield className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">
               Actions This Week
             </span>

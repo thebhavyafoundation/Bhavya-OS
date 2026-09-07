@@ -778,12 +778,14 @@ export function TransformerPipelineVisualizer() {
           <div className="grid grid-cols-3 gap-2">
             {tokens.map((t, i) => (
               <div key={i} className="bg-white/5 rounded-lg p-2">
-                <div className="text-xs font-mono text-blue-500 mb-1">{t}</div>
+                <div className="text-xs font-mono text-accent-gold mb-1">
+                  {t}
+                </div>
                 <div className="flex gap-1">
                   {[...Array(6)].map((_, j) => (
                     <div
                       key={j}
-                      className="w-3 h-3 rounded-sm bg-blue-500"
+                      className="w-3 h-3 rounded-sm bg-accent-gold"
                       style={{ opacity: 0.3 + Math.random() * 0.7 }}
                     />
                   ))}

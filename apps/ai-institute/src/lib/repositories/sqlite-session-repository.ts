@@ -22,7 +22,9 @@ export class SqliteSessionRepository implements SessionRepository {
     return { token, expiresAt };
   }
 
-  async findByToken(token: string): Promise<{ userId: string; expiresAt: string } | null> {
+  async findByToken(
+    token: string,
+  ): Promise<{ userId: string; expiresAt: string } | null> {
     const db = getDatabase({ path: "" });
     const row = db
       .prepare("SELECT * FROM sessions WHERE token = ?")
@@ -41,5 +43,10 @@ export class SqliteSessionRepository implements SessionRepository {
   async delete(token: string): Promise<void> {
     const db = getDatabase({ path: "" });
     db.prepare("DELETE FROM sessions WHERE token = ?").run(token);
+  }
+
+  async deleteAllForUser(userId: string): Promise<void> {
+    const db = getDatabase({ path: "" });
+    db.prepare("DELETE FROM sessions WHERE user_id = ?").run(userId);
   }
 }

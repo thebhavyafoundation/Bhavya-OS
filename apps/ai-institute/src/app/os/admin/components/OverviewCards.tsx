@@ -67,7 +67,7 @@ export function OverviewCards() {
       label: "Packages",
       value: counts.packages,
       icon: FileText,
-      colorClass: "text-blue-400",
+      colorClass: "text-accent-gold",
     },
     {
       label: "Content items",
@@ -79,7 +79,7 @@ export function OverviewCards() {
       label: "Releases",
       value: counts.releases,
       icon: Tag,
-      colorClass: "text-purple-400",
+      colorClass: "text-accent-gold",
     },
   ];
 

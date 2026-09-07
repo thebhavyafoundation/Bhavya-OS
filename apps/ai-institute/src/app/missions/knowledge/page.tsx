@@ -51,7 +51,7 @@ export default function KnowledgeMissionPage() {
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-500/20">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent-gold/20">
               <span className="text-2xl">🧠</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -71,7 +71,7 @@ export default function KnowledgeMissionPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">
+                <div className="text-3xl font-bold text-accent-gold mb-1">
                   {stats.totalKos}
                 </div>
                 <div className="text-sm text-text-primary/50">
@@ -79,19 +79,19 @@ export default function KnowledgeMissionPage() {
                 </div>
               </div>
               <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">
+                <div className="text-3xl font-bold text-accent-gold mb-1">
                   {stats.totalLessons}
                 </div>
                 <div className="text-sm text-text-primary/50">Lessons</div>
               </div>
               <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">
+                <div className="text-3xl font-bold text-accent-gold mb-1">
                   {stats.totalPublications}
                 </div>
                 <div className="text-sm text-text-primary/50">Publications</div>
               </div>
               <div className="bg-bg-secondary border border-border-primary rounded-xl p-5 text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-1">
+                <div className="text-3xl font-bold text-accent-gold mb-1">
                   {stats.koCreatedThisMonth}
                 </div>
                 <div className="text-sm text-text-primary/50">
@@ -168,7 +168,7 @@ export default function KnowledgeMissionPage() {
                   key={e.id}
                   className="bg-bg-secondary border border-border-primary rounded-xl p-4 flex items-start gap-3"
                 >
-                  <div className="w-2 h-2 rounded-full bg-blue-400 mt-2 shrink-0" />
+                  <div className="w-2 h-2 rounded-full bg-accent-gold mt-2 shrink-0" />
                   <div>
                     <p className="text-sm text-text-primary/80">
                       {e.description}
@@ -202,7 +202,7 @@ export default function KnowledgeMissionPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
               href="/courses"
-              className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Learn</div>
               <div className="text-sm text-text-primary/50">
@@ -211,7 +211,7 @@ export default function KnowledgeMissionPage() {
             </Link>
             <Link
               href="/app/knowledge"
-              className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Contribute</div>
               <div className="text-sm text-text-primary/50">
@@ -220,7 +220,7 @@ export default function KnowledgeMissionPage() {
             </Link>
             <Link
               href="/research"
-              className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center hover:bg-blue-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Research</div>
               <div className="text-sm text-text-primary/50">

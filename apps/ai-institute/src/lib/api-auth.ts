@@ -108,6 +108,12 @@ export async function deleteSession(token: string): Promise<void> {
   await sessionRepo.delete(token);
 }
 
+export async function deleteAllSessionsForUser(userId: string): Promise<void> {
+  await ensureDb();
+  const sessionRepo = getSessionRepository();
+  await sessionRepo.deleteAllForUser(userId);
+}
+
 export function stripSensitive(user: ApiUser) {
   const { passwordHash: _, ...safe } = user;
   return safe;

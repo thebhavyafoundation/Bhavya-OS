@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getKO, updateKO, deleteKO } from "@/lib/knowledge-repository";
 import { requireAuth } from "@/lib/api-auth";
-import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
+import {
+  roleIsAllowed,
+  CONTENT_MANAGEMENT_ROLES,
+  type Role,
+} from "@/lib/roles";
 import { recordEvidence, koEventKey } from "@/lib/institutional-evidence";
 
 export async function GET(
@@ -10,12 +14,24 @@ export async function GET(
 ) {
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   const { id } = await params;
   const ko = getKO(id);
   if (!ko) {
-    return NextResponse.json({ error: "Knowledge Object not found" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Knowledge Object not found" },
+      { status: 404 },
+    );
+  }
+  if (ko.provenance === "test-seed" && user.role !== "admin") {
+    return NextResponse.json(
+      { error: "Knowledge Object not found" },
+      { status: 404 },
+    );
   }
   return NextResponse.json(ko);
 }
@@ -27,12 +43,18 @@ export async function PUT(
   // 1. Authentication
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
 
   // 2. Authorization
   if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
-    return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Insufficient permissions" },
+      { status: 403 },
+    );
   }
 
   // 3. Parse body
@@ -41,18 +63,36 @@ export async function PUT(
     body = await request.json();
   } catch {
     return NextResponse.json(
-      { error: "Invalid JSON", errors: [{ field: "body", message: "Request body must be valid JSON" }] },
+      {
+        error: "Invalid JSON",
+        errors: [{ field: "body", message: "Request body must be valid JSON" }],
+      },
       { status: 400 },
     );
   }
 
   // 4. Strip server-controlled fields (clients cannot overwrite these)
-  const { id: _id, createdAt: _createdAt, provenance: _provenance, version: _version, ...safeBody } = body;
+  const {
+    id: _id,
+    createdAt: _createdAt,
+    provenance: _provenance,
+    version: _version,
+    ...safeBody
+  } = body;
 
   // 5. Validate status if provided
-  if (safeBody.status !== undefined && safeBody.status !== "draft" && safeBody.status !== "published") {
+  if (
+    safeBody.status !== undefined &&
+    safeBody.status !== "draft" &&
+    safeBody.status !== "published"
+  ) {
     return NextResponse.json(
-      { error: "Invalid status", errors: [{ field: "status", message: "Status must be 'draft' or 'published'" }] },
+      {
+        error: "Invalid status",
+        errors: [
+          { field: "status", message: "Status must be 'draft' or 'published'" },
+        ],
+      },
       { status: 400 },
     );
   }
@@ -95,12 +135,18 @@ export async function DELETE(
   // 1. Authentication
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
 
   // 2. Authorization (admin only for deletion)
   if (!roleIsAllowed(user.role as Role, ["admin"])) {
-    return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Insufficient permissions" },
+      { status: 403 },
+    );
   }
 
   // 3. Canonical deletion

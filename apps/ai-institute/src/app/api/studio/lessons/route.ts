@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbListLessons, dbCreateLesson } from "@/lib/studio/db";
 import { requireAuth } from "@/lib/api-auth";
-import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
+import {
+  roleIsAllowed,
+  CONTENT_MANAGEMENT_ROLES,
+  type Role,
+} from "@/lib/roles";
+import { recordAuditEvent } from "@/lib/audit-repository";
 
 export async function GET(request: NextRequest) {
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   try {
     const { searchParams } = new URL(request.url);
@@ -25,10 +33,16 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
-    return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Insufficient permissions" },
+      { status: 403 },
+    );
   }
   try {
     const body = await request.json();
@@ -46,6 +60,18 @@ export async function POST(request: NextRequest) {
       learningOutcomes: body.learningOutcomes,
       sections: body.sections,
     });
+
+    // Record audit event for lesson creation
+    await recordAuditEvent({
+      actorId: user.id,
+      actorEmail: user.email,
+      action: "lesson.create",
+      resource: "lesson",
+      resourceId: id,
+      result: "success",
+      metadata: { title: body.title, courseId: body.courseId },
+    });
+
     return NextResponse.json(lesson, { status: 201 });
   } catch {
     return NextResponse.json(

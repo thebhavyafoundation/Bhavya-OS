@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     } catch {
       // fall through to session deletion
     }
-    deleteSession(token);
+    await deleteSession(token);
     log.info("Session deleted");
   }
 

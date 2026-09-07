@@ -116,7 +116,7 @@ const apiEndpoints = [
 
 const methodColors: Record<string, string> = {
   GET: "bg-green-900/30 text-green-400",
-  POST: "bg-blue-900/30 text-blue-400",
+  POST: "bg-forest/30 text-accent-gold",
   PUT: "bg-amber-900/30 text-amber-400",
   DELETE: "bg-red-900/30 text-red-400",
 };

@@ -48,17 +48,37 @@ export default function HeritageMissionPage() {
         {stats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {[
-              { label: "Missions", value: stats.totalMissions, color: "text-yellow-500" },
-              { label: "Assets", value: stats.totalAssets, color: "text-cyan-400" },
-              { label: "Assessments", value: stats.totalAssessments, color: "text-purple-400" },
-              { label: "Conservation Plans", value: stats.totalConservationPlans, color: "text-emerald-400" },
+              {
+                label: "Missions",
+                value: stats.totalMissions,
+                color: "text-yellow-500",
+              },
+              {
+                label: "Assets",
+                value: stats.totalAssets,
+                color: "text-cyan-400",
+              },
+              {
+                label: "Assessments",
+                value: stats.totalAssessments,
+                color: "text-accent-gold",
+              },
+              {
+                label: "Conservation Plans",
+                value: stats.totalConservationPlans,
+                color: "text-emerald-400",
+              },
             ].map((stat) => (
               <div
                 key={stat.label}
                 className="bg-bg-secondary border border-border-primary rounded-xl p-5"
               >
-                <div className="text-xs text-text-secondary mb-1">{stat.label}</div>
-                <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+                <div className="text-xs text-text-secondary mb-1">
+                  {stat.label}
+                </div>
+                <div className={`text-2xl font-bold ${stat.color}`}>
+                  {stat.value}
+                </div>
               </div>
             ))}
           </div>

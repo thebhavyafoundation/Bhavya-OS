@@ -12,7 +12,7 @@ export default function CommunityMissionPage() {
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-purple-500/20">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent-gold/20">
               <span className="text-2xl">🤝</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold">
@@ -100,7 +100,7 @@ export default function CommunityMissionPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
               href="/community"
-              className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-6 text-center hover:bg-purple-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Join</div>
               <div className="text-sm text-white/50">
@@ -109,7 +109,7 @@ export default function CommunityMissionPage() {
             </Link>
             <Link
               href="/register"
-              className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-6 text-center hover:bg-purple-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Volunteer</div>
               <div className="text-sm text-white/50">
@@ -118,7 +118,7 @@ export default function CommunityMissionPage() {
             </Link>
             <Link
               href="/donate"
-              className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-6 text-center hover:bg-purple-500/20 transition-colors"
+              className="bg-accent-gold/10 border border-accent-gold/20 rounded-xl p-6 text-center hover:bg-accent-gold/20 transition-colors"
             >
               <div className="text-lg font-semibold mb-1">Support</div>
               <div className="text-sm text-white/50">

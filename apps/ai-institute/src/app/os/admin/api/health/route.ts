@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { requireAuth } from "@/lib/api-auth";
 
 const ROOT =
   process.env.PROJECT_ROOT || join(process.cwd(), "..", "..", "..", "..");
@@ -16,7 +17,15 @@ function countItems(file: string): number {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const user = await requireAuth(request);
+  if (!user) {
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
+  }
+
   // Real counts from the machine-readable registries. No invented numbers:
   // anything unreadable reports 0, never a placeholder.
   return NextResponse.json({

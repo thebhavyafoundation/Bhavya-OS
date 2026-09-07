@@ -3,7 +3,7 @@ import {
   requireAuth,
   verifyPassword,
   hashPassword,
-  deleteSession,
+  deleteAllSessionsForUser,
 } from "@/lib/api-auth";
 import { getUserRepository } from "@/lib/repositories";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
@@ -69,11 +69,8 @@ export async function PUT(request: NextRequest) {
       actorId: user.id,
     });
 
-    // Invalidate all sessions for this user ( compromised session stays valid )
-    const token = request.cookies.get("session-token")?.value;
-    if (token) {
-      await deleteSession(token);
-    }
+    // Invalidate ALL sessions for this user — prevents stolen session reuse
+    await deleteAllSessionsForUser(user.id);
 
     log.info("Password changed and session invalidated", { userId: user.id });
     return NextResponse.json({ success: true });

@@ -31,14 +31,14 @@ export default async function DocsPage() {
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <BookOpen className="w-4 h-4 text-blue-400" />
+            <BookOpen className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Policies</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">8</div>
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <BookOpen className="w-4 h-4 text-purple-400" />
+            <BookOpen className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">ADRs</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">12</div>

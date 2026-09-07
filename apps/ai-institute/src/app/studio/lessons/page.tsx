@@ -2,10 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  listLessons,
-  deleteLesson,
-} from "@/lib/studio/runtime-client";
+import { listLessons, deleteLesson } from "@/lib/studio/runtime-client";
 import { BookOpen, Plus, Trash2, ArrowRight } from "lucide-react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -90,10 +87,7 @@ export default function LessonsPage() {
               key={lesson.id}
               className="glass rounded-xl p-5 flex justify-between items-center hover:border-border-secondary transition-colors"
             >
-              <Link
-                href={`/studio/lessons/${lesson.id}`}
-                className="flex-1"
-              >
+              <Link href={`/studio/lessons/${lesson.id}`} className="flex-1">
                 <div className="text-base font-semibold text-text-primary mb-1">
                   {lesson.title}
                 </div>
@@ -105,7 +99,7 @@ export default function LessonsPage() {
                       lesson.status === "published"
                         ? "bg-green-900/30 text-green-400"
                         : lesson.status === "ready"
-                          ? "bg-blue-900/30 text-blue-400"
+                          ? "bg-forest/30 text-accent-gold"
                           : "bg-amber-900/30 text-amber-400"
                     }`}
                   >

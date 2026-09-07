@@ -30,14 +30,14 @@ export default async function SocialPage() {
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <MessageSquare className="w-4 h-4 text-blue-400" />
+            <MessageSquare className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Campaigns</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>
         </div>
         <div className="glass rounded-xl p-4">
           <div className="flex items-center gap-2 mb-2">
-            <MessageSquare className="w-4 h-4 text-purple-400" />
+            <MessageSquare className="w-4 h-4 text-accent-gold" />
             <span className="text-xs text-text-tertiary">Engagement</span>
           </div>
           <div className="text-2xl font-bold text-text-primary">—</div>

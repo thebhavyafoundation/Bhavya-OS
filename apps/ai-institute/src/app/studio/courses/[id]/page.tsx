@@ -41,7 +41,9 @@ export default function CourseDetailPage() {
         setDescription(c?.description || "");
         const allLessons = await listLessons({ courseId: id });
         setLessons(allLessons);
-      } catch { /* course not found */ }
+      } catch {
+        /* course not found */
+      }
       setLoading(false);
     }
     load();
@@ -116,7 +118,11 @@ export default function CourseDetailPage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => { setEditing(false); setTitle(course.title); setDescription(course.description); }}
+                  onClick={() => {
+                    setEditing(false);
+                    setTitle(course.title);
+                    setDescription(course.description);
+                  }}
                   className="px-4 py-2 rounded-lg border border-border-primary text-text-tertiary text-sm hover:text-text-secondary transition-colors"
                 >
                   Cancel
@@ -132,10 +138,13 @@ export default function CourseDetailPage() {
                 </h1>
               </div>
               <p className="text-sm text-text-tertiary">
-                {course.subject} · Grade {course.grade} · {lessons.length} lessons
+                {course.subject} · Grade {course.grade} · {lessons.length}{" "}
+                lessons
               </p>
               {course.description && (
-                <p className="text-sm text-text-secondary mt-2">{course.description}</p>
+                <p className="text-sm text-text-secondary mt-2">
+                  {course.description}
+                </p>
               )}
             </div>
           )}
@@ -193,7 +202,7 @@ export default function CourseDetailPage() {
                         lesson.status === "published"
                           ? "text-green-400"
                           : lesson.status === "ready"
-                            ? "text-blue-400"
+                            ? "text-accent-gold"
                             : "text-amber-400"
                       }
                     >

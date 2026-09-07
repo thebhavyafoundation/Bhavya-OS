@@ -262,7 +262,7 @@ export function AITutor() {
             <div
               className={`max-w-[85%] rounded-lg px-4 py-3 ${
                 msg.role === "student"
-                  ? "bg-blue-500 text-white"
+                  ? "bg-accent-gold text-white"
                   : "bg-white/10 text-white/80"
               }`}
             >

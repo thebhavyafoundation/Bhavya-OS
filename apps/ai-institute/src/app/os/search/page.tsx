@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import {
-  getKnowledgeObjects,
   getContentDocuments,
   getGovernanceDocs,
   getPolicies,
 } from "@/lib/os-data";
+import { getPublicKnowledgeObjects } from "@/lib/public-projection";
 import { Search } from "lucide-react";
 import { SearchBrowser } from "./components/SearchBrowser";
 
@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export default async function SearchPage() {
   const [knowledgeObjects, contentDocs, governanceDocs, policies] =
     await Promise.all([
-      getKnowledgeObjects(),
+      Promise.resolve(getPublicKnowledgeObjects()),
       getContentDocuments(),
       getGovernanceDocs(),
       getPolicies(),
