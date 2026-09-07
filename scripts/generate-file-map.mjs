@@ -41,7 +41,7 @@ function frontmatterStatus(file) {
       if (sm) return sm[1].trim();
     }
     const bm = text.match(/\*\*Status:\*\*\s*(.+)/);
-    if (bm) return bm[1].trim();
+    if (bm) return bm[1].replace(/\s+/g, " ").trim();
     const hm = text.match(/^## Status\s*\n+\s*(.+)$/m);
     return hm ? hm[1].trim() : "no-status";
   } catch {
