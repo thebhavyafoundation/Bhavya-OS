@@ -474,6 +474,15 @@
   - `contracts\runtime`/
   - `contracts\services`/
   - `contracts\shared`/
+- `design`/
+  - `design\CONTEXT.md`
+  - `design\DESIGN-CONSTITUTION.md`
+  - `design\DESIGN-MANIFEST.md`
+  - `design\DESIGN-PRINCIPLES.md`
+  - `design\governance`/
+  - `design\inventory`/
+  - `design\motion`/
+  - `design\tokens`/
 - `design-system`/
   - `design-system\bhavya-foundation`/
 - `docs`/
