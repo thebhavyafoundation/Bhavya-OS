@@ -9,16 +9,15 @@ import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
 import { roleIsAllowed, type Role } from "@/lib/roles";
 import { recordAuditEvent } from "@/lib/audit-repository";
+import { getCourseById, courses } from "@/data/academy-courses";
+import { labExercises } from "@/data/lab-exercises";
 
-const VALID_LESSON_IDS = ["what-is-ai", "how-ai-works", "building-with-ai"];
-const VALID_COURSE_IDS = ["ai-foundations"];
-const VALID_LAB_TASKS = [
-  "lab-linear-regression",
-  "lab-data-cleaning",
-  "lab-neural-network",
-  "lab-image-classification",
-  "lab-sentiment-analysis",
-];
+/** Check if a lesson ID exists in any course (globally unique lesson IDs). */
+function isValidLessonId(lessonId: string): boolean {
+  return courses.some((c) =>
+    c.modules.some((m) => m.lessons.some((l) => l.id === lessonId)),
+  );
+}
 
 export async function POST(request: NextRequest) {
   const correlationId = extractCorrelationId(request);
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
 
     switch (action) {
       case "completeLesson": {
-        if (!data?.lessonId || !VALID_LESSON_IDS.includes(data.lessonId)) {
+        if (!data?.lessonId || !isValidLessonId(data.lessonId)) {
           return NextResponse.json(
             { error: "Invalid lesson ID" },
             { status: 400 },
@@ -91,7 +90,7 @@ export async function POST(request: NextRequest) {
         break;
       }
       case "completeLab": {
-        if (!data?.taskId || !VALID_LAB_TASKS.includes(data.taskId)) {
+        if (!data?.taskId || !labExercises.some((e) => e.id === data.taskId)) {
           return NextResponse.json(
             { error: "Invalid task ID" },
             { status: 400 },
@@ -157,7 +156,7 @@ export async function POST(request: NextRequest) {
         break;
       }
       case "enroll": {
-        if (!data?.courseId || !VALID_COURSE_IDS.includes(data.courseId)) {
+        if (!data?.courseId || !getCourseById(data.courseId)) {
           return NextResponse.json(
             { error: "Invalid course ID" },
             { status: 400 },
