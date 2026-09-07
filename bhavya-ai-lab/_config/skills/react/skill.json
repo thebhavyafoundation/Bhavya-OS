@@ -1,9 +1,0 @@
-{
-  "id": "react",
-  "name": "React Component Development",
-  "version": "1.0.0",
-  "description": "Patterns for building React components for educational platforms.",
-  "workspaces": ["platform", "production"],
-  "dependencies": ["typescript"],
-  "registries": ["components", "layouts"]
-}

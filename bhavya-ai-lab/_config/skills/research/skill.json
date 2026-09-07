@@ -1,9 +1,0 @@
-{
-  "id": "research",
-  "name": "Educational Research",
-  "version": "1.0.0",
-  "description": "Research methodologies for educational content creation.",
-  "workspaces": ["research"],
-  "dependencies": [],
-  "registries": ["citations", "glossary"]
-}

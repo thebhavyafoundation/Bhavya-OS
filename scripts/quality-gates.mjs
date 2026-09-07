@@ -10,7 +10,7 @@ import { readdirSync, readFileSync, statSync, existsSync } from "fs";
 import { join, relative } from "path";
 
 const ROOT = join(import.meta.dirname, "..");
-const IGNORE_DIRS = ["node_modules", ".next", "dist", ".git", ".playwright-mcp", ".worktrees", "bar", "bhavya-ai-lab", "memory", "knowledge", "platform", "prototypes", "specs", "website"];
+const IGNORE_DIRS = ["node_modules", ".next", "dist", ".git", ".playwright-mcp", ".worktrees", "bar", "memory", "knowledge", "platform", "prototypes", "specs", "website"];
 
 let passed = 0;
 let failed = 0;

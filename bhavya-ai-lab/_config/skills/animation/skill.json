@@ -1,9 +1,0 @@
-{
-  "id": "animation",
-  "name": "Motion Graphics",
-  "version": "1.0.0",
-  "description": "Kinetic typography, data visualization, and educational animations.",
-  "workspaces": ["production"],
-  "dependencies": ["remotion", "react"],
-  "registries": ["animations", "components"]
-}

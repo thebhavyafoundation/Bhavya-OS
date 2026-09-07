@@ -21,25 +21,14 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join, resolve } from "path";
 
 /**
- * Resolve a path relative to workspace root.
- * When running from apps/ai-institute/, process.cwd() is wrong.
+ * Resolve a path: app-local first, then workspace root fallback.
+ *
+ * bhavya-ai-lab/ paths resolve to apps/ai-institute/bhavya-ai-lab/
+ * content/, registry/, memory/ paths resolve to repository root.
  */
 function resolveFromWorkspace(...segments: string[]): string {
-  let dir = process.cwd();
-  for (let i = 0; i < 5; i++) {
-    const pkgPath = join(dir, "package.json");
-    if (existsSync(pkgPath)) {
-      try {
-        const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "bhavya-foundation" || pkg.name === "@bhavya/root") {
-          return resolve(join(dir, ...segments));
-        }
-      } catch {
-        /* continue */
-      }
-    }
-    dir = join(dir, "..");
-  }
+  const appLocal = join(process.cwd(), ...segments);
+  if (existsSync(appLocal)) return resolve(appLocal);
   return resolve(join(process.cwd(), "..", "..", ...segments));
 }
 

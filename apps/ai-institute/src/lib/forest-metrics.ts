@@ -24,34 +24,31 @@
  * - plantingsCreatedThisMonth: planting-created evidence entries in current month
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "fs";
+import {
+  readFileSync,
+  writeFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+} from "fs";
 import { join, resolve } from "path";
 import { DriftDetector } from "@/lib/institutional/drift-detector";
 
 /**
- * Resolve a path relative to workspace root.
- * When running from apps/ai-institute/, process.cwd() is wrong.
+ * Resolve a path: app-local first, then workspace root fallback.
+ *
+ * bhavya-ai-lab/ paths resolve to apps/ai-institute/bhavya-ai-lab/
+ * content/, registry/, memory/ paths resolve to repository root.
  */
 function resolveFromWorkspace(...segments: string[]): string {
-  // Walk up to find workspace root
-  let dir = process.cwd();
-  for (let i = 0; i < 5; i++) {
-    const pkgPath = join(dir, "package.json");
-    if (existsSync(pkgPath)) {
-      try {
-        const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "bhavya-foundation" || pkg.name === "@bhavya/root") {
-          return resolve(join(dir, ...segments));
-        }
-      } catch { /* continue */ }
-    }
-    dir = join(dir, "..");
-  }
-  // Fallback: 2 levels up from apps/ai-institute/
+  const appLocal = join(process.cwd(), ...segments);
+  if (existsSync(appLocal)) return resolve(appLocal);
+  // Fallback: workspace root is 2 levels up from apps/ai-institute/
   return resolve(join(process.cwd(), "..", "..", ...segments));
 }
 
-const METRICS_DIR = process.env.METRICS_DIR || resolveFromWorkspace("bhavya-ai-lab", "metrics");
+const METRICS_DIR =
+  process.env.METRICS_DIR || resolveFromWorkspace("bhavya-ai-lab", "metrics");
 const FOREST_METRICS_FILE = join(METRICS_DIR, "forest.json");
 
 // ── Types ──────────────────────────────────────────────────────
@@ -164,7 +161,8 @@ export function recordPlantingCreated(): ForestMetrics {
 
 // ── Replay / Rebuild ─────────────────────────────────────────
 
-const FOREST_DIR = process.env.FOREST_DIR || resolveFromWorkspace("content", "forest");
+const FOREST_DIR =
+  process.env.FOREST_DIR || resolveFromWorkspace("content", "forest");
 const FOREST_EVIDENCE_DIR =
   process.env.FOREST_EVIDENCE_DIR ||
   resolveFromWorkspace("bhavya-ai-lab", "evidence", "forest");
@@ -199,21 +197,32 @@ export function rebuildForestMetricsFromEvidence(): ForestMetrics {
 
   try {
     if (existsSync(FOREST_EVIDENCE_DIR)) {
-      const files = readdirSync(FOREST_EVIDENCE_DIR).filter((f) => f.endsWith(".json"));
+      const files = readdirSync(FOREST_EVIDENCE_DIR).filter((f) =>
+        f.endsWith(".json"),
+      );
       for (const f of files) {
         try {
           const raw = readFileSync(join(FOREST_EVIDENCE_DIR, f), "utf-8");
-          const entry = JSON.parse(raw) as { activityType: string; timestamp: string };
+          const entry = JSON.parse(raw) as {
+            activityType: string;
+            timestamp: string;
+          };
 
           const entryMonth = entry.timestamp.slice(0, 7);
           if (entryMonth === currentMonth) {
-            if (entry.activityType === "mission-created") missionsCreatedThisMonth += 1;
-            if (entry.activityType === "planting-created") plantingsCreatedThisMonth += 1;
+            if (entry.activityType === "mission-created")
+              missionsCreatedThisMonth += 1;
+            if (entry.activityType === "planting-created")
+              plantingsCreatedThisMonth += 1;
           }
-        } catch { /* skip corrupted */ }
+        } catch {
+          /* skip corrupted */
+        }
       }
     }
-  } catch { /* directory may not exist */ }
+  } catch {
+    /* directory may not exist */
+  }
 
   const rebuilt: ForestMetrics = {
     totalMissions,
@@ -250,12 +259,28 @@ export function detectForestMetricsDrift(): {
   const current = readMetricsFile();
 
   const results = forestDetector.detect([
-    { name: "missions", prefix: "mission-", materialized: current.totalMissions },
+    {
+      name: "missions",
+      prefix: "mission-",
+      materialized: current.totalMissions,
+    },
     { name: "sites", prefix: "site-", materialized: current.totalSites },
-    { name: "plantings", prefix: "planting-", materialized: current.totalPlantings },
+    {
+      name: "plantings",
+      prefix: "planting-",
+      materialized: current.totalPlantings,
+    },
     { name: "surveys", prefix: "survey-", materialized: current.totalSurveys },
-    { name: "monitoring", prefix: "monitoring-", materialized: current.totalMonitoring },
-    { name: "impactReports", prefix: "impact-", materialized: current.totalImpactReports },
+    {
+      name: "monitoring",
+      prefix: "monitoring-",
+      materialized: current.totalMonitoring,
+    },
+    {
+      name: "impactReports",
+      prefix: "impact-",
+      materialized: current.totalImpactReports,
+    },
   ]);
 
   const canonical = {

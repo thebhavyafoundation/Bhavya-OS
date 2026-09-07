@@ -41,28 +41,18 @@ export type ActivityType =
   | "lesson-reverted";
 
 /** Re-export EvidenceRecord as InstitutionalEvidence for backward compatibility */
-export type InstitutionalEvidence = import("@/lib/institutional/evidence-store").EvidenceRecord;
+export type InstitutionalEvidence =
+  import("@/lib/institutional/evidence-store").EvidenceRecord;
 
 // ── Store Instance ──────────────────────────────────────────
 
 /**
- * Resolve evidence dir relative to workspace root.
+ * Resolve evidence dir: app-local first, then workspace root fallback.
  */
 function resolveEvidenceDir(): string {
   if (process.env.EVIDENCE_DIR) return process.env.EVIDENCE_DIR;
-  let dir = process.cwd();
-  for (let i = 0; i < 5; i++) {
-    const pkgPath = join(dir, "package.json");
-    if (existsSync(pkgPath)) {
-      try {
-        const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "bhavya-foundation" || pkg.name === "@bhavya/root") {
-          return resolve(join(dir, "bhavya-ai-lab", "evidence"));
-        }
-      } catch { /* continue */ }
-    }
-    dir = join(dir, "..");
-  }
+  const appLocal = join(process.cwd(), "bhavya-ai-lab", "evidence");
+  if (existsSync(appLocal)) return resolve(appLocal);
   return resolve(join(process.cwd(), "..", "..", "bhavya-ai-lab", "evidence"));
 }
 
@@ -96,7 +86,13 @@ export function recordEvidence(
   metadata: Record<string, unknown> = {},
   idempotencyKey?: string,
 ): InstitutionalEvidence {
-  return store.record(activityType, activityId, description, metadata, idempotencyKey);
+  return store.record(
+    activityType,
+    activityId,
+    description,
+    metadata,
+    idempotencyKey,
+  );
 }
 
 /**
@@ -117,14 +113,18 @@ export function listEvidence(limit: number = 50): InstitutionalEvidence[] {
 /**
  * Get Knowledge evidence entries for a specific activity.
  */
-export function getEvidenceByActivity(activityId: string): InstitutionalEvidence[] {
+export function getEvidenceByActivity(
+  activityId: string,
+): InstitutionalEvidence[] {
   return store.list().filter((e) => e.activityId === activityId);
 }
 
 /**
  * Get Knowledge evidence entries of a specific type.
  */
-export function getEvidenceByType(activityType: ActivityType): InstitutionalEvidence[] {
+export function getEvidenceByType(
+  activityType: ActivityType,
+): InstitutionalEvidence[] {
   return store.listByType(activityType);
 }
 

@@ -1,9 +1,0 @@
-{
-  "id": "qa",
-  "name": "Quality Assurance",
-  "version": "1.0.0",
-  "description": "Testing, validation, and quality standards.",
-  "workspaces": ["platform", "production", "build"],
-  "dependencies": [],
-  "registries": ["schemas"]
-}

@@ -8,9 +8,8 @@ if (!app) {
 }
 
 const validApps = [
-  'website', 'dashboard', 'forest', 'heritage', 'research',
-  'volunteer', 'knowledge', 'library', 'admin', 'docs',
-  'transparency', 'design-system', 'bhavya-ai-lab', 'ai-institute'
+  'ai-institute', 'admin', 'docs', 'design-system',
+  'github-os', 'ioc', 'social-os', 'bhavya-intelligence-network', 'website'
 ];
 
 if (!validApps.includes(app)) {
@@ -18,12 +17,24 @@ if (!validApps.includes(app)) {
   process.exit(1);
 }
 
-console.log(`Building @bhavya/${app}...`);
+// Package name mapping for apps with non-standard names
+const packageMap = {
+  'admin': 'admin-app',
+  'docs': 'docs-app',
+  'design-system': 'design-system-app',
+  'github-os': 'app-github-os',
+  'ioc': 'app-ioc',
+  'social-os': 'app-social-os',
+};
+
+const packageName = packageMap[app] || app;
+
+console.log(`Building @bhavya/${packageName}...`);
 console.log('Working directory:', process.cwd());
 
-execSync(`pnpm --filter @bhavya/${app === 'admin' ? 'admin-app' : app === 'docs' ? 'docs-app' : app} build`, {
+execSync(`pnpm --filter @bhavya/${packageName} build`, {
   stdio: 'inherit',
   cwd: process.cwd(),
 });
 
-console.log(`Build complete for @bhavya/${app}!`);
+console.log(`Build complete for @bhavya/${packageName}!`);

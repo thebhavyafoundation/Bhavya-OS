@@ -16,7 +16,6 @@
     "scaffold": "pnpm --filter @bhavya/content-core scaffold",
     "format": "prettier --write \"**/*.{ts,tsx,md,mdx,json,css}\"",
     "clean": "turbo clean && git clean -xdf .turbo node_modules",
-    "registry:generate": "node scripts/generate-registry.js",
     "file-map": "node scripts/generate-file-map.mjs",
     "file-map:check": "node scripts/generate-file-map.mjs && git diff --exit-code -- FILE-MAP.md",
     "runtime:compile": "node .ai/build/compile-runtime.mjs",
@@ -38,10 +37,6 @@
     "vercel:deploy": "vercel deploy --prebuilt",
     "vercel:deploy:app": "node scripts/vercel-build-app.mjs",
     "vercel:deploy:all": "bash scripts/deploy-all-vercel.sh",
-    "dashboard": "pnpm --filter @bhavya/dashboard dev",
-    "studio": "pnpm --filter @bhavya/lesson-studio dev",
-    "studio:build": "pnpm --filter @bhavya/lesson-studio build",
-    "studio:full": "start cmd /k \"pnpm run bhavya:api\" && pnpm run studio",
     "bhavya:api:verbose": "node packages/runtime/cli/api-standalone.mjs"
   },
   "dependencies": {

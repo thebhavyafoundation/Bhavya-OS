@@ -3,6 +3,15 @@ import path from "path";
 
 const ROOT = path.resolve(process.cwd(), "../../..");
 
+/**
+ * Resolve bhavya-ai-lab/ path: app-local first, then workspace root fallback.
+ */
+function resolveLab(...segments: string[]): string {
+  const appLocal = path.join(process.cwd(), "bhavya-ai-lab", ...segments);
+  if (fs.existsSync(appLocal)) return appLocal;
+  return path.join(ROOT, "bhavya-ai-lab", ...segments);
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function readJSON(filePath: string): any | null {
   try {
@@ -36,6 +45,19 @@ function listDir(dirPath: string): string[] {
   }
 }
 
+/**
+ * List a bhavya-ai-lab/ directory: app-local first, then root fallback.
+ */
+function listLabDir(subdir: string): string[] {
+  const appLocal = path.join(process.cwd(), "bhavya-ai-lab", subdir);
+  if (fs.existsSync(appLocal)) {
+    return fs
+      .readdirSync(appLocal)
+      .filter((f) => !f.startsWith("_") && !f.startsWith("."));
+  }
+  return listDir(path.join("bhavya-ai-lab", subdir));
+}
+
 // --- Knowledge Objects ---
 
 export interface KnowledgeObject {
@@ -58,11 +80,21 @@ export interface KnowledgeObject {
 }
 
 export async function getKnowledgeObjects(): Promise<KnowledgeObject[]> {
-  const files = listDir("bhavya-ai-lab/knowledge/objects");
-  return files
+  const koDir = resolveLab("knowledge", "objects");
+  if (!fs.existsSync(koDir)) return [];
+  return fs
+    .readdirSync(koDir)
     .filter((f) => f.endsWith(".json"))
-    .map((f) => readJSON(`bhavya-ai-lab/knowledge/objects/${f}`))
-    .filter(Boolean);
+    .map((f) => {
+      try {
+        return JSON.parse(
+          fs.readFileSync(path.join(koDir, f), "utf-8"),
+        ) as KnowledgeObject;
+      } catch {
+        return null;
+      }
+    })
+    .filter((item): item is KnowledgeObject => item !== null);
 }
 
 // --- Content Documents ---
@@ -251,17 +283,30 @@ export async function getDecisions() {
 // --- Runtime ---
 
 export async function getRuntime() {
-  return readJSON("bhavya-ai-lab/runtime.json");
+  const runtimePath = resolveLab("runtime.json");
+  if (!fs.existsSync(runtimePath)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(runtimePath, "utf-8"));
+  } catch {
+    return null;
+  }
 }
 
 // --- Builders ---
 
 export async function getBuilders() {
-  const dirs = listDir("bhavya-ai-lab/builders");
+  const dirs = listLabDir("builders");
   const builders = [];
   for (const dir of dirs) {
-    const config = readJSON(`bhavya-ai-lab/builders/${dir}/builder.json`);
-    if (config) builders.push(config);
+    const configPath = resolveLab("builders", dir, "builder.json");
+    if (fs.existsSync(configPath)) {
+      try {
+        const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+        if (config) builders.push(config);
+      } catch {
+        /* skip corrupted */
+      }
+    }
   }
   return builders;
 }
@@ -547,9 +592,7 @@ export function getGitHubRepoHealth(
   }
 }
 
-export function getGitHubRepoReviews(
-  repositoryId: string,
-): GitHubReview[] {
+export function getGitHubRepoReviews(repositoryId: string): GitHubReview[] {
   const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
   if (!fs.existsSync(dbPath)) return [];
 
@@ -575,9 +618,7 @@ export function getGitHubRepoReviews(
   }
 }
 
-export function getGitHubRepoDebt(
-  repositoryId: string,
-): GitHubTechnicalDebt[] {
+export function getGitHubRepoDebt(repositoryId: string): GitHubTechnicalDebt[] {
   const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
   if (!fs.existsSync(dbPath)) return [];
 
@@ -602,9 +643,7 @@ export function getGitHubRepoDebt(
   }
 }
 
-export function getGitHubRepoADRs(
-  repositoryId: string,
-): GitHubADR[] {
+export function getGitHubRepoADRs(repositoryId: string): GitHubADR[] {
   const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
   if (!fs.existsSync(dbPath)) return [];
 
@@ -821,14 +860,20 @@ export async function getNavigation(name: string) {
 // --- BBL Examples ---
 
 export async function getBBLLessons() {
-  const files = listDir("bhavya-ai-lab/bbl/examples");
-  return files
+  const bblDir = resolveLab("bbl", "examples");
+  if (!fs.existsSync(bblDir)) return [];
+  return fs
+    .readdirSync(bblDir)
     .filter((f) => f.endsWith(".bbl"))
     .map((f) => {
-      const content = readMD(`bhavya-ai-lab/bbl/examples/${f}`);
-      return { filename: f, content };
+      try {
+        const content = fs.readFileSync(path.join(bblDir, f), "utf-8");
+        return { filename: f, content };
+      } catch {
+        return null;
+      }
     })
-    .filter((l) => l.content);
+    .filter((l): l is { filename: string; content: string } => l !== null);
 }
 
 // --- Content Stats (for home page) ---

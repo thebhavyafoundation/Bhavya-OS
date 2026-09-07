@@ -1,9 +1,0 @@
-{
-  "id": "typescript",
-  "name": "TypeScript Development",
-  "version": "1.0.0",
-  "description": "TypeScript patterns, type safety, and project configuration.",
-  "workspaces": ["platform", "production", "build"],
-  "dependencies": [],
-  "registries": ["schemas"]
-}

@@ -19,41 +19,15 @@ import {
 import { join, resolve } from "path";
 
 /**
- * Resolve KO_DIR relative to workspace root.
+ * Resolve KO_DIR: app-local first, then workspace root fallback.
  *
- * When the Next.js app runs from apps/ai-institute/, process.cwd() is
- * apps/ai-institute/ — but KO files live at the workspace root:
- *   bhavya-ai-lab/knowledge/objects/
- *
- * Resolution strategy:
- *   1. Use KO_DIR env var if set (for tests and overrides)
- *   2. Walk up from process.cwd() to find workspace root (has root package.json)
- *   3. Fall back to process.cwd() relative path (legacy)
+ * bhavya-ai-lab/knowledge/objects/ resolves to app-local if it exists,
+ * otherwise falls back to repository root.
  */
 function resolveKoDir(): string {
   if (process.env.KO_DIR) return process.env.KO_DIR;
-
-  // Walk up to workspace root (contains root package.json with "bhavya-foundation")
-  let dir = process.cwd();
-  for (let i = 0; i < 5; i++) {
-    const candidate = join(dir, "bhavya-ai-lab", "knowledge", "objects");
-    if (existsSync(candidate)) return candidate;
-    // Also check if this dir has the root package.json
-    const pkgPath = join(dir, "package.json");
-    if (existsSync(pkgPath)) {
-      try {
-        const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
-        if (pkg.name === "bhavya-foundation" || pkg.name === "@bhavya/root") {
-          return candidate;
-        }
-      } catch {
-        /* continue */
-      }
-    }
-    dir = join(dir, "..");
-  }
-
-  // Fallback: workspace root is 2 levels up from apps/ai-institute/
+  const appLocal = join(process.cwd(), "bhavya-ai-lab", "knowledge", "objects");
+  if (existsSync(appLocal)) return appLocal;
   return join(
     process.cwd(),
     "..",

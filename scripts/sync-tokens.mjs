@@ -20,23 +20,12 @@ const CANONICAL_SOURCE = join(ROOT, "packages/platform-ui/src/styles/tokens.css"
 const CONSUMING_APPS = [
   "ai-institute",
   "admin",
-  "website",
-  "transparency",
-  "github-os",
-  "dashboard",
   "design-system",
-  "knowledge-studio",
-  "lesson-studio",
-  "research",
-  "ioc",
   "docs",
-  "bhavya-ai-lab",
-  "volunteer",
+  "github-os",
+  "ioc",
   "social-os",
-  "knowledge",
-  "forest",
-  "heritage",
-  "library",
+  "website",
 ];
 
 const HEADER = `/*
