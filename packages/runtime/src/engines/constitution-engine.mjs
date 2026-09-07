@@ -5,7 +5,7 @@
  * Every AI action must retrieve from this layer and cite sources.
  */
 
-import { initialize as initConstitution, search, cite, getConstitutionalDocument, searchDefinitions, searchPolicies, searchResponsibilities, queryKnowledgeGraph, findRelationshipPath, getAllDocumentSummaries, getStats } from '../../constitution/src/sdk.mjs';
+import { initialize as initConstitution, search, cite, getConstitutionalDocument, searchDefinitions, searchPolicies, searchResponsibilities, queryKnowledgeGraph, findRelationshipPath, getAllDocumentSummaries, getStats } from '../../../constitution/src/sdk.mjs';
 
 export class ConstitutionEngine {
   #initialized = false;

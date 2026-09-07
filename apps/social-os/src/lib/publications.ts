@@ -110,7 +110,7 @@ function mapRowToPublication(row: any): Publication {
     content: row.content,
     platformContent: JSON.parse(row.platform_content || "{}"),
     status: row.status as PublicationStatus,
-    priority: row.priority as Priority,
+    priority: row.priority as SocialPriority,
     source: {
       type: row.source_type,
       knowledgePackageId: row.source_knowledge_package_id,
@@ -118,6 +118,7 @@ function mapRowToPublication(row: any): Publication {
       reviewStatus: row.source_review_status,
       constitutionCitation: row.source_constitution_citation,
     },
+    campaignId: row.campaign,
     scheduledAt: row.scheduled_at,
     publishedAt: row.published_at,
     metadata: {
@@ -126,7 +127,6 @@ function mapRowToPublication(row: any): Publication {
       createdBy: row.created_by,
       version: row.version,
       tags: JSON.parse(row.tags || "[]"),
-      campaign: row.campaign,
     },
   };
 }

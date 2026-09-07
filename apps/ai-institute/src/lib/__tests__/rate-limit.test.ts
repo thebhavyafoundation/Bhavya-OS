@@ -3,7 +3,8 @@ import { checkRateLimit, RateLimits } from "../rate-limit";
 
 describe("Rate Limiter", () => {
   it("should allow requests within limit", () => {
-    const result = checkRateLimit("test-allow", { maxRequests: 3, windowMs: 60000 });
+    const key = "test-allow-" + Date.now();
+    const result = checkRateLimit(key, { maxRequests: 3, windowMs: 60000 });
     expect(result.limited).toBe(false);
     expect(result.remaining).toBe(2);
   });

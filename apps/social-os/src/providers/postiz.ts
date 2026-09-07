@@ -117,7 +117,7 @@ export class PostizProvider implements PublishingProvider {
 
   async uploadMedia(file: Buffer, type: MediaType): Promise<MediaAsset> {
     const formData = new FormData();
-    formData.append("file", new Blob([file]), `upload.${type}`);
+    formData.append("file", new Blob([new Uint8Array(file)]), `upload.${type}`);
     const data = await this.request<any>("/media", {
       method: "POST",
       body: formData,
@@ -186,6 +186,22 @@ export class PostizProvider implements PublishingProvider {
         maxMedia: 10,
         supportedMediaTypes: ["image", "video"],
         hashtagLimit: 30,
+      },
+      newsletter: {
+        maxCharacters: 10000,
+        maxMedia: 5,
+        supportedMediaTypes: ["image", "video", "document"],
+        hashtagLimit: 10,
+      },
+      discord: {
+        maxCharacters: 2000,
+        maxMedia: 10,
+        supportedMediaTypes: ["image", "video", "document"],
+      },
+      website: {
+        maxCharacters: Infinity,
+        maxMedia: 50,
+        supportedMediaTypes: ["image", "video", "document"],
       },
     };
     return limits[platform];

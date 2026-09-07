@@ -28,6 +28,9 @@ design-system/bhavya-foundation/
 # Foundation snapshots (generated)
 foundation-snapshot-*/
 
+# Runtime test artifacts
+__test_io_*__/
+
 # Extracted pages (temporary)
 extracted_pages/
 

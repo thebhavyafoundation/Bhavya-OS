@@ -10,9 +10,9 @@ const ROOT = join(__dirname, '..', '..', '..');
 describe('Bhavya Runtime', () => {
   let rt;
 
-  before(() => {
+  before(async () => {
     rt = createRuntime({ barPath: join(ROOT, 'bar') });
-    rt.load();
+    await rt.load();
   });
 
   describe('Registry Loading', () => {
