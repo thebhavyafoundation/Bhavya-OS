@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { courses } from "@/data/academy-courses";
 
 /**
  * Public sitemap. Every URL below is a verified real page (page.tsx on
@@ -14,7 +15,6 @@ const STATIC_ROUTES = [
   "/community",
   "/contributing",
   "/courses",
-  "/courses/ai-foundations",
   "/donate",
   "/faq",
   "/forest",
@@ -45,8 +45,17 @@ const STATIC_ROUTES = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return STATIC_ROUTES.map((path) => ({
+  const staticEntries = STATIC_ROUTES.map((path) => ({
     url: `${BASE}${path}`,
     lastModified: new Date(),
   }));
+
+  const courseEntries = courses
+    .filter((c) => c.status === "published")
+    .map((c) => ({
+      url: `${BASE}/courses/${c.id}`,
+      lastModified: new Date(c.updatedAt),
+    }));
+
+  return [...staticEntries, ...courseEntries];
 }

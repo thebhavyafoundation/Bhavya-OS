@@ -14,7 +14,7 @@ import {
   ArrowRight,
   LogIn,
 } from "lucide-react";
-import { getCourseById } from "@/data/academy-courses";
+import { getCourseById, courses } from "@/data/academy-courses";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -53,16 +53,38 @@ export default function DashboardPage() {
     );
   }
 
-  const course = getCourseById("ai-foundations");
-  const allLessons = course?.modules.flatMap((m) => m.lessons) ?? [];
-  const totalLessons = allLessons.length;
+  const enrolledCourses = (student?.enrolledCourses ?? [])
+    .map((id) => getCourseById(id))
+    .filter(Boolean) as NonNullable<ReturnType<typeof getCourseById>>[];
+
+  // Build a flat lesson list across all enrolled courses for progress calc
+  const allEnrolledLessons = enrolledCourses.flatMap((c) =>
+    c.modules.flatMap((m) => m.lessons),
+  );
+  const totalLessons = allEnrolledLessons.length;
   const completedLessons = student?.lessonsCompleted.length || 0;
   const progressPercent =
     totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
-  const currentLessonIdx = student?.currentLessonIndex || 0;
-  const currentLesson =
-    allLessons[Math.min(currentLessonIdx, totalLessons - 1)];
+  // Pick the first enrolled course as the "active" course for the hero card
+  const activeCourse = enrolledCourses[0];
+  const activeCourseLessons = activeCourse
+    ? activeCourse.modules.flatMap((m) => m.lessons)
+    : [];
+  const activeCourseCompleted = activeCourse
+    ? activeCourseLessons.filter((l) =>
+        student?.lessonsCompleted.includes(l.id),
+      ).length
+    : 0;
+  const activeCourseProgress =
+    activeCourseLessons.length > 0
+      ? Math.round((activeCourseCompleted / activeCourseLessons.length) * 100)
+      : 0;
+  const activeCurrentLessonIdx = student?.currentLessonIndex || 0;
+  const activeCurrentLesson =
+    activeCourseLessons[
+      Math.min(activeCurrentLessonIdx, activeCourseLessons.length - 1)
+    ];
 
   return (
     <>
@@ -85,7 +107,7 @@ export default function DashboardPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            {!student?.enrolledCourses.length ? (
+            {!enrolledCourses.length ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -96,22 +118,16 @@ export default function DashboardPage() {
                   <BookOpen className="w-8 h-8 text-accent-gold" />
                 </div>
                 <h2 className="text-lg font-semibold text-text-primary mb-2">
-                  Start Your First Course
+                  Start Your Learning Journey
                 </h2>
                 <p className="text-sm text-text-tertiary mb-6 max-w-sm mx-auto">
-                  Enroll in AI Foundations to begin learning. You&apos;ll
-                  explore what AI is, how it learns, and build your first AI
-                  project.
+                  Browse our courses and enroll to begin tracking your progress.
                 </p>
                 <Link
-                  href={
-                    allLessons.length > 0
-                      ? `/courses/ai-foundations/lessons/${allLessons[0].id}`
-                      : "/courses/ai-foundations"
-                  }
+                  href="/courses"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent-gold text-text-primary text-sm font-semibold hover:bg-accent-gold/90 transition-colors"
                 >
-                  Begin AI Foundations
+                  Browse Courses
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </motion.div>
@@ -126,27 +142,35 @@ export default function DashboardPage() {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h2 className="text-lg font-semibold text-text-primary">
-                        {currentLesson.title}
+                        {activeCurrentLesson?.title ?? activeCourse?.title}
                       </h2>
                       <p className="text-sm text-text-tertiary mt-1">
-                        Lesson {currentLesson.order} in AI Foundations
+                        {activeCurrentLesson
+                          ? `Lesson ${activeCurrentLesson.order} in ${activeCourse?.title}`
+                          : activeCourse?.title}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-text-tertiary">
-                      <BookOpen className="w-3.5 h-3.5" />
-                      {currentLesson.duration} min
+                    {activeCurrentLesson && (
+                      <div className="flex items-center gap-2 text-xs text-text-tertiary">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        {activeCurrentLesson.duration} min
+                      </div>
+                    )}
+                  </div>
+                  {activeCurrentLesson && (
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="px-2 py-1 rounded-md bg-bg-tertiary/30 text-accent-green-light text-[10px] font-semibold uppercase">
+                        Lesson {activeCurrentLesson.order}
+                      </span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-2 py-1 rounded-md bg-bg-tertiary/30 text-accent-green-light text-[10px] font-semibold uppercase">
-                      Lesson {currentLesson.order}
-                    </span>
-                  </div>
+                  )}
                   <Link
                     href={
-                      currentLesson
-                        ? `/courses/ai-foundations/lessons/${currentLesson.id}`
-                        : "/courses/ai-foundations"
+                      activeCurrentLesson
+                        ? `/courses/${activeCourse?.id}/lessons/${activeCurrentLesson.id}`
+                        : activeCourse
+                          ? `/courses/${activeCourse.id}`
+                          : "/courses"
                     }
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-gold text-text-primary text-sm font-semibold hover:bg-accent-gold/90 transition-colors"
                   >
@@ -207,21 +231,22 @@ export default function DashboardPage() {
                   className="rounded-2xl border border-border-primary bg-bg-secondary p-6"
                 >
                   <h3 className="text-sm font-semibold text-accent-gold uppercase tracking-wider mb-4">
-                    Module Outline
+                    {activeCourse?.title ?? "Course"} — Module Outline
                   </h3>
                   <div className="space-y-2">
-                    {course?.modules.map((mod) =>
+                    {activeCourse?.modules.map((mod) =>
                       mod.lessons.map((lesson, i) => {
                         const isCompleted = student?.lessonsCompleted.includes(
                           lesson.id,
                         );
                         const isCurrent =
-                          allLessons.findIndex((l) => l.id === lesson.id) ===
-                          currentLessonIdx;
+                          activeCourseLessons.findIndex(
+                            (l) => l.id === lesson.id,
+                          ) === activeCurrentLessonIdx;
                         return (
                           <Link
                             key={lesson.id}
-                            href={`/courses/ai-foundations/lessons/${lesson.id}`}
+                            href={`/courses/${activeCourse?.id}/lessons/${lesson.id}`}
                             className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-bg-tertiary/20 transition-colors group"
                           >
                             <div
@@ -247,23 +272,25 @@ export default function DashboardPage() {
                         );
                       }),
                     )}
-                    <Link
-                      href="/courses/ai-foundations"
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-bg-tertiary/20 transition-colors group"
-                    >
-                      <div className="w-7 h-7 rounded-full border border-border-primary flex items-center justify-center group-hover:border-accent-gold/40 transition-colors">
-                        <FolderOpen className="w-3.5 h-3.5 text-text-tertiary group-hover:text-accent-gold" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm text-text-primary">
-                          View Full Course
+                    {activeCourse && (
+                      <Link
+                        href={`/courses/${activeCourse.id}`}
+                        className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-bg-tertiary/20 transition-colors group"
+                      >
+                        <div className="w-7 h-7 rounded-full border border-border-primary flex items-center justify-center group-hover:border-accent-gold/40 transition-colors">
+                          <FolderOpen className="w-3.5 h-3.5 text-text-tertiary group-hover:text-accent-gold" />
                         </div>
-                        <div className="text-[10px] text-text-tertiary">
-                          {totalLessons} lessons · {course?.modules.length}{" "}
-                          modules
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm text-text-primary">
+                            View Full Course
+                          </div>
+                          <div className="text-[10px] text-text-tertiary">
+                            {activeCourseLessons.length} lessons ·{" "}
+                            {activeCourse.modules.length} modules
+                          </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    )}
                   </div>
                 </motion.div>
               </>
@@ -344,14 +371,16 @@ export default function DashboardPage() {
               <div className="space-y-2">
                 <Link
                   href={
-                    allLessons.length > 0
-                      ? `/courses/ai-foundations/lessons/${allLessons[0].id}`
-                      : "/courses"
+                    activeCurrentLesson
+                      ? `/courses/${activeCourse?.id}/lessons/${activeCurrentLesson.id}`
+                      : activeCourse
+                        ? `/courses/${activeCourse.id}`
+                        : "/courses"
                   }
                   className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-bg-tertiary/15 border border-border-primary/25 text-sm text-text-tertiary hover:bg-bg-tertiary/25 hover:text-text-primary transition-all"
                 >
                   <BookOpen className="w-4 h-4" />
-                  {student?.enrolledCourses.length
+                  {enrolledCourses.length
                     ? "Continue Lesson"
                     : "Start Learning"}
                 </Link>

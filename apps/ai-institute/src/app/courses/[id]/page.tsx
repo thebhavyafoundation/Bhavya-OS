@@ -5,6 +5,7 @@ import {
   getTotalLessonsAsync,
   getFirstLessonId,
 } from "@/lib/studio/courses";
+import { EnrollButton } from "./enroll-button";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -170,12 +171,7 @@ export default async function CourseDetailPage({
 
         {firstLessonId && (
           <div className="mt-12 flex justify-center">
-            <Link
-              href={`/courses/${course.id}/lessons/${firstLessonId}`}
-              className="rounded-lg bg-bg-tertiary px-8 py-3 text-sm font-medium text-text-primary hover:bg-bg-tertiary/80 transition"
-            >
-              Start Course
-            </Link>
+            <EnrollButton courseId={course.id} firstLessonId={firstLessonId} />
           </div>
         )}
       </div>
