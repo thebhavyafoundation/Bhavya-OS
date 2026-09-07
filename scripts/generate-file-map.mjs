@@ -56,11 +56,13 @@ lines.push("> DO NOT HAND-EDIT. Rebuild with `node scripts/generate-file-map.mjs
 lines.push("> Output is byte-deterministic: regenerate → `git diff` must be empty when sources are unchanged.");
 lines.push("");
 lines.push("## Entry + routers");
+lines.push("");
 for (const f of ["AGENTS.md", "CONTEXT.md", "apps/CONTEXT.md", "apps/ai-institute/CONTEXT.md", "packages/CONTEXT.md", "docs/CONTEXT.md", ".ai/CONTEXT.md", "rfcs/CONTEXT.md", "_shared/factory-map.md", "_system/schema.md"]) {
   lines.push(`- \`${f}\` — ${existsSync(join(ROOT, f)) ? "present" : "MISSING"}`);
 }
 lines.push("");
 lines.push("## RFC pipeline status (frontmatter scan)");
+lines.push("");
 try {
   for (const name of readdirSync(join(ROOT, "rfcs")).sort()) {
     if (!name.endsWith(".md") || name === "CONTEXT.md") continue;
@@ -71,9 +73,11 @@ try {
 }
 lines.push("");
 lines.push("## Top-level tree (depth 2, generated)");
+lines.push("");
 lines.push(...list(ROOT, 0, 1));
 lines.push("");
 lines.push("## Canonical homes (links, not copies)");
+lines.push("");
 lines.push("- tokens: `packages/platform-ui/src/styles/tokens.css`");
 lines.push("- components: `packages/platform-ui/src/components/`");
 lines.push("- brand: `docs/brand/BRAND_GUIDE.md`");
