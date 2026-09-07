@@ -13,7 +13,8 @@ import {
 import { getFeedbackIntelligence } from "@/campaign/community-intelligence.js";
 import { getCalendarStats } from "@/campaign/calendar.js";
 import { listCampaigns } from "@/campaign/engine.js";
-import { listPublications, getPendingApprovals } from "@/lib/publications.js";
+import { listPublications } from "@/lib/publications.js";
+import { getPendingApprovals } from "@/approval/gate.js";
 
 export async function GET() {
   const pulse = getInstitutionPulse();

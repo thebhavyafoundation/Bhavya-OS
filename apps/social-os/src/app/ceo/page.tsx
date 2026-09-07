@@ -12,6 +12,7 @@ import { getPendingApprovals } from "@/approval/gate.js";
 import { getRecentEvents } from "@/lib/events.js";
 import { getBrandReviews } from "@/lib/constitution-integration.js";
 import { getCommunicationLoopStatus } from "@/campaign/communication-loop.js";
+import { getGitHubOSFeedback } from "@/lib/github-integration.js";
 
 export default function CEODashboardPage() {
   const pulse = getInstitutionPulse();
@@ -26,6 +27,7 @@ export default function CEODashboardPage() {
   const brandReviews = getBrandReviews();
   const loopStatus = getCommunicationLoopStatus();
   const upcomingEntries = getUpcomingEntries(7);
+  const github = getGitHubOSFeedback();
 
   return (
     <div

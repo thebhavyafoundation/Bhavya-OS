@@ -19,7 +19,7 @@ import {
   getPublication,
   updatePublicationStatus,
 } from "../lib/publications.js";
-import { saveInstitutionalMetrics } from "../analytics/institution.js";
+import { saveInstitutionMetric } from "../analytics/institution.js";
 import {
   submitFeedback,
   processFeedback,

@@ -16,7 +16,12 @@ export type EventType =
   | "publication.rejected"
   | "publication.published"
   | "analytics.collected"
-  | "analytics.feed";
+  | "analytics.feed"
+  | "calendar.entry_created"
+  | "communication.loop_completed"
+  | "feedback.submitted"
+  | "feedback.processed"
+  | "campaign.created";
 
 export function emitEvent(
   type: EventType,

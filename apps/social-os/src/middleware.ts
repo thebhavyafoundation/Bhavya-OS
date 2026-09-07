@@ -1,3 +1,11 @@
+/**
+ * Social OS — Security Middleware
+ *
+ * Gates API routes behind session-token cookie.
+ * Health endpoints remain public.
+ * Full auth verification happens when absorbed into ai-institute.
+ */
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 

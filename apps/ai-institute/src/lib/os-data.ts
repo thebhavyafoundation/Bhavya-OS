@@ -192,6 +192,28 @@ export async function getProjects(): Promise<Project[]> {
     .filter(Boolean);
 }
 
+// --- Financials ---
+
+export interface FinancialReport {
+  id: string;
+  title: string;
+  period: string;
+  status: string;
+  approved: string;
+  type: string;
+  totalRevenue: number;
+  totalExpenditure: number;
+  notes: string;
+}
+
+export async function getFinancials(): Promise<FinancialReport[]> {
+  const files = listDir("content/financials");
+  return files
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => readJSON(`content/financials/${f}`))
+    .filter(Boolean);
+}
+
 // --- Registry Data ---
 
 export async function getRegistry(type: string) {
@@ -329,4 +351,89 @@ export async function getContentStats() {
     decisions: decisions?.records?.length || 0,
     knowledgeGraphNodes: knowledgeGraph?.nodes?.length || 0,
   };
+}
+
+// --- IOC (Institute of Compliance) ---
+
+export interface IOCData {
+  activeOKRs: number;
+  openRisks: number;
+  pendingReviews: number;
+  actionsThisWeek: number;
+  okrs: { id: string; title: string; status: string; progress: number }[];
+  risks: { id: string; title: string; severity: string; status: string }[];
+}
+
+export function getIOCData(): IOCData {
+  const dbPath = path.join(ROOT, "apps/ioc/data/ioc.db");
+  if (!fs.existsSync(dbPath)) {
+    return {
+      activeOKRs: 0,
+      openRisks: 0,
+      pendingReviews: 0,
+      actionsThisWeek: 0,
+      okrs: [],
+      risks: [],
+    };
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const okrs = db
+      .prepare(
+        "SELECT id, title, status, progress FROM objectives WHERE status != 'completed' LIMIT 20",
+      )
+      .all() as {
+      id: string;
+      title: string;
+      status: string;
+      progress: number;
+    }[];
+
+    const risks = db
+      .prepare(
+        "SELECT id, title, severity, status FROM risks WHERE status = 'open' LIMIT 20",
+      )
+      .all() as {
+      id: string;
+      title: string;
+      severity: string;
+      status: string;
+    }[];
+
+    const pendingReviews = db
+      .prepare(
+        "SELECT COUNT(*) as count FROM weekly_reviews WHERE status = 'pending'",
+      )
+      .get() as { count: number } | undefined;
+
+    const actionsThisWeek = db
+      .prepare(
+        "SELECT COUNT(*) as count FROM action_items WHERE created_at >= date('now', '-7 days')",
+      )
+      .get() as { count: number } | undefined;
+
+    db.close();
+
+    return {
+      activeOKRs: okrs.length,
+      openRisks: risks.length,
+      pendingReviews: pendingReviews?.count || 0,
+      actionsThisWeek: actionsThisWeek?.count || 0,
+      okrs,
+      risks,
+    };
+  } catch {
+    return {
+      activeOKRs: 0,
+      openRisks: 0,
+      pendingReviews: 0,
+      actionsThisWeek: 0,
+      okrs: [],
+      risks: [],
+    };
+  }
 }
