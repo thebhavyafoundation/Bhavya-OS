@@ -628,6 +628,190 @@ export function getGitHubRepoADRs(
   }
 }
 
+// --- Social OS ---
+
+export interface SocialPublication {
+  id: string;
+  title: string;
+  content: string;
+  status: string;
+  priority: string;
+  source_type: string;
+  platform_content: string;
+  scheduled_at: string;
+  published_at: string;
+  created_at: string;
+  tags: string;
+}
+
+export interface SocialCampaign {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  status: string;
+  channels: string;
+  start_date: string;
+  end_date: string;
+  objectives: string;
+  metrics: string;
+  created_at: string;
+}
+
+export interface SocialCalendarEntry {
+  id: string;
+  campaign_id: string;
+  type: string;
+  title: string;
+  description: string;
+  platforms: string;
+  scheduled_date: string;
+  status: string;
+  publication_id: string;
+}
+
+export interface SocialFeedback {
+  id: string;
+  source: string;
+  classification: string;
+  content: string;
+  author: string;
+  sentiment: number;
+  created_at: string;
+}
+
+export interface SocialInstitutionMetric {
+  id: string;
+  name: string;
+  category: string;
+  value: number;
+  unit: string;
+  trend: string;
+  change_percent: number;
+  period: string;
+  collected_at: string;
+}
+
+export interface SocialData {
+  publications: SocialPublication[];
+  campaigns: SocialCampaign[];
+  calendar: SocialCalendarEntry[];
+  feedback: SocialFeedback[];
+  metrics: SocialInstitutionMetric[];
+  totalPublications: number;
+  publishedCount: number;
+  draftCount: number;
+  totalCampaigns: number;
+  activeCampaigns: number;
+}
+
+export function getSocialData(): SocialData {
+  const dbPath = path.join(ROOT, "apps/social-os/data/social-os.db");
+  if (!fs.existsSync(dbPath)) {
+    return {
+      publications: [],
+      campaigns: [],
+      calendar: [],
+      feedback: [],
+      metrics: [],
+      totalPublications: 0,
+      publishedCount: 0,
+      draftCount: 0,
+      totalCampaigns: 0,
+      activeCampaigns: 0,
+    };
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const publications = db
+      .prepare(
+        `SELECT id, title, content, status, priority, source_type,
+         platform_content, scheduled_at, published_at, created_at, tags
+         FROM publications ORDER BY created_at DESC LIMIT 50`,
+      )
+      .all() as SocialPublication[];
+
+    const campaigns = db
+      .prepare(
+        `SELECT id, name, description, type, status, channels,
+         start_date, end_date, objectives, metrics, created_at
+         FROM campaigns ORDER BY created_at DESC`,
+      )
+      .all() as SocialCampaign[];
+
+    const calendar = db
+      .prepare(
+        `SELECT id, campaign_id, type, title, description, platforms,
+         scheduled_date, status, publication_id
+         FROM editorial_calendar ORDER BY scheduled_date DESC LIMIT 30`,
+      )
+      .all() as SocialCalendarEntry[];
+
+    const feedback = db
+      .prepare(
+        `SELECT id, source, classification, content, author, sentiment, created_at
+         FROM community_feedback ORDER BY created_at DESC LIMIT 20`,
+      )
+      .all() as SocialFeedback[];
+
+    const metrics = db
+      .prepare(
+        `SELECT id, name, category, value, unit, trend, change_percent, period, collected_at
+         FROM institution_metrics ORDER BY collected_at DESC LIMIT 20`,
+      )
+      .all() as SocialInstitutionMetric[];
+
+    const pubStats = db
+      .prepare(
+        `SELECT COUNT(*) as total,
+         SUM(CASE WHEN status = 'published' THEN 1 ELSE 0 END) as published,
+         SUM(CASE WHEN status = 'draft' THEN 1 ELSE 0 END) as draft
+         FROM publications`,
+      )
+      .get() as { total: number; published: number; draft: number };
+
+    const campStats = db
+      .prepare(
+        `SELECT COUNT(*) as total,
+         SUM(CASE WHEN status = 'active' THEN 1 ELSE 0 END) as active
+         FROM campaigns`,
+      )
+      .get() as { total: number; active: number };
+
+    db.close();
+
+    return {
+      publications,
+      campaigns,
+      calendar,
+      feedback,
+      metrics,
+      totalPublications: pubStats?.total || 0,
+      publishedCount: pubStats?.published || 0,
+      draftCount: pubStats?.draft || 0,
+      totalCampaigns: campStats?.total || 0,
+      activeCampaigns: campStats?.active || 0,
+    };
+  } catch {
+    return {
+      publications: [],
+      campaigns: [],
+      calendar: [],
+      feedback: [],
+      metrics: [],
+      totalPublications: 0,
+      publishedCount: 0,
+      draftCount: 0,
+      totalCampaigns: 0,
+      activeCampaigns: 0,
+    };
+  }
+}
+
 // --- Navigation ---
 
 export async function getNavigation(name: string) {
