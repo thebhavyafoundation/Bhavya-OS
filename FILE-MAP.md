@@ -313,6 +313,11 @@
 - `README.md`
 - `VERCEL.md`
 - `__test_io_dir__`/
+- `__test_io_json__`/
+  - `__test_io_json__\test-item.json`
+- `__test_io_list__`/
+  - `__test_io_list__\alpha.json`
+  - `__test_io_list__\beta.json`
 - `_archive`/
   - `_archive\.registry`/
   - `_archive\.schemas`/

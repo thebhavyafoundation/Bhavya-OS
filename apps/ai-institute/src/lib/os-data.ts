@@ -287,6 +287,347 @@ export function parseMDXFrontmatter(content: string) {
   return { meta, body: match[2] };
 }
 
+// --- GitHub OS ---
+
+export interface GitHubRepository {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  language: string;
+  stars: number;
+  forks: number;
+  license: string;
+  health_score: number;
+  technology_score: number;
+  bhavya_score: number;
+  engineering_maturity: string;
+  architecture_summary: string;
+  why_bhavya_cares: string;
+  learning_difficulty: string;
+  recommendation_type: string;
+  tech_stack: string;
+  topics: string;
+}
+
+export interface GitHubActivityEvent {
+  id: string;
+  type: string;
+  entity_type: string;
+  entity_id: string;
+  title: string;
+  description: string;
+  created_at: string;
+}
+
+export interface GitHubTechRadarItem {
+  id: string;
+  name: string;
+  category: string;
+  ring: string;
+  description: string;
+  score: number;
+}
+
+export interface GitHubRecommendation {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  priority: string;
+  status: string;
+}
+
+export interface GitHubEngineeringHealth {
+  id: string;
+  repository_id: string;
+  overall_score: number;
+  documentation_score: number;
+  test_coverage_score: number;
+  dependency_freshness_score: number;
+  release_cadence_score: number;
+  architecture_consistency_score: number;
+}
+
+export interface GitHubReview {
+  id: string;
+  repository_id: string;
+  review_type: string;
+  overall_score: number;
+  architecture_score: number;
+  code_organization_score: number;
+  documentation_score: number;
+  testing_score: number;
+  strengths: string;
+  weaknesses: string;
+  verdict: string;
+}
+
+export interface GitHubTechnicalDebt {
+  id: string;
+  repository_id: string;
+  category: string;
+  title: string;
+  description: string;
+  severity: string;
+  status: string;
+}
+
+export interface GitHubADR {
+  id: string;
+  repository_id: string;
+  number: number;
+  title: string;
+  status: string;
+  context: string;
+  decision: string;
+  consequences: string;
+}
+
+export interface GitHubData {
+  repositories: GitHubRepository[];
+  recentActivity: GitHubActivityEvent[];
+  techRadar: GitHubTechRadarItem[];
+  recommendations: GitHubRecommendation[];
+  totalRepos: number;
+  avgHealthScore: number;
+  avgBhavyaScore: number;
+  languageDistribution: Record<string, number>;
+}
+
+export function getGitHubData(): GitHubData {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) {
+    return {
+      repositories: [],
+      recentActivity: [],
+      techRadar: [],
+      recommendations: [],
+      totalRepos: 0,
+      avgHealthScore: 0,
+      avgBhavyaScore: 0,
+      languageDistribution: {},
+    };
+  }
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const repositories = db
+      .prepare(
+        `SELECT id, name, slug, description, language, stars, forks, license,
+         health_score, technology_score, bhavya_score, engineering_maturity,
+         architecture_summary, why_bhavya_cares, learning_difficulty,
+         recommendation_type, tech_stack, topics
+         FROM repositories ORDER BY bhavya_score DESC`,
+      )
+      .all() as GitHubRepository[];
+
+    const recentActivity = db
+      .prepare(
+        `SELECT id, type, entity_type, entity_id, title, description, created_at
+         FROM activity_events ORDER BY created_at DESC LIMIT 20`,
+      )
+      .all() as GitHubActivityEvent[];
+
+    const techRadar = db
+      .prepare(
+        `SELECT id, name, category, ring, description, score
+         FROM technology_radar ORDER BY score DESC`,
+      )
+      .all() as GitHubTechRadarItem[];
+
+    const recommendations = db
+      .prepare(
+        `SELECT id, type, title, description, priority, status
+         FROM recommendations ORDER BY
+         CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END`,
+      )
+      .all() as GitHubRecommendation[];
+
+    const stats = db
+      .prepare(
+        `SELECT COUNT(*) as total,
+         AVG(health_score) as avg_health,
+         AVG(bhavya_score) as avg_bhavya
+         FROM repositories`,
+      )
+      .get() as { total: number; avg_health: number; avg_bhavya: number };
+
+    const langRows = db
+      .prepare(
+        `SELECT language, COUNT(*) as count FROM repositories WHERE language IS NOT NULL GROUP BY language`,
+      )
+      .all() as { language: string; count: number }[];
+
+    db.close();
+
+    const languageDistribution: Record<string, number> = {};
+    langRows.forEach((r) => {
+      languageDistribution[r.language] = r.count;
+    });
+
+    return {
+      repositories,
+      recentActivity,
+      techRadar,
+      recommendations,
+      totalRepos: stats?.total || 0,
+      avgHealthScore: Math.round((stats?.avg_health || 0) * 10) / 10,
+      avgBhavyaScore: Math.round((stats?.avg_bhavya || 0) * 10) / 10,
+      languageDistribution,
+    };
+  } catch {
+    return {
+      repositories: [],
+      recentActivity: [],
+      techRadar: [],
+      recommendations: [],
+      totalRepos: 0,
+      avgHealthScore: 0,
+      avgBhavyaScore: 0,
+      languageDistribution: {},
+    };
+  }
+}
+
+export function getGitHubRepository(id: string): GitHubRepository | null {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) return null;
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const repo = db
+      .prepare(
+        `SELECT id, name, slug, description, language, stars, forks, license,
+         health_score, technology_score, bhavya_score, engineering_maturity,
+         architecture_summary, why_bhavya_cares, learning_difficulty,
+         recommendation_type, tech_stack, topics
+         FROM repositories WHERE id = ? OR slug = ?`,
+      )
+      .get(id, id) as GitHubRepository | undefined;
+
+    db.close();
+    return repo || null;
+  } catch {
+    return null;
+  }
+}
+
+export function getGitHubRepoHealth(
+  repositoryId: string,
+): GitHubEngineeringHealth | null {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) return null;
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const health = db
+      .prepare(
+        `SELECT id, repository_id, overall_score, documentation_score,
+         test_coverage_score, dependency_freshness_score,
+         release_cadence_score, architecture_consistency_score
+         FROM engineering_health WHERE repository_id = ?
+         ORDER BY calculated_at DESC LIMIT 1`,
+      )
+      .get(repositoryId) as GitHubEngineeringHealth | undefined;
+
+    db.close();
+    return health || null;
+  } catch {
+    return null;
+  }
+}
+
+export function getGitHubRepoReviews(
+  repositoryId: string,
+): GitHubReview[] {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) return [];
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const reviews = db
+      .prepare(
+        `SELECT id, repository_id, review_type, overall_score,
+         architecture_score, code_organization_score, documentation_score,
+         testing_score, strengths, weaknesses, verdict
+         FROM engineering_reviews WHERE repository_id = ?
+         ORDER BY reviewed_at DESC`,
+      )
+      .all(repositoryId) as GitHubReview[];
+
+    db.close();
+    return reviews;
+  } catch {
+    return [];
+  }
+}
+
+export function getGitHubRepoDebt(
+  repositoryId: string,
+): GitHubTechnicalDebt[] {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) return [];
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const debt = db
+      .prepare(
+        `SELECT id, repository_id, category, title, description, severity, status
+         FROM technical_debt WHERE repository_id = ?
+         ORDER BY
+         CASE severity WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END`,
+      )
+      .all(repositoryId) as GitHubTechnicalDebt[];
+
+    db.close();
+    return debt;
+  } catch {
+    return [];
+  }
+}
+
+export function getGitHubRepoADRs(
+  repositoryId: string,
+): GitHubADR[] {
+  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
+  if (!fs.existsSync(dbPath)) return [];
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    const db = new Database(dbPath, { readonly: true });
+
+    const adrs = db
+      .prepare(
+        `SELECT id, repository_id, number, title, status, context, decision, consequences
+         FROM adrs WHERE repository_id = ?
+         ORDER BY number DESC`,
+      )
+      .all(repositoryId) as GitHubADR[];
+
+    db.close();
+    return adrs;
+  } catch {
+    return [];
+  }
+}
+
 // --- Navigation ---
 
 export async function getNavigation(name: string) {
