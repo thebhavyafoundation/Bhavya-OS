@@ -1,3 +1,8 @@
+---
+type: rfc
+status: draft
+---
+
 # RFC status vocabulary — canonical proposal (governance decision, not cleanup)
 
 ## Canonical vocabulary (all new RFCs)

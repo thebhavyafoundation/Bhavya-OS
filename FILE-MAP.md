@@ -21,7 +21,7 @@
 - `rfcs/RFC-0001-Volunteer-Portal.md` — published
 - `rfcs/RFC-0002-Forest-GIS.md` — published
 - `rfcs/RFC-0003-AI-Gateway.md` — Accepted
-- `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — `body line |`published` (no content change needed beyond frontmatter, when approved) |
+- `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — draft
 
 ## Top-level tree (depth 2, generated)
 
