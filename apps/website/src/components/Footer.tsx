@@ -108,13 +108,7 @@ export function Footer() {
           <nav className="footer-links" aria-label="Learn navigation">
             <a href="/programs">Programs</a>
             <a href="/knowledge/packages">Knowledge Packages</a>
-            <a
-              href="https://bhavya-foundation-bhavya-ai-lab.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              AI Lab
-            </a>
+            <a href="/os">Bhavya OS</a>
             <a href="/knowledge">Digital Library</a>
             <a href="/resources">Resources</a>
           </nav>

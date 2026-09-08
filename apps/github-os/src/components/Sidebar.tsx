@@ -228,28 +228,29 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Footer */}
+      {/* Footer — Institutional Return Path */}
       <div
-        className="p-4"
+        className="p-4 space-y-2"
         style={{ borderTop: "1px solid var(--color-border-primary)" }}
       >
-        <div className="flex items-center gap-3">
-          <Avatar name="Bhavya Foundation" size="md" />
-          <div className="flex-1 min-w-0">
-            <div
-              className="text-sm font-medium truncate"
-              style={{ color: "var(--color-text-inverse)" }}
-            >
-              Bhavya Foundation
-            </div>
-            <div
-              className="text-[11px]"
-              style={{ color: "var(--color-text-tertiary)" }}
-            >
-              Admin
-            </div>
-          </div>
-        </div>
+        <Link
+          href="/os"
+          className="flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors"
+          style={{
+            color: "var(--color-text-tertiary)",
+            background: "var(--color-bg-primary)",
+          }}
+        >
+          <Home size={14} />
+          <span>Bhavya OS</span>
+        </Link>
+        <Link
+          href="/"
+          className="flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          <span className="text-[11px]">Bhavya Foundation</span>
+        </Link>
       </div>
     </aside>
   );
