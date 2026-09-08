@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET() {
+export const GET = withAuth(async (_request, _user) => {
   const db = getDb();
   const comparisons = db
     .prepare(
@@ -16,9 +17,9 @@ export async function GET() {
     .all();
 
   return NextResponse.json({ comparisons });
-}
+});
 
-export async function POST(request: Request) {
+export const POST = withAuth(async (request, _user) => {
   const db = getDb();
   const { repo_a_id, repo_b_id } = await request.json();
 
@@ -89,4 +90,4 @@ export async function POST(request: Request) {
   ).run(id, repo_a_id, repo_b_id, JSON.stringify(comparison));
 
   return NextResponse.json({ comparison: { id, ...comparison } });
-}
+});

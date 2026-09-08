@@ -16,8 +16,9 @@ import {
 } from "@/lib/constitution-integration.js";
 import { getPublication } from "@/lib/publications.js";
 import type { PlatformType } from "@/lib/types.js";
+import { withAuth } from "@/lib/api-auth";
 
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request, _user) => {
   const body = await request.json();
   const { integration, action } = body;
 
@@ -103,9 +104,9 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
   }
-}
+});
 
-export async function GET() {
+export const GET = withAuth(async (_request, _user) => {
   return NextResponse.json({
     integrations: [
       {
@@ -144,4 +145,4 @@ export async function GET() {
       },
     },
   });
-}
+});

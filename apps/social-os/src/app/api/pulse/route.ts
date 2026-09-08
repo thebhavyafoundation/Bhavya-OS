@@ -15,8 +15,9 @@ import { getCalendarStats } from "@/campaign/calendar.js";
 import { listCampaigns } from "@/campaign/engine.js";
 import { listPublications } from "@/lib/publications.js";
 import { getPendingApprovals } from "@/approval/gate.js";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET() {
+export const GET = withAuth(async (_request, _user) => {
   const pulse = getInstitutionPulse();
   const mission = getMissionMetrics();
   const analytics = getAnalyticsSummary();
@@ -41,9 +42,9 @@ export async function GET() {
     allMetrics,
     timestamp: new Date().toISOString(),
   });
-}
+});
 
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request, _user) => {
   const body = await request.json();
   const { action } = body;
 
@@ -61,4 +62,4 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: "unknown action" }, { status: 400 });
   }
-}
+});

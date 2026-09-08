@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bhavya/auth": "workspace:*",
     "better-sqlite3": "^13.0.2",
     "next": "^15.5.20",
     "react": "^19.2.0",

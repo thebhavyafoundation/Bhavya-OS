@@ -15,8 +15,9 @@ import type {
   CommunicationChannel,
   AudienceType,
 } from "@/lib/types.js";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET(request: NextRequest) {
+export const GET = withAuth(async (request, _user) => {
   const { searchParams } = new URL(request.url);
   const action = searchParams.get("action");
 
@@ -52,9 +53,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ campaigns });
     }
   }
-}
+});
 
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request, _user) => {
   const body = await request.json();
   const { action } = body;
 
@@ -140,4 +141,4 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: "unknown action" }, { status: 400 });
   }
-}
+});

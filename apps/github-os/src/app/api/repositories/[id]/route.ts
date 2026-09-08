@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
+export const GET = withAuth(async (request, _user) => {
   const db = getDb();
-  const { id } = params;
+  const id = request.nextUrl.pathname.split("/").at(-1)!;
 
   const repository = db
     .prepare("SELECT * FROM repositories WHERE id = ?")
@@ -41,4 +39,4 @@ export async function GET(
     adrs,
     knowledge,
   });
-}
+});

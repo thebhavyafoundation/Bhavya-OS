@@ -15,8 +15,9 @@ import {
 import { getAnalyticsSummary } from "@/analytics/collector.js";
 import { emitEvent, getRecentEvents } from "@/lib/events.js";
 import type { PlatformType, ContentSource } from "@/lib/types.js";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET(request: NextRequest) {
+export const GET = withAuth(async (request, _user) => {
   const { searchParams } = new URL(request.url);
   const action = searchParams.get("action");
   const status = searchParams.get("status");
@@ -66,9 +67,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ publications });
     }
   }
-}
+});
 
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request, _user) => {
   const body = await request.json();
   const { action } = body;
 
@@ -168,13 +169,13 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: "unknown action" }, { status: 400 });
   }
-}
+});
 
-export async function DELETE(request: NextRequest) {
+export const DELETE = withAuth(async (request, _user) => {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
 
   const deleted = deletePublication(id);
   return NextResponse.json({ deleted });
-}
+});

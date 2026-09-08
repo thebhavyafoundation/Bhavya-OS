@@ -5,8 +5,9 @@ import {
   getCommunicationLoopStatus,
 } from "@/campaign/communication-loop.js";
 import type { CommunicationChannel } from "@/lib/types.js";
+import { withAuth } from "@/lib/api-auth";
 
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request, _user) => {
   const body = await request.json();
   const { action } = body;
 
@@ -39,9 +40,9 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: "unknown action" }, { status: 400 });
   }
-}
+});
 
-export async function GET() {
+export const GET = withAuth(async (_request, _user) => {
   const status = getCommunicationLoopStatus();
   return NextResponse.json({ status });
-}
+});

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET() {
+export const GET = withAuth(async (_request, _user) => {
   const db = getDb();
 
   const library = db
@@ -11,4 +12,4 @@ export async function GET() {
     .all();
 
   return NextResponse.json(library);
-}
+});

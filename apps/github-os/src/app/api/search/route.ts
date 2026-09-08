@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET(request: Request) {
+export const GET = withAuth(async (request, _user) => {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q") || "";
 
@@ -56,4 +57,4 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.json({ results });
-}
+});

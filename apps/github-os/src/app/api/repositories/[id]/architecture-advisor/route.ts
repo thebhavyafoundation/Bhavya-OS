@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { withAuth } from "@/lib/api-auth";
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
-  const { id } = await params;
+export const GET = withAuth(async (request, _user) => {
+  const id = request.nextUrl.pathname.split("/").at(-2)!;
   const db = getDb();
 
   const advisors = db
@@ -13,4 +11,4 @@ export async function GET(
     .all(id);
 
   return NextResponse.json(advisors);
-}
+});

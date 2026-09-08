@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { seedData } from "@/lib/seed";
+import { withAuth } from "@/lib/api-auth";
 
-export async function POST() {
+export const POST = withAuth(async (_request, _user) => {
   try {
     seedData();
     return NextResponse.json({
@@ -14,4 +15,4 @@ export async function POST() {
       { status: 500 },
     );
   }
-}
+});
