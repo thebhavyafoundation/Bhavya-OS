@@ -18,6 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bhavyafoundation.org"),
   title: "Bhavya Foundation",
   description:
     "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
