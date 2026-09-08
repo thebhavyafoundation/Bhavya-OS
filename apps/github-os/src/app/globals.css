@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./_tokens-generated.css";
 
 /* Global focus-visible ring for keyboard navigation */
 :focus-visible {

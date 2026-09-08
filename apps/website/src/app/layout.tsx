@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { organizationJsonLd, buildMetadata } from "../lib/metadata";
 import { Providers } from "../components/Providers";
+import "@bhavya/platform-ui";
 import "./globals.css";
 
 export const metadata: Metadata = buildMetadata({

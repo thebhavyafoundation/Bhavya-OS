@@ -452,6 +452,9 @@ importers:
       '@bhavya/mission-runtime':
         specifier: workspace:*
         version: link:../../packages/mission-runtime
+      '@bhavya/platform-ui':
+        specifier: workspace:*
+        version: link:../../packages/platform-ui
       '@bhavya/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
