@@ -1,15 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@import "./_tokens-generated.css";
+
+@theme {
+  /* admin dark-only overrides — maps platform-ui tokens to dark palette */
+  --color-bg-primary: #0a1f1a;
+  --color-bg-secondary: #111;
+  --color-surface-primary: #1a3a2e;
+  --color-surface-secondary: #233d32;
+  --color-border-primary: #2d5a3d;
+  --color-text-primary: #f7f4ec;
+  --color-text-secondary: #8a9a8b;
+  --color-text-muted: #6a7c52;
+  --color-accent-green: #0e382e;
+  --color-accent-gold: #d4af37;
+  --color-status-error: #ef4444;
+  --color-status-warning: #eab308;
+  --color-status-success: #22c55e;
+  --color-status-info: #3b82f6;
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* backward-compatible --admin-* aliases */
+  --admin-primary: var(--color-accent-green);
+  --admin-surface: var(--color-surface-primary);
+  --admin-surface-hover: var(--color-surface-secondary);
+  --admin-border: var(--color-border-primary);
+  --admin-text: var(--color-text-primary);
+  --admin-text-secondary: var(--color-text-secondary);
+  --admin-text-muted: var(--color-text-muted);
+  --admin-success: var(--color-status-success);
+  --admin-warning: var(--color-status-warning);
+  --admin-danger: var(--color-status-error);
+  --admin-info: var(--color-status-info);
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family:
-    "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
 }
