@@ -29,5 +29,6 @@ export {
   databaseExists,
   getReadonlyDatabase,
   getReadWriteDatabase,
+  getAdaptedDatabase,
 } from "./registry";
 export type { DatabaseName } from "./registry";

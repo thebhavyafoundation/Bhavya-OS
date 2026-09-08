@@ -114,3 +114,16 @@ export function getReadWriteDatabase(
     foreignKeys: true,
   });
 }
+
+/**
+ * Get an adapted database connection for a named database.
+ * Convenience alias for getReadWriteDatabase() that communicates
+ * "I want the canonical local adapter for this database."
+ *
+ * For remote/Turso connections, apps must handle the async remote
+ * client separately — better-sqlite3 and @libsql/client have
+ * incompatible APIs (sync vs async) that cannot share one interface.
+ */
+export function getAdaptedDatabase(name: DatabaseName): BetterSqlite3.Database {
+  return getReadWriteDatabase(name);
+}
