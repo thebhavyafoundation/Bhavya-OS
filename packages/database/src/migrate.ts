@@ -116,7 +116,14 @@ function loadMigrationsFromDisk(dbName: DatabaseName): Migration[] {
       const mod = require(join(migrationsDir, file));
       const migration: Migration = mod.default || mod.migration;
       if (migration && migration.id && migration.up) {
-        migrations.push(migration);
+        // Prefix migration ID with domain name for shared-DB uniqueness.
+        // All domains export the same base ID (e.g. "001_baseline_schema");
+        // prefixing ensures each domain tracks its own applied migrations
+        // even when all share a single _migrations table (bhavya.db).
+        migrations.push({
+          ...migration,
+          id: `${dbName}/${migration.id}`,
+        });
       }
     }
 

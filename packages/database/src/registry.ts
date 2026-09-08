@@ -23,17 +23,17 @@ interface DatabaseRegistryEntry {
 
 const REGISTRY: Record<DatabaseName, DatabaseRegistryEntry> = {
   "ai-institute": {
-    relativePath: "apps/ai-institute/bhavya-ai-lab/ai-institute.db",
+    relativePath: "packages/database/data/bhavya.db",
     envKey: "TURSO_DATABASE_URL",
   },
   "github-os": {
-    relativePath: "apps/github-os/data/github-os.db",
+    relativePath: "packages/database/data/bhavya.db",
   },
   "social-os": {
-    relativePath: "apps/social-os/data/social-os.db",
+    relativePath: "packages/database/data/bhavya.db",
   },
   ioc: {
-    relativePath: "apps/ioc/data/ioc.db",
+    relativePath: "packages/database/data/bhavya.db",
   },
 };
 
