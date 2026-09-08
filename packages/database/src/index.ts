@@ -10,13 +10,18 @@ export {
 } from "./sqlite";
 export type { DatabaseConfig } from "./sqlite";
 export {
-  ensureMigrationsTable,
-  getAppliedMigrations,
-  applyMigration,
-  rollbackMigration,
   migrate,
+  rollback,
+  getMigrationStatus,
+  computeChecksum,
+  migrateLegacy,
 } from "./migrate";
-export type { Migration } from "./migrate";
+export type {
+  Migration,
+  MigrationRecord,
+  MigrationResult,
+  MigrationStatus,
+} from "./migrate";
 export { SqliteRepository } from "./repository";
 export type { Repository } from "./repository";
 export {
