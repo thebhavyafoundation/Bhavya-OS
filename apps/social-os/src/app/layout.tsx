@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import "@bhavya/platform-ui";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Social OS — Bhavya Foundation",
@@ -13,7 +15,7 @@ export default function SocialOSLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "system-ui, sans-serif" }}>
+      <body style={{ margin: 0 }}>
         <div style={{ display: "flex", minHeight: "100vh" }}>
           {/* Institutional Sidebar */}
           <aside
