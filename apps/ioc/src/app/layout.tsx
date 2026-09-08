@@ -1,13 +1,18 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import Sidebar from '@/components/Sidebar';
+import type { Metadata } from "next";
+import "@bhavya/platform-ui";
+import "./globals.css";
+import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
-  title: 'IOC — Institution Operations Center',
-  description: 'Executive command center for Bhavya Foundation',
+  title: "IOC — Institution Operations Center",
+  description: "Executive command center for Bhavya Foundation",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body className="bg-black text-white">
