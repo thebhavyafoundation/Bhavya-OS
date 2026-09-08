@@ -2,7 +2,7 @@ import type { Migration } from "../../src/migrate";
 
 export const migration: Migration = {
   id: "001_baseline_schema",
-  name: "Baseline schema — 11 tables for OKR/risk/compliance",
+  name: "Baseline schema — 16 tables for OKR/risk/compliance/production",
   up: `
 -- Institutions
 CREATE TABLE IF NOT EXISTS institutions (
@@ -157,8 +157,60 @@ CREATE TABLE IF NOT EXISTS system_health (
   events_consumed INTEGER NOT NULL DEFAULT 0,
   notes TEXT
 );
+
+-- Content packages (IoC production workflow)
+CREATE TABLE IF NOT EXISTS ioc_content_packages (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  level TEXT NOT NULL DEFAULT 'L1',
+  domain TEXT NOT NULL DEFAULT 'general',
+  status TEXT NOT NULL DEFAULT 'draft',
+  stage TEXT NOT NULL DEFAULT 'research',
+  assignee TEXT,
+  due_date TEXT,
+  concepts INTEGER NOT NULL DEFAULT 0,
+  published_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+-- Media assets
+CREATE TABLE IF NOT EXISTS ioc_media_assets (
+  id TEXT PRIMARY KEY,
+  kp_id TEXT NOT NULL,
+  type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'draft',
+  platform TEXT,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY (kp_id) REFERENCES ioc_content_packages(id)
+);
+
+-- Community requests
+CREATE TABLE IF NOT EXISTS ioc_community_requests (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'pending',
+  requested_by TEXT,
+  created_at TEXT NOT NULL
+);
+
+-- Student feedback
+CREATE TABLE IF NOT EXISTS ioc_student_feedback (
+  id TEXT PRIMARY KEY,
+  kp_id TEXT NOT NULL,
+  score INTEGER NOT NULL,
+  comment TEXT,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY (kp_id) REFERENCES ioc_content_packages(id)
+);
   `,
   down: `
+DROP TABLE IF EXISTS ioc_student_feedback;
+DROP TABLE IF EXISTS ioc_community_requests;
+DROP TABLE IF EXISTS ioc_media_assets;
+DROP TABLE IF EXISTS ioc_content_packages;
 DROP TABLE IF EXISTS system_health;
 DROP TABLE IF EXISTS institution_kpis;
 DROP TABLE IF EXISTS institution_events;
