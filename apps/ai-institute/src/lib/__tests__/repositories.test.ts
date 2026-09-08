@@ -1,28 +1,30 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { join } from "path";
 import { existsSync, unlinkSync, mkdirSync } from "fs";
-import { initLocalDatabase, migrate, getDatabase } from "../sqlite";
-import { aiInstituteMigrations } from "../migrations";
+import { getAdaptedDatabase, migrate } from "@bhavya/database";
 import { SqliteUserRepository } from "../repositories/sqlite-user-repository";
 import { SqliteSessionRepository } from "../repositories/sqlite-session-repository";
 
 const TEST_DB_DIR = join(process.cwd(), "bhavya-ai-lab", "test");
 const TEST_DB_PATH = join(TEST_DB_DIR, "test-repos.db");
 
-beforeAll(() => {
+beforeAll(async () => {
   if (!existsSync(TEST_DB_DIR)) mkdirSync(TEST_DB_DIR, { recursive: true });
-  initLocalDatabase(TEST_DB_PATH);
-  migrate(aiInstituteMigrations);
+  await migrate("ai-institute");
 });
 
 afterAll(() => {
   try {
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.close?.();
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   try {
     if (existsSync(TEST_DB_PATH)) unlinkSync(TEST_DB_PATH);
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 });
 
 describe("SqliteUserRepository", () => {
@@ -42,7 +44,7 @@ describe("SqliteUserRepository", () => {
     expect(found).not.toBeNull();
     expect(found!.name).toBe("Repo Test");
 
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.prepare("DELETE FROM users WHERE id = ?").run(user.id);
   });
 
@@ -59,7 +61,7 @@ describe("SqliteUserRepository", () => {
     expect(found).not.toBeNull();
     expect(found!.id).toBe(user.id);
 
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.prepare("DELETE FROM users WHERE id = ?").run(user.id);
   });
 });
@@ -83,7 +85,7 @@ describe("SqliteSessionRepository", () => {
     expect(found).not.toBeNull();
     expect(found!.userId).toBe(user.id);
 
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.prepare("DELETE FROM sessions WHERE user_id = ?").run(user.id);
     db.prepare("DELETE FROM users WHERE id = ?").run(user.id);
   });

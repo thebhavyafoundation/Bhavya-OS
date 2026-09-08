@@ -1,27 +1,34 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { join } from "path";
 import { existsSync, unlinkSync, mkdirSync } from "fs";
-import { initLocalDatabase, migrate, getDatabase } from "../sqlite";
-import { aiInstituteMigrations } from "../migrations";
-import { hashPassword, verifyPassword, stripSensitive, ApiUser } from "../api-auth";
+import { getAdaptedDatabase, migrate } from "@bhavya/database";
+import {
+  hashPassword,
+  verifyPassword,
+  stripSensitive,
+  ApiUser,
+} from "../api-auth";
 
 const TEST_DB_DIR = join(process.cwd(), "bhavya-ai-lab", "test");
 const TEST_DB_PATH = join(TEST_DB_DIR, "test-auth.db");
 
-beforeAll(() => {
+beforeAll(async () => {
   if (!existsSync(TEST_DB_DIR)) mkdirSync(TEST_DB_DIR, { recursive: true });
-  initLocalDatabase(TEST_DB_PATH);
-  migrate(aiInstituteMigrations);
+  await migrate("ai-institute");
 });
 
 afterAll(() => {
   try {
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.close?.();
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   try {
     if (existsSync(TEST_DB_PATH)) unlinkSync(TEST_DB_PATH);
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 });
 
 describe("Password Hashing", () => {

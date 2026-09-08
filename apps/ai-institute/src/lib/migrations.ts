@@ -1,4 +1,4 @@
-import type { Migration } from "./sqlite";
+import type { Migration } from "@bhavya/database";
 
 export const aiInstituteMigrations: Migration[] = [
   {

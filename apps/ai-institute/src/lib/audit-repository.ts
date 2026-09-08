@@ -10,7 +10,7 @@
  * components — the admin audit UI reads through GET /os/admin/api/audit.
  */
 
-import { getDatabase } from "./sqlite";
+import { getAdaptedDatabase } from "@bhavya/database";
 
 export interface AuditEvent {
   id: string;
@@ -60,7 +60,7 @@ function rowToEvent(row: Record<string, unknown>): AuditEvent {
 
 export async function recordAuditEvent(input: RecordAuditInput): Promise<void> {
   try {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const now = new Date().toISOString();
     db.prepare(
       `INSERT INTO audit_events (id, actor_id, actor_email, action, resource, resource_id, result, metadata, created_at)
@@ -82,7 +82,7 @@ export async function recordAuditEvent(input: RecordAuditInput): Promise<void> {
 }
 
 export async function listAuditEvents(limit = 100): Promise<AuditEvent[]> {
-  const db = getDatabase({ path: "" });
+  const db = getAdaptedDatabase("ai-institute");
   const rows = db
     .prepare("SELECT * FROM audit_events ORDER BY created_at DESC LIMIT ?")
     .all(Math.min(Math.max(limit, 1), 500)) as Record<string, unknown>[];

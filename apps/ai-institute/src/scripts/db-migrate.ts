@@ -2,42 +2,33 @@
  * AI Institute — Database Migration Script
  *
  * Usage: npx tsx src/scripts/db-migrate.ts
+ *
+ * Delegates to @bhavya/database's migration engine.
+ * Migrations are discovered from packages/database/migrations/ai-institute/.
  */
 
-import { join } from "path";
-import {
-  getDatabase,
-  migrate,
-  initLocalDatabase,
-  initRemoteDatabase,
-} from "../lib/sqlite";
-import { aiInstituteMigrations } from "../lib/migrations";
+import { migrate, getMigrationStatus } from "@bhavya/database";
 
 async function main() {
-  const isProd = !!process.env.TURSO_DATABASE_URL;
-
-  if (isProd) {
-    await initRemoteDatabase();
-  } else {
-    const dbPath = join(process.cwd(), "bhavya-ai-lab", "ai-institute.db");
-    initLocalDatabase(dbPath);
-  }
-
-  const result = migrate(aiInstituteMigrations);
+  const result = await migrate("ai-institute");
 
   if (result.applied.length === 0) {
     console.log("No pending migrations.");
   } else {
-    console.log(`Applied ${result.applied.length} migration(s): ${result.applied.join(", ")}`);
+    console.log(
+      `Applied ${result.applied.length} migration(s): ${result.applied.join(", ")}`,
+    );
   }
 
   // Verify tables
-  const db = getDatabase();
-  const tables = db.prepare(
-    "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE '_%' ORDER BY name"
-  ).all() as { name: string }[];
-  console.log("\nTables:");
-  for (const t of tables) console.log(`  - ${t.name}`);
+  const status = await getMigrationStatus("ai-institute");
+  console.log(
+    `\nMigration status: ${status.applied.length} applied, ${status.pending.length} pending`,
+  );
+
+  for (const m of status.applied) {
+    console.log(`  ✓ ${m.id} (${m.name})`);
+  }
 }
 
 main().catch((e) => {

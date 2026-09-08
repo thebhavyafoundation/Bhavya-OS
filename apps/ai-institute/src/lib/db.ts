@@ -1,46 +1,45 @@
 /**
  * AI Institute — Database Initialization
  *
- * Handles both local (better-sqlite3) and production (Turso/libSQL) databases.
- * Migrations run once on first access, not on every request.
+ * Handles both local (better-sqlite3 via @bhavya/database) and
+ * production (Turso/libSQL) databases.
+ *
+ * Migrations run via @bhavya/database's migrate() function,
+ * which discovers and applies pending migrations from
+ * packages/database/migrations/ai-institute/.
  */
 
-import { join } from "path";
-import {
-  getDatabase,
-  migrate,
-  initLocalDatabase,
-  initRemoteDatabase,
-} from "./sqlite";
-import { aiInstituteMigrations } from "./migrations";
+import { getAdaptedDatabase, migrate } from "@bhavya/database";
+import { initRemoteDatabase, isProduction } from "./sqlite";
 
 let initialized = false;
 
 /**
  * Initialize database. Safe to call multiple times (idempotent).
- * - Local: creates file at bhavya-ai-lab/ai-institute.db
- * - Production: connects to Turso via TURSO_DATABASE_URL
+ * - Local: opens via @bhavya/database (resolves path by name)
+ * - Production: initializes remote Turso connection, runs migrations
  */
 export async function initDatabase(): Promise<void> {
   if (initialized) return;
 
-  if (process.env.TURSO_DATABASE_URL) {
-    // Production: initialize remote connection
+  if (isProduction()) {
     await initRemoteDatabase();
-  } else {
-    // Local: initialize file-based SQLite
-    const dbPath = join(process.cwd(), "bhavya-ai-lab", "ai-institute.db");
-    initLocalDatabase(dbPath);
   }
 
-  // Run migrations (idempotent — only applies pending migrations)
-  migrate(aiInstituteMigrations);
+  // Run migrations via @bhavya/database (local mode only).
+  // Remote migrations are handled separately in production.
+  if (!isProduction()) {
+    await migrate("ai-institute");
+  }
+
   initialized = true;
 }
 
 /**
  * Synchronous database access (for use in request handlers after init).
+ * Returns a better-sqlite3 connection via @bhavya/database.
+ * Only valid for local mode — remote mode requires async access.
  */
 export function getDb() {
-  return getDatabase();
+  return getAdaptedDatabase("ai-institute");
 }

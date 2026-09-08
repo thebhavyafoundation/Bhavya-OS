@@ -1,4 +1,4 @@
-import { getDatabase } from "../sqlite";
+import { getAdaptedDatabase } from "@bhavya/database";
 import type { User, CreateUserInput, UserRepository } from "./types";
 
 function generateId(): string {
@@ -23,21 +23,21 @@ function rowToUser(row: Record<string, unknown>): User {
 
 export class SqliteUserRepository implements UserRepository {
   async findByEmail(email: string): Promise<User | null> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const row = db.prepare("SELECT * FROM users WHERE email = ?").get(email) as
       Record<string, unknown> | undefined;
     return row ? rowToUser(row) : null;
   }
 
   async findById(id: string): Promise<User | null> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const row = db.prepare("SELECT * FROM users WHERE id = ?").get(id) as
       Record<string, unknown> | undefined;
     return row ? rowToUser(row) : null;
   }
 
   async create(data: CreateUserInput): Promise<User> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const now = new Date().toISOString();
     const id = generateId();
 
@@ -61,7 +61,7 @@ export class SqliteUserRepository implements UserRepository {
   }
 
   async updateRole(userId: string, role: string): Promise<User | null> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const now = new Date().toISOString();
     db.prepare("UPDATE users SET role = ?, updated_at = ? WHERE id = ?").run(
       role,
@@ -75,7 +75,7 @@ export class SqliteUserRepository implements UserRepository {
     userId: string,
     passwordHash: string,
   ): Promise<User | null> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const now = new Date().toISOString();
     db.prepare(
       "UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?",
@@ -84,7 +84,7 @@ export class SqliteUserRepository implements UserRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const rows = db
       .prepare("SELECT * FROM users ORDER BY created_at DESC")
       .all() as Record<string, unknown>[];

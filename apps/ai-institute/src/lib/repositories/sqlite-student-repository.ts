@@ -1,5 +1,9 @@
-import { getDatabase } from "../sqlite";
-import type { StudentProfile, CreateStudentInput, StudentRepository } from "./types";
+import { getAdaptedDatabase } from "@bhavya/database";
+import type {
+  StudentProfile,
+  CreateStudentInput,
+  StudentRepository,
+} from "./types";
 
 function generateId(): string {
   return `stu_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
@@ -20,7 +24,9 @@ function rowToStudent(row: Record<string, unknown>): StudentProfile {
     assessmentCompleted: (row.assessment_completed as number) === 1,
     labTasksCompleted: JSON.parse((row.lab_tasks_completed as string) ?? "[]"),
     labScore: row.lab_score as number,
-    knowledgeCheckAnswers: JSON.parse((row.knowledge_check_answers as string) ?? "{}"),
+    knowledgeCheckAnswers: JSON.parse(
+      (row.knowledge_check_answers as string) ?? "{}",
+    ),
     knowledgeCheckScore: row.knowledge_check_score as number,
     projectSubmitted: (row.project_submitted as number) === 1,
     projectScore: row.project_score as number,
@@ -35,30 +41,47 @@ function rowToStudent(row: Record<string, unknown>): StudentProfile {
   };
 }
 
-function studentToRow(id: string, data: Partial<StudentProfile>): Record<string, unknown> {
+function studentToRow(
+  id: string,
+  data: Partial<StudentProfile>,
+): Record<string, unknown> {
   const row: Record<string, unknown> = { id };
   if (data.userId !== undefined) row.user_id = data.userId;
   if (data.name !== undefined) row.name = data.name;
   if (data.email !== undefined) row.email = data.email;
   if (data.role !== undefined) row.role = data.role;
-  if (data.interests !== undefined) row.interests = JSON.stringify(data.interests);
+  if (data.interests !== undefined)
+    row.interests = JSON.stringify(data.interests);
   if (data.currentCourse !== undefined) row.current_course = data.currentCourse;
-  if (data.currentLessonIndex !== undefined) row.current_lesson_index = data.currentLessonIndex;
-  if (data.lessonsCompleted !== undefined) row.lessons_completed = JSON.stringify(data.lessonsCompleted);
-  if (data.assessmentScore !== undefined) row.assessment_score = data.assessmentScore;
-  if (data.assessmentCompleted !== undefined) row.assessment_completed = data.assessmentCompleted ? 1 : 0;
-  if (data.labTasksCompleted !== undefined) row.lab_tasks_completed = JSON.stringify(data.labTasksCompleted);
+  if (data.currentLessonIndex !== undefined)
+    row.current_lesson_index = data.currentLessonIndex;
+  if (data.lessonsCompleted !== undefined)
+    row.lessons_completed = JSON.stringify(data.lessonsCompleted);
+  if (data.assessmentScore !== undefined)
+    row.assessment_score = data.assessmentScore;
+  if (data.assessmentCompleted !== undefined)
+    row.assessment_completed = data.assessmentCompleted ? 1 : 0;
+  if (data.labTasksCompleted !== undefined)
+    row.lab_tasks_completed = JSON.stringify(data.labTasksCompleted);
   if (data.labScore !== undefined) row.lab_score = data.labScore;
-  if (data.knowledgeCheckAnswers !== undefined) row.knowledge_check_answers = JSON.stringify(data.knowledgeCheckAnswers);
-  if (data.knowledgeCheckScore !== undefined) row.knowledge_check_score = data.knowledgeCheckScore;
-  if (data.projectSubmitted !== undefined) row.project_submitted = data.projectSubmitted ? 1 : 0;
+  if (data.knowledgeCheckAnswers !== undefined)
+    row.knowledge_check_answers = JSON.stringify(data.knowledgeCheckAnswers);
+  if (data.knowledgeCheckScore !== undefined)
+    row.knowledge_check_score = data.knowledgeCheckScore;
+  if (data.projectSubmitted !== undefined)
+    row.project_submitted = data.projectSubmitted ? 1 : 0;
   if (data.projectScore !== undefined) row.project_score = data.projectScore;
-  if (data.badgeEarned !== undefined) row.badge_earned = data.badgeEarned ? 1 : 0;
-  if (data.reflectionEntries !== undefined) row.reflection_entries = JSON.stringify(data.reflectionEntries);
+  if (data.badgeEarned !== undefined)
+    row.badge_earned = data.badgeEarned ? 1 : 0;
+  if (data.reflectionEntries !== undefined)
+    row.reflection_entries = JSON.stringify(data.reflectionEntries);
   if (data.streak !== undefined) row.streak = data.streak;
-  if (data.lastActiveDate !== undefined) row.last_active_date = data.lastActiveDate;
-  if (data.onboardingComplete !== undefined) row.onboarding_complete = data.onboardingComplete ? 1 : 0;
-  if (data.enrolledCourses !== undefined) row.enrolled_courses = JSON.stringify(data.enrolledCourses);
+  if (data.lastActiveDate !== undefined)
+    row.last_active_date = data.lastActiveDate;
+  if (data.onboardingComplete !== undefined)
+    row.onboarding_complete = data.onboardingComplete ? 1 : 0;
+  if (data.enrolledCourses !== undefined)
+    row.enrolled_courses = JSON.stringify(data.enrolledCourses);
   if (data.enrolledAt !== undefined) row.enrolled_at = data.enrolledAt;
   if (data.updatedAt !== undefined) row.updated_at = data.updatedAt;
   return row;
@@ -66,7 +89,7 @@ function studentToRow(id: string, data: Partial<StudentProfile>): Record<string,
 
 export class SqliteStudentRepository implements StudentRepository {
   async findByUserId(userId: string): Promise<StudentProfile | null> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const row = db
       .prepare("SELECT * FROM student_profiles WHERE user_id = ?")
       .get(userId) as Record<string, unknown> | undefined;
@@ -74,7 +97,7 @@ export class SqliteStudentRepository implements StudentRepository {
   }
 
   async create(data: CreateStudentInput): Promise<StudentProfile> {
-    const db = getDatabase({ path: "" });
+    const db = getAdaptedDatabase("ai-institute");
     const existing = await this.findByUserId(data.userId);
     if (existing) return existing;
 
@@ -115,8 +138,11 @@ export class SqliteStudentRepository implements StudentRepository {
     return this.findByUserId(data.userId) as Promise<StudentProfile>;
   }
 
-  async update(userId: string, data: Partial<StudentProfile>): Promise<StudentProfile | null> {
-    const db = getDatabase({ path: "" });
+  async update(
+    userId: string,
+    data: Partial<StudentProfile>,
+  ): Promise<StudentProfile | null> {
+    const db = getAdaptedDatabase("ai-institute");
     const existing = await this.findByUserId(userId);
     if (!existing) return null;
 

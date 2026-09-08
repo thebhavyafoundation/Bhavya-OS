@@ -18,18 +18,29 @@
 
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { join } from "path";
-import { existsSync, unlinkSync, mkdirSync, readdirSync, readFileSync } from "fs";
+import {
+  existsSync,
+  unlinkSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+} from "fs";
 import { NextRequest } from "next/server";
-import { initLocalDatabase, migrate, getDatabase } from "../sqlite";
-import { aiInstituteMigrations } from "../migrations";
+import { getAdaptedDatabase, migrate } from "@bhavya/database";
 import { createSession } from "../api-auth";
 import { GET as studioCoursesGET } from "@/app/api/studio/courses/route";
 import { GET as studioLessonsGET } from "@/app/api/studio/lessons/route";
-import { GET as forestMissionsGET, POST as forestMissionsPOST } from "@/app/api/forest/missions/route";
+import {
+  GET as forestMissionsGET,
+  POST as forestMissionsPOST,
+} from "@/app/api/forest/missions/route";
 import { GET as forestMissionByIdGET } from "@/app/api/forest/missions/[id]/route";
 import { GET as mentorsGET } from "@/app/api/mentors/route";
 
-function makeRequest(url: string, opts?: { method?: string; headers?: Record<string, string>; body?: string }): NextRequest {
+function makeRequest(
+  url: string,
+  opts?: { method?: string; headers?: Record<string, string>; body?: string },
+): NextRequest {
   return new NextRequest(url, {
     method: opts?.method ?? "GET",
     headers: opts?.headers ?? {},
@@ -61,42 +72,75 @@ let studentSessionToken: string;
 
 beforeAll(async () => {
   if (!existsSync(TEST_DB_DIR)) mkdirSync(TEST_DB_DIR, { recursive: true });
-  initLocalDatabase(TEST_DB_PATH);
-  migrate(aiInstituteMigrations);
+  await migrate("ai-institute");
 
-  const db = getDatabase();
+  const db = getAdaptedDatabase("ai-institute");
   const now = new Date().toISOString();
 
   // Create admin user
   adminUserId = uuid();
-  db.prepare(`
+  db.prepare(
+    `
     INSERT OR IGNORE INTO users (id, email, name, password_hash, role, provider, interests, onboarding_complete, created_at, updated_at)
     VALUES (?, ?, ?, ?, ?, 'local', '[]', 1, ?, ?)
-  `).run(adminUserId, `admin-${uuid()}@test.com`, "Test Admin", hashSync("admin123"), "admin", now, now);
+  `,
+  ).run(
+    adminUserId,
+    `admin-${uuid()}@test.com`,
+    "Test Admin",
+    hashSync("admin123"),
+    "admin",
+    now,
+    now,
+  );
 
   // Create student user
   studentUserId = uuid();
-  db.prepare(`
+  db.prepare(
+    `
     INSERT OR IGNORE INTO users (id, email, name, password_hash, role, provider, interests, onboarding_complete, created_at, updated_at)
     VALUES (?, ?, ?, ?, ?, 'local', '[]', 1, ?, ?)
-  `).run(studentUserId, `student-${uuid()}@test.com`, "Test Student", hashSync("student123"), "student", now, now);
+  `,
+  ).run(
+    studentUserId,
+    `student-${uuid()}@test.com`,
+    "Test Student",
+    hashSync("student123"),
+    "student",
+    now,
+    now,
+  );
 
   // Create sessions
-  const adminSession = await createSession({ id: adminUserId, email: `admin-${uuid()}@test.com`, name: "Test Admin", role: "admin" } as never);
+  const adminSession = await createSession({
+    id: adminUserId,
+    email: `admin-${uuid()}@test.com`,
+    name: "Test Admin",
+    role: "admin",
+  } as never);
   adminSessionToken = adminSession.token;
 
-  const studentSession = await createSession({ id: studentUserId, email: `student-${uuid()}@test.com`, name: "Test Student", role: "student" } as never);
+  const studentSession = await createSession({
+    id: studentUserId,
+    email: `student-${uuid()}@test.com`,
+    name: "Test Student",
+    role: "student",
+  } as never);
   studentSessionToken = studentSession.token;
 }, 30000);
 
 afterAll(() => {
   try {
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     db.close?.();
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   try {
     if (existsSync(TEST_DB_PATH)) unlinkSync(TEST_DB_PATH);
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
 });
 
 // ── Gate 1: No cookie → protected route rejected ──────────
@@ -143,11 +187,14 @@ describe("Security Gate 2: Invalid session → rejected", () => {
 
 describe("Security Gate 3: Expired session → rejected", () => {
   it("should reject with an expired session token", async () => {
-    const db = getDatabase();
+    const db = getAdaptedDatabase("ai-institute");
     const expiredToken = uuid().repeat(3); // 96 chars
-    const pastDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    db.prepare(`INSERT INTO sessions (token, user_id, expires_at, created_at) VALUES (?, ?, ?, ?)`)
-      .run(expiredToken, adminUserId, pastDate, pastDate);
+    const pastDate = new Date(
+      Date.now() - 7 * 24 * 60 * 60 * 1000,
+    ).toISOString();
+    db.prepare(
+      `INSERT INTO sessions (token, user_id, expires_at, created_at) VALUES (?, ?, ?, ?)`,
+    ).run(expiredToken, adminUserId, pastDate, pastDate);
 
     const request = makeRequest("http://localhost:3020/api/studio/courses", {
       headers: { Cookie: `session-token=${expiredToken}` },
@@ -208,7 +255,10 @@ describe("Security Gate 6: Authorized role → Forest POST accepted", () => {
         "Content-Type": "application/json",
         Cookie: `session-token=${adminSessionToken}`,
       },
-      body: JSON.stringify({ name: "Security Test Mission", region: "Security Test Region" }),
+      body: JSON.stringify({
+        name: "Security Test Mission",
+        region: "Security Test Region",
+      }),
     });
     const response = await forestMissionsPOST(request);
     expect(response.status).toBe(201);
@@ -224,7 +274,10 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
   it("should reject missing name", async () => {
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: JSON.stringify({ region: "Test" }),
     });
     const response = await forestMissionsPOST(request);
@@ -237,7 +290,10 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
   it("should reject missing region", async () => {
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: JSON.stringify({ name: "Test" }),
     });
     const response = await forestMissionsPOST(request);
@@ -247,7 +303,10 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
   it("should reject name exceeding max length", async () => {
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: JSON.stringify({ name: "x".repeat(201), region: "Test" }),
     });
     const response = await forestMissionsPOST(request);
@@ -257,7 +316,10 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
   it("should reject invalid JSON body", async () => {
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: "not json",
     });
     const response = await forestMissionsPOST(request);
@@ -267,8 +329,15 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
   it("should reject goals as non-array", async () => {
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
-      body: JSON.stringify({ name: "Test", region: "Test", goals: "not-array" }),
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
+      body: JSON.stringify({
+        name: "Test",
+        region: "Test",
+        goals: "not-array",
+      }),
     });
     const response = await forestMissionsPOST(request);
     expect(response.status).toBe(400);
@@ -280,14 +349,22 @@ describe("Security Gate 7: Malformed Forest payload → rejected", () => {
 describe("Security Gate 8: Failed validation → no evidence", () => {
   it("should not create evidence when validation fails", async () => {
     // Capture the specific evidence file IDs that exist BEFORE the request
-    const evidenceDir = join(process.cwd(), "bhavya-ai-lab", "evidence", "forest");
+    const evidenceDir = join(
+      process.cwd(),
+      "bhavya-ai-lab",
+      "evidence",
+      "forest",
+    );
     const beforeIds = existsSync(evidenceDir)
       ? new Set(readdirSync(evidenceDir).filter((f) => f.endsWith(".json")))
       : new Set<string>();
 
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: JSON.stringify({ name: "", region: "" }),
     });
     const response = await forestMissionsPOST(request);
@@ -309,7 +386,12 @@ describe("Security Gate 8: Failed validation → no evidence", () => {
 
 describe("Security Gate 9: Failed validation → no metrics", () => {
   it("should not update metrics when validation fails", async () => {
-    const metricsPath = join(process.cwd(), "bhavya-ai-lab", "metrics", "forest.json");
+    const metricsPath = join(
+      process.cwd(),
+      "bhavya-ai-lab",
+      "metrics",
+      "forest.json",
+    );
     let beforeMetrics = { totalMissions: 0 };
     if (existsSync(metricsPath)) {
       beforeMetrics = JSON.parse(readFileSync(metricsPath, "utf-8"));
@@ -317,7 +399,10 @@ describe("Security Gate 9: Failed validation → no metrics", () => {
 
     const request = makeRequest("http://localhost:3020/api/forest/missions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Cookie: `session-token=${adminSessionToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session-token=${adminSessionToken}`,
+      },
       body: JSON.stringify({ name: "Valid Name", region: "" }),
     });
     const response = await forestMissionsPOST(request);
@@ -344,7 +429,8 @@ describe("Security Gate 10: Test-seeded Forest record → excluded from public",
     }
 
     const testSeeded = missions.filter(
-      (m: { provenance?: string }) => m.provenance === "test-seed" || m.provenance === undefined,
+      (m: { provenance?: string }) =>
+        m.provenance === "test-seed" || m.provenance === undefined,
     );
     expect(testSeeded.length).toBe(0);
   });
@@ -358,11 +444,17 @@ describe("Security Gate 10: Test-seeded Forest record → excluded from public",
     );
     if (files.length === 0) return;
 
-    const firstFile = JSON.parse(readFileSync(join(forestDir, files[0]), "utf-8"));
+    const firstFile = JSON.parse(
+      readFileSync(join(forestDir, files[0]), "utf-8"),
+    );
 
     if (firstFile.provenance !== "institutional") {
-      const request = makeRequest(`http://localhost:3020/api/forest/missions/${firstFile.id}`);
-      const response = await forestMissionByIdGET(request, { params: Promise.resolve({ id: firstFile.id }) });
+      const request = makeRequest(
+        `http://localhost:3020/api/forest/missions/${firstFile.id}`,
+      );
+      const response = await forestMissionByIdGET(request, {
+        params: Promise.resolve({ id: firstFile.id }),
+      });
       expect(response.status).toBe(404);
     }
   });
@@ -375,7 +467,7 @@ describe("Security Gate 11: System prompt → absent from client bundle", () => 
     const response = await mentorsGET();
     expect(response.status).toBe(200);
     const body = await response.json();
-    const mentors = Array.isArray(body) ? body : body.mentors ?? [];
+    const mentors = Array.isArray(body) ? body : (body.mentors ?? []);
     for (const mentor of mentors) {
       expect(mentor.systemPrompt).toBeUndefined();
     }
