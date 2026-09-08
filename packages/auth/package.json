@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bhavya/database": "workspace:*",
     "better-sqlite3": "^13.0.2"
   },
   "devDependencies": {

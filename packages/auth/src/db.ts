@@ -2,17 +2,18 @@
  * @bhavya/auth — Database Adapter
  *
  * Connects to the canonical Bhavya Foundation database for session validation.
- * Local: better-sqlite3 (file-based)
- * Production: @libsql/client (Turso/libSQL)
+ * Local: better-sqlite3 via @bhavya/database (file-based)
+ * Production: @libsql/client (Turso/libSQL) — kept separate due to async API
  *
  * The canonical database path is resolved via:
  *   1. AUTH_DATABASE_URL env var (production Turso)
  *   2. AUTH_DATABASE_PATH env var (local override)
- *   3. Default: apps/ai-institute/bhavya-ai-lab/ai-institute.db
+ *   3. @bhavya/database registry (ai-institute)
  */
 
 import { existsSync } from "fs";
-import { join, resolve } from "path";
+import { resolve } from "path";
+import { getAdaptedDatabase } from "@bhavya/database";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -29,7 +30,7 @@ export interface UserRow {
   role: string;
 }
 
-// ─── Local Adapter (better-sqlite3) ─────────────────────────────────────────
+// ─── Local Adapter (better-sqlite3 via @bhavya/database) ────────────────────
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let _localDb: any = null;
@@ -38,54 +39,26 @@ let _localDb: any = null;
 function getLocalDb(): any {
   if (_localDb) return _localDb;
 
-  const dbPath = resolveDbPath();
-  if (!existsSync(dbPath)) {
-    throw new Error(
-      `Canonical database not found at ${dbPath}. ` +
-        `Set AUTH_DATABASE_PATH or AUTH_DATABASE_URL environment variable.`,
-    );
-  }
-
-  // Dynamic require to avoid webpack bundling the native module
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const Database = require("better-sqlite3");
-  _localDb = new Database(dbPath);
-  _localDb.pragma("journal_mode = WAL");
-  _localDb.pragma("foreign_keys = ON");
-  return _localDb;
-}
-
-function resolveDbPath(): string {
-  // 1. Explicit env var
+  // If AUTH_DATABASE_PATH is set, open that specific path directly.
+  // Otherwise, use @bhavya/database's registry resolution.
   if (process.env.AUTH_DATABASE_PATH) {
-    return resolve(process.env.AUTH_DATABASE_PATH);
+    const dbPath = resolve(process.env.AUTH_DATABASE_PATH);
+    if (!existsSync(dbPath)) {
+      throw new Error(
+        `Database not found at ${dbPath}. Set AUTH_DATABASE_PATH correctly.`,
+      );
+    }
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const Database = require("better-sqlite3");
+    _localDb = new Database(dbPath);
+    _localDb.pragma("journal_mode = WAL");
+    _localDb.pragma("foreign_keys = ON");
+    return _localDb;
   }
 
-  // 2. Default: canonical location relative to workspace root
-  //    When consumed by apps/ai-institute, CWD is the app directory.
-  //    When consumed by migrating apps, CWD is their app directory.
-  //    The canonical DB lives at apps/ai-institute/bhavya-ai-lab/ai-institute.db
-  const workspaceRoot = findWorkspaceRoot();
-  return join(
-    workspaceRoot,
-    "apps",
-    "ai-institute",
-    "bhavya-ai-lab",
-    "ai-institute.db",
-  );
-}
-
-function findWorkspaceRoot(): string {
-  // Walk up from CWD to find pnpm-workspace.yaml
-  let dir = process.cwd();
-  for (let i = 0; i < 10; i++) {
-    if (existsSync(join(dir, "pnpm-workspace.yaml"))) return dir;
-    const parent = join(dir, "..");
-    if (parent === dir) break;
-    dir = parent;
-  }
-  // Fallback: assume 2 levels up from CWD (apps/<name>)
-  return join(process.cwd(), "..", "..");
+  // Default: use @bhavya/database registry (resolves ai-institute path)
+  _localDb = getAdaptedDatabase("ai-institute");
+  return _localDb;
 }
 
 // ─── Production Adapter (Turso) ──────────────────────────────────────────────
@@ -119,7 +92,7 @@ async function getRemoteDb(): Promise<{
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { createClient } = require("@libsql/client");
   _remoteDb = createClient({ url, authToken });
-  return _remoteDb;
+  return _remoteDb!;
 }
 
 // ─── Public API ──────────────────────────────────────────────────────────────
