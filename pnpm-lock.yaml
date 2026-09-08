@@ -66,6 +66,9 @@ importers:
       '@bhavya/mission-runtime':
         specifier: workspace:*
         version: link:../../packages/mission-runtime
+      '@bhavya/platform-ui':
+        specifier: workspace:*
+        version: link:../../packages/platform-ui
       '@bhavya/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
@@ -299,6 +302,9 @@ importers:
       '@bhavya/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@bhavya/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@bhavya/events':
         specifier: workspace:*
         version: link:../../packages/events
@@ -354,6 +360,12 @@ importers:
       '@bhavya/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@bhavya/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@bhavya/platform-ui':
+        specifier: workspace:*
+        version: link:../../packages/platform-ui
       better-sqlite3:
         specifier: ^13.0.2
         version: 13.0.2
@@ -394,6 +406,9 @@ importers:
       '@bhavya/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@bhavya/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@bhavya/events':
         specifier: workspace:*
         version: link:../../packages/events

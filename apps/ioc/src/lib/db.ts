@@ -1,18 +1,13 @@
-import Database from 'better-sqlite3';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { getReadWriteDatabase } from "@bhavya/database";
+import type Database from "better-sqlite3";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, '..', '..', 'data', 'ioc.db');
-
-let db: Database.Database | null = null;
+let initialized = false;
 
 export function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma('journal_mode = WAL');
-    db.pragma('foreign_keys = ON');
+  const db = getReadWriteDatabase("ioc");
+  if (!initialized) {
     initializeSchema(db);
+    initialized = true;
   }
   return db;
 }

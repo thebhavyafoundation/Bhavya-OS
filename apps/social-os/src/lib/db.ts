@@ -1,26 +1,19 @@
-import Database from "better-sqlite3";
-import path from "path";
-import { fileURLToPath } from "url";
+import { getReadWriteDatabase } from "@bhavya/database";
+import type Database from "better-sqlite3";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, "..", "..", "data", "social-os.db");
-
-let db: Database.Database | null = null;
+let initialized = false;
 
 export function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma("journal_mode = WAL");
-    db.pragma("foreign_keys = ON");
+  const db = getReadWriteDatabase("social-os");
+  if (!initialized) {
     initializeSchema(db);
+    initialized = true;
   }
   return db;
 }
 
 function initializeSchema(db: Database.Database): void {
   db.exec(`
-    -- ─── EXISTING TABLES ─────────────────────────────────────
-
     CREATE TABLE IF NOT EXISTS publications (
       id TEXT PRIMARY KEY,
       title TEXT NOT NULL,
@@ -92,8 +85,6 @@ function initializeSchema(db: Database.Database): void {
       processed INTEGER NOT NULL DEFAULT 0
     );
 
-    -- ─── NEW TABLES: Campaign Engine ──────────────────────────
-
     CREATE TABLE IF NOT EXISTS campaigns (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
@@ -115,8 +106,6 @@ function initializeSchema(db: Database.Database): void {
       updated_at TEXT NOT NULL
     );
 
-    -- ─── NEW TABLES: Editorial Calendar ───────────────────────
-
     CREATE TABLE IF NOT EXISTS editorial_calendar (
       id TEXT PRIMARY KEY,
       campaign_id TEXT,
@@ -132,8 +121,6 @@ function initializeSchema(db: Database.Database): void {
       FOREIGN KEY (campaign_id) REFERENCES campaigns(id)
     );
 
-    -- ─── NEW TABLES: Community Intelligence ───────────────────
-
     CREATE TABLE IF NOT EXISTS community_feedback (
       id TEXT PRIMARY KEY,
       source TEXT NOT NULL,
@@ -148,8 +135,6 @@ function initializeSchema(db: Database.Database): void {
       created_at TEXT NOT NULL
     );
 
-    -- ─── NEW TABLES: Brand Review ─────────────────────────────
-
     CREATE TABLE IF NOT EXISTS brand_reviews (
       id TEXT PRIMARY KEY,
       publication_id TEXT NOT NULL,
@@ -163,8 +148,6 @@ function initializeSchema(db: Database.Database): void {
       FOREIGN KEY (publication_id) REFERENCES publications(id)
     );
 
-    -- ─── NEW TABLES: Institution Metrics ──────────────────────
-
     CREATE TABLE IF NOT EXISTS institution_metrics (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
@@ -176,8 +159,6 @@ function initializeSchema(db: Database.Database): void {
       period TEXT NOT NULL DEFAULT '',
       collected_at TEXT NOT NULL
     );
-
-    -- ─── NEW TABLES: Communication Strategy ───────────────────
 
     CREATE TABLE IF NOT EXISTS communication_strategies (
       id TEXT PRIMARY KEY,
@@ -191,8 +172,6 @@ function initializeSchema(db: Database.Database): void {
       active INTEGER NOT NULL DEFAULT 1,
       created_at TEXT NOT NULL
     );
-
-    -- ─── NEW TABLES: Publishing Windows ───────────────────────
 
     CREATE TABLE IF NOT EXISTS publishing_windows (
       id TEXT PRIMARY KEY,

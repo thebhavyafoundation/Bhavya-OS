@@ -1,7 +1,17 @@
 import fs from "fs";
 import path from "path";
+import { getReadonlyDatabase } from "@bhavya/database";
+import type { DatabaseName } from "@bhavya/database";
 
 const ROOT = path.resolve(process.cwd(), "../../..");
+
+/**
+ * Get a read-only database connection via the shared adapter.
+ * Returns null if the database file doesn't exist on disk.
+ */
+function getForeignDb(name: DatabaseName) {
+  return getReadonlyDatabase(name);
+}
 
 /**
  * Resolve bhavya-ai-lab/ path: app-local first, then workspace root fallback.
@@ -441,8 +451,8 @@ export interface GitHubData {
 }
 
 export function getGitHubData(): GitHubData {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) {
+  const db = getForeignDb("github-os");
+  if (!db) {
     return {
       repositories: [],
       recentActivity: [],
@@ -456,10 +466,6 @@ export function getGitHubData(): GitHubData {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const repositories = db
       .prepare(
         `SELECT id, name, slug, description, language, stars, forks, license,
@@ -507,8 +513,6 @@ export function getGitHubData(): GitHubData {
       )
       .all() as { language: string; count: number }[];
 
-    db.close();
-
     const languageDistribution: Record<string, number> = {};
     langRows.forEach((r) => {
       languageDistribution[r.language] = r.count;
@@ -539,14 +543,10 @@ export function getGitHubData(): GitHubData {
 }
 
 export function getGitHubRepository(id: string): GitHubRepository | null {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) return null;
+  const db = getForeignDb("github-os");
+  if (!db) return null;
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const repo = db
       .prepare(
         `SELECT id, name, slug, description, language, stars, forks, license,
@@ -557,7 +557,6 @@ export function getGitHubRepository(id: string): GitHubRepository | null {
       )
       .get(id, id) as GitHubRepository | undefined;
 
-    db.close();
     return repo || null;
   } catch {
     return null;
@@ -567,14 +566,10 @@ export function getGitHubRepository(id: string): GitHubRepository | null {
 export function getGitHubRepoHealth(
   repositoryId: string,
 ): GitHubEngineeringHealth | null {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) return null;
+  const db = getForeignDb("github-os");
+  if (!db) return null;
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const health = db
       .prepare(
         `SELECT id, repository_id, overall_score, documentation_score,
@@ -585,7 +580,6 @@ export function getGitHubRepoHealth(
       )
       .get(repositoryId) as GitHubEngineeringHealth | undefined;
 
-    db.close();
     return health || null;
   } catch {
     return null;
@@ -593,14 +587,10 @@ export function getGitHubRepoHealth(
 }
 
 export function getGitHubRepoReviews(repositoryId: string): GitHubReview[] {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) return [];
+  const db = getForeignDb("github-os");
+  if (!db) return [];
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const reviews = db
       .prepare(
         `SELECT id, repository_id, review_type, overall_score,
@@ -611,7 +601,6 @@ export function getGitHubRepoReviews(repositoryId: string): GitHubReview[] {
       )
       .all(repositoryId) as GitHubReview[];
 
-    db.close();
     return reviews;
   } catch {
     return [];
@@ -619,14 +608,10 @@ export function getGitHubRepoReviews(repositoryId: string): GitHubReview[] {
 }
 
 export function getGitHubRepoDebt(repositoryId: string): GitHubTechnicalDebt[] {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) return [];
+  const db = getForeignDb("github-os");
+  if (!db) return [];
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const debt = db
       .prepare(
         `SELECT id, repository_id, category, title, description, severity, status
@@ -636,7 +621,6 @@ export function getGitHubRepoDebt(repositoryId: string): GitHubTechnicalDebt[] {
       )
       .all(repositoryId) as GitHubTechnicalDebt[];
 
-    db.close();
     return debt;
   } catch {
     return [];
@@ -644,14 +628,10 @@ export function getGitHubRepoDebt(repositoryId: string): GitHubTechnicalDebt[] {
 }
 
 export function getGitHubRepoADRs(repositoryId: string): GitHubADR[] {
-  const dbPath = path.join(ROOT, "apps/github-os/data/github-os.db");
-  if (!fs.existsSync(dbPath)) return [];
+  const db = getForeignDb("github-os");
+  if (!db) return [];
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const adrs = db
       .prepare(
         `SELECT id, repository_id, number, title, status, context, decision, consequences
@@ -660,7 +640,6 @@ export function getGitHubRepoADRs(repositoryId: string): GitHubADR[] {
       )
       .all(repositoryId) as GitHubADR[];
 
-    db.close();
     return adrs;
   } catch {
     return [];
@@ -745,8 +724,8 @@ export interface SocialData {
 }
 
 export function getSocialData(): SocialData {
-  const dbPath = path.join(ROOT, "apps/social-os/data/social-os.db");
-  if (!fs.existsSync(dbPath)) {
+  const db = getForeignDb("social-os");
+  if (!db) {
     return {
       publications: [],
       campaigns: [],
@@ -762,10 +741,6 @@ export function getSocialData(): SocialData {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const publications = db
       .prepare(
         `SELECT id, title, content, status, priority, source_type,
@@ -820,8 +795,6 @@ export function getSocialData(): SocialData {
          FROM campaigns`,
       )
       .get() as { total: number; active: number };
-
-    db.close();
 
     return {
       publications,
@@ -1045,8 +1018,8 @@ export interface IOCData {
 }
 
 export function getIOCData(): IOCData {
-  const dbPath = path.join(ROOT, "apps/ioc/data/ioc.db");
-  if (!fs.existsSync(dbPath)) {
+  const db = getForeignDb("ioc");
+  if (!db) {
     return {
       activeOKRs: 0,
       openRisks: 0,
@@ -1058,10 +1031,6 @@ export function getIOCData(): IOCData {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    const db = new Database(dbPath, { readonly: true });
-
     const okrs = db
       .prepare(
         "SELECT id, title, status, progress FROM objectives WHERE status != 'completed' LIMIT 20",
@@ -1096,8 +1065,6 @@ export function getIOCData(): IOCData {
       )
       .get() as { count: number } | undefined;
 
-    db.close();
-
     return {
       activeOKRs: okrs.length,
       openRisks: risks.length,
@@ -1119,15 +1086,7 @@ export function getIOCData(): IOCData {
 }
 
 function getIOCDb() {
-  const dbPath = path.join(ROOT, "apps/ioc/data/ioc.db");
-  if (!fs.existsSync(dbPath)) return null;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    return new Database(dbPath, { readonly: true });
-  } catch {
-    return null;
-  }
+  return getForeignDb("ioc");
 }
 
 export function getIOCObjectives(): IOCObjective[] {
@@ -1144,8 +1103,6 @@ export function getIOCObjectives(): IOCObjective[] {
     return rows;
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1162,8 +1119,6 @@ export function getIOCRisks(): IOCRisk[] {
       .all() as IOCRisk[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1181,8 +1136,6 @@ export function getIOCActions(): IOCActionItem[] {
       .all() as IOCActionItem[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1199,8 +1152,6 @@ export function getIOCReviews(): IOCWeeklyReview[] {
       .all() as IOCWeeklyReview[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1218,8 +1169,6 @@ export function getIOCAlerts(): IOCAlert[] {
       .all() as IOCAlert[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1235,8 +1184,6 @@ export function getIOCEvents(): IOCEvent[] {
       .all() as IOCEvent[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1252,8 +1199,6 @@ export function getIOCKpis(): IOCKpi[] {
       .all() as IOCKpi[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1270,8 +1215,6 @@ export function getIOCHealth(): IOCSystemHealth[] {
       .all() as IOCSystemHealth[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }
 
@@ -1288,7 +1231,5 @@ export function getIOCDecisions(): IOCDecision[] {
       .all() as IOCDecision[];
   } catch {
     return [];
-  } finally {
-    db?.close();
   }
 }

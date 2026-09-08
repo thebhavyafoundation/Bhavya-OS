@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@bhavya/auth": "workspace:*",
+    "@bhavya/database": "workspace:*",
     "@bhavya/platform-ui": "workspace:*",
     "better-sqlite3": "^13.0.2",
     "next": "^15.5.20",

@@ -1,16 +1,13 @@
-import Database from "better-sqlite3";
-import path from "path";
+import { getReadWriteDatabase } from "@bhavya/database";
+import type Database from "better-sqlite3";
 
-const DB_PATH = path.join(process.cwd(), "data", "github-os.db");
-
-let db: Database.Database | null = null;
+let initialized = false;
 
 export function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(DB_PATH);
-    db.pragma("journal_mode = WAL");
-    db.pragma("foreign_keys = ON");
+  const db = getReadWriteDatabase("github-os");
+  if (!initialized) {
     initializeDatabase(db);
+    initialized = true;
   }
   return db;
 }
@@ -401,7 +398,6 @@ function initializeDatabase(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_student_repo ON student_mode(repository_id);
     CREATE INDEX IF NOT EXISTS idx_elite_category ON elite_engineering_library(category);
 
-    -- Design Intelligence: Website Intelligence
     CREATE TABLE IF NOT EXISTS website_intelligence (
       id TEXT PRIMARY KEY,
       source_url TEXT NOT NULL,
@@ -433,7 +429,6 @@ function initializeDatabase(db: Database.Database) {
       FOREIGN KEY (repository_id) REFERENCES repositories(id)
     );
 
-    -- Design Intelligence: Design Intelligence Record
     CREATE TABLE IF NOT EXISTS design_intelligence (
       id TEXT PRIMARY KEY,
       source_id TEXT NOT NULL,
@@ -475,7 +470,6 @@ function initializeDatabase(db: Database.Database) {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    -- Design Intelligence: Design Genome
     CREATE TABLE IF NOT EXISTS design_genome (
       id TEXT PRIMARY KEY,
       category TEXT NOT NULL,
@@ -495,7 +489,6 @@ function initializeDatabase(db: Database.Database) {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    -- Design Intelligence: Design Score
     CREATE TABLE IF NOT EXISTS design_scores (
       id TEXT PRIMARY KEY,
       source_id TEXT NOT NULL,
@@ -525,7 +518,6 @@ function initializeDatabase(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_design_scores_source ON design_scores(source_id, source_type);
     CREATE INDEX IF NOT EXISTS idx_design_scores_overall ON design_scores(overall_score);
 
-    -- Constitutional Design Validator
     CREATE TABLE IF NOT EXISTS constitutional_validations (
       id TEXT PRIMARY KEY,
       source_id TEXT NOT NULL,
