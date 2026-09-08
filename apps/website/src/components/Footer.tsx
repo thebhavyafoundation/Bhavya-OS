@@ -17,7 +17,7 @@ export function Footer() {
               style={{
                 fontSize: "var(--text-md)",
                 fontWeight: 800,
-                color: "var(--text)",
+                color: "var(--color-text-primary)",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -39,7 +39,7 @@ export function Footer() {
               style={{
                 fontSize: "var(--text-xs)",
                 fontFamily: "var(--font-mono)",
-                color: "var(--text-tertiary)",
+                color: "var(--color-text-muted)",
                 display: "flex",
                 alignItems: "center",
                 gap: "var(--space-2)",
@@ -50,8 +50,8 @@ export function Footer() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: "var(--primary)",
-                  boxShadow: "0 0 0 4px var(--primary-glow)",
+                  background: "var(--color-accent-green)",
+                  boxShadow: "0 0 0 4px var(--color-accent-green-glow)",
                   animation: "pulse 2s infinite",
                 }}
               />
@@ -70,7 +70,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              style={{ color: "var(--text-tertiary)" }}
+              style={{ color: "var(--color-text-muted)" }}
             >
               <Github size={18} />
             </a>
@@ -79,7 +79,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              style={{ color: "var(--text-tertiary)" }}
+              style={{ color: "var(--color-text-muted)" }}
             >
               <Linkedin size={18} />
             </a>
@@ -88,7 +88,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
-              style={{ color: "var(--text-tertiary)" }}
+              style={{ color: "var(--color-text-muted)" }}
             >
               <Twitter size={18} />
             </a>
