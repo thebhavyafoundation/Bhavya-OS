@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { DailyIntelligenceOrchestrator } from "@/lib/daily-intelligence-engine";
+import { withAuth } from "@/lib/api-auth";
 
 /**
  * GET /api/daily-intelligence/trends — Get detected trends
  */
-export async function GET() {
+export const GET = withAuth(async () => {
   try {
     const orchestrator = new DailyIntelligenceOrchestrator();
     const trends = orchestrator.detectTrends();
@@ -20,4 +21,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+});

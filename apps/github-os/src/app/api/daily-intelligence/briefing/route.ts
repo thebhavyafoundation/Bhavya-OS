@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { DailyIntelligenceOrchestrator } from "@/lib/daily-intelligence-engine";
+import { withAuth } from "@/lib/api-auth";
 
 /**
  * GET /api/daily-intelligence/briefing — Get latest daily briefing
  */
-export async function GET() {
+export const GET = withAuth(async () => {
   try {
     const orchestrator = new DailyIntelligenceOrchestrator();
     const briefing = orchestrator.getLatestBriefing();
@@ -28,4 +29,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+});

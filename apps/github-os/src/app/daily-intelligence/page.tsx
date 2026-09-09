@@ -370,6 +370,7 @@ export default function DailyIntelligenceDashboard() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [triggering, setTriggering] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [latestRun, setLatestRun] = useState<DailyRun | null>(null);
   const [briefing, setBriefing] = useState<DailyBriefing | null>(null);
@@ -385,6 +386,7 @@ export default function DailyIntelligenceDashboard() {
 
   const loadData = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const [statusRes, findingsRes, trendsRes, runsRes] = await Promise.all([
         fetch("/api/daily-intelligence"),
@@ -392,6 +394,15 @@ export default function DailyIntelligenceDashboard() {
         fetch("/api/daily-intelligence/trends"),
         fetch("/api/daily-intelligence/runs?limit=10"),
       ]);
+
+      // Check for authentication errors
+      if (statusRes.status === 401 || findingsRes.status === 401) {
+        setError(
+          "Authentication required. Please sign in to access Daily Intelligence.",
+        );
+        setLoading(false);
+        return;
+      }
 
       const statusData = await statusRes.json();
       const findingsData = await findingsRes.json();
@@ -406,7 +417,7 @@ export default function DailyIntelligenceDashboard() {
       if (trendsData.success) setTrends(trendsData.trends || []);
       if (runsData.success) setRuns(runsData.runs || []);
     } catch {
-      // API not available — show empty state
+      setError("Unable to connect to the intelligence API.");
     }
     setLoading(false);
   }, []);
@@ -569,6 +580,24 @@ export default function DailyIntelligenceDashboard() {
               </Card>
             ))}
           </div>
+        ) : error ? (
+          <Card padding="lg" className="text-center">
+            <AlertTriangle
+              size={48}
+              className="text-[var(--color-accent-gold)] mx-auto mb-4"
+            />
+            <h3 className="text-lg font-medium text-text-primary mb-2">
+              Authentication Required
+            </h3>
+            <p className="text-sm text-text-muted mb-4">{error}</p>
+            <button
+              onClick={loadData}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-bg-secondary border border-border-primary rounded-lg text-sm text-text-tertiary hover:text-text-primary hover:border-border-secondary transition-colors"
+            >
+              <RefreshCw size={14} />
+              Retry
+            </button>
+          </Card>
         ) : (
           <>
             {/* Briefing Tab */}

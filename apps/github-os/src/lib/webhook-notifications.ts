@@ -110,53 +110,102 @@ function formatGenericPayload(payload: NotificationPayload): object {
 
 /**
  * Validate a webhook URL to prevent SSRF attacks.
- * Blocks internal network addresses, localhost, and non-HTTPS schemes.
+ * Blocks internal network addresses, localhost, non-HTTPS schemes,
+ * IPv6 private ranges, DNS rebinding attempts, and dangerous ports.
  */
 function validateWebhookUrl(url: string): { valid: boolean; error?: string } {
   try {
     const parsed = new URL(url);
 
-    // Only allow https (and http for localhost development)
-    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
-      return { valid: false, error: "Only http/https URLs are allowed" };
+    // Only allow https (no http, even for development)
+    if (parsed.protocol !== "https:") {
+      return { valid: false, error: "Only HTTPS URLs are allowed" };
     }
 
     const hostname = parsed.hostname.toLowerCase();
 
-    // Block localhost
+    // Block localhost variants
     if (
       hostname === "localhost" ||
       hostname === "127.0.0.1" ||
       hostname === "::1" ||
-      hostname === "[::1]"
+      hostname === "[::1]" ||
+      hostname === "0.0.0.0"
     ) {
-      return { valid: false, error: "localhost URLs are not allowed" };
+      return { valid: false, error: "Localhost URLs are not allowed" };
     }
 
-    // Block private/internal IP ranges
+    // Block IPv4 private/internal ranges
     const ipMatch = hostname.match(
       /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/,
     );
     if (ipMatch) {
-      const [, a, b] = ipMatch.map(Number);
+      const [, a, b, c] = ipMatch.map(Number);
+      // Validate each octet is 0-255
+      if (ipMatch.slice(1).some((v) => Number(v) > 255)) {
+        return { valid: false, error: "Invalid IP address" };
+      }
+      // 0.0.0.0/8
+      if (a === 0)
+        return { valid: false, error: "Reserved network URLs are not allowed" };
       // 10.0.0.0/8
       if (a === 10)
         return { valid: false, error: "Private network URLs are not allowed" };
+      // 100.64.0.0/10 (CGNAT)
+      if (a === 100 && b >= 64 && b <= 127)
+        return { valid: false, error: "Private network URLs are not allowed" };
+      // 127.0.0.0/8
+      if (a === 127)
+        return { valid: false, error: "Loopback URLs are not allowed" };
+      // 169.254.0.0/16 (link-local / cloud metadata)
+      if (a === 169 && b === 254)
+        return { valid: false, error: "Link-local URLs are not allowed" };
       // 172.16.0.0/12
       if (a === 172 && b >= 16 && b <= 31)
         return { valid: false, error: "Private network URLs are not allowed" };
       // 192.168.0.0/16
       if (a === 192 && b === 168)
         return { valid: false, error: "Private network URLs are not allowed" };
-      // 169.254.0.0/16 (link-local / cloud metadata)
-      if (a === 169 && b === 254)
-        return { valid: false, error: "Link-local URLs are not allowed" };
-      // 127.0.0.0/8
-      if (a === 127)
+      // 224.0.0.0/4 (multicast)
+      if (a >= 224 && a <= 239)
+        return { valid: false, error: "Multicast URLs are not allowed" };
+      // 240.0.0.0/4 (reserved)
+      if (a >= 240)
+        return { valid: false, error: "Reserved network URLs are not allowed" };
+    }
+
+    // Block IPv6 private/loopback/link-local ranges
+    if (hostname.includes(":") || hostname.startsWith("[")) {
+      const cleanIpv6 = hostname.replace(/[\[\]]/g, "");
+      // Loopback ::1
+      if (cleanIpv6 === "::1")
         return { valid: false, error: "Loopback URLs are not allowed" };
-      // 0.0.0.0
-      if (a === 0)
-        return { valid: false, error: "Zero-net URLs are not allowed" };
+      // Link-local fe80::/10
+      if (cleanIpv6.startsWith("fe80"))
+        return { valid: false, error: "Link-local URLs are not allowed" };
+      // Unique local fc00::/7
+      if (cleanIpv6.startsWith("fc") || cleanIpv6.startsWith("fd"))
+        return { valid: false, error: "Private network URLs are not allowed" };
+      // IPv4-mapped ::ffff:0:0/96
+      if (
+        cleanIpv6.includes("ffff") &&
+        (cleanIpv6.includes("127") ||
+          cleanIpv6.includes("10.") ||
+          cleanIpv6.includes("192.168") ||
+          cleanIpv6.includes("172.16"))
+      ) {
+        return { valid: false, error: "Private network URLs are not allowed" };
+      }
+    }
+
+    // Block dangerous ports
+    const port = parsed.port ? parseInt(parsed.port, 10) : 443;
+    const dangerousPorts = new Set([
+      22, 23, 25, 53, 80, 445, 1433, 1521, 2049, 3306, 3389, 5432, 5984, 6379,
+      8080, 8443, 9200, 9300, 27017,
+    ]);
+    if (dangerousPorts.has(port)) {
+      return { valid: false, error: `Port ${port} is not allowed` };
     }
 
     // Block metadata endpoints by hostname pattern
@@ -164,10 +213,26 @@ function validateWebhookUrl(url: string): { valid: boolean; error?: string } {
       hostname.endsWith(".internal") ||
       hostname.endsWith(".local") ||
       hostname.endsWith(".localhost") ||
+      hostname.endsWith(".localdomain") ||
       hostname === "metadata.google.internal" ||
-      hostname === "169.254.169.254"
+      hostname === "169.254.169.254" ||
+      hostname === "metadata.aws.internal" ||
+      hostname === "169.254.169.254.nip.io" ||
+      hostname === "instance-data"
     ) {
       return { valid: false, error: "Internal metadata URLs are not allowed" };
+    }
+
+    // Block cloud metadata endpoints
+    if (
+      hostname === "metadata.google.internal" ||
+      hostname === "metadata.googleapis.com" ||
+      hostname === "169.254.169.254" ||
+      hostname === "metadata.aws" ||
+      hostname === "169.254.170.2" ||
+      hostname === "169.254.169.254.nip.io"
+    ) {
+      return { valid: false, error: "Cloud metadata URLs are not allowed" };
     }
 
     return { valid: true };
@@ -200,6 +265,7 @@ async function sendWebhook(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
       signal: AbortSignal.timeout(10000),
+      redirect: "error", // Prevent redirect-based SSRF
     });
 
     if (!res.ok) {

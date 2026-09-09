@@ -3,12 +3,13 @@ import {
   getWebhookConfigs,
   storeWebhookConfig,
 } from "@/lib/webhook-notifications";
+import { withAuth } from "@/lib/api-auth";
 import type { WebhookConfig } from "@/lib/webhook-notifications";
 
 /**
  * GET /api/daily-intelligence/webhooks — List webhook configs
  */
-export async function GET() {
+export const GET = withAuth(async () => {
   try {
     const configs = getWebhookConfigs();
     return NextResponse.json({
@@ -27,12 +28,12 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+});
 
 /**
  * POST /api/daily-intelligence/webhooks — Add or update a webhook config
  */
-export async function POST(request: NextRequest) {
+export const POST = withAuth(async (request) => {
   try {
     const body = await request.json();
     const config: WebhookConfig = {
@@ -62,4 +63,4 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
-}
+});

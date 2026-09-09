@@ -1,13 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {
   persistIntelligenceGraph,
   getIntelligenceGraphSummary,
 } from "@/lib/intelligence-graph";
+import { withAuth } from "@/lib/api-auth";
 
 /**
  * POST /api/daily-intelligence/graph — Build and persist intelligence graph
  */
-export async function POST() {
+export const POST = withAuth(async () => {
   try {
     const result = persistIntelligenceGraph();
     return NextResponse.json({
@@ -20,12 +21,12 @@ export async function POST() {
       { status: 500 },
     );
   }
-}
+});
 
 /**
  * GET /api/daily-intelligence/graph — Get intelligence graph summary
  */
-export async function GET() {
+export const GET = withAuth(async () => {
   try {
     const summary = getIntelligenceGraphSummary();
     return NextResponse.json({
@@ -38,4 +39,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+});

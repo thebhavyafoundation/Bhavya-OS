@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { validateConstitutionalCompliance } from "@/lib/constitutional-validation";
+import { withAuth } from "@/lib/api-auth";
 
 /**
  * GET /api/daily-intelligence/validate — Run constitutional validation
  */
-export async function GET() {
+export const GET = withAuth(async () => {
   try {
     const result = validateConstitutionalCompliance();
     return NextResponse.json({
@@ -17,4 +18,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+});
