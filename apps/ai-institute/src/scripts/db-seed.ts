@@ -2,7 +2,10 @@
  * AI Institute — Database Seed Script
  *
  * Usage: npx tsx src/scripts/db-seed.ts
- * Creates demo data: admin user, instructor, 2 students, 1 course, progress
+ * Creates demo data: admin user, instructor, 2 students, student profiles
+ *
+ * NOTE: courses/lessons/progress tables are managed by the knowledge engine
+ * (knowledge_packages/learning_paths). This script only seeds user/auth tables.
  */
 
 import { getAdaptedDatabase, migrate } from "@bhavya/database";
@@ -96,57 +99,15 @@ async function main() {
   );
   console.log("✓ Created demo session");
 
-  // ─── Courses ──────────────────────────────────────────────────────────────
-  const courseId = uuid();
-  db.prepare(
-    `
-    INSERT OR IGNORE INTO courses (id, title, description, instructor_id, status, created_at, updated_at)
-    VALUES (?, ?, ?, ?, 'active', ?, ?)
-  `,
-  ).run(
-    courseId,
-    "AI Foundations",
-    "Complete AI learning path from basics to deployment",
-    instructorId,
-    now,
-    now,
-  );
-
-  // ─── Lessons ──────────────────────────────────────────────────────────────
-  const lessons = [
-    { title: "What is Artificial Intelligence?", idx: 0 },
-    { title: "Machine Learning Fundamentals", idx: 1 },
-    { title: "Neural Networks", idx: 2 },
-    { title: "Natural Language Processing", idx: 3 },
-    { title: "Computer Vision", idx: 4 },
-    { title: "AI Ethics and Safety", idx: 5 },
-  ];
-
-  for (const lesson of lessons) {
-    db.prepare(
-      `
-      INSERT OR IGNORE INTO lessons (id, course_id, title, content, order_index, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `,
-    ).run(
-      uuid(),
-      courseId,
-      lesson.title,
-      `Content for ${lesson.title}`,
-      lesson.idx,
-      now,
-      now,
-    );
-  }
-  console.log("✓ Created 6 lessons");
-
   // ─── Student Profiles ─────────────────────────────────────────────────────
   const insertStudent = db.prepare(`
     INSERT OR IGNORE INTO student_profiles (
       id, user_id, name, email, role, interests, current_course, current_lesson_index,
-      lessons_completed, assessment_score, lab_score, streak, last_active_date,
+      lessons_completed, assessment_score, assessment_completed, lab_tasks_completed,
+      lab_score, knowledge_check_answers, knowledge_check_score, project_submitted,
+      project_score, badge_earned, reflection_entries, streak, last_active_date,
       onboarding_complete, enrolled_courses, enrolled_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)
   `);
 
   insertStudent.run(
@@ -156,14 +117,22 @@ async function main() {
     "student@ai-institute.com",
     "student",
     '["ai","web"]',
-    courseId,
+    "",
     2,
     '["lesson-1","lesson-2"]',
     75,
+    0,
+    "[]",
     60,
+    "{}",
+    0,
+    0,
+    0,
+    0,
+    "[]",
     5,
     now,
-    `["${courseId}"]`,
+    "[]",
     now,
     now,
   );
@@ -175,33 +144,27 @@ async function main() {
     "researcher@ai-institute.com",
     "researcher",
     '["ai","research"]',
-    courseId,
+    "",
     0,
     "[]",
     0,
     0,
+    "[]",
+    0,
+    "{}",
+    0,
+    0,
+    0,
+    0,
+    "[]",
     0,
     now,
-    `["${courseId}"]`,
+    "[]",
     now,
     now,
   );
 
   console.log("✓ Created 2 student profiles");
-
-  // ─── Progress Records ─────────────────────────────────────────────────────
-  const lessonIds = db
-    .prepare("SELECT id FROM lessons WHERE course_id = ? ORDER BY order_index")
-    .all(courseId) as { id: string }[];
-  for (let i = 0; i < Math.min(2, lessonIds.length); i++) {
-    db.prepare(
-      `
-      INSERT OR IGNORE INTO progress (id, student_id, lesson_id, status, completed_at, created_at)
-      VALUES (?, ?, ?, 'completed', ?, ?)
-    `,
-    ).run(uuid(), student1Id, lessonIds[i].id, now, now);
-  }
-  console.log("✓ Created progress records");
 
   console.log("\n✓ Seed complete. See db-seed.ts source for demo credentials.");
 }
