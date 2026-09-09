@@ -51,6 +51,7 @@ function isMutatingMethod(method: string): boolean {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const start = Date.now();
 
   // CSRF checks on mutating API routes
   if (pathname.startsWith("/api/") && isMutatingMethod(request.method)) {
@@ -80,6 +81,19 @@ export function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
   applySecurityHeaders(response);
+
+  if (pathname.startsWith("/api/")) {
+    const duration = Date.now() - start;
+    console.info(
+      JSON.stringify({
+        method: request.method,
+        path: pathname,
+        status: response.status,
+        duration,
+      }),
+    );
+  }
+
   return response;
 }
 
