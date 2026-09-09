@@ -1,0 +1,61 @@
+{
+  "nodes": [
+    {
+      "id": "repo-expressjs-express",
+      "type": "repository",
+      "label": "expressjs/express"
+    },
+    {
+      "id": "tech-javascript",
+      "type": "technology",
+      "label": "JavaScript"
+    },
+    {
+      "id": "skill-testing-strategy",
+      "type": "pattern",
+      "label": "Testing Strategy"
+    },
+    {
+      "id": "skill-ci-cd-pipeline",
+      "type": "pattern",
+      "label": "CI/CD Pipeline"
+    },
+    {
+      "id": "pat-test-driven-ci",
+      "type": "pattern",
+      "label": "Test-Driven CI"
+    },
+    {
+      "id": "pat-middleware-pattern",
+      "type": "pattern",
+      "label": "Middleware Pattern"
+    }
+  ],
+  "edges": [
+    {
+      "source": "repo-expressjs-express",
+      "target": "tech-javascript",
+      "relationship": "uses"
+    },
+    {
+      "source": "repo-expressjs-express",
+      "target": "skill-testing-strategy",
+      "relationship": "implements"
+    },
+    {
+      "source": "repo-expressjs-express",
+      "target": "skill-ci-cd-pipeline",
+      "relationship": "implements"
+    },
+    {
+      "source": "repo-expressjs-express",
+      "target": "pat-test-driven-ci",
+      "relationship": "implements"
+    },
+    {
+      "source": "repo-expressjs-express",
+      "target": "pat-middleware-pattern",
+      "relationship": "implements"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "repo": {
+    "fullName": "expressjs/express",
+    "name": "express",
+    "owner": "expressjs",
+    "description": "Fast, unopinionated, minimalist web framework for node.",
+    "url": "https://github.com/expressjs/express",
+    "stars": 69449,
+    "forks": 24946,
+    "language": "JavaScript",
+    "topics": ["express", "javascript", "nodejs", "server"],
+    "license": "MIT",
+    "createdAt": "2009-06-26T18:56:01Z",
+    "updatedAt": "2026-09-09T09:15:20Z",
+    "pushedAt": "2026-09-08T13:33:14Z",
+    "archived": false,
+    "openIssues": 229
+  },
+  "inspection": {
+    "hasReadme": true,
+    "hasLicense": true,
+    "hasTests": true,
+    "hasCI": true,
+    "hasTypeScript": false,
+    "hasESLint": true,
+    "hasPrettier": false,
+    "hasDocumentation": false,
+    "hasChangelog": true,
+    "packageManager": null,
+    "framework": null,
+    "language": "JavaScript",
+    "testFramework": null,
+    "qualityIndicators": [
+      "README",
+      "License",
+      "Tests",
+      "CI/CD",
+      "ESLint",
+      "Changelog"
+    ]
+  },
+  "scores": {
+    "healthScore": 92,
+    "technologyScore": 58,
+    "bhavyaScore": 78
+  },
+  "licenseInfo": {
+    "spdxId": "MIT",
+    "isOsiApproved": true,
+    "isCopyleft": false,
+    "compatibilityNotes": "Permissive — fully compatible with Bhavya Foundation",
+    "confidence": "high"
+  },
+  "security": {
+    "hasKnownVulnerabilities": false,
+    "dependencyRisk": "low",
+    "supplyChainRisk": "unknown",
+    "credentialExposure": false,
+    "suspiciousPatterns": [],
+    "recommendations": []
+  },
+  "skills": [
+    {
+      "name": "Testing Strategy",
+      "confidence": 0.8
+    },
+    {
+      "name": "CI/CD Pipeline",
+      "confidence": 0.9
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Test-Driven CI",
+      "category": "operational"
+    },
+    {
+      "name": "Middleware Pattern",
+      "category": "behavioral"
+    }
+  ],
+  "recommendation": {
+    "type": "adopt",
+    "reasoning": "High-quality repository with compatible licensing and strong relevance",
+    "confidence": 0.76
+  },
+  "provenance": {
+    "repository": "expressjs/express",
+    "url": "https://github.com/expressjs/express",
+    "analyzedAt": "2026-09-09T09:24:36.265Z",
+    "engineVersion": "1.0.0",
+    "pipelineVersion": "1.0.0",
+    "steps": 13,
+    "apiCalls": 6
+  }
+}

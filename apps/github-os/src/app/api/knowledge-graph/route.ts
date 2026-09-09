@@ -1,38 +1,51 @@
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
 import { withAuth } from "@/lib/api-auth";
+import {
+  buildKnowledgeGraphFromData,
+  getKnowledgeGraph,
+} from "@/lib/knowledge-graph-builder";
 
 export const GET = withAuth(async (request, _user) => {
-  const db = getDb();
   const { searchParams } = new URL(request.url);
-  const nodeType = searchParams.get("nodeType") || "";
+  const nodeType = searchParams.get("nodeType") || undefined;
+  const relationship = searchParams.get("relationship") || undefined;
+  const rebuild = searchParams.get("rebuild") === "true";
 
-  let nodesQuery = "SELECT * FROM knowledge_graph_nodes";
-  const nodeParams: string[] = [];
-
-  if (nodeType) {
-    nodesQuery += " WHERE node_type = ?";
-    nodeParams.push(nodeType);
+  if (rebuild) {
+    // Rebuild graph from all stored data
+    const result = buildKnowledgeGraphFromData();
+    return NextResponse.json({
+      success: true,
+      rebuilt: true,
+      ...result,
+    });
   }
 
-  nodesQuery += " ORDER BY node_type, label";
-
-  const nodes = db.prepare(nodesQuery).all(...nodeParams);
-  const edges = db
-    .prepare("SELECT * FROM knowledge_graph_edges ORDER BY relationship")
-    .all();
-
-  const nodeTypes = db
-    .prepare(
-      "SELECT DISTINCT node_type FROM knowledge_graph_nodes ORDER BY node_type",
-    )
-    .all() as { node_type: string }[];
+  const graph = getKnowledgeGraph({ nodeType, relationship });
 
   return NextResponse.json({
-    nodes,
-    edges,
+    success: true,
+    nodes: graph.nodes,
+    edges: graph.edges,
+    stats: graph.stats,
     filters: {
-      nodeTypes: nodeTypes.map((n) => n.node_type),
+      nodeTypes: Object.keys(graph.stats.nodeTypes),
+      relationships: Object.keys(graph.stats.edgeTypes),
     },
   });
+});
+
+/**
+ * POST /api/knowledge-graph — Rebuild the knowledge graph
+ */
+export const POST = withAuth(async () => {
+  try {
+    const result = buildKnowledgeGraphFromData();
+    return NextResponse.json({
+      success: true,
+      ...result,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: String(error) }, { status: 500 });
+  }
 });

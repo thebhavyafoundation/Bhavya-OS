@@ -1,0 +1,121 @@
+{
+  "pipeline": "Git OS End-to-End Intelligence Pipeline",
+  "startedAt": "2026-09-09T09:24:33.299Z",
+  "steps": [
+    {
+      "name": "GitHub Discovery",
+      "status": "PASS",
+      "details": "Found expressjs/express (69449 stars, JavaScript)",
+      "timestamp": "2026-09-09T09:24:34.595Z"
+    },
+    {
+      "name": "README Ingestion",
+      "status": "PASS",
+      "details": "Fetched 10368 characters",
+      "timestamp": "2026-09-09T09:24:35.087Z"
+    },
+    {
+      "name": "Directory Ingestion",
+      "status": "PASS",
+      "details": "Fetched 14 top-level items",
+      "timestamp": "2026-09-09T09:24:35.428Z"
+    },
+    {
+      "name": "Releases Ingestion",
+      "status": "PASS",
+      "details": "Fetched 5 releases",
+      "timestamp": "2026-09-09T09:24:35.937Z"
+    },
+    {
+      "name": "Languages Ingestion",
+      "status": "PASS",
+      "details": "Detected 1 languages",
+      "timestamp": "2026-09-09T09:24:36.263Z"
+    },
+    {
+      "name": "Repository Inspection",
+      "status": "PASS",
+      "details": "Quality indicators: README, License, Tests, CI/CD, ESLint, Changelog",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "License Analysis",
+      "status": "PASS",
+      "details": "MIT — Permissive — fully compatible with Bhavya Foundation",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "Security Assessment",
+      "status": "PASS",
+      "details": "Credential exposure: false, Suspicious patterns: 0",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "Quality Scoring",
+      "status": "PASS",
+      "details": "Health: 92, Technology: 58, Bhavya: 78",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "Skill Extraction",
+      "status": "PASS",
+      "details": "Extracted 2 skills: Testing Strategy, CI/CD Pipeline",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "Pattern Extraction",
+      "status": "PASS",
+      "details": "Extracted 2 patterns: Test-Driven CI, Middleware Pattern",
+      "timestamp": "2026-09-09T09:24:36.264Z"
+    },
+    {
+      "name": "Recommendation",
+      "status": "PASS",
+      "details": "ADOPT — High-quality repository with compatible licensing and strong relevance",
+      "timestamp": "2026-09-09T09:24:36.265Z"
+    },
+    {
+      "name": "Knowledge Graph",
+      "status": "PASS",
+      "details": "Created 6 nodes, 5 edges",
+      "timestamp": "2026-09-09T09:24:36.265Z"
+    },
+    {
+      "name": "Provenance",
+      "status": "PASS",
+      "details": "Recorded for expressjs/express at 2026-09-09T09:24:36.265Z",
+      "timestamp": "2026-09-09T09:24:36.265Z"
+    }
+  ],
+  "repository": {
+    "fullName": "expressjs/express",
+    "name": "express",
+    "owner": "expressjs",
+    "description": "Fast, unopinionated, minimalist web framework for node.",
+    "url": "https://github.com/expressjs/express",
+    "stars": 69449,
+    "forks": 24946,
+    "language": "JavaScript",
+    "topics": ["express", "javascript", "nodejs", "server"],
+    "license": "MIT",
+    "createdAt": "2009-06-26T18:56:01Z",
+    "updatedAt": "2026-09-09T09:15:20Z",
+    "pushedAt": "2026-09-08T13:33:14Z",
+    "archived": false,
+    "openIssues": 229
+  },
+  "errors": [],
+  "completedAt": "2026-09-09T09:24:36.265Z",
+  "summary": {
+    "discovered": 1,
+    "ingested": 1,
+    "inspected": 1,
+    "scored": 1,
+    "skillsExtracted": 2,
+    "patternsExtracted": 2,
+    "recommended": 1,
+    "graphNodes": 6,
+    "graphEdges": 5,
+    "errors": 0
+  }
+}
