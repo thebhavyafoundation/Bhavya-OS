@@ -151,7 +151,9 @@ export function submitFeedback(input: {
     sentiment,
   });
 
-  return getFeedback(id)!;
+  const item = getFeedback(id);
+  if (!item) throw new Error("Feedback not found after insert");
+  return item;
 }
 
 export function getFeedback(id: string): CommunityFeedback | null {

@@ -45,7 +45,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -76,6 +81,11 @@ export const POST = withAuth(async (request, _user) => {
         status,
         progress || 0,
       );
+      if (!objective)
+        return NextResponse.json(
+          { error: "Objective not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ objective });
     }
     case "add-key-result": {

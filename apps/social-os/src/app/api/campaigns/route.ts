@@ -25,7 +25,7 @@ export const GET = withAuth(async (request, _user) => {
     case "list": {
       const status = searchParams.get("status") as CampaignStatus | undefined;
       const type = searchParams.get("type") as CampaignType | undefined;
-      const limit = parseInt(searchParams.get("limit") || "50");
+      const limit = Math.min(Number(searchParams.get("limit")) || 50, 1000);
       const campaigns = listCampaigns({ status, type, limit });
       return NextResponse.json({ campaigns });
     }
@@ -56,7 +56,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -92,6 +97,11 @@ export const POST = withAuth(async (request, _user) => {
           { status: 400 },
         );
       const campaign = updateCampaignStatus(campaignId, status);
+      if (!campaign)
+        return NextResponse.json(
+          { error: "Campaign not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ campaign });
     }
 

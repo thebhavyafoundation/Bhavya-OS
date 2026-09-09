@@ -17,7 +17,9 @@ export function createObjective(input: {
     VALUES (?, ?, ?, ?, ?, 'not_started', 0, '[]', '[]', ?, ?)
   `).run(id, input.title, input.description || '', input.department || null, input.quarter, now, now);
 
-  return getObjective(id)!;
+  const item = getObjective(id);
+  if (!item) throw new Error("Objective not found after insert");
+  return item;
 }
 
 export function getObjective(id: string): Objective | null {

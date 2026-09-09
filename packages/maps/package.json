@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@bhavya/platform-ui": "workspace:*",
-    "maplibre-gl": "^5.7.1",
+    "maplibre-gl": "6.4.1",
     "react": "^19.2.4"
   },
   "devDependencies": {

@@ -21,7 +21,9 @@ export function createActionItem(input: {
     VALUES (?, ?, ?, ?, ?, ?, 'pending', ?, ?)
   `).run(id, input.title, input.description || '', input.owner || null, input.dueDate || null, input.priority || 'normal', input.linkedObjectiveId || null, now);
 
-  return getActionItem(id)!;
+  const item = getActionItem(id);
+  if (!item) throw new Error("Action item not found after insert");
+  return item;
 }
 
 export function getActionItem(id: string): ActionItem | null {

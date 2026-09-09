@@ -38,7 +38,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -68,6 +73,11 @@ export const POST = withAuth(async (request, _user) => {
         status as KPStatus,
         stage as ProductionStage | undefined,
       );
+      if (!kp)
+        return NextResponse.json(
+          { error: "Knowledge Package not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ kp });
     }
     case "advance": {

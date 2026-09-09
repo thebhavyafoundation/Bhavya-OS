@@ -21,7 +21,9 @@ export function createRisk(input: {
     VALUES (?, ?, ?, ?, 'open', ?, ?, ?, ?, ?)
   `).run(id, input.title, input.description || '', input.severity || 'medium', input.category || input.department || '', input.mitigationPlan || input.mitigation || null, input.owner || null, now, now);
 
-  return getRisk(id)!;
+  const item = getRisk(id);
+  if (!item) throw new Error("Risk not found after insert");
+  return item;
 }
 
 export function getRisk(id: string): Risk | null {

@@ -14,7 +14,9 @@ export function createApprovalRequest(publicationId: string): ApprovalRecord {
   `,
   ).run(id, publicationId, now);
 
-  return getApproval(id)!;
+  const item = getApproval(id);
+  if (!item) throw new Error("Approval not found after insert");
+  return item;
 }
 
 export function getApproval(id: string): ApprovalRecord | null {

@@ -23,7 +23,7 @@ export const GET = withAuth(async (request, _user) => {
       const status = searchParams.get("status") as CalendarStatus | undefined;
       const startDate = searchParams.get("startDate");
       const endDate = searchParams.get("endDate");
-      const limit = parseInt(searchParams.get("limit") || "50");
+      const limit = Math.min(Number(searchParams.get("limit")) || 50, 1000);
       const entries = listCalendarEntries({
         type,
         status,
@@ -35,7 +35,7 @@ export const GET = withAuth(async (request, _user) => {
     }
 
     case "upcoming": {
-      const days = parseInt(searchParams.get("days") || "7");
+      const days = Math.min(Number(searchParams.get("days")) || 7, 365);
       const entries = getUpcomingEntries(days);
       return NextResponse.json({ entries });
     }
@@ -53,7 +53,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -85,6 +90,11 @@ export const POST = withAuth(async (request, _user) => {
           { status: 400 },
         );
       const entry = updateCalendarEntryStatus(entryId, status);
+      if (!entry)
+        return NextResponse.json(
+          { error: "Calendar entry not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ entry });
     }
 

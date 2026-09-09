@@ -44,7 +44,9 @@ export function createPublication(input: {
     input.campaign || null,
   );
 
-  return getPublication(id)!;
+  const item = getPublication(id);
+  if (!item) throw new Error("Publication not found after insert");
+  return item;
 }
 
 export function getPublication(id: string): Publication | null {

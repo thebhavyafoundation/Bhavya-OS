@@ -32,7 +32,7 @@ export const GET = withAuth(async (request, _user) => {
       });
     }
     default: {
-      const limit = parseInt(searchParams.get("limit") || "50");
+      const limit = Math.min(Number(searchParams.get("limit")) || 50, 1000);
       const events = getRecentEvents(limit);
       return NextResponse.json({ events });
     }
@@ -40,7 +40,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {

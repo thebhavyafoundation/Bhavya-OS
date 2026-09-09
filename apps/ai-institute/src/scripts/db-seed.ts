@@ -26,6 +26,11 @@ function hashPassword(password: string): string {
 }
 
 async function main() {
+  if (process.env.NODE_ENV === "production") {
+    console.error("Refusing to seed in production environment");
+    process.exit(1);
+  }
+
   await migrate("ai-institute");
 
   const db = getAdaptedDatabase("ai-institute");

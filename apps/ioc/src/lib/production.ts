@@ -24,7 +24,9 @@ export function createKP(input: {
     VALUES (?, ?, ?, ?, 'draft', 'research', ?, ?, ?, ?, ?)
   `).run(id, input.title, input.level || 'L1', input.domain || 'general', input.assignee || null, input.dueDate || null, input.concepts || 0, now, now);
 
-  return getKP(id)!;
+  const item = getKP(id);
+  if (!item) throw new Error("KP not found after insert");
+  return item;
 }
 
 export function getKP(id: string): ContentKnowledgePackage | null {

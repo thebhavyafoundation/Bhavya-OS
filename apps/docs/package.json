@@ -12,7 +12,7 @@
   "dependencies": {
     "@bhavya/mission-runtime": "workspace:*",
     "@bhavya/sdk": "workspace:*",
-    "next": "15.5.20",
+    "next": "15.5.25",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

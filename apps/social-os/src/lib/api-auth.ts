@@ -19,13 +19,20 @@ type AuthenticatedHandler = (
  */
 export function withAuth(handler: AuthenticatedHandler) {
   return async (request: NextRequest): Promise<NextResponse> => {
-    const user = await requireAuth(request);
-    if (!user) {
+    try {
+      const user = await requireAuth(request);
+      if (!user) {
+        return NextResponse.json(
+          { error: "Authentication required" },
+          { status: 401 },
+        );
+      }
+      return handler(request, user);
+    } catch (error) {
       return NextResponse.json(
-        { error: "Authentication required" },
-        { status: 401 },
+        { error: "Internal server error" },
+        { status: 500 },
       );
     }
-    return handler(request, user);
   };
 }

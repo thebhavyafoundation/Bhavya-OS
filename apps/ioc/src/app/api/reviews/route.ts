@@ -16,7 +16,7 @@ export const GET = withAuth(async (request, _user) => {
       return NextResponse.json({ review });
     }
     case "list": {
-      const limit = parseInt(searchParams.get("limit") || "10");
+      const limit = Math.min(Number(searchParams.get("limit")) || 10, 1000);
       const reviews = getWeeklyReviews(limit);
       return NextResponse.json({ reviews });
     }
@@ -28,7 +28,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {

@@ -45,7 +45,9 @@ export function createCampaign(input: {
   );
 
   emitEvent("campaign.created", { campaignId: id, name: input.name });
-  return getCampaign(id)!;
+  const item = getCampaign(id);
+  if (!item) throw new Error("Campaign not found after insert");
+  return item;
 }
 
 export function getCampaign(id: string): Campaign | null {

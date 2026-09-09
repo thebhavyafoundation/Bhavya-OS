@@ -42,7 +42,9 @@ export function createCalendarEntry(input: {
     type: input.type,
     scheduledDate: input.scheduledDate,
   });
-  return getCalendarEntry(id)!;
+  const item = getCalendarEntry(id);
+  if (!item) throw new Error("Calendar entry not found after insert");
+  return item;
 }
 
 export function getCalendarEntry(id: string): EditorialCalendarEntry | null {

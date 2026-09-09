@@ -23,7 +23,7 @@
     "@bhavya/workflows": "workspace:*",
     "@bhavya/platform": "workspace:*",
     "@bhavya/platform-ui": "workspace:*",
-    "next": "^15.5.20",
+    "next": "15.5.25",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "lucide-react": "^0.400.0"

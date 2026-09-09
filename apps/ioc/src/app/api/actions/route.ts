@@ -28,7 +28,12 @@ export const GET = withAuth(async (request, _user) => {
 });
 
 export const POST = withAuth(async (request, _user) => {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -68,6 +73,11 @@ export const POST = withAuth(async (request, _user) => {
           { status: 400 },
         );
       const item = updateActionStatus(itemId, status);
+      if (!item)
+        return NextResponse.json(
+          { error: "Action item not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ item });
     }
     case "complete": {
@@ -75,6 +85,11 @@ export const POST = withAuth(async (request, _user) => {
       if (!itemId)
         return NextResponse.json({ error: "itemId required" }, { status: 400 });
       const item = completeAction(itemId, result);
+      if (!item)
+        return NextResponse.json(
+          { error: "Action item not found" },
+          { status: 404 },
+        );
       return NextResponse.json({ item });
     }
     default:

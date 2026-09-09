@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkAllSystems, checkSystemHealth, getSystemHealthFromDb, getOperationalHealth } from '@/lib/system-health';
 import type { SystemName } from '@/lib/types';
+import { withAuth } from '@/lib/api-auth';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -28,8 +29,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
+export const POST = withAuth(async (request, _user) => {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
   const { action } = body;
 
   switch (action) {
@@ -40,4 +46,4 @@ export async function POST(request: NextRequest) {
     default:
       return NextResponse.json({ error: 'unknown action' }, { status: 400 });
   }
-}
+});
