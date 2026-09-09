@@ -19,9 +19,45 @@ Community. AI Institute never replaces the Foundation identity.
 
 ## Test / verify
 
-- Test: `pnpm test` (turbo) or `pnpm --filter @bhavya/<name> test`
-- Verify: `pnpm typecheck`, `git diff --check`, `pnpm file-map:check`
-- Canonical repo: `github.com/thebhavyafoundation/Bhavya-OS` (`master`) → ONE Vercel project (`bhavya-foundation`) → `bhavyafoundation.org`
+All commands verified in root `package.json`:
+
+- **Build:** `pnpm build` (turbo, depends on `^build`)
+- **Lint:** `pnpm lint` (turbo, depends on `^build`)
+- **Typecheck:** `pnpm typecheck` (turbo, depends on `^build`)
+- **Test:** `pnpm test` (turbo) or `pnpm --filter @bhavya/<name> test`
+- **Format:** `pnpm format` (prettier, all `*.{ts,tsx,md,mdx,json,css}`)
+- **Validate:** `pnpm validate` (content-core)
+- **Scaffold:** `pnpm scaffold` (content-core)
+- **File map:** `pnpm file-map` (generate) / `pnpm file-map:check` (CI check)
+- **Token sync:** `pnpm tokens:sync` (sync) / `pnpm tokens:check` (CI check)
+- **Git check:** `git diff --check`
+
+### CI workflow (`.github/workflows/ci.yml`)
+
+Runs on push/PR to `main`. Three parallel jobs, then build:
+
+1. **lint-and-typecheck** — `pnpm lint` + `pnpm typecheck`
+2. **test** — `pnpm test`
+3. **secret-scan** — gitleaks + pattern scan
+4. **build** (after lint-and-typecheck + test pass) — `pnpm build`
+
+### Vercel
+
+Documented for architectural awareness only. Agents MUST NOT create, modify,
+deploy, promote, rollback, or otherwise operate Vercel resources unless the
+user explicitly authorizes Vercel operations in that task.
+
+- `vercel.json` builds `apps/ai-institute` via `scripts/vercel-build-app.mjs`
+- Valid apps: `ai-institute`, `admin`, `docs`, `design-system`, `github-os`, `ioc`, `social-os`, `bhavya-intelligence-network`, `website`
+- Deploy workflow: `.github/workflows/deploy.yml` (requires `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` secrets)
+
+**Normal workflow is Git-only:** inspect → modify → validate → commit → push → verify remote.
+Knowing that `vercel-build-app.mjs` exists does NOT constitute authorization to execute it.
+Do not present Vercel deployment as a normal verification step.
+
+### Canonical repo
+
+`github.com/thebhavyafoundation/Bhavya-OS` (`master`) → ONE Vercel project (`bhavya-foundation`) → `bhavyafoundation.org`
 
 ## Never do
 
