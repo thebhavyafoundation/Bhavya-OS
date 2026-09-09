@@ -14,7 +14,6 @@ export {
   rollback,
   getMigrationStatus,
   computeChecksum,
-  migrateLegacy,
 } from "./migrate";
 export type {
   Migration,

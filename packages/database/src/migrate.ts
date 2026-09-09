@@ -286,30 +286,3 @@ export async function getMigrationStatus(
 }
 
 // ─── Legacy API (backward compatible) ────────────────────────────────────────
-
-/**
- * Legacy migrate function — accepts an array of migrations.
- * Uses the default database connection.
- *
- * @deprecated Use migrate(dbName) instead for named-database support.
- */
-export function migrateLegacy(migrations: Migration[]): { applied: string[] } {
-  const db = getReadWriteDatabase("ai-institute");
-  ensureMigrationsTable(db);
-  const appliedIds = getAppliedIds(db);
-  const pending = migrations.filter((m) => !appliedIds.includes(m.id));
-  const appliedIds_: string[] = [];
-
-  for (const migration of pending) {
-    db.exec(migration.up);
-    const checksum = computeChecksum(migration);
-    db.prepare(
-      `INSERT INTO ${MIGRATIONS_TABLE} (id, name, checksum) VALUES (?, ?, ?)`,
-    ).run(migration.id, migration.name, checksum);
-    appliedIds_.push(migration.id);
-  }
-
-  return { applied: appliedIds_ };
-}
-
-// Legacy re-exports are provided via index.ts for backward compatibility.
