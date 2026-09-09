@@ -42,10 +42,11 @@ export function getNamedDatabase(
   const dir = dirname(config.path);
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
-  const db = new Database(config.path, { readonly: config.readonly });
+  const db = new Database(config.path, { readonly: config.readonly ?? false });
   if (config.wal !== false && !config.readonly) db.pragma("journal_mode = WAL");
   if (config.foreignKeys !== false && !config.readonly)
     db.pragma("foreign_keys = ON");
+  if (!config.readonly) db.pragma("busy_timeout = 5000");
 
   _connections.set(name, { db, config });
   return db;
