@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@bhavya/auth": "workspace:*",
     "@bhavya/mission-runtime": "workspace:*",
     "@bhavya/platform-ui": "workspace:*",
     "@bhavya/sdk": "workspace:*",

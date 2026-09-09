@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { requireAdminAuth } from "@/lib/auth";
 
 const ROOT = process.env.PROJECT_ROOT || join(process.cwd(), "..", "..");
 
@@ -13,6 +14,9 @@ function readJson(path: string): unknown {
 }
 
 export async function GET(req: NextRequest) {
+  const auth = await requireAdminAuth(req);
+  if (auth.error) return auth.error;
+
   const type = req.nextUrl.searchParams.get("type");
 
   if (!type) {

@@ -63,16 +63,29 @@ export function getRiskSummary(): {
   closed: number;
 } {
   const db = getDb();
-  const total = (db.prepare('SELECT COUNT(*) as c FROM risks').get() as any).c;
-  const open = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE status = 'open'").get() as any).c;
-  const critical = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE severity = 'critical' AND status = 'open'").get() as any).c;
-  const high = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE severity = 'high' AND status = 'open'").get() as any).c;
-  const medium = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE severity = 'medium' AND status = 'open'").get() as any).c;
-  const low = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE severity = 'low' AND status = 'open'").get() as any).c;
-  const mitigated = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE status = 'mitigated'").get() as any).c;
-  const closed = (db.prepare("SELECT COUNT(*) as c FROM risks WHERE status = 'closed'").get() as any).c;
+  const row = db.prepare(`
+    SELECT
+      COUNT(*) as total,
+      SUM(CASE WHEN status = 'open' THEN 1 ELSE 0 END) as open,
+      SUM(CASE WHEN severity = 'critical' AND status = 'open' THEN 1 ELSE 0 END) as critical,
+      SUM(CASE WHEN severity = 'high' AND status = 'open' THEN 1 ELSE 0 END) as high,
+      SUM(CASE WHEN severity = 'medium' AND status = 'open' THEN 1 ELSE 0 END) as medium,
+      SUM(CASE WHEN severity = 'low' AND status = 'open' THEN 1 ELSE 0 END) as low,
+      SUM(CASE WHEN status = 'mitigated' THEN 1 ELSE 0 END) as mitigated,
+      SUM(CASE WHEN status = 'closed' THEN 1 ELSE 0 END) as closed
+    FROM risks
+  `).get() as any;
 
-  return { total, open, critical, high, medium, low, mitigated, closed };
+  return {
+    total: row.total || 0,
+    open: row.open || 0,
+    critical: row.critical || 0,
+    high: row.high || 0,
+    medium: row.medium || 0,
+    low: row.low || 0,
+    mitigated: row.mitigated || 0,
+    closed: row.closed || 0,
+  };
 }
 
 function mapRowToRisk(row: any): Risk {

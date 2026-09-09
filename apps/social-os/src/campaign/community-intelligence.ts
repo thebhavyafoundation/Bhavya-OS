@@ -220,7 +220,7 @@ export function getFeedbackIntelligence(): {
   topKnowledgeGaps: { content: string; count: number }[];
 } {
   const db = getDb();
-  const all = db.prepare("SELECT * FROM community_feedback").all() as any[];
+  const all = db.prepare("SELECT * FROM community_feedback ORDER BY created_at DESC LIMIT 10000").all() as any[];
 
   const byClassification: Record<string, number> = {};
   const bySource: Record<string, number> = {};

@@ -8,6 +8,7 @@
     "start": "next start --port 3050"
   },
   "dependencies": {
+    "@bhavya/auth": "workspace:*",
     "@bhavya/intelligence": "workspace:*",
     "@bhavya/capability-registry": "workspace:*",
     "@bhavya/crawlers": "workspace:*",

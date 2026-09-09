@@ -17,7 +17,7 @@ export function emitInstitutionEvent(type: string, source: SystemName, payload: 
 
 export function getUnprocessedEvents(): InstitutionEvent[] {
   const db = getDb();
-  const rows = db.prepare('SELECT * FROM institution_events WHERE aggregated = 0 ORDER BY created_at ASC').all() as any[];
+  const rows = db.prepare('SELECT * FROM institution_events WHERE aggregated = 0 ORDER BY created_at ASC LIMIT 500').all() as any[];
   return rows.map(mapRowToEvent);
 }
 

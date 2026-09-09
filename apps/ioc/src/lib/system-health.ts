@@ -11,7 +11,7 @@ const SYSTEM_CONFIGS: Record<SystemName, {
   github_os: { name: 'GitHub OS', dashboard: 'http://localhost:3070', api: 'http://localhost:3070/api/health', eventsProduced: 0, eventsConsumed: 0 },
   knowledge_studio: { name: 'Knowledge Studio', dashboard: 'http://localhost:3050', api: 'http://localhost:3100/health', eventsProduced: 0, eventsConsumed: 0 },
   ai_institute: { name: 'AI Institute', dashboard: 'http://localhost:3060', eventsProduced: 0, eventsConsumed: 0 },
-  website: { name: 'Website', dashboard: 'https://website-ten-vert-90.vercel.app', api: 'https://website-ten-vert-90.vercel.app/api/health', eventsProduced: 0, eventsConsumed: 0 },
+  website: { name: 'Website', dashboard: process.env.WEBSITE_URL || 'https://bhavyafoundation.org', eventsProduced: 0, eventsConsumed: 0 },
   social_os: { name: 'Social OS', dashboard: 'http://localhost:3080', api: 'http://localhost:3080/api/health', eventsProduced: 7, eventsConsumed: 3 },
   constitution_sdk: { name: 'Constitution SDK', eventsProduced: 0, eventsConsumed: 0, dashboard: 'N/A' },
   content_factory: { name: 'Content Factory', api: 'http://localhost:3100/health', eventsProduced: 3, eventsConsumed: 0, dashboard: 'N/A' },

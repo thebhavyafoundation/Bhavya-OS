@@ -63,6 +63,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@bhavya/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@bhavya/mission-runtime':
         specifier: workspace:*
         version: link:../../packages/mission-runtime
@@ -170,6 +173,9 @@ importers:
       '@bhavya/analyzers':
         specifier: workspace:*
         version: link:../../packages/analyzers
+      '@bhavya/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@bhavya/browser-automation':
         specifier: workspace:*
         version: link:../../packages/browser-automation

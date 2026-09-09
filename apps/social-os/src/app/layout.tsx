@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@bhavya/platform-ui";
 import "./globals.css";
+import MobileMenuToggle from "@/components/MobileMenuToggle";
 
 export const metadata: Metadata = {
   title: "Social OS — Bhavya Foundation",
@@ -15,10 +16,62 @@ export default function SocialOSLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <style>{`
+          .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            z-index: 10000;
+          }
+          .skip-link:focus {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            width: auto;
+            height: auto;
+            padding: 8px 16px;
+            background: var(--color-brand-forest);
+            color: var(--color-brand-ivory);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 10000;
+          }
+          .mobile-menu-toggle {
+            display: none !important;
+          }
+          @media (max-width: 768px) {
+            .mobile-menu-toggle {
+              display: block !important;
+            }
+            [data-sidebar] {
+              position: fixed !important;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              z-index: 1000;
+              transform: translateX(-100%);
+              transition: transform 0.2s ease;
+            }
+            [data-sidebar][data-open="true"] {
+              transform: translateX(0) !important;
+            }
+          }
+        `}</style>
+      </head>
       <body style={{ margin: 0 }}>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <MobileMenuToggle />
         <div style={{ display: "flex", minHeight: "100vh" }}>
           {/* Institutional Sidebar */}
           <aside
+            data-sidebar
+            data-open="false"
             style={{
               width: 256,
               background: "var(--color-sidebar-bg)",
@@ -43,7 +96,7 @@ export default function SocialOSLayout({
                 Communication Operations
               </div>
             </div>
-            <nav style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <nav aria-label="Social OS navigation" style={{ display: "flex", flexDirection: "column", gap: 4 }}>
               <a
                 href="/"
                 style={{
@@ -118,7 +171,7 @@ export default function SocialOSLayout({
             </div>
           </aside>
           {/* Main Content */}
-          <main style={{ flex: 1 }}>{children}</main>
+          <main id="main-content" style={{ flex: 1 }}>{children}</main>
         </div>
       </body>
     </html>
