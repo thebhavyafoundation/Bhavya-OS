@@ -59,6 +59,7 @@ const navGroups: NavGroup[] = [
       { label: "Comparisons", icon: GitCompare, href: "/comparisons" },
       { label: "Knowledge Graph", icon: Network, href: "/knowledge-graph" },
       { label: "Recommendations", icon: FileText, href: "/knowledge" },
+      { label: "Daily Intelligence", icon: Brain, href: "/daily-intelligence" },
     ],
   },
   {
