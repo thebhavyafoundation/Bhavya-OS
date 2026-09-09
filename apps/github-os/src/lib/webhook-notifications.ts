@@ -109,6 +109,74 @@ function formatGenericPayload(payload: NotificationPayload): object {
 }
 
 /**
+ * Validate a webhook URL to prevent SSRF attacks.
+ * Blocks internal network addresses, localhost, and non-HTTPS schemes.
+ */
+function validateWebhookUrl(url: string): { valid: boolean; error?: string } {
+  try {
+    const parsed = new URL(url);
+
+    // Only allow https (and http for localhost development)
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      return { valid: false, error: "Only http/https URLs are allowed" };
+    }
+
+    const hostname = parsed.hostname.toLowerCase();
+
+    // Block localhost
+    if (
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname === "::1" ||
+      hostname === "[::1]"
+    ) {
+      return { valid: false, error: "localhost URLs are not allowed" };
+    }
+
+    // Block private/internal IP ranges
+    const ipMatch = hostname.match(
+      /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/,
+    );
+    if (ipMatch) {
+      const [, a, b] = ipMatch.map(Number);
+      // 10.0.0.0/8
+      if (a === 10)
+        return { valid: false, error: "Private network URLs are not allowed" };
+      // 172.16.0.0/12
+      if (a === 172 && b >= 16 && b <= 31)
+        return { valid: false, error: "Private network URLs are not allowed" };
+      // 192.168.0.0/16
+      if (a === 192 && b === 168)
+        return { valid: false, error: "Private network URLs are not allowed" };
+      // 169.254.0.0/16 (link-local / cloud metadata)
+      if (a === 169 && b === 254)
+        return { valid: false, error: "Link-local URLs are not allowed" };
+      // 127.0.0.0/8
+      if (a === 127)
+        return { valid: false, error: "Loopback URLs are not allowed" };
+      // 0.0.0.0
+      if (a === 0)
+        return { valid: false, error: "Zero-net URLs are not allowed" };
+    }
+
+    // Block metadata endpoints by hostname pattern
+    if (
+      hostname.endsWith(".internal") ||
+      hostname.endsWith(".local") ||
+      hostname.endsWith(".localhost") ||
+      hostname === "metadata.google.internal" ||
+      hostname === "169.254.169.254"
+    ) {
+      return { valid: false, error: "Internal metadata URLs are not allowed" };
+    }
+
+    return { valid: true };
+  } catch {
+    return { valid: false, error: "Invalid URL format" };
+  }
+}
+
+/**
  * Send a webhook notification
  */
 async function sendWebhook(
@@ -116,6 +184,10 @@ async function sendWebhook(
   payload: NotificationPayload,
 ): Promise<{ success: boolean; error?: string }> {
   if (!config.enabled) return { success: false, error: "Webhook disabled" };
+
+  // SSRF protection: validate URL before sending
+  const urlCheck = validateWebhookUrl(config.url);
+  if (!urlCheck.valid) return { success: false, error: urlCheck.error };
 
   const body =
     config.type === "discord"
@@ -220,6 +292,12 @@ export async function notifyHighRelevanceFindings(
  * Store a webhook configuration
  */
 export function storeWebhookConfig(config: WebhookConfig): void {
+  // Validate URL before storing
+  const urlCheck = validateWebhookUrl(config.url);
+  if (!urlCheck.valid) {
+    throw new Error(`Invalid webhook URL: ${urlCheck.error}`);
+  }
+
   const db = getDb();
   db.prepare(
     `INSERT OR REPLACE INTO daily_intelligence_config (key, value, type, enabled, updated_at)
