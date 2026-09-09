@@ -16,6 +16,10 @@
   --color-status-error: #dc3545;
   --color-status-warning: #ffc107;
   --color-status-success: #28a745;
+  --color-status-info: #007bff;
+  --color-sidebar-bg: #0a1f1a;
+  --color-sidebar-border: #1a3a2e;
+  --color-sidebar-text: #8a9a8b;
   --font-display: "Playfair Display", serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }

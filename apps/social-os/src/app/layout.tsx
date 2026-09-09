@@ -21,8 +21,8 @@ export default function SocialOSLayout({
           <aside
             style={{
               width: 256,
-              background: "#0a1f1a",
-              borderRight: "1px solid #1a3a2e",
+              background: "var(--color-sidebar-bg)",
+              borderRight: "1px solid var(--color-sidebar-border)",
               padding: 16,
               display: "flex",
               flexDirection: "column",
@@ -30,10 +30,16 @@ export default function SocialOSLayout({
             }}
           >
             <div style={{ marginBottom: 32 }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "#D4AF37" }}>
+              <div
+                style={{
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: "var(--color-accent-gold)",
+                }}
+              >
                 Social OS
               </div>
-              <div style={{ fontSize: 11, color: "#8A9A8B" }}>
+              <div style={{ fontSize: 11, color: "var(--color-sidebar-text)" }}>
                 Communication Operations
               </div>
             </div>
@@ -41,7 +47,7 @@ export default function SocialOSLayout({
               <a
                 href="/"
                 style={{
-                  color: "#8A9A8B",
+                  color: "var(--color-sidebar-text)",
                   textDecoration: "none",
                   fontSize: 14,
                   padding: "8px 12px",
@@ -53,7 +59,7 @@ export default function SocialOSLayout({
               <a
                 href="/dashboard"
                 style={{
-                  color: "#8A9A8B",
+                  color: "var(--color-sidebar-text)",
                   textDecoration: "none",
                   fontSize: 14,
                   padding: "8px 12px",
@@ -65,7 +71,7 @@ export default function SocialOSLayout({
               <a
                 href="/ceo"
                 style={{
-                  color: "#8A9A8B",
+                  color: "var(--color-sidebar-text)",
                   textDecoration: "none",
                   fontSize: 14,
                   padding: "8px 12px",
@@ -80,7 +86,7 @@ export default function SocialOSLayout({
               style={{
                 marginTop: "auto",
                 paddingTop: 16,
-                borderTop: "1px solid #1a3a2e",
+                borderTop: "1px solid var(--color-sidebar-border)",
                 display: "flex",
                 flexDirection: "column",
                 gap: 4,
@@ -89,7 +95,7 @@ export default function SocialOSLayout({
               <a
                 href="/os"
                 style={{
-                  color: "#8A9A8B",
+                  color: "var(--color-sidebar-text)",
                   textDecoration: "none",
                   fontSize: 14,
                   padding: "8px 12px",
@@ -101,7 +107,7 @@ export default function SocialOSLayout({
               <a
                 href="/"
                 style={{
-                  color: "#6A7C52",
+                  color: "var(--color-text-secondary)",
                   textDecoration: "none",
                   fontSize: 11,
                   padding: "4px 12px",
