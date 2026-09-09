@@ -37,14 +37,20 @@ export default function ActionsPage() {
 
   async function createAction(e: React.FormEvent) {
     e.preventDefault();
-    await fetch('/api/actions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'create', ...form }),
-    });
-    setForm({ title: '', description: '', type: 'decision', priority: 'medium', owner: '', dueDate: '' });
-    setShowForm(false);
-    load();
+    try {
+      const response = await fetch('/api/actions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create', ...form }),
+      });
+      if (!response.ok) throw new Error("Failed to create");
+      setForm({ title: '', description: '', type: 'decision', priority: 'medium', owner: '', dueDate: '' });
+      setShowForm(false);
+      load();
+    } catch (error) {
+      console.error("Failed to create:", error);
+      alert("Failed to create. Please try again.");
+    }
   }
 
   async function updateStatus(id: string, status: string) {

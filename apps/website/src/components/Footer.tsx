@@ -126,6 +126,7 @@ export function Footer() {
           <div className="footer-col-title">Legal</div>
           <nav className="footer-links" aria-label="Legal navigation">
             <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
             <a href="/accessibility">Accessibility</a>
           </nav>
         </div>
@@ -133,6 +134,11 @@ export function Footer() {
       <div className="footer-bottom">
         <span>&copy; 2026 Bhavya Foundation</span>
         <span>Built for Generations &middot; Nature. Knowledge. Heritage.</span>
+      </div>
+      <div className="footer-contact" style={{ display: "flex", justifyContent: "center", gap: "var(--space-4)", padding: "var(--space-4) 0", borderTop: "1px solid var(--color-border-subtle)", fontSize: "var(--text-xs)", color: "var(--color-text-muted)" }}>
+        <span>Contact: <a href="mailto:contact@bhavyafoundation.org" style={{ color: "var(--color-text-muted)" }}>contact@bhavyafoundation.org</a></span>
+        <span>&middot;</span>
+        <span>Registered Office: Bhavya Foundation, India</span>
       </div>
     </footer>
   );

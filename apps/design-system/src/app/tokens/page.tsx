@@ -2,34 +2,34 @@ import Sidebar from "@/components/Sidebar";
 
 const colors = {
   brand: {
-    50: "#eff6ff", 100: "#dbeafe", 200: "#bfdbfe", 300: "#93c5fd",
-    400: "#60a5fa", 500: "#1a56db", 600: "#1e40af", 700: "#1e3a8a",
-    800: "#172554", 900: "#0f172a",
+    50: "#f0f7f2", 100: "#d8ead9", 200: "#b1d5b3", 300: "#8abf8d",
+    400: "#63aa67", 500: "#2d8a45", 600: "#1a6e34", 700: "#0e382e",
+    800: "#0b2d24", 900: "#071c16",
   },
   accent: {
-    50: "#fffbeb", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d",
-    400: "#fbbf24", 500: "#d97706", 600: "#b45309", 700: "#92400e",
-    800: "#78350f", 900: "#451a03",
+    50: "#fdf8e8", 100: "#f9edc4", 200: "#f3db8a", 300: "#edc94f",
+    400: "#e6b82e", 500: "#d4af37", 600: "#b8952d", 700: "#8a6f22",
+    800: "#5c4a17", 900: "#40320c",
   },
   forest: {
-    50: "#f0fdf4", 100: "#dcfce7", 200: "#bbf7d0", 300: "#86efac",
-    400: "#4ade80", 500: "#16a34a", 600: "#15803d", 700: "#166534",
-    800: "#14532d", 900: "#052e16",
+    50: "#f0f7f2", 100: "#d8ead9", 200: "#b1d5b3", 300: "#8abf8d",
+    400: "#63aa67", 500: "#2d8a45", 600: "#1a6e34", 700: "#0e382e",
+    800: "#0b2d24", 900: "#071c16",
   },
   heritage: {
-    50: "#faf5ff", 100: "#f3e8ff", 200: "#e9d5ff", 300: "#d8b4fe",
-    400: "#c084fc", 500: "#9333ea", 600: "#7e22ce", 700: "#6b21a8",
-    800: "#581c87", 900: "#3b0764",
+    50: "#f2f5f3", 100: "#e0e7e2", 200: "#c1cfc5", 300: "#a2b7a8",
+    400: "#8a9a8b", 500: "#6e8270", 600: "#5a6b5c", 700: "#465447",
+    800: "#313c33", 900: "#0e2210",
   },
 };
 
 const semanticTokens = [
-  { name: "--primary", value: "var(--color-brand-500)", color: "#1a56db", description: "Primary brand color" },
-  { name: "--accent", value: "var(--color-accent-500)", color: "#d97706", description: "Accent / highlight color" },
-  { name: "--success", value: "var(--color-forest-500)", color: "#16a34a", description: "Success state" },
-  { name: "--warning", value: "var(--color-accent-500)", color: "#d97706", description: "Warning state" },
-  { name: "--danger", value: "var(--color-red-500)", color: "#dc2626", description: "Error / danger state" },
-  { name: "--info", value: "var(--color-brand-400)", color: "#60a5fa", description: "Informational state" },
+  { name: "--primary", value: "var(--color-brand-700)", color: "#0e382e", description: "Primary brand color (Forest)" },
+  { name: "--accent", value: "var(--color-accent-500)", color: "#d4af37", description: "Accent / highlight color (Gold)" },
+  { name: "--success", value: "var(--color-forest-500)", color: "#2d8a45", description: "Success state" },
+  { name: "--warning", value: "var(--color-accent-500)", color: "#d4af37", description: "Warning state" },
+  { name: "--danger", value: "var(--color-red-500)", color: "#c0392b", description: "Error / danger state" },
+  { name: "--info", value: "var(--color-heritage-400)", color: "#8a9a8b", description: "Informational state (Sage)" },
 ];
 
 const spacingTokens = [

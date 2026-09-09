@@ -52,3 +52,12 @@ h5,
 h6 {
   font-family: var(--font-display);
 }
+
+@media (max-width: 767px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+  .admin-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+}

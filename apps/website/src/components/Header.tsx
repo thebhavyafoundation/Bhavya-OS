@@ -47,6 +47,9 @@ export function Header({ currentPath = "/" }: { currentPath?: string }) {
         <div className="nav-actions">
           <LanguageSwitcher />
           <ThemeToggle />
+          <a href="/donate" className="nav-donate">
+            Donate
+          </a>
           <a href="/knowledge" className="nav-cta">
             Start Learning
             <ArrowRight aria-hidden="true" />

@@ -41,14 +41,20 @@ export default function OKRPage() {
 
   async function createObjective(e: React.FormEvent) {
     e.preventDefault();
-    await fetch('/api/okr', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'create', ...form }),
-    });
-    setForm({ title: '', description: '', quarter: '2026-Q1', department: 'institution' });
-    setShowForm(false);
-    load();
+    try {
+      const response = await fetch('/api/okr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create', ...form }),
+      });
+      if (!response.ok) throw new Error("Failed to create");
+      setForm({ title: '', description: '', quarter: '2026-Q1', department: 'institution' });
+      setShowForm(false);
+      load();
+    } catch (error) {
+      console.error("Failed to create:", error);
+      alert("Failed to create. Please try again.");
+    }
   }
 
   if (loading) return <div className="min-h-screen bg-black text-white flex items-center justify-center"><div className="text-sage">Loading OKRs...</div></div>;

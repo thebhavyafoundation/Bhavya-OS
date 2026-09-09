@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Sun, Moon, Menu, X } from "lucide-react";
 
 function ThemeToggle() {
@@ -29,27 +29,38 @@ export function MobileMenu({ items, currentPath }: { items: { id: string; label:
   const [open, setOpen] = useState(false);
   const isActive = (href: string) => currentPath === href;
 
+  const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, close]);
+
   return (
     <>
-      <button className="mobile-nav-btn" onClick={() => setOpen(true)} aria-label="Open navigation menu">
+      <button className="mobile-nav-btn" onClick={() => setOpen(true)} aria-expanded={open} aria-label="Open navigation menu">
         <Menu />
       </button>
       {open && (
-        <div className="mobile-nav-overlay open" onClick={() => setOpen(false)}>
-          <nav className="mobile-nav-panel" onClick={(e) => e.stopPropagation()} aria-label="Mobile navigation">
+        <div className="mobile-nav-overlay open" onClick={close}>
+          <nav className="mobile-nav-panel" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Mobile navigation">
             {items.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
                 className={`mobile-nav-link${isActive(item.href) ? " active" : ""}`}
-                onClick={() => setOpen(false)}
+                onClick={close}
               >
                 {item.label}
               </a>
             ))}
             <button
               className="mobile-nav-btn mobile-nav-btn--close"
-              onClick={() => setOpen(false)}
+              onClick={close}
               style={{ alignSelf: "flex-end", marginTop: 8 }}
               aria-label="Close navigation menu"
             >

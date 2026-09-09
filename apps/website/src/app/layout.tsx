@@ -27,6 +27,7 @@ export default function WebsiteLayout({ children }: { children: ReactNode }) {
         <meta property="og:image" content="/brand/og-image.svg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/svg+xml" />
         <meta
           property="og:image:alt"
           content="Bhavya Foundation — Nature. Knowledge. Heritage."
@@ -67,9 +68,6 @@ export default function WebsiteLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <Providers>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
           {children}
         </Providers>
       </body>
