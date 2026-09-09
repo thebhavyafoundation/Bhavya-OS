@@ -9,7 +9,6 @@
     ".": "./src/index.ts",
     "./sqlite": "./src/sqlite.ts",
     "./migrate": "./src/migrate.ts",
-    "./repository": "./src/repository.ts",
     "./registry": "./src/registry.ts"
   },
   "scripts": {
