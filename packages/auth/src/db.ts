@@ -7,12 +7,9 @@
  *
  * The canonical database path is resolved via:
  *   1. AUTH_DATABASE_URL env var (production Turso)
- *   2. AUTH_DATABASE_PATH env var (local override)
- *   3. @bhavya/database registry (ai-institute)
+ *   2. @bhavya/database registry (ai-institute → bhavya.db)
  */
 
-import { existsSync } from "fs";
-import { resolve } from "path";
 import { getAdaptedDatabase } from "@bhavya/database";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -39,24 +36,8 @@ let _localDb: any = null;
 function getLocalDb(): any {
   if (_localDb) return _localDb;
 
-  // If AUTH_DATABASE_PATH is set, open that specific path directly.
-  // Otherwise, use @bhavya/database's registry resolution.
-  if (process.env.AUTH_DATABASE_PATH) {
-    const dbPath = resolve(process.env.AUTH_DATABASE_PATH);
-    if (!existsSync(dbPath)) {
-      throw new Error(
-        `Database not found at ${dbPath}. Set AUTH_DATABASE_PATH correctly.`,
-      );
-    }
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const Database = require("better-sqlite3");
-    _localDb = new Database(dbPath);
-    _localDb.pragma("journal_mode = WAL");
-    _localDb.pragma("foreign_keys = ON");
-    return _localDb;
-  }
-
-  // Default: use @bhavya/database registry (resolves ai-institute path)
+  // Always use the canonical adapter (WAL, FK enforcement, busy_timeout
+  // are configured by the registry — no duplicate pragma setup needed).
   _localDb = getAdaptedDatabase("ai-institute");
   return _localDb;
 }
