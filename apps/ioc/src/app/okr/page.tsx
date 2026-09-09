@@ -69,15 +69,15 @@ export default function OKRPage() {
         {showForm && (
           <form onSubmit={createObjective} className="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-8">
             <div className="grid grid-cols-2 gap-4">
-              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required />
-              <input placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
-              <select value={form.quarter} onChange={(e) => setForm({ ...form, quarter: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required aria-label="Title" />
+              <input placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Description" />
+              <select value={form.quarter} onChange={(e) => setForm({ ...form, quarter: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Quarter">
                 <option value="2026-Q1">2026 Q1</option>
                 <option value="2026-Q2">2026 Q2</option>
                 <option value="2026-Q3">2026 Q3</option>
                 <option value="2026-Q4">2026 Q4</option>
               </select>
-              <select value={form.department} onChange={(e) => setForm({ ...form, department: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <select value={form.department} onChange={(e) => setForm({ ...form, department: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Department">
                 <option value="institution">Institution</option>
                 <option value="knowledge_production">Knowledge Production</option>
                 <option value="publishing">Publishing</option>

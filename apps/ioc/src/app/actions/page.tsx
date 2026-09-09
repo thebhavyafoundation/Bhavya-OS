@@ -72,20 +72,20 @@ export default function ActionsPage() {
         {showForm && (
           <form onSubmit={createAction} className="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-8">
             <div className="grid grid-cols-2 gap-4">
-              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required />
-              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required aria-label="Title" />
+              <select value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Type">
                 <option value="decision">Decision</option>
                 <option value="task">Task</option>
                 <option value="follow-up">Follow-up</option>
                 <option value="review">Review</option>
               </select>
-              <select value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <select value={form.priority} onChange={(e) => setForm({ ...form, priority: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Priority">
                 <option value="critical">Critical</option>
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
-              <input placeholder="Owner" value={form.owner} onChange={(e) => setForm({ ...form, owner: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
+              <input placeholder="Owner" value={form.owner} onChange={(e) => setForm({ ...form, owner: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Owner" />
             </div>
             <div className="mt-4 flex gap-2">
               <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500 transition">Create</button>

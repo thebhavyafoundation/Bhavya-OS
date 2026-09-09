@@ -33,10 +33,10 @@ html {
  */
 :root {
   /* ── Website Semantic Colors ─────────────────────────────────── */
-  --bg: #fafafa;
-  --bg-alt: #ffffff;
-  --bg-elevated: #ffffff;
-  --surface: #ffffff;
+  --bg: #F7F4EC;
+  --bg-alt: #F7F4EC;
+  --bg-elevated: #F7F4EC;
+  --surface: #F7F4EC;
   --surface-hover: #f9fafb;
   --surface-2: #f5f5f5;
   --surface-3: #e5e5e5;
@@ -51,32 +51,27 @@ html {
   --text-tertiary: #a3a3a3;
   --text-inverse: #ffffff;
 
-  --primary: #15803d;
-  --primary-hover: #166534;
-  --primary-light: #22c55e;
-  --primary-glow: rgba(21, 128, 61, 0.08);
-  --primary-subtle: rgba(21, 128, 61, 0.04);
-  --primary-gradient: linear-gradient(135deg, #15803d, #166534);
+  --primary: #0E382E;
+  --primary-hover: #1a4d3e;
+  --primary-light: #8A9A8B;
+  --primary-glow: rgba(14, 56, 46, 0.08);
+  --primary-subtle: rgba(14, 56, 46, 0.04);
+  --primary-gradient: linear-gradient(135deg, #0E382E, #1a4d3e);
 
-  --secondary: #8a7359;
-  --secondary-hover: #735f4b;
-  --secondary-glow: rgba(138, 115, 89, 0.08);
+  --secondary: #6A7C52;
+  --secondary-hover: #5a6c44;
+  --secondary-glow: rgba(106, 124, 82, 0.08);
 
-  --accent: #ca8a04;
-  --accent-hover: #a16207;
-  --accent-glow: rgba(202, 138, 4, 0.08);
+  --accent: #D4AF37;
+  --accent-hover: #b8962e;
+  --accent-glow: rgba(212, 175, 55, 0.08);
 
   --white: #ffffff;
   --black: #000000;
 
-  /* ── Override: font-display to Inter (website design choice) ─── */
-  --font-display:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
-    sans-serif;
-
   /* ── Website-specific shadows (not in platform-ui) ───────────── */
-  --shadow-glow: 0 0 48px rgba(21, 128, 61, 0.12);
-  --shadow-glow-lg: 0 0 80px rgba(21, 128, 61, 0.16);
+  --shadow-glow: 0 0 48px rgba(14, 56, 46, 0.12);
+  --shadow-glow-lg: 0 0 80px rgba(14, 56, 46, 0.16);
 
   /* ── Website-specific tokens (not in platform-ui) ────────────── */
   --space-7: 1.75rem; /* 28px — between space-6 and space-8 */
@@ -107,23 +102,23 @@ html {
   --text-tertiary: #525252;
   --text-inverse: #0a0a0a;
 
-  --primary: #4ade80;
-  --primary-hover: #22c55e;
-  --primary-light: #86efac;
-  --primary-glow: rgba(74, 222, 128, 0.1);
-  --primary-subtle: rgba(74, 222, 128, 0.05);
-  --primary-gradient: linear-gradient(135deg, #4ade80, #22c55e);
+  --primary: #8A9A8B;
+  --primary-hover: #7a8a7b;
+  --primary-light: #a0b0a1;
+  --primary-glow: rgba(138, 154, 139, 0.1);
+  --primary-subtle: rgba(138, 154, 139, 0.05);
+  --primary-gradient: linear-gradient(135deg, #8A9A8B, #7a8a7b);
 
-  --secondary: #b09a7c;
-  --secondary-hover: #c9b8a2;
-  --secondary-glow: rgba(176, 154, 124, 0.1);
+  --secondary: #8A9A8B;
+  --secondary-hover: #a0b0a1;
+  --secondary-glow: rgba(138, 154, 139, 0.1);
 
-  --accent: #facc15;
-  --accent-hover: #fde047;
-  --accent-glow: rgba(250, 204, 21, 0.1);
+  --accent: #D4AF37;
+  --accent-hover: #e0c048;
+  --accent-glow: rgba(212, 175, 55, 0.1);
 
-  --shadow-glow: 0 0 48px rgba(74, 222, 128, 0.08);
-  --shadow-glow-lg: 0 0 80px rgba(74, 222, 128, 0.12);
+  --shadow-glow: 0 0 48px rgba(138, 154, 139, 0.08);
+  --shadow-glow-lg: 0 0 80px rgba(138, 154, 139, 0.12);
 }
 
 /* ── Body ──────────────────────────────────────────────────── */

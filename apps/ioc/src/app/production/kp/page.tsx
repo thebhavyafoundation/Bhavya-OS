@@ -86,18 +86,18 @@ export default function KPTrackerPage() {
         {showForm && (
           <form onSubmit={createKP} className="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-8">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <input placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required />
-              <select value={form.level} onChange={e => setForm({ ...form, level: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <input placeholder="Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required aria-label="Title" />
+              <select value={form.level} onChange={e => setForm({ ...form, level: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Level">
                 <option value="L1">L1 — Foundations</option>
                 <option value="L2">L2 — Core</option>
                 <option value="L3">L3 — Applied</option>
                 <option value="L4">L4 — Advanced</option>
                 <option value="L5">L5 — Mastery</option>
               </select>
-              <input placeholder="Domain" value={form.domain} onChange={e => setForm({ ...form, domain: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
-              <input placeholder="Assignee" value={form.assignee} onChange={e => setForm({ ...form, assignee: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
-              <input type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
-              <input type="number" placeholder="Concepts" value={form.concepts} onChange={e => setForm({ ...form, concepts: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
+              <input placeholder="Domain" value={form.domain} onChange={e => setForm({ ...form, domain: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Domain" />
+              <input placeholder="Assignee" value={form.assignee} onChange={e => setForm({ ...form, assignee: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Assignee" />
+              <input type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Due Date" />
+              <input type="number" placeholder="Concepts" value={form.concepts} onChange={e => setForm({ ...form, concepts: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Concepts" />
             </div>
             <div className="mt-4 flex gap-2">
               <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500 transition">Create</button>
@@ -108,14 +108,14 @@ export default function KPTrackerPage() {
 
         {/* Filters */}
         <div className="flex gap-3 mb-6">
-          <select value={filter.status} onChange={e => setFilter({ ...filter, status: e.target.value })} className="bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm text-sage">
+          <select value={filter.status} onChange={e => setFilter({ ...filter, status: e.target.value })} className="bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm text-sage" aria-label="Filter by status">
             <option value="">All Statuses</option>
             <option value="draft">Draft</option>
             <option value="in-review">In Review</option>
             <option value="approved">Approved</option>
             <option value="published">Published</option>
           </select>
-          <select value={filter.level} onChange={e => setFilter({ ...filter, level: e.target.value })} className="bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm text-sage">
+          <select value={filter.level} onChange={e => setFilter({ ...filter, level: e.target.value })} className="bg-gray-900 border border-gray-700 rounded px-3 py-2 text-sm text-sage" aria-label="Filter by level">
             <option value="">All Levels</option>
             <option value="L1">L1</option>
             <option value="L2">L2</option>

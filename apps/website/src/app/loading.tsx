@@ -53,7 +53,7 @@ export default function Loading() {
             style={{
               width: "40%",
               height: "100%",
-              background: "#eab308",
+              background: "#D4AF37",
               borderRadius: 1,
             }}
             animate={{

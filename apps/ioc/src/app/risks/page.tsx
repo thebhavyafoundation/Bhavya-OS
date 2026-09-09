@@ -63,16 +63,16 @@ export default function RisksPage() {
         {showForm && (
           <form onSubmit={createRisk} className="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-8">
             <div className="grid grid-cols-2 gap-4">
-              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required />
-              <select value={form.severity} onChange={(e) => setForm({ ...form, severity: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white">
+              <input placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" required aria-label="Title" />
+              <select value={form.severity} onChange={(e) => setForm({ ...form, severity: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Severity">
                 <option value="critical">Critical</option>
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
                 <option value="low">Low</option>
               </select>
-              <input placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white col-span-2" />
-              <input placeholder="Owner" value={form.owner} onChange={(e) => setForm({ ...form, owner: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
-              <input placeholder="Mitigation Plan" value={form.mitigationPlan} onChange={(e) => setForm({ ...form, mitigationPlan: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" />
+              <input placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white col-span-2" aria-label="Description" />
+              <input placeholder="Owner" value={form.owner} onChange={(e) => setForm({ ...form, owner: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Owner" />
+              <input placeholder="Mitigation Plan" value={form.mitigationPlan} onChange={(e) => setForm({ ...form, mitigationPlan: e.target.value })} className="bg-gray-800 border border-gray-600 rounded p-3 text-white" aria-label="Mitigation Plan" />
             </div>
             <div className="mt-4 flex gap-2">
               <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500 transition">Create</button>
