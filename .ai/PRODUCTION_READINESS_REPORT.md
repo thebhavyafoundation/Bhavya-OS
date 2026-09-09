@@ -17,14 +17,14 @@ Systematic audit and remediation of the Bhavya Foundation codebase for productio
 
 ### Fixes Applied
 
-| Issue | Severity | Files Changed | Status |
-|-------|----------|---------------|--------|
-| CSRF protection missing on social-os/ioc | CRITICAL | `apps/social-os/src/middleware.ts`, `apps/ioc/src/middleware.ts` | FIXED |
-| Security headers missing (CSP, HSTS, X-Frame-Options, etc.) | CRITICAL | All 5 middleware/config files | FIXED |
-| CSP missing in admin/next.config.ts | HIGH | `apps/admin/next.config.ts` | FIXED |
-| CSP missing in docs/next.config.ts | HIGH | `apps/docs/next.config.ts` | FIXED |
-| bhavya-intelligence-network zero security headers | HIGH | `apps/bhavya-intelligence-network/next.config.ts` | FIXED |
-| Demo credentials accessible in production | MEDIUM | `apps/ai-institute/src/scripts/db-seed.ts` | FIXED (production guard added) |
+| Issue                                                       | Severity | Files Changed                                                    | Status                         |
+| ----------------------------------------------------------- | -------- | ---------------------------------------------------------------- | ------------------------------ |
+| CSRF protection missing on social-os/ioc                    | CRITICAL | `apps/social-os/src/middleware.ts`, `apps/ioc/src/middleware.ts` | FIXED                          |
+| Security headers missing (CSP, HSTS, X-Frame-Options, etc.) | CRITICAL | All 5 middleware/config files                                    | FIXED                          |
+| CSP missing in admin/next.config.ts                         | HIGH     | `apps/admin/next.config.ts`                                      | FIXED                          |
+| CSP missing in docs/next.config.ts                          | HIGH     | `apps/docs/next.config.ts`                                       | FIXED                          |
+| bhavya-intelligence-network zero security headers           | HIGH     | `apps/bhavya-intelligence-network/next.config.ts`                | FIXED                          |
+| Demo credentials accessible in production                   | MEDIUM   | `apps/ai-institute/src/scripts/db-seed.ts`                       | FIXED (production guard added) |
 
 ### Security Headers Now Present
 
@@ -38,14 +38,14 @@ HSTS (`max-age=63072000; includeSubDomains; preload`) added in production mode.
 
 ### Fixes Applied
 
-| Issue | Severity | Files Changed | Status |
-|-------|----------|---------------|--------|
-| 15 POST/PUT routes missing try/catch on `request.json()` | CRITICAL | 8 IOC routes, 7 social-os routes | FIXED |
-| 9 non-null assertions after INSERT operations | CRITICAL | 9 lib files across IOC/social-os | FIXED |
-| `withAuth` not catching `requireAuth` exceptions | CRITICAL | `apps/ioc/src/lib/api-auth.ts`, `apps/social-os/src/lib/api-auth.ts` | FIXED |
-| IOC health POST handler unauthenticated (SSRF/DoS vector) | CRITICAL | `apps/ioc/src/app/api/health/route.ts` | FIXED |
-| 7 `parseInt` NaN vulnerabilities in query params | HIGH | 6 route files | FIXED |
-| 7 null dereference in update function returns | HIGH | 6 route files | FIXED |
+| Issue                                                     | Severity | Files Changed                                                        | Status |
+| --------------------------------------------------------- | -------- | -------------------------------------------------------------------- | ------ |
+| 15 POST/PUT routes missing try/catch on `request.json()`  | CRITICAL | 8 IOC routes, 7 social-os routes                                     | FIXED  |
+| 9 non-null assertions after INSERT operations             | CRITICAL | 9 lib files across IOC/social-os                                     | FIXED  |
+| `withAuth` not catching `requireAuth` exceptions          | CRITICAL | `apps/ioc/src/lib/api-auth.ts`, `apps/social-os/src/lib/api-auth.ts` | FIXED  |
+| IOC health POST handler unauthenticated (SSRF/DoS vector) | CRITICAL | `apps/ioc/src/app/api/health/route.ts`                               | FIXED  |
+| 7 `parseInt` NaN vulnerabilities in query params          | HIGH     | 6 route files                                                        | FIXED  |
+| 7 null dereference in update function returns             | HIGH     | 6 route files                                                        | FIXED  |
 
 ---
 
@@ -53,10 +53,10 @@ HSTS (`max-age=63072000; includeSubDomains; preload`) added in production mode.
 
 ### Fixes Applied
 
-| Issue | Severity | Change | Status |
-|-------|----------|--------|--------|
-| Next.js RCE (CVE-2026-75604) | CRITICAL | Upgraded all apps from 15.3.3/15.5.20 → 15.5.25 | FIXED |
-| maplibre-gl XSS (CVE-2026-85061, CVSS 10.0) | CRITICAL | Upgraded from 5.24.0 → 6.4.1 | FIXED |
+| Issue                                       | Severity | Change                                          | Status |
+| ------------------------------------------- | -------- | ----------------------------------------------- | ------ |
+| Next.js RCE (CVE-2026-75604)                | CRITICAL | Upgraded all apps from 15.3.3/15.5.20 → 15.5.25 | FIXED  |
+| maplibre-gl XSS (CVE-2026-85061, CVSS 10.0) | CRITICAL | Upgraded from 5.24.0 → 6.4.1                    | FIXED  |
 
 ### Remaining (Documented Known Risks)
 
@@ -71,11 +71,11 @@ HSTS (`max-age=63072000; includeSubDomains; preload`) added in production mode.
 
 ### Fixes Applied
 
-| Issue | Severity | Change | Status |
-|-------|----------|--------|--------|
-| Dockerfile completely broken | CRITICAL | Rewritten for current repo structure | FIXED |
-| Missing `output: 'standalone'` on 8 apps | HIGH | Added to all production apps | FIXED |
-| Missing `poweredByHeader: false` on 5 apps | LOW | Added to ai-institute, social-os, ioc, design-system | FIXED |
+| Issue                                      | Severity | Change                                               | Status |
+| ------------------------------------------ | -------- | ---------------------------------------------------- | ------ |
+| Dockerfile completely broken               | CRITICAL | Rewritten for current repo structure                 | FIXED  |
+| Missing `output: 'standalone'` on 8 apps   | HIGH     | Added to all production apps                         | FIXED  |
+| Missing `poweredByHeader: false` on 5 apps | LOW      | Added to ai-institute, social-os, ioc, design-system | FIXED  |
 
 ### Remaining (Documented Known Risks)
 
@@ -108,6 +108,7 @@ Database tests: 10/10 PASS
 ## Files Modified Summary
 
 ### Security (6 files)
+
 - `apps/social-os/src/middleware.ts` — CSRF + security headers
 - `apps/ioc/src/middleware.ts` — CSRF + security headers
 - `apps/admin/next.config.ts` — CSP header
@@ -116,6 +117,7 @@ Database tests: 10/10 PASS
 - `apps/ai-institute/src/scripts/db-seed.ts` — Production guard
 
 ### Reliability (30+ files)
+
 - 8 IOC API routes — JSON parsing try/catch
 - 7 social-os API routes — JSON parsing try/catch
 - 9 lib files — Non-null assertion fixes
@@ -125,11 +127,13 @@ Database tests: 10/10 PASS
 - 1 health route — Authentication added
 
 ### Dependencies (11 files)
+
 - All 9 app package.json files — Next.js 15.5.25
 - Root package.json — Next.js 15.5.25
 - packages/maps/package.json — maplibre-gl 6.4.1
 
 ### Configuration (10 files)
+
 - Dockerfile — Complete rewrite
 - 8 next.config files — `output: 'standalone'`
 - 4 next.config files — `poweredByHeader: false`
