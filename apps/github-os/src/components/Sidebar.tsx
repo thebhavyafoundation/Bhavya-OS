@@ -166,7 +166,7 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-2 px-3">
+      <nav className="flex-1 overflow-y-auto py-2 px-3" aria-label="Main navigation">
         {navGroups.map((group) => {
           const isCollapsed = collapsed[group.label] === true;
           return (
@@ -175,6 +175,8 @@ export function Sidebar() {
                 onClick={() => toggleGroup(group.label)}
                 className="w-full flex items-center justify-between px-3 py-1.5 text-[10px] font-semibold tracking-widest uppercase transition-colors"
                 style={{ color: "var(--color-text-muted)" }}
+                aria-expanded={!isCollapsed}
+                aria-controls={`nav-group-${group.label.toLowerCase().replace(/\s/g, "-")}`}
               >
                 {group.label}
                 {isCollapsed ? (
@@ -183,18 +185,25 @@ export function Sidebar() {
                   <ChevronDown size={10} />
                 )}
               </button>
-              {!isCollapsed &&
-                group.items.map((item) => {
-                  const isActive =
-                    pathname === item.href ||
-                    (item.href !== "/" && pathname.startsWith(item.href));
-                  const Icon = item.icon;
+              <div
+                id={`nav-group-${group.label.toLowerCase().replace(/\s/g, "-")}`}
+                role="group"
+                aria-label={`${group.label} navigation`}
+                className={isCollapsed ? "hidden" : ""}
+              >
+                {!isCollapsed &&
+                  group.items.map((item) => {
+                    const isActive =
+                      pathname === item.href ||
+                      (item.href !== "/" && pathname.startsWith(item.href));
+                    const Icon = item.icon;
 
-                  return (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="flex items-center gap-3 px-3 py-1.5 text-sm rounded-md transition-colors"
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-center gap-3 px-3 py-1.5 text-sm rounded-md transition-colors"
+                        aria-current={isActive ? "page" : undefined}
                       style={{
                         color: isActive
                           ? "var(--color-text-inverse)"
@@ -224,6 +233,7 @@ export function Sidebar() {
                     </Link>
                   );
                 })}
+              </div>
             </div>
           );
         })}

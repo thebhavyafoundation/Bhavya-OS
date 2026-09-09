@@ -9,6 +9,8 @@ import {
   Search,
   RefreshCw,
   TrendingUp,
+  TrendingDown,
+  Minus,
   AlertTriangle,
   CheckCircle2,
   Clock,
@@ -27,6 +29,9 @@ import {
   Zap,
   BarChart3,
   FlaskConical,
+  Info,
+  ExternalLink,
+  GitBranch,
 } from "lucide-react";
 import { Card, Badge, Skeleton, AppLayout } from "@bhavya/platform-ui";
 
@@ -187,23 +192,55 @@ function StatCard({
   value,
   icon: Icon,
   color,
+  tooltip,
+  trend,
 }: {
   label: string;
   value: string | number;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   color: string;
+  tooltip?: string;
+  trend?: "up" | "down" | "neutral";
 }) {
   return (
-    <Card padding="md">
+    <Card padding="md" className="relative overflow-hidden">
       <div className="flex items-center gap-3">
         <div
           className={`w-10 h-10 rounded-lg flex items-center justify-center ${color}`}
         >
           <Icon size={18} />
         </div>
-        <div>
-          <p className="text-2xl font-semibold text-text-primary">{value}</p>
-          <p className="text-xs text-text-muted">{label}</p>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5">
+            <p className="text-2xl font-semibold text-text-primary">{value}</p>
+            {trend && (
+              <span
+                className={`flex items-center gap-0.5 text-xs font-medium ${
+                  trend === "up"
+                    ? "text-accent-green"
+                    : trend === "down"
+                      ? "text-red-400"
+                      : "text-text-muted"
+                }`}
+              >
+                {trend === "up" ? (
+                  <TrendingUp size={12} />
+                ) : trend === "down" ? (
+                  <TrendingDown size={12} />
+                ) : (
+                  <Minus size={12} />
+                )}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <p className="text-xs text-text-muted">{label}</p>
+            {tooltip && (
+              <span title={tooltip} className="cursor-help">
+                <Info size={10} className="text-text-muted" />
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </Card>
@@ -214,49 +251,87 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
   const Icon = getFindingIcon(finding.finding_type);
   const [expanded, setExpanded] = useState(false);
 
+  // Parse tags for source repository
+  const sourceRepo = finding.tags.find((t) => t.startsWith("repo:"))?.replace("repo:", "");
+  const sourceFile = finding.tags.find((t) => t.startsWith("file:"))?.replace("file:", "");
+
   return (
-    <Card padding="md" hover>
+    <Card padding="md" hover className="group">
       <div className="cursor-pointer" onClick={() => setExpanded(!expanded)}>
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 min-w-0 flex-1">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-bg-tertiary flex-shrink-0 mt-0.5">
-              <Icon size={14} className="text-text-secondary" />
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-bg-tertiary flex-shrink-0 mt-0.5 group-hover:bg-[var(--color-accent-gold)]/10 transition-colors">
+              <Icon size={14} className="text-text-secondary group-hover:text-[var(--color-accent-gold)] transition-colors" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-text-primary truncate">
-                {finding.title}
-              </p>
-              <p className="text-xs text-text-muted mt-0.5 line-clamp-2">
+              <div className="flex items-center gap-2 mb-0.5">
+                <p className="text-sm font-medium text-text-primary truncate">
+                  {finding.title}
+                </p>
+                <Badge
+                  variant={
+                    finding.finding_type === "security_concern"
+                      ? "error"
+                      : finding.finding_type === "license_concern"
+                        ? "warning"
+                        : "default"
+                  }
+                  size="sm"
+                >
+                  {finding.finding_type.replace(/_/g, " ")}
+                </Badge>
+              </div>
+              <p className="text-xs text-text-muted line-clamp-2">
                 {finding.description}
               </p>
+              {sourceRepo && (
+                <div className="flex items-center gap-1.5 mt-1.5">
+                  <GitBranch size={10} className="text-text-muted" />
+                  <span className="text-[10px] text-text-muted font-mono">
+                    {sourceRepo}
+                  </span>
+                  {sourceFile && (
+                    <>
+                      <span className="text-[10px] text-text-muted">·</span>
+                      <span className="text-[10px] text-text-muted font-mono truncate max-w-[200px]">
+                        {sourceFile}
+                      </span>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            <Badge
-              variant={
-                finding.confidence === "high"
-                  ? "success"
-                  : finding.confidence === "medium"
-                    ? "warning"
-                    : "default"
-              }
-              size="sm"
-            >
-              {finding.confidence}
-            </Badge>
-            <Badge
-              variant={
-                finding.relevance_to_bhavya === "high"
-                  ? "purple"
-                  : finding.relevance_to_bhavya === "medium"
-                    ? "info"
-                    : "default"
-              }
-              size="sm"
-            >
-              {finding.relevance_to_bhavya} relevance
-            </Badge>
-            {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            <div className="flex flex-col items-end gap-1">
+              <Badge
+                variant={
+                  finding.confidence === "high"
+                    ? "success"
+                    : finding.confidence === "medium"
+                      ? "warning"
+                      : "default"
+                }
+                size="sm"
+              >
+                {finding.confidence}
+              </Badge>
+              <Badge
+                variant={
+                  finding.relevance_to_bhavya === "high"
+                    ? "purple"
+                    : finding.relevance_to_bhavya === "medium"
+                      ? "info"
+                      : "default"
+                }
+                size="sm"
+              >
+                {finding.relevance_to_bhavya} relevance
+              </Badge>
+            </div>
+            <div className="w-6 h-6 rounded flex items-center justify-center text-text-muted group-hover:bg-bg-tertiary transition-colors">
+              {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+            </div>
           </div>
         </div>
       </div>
@@ -264,18 +339,6 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
       {expanded && (
         <div className="mt-4 pt-4 border-t border-border-primary space-y-3">
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <div>
-              <span className="text-text-muted">Type:</span>
-              <span className="ml-2 text-text-secondary">
-                {finding.finding_type.replace(/_/g, " ")}
-              </span>
-            </div>
-            <div>
-              <span className="text-text-muted">Category:</span>
-              <span className="ml-2 text-text-secondary">
-                {finding.category}
-              </span>
-            </div>
             <div>
               <span className="text-text-muted">Verification:</span>
               <span className="ml-2 text-text-secondary">
@@ -288,17 +351,32 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
                 {finding.quality}
               </span>
             </div>
+            <div>
+              <span className="text-text-muted">Confidence Score:</span>
+              <span className="ml-2 text-text-secondary">
+                {(finding.confidence_score * 100).toFixed(0)}%
+              </span>
+            </div>
+            <div>
+              <span className="text-text-muted">Discovered:</span>
+              <span className="ml-2 text-text-secondary">
+                {formatDate(finding.created_at)}
+              </span>
+            </div>
           </div>
           {finding.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {finding.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-0.5 bg-bg-tertiary border border-border-primary rounded text-[10px] text-text-muted"
-                >
-                  {tag}
-                </span>
-              ))}
+            <div>
+              <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1.5">Tags</p>
+              <div className="flex flex-wrap gap-1.5">
+                {finding.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-0.5 bg-bg-tertiary border border-border-primary rounded text-[10px] text-text-muted font-mono"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -321,25 +399,40 @@ function BriefingSection({
   return (
     <div className="mb-6">
       <div className="flex items-center gap-2 mb-3">
-        <Icon size={16} className="text-[var(--color-accent-gold)]" />
-        <h3 className="text-sm font-medium text-text-primary">{title}</h3>
-        <span className="text-xs text-text-muted">({items.length})</span>
+        <div className="w-6 h-6 rounded flex items-center justify-center bg-[var(--color-accent-gold)]/10">
+          <Icon size={14} className="text-[var(--color-accent-gold)]" />
+        </div>
+        <h3 className="text-sm font-semibold text-text-primary">{title}</h3>
+        <span className="text-xs text-text-muted bg-bg-tertiary px-1.5 py-0.5 rounded">
+          {items.length}
+        </span>
       </div>
       <div className="space-y-2">
         {items.map((item, i) => (
-          <Card key={i} padding="sm">
+          <Card key={i} padding="sm" className="group hover:border-[var(--color-accent-gold)]/20 transition-colors">
             <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-sm font-medium text-text-primary">
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-text-primary mb-0.5">
                   {item.title}
                 </p>
-                <p className="text-xs text-text-muted mt-0.5">
+                <p className="text-xs text-text-muted line-clamp-2">
                   {item.description}
                 </p>
+                {item.source && (
+                  <div className="flex items-center gap-1 mt-1.5">
+                    <ExternalLink size={10} className="text-text-muted" />
+                    <span className="text-[10px] text-text-muted font-mono truncate">
+                      {item.source}
+                    </span>
+                  </div>
+                )}
                 {item.action && (
-                  <p className="text-xs text-[var(--color-accent-gold)] mt-1">
-                    → {item.action}
-                  </p>
+                  <div className="flex items-center gap-1.5 mt-2 px-2 py-1.5 bg-[var(--color-accent-gold)]/5 rounded border border-[var(--color-accent-gold)]/10">
+                    <ArrowRight size={10} className="text-[var(--color-accent-gold)]" />
+                    <p className="text-xs text-[var(--color-accent-gold)] font-medium">
+                      {item.action}
+                    </p>
+                  </div>
                 )}
               </div>
               <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -462,19 +555,33 @@ export default function DailyIntelligenceDashboard() {
       <div className="animate-fade-in">
         {/* Header */}
         <header className="mb-8">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Brain size={20} className="text-[var(--color-accent-gold)]" />
                 <h1 className="text-2xl font-semibold text-text-primary">
                   Daily Intelligence
                 </h1>
+                {latestRun && (
+                  <Badge
+                    variant={getStatusColor(latestRun.status) as any}
+                    size="sm"
+                  >
+                    {latestRun.status}
+                  </Badge>
+                )}
               </div>
               <p className="text-sm text-text-tertiary">
                 Continuous open-source discovery, extraction, and learning
               </p>
+              {latestRun && (
+                <p className="text-xs text-text-muted mt-1">
+                  Last run: {formatDate(latestRun.completed_at || latestRun.started_at)} at {formatTime(latestRun.completed_at || latestRun.started_at)}
+                  {latestRun.duration_ms && ` · ${formatDuration(latestRun.duration_ms)}`}
+                </p>
+              )}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               <button
                 onClick={loadData}
                 className="flex items-center gap-2 px-3 py-2 bg-bg-secondary border border-border-primary rounded-lg text-sm text-text-tertiary hover:text-text-primary hover:border-border-secondary transition-colors"
@@ -518,30 +625,35 @@ export default function DailyIntelligenceDashboard() {
                   ? "bg-accent-green/10 text-accent-green"
                   : "bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]"
               }
+              tooltip="Current pipeline execution status"
             />
             <StatCard
               label="Findings"
               value={latestRun.findings_count}
               icon={Lightbulb}
               color="bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]"
+              tooltip="Intelligence insights extracted from repositories"
             />
             <StatCard
-              label="Inspected"
+              label="Repos Inspected"
               value={latestRun.inspected_count}
               icon={BarChart3}
               color="bg-accent-blue/10 text-accent-blue"
+              tooltip="Repositories analyzed in this run"
             />
             <StatCard
               label="API Calls"
               value={latestRun.api_calls}
               icon={Zap}
               color="bg-purple-500/10 text-purple-400"
+              tooltip="GitHub API requests made during inspection"
             />
             <StatCard
               label="Duration"
               value={formatDuration(latestRun.duration_ms)}
               icon={Clock}
               color="bg-bg-tertiary text-text-secondary"
+              tooltip="Total time for pipeline execution"
             />
           </div>
         )}
@@ -549,10 +661,10 @@ export default function DailyIntelligenceDashboard() {
         {/* Tabs */}
         <div className="flex items-center gap-1 mb-6 border-b border-border-primary">
           {[
-            { id: "briefing" as const, label: "Briefing", icon: BookOpen },
-            { id: "findings" as const, label: "Findings", icon: Lightbulb },
-            { id: "trends" as const, label: "Trends", icon: TrendingUp },
-            { id: "history" as const, label: "Run History", icon: Clock },
+            { id: "briefing" as const, label: "Briefing", icon: BookOpen, count: briefing ? (briefing.top_discoveries.length + briefing.engineering_practices.length + briefing.ai_techniques.length + briefing.architecture_lessons.length + briefing.design_inspiration.length + briefing.learning_lessons.length + briefing.experiments.length + briefing.warnings.length) : 0 },
+            { id: "findings" as const, label: "Findings", icon: Lightbulb, count: findings.length },
+            { id: "trends" as const, label: "Trends", icon: TrendingUp, count: trends.length },
+            { id: "history" as const, label: "Run History", icon: Clock, count: runs.length },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -565,6 +677,15 @@ export default function DailyIntelligenceDashboard() {
             >
               <tab.icon size={14} />
               {tab.label}
+              {tab.count > 0 && (
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${
+                  activeTab === tab.id
+                    ? "bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]"
+                    : "bg-bg-tertiary text-text-muted"
+                }`}>
+                  {tab.count}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -682,7 +803,7 @@ export default function DailyIntelligenceDashboard() {
             {activeTab === "findings" && (
               <div>
                 {/* Filters */}
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
                   <Filter size={14} className="text-text-muted" />
                   <select
                     value={filterType}
