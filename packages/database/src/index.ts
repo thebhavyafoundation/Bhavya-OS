@@ -22,8 +22,7 @@ export type {
   MigrationResult,
   MigrationStatus,
 } from "./migrate";
-export { SqliteRepository } from "./repository";
-export type { Repository } from "./repository";
+
 export {
   getDatabasePath,
   databaseExists,
