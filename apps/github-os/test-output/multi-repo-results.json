@@ -1,0 +1,342 @@
+[
+  {
+    "repository": "psf/requests",
+    "steps": [
+      {
+        "name": "Discovery",
+        "status": "PASS",
+        "details": "psf/requests (54291★, Python)"
+      },
+      {
+        "name": "README",
+        "status": "PASS",
+        "details": "2894 chars"
+      },
+      {
+        "name": "Directory",
+        "status": "PASS",
+        "details": "21 items"
+      },
+      {
+        "name": "Languages",
+        "status": "PASS",
+        "details": "2 languages"
+      },
+      {
+        "name": "Inspection",
+        "status": "PASS",
+        "details": "README, License, Tests, CI/CD, Docs, Changelog"
+      },
+      {
+        "name": "License",
+        "status": "PASS",
+        "details": "Apache-2.0 — OSI-approved — compatible"
+      },
+      {
+        "name": "Security",
+        "status": "PASS",
+        "details": "Exposure: false, Suspicious: 0"
+      },
+      {
+        "name": "Scoring",
+        "status": "PASS",
+        "details": "Health: 97, Tech: 63, Bhavya: 64"
+      },
+      {
+        "name": "Skills",
+        "status": "PASS",
+        "details": "3: Testing, CI/CD, Documentation"
+      },
+      {
+        "name": "Patterns",
+        "status": "PASS",
+        "details": "1: Test-Driven CI"
+      },
+      {
+        "name": "Recommendation",
+        "status": "PASS",
+        "details": "ADOPT"
+      },
+      {
+        "name": "Graph",
+        "status": "PASS",
+        "details": "2 nodes, 1 edges"
+      }
+    ],
+    "errors": [],
+    "scores": {
+      "healthScore": 97,
+      "technologyScore": 63,
+      "bhavyaScore": 64
+    },
+    "recommendation": "adopt",
+    "license": {
+      "spdxId": "Apache-2.0",
+      "isOsiApproved": true,
+      "isCopyleft": false
+    },
+    "security": {
+      "credentialExposure": false,
+      "suspiciousPatterns": []
+    },
+    "graph": {
+      "nodes": 2,
+      "edges": 1
+    }
+  },
+  {
+    "repository": "tokio-rs/tokio",
+    "steps": [
+      {
+        "name": "Discovery",
+        "status": "PASS",
+        "details": "tokio-rs/tokio (33097★, Rust)"
+      },
+      {
+        "name": "README",
+        "status": "PASS",
+        "details": "9304 chars"
+      },
+      {
+        "name": "Directory",
+        "status": "PASS",
+        "details": "25 items"
+      },
+      {
+        "name": "Languages",
+        "status": "PASS",
+        "details": "1 languages"
+      },
+      {
+        "name": "Inspection",
+        "status": "PASS",
+        "details": "README, License, Tests, CI/CD, Docs"
+      },
+      {
+        "name": "License",
+        "status": "PASS",
+        "details": "MIT — OSI-approved — compatible"
+      },
+      {
+        "name": "Security",
+        "status": "PASS",
+        "details": "Exposure: false, Suspicious: 0"
+      },
+      {
+        "name": "Scoring",
+        "status": "PASS",
+        "details": "Health: 93, Tech: 63, Bhavya: 64"
+      },
+      {
+        "name": "Skills",
+        "status": "PASS",
+        "details": "3: Testing, CI/CD, Documentation"
+      },
+      {
+        "name": "Patterns",
+        "status": "PASS",
+        "details": "1: Test-Driven CI"
+      },
+      {
+        "name": "Recommendation",
+        "status": "PASS",
+        "details": "ADOPT"
+      },
+      {
+        "name": "Graph",
+        "status": "PASS",
+        "details": "2 nodes, 1 edges"
+      }
+    ],
+    "errors": [],
+    "scores": {
+      "healthScore": 93,
+      "technologyScore": 63,
+      "bhavyaScore": 64
+    },
+    "recommendation": "adopt",
+    "license": {
+      "spdxId": "MIT",
+      "isOsiApproved": true,
+      "isCopyleft": false
+    },
+    "security": {
+      "credentialExposure": false,
+      "suspiciousPatterns": []
+    },
+    "graph": {
+      "nodes": 2,
+      "edges": 1
+    }
+  },
+  {
+    "repository": "gin-gonic/gin",
+    "steps": [
+      {
+        "name": "Discovery",
+        "status": "PASS",
+        "details": "gin-gonic/gin (89191★, Go)"
+      },
+      {
+        "name": "README",
+        "status": "PASS",
+        "details": "11767 chars"
+      },
+      {
+        "name": "Directory",
+        "status": "PASS",
+        "details": "62 items"
+      },
+      {
+        "name": "Languages",
+        "status": "PASS",
+        "details": "2 languages"
+      },
+      {
+        "name": "Inspection",
+        "status": "PASS",
+        "details": "README, License, Tests, CI/CD, Docs, Changelog"
+      },
+      {
+        "name": "License",
+        "status": "PASS",
+        "details": "MIT — OSI-approved — compatible"
+      },
+      {
+        "name": "Security",
+        "status": "PASS",
+        "details": "Exposure: false, Suspicious: 0"
+      },
+      {
+        "name": "Scoring",
+        "status": "PASS",
+        "details": "Health: 97, Tech: 63, Bhavya: 64"
+      },
+      {
+        "name": "Skills",
+        "status": "PASS",
+        "details": "3: Testing, CI/CD, Documentation"
+      },
+      {
+        "name": "Patterns",
+        "status": "PASS",
+        "details": "3: Test-Driven CI, Middleware, Plugin"
+      },
+      {
+        "name": "Recommendation",
+        "status": "PASS",
+        "details": "ADOPT"
+      },
+      {
+        "name": "Graph",
+        "status": "PASS",
+        "details": "2 nodes, 1 edges"
+      }
+    ],
+    "errors": [],
+    "scores": {
+      "healthScore": 97,
+      "technologyScore": 63,
+      "bhavyaScore": 64
+    },
+    "recommendation": "adopt",
+    "license": {
+      "spdxId": "MIT",
+      "isOsiApproved": true,
+      "isCopyleft": false
+    },
+    "security": {
+      "credentialExposure": false,
+      "suspiciousPatterns": []
+    },
+    "graph": {
+      "nodes": 2,
+      "edges": 1
+    }
+  },
+  {
+    "repository": "vuejs/vue",
+    "steps": [
+      {
+        "name": "Discovery",
+        "status": "PASS",
+        "details": "vuejs/vue (212065★, TypeScript)"
+      },
+      {
+        "name": "README",
+        "status": "PASS",
+        "details": "7873 chars"
+      },
+      {
+        "name": "Directory",
+        "status": "PASS",
+        "details": "25 items"
+      },
+      {
+        "name": "Languages",
+        "status": "PASS",
+        "details": "5 languages"
+      },
+      {
+        "name": "Inspection",
+        "status": "PASS",
+        "details": "README, License, Tests, CI/CD, TypeScript, Changelog"
+      },
+      {
+        "name": "License",
+        "status": "PASS",
+        "details": "MIT — OSI-approved — compatible"
+      },
+      {
+        "name": "Security",
+        "status": "PASS",
+        "details": "Exposure: false, Suspicious: 0"
+      },
+      {
+        "name": "Scoring",
+        "status": "PASS",
+        "details": "Health: 92, Tech: 73, Bhavya: 63"
+      },
+      {
+        "name": "Skills",
+        "status": "PASS",
+        "details": "3: Testing, CI/CD, TypeScript"
+      },
+      {
+        "name": "Patterns",
+        "status": "PASS",
+        "details": "1: Test-Driven CI"
+      },
+      {
+        "name": "Recommendation",
+        "status": "PASS",
+        "details": "ADOPT"
+      },
+      {
+        "name": "Graph",
+        "status": "PASS",
+        "details": "2 nodes, 1 edges"
+      }
+    ],
+    "errors": [],
+    "scores": {
+      "healthScore": 92,
+      "technologyScore": 73,
+      "bhavyaScore": 63
+    },
+    "recommendation": "adopt",
+    "license": {
+      "spdxId": "MIT",
+      "isOsiApproved": true,
+      "isCopyleft": false
+    },
+    "security": {
+      "credentialExposure": false,
+      "suspiciousPatterns": []
+    },
+    "graph": {
+      "nodes": 2,
+      "edges": 1
+    }
+  }
+]

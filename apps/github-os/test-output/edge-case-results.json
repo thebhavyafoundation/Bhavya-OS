@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-09-09T10:04:45.014Z",
+  "licenseEdgeCases": {
+    "spdxDetection": 13,
+    "contentDetection": 7,
+    "copyleft": 2
+  },
+  "securityEdgeCases": {
+    "sensitiveFiles": 2,
+    "codeCredentials": 4,
+    "mixedFiles": 2,
+    "edgeInputs": 3
+  },
+  "totalTests": 50,
+  "totalPassed": 50,
+  "totalFailed": 0
+}
