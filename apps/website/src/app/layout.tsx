@@ -47,17 +47,17 @@ export default function WebsiteLayout({ children }: { children: ReactNode }) {
         <link
           rel="alternate"
           hrefLang="en-IN"
-          href="https://bhavya.foundation"
+          href="https://thebhavyafoundation.github.io/Bhavya-OS"
         />
         <link
           rel="alternate"
           hrefLang="hi"
-          href="https://bhavya.foundation/hi"
+          href="https://thebhavyafoundation.github.io/Bhavya-OS/hi"
         />
         <link
           rel="alternate"
           hrefLang="x-default"
-          href="https://bhavya.foundation"
+          href="https://thebhavyafoundation.github.io/Bhavya-OS"
         />
         <script
           type="application/ld+json"

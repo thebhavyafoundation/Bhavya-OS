@@ -1,4 +1,4 @@
-import { LocalizationService, type Locale } from "@bhavya/mission-runtime";
+export type Locale = "en-IN" | "hi" | "ta" | "te";
 
 export const SUPPORTED_LOCALES: Locale[] = ["en-IN", "hi", "ta", "te"];
 export const DEFAULT_LOCALE: Locale = "en-IN";
@@ -56,9 +56,12 @@ export function getLocale(): Locale {
 }
 
 export function t(key: TranslationKey, params?: Record<string, string>): string {
-  const loc = new LocalizationService();
-  for (const [k, v] of Object.entries(TRANSLATIONS)) {
-    loc.register(k, v);
+  const translations = TRANSLATIONS[key];
+  let text = translations?.[currentLocale] ?? translations?.["en-IN"] ?? key;
+  if (params) {
+    for (const [k, v] of Object.entries(params)) {
+      text = text.replace(new RegExp(`\\{${k}\\}`, "g"), v);
+    }
   }
-  return loc.translate(key, currentLocale, params);
+  return text;
 }

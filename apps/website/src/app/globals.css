@@ -1187,6 +1187,12 @@ main {
 .stat-number.accent {
   color: var(--accent);
 }
+.stat-number.blue {
+  color: var(--primary);
+}
+.stat-number.purple {
+  color: var(--accent);
+}
 .stat-label {
   font-size: var(--text-sm);
   color: var(--text-secondary);
@@ -1283,6 +1289,14 @@ tr:hover td {
   background: var(--accent-glow);
   color: var(--accent);
   border: 1px solid rgba(202, 138, 4, 0.15);
+}
+.tag-blue {
+  background: var(--primary);
+  color: var(--ivory);
+}
+.tag-purple {
+  background: var(--accent);
+  color: var(--forest);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2156,9 +2170,9 @@ tr:hover td {
 }
 
 .badge-info {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(14, 56, 46, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(14, 56, 46, 0.2);
 }
 
 .badge-icon {

@@ -170,10 +170,29 @@ export default function KnowledgePackagesPage() {
                   </div>
                   <div style={{ flex: 1, minWidth: 280 }}>
                     <div
-                      className="stat-eyebrow"
-                      style={{ marginBottom: "var(--space-2)" }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "var(--space-2)",
+                        marginBottom: "var(--space-2)",
+                      }}
                     >
-                      {pkg.id.toUpperCase()} · GRADE {pkg.grade} · {pkg.subject}
+                      <span className="stat-eyebrow">
+                        {pkg.id.toUpperCase()} · GRADE {pkg.grade} · {pkg.subject}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          fontFamily: "var(--font-mono)",
+                          color: "var(--color-text-muted, #999)",
+                          background: "var(--surface-2, #f0f0ea)",
+                          padding: "2px 8px",
+                          borderRadius: "var(--radius-full, 9999px)",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Planned
+                      </span>
                     </div>
                     <h2
                       style={{

@@ -1,6 +1,4 @@
-import type { AppManifest } from "@bhavya/mission-runtime";
-
-export const appManifest: AppManifest = {
+export const appManifest = {
   id: "website",
   name: "Bhavya Foundation",
   version: "0.5.0",

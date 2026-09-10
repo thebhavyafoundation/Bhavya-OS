@@ -24,7 +24,7 @@ const stats = [
   },
   {
     eyebrow: "CONSTITUTIONAL COMMITMENTS",
-    value: "14 Parts · 11 Values",
+    value: "12 Articles · 4 Missions",
     description:
       "Our Constitution establishes the governance, ethics, and operational framework that guides every decision of the Foundation.",
     link: "/mission",

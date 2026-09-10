@@ -1,7 +1,8 @@
-import fs from "fs";
-import path from "path";
-
-const CONTENT_DIR = path.resolve(process.cwd(), "../../content");
+import { financials } from "../data/financials";
+import { governance } from "../data/governance";
+import { policies } from "../data/policies";
+import { projects } from "../data/projects";
+import { releases } from "../data/releases";
 
 export interface ContentItem {
   id: string;
@@ -15,40 +16,27 @@ export interface ContentEnvelope<T = ContentItem> {
   source: string;
 }
 
-function getFileMeta(filePath: string): { lastUpdated: string; source: string } {
-  const stat = fs.statSync(filePath);
-  return {
-    lastUpdated: stat.mtime.toISOString().slice(0, 10),
-    source: path.relative(CONTENT_DIR, filePath).replace(/\\/g, "/"),
-  };
-}
+const dataMap: Record<string, readonly ContentItem[]> = {
+  financials: financials as unknown as readonly ContentItem[],
+  governance: governance as unknown as readonly ContentItem[],
+  policies: policies as unknown as readonly ContentItem[],
+  projects: projects as unknown as readonly ContentItem[],
+  releases: releases as unknown as readonly ContentItem[],
+};
 
 export function readContent<T = ContentItem>(domain: string, id: string): ContentEnvelope<T> | null {
-  try {
-    const filePath = path.join(CONTENT_DIR, domain, `${id}.json`);
-    if (fs.existsSync(filePath)) {
-      const data = JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
-      return { data, ...getFileMeta(filePath) };
-    }
-  } catch (e) {
-    console.error(`ContentReader: failed to read ${domain}/${id}`, e);
-  }
-  return null;
+  const items = dataMap[domain];
+  if (!items) return null;
+  const item = items.find(i => i.id === id);
+  if (!item) return null;
+  return { data: item as T, lastUpdated: "2026-09-01", source: `${domain}/${id}.json` };
 }
 
 export function readContentDir<T = ContentItem>(domain: string): (ContentEnvelope<T> & { data: T })[] {
-  try {
-    const dirPath = path.join(CONTENT_DIR, domain);
-    if (!fs.existsSync(dirPath)) return [];
-    return fs.readdirSync(dirPath)
-      .filter(f => f.endsWith(".json"))
-      .map(f => {
-        const filePath = path.join(dirPath, f);
-        const data = JSON.parse(fs.readFileSync(filePath, "utf8")) as T;
-        return { data, ...getFileMeta(filePath) };
-      });
-  } catch (e) {
-    console.error(`ContentReader: failed to read domain '${domain}'`, e);
-    return [];
-  }
+  const items = dataMap[domain] ?? [];
+  return items.map(item => ({
+    data: item as T,
+    lastUpdated: "2026-09-01",
+    source: `${domain}/${item.id}.json`,
+  }));
 }

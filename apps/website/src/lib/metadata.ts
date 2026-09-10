@@ -9,7 +9,7 @@ interface PageMeta {
   publishedTime?: string;
 }
 
-const SITE_URL = "https://bhavya.foundation";
+const SITE_URL = "https://thebhavyafoundation.github.io/Bhavya-OS";
 const SITE_NAME = "Bhavya Foundation — Nature, Knowledge, Heritage, Community";
 const DEFAULT_IMAGE = "/brand/og-image.svg";
 

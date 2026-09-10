@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { type Locale } from "@bhavya/mission-runtime";
+import { type Locale } from "../i18n/config";
 import { SUPPORTED_LOCALES, setLocale } from "../i18n/config";
 
 export function LanguageSwitcher() {

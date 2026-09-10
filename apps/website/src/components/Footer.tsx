@@ -107,10 +107,10 @@ export function Footer() {
           <div className="footer-col-title">Learn</div>
           <nav className="footer-links" aria-label="Learn navigation">
             <a href="/programs">Programs</a>
-            <a href="/knowledge/packages">Knowledge Packages</a>
-            <a href="/os">Bhavya OS</a>
-            <a href="/knowledge">Digital Library</a>
-            <a href="/resources">Resources</a>
+            <a href="/curriculum">Curriculum</a>
+            <a href="/knowledge">Knowledge</a>
+            <a href="/library">Library</a>
+            <a href="/research">Research</a>
           </nav>
         </div>
         <div>
@@ -119,14 +119,14 @@ export function Footer() {
             <a href="/about">About</a>
             <a href="/transparency">Transparency</a>
             <a href="/mission">Constitution</a>
-            <a href="/donate">Donate</a>
+            <a href="/get-involved">Get Involved</a>
+            <a href="/contact">Contact</a>
           </nav>
         </div>
         <div>
           <div className="footer-col-title">Legal</div>
           <nav className="footer-links" aria-label="Legal navigation">
             <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms of Service</a>
             <a href="/accessibility">Accessibility</a>
           </nav>
         </div>

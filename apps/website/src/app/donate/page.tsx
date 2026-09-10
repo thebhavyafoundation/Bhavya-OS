@@ -35,12 +35,11 @@ export default function DonatePage() {
             <div>
               <div className="card">
                 <h2>Your Impact</h2>
-                <ul>
-                  <li>₹100 plants 10 native trees</li>
-                  <li>₹500 supports 1 child for a month</li>
-                  <li>₹1,000 documents 1 heritage site</li>
-                  <li>₹5,000 establishes 1 AI lab</li>
-                </ul>
+                <p>
+                  Your contribution directly supports our missions across forest
+                  restoration, AI education, heritage preservation, and community
+                  building. Impact details will be published as projects progress.
+                </p>
               </div>
             </div>
           </div>

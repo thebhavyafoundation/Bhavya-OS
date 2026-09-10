@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getSkipLinkProps } from "@bhavya/mission-runtime";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { PageHero, SectionHeader } from "../../components/ui/PageHero";
@@ -12,7 +11,7 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function AccessibilityPage() {
-  const skip = getSkipLinkProps("main-content");
+  const skip = { href: "#main-content", "aria-label": "Skip to main content", className: "skip-link" };
 
   return (
     <>

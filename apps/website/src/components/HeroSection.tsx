@@ -204,7 +204,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
         >
           Free AI education for rural India. Restoring forests, preserving
-          heritage, and building communities. 13 levels. 78 modules. 331
+          heritage, and building communities. 13 levels. 74 modules. 3
           knowledge packages — designed for generations.
         </motion.p>
 
@@ -234,13 +234,10 @@ export function HeroSection() {
           aria-label="Foundation stats"
         >
           <span>
-            <i /> 13 Levels · 78 Modules
+            <i /> 13 Levels · 74 Modules
           </span>
           <span>
-            <i /> 331 Knowledge Packages
-          </span>
-          <span>
-            <i /> 594 Production Days
+            <i /> 3 Knowledge Packages
           </span>
         </motion.div>
       </motion.div>

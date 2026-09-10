@@ -145,7 +145,7 @@ export default function AboutPage() {
                 <div className="info-card-title">The Constitution</div>
                 <div className="info-card-desc">
                   Establishes the governance, ethics, and operational framework.
-                  Contains 14 Parts, 5 Missions, 11 Values, and 8 Commitments.
+                  Contains 12 Articles across 4 Missions.
                 </div>
               </div>
               <div className="info-card">

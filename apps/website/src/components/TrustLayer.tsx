@@ -14,7 +14,7 @@ const trustItems = [
     icon: <BookCheck size={20} />,
     title: "Constitution",
     description:
-      "14 Parts, 11 Values — the governance framework that guides every decision.",
+      "12 Articles — the governance framework that guides every decision.",
     link: "/mission",
     linkText: "Read the Constitution",
     color: "var(--primary)",
