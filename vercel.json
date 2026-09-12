@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "corepack enable && pnpm install --no-frozen-lockfile --ignore-scripts",
+  "installCommand": "npm install -g pnpm@10.17.1 && pnpm install --no-frozen-lockfile --ignore-scripts",
   "buildCommand": "npx turbo run build --filter=@bhavya/ai-institute...",
   "framework": "nextjs",
   "outputDirectory": "apps/ai-institute/.next"
