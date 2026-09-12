@@ -1,35 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface MagneticButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   strength?: number;
+  className?: string;
+  onClick?: () => void;
 }
 
 export function MagneticButton({
   children,
   strength = 0.3,
+  className,
+  onClick,
 }: MagneticButtonProps) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  const ref = useRef<HTMLButtonElement>(null);
 
-  const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 150, damping: 15 });
-  const springY = useSpring(y, { stiffness: 150, damping: 15 });
 
-  if (reducedMotion) {
-    return <div className="inline-block">{children}</div>;
-  }
+  const springX = useSpring(x, { stiffness: 300, damping: 20 });
+  const springY = useSpring(y, { stiffness: 300, damping: 20 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -46,14 +39,16 @@ export function MagneticButton({
   };
 
   return (
-    <motion.div
+    <motion.button
       ref={ref}
+      className={className}
       style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="inline-block"
+      onClick={onClick}
+      whileTap={{ scale: 0.97 }}
     >
       {children}
-    </motion.div>
+    </motion.button>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useInView, type Variant } from "framer-motion";
 
 interface RevealProps {
@@ -60,15 +60,6 @@ export function Reveal({
   once = true,
   className,
 }: RevealProps) {
-  const [reducedMotion, setReducedMotion] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
 
@@ -79,10 +70,6 @@ export function Reveal({
   if (distance !== undefined) {
     if ("y" in hidden) hidden.y = distance;
     if ("x" in hidden) hidden.x = distance;
-  }
-
-  if (reducedMotion) {
-    return <div className={className}>{children}</div>;
   }
 
   return (

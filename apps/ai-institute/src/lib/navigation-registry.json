@@ -1,7 +1,7 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Bhavya Foundation — Canonical Navigation Registry. Single source of truth for all navigation rendering.",
-  "lastUpdated": "2026-09-06",
+  "lastUpdated": "2026-09-12",
   "waveO": {
     "note": "Wave O orphan classification. Deferred routes are NOT in canonical navigation.",
     "redirected": [
@@ -120,6 +120,13 @@
               "href": "/courses",
               "icon": "GraduationCap",
               "description": "AI curriculum from foundations to advanced"
+            },
+            {
+              "id": "curriculum",
+              "label": "Curriculum",
+              "href": "/curriculum",
+              "icon": "BookOpen",
+              "description": "13 levels from Digital Foundations to Institution Building"
             },
             {
               "id": "research",

@@ -19,6 +19,11 @@ import {
   Handshake,
   Heart,
   Database,
+  BookCheck,
+  FlaskConical,
+  Map,
+  BarChart3,
+  BookOpen,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -606,6 +611,407 @@ export default function HomePage() {
                 </a>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== GOVERNANCE & TRUST — INSTITUTIONAL CREDIBILITY ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-bg-primary)",
+        }}
+      >
+        <div className="container">
+          <Reveal variant="slide-up">
+            <div style={{ marginBottom: "var(--space-12)" }}>
+              <span className="editorial-label">BUILT ON PUBLIC TRUST</span>
+              <h2
+                className="editorial-heading"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  marginTop: "var(--space-4)",
+                }}
+              >
+                Transparency is not optional.
+              </h2>
+              <p
+                style={{
+                  marginTop: "var(--space-4)",
+                  fontSize: "var(--text-lg)",
+                  color: "var(--color-text-secondary)",
+                  maxWidth: "600px",
+                  lineHeight: 1.7,
+                }}
+              >
+                Every decision is traceable. Every metric is public. Every
+                commitment is constitutional.
+              </p>
+            </div>
+          </Reveal>
+
+          <div
+            className="home-trust-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "var(--space-6)",
+            }}
+          >
+            {[
+              {
+                icon: BookCheck,
+                title: "Constitution",
+                desc: "12 Articles — the governance framework that guides every decision.",
+                href: "/about",
+                linkText: "Read the Constitution",
+                color: "var(--color-brand-forest)",
+              },
+              {
+                icon: FlaskConical,
+                title: "Engineering Standards",
+                desc: "10 Quality Gates, 26 Production Metrics, research-backed decisions.",
+                href: "/about",
+                linkText: "View Engineering Standards",
+                color: "var(--color-earth-600, #6a7c52)",
+              },
+              {
+                icon: Map,
+                title: "Public Roadmap",
+                desc: "Open governance, published priorities, and community input on every initiative.",
+                href: "/missions",
+                linkText: "View Roadmap",
+                color: "var(--color-brand-gold)",
+              },
+              {
+                icon: BarChart3,
+                title: "Live Metrics",
+                desc: "Real-time programme outcomes and institutional health — always public.",
+                href: "/missions",
+                linkText: "See the Numbers",
+                color: "var(--color-forest-600, #0e5936)",
+              },
+            ].map((item, i) => (
+              <Reveal
+                key={item.title}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={30}
+              >
+                <a
+                  href={item.href}
+                  style={{
+                    display: "block",
+                    padding: "var(--space-6)",
+                    borderRadius: "var(--radius-lg)",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    textDecoration: "none",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                    height: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "44px",
+                      height: "44px",
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--color-forest-50)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: item.color,
+                      marginBottom: "var(--space-5)",
+                    }}
+                  >
+                    <item.icon size={20} />
+                  </div>
+                  <h3
+                    style={{
+                      fontSize: "var(--text-lg)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.6,
+                      marginBottom: "var(--space-4)",
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "var(--space-2)",
+                      fontSize: "var(--text-sm)",
+                      fontWeight: 600,
+                      color: item.color,
+                    }}
+                  >
+                    {item.linkText} <ArrowRight size={14} />
+                  </span>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====== CURRICULUM HIGHLIGHT — AI EDUCATION ====== */}
+      <section
+        style={{
+          padding: "var(--space-24) 0",
+          background: "var(--color-ivory-200)",
+        }}
+      >
+        <div className="container">
+          <div
+            className="home-curriculum-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "var(--space-16)",
+              alignItems: "center",
+            }}
+          >
+            <Reveal variant="slide-up">
+              <div>
+                <span className="editorial-label">AI INSTITUTE</span>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  Free AI education
+                  <br />
+                  for rural India.
+                </h2>
+                <p
+                  style={{
+                    marginTop: "var(--space-6)",
+                    fontSize: "var(--text-lg)",
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  13 levels. 74 modules. 25 core concepts — a complete
+                  curriculum from foundations to advanced research, designed for
+                  communities that need it most.
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "var(--space-8)",
+                    marginTop: "var(--space-8)",
+                  }}
+                >
+                  {[
+                    { value: "13", label: "Levels" },
+                    { value: "74+", label: "Modules" },
+                    { value: "25", label: "Core Concepts" },
+                  ].map((stat) => (
+                    <div key={stat.label}>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: "var(--text-2xl, 2rem)",
+                          fontWeight: 400,
+                          color: "var(--color-brand-forest)",
+                        }}
+                      >
+                        {stat.value}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "var(--color-text-muted)",
+                          marginTop: "var(--space-1)",
+                        }}
+                      >
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="/curriculum"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    marginTop: "var(--space-8)",
+                    color: "var(--color-brand-forest)",
+                    fontWeight: 600,
+                    fontSize: "var(--text-sm)",
+                    textDecoration: "none",
+                  }}
+                >
+                  Explore the Curriculum
+                  <ArrowRight size={14} />
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal variant="slide-up" delay={0.2}>
+              <div
+                style={{
+                  padding: "var(--space-8)",
+                  background: "var(--color-bg-primary)",
+                  borderRadius: "var(--radius-lg)",
+                  border: "1px solid var(--color-border-primary)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-3)",
+                    marginBottom: "var(--space-6)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--color-forest-50)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "var(--color-brand-forest)",
+                    }}
+                  >
+                    <BookOpen size={20} />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 600,
+                        color: "var(--color-text-primary)",
+                      }}
+                    >
+                      Curriculum Overview
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "var(--color-text-muted)",
+                      }}
+                    >
+                      Foundation to Advanced Research
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "var(--space-3)",
+                  }}
+                >
+                  {[
+                    {
+                      level: "1-3",
+                      name: "Foundations",
+                      modules: "18 modules",
+                      color: "var(--color-forest-50)",
+                    },
+                    {
+                      level: "4-7",
+                      name: "Applied Learning",
+                      modules: "24 modules",
+                      color: "var(--color-ivory-300, #ede9df)",
+                    },
+                    {
+                      level: "8-10",
+                      name: "Advanced",
+                      modules: "18 modules",
+                      color: "var(--color-ivory-300, #ede9df)",
+                    },
+                    {
+                      level: "11-13",
+                      name: "Research & Mastery",
+                      modules: "14 modules",
+                      color: "var(--color-forest-50)",
+                    },
+                  ].map((tier) => (
+                    <div
+                      key={tier.level}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "var(--space-4)",
+                        padding: "var(--space-3) var(--space-4)",
+                        borderRadius: "var(--radius-md)",
+                        background: tier.color,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          fontWeight: 700,
+                          color: "var(--color-brand-forest)",
+                          minWidth: "36px",
+                        }}
+                      >
+                        L{tier.level}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          fontWeight: 500,
+                          color: "var(--color-text-primary)",
+                          flex: 1,
+                        }}
+                      >
+                        {tier.name}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "var(--color-text-muted)",
+                        }}
+                      >
+                        {tier.modules}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <a
+                  href="/curriculum/levels"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "var(--space-2)",
+                    marginTop: "var(--space-6)",
+                    padding: "var(--space-3) var(--space-5)",
+                    borderRadius: "var(--radius-full)",
+                    border: "1px solid var(--color-border-primary)",
+                    fontSize: "var(--text-sm)",
+                    fontWeight: 600,
+                    color: "var(--color-brand-forest)",
+                    textDecoration: "none",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
+                  View All Levels <ArrowRight size={14} />
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

@@ -1063,6 +1063,12 @@ body {
   .home-involved-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+  .home-trust-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .home-curriculum-grid {
+    grid-template-columns: 1fr !important;
+  }
   .home-ecosystem-flow {
     flex-wrap: wrap;
     justify-content: center;
@@ -1138,6 +1144,12 @@ body {
   .home-missions-grid,
   .home-realwork-grid,
   .home-involved-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .home-trust-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .home-curriculum-grid {
     grid-template-columns: 1fr !important;
   }
   .home-intro-grid,
