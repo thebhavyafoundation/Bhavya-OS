@@ -30,3 +30,11 @@ export {
   getAdaptedDatabase,
 } from "./registry";
 export type { DatabaseName } from "./registry";
+
+export {
+  initAsyncAdapter,
+  getAsyncAdapter,
+  type AsyncDatabase,
+  type QueryRow,
+  type QueryResult,
+} from "./async-adapter";

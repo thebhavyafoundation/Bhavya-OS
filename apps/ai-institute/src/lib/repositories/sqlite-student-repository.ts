@@ -1,4 +1,4 @@
-import { getAdaptedDatabase } from "@bhavya/database";
+import { getAsyncDb } from "../db";
 import type {
   StudentProfile,
   CreateStudentInput,
@@ -89,25 +89,25 @@ function studentToRow(
 
 export class SqliteStudentRepository implements StudentRepository {
   async findByUserId(userId: string): Promise<StudentProfile | null> {
-    const db = getAdaptedDatabase("ai-institute");
-    const row = db
-      .prepare("SELECT * FROM student_profiles WHERE user_id = ?")
-      .get(userId) as Record<string, unknown> | undefined;
+    const db = getAsyncDb();
+    const row = await db.get<Record<string, unknown>>(
+      "SELECT * FROM student_profiles WHERE user_id = ?",
+      userId,
+    );
     return row ? rowToStudent(row) : null;
   }
 
   async create(data: CreateStudentInput): Promise<StudentProfile> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const existing = await this.findByUserId(data.userId);
     if (existing) return existing;
 
     const now = new Date().toISOString();
     const id = generateId();
 
-    db.prepare(
+    await db.run(
       `INSERT INTO student_profiles (id, user_id, name, email, role, interests, current_course, current_lesson_index, lessons_completed, assessment_score, assessment_completed, lab_tasks_completed, lab_score, knowledge_check_answers, knowledge_check_score, project_submitted, project_score, badge_earned, reflection_entries, streak, last_active_date, onboarding_complete, enrolled_courses, enrolled_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
       id,
       data.userId,
       data.name,
@@ -142,7 +142,7 @@ export class SqliteStudentRepository implements StudentRepository {
     userId: string,
     data: Partial<StudentProfile>,
   ): Promise<StudentProfile | null> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const existing = await this.findByUserId(userId);
     if (!existing) return null;
 
@@ -153,7 +153,7 @@ export class SqliteStudentRepository implements StudentRepository {
     const vals = cols.map((c) => row[c]);
     vals.push(existing.id);
 
-    db.prepare(`UPDATE student_profiles SET ${sets} WHERE id = ?`).run(...vals);
+    await db.run(`UPDATE student_profiles SET ${sets} WHERE id = ?`, ...vals);
     return this.findByUserId(userId);
   }
 }

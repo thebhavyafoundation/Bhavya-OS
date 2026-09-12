@@ -10,7 +10,7 @@
  * components — the admin audit UI reads through GET /os/admin/api/audit.
  */
 
-import { getAdaptedDatabase } from "@bhavya/database";
+import { getAsyncDb } from "./db";
 
 export interface AuditEvent {
   id: string;
@@ -60,12 +60,11 @@ function rowToEvent(row: Record<string, unknown>): AuditEvent {
 
 export async function recordAuditEvent(input: RecordAuditInput): Promise<void> {
   try {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const now = new Date().toISOString();
-    db.prepare(
+    await db.run(
       `INSERT INTO audit_events (id, actor_id, actor_email, action, resource, resource_id, result, metadata, created_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
       generateId(),
       input.actorId ?? null,
       input.actorEmail ?? "",
@@ -82,9 +81,10 @@ export async function recordAuditEvent(input: RecordAuditInput): Promise<void> {
 }
 
 export async function listAuditEvents(limit = 100): Promise<AuditEvent[]> {
-  const db = getAdaptedDatabase("ai-institute");
-  const rows = db
-    .prepare("SELECT * FROM audit_events ORDER BY created_at DESC LIMIT ?")
-    .all(Math.min(Math.max(limit, 1), 500)) as Record<string, unknown>[];
+  const db = getAsyncDb();
+  const rows = await db.all<Record<string, unknown>>(
+    "SELECT * FROM audit_events ORDER BY created_at DESC LIMIT ?",
+    Math.min(Math.max(limit, 1), 500),
+  );
   return rows.map(rowToEvent);
 }

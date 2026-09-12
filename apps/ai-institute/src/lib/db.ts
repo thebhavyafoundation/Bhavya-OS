@@ -9,10 +9,16 @@
  * packages/database/migrations/ai-institute/.
  */
 
-import { getAdaptedDatabase, migrate } from "@bhavya/database";
-import { initRemoteDatabase, isProduction } from "./sqlite";
+import {
+  getAdaptedDatabase,
+  migrate,
+  initAsyncAdapter,
+  type AsyncDatabase,
+} from "@bhavya/database";
+import { isProduction } from "./sqlite";
 
 let initialized = false;
+let _asyncDb: AsyncDatabase | null = null;
 
 /**
  * Initialize database. Safe to call multiple times (idempotent).
@@ -23,12 +29,13 @@ export async function initDatabase(): Promise<void> {
   if (initialized) return;
 
   if (isProduction()) {
-    await initRemoteDatabase();
-  }
-
-  // Run migrations via @bhavya/database (local mode only).
-  // Remote migrations are handled separately in production.
-  if (!isProduction()) {
+    _asyncDb = await initAsyncAdapter("ai-institute", () => {
+      return getAdaptedDatabase("ai-institute");
+    });
+  } else {
+    _asyncDb = await initAsyncAdapter("ai-institute", () => {
+      return getAdaptedDatabase("ai-institute");
+    });
     await migrate("ai-institute");
   }
 
@@ -36,9 +43,24 @@ export async function initDatabase(): Promise<void> {
 }
 
 /**
- * Synchronous database access (for use in request handlers after init).
+ * Get the async database adapter.
+ * Works in both local and production modes.
+ * Use this for all new code — it's compatible with Vercel serverless.
+ */
+export function getAsyncDb(): AsyncDatabase {
+  if (!_asyncDb) {
+    throw new Error("Database not initialized. Call initDatabase() first.");
+  }
+  return _asyncDb;
+}
+
+/**
+ * Synchronous database access (for legacy code in request handlers after init).
  * Returns a better-sqlite3 connection via @bhavya/database.
  * Only valid for local mode — remote mode requires async access.
+ *
+ * @deprecated Use getAsyncDb() for new code. This method will not work
+ * in Vercel serverless environments.
  */
 export function getDb() {
   return getAdaptedDatabase("ai-institute");

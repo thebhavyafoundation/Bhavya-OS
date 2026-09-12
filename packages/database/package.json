@@ -18,6 +18,7 @@
     "db:migrate:status": "tsx src/cli.ts status"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.4",
     "better-sqlite3": "^13.0.2"
   },
   "devDependencies": {

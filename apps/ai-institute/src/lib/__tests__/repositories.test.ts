@@ -1,16 +1,17 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { join } from "path";
 import { existsSync, unlinkSync, mkdirSync } from "fs";
-import { getAdaptedDatabase, migrate } from "@bhavya/database";
+import { getAdaptedDatabase } from "@bhavya/database";
 import { SqliteUserRepository } from "../repositories/sqlite-user-repository";
 import { SqliteSessionRepository } from "../repositories/sqlite-session-repository";
+import { initDatabase } from "../db";
 
 const TEST_DB_DIR = join(process.cwd(), "bhavya-ai-lab", "test");
 const TEST_DB_PATH = join(TEST_DB_DIR, "test-repos.db");
 
 beforeAll(async () => {
   if (!existsSync(TEST_DB_DIR)) mkdirSync(TEST_DB_DIR, { recursive: true });
-  await migrate("ai-institute");
+  await initDatabase();
 });
 
 afterAll(() => {

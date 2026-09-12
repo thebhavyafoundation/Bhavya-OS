@@ -1,4 +1,4 @@
-import { getAdaptedDatabase } from "@bhavya/database";
+import { getAsyncDb } from "../db";
 import type { User, CreateUserInput, UserRepository } from "./types";
 
 function generateId(): string {
@@ -23,28 +23,31 @@ function rowToUser(row: Record<string, unknown>): User {
 
 export class SqliteUserRepository implements UserRepository {
   async findByEmail(email: string): Promise<User | null> {
-    const db = getAdaptedDatabase("ai-institute");
-    const row = db.prepare("SELECT * FROM users WHERE email = ?").get(email) as
-      Record<string, unknown> | undefined;
+    const db = getAsyncDb();
+    const row = await db.get<Record<string, unknown>>(
+      "SELECT * FROM users WHERE email = ?",
+      email,
+    );
     return row ? rowToUser(row) : null;
   }
 
   async findById(id: string): Promise<User | null> {
-    const db = getAdaptedDatabase("ai-institute");
-    const row = db.prepare("SELECT * FROM users WHERE id = ?").get(id) as
-      Record<string, unknown> | undefined;
+    const db = getAsyncDb();
+    const row = await db.get<Record<string, unknown>>(
+      "SELECT * FROM users WHERE id = ?",
+      id,
+    );
     return row ? rowToUser(row) : null;
   }
 
   async create(data: CreateUserInput): Promise<User> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const now = new Date().toISOString();
     const id = generateId();
 
-    db.prepare(
+    await db.run(
       `INSERT INTO users (id, email, name, role, provider, interests, onboarding_complete, password_hash, created_at, updated_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
       id,
       data.email,
       data.name,
@@ -61,9 +64,10 @@ export class SqliteUserRepository implements UserRepository {
   }
 
   async updateRole(userId: string, role: string): Promise<User | null> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const now = new Date().toISOString();
-    db.prepare("UPDATE users SET role = ?, updated_at = ? WHERE id = ?").run(
+    await db.run(
+      "UPDATE users SET role = ?, updated_at = ? WHERE id = ?",
       role,
       now,
       userId,
@@ -75,19 +79,22 @@ export class SqliteUserRepository implements UserRepository {
     userId: string,
     passwordHash: string,
   ): Promise<User | null> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const now = new Date().toISOString();
-    db.prepare(
+    await db.run(
       "UPDATE users SET password_hash = ?, updated_at = ? WHERE id = ?",
-    ).run(passwordHash, now, userId);
+      passwordHash,
+      now,
+      userId,
+    );
     return this.findById(userId);
   }
 
   async findAll(): Promise<User[]> {
-    const db = getAdaptedDatabase("ai-institute");
-    const rows = db
-      .prepare("SELECT * FROM users ORDER BY created_at DESC")
-      .all() as Record<string, unknown>[];
+    const db = getAsyncDb();
+    const rows = await db.all<Record<string, unknown>>(
+      "SELECT * FROM users ORDER BY created_at DESC",
+    );
     return rows.map(rowToUser);
   }
 }

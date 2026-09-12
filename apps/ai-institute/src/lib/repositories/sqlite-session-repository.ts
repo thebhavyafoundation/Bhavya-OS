@@ -1,4 +1,4 @@
-import { getAdaptedDatabase } from "@bhavya/database";
+import { getAsyncDb } from "../db";
 import type { SessionRepository } from "./types";
 
 const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
@@ -11,13 +11,16 @@ function generateToken(): string {
 
 export class SqliteSessionRepository implements SessionRepository {
   async create(userId: string): Promise<{ token: string; expiresAt: string }> {
-    const db = getAdaptedDatabase("ai-institute");
+    const db = getAsyncDb();
     const token = generateToken();
     const expiresAt = new Date(Date.now() + SESSION_DURATION_MS).toISOString();
 
-    db.prepare(
+    await db.run(
       `INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)`,
-    ).run(token, userId, expiresAt);
+      token,
+      userId,
+      expiresAt,
+    );
 
     return { token, expiresAt };
   }
@@ -25,10 +28,11 @@ export class SqliteSessionRepository implements SessionRepository {
   async findByToken(
     token: string,
   ): Promise<{ userId: string; expiresAt: string } | null> {
-    const db = getAdaptedDatabase("ai-institute");
-    const row = db
-      .prepare("SELECT * FROM sessions WHERE token = ?")
-      .get(token) as { user_id: string; expires_at: string } | undefined;
+    const db = getAsyncDb();
+    const row = await db.get<{ user_id: string; expires_at: string }>(
+      "SELECT * FROM sessions WHERE token = ?",
+      token,
+    );
 
     if (!row) return null;
 
@@ -41,12 +45,12 @@ export class SqliteSessionRepository implements SessionRepository {
   }
 
   async delete(token: string): Promise<void> {
-    const db = getAdaptedDatabase("ai-institute");
-    db.prepare("DELETE FROM sessions WHERE token = ?").run(token);
+    const db = getAsyncDb();
+    await db.run("DELETE FROM sessions WHERE token = ?", token);
   }
 
   async deleteAllForUser(userId: string): Promise<void> {
-    const db = getAdaptedDatabase("ai-institute");
-    db.prepare("DELETE FROM sessions WHERE user_id = ?").run(userId);
+    const db = getAsyncDb();
+    await db.run("DELETE FROM sessions WHERE user_id = ?", userId);
   }
 }
