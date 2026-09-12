@@ -1,6 +1,0 @@
-{
-  "installCommand": "pnpm install",
-  "buildCommand": "node scripts/vercel-build-app.mjs website",
-  "framework": "nextjs",
-  "outputDirectory": "apps/website/.next"
-}
