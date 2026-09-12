@@ -18,12 +18,15 @@ export function SiteFooter() {
       <div className="container">
         {/* Top section — logo + tagline */}
         <div
-          className="flex flex-col sm:flex-row sm:justify-between"
           style={{
+            display: "flex",
+            justifyContent: "space-between",
             alignItems: "flex-start",
             marginBottom: "var(--space-12)",
             paddingBottom: "var(--space-8)",
-            borderBottom: "1px solid rgba(247, 244, 236, 0.1)",
+            borderBottom: "1px solid rgba(247, 244, 236, 0.08)",
+            flexWrap: "wrap",
+            gap: "var(--space-8)",
           }}
         >
           <div>
@@ -32,9 +35,9 @@ export function SiteFooter() {
               style={{
                 marginTop: "var(--space-4)",
                 fontSize: "var(--text-sm)",
-                color: "rgba(247, 244, 236, 0.6)",
+                color: "rgba(247, 244, 236, 0.5)",
                 maxWidth: "300px",
-                lineHeight: 1.6,
+                lineHeight: 1.7,
               }}
             >
               A living institution connecting nature, knowledge, heritage, and
@@ -47,7 +50,9 @@ export function SiteFooter() {
               alignItems: "center",
               gap: "var(--space-2)",
               fontSize: "var(--text-xs)",
-              color: "rgba(247, 244, 236, 0.4)",
+              color: "rgba(247, 244, 236, 0.35)",
+              fontFamily: "var(--font-mono)",
+              letterSpacing: "0.02em",
             }}
           >
             <div
@@ -75,9 +80,11 @@ export function SiteFooter() {
             <div key={column.title}>
               <h4
                 style={{
-                  fontSize: "var(--text-sm)",
+                  fontSize: "var(--text-xs)",
                   fontWeight: 600,
-                  color: "var(--color-text-inverse)",
+                  color: "rgba(247, 244, 236, 0.4)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
                   marginBottom: "var(--space-4)",
                 }}
               >
@@ -112,18 +119,24 @@ export function SiteFooter() {
             justifyContent: "space-between",
             alignItems: "center",
             paddingTop: "var(--space-6)",
-            borderTop: "1px solid rgba(247, 244, 236, 0.1)",
+            borderTop: "1px solid rgba(247, 244, 236, 0.08)",
             fontSize: "var(--text-xs)",
-            color: "rgba(247, 244, 236, 0.4)",
+            color: "rgba(247, 244, 236, 0.35)",
+            flexWrap: "wrap",
+            gap: "var(--space-4)",
           }}
         >
-          <p>© 2026 Bhavya Foundation. Building for Generations.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Bhavya Foundation. Building for
+            Generations.
+          </p>
           <div style={{ display: "flex", gap: "var(--space-4)" }}>
             <a
               href="/privacy"
               style={{
-                color: "rgba(247, 244, 236, 0.4)",
+                color: "rgba(247, 244, 236, 0.35)",
                 textDecoration: "none",
+                transition: "color var(--duration-fast) ease",
               }}
             >
               Privacy
@@ -131,8 +144,9 @@ export function SiteFooter() {
             <a
               href="/terms"
               style={{
-                color: "rgba(247, 244, 236, 0.4)",
+                color: "rgba(247, 244, 236, 0.35)",
                 textDecoration: "none",
+                transition: "color var(--duration-fast) ease",
               }}
             >
               Terms
@@ -140,8 +154,9 @@ export function SiteFooter() {
             <a
               href="/accessibility"
               style={{
-                color: "rgba(247, 244, 236, 0.4)",
+                color: "rgba(247, 244, 236, 0.35)",
                 textDecoration: "none",
+                transition: "color var(--duration-fast) ease",
               }}
             >
               Accessibility

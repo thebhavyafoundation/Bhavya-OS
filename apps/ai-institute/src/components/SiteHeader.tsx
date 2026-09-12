@@ -239,17 +239,18 @@ export function SiteHeader({
                 gap: "var(--space-2)",
                 padding: "var(--space-2) var(--space-4)",
                 borderRadius: "var(--radius-full)",
-                background: "var(--color-brand-forest)",
-                color: "var(--color-text-inverse)",
+                background: "transparent",
+                border: "1px solid var(--color-border-primary)",
+                color: "var(--color-text-secondary)",
                 fontSize: "var(--text-xs)",
-                fontWeight: 600,
+                fontWeight: 500,
                 letterSpacing: "0.02em",
                 textDecoration: "none",
                 transition: "all var(--duration-normal) var(--ease-out)",
               }}
             >
-              Enter Bhavya OS
-              <ArrowRight size={14} />
+              Bhavya OS
+              <ArrowRight size={12} />
             </a>
             <button
               className="nav-mobile-trigger"
@@ -325,7 +326,7 @@ export function SiteHeader({
                     gap: "var(--space-2)",
                   }}
                 >
-                  Enter Bhavya OS
+                  Bhavya OS
                   <ArrowRight size={14} />
                 </a>
               </div>

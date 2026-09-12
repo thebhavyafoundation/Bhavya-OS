@@ -16,7 +16,9 @@ import {
   Landmark,
   Compass,
   Target,
-  Zap,
+  Handshake,
+  Heart,
+  Database,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -33,7 +35,7 @@ const missions = [
     icon: TreePine,
     label: "Forest",
     title: "Forest",
-    desc: "Restore ecosystems. Protect biodiversity. Conserve water.",
+    desc: "Restore degraded ecosystems. Protect biodiversity. Conserve watersheds.",
     photo: "/photography/forest/forest-cedar-sunlight.jpg",
     color: "var(--color-brand-forest)",
   },
@@ -42,7 +44,7 @@ const missions = [
     icon: Brain,
     label: "Knowledge",
     title: "Knowledge",
-    desc: "Expand learning. Research. Innovation. Digital access.",
+    desc: "Expand access to learning. Advance research. Bridge the digital divide.",
     photo: "/photography/knowledge/knowledge-school-children.jpg",
     color: "var(--color-brand-forest)",
   },
@@ -51,7 +53,7 @@ const missions = [
     icon: Building2,
     label: "Heritage",
     title: "Heritage",
-    desc: "Preserve traditions. Document history. Protect living heritage.",
+    desc: "Preserve cultural traditions. Document living history. Protect heritage sites.",
     photo: "/photography/heritage/heritage-stone-temple.jpg",
     color: "var(--color-brand-forest)",
   },
@@ -60,7 +62,7 @@ const missions = [
     icon: HeartHandshake,
     label: "Community",
     title: "Community",
-    desc: "Empower people. Strengthen communities. Develop leadership.",
+    desc: "Empower local leadership. Strengthen social fabric. Build resilient communities.",
     photo: "/photography/community/community-village-gathering.jpg",
     color: "var(--color-brand-forest)",
   },
@@ -101,7 +103,7 @@ const getInvolved = [
     href: "/volunteer",
   },
   {
-    icon: HeartHandshake,
+    icon: Handshake,
     title: "Partner with Us",
     desc: "Collaborate on institutional research and programmes.",
     href: "/get-involved",
@@ -113,7 +115,7 @@ const getInvolved = [
     href: "/knowledge/academy",
   },
   {
-    icon: HeartHandshake,
+    icon: Heart,
     title: "Support Our Work",
     desc: "Fund a mission. Every donation is publicly documented.",
     href: "/donate",
@@ -194,13 +196,13 @@ export default function HomePage() {
 
           <motion.p
             className="hero-desc"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: "rgba(247, 244, 236, 0.75)" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
-            Bhavya is a public institution working across nature, knowledge,
-            heritage, and communities.
+            A public institution working across nature, knowledge, heritage, and
+            community — built with patience, evidence, and long-term thinking.
           </motion.p>
 
           <motion.div
@@ -210,12 +212,12 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <a href="/missions" className="btn btn-gold">
-              Explore Our Missions
+              Our Missions
               <ArrowRight size={16} />
             </a>
             <a href="/about" className="btn btn-secondary-inverse">
               <Play size={14} fill="currentColor" />
-              Watch Our Story
+              About the Institution
             </a>
           </motion.div>
 
@@ -226,53 +228,15 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 1.5 }}
           >
             <span>
-              <span className="hero-proof-dot" /> Healthier forests
+              <span className="hero-proof-dot" /> Four permanent missions
             </span>
             <span>
-              <span className="hero-proof-dot" /> Stronger communities
+              <span className="hero-proof-dot" /> Evidence-driven work
             </span>
             <span>
-              <span className="hero-proof-dot" /> A brighter tomorrow
+              <span className="hero-proof-dot" /> Built to last
             </span>
           </motion.div>
-        </motion.div>
-
-        {/* Bhavya OS link — right side */}
-        <motion.div
-          style={{
-            position: "absolute",
-            right: "var(--space-8)",
-            bottom: "20%",
-            zIndex: 1,
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <a
-            href="/os"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-3)",
-              padding: "var(--space-4) var(--space-6)",
-              borderRadius: "var(--radius-full)",
-              background:
-                "color-mix(in srgb, var(--color-forest-900) 60%, transparent)",
-              backdropFilter: "blur(12px)",
-              border:
-                "1px solid color-mix(in srgb, var(--color-text-inverse) 15%, transparent)",
-              color: "var(--color-text-inverse)",
-              textDecoration: "none",
-              fontSize: "var(--text-sm)",
-              fontWeight: 600,
-              transition: "all var(--duration-normal) var(--ease-out)",
-            }}
-          >
-            <Zap size={14} />
-            Enter Bhavya OS
-            <ArrowRight size={14} />
-          </a>
         </motion.div>
       </section>
 
@@ -307,7 +271,7 @@ export default function HomePage() {
                 >
                   Long-term thinking.
                   <br />
-                  Real-world impact.
+                  Enduring impact.
                 </h2>
                 <p
                   style={{
@@ -359,7 +323,8 @@ export default function HomePage() {
                   }}
                 >
                   &ldquo;A tree planted today becomes the forest that protects
-                  tomorrow.&rdquo;
+                  tomorrow. An institution built today becomes the system that
+                  serves generations.&rdquo;
                 </p>
                 <p
                   style={{
@@ -394,7 +359,7 @@ export default function HomePage() {
                 marginTop: "var(--space-4)",
               }}
             >
-              Four missions. A shared tomorrow.
+              Four permanent missions.
             </h2>
             <p
               style={{
@@ -402,6 +367,7 @@ export default function HomePage() {
                 fontSize: "var(--text-lg)",
                 color: "var(--color-text-secondary)",
                 maxWidth: "600px",
+                lineHeight: 1.7,
               }}
             >
               Bhavya works across four permanent missions to create lasting
@@ -426,26 +392,21 @@ export default function HomePage() {
               >
                 <a
                   href={`/${m.key}`}
+                  className="mission-card"
                   style={{
-                    display: "block",
-                    textDecoration: "none",
-                    borderRadius: "var(--radius-lg)",
-                    overflow: "hidden",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    transition: "all var(--duration-normal) var(--ease-out)",
+                    height: "100%",
                   }}
                 >
                   <div
+                    className="mission-card-image"
                     style={{
-                      height: "200px",
-                      overflow: "hidden",
-                      position: "relative",
+                      height: "220px",
                     }}
                   >
                     <img
                       src={m.photo}
                       alt={m.title}
+                      loading="lazy"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -469,38 +430,20 @@ export default function HomePage() {
                         left: "var(--space-4)",
                         padding: "var(--space-1) var(--space-3)",
                         borderRadius: "var(--radius-full)",
-                        background: "rgba(255, 255, 255, 0.15)",
+                        background: "rgba(255, 255, 255, 0.12)",
                         backdropFilter: "blur(8px)",
                         fontSize: "var(--text-xs)",
                         color: "white",
                         fontWeight: 600,
+                        letterSpacing: "0.05em",
                       }}
                     >
                       {m.label}
                     </div>
                   </div>
-                  <div style={{ padding: "var(--space-6)" }}>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "var(--text-xl)",
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
-                        marginBottom: "var(--space-2)",
-                      }}
-                    >
-                      {m.title}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "var(--text-sm)",
-                        color: "var(--color-text-secondary)",
-                        lineHeight: 1.6,
-                        marginBottom: "var(--space-4)",
-                      }}
-                    >
-                      {m.desc}
-                    </p>
+                  <div className="mission-card-body">
+                    <h3 className="mission-card-title">{m.title}</h3>
+                    <p className="mission-card-desc">{m.desc}</p>
                     <span
                       style={{
                         display: "inline-flex",
@@ -548,8 +491,20 @@ export default function HomePage() {
                   marginTop: "var(--space-4)",
                 }}
               >
-                People. Places. Progress.
+                From intention to action.
               </h2>
+              <p
+                style={{
+                  marginTop: "var(--space-4)",
+                  fontSize: "var(--text-base)",
+                  color: "var(--color-text-secondary)",
+                  maxWidth: "500px",
+                  lineHeight: 1.6,
+                }}
+              >
+                Active work across our four missions — restoring landscapes,
+                expanding access, and strengthening communities.
+              </p>
             </div>
             <a
               href="/missions"
@@ -561,6 +516,7 @@ export default function HomePage() {
                 fontWeight: 600,
                 color: "var(--color-brand-forest)",
                 textDecoration: "none",
+                transition: "gap var(--duration-fast) ease",
               }}
             >
               View All <ArrowRight size={14} />
@@ -582,32 +538,23 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={30}
               >
-                <a
-                  href={item.href}
-                  style={{
-                    display: "block",
-                    textDecoration: "none",
-                    borderRadius: "var(--radius-lg)",
-                    overflow: "hidden",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                  }}
-                >
+                <a href={item.href} className="mission-card">
                   <div
+                    className="mission-card-image"
                     style={{
-                      height: "180px",
-                      overflow: "hidden",
-                      position: "relative",
+                      height: "200px",
                     }}
                   >
                     <img
                       src={item.photo}
                       alt={item.title}
+                      loading="lazy"
                       style={{
                         width: "100%",
                         height: "100%",
                         objectFit: "cover",
+                        transition:
+                          "transform var(--duration-slow) var(--ease-out)",
                       }}
                     />
                     <div
@@ -631,14 +578,13 @@ export default function HomePage() {
                           display: "inline-block",
                           padding: "2px var(--space-2)",
                           borderRadius: "var(--radius-full)",
-                          background: "rgba(255, 255, 255, 0.2)",
+                          background: "rgba(255, 255, 255, 0.15)",
                           backdropFilter: "blur(4px)",
                           fontSize: "10px",
                           color: "white",
                           fontWeight: 600,
                           textTransform: "uppercase",
                           letterSpacing: "0.05em",
-                          marginBottom: "var(--space-2)",
                         }}
                       >
                         {item.category}
@@ -686,6 +632,19 @@ export default function HomePage() {
               >
                 A connected ecosystem for greater impact.
               </h2>
+              <p
+                style={{
+                  marginTop: "var(--space-4)",
+                  fontSize: "var(--text-base)",
+                  color: "var(--color-text-secondary)",
+                  maxWidth: "550px",
+                  marginInline: "auto",
+                  lineHeight: 1.6,
+                }}
+              >
+                One institution connecting missions, programs, evidence, and
+                technology — so every effort compounds over time.
+              </p>
             </div>
           </Reveal>
 
@@ -704,24 +663,28 @@ export default function HomePage() {
               {[
                 {
                   label: "Foundation",
-                  sublabel: "Institutional Home",
+                  sublabel: "Institutional home",
                   icon: Landmark,
                 },
                 {
                   label: "Missions",
-                  sublabel: "Four Focus Areas",
+                  sublabel: "Four focus areas",
                   icon: Target,
                 },
                 {
                   label: "Programs",
-                  sublabel: "On-Ground Work",
+                  sublabel: "On-ground work",
                   icon: Compass,
                 },
-                { label: "Impact", sublabel: "Measurable Change", icon: Globe },
+                {
+                  label: "Impact",
+                  sublabel: "Measurable change",
+                  icon: Globe,
+                },
                 {
                   label: "Bhavya OS",
-                  sublabel: "The Operating System",
-                  icon: Zap,
+                  sublabel: "Operating system",
+                  icon: Database,
                 },
               ].map((step, i, arr) => (
                 <div
@@ -854,9 +817,9 @@ export default function HomePage() {
                     marginBottom: "var(--space-6)",
                   }}
                 >
-                  From knowledge
+                  The system behind
                   <br />
-                  to action.
+                  the institution.
                 </h2>
                 <p
                   style={{
@@ -866,8 +829,9 @@ export default function HomePage() {
                     marginBottom: "var(--space-8)",
                   }}
                 >
-                  Bhavya OS connects programs, projects, people, documents,
-                  evidence, research and impact in one institutional system.
+                  Bhavya OS is the institutional operating system — connecting
+                  programs, projects, evidence, research, and impact in one
+                  unified system built to endure.
                 </p>
                 <a
                   href="/os"
@@ -902,18 +866,25 @@ export default function HomePage() {
                 {[
                   {
                     label: "Programs",
-                    desc: "Manage institutional programmes",
+                    desc: "Manage institutional programmes across all missions",
                   },
-                  { label: "Projects", desc: "Track on-ground initiatives" },
-                  { label: "People", desc: "Volunteers, researchers, teams" },
-                  { label: "Documents", desc: "Evidence, reports, policies" },
-                  { label: "Impact", desc: "Metrics and verification" },
-                  { label: "Research", desc: "Knowledge and publications" },
+                  {
+                    label: "Projects",
+                    desc: "Track on-ground initiatives with evidence trails",
+                  },
+                  {
+                    label: "Research",
+                    desc: "Knowledge, publications, and institutional learning",
+                  },
+                  {
+                    label: "Impact",
+                    desc: "Metrics, verification, and transparent reporting",
+                  },
                 ].map((item) => (
                   <div
                     key={item.label}
                     style={{
-                      padding: "var(--space-4)",
+                      padding: "var(--space-5)",
                       borderRadius: "var(--radius-md)",
                       background: "rgba(255, 255, 255, 0.05)",
                       border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -924,7 +895,7 @@ export default function HomePage() {
                         fontSize: "var(--text-sm)",
                         fontWeight: 600,
                         color: "var(--color-text-inverse)",
-                        marginBottom: "var(--space-1)",
+                        marginBottom: "var(--space-2)",
                       }}
                     >
                       {item.label}
@@ -933,6 +904,7 @@ export default function HomePage() {
                       style={{
                         fontSize: "var(--text-xs)",
                         color: "rgba(247, 244, 236, 0.5)",
+                        lineHeight: 1.5,
                       }}
                     >
                       {item.desc}
@@ -954,7 +926,7 @@ export default function HomePage() {
       >
         <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">JOIN THE MOVEMENT</span>
+            <span className="editorial-label">GET INVOLVED</span>
             <h2
               className="editorial-heading"
               style={{
@@ -962,7 +934,7 @@ export default function HomePage() {
                 marginTop: "var(--space-4)",
               }}
             >
-              Be part of a better tomorrow.
+              Contribute to what lasts.
             </h2>
             <p
               style={{
@@ -970,10 +942,11 @@ export default function HomePage() {
                 fontSize: "var(--text-lg)",
                 color: "var(--color-text-secondary)",
                 maxWidth: "600px",
+                lineHeight: 1.7,
               }}
             >
               Whether you want to volunteer, partner, research, or support our
-              work, there are many ways to get involved.
+              work, there are many ways to contribute to the institution.
             </p>
           </div>
 
@@ -1002,19 +975,20 @@ export default function HomePage() {
                     border: "1px solid var(--color-border-primary)",
                     textDecoration: "none",
                     transition: "all var(--duration-normal) var(--ease-out)",
+                    height: "100%",
                   }}
                 >
                   <div
                     style={{
-                      width: "40px",
-                      height: "40px",
+                      width: "44px",
+                      height: "44px",
                       borderRadius: "var(--radius-md)",
                       background: "var(--color-forest-50)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       color: "var(--color-brand-forest)",
-                      marginBottom: "var(--space-4)",
+                      marginBottom: "var(--space-5)",
                     }}
                   >
                     <card.icon size={20} />
@@ -1049,7 +1023,7 @@ export default function HomePage() {
                       color: "var(--color-brand-forest)",
                     }}
                   >
-                    {card.title} <ArrowRight size={14} />
+                    Learn more <ArrowRight size={14} />
                   </span>
                 </a>
               </Reveal>
@@ -1084,7 +1058,7 @@ export default function HomePage() {
               The institution is being built.
               <br />
               <span style={{ color: "var(--color-accent-gold)" }}>
-                Be part of it.
+                Shape what endures.
               </span>
             </h2>
           </Reveal>
