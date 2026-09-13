@@ -26,7 +26,7 @@ export async function GET() {
     // Filter to public-eligible only (shared predicate with public-projection.ts)
     const publicKos = allKos.filter(isKOPublicEligible);
 
-    const metrics = getKnowledgeMetrics();
+    const metrics = await getKnowledgeMetrics();
 
     const evidence = await listEvidence(10); // Latest 10 evidence entries
     const evidenceCounts = await getEvidenceCounts();
