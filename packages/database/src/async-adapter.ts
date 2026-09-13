@@ -148,7 +148,7 @@ let _asyncAdapter: AsyncDatabase | null = null;
  */
 export async function initAsyncAdapter(
   name: DatabaseName,
-  getLocalDb: () => unknown,
+  getLocalDb: () => SqliteDb,
 ): Promise<AsyncDatabase> {
   if (_asyncAdapter) return _asyncAdapter;
 
