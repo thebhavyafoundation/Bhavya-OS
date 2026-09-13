@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev -p 3030",
     "build": "next build",
+    "build:cloudflare": "npx opennextjs-cloudflare build",
+    "preview": "npx opennextjs-cloudflare preview",
+    "deploy": "npx opennextjs-cloudflare deploy",
     "start": "next start -p 3030",
     "db:migrate": "tsx src/scripts/db-migrate.ts",
     "db:seed": "tsx src/scripts/db-seed.ts",
-    "db:backup": "tsx scripts/backup-db.ts",
+    "db:backup": "scripts/backup-db.ts",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest"
   },

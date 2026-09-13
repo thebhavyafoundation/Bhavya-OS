@@ -90,21 +90,25 @@ export interface KnowledgeObject {
 }
 
 export async function getKnowledgeObjects(): Promise<KnowledgeObject[]> {
-  const koDir = resolveLab("knowledge", "objects");
-  if (!fs.existsSync(koDir)) return [];
-  return fs
-    .readdirSync(koDir)
-    .filter((f) => f.endsWith(".json"))
-    .map((f) => {
-      try {
-        return JSON.parse(
-          fs.readFileSync(path.join(koDir, f), "utf-8"),
-        ) as KnowledgeObject;
-      } catch {
-        return null;
-      }
-    })
-    .filter((item): item is KnowledgeObject => item !== null);
+  try {
+    const koDir = resolveLab("knowledge", "objects");
+    if (!fs.existsSync(koDir)) return [];
+    return fs
+      .readdirSync(koDir)
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => {
+        try {
+          return JSON.parse(
+            fs.readFileSync(path.join(koDir, f), "utf-8"),
+          ) as KnowledgeObject;
+        } catch {
+          return null;
+        }
+      })
+      .filter((item): item is KnowledgeObject => item !== null);
+  } catch {
+    return [];
+  }
 }
 
 // --- Content Documents ---

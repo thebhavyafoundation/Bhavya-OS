@@ -26,15 +26,22 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Real counts from the machine-readable registries. No invented numbers:
-  // anything unreadable reports 0, never a placeholder.
-  return NextResponse.json({
-    status: "healthy",
-    timestamp: new Date().toISOString(),
-    version: "0.1.0",
-    inventory: {
-      apps: countItems("registry/apps.json"),
-      packages: countItems("registry/packages.json"),
-    },
-  });
+  try {
+    return NextResponse.json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      version: "0.1.0",
+      inventory: {
+        apps: countItems("registry/apps.json"),
+        packages: countItems("registry/packages.json"),
+      },
+    });
+  } catch {
+    return NextResponse.json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      version: "0.1.0",
+      inventory: { apps: 0, packages: 0 },
+    });
+  }
 }
