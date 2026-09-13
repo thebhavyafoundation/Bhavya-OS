@@ -31,6 +31,8 @@ jobs:
       - name: Build for Cloudflare
         working-directory: apps/ai-institute
         run: npx opennextjs-cloudflare build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Deploy to Cloudflare Workers
         working-directory: apps/ai-institute
