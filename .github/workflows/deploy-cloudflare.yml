@@ -28,13 +28,43 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # ── DIAGNOSTIC: test better-sqlite3 native module loading on CI Node ──
+      # Temporary step — remove after diagnostic run.
+      - name: Diagnostic — test better-sqlite3 native module loading
+        run: |
+          echo "=== NODE VERSION ==="
+          node --version
+          echo "=== BETTER-SQLITE3 PACKAGE LOCATION ==="
+          ls -la node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3/prebuilds/ 2>/dev/null || echo "No prebuilds dir found at pnpm level"
+          ls -la node_modules/better-sqlite3/prebuilds/ 2>/dev/null || echo "No prebuilds dir at top level"
+          echo "=== TEST: require('better-sqlite3') ==="
+          node -e "
+            try {
+              const db = require('better-sqlite3');
+              console.log('BETTER_SQLITE3_LOAD_OK');
+              const instance = db(':memory:');
+              console.log('BETTER_SQLITE3_RUNTIME_OK');
+              instance.close();
+            } catch (e) {
+              console.log('BETTER_SQLITE3_LOAD_FAILED');
+              console.log('Error name:', e && e.name);
+              console.log('Error message:', e && e.message);
+              console.log('Error code:', e && e.code);
+              if (e && e.stack) console.log(e.stack);
+              process.exitCode = 10;
+            }
+          "
+          echo "=== DIAGNOSTIC COMPLETE ==="
+
       - name: Build for Cloudflare
+        if: github.event_name == 'push'
         working-directory: apps/ai-institute
         run: npx opennextjs-cloudflare build
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Deploy to Cloudflare Workers
+        if: github.event_name == 'push'
         working-directory: apps/ai-institute
         run: npx opennextjs-cloudflare deploy
         env:
