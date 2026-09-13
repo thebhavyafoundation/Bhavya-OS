@@ -2,67 +2,23 @@
  * Knowledge Mission Metrics
  *
  * Tracks institutional metrics for the Knowledge Mission.
- * Filesystem-based (JSON files in bhavya-ai-lab/metrics/).
  *
- * ## Source of Truth
+ * ## Architecture
  *
- * Metrics are materialized counters (Model B), NOT derived from evidence.
- * They are updated by event handlers (`recordKoCreated`, `recordLessonPublished`).
+ * Metrics are derived from authoritative database records:
+ * - totalKos: count from knowledge_objects table
+ * - totalLessons: count from studio_lessons table
+ * - totalPublications: count from evidence_records (lesson-published events)
+ * - koCreatedThisMonth: count from evidence_records (ko-created events this month)
+ * - lessonsPublishedThisMonth: count from evidence_records (lesson-published events this month)
  *
- * ## Concurrency Model
- *
- * Single file read-modify-write. Safe for single-process deployment.
- * Concurrent calls to `recordKoCreated()` could theoretically lose an increment
- * if two reads happen before either write completes. In practice, this is
- * extremely unlikely in the single-process Next.js runtime.
+ * No filesystem persistence required. Metrics are computed on read.
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
-import { join, resolve } from "path";
-
-/**
- * Resolve a path: app-local first, then workspace root fallback.
- *
- * bhavya-ai-lab/ paths resolve to apps/ai-institute/bhavya-ai-lab/
- * content/, registry/, memory/ paths resolve to repository root.
- */
-function resolveFromWorkspace(...segments: string[]): string {
-  const appLocal = join(process.cwd(), ...segments);
-  if (existsSync(appLocal)) return resolve(appLocal);
-  return resolve(join(process.cwd(), "..", "..", ...segments));
-}
-
-const METRICS_DIR =
-  process.env.METRICS_DIR || resolveFromWorkspace("bhavya-ai-lab", "metrics");
-const KNOWLEDGE_METRICS_FILE = join(METRICS_DIR, "knowledge.json");
+import { getAsyncDb } from "./db";
 
 // ── Types ──────────────────────────────────────────────────────
 
-/**
- * Public metric definitions (for documentation):
- *
- * totalKos
- *   = count of canonical KO JSON files currently present in bhavya-ai-lab/knowledge/objects/
- *   = "How many knowledge objects exist right now?"
- *
- * totalLessons
- *   = count of lessons in Studio SQLite (canonical source)
- *   = NOTE: file-based lessons (bhavya-ai-lab/data/lessons/) removed in Wave J
- *
- * totalPublications
- *   = cumulative count of lesson publication events
- *   = "How many times has a lesson been published?"
- *
- * koCreatedThisMonth
- *   = KO creation events during current calendar month
- *   = reset to 0 when month changes
- *   = "How many KOs were created this month?"
- *
- * lessonsPublishedThisMonth
- *   = lesson publication events during current calendar month
- *   = reset to 0 when month changes
- *   = "How many lessons were published this month?"
- */
 export interface KnowledgeMetrics {
   totalKos: number;
   totalLessons: number;
@@ -72,29 +28,50 @@ export interface KnowledgeMetrics {
   lastUpdated: string;
 }
 
-// ── Storage ────────────────────────────────────────────────────
+// ── Queries ────────────────────────────────────────────────────
 
-function ensureDir(): void {
-  if (!existsSync(METRICS_DIR)) {
-    mkdirSync(METRICS_DIR, { recursive: true });
-  }
-}
-
-function readMetricsFile(): KnowledgeMetrics {
-  ensureDir();
-  if (!existsSync(KNOWLEDGE_METRICS_FILE)) {
-    return {
-      totalKos: 0,
-      totalLessons: 0,
-      totalPublications: 0,
-      koCreatedThisMonth: 0,
-      lessonsPublishedThisMonth: 0,
-      lastUpdated: new Date().toISOString(),
-    };
-  }
+/**
+ * Get current Knowledge Mission metrics.
+ * Derived from authoritative database records.
+ */
+export async function getKnowledgeMetrics(): Promise<KnowledgeMetrics> {
   try {
-    const raw = readFileSync(KNOWLEDGE_METRICS_FILE, "utf-8");
-    return JSON.parse(raw) as KnowledgeMetrics;
+    const db = getAsyncDb();
+    const now = new Date();
+    const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+    const [
+      kosCount,
+      lessonsCount,
+      publicationsCount,
+      koThisMonth,
+      lessonsThisMonth,
+    ] = await Promise.all([
+      db.get<{ count: number }>(
+        "SELECT COUNT(*) as count FROM knowledge_objects",
+      ),
+      db.get<{ count: number }>("SELECT COUNT(*) as count FROM studio_lessons"),
+      db.get<{ count: number }>(
+        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published'",
+      ),
+      db.get<{ count: number }>(
+        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'ko-created' AND timestamp LIKE ?",
+        `${currentMonth}%`,
+      ),
+      db.get<{ count: number }>(
+        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published' AND timestamp LIKE ?",
+        `${currentMonth}%`,
+      ),
+    ]);
+
+    return {
+      totalKos: kosCount?.count ?? 0,
+      totalLessons: lessonsCount?.count ?? 0,
+      totalPublications: publicationsCount?.count ?? 0,
+      koCreatedThisMonth: koThisMonth?.count ?? 0,
+      lessonsPublishedThisMonth: lessonsThisMonth?.count ?? 0,
+      lastUpdated: now.toISOString(),
+    };
   } catch {
     return {
       totalKos: 0,
@@ -107,69 +84,38 @@ function readMetricsFile(): KnowledgeMetrics {
   }
 }
 
-function writeMetricsFile(data: KnowledgeMetrics): void {
-  ensureDir();
-  writeFileSync(KNOWLEDGE_METRICS_FILE, JSON.stringify(data, null, 2), "utf-8");
-}
-
-// ── Queries ────────────────────────────────────────────────────
+// ── Mutation Stubs (kept for backward compatibility) ──────────
+// These functions are no longer needed — metrics are derived from records.
+// They exist only so callers that import them don't break at import time.
 
 /**
- * Get current Knowledge Mission metrics.
- */
-export function getKnowledgeMetrics(): KnowledgeMetrics {
-  return readMetricsFile();
-}
-
-// ── Mutations ──────────────────────────────────────────────────
-
-/**
- * Record a KO creation event.
- * Increments totalKos and koCreatedThisMonth.
+ * @deprecated Metrics are now derived from authoritative records.
+ * This function is a no-op retained for import compatibility.
  */
 export function recordKoCreated(): KnowledgeMetrics {
-  const metrics = readMetricsFile();
-  const now = new Date();
-  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  const lastMonth = metrics.lastUpdated
-    ? `${new Date(metrics.lastUpdated).getFullYear()}-${String(new Date(metrics.lastUpdated).getMonth() + 1).padStart(2, "0")}`
-    : "";
-
-  // Reset monthly counter if month changed
-  if (currentMonth !== lastMonth) {
-    metrics.koCreatedThisMonth = 0;
-  }
-
-  metrics.totalKos += 1;
-  metrics.koCreatedThisMonth += 1;
-  metrics.lastUpdated = now.toISOString();
-
-  writeMetricsFile(metrics);
-  return metrics;
+  // No-op: metrics derived from evidence_records on read
+  return {
+    totalKos: 0,
+    totalLessons: 0,
+    totalPublications: 0,
+    koCreatedThisMonth: 0,
+    lessonsPublishedThisMonth: 0,
+    lastUpdated: new Date().toISOString(),
+  };
 }
 
 /**
- * Record a lesson publication event.
- * Increments totalLessons, totalPublications, and lessonsPublishedThisMonth.
+ * @deprecated Metrics are now derived from authoritative records.
+ * This function is a no-op retained for import compatibility.
  */
 export function recordLessonPublished(): KnowledgeMetrics {
-  const metrics = readMetricsFile();
-  const now = new Date();
-  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  const lastMonth = metrics.lastUpdated
-    ? `${new Date(metrics.lastUpdated).getFullYear()}-${String(new Date(metrics.lastUpdated).getMonth() + 1).padStart(2, "0")}`
-    : "";
-
-  // Reset monthly counter if month changed
-  if (currentMonth !== lastMonth) {
-    metrics.lessonsPublishedThisMonth = 0;
-  }
-
-  metrics.totalLessons += 1;
-  metrics.totalPublications += 1;
-  metrics.lessonsPublishedThisMonth += 1;
-  metrics.lastUpdated = now.toISOString();
-
-  writeMetricsFile(metrics);
-  return metrics;
+  // No-op: metrics derived from evidence_records on read
+  return {
+    totalKos: 0,
+    totalLessons: 0,
+    totalPublications: 0,
+    koCreatedThisMonth: 0,
+    lessonsPublishedThisMonth: 0,
+    lastUpdated: new Date().toISOString(),
+  };
 }

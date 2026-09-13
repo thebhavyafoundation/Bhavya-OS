@@ -29,22 +29,22 @@ import type { KnowledgeObject } from "./knowledge-repository";
  * Determines whether an entity is eligible for public exposure.
  */
 export type DataClassification =
-  | "PUBLIC"       // Explicitly approved for public consumption
-  | "COMMUNITY"    // Visible to authenticated community members
-  | "INTERNAL"     // Visible only within the institution
-  | "RESTRICTED"   // Requires specific authorization
-  | "PRIVATE";     // Never exposed outside the owning entity
+  | "PUBLIC" // Explicitly approved for public consumption
+  | "COMMUNITY" // Visible to authenticated community members
+  | "INTERNAL" // Visible only within the institution
+  | "RESTRICTED" // Requires specific authorization
+  | "PRIVATE"; // Never exposed outside the owning entity
 
 /**
  * Publication status for content entities.
  * Only PUBLISHED entities may appear on public pages.
  */
 export type PublicationStatus =
-  | "draft"        // Not yet submitted for review
-  | "review"       // Under review
-  | "approved"     // Approved but not yet published
-  | "published"    // Publicly visible
-  | "archived";    // No longer publicly visible
+  | "draft" // Not yet submitted for review
+  | "review" // Under review
+  | "approved" // Approved but not yet published
+  | "published" // Publicly visible
+  | "archived"; // No longer publicly visible
 
 /**
  * Check if an entity is eligible for public exposure.
@@ -56,7 +56,9 @@ export function isPublicEligible(status: PublicationStatus): boolean {
 /**
  * Check if a classification level allows public exposure.
  */
-export function isPublicClassification(classification: DataClassification): boolean {
+export function isPublicClassification(
+  classification: DataClassification,
+): boolean {
   return classification === "PUBLIC";
 }
 
@@ -65,7 +67,10 @@ export function isPublicClassification(classification: DataClassification): bool
  * Requires status="published" AND provenance="institutional".
  * Used by both the stats API and the full projection functions.
  */
-export function isKOPublicEligible(summary: { status?: string; provenance?: string }): boolean {
+export function isKOPublicEligible(summary: {
+  status?: string;
+  provenance?: string;
+}): boolean {
   const status = summary.status || "draft";
   const provenance = summary.provenance || "institutional";
   return status === "published" && provenance === "institutional";
@@ -221,7 +226,9 @@ export interface PublicMission {
  * Project a Knowledge Object to its public representation.
  * Strips internal metadata, unpublished content, and sensitive fields.
  */
-export function projectKnowledgeObject(ko: KnowledgeObject): PublicKnowledgeObject {
+export function projectKnowledgeObject(
+  ko: KnowledgeObject,
+): PublicKnowledgeObject {
   return {
     id: ko.id,
     title: ko.title,
@@ -257,7 +264,9 @@ export function projectKnowledgeObject(ko: KnowledgeObject): PublicKnowledgeObje
 /**
  * Project a list of Knowledge Objects to public representations.
  */
-export function projectKnowledgeObjects(kos: KnowledgeObject[]): PublicKnowledgeObject[] {
+export function projectKnowledgeObjects(
+  kos: KnowledgeObject[],
+): PublicKnowledgeObject[] {
   return kos.map(projectKnowledgeObject);
 }
 
@@ -286,14 +295,16 @@ export function projectMentorAgent(agent: {
 /**
  * Project a list of Mentor Agents to public representations.
  */
-export function projectMentorAgents(agents: Array<{
-  id: string;
-  name: string;
-  description?: string;
-  specialties?: string[];
-  personality?: string;
-  systemPrompt?: string;
-}>): PublicMentorAgent[] {
+export function projectMentorAgents(
+  agents: Array<{
+    id: string;
+    name: string;
+    description?: string;
+    specialties?: string[];
+    personality?: string;
+    systemPrompt?: string;
+  }>,
+): PublicMentorAgent[] {
   return agents.map(projectMentorAgent);
 }
 
@@ -304,15 +315,15 @@ export function projectMentorAgents(agents: Array<{
  * Only returns published, institutional-eligible records.
  * Filters out drafts, test-seeded, and imported KOs.
  */
-export function getPublicKnowledgeObjects(): PublicKnowledgeObject[] {
-  // Import dynamically to avoid circular dependencies
-  const { listKOs, getKO } = require("./knowledge-repository");
-  const kos = listKOs() as Array<{ id: string; provenance?: string; status?: string }>;
-  return kos
-    // Filter: only published + institutional (shared predicate)
-    .filter(isKOPublicEligible)
-    .map((summary: { id: string }) => getKO(summary.id))
-    .filter((ko: KnowledgeObject | null): ko is KnowledgeObject => ko !== null)
+export async function getPublicKnowledgeObjects(): Promise<
+  PublicKnowledgeObject[]
+> {
+  const { listKOs, getKO } = await import("./knowledge-repository");
+  const kos = await listKOs();
+  const eligible = kos.filter(isKOPublicEligible);
+  const fullKOs = await Promise.all(eligible.map((s) => getKO(s.id)));
+  return fullKOs
+    .filter((ko): ko is KnowledgeObject => ko !== null)
     .map(projectKnowledgeObject);
 }
 
@@ -321,9 +332,11 @@ export function getPublicKnowledgeObjects(): PublicKnowledgeObject[] {
  * Only returns the KO if it is published AND institutional.
  * Draft, test-seeded, and imported KOs are excluded.
  */
-export function getPublicKnowledgeObject(id: string): PublicKnowledgeObject | null {
-  const { getKO } = require("./knowledge-repository");
-  const ko = getKO(id);
+export async function getPublicKnowledgeObject(
+  id: string,
+): Promise<PublicKnowledgeObject | null> {
+  const { getKO } = await import("./knowledge-repository");
+  const ko = await getKO(id);
   if (!ko) return null;
 
   // Enforce publication eligibility: must be published + institutional
@@ -377,7 +390,8 @@ export function projectLesson(lesson: InternalLesson): PublicLesson {
       return {
         title: (section.title as string) || "",
         content: (section.content as string) || "",
-        type: (section.type as "reading" | "exercise" | "reflection") || "reading",
+        type:
+          (section.type as "reading" | "exercise" | "reflection") || "reading",
       };
     }),
     // NOTE: assessment, teacherGuide, workbook are intentionally excluded
@@ -403,7 +417,9 @@ export async function getPublicCourses(): Promise<PublicCourse[]> {
     await ensureStudioDb();
     const { getDb } = await import("./db");
     const rows = getDb()
-      .prepare("SELECT * FROM studio_courses WHERE status = 'published' ORDER BY updated_at DESC")
+      .prepare(
+        "SELECT * FROM studio_courses WHERE status = 'published' ORDER BY updated_at DESC",
+      )
       .all() as Array<{
       id: string;
       title: string;
@@ -437,22 +453,28 @@ export async function getPublicCourses(): Promise<PublicCourse[]> {
  * Get a single public-safe course by ID.
  * Only returns the course if it is published.
  */
-export async function getPublicCourse(id: string): Promise<PublicCourse | null> {
+export async function getPublicCourse(
+  id: string,
+): Promise<PublicCourse | null> {
   try {
     const { ensureStudioDb } = await import("./studio/db");
     await ensureStudioDb();
     const { getDb } = await import("./db");
     const row = getDb()
-      .prepare("SELECT * FROM studio_courses WHERE id = ? AND status = 'published'")
-      .get(id) as {
-      id: string;
-      title: string;
-      description: string;
-      subject: string;
-      grade: number;
-      lessons: string;
-      status: string;
-    } | undefined;
+      .prepare(
+        "SELECT * FROM studio_courses WHERE id = ? AND status = 'published'",
+      )
+      .get(id) as
+      | {
+          id: string;
+          title: string;
+          description: string;
+          subject: string;
+          grade: number;
+          lessons: string;
+          status: string;
+        }
+      | undefined;
 
     if (!row) return null;
 

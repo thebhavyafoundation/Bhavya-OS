@@ -20,7 +20,7 @@ export async function GET(
     );
   }
   const { id } = await params;
-  const ko = getKO(id);
+  const ko = await getKO(id);
   if (!ko) {
     return NextResponse.json(
       { error: "Knowledge Object not found" },
@@ -99,7 +99,7 @@ export async function PUT(
 
   // 6. Canonical mutation
   const { id } = await params;
-  const ko = updateKO(id, safeBody);
+  const ko = await updateKO(id, safeBody);
   if (!ko) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -107,7 +107,7 @@ export async function PUT(
   // 7. Record evidence (non-fatal)
   let evidenceRecorded = true;
   try {
-    recordEvidence(
+    await recordEvidence(
       "ko-updated",
       ko.id,
       `Knowledge Object "${ko.title}" updated`,
@@ -151,7 +151,7 @@ export async function DELETE(
 
   // 3. Canonical deletion
   const { id } = await params;
-  const deleted = deleteKO(id);
+  const deleted = await deleteKO(id);
   if (!deleted) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -162,7 +162,7 @@ export async function DELETE(
   // that metrics represent institutional activity volume, not current state.
   let evidenceRecorded = true;
   try {
-    recordEvidence(
+    await recordEvidence(
       "ko-deleted",
       id,
       `Knowledge Object "${id}" deleted`,

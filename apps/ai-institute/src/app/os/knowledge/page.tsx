@@ -14,12 +14,12 @@ export const dynamic = "force-dynamic";
 export default async function KnowledgePage() {
   await requirePolicy("/os/knowledge");
   // Fetch KO summaries from canonical repository (has provenance + status)
-  const koSummaries = listKOs();
+  const koSummaries = await listKOs();
 
   // Fetch full KO objects for display
-  const knowledgeObjects: KnowledgeObject[] = koSummaries
-    .map((s) => getKO(s.id))
-    .filter((ko): ko is KnowledgeObject => ko !== null);
+  const knowledgeObjects: KnowledgeObject[] = (
+    await Promise.all(koSummaries.map((s) => getKO(s.id)))
+  ).filter((ko): ko is KnowledgeObject => ko !== null);
 
   // Fetch other data in parallel
   const [contentDocs, evidence, evidenceCounts, metrics] = await Promise.all([

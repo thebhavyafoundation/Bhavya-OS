@@ -21,15 +21,15 @@ import { isKOPublicEligible } from "@/lib/public-projection";
 
 export async function GET() {
   try {
-    const allKos = listKOs();
+    const allKos = await listKOs();
 
     // Filter to public-eligible only (shared predicate with public-projection.ts)
     const publicKos = allKos.filter(isKOPublicEligible);
 
     const metrics = getKnowledgeMetrics();
 
-    const evidence = listEvidence(10); // Latest 10 evidence entries
-    const evidenceCounts = getEvidenceCounts();
+    const evidence = await listEvidence(10); // Latest 10 evidence entries
+    const evidenceCounts = await getEvidenceCounts();
 
     return NextResponse.json({
       // Counts — derived from actual filesystem state where possible

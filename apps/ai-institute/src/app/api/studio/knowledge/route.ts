@@ -224,7 +224,7 @@ export async function GET(request: NextRequest) {
     );
   }
   try {
-    let knowledge = listKOs();
+    let knowledge = await listKOs();
     if (user.role !== "admin") {
       knowledge = knowledge.filter((ko) => ko.provenance !== "test-seed");
     }
@@ -280,7 +280,7 @@ export async function POST(request: NextRequest) {
 
   // 5. Canonical persistence (provenance + status enforced server-side)
   try {
-    const ko = createKO({
+    const ko = await createKO({
       ...body,
       provenance: "institutional" as KOProvenance,
       status: "draft" as KOStatus,
@@ -289,7 +289,7 @@ export async function POST(request: NextRequest) {
     // 6. Record evidence (AFTER canonical persistence succeeds)
     let evidenceRecorded = true;
     try {
-      recordEvidence(
+      await recordEvidence(
         "ko-created",
         ko.id,
         `Knowledge Object "${ko.title}" created in domain "${ko.domain}"`,
@@ -383,14 +383,14 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const ko = updateKO(id, safeBody);
+    const ko = await updateKO(id, safeBody);
     if (!ko) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
     // Record evidence of update
     try {
-      recordEvidence(
+      await recordEvidence(
         "ko-updated",
         ko.id,
         `Knowledge Object "${ko.title}" updated`,
@@ -427,14 +427,14 @@ export async function DELETE(request: NextRequest) {
     if (!id) {
       return NextResponse.json({ error: "ID required" }, { status: 400 });
     }
-    const deleted = deleteKO(id);
+    const deleted = await deleteKO(id);
     if (!deleted) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
     // Record evidence of deletion
     try {
-      recordEvidence(
+      await recordEvidence(
         "ko-deleted",
         id,
         `Knowledge Object "${id}" deleted`,

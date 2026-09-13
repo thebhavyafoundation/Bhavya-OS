@@ -44,7 +44,7 @@ export async function POST(
     });
 
     // Record evidence of lesson publication (with idempotency key)
-    recordEvidence(
+    await recordEvidence(
       "lesson-published",
       id,
       `Lesson "${lesson.title || id}" published to Academy`,
@@ -80,7 +80,7 @@ export async function POST(
     await dbUpdateLesson(id, { status: "draft" });
 
     // Record evidence of lesson revert (with idempotency key)
-    recordEvidence(
+    await recordEvidence(
       "lesson-reverted",
       id,
       `Lesson "${lesson.title || id}" reverted to draft`,

@@ -16,13 +16,29 @@
  */
 
 import { NextResponse } from "next/server";
-import { getMissions, getSites, getSurveys, getPlantings, getMonitoring, getForestImpactReports } from "@bhavya/content-core";
-import { getForestMetrics, rebuildForestMetricsFromEvidence, detectForestMetricsDrift } from "@/lib/forest-metrics";
-import { listForestEvidence, getForestEvidenceCounts } from "@/lib/forest-evidence";
+import {
+  getMissions,
+  getSites,
+  getSurveys,
+  getPlantings,
+  getMonitoring,
+  getForestImpactReports,
+} from "@bhavya/content-core";
+import {
+  getForestMetrics,
+  rebuildForestMetricsFromEvidence,
+  detectForestMetricsDrift,
+} from "@/lib/forest-metrics";
+import {
+  listForestEvidence,
+  getForestEvidenceCounts,
+} from "@/lib/forest-evidence";
 
-function countByProvenance<T>(
-  items: T[],
-): { total: number; institutional: number; testSeed: number } {
+function countByProvenance<T>(items: T[]): {
+  total: number;
+  institutional: number;
+  testSeed: number;
+} {
   let institutional = 0;
   let testSeed = 0;
   for (const item of items) {
@@ -53,8 +69,8 @@ export async function GET() {
       : getForestMetrics();
 
     // Evidence summary
-    const evidence = listForestEvidence(10);
-    const evidenceCounts = getForestEvidenceCounts();
+    const evidence = await listForestEvidence(10);
+    const evidenceCounts = await getForestEvidenceCounts();
 
     return NextResponse.json({
       // Institutional counts — only records created via authorized API
@@ -73,8 +89,13 @@ export async function GET() {
         surveys: surveys.testSeed,
         monitoring: monitoring.testSeed,
         impactReports: impactReports.testSeed,
-        total: missions.testSeed + sites.testSeed + plantings.testSeed +
-          surveys.testSeed + monitoring.testSeed + impactReports.testSeed,
+        total:
+          missions.testSeed +
+          sites.testSeed +
+          plantings.testSeed +
+          surveys.testSeed +
+          monitoring.testSeed +
+          impactReports.testSeed,
       },
 
       // Monthly activity (from evidence — only institutional)

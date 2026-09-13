@@ -43,7 +43,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getMissions, createMission, type Mission } from "@bhavya/content-core";
 import { requireAuth } from "@/lib/api-auth";
-import { roleIsAllowed, CONTENT_MANAGEMENT_ROLES, type Role } from "@/lib/roles";
+import {
+  roleIsAllowed,
+  CONTENT_MANAGEMENT_ROLES,
+  type Role,
+} from "@/lib/roles";
 import { recordForestEvidence, forestEventKey } from "@/lib/forest-evidence";
 import { recordMissionCreated } from "@/lib/forest-metrics";
 
@@ -76,50 +80,80 @@ function validateForestMissionPayload(body: unknown): ValidationError[] {
 
   // name: required string, 1–200 chars
   if (!b.name || typeof b.name !== "string") {
-    errors.push({ field: "name", message: "Name is required and must be a string" });
+    errors.push({
+      field: "name",
+      message: "Name is required and must be a string",
+    });
   } else {
     const name = b.name.trim();
     if (name.length === 0) {
       errors.push({ field: "name", message: "Name cannot be empty" });
     } else if (name.length > MAX_NAME_LENGTH) {
-      errors.push({ field: "name", message: `Name must be ${MAX_NAME_LENGTH} characters or fewer` });
+      errors.push({
+        field: "name",
+        message: `Name must be ${MAX_NAME_LENGTH} characters or fewer`,
+      });
     }
   }
 
   // region: required string, 1–100 chars
   if (!b.region || typeof b.region !== "string") {
-    errors.push({ field: "region", message: "Region is required and must be a string" });
+    errors.push({
+      field: "region",
+      message: "Region is required and must be a string",
+    });
   } else {
     const region = b.region.trim();
     if (region.length === 0) {
       errors.push({ field: "region", message: "Region cannot be empty" });
     } else if (region.length > MAX_REGION_LENGTH) {
-      errors.push({ field: "region", message: `Region must be ${MAX_REGION_LENGTH} characters or fewer` });
+      errors.push({
+        field: "region",
+        message: `Region must be ${MAX_REGION_LENGTH} characters or fewer`,
+      });
     }
   }
 
   // description: optional string, 0–2000 chars
   if (b.description !== undefined && b.description !== null) {
     if (typeof b.description !== "string") {
-      errors.push({ field: "description", message: "Description must be a string" });
+      errors.push({
+        field: "description",
+        message: "Description must be a string",
+      });
     } else if (b.description.length > MAX_DESCRIPTION_LENGTH) {
-      errors.push({ field: "description", message: `Description must be ${MAX_DESCRIPTION_LENGTH} characters or fewer` });
+      errors.push({
+        field: "description",
+        message: `Description must be ${MAX_DESCRIPTION_LENGTH} characters or fewer`,
+      });
     }
   }
 
   // goals: optional array of strings, max 20, each max 500 chars
   if (b.goals !== undefined && b.goals !== null) {
     if (!Array.isArray(b.goals)) {
-      errors.push({ field: "goals", message: "Goals must be an array of strings" });
+      errors.push({
+        field: "goals",
+        message: "Goals must be an array of strings",
+      });
     } else {
       if (b.goals.length > MAX_GOALS) {
-        errors.push({ field: "goals", message: `Goals must contain ${MAX_GOALS} items or fewer` });
+        errors.push({
+          field: "goals",
+          message: `Goals must contain ${MAX_GOALS} items or fewer`,
+        });
       }
       for (let i = 0; i < b.goals.length; i++) {
         if (typeof b.goals[i] !== "string") {
-          errors.push({ field: `goals[${i}]`, message: "Each goal must be a string" });
+          errors.push({
+            field: `goals[${i}]`,
+            message: "Each goal must be a string",
+          });
         } else if (b.goals[i].length > MAX_GOAL_LENGTH) {
-          errors.push({ field: `goals[${i}]`, message: `Goal must be ${MAX_GOAL_LENGTH} characters or fewer` });
+          errors.push({
+            field: `goals[${i}]`,
+            message: `Goal must be ${MAX_GOAL_LENGTH} characters or fewer`,
+          });
         }
       }
     }
@@ -128,16 +162,28 @@ function validateForestMissionPayload(body: unknown): ValidationError[] {
   // tags: optional array of strings, max 20, each max 100 chars
   if (b.tags !== undefined && b.tags !== null) {
     if (!Array.isArray(b.tags)) {
-      errors.push({ field: "tags", message: "Tags must be an array of strings" });
+      errors.push({
+        field: "tags",
+        message: "Tags must be an array of strings",
+      });
     } else {
       if (b.tags.length > MAX_TAGS) {
-        errors.push({ field: "tags", message: `Tags must contain ${MAX_TAGS} items or fewer` });
+        errors.push({
+          field: "tags",
+          message: `Tags must contain ${MAX_TAGS} items or fewer`,
+        });
       }
       for (let i = 0; i < b.tags.length; i++) {
         if (typeof b.tags[i] !== "string") {
-          errors.push({ field: `tags[${i}]`, message: "Each tag must be a string" });
+          errors.push({
+            field: `tags[${i}]`,
+            message: "Each tag must be a string",
+          });
         } else if (b.tags[i].length > MAX_TAG_LENGTH) {
-          errors.push({ field: `tags[${i}]`, message: `Tag must be ${MAX_TAG_LENGTH} characters or fewer` });
+          errors.push({
+            field: `tags[${i}]`,
+            message: `Tag must be ${MAX_TAG_LENGTH} characters or fewer`,
+          });
         }
       }
     }
@@ -161,8 +207,7 @@ export async function GET() {
     const institutional = allMissions
       .filter((m) => m.provenance === "institutional")
       .sort(
-        (a, b) =>
-          new Date(b.created).getTime() - new Date(a.created).getTime(),
+        (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime(),
       );
     return NextResponse.json(institutional);
   } catch {
@@ -187,10 +232,16 @@ export async function POST(request: NextRequest) {
   // Auth check
   const user = await requireAuth(request);
   if (!user) {
-    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Authentication required" },
+      { status: 401 },
+    );
   }
   if (!roleIsAllowed(user.role as Role, CONTENT_MANAGEMENT_ROLES)) {
-    return NextResponse.json({ error: "Insufficient permissions" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Insufficient permissions" },
+      { status: 403 },
+    );
   }
 
   // Parse body
@@ -198,10 +249,7 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      { error: "Invalid JSON body" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
   // Validate
@@ -220,10 +268,14 @@ export async function POST(request: NextRequest) {
   try {
     mission = createMission({
       name: (b.name as string).trim(),
-      description: (b.description as string || "").trim(),
+      description: ((b.description as string) || "").trim(),
       region: (b.region as string).trim(),
-      goals: Array.isArray(b.goals) ? b.goals.map((g) => (g as string).trim()) : [],
-      tags: Array.isArray(b.tags) ? b.tags.map((t) => (t as string).trim()) : [],
+      goals: Array.isArray(b.goals)
+        ? b.goals.map((g) => (g as string).trim())
+        : [],
+      tags: Array.isArray(b.tags)
+        ? b.tags.map((t) => (t as string).trim())
+        : [],
       provenance: "institutional",
     });
   } catch (error) {
@@ -237,7 +289,7 @@ export async function POST(request: NextRequest) {
   const sideEffects: string[] = [];
 
   try {
-    recordForestEvidence(
+    await recordForestEvidence(
       "mission-created",
       mission.id,
       `Forest mission "${mission.name}" created in region "${mission.region}"`,
@@ -260,7 +312,10 @@ export async function POST(request: NextRequest) {
     // Metrics failure is observable; reconciliation via rebuildForestMetricsFromEvidence()
   }
 
-  const response: Mission & { warnings?: string[]; partialProcessing?: boolean } = { ...mission };
+  const response: Mission & {
+    warnings?: string[];
+    partialProcessing?: boolean;
+  } = { ...mission };
   if (sideEffects.length > 0) {
     response.warnings = sideEffects;
     response.partialProcessing = true;
