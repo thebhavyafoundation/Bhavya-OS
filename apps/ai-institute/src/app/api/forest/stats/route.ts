@@ -65,8 +65,8 @@ export async function GET() {
     // Check for drift and rebuild from evidence if necessary
     const { drift } = detectForestMetricsDrift();
     const metrics = drift
-      ? rebuildForestMetricsFromEvidence()
-      : getForestMetrics();
+      ? await rebuildForestMetricsFromEvidence()
+      : await getForestMetrics();
 
     // Evidence summary
     const evidence = await listForestEvidence(10);

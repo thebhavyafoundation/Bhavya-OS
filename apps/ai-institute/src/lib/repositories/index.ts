@@ -61,3 +61,5 @@ export function getKnowledgeRepository(): KnowledgeRepository {
 export function getEvidenceRepository(): EvidenceRepository {
   return new SqliteEvidenceRepository();
 }
+
+export { eventKey } from "./evidence-repository";
