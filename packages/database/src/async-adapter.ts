@@ -10,6 +10,7 @@
  */
 
 import type { DatabaseName } from "./registry";
+import type BetterSqlite3 from "better-sqlite3";
 
 // ─── Async Query Result ──────────────────────────────────────────────────────
 
@@ -57,10 +58,7 @@ interface SqliteStatement {
   run: (...args: unknown[]) => any;
 }
 
-interface SqliteDb {
-  prepare: (sql: string) => SqliteStatement;
-  exec: (sql: string) => void;
-}
+type SqliteDb = BetterSqlite3.Database;
 
 // ─── Production Adapter (Turso/libSQL) ───────────────────────────────────────
 
