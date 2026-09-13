@@ -13,14 +13,5 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "bhavya-foundation"
     }
-  ],
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "bhavya-foundation-opennext-cache"
-    }
-  ],
-  "images": {
-    "binding": "IMAGES"
-  }
+  ]
 }
