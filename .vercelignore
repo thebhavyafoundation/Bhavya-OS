@@ -4,7 +4,12 @@
 **/.vercel
 **/.env
 *.db
+*.db-shm
+*.db-wal
 *.tsbuildinfo
+*.zip
+*.onnx
+*.bin
 .git
 
 # All apps except ai-institute
@@ -43,6 +48,7 @@ apps/bhavya-intelligence-network
 .worktrees
 
 # Root-only directories (must use / prefix to not match packages/*)
+/_archive
 /archive
 /bar
 /bhavya-website
