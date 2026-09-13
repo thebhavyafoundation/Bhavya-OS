@@ -9,7 +9,7 @@ if (!app) {
 
 const validApps = [
   'ai-institute', 'admin', 'docs', 'design-system',
-  'github-os', 'ioc', 'social-os', 'bhavya-intelligence-network', 'website'
+  'github-os', 'ioc', 'social-os', 'bhavya-intelligence-network'
 ];
 
 if (!validApps.includes(app)) {

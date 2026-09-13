@@ -33,6 +33,11 @@ export function TiltCard({
   );
   const glareX = useSpring(useTransform(x, [0, 1], [0, 100]), springConfig);
   const glareY = useSpring(useTransform(y, [0, 1], [0, 100]), springConfig);
+  const glareBackground = useTransform(
+    [glareX, glareY],
+    ([gx, gy]) =>
+      `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
+  );
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -62,23 +67,17 @@ export function TiltCard({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      {glareEnabled && (
-        <motion.div
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "inherit",
-            background: useTransform(
-              [glareX, glareY],
-              ([gx, gy]) =>
-                `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
-            ),
-            opacity: isHovered ? 1 : 0,
-            pointerEvents: "none",
-            transition: "opacity 0.3s ease",
-          }}
-        />
-      )}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "inherit",
+          background: glareBackground,
+          opacity: glareEnabled && isHovered ? 1 : 0,
+          pointerEvents: "none",
+          transition: "opacity 0.3s ease",
+        }}
+      />
     </motion.div>
   );
 }
