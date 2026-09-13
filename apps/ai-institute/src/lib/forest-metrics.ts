@@ -77,6 +77,8 @@ export async function getForestMetrics(): Promise<ForestMetrics> {
       totalRegions: 0,
       activeMissions: 0,
       missionsThisMonth: 0,
+      missionsCreatedThisMonth: 0,
+      plantingsCreatedThisMonth: 0,
       lastUpdated: new Date().toISOString(),
     };
   }
