@@ -30,13 +30,15 @@ All commands verified in root `package.json`:
 - **Scaffold:** `pnpm scaffold` (content-core)
 - **File map:** `pnpm file-map` (generate) / `pnpm file-map:check` (CI check)
 - **Token sync:** `pnpm tokens:sync` (sync) / `pnpm tokens:check` (CI check)
+- **AntiSlop:** `pnpm antislop` (deterministic anti-AI-slop quality gate)
+- **AntiSlop (staged):** `pnpm antislop:staged` (pre-commit mode, staged files only)
 - **Git check:** `git diff --check`
 
 ### CI workflow (`.github/workflows/ci.yml`)
 
 Runs on push/PR to `main`. Three parallel jobs, then build:
 
-1. **lint-and-typecheck** — `pnpm lint` + `pnpm typecheck`
+1. **lint-and-typecheck** — `pnpm antislop` + `pnpm lint` + `pnpm typecheck`
 2. **test** — `pnpm test`
 3. **secret-scan** — gitleaks + pattern scan
 4. **build** (after lint-and-typecheck + test pass) — `pnpm build`
@@ -226,6 +228,10 @@ Project-local skills live in `.opencode/skills/`. Use the `skill` tool to load t
 | `bhavya-security-audit`          | CSO mode for security audit                         |
 | `bhavya-ship`                    | Ship workflow                                       |
 | `bhavya-spec`                    | Structured specification development                |
+| `bhavya-reasons-canvas`          | REASONS Canvas design contracts (SPDD integration)  |
+| `antislop`                       | Anti-AI-slop quality rules and gate                 |
+| `antislop-code`                  | Code comment hygiene (remove AI-slop comments)      |
+| `antislop-copywriting`           | Detect AI writing patterns in prose                 |
 
 ## Skill Precedence
 

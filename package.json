@@ -37,7 +37,10 @@
     "vercel:deploy": "vercel deploy --prebuilt",
     "vercel:deploy:app": "node scripts/vercel-build-app.mjs",
     "vercel:deploy:all": "bash scripts/deploy-all-vercel.sh",
-    "bhavya:api:verbose": "node packages/runtime/cli/api-standalone.mjs"
+    "bhavya:api:verbose": "node packages/runtime/cli/api-standalone.mjs",
+    "antislop": "node scripts/antislop-gate.mjs",
+    "antislop:staged": "node scripts/antislop-gate.mjs --staged",
+    "drift:check": "node scripts/drift-check.mjs"
   },
   "dependencies": {
     "next": "15.5.25",

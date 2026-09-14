@@ -60,6 +60,14 @@ GitHub Actions must pass on the PR.
 ### 10. Production Smoke Test
 For significant changes, verify the deployed preview works correctly.
 
+### 11. Design-Code Drift Check (if REASONS Canvas exists)
+If a REASONS Canvas was created for this task (`specs/{feature}-reasons-canvas.md`):
+1. For each Operation step, verify the described file exists and matches
+2. For each Safeguard, verify it was not violated
+3. For each Structure file, verify it was created/modified as described
+4. Record status: MATCH or DRIFT for each item
+5. If drift detected: investigate discrepancy. The canvas is NOT authority over source code. If the implementation improved on the canvas design, update the canvas to match reality.
+
 ## Evidence Standard
 
 Never report "complete" based on code inspection alone.
@@ -103,4 +111,13 @@ Completion requires evidence:
 [link to CI run]
 
 ### Overall: VERIFIED / NOT VERIFIED
+```
+
+## Design-Code Drift Report (if applicable)
+
+```markdown
+### Drift Check: PASS/FAIL
+| Canvas Item | Expected | Actual | Status |
+|-------------|----------|--------|--------|
+| {item} | {expectation} | {reality} | MATCH/DRIFT |
 ```

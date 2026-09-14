@@ -10,6 +10,7 @@ Propose it (`rfcs/`) → build it (`apps/` + `packages/`) → govern it
 | `rfcs/`             | pipeline            | `rfcs/CONTEXT.md`                   | `status:` frontmatter per RFC                |
 | `docs/`, `.ai/`     | knowledge bundle    | `docs/CONTEXT.md`, `.ai/CONTEXT.md` | files on disk                                |
 | `registry/`, `bar/` | catalog (generated) | `registry/index.json`               | rebuilt by script                            |
+| `specs/`            | design contracts    | `specs/`                            | REASONS Canvas lives here                    |
 
 Factory (stable): `_shared/factory-map.md`. Product (per run): RFCs, routes,
 releases, curriculum runs. This file points — content lives in each hub.
