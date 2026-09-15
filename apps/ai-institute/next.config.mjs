@@ -19,7 +19,11 @@ const nextConfig = {
     "@bhavya/impact-runtime",
     "@bhavya/project-runtime",
   ],
-  serverExternalPackages: ["better-sqlite3", "@libsql/client"],
+  serverExternalPackages: [
+    "better-sqlite3",
+    "@libsql/client",
+    "@libsql/isomorphic-ws",
+  ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   openNextConfig: defineCloudflareConfig({}),
 };
