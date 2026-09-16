@@ -2,7 +2,6 @@
 
 **Nature. Knowledge. Heritage. Building for Generations.**
 
-[![Website](https://img.shields.io/badge/Website-website--ten--vert--90.vercel.app-green)](https://website-ten-vert-90.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Company-blue)](https://www.linkedin.com/company/143079926/)
 [![GitHub](https://img.shields.io/badge/GitHub-Organization-black)](https://github.com/thebhavyafoundation)
 
@@ -14,12 +13,12 @@ Bhavya Foundation is a public institution committed to building a better tomorro
 
 ### Four Missions
 
-| Mission          | Focus                                       | Impact                  |
-| ---------------- | ------------------------------------------- | ----------------------- |
-| 🌱 **Forest**    | Restore ecosystems, conserve biodiversity   | 8+ hectares restored    |
-| 📚 **Knowledge** | AI labs, digital libraries, STEM education  | 10K+ students empowered |
-| 🏛️ **Heritage**  | Document and preserve traditional knowledge | Active preservation     |
-| 👥 **Community** | Youth empowerment, village development      | 50+ communities engaged |
+| Mission          | Focus                                       | 
+| ---------------- | ------------------------------------------- | 
+| 🌱 **Forest**    | Restore ecosystems, conserve biodiversity   | 
+| 📚 **Knowledge** | AI labs, digital libraries, STEM education  | 
+| 🏛️ **Heritage**  | Document and preserve traditional knowledge |
+| 👥 **Community** | Youth empowerment, village development      |
 
 ---
 
