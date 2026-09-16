@@ -138,7 +138,6 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Contact
 
-- **Website:** [website-ten-vert-90.vercel.app](https://website-ten-vert-90.vercel.app)
 - **LinkedIn:** [Bhavya Foundation](https://www.linkedin.com/company/143079926/)
 - **GitHub:** [thebhavyafoundation](https://github.com/thebhavyafoundation)
 
