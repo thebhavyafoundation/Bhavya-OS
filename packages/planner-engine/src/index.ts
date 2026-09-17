@@ -2,10 +2,12 @@
 // Converts goals into executable plans
 // Goal → Plan → Tasks → Agents → Execution
 
-import type { Goal, Plan, Task, AgentId } from '@bhavya/kernel';
+import type { Goal, Plan, Task, AgentId } from "@bhavya/kernel";
 
 export interface PlannerEngineConfig {
-  events: { emit: (type: string, payload: Record<string, unknown>) => Promise<void> };
+  events: {
+    emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
+  };
 }
 
 export class PlannerEngine {
@@ -21,16 +23,29 @@ export class PlannerEngine {
   }
 
   async createPlan(goal: Goal): Promise<Plan> {
+    const now = new Date();
     const plan: Plan = {
       id: `plan:${crypto.randomUUID()}`,
+      name: goal.name,
+      description: goal.description,
       goalId: goal.id,
+      status: "draft",
       steps: [],
-      status: 'draft',
-      createdAt: new Date(),
+      milestones: [],
+      resources: [],
+      timeline: {
+        startDate: now.toISOString(),
+        endDate: (goal.deadline ?? now).toISOString(),
+        phases: [],
+      },
+      dependencies: [],
+      metadata: {},
+      createdAt: now,
+      updatedAt: now,
     };
 
     this.plans.set(plan.id, plan);
-    await this.config.events.emit('planner.plan.created', { planId: plan.id });
+    await this.config.events.emit("planner.plan.created", { planId: plan.id });
     return plan;
   }
 
@@ -47,17 +62,17 @@ export class PlannerEngine {
     return plan;
   }
 
-  private generateSteps(goal: Goal): Plan['steps'] {
+  private generateSteps(goal: Goal): Plan["steps"] {
     // Placeholder: would use AI to decompose goal
     return [
       {
-        name: 'analyze',
+        name: "analyze",
         task: {
           id: `task:${crypto.randomUUID()}`,
-          type: 'analysis',
+          type: "analysis",
           goal: goal.description,
           input: {},
-          status: 'pending',
+          status: "pending",
           dependencies: [],
           events: [],
           createdAt: new Date(),
@@ -68,7 +83,11 @@ export class PlannerEngine {
     ];
   }
 
-  async assignTask(planId: string, stepIndex: number, agentId: AgentId): Promise<boolean> {
+  async assignTask(
+    planId: string,
+    stepIndex: number,
+    agentId: AgentId,
+  ): Promise<boolean> {
     const plan = this.plans.get(planId);
     if (!plan || !plan.steps[stepIndex]) return false;
 
@@ -79,7 +98,7 @@ export class PlannerEngine {
   async approve(planId: string): Promise<boolean> {
     const plan = this.plans.get(planId);
     if (!plan) return false;
-    plan.status = 'approved';
+    plan.status = "approved";
     return true;
   }
 
