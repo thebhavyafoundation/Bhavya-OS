@@ -325,7 +325,7 @@
       "stackData": 22
     },
     "gsap-core": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-core",
+      "path": "~/.config/opencode/skills/gsap/gsap-core",
       "category": "frontend",
       "purpose": "Core GSAP API — gsap.to(), from(), fromTo(), easing, duration, stagger, matchMedia()",
       "capabilities": [
@@ -344,7 +344,7 @@
       "format": "SKILL.md"
     },
     "gsap-react": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-react",
+      "path": "~/.config/opencode/skills/gsap/gsap-react",
       "category": "frontend",
       "purpose": "GSAP with React — useGSAP hook, refs, gsap.context(), cleanup",
       "capabilities": [
@@ -362,7 +362,7 @@
       "format": "SKILL.md"
     },
     "gsap-scrolltrigger": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-scrolltrigger",
+      "path": "~/.config/opencode/skills/gsap/gsap-scrolltrigger",
       "category": "frontend",
       "purpose": "Scroll-linked animations, pinning, scrub, triggers",
       "capabilities": [
@@ -385,7 +385,7 @@
       "format": "SKILL.md"
     },
     "gsap-timeline": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-timeline",
+      "path": "~/.config/opencode/skills/gsap/gsap-timeline",
       "category": "frontend",
       "purpose": "Sequencing — gsap.timeline(), position parameter, nesting",
       "capabilities": [
@@ -403,7 +403,7 @@
       "format": "SKILL.md"
     },
     "gsap-utils": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-utils",
+      "path": "~/.config/opencode/skills/gsap/gsap-utils",
       "category": "frontend",
       "purpose": "Utilities — clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap",
       "capabilities": [
@@ -425,7 +425,7 @@
       "format": "SKILL.md"
     },
     "gsap-frameworks": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-frameworks",
+      "path": "~/.config/opencode/skills/gsap/gsap-frameworks",
       "category": "frontend",
       "purpose": "GSAP with Vue, Svelte, non-React frameworks — lifecycle, scoping, cleanup",
       "capabilities": [
@@ -443,7 +443,7 @@
       "format": "SKILL.md"
     },
     "gsap-plugins": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-plugins",
+      "path": "~/.config/opencode/skills/gsap/gsap-plugins",
       "category": "frontend",
       "purpose": "Plugin registration — ScrollTo, ScrollSmoother, Flip, Draggable, Observer, SplitText, etc.",
       "capabilities": [
@@ -470,7 +470,7 @@
       "format": "SKILL.md"
     },
     "gsap-performance": {
-      "path": "C:/Users/BBNC/.config/opencode/skills/gsap/gsap-performance",
+      "path": "~/.config/opencode/skills/gsap/gsap-performance",
       "category": "frontend",
       "purpose": "Animation performance — transforms, will-change, batching, 60fps",
       "capabilities": [
