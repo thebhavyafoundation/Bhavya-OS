@@ -2,7 +2,7 @@
 // Reacts to events, triggers workflows automatically.
 // No polling — pure event-driven.
 
-import type { Event } from '../types/index.js';
+import type { Event } from "../types/index.js";
 
 export interface WorkflowTrigger {
   id: string;
@@ -25,14 +25,19 @@ export interface OrchestratorConfig {
     getStatus: (id: string) => Promise<string>;
   };
   memory: {
-    set: (entry: any) => Promise<any>;
+    set: (entry: Record<string, unknown>) => Promise<void>;
   };
 }
 
 export class EventDrivenOrchestrator {
   private config: OrchestratorConfig;
   private triggers = new Map<string, WorkflowTrigger>();
-  private executionLog: Array<{ triggerId: string; eventType: string; timestamp: Date; success: boolean }> = [];
+  private executionLog: Array<{
+    triggerId: string;
+    eventType: string;
+    timestamp: Date;
+    success: boolean;
+  }> = [];
 
   constructor(config: OrchestratorConfig) {
     this.config = config;
@@ -48,7 +53,7 @@ export class EventDrivenOrchestrator {
   }
 
   // Register a new trigger
-  registerTrigger(trigger: Omit<WorkflowTrigger, 'id'>): string {
+  registerTrigger(trigger: Omit<WorkflowTrigger, "id">): string {
     const id = `trigger:${crypto.randomUUID()}`;
     const fullTrigger: WorkflowTrigger = { ...trigger, id };
     this.triggers.set(id, fullTrigger);
@@ -68,7 +73,11 @@ export class EventDrivenOrchestrator {
   }
 
   // Handle incoming event
-  private async handleEvent(triggerId: string, trigger: WorkflowTrigger, event: Event): Promise<void> {
+  private async handleEvent(
+    triggerId: string,
+    trigger: WorkflowTrigger,
+    event: Event,
+  ): Promise<void> {
     // Check cooldown
     if (trigger.cooldownMs && trigger.lastTriggered) {
       const elapsed = Date.now() - trigger.lastTriggered.getTime();
@@ -76,13 +85,18 @@ export class EventDrivenOrchestrator {
     }
 
     // Check condition
-    if (trigger.condition && !trigger.condition(event.payload as Record<string, unknown>)) {
+    if (
+      trigger.condition &&
+      !trigger.condition(event.payload as Record<string, unknown>)
+    ) {
       return;
     }
 
     // Execute workflow
     try {
-      const input = trigger.workflowInput(event.payload as Record<string, unknown>);
+      const input = trigger.workflowInput(
+        event.payload as Record<string, unknown>,
+      );
       await this.config.workflows.start(trigger.workflowId, input);
 
       trigger.lastTriggered = new Date();
@@ -95,10 +109,10 @@ export class EventDrivenOrchestrator {
       });
 
       await this.config.memory.set({
-        type: 'orchestration',
+        type: "orchestration",
         content: `Triggered: ${trigger.workflowId} from ${event.type}`,
-        tags: ['orchestration', trigger.workflowId, event.type],
-        source: 'event-orchestrator',
+        tags: ["orchestration", trigger.workflowId, event.type],
+        source: "event-orchestrator",
         confidence: 1,
       });
     } catch {
@@ -118,7 +132,12 @@ export class EventDrivenOrchestrator {
   }
 
   // Get execution log
-  getExecutionLog(): Array<{ triggerId: string; eventType: string; timestamp: Date; success: boolean }> {
+  getExecutionLog(): Array<{
+    triggerId: string;
+    eventType: string;
+    timestamp: Date;
+    success: boolean;
+  }> {
     return [...this.executionLog];
   }
 

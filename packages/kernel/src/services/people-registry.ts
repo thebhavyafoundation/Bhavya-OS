@@ -15,7 +15,7 @@ export interface Person {
   certifications: Certification[];
   roles: PersonRole[];
   permissions: string[];
-  status: 'pending' | 'active' | 'inactive' | 'suspended';
+  status: "pending" | "active" | "inactive" | "suspended";
   createdAt: Date;
   updatedAt: Date;
   metadata: Record<string, unknown>;
@@ -33,17 +33,17 @@ export interface PersonIdentity {
 
 export interface Skill {
   name: string;
-  level: 'beginner' | 'intermediate' | 'expert';
+  level: "beginner" | "intermediate" | "expert";
   verified: boolean;
   verifiedBy?: string;
   verifiedAt?: Date;
 }
 
 export interface Availability {
-  status: 'available' | 'busy' | 'unavailable';
+  status: "available" | "busy" | "unavailable";
   hoursPerWeek: number;
   preferredDays: string[];
-  preferredTime: 'morning' | 'afternoon' | 'evening' | 'flexible';
+  preferredTime: "morning" | "afternoon" | "evening" | "flexible";
   startDate?: Date;
   endDate?: Date;
 }
@@ -83,11 +83,19 @@ export interface Certification {
   issuedAt: Date;
   expiresAt?: Date;
   credentialId?: string;
-  status: 'active' | 'expired' | 'revoked';
+  status: "active" | "expired" | "revoked";
 }
 
 export interface PersonRole {
-  role: 'volunteer' | 'trustee' | 'advisor' | 'researcher' | 'donor' | 'staff' | 'partner' | 'community-member';
+  role:
+    | "volunteer"
+    | "trustee"
+    | "advisor"
+    | "researcher"
+    | "donor"
+    | "staff"
+    | "partner"
+    | "community-member";
   assignedAt: Date;
   assignedBy: string;
   missionId?: string;
@@ -95,7 +103,19 @@ export interface PersonRole {
 }
 
 export interface PeopleInput {
-  action: 'register' | 'update' | 'verify' | 'assign-role' | 'add-skill' | 'add-certification' | 'log-training' | 'get' | 'list' | 'search' | 'get-by-role' | 'get-by-skill';
+  action:
+    | "register"
+    | "update"
+    | "verify"
+    | "assign-role"
+    | "add-skill"
+    | "add-certification"
+    | "log-training"
+    | "get"
+    | "list"
+    | "search"
+    | "get-by-role"
+    | "get-by-skill";
   personId?: string;
   firstName?: string;
   lastName?: string;
@@ -104,7 +124,7 @@ export interface PeopleInput {
   skills?: Skill[];
   interests?: string[];
   languages?: string[];
-  role?: PersonRole['role'];
+  role?: PersonRole["role"];
   missionId?: string;
   skillName?: string;
   certName?: string;
@@ -113,65 +133,78 @@ export interface PeopleInput {
   roleFilter?: string;
   skillFilter?: string;
   query?: string;
-  status?: Person['status'];
+  status?: Person["status"];
 }
 
 export class PeopleRegistry {
-  name = 'people';
-  description = 'Unified profile for every person in the institution';
+  name = "people";
+  description = "Unified profile for every person in the institution";
   capabilities = [
-    'register-person',
-    'update-profile',
-    'verify-person',
-    'assign-roles',
-    'manage-skills',
-    'manage-certifications',
-    'log-training',
-    'search-people',
-    'audit-trail',
+    "register-person",
+    "update-profile",
+    "verify-person",
+    "assign-roles",
+    "manage-skills",
+    "manage-certifications",
+    "log-training",
+    "search-people",
+    "audit-trail",
   ];
 
   private people = new Map<string, Person>();
-  private auditLog: Array<{ action: string; personId: string; agent: string; timestamp: Date; details: Record<string, unknown> }> = [];
+  private auditLog: Array<{
+    action: string;
+    personId: string;
+    agent: string;
+    timestamp: Date;
+    details: Record<string, unknown>;
+  }> = [];
 
   async initialize(): Promise<void> {
     // Ready
   }
 
-  async execute(input: PeopleInput): Promise<{ success: boolean; result?: any }> {
+  async execute(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; result?: unknown }> {
     switch (input.action) {
-      case 'register':
+      case "register":
         return this.register(input);
-      case 'update':
+      case "update":
         return this.update(input);
-      case 'verify':
+      case "verify":
         return this.verify(input);
-      case 'assign-role':
+      case "assign-role":
         return this.assignRole(input);
-      case 'add-skill':
+      case "add-skill":
         return this.addSkill(input);
-      case 'add-certification':
+      case "add-certification":
         return this.addCertification(input);
-      case 'log-training':
+      case "log-training":
         return this.logTraining(input);
-      case 'get':
+      case "get":
         return this.get(input);
-      case 'list':
+      case "list":
         return this.list();
-      case 'search':
+      case "search":
         return this.search(input);
-      case 'get-by-role':
+      case "get-by-role":
         return this.getByRole(input);
-      case 'get-by-skill':
+      case "get-by-skill":
         return this.getBySkill(input);
     }
   }
 
-  private async register(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
-    if (!input.firstName || !input.lastName || !input.email) return { success: false };
+  private async register(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
+    if (!input.firstName || !input.lastName || !input.email)
+      return { success: false };
 
     // Check for duplicate email
-    const existing = Array.from(this.people.values()).find((p) => p.identity.email === input.email);
+    const existing = Array.from(this.people.values()).find(
+      (p) => p.identity.email === input.email,
+    );
     if (existing) return { success: false };
 
     const person: Person = {
@@ -184,27 +217,36 @@ export class PeopleRegistry {
       },
       skills: input.skills ?? [],
       interests: input.interests ?? [],
-      languages: input.languages ?? ['english'],
-      availability: { status: 'available', hoursPerWeek: 10, preferredDays: [], preferredTime: 'flexible' },
+      languages: input.languages ?? ["english"],
+      availability: {
+        status: "available",
+        hoursPerWeek: 10,
+        preferredDays: [],
+        preferredTime: "flexible",
+      },
       location: { remote: true },
       missionHistory: [],
       training: [],
       certifications: [],
       roles: [],
-      permissions: ['read'],
-      status: 'pending',
+      permissions: ["read"],
+      status: "pending",
       createdAt: new Date(),
       updatedAt: new Date(),
       metadata: {},
     };
 
     this.people.set(person.id, person);
-    this.audit('register', person.id, 'people-registry', { name: `${input.firstName} ${input.lastName}` });
+    this.audit("register", person.id, "people-registry", {
+      name: `${input.firstName} ${input.lastName}`,
+    });
 
     return { success: true, person };
   }
 
-  private async update(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async update(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId) return { success: false };
 
     const person = this.people.get(input.personId);
@@ -217,25 +259,29 @@ export class PeopleRegistry {
     if (input.interests) person.interests = input.interests;
     if (input.languages) person.languages = input.languages;
     person.updatedAt = new Date();
-    this.audit('update', person.id, 'people-registry', {});
+    this.audit("update", person.id, "people-registry", {});
 
     return { success: true, person };
   }
 
-  private async verify(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async verify(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId) return { success: false };
 
     const person = this.people.get(input.personId);
     if (!person) return { success: false };
 
-    person.status = 'active';
+    person.status = "active";
     person.updatedAt = new Date();
-    this.audit('verify', person.id, 'people-registry', {});
+    this.audit("verify", person.id, "people-registry", {});
 
     return { success: true, person };
   }
 
-  private async assignRole(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async assignRole(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId || !input.role) return { success: false };
 
     const person = this.people.get(input.personId);
@@ -244,17 +290,21 @@ export class PeopleRegistry {
     person.roles.push({
       role: input.role,
       assignedAt: new Date(),
-      assignedBy: 'system',
+      assignedBy: "system",
       missionId: input.missionId,
       permissions: this.getDefaultPermissions(input.role),
     });
     person.updatedAt = new Date();
-    this.audit('assign-role', person.id, 'people-registry', { role: input.role });
+    this.audit("assign-role", person.id, "people-registry", {
+      role: input.role,
+    });
 
     return { success: true, person };
   }
 
-  private async addSkill(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async addSkill(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId || !input.skillName) return { success: false };
 
     const person = this.people.get(input.personId);
@@ -267,18 +317,23 @@ export class PeopleRegistry {
     } else {
       person.skills.push({
         name: input.skillName,
-        level: input.skills?.[0]?.level ?? 'beginner',
+        level: input.skills?.[0]?.level ?? "beginner",
         verified: false,
       });
     }
     person.updatedAt = new Date();
-    this.audit('add-skill', person.id, 'people-registry', { skill: input.skillName });
+    this.audit("add-skill", person.id, "people-registry", {
+      skill: input.skillName,
+    });
 
     return { success: true, person };
   }
 
-  private async addCertification(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
-    if (!input.personId || !input.certName || !input.certOrg) return { success: false };
+  private async addCertification(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
+    if (!input.personId || !input.certName || !input.certOrg)
+      return { success: false };
 
     const person = this.people.get(input.personId);
     if (!person) return { success: false };
@@ -288,15 +343,19 @@ export class PeopleRegistry {
       name: input.certName,
       issuingOrganization: input.certOrg,
       issuedAt: new Date(),
-      status: 'active',
+      status: "active",
     });
     person.updatedAt = new Date();
-    this.audit('add-certification', person.id, 'people-registry', { cert: input.certName });
+    this.audit("add-certification", person.id, "people-registry", {
+      cert: input.certName,
+    });
 
     return { success: true, person };
   }
 
-  private async logTraining(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async logTraining(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId || !input.trainingName) return { success: false };
 
     const person = this.people.get(input.personId);
@@ -305,16 +364,20 @@ export class PeopleRegistry {
     person.training.push({
       id: `training:${crypto.randomUUID()}`,
       name: input.trainingName,
-      description: '',
+      description: "",
       completedAt: new Date(),
     });
     person.updatedAt = new Date();
-    this.audit('log-training', person.id, 'people-registry', { training: input.trainingName });
+    this.audit("log-training", person.id, "people-registry", {
+      training: input.trainingName,
+    });
 
     return { success: true, person };
   }
 
-  private async get(input: PeopleInput): Promise<{ success: boolean; person?: Person }> {
+  private async get(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; person?: Person }> {
     if (!input.personId) return { success: false };
     const person = this.people.get(input.personId);
     return { success: !!person, person };
@@ -324,19 +387,24 @@ export class PeopleRegistry {
     return { success: true, people: Array.from(this.people.values()) };
   }
 
-  private async search(input: PeopleInput): Promise<{ success: boolean; people: Person[] }> {
+  private async search(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; people: Person[] }> {
     if (!input.query) return { success: false, people: [] };
 
     const lower = input.query.toLowerCase();
     const people = Array.from(this.people.values()).filter((p) => {
-      const searchable = `${p.identity.firstName} ${p.identity.lastName} ${p.identity.email} ${p.skills.map((s) => s.name).join(' ')}`.toLowerCase();
+      const searchable =
+        `${p.identity.firstName} ${p.identity.lastName} ${p.identity.email} ${p.skills.map((s) => s.name).join(" ")}`.toLowerCase();
       return searchable.includes(lower);
     });
 
     return { success: true, people };
   }
 
-  private async getByRole(input: PeopleInput): Promise<{ success: boolean; people: Person[] }> {
+  private async getByRole(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; people: Person[] }> {
     if (!input.roleFilter) return { success: false, people: [] };
 
     const people = Array.from(this.people.values()).filter((p) =>
@@ -346,26 +414,38 @@ export class PeopleRegistry {
     return { success: true, people };
   }
 
-  private async getBySkill(input: PeopleInput): Promise<{ success: boolean; people: Person[] }> {
+  private async getBySkill(
+    input: PeopleInput,
+  ): Promise<{ success: boolean; people: Person[] }> {
     if (!input.skillFilter) return { success: false, people: [] };
 
     const people = Array.from(this.people.values()).filter((p) =>
-      p.skills.some((s) => s.name.toLowerCase() === input.skillFilter!.toLowerCase()),
+      p.skills.some(
+        (s) => s.name.toLowerCase() === input.skillFilter!.toLowerCase(),
+      ),
     );
 
     return { success: true, people };
   }
 
-  private getDefaultPermissions(role: PersonRole['role']): string[] {
+  private getDefaultPermissions(role: PersonRole["role"]): string[] {
     switch (role) {
-      case 'trustee': return ['read', 'write', 'approve', 'govern'];
-      case 'staff': return ['read', 'write', 'execute'];
-      case 'volunteer': return ['read', 'execute'];
-      case 'advisor': return ['read', 'advise'];
-      case 'researcher': return ['read', 'write', 'research'];
-      case 'donor': return ['read', 'donate'];
-      case 'partner': return ['read', 'collaborate'];
-      case 'community-member': return ['read'];
+      case "trustee":
+        return ["read", "write", "approve", "govern"];
+      case "staff":
+        return ["read", "write", "execute"];
+      case "volunteer":
+        return ["read", "execute"];
+      case "advisor":
+        return ["read", "advise"];
+      case "researcher":
+        return ["read", "write", "research"];
+      case "donor":
+        return ["read", "donate"];
+      case "partner":
+        return ["read", "collaborate"];
+      case "community-member":
+        return ["read"];
     }
   }
 
@@ -373,8 +453,19 @@ export class PeopleRegistry {
     return [...this.auditLog];
   }
 
-  private audit(action: string, personId: string, agent: string, details: Record<string, unknown>): void {
-    this.auditLog.push({ action, personId, agent, timestamp: new Date(), details });
+  private audit(
+    action: string,
+    personId: string,
+    agent: string,
+    details: Record<string, unknown>,
+  ): void {
+    this.auditLog.push({
+      action,
+      personId,
+      agent,
+      timestamp: new Date(),
+      details,
+    });
   }
 
   async shutdown(): Promise<void> {

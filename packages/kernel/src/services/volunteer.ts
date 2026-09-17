@@ -2,11 +2,11 @@
 // Solves: Onboard, manage, recognize volunteers
 // Exercises: Agents, workflows, permissions
 
-import type { InstitutionService } from './index.js';
-import type { Artifact } from '../types/index.js';
+import type { InstitutionService } from "./index.js";
+import type { Artifact } from "../types/index.js";
 
 export interface VolunteerInput {
-  action: 'onboard' | 'assign' | 'recognize' | 'offboard';
+  action: "onboard" | "assign" | "recognize" | "offboard";
   name: string;
   email: string;
   skills?: string[];
@@ -14,39 +14,71 @@ export interface VolunteerInput {
   team?: string;
 }
 
+interface Volunteer {
+  id: string;
+  name: string;
+  email: string;
+  skills: string[];
+  availability: string;
+  status: "active" | "inactive";
+  joinedAt: Date;
+  team?: string;
+  assignedAt?: Date;
+  recognitions?: Array<{ date: Date; reason: string }>;
+  leftAt?: Date;
+}
+
 export class VolunteerService implements InstitutionService {
-  name = 'volunteer';
-  description = 'Onboard, manage, recognize volunteers';
-  capabilities = ['onboard-volunteer', 'assign-team', 'recognize-contribution', 'offboard-volunteer'];
-  private volunteers = new Map<string, any>();
+  name = "volunteer";
+  description = "Onboard, manage, recognize volunteers";
+  capabilities = [
+    "onboard-volunteer",
+    "assign-team",
+    "recognize-contribution",
+    "offboard-volunteer",
+  ];
+  private volunteers = new Map<string, Volunteer>();
 
   async initialize(): Promise<void> {
     // Service ready
   }
 
-  async execute(input: VolunteerInput): Promise<{ artifacts: Artifact[]; success: boolean; volunteer?: any }> {
+  async execute(
+    input: VolunteerInput,
+  ): Promise<{
+    artifacts: Artifact[];
+    success: boolean;
+    volunteer?: Volunteer;
+  }> {
     const artifacts: Artifact[] = [];
 
     switch (input.action) {
-      case 'onboard':
+      case "onboard":
         return this.onboard(input, artifacts);
-      case 'assign':
+      case "assign":
         return this.assign(input, artifacts);
-      case 'recognize':
+      case "recognize":
         return this.recognize(input, artifacts);
-      case 'offboard':
+      case "offboard":
         return this.offboard(input, artifacts);
     }
   }
 
-  private async onboard(input: VolunteerInput, artifacts: Artifact[]): Promise<{ artifacts: Artifact[]; success: boolean; volunteer: any }> {
+  private async onboard(
+    input: VolunteerInput,
+    artifacts: Artifact[],
+  ): Promise<{
+    artifacts: Artifact[];
+    success: boolean;
+    volunteer: Volunteer;
+  }> {
     const volunteer = {
       id: `vol:${crypto.randomUUID()}`,
       name: input.name,
       email: input.email,
       skills: input.skills ?? [],
-      availability: input.availability ?? 'flexible',
-      status: 'active',
+      availability: input.availability ?? "flexible",
+      status: "active",
       joinedAt: new Date(),
     };
 
@@ -54,7 +86,7 @@ export class VolunteerService implements InstitutionService {
 
     artifacts.push({
       path: `volunteers/${volunteer.id}.json`,
-      action: 'created',
+      action: "created",
       content: JSON.stringify(volunteer, null, 2),
       metadata: {},
     });
@@ -62,7 +94,14 @@ export class VolunteerService implements InstitutionService {
     return { artifacts, success: true, volunteer };
   }
 
-  private async assign(input: VolunteerInput, artifacts: Artifact[]): Promise<{ artifacts: Artifact[]; success: boolean; volunteer: any }> {
+  private async assign(
+    input: VolunteerInput,
+    artifacts: Artifact[],
+  ): Promise<{
+    artifacts: Artifact[];
+    success: boolean;
+    volunteer: Volunteer | null;
+  }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
@@ -73,7 +112,7 @@ export class VolunteerService implements InstitutionService {
 
     artifacts.push({
       path: `volunteers/${volunteer.id}.json`,
-      action: 'updated',
+      action: "updated",
       content: JSON.stringify(volunteer, null, 2),
       metadata: {},
     });
@@ -81,18 +120,28 @@ export class VolunteerService implements InstitutionService {
     return { artifacts, success: true, volunteer };
   }
 
-  private async recognize(input: VolunteerInput, artifacts: Artifact[]): Promise<{ artifacts: Artifact[]; success: boolean; volunteer: any }> {
+  private async recognize(
+    input: VolunteerInput,
+    artifacts: Artifact[],
+  ): Promise<{
+    artifacts: Artifact[];
+    success: boolean;
+    volunteer: Volunteer | null;
+  }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
     if (!volunteer) return { artifacts, success: false, volunteer: null };
 
     volunteer.recognitions = volunteer.recognitions ?? [];
-    volunteer.recognitions.push({ date: new Date(), reason: input.skills?.[0] ?? 'contribution' });
+    volunteer.recognitions.push({
+      date: new Date(),
+      reason: input.skills?.[0] ?? "contribution",
+    });
 
     artifacts.push({
       path: `volunteers/${volunteer.id}.json`,
-      action: 'updated',
+      action: "updated",
       content: JSON.stringify(volunteer, null, 2),
       metadata: {},
     });
@@ -100,18 +149,25 @@ export class VolunteerService implements InstitutionService {
     return { artifacts, success: true, volunteer };
   }
 
-  private async offboard(input: VolunteerInput, artifacts: Artifact[]): Promise<{ artifacts: Artifact[]; success: boolean; volunteer: any }> {
+  private async offboard(
+    input: VolunteerInput,
+    artifacts: Artifact[],
+  ): Promise<{
+    artifacts: Artifact[];
+    success: boolean;
+    volunteer: Volunteer | null;
+  }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
     if (!volunteer) return { artifacts, success: false, volunteer: null };
 
-    volunteer.status = 'inactive';
+    volunteer.status = "inactive";
     volunteer.leftAt = new Date();
 
     artifacts.push({
       path: `volunteers/${volunteer.id}.json`,
-      action: 'updated',
+      action: "updated",
       content: JSON.stringify(volunteer, null, 2),
       metadata: {},
     });

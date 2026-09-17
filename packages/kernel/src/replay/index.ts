@@ -2,12 +2,21 @@
 // Restore context, replay events, resume workflow.
 // Makes debugging, auditing, and recovery possible.
 
-import type { ExecutionContext, Event, ExecutionRecord, ExecutionState } from '../types/index.js';
+import type {
+  ExecutionContext,
+  Event,
+  ExecutionRecord,
+  ExecutionState,
+} from "../types/index.js";
 
 export interface ReplayConfig {
   idempotency: {
     getExecution: (id: string) => Promise<ExecutionRecord | undefined>;
-    updateExecution: (id: string, state: ExecutionState, output?: unknown) => Promise<void>;
+    updateExecution: (
+      id: string,
+      state: ExecutionState,
+      output?: unknown,
+    ) => Promise<void>;
   };
   events: {
     emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
@@ -15,8 +24,8 @@ export interface ReplayConfig {
     on: (type: string, handler: (event: Event) => Promise<void>) => () => void;
   };
   memory: {
-    set: (entry: any) => Promise<any>;
-    get: (id: string) => Promise<any>;
+    set: (entry: Record<string, unknown>) => Promise<void>;
+    get: (id: string) => Promise<Record<string, unknown> | undefined>;
   };
 }
 
@@ -57,7 +66,7 @@ export class ReplayEngine {
     // 2. Restore context
     const context: ExecutionContext = {
       ...original.context,
-      state: 'running',
+      state: "running",
       retryCount: original.context.retryCount + 1,
       timestamps: {
         ...original.context.timestamps,
@@ -75,7 +84,10 @@ export class ReplayEngine {
     let replayedEvents = 0;
     for (const event of executionEvents) {
       try {
-        await this.config.events.emit(event.type, event.payload as Record<string, unknown>);
+        await this.config.events.emit(
+          event.type,
+          event.payload as Record<string, unknown>,
+        );
         replayedEvents++;
       } catch {
         // Skip failed events
@@ -83,14 +95,14 @@ export class ReplayEngine {
     }
 
     // 5. Update execution state
-    await this.config.idempotency.updateExecution(executionId, 'running');
+    await this.config.idempotency.updateExecution(executionId, "running");
 
     // 6. Update memory
     await this.config.memory.set({
-      type: 'history',
+      type: "history",
       content: `Execution ${executionId} replayed (attempt ${context.retryCount})`,
-      tags: ['replay', executionId, `attempt-${context.retryCount}`],
-      source: 'replay-engine',
+      tags: ["replay", executionId, `attempt-${context.retryCount}`],
+      source: "replay-engine",
       confidence: 1,
     });
 
@@ -98,7 +110,7 @@ export class ReplayEngine {
       executionId,
       originalStatus,
       replayedEvents,
-      newStatus: 'running',
+      newStatus: "running",
       context,
       duration: Date.now() - startTime,
       timestamp: new Date(),
@@ -119,20 +131,20 @@ export class ReplayEngine {
 
     const context: ExecutionContext = {
       ...original.context,
-      state: 'running',
+      state: "running",
       timestamps: {
         ...original.context.timestamps,
         lastUpdated: new Date(),
       },
     };
 
-    await this.config.idempotency.updateExecution(executionId, 'running');
+    await this.config.idempotency.updateExecution(executionId, "running");
 
     const result: ReplayResult = {
       executionId,
       originalStatus: original.status,
       replayedEvents: 0,
-      newStatus: 'running',
+      newStatus: "running",
       context,
       duration: Date.now() - startTime,
       timestamp: new Date(),

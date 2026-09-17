@@ -2,16 +2,16 @@
 // Discovers work, assigns agents, coordinates autonomously.
 // No human tells it what to do — it figures it out.
 
-import type { ExecutionContext, Event } from '../types/index.js';
+import type { Event } from "../types/index.js";
 
 export interface WorkItem {
   id: string;
-  type: 'task' | 'workflow' | 'goal';
+  type: "task" | "workflow" | "goal";
   title: string;
   description: string;
   requiredCapabilities: string[];
-  priority: 'low' | 'medium' | 'high' | 'critical';
-  status: 'discovered' | 'assigned' | 'in-progress' | 'completed' | 'failed';
+  priority: "low" | "medium" | "high" | "critical";
+  status: "discovered" | "assigned" | "in-progress" | "completed" | "failed";
   assignedAgent?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -22,7 +22,7 @@ export interface SelfOrganizingAgent {
   id: string;
   name: string;
   capabilities: string[];
-  availability: 'available' | 'busy' | 'offline';
+  availability: "available" | "busy" | "offline";
   currentWorkload: number;
   maxWorkload: number;
   performance: number; // 0-1 score
@@ -36,9 +36,9 @@ export interface SelfOrganizingConfig {
     on: (type: string, handler: (event: Event) => Promise<void>) => () => void;
   };
   memory: {
-    set: (entry: any) => Promise<any>;
-    get: (id: string) => Promise<any>;
-    search: (query: string) => Promise<any[]>;
+    set: (entry: Record<string, unknown>) => Promise<void>;
+    get: (id: string) => Promise<Record<string, unknown> | undefined>;
+    search: (query: string) => Promise<Array<Record<string, unknown>>>;
   };
   agents: {
     getAll: () => SelfOrganizingAgent[];
@@ -60,12 +60,12 @@ export class SelfOrganizingEngine {
     this.running = true;
 
     // Listen for new work signals
-    this.config.events.on('work.discovered', async (event) => {
-      await this.discoverWork(event.payload as any);
+    this.config.events.on("work.discovered", async (event) => {
+      await this.discoverWork(event.payload as Record<string, unknown>);
     });
 
     // Listen for agent availability changes
-    this.config.events.on('agent.available', async () => {
+    this.config.events.on("agent.available", async () => {
       await this.attemptAssignment();
     });
 
@@ -74,15 +74,21 @@ export class SelfOrganizingEngine {
   }
 
   // Discover new work from events, memory, or external signals
-  async discoverWork(signal: { type: string; title: string; description: string; requiredCapabilities: string[]; priority?: WorkItem['priority'] }): Promise<WorkItem> {
+  async discoverWork(signal: {
+    type: string;
+    title: string;
+    description: string;
+    requiredCapabilities: string[];
+    priority?: WorkItem["priority"];
+  }): Promise<WorkItem> {
     const workItem: WorkItem = {
       id: `work:${crypto.randomUUID()}`,
-      type: 'task',
+      type: "task",
       title: signal.title,
       description: signal.description,
       requiredCapabilities: signal.requiredCapabilities,
-      priority: signal.priority ?? 'medium',
-      status: 'discovered',
+      priority: signal.priority ?? "medium",
+      status: "discovered",
       createdAt: new Date(),
       updatedAt: new Date(),
       metadata: { source: signal.type },
@@ -92,15 +98,15 @@ export class SelfOrganizingEngine {
 
     // Persist to memory
     await this.config.memory.set({
-      type: 'work-item',
+      type: "work-item",
       content: `Discovered: ${workItem.title}`,
-      tags: ['work', workItem.priority, workItem.status],
-      source: 'self-organizing',
+      tags: ["work", workItem.priority, workItem.status],
+      source: "self-organizing",
       confidence: 1,
     });
 
     // Emit event
-    await this.config.events.emit('work.item.discovered', {
+    await this.config.events.emit("work.item.discovered", {
       workItemId: workItem.id,
       title: workItem.title,
       priority: workItem.priority,
@@ -115,12 +121,16 @@ export class SelfOrganizingEngine {
   // Attempt to assign unassigned work to available agents
   async attemptAssignment(): Promise<void> {
     const unassigned = Array.from(this.workItems.values()).filter(
-      (w) => w.status === 'discovered',
+      (w) => w.status === "discovered",
     );
 
     for (const work of unassigned) {
       const agent = this.config.agents.getBestMatch(work.requiredCapabilities);
-      if (agent && agent.availability === 'available' && agent.currentWorkload < agent.maxWorkload) {
+      if (
+        agent &&
+        agent.availability === "available" &&
+        agent.currentWorkload < agent.maxWorkload
+      ) {
         await this.assignWork(work.id, agent.id);
       }
     }
@@ -132,20 +142,20 @@ export class SelfOrganizingEngine {
     if (!work) return;
 
     work.assignedAgent = agentId;
-    work.status = 'assigned';
+    work.status = "assigned";
     work.updatedAt = new Date();
 
-    await this.config.events.emit('work.item.assigned', {
+    await this.config.events.emit("work.item.assigned", {
       workItemId,
       agentId,
       title: work.title,
     });
 
     await this.config.memory.set({
-      type: 'assignment',
+      type: "assignment",
       content: `Assigned: ${work.title} → ${agentId}`,
-      tags: ['assignment', workItemId, agentId],
-      source: 'self-organizing',
+      tags: ["assignment", workItemId, agentId],
+      source: "self-organizing",
       confidence: 1,
     });
   }
@@ -155,10 +165,10 @@ export class SelfOrganizingEngine {
     const work = this.workItems.get(workItemId);
     if (!work) return;
 
-    work.status = 'in-progress';
+    work.status = "in-progress";
     work.updatedAt = new Date();
 
-    await this.config.events.emit('work.item.started', { workItemId });
+    await this.config.events.emit("work.item.started", { workItemId });
   }
 
   // Complete work
@@ -166,27 +176,27 @@ export class SelfOrganizingEngine {
     const work = this.workItems.get(workItemId);
     if (!work) return;
 
-    work.status = 'completed';
+    work.status = "completed";
     work.updatedAt = new Date();
     work.metadata.output = output;
 
-    await this.config.events.emit('work.item.completed', {
+    await this.config.events.emit("work.item.completed", {
       workItemId,
       agentId: work.assignedAgent,
       output,
     });
 
     await this.config.memory.set({
-      type: 'completion',
+      type: "completion",
       content: `Completed: ${work.title}`,
-      tags: ['completion', workItemId],
-      source: 'self-organizing',
+      tags: ["completion", workItemId],
+      source: "self-organizing",
       confidence: 1,
     });
   }
 
   // Get all work items
-  async getWorkItems(status?: WorkItem['status']): Promise<WorkItem[]> {
+  async getWorkItems(status?: WorkItem["status"]): Promise<WorkItem[]> {
     const items = Array.from(this.workItems.values());
     if (status) return items.filter((w) => w.status === status);
     return items;
@@ -195,7 +205,7 @@ export class SelfOrganizingEngine {
   // Get unassigned work
   async getUnassigned(): Promise<WorkItem[]> {
     return Array.from(this.workItems.values()).filter(
-      (w) => w.status === 'discovered',
+      (w) => w.status === "discovered",
     );
   }
 

@@ -7,8 +7,8 @@ export interface Proposal {
   title: string;
   description: string;
   proposedBy: string;
-  type: 'decision' | 'action' | 'change';
-  status: 'proposed' | 'voting' | 'approved' | 'rejected' | 'implemented';
+  type: "decision" | "action" | "change";
+  status: "proposed" | "voting" | "approved" | "rejected" | "implemented";
   votes: Vote[];
   quorum: number; // minimum votes needed
   threshold: number; // percentage needed to pass (0-1)
@@ -19,7 +19,7 @@ export interface Proposal {
 
 export interface Vote {
   agentId: string;
-  decision: 'approve' | 'reject' | 'abstain';
+  decision: "approve" | "reject" | "abstain";
   reasoning: string;
   timestamp: Date;
 }
@@ -29,7 +29,7 @@ export interface ConsensusConfig {
     emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
   };
   memory: {
-    set: (entry: any) => Promise<any>;
+    set: (entry: Record<string, unknown>) => Promise<void>;
   };
   agents: {
     getAll: () => { id: string; name: string }[];
@@ -53,7 +53,7 @@ export class ConsensusEngine {
     title: string;
     description: string;
     proposedBy: string;
-    type: Proposal['type'];
+    type: Proposal["type"];
     quorum?: number;
     threshold?: number;
     durationMs?: number;
@@ -65,18 +65,20 @@ export class ConsensusEngine {
       description: input.description,
       proposedBy: input.proposedBy,
       type: input.type,
-      status: 'proposed',
+      status: "proposed",
       votes: [],
       quorum: input.quorum ?? Math.ceil(agents.length * 0.5),
       threshold: input.threshold ?? 0.6,
       createdAt: new Date(),
-      closesAt: new Date(Date.now() + (input.durationMs ?? 7 * 24 * 60 * 60 * 1000)),
+      closesAt: new Date(
+        Date.now() + (input.durationMs ?? 7 * 24 * 60 * 60 * 1000),
+      ),
       metadata: {},
     };
 
     this.proposals.set(proposal.id, proposal);
 
-    await this.config.events.emit('proposal.created', {
+    await this.config.events.emit("proposal.created", {
       proposalId: proposal.id,
       title: proposal.title,
       proposedBy: proposal.proposedBy,
@@ -86,9 +88,16 @@ export class ConsensusEngine {
   }
 
   // Cast vote
-  async castVote(proposalId: string, vote: Omit<Vote, 'timestamp'>): Promise<Proposal | null> {
+  async castVote(
+    proposalId: string,
+    vote: Omit<Vote, "timestamp">,
+  ): Promise<Proposal | null> {
     const proposal = this.proposals.get(proposalId);
-    if (!proposal || proposal.status === 'implemented' || proposal.status === 'rejected') {
+    if (
+      !proposal ||
+      proposal.status === "implemented" ||
+      proposal.status === "rejected"
+    ) {
       return null;
     }
 
@@ -97,9 +106,9 @@ export class ConsensusEngine {
     if (existingVote) return null;
 
     proposal.votes.push({ ...vote, timestamp: new Date() });
-    proposal.status = 'voting';
+    proposal.status = "voting";
 
-    await this.config.events.emit('proposal.voted', {
+    await this.config.events.emit("proposal.voted", {
       proposalId,
       agentId: vote.agentId,
       decision: vote.decision,
@@ -117,8 +126,12 @@ export class ConsensusEngine {
     if (!proposal) return;
 
     const totalVotes = proposal.votes.length;
-    const approvals = proposal.votes.filter((v) => v.decision === 'approve').length;
-    const rejections = proposal.votes.filter((v) => v.decision === 'reject').length;
+    const approvals = proposal.votes.filter(
+      (v) => v.decision === "approve",
+    ).length;
+    const rejections = proposal.votes.filter(
+      (v) => v.decision === "reject",
+    ).length;
 
     // Check quorum
     if (totalVotes < proposal.quorum) return;
@@ -126,18 +139,26 @@ export class ConsensusEngine {
     // Check threshold
     const approvalRate = approvals / totalVotes;
     if (approvalRate >= proposal.threshold) {
-      proposal.status = 'approved';
-      await this.config.events.emit('proposal.approved', { proposalId, approvals, rejections });
+      proposal.status = "approved";
+      await this.config.events.emit("proposal.approved", {
+        proposalId,
+        approvals,
+        rejections,
+      });
       await this.config.memory.set({
-        type: 'consensus',
+        type: "consensus",
         content: `Approved: ${proposal.title} (${approvals}/${totalVotes})`,
-        tags: ['consensus', 'approved', proposalId],
-        source: 'consensus-engine',
+        tags: ["consensus", "approved", proposalId],
+        source: "consensus-engine",
         confidence: 1,
       });
-    } else if (rejections / totalVotes > (1 - proposal.threshold)) {
-      proposal.status = 'rejected';
-      await this.config.events.emit('proposal.rejected', { proposalId, approvals, rejections });
+    } else if (rejections / totalVotes > 1 - proposal.threshold) {
+      proposal.status = "rejected";
+      await this.config.events.emit("proposal.rejected", {
+        proposalId,
+        approvals,
+        rejections,
+      });
     }
   }
 
@@ -147,7 +168,7 @@ export class ConsensusEngine {
   }
 
   // Get all proposals
-  getProposals(status?: Proposal['status']): Proposal[] {
+  getProposals(status?: Proposal["status"]): Proposal[] {
     const proposals = Array.from(this.proposals.values());
     if (status) return proposals.filter((p) => p.status === status);
     return proposals;

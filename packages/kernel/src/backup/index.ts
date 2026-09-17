@@ -1,8 +1,15 @@
 // Backup & Recovery
 // Data protection with automated backups.
 
-import { resolve } from 'node:path';
-import { existsSync, mkdirSync, writeFileSync, readFileSync, readdirSync, unlinkSync } from 'node:fs';
+import { resolve, dirname } from "node:path";
+import {
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+  readFileSync,
+  readdirSync,
+  unlinkSync,
+} from "node:fs";
 
 export interface BackupConfig {
   root: string;
@@ -16,7 +23,7 @@ export interface Backup {
   timestamp: Date;
   size: number;
   path: string;
-  status: 'in-progress' | 'completed' | 'failed';
+  status: "in-progress" | "completed" | "failed";
   metadata: Record<string, unknown>;
 }
 
@@ -60,8 +67,8 @@ export class BackupRecovery {
       id: `backup:${crypto.randomUUID()}`,
       timestamp: new Date(),
       size: 0,
-      path: '',
-      status: 'in-progress',
+      path: "",
+      status: "in-progress",
       metadata: {},
     };
 
@@ -81,16 +88,19 @@ export class BackupRecovery {
 
       backup.path = backupPath;
       backup.size = files.length;
-      backup.status = 'completed';
+      backup.status = "completed";
     } catch {
-      backup.status = 'failed';
+      backup.status = "failed";
     }
 
     this.backups.push(backup);
 
     // Cleanup old backups
     if (this.backups.length > this.config.maxBackups) {
-      const toRemove = this.backups.slice(0, this.backups.length - this.config.maxBackups);
+      const toRemove = this.backups.slice(
+        0,
+        this.backups.length - this.config.maxBackups,
+      );
       for (const old of toRemove) {
         if (existsSync(old.path)) unlinkSync(old.path);
       }
@@ -104,17 +114,22 @@ export class BackupRecovery {
   // Restore from backup
   async restore(backupId: string): Promise<RecoveryResult> {
     const backup = this.backups.find((b) => b.id === backupId);
-    if (!backup || backup.status !== 'completed') {
-      return { backupId, restored: false, filesRestored: 0, timestamp: new Date() };
+    if (!backup || backup.status !== "completed") {
+      return {
+        backupId,
+        restored: false,
+        filesRestored: 0,
+        timestamp: new Date(),
+      };
     }
 
     try {
-      const data = JSON.parse(readFileSync(backup.path, 'utf-8'));
+      const data = JSON.parse(readFileSync(backup.path, "utf-8"));
       let filesRestored = 0;
 
       for (const file of data.files) {
         const filePath = resolve(this.config.root, file.relativePath);
-        const dir = require('node:path').dirname(filePath);
+        const dir = dirname(filePath);
         if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
         writeFileSync(filePath, file.content);
         filesRestored++;
@@ -122,7 +137,12 @@ export class BackupRecovery {
 
       return { backupId, restored: true, filesRestored, timestamp: new Date() };
     } catch {
-      return { backupId, restored: false, filesRestored: 0, timestamp: new Date() };
+      return {
+        backupId,
+        restored: false,
+        filesRestored: 0,
+        timestamp: new Date(),
+      };
     }
   }
 
@@ -131,18 +151,31 @@ export class BackupRecovery {
     return [...this.backups];
   }
 
-  private collectFiles(dir: string): Array<{ relativePath: string; content: string }> {
+  private collectFiles(
+    dir: string,
+  ): Array<{ relativePath: string; content: string }> {
     const files: Array<{ relativePath: string; content: string }> = [];
     try {
       const entries = readdirSync(dir, { withFileTypes: true });
       for (const entry of entries) {
         const fullPath = resolve(dir, entry.name);
-        if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+        if (
+          entry.isDirectory() &&
+          !entry.name.startsWith(".") &&
+          entry.name !== "node_modules"
+        ) {
           files.push(...this.collectFiles(fullPath));
-        } else if (entry.isFile() && (entry.name.endsWith('.ts') || entry.name.endsWith('.json') || entry.name.endsWith('.md'))) {
+        } else if (
+          entry.isFile() &&
+          (entry.name.endsWith(".ts") ||
+            entry.name.endsWith(".json") ||
+            entry.name.endsWith(".md"))
+        ) {
           files.push({
-            relativePath: fullPath.replace(this.config.root, '').replace(/\\/g, '/'),
-            content: readFileSync(fullPath, 'utf-8'),
+            relativePath: fullPath
+              .replace(this.config.root, "")
+              .replace(/\\/g, "/"),
+            content: readFileSync(fullPath, "utf-8"),
           });
         }
       }
@@ -153,14 +186,14 @@ export class BackupRecovery {
   }
 
   private loadBackupIndex(): void {
-    const indexPath = resolve(this.config.backupDir, 'index.json');
+    const indexPath = resolve(this.config.backupDir, "index.json");
     if (existsSync(indexPath)) {
-      this.backups = JSON.parse(readFileSync(indexPath, 'utf-8'));
+      this.backups = JSON.parse(readFileSync(indexPath, "utf-8"));
     }
   }
 
   private saveBackupIndex(): void {
-    const indexPath = resolve(this.config.backupDir, 'index.json');
+    const indexPath = resolve(this.config.backupDir, "index.json");
     writeFileSync(indexPath, JSON.stringify(this.backups, null, 2));
   }
 

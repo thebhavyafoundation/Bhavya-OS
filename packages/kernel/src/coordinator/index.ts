@@ -3,15 +3,38 @@
 // The coordinator doesn't perform work itself.
 // Its role is to orchestrate multiple engines and combine their outputs.
 
-import type { Goal, Plan, Task, Event, ExecutionContext, ExecutionReport, Artifact } from '../types/index.js';
+import type {
+  Goal,
+  Plan,
+  Task,
+  Event,
+  ExecutionContext,
+  ExecutionReport,
+  Artifact,
+} from "../types/index.js";
 
 export interface CoordinatorConfig {
-  planner: { createPlan: (goal: Goal) => Promise<Plan>; execute: (planId: string) => Promise<boolean> };
+  planner: {
+    createPlan: (goal: Goal) => Promise<Plan>;
+    execute: (planId: string) => Promise<boolean>;
+  };
   scheduler: { enqueue: (task: Task) => Promise<void> };
-  events: { emit: (type: string, payload: Record<string, unknown>) => Promise<void>; on: (type: string, handler: (event: Event) => Promise<void>) => () => void };
-  memory: { set: (entry: any) => Promise<any>; get: (id: string) => Promise<any> };
-  registry: { get: (type: string) => any[] };
-  idempotency: { shouldExecute: (key: string) => Promise<{ proceed: boolean; reason: string }>; register: (key: string, executionId: string) => Promise<void>; complete: (key: string, result?: unknown) => Promise<void> };
+  events: {
+    emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
+    on: (type: string, handler: (event: Event) => Promise<void>) => () => void;
+  };
+  memory: {
+    set: (entry: Record<string, unknown>) => Promise<void>;
+    get: (id: string) => Promise<Record<string, unknown> | undefined>;
+  };
+  registry: { get: (type: string) => Array<Record<string, unknown>> };
+  idempotency: {
+    shouldExecute: (
+      key: string,
+    ) => Promise<{ proceed: boolean; reason: string }>;
+    register: (key: string, executionId: string) => Promise<void>;
+    complete: (key: string, result?: unknown) => Promise<void>;
+  };
 }
 
 export interface CoordinatedExecution {
@@ -21,7 +44,7 @@ export interface CoordinatedExecution {
   agents: AgentExecution[];
   artifacts: Artifact[];
   events: string[];
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  status: "pending" | "running" | "completed" | "failed";
   context: ExecutionContext;
 }
 
@@ -30,7 +53,7 @@ export interface AgentExecution {
   role: string;
   task: Task;
   result?: unknown;
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  status: "pending" | "running" | "completed" | "failed";
 }
 
 export class Coordinator {
@@ -43,7 +66,7 @@ export class Coordinator {
 
   async initialize(): Promise<void> {
     // Listen for events to track execution state
-    this.config.events.on('task.completed', async (event) => {
+    this.config.events.on("task.completed", async (event) => {
       const payload = event.payload as Record<string, unknown>;
       const executionId = payload.executionId as string;
       if (executionId) {
@@ -54,17 +77,17 @@ export class Coordinator {
             (a) => a.task.id === payload.taskId,
           );
           if (agentExec) {
-            agentExec.status = 'completed';
+            agentExec.status = "completed";
             agentExec.result = payload.result;
           }
 
           // Check if all agents are done
           const allDone = execution.agents.every(
-            (a) => a.status === 'completed' || a.status === 'failed',
+            (a) => a.status === "completed" || a.status === "failed",
           );
           if (allDone) {
-            execution.status = 'completed';
-            await this.config.events.emit('execution.completed', {
+            execution.status = "completed";
+            await this.config.events.emit("execution.completed", {
               executionId,
               artifacts: execution.artifacts.length,
             });
@@ -78,19 +101,24 @@ export class Coordinator {
     const executionId = `exec:${crypto.randomUUID()}`;
 
     // Check idempotency
-    const { proceed, reason } = await this.config.idempotency.shouldExecute(`coordinator:${goal.id}`);
+    const { proceed, reason } = await this.config.idempotency.shouldExecute(
+      `coordinator:${goal.id}`,
+    );
     if (!proceed) {
       throw new Error(`Execution blocked: ${reason}`);
     }
 
-    await this.config.idempotency.register(`coordinator:${goal.id}`, executionId);
+    await this.config.idempotency.register(
+      `coordinator:${goal.id}`,
+      executionId,
+    );
 
     const context: ExecutionContext = {
       executionId,
       correlationId: `corr:${crypto.randomUUID()}`,
       retryCount: 0,
       maxRetries: 3,
-      state: 'running',
+      state: "running",
       timestamps: { started: new Date(), lastUpdated: new Date() },
       metadata: { coordinator: true, goalId: goal.id },
     };
@@ -101,7 +129,7 @@ export class Coordinator {
       agents: [],
       artifacts: [],
       events: [],
-      status: 'running',
+      status: "running",
       context,
     };
 
@@ -115,10 +143,10 @@ export class Coordinator {
       // 2. Assign agents based on plan steps
       for (const step of plan.steps) {
         const agentExec: AgentExecution = {
-          agentId: step.task.assignee ?? 'unassigned',
+          agentId: step.task.assignee ?? "unassigned",
           role: step.task.type,
           task: step.task,
-          status: 'pending',
+          status: "pending",
         };
         execution.agents.push(agentExec);
       }
@@ -127,33 +155,37 @@ export class Coordinator {
       await this.config.planner.execute(plan.id);
 
       // 4. Emit events
-      await this.config.events.emit('execution.started', {
+      await this.config.events.emit("execution.started", {
         executionId,
         goalId: goal.id,
         agents: execution.agents.length,
       });
-      execution.events.push('execution.started');
+      execution.events.push("execution.started");
 
       // 5. Update memory
       await this.config.memory.set({
-        type: 'project',
+        type: "project",
         content: `Execution ${executionId} started for goal: ${goal.description}`,
-        tags: ['execution', 'started', goal.id],
-        source: 'coordinator',
+        tags: ["execution", "started", goal.id],
+        source: "coordinator",
         confidence: 1,
       });
 
-      await this.config.idempotency.complete(`coordinator:${goal.id}`, { executionId });
+      await this.config.idempotency.complete(`coordinator:${goal.id}`, {
+        executionId,
+      });
 
       return execution;
     } catch (error) {
-      execution.status = 'failed';
-      context.state = 'failed';
+      execution.status = "failed";
+      context.state = "failed";
       throw error;
     }
   }
 
-  async getExecution(executionId: string): Promise<CoordinatedExecution | undefined> {
+  async getExecution(
+    executionId: string,
+  ): Promise<CoordinatedExecution | undefined> {
     return this.executions.get(executionId);
   }
 
@@ -161,7 +193,9 @@ export class Coordinator {
     return Array.from(this.executions.values());
   }
 
-  async getExecutionReport(executionId: string): Promise<ExecutionReport | null> {
+  async getExecutionReport(
+    executionId: string,
+  ): Promise<ExecutionReport | null> {
     const execution = this.executions.get(executionId);
     if (!execution) return null;
 
@@ -173,7 +207,12 @@ export class Coordinator {
       artifacts: execution.artifacts,
       events: execution.events,
       memoryUpdates: [],
-      status: execution.status === 'completed' ? 'success' : execution.status === 'failed' ? 'failed' : 'partial',
+      status:
+        execution.status === "completed"
+          ? "success"
+          : execution.status === "failed"
+            ? "failed"
+            : "partial",
       duration: Date.now() - execution.context.timestamps.started.getTime(),
       timestamp: new Date(),
       context: execution.context,
@@ -185,4 +224,4 @@ export class Coordinator {
   }
 }
 
-export type { ExecutionReport } from '../types/index.js';
+export type { ExecutionReport } from "../types/index.js";

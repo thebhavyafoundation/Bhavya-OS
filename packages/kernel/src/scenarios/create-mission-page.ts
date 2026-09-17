@@ -2,22 +2,28 @@
 // Input: "Create a new mission page"
 // Output: Real files, navigation, tests, docs, report
 
-import { resolve } from 'node:path';
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
-import type { ExecutionContext, Artifact, ExecutionReport, Goal, Plan } from '../types/index.js';
+import { resolve } from "node:path";
+import { existsSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
+import type {
+  ExecutionContext,
+  Artifact,
+  ExecutionReport,
+} from "../types/index.js";
 
 export interface CreatePageInput {
   name: string;
   title: string;
   description: string;
-  mission: 'forest' | 'knowledge' | 'heritage' | 'community';
+  mission: "forest" | "knowledge" | "heritage" | "community";
   content?: string;
 }
 
 export interface CreatePageContext {
   root: string;
-  events: { emit: (type: string, payload: Record<string, unknown>) => Promise<void> };
-  memory: { set: (entry: any) => Promise<any> };
+  events: {
+    emit: (type: string, payload: Record<string, unknown>) => Promise<void>;
+  };
+  memory: { set: (entry: Record<string, unknown>) => Promise<void> };
 }
 
 export class CreateMissionPage {
@@ -39,34 +45,47 @@ export class CreateMissionPage {
       correlationId: `corr:${crypto.randomUUID()}`,
       retryCount: 0,
       maxRetries: 3,
-      state: 'running',
+      state: "running",
       timestamps: { started: new Date(), lastUpdated: new Date() },
-      metadata: { scenario: 'create-mission-page' },
+      metadata: { scenario: "create-mission-page" },
     };
 
     try {
       // 1. Create page directory
-      const pageDir = resolve(this.ctx.root, `apps/website/src/app/${input.name}`);
+      const pageDir = resolve(
+        this.ctx.root,
+        `apps/website/src/app/${input.name}`,
+      );
       if (!existsSync(pageDir)) {
         mkdirSync(pageDir, { recursive: true });
       }
 
       // 2. Generate page component
       const pageContent = this.generatePageComponent(input);
-      const pagePath = resolve(pageDir, 'page.tsx');
+      const pagePath = resolve(pageDir, "page.tsx");
       writeFileSync(pagePath, pageContent);
-      artifacts.push({ path: `apps/website/src/app/${input.name}/page.tsx`, action: 'created', content: pageContent, metadata: {} });
+      artifacts.push({
+        path: `apps/website/src/app/${input.name}/page.tsx`,
+        action: "created",
+        content: pageContent,
+        metadata: {},
+      });
 
       // 3. Generate page styles
       const stylesContent = this.generatePageStyles(input);
-      const stylesPath = resolve(pageDir, 'styles.module.css');
+      const stylesPath = resolve(pageDir, "styles.module.css");
       writeFileSync(stylesPath, stylesContent);
-      artifacts.push({ path: `apps/website/src/app/${input.name}/styles.module.css`, action: 'created', content: stylesContent, metadata: {} });
+      artifacts.push({
+        path: `apps/website/src/app/${input.name}/styles.module.css`,
+        action: "created",
+        content: stylesContent,
+        metadata: {},
+      });
 
       // 4. Update navigation
-      const navPath = resolve(this.ctx.root, 'navigation/public.json');
+      const navPath = resolve(this.ctx.root, "navigation/public.json");
       if (existsSync(navPath)) {
-        const nav = JSON.parse(readFileSync(navPath, 'utf-8'));
+        const nav = JSON.parse(readFileSync(navPath, "utf-8"));
         nav.items = nav.items || [];
         nav.items.push({
           label: input.title,
@@ -74,52 +93,66 @@ export class CreateMissionPage {
           mission: input.mission,
         });
         writeFileSync(navPath, JSON.stringify(nav, null, 2));
-        artifacts.push({ path: 'navigation/public.json', action: 'updated', metadata: {} });
+        artifacts.push({
+          path: "navigation/public.json",
+          action: "updated",
+          metadata: {},
+        });
       }
 
       // 5. Generate metadata
       const metadataContent = this.generateMetadata(input);
-      const metadataPath = resolve(pageDir, 'metadata.ts');
+      const metadataPath = resolve(pageDir, "metadata.ts");
       writeFileSync(metadataPath, metadataContent);
-      artifacts.push({ path: `apps/website/src/app/${input.name}/metadata.ts`, action: 'created', content: metadataContent, metadata: {} });
+      artifacts.push({
+        path: `apps/website/src/app/${input.name}/metadata.ts`,
+        action: "created",
+        content: metadataContent,
+        metadata: {},
+      });
 
       // 6. Generate test file
       const testContent = this.generateTest(input);
-      const testDir = resolve(this.ctx.root, '.tests/unit');
+      const testDir = resolve(this.ctx.root, ".tests/unit");
       if (!existsSync(testDir)) mkdirSync(testDir, { recursive: true });
       const testPath = resolve(testDir, `${input.name}.test.tsx`);
       writeFileSync(testPath, testContent);
-      artifacts.push({ path: `.tests/unit/${input.name}.test.tsx`, action: 'created', content: testContent, metadata: {} });
+      artifacts.push({
+        path: `.tests/unit/${input.name}.test.tsx`,
+        action: "created",
+        content: testContent,
+        metadata: {},
+      });
 
       // 7. Update memory
       await this.ctx.memory.set({
-        type: 'project',
+        type: "project",
         content: `Mission page created: ${input.title} (${input.name})`,
-        tags: ['page', 'mission', input.mission, 'created'],
-        source: 'create-mission-page',
+        tags: ["page", "mission", input.mission, "created"],
+        source: "create-mission-page",
         confidence: 1,
       });
       memoryUpdates.push(`Page ${input.name} documented in memory`);
 
       // 8. Emit events
-      await this.ctx.events.emit('page.created', {
+      await this.ctx.events.emit("page.created", {
         name: input.name,
         title: input.title,
         mission: input.mission,
         artifacts: artifacts.length,
       });
-      events.push('page.created');
+      events.push("page.created");
 
       // 9. Update metrics
-      const metricsPath = resolve(this.ctx.root, '.metrics/engineering.json');
+      const metricsPath = resolve(this.ctx.root, ".metrics/engineering.json");
       if (existsSync(metricsPath)) {
-        const metrics = JSON.parse(readFileSync(metricsPath, 'utf-8'));
+        const metrics = JSON.parse(readFileSync(metricsPath, "utf-8"));
         metrics.data.commits.total++;
         metrics.data.commits.thisWeek++;
         writeFileSync(metricsPath, JSON.stringify(metrics, null, 2));
       }
 
-      context.state = 'completed';
+      context.state = "completed";
       context.timestamps.completed = new Date();
 
       return {
@@ -128,13 +161,13 @@ export class CreateMissionPage {
         artifacts,
         events,
         memoryUpdates,
-        status: 'success',
+        status: "success",
         duration: Date.now() - startTime,
         timestamp: new Date(),
         context,
       };
-    } catch (error) {
-      context.state = 'failed';
+    } catch (_error) {
+      context.state = "failed";
       context.timestamps.completed = new Date();
 
       return {
@@ -143,7 +176,7 @@ export class CreateMissionPage {
         artifacts,
         events,
         memoryUpdates,
-        status: 'failed',
+        status: "failed",
         duration: Date.now() - startTime,
         timestamp: new Date(),
         context,
@@ -239,8 +272,8 @@ describe('${input.title} Page', () => {
 
   private toPascalCase(str: string): string {
     return str
-      .split('-')
+      .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join('');
+      .join("");
   }
 }

@@ -32,8 +32,15 @@ export interface ComplianceRule {
 }
 
 export interface AuditInput {
-  action: 'record' | 'query' | 'snapshot' | 'restore' | 'check-compliance' | 'get-snapshots' | 'get-entry';
-  entry?: Omit<AuditEntry, 'id' | 'timestamp'>;
+  action:
+    | "record"
+    | "query"
+    | "snapshot"
+    | "restore"
+    | "check-compliance"
+    | "get-snapshots"
+    | "get-entry";
+  entry?: Omit<AuditEntry, "id" | "timestamp">;
   entity?: string;
   entityId?: string;
   from?: Date;
@@ -44,15 +51,15 @@ export interface AuditInput {
 }
 
 export class AuditService {
-  name = 'audit';
-  description = 'Audit trail, compliance, versioning, snapshots';
+  name = "audit";
+  description = "Audit trail, compliance, versioning, snapshots";
   capabilities = [
-    'record-audit',
-    'query-audit',
-    'create-snapshot',
-    'restore-snapshot',
-    'check-compliance',
-    'version-tracking',
+    "record-audit",
+    "query-audit",
+    "create-snapshot",
+    "restore-snapshot",
+    "check-compliance",
+    "version-tracking",
   ];
 
   private entries: AuditEntry[] = [];
@@ -62,53 +69,58 @@ export class AuditService {
   async initialize(): Promise<void> {
     // Default compliance rules
     this.rules.push({
-      id: 'rule:governance-document',
-      name: 'Governance Document Required Fields',
-      description: 'Governance documents must have title, content, and type',
-      entity: 'governance-document',
-      requiredFields: ['title', 'content', 'type'],
+      id: "rule:governance-document",
+      name: "Governance Document Required Fields",
+      description: "Governance documents must have title, content, and type",
+      entity: "governance-document",
+      requiredFields: ["title", "content", "type"],
       validator: (e) => !!(e.title && e.content && e.type),
     });
 
     this.rules.push({
-      id: 'rule:budget',
-      name: 'Budget Required Fields',
-      description: 'Budgets must have name, fiscal year, and total allocation',
-      entity: 'budget',
-      requiredFields: ['name', 'fiscalYear', 'totalAllocation'],
+      id: "rule:budget",
+      name: "Budget Required Fields",
+      description: "Budgets must have name, fiscal year, and total allocation",
+      entity: "budget",
+      requiredFields: ["name", "fiscalYear", "totalAllocation"],
       validator: (e) => !!(e.name && e.fiscalYear && e.totalAllocation),
     });
 
     this.rules.push({
-      id: 'rule:project',
-      name: 'Project Required Fields',
-      description: 'Projects must have name, description, vertical, and manager',
-      entity: 'project',
-      requiredFields: ['name', 'description', 'vertical', 'manager'],
+      id: "rule:project",
+      name: "Project Required Fields",
+      description:
+        "Projects must have name, description, vertical, and manager",
+      entity: "project",
+      requiredFields: ["name", "description", "vertical", "manager"],
       validator: (e) => !!(e.name && e.description && e.vertical && e.manager),
     });
   }
 
-  async execute(input: AuditInput): Promise<{ success: boolean; result?: any }> {
+  async execute(
+    input: AuditInput,
+  ): Promise<{ success: boolean; result?: unknown }> {
     switch (input.action) {
-      case 'record':
+      case "record":
         return this.record(input);
-      case 'query':
+      case "query":
         return this.query(input);
-      case 'snapshot':
+      case "snapshot":
         return this.snapshot(input);
-      case 'restore':
+      case "restore":
         return this.restore(input);
-      case 'check-compliance':
+      case "check-compliance":
         return this.checkCompliance(input);
-      case 'get-snapshots':
+      case "get-snapshots":
         return this.getSnapshots();
-      case 'get-entry':
+      case "get-entry":
         return this.getEntry(input);
     }
   }
 
-  private async record(input: AuditInput): Promise<{ success: boolean; entry?: AuditEntry }> {
+  private async record(
+    input: AuditInput,
+  ): Promise<{ success: boolean; entry?: AuditEntry }> {
     if (!input.entry) return { success: false };
 
     const entry: AuditEntry = {
@@ -121,18 +133,24 @@ export class AuditService {
     return { success: true, entry };
   }
 
-  private async query(input: AuditInput): Promise<{ success: boolean; entries: AuditEntry[] }> {
+  private async query(
+    input: AuditInput,
+  ): Promise<{ success: boolean; entries: AuditEntry[] }> {
     let entries = [...this.entries];
 
-    if (input.entity) entries = entries.filter((e) => e.entity === input.entity);
-    if (input.entityId) entries = entries.filter((e) => e.entityId === input.entityId);
+    if (input.entity)
+      entries = entries.filter((e) => e.entity === input.entity);
+    if (input.entityId)
+      entries = entries.filter((e) => e.entityId === input.entityId);
     if (input.from) entries = entries.filter((e) => e.timestamp >= input.from!);
     if (input.to) entries = entries.filter((e) => e.timestamp <= input.to!);
 
     return { success: true, entries };
   }
 
-  private async snapshot(input: AuditInput): Promise<{ success: boolean; snapshot?: Snapshot }> {
+  private async snapshot(
+    input: AuditInput,
+  ): Promise<{ success: boolean; snapshot?: Snapshot }> {
     if (!input.snapshotDescription) return { success: false };
 
     const snapshot: Snapshot = {
@@ -140,7 +158,10 @@ export class AuditService {
       timestamp: new Date(),
       version: this.snapshots.length + 1,
       description: input.snapshotDescription,
-      data: { entryCount: this.entries.length, entries: this.entries.slice(-100) },
+      data: {
+        entryCount: this.entries.length,
+        entries: this.entries.slice(-100),
+      },
       checksum: this.computeChecksum(this.entries),
     };
 
@@ -159,13 +180,16 @@ export class AuditService {
     return { success: true };
   }
 
-  private async checkCompliance(input: AuditInput): Promise<{ success: boolean; compliant: boolean; violations: string[] }> {
-    if (!input.entity || !input.entityId) return { success: false, compliant: false, violations: [] };
+  private async checkCompliance(
+    input: AuditInput,
+  ): Promise<{ success: boolean; compliant: boolean; violations: string[] }> {
+    if (!input.entity || !input.entityId)
+      return { success: false, compliant: false, violations: [] };
 
     const violations: string[] = [];
     const applicableRules = this.rules.filter((r) => r.entity === input.entity);
 
-    for (const rule of applicableRules) {
+    for (const _rule of applicableRules) {
       // In real implementation, would fetch entity and validate
       // For now, assume compliant
     }
@@ -173,11 +197,16 @@ export class AuditService {
     return { success: true, compliant: violations.length === 0, violations };
   }
 
-  private async getSnapshots(): Promise<{ success: boolean; snapshots: Snapshot[] }> {
+  private async getSnapshots(): Promise<{
+    success: boolean;
+    snapshots: Snapshot[];
+  }> {
     return { success: true, snapshots: [...this.snapshots] };
   }
 
-  private async getEntry(input: AuditInput): Promise<{ success: boolean; entry?: AuditEntry }> {
+  private async getEntry(
+    input: AuditInput,
+  ): Promise<{ success: boolean; entry?: AuditEntry }> {
     if (!input.entityId) return { success: false };
     const entry = this.entries.find((e) => e.id === input.entityId);
     return { success: !!entry, entry };
@@ -188,7 +217,7 @@ export class AuditService {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash |= 0;
     }
     return `checksum:${hash.toString(16)}`;

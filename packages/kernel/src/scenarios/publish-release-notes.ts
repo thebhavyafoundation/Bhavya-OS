@@ -155,7 +155,7 @@ export class PublishReleaseNotes {
         timestamp: new Date(),
         context,
       };
-    } catch (error) {
+    } catch (_error) {
       context.state = "failed";
       context.timestamps.completed = new Date();
 
