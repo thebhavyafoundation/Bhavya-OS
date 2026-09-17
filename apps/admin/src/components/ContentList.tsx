@@ -11,14 +11,62 @@ interface ContentItem {
 }
 
 const fallbackContent: ContentItem[] = [
-  { id: "governance-constitution", title: "Constitution", domain: "governance", status: "published", updated: "2026-07-15" },
-  { id: "governance-adr-0001", title: "ADR-0001: ADR Standard", domain: "governance", status: "published", updated: "2026-07-15" },
-  { id: "governance-adr-0002", title: "ADR-0002: AI Gateway", domain: "governance", status: "published", updated: "2026-07-20" },
-  { id: "governance-adr-0003", title: "ADR-0003: Release Train", domain: "governance", status: "published", updated: "2026-07-24" },
-  { id: "policies-security", title: "Security Policy", domain: "policies", status: "published", updated: "2026-07-18" },
-  { id: "policies-accessibility", title: "Accessibility Policy", domain: "policies", status: "published", updated: "2026-07-18" },
-  { id: "releases-v1.0.0-rc2", title: "v1.0.0-rc2 Release Notes", domain: "releases", status: "draft", updated: "2026-07-24" },
-  { id: "standards-bdl", title: "BDL — Bhavya Design Language", domain: "standards", status: "published", updated: "2026-07-15" },
+  {
+    id: "governance-constitution",
+    title: "Constitution",
+    domain: "governance",
+    status: "published",
+    updated: "2026-07-15",
+  },
+  {
+    id: "governance-adr-0007",
+    title: "ADR-007: ADR Standard",
+    domain: "governance",
+    status: "published",
+    updated: "2026-07-15",
+  },
+  {
+    id: "governance-adr-0008",
+    title: "ADR-008: AI Gateway",
+    domain: "governance",
+    status: "published",
+    updated: "2026-07-20",
+  },
+  {
+    id: "governance-adr-0009",
+    title: "ADR-009: Release Train",
+    domain: "governance",
+    status: "published",
+    updated: "2026-07-24",
+  },
+  {
+    id: "policies-security",
+    title: "Security Policy",
+    domain: "policies",
+    status: "published",
+    updated: "2026-07-18",
+  },
+  {
+    id: "policies-accessibility",
+    title: "Accessibility Policy",
+    domain: "policies",
+    status: "published",
+    updated: "2026-07-18",
+  },
+  {
+    id: "releases-v1.0.0-rc2",
+    title: "v1.0.0-rc2 Release Notes",
+    domain: "releases",
+    status: "draft",
+    updated: "2026-07-24",
+  },
+  {
+    id: "standards-bdl",
+    title: "BDL — Bhavya Design Language",
+    domain: "standards",
+    status: "published",
+    updated: "2026-07-15",
+  },
 ];
 
 const statusStyles: Record<string, { bg: string; text: string }> = {
@@ -37,13 +85,15 @@ export function ContentList() {
         const res = await fetch("/api/data?type=content");
         const data = await res.json();
         if (data.data?.length) {
-          setItems(data.data.map((item: { id: string; title: string }) => ({
-            id: item.id,
-            title: item.title,
-            domain: item.id.split("-")[0],
-            status: "published" as const,
-            updated: new Date().toISOString().split("T")[0],
-          })));
+          setItems(
+            data.data.map((item: { id: string; title: string }) => ({
+              id: item.id,
+              title: item.title,
+              domain: item.id.split("-")[0],
+              status: "published" as const,
+              updated: new Date().toISOString().split("T")[0],
+            })),
+          );
         }
       } catch {
         // Use fallback
@@ -52,7 +102,8 @@ export function ContentList() {
     loadContent();
   }, []);
 
-  const filtered = filter === "all" ? items : items.filter((i) => i.domain === filter);
+  const filtered =
+    filter === "all" ? items : items.filter((i) => i.domain === filter);
   const domains = [...new Set(items.map((i) => i.domain))];
 
   return (
@@ -62,8 +113,10 @@ export function ContentList() {
           onClick={() => setFilter("all")}
           className="px-3 py-1.5 rounded text-sm border transition-colors"
           style={{
-            borderColor: filter === "all" ? "var(--admin-primary)" : "var(--admin-border)",
-            backgroundColor: filter === "all" ? "var(--admin-primary)" : "transparent",
+            borderColor:
+              filter === "all" ? "var(--admin-primary)" : "var(--admin-border)",
+            backgroundColor:
+              filter === "all" ? "var(--admin-primary)" : "transparent",
             color: filter === "all" ? "white" : "var(--admin-text-secondary)",
           }}
         >
@@ -75,9 +128,14 @@ export function ContentList() {
             onClick={() => setFilter(domain)}
             className="px-3 py-1.5 rounded text-sm border transition-colors"
             style={{
-              borderColor: filter === domain ? "var(--admin-primary)" : "var(--admin-border)",
-              backgroundColor: filter === domain ? "var(--admin-primary)" : "transparent",
-              color: filter === domain ? "white" : "var(--admin-text-secondary)",
+              borderColor:
+                filter === domain
+                  ? "var(--admin-primary)"
+                  : "var(--admin-border)",
+              backgroundColor:
+                filter === domain ? "var(--admin-primary)" : "transparent",
+              color:
+                filter === domain ? "white" : "var(--admin-text-secondary)",
             }}
           >
             {domain} ({items.filter((i) => i.domain === domain).length})
@@ -91,10 +149,30 @@ export function ContentList() {
         <table className="w-full text-sm">
           <thead>
             <tr style={{ backgroundColor: "var(--admin-surface-hover)" }}>
-              <th className="text-left px-4 py-2 font-medium" style={{ color: "var(--admin-text-secondary)" }}>Title</th>
-              <th className="text-left px-4 py-2 font-medium" style={{ color: "var(--admin-text-secondary)" }}>Domain</th>
-              <th className="text-left px-4 py-2 font-medium" style={{ color: "var(--admin-text-secondary)" }}>Status</th>
-              <th className="text-left px-4 py-2 font-medium" style={{ color: "var(--admin-text-secondary)" }}>Updated</th>
+              <th
+                className="text-left px-4 py-2 font-medium"
+                style={{ color: "var(--admin-text-secondary)" }}
+              >
+                Title
+              </th>
+              <th
+                className="text-left px-4 py-2 font-medium"
+                style={{ color: "var(--admin-text-secondary)" }}
+              >
+                Domain
+              </th>
+              <th
+                className="text-left px-4 py-2 font-medium"
+                style={{ color: "var(--admin-text-secondary)" }}
+              >
+                Status
+              </th>
+              <th
+                className="text-left px-4 py-2 font-medium"
+                style={{ color: "var(--admin-text-secondary)" }}
+              >
+                Updated
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -104,8 +182,18 @@ export function ContentList() {
                 className="border-t"
                 style={{ borderColor: "var(--admin-border)" }}
               >
-                <td className="px-4 py-2" style={{ color: "var(--admin-text)" }}>{item.title}</td>
-                <td className="px-4 py-2" style={{ color: "var(--admin-text-muted)" }}>{item.domain}</td>
+                <td
+                  className="px-4 py-2"
+                  style={{ color: "var(--admin-text)" }}
+                >
+                  {item.title}
+                </td>
+                <td
+                  className="px-4 py-2"
+                  style={{ color: "var(--admin-text-muted)" }}
+                >
+                  {item.domain}
+                </td>
                 <td className="px-4 py-2">
                   <span
                     className="px-2 py-0.5 rounded text-xs font-medium"
@@ -117,7 +205,12 @@ export function ContentList() {
                     {item.status}
                   </span>
                 </td>
-                <td className="px-4 py-2" style={{ color: "var(--admin-text-muted)" }}>{item.updated}</td>
+                <td
+                  className="px-4 py-2"
+                  style={{ color: "var(--admin-text-muted)" }}
+                >
+                  {item.updated}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -12,7 +12,7 @@ BOOK-001 (AI Constitution) is supreme. All decisions must comply.
 
 ### 2. Check Existing Decisions
 
-Look in `.ai/decision-log.md` and `governance/adr/` before re-deciding.
+Look in `.ai/decision-log.md` and `docs/adr/` before re-deciding.
 
 ### 3. Document Every Decision
 

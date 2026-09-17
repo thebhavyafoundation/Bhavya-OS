@@ -1,8 +1,7 @@
-# ADR-001: GitHub Intelligence Lab Package Boundaries
+# ADR-011: GitHub Intelligence Lab Package Boundaries
 
-**Status:** Accepted
-**Date:** 2026-08-03
-**Deciders:** Bhavya OS Architecture
+**Status:** Accepted | **Date:** 2026-08-03 | **Deciders:** Bhavya OS Architecture
+**Source:** Migrated from `docs/architecture/ADR-001-github-intelligence-package-boundaries.md` (2026-09-17)
 
 ## Context
 

@@ -5,21 +5,29 @@ const ROOT = path.resolve(process.cwd(), "../..");
 
 function readJSON<T>(filePath: string, fallback: T): T {
   try {
-    const full = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);
+    const full = path.isAbsolute(filePath)
+      ? filePath
+      : path.join(ROOT, filePath);
     if (fs.existsSync(full)) {
       return JSON.parse(fs.readFileSync(full, "utf8"));
     }
-  } catch { /* fallback */ }
+  } catch {
+    /* fallback */
+  }
   return fallback;
 }
 
 function readMD(filePath: string): string {
   try {
-    const full = path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);
+    const full = path.isAbsolute(filePath)
+      ? filePath
+      : path.join(ROOT, filePath);
     if (fs.existsSync(full)) {
       return fs.readFileSync(full, "utf8");
     }
-  } catch { /* fallback */ }
+  } catch {
+    /* fallback */
+  }
   return "";
 }
 
@@ -29,7 +37,9 @@ function listDir(dirPath: string): string[] {
     if (fs.existsSync(full)) {
       return fs.readdirSync(full).filter((f) => !f.startsWith("."));
     }
-  } catch { /* fallback */ }
+  } catch {
+    /* fallback */
+  }
   return [];
 }
 
@@ -50,7 +60,9 @@ export interface KnowledgeGraph {
 }
 
 export function getKnowledgeGraph(): KnowledgeGraph {
-  return readJSON<KnowledgeGraph>("registry/knowledge-graph.json", { nodes: [] });
+  return readJSON<KnowledgeGraph>("registry/knowledge-graph.json", {
+    nodes: [],
+  });
 }
 
 export function getNodesByType(type: string): KNode[] {
@@ -86,7 +98,9 @@ export function getGovernanceDocs(): GovDocument[] {
   const files = listDir("content/governance");
   return files
     .filter((f) => f.endsWith(".json"))
-    .map((f) => readJSON<GovDocument>(`content/governance/${f}`, {} as GovDocument));
+    .map((f) =>
+      readJSON<GovDocument>(`content/governance/${f}`, {} as GovDocument),
+    );
 }
 
 export function getGovDoc(id: string): GovDocument | undefined {
@@ -150,7 +164,8 @@ export interface StandardsRegistry {
 }
 
 export function getStandards(): Standard[] {
-  return readJSON<StandardsRegistry>("registry/standards.json", { items: [] }).items;
+  return readJSON<StandardsRegistry>("registry/standards.json", { items: [] })
+    .items;
 }
 
 export function getStandardContent(file: string): string {
@@ -168,18 +183,21 @@ export interface ADR {
 }
 
 export function getADRs(): ADR[] {
-  const files = listDir("governance/adr");
+  const files = listDir("docs/adr");
   return files
     .filter((f) => f.endsWith(".md"))
     .map((f) => {
-      const content = readMD(`governance/adr/${f}`);
+      const content = readMD(`docs/adr/${f}`);
       const titleMatch = content.match(/^# (.+)/m);
-      const statusMatch = content.match(/\*\*Status:\*\*\s*(.+)/i);
-      const dateMatch = content.match(/\*\*Date:\*\*\s*(.+)/i);
-      const approvedMatch = content.match(/\*\*Approved By:\*\*\s*(.+)/i);
+      const statusMatch = content.match(/\*\*Status:\*\*\s*([^|\n]+)/i);
+      const dateMatch = content.match(/\*\*Date:\*\*\s*([^|\n]+)/i);
+      const approvedMatch = content.match(
+        /\*\*(?:Approved By|Deciders):\*\*\s*([^|\n]+)/i,
+      );
       return {
         id: f.replace(".md", ""),
-        title: titleMatch?.[1]?.replace(/^ADR-\d+\s*--\s*/, "") || f,
+        title:
+          titleMatch?.[1]?.replace(/^ADR-\d+\s*[:\u2013\u2014-]*\s*/, "") || f,
         status: statusMatch?.[1]?.trim() || "Unknown",
         date: dateMatch?.[1]?.trim(),
         approvedBy: approvedMatch?.[1]?.trim(),
@@ -230,7 +248,10 @@ export interface AppEntry {
 }
 
 export function getApps(): AppEntry[] {
-  return readJSON<{ items: AppEntry[] }>("registry/apps.json", { items: [] }).items || [];
+  return (
+    readJSON<{ items: AppEntry[] }>("registry/apps.json", { items: [] })
+      .items || []
+  );
 }
 
 // ── Search Index ─────────────────────────────────────────
@@ -244,7 +265,11 @@ export interface SearchDocument {
 }
 
 export function getSearchIndex(): SearchDocument[] {
-  return readJSON<{ documents: SearchDocument[] }>("registry/search-index.json", { documents: [] }).documents || [];
+  return (
+    readJSON<{ documents: SearchDocument[] }>("registry/search-index.json", {
+      documents: [],
+    }).documents || []
+  );
 }
 
 export function searchAll(query: string): SearchDocument[] {
@@ -253,6 +278,6 @@ export function searchAll(query: string): SearchDocument[] {
     (doc) =>
       doc.title.toLowerCase().includes(q) ||
       doc.content.toLowerCase().includes(q) ||
-      doc.tags?.some((t) => t.toLowerCase().includes(q))
+      doc.tags?.some((t) => t.toLowerCase().includes(q)),
   );
 }

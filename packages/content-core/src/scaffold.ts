@@ -323,12 +323,18 @@ Description of second requirement.
 How to implement these standards.`,
     );
   } else if (category === "adr") {
+    const adrDir = path.join(ROOT, "docs/adr");
+    const existing = fs.existsSync(adrDir) ? fs.readdirSync(adrDir) : [];
+    const maxNum = existing.reduce((max, f) => {
+      const m = f.match(/^ADR-(\d+)/);
+      return m ? Math.max(max, parseInt(m[1], 10)) : max;
+    }, 0);
+    const adrId = `ADR-${String(maxNum + 1).padStart(3, "0")}`;
     write_file(
-      `governance/adr/${id}.md`,
-      `# ${id} — ${title}
+      `docs/adr/${adrId}-${toKebabCase(title)}.md`,
+      `# ${adrId}: ${title}
 
-**Status:** proposed
-**Date:** ${new Date().toISOString().split("T")[0]}
+**Status:** Proposed | **Date:** ${new Date().toISOString().split("T")[0]} | **Deciders:**
 
 ## Context
 
@@ -337,6 +343,8 @@ What is the issue that we're seeing that is motivating this decision or change?
 ## Decision
 
 What is the change that we're proposing and/or doing?
+
+## Alternatives Considered
 
 ## Consequences
 

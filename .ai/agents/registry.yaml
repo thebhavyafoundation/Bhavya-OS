@@ -10,7 +10,7 @@ agents:
       - repository-map
       - dependencies
       - standards/architecture
-      - governance/adr
+      - docs/adr
     max_files: 6
 
   frontend:

@@ -6,7 +6,7 @@
 
 | Path               | What it holds                                            |
 | ------------------ | -------------------------------------------------------- |
-| `adr/`             | 6 Architecture Decision Records                          |
+| `adr/`             | 13 Architecture Decision Records                         |
 | `ai-institute/`    | 37 files — full AI Institute architecture                |
 | `applications/`    | Application documentation                                |
 | `architecture/`    | Architecture documentation                               |

@@ -9,7 +9,7 @@ goals:
   - Specification layer (.ai/ MEMORY, WORKFLOWS, EVENTS, DECISIONS, TOOLS, PERMISSIONS, KPIS, POLICIES)
   - Domain-Owned Memory System (memory/*/_meta.json)
   - Deterministic Registry Generator (scripts/generate-registry.js)
-  - Provider-Agnostic AI Gateway Contract (ADR-0002, RFC-0003)
+  - Provider-Agnostic AI Gateway Contract (ADR-008, RFC-0003)
   - Engineering Dashboard v2 Control Center
 scope:
   schemas:

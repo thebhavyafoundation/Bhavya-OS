@@ -20,7 +20,7 @@ load:
 - Every architectural decision updates `decision-log.md`
 - Every spec change updates related README
 - Concise, clear, structured markdown
-- ADRs in `governance/adr/`, RFCs in `rfcs/`
+- ADRs in `docs/adr/`, RFCs in `rfcs/`
 - Docs in `docs/` and `content/`
 - Update `registry/knowledge-graph.json` when adding new documents
 

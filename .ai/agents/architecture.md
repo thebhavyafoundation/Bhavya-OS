@@ -11,8 +11,8 @@ load:
   - .ai/repository-map.md
   - .ai/dependencies.md
   - standards/architecture
-  - governance/architecture.md
-  - governance/adr
+  - docs/architecture/
+  - docs/adr/
   - turbo.json
   - tsconfig.base.json
 ```

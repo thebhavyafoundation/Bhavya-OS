@@ -8,10 +8,10 @@ last_updated: 2026-07-23
 
 ## ADRs
 
-- ADR-0001: Architectural Decision Records Standard (Accepted)
-- ADR-0002: Provider-Agnostic AI Gateway (Accepted)
-- ADR-0003: Deterministic Registry Generation Protocol (Approved)
-- ADR-0004: Domain-Owned Memory System Architecture (Approved)
+- ADR-007: Architectural Decision Records Standard (Accepted)
+- ADR-008: Provider-Agnostic AI Gateway (Accepted)
+- ADR-012: Deterministic Registry Generation Protocol (Accepted)
+- ADR-013: Domain-Owned Memory System Architecture (Accepted)
 
 ## RFCs
 

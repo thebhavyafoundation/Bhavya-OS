@@ -47,7 +47,7 @@ bhavya-foundation/
 | -------------------------------- | ------------------------ | ---------------- |
 | `.ai/` (existing)                | `.ai/`                   | Keep, reorganize |
 | `governance/constitution.md`     | `.ai/CONSTITUTION.md`    | Move             |
-| `governance/governance-model.md` | `.ai/MISSION.md`         | Move             |
+| `governance/governance-model.md` | `.ai/MISSION.md`         | Archive (empty)  |
 | `governance/roadmap.md`          | `.ai/VISION.md`          | Move             |
 | `ai/memory/values.md`            | `.ai/VALUES.md`          | Move             |
 | `.ai/conventions.md`             | `.ai/CONSTRAINTS.md`     | Rename           |

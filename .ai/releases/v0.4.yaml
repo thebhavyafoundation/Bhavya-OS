@@ -20,6 +20,6 @@ scope:
     - knowledge-graph.json
     - search-index.json
   governance:
-    - ADR-0002 (AI Gateway)
+    - ADR-008 (AI Gateway)
     - RFC-0003 (AI Gateway)
 successor: REL-005

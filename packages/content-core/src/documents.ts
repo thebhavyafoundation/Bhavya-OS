@@ -17,8 +17,8 @@ export function parseMarkdownMetadata(content: string): {
   tags: string[];
 } {
   const titleMatch = content.match(/^# (.+)/m);
-  const statusMatch = content.match(/\*\*Status:\*\*\s*(.+)/i);
-  const dateMatch = content.match(/\*\*Date:\*\*\s*(.+)/i);
+  const statusMatch = content.match(/\*\*Status:\*\*\s*([^|\n]+)/i);
+  const dateMatch = content.match(/\*\*Date:\*\*\s*([^|\n]+)/i);
   return {
     title: titleMatch?.[1] || "",
     status: statusMatch?.[1]?.trim(),
@@ -51,14 +51,14 @@ export function parseJsonMetadata(data: Record<string, unknown>): {
 
 function buildAdrs(): Document[] {
   const docs: Document[] = [];
-  for (const f of listDir("governance/adr")) {
+  for (const f of listDir("docs/adr")) {
     if (!f.endsWith(".md")) continue;
-    const content = readMD(`governance/adr/${f}`);
+    const content = readMD(`docs/adr/${f}`);
     const meta = parseMarkdownMetadata(content);
     const id = f.replace(".md", "");
     docs.push({
       id,
-      title: meta.title.replace(/^ADR-\d+\s*--\s*/, "") || f,
+      title: meta.title.replace(/^ADR-\d+\s*[:\u2013\u2014-]*\s*/, "") || f,
       category: "adr",
       path: `/documents/${id}`,
       content,

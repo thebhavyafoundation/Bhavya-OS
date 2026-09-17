@@ -1,31 +1,34 @@
-# ADR-0003 — Release Train & Platform Governance Policy
+# ADR-009: Release Train & Platform Governance Policy
 
-## Status
-Accepted
+**Status:** Accepted | **Date:** 2026-07-24 | **Deciders:** Founder & Governance Agent
+**Source:** Migrated from governance ADR-0003 (2026-09-17)
 
 ## Context
+
 The Bhavya Platform has reached v1.0.0-rc1 with three applications (website, docs, design-system) sharing a common runtime, SDK, and infrastructure. Feature-driven development served the initial build phase, but as the platform approaches production deployment, a disciplined release process is needed to ensure stability, operational readiness, and organizational alignment.
 
 The platform needs:
+
 1. A predictable release cadence that organizations can plan around
 2. Clear boundaries between stable releases and experimental work
 3. Governance processes that scale as more applications are added
 4. External validation (staging, UAT, operational rehearsals) before production
 
 ## Decision
+
 We adopt a **release train** model with the following policies:
 
 ### Release Train
 
-| Release | Focus | Dependencies |
-|---------|-------|-------------|
-| v1.0.0 | Public production launch | Staging deployment, UAT, operational rehearsal |
-| v1.1.0 | Admin Platform (APP-003) | v1.0.0 stable |
-| v1.2.0 | Volunteer Platform | v1.1.0 stable |
-| v1.3.0 | Programs Platform | v1.2.0 stable |
-| v1.4.0 | Heritage Platform | v1.3.0 stable |
-| v1.5.0 | Nature Platform | v1.4.0 stable |
-| v2.0.0 | Multi-organization federation | Justified by Foundation needs |
+| Release | Focus                         | Dependencies                                   |
+| ------- | ----------------------------- | ---------------------------------------------- |
+| v1.0.0  | Public production launch      | Staging deployment, UAT, operational rehearsal |
+| v1.1.0  | Admin Platform (APP-003)      | v1.0.0 stable                                  |
+| v1.2.0  | Volunteer Platform            | v1.1.0 stable                                  |
+| v1.3.0  | Programs Platform             | v1.2.0 stable                                  |
+| v1.4.0  | Heritage Platform             | v1.3.0 stable                                  |
+| v1.5.0  | Nature Platform               | v1.4.0 stable                                  |
+| v2.0.0  | Multi-organization federation | Justified by Foundation needs                  |
 
 ### Branching Strategy
 
@@ -59,28 +62,27 @@ Every release must pass these gates before tagging:
 - Tags require signed commits (when GPG keys are configured)
 
 ## Alternatives Considered
+
 - **Continuous deployment**: Rejected because institutional software requires deliberate release cycles with stakeholder sign-off.
 - **Calendar-based releases**: Rejected because not all applications have the same development velocity. Release train is dependency-driven.
 - **No branching strategy**: Rejected because hotfixes and stabilization need isolation from feature development.
 
 ## Consequences
+
 **Benefits:**
+
 - Predictable release cadence for organizational planning
 - Clear stability guarantees for each release
 - Operational validation before production exposure
 - Scalable as more applications are added
 
 **Trade-offs:**
+
 - Adds process overhead for each release
 - Requires maintaining release branches
 
 **Future Implications:**
+
 - All new applications follow the same release train
 - ADRs required for any change to the governance policy itself
 - Quarterly dependency updates and security reviews scheduled
-
-## Date
-2026-07-24
-
-## Approved By
-Founder & Governance Agent
