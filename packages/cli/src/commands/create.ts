@@ -1,33 +1,38 @@
-import { resolve } from 'node:path';
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { resolve } from "node:path";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 
 export async function createAgent(type: string, name: string): Promise<void> {
   const root = process.cwd();
 
   switch (type) {
-    case 'agent':
+    case "agent":
       await createAgentDefinition(root, name);
       break;
-    case 'workflow':
+    case "workflow":
       await createWorkflow(root, name);
       break;
-    case 'service':
+    case "service":
       await createService(root, name);
       break;
-    case 'event':
+    case "event":
       await createEvent(root, name);
       break;
-    case 'memory':
+    case "memory":
       await createMemoryType(root, name);
       break;
     default:
-      console.error(`Unknown type: ${type}. Use agent, workflow, service, event, or memory.`);
+      console.error(
+        `Unknown type: ${type}. Use agent, workflow, service, event, or memory.`,
+      );
       process.exit(1);
   }
 }
 
-async function createAgentDefinition(root: string, name: string): Promise<void> {
-  const dir = resolve(root, '.agents');
+async function createAgentDefinition(
+  root: string,
+  name: string,
+): Promise<void> {
+  const dir = resolve(root, ".agents");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
   const content = `# ${name}
@@ -81,7 +86,7 @@ Next steps:`);
 }
 
 async function createWorkflow(root: string, name: string): Promise<void> {
-  const dir = resolve(root, '.workflows');
+  const dir = resolve(root, ".workflows");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
   const content = `# ${name}
@@ -135,11 +140,15 @@ Next steps:`);
   console.log(`  3. Test with: bhavya test workflow ${name}`);
 }
 
-async function createService(root: string, name: string): Promise<void>
-  const dir = resolve(root, 'packages/kernel/src/services');
+async function createService(root: string, name: string): Promise<void> {
+  const dir = resolve(root, "packages/kernel/src/services");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
-  const className = name.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('') + 'Service';
+  const className =
+    name
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join("") + "Service";
 
   const content = `// ${name} Service
 // Solves: [describe the institutional need]
@@ -185,7 +194,7 @@ Next steps:`);
 }
 
 async function createEvent(root: string, name: string): Promise<void> {
-  const dir = resolve(root, '.events');
+  const dir = resolve(root, ".events");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
   const content = `# ${name}
@@ -202,7 +211,10 @@ async function createEvent(root: string, name: string): Promise<void> {
 ## Payload
 
 \`\`\`typescript
-interface ${name.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('')}Payload {
+interface ${name
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("")}Payload {
   // Define payload fields
 }
 \`\`\`
@@ -229,7 +241,7 @@ Next steps:`);
 }
 
 async function createMemoryType(root: string, name: string): Promise<void> {
-  const dir = resolve(root, '.memory');
+  const dir = resolve(root, "memory");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
   const content = `# ${name}
@@ -246,7 +258,10 @@ async function createMemoryType(root: string, name: string): Promise<void> {
 ## Schema
 
 \`\`\`typescript
-interface ${name.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('')}Memory {
+interface ${name
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("")}Memory {
   // Define fields
 }
 \`\`\`
@@ -261,9 +276,9 @@ interface ${name.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).j
 `;
 
   writeFileSync(resolve(dir, `${name}.md`), content);
-  console.log(`Created: .memory/${name}.md`);
+  console.log(`Created: memory/${name}.md`);
   console.log(`
 Next steps:`);
-  console.log(`  1. Edit .memory/${name}.md`);
+  console.log(`  1. Edit memory/${name}.md`);
   console.log(`  2. Define schema and usage`);
 }

@@ -23,10 +23,13 @@ export class SearchEngine {
   }
 
   async initialize(): Promise<void> {
-    // Build search index from .memory/, docs/, .agents/, etc.
+    // Build search index from memory/, docs/, .ai/, etc.
   }
 
-  async search(query: string, options?: { type?: string; limit?: number }): Promise<SearchResult[]> {
+  async search(
+    query: string,
+    options?: { type?: string; limit?: number },
+  ): Promise<SearchResult[]> {
     const lower = query.toLowerCase();
     const results: SearchResult[] = [];
 
@@ -47,7 +50,13 @@ export class SearchEngine {
       .slice(0, options?.limit ?? 10);
   }
 
-  async indexContent(id: string, type: string, title: string, content: string, path: string): Promise<void> {
+  async indexContent(
+    id: string,
+    type: string,
+    title: string,
+    content: string,
+    path: string,
+  ): Promise<void> {
     const entry: SearchResult = {
       id,
       type,

@@ -1,9 +1,9 @@
 // Bhavya Kernel — Memory Module
 // Unified memory interface.
 
-import type { MemoryEntry, MemoryType } from '../types/index.js';
-import { resolve } from 'node:path';
-import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import type { MemoryEntry, MemoryType } from "../types/index.js";
+import { resolve } from "node:path";
+import { existsSync, readdirSync, readFileSync, mkdirSync } from "node:fs";
 
 export interface MemoryConfig {
   root: string;
@@ -16,7 +16,7 @@ export class MemoryEngine {
 
   constructor(config: MemoryConfig) {
     this.config = config;
-    this.memoryDir = resolve(config.root, '.memory');
+    this.memoryDir = resolve(config.root, ".ai/memory");
   }
 
   async initialize(): Promise<void> {
@@ -27,16 +27,18 @@ export class MemoryEngine {
   }
 
   private async loadAll(): Promise<void> {
-    const files = readdirSync(this.memoryDir).filter((f) => f.endsWith('.md') || f.endsWith('.json'));
+    const files = readdirSync(this.memoryDir).filter(
+      (f) => f.endsWith(".md") || f.endsWith(".json"),
+    );
     for (const file of files) {
-      const content = readFileSync(resolve(this.memoryDir, file), 'utf-8');
+      const content = readFileSync(resolve(this.memoryDir, file), "utf-8");
       const entry: MemoryEntry = {
         id: `memory:${file}`,
         type: this.inferType(file),
-        priority: 'medium',
-        status: 'active',
+        priority: "medium",
+        status: "active",
         content,
-        summary: '',
+        summary: "",
         tags: [],
         metadata: {},
         relations: [],
@@ -50,14 +52,15 @@ export class MemoryEngine {
   }
 
   private inferType(filename: string): MemoryType {
-    if (filename.includes('project')) return 'project';
-    if (filename.includes('people') || filename.includes('person')) return 'person';
-    if (filename.includes('knowledge')) return 'knowledge';
-    if (filename.includes('architecture')) return 'architecture';
-    if (filename.includes('history')) return 'history';
-    if (filename.includes('bug')) return 'bug';
-    if (filename.includes('lesson')) return 'lesson';
-    return 'knowledge';
+    if (filename.includes("project")) return "project";
+    if (filename.includes("people") || filename.includes("person"))
+      return "person";
+    if (filename.includes("knowledge")) return "knowledge";
+    if (filename.includes("architecture")) return "architecture";
+    if (filename.includes("history")) return "history";
+    if (filename.includes("bug")) return "bug";
+    if (filename.includes("lesson")) return "lesson";
+    return "knowledge";
   }
 
   async get(id: string): Promise<MemoryEntry | undefined> {
@@ -72,7 +75,9 @@ export class MemoryEngine {
     return Array.from(this.store.values());
   }
 
-  async set(entry: Omit<MemoryEntry, 'id' | 'createdAt' | 'updatedAt'>): Promise<MemoryEntry> {
+  async set(
+    entry: Omit<MemoryEntry, "id" | "createdAt" | "updatedAt">,
+  ): Promise<MemoryEntry> {
     const id = `memory:${crypto.randomUUID()}`;
     const full: MemoryEntry = {
       ...entry,
@@ -84,7 +89,10 @@ export class MemoryEngine {
     return full;
   }
 
-  async update(id: string, updates: Partial<MemoryEntry>): Promise<MemoryEntry | undefined> {
+  async update(
+    id: string,
+    updates: Partial<MemoryEntry>,
+  ): Promise<MemoryEntry | undefined> {
     const existing = this.store.get(id);
     if (!existing) return undefined;
 

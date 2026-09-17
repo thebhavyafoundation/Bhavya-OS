@@ -37,7 +37,7 @@ export class Registry {
       agent: ['.agents'],
       workflow: ['.workflows'],
       event: ['.events'],
-      memory: ['.memory'],
+      memory: ['.ai/memory'],
       command: ['.commands'],
       prompt: ['.prompts'],
       template: ['.templates'],
