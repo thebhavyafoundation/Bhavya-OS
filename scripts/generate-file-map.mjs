@@ -9,6 +9,11 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "FILE-MAP.md");
 
+// Environment/tool dirs that are gitignored or machine-generated. Skipping them
+// keeps the output byte-deterministic across machines and CI.
+const SKIP_NAMES = new Set(["node_modules", ".git", ".next", ".turbo", ".vercel"]);
+const HUSKY_INTERNAL = join(".husky", "_");
+
 function list(dir, depth = 0, maxDepth = 2) {
   const out = [];
   let entries = [];
@@ -18,8 +23,10 @@ function list(dir, depth = 0, maxDepth = 2) {
     return out;
   }
   for (const name of entries.sort()) {
-    if (name === "node_modules" || name === ".git" || name === ".next") continue;
+    if (SKIP_NAMES.has(name)) continue;
+    if (/^__test_io_.*__$/.test(name)) continue;
     const full = join(dir, name);
+    if (relative(ROOT, full) === HUSKY_INTERNAL) continue;
     let st;
     try {
       st = statSync(full);
