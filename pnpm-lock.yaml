@@ -945,6 +945,9 @@ importers:
         specifier: workspace:*
         version: link:../shared
     devDependencies:
+      '@bhavya/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
@@ -1012,6 +1015,9 @@ importers:
         specifier: workspace:*
         version: link:../shared
     devDependencies:
+      '@bhavya/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: ^5.8.2
         version: 5.9.3

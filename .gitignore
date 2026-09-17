@@ -68,3 +68,4 @@ bar/bee-state/
 bar/provenance/
 packages/bar/
 bhavya-ai-lab/metrics/
+next-env.d.ts
