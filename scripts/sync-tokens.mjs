@@ -9,7 +9,7 @@
 //   node scripts/sync-tokens.mjs          # sync all apps
 //   node scripts/sync-tokens.mjs --check   # check if sync is needed (CI mode)
 
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -17,16 +17,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const CANONICAL_SOURCE = join(ROOT, "packages/platform-ui/src/styles/tokens.css");
 
-const CONSUMING_APPS = [
-  "ai-institute",
-  "admin",
-  "design-system",
-  "docs",
-  "github-os",
-  "ioc",
-  "social-os",
-  "website",
-];
+// Derived from the apps/ tree so retired apps cannot linger in the list and
+// new apps are covered automatically.
+const CONSUMING_APPS = readdirSync(join(ROOT, "apps"))
+  .filter((name) => existsSync(join(ROOT, "apps", name, "src", "app")))
+  .sort();
 
 const HEADER = `/*
  * AUTO-GENERATED FILE - DO NOT EDIT
