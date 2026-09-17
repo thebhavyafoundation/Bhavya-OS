@@ -1,5 +1,5 @@
 {
-  "extends": "@bhavya/typescript/tsconfig.json",
+  "extends": "@bhavya/typescript/base",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"

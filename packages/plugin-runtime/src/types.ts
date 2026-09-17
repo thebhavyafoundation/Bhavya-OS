@@ -1,6 +1,9 @@
 // Bhavya OS Plugin Runtime — Type Definitions
 
-import type { ID, JSONObject } from "@bhavya/shared";
+// Local type aliases (not exported from @bhavya/shared)
+type ID = string;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type JSONObject = Record<string, any>;
 
 // ─── Plugin States ──────────────────────────────────────────────────
 

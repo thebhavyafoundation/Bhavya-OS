@@ -16,6 +16,7 @@
     "@bhavya/events": "workspace:*"
   },
   "devDependencies": {
+    "@bhavya/typescript": "workspace:*",
     "typescript": "^5.8.2"
   }
 }
