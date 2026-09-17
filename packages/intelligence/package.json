@@ -12,6 +12,9 @@
     "typecheck": "tsc --noEmit",
     "build": "tsc"
   },
+  "dependencies": {
+    "@bhavya/content-core": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^5.8.2"
   }
