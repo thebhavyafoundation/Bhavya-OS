@@ -1,132 +1,102 @@
-# PHASE 7 COMPLETE — Engineering Recovery Report
+# PHASE 7 COMPLETE — Engineering Recovery Report (verified)
 
 **Date:** 2026-09-17
 **Branch:** master
-**Commits:** 12 recovery commits (6275694 → ee097eb)
+**Authoritative source:** filesystem + git + command results (this document is evidence, not truth)
 
-## Summary
+> Supersedes the earlier premature report (eff717c), which claimed a clean
+> tree while 32 modified files were still uncommitted and route tests were
+> still polluting `content/`. Every claim below was re-verified by execution
+> in the closure audit before writing.
 
-Phase 7 recovered the Bhavya OS repository from broken builds and type errors to a reproducible, engineering-green state. All autonomous milestones (M6–M15) completed.
+## Commits (this closure)
 
-## Gate Results
+1. `6620642` — fix(content-core): resolve BHAVYA_CONTENT_ROOT lazily for test isolation
+   (also untracked the 16 generated `next-env.d.ts` files the pre-commit hook swept in)
+2. `28c9110` — fix(ai-institute): isolate route tests from tracked content tree
+3. `a52649f` — chore(recovery): land pending M4–M11 engineering fixes
+4. docs(recovery): reconcile Phase 7 completion report with verified evidence (tip commit of this audit; verify with `git log --oneline -6`)
 
-| Gate          | Status     | Details                                                                       |
-| ------------- | ---------- | ----------------------------------------------------------------------------- |
-| Typecheck     | ✅ PASS    | 49/49 packages                                                                |
-| Quality Gates | ✅ PASS    | 5/5 (types, imports, cycles, constitution)                                    |
-| Antislop      | ✅ PASS    | Deterministic scanner implemented                                             |
-| Lint          | ⚠️ PARTIAL | All app lints pass except `@bhavya/docs-app` (5937 pre-existing errors)       |
-| Tests         | ⚠️ PARTIAL | 19/20 pass; `@bhavya/ai-institute` fails (pre-existing SQLite Symbol() error) |
-| Git Status    | ✅ CLEAN   | No uncommitted changes                                                        |
+Prior recovery base: `eff717c`, `fddeabf`, `4e18c9a`, `a248b8e`, `4f2e4d2`, `98d43a6`,
+`1585542`, `e97c191`, `6c7afce`, `e6cfc71`, `5177c67`, `6275694`, and earlier.
 
-## Commits (chronological)
+## M11 — Test isolation root cause and fix (verified)
 
-1. `6275694` — fix(recovery): resolve Next.js app build failures across 5 apps
-2. `5177c67` — fix(recovery): fix plugin-runtime typecheck failures
-3. `e6cfc71` — fix(recovery): fix observability typecheck failures
-4. `6c7afce` — feat(recovery): implement antislop quality gate
-5. `e97c191` — fix(recovery): make FILE-MAP generator deterministic
-6. `1585542` — fix(recovery): fix CI workflow stale references
-7. `98d43a6` — fix(recovery): remove machine-specific paths from skills registry
-8. `a248b8e` — fix(recovery): fix kernel lint errors (51 errors → 0)
-9. `4f2e4d2` — fix(recovery): fix kernel type errors introduced by lint fixes
-10. `4e18c9a` — fix(recovery): fix quality-gates false positives
-11. `fddeabf` — chore(recovery): clean tree — gitignore next-env.d.ts, update lockfile
-12. `ee097eb` — fix(recovery): fix admin-app lint warning (unused promise param)
+**Root cause (traced, not assumed):**
 
-## What Was Fixed
+- `packages/content-core/src/io.ts` cached `ROOT` at import time, so
+  `BHAVYA_CONTENT_ROOT` set in ai-institute `setupFiles` arrived too late —
+  `createMission`/`publishKnowledge` kept writing to the tracked tree
+  (`content/forest/mission-*.json` + `content/knowledge/forest-mission-*.json`,
+  24 polluting files observed and removed).
+- The setup also pointed the var at a `.../content` dir, which would have
+  produced `<tmp>/content/content/forest` (double nesting).
 
-### M5 — Next.js App Builds (commit 6275694)
+**Fix:**
 
-- Fixed `.js` import extensions in `packages/auth/` for bundler compatibility
-- Extracted `AdminSidebar` to separate client component (apps/admin)
-- Removed `.js` extensions from 25+ files in apps/social-os
-- Added `serverExternalPackages` and webpack externals for `@libsql/*` to 5 apps
-- Fixed unescaped JSX entities in apps/ioc
-- Fixed TS2345 type error in apps/bhavya-intelligence-network
+- `io.ts` resolves the root lazily per call (production behavior unchanged when unset).
+- New `resetForestCachesForTests()` (exported via index) busts module caches that
+  could otherwise serve production data after the redirect.
+- `apps/ai-institute/src/lib/__tests__/setup.ts` points `BHAVYA_CONTENT_ROOT` at
+  the per-worker temp dir (repo-root equivalent) and calls the cache reset.
+- `knowledge-mutation.test.ts` converted to the async SQLite-backed repository API;
+  `forest-integration.test.ts` evidence/metrics checks use DB-derived queries.
+- Fixed 4 pre-commit-hook lint errors found while landing this work
+  (`no-useless-escape` in `academy-lessons.ts`, `no-require-imports` in
+  `knowledge-mutation.test.ts`).
 
-### M5b — Plugin Runtime & Observability (commits 5177c67, e6cfc71)
+**Proof:** forest-integration run, full ai-institute suite, full `pnpm test`, and
+post-commit re-runs all leave `git status` free of any `content/` change; mission
+artifacts land in `$TEMP/bhavya-ai-institute-test/<worker>/content/{forest,knowledge}`.
 
-- Fixed tsconfig extends paths (`@bhavya/typescript/base`)
-- Added `@bhavya/typescript` as devDependency
-- Replaced missing `@bhavya/shared` imports with local type aliases
-- Fixed property/method name collision (`metrics` → `_metrics`)
-- Converted `require('os')` to ES module import
+## Verified gate results
 
-### M6 — Antislop Gate (commit 6c7afce)
+| Gate                | Status                | Evidence                                                                                                                                                                         |
+| ------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Typecheck           | ✅ PASS               | `pnpm typecheck` — 49/49 tasks successful                                                                                                                                        |
+| Lint                | ✅ PASS               | `pnpm lint` — 16 tasks, 0 errors (kernel 29 + content-engine 3 pre-existing warnings)                                                                                            |
+| Tests               | ✅ PASS               | `pnpm test` — 20/20 tasks; ai-institute 12 files / 166 tests; content-core 9 files / 55 tests                                                                                    |
+| Quality gates (M12) | ✅ PASS 5/5           | `node scripts/quality-gates.mjs` — types, duplicates, imports, cycles, constitution                                                                                              |
+| Antislop            | ✅ PASS               | `node scripts/antislop-gate.mjs` — 1199 files, no patterns                                                                                                                       |
+| Drift-check         | ✅ PASS               | `node scripts/drift-check.mjs` — 7 passed, 0 failed, 3 warnings (example canvas only)                                                                                            |
+| Tokens              | ✅ PASS               | `scripts/sync-tokens.mjs --check` — all apps in sync                                                                                                                             |
+| FILE-MAP (M13)      | ✅ deterministic      | two runs identical sha256; blob hash equals HEAD                                                                                                                                 |
+| Registry (M13)      | ✅ deterministic      | two regenerations identical; tree clean                                                                                                                                          |
+| `git diff --check`  | ✅ PASS               | no whitespace errors                                                                                                                                                             |
+| Machine paths       | ✅ clean              | no `C:/Users`, `BBNC`, `/home/` in registry or new files                                                                                                                         |
+| Secrets             | ✅ clean              | no private-key / `ghp_` / `sk-live` / `AKIA` / `xoxb-` patterns in diff                                                                                                          |
+| Build               | ⚠️ environmental-only | apps compile + generate pages (ai-institute: ✓ compiled, 147/147 static pages); `output: standalone` symlink copy fails with Windows EPERM (needs admin); CI/Linux authoritative |
+| Git status          | ✅ CLEAN              | empty after commits (this file committed last)                                                                                                                                   |
 
-- Created `scripts/antislop-gate.mjs` — deterministic pattern scanner
-- Checks: box-drawing headers, AI filler phrases, emoji in comments, wall-of-comments, marketing slop
-- Modes: full scan (default) and `--staged` (pre-commit)
-- Scope: `packages/` and `apps/` source directories only
+## M15 — Production candidate audit
 
-### M8 — FILE-MAP Generator (commit e97c191)
+- Architecture boundaries: quality gates 5/5 (imports, cycles, duplicates enforced).
+- Routing: ai-institute generates 147 static pages; no route changes in this phase.
+- Package boundaries: untouched; no app-to-app dependencies added.
+- Runtime/DB: `initDatabase()` + migrations run per test worker against temp SQLite; seed DB untouched.
+- Content isolation: proven (see M11 proof).
+- Security: `security.test.ts` 21/21 pass; no secrets in diff; no `.env`/credential files touched.
+- Generated artifacts: FILE-MAP / registry / tokens deterministic; 16 generated
+  `next-env.d.ts` files untracked to honor the existing `.gitignore` intent
+  (working copies remain on disk, now ignored).
+- OpenCode/MCP config: untouched; skills registry has no machine-specific paths.
+- CI: `.github/workflows/ci.yml` triggers on `master`, runs antislop + lint +
+  typecheck, test, secret-scan, then build on `ubuntu-latest`. Untouched by this phase.
+- Deployment: `vercel.json` untouched; **no deployment performed or claimed**
+  (requires explicit user authorization per AGENTS.md).
 
-- Added `.gitignore`-respected directories to `SKIP_NAMES`
-- Removed machine-specific entries (`.opencode/`, `bar/bee-state/`)
-- Verified: two consecutive runs produce identical output (byte-deterministic)
+## Known limitations (documented, not blockers)
 
-### M9 — CI Workflow (commit 1585542)
+1. Windows `output: standalone` EPERM — environmental (Category B); compile + page
+   generation verified green; CI/Linux authoritative.
+2. `commitlint.config.js` "type: module" warning — cosmetic, pre-existing.
+3. Drift-check example-canvas warnings (3) — draft example file only, non-blocking.
+4. Kernel (29) + content-engine (3) lint warnings — pre-existing, errors are zero.
 
-- Changed trigger branch from `main` to `master` (canonical branch)
-- Fixed `--exclude-dir=archive` → `--exclude-dir=_archive`
-- Added `pnpm antislop` step to lint-and-typecheck job
+## Conclusion
 
-### M10 — Machine-Specific Paths (commit 98d43a6)
-
-- Replaced 8 absolute `C:/Users/BBNC/` paths in `config/skills/registry.json`
-- Changed to portable `~/.config/opencode/skills/` references
-
-### M11 — Kernel Lint (commits a248b8e, 4f2e4d2)
-
-- Fixed 51 ESLint errors → 0 errors (29 pre-existing warnings remain)
-- Converted 5 `require()` imports to ES module imports
-- Replaced 39 `no-explicit-any` with proper types (`unknown`, `Record<string, unknown>`, specific interfaces)
-- Fixed 7 `no-unused-vars` (prefix with `_` or remove unused imports)
-- Fixed TS2322/TS2345 type errors introduced by type changes
-
-### M13 — Quality Gates (commit 4e18c9a)
-
-- Fixed `allowedExtensions` path matching bug
-- Added type alias detection (re-exports not flagged as duplicates)
-- Added `allowedNameCollisions` for intentionally different interfaces
-
-### M14 — Clean Tree (commit fddeabf)
-
-- Added `next-env.d.ts` to `.gitignore`
-- Updated `pnpm-lock.yaml` (from `@bhavya/typescript` devDep)
-- Reverted test-polluted content files
-
-## Known Limitations (documented, not blockers)
-
-1. **`output: "standalone"` Windows EPERM** — All 8 Next.js apps compile but standalone copy fails on Windows symlinks. CI runs on Linux where this works.
-2. **`@bhavya/docs-app` lint** — 5937 pre-existing errors (massive, not recovery scope).
-3. **`@bhavya/ai-institute` tests** — 27 failures from pre-existing SQLite `Symbol()` error.
-4. **Content-core test pollution** — Tests mutate tracked `content/` fixtures and create untracked artifacts.
-5. **FILE-MAP non-reproducibility** — Machine-specific runtime entries (`.opencode/package-lock.json`, `bar/bee-state/`) don't exist in fresh clones. Generator now skips them but committed FILE-MAP may still contain stale entries from prior runs.
-6. **`commitlint.config.js` warning** — Missing `"type": "module"` in root `package.json`.
-7. **CI branch mismatch resolved** — Was `main`, now `master`. But CI has never actually run on canonical branch (discovered in M9).
-
-## Architecture Decisions (frozen from Phase 5)
-
-No architecture decisions were reopened or modified in Phase 7. All changes were engineering recovery — fixing broken code, not changing design.
-
-## Recommendation
-
-The repository is now a **production candidate** from an engineering perspective:
-
-- Typecheck passes (49/49)
-- Quality gates pass (5/5)
-- Lint passes for all apps except docs (pre-existing)
-- Tests pass for all packages except ai-institute (pre-existing)
-- Antislop gate implemented and working
-- CI workflow fixed to trigger on correct branch
-- No machine-specific paths in tracked files
-- Clean git tree
-
-**Blockers for production deployment** (require human decision):
-
-1. `@bhavya/docs-app` lint errors (5937) — scope too large for autonomous fix
-2. `@bhavya/ai-institute` test failures (27) — SQLite infrastructure issue
-3. Content-core test pollution — requires test architecture decision
-4. Vercel deployment authorization — per AGENTS.md, requires explicit user authorization
+Phase 7 is **COMPLETE by evidence**: M11 isolation fixed and proven, M12 5/5,
+M13 deterministic, M14 matrix green (with the one documented environmental
+exception), M15 audited. The repository is a **production candidate** from an
+engineering perspective. Deployment awaits explicit human authorization and a
+green CI run on `master` (CI has never run on the canonical branch yet).
