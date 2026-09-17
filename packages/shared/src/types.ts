@@ -11,9 +11,9 @@
  * @license MIT
  */
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // CORE IDENTIFIERS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export type AgentId = string;
 export type TaskId = string;
@@ -25,17 +25,17 @@ export type PlanId = string;
 export type ExecutionId = string;
 export type CorrelationId = string;
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // COMMON ENUMS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export type Priority = "critical" | "high" | "medium" | "low";
 
 export type EntityStatus = "draft" | "review" | "published" | "archived";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // EXECUTION CONTEXT
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface ExecutionContext {
   executionId: ExecutionId;
@@ -66,9 +66,9 @@ export type ExecutionState =
   | "cancelled"
   | "retrying";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // EVENT SYSTEM — Single canonical EventBus
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /** Canonical event — used by all packages */
 export interface BhavyaEvent<T = unknown> {
@@ -175,9 +175,9 @@ export interface NotificationSentPayload {
   success: boolean;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // WORKFLOW SYSTEM — Single canonical WorkflowEngine
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /** Canonical workflow definition */
 export interface Workflow {
@@ -292,9 +292,9 @@ export interface WorkflowMetrics {
   totalExecutions: number;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // MEMORY SYSTEM — Single canonical MemoryEngine
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /** Canonical memory entry — merges kernel + runtime definitions */
 export interface Memory {
@@ -377,9 +377,9 @@ export interface MemoryStats {
   newestMemory: Date;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // GOAL & PLAN SYSTEM
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /** Canonical goal — merges @bhavya/types (rich) + kernel (simple) */
 export interface Goal {
@@ -471,9 +471,9 @@ export interface TimelinePhase {
   endDate: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // AGENT & TASK SYSTEM
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Agent {
   id: AgentId;
@@ -515,9 +515,9 @@ export interface Task {
 export type TaskStatus =
   "pending" | "queued" | "running" | "completed" | "failed" | "cancelled";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // KNOWLEDGE TYPES — Educational + Technology domains
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 // ─── Educational Knowledge ────────────────────────────────────────
 
@@ -642,12 +642,7 @@ export interface LearningOutcome {
 }
 
 export type BloomLevel =
-  | "remember"
-  | "understand"
-  | "apply"
-  | "analyze"
-  | "evaluate"
-  | "create";
+  "remember" | "understand" | "apply" | "analyze" | "evaluate" | "create";
 
 export interface LessonSection {
   id: string;
@@ -685,11 +680,7 @@ export interface Course {
 }
 
 export type CourseLevel =
-  | "foundation"
-  | "beginner"
-  | "intermediate"
-  | "advanced"
-  | "expert";
+  "foundation" | "beginner" | "intermediate" | "advanced" | "expert";
 
 export interface CourseModule {
   id: string;
@@ -835,11 +826,7 @@ export type MissionSlug = "forest" | "knowledge" | "heritage" | "community";
 export type MissionStatus = "active" | "on-hold" | "completed" | "archived";
 
 export type MissionDomain =
-  | "environment"
-  | "education"
-  | "heritage"
-  | "community"
-  | "research";
+  "environment" | "education" | "heritage" | "community" | "research";
 
 export interface Program {
   id: string;
@@ -1002,9 +989,9 @@ export type PublicationStatus = "draft" | "pending" | "published" | "archived";
 export type QuestionType = "mcq" | "short-answer" | "reflection" | "practical";
 export type ExerciseType = "short-answer" | "mcq" | "reflection" | "practical";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // UNIVERSAL ENTITY — Base for Knowledge Graph
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /** Base entity — every knowledge graph node extends this */
 export interface BaseEntity {
@@ -1080,9 +1067,9 @@ export type RelationType =
   | "documents"
   | "verified_by";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // ARTIFACTS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Artifact {
   path: string;
@@ -1101,9 +1088,9 @@ export interface ArtifactMetadata {
   encoding?: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // PIPELINE
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface PipelineExecution {
   id: ExecutionId;
@@ -1158,9 +1145,9 @@ export interface TraceSpan {
   attributes: Record<string, unknown>;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // SEARCH
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface SearchResult {
   id: string;
@@ -1193,9 +1180,9 @@ export interface SearchResponse {
   duration: number;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // NOTIFICATIONS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Notification {
   id: string;
@@ -1227,9 +1214,9 @@ export interface NotificationPreference {
   types: NotificationType[];
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // AUDIT
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface AuditEntry {
   id: string;
@@ -1252,9 +1239,9 @@ export type AuditAction =
   | "reject"
   | "execute";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // PROVIDERS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Provider {
   id: string;
@@ -1296,9 +1283,9 @@ export interface ProviderHealth {
   error?: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // USER & AUTH
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface User {
   id: string;
@@ -1345,9 +1332,9 @@ export interface RegistrationData {
   name: string;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // SCHEMA & REGISTRY
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Schema {
   type: string;
@@ -1376,9 +1363,9 @@ export type RegistryType =
   | "schema"
   | "policy";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // HEALTH & REPORTING
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface HealthStatus {
   status: "healthy" | "degraded" | "unhealthy";
@@ -1407,9 +1394,9 @@ export interface ExecutionReport {
   context: ExecutionContext;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // PERMISSION
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface Permission {
   resource: string;

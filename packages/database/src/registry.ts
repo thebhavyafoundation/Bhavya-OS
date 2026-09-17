@@ -62,6 +62,11 @@ function resolveWorkspaceRoot(): string {
  * Get the absolute path for a named database.
  */
 export function getDatabasePath(name: DatabaseName): string {
+  // Test isolation override: point a named DB at a temp file without
+  // touching production behavior (unset => identical resolution as before).
+  if (process.env.BHAVYA_DB_PATH) {
+    return process.env.BHAVYA_DB_PATH!;
+  }
   const entry = REGISTRY[name];
   if (entry.envKey && process.env[entry.envKey]) {
     return process.env[entry.envKey]!;

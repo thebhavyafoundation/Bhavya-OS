@@ -81,9 +81,9 @@ export class BhavyaRuntime {
     if (!this.#loaded) throw new Error('Runtime not loaded. Call load() first.');
   }
 
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
   // Public API — the SDK surface
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
 
   /**
    * Resolve a capability to its full execution context.

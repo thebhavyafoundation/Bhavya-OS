@@ -189,24 +189,15 @@ export async function migrate(
   const appliedIds_: string[] = [];
 
   for (const migration of pending) {
-    const txFn = db.transaction;
-    if (txFn) {
-      // Transactional execution
-      txFn(() => {
-        db.exec(migration.up);
-        const checksum = computeChecksum(migration);
-        db.prepare(
-          `INSERT INTO ${MIGRATIONS_TABLE} (id, name, checksum) VALUES (?, ?, ?)`,
-        ).run(migration.id, migration.name, checksum);
-      })();
-    } else {
-      // Fallback: direct execution (no transaction support)
+    // Transactional execution (call as a method: detached db.transaction
+    // loses its `this` binding and crashes inside better-sqlite3).
+    db.transaction(() => {
       db.exec(migration.up);
       const checksum = computeChecksum(migration);
       db.prepare(
         `INSERT INTO ${MIGRATIONS_TABLE} (id, name, checksum) VALUES (?, ?, ?)`,
       ).run(migration.id, migration.name, checksum);
-    }
+    })();
 
     appliedIds_.push(migration.id);
   }
@@ -245,20 +236,12 @@ export async function rollback(dbName: DatabaseName): Promise<string | null> {
     );
   }
 
-  const txFn = db.transaction;
-  if (txFn) {
-    txFn(() => {
-      db.exec(migration.down);
-      db.prepare(`DELETE FROM ${MIGRATIONS_TABLE} WHERE id = ?`).run(
-        migration.id,
-      );
-    })();
-  } else {
+  db.transaction(() => {
     db.exec(migration.down);
     db.prepare(`DELETE FROM ${MIGRATIONS_TABLE} WHERE id = ?`).run(
       migration.id,
     );
-  }
+  })();
 
   return migration.id;
 }

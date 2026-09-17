@@ -1,10 +1,11 @@
-import { getGovernanceDocs, getPolicies, getKnowledgeGraph } from "../../lib/data";
+import { getGovernanceDocs, getKnowledgeGraph } from "../../lib/data";
 
 export default async function GovernancePage() {
   const govDocs = getGovernanceDocs();
-  const policies = getPolicies();
   const kg = getKnowledgeGraph();
-  const govNodes = kg.nodes.filter((n) => n.type === "adr" || n.type === "standard");
+  const govNodes = kg.nodes.filter(
+    (n) => n.type === "adr" || n.type === "standard",
+  );
 
   return (
     <div className="shell">
@@ -16,7 +17,9 @@ export default async function GovernancePage() {
         <nav className="nav">
           <span className="nav-section">Browse</span>
           <a href="/">Dashboard</a>
-          <a href="/governance" className="active">Governance</a>
+          <a href="/governance" className="active">
+            Governance
+          </a>
           <a href="/governance/policies">Policies</a>
           <a href="/decisions">Decision Records</a>
           <a href="/standards">Standards</a>
@@ -29,16 +32,28 @@ export default async function GovernancePage() {
       <main className="main" id="main-content">
         <div className="header">
           <h1>Governance Library</h1>
-          <p>Founding documents, governance manual, board charter, and institutional policies</p>
+          <p>
+            Founding documents, governance manual, board charter, and
+            institutional policies
+          </p>
         </div>
 
         {/* Governing Documents */}
         <div className="header">
           <h2 style={{ fontSize: 16, fontWeight: 700 }}>Governing Documents</h2>
-          <p style={{ fontSize: 12, color: "var(--text-2)" }}>Core institutional documents that define the Foundation</p>
+          <p style={{ fontSize: 12, color: "var(--text-2)" }}>
+            Core institutional documents that define the Foundation
+          </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 40 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            marginBottom: 40,
+          }}
+        >
           {govDocs.map((doc) => (
             <div key={doc.id} className="card">
               <div className="card-title">
@@ -49,16 +64,54 @@ export default async function GovernancePage() {
                 </div>
               </div>
               {doc.summary && <div className="card-desc">{doc.summary}</div>}
-              <div style={{ display: "flex", gap: 12, fontSize: 11, color: "var(--text-3)" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 12,
+                  fontSize: 11,
+                  color: "var(--text-3)",
+                }}
+              >
                 {doc.ratified && <span>Ratified: {doc.ratified}</span>}
                 {doc.owner && <span>Owner: {doc.owner}</span>}
               </div>
               {doc.sections && doc.sections.length > 0 && (
-                <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
+                <div
+                  style={{
+                    marginTop: 12,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 8,
+                  }}
+                >
                   {doc.sections.map((section, i) => (
-                    <div key={i} style={{ background: "var(--surface-2)", padding: "10px 14px", borderRadius: 6, border: "1px solid var(--border)" }}>
-                      <div style={{ fontSize: 12, fontWeight: 600, marginBottom: 4 }}>{section.heading}</div>
-                      <div style={{ fontSize: 12, color: "var(--text-2)", lineHeight: 1.5 }}>{section.body}</div>
+                    <div
+                      key={i}
+                      style={{
+                        background: "var(--surface-2)",
+                        padding: "10px 14px",
+                        borderRadius: 6,
+                        border: "1px solid var(--border)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 600,
+                          marginBottom: 4,
+                        }}
+                      >
+                        {section.heading}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 12,
+                          color: "var(--text-2)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {section.body}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -69,8 +122,12 @@ export default async function GovernancePage() {
 
         {/* Related Knowledge Graph Nodes */}
         <div className="header">
-          <h2 style={{ fontSize: 16, fontWeight: 700 }}>Related Standards & ADRs</h2>
-          <p style={{ fontSize: 12, color: "var(--text-2)" }}>Cross-linked governance references from the knowledge graph</p>
+          <h2 style={{ fontSize: 16, fontWeight: 700 }}>
+            Related Standards & ADRs
+          </h2>
+          <p style={{ fontSize: 12, color: "var(--text-2)" }}>
+            Cross-linked governance references from the knowledge graph
+          </p>
         </div>
 
         <div className="grid-2">
@@ -78,13 +135,22 @@ export default async function GovernancePage() {
             <div key={node.id} className="card">
               <div className="card-title">
                 <span>{node.title}</span>
-                <span className={`badge ${node.type === "adr" ? "badge-purple" : "badge-blue"}`}>{node.type}</span>
+                <span
+                  className={`badge ${node.type === "adr" ? "badge-purple" : "badge-blue"}`}
+                >
+                  {node.type}
+                </span>
               </div>
-              <div className="card-desc">ID: {node.id} · Owner: {node.owner || "System"} · Status: {node.status}</div>
+              <div className="card-desc">
+                ID: {node.id} · Owner: {node.owner || "System"} · Status:{" "}
+                {node.status}
+              </div>
               {node.links && node.links.length > 0 && (
                 <div style={{ marginTop: 8 }}>
                   {node.links.map((linkId) => (
-                    <span className="link-tag" key={linkId}>→ {linkId}</span>
+                    <span className="link-tag" key={linkId}>
+                      → {linkId}
+                    </span>
                   ))}
                 </div>
               )}

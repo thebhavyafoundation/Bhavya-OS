@@ -1,6 +1,6 @@
-// ═══════════════════════════════════════════════════
+// ───────────────────────────────────────────────────
 // Bhavya Execution Engine — Core Types
-// ═══════════════════════════════════════════════════
+// ───────────────────────────────────────────────────
 
 /**
  * @typedef {'pending'|'queued'|'running'|'paused'|'waiting-approval'|'completed'|'failed'|'cancelled'|'compensating'|'compensated'} NodeStatus

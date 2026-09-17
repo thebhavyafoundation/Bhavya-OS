@@ -17,9 +17,9 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // TYPES
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface NavItem {
   label: string;
@@ -61,9 +61,9 @@ export interface BhavyaNavProps {
   onSignOut?: () => void;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // DEFAULT ITEMS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 const DEFAULT_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
@@ -74,9 +74,9 @@ const DEFAULT_ITEMS: NavItem[] = [
   { label: "Dashboard", href: "/dashboard" },
 ];
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // BRAND TOKENS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 const BRAND = {
   forest: "#1a3a2a",
@@ -91,9 +91,9 @@ const BRAND = {
   textMuted: "#7a7268",
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // COMPONENT
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export function BhavyaNav({
   items = DEFAULT_ITEMS,
@@ -136,7 +136,7 @@ export function BhavyaNav({
         window.location.href = href;
       }
     },
-    [onNavigate]
+    [onNavigate],
   );
 
   const handleSearchSubmit = useCallback(
@@ -146,7 +146,7 @@ export function BhavyaNav({
         onSearch(searchQuery.trim());
       }
     },
-    [onSearch, searchQuery]
+    [onSearch, searchQuery],
   );
 
   return (
@@ -241,7 +241,9 @@ export function BhavyaNav({
           className="bhavya-nav-desktop"
         >
           {items.map((item) => {
-            const isActive = activeRoute === item.href || activeRoute?.startsWith(item.href + "/");
+            const isActive =
+              activeRoute === item.href ||
+              activeRoute?.startsWith(item.href + "/");
             return (
               <a
                 key={item.href}
@@ -322,7 +324,14 @@ export function BhavyaNav({
               }}
               className="bhavya-nav-search"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={BRAND.textMuted} strokeWidth="2">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={BRAND.textMuted}
+                strokeWidth="2"
+              >
                 <circle cx="11" cy="11" r="8" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
@@ -400,7 +409,12 @@ export function BhavyaNav({
                   <img
                     src={user.avatar}
                     alt={user.name}
-                    style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
                   user.name.charAt(0).toUpperCase()
@@ -447,12 +461,26 @@ export function BhavyaNav({
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             {mobileOpen ? (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="18" x2="21" y2="18" />

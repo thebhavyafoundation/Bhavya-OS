@@ -47,6 +47,22 @@ const FILLER_PHRASES = [
 // Excessive consecutive comment lines (file headers are often 10-15 lines)
 const MAX_CONSECUTIVE_COMMENTS = 15;
 
+// ── Allowlist: exact file + line-pattern pairs that are intentional ──────────
+// These are NOT AI slop: curated institutional language and remediation
+// reports that quote a removed phrase as evidence. Each entry requires a
+// reason so future additions stay auditable. New code is still scanned.
+const ALLOWLIST = [
+  // Mission value statement in agent memory (curated institutional language).
+  { file: "packages/memory-engine/memory/knowledge.md", pattern: /empower/i, reason: "mission-value" },
+  { file: "packages/memory-engine/memory/people.md", pattern: /empower/i, reason: "mission-value" },
+  // Readiness report quoting the phrase it removed (remediation evidence).
+  { file: "apps/ai-institute/docs/WAVE-13-READINESS-REPORT.md", pattern: /world[- ]?class/i, reason: "quoted-remediation" },
+];
+
+function isAllowed(rel, text) {
+  return ALLOWLIST.some((e) => e.file === rel && e.pattern.test(text));
+}
+
 // ── Patterns: copywriting slop (markdown only) ──────────────────────────────
 const MARKETING_SLOP = [
   /\bgame[- ]?changing\b/i,
@@ -127,6 +143,7 @@ function analyzeFile(filePath) {
   const lines = content.split("\n");
   let consecutiveComments = 0;
   let commentedCodeCount = 0;
+  let inJsDoc = false;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -134,51 +151,62 @@ function analyzeFile(filePath) {
     const lineNum = i + 1;
 
     if (!isMd) {
-      const isComment =
-        trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*");
-
-      if (isComment) {
-        consecutiveComments++;
-        const commentText = trimmed.replace(/^\/\/\s?/, "").replace(/^\*\s?/, "");
-
-        // Box-drawing in comments (AI decorative headers only: ═, ║, etc.)
-        if (BOX_DRAWING_AI.test(commentText)) {
-          findings.push({ type: "box-drawing", file: rel, line: lineNum,
-            msg: "AI decorative header characters in comment (═, ║, etc.)" });
-        }
-
-        // Filler phrases
-        for (const pattern of FILLER_PHRASES) {
-          if (pattern.test(commentText)) {
-            findings.push({ type: "filler", file: rel, line: lineNum,
-              msg: `AI filler phrase detected` });
-            break;
-          }
-        }
-
-        // Emoji in comments
-        if (EMOJI_IN_COMMENT.test(commentText)) {
-          findings.push({ type: "emoji", file: rel, line: lineNum,
-            msg: "Emoji in code comment" });
-        }
-
-        // Commented-out code
-        if (COMMENTED_CODE.test(line)) {
-          commentedCodeCount++;
+      // Structured JSDoc blocks (/** ... */) are deliberate API documentation,
+      // not comment walls: neither count toward nor reset the wall counter.
+      if (trimmed.startsWith("/**")) {
+        inJsDoc = true;
+      }
+      if (inJsDoc) {
+        if (trimmed.includes("*/")) {
+          inJsDoc = false;
         }
       } else {
-        consecutiveComments = 0;
-      }
+        const isComment =
+          trimmed.startsWith("//") || trimmed.startsWith("*") || trimmed.startsWith("/*");
 
-      // Wall of comments
-      if (consecutiveComments === MAX_CONSECUTIVE_COMMENTS + 1) {
-        findings.push({ type: "wall-of-comments", file: rel, line: lineNum,
-          msg: `${MAX_CONSECUTIVE_COMMENTS}+ consecutive comment lines` });
+        if (isComment) {
+          consecutiveComments++;
+          const commentText = trimmed.replace(/^\/\/\s?/, "").replace(/^\*\s?/, "");
+
+          // Box-drawing in comments (AI decorative headers only: ═, ║, etc.)
+          if (BOX_DRAWING_AI.test(commentText)) {
+            findings.push({ type: "box-drawing", file: rel, line: lineNum,
+              msg: "AI decorative header characters in comment (═, ║, etc.)" });
+          }
+
+          // Filler phrases
+          for (const pattern of FILLER_PHRASES) {
+            if (pattern.test(commentText)) {
+              findings.push({ type: "filler", file: rel, line: lineNum,
+                msg: `AI filler phrase detected` });
+              break;
+            }
+          }
+
+          // Emoji in comments
+          if (EMOJI_IN_COMMENT.test(commentText)) {
+            findings.push({ type: "emoji", file: rel, line: lineNum,
+              msg: "Emoji in code comment" });
+          }
+
+          // Commented-out code
+          if (COMMENTED_CODE.test(line)) {
+            commentedCodeCount++;
+          }
+        } else {
+          consecutiveComments = 0;
+        }
+
+        // Wall of comments
+        if (consecutiveComments === MAX_CONSECUTIVE_COMMENTS + 1) {
+          findings.push({ type: "wall-of-comments", file: rel, line: lineNum,
+            msg: `${MAX_CONSECUTIVE_COMMENTS}+ consecutive comment lines` });
+        }
       }
     }
 
     // ── Copywriting slop (markdown only) ────────────────────────────────
-    if (isMd && trimmed.length > 10) {
+    if (isMd && trimmed.length > 10 && !isAllowed(rel, trimmed)) {
       for (const pattern of MARKETING_SLOP) {
         if (pattern.test(trimmed)) {
           findings.push({ type: "marketing-slop", file: rel, line: lineNum,

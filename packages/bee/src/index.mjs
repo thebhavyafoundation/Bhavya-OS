@@ -65,9 +65,9 @@ export class ExecutionEngine {
     this.#metrics = new MetricsEngine();
   }
 
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
   // Public API
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
 
   /**
    * Plan a goal — parse, resolve capabilities, build DAG.
@@ -265,9 +265,9 @@ export class ExecutionEngine {
     return this.#orchestrator.getUtilization();
   }
 
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
   // Execution Engine Internals
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
 
   async #executePlan(plan, opts = {}) {
     const maxParallel = opts.maxParallel || 3;
@@ -412,9 +412,9 @@ export class ExecutionEngine {
     };
   }
 
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
   // Accessors for component interaction
-  // ═══════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────
 
   get events() { return this.#eventBus; }
   get approvals() { return this.#approvalEngine; }

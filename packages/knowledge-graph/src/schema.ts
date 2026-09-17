@@ -28,9 +28,9 @@ import type {
   Difficulty,
 } from "@bhavya/shared";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // ENTITY TYPES — 17 typed entities extending BaseEntity
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 // ─── Concept ─────────────────────────────────────────────────────
 
@@ -345,11 +345,7 @@ export interface BeneficiaryEntity extends BaseEntity {
 }
 
 export type BeneficiaryType =
-  | "individual"
-  | "family"
-  | "community"
-  | "school"
-  | "organization";
+  "individual" | "family" | "community" | "school" | "organization";
 
 // ─── Evidence ─────────────────────────────────────────────────
 
@@ -365,18 +361,10 @@ export interface EvidenceEntity extends BaseEntity {
 }
 
 export type EvidenceType =
-  | "photo"
-  | "video"
-  | "document"
-  | "testimonial"
-  | "data"
-  | "audit";
+  "photo" | "video" | "document" | "testimonial" | "data" | "audit";
 
 export type VerificationStatus =
-  | "pending"
-  | "verified"
-  | "rejected"
-  | "disputed";
+  "pending" | "verified" | "rejected" | "disputed";
 
 // ─── Activity ─────────────────────────────────────────────────
 
@@ -455,11 +443,7 @@ export interface MetricEntity extends BaseEntity {
 }
 
 export type MetricType =
-  | "impact"
-  | "performance"
-  | "financial"
-  | "operational"
-  | "engagement";
+  "impact" | "performance" | "financial" | "operational" | "engagement";
 
 // ─── Document ─────────────────────────────────────────────────
 
@@ -495,12 +479,7 @@ export interface ReportEntity extends BaseEntity {
 }
 
 export type ReportType =
-  | "annual"
-  | "quarterly"
-  | "monthly"
-  | "impact"
-  | "financial"
-  | "progress";
+  "annual" | "quarterly" | "monthly" | "impact" | "financial" | "progress";
 
 export interface ReportSection {
   title: string;
@@ -508,9 +487,9 @@ export interface ReportSection {
   metrics?: string[];
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // UNION TYPE — Any entity in the graph
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export type KnowledgeEntity =
   | ConceptEntity
@@ -539,9 +518,9 @@ export type KnowledgeEntity =
   | DocumentEntity
   | ReportEntity;
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // GRAPH STORE — In-memory knowledge graph
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface KnowledgeGraph {
   entities: Map<string, KnowledgeEntity>;
@@ -555,17 +534,17 @@ export function createKnowledgeGraph(): KnowledgeGraph {
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // UTILITY — Access BaseEntity fields on any KnowledgeEntity
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 function baseOf(entity: KnowledgeEntity): BaseEntity {
   return entity as BaseEntity;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // MUTATION FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export function addEntity<T extends KnowledgeEntity>(
   graph: KnowledgeGraph,
@@ -644,9 +623,9 @@ export function updateEntity<T extends KnowledgeEntity>(
   return updated;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // QUERY FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export function getEntity(
   graph: KnowledgeGraph,
@@ -731,9 +710,9 @@ export function searchEntities(
   return result;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // GRAPH TRAVERSAL
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /**
  * BFS shortest path between two entities.
@@ -899,9 +878,9 @@ export function getDependents(
   return result;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // GRAPH STATISTICS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface GraphStats {
   totalEntities: number;
@@ -978,9 +957,9 @@ function countDisconnectedComponents(graph: KnowledgeGraph): number {
   return count;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // VALIDATION
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface ValidationResult {
   valid: boolean;
@@ -1170,9 +1149,9 @@ function detectPrerequisiteCycles(graph: KnowledgeGraph): string[] {
   return errors;
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // CONSTANTS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export const ENTITY_TYPES: EntityType[] = [
   "concept",
@@ -1232,9 +1211,9 @@ const VALID_STATUSES: EntityStatus[] = [
   "archived",
 ];
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // FACTORY HELPERS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export function createEntity<T extends KnowledgeEntity>(
   fields: Omit<T, "createdAt" | "updatedAt"> & {
@@ -1259,9 +1238,9 @@ export function createRelation(
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // IMPORT / EXPORT
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface KnowledgeGraphExport {
   version: string;

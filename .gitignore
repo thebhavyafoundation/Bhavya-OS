@@ -68,4 +68,8 @@ bar/bee-state/
 bar/provenance/
 packages/bar/
 bhavya-ai-lab/metrics/
+
+# SQLite transient files (test artifacts; the seed .db stays tracked)
+*.db-shm
+*.db-wal
 next-env.d.ts

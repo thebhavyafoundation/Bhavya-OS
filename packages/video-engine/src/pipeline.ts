@@ -20,9 +20,9 @@ import type {
   CompositionMetadata,
 } from "./types";
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // TYPES
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 export interface CurriculumLesson {
   id: string;
@@ -66,9 +66,9 @@ const DEFAULT_OPTIONS: Required<PipelineOptions> = {
   titleDuration: 5,
 };
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // PIPELINE FUNCTIONS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /**
  * Convert a single curriculum lesson into a VideoComposition.
@@ -77,7 +77,7 @@ export function lessonToComposition(
   course: CurriculumCourse,
   moduleIndex: number,
   lesson: CurriculumLesson,
-  options: PipelineOptions = {}
+  options: PipelineOptions = {},
 ): VideoComposition {
   const opts = { ...DEFAULT_OPTIONS, ...options };
   const scenes: VideoScene[] = [];
@@ -170,7 +170,11 @@ export function lessonToComposition(
   }
 
   // 7. Assessment (if enabled)
-  if (opts.includeAssessments && lesson.keyConcepts && lesson.keyConcepts.length > 0) {
+  if (
+    opts.includeAssessments &&
+    lesson.keyConcepts &&
+    lesson.keyConcepts.length > 0
+  ) {
     const concept = lesson.keyConcepts[0];
     scenes.push({
       id: `assessment-${lesson.id}`,
@@ -230,14 +234,14 @@ export function lessonToComposition(
  */
 export function courseToCompositions(
   course: CurriculumCourse,
-  options: PipelineOptions = {}
+  options: PipelineOptions = {},
 ): VideoComposition[] {
   const compositions: VideoComposition[] = [];
 
   course.modules.forEach((module, moduleIndex) => {
     module.lessons.forEach((lesson) => {
       compositions.push(
-        lessonToComposition(course, moduleIndex, lesson, options)
+        lessonToComposition(course, moduleIndex, lesson, options),
       );
     });
   });
@@ -250,7 +254,7 @@ export function courseToCompositions(
  */
 export function mergeCompositions(
   compositions: VideoComposition[],
-  title?: string
+  title?: string,
 ): VideoComposition {
   const allScenes = compositions.flatMap((c) => c.scenes);
   const totalDuration = allScenes.reduce((sum, s) => sum + s.duration, 0);
@@ -271,9 +275,9 @@ export function mergeCompositions(
   };
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 // HELPERS
-// ═══════════════════════════════════════════════════════════════════
+// ───────────────────────────────────────────────────────────────────
 
 /**
  * Split text into roughly equal chunks by paragraph breaks.
@@ -301,7 +305,7 @@ export function compositionToHTML(composition: VideoComposition): string {
     <section class="scene scene-${scene.type}" data-duration="${scene.duration}">
       <h2>${scene.type}</h2>
       <pre>${JSON.stringify(scene, null, 2)}</pre>
-    </section>`
+    </section>`,
     )
     .join("\n");
 
