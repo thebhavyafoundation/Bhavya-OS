@@ -300,6 +300,7 @@
   - `_archive\runtime-stderr.log`
   - `_archive\runtime-stdout.log`
   - `_archive\test-artifacts-2026-09-05`/
+  - `_archive\test-artifacts-2026-09-17`/
   - `_archive\v1.0.0_ARCHIVE.md`
 - `_shared`/
   - `_shared\factory-map.md`
@@ -496,7 +497,6 @@
   - `packages\analyzers`/
   - `packages\api`/
   - `packages\auth`/
-  - `packages\bar`/
   - `packages\bdl`/
   - `packages\bee`/
   - `packages\branding`/
