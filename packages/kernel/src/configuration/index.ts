@@ -47,7 +47,7 @@ export class Configuration {
     let obj: Record<string, unknown> = this.loaded as Record<string, unknown>;
     for (let i = 0; i < keys.length - 1; i++) {
       if (!obj[keys[i]]) obj[keys[i]] = {};
-      obj = obj[keys[i]];
+      obj = obj[keys[i]] as Record<string, unknown>;
     }
     obj[keys[keys.length - 1]] = value;
   }

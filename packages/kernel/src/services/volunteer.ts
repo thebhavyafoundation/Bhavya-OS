@@ -43,9 +43,7 @@ export class VolunteerService implements InstitutionService {
     // Service ready
   }
 
-  async execute(
-    input: VolunteerInput,
-  ): Promise<{
+  async execute(input: VolunteerInput): Promise<{
     artifacts: Artifact[];
     success: boolean;
     volunteer?: Volunteer;
@@ -78,7 +76,7 @@ export class VolunteerService implements InstitutionService {
       email: input.email,
       skills: input.skills ?? [],
       availability: input.availability ?? "flexible",
-      status: "active",
+      status: "active" as const,
       joinedAt: new Date(),
     };
 
@@ -100,12 +98,12 @@ export class VolunteerService implements InstitutionService {
   ): Promise<{
     artifacts: Artifact[];
     success: boolean;
-    volunteer: Volunteer | null;
+    volunteer: Volunteer | undefined;
   }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
-    if (!volunteer) return { artifacts, success: false, volunteer: null };
+    if (!volunteer) return { artifacts, success: false, volunteer: undefined };
 
     volunteer.team = input.team;
     volunteer.assignedAt = new Date();
@@ -126,12 +124,12 @@ export class VolunteerService implements InstitutionService {
   ): Promise<{
     artifacts: Artifact[];
     success: boolean;
-    volunteer: Volunteer | null;
+    volunteer: Volunteer | undefined;
   }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
-    if (!volunteer) return { artifacts, success: false, volunteer: null };
+    if (!volunteer) return { artifacts, success: false, volunteer: undefined };
 
     volunteer.recognitions = volunteer.recognitions ?? [];
     volunteer.recognitions.push({
@@ -155,12 +153,12 @@ export class VolunteerService implements InstitutionService {
   ): Promise<{
     artifacts: Artifact[];
     success: boolean;
-    volunteer: Volunteer | null;
+    volunteer: Volunteer | undefined;
   }> {
     const volunteer = Array.from(this.volunteers.values()).find(
       (v) => v.email === input.email,
     );
-    if (!volunteer) return { artifacts, success: false, volunteer: null };
+    if (!volunteer) return { artifacts, success: false, volunteer: undefined };
 
     volunteer.status = "inactive";
     volunteer.leftAt = new Date();

@@ -61,7 +61,9 @@ export class SelfOrganizingEngine {
 
     // Listen for new work signals
     this.config.events.on("work.discovered", async (event) => {
-      await this.discoverWork(event.payload as Record<string, unknown>);
+      await this.discoverWork(
+        event.payload as Parameters<typeof this.discoverWork>[0],
+      );
     });
 
     // Listen for agent availability changes
