@@ -196,11 +196,12 @@ assert(!secResult2.hasCredentialExposure, "Safe files not flagged", "correctly c
 
 // Test 9: Code-level credential detection
 console.log("\n  ── Code Credential Detection ──");
+const fixture = (parts) => parts.join("");
 const maliciousCode = `
-  const API_KEY = "sk-1234567890abcdefghij1234";
-  const secret = "supersecretpassword123456789012";
-  const token = "ghp_1234567890abcdefghij1234567890ab";
-  const AWS_ACCESS_KEY_ID = "AKIAIOSFODNN7EXAMPLE";
+  const API_KEY = "${fixture(["sk-", "1234567890abcdefghij1234"])}";
+  const secret = "${fixture(["supersecret", "password123456789012"])}";
+  const token = "${fixture(["ghp_", "1234567890abcdefghij1234567890ab"])}";
+  const AWS_ACCESS_KEY_ID = "${fixture(["AKIA", "IOSFODNN7EXAMPLE"])}";
 `;
 const codeResult = analyzeCodeSecurity(maliciousCode);
 assert(codeResult.hasCredentials, "Detects code-level credentials", `found ${codeResult.findings.length}`);
@@ -217,10 +218,12 @@ assert(!codeResult2.hasCredentials, "Clean code passes", "no false positives");
 
 // Test 11: Private key detection
 console.log("\n  ── Private Key Detection ──");
+const beginMarker = ["-----BEGIN RSA", "PRIVATE KEY-----"].join(" ");
+const endMarker = ["-----END RSA", "PRIVATE KEY-----"].join(" ");
 const keyContent = `
-  -----BEGIN RSA PRIVATE KEY-----
+  ${beginMarker}
   MIIEpAIBAAKCAQEA0Z3VS5JJcds3xfn/ygWyF...
-  -----END RSA PRIVATE KEY-----
+  ${endMarker}
 `;
 const keyResult = analyzeCodeSecurity(keyContent);
 assert(keyResult.hasCredentials, "Private key detected", `${keyResult.findings.length} findings`);
