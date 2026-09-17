@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "services",
-  "generated_at": "2026-07-23T16:56:32.140Z",
+  "generated_at": "2026-09-17T07:06:22.433Z",
   "generator": "scripts/generate-registry.js",
   "items": [
     {
@@ -11,15 +11,15 @@
       "status": "active"
     },
     {
-      "id": "svc.website",
-      "name": "Bhavya Foundation Website",
-      "endpoint": "http://localhost:3000",
+      "id": "svc.ai-institute",
+      "name": "Bhavya Foundation Web",
+      "endpoint": "http://localhost:3030",
       "status": "active"
     },
     {
-      "id": "svc.admin_dashboard",
+      "id": "svc.admin",
       "name": "Engineering Dashboard",
-      "endpoint": "http://localhost:3001",
+      "endpoint": "http://localhost:3003",
       "status": "active"
     },
     {
@@ -29,9 +29,33 @@
       "status": "active"
     },
     {
-      "id": "svc.transparency",
-      "name": "Transparency Portal",
-      "endpoint": "http://localhost:3003",
+      "id": "svc.bhavya-intelligence-network",
+      "name": "Intelligence engine",
+      "endpoint": "http://localhost:3050",
+      "status": "active"
+    },
+    {
+      "id": "svc.design-system",
+      "name": "Design system showcase",
+      "endpoint": "http://localhost:3010",
+      "status": "active"
+    },
+    {
+      "id": "svc.github-os",
+      "name": "Repository intelligence",
+      "endpoint": "http://localhost:3070",
+      "status": "active"
+    },
+    {
+      "id": "svc.ioc",
+      "name": "Compliance / OKR",
+      "endpoint": "http://localhost:3090",
+      "status": "active"
+    },
+    {
+      "id": "svc.social-os",
+      "name": "Communication ops",
+      "endpoint": "http://localhost:3080",
       "status": "active"
     },
     {

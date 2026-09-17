@@ -1,8 +1,11 @@
 # packages/ — Shared Package Library
 
-65 packages organized by domain. Each is a record in the library with its own `package.json`, `src/`, and `CONTRACT.md` (where applicable).
+62 packages organized by domain. Each is a record in the library with its own `package.json`, `src/`, and `CONTRACT.md` (where applicable).
 
-**Last updated:** 2026-08-10
+Legacy stub directories (`github-os/`, `ioc/`, `social-os/`) hold source files but no
+`package.json`, so they are not workspace packages and are excluded from the registry.
+
+**Last updated:** 2026-09-17
 
 ## Core Platform
 

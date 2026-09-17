@@ -16,14 +16,14 @@ export async function doctorCommand(): Promise<void> {
   }
 
   // Check agents
-  const agentsPath = resolve(root, ".agents");
+  const agentsPath = resolve(root, ".ai/agents");
   if (existsSync(agentsPath)) {
     const agents = readdirSync(agentsPath).filter((f: string) =>
       f.endsWith(".md"),
     );
     console.log(`  OK Agents: ${agents.length} loaded`);
   } else {
-    console.log(`  WARN Agents: no .agents directory`);
+    console.log(`  WARN Agents: no .ai/agents directory`);
   }
 
   // Check workflows

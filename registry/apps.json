@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "apps",
-  "generated_at": "2026-09-17T06:34:49.279Z",
+  "generated_at": "2026-09-17T07:03:37.585Z",
   "generator": "scripts/generate-registry.js",
   "items": [
     {
@@ -11,37 +11,37 @@
       "owner": "Engineering",
       "mission": "Platform",
       "visibility": "internal",
-      "port": 3001,
+      "port": 3003,
       "path": "apps/admin"
     },
     {
       "id": "ai-institute",
-      "name": "ai-institute",
-      "version": "0.5.0",
+      "name": "Bhavya Foundation Web",
+      "version": "0.1.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "Knowledge",
       "visibility": "public",
-      "port": null,
+      "port": 3030,
       "path": "apps/ai-institute"
     },
     {
       "id": "bhavya-intelligence-network",
-      "name": "bhavya-intelligence-network",
-      "version": "0.5.0",
+      "name": "Intelligence engine",
+      "version": "1.0.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "Intelligence",
       "visibility": "public",
-      "port": null,
+      "port": 3050,
       "path": "apps/bhavya-intelligence-network"
     },
     {
       "id": "design-system",
-      "name": "design-system",
-      "version": "0.5.0",
+      "name": "Design system showcase",
+      "version": "0.9.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "Design System",
       "visibility": "public",
-      "port": null,
+      "port": 3010,
       "path": "apps/design-system"
     },
     {
@@ -56,32 +56,32 @@
     },
     {
       "id": "github-os",
-      "name": "github-os",
-      "version": "0.5.0",
+      "name": "Repository intelligence",
+      "version": "0.1.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "GitHub",
       "visibility": "public",
-      "port": null,
+      "port": 3070,
       "path": "apps/github-os"
     },
     {
       "id": "ioc",
-      "name": "ioc",
-      "version": "0.5.0",
+      "name": "Compliance / OKR",
+      "version": "0.1.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "Compliance (IOC)",
       "visibility": "public",
-      "port": null,
+      "port": 3090,
       "path": "apps/ioc"
     },
     {
       "id": "social-os",
-      "name": "social-os",
-      "version": "0.5.0",
+      "name": "Communication ops",
+      "version": "0.1.0",
       "owner": "Platform",
-      "mission": "General",
+      "mission": "Social",
       "visibility": "public",
-      "port": null,
+      "port": 3080,
       "path": "apps/social-os"
     }
   ]

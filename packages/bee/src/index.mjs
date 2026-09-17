@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { fileURLToPath } from 'url';
 import { createRegistry } from '@bhavya/runtime/registry';
 import { parseGoal } from './planners/goal-planner.mjs';
 import { CapabilityResolver } from './planners/capability-resolver.mjs';
@@ -12,6 +13,8 @@ import { ApprovalEngine } from './engines/approval-engine.mjs';
 import { RecoveryEngine } from './engines/recovery-engine.mjs';
 import { ObservabilityEngine } from './engines/observability-engine.mjs';
 import { MetricsEngine } from './engines/metrics-engine.mjs';
+
+const DEFAULT_ROOT = fileURLToPath(new URL('../../..', import.meta.url));
 
 /**
  * Bhavya Execution Engine (BEE) — the autonomous brain.
@@ -40,7 +43,7 @@ export class ExecutionEngine {
    * @param {{ barPath?: string, stateDir?: string, log?: (msg: string) => void }} [opts]
    */
   constructor(opts = {}) {
-    const barPath = opts.barPath || join(process.cwd(), 'bar');
+    const barPath = opts.barPath || join(DEFAULT_ROOT, 'bar');
     const stateDir = opts.stateDir || join(barPath, 'bee-state');
     const log = opts.log || (() => {});
 

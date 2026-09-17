@@ -313,15 +313,20 @@ commands["platform"] = {
   status: async () => {
     const repoIndex = readJSON("platform/repo-intelligence/output/repository-index.json");
     const depGraph = readJSON("platform/repo-intelligence/output/dependency-graph.json");
+    const packages = readJSON("registry/packages.json");
+    const agents = readJSON("registry/agents.json");
+    const { QualityGates } = await import(
+      toFileURL(path.join(ROOT, "platform/ai-runtime/quality-gates.mjs"))
+    );
     print({
       name: "Bhavya OS Platform",
       version: "3.0.0",
-      packages: repoIndex?.stats?.totalPackages || 0,
+      packages: packages?.items?.length || 0,
       routes: repoIndex?.stats?.totalRoutes || 0,
       components: repoIndex?.stats?.totalComponents || 0,
       dependencies: depGraph?.edges?.length || 0,
-      agents: 10,
-      qualityGates: 8,
+      agents: agents?.items?.length || 0,
+      qualityGates: new QualityGates().gates.length,
     });
   },
 };

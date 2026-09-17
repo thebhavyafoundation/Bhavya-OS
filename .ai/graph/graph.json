@@ -3,8 +3,8 @@
     {
       "id": "APP-001",
       "type": "app",
-      "name": "website",
-      "path": "apps/website"
+      "name": "ai-institute",
+      "path": "apps/ai-institute"
     },
     {
       "id": "APP-002",
@@ -21,38 +21,32 @@
     {
       "id": "APP-004",
       "type": "app",
-      "name": "transparency",
-      "path": "apps/transparency"
+      "name": "bhavya-intelligence-network",
+      "path": "apps/bhavya-intelligence-network"
     },
     {
       "id": "APP-005",
       "type": "app",
-      "name": "forest",
-      "path": "apps/forest"
+      "name": "design-system",
+      "path": "apps/design-system"
     },
     {
       "id": "APP-006",
       "type": "app",
-      "name": "heritage",
-      "path": "apps/heritage"
+      "name": "github-os",
+      "path": "apps/github-os"
     },
     {
       "id": "APP-007",
       "type": "app",
-      "name": "volunteer",
-      "path": "apps/volunteer"
+      "name": "ioc",
+      "path": "apps/ioc"
     },
     {
       "id": "APP-008",
       "type": "app",
-      "name": "knowledge",
-      "path": "apps/knowledge"
-    },
-    {
-      "id": "APP-009",
-      "type": "app",
-      "name": "library",
-      "path": "apps/library"
+      "name": "social-os",
+      "path": "apps/social-os"
     },
     {
       "id": "PKG-001",
@@ -93,359 +87,335 @@
     {
       "id": "PKG-007",
       "type": "package",
-      "name": "bar",
-      "path": "packages/bar"
-    },
-    {
-      "id": "PKG-008",
-      "type": "package",
       "name": "bdl",
       "path": "packages/bdl"
     },
     {
-      "id": "PKG-009",
+      "id": "PKG-008",
       "type": "package",
       "name": "bee",
       "path": "packages/bee"
     },
     {
-      "id": "PKG-010",
+      "id": "PKG-009",
       "type": "package",
       "name": "branding",
       "path": "packages/branding"
     },
     {
-      "id": "PKG-011",
+      "id": "PKG-010",
       "type": "package",
       "name": "browser-automation",
       "path": "packages/browser-automation"
     },
     {
-      "id": "PKG-012",
+      "id": "PKG-011",
       "type": "package",
       "name": "capability-registry",
       "path": "packages/capability-registry"
     },
     {
-      "id": "PKG-013",
+      "id": "PKG-012",
       "type": "package",
       "name": "charts",
       "path": "packages/charts"
     },
     {
-      "id": "PKG-014",
+      "id": "PKG-013",
       "type": "package",
       "name": "cli",
       "path": "packages/cli"
     },
     {
-      "id": "PKG-015",
+      "id": "PKG-014",
       "type": "package",
       "name": "config",
       "path": "packages/config"
     },
     {
-      "id": "PKG-016",
+      "id": "PKG-015",
       "type": "package",
       "name": "constitution",
       "path": "packages/constitution"
     },
     {
-      "id": "PKG-017",
+      "id": "PKG-016",
       "type": "package",
       "name": "content-board",
       "path": "packages/content-board"
     },
     {
-      "id": "PKG-018",
+      "id": "PKG-017",
       "type": "package",
       "name": "content-core",
       "path": "packages/content-core"
     },
     {
-      "id": "PKG-019",
+      "id": "PKG-018",
       "type": "package",
       "name": "content-engine",
       "path": "packages/content-engine"
     },
     {
-      "id": "PKG-020",
+      "id": "PKG-019",
       "type": "package",
       "name": "crawlers",
       "path": "packages/crawlers"
     },
     {
-      "id": "PKG-021",
+      "id": "PKG-020",
       "type": "package",
       "name": "database",
       "path": "packages/database"
     },
     {
-      "id": "PKG-022",
+      "id": "PKG-021",
       "type": "package",
       "name": "design-system",
       "path": "packages/design-system"
     },
     {
-      "id": "PKG-023",
+      "id": "PKG-022",
       "type": "package",
       "name": "docs",
       "path": "packages/docs"
     },
     {
-      "id": "PKG-024",
+      "id": "PKG-023",
       "type": "package",
       "name": "eslint",
       "path": "packages/eslint"
     },
     {
-      "id": "PKG-025",
+      "id": "PKG-024",
       "type": "package",
       "name": "events",
       "path": "packages/events"
     },
     {
-      "id": "PKG-026",
+      "id": "PKG-025",
       "type": "package",
       "name": "github-intelligence",
       "path": "packages/github-intelligence"
     },
     {
-      "id": "PKG-027",
-      "type": "package",
-      "name": "github-os",
-      "path": "packages/github-os"
-    },
-    {
-      "id": "PKG-028",
+      "id": "PKG-026",
       "type": "package",
       "name": "icons",
       "path": "packages/icons"
     },
     {
-      "id": "PKG-029",
+      "id": "PKG-027",
       "type": "package",
       "name": "impact-runtime",
       "path": "packages/impact-runtime"
     },
     {
-      "id": "PKG-030",
+      "id": "PKG-028",
       "type": "package",
       "name": "intelligence",
       "path": "packages/intelligence"
     },
     {
-      "id": "PKG-031",
+      "id": "PKG-029",
       "type": "package",
       "name": "interactive-components",
       "path": "packages/interactive-components"
     },
     {
-      "id": "PKG-032",
-      "type": "package",
-      "name": "ioc",
-      "path": "packages/ioc"
-    },
-    {
-      "id": "PKG-033",
+      "id": "PKG-030",
       "type": "package",
       "name": "kernel",
       "path": "packages/kernel"
     },
     {
-      "id": "PKG-034",
+      "id": "PKG-031",
       "type": "package",
       "name": "knowledge-engine",
       "path": "packages/knowledge-engine"
     },
     {
-      "id": "PKG-035",
+      "id": "PKG-032",
       "type": "package",
       "name": "knowledge-extraction",
       "path": "packages/knowledge-extraction"
     },
     {
-      "id": "PKG-036",
+      "id": "PKG-033",
       "type": "package",
       "name": "knowledge-graph",
       "path": "packages/knowledge-graph"
     },
     {
-      "id": "PKG-037",
+      "id": "PKG-034",
       "type": "package",
       "name": "learning-runtime",
       "path": "packages/learning-runtime"
     },
     {
-      "id": "PKG-038",
+      "id": "PKG-035",
       "type": "package",
       "name": "maps",
       "path": "packages/maps"
     },
     {
-      "id": "PKG-039",
+      "id": "PKG-036",
       "type": "package",
       "name": "mcp-manager",
       "path": "packages/mcp-manager"
     },
     {
-      "id": "PKG-040",
+      "id": "PKG-037",
       "type": "package",
       "name": "memory-engine",
       "path": "packages/memory-engine"
     },
     {
-      "id": "PKG-041",
+      "id": "PKG-038",
       "type": "package",
       "name": "mentor-engine",
       "path": "packages/mentor-engine"
     },
     {
-      "id": "PKG-042",
+      "id": "PKG-039",
       "type": "package",
       "name": "mission-runtime",
       "path": "packages/mission-runtime"
     },
     {
-      "id": "PKG-043",
+      "id": "PKG-040",
       "type": "package",
       "name": "motion-system",
       "path": "packages/motion-system"
     },
     {
-      "id": "PKG-044",
+      "id": "PKG-041",
       "type": "package",
       "name": "notifications",
       "path": "packages/notifications"
     },
     {
-      "id": "PKG-045",
+      "id": "PKG-042",
       "type": "package",
       "name": "observability",
       "path": "packages/observability"
     },
     {
-      "id": "PKG-046",
+      "id": "PKG-043",
       "type": "package",
       "name": "planner-engine",
       "path": "packages/planner-engine"
     },
     {
-      "id": "PKG-047",
+      "id": "PKG-044",
       "type": "package",
       "name": "platform",
       "path": "packages/platform"
     },
     {
-      "id": "PKG-048",
+      "id": "PKG-045",
       "type": "package",
       "name": "platform-ui",
       "path": "packages/platform-ui"
     },
     {
-      "id": "PKG-049",
+      "id": "PKG-046",
       "type": "package",
       "name": "plugin-manager",
       "path": "packages/plugin-manager"
     },
     {
-      "id": "PKG-050",
+      "id": "PKG-047",
       "type": "package",
       "name": "plugin-runtime",
       "path": "packages/plugin-runtime"
     },
     {
-      "id": "PKG-051",
+      "id": "PKG-048",
       "type": "package",
       "name": "project-runtime",
       "path": "packages/project-runtime"
     },
     {
-      "id": "PKG-052",
+      "id": "PKG-049",
       "type": "package",
       "name": "providers",
       "path": "packages/providers"
     },
     {
-      "id": "PKG-053",
+      "id": "PKG-050",
       "type": "package",
       "name": "runtime",
       "path": "packages/runtime"
     },
     {
-      "id": "PKG-054",
+      "id": "PKG-051",
       "type": "package",
       "name": "scheduler-engine",
       "path": "packages/scheduler-engine"
     },
     {
-      "id": "PKG-055",
+      "id": "PKG-052",
       "type": "package",
       "name": "sdk",
       "path": "packages/sdk"
     },
     {
-      "id": "PKG-056",
+      "id": "PKG-053",
       "type": "package",
       "name": "search-engine",
       "path": "packages/search-engine"
     },
     {
-      "id": "PKG-057",
+      "id": "PKG-054",
       "type": "package",
       "name": "security",
       "path": "packages/security"
     },
     {
-      "id": "PKG-058",
+      "id": "PKG-055",
       "type": "package",
       "name": "shared",
       "path": "packages/shared"
     },
     {
-      "id": "PKG-059",
-      "type": "package",
-      "name": "social-os",
-      "path": "packages/social-os"
-    },
-    {
-      "id": "PKG-060",
+      "id": "PKG-056",
       "type": "package",
       "name": "technology-radar",
       "path": "packages/technology-radar"
     },
     {
-      "id": "PKG-061",
+      "id": "PKG-057",
       "type": "package",
       "name": "types",
       "path": "packages/types"
     },
     {
-      "id": "PKG-062",
+      "id": "PKG-058",
       "type": "package",
       "name": "typescript",
       "path": "packages/typescript"
     },
     {
-      "id": "PKG-063",
+      "id": "PKG-059",
       "type": "package",
       "name": "ui",
       "path": "packages/ui"
     },
     {
-      "id": "PKG-064",
+      "id": "PKG-060",
       "type": "package",
       "name": "video-engine",
       "path": "packages/video-engine"
     },
     {
-      "id": "PKG-065",
+      "id": "PKG-061",
       "type": "package",
       "name": "workflow-engine",
       "path": "packages/workflow-engine"
     },
     {
-      "id": "PKG-066",
+      "id": "PKG-062",
       "type": "package",
       "name": "workflows",
       "path": "packages/workflows"
@@ -523,313 +493,498 @@
   ],
   "edges": [
     {
+      "source": "APP-001",
+      "target": "PKG-017",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-020",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-027",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "APP-001",
+      "target": "PKG-048",
+      "type": "depends"
+    },
+    {
       "source": "APP-002",
       "target": "PKG-006",
       "type": "depends"
     },
     {
       "source": "APP-002",
-      "target": "PKG-042",
+      "target": "PKG-039",
       "type": "depends"
     },
     {
       "source": "APP-002",
-      "target": "PKG-048",
+      "target": "PKG-045",
       "type": "depends"
     },
     {
       "source": "APP-002",
-      "target": "PKG-055",
+      "target": "PKG-052",
       "type": "depends"
     },
     {
       "source": "APP-003",
-      "target": "PKG-042",
+      "target": "PKG-039",
       "type": "depends"
     },
     {
       "source": "APP-003",
-      "target": "PKG-055",
+      "target": "PKG-052",
       "type": "depends"
     },
     {
-      "source": "PKG-001",
-      "target": "PKG-058",
+      "source": "APP-004",
+      "target": "PKG-006",
       "type": "depends"
     },
     {
-      "source": "PKG-003",
-      "target": "PKG-047",
+      "source": "APP-004",
+      "target": "PKG-028",
       "type": "depends"
     },
     {
-      "source": "PKG-003",
-      "target": "PKG-061",
+      "source": "APP-004",
+      "target": "PKG-011",
       "type": "depends"
     },
     {
-      "source": "PKG-004",
-      "target": "PKG-030",
+      "source": "APP-004",
+      "target": "PKG-019",
       "type": "depends"
     },
     {
-      "source": "PKG-004",
-      "target": "PKG-012",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-005",
-      "target": "PKG-047",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-005",
-      "target": "PKG-057",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-006",
-      "target": "PKG-021",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-009",
-      "target": "PKG-053",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-011",
-      "target": "PKG-030",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-012",
-      "target": "PKG-030",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-012",
-      "target": "PKG-047",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-013",
-      "target": "PKG-048",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-014",
-      "target": "PKG-033",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-019",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-019",
+      "source": "APP-004",
       "target": "PKG-036",
       "type": "depends"
     },
     {
-      "source": "PKG-020",
-      "target": "PKG-030",
+      "source": "APP-004",
+      "target": "PKG-046",
       "type": "depends"
     },
     {
-      "source": "PKG-020",
-      "target": "PKG-047",
+      "source": "APP-004",
+      "target": "PKG-010",
       "type": "depends"
     },
     {
-      "source": "PKG-025",
-      "target": "PKG-047",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-025",
-      "target": "PKG-061",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-026",
-      "target": "PKG-030",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-026",
-      "target": "PKG-012",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-033",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-034",
-      "target": "PKG-033",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-035",
-      "target": "PKG-030",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-035",
-      "target": "PKG-047",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-036",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-038",
-      "target": "PKG-048",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-039",
-      "target": "PKG-030",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-039",
-      "target": "PKG-012",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-040",
-      "target": "PKG-033",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-042",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-044",
-      "target": "PKG-047",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-044",
-      "target": "PKG-061",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-045",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-045",
+      "source": "APP-004",
       "target": "PKG-025",
       "type": "depends"
     },
     {
-      "source": "PKG-046",
-      "target": "PKG-033",
+      "source": "APP-004",
+      "target": "PKG-056",
       "type": "depends"
     },
     {
-      "source": "PKG-049",
-      "target": "PKG-030",
+      "source": "APP-004",
+      "target": "PKG-004",
       "type": "depends"
     },
     {
-      "source": "PKG-049",
-      "target": "PKG-012",
+      "source": "APP-004",
+      "target": "PKG-032",
       "type": "depends"
     },
     {
-      "source": "PKG-050",
-      "target": "PKG-058",
+      "source": "APP-004",
+      "target": "PKG-024",
       "type": "depends"
     },
     {
-      "source": "PKG-050",
-      "target": "PKG-025",
+      "source": "APP-004",
+      "target": "PKG-062",
       "type": "depends"
     },
     {
-      "source": "PKG-052",
-      "target": "PKG-061",
+      "source": "APP-004",
+      "target": "PKG-044",
       "type": "depends"
     },
     {
-      "source": "PKG-053",
-      "target": "PKG-058",
+      "source": "APP-004",
+      "target": "PKG-045",
       "type": "depends"
     },
     {
-      "source": "PKG-054",
-      "target": "PKG-033",
+      "source": "APP-005",
+      "target": "PKG-045",
       "type": "depends"
     },
     {
-      "source": "PKG-055",
-      "target": "PKG-042",
+      "source": "APP-006",
+      "target": "PKG-006",
       "type": "depends"
     },
     {
-      "source": "PKG-055",
+      "source": "APP-006",
+      "target": "PKG-020",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-024",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "APP-006",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "APP-007",
+      "target": "PKG-006",
+      "type": "depends"
+    },
+    {
+      "source": "APP-007",
+      "target": "PKG-020",
+      "type": "depends"
+    },
+    {
+      "source": "APP-007",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-006",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-020",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-024",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "APP-008",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-001",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-003",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-003",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-004",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-004",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-005",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-005",
+      "target": "PKG-054",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-006",
+      "target": "PKG-020",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-008",
       "target": "PKG-050",
       "type": "depends"
     },
     {
-      "source": "PKG-055",
-      "target": "PKG-025",
+      "source": "PKG-010",
+      "target": "PKG-028",
       "type": "depends"
     },
     {
-      "source": "PKG-056",
-      "target": "PKG-033",
+      "source": "PKG-011",
+      "target": "PKG-028",
       "type": "depends"
     },
     {
-      "source": "PKG-060",
+      "source": "PKG-011",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-012",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-013",
       "target": "PKG-030",
       "type": "depends"
     },
     {
-      "source": "PKG-060",
-      "target": "PKG-012",
+      "source": "PKG-018",
+      "target": "PKG-055",
       "type": "depends"
     },
     {
-      "source": "PKG-061",
-      "target": "PKG-058",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-063",
-      "target": "PKG-008",
-      "type": "depends"
-    },
-    {
-      "source": "PKG-065",
+      "source": "PKG-018",
       "target": "PKG-033",
       "type": "depends"
     },
     {
-      "source": "PKG-066",
+      "source": "PKG-019",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-019",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-024",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-024",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-025",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-025",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-030",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-031",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-032",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-032",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-033",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-035",
+      "target": "PKG-045",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-036",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-036",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-037",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-039",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-041",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-041",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-042",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-042",
+      "target": "PKG-024",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-043",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-046",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-046",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-047",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-047",
+      "target": "PKG-024",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-049",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-050",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-051",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-052",
+      "target": "PKG-039",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-052",
       "target": "PKG-047",
       "type": "depends"
     },
     {
-      "source": "PKG-066",
-      "target": "PKG-061",
+      "source": "PKG-052",
+      "target": "PKG-024",
       "type": "depends"
     },
     {
-      "source": "PKG-066",
-      "target": "PKG-025",
+      "source": "PKG-053",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-056",
+      "target": "PKG-028",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-056",
+      "target": "PKG-011",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-057",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-059",
+      "target": "PKG-007",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-061",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-062",
+      "target": "PKG-044",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-062",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-062",
+      "target": "PKG-024",
       "type": "depends"
     }
   ]

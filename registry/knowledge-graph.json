@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "version": "v1.0",
-  "generatedAt": "2026-09-17T06:34:49.354Z",
+  "generatedAt": "2026-09-17T07:07:52.874Z",
   "generator": "scripts/generate-knowledge-graph.js",
   "nodes": [
     {
@@ -41,7 +41,7 @@
       "updated": "2026-07-20",
       "links": [
         "BDL-001",
-        "agent.volunteer"
+        "agent.research"
       ]
     },
     {
@@ -54,7 +54,7 @@
       "updated": "2026-07-21",
       "links": [
         "BAR-001",
-        "agent.forest"
+        "agent.research"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "updated": "2026-07-22",
       "links": [
         "ADR-008",
-        "agent.engineering"
+        "agent.research"
       ]
     },
     {
@@ -92,8 +92,7 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "packages/ui",
-        "packages/theme"
+        "packages/platform-ui"
       ]
     },
     {
@@ -118,8 +117,7 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "agent.governance",
-        "agent.founder"
+        "agent.architecture"
       ]
     },
     {
@@ -131,7 +129,6 @@
       "created": "2026-07-15",
       "updated": "2026-07-22",
       "links": [
-        "agent.founder",
         "agent.release"
       ]
     },
@@ -158,7 +155,7 @@
       "updated": "2026-07-22",
       "links": [
         "RFC-0003",
-        "agent.engineering"
+        "agent.release"
       ]
     },
     {

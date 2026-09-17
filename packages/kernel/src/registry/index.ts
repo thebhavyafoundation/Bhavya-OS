@@ -34,14 +34,14 @@ export class Registry {
 
   async discover(type: RegistryType): Promise<RegistryEntry[]> {
     const dirMap: Record<RegistryType, string[]> = {
-      agent: ['.agents'],
+      agent: ['.ai/agents'],
       workflow: ['.workflows'],
       event: ['.events'],
       memory: ['.ai/memory'],
       command: ['.commands'],
       prompt: ['.prompts'],
       template: ['.templates'],
-      schema: ['.schemas'],
+      schema: ['schemas'],
       policy: ['.policies'],
     };
 

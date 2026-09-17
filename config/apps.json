@@ -1,14 +1,77 @@
 {
-  "_notice": "App metadata source. Consumed by scripts/generate-registry.js. Do not edit registry/apps.json directly.",
+  "_notice": "App metadata source. Consumed by scripts/generate-registry.js and .ai/build/compile-runtime.mjs. Do not edit registry/apps.json directly.",
   "apps": [
-    { "id": "website",      "name": "Bhavya Foundation",     "port": 3000, "visibility": "public",   "mission": "Foundation",  "owner": "Communications",   "status": "active" },
-    { "id": "admin",        "name": "Engineering Dashboard",  "port": 3001, "visibility": "internal", "mission": "Platform",    "owner": "Engineering",      "status": "active" },
-    { "id": "docs",         "name": "Knowledge Platform",     "port": 3002, "visibility": "public",   "mission": "Knowledge",   "owner": "Documentation",    "status": "active" },
-    { "id": "transparency", "name": "Transparency Portal",    "port": 3003, "visibility": "public",   "mission": "Governance",  "owner": "Governance",       "status": "active" },
-    { "id": "forest",       "name": "Forest & Nature",        "port": 3004, "visibility": "public",   "mission": "Nature",      "owner": "Forest Team",      "status": "shell" },
-    { "id": "heritage",     "name": "Heritage & Culture",     "port": 3005, "visibility": "public",   "mission": "Heritage",    "owner": "Heritage Team",    "status": "shell" },
-    { "id": "volunteer",    "name": "Volunteer Portal",        "port": 3006, "visibility": "public",   "mission": "Community",   "owner": "Community Team",   "status": "shell" },
-    { "id": "knowledge",    "name": "Knowledge & Education",  "port": 3007, "visibility": "public",   "mission": "Knowledge",   "owner": "Education Team",   "status": "shell" },
-    { "id": "library",      "name": "Digital Library",        "port": 3008, "visibility": "public",   "mission": "Knowledge",   "owner": "Library Team",     "status": "shell" }
+    {
+      "id": "ai-institute",
+      "name": "Bhavya Foundation Web",
+      "port": 3030,
+      "visibility": "public",
+      "mission": "Knowledge",
+      "owner": "Platform",
+      "status": "active"
+    },
+    {
+      "id": "admin",
+      "name": "Engineering Dashboard",
+      "port": 3003,
+      "visibility": "internal",
+      "mission": "Platform",
+      "owner": "Engineering",
+      "status": "active"
+    },
+    {
+      "id": "docs",
+      "name": "Knowledge Platform",
+      "port": 3002,
+      "visibility": "public",
+      "mission": "Knowledge",
+      "owner": "Documentation",
+      "status": "active"
+    },
+    {
+      "id": "bhavya-intelligence-network",
+      "name": "Intelligence engine",
+      "port": 3050,
+      "visibility": "public",
+      "mission": "Intelligence",
+      "owner": "Platform",
+      "status": "active"
+    },
+    {
+      "id": "design-system",
+      "name": "Design system showcase",
+      "port": 3010,
+      "visibility": "public",
+      "mission": "Design System",
+      "owner": "Platform",
+      "status": "active"
+    },
+    {
+      "id": "github-os",
+      "name": "Repository intelligence",
+      "port": 3070,
+      "visibility": "public",
+      "mission": "GitHub",
+      "owner": "Platform",
+      "status": "active"
+    },
+    {
+      "id": "ioc",
+      "name": "Compliance / OKR",
+      "port": 3090,
+      "visibility": "public",
+      "mission": "Compliance (IOC)",
+      "owner": "Platform",
+      "status": "active"
+    },
+    {
+      "id": "social-os",
+      "name": "Communication ops",
+      "port": 3080,
+      "visibility": "public",
+      "mission": "Social",
+      "owner": "Platform",
+      "status": "active"
+    }
   ]
 }

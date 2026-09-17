@@ -1,33 +1,44 @@
-import { resolve } from 'node:path';
-import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
 
 export async function testCommand(type: string, name?: string): Promise<void> {
   const root = process.cwd();
 
   switch (type) {
-    case 'agent':
-      if (!name) { console.error('Usage: bhavya test agent <name>'); process.exit(1); }
+    case "agent":
+      if (!name) {
+        console.error("Usage: bhavya test agent <name>");
+        process.exit(1);
+      }
       await testAgent(root, name);
       break;
-    case 'workflow':
-      if (!name) { console.error('Usage: bhavya test workflow <name>'); process.exit(1); }
+    case "workflow":
+      if (!name) {
+        console.error("Usage: bhavya test workflow <name>");
+        process.exit(1);
+      }
       await testWorkflow(root, name);
       break;
-    case 'service':
-      if (!name) { console.error('Usage: bhavya test service <name>'); process.exit(1); }
+    case "service":
+      if (!name) {
+        console.error("Usage: bhavya test service <name>");
+        process.exit(1);
+      }
       await testService(root, name);
       break;
-    case 'all':
+    case "all":
       await testAll(root);
       break;
     default:
-      console.error(`Unknown type: ${type}. Use agent, workflow, service, or all.`);
+      console.error(
+        `Unknown type: ${type}. Use agent, workflow, service, or all.`,
+      );
       process.exit(1);
   }
 }
 
 async function testAgent(root: string, name: string): Promise<void> {
-  const path = resolve(root, `.agents/${name}.md`);
+  const path = resolve(root, `.ai/agents/${name}.md`);
   if (!existsSync(path)) {
     console.error(`Agent not found: ${name}`);
     process.exit(1);

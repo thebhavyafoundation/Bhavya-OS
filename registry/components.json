@@ -1,46 +1,139 @@
 {
-  "version": "1.0",
-  "components": [
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "components",
+  "generated_at": "2026-09-17T07:17:13.404Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
     {
-      "id": "header",
-      "name": "Header",
-      "path": "apps/website/src/components/Header.tsx",
+      "id": "app-footer",
+      "name": "AppFooter",
+      "path": "packages/platform-ui/src/components/AppFooter.tsx",
       "status": "active"
     },
     {
-      "id": "footer",
-      "name": "Footer",
-      "path": "apps/website/src/components/Footer.tsx",
+      "id": "app-layout",
+      "name": "AppLayout",
+      "path": "packages/platform-ui/src/components/AppLayout.tsx",
       "status": "active"
     },
     {
-      "id": "hero-section",
-      "name": "Hero Section",
-      "path": "apps/website/src/components/HeroSection.tsx",
+      "id": "app-sidebar",
+      "name": "AppSidebar",
+      "path": "packages/platform-ui/src/components/AppSidebar.tsx",
       "status": "active"
     },
     {
-      "id": "mission-cards",
-      "name": "Mission Cards",
-      "path": "apps/website/src/components/MissionCards.tsx",
+      "id": "avatar",
+      "name": "Avatar",
+      "path": "packages/platform-ui/src/components/Avatar.tsx",
       "status": "active"
     },
     {
-      "id": "stats-section",
-      "name": "Stats Section",
-      "path": "apps/website/src/components/StatsSection.tsx",
+      "id": "badge",
+      "name": "Badge",
+      "path": "packages/platform-ui/src/components/Badge.tsx",
       "status": "active"
     },
     {
-      "id": "cta-section",
-      "name": "CTA Section",
-      "path": "apps/website/src/components/CTASection.tsx",
+      "id": "bhavya-nav",
+      "name": "BhavyaNav",
+      "path": "packages/platform-ui/src/components/BhavyaNav.tsx",
       "status": "active"
     },
     {
-      "id": "principles-section",
-      "name": "Principles Section",
-      "path": "apps/website/src/components/PrinciplesSection.tsx",
+      "id": "breadcrumb",
+      "name": "Breadcrumb",
+      "path": "packages/platform-ui/src/components/Breadcrumb.tsx",
+      "status": "active"
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "path": "packages/platform-ui/src/components/Button.tsx",
+      "status": "active"
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "path": "packages/platform-ui/src/components/Card.tsx",
+      "status": "active"
+    },
+    {
+      "id": "data-table",
+      "name": "DataTable",
+      "path": "packages/platform-ui/src/components/DataTable.tsx",
+      "status": "active"
+    },
+    {
+      "id": "empty-state",
+      "name": "EmptyState",
+      "path": "packages/platform-ui/src/components/EmptyState.tsx",
+      "status": "active"
+    },
+    {
+      "id": "error-state",
+      "name": "ErrorState",
+      "path": "packages/platform-ui/src/components/ErrorState.tsx",
+      "status": "active"
+    },
+    {
+      "id": "loading-state",
+      "name": "LoadingState",
+      "path": "packages/platform-ui/src/components/LoadingState.tsx",
+      "status": "active"
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "path": "packages/platform-ui/src/components/Modal.tsx",
+      "status": "active"
+    },
+    {
+      "id": "page-layout",
+      "name": "PageLayout",
+      "path": "packages/platform-ui/src/components/PageLayout.tsx",
+      "status": "active"
+    },
+    {
+      "id": "search-bar",
+      "name": "SearchBar",
+      "path": "packages/platform-ui/src/components/SearchBar.tsx",
+      "status": "active"
+    },
+    {
+      "id": "sidebar",
+      "name": "Sidebar",
+      "path": "packages/platform-ui/src/components/Sidebar.tsx",
+      "status": "active"
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "path": "packages/platform-ui/src/components/Skeleton.tsx",
+      "status": "active"
+    },
+    {
+      "id": "stat-card",
+      "name": "StatCard",
+      "path": "packages/platform-ui/src/components/StatCard.tsx",
+      "status": "active"
+    },
+    {
+      "id": "status-badge",
+      "name": "StatusBadge",
+      "path": "packages/platform-ui/src/components/StatusBadge.tsx",
+      "status": "active"
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "path": "packages/platform-ui/src/components/Tabs.tsx",
+      "status": "active"
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "path": "packages/platform-ui/src/components/Toast.tsx",
       "status": "active"
     }
   ]

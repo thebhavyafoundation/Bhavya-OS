@@ -6,15 +6,14 @@
 
 | ID | Name | Path | Port | Status |
 |----|------|------|------|--------|
-| APP-001 | Bhavya Foundation | apps/website | 3000 | active |
-| APP-002 | Engineering Dashboard | apps/admin | 3001 | active |
+| APP-001 | Bhavya Foundation Web | apps/ai-institute | 3030 | active |
+| APP-002 | Engineering Dashboard | apps/admin | 3003 | active |
 | APP-003 | Knowledge Platform | apps/docs | 3002 | active |
-| APP-004 | Transparency Portal | apps/transparency | 3003 | active |
-| APP-005 | Forest & Nature | apps/forest | 3004 | shell |
-| APP-006 | Heritage & Culture | apps/heritage | 3005 | shell |
-| APP-007 | Volunteer Portal | apps/volunteer | 3006 | shell |
-| APP-008 | Knowledge & Education | apps/knowledge | 3007 | shell |
-| APP-009 | Digital Library | apps/library | 3008 | shell |
+| APP-004 | Intelligence engine | apps/bhavya-intelligence-network | 3050 | active |
+| APP-005 | Design system showcase | apps/design-system | 3010 | active |
+| APP-006 | Repository intelligence | apps/github-os | 3070 | active |
+| APP-007 | Compliance / OKR | apps/ioc | 3090 | active |
+| APP-008 | Communication ops | apps/social-os | 3080 | active |
 
 ## Packages
 
@@ -26,65 +25,61 @@
 | PKG-004 | analyzers | packages/analyzers | library |
 | PKG-005 | api | packages/api | library |
 | PKG-006 | auth | packages/auth | auth |
-| PKG-007 | bar | packages/bar | library |
-| PKG-008 | bdl | packages/bdl | design-language |
-| PKG-009 | bee | packages/bee | library |
-| PKG-010 | branding | packages/branding | branding |
-| PKG-011 | browser-automation | packages/browser-automation | library |
-| PKG-012 | capability-registry | packages/capability-registry | library |
-| PKG-013 | charts | packages/charts | charts |
-| PKG-014 | cli | packages/cli | library |
-| PKG-015 | config | packages/config | configuration |
-| PKG-016 | constitution | packages/constitution | library |
-| PKG-017 | content-board | packages/content-board | library |
-| PKG-018 | content-core | packages/content-core | library |
-| PKG-019 | content-engine | packages/content-engine | library |
-| PKG-020 | crawlers | packages/crawlers | library |
-| PKG-021 | database | packages/database | database |
-| PKG-022 | design-system | packages/design-system | design-language |
-| PKG-023 | docs | packages/docs | content-registry |
-| PKG-024 | eslint | packages/eslint | configuration |
-| PKG-025 | events | packages/events | configuration |
-| PKG-026 | github-intelligence | packages/github-intelligence | library |
-| PKG-027 | github-os | packages/github-os | library |
-| PKG-028 | icons | packages/icons | icons |
-| PKG-029 | impact-runtime | packages/impact-runtime | runtime |
-| PKG-030 | intelligence | packages/intelligence | library |
-| PKG-031 | interactive-components | packages/interactive-components | configuration |
-| PKG-032 | ioc | packages/ioc | library |
-| PKG-033 | kernel | packages/kernel | library |
-| PKG-034 | knowledge-engine | packages/knowledge-engine | library |
-| PKG-035 | knowledge-extraction | packages/knowledge-extraction | library |
-| PKG-036 | knowledge-graph | packages/knowledge-graph | library |
-| PKG-037 | learning-runtime | packages/learning-runtime | runtime |
-| PKG-038 | maps | packages/maps | maps |
-| PKG-039 | mcp-manager | packages/mcp-manager | library |
-| PKG-040 | memory-engine | packages/memory-engine | library |
-| PKG-041 | mentor-engine | packages/mentor-engine | library |
-| PKG-042 | mission-runtime | packages/mission-runtime | runtime |
-| PKG-043 | motion-system | packages/motion-system | library |
-| PKG-044 | notifications | packages/notifications | library |
-| PKG-045 | observability | packages/observability | library |
-| PKG-046 | planner-engine | packages/planner-engine | library |
-| PKG-047 | platform | packages/platform | library |
-| PKG-048 | platform-ui | packages/platform-ui | component-library |
-| PKG-049 | plugin-manager | packages/plugin-manager | library |
-| PKG-050 | plugin-runtime | packages/plugin-runtime | runtime |
-| PKG-051 | project-runtime | packages/project-runtime | runtime |
-| PKG-052 | providers | packages/providers | library |
-| PKG-053 | runtime | packages/runtime | runtime |
-| PKG-054 | scheduler-engine | packages/scheduler-engine | library |
-| PKG-055 | sdk | packages/sdk | library |
-| PKG-056 | search-engine | packages/search-engine | library |
-| PKG-057 | security | packages/security | library |
-| PKG-058 | shared | packages/shared | library |
-| PKG-059 | social-os | packages/social-os | library |
-| PKG-060 | technology-radar | packages/technology-radar | library |
-| PKG-061 | types | packages/types | library |
-| PKG-062 | typescript | packages/typescript | configuration |
-| PKG-063 | ui | packages/ui | component-library |
-| PKG-064 | video-engine | packages/video-engine | library |
-| PKG-065 | workflow-engine | packages/workflow-engine | library |
-| PKG-066 | workflows | packages/workflows | library |
+| PKG-007 | bdl | packages/bdl | design-language |
+| PKG-008 | bee | packages/bee | library |
+| PKG-009 | branding | packages/branding | branding |
+| PKG-010 | browser-automation | packages/browser-automation | library |
+| PKG-011 | capability-registry | packages/capability-registry | library |
+| PKG-012 | charts | packages/charts | charts |
+| PKG-013 | cli | packages/cli | library |
+| PKG-014 | config | packages/config | configuration |
+| PKG-015 | constitution | packages/constitution | library |
+| PKG-016 | content-board | packages/content-board | library |
+| PKG-017 | content-core | packages/content-core | library |
+| PKG-018 | content-engine | packages/content-engine | library |
+| PKG-019 | crawlers | packages/crawlers | library |
+| PKG-020 | database | packages/database | database |
+| PKG-021 | design-system | packages/design-system | design-language |
+| PKG-022 | docs | packages/docs | content-registry |
+| PKG-023 | eslint | packages/eslint | configuration |
+| PKG-024 | events | packages/events | configuration |
+| PKG-025 | github-intelligence | packages/github-intelligence | library |
+| PKG-026 | icons | packages/icons | icons |
+| PKG-027 | impact-runtime | packages/impact-runtime | runtime |
+| PKG-028 | intelligence | packages/intelligence | library |
+| PKG-029 | interactive-components | packages/interactive-components | configuration |
+| PKG-030 | kernel | packages/kernel | library |
+| PKG-031 | knowledge-engine | packages/knowledge-engine | library |
+| PKG-032 | knowledge-extraction | packages/knowledge-extraction | library |
+| PKG-033 | knowledge-graph | packages/knowledge-graph | library |
+| PKG-034 | learning-runtime | packages/learning-runtime | runtime |
+| PKG-035 | maps | packages/maps | maps |
+| PKG-036 | mcp-manager | packages/mcp-manager | library |
+| PKG-037 | memory-engine | packages/memory-engine | library |
+| PKG-038 | mentor-engine | packages/mentor-engine | library |
+| PKG-039 | mission-runtime | packages/mission-runtime | runtime |
+| PKG-040 | motion-system | packages/motion-system | library |
+| PKG-041 | notifications | packages/notifications | library |
+| PKG-042 | observability | packages/observability | library |
+| PKG-043 | planner-engine | packages/planner-engine | library |
+| PKG-044 | platform | packages/platform | library |
+| PKG-045 | platform-ui | packages/platform-ui | component-library |
+| PKG-046 | plugin-manager | packages/plugin-manager | library |
+| PKG-047 | plugin-runtime | packages/plugin-runtime | runtime |
+| PKG-048 | project-runtime | packages/project-runtime | runtime |
+| PKG-049 | providers | packages/providers | library |
+| PKG-050 | runtime | packages/runtime | runtime |
+| PKG-051 | scheduler-engine | packages/scheduler-engine | library |
+| PKG-052 | sdk | packages/sdk | library |
+| PKG-053 | search-engine | packages/search-engine | library |
+| PKG-054 | security | packages/security | library |
+| PKG-055 | shared | packages/shared | library |
+| PKG-056 | technology-radar | packages/technology-radar | library |
+| PKG-057 | types | packages/types | library |
+| PKG-058 | typescript | packages/typescript | configuration |
+| PKG-059 | ui | packages/ui | component-library |
+| PKG-060 | video-engine | packages/video-engine | library |
+| PKG-061 | workflow-engine | packages/workflow-engine | library |
+| PKG-062 | workflows | packages/workflows | library |
 
-*Generated: 2026-09-17T06:41:30.907Z*
+*Generated: 2026-09-17T07:19:25.259Z*

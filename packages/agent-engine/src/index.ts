@@ -1,9 +1,15 @@
 // Agent Engine
-// Loads .agents/, creates Agent, manages Capabilities, Permissions, Lifecycle
+// Loads .ai/agents/, creates Agent, manages Capabilities, Permissions, Lifecycle
 
-import type { Agent, AgentId, Capability, Permission, AgentStatus } from '@bhavya/shared';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import type {
+  Agent,
+  AgentId,
+  Capability,
+  Permission,
+  AgentStatus,
+} from "@bhavya/shared";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 export interface AgentEngineConfig {
   root: string;
@@ -22,10 +28,12 @@ export class AgentEngine {
   }
 
   private async loadAll(): Promise<void> {
-    const agentsDir = resolve(this.config.root, '.agents');
+    const agentsDir = resolve(this.config.root, ".ai/agents");
     if (!existsSync(agentsDir)) return;
 
-    const files = readdirSync(agentsDir).filter((f) => f.endsWith('.md') || f.endsWith('.json'));
+    const files = readdirSync(agentsDir).filter(
+      (f) => f.endsWith(".md") || f.endsWith(".json"),
+    );
     for (const file of files) {
       const agent = await this.loadAgent(`${agentsDir}/${file}`);
       if (agent) this.agents.set(agent.id, agent);
@@ -34,8 +42,12 @@ export class AgentEngine {
 
   private async loadAgent(path: string): Promise<Agent | null> {
     try {
-      const content = readFileSync(path, 'utf-8');
-      const name = path.split('/').pop()?.replace(/\.[^.]+$/, '') ?? 'unknown';
+      const content = readFileSync(path, "utf-8");
+      const name =
+        path
+          .split("/")
+          .pop()
+          ?.replace(/\.[^.]+$/, "") ?? "unknown";
 
       return {
         id: `agent:${name}`,
@@ -44,7 +56,7 @@ export class AgentEngine {
         description: content.slice(0, 200),
         capabilities: [],
         permissions: [],
-        status: 'idle',
+        status: "idle",
         metadata: {},
       };
     } catch {
@@ -54,26 +66,26 @@ export class AgentEngine {
 
   private inferRole(name: string): string {
     const roles: Record<string, string> = {
-      founder: 'founder',
-      ceo: 'ceo',
-      cto: 'cto',
-      designer: 'designer',
-      developer: 'developer',
-      reviewer: 'reviewer',
-      researcher: 'researcher',
-      writer: 'writer',
-      seo: 'seo',
-      translator: 'translator',
-      historian: 'historian',
-      legal: 'legal',
-      volunteer: 'volunteer',
-      donation: 'donation',
-      socialmedia: 'social-media',
-      qa: 'qa',
-      release: 'release',
-      security: 'security',
+      founder: "founder",
+      ceo: "ceo",
+      cto: "cto",
+      designer: "designer",
+      developer: "developer",
+      reviewer: "reviewer",
+      researcher: "researcher",
+      writer: "writer",
+      seo: "seo",
+      translator: "translator",
+      historian: "historian",
+      legal: "legal",
+      volunteer: "volunteer",
+      donation: "donation",
+      socialmedia: "social-media",
+      qa: "qa",
+      release: "release",
+      security: "security",
     };
-    return roles[name.toLowerCase()] ?? 'unknown';
+    return roles[name.toLowerCase()] ?? "unknown";
   }
 
   async get(id: AgentId): Promise<Agent | undefined> {

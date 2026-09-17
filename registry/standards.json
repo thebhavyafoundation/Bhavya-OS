@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "standards",
-  "generated_at": "2026-09-17T06:34:49.286Z",
+  "generated_at": "2026-09-17T07:20:47.880Z",
   "generator": "scripts/generate-registry.js",
   "items": [
     {
@@ -23,10 +23,6 @@
     {
       "id": "std.BPS-001",
       "file": "standards/BPS-001.md"
-    },
-    {
-      "id": "std.README",
-      "file": "standards/README.md"
     },
     {
       "id": "std.accessibility",

@@ -70,7 +70,7 @@ export class PublishReleaseNotes {
       });
 
       // 2. Update release registry
-      const registryPath = resolve(this.ctx.root, ".registry/pages.json");
+      const registryPath = resolve(this.ctx.root, "registry/releases.json");
       if (existsSync(registryPath)) {
         const registry = JSON.parse(readFileSync(registryPath, "utf-8"));
         registry.releases = registry.releases || [];
@@ -82,7 +82,7 @@ export class PublishReleaseNotes {
         });
         writeFileSync(registryPath, JSON.stringify(registry, null, 2));
         artifacts.push({
-          path: ".registry/pages.json",
+          path: "registry/releases.json",
           action: "updated",
           metadata: {},
         });
@@ -179,7 +179,7 @@ export class PublishReleaseNotes {
 
   private getSnapshotFiles(): string[] {
     const files: string[] = [];
-    const dirs = [".ai", ".agents", "memory", ".workflows", ".registry"];
+    const dirs = [".ai", "memory", ".workflows", "registry"];
     for (const dir of dirs) {
       const dirPath = resolve(this.ctx.root, dir);
       if (existsSync(dirPath)) {

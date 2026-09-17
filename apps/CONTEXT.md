@@ -1,8 +1,8 @@
 # apps/ — Application Umbrella
 
-9 applications in the pnpm workspace. One canonical web app, one dev tool, seven domain apps migrating into the canonical application.
+8 applications in the pnpm workspace. One canonical web app, one dev tool, six domain apps migrating into the canonical application.
 
-**Last updated:** 2026-08-10
+**Last updated:** 2026-09-17
 
 ## Product Model
 
@@ -34,17 +34,19 @@ See `docs/product/DIGITAL_INSTITUTION.md` for the full product definition.
 
 ## Applications
 
-| App                            | Description                                | Classification     | Status   | Target Route               |
-| ------------------------------ | ------------------------------------------ | ------------------ | -------- | -------------------------- |
-| `ai-institute/`                | Bhavya Digital Institution — canonical app | **CANONICAL HOST** | Active   | `/` + `/app` + `/os`       |
-| `website/`                     | Public foundation website                  | **MERGED**         | Archived | Content moved to canonical |
-| `admin/`                       | Founder and operations dashboard           | **MIGRATING**      | Active   | `/os/admin`                |
-| `design-system/`               | Design system showcase                     | **KEEP**           | Active   | `/design-system`           |
-| `docs/`                        | Institutional governance dashboard         | **MIGRATING**      | Active   | `/os/docs`                 |
-| `github-os/`                   | GitHub intelligence platform               | **MIGRATING**      | Active   | `/os/github`               |
-| `ioc/`                         | Institute of Compliance — OKR, risks       | **MIGRATING**      | Active   | `/os/ioc`                  |
-| `social-os/`                   | Communication operations                   | **MIGRATING**      | Active   | `/os/social`               |
-| `bhavya-intelligence-network/` | Intelligence orchestration engine          | **EXTRACTING**     | Active   | Package only (no routes)   |
+| App                            | Description                                | Classification     | Status | Target Route             |
+| ------------------------------ | ------------------------------------------ | ------------------ | ------ | ------------------------ |
+| `ai-institute/`                | Bhavya Digital Institution — canonical app | **CANONICAL HOST** | Active | `/` + `/app` + `/os`     |
+| `admin/`                       | Founder and operations dashboard           | **MIGRATING**      | Active | `/os/admin`              |
+| `design-system/`               | Design system showcase                     | **KEEP**           | Active | `/design-system`         |
+| `docs/`                        | Institutional governance dashboard         | **MIGRATING**      | Active | `/os/docs`               |
+| `github-os/`                   | GitHub intelligence platform               | **MIGRATING**      | Active | `/os/github`             |
+| `ioc/`                         | Institute of Compliance — OKR, risks       | **MIGRATING**      | Active | `/os/ioc`                |
+| `social-os/`                   | Communication operations                   | **MIGRATING**      | Active | `/os/social`             |
+| `bhavya-intelligence-network/` | Intelligence orchestration engine          | **EXTRACTING**     | Active | Package only (no routes) |
+
+`apps/website/` is archived and no longer in the workspace — see
+`docs/architecture/REPOSITORY_SOURCE_OF_TRUTH.md`.
 
 ## Route by task
 

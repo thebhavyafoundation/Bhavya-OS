@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "packages",
-  "generated_at": "2026-09-17T06:34:49.282Z",
+  "generated_at": "2026-09-17T07:17:13.376Z",
   "generator": "scripts/generate-registry.js",
   "items": [
     {
@@ -33,11 +33,6 @@
       "id": "pkg.auth",
       "name": "auth",
       "path": "packages/auth"
-    },
-    {
-      "id": "pkg.bar",
-      "name": "bar",
-      "path": "packages/bar"
     },
     {
       "id": "pkg.bdl",
@@ -135,11 +130,6 @@
       "path": "packages/github-intelligence"
     },
     {
-      "id": "pkg.github-os",
-      "name": "github-os",
-      "path": "packages/github-os"
-    },
-    {
       "id": "pkg.icons",
       "name": "icons",
       "path": "packages/icons"
@@ -158,11 +148,6 @@
       "id": "pkg.interactive-components",
       "name": "interactive-components",
       "path": "packages/interactive-components"
-    },
-    {
-      "id": "pkg.ioc",
-      "name": "ioc",
-      "path": "packages/ioc"
     },
     {
       "id": "pkg.kernel",
@@ -293,11 +278,6 @@
       "id": "pkg.shared",
       "name": "shared",
       "path": "packages/shared"
-    },
-    {
-      "id": "pkg.social-os",
-      "name": "social-os",
-      "path": "packages/social-os"
     },
     {
       "id": "pkg.technology-radar",

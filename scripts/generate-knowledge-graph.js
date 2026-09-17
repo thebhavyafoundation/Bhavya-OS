@@ -70,7 +70,7 @@ function generateKnowledgeGraph() {
       status: "Proposed",
       created: "2026-07-20",
       updated: "2026-07-20",
-      links: ["BDL-001", "agent.volunteer"],
+      links: ["BDL-001", "agent.research"],
     },
     {
       id: "RFC-0002",
@@ -80,7 +80,7 @@ function generateKnowledgeGraph() {
       status: "Proposed",
       created: "2026-07-21",
       updated: "2026-07-21",
-      links: ["BAR-001", "agent.forest"],
+      links: ["BAR-001", "agent.research"],
     },
     {
       id: "RFC-0003",
@@ -90,7 +90,7 @@ function generateKnowledgeGraph() {
       status: "Accepted",
       created: "2026-07-22",
       updated: "2026-07-22",
-      links: ["ADR-008", "agent.engineering"],
+      links: ["ADR-008", "agent.research"],
     },
     {
       id: "BAR-001",
@@ -110,7 +110,7 @@ function generateKnowledgeGraph() {
       status: "Active",
       created: "2026-07-15",
       updated: "2026-07-22",
-      links: ["packages/ui", "packages/theme"],
+      links: ["packages/platform-ui"],
     },
     {
       id: "BPS-001",
@@ -130,7 +130,7 @@ function generateKnowledgeGraph() {
       status: "Active",
       created: "2026-07-15",
       updated: "2026-07-22",
-      links: ["agent.governance", "agent.founder"],
+      links: ["agent.architecture"],
     },
     {
       id: "BOM-001",
@@ -140,7 +140,7 @@ function generateKnowledgeGraph() {
       status: "Active",
       created: "2026-07-15",
       updated: "2026-07-22",
-      links: ["agent.founder", "agent.release"],
+      links: ["agent.release"],
     },
     {
       id: "Release-v0.1",
@@ -160,7 +160,7 @@ function generateKnowledgeGraph() {
       status: "Released",
       created: "2026-07-22",
       updated: "2026-07-22",
-      links: ["RFC-0003", "agent.engineering"],
+      links: ["RFC-0003", "agent.release"],
     },
     {
       id: "Release-v0.3",

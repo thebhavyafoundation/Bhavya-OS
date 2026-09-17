@@ -14,19 +14,17 @@ _Edit the source files listed below, then re-run the compiler._
 
 ---
 
-## Website (apps/website)
+## Foundation Web (apps/ai-institute)
 
 ```
 load:
-  - apps/website
-  - packages/ui
-  - packages/bdl
+  - apps/ai-institute
+  - packages/platform-ui
   - packages/mission-runtime
   - standards/frontend
   - standards/accessibility
   - standards/design
   - specs/design-system
-  - navigation/public.json
   - content/homepage.mdx
 ```
 
@@ -47,14 +45,11 @@ load:
   - specs/missions
 ```
 
-## Shared UI (packages/ui)
+## Platform UI (packages/platform-ui)
 
 ```
 load:
-  - packages/ui
-  - packages/bdl
-  - packages/bdl/tokens
-  - packages/bdl/primitives
+  - packages/platform-ui
   - standards/design
   - specs/design-system
   - standards/frontend

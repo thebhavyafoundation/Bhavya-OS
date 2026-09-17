@@ -77,16 +77,25 @@ function listDirs(dir) {
 function generateApps() {
   const appsDir = path.join(rootDir, "apps");
   const ports = readJSON(path.join(rootDir, "config", "ports.json"), {});
+  const appsConfig = readJSON(path.join(rootDir, "config", "apps.json"), {});
+  const configured = new Map(
+    (appsConfig.apps || [])
+      .filter((app) => app && app.id)
+      .map((app) => [app.id, app]),
+  );
   const items = listDirs(appsDir).map((dirName) => {
     const manifest = parseAppManifest(path.join(appsDir, dirName));
+    const config = configured.get(dirName) || {};
+    const pkg = readJSON(path.join(appsDir, dirName, "package.json"), {});
     return {
       id: (manifest && manifest.id) || dirName,
-      name: (manifest && manifest.name) || dirName,
-      version: (manifest && manifest.version) || "0.5.0",
-      owner: (manifest && manifest.owner) || "Platform",
-      mission: (manifest && manifest.mission) || "General",
-      visibility: (manifest && manifest.visibility) || "public",
-      port: ports[dirName] || null,
+      name: (manifest && manifest.name) || config.name || pkg.name || dirName,
+      version: (manifest && manifest.version) || pkg.version || "0.0.0",
+      owner: (manifest && manifest.owner) || config.owner || "Platform",
+      mission: (manifest && manifest.mission) || config.mission || "General",
+      visibility:
+        (manifest && manifest.visibility) || config.visibility || "public",
+      port: ports[dirName] || config.port || null,
       path: `apps/${dirName}`,
     };
   });
@@ -99,12 +108,20 @@ function generateApps() {
   });
 }
 
+// Only directories that actually declare a package.json are workspace packages.
+// The packages/ tree also contains legacy stub directories (for example
+// packages/ioc/, packages/social-os/) that are not importable and must not be
+// advertised as packages.
 function generatePackages() {
-  const items = listDirs(path.join(rootDir, "packages")).map((name) => ({
-    id: `pkg.${name}`,
-    name,
-    path: `packages/${name}`,
-  }));
+  const items = listDirs(path.join(rootDir, "packages"))
+    .filter((name) =>
+      fs.existsSync(path.join(rootDir, "packages", name, "package.json")),
+    )
+    .map((name) => ({
+      id: `pkg.${name}`,
+      name,
+      path: `packages/${name}`,
+    }));
   writeRegistry(path.join(registryDir, "packages.json"), {
     _notice: NOTICE,
     registry_type: "packages",
@@ -145,7 +162,7 @@ function generateStandards() {
   const files = fs.existsSync(standardsDir)
     ? fs
         .readdirSync(standardsDir)
-        .filter((f) => f.endsWith(".md"))
+        .filter((f) => f.endsWith(".md") && f !== "README.md")
         .sort()
     : [];
   const items = files.map((file) => ({
@@ -197,6 +214,7 @@ function generateWorkflows() {
 
 function generateServices() {
   const ports = readJSON(path.join(rootDir, "config", "ports.json"), {});
+  const appsConfig = readJSON(path.join(rootDir, "config", "apps.json"), {});
   const items = [
     {
       id: "svc.ai_gateway",
@@ -204,30 +222,14 @@ function generateServices() {
       endpoint: "http://localhost:8082",
       status: "active",
     },
-    {
-      id: "svc.website",
-      name: "Bhavya Foundation Website",
-      endpoint: `http://localhost:${ports.website || 3000}`,
-      status: "active",
-    },
-    {
-      id: "svc.admin_dashboard",
-      name: "Engineering Dashboard",
-      endpoint: `http://localhost:${ports.admin || 3001}`,
-      status: "active",
-    },
-    {
-      id: "svc.docs",
-      name: "Knowledge Platform",
-      endpoint: `http://localhost:${ports.docs || 3002}`,
-      status: "active",
-    },
-    {
-      id: "svc.transparency",
-      name: "Transparency Portal",
-      endpoint: `http://localhost:${ports.transparency || 3003}`,
-      status: "active",
-    },
+    ...(appsConfig.apps || [])
+      .filter((app) => app && app.id)
+      .map((app) => ({
+        id: `svc.${app.id}`,
+        name: app.name || app.id,
+        endpoint: `http://localhost:${ports[app.id] || app.port}`,
+        status: app.status || "active",
+      })),
     {
       id: "svc.openhuman_rpc",
       name: "OpenHuman Core RPC",
@@ -244,11 +246,126 @@ function generateServices() {
   });
 }
 
+// Page registry derived from the real apps/ tree. The previous hand-written
+// file listed retired apps (website, forest, heritage, transparency, ...).
+function generatePages() {
+  const appsDir = path.join(rootDir, "apps");
+  const appsConfig = readJSON(path.join(rootDir, "config", "apps.json"), {});
+  const configured = new Map(
+    (appsConfig.apps || [])
+      .filter((app) => app && app.id)
+      .map((app) => [app.id, app]),
+  );
+  const items = listDirs(appsDir).map((dirName) => {
+    const config = configured.get(dirName) || {};
+    const pkg = readJSON(path.join(appsDir, dirName, "package.json"), {});
+    return {
+      id: dirName,
+      name: config.name || pkg.name || dirName,
+      path: `apps/${dirName}`,
+      status: "active",
+    };
+  });
+  writeRegistry(path.join(registryDir, "pages.json"), {
+    _notice: NOTICE,
+    registry_type: "pages",
+    generated_at: null,
+    generator: GENERATOR,
+    items,
+  });
+}
+
+// Component registry derived from the canonical design system. The previous
+// hand-written file pointed at apps/website/src/components/*.tsx (archived).
+function generateComponents() {
+  const componentsDir = path.join(
+    rootDir,
+    "packages",
+    "platform-ui",
+    "src",
+    "components",
+  );
+  const files = fs.existsSync(componentsDir)
+    ? fs
+        .readdirSync(componentsDir)
+        .filter((f) => f.endsWith(".tsx"))
+        .sort()
+    : [];
+  const items = files.map((file) => ({
+    id: path
+      .basename(file, ".tsx")
+      .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+      .toLowerCase(),
+    name: path.basename(file, ".tsx"),
+    path: `packages/platform-ui/src/components/${file}`,
+    status: "active",
+  }));
+  writeRegistry(path.join(registryDir, "components.json"), {
+    _notice: NOTICE,
+    registry_type: "components",
+    generated_at: null,
+    generator: GENERATOR,
+    items,
+  });
+}
+
+// Index of the registry directory itself. Every entry is derived from what is
+// actually on disk at generation time, so the index can never point at a
+// removed store (the previous hand-written index referenced retired dot-dirs).
+function generateIndex() {
+  const pkg = readJSON(path.join(rootDir, "package.json"), {});
+  const registries = {};
+  for (const file of fs
+    .readdirSync(registryDir)
+    .filter((name) => name.endsWith(".json") && name !== "index.json")
+    .sort()) {
+    const data = readJSON(path.join(registryDir, file), {});
+    const items = Array.isArray(data.items)
+      ? data.items.length
+      : Array.isArray(data.nodes)
+        ? data.nodes.length
+        : null;
+    registries[path.basename(file, ".json")] = {
+      path: `registry/${file}`,
+      generated: Boolean(data.generator),
+      generator: data.generator || null,
+      items,
+    };
+  }
+
+  const candidates = {
+    startHere: ".ai/MASTER_CONTEXT.md",
+    agents: ".ai/agents/registry.yaml",
+    memory: "memory/",
+    docs: "docs/",
+    adrs: "docs/adr/",
+    standards: "standards/",
+    skills: ".opencode/skills/",
+  };
+  const discovery = {};
+  for (const [key, rel] of Object.entries(candidates)) {
+    if (fs.existsSync(path.join(rootDir, rel))) discovery[key] = rel;
+  }
+
+  writeRegistry(path.join(registryDir, "index.json"), {
+    _notice: NOTICE,
+    registry_type: "index",
+    generated_at: null,
+    generator: GENERATOR,
+    version: pkg.version || "0.0.0",
+    registries,
+    discovery,
+  });
+}
+
 generateApps();
 generatePackages();
+generatePages();
+generateComponents();
 generateAgents();
 generateStandards();
 generateWorkflows();
 generateServices();
+generateIndex();
 
 console.log("OK: registry/*.json regenerated by scripts/generate-registry.js");

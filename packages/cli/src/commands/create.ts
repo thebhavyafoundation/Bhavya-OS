@@ -32,7 +32,7 @@ async function createAgentDefinition(
   root: string,
   name: string,
 ): Promise<void> {
-  const dir = resolve(root, ".agents");
+  const dir = resolve(root, ".ai/agents");
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
 
   const content = `# ${name}
@@ -77,12 +77,13 @@ async function createAgentDefinition(
 `;
 
   writeFileSync(resolve(dir, `${name}.md`), content);
-  console.log(`Created: .agents/${name}.md`);
+  console.log(`Created: .ai/agents/${name}.md`);
   console.log(`
 Next steps:`);
-  console.log(`  1. Edit .agents/${name}.md`);
+  console.log(`  1. Edit .ai/agents/${name}.md`);
   console.log(`  2. Define capabilities and permissions`);
-  console.log(`  3. Test with: bhavya test agent ${name}`);
+  console.log(`  3. Register the role in .ai/agents/registry.yaml`);
+  console.log(`  4. Test with: bhavya test agent ${name}`);
 }
 
 async function createWorkflow(root: string, name: string): Promise<void> {

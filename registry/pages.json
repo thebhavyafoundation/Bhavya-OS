@@ -1,65 +1,55 @@
 {
-  "version": "1.0",
-  "pages": [
-    {
-      "id": "website",
-      "name": "Main Website",
-      "path": "apps/website",
-      "status": "active",
-      "url": "https://bhavya-site-kohl.vercel.app"
-    },
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "pages",
+  "generated_at": "2026-09-17T07:17:13.400Z",
+  "generator": "scripts/generate-registry.js",
+  "items": [
     {
       "id": "admin",
-      "name": "Admin Dashboard",
+      "name": "Engineering Dashboard",
       "path": "apps/admin",
       "status": "active"
     },
     {
+      "id": "ai-institute",
+      "name": "Bhavya Foundation Web",
+      "path": "apps/ai-institute",
+      "status": "active"
+    },
+    {
+      "id": "bhavya-intelligence-network",
+      "name": "Intelligence engine",
+      "path": "apps/bhavya-intelligence-network",
+      "status": "active"
+    },
+    {
+      "id": "design-system",
+      "name": "Design system showcase",
+      "path": "apps/design-system",
+      "status": "active"
+    },
+    {
       "id": "docs",
-      "name": "Documentation",
+      "name": "Knowledge Platform",
       "path": "apps/docs",
       "status": "active"
     },
     {
-      "id": "forest",
-      "name": "Forest GIS",
-      "path": "apps/forest",
-      "status": "planned"
-    },
-    {
-      "id": "heritage",
-      "name": "Heritage Portal",
-      "path": "apps/heritage",
-      "status": "planned"
-    },
-    {
-      "id": "knowledge",
-      "name": "Knowledge Base",
-      "path": "apps/knowledge",
-      "status": "planned"
-    },
-    {
-      "id": "library",
-      "name": "Digital Library",
-      "path": "apps/library",
-      "status": "planned"
-    },
-    {
-      "id": "transparency",
-      "name": "Transparency Portal",
-      "path": "apps/transparency",
+      "id": "github-os",
+      "name": "Repository intelligence",
+      "path": "apps/github-os",
       "status": "active"
     },
     {
-      "id": "volunteer",
-      "name": "Volunteer Portal",
-      "path": "apps/volunteer",
-      "status": "planned"
+      "id": "ioc",
+      "name": "Compliance / OKR",
+      "path": "apps/ioc",
+      "status": "active"
     },
     {
-      "id": "design-system",
-      "name": "Design System",
-      "path": "apps/design-system",
+      "id": "social-os",
+      "name": "Communication ops",
+      "path": "apps/social-os",
       "status": "active"
     }
   ]

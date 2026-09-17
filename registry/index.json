@@ -1,91 +1,120 @@
 {
-  "version": "1.0.0-alpha",
-  "lastUpdated": "2026-07-27T00:00:00Z",
+  "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
+  "registry_type": "index",
+  "generated_at": "2026-09-17T07:20:47.903Z",
+  "generator": "scripts/generate-registry.js",
+  "version": "0.1.0",
   "registries": {
     "agents": {
-      "path": ".agents/registry.json",
-      "description": "AI agent definitions and capabilities"
+      "path": "registry/agents.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 9
     },
-    "workflows": {
-      "path": ".workflows/index.json",
-      "description": "Operational workflow definitions"
+    "apps": {
+      "path": "registry/apps.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 8
     },
-    "memory": {
-      "path": ".memory/index.json",
-      "description": "Long-term memory entries"
-    },
-    "events": {
-      "path": ".events/index.json",
-      "description": "Event definitions and handlers"
-    },
-    "commands": {
-      "path": ".commands/index.json",
-      "description": "Command definitions"
-    },
-    "prompts": {
-      "path": ".prompts/index.json",
-      "description": "Prompt templates"
-    },
-    "templates": {
-      "path": ".templates/index.json",
-      "description": "Content templates"
-    },
-    "pages": {
-      "path": ".registry/pages.json",
-      "description": "Website page registry"
+    "capability-registry": {
+      "path": "registry/capability-registry.json",
+      "generated": false,
+      "generator": null,
+      "items": null
     },
     "components": {
-      "path": ".registry/components.json",
-      "description": "UI component registry"
+      "path": "registry/components.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 22
+    },
+    "core-manifest": {
+      "path": "registry/core-manifest.json",
+      "generated": false,
+      "generator": null,
+      "items": null
     },
     "documents": {
-      "path": ".registry/documents.json",
-      "description": "Document registry"
+      "path": "registry/documents.json",
+      "generated": false,
+      "generator": null,
+      "items": null
     },
-    "models": {
-      "path": ".registry/models.json",
-      "description": "AI model registry"
-    },
-    "services": {
-      "path": ".registry/services.json",
-      "description": "Service registry"
-    },
-    "standards": {
-      "path": ".registry/standards.json",
-      "description": "Coding standards registry"
-    },
-    "packages": {
-      "path": ".registry/packages.json",
-      "description": "Package registry"
-    },
-    "search": {
-      "path": ".registry/search.json",
-      "description": "Search index"
+    "knowledge-graph": {
+      "path": "registry/knowledge-graph.json",
+      "generated": true,
+      "generator": "scripts/generate-knowledge-graph.js",
+      "items": 14
     },
     "mcp": {
-      "path": ".registry/mcp.json",
-      "description": "MCP server registry"
+      "path": "registry/mcp.json",
+      "generated": false,
+      "generator": null,
+      "items": null
     },
-    "policies": {
-      "path": ".policies/",
-      "description": "Operational policies"
+    "models": {
+      "path": "registry/models.json",
+      "generated": false,
+      "generator": null,
+      "items": null
     },
-    "schemas": {
-      "path": ".schemas/",
-      "description": "Validation schemas"
+    "packages": {
+      "path": "registry/packages.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 62
     },
-    "metrics": {
-      "path": ".metrics/",
-      "description": "Dashboard metrics"
+    "pages": {
+      "path": "registry/pages.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 8
+    },
+    "prompts": {
+      "path": "registry/prompts.json",
+      "generated": false,
+      "generator": null,
+      "items": null
+    },
+    "search-index": {
+      "path": "registry/search-index.json",
+      "generated": true,
+      "generator": "scripts/generate-knowledge-graph.js",
+      "items": null
+    },
+    "search": {
+      "path": "registry/search.json",
+      "generated": false,
+      "generator": null,
+      "items": null
+    },
+    "services": {
+      "path": "registry/services.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 10
+    },
+    "standards": {
+      "path": "registry/standards.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 20
+    },
+    "workflows": {
+      "path": "registry/workflows.json",
+      "generated": true,
+      "generator": "scripts/generate-registry.js",
+      "items": 6
     }
   },
   "discovery": {
     "startHere": ".ai/MASTER_CONTEXT.md",
-    "forAgents": ".agents/registry.json",
-    "forWorkflows": ".workflows/",
-    "forMemory": ".memory/",
-    "forDocs": "docs/",
-    "forSchema": ".schemas/",
-    "forMetrics": ".metrics/"
+    "agents": ".ai/agents/registry.yaml",
+    "memory": "memory/",
+    "docs": "docs/",
+    "adrs": "docs/adr/",
+    "standards": "standards/",
+    "skills": ".opencode/skills/"
   }
 }
