@@ -293,6 +293,7 @@
   - `_archive\dashboard.png`
   - `_archive\github-readme.md`
   - `_archive\governance-2026-09-17`/
+  - `_archive\platform-ai-runtime-2026-09-17`/
   - `_archive\repositories.png`
   - `_archive\repository-detail.png`
   - `_archive\root-status-2026-09-05`/
