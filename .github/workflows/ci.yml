@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   lint-and-typecheck:
@@ -19,6 +19,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm antislop
       - run: pnpm lint
       - run: pnpm typecheck
 
@@ -36,7 +37,7 @@ jobs:
         run: |
           echo "Scanning for exposed secrets (API keys, tokens, private keys)..."
           # Search tracked files for common secret patterns; fail if found
-          if grep -R --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=archive --exclude-dir=.next -E "(AKIA[0-9A-Z]{16}|ghp_[a-zA-Z0-9]{36}|sk_live_[0-9a-zA-Z]{24}|-----BEGIN (RSA|EC|DSA) PRIVATE KEY-----)" .; then
+          if grep -R --exclude-dir=node_modules --exclude-dir=.git --exclude-dir=_archive --exclude-dir=.next -E "(AKIA[0-9A-Z]{16}|ghp_[a-zA-Z0-9]{36}|sk_live_[0-9a-zA-Z]{24}|-----BEGIN (RSA|EC|DSA) PRIVATE KEY-----)" .; then
             echo "::error::Potential secret detected — failing CI"
             exit 1
           else
