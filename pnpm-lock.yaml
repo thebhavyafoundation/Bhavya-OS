@@ -714,6 +714,9 @@ importers:
 
   packages/docs:
     devDependencies:
+      '@bhavya/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
