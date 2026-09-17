@@ -195,32 +195,15 @@ describe("Forest E2E: Create → Canonical → Evidence → Metrics → Read", (
     expect(fetched.id).toBe(mission.id);
     expect(fetched.name).toBe("Integration Test Mission");
 
-    // Step 3: Verify evidence was created
-    const evidenceDir = join(
-      process.cwd(),
-      "bhavya-ai-lab",
-      "evidence",
-      "forest",
-    );
-    expect(existsSync(evidenceDir)).toBe(true);
-    const evidenceFiles = readdirSync(evidenceDir).filter((f) =>
-      f.endsWith(".json"),
-    );
-    const missionEvidence = evidenceFiles.filter((f) => {
-      const content = JSON.parse(readFileSync(join(evidenceDir, f), "utf-8"));
-      return content.activityId === mission.id;
-    });
+    // Step 3: Verify evidence was created (DB-derived evidence records)
+    const { getEvidenceByActivity } =
+      await import("@/lib/institutional-evidence");
+    const missionEvidence = await getEvidenceByActivity(mission.id);
     expect(missionEvidence.length).toBeGreaterThanOrEqual(1);
 
-    // Step 4: Verify metrics were updated
-    const metricsPath = join(
-      WORKSPACE_ROOT,
-      "bhavya-ai-lab",
-      "metrics",
-      "forest.json",
-    );
-    expect(existsSync(metricsPath)).toBe(true);
-    const metrics = JSON.parse(readFileSync(metricsPath, "utf-8"));
+    // Step 4: Verify metrics were updated (derived from evidence records)
+    const { getForestMetrics } = await import("@/lib/forest-metrics");
+    const metrics = await getForestMetrics();
     expect(metrics.totalMissions).toBeGreaterThanOrEqual(1);
 
     // Step 5: Verify public GET returns the mission

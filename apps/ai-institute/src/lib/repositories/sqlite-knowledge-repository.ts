@@ -81,7 +81,7 @@ export class SqliteKnowledgeRepository implements KnowledgeRepository {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       id,
       data.domain ?? "",
-      data.title ?? "Untitled",
+      data.title || "Untitled",
       data.description ?? "",
       data.grade ?? 9,
       data.subject ?? "AI",

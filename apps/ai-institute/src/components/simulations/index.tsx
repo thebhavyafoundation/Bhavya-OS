@@ -2,9 +2,9 @@
 
 import { useState, useCallback, useMemo } from "react";
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // ATTENTION MECHANISM SIMULATOR
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 interface Token {
   id: number;
@@ -246,9 +246,9 @@ export function AttentionSimulator() {
   );
 }
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // TOKENIZATION SIMULATOR
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 export function TokenizationSimulator() {
   const [input, setInput] = useState("Hello, how are you today?");
@@ -362,9 +362,9 @@ export function TokenizationSimulator() {
   );
 }
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // EMBEDDING SPACE EXPLORER
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 interface EmbeddingWord {
   word: string;
@@ -562,9 +562,9 @@ export function EmbeddingSpaceExplorer() {
   );
 }
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // VECTOR SEARCH SIMULATOR
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 export function VectorSearchSimulator() {
   const [query, setQuery] = useState("machine learning");
@@ -695,9 +695,9 @@ export function VectorSearchSimulator() {
   );
 }
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // TRANSFORMER PIPELINE VISUALIZER
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 export function TransformerPipelineVisualizer() {
   const [step, setStep] = useState(0);
@@ -869,9 +869,9 @@ export function TransformerPipelineVisualizer() {
   );
 }
 
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 // RAG PIPELINE SIMULATOR
-// ═══════════════════════════════════════════
+// ───────────────────────────────────────────
 
 export function RAGPipelineSimulator() {
   const [query, setQuery] = useState("What is machine learning?");

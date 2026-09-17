@@ -35,53 +35,51 @@ export interface KnowledgeMetrics {
  * Derived from authoritative database records.
  */
 export async function getKnowledgeMetrics(): Promise<KnowledgeMetrics> {
-  try {
-    const db = getAsyncDb();
-    const now = new Date();
-    const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const now = new Date();
+  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 
-    const [
-      kosCount,
-      lessonsCount,
-      publicationsCount,
-      koThisMonth,
-      lessonsThisMonth,
-    ] = await Promise.all([
-      db.get<{ count: number }>(
-        "SELECT COUNT(*) as count FROM knowledge_objects",
-      ),
-      db.get<{ count: number }>("SELECT COUNT(*) as count FROM studio_lessons"),
-      db.get<{ count: number }>(
-        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published'",
-      ),
-      db.get<{ count: number }>(
-        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'ko-created' AND timestamp LIKE ?",
-        `${currentMonth}%`,
-      ),
-      db.get<{ count: number }>(
-        "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published' AND timestamp LIKE ?",
-        `${currentMonth}%`,
-      ),
-    ]);
-
-    return {
-      totalKos: kosCount?.count ?? 0,
-      totalLessons: lessonsCount?.count ?? 0,
-      totalPublications: publicationsCount?.count ?? 0,
-      koCreatedThisMonth: koThisMonth?.count ?? 0,
-      lessonsPublishedThisMonth: lessonsThisMonth?.count ?? 0,
-      lastUpdated: now.toISOString(),
-    };
-  } catch {
-    return {
-      totalKos: 0,
-      totalLessons: 0,
-      totalPublications: 0,
-      koCreatedThisMonth: 0,
-      lessonsPublishedThisMonth: 0,
-      lastUpdated: new Date().toISOString(),
-    };
+  // Each query resolves independently: a missing optional table (e.g.
+  // studio_lessons on a fresh migrated DB) yields 0 for that metric
+  // instead of zeroing every metric via a shared catch block.
+  async function count(sql: string, ...params: string[]): Promise<number> {
+    try {
+      const row = await getAsyncDb().get<{ count: number }>(sql, ...params);
+      return row?.count ?? 0;
+    } catch {
+      return 0;
+    }
   }
+
+  const [
+    totalKos,
+    totalLessons,
+    totalPublications,
+    koCreatedThisMonth,
+    lessonsPublishedThisMonth,
+  ] = await Promise.all([
+    count("SELECT COUNT(*) as count FROM knowledge_objects"),
+    count("SELECT COUNT(*) as count FROM studio_lessons"),
+    count(
+      "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published'",
+    ),
+    count(
+      "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'ko-created' AND timestamp LIKE ?",
+      `${currentMonth}%`,
+    ),
+    count(
+      "SELECT COUNT(*) as count FROM evidence_records WHERE activity_type = 'lesson-published' AND timestamp LIKE ?",
+      `${currentMonth}%`,
+    ),
+  ]);
+
+  return {
+    totalKos,
+    totalLessons,
+    totalPublications,
+    koCreatedThisMonth,
+    lessonsPublishedThisMonth,
+    lastUpdated: now.toISOString(),
+  };
 }
 
 // ── Mutation Stubs (kept for backward compatibility) ──────────

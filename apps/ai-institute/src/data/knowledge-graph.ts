@@ -44,9 +44,9 @@ export type KnowledgeCategory =
   | "research";
 
 export const knowledgeGraph: KnowledgeNode[] = [
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // FUNDAMENTALS
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "what-is-ai",
     title: "What is AI?",
@@ -329,9 +329,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: ["image-classifier"],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // TRANSFORMERS & LLMs
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "transformers",
     title: "Transformers",
@@ -683,9 +683,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: ["semantic-search"],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // PROMPT ENGINEERING
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "prompt-engineering",
     title: "Prompt Engineering",
@@ -869,9 +869,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: [],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // RAG & VECTOR DATABASES
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "rag",
     title: "Retrieval-Augmented Generation",
@@ -1075,9 +1075,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: [],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // AGENTS
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "agents",
     title: "AI Agents",
@@ -1343,9 +1343,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: ["multi-agent-team"],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // FINE-TUNING & TRAINING
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "fine-tuning",
     title: "Fine-Tuning",
@@ -1481,9 +1481,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: [],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // DEPLOYMENT & INFRASTRUCTURE
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "inference",
     title: "Model Inference",
@@ -1590,9 +1590,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: [],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // ETHICS & SAFETY
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "ai-safety",
     title: "AI Safety & Ethics",
@@ -1661,9 +1661,9 @@ export const knowledgeGraph: KnowledgeNode[] = [
     projects: ["bias-audit"],
   },
 
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   // PRODUCT & BUSINESS
-  // ═══════════════════════════════════════════
+  // ───────────────────────────────────────────
   {
     id: "ai-product",
     title: "Building AI Products",
