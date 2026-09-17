@@ -1,10 +1,20 @@
 import fs from "fs";
 import path from "path";
 
-const ROOT = path.resolve(process.cwd(), "../..");
+// Content root: overridable via BHAVYA_CONTENT_ROOT so tests can run against
+// an isolated temp tree instead of the tracked content/ directory.
+// Production/CLI behavior is unchanged when the variable is unset.
+// NOTE: resolved lazily (per call) — NOT cached at import time — so a test
+// setup file that sets BHAVYA_CONTENT_ROOT before tests run will take effect
+// even when this module was imported earlier in the worker lifecycle.
+function getRoot(): string {
+  return (
+    process.env.BHAVYA_CONTENT_ROOT ?? path.resolve(process.cwd(), "../..")
+  );
+}
 
 export function resolvePath(filePath: string): string {
-  return path.isAbsolute(filePath) ? filePath : path.join(ROOT, filePath);
+  return path.isAbsolute(filePath) ? filePath : path.join(getRoot(), filePath);
 }
 
 export function readJSON<T>(filePath: string, fallback: T): T {
@@ -33,7 +43,7 @@ export function readMD(filePath: string): string {
 
 export function listDir(dirPath: string): string[] {
   try {
-    const full = path.join(ROOT, dirPath);
+    const full = path.join(getRoot(), dirPath);
     if (fs.existsSync(full)) {
       return fs.readdirSync(full).filter((f) => !f.startsWith("."));
     }
@@ -48,7 +58,7 @@ export function writeJSON(
   fileName: string,
   data: unknown,
 ): void {
-  const full = path.join(ROOT, dirPath);
+  const full = path.join(getRoot(), dirPath);
   if (!fs.existsSync(full)) {
     fs.mkdirSync(full, { recursive: true });
   }
@@ -56,7 +66,7 @@ export function writeJSON(
 }
 
 export function ensureDir(dirPath: string): void {
-  const full = path.join(ROOT, dirPath);
+  const full = path.join(getRoot(), dirPath);
   if (!fs.existsSync(full)) {
     fs.mkdirSync(full, { recursive: true });
   }

@@ -75,6 +75,7 @@ export {
 
 // ── Forest ─────────────────────────────────────────────────
 export {
+  resetForestCachesForTests,
   getMissions,
   getMission,
   getMissionsByStatus,

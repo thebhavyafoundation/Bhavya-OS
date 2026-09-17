@@ -13,7 +13,12 @@ import {
   RecordProvenance,
 } from "./models";
 import { readJSON, writeJSON, listDir, ensureDir } from "./io";
-import { publishFieldReport, publishSurveyResult, publishMonitoringLog, publishImpactReport } from "./publish";
+import {
+  publishFieldReport,
+  publishSurveyResult,
+  publishMonitoringLog,
+  publishImpactReport,
+} from "./publish";
 import { getDocuments } from "./documents";
 
 const FOREST_DIR = "content/forest";
@@ -44,6 +49,20 @@ function loadFiles<T>(
 function saveItem<T extends { id: string }>(prefix: string, item: T): void {
   ensureDir(FOREST_DIR);
   writeJSON(FOREST_DIR, `${prefix}-${item.id}.json`, item);
+}
+
+// ── Test isolation ─────────────────────────────────────────
+// Clears all module-level caches so a worker that imported this module
+// before BHAVYA_CONTENT_ROOT was redirected cannot serve production data
+// from cache. Test setup files should call this after setting the env var.
+// Production behavior is unchanged (caches simply repopulate on next read).
+export function resetForestCachesForTests(): void {
+  _missionsCache = null;
+  _sitesCache = null;
+  _surveysCache = null;
+  _plantingsCache = null;
+  _monitoringCache = null;
+  _impactCache = null;
 }
 
 // ── Missions ───────────────────────────────────────────────
