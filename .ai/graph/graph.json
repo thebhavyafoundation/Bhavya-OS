@@ -57,106 +57,406 @@
     {
       "id": "PKG-001",
       "type": "package",
+      "name": "agent-engine",
+      "path": "packages/agent-engine"
+    },
+    {
+      "id": "PKG-002",
+      "type": "package",
+      "name": "agent-platform",
+      "path": "packages/agent-platform"
+    },
+    {
+      "id": "PKG-003",
+      "type": "package",
+      "name": "ai",
+      "path": "packages/ai"
+    },
+    {
+      "id": "PKG-004",
+      "type": "package",
+      "name": "analyzers",
+      "path": "packages/analyzers"
+    },
+    {
+      "id": "PKG-005",
+      "type": "package",
+      "name": "api",
+      "path": "packages/api"
+    },
+    {
+      "id": "PKG-006",
+      "type": "package",
       "name": "auth",
       "path": "packages/auth"
     },
     {
-      "id": "PKG-002",
+      "id": "PKG-007",
+      "type": "package",
+      "name": "bar",
+      "path": "packages/bar"
+    },
+    {
+      "id": "PKG-008",
       "type": "package",
       "name": "bdl",
       "path": "packages/bdl"
     },
     {
-      "id": "PKG-003",
+      "id": "PKG-009",
       "type": "package",
-      "name": "bdx",
-      "path": "packages/bdx"
+      "name": "bee",
+      "path": "packages/bee"
     },
     {
-      "id": "PKG-004",
+      "id": "PKG-010",
       "type": "package",
       "name": "branding",
       "path": "packages/branding"
     },
     {
-      "id": "PKG-005",
+      "id": "PKG-011",
+      "type": "package",
+      "name": "browser-automation",
+      "path": "packages/browser-automation"
+    },
+    {
+      "id": "PKG-012",
+      "type": "package",
+      "name": "capability-registry",
+      "path": "packages/capability-registry"
+    },
+    {
+      "id": "PKG-013",
       "type": "package",
       "name": "charts",
       "path": "packages/charts"
     },
     {
-      "id": "PKG-006",
+      "id": "PKG-014",
+      "type": "package",
+      "name": "cli",
+      "path": "packages/cli"
+    },
+    {
+      "id": "PKG-015",
       "type": "package",
       "name": "config",
       "path": "packages/config"
     },
     {
-      "id": "PKG-007",
+      "id": "PKG-016",
+      "type": "package",
+      "name": "constitution",
+      "path": "packages/constitution"
+    },
+    {
+      "id": "PKG-017",
+      "type": "package",
+      "name": "content-board",
+      "path": "packages/content-board"
+    },
+    {
+      "id": "PKG-018",
+      "type": "package",
+      "name": "content-core",
+      "path": "packages/content-core"
+    },
+    {
+      "id": "PKG-019",
+      "type": "package",
+      "name": "content-engine",
+      "path": "packages/content-engine"
+    },
+    {
+      "id": "PKG-020",
+      "type": "package",
+      "name": "crawlers",
+      "path": "packages/crawlers"
+    },
+    {
+      "id": "PKG-021",
       "type": "package",
       "name": "database",
       "path": "packages/database"
     },
     {
-      "id": "PKG-008",
+      "id": "PKG-022",
+      "type": "package",
+      "name": "design-system",
+      "path": "packages/design-system"
+    },
+    {
+      "id": "PKG-023",
       "type": "package",
       "name": "docs",
       "path": "packages/docs"
     },
     {
-      "id": "PKG-009",
+      "id": "PKG-024",
       "type": "package",
       "name": "eslint",
       "path": "packages/eslint"
     },
     {
-      "id": "PKG-010",
+      "id": "PKG-025",
+      "type": "package",
+      "name": "events",
+      "path": "packages/events"
+    },
+    {
+      "id": "PKG-026",
+      "type": "package",
+      "name": "github-intelligence",
+      "path": "packages/github-intelligence"
+    },
+    {
+      "id": "PKG-027",
+      "type": "package",
+      "name": "github-os",
+      "path": "packages/github-os"
+    },
+    {
+      "id": "PKG-028",
       "type": "package",
       "name": "icons",
       "path": "packages/icons"
     },
     {
-      "id": "PKG-011",
+      "id": "PKG-029",
+      "type": "package",
+      "name": "impact-runtime",
+      "path": "packages/impact-runtime"
+    },
+    {
+      "id": "PKG-030",
+      "type": "package",
+      "name": "intelligence",
+      "path": "packages/intelligence"
+    },
+    {
+      "id": "PKG-031",
+      "type": "package",
+      "name": "interactive-components",
+      "path": "packages/interactive-components"
+    },
+    {
+      "id": "PKG-032",
+      "type": "package",
+      "name": "ioc",
+      "path": "packages/ioc"
+    },
+    {
+      "id": "PKG-033",
+      "type": "package",
+      "name": "kernel",
+      "path": "packages/kernel"
+    },
+    {
+      "id": "PKG-034",
+      "type": "package",
+      "name": "knowledge-engine",
+      "path": "packages/knowledge-engine"
+    },
+    {
+      "id": "PKG-035",
+      "type": "package",
+      "name": "knowledge-extraction",
+      "path": "packages/knowledge-extraction"
+    },
+    {
+      "id": "PKG-036",
+      "type": "package",
+      "name": "knowledge-graph",
+      "path": "packages/knowledge-graph"
+    },
+    {
+      "id": "PKG-037",
+      "type": "package",
+      "name": "learning-runtime",
+      "path": "packages/learning-runtime"
+    },
+    {
+      "id": "PKG-038",
       "type": "package",
       "name": "maps",
       "path": "packages/maps"
     },
     {
-      "id": "PKG-012",
+      "id": "PKG-039",
+      "type": "package",
+      "name": "mcp-manager",
+      "path": "packages/mcp-manager"
+    },
+    {
+      "id": "PKG-040",
+      "type": "package",
+      "name": "memory-engine",
+      "path": "packages/memory-engine"
+    },
+    {
+      "id": "PKG-041",
+      "type": "package",
+      "name": "mentor-engine",
+      "path": "packages/mentor-engine"
+    },
+    {
+      "id": "PKG-042",
       "type": "package",
       "name": "mission-runtime",
       "path": "packages/mission-runtime"
     },
     {
-      "id": "PKG-013",
+      "id": "PKG-043",
+      "type": "package",
+      "name": "motion-system",
+      "path": "packages/motion-system"
+    },
+    {
+      "id": "PKG-044",
+      "type": "package",
+      "name": "notifications",
+      "path": "packages/notifications"
+    },
+    {
+      "id": "PKG-045",
+      "type": "package",
+      "name": "observability",
+      "path": "packages/observability"
+    },
+    {
+      "id": "PKG-046",
+      "type": "package",
+      "name": "planner-engine",
+      "path": "packages/planner-engine"
+    },
+    {
+      "id": "PKG-047",
+      "type": "package",
+      "name": "platform",
+      "path": "packages/platform"
+    },
+    {
+      "id": "PKG-048",
+      "type": "package",
+      "name": "platform-ui",
+      "path": "packages/platform-ui"
+    },
+    {
+      "id": "PKG-049",
+      "type": "package",
+      "name": "plugin-manager",
+      "path": "packages/plugin-manager"
+    },
+    {
+      "id": "PKG-050",
+      "type": "package",
+      "name": "plugin-runtime",
+      "path": "packages/plugin-runtime"
+    },
+    {
+      "id": "PKG-051",
+      "type": "package",
+      "name": "project-runtime",
+      "path": "packages/project-runtime"
+    },
+    {
+      "id": "PKG-052",
+      "type": "package",
+      "name": "providers",
+      "path": "packages/providers"
+    },
+    {
+      "id": "PKG-053",
       "type": "package",
       "name": "runtime",
       "path": "packages/runtime"
     },
     {
-      "id": "PKG-014",
+      "id": "PKG-054",
+      "type": "package",
+      "name": "scheduler-engine",
+      "path": "packages/scheduler-engine"
+    },
+    {
+      "id": "PKG-055",
       "type": "package",
       "name": "sdk",
       "path": "packages/sdk"
     },
     {
-      "id": "PKG-015",
+      "id": "PKG-056",
+      "type": "package",
+      "name": "search-engine",
+      "path": "packages/search-engine"
+    },
+    {
+      "id": "PKG-057",
+      "type": "package",
+      "name": "security",
+      "path": "packages/security"
+    },
+    {
+      "id": "PKG-058",
+      "type": "package",
+      "name": "shared",
+      "path": "packages/shared"
+    },
+    {
+      "id": "PKG-059",
+      "type": "package",
+      "name": "social-os",
+      "path": "packages/social-os"
+    },
+    {
+      "id": "PKG-060",
+      "type": "package",
+      "name": "technology-radar",
+      "path": "packages/technology-radar"
+    },
+    {
+      "id": "PKG-061",
+      "type": "package",
+      "name": "types",
+      "path": "packages/types"
+    },
+    {
+      "id": "PKG-062",
       "type": "package",
       "name": "typescript",
       "path": "packages/typescript"
     },
     {
-      "id": "PKG-016",
+      "id": "PKG-063",
       "type": "package",
       "name": "ui",
       "path": "packages/ui"
     },
     {
-      "id": "ADR-0001",
+      "id": "PKG-064",
+      "type": "package",
+      "name": "video-engine",
+      "path": "packages/video-engine"
+    },
+    {
+      "id": "PKG-065",
+      "type": "package",
+      "name": "workflow-engine",
+      "path": "packages/workflow-engine"
+    },
+    {
+      "id": "PKG-066",
+      "type": "package",
+      "name": "workflows",
+      "path": "packages/workflows"
+    },
+    {
+      "id": "ADR-007",
       "type": "adr",
       "name": "Architectural Decision Records Standard"
     },
     {
-      "id": "ADR-0002",
+      "id": "ADR-008",
       "type": "adr",
       "name": "Provider-Agnostic AI Gateway Abstraction Layer"
     },
@@ -223,88 +523,313 @@
   ],
   "edges": [
     {
-      "source": "APP-001",
-      "target": "PKG-012",
-      "type": "depends"
-    },
-    {
-      "source": "APP-001",
-      "target": "PKG-014",
-      "type": "depends"
-    },
-    {
-      "source": "APP-001",
-      "target": "PKG-016",
+      "source": "APP-002",
+      "target": "PKG-006",
       "type": "depends"
     },
     {
       "source": "APP-002",
-      "target": "PKG-002",
+      "target": "PKG-042",
       "type": "depends"
     },
     {
-      "source": "APP-005",
-      "target": "PKG-011",
+      "source": "APP-002",
+      "target": "PKG-048",
       "type": "depends"
     },
     {
-      "source": "APP-005",
+      "source": "APP-002",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "APP-003",
+      "target": "PKG-042",
+      "type": "depends"
+    },
+    {
+      "source": "APP-003",
+      "target": "PKG-055",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-001",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-003",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-003",
+      "target": "PKG-061",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-004",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-004",
       "target": "PKG-012",
-      "type": "depends"
-    },
-    {
-      "source": "APP-005",
-      "target": "PKG-016",
-      "type": "depends"
-    },
-    {
-      "source": "APP-006",
-      "target": "PKG-016",
-      "type": "depends"
-    },
-    {
-      "source": "APP-007",
-      "target": "PKG-016",
-      "type": "depends"
-    },
-    {
-      "source": "APP-008",
-      "target": "PKG-016",
-      "type": "depends"
-    },
-    {
-      "source": "APP-009",
-      "target": "PKG-008",
-      "type": "depends"
-    },
-    {
-      "source": "APP-009",
-      "target": "PKG-016",
       "type": "depends"
     },
     {
       "source": "PKG-005",
-      "target": "PKG-016",
+      "target": "PKG-047",
       "type": "depends"
     },
     {
-      "source": "PKG-008",
-      "target": "PKG-016",
+      "source": "PKG-005",
+      "target": "PKG-057",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-006",
+      "target": "PKG-021",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-009",
+      "target": "PKG-053",
       "type": "depends"
     },
     {
       "source": "PKG-011",
-      "target": "PKG-016",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-012",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-012",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-013",
+      "target": "PKG-048",
       "type": "depends"
     },
     {
       "source": "PKG-014",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-019",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-019",
+      "target": "PKG-036",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-020",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-020",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-025",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-025",
+      "target": "PKG-061",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-026",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-026",
       "target": "PKG-012",
       "type": "depends"
     },
     {
-      "source": "PKG-016",
-      "target": "PKG-002",
+      "source": "PKG-033",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-034",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-035",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-035",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-036",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-038",
+      "target": "PKG-048",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-039",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-039",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-040",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-042",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-044",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-044",
+      "target": "PKG-061",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-045",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-045",
+      "target": "PKG-025",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-046",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-049",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-049",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-050",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-050",
+      "target": "PKG-025",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-052",
+      "target": "PKG-061",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-053",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-054",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-055",
+      "target": "PKG-042",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-055",
+      "target": "PKG-050",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-055",
+      "target": "PKG-025",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-056",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-060",
+      "target": "PKG-030",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-060",
+      "target": "PKG-012",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-061",
+      "target": "PKG-058",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-063",
+      "target": "PKG-008",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-065",
+      "target": "PKG-033",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-066",
+      "target": "PKG-047",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-066",
+      "target": "PKG-061",
+      "type": "depends"
+    },
+    {
+      "source": "PKG-066",
+      "target": "PKG-025",
       "type": "depends"
     }
   ]

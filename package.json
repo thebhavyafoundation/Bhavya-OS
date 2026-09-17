@@ -22,6 +22,7 @@
     "registry:check": "node scripts/generate-registry.js && node scripts/generate-knowledge-graph.js && git diff --exit-code -- registry/",
     "runtime:compile": "node .ai/build/compile-runtime.mjs",
     "runtime:validate": "node .ai/build/validate-runtime.mjs",
+    "snapshot": "node .ai/build/generate-snapshot.mjs",
     "runtime:daemon": "node packages/runtime/daemon/watch.mjs",
     "runtime:daemon:once": "node packages/runtime/daemon/watch.mjs --once",
     "bhavya": "node packages/runtime/cli/bhavya.mjs",

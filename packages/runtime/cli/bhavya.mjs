@@ -315,7 +315,7 @@ commands["platform"] = {
     const depGraph = readJSON("platform/repo-intelligence/output/dependency-graph.json");
     print({
       name: "Bhavya OS Platform",
-      version: "2.0.0",
+      version: "3.0.0",
       packages: repoIndex?.stats?.totalPackages || 0,
       routes: repoIndex?.stats?.totalRoutes || 0,
       components: repoIndex?.stats?.totalComponents || 0,

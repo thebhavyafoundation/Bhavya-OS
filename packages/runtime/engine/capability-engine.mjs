@@ -15,7 +15,7 @@ import crypto from "crypto";
 import { fileURLToPath } from "url";
 import { ROOT, BHAVYA_LAB, resolveOSPath, readJSON, ensureDir } from "./config.mjs";
 
-const RUNTIME_VERSION = "3.1.0";
+const RUNTIME_VERSION = "3.0.0";
 const PROVENANCE_DIR = path.join(BHAVYA_LAB, "institution", "provenance");
 
 // ── Registry ───────────────────────────────────────────────────────
