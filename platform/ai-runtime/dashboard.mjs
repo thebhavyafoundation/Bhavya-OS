@@ -12,7 +12,7 @@ import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 import { createServer } from "http";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class Dashboard {
   constructor(config = {}) {

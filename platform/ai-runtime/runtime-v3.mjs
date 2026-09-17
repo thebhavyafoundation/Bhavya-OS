@@ -5,6 +5,7 @@
  * documents, deploys, monitors, learns, self-heals.
  */
 
+import { join } from "path";
 import { EventBus, EventTypes, getEventBus } from "./event-bus.mjs";
 import { FileWatcher } from "./file-watcher.mjs";
 import { WorkerPool, Worker } from "./worker-pool.mjs";
@@ -31,7 +32,7 @@ import { SelfHealing } from "./self-healing.mjs";
 import { RealWorldValidation } from "./real-world-validation.mjs";
 import { PlatformCertification } from "./platform-certification.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class Runtime {
   constructor(config = {}) {

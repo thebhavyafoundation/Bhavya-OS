@@ -14,7 +14,7 @@ import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const ARTIFACTS_DIR = join(ROOT, "platform/ai-runtime/artifacts");
 
 export class ArtifactGenerator {

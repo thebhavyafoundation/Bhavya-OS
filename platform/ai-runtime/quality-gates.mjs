@@ -7,7 +7,7 @@ import { execSync } from "child_process";
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class QualityGates {
   constructor(config = {}) {

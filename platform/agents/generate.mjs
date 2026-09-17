@@ -7,7 +7,7 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation\\platform\\agents";
+const ROOT = import.meta.dirname;
 
 const agents = [
   {

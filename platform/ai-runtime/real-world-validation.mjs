@@ -12,7 +12,7 @@ import { GitOperations } from "./git-operations.mjs";
 import { GoalPlanner } from "./goal-planner.mjs";
 import { ArtifactGenerator } from "./artifact-generator.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class RealWorldValidation {
   constructor(config = {}) {

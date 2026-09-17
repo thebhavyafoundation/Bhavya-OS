@@ -10,7 +10,7 @@ import { join } from "path";
 import { execSync } from "child_process";
 import { performance } from "perf_hooks";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 console.log("\n📊 Bhavya OS — Production Readiness Report\n");
 

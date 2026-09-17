@@ -10,7 +10,7 @@ import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 import http from "http";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class ExecutiveDashboard {
   constructor(config = {}) {

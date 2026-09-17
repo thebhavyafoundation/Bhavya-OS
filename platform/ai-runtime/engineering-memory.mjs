@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 
 import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const MEMORY_DIR = join(ROOT, "memory", "engineering");
 
 export class EngineeringMemory {

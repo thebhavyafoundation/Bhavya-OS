@@ -14,7 +14,7 @@ import { ExecutionScheduler, Priority } from "../ai-runtime/scheduler.mjs";
 import { EngineeringMemory } from "../ai-runtime/engineering-memory.mjs";
 import { execSync } from "child_process";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 let results = {};
 

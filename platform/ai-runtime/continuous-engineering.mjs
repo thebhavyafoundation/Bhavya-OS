@@ -10,12 +10,13 @@
  * - Deployment Validation
  */
 
+import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 import { FileWatcher } from "./file-watcher.mjs";
 import { EngineeringBacklog } from "./engineering-backlog.mjs";
 import { ContinuousVerification } from "./continuous-verification.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class ContinuousEngineering {
   constructor(config = {}) {

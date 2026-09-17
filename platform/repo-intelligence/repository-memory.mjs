@@ -7,7 +7,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 
-const MEMORY_DIR = "F:\\Bhavya Foundation\\memory\\engineering";
+const MEMORY_DIR = join(import.meta.dirname, "../../memory/engineering");
 
 // Ensure directory exists
 mkdirSync(MEMORY_DIR, { recursive: true });

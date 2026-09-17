@@ -11,7 +11,7 @@ import { EventBus, EventTypes } from "./event-bus.mjs";
 import { ChiefArchitect } from "./chief-architect.mjs";
 import { EngineeringMemory } from "./engineering-memory.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class OpenCodeIntegration {
   constructor(config = {}) {

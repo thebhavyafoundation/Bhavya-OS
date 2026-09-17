@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from "
 import { join, relative, basename, extname } from "path";
 import { execSync } from "child_process";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const OUTPUT = join(ROOT, "platform", "repo-intelligence", "output");
 
 // Ensure output dir exists

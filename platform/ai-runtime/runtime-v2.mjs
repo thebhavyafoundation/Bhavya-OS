@@ -4,6 +4,7 @@
  * All modules communicate through the Event Bus.
  */
 
+import { join } from "path";
 import { EventBus, EventTypes, getEventBus } from "./event-bus.mjs";
 import { FileWatcher } from "./file-watcher.mjs";
 import { WorkerPool, Worker } from "./worker-pool.mjs";
@@ -14,7 +15,7 @@ import { SelfReview } from "./self-review.mjs";
 import { ChiefArchitect } from "./chief-architect.mjs";
 import { Dashboard } from "./dashboard.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class Runtime {
   constructor(config = {}) {

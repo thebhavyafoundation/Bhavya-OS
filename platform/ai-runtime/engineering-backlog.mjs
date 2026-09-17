@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const BACKLOG_DIR = join(ROOT, "platform/ai-runtime/backlog");
 
 export const TaskPriority = { CRITICAL: 0, HIGH: 1, NORMAL: 2, LOW: 3 };

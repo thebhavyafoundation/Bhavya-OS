@@ -2,7 +2,7 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, statSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const AGENTS_DIR = join(ROOT, "platform", "agents");
 const issues = [];
 

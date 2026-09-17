@@ -2,7 +2,7 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const results = [];
 
 console.log("Phase 4: AI Runtime Validation\n");

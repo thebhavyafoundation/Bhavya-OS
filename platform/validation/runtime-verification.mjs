@@ -3,6 +3,7 @@
  * Comprehensive integration tests for all platform components.
  */
 
+import { join } from "path";
 import { EventBus, EventTypes, getEventBus, resetEventBus } from "../ai-runtime/event-bus.mjs";
 import { FileWatcher } from "../ai-runtime/file-watcher.mjs";
 import { WorkerPool, Worker, WorkerState } from "../ai-runtime/worker-pool.mjs";
@@ -13,7 +14,7 @@ import { SelfReview } from "../ai-runtime/self-review.mjs";
 import { ChiefArchitect } from "../ai-runtime/chief-architect.mjs";
 import { OpenCodeIntegration } from "../ai-runtime/opencode-integration.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 let passed = 0;
 let failed = 0;

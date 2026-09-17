@@ -16,7 +16,7 @@ import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 import { EngineeringMemory } from "./engineering-memory.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class ChiefArchitect {
   constructor(config = {}) {

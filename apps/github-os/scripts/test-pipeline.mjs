@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../../..");
 const OUTPUT = join(ROOT, "apps", "github-os", "test-output");
 mkdirSync(OUTPUT, { recursive: true });
 

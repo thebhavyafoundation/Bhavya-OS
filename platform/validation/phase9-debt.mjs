@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 
 import { join } from "path";
 import { execSync } from "child_process";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const issues = [];
 
 console.log("Phase 9: Technical Debt Identification\n");

@@ -9,7 +9,7 @@ import { join } from "path";
 import { execSync } from "child_process";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class PlatformCertification {
   constructor(config = {}) {

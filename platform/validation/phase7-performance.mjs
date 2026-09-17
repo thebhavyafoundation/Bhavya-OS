@@ -3,7 +3,7 @@ import { execSync } from "child_process";
 import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const results = [];
 
 console.log("Phase 7: Performance Measurement\n");

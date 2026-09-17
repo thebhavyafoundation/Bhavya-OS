@@ -29,7 +29,7 @@ function assert(condition, testName, details) {
   }
 }
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../../..");
 
 // ─── J33: ROUTE INTEGRITY ───────────────────────────────────────────────────
 

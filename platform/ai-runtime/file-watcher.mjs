@@ -9,7 +9,7 @@ import { watch, readdirSync, statSync, readFileSync, writeFileSync, existsSync, 
 import { join, relative, extname, basename } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const OUTPUT = join(ROOT, "platform", "repo-intelligence", "output");
 
 export class FileWatcher {

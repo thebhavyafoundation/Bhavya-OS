@@ -10,7 +10,7 @@ import { existsSync } from "fs";
 import { join } from "path";
 import { EventBus, EventTypes } from "./event-bus.mjs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 
 export class ContinuousVerification {
   constructor(config = {}) {

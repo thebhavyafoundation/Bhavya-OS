@@ -15,7 +15,7 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join } from "path";
 import { mkdirSync } from "fs";
 
-const ROOT = "F:\\Bhavya Foundation";
+const ROOT = join(import.meta.dirname, "../..");
 const INPUT = join(ROOT, "platform", "repo-intelligence", "output");
 const OUTPUT = join(ROOT, "knowledge", "engineering-graphs");
 mkdirSync(OUTPUT, { recursive: true });
