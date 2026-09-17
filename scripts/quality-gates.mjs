@@ -49,9 +49,11 @@ function checkNoDuplicateTypes() {
     "types/src/user.ts",
     "types/src/artifacts.ts",
     "kernel/src/types/index.ts",
-    "kernel/src/observability",
+    "observability/index.ts",
     "sdk/extension.ts", // Re-exports shared types for convenience
   ];
+  // Allowed name collisions: interfaces with same name but different fields
+  const allowedNameCollisions = ["ioc/types.ts: Task"];
   
   const duplicates = [];
   for (const pkg of readdirSync(join(ROOT, "packages"))) {
@@ -63,6 +65,7 @@ function checkNoDuplicateTypes() {
     
     for (const type of criticalTypes) {
       const pattern = new RegExp(`export\\s+(?:interface|type)\\s+${type}\\b`, "g");
+      const aliasPattern = new RegExp(`export\\s+type\\s+${type}\\s*=\\s*\\w+\\s*;`, "g");
       const files = readdirSync(srcDir, { recursive: true }).filter(f => /\.(ts|tsx)$/.test(f));
       for (const file of files) {
         const relPath = `${pkg}/${file}`.replace(/\\/g, "/");
@@ -70,6 +73,8 @@ function checkNoDuplicateTypes() {
         if (allowedExtensions.some(ext => relPath.includes(ext))) continue;
         try {
           const content = readFileSync(join(pkgDir, "src", file), "utf-8");
+          // Skip type aliases (re-exports like `export type Agent = SelfOrganizingAgent`)
+          if (aliasPattern.test(content)) continue;
           if (pattern.test(content)) {
             duplicates.push(relPath + ": " + type);
           }
@@ -78,8 +83,9 @@ function checkNoDuplicateTypes() {
     }
   }
   
-  if (duplicates.length === 0) return true;
-  return `${duplicates.length} duplicate type definitions found:\n    ${duplicates.join("\n    ")}`;
+  const filtered = duplicates.filter(d => !allowedNameCollisions.includes(d));
+  if (filtered.length === 0) return true;
+  return `${filtered.length} duplicate type definitions found:\n    ${filtered.join("\n    ")}`;
 }
 
 // Gate 2: No imports from deprecated packages
