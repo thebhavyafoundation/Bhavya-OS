@@ -1,9 +1,33 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "standards",
-  "generated_at": "2026-07-23T16:56:32.138Z",
+  "generated_at": "2026-09-17T06:34:49.286Z",
   "generator": "scripts/generate-registry.js",
   "items": [
+    {
+      "id": "std.BAR-001",
+      "file": "standards/BAR-001.md"
+    },
+    {
+      "id": "std.BDL-001",
+      "file": "standards/BDL-001.md"
+    },
+    {
+      "id": "std.BGS-001",
+      "file": "standards/BGS-001.md"
+    },
+    {
+      "id": "std.BOM-001",
+      "file": "standards/BOM-001.md"
+    },
+    {
+      "id": "std.BPS-001",
+      "file": "standards/BPS-001.md"
+    },
+    {
+      "id": "std.README",
+      "file": "standards/README.md"
+    },
     {
       "id": "std.accessibility",
       "file": "standards/accessibility.md"
@@ -51,10 +75,6 @@
     {
       "id": "std.performance",
       "file": "standards/performance.md"
-    },
-    {
-      "id": "std.README",
-      "file": "standards/README.md"
     },
     {
       "id": "std.release",

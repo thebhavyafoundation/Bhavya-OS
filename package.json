@@ -18,6 +18,8 @@
     "clean": "turbo clean && git clean -xdf .turbo node_modules",
     "file-map": "node scripts/generate-file-map.mjs",
     "file-map:check": "node scripts/generate-file-map.mjs && git diff --exit-code -- FILE-MAP.md",
+    "registry:generate": "node scripts/generate-registry.js && node scripts/generate-knowledge-graph.js",
+    "registry:check": "node scripts/generate-registry.js && node scripts/generate-knowledge-graph.js && git diff --exit-code -- registry/",
     "runtime:compile": "node .ai/build/compile-runtime.mjs",
     "runtime:validate": "node .ai/build/validate-runtime.mjs",
     "runtime:daemon": "node packages/runtime/daemon/watch.mjs",

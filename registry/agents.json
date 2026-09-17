@@ -1,32 +1,62 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "agents",
-  "generated_at": "2026-07-23T16:56:32.137Z",
+  "generated_at": "2026-09-17T06:34:49.284Z",
   "generator": "scripts/generate-registry.js",
   "items": [
+    {
+      "id": "agent.architecture",
+      "name": "Architecture Agent",
+      "role": "architecture",
+      "file": ".ai/agents/registry.yaml"
+    },
+    {
+      "id": "agent.backend",
+      "name": "Backend Agent",
+      "role": "backend",
+      "file": ".ai/agents/registry.yaml"
+    },
+    {
+      "id": "agent.devops",
+      "name": "Devops Agent",
+      "role": "devops",
+      "file": ".ai/agents/registry.yaml"
+    },
     {
       "id": "agent.documentation",
       "name": "Documentation Agent",
       "role": "documentation",
-      "file": ".agents/documentation.agent.json"
+      "file": ".ai/agents/registry.yaml"
     },
     {
-      "id": "agent.founder",
-      "name": "Founder Office Agent",
-      "role": "founder",
-      "file": ".agents/founder.agent.json"
-    },
-    {
-      "id": "agent.governance",
-      "name": "Governance Agent",
-      "role": "governance",
-      "file": ".agents/governance.agent.json"
+      "id": "agent.frontend",
+      "name": "Frontend Agent",
+      "role": "frontend",
+      "file": ".ai/agents/registry.yaml"
     },
     {
       "id": "agent.release",
-      "name": "Release Engineering Agent",
+      "name": "Release Agent",
       "role": "release",
-      "file": ".agents/release.agent.json"
+      "file": ".ai/agents/registry.yaml"
+    },
+    {
+      "id": "agent.research",
+      "name": "Research Agent",
+      "role": "research",
+      "file": ".ai/agents/registry.yaml"
+    },
+    {
+      "id": "agent.security",
+      "name": "Security Agent",
+      "role": "security",
+      "file": ".ai/agents/registry.yaml"
+    },
+    {
+      "id": "agent.testing",
+      "name": "Testing Agent",
+      "role": "testing",
+      "file": ".ai/agents/registry.yaml"
     }
   ]
 }

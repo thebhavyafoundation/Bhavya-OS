@@ -1,13 +1,43 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "packages",
-  "generated_at": "2026-07-23T16:56:32.110Z",
+  "generated_at": "2026-09-17T06:34:49.282Z",
   "generator": "scripts/generate-registry.js",
   "items": [
+    {
+      "id": "pkg.agent-engine",
+      "name": "agent-engine",
+      "path": "packages/agent-engine"
+    },
+    {
+      "id": "pkg.agent-platform",
+      "name": "agent-platform",
+      "path": "packages/agent-platform"
+    },
+    {
+      "id": "pkg.ai",
+      "name": "ai",
+      "path": "packages/ai"
+    },
+    {
+      "id": "pkg.analyzers",
+      "name": "analyzers",
+      "path": "packages/analyzers"
+    },
+    {
+      "id": "pkg.api",
+      "name": "api",
+      "path": "packages/api"
+    },
     {
       "id": "pkg.auth",
       "name": "auth",
       "path": "packages/auth"
+    },
+    {
+      "id": "pkg.bar",
+      "name": "bar",
+      "path": "packages/bar"
     },
     {
       "id": "pkg.bdl",
@@ -15,9 +45,9 @@
       "path": "packages/bdl"
     },
     {
-      "id": "pkg.bdx",
-      "name": "bdx",
-      "path": "packages/bdx"
+      "id": "pkg.bee",
+      "name": "bee",
+      "path": "packages/bee"
     },
     {
       "id": "pkg.branding",
@@ -25,9 +55,24 @@
       "path": "packages/branding"
     },
     {
+      "id": "pkg.browser-automation",
+      "name": "browser-automation",
+      "path": "packages/browser-automation"
+    },
+    {
+      "id": "pkg.capability-registry",
+      "name": "capability-registry",
+      "path": "packages/capability-registry"
+    },
+    {
       "id": "pkg.charts",
       "name": "charts",
       "path": "packages/charts"
+    },
+    {
+      "id": "pkg.cli",
+      "name": "cli",
+      "path": "packages/cli"
     },
     {
       "id": "pkg.config",
@@ -35,9 +80,39 @@
       "path": "packages/config"
     },
     {
+      "id": "pkg.constitution",
+      "name": "constitution",
+      "path": "packages/constitution"
+    },
+    {
+      "id": "pkg.content-board",
+      "name": "content-board",
+      "path": "packages/content-board"
+    },
+    {
+      "id": "pkg.content-core",
+      "name": "content-core",
+      "path": "packages/content-core"
+    },
+    {
+      "id": "pkg.content-engine",
+      "name": "content-engine",
+      "path": "packages/content-engine"
+    },
+    {
+      "id": "pkg.crawlers",
+      "name": "crawlers",
+      "path": "packages/crawlers"
+    },
+    {
       "id": "pkg.database",
       "name": "database",
       "path": "packages/database"
+    },
+    {
+      "id": "pkg.design-system",
+      "name": "design-system",
+      "path": "packages/design-system"
     },
     {
       "id": "pkg.docs",
@@ -50,9 +125,69 @@
       "path": "packages/eslint"
     },
     {
+      "id": "pkg.events",
+      "name": "events",
+      "path": "packages/events"
+    },
+    {
+      "id": "pkg.github-intelligence",
+      "name": "github-intelligence",
+      "path": "packages/github-intelligence"
+    },
+    {
+      "id": "pkg.github-os",
+      "name": "github-os",
+      "path": "packages/github-os"
+    },
+    {
       "id": "pkg.icons",
       "name": "icons",
       "path": "packages/icons"
+    },
+    {
+      "id": "pkg.impact-runtime",
+      "name": "impact-runtime",
+      "path": "packages/impact-runtime"
+    },
+    {
+      "id": "pkg.intelligence",
+      "name": "intelligence",
+      "path": "packages/intelligence"
+    },
+    {
+      "id": "pkg.interactive-components",
+      "name": "interactive-components",
+      "path": "packages/interactive-components"
+    },
+    {
+      "id": "pkg.ioc",
+      "name": "ioc",
+      "path": "packages/ioc"
+    },
+    {
+      "id": "pkg.kernel",
+      "name": "kernel",
+      "path": "packages/kernel"
+    },
+    {
+      "id": "pkg.knowledge-engine",
+      "name": "knowledge-engine",
+      "path": "packages/knowledge-engine"
+    },
+    {
+      "id": "pkg.knowledge-extraction",
+      "name": "knowledge-extraction",
+      "path": "packages/knowledge-extraction"
+    },
+    {
+      "id": "pkg.knowledge-graph",
+      "name": "knowledge-graph",
+      "path": "packages/knowledge-graph"
+    },
+    {
+      "id": "pkg.learning-runtime",
+      "name": "learning-runtime",
+      "path": "packages/learning-runtime"
     },
     {
       "id": "pkg.maps",
@@ -60,9 +195,74 @@
       "path": "packages/maps"
     },
     {
+      "id": "pkg.mcp-manager",
+      "name": "mcp-manager",
+      "path": "packages/mcp-manager"
+    },
+    {
+      "id": "pkg.memory-engine",
+      "name": "memory-engine",
+      "path": "packages/memory-engine"
+    },
+    {
+      "id": "pkg.mentor-engine",
+      "name": "mentor-engine",
+      "path": "packages/mentor-engine"
+    },
+    {
       "id": "pkg.mission-runtime",
       "name": "mission-runtime",
       "path": "packages/mission-runtime"
+    },
+    {
+      "id": "pkg.motion-system",
+      "name": "motion-system",
+      "path": "packages/motion-system"
+    },
+    {
+      "id": "pkg.notifications",
+      "name": "notifications",
+      "path": "packages/notifications"
+    },
+    {
+      "id": "pkg.observability",
+      "name": "observability",
+      "path": "packages/observability"
+    },
+    {
+      "id": "pkg.planner-engine",
+      "name": "planner-engine",
+      "path": "packages/planner-engine"
+    },
+    {
+      "id": "pkg.platform",
+      "name": "platform",
+      "path": "packages/platform"
+    },
+    {
+      "id": "pkg.platform-ui",
+      "name": "platform-ui",
+      "path": "packages/platform-ui"
+    },
+    {
+      "id": "pkg.plugin-manager",
+      "name": "plugin-manager",
+      "path": "packages/plugin-manager"
+    },
+    {
+      "id": "pkg.plugin-runtime",
+      "name": "plugin-runtime",
+      "path": "packages/plugin-runtime"
+    },
+    {
+      "id": "pkg.project-runtime",
+      "name": "project-runtime",
+      "path": "packages/project-runtime"
+    },
+    {
+      "id": "pkg.providers",
+      "name": "providers",
+      "path": "packages/providers"
     },
     {
       "id": "pkg.runtime",
@@ -70,9 +270,44 @@
       "path": "packages/runtime"
     },
     {
+      "id": "pkg.scheduler-engine",
+      "name": "scheduler-engine",
+      "path": "packages/scheduler-engine"
+    },
+    {
       "id": "pkg.sdk",
       "name": "sdk",
       "path": "packages/sdk"
+    },
+    {
+      "id": "pkg.search-engine",
+      "name": "search-engine",
+      "path": "packages/search-engine"
+    },
+    {
+      "id": "pkg.security",
+      "name": "security",
+      "path": "packages/security"
+    },
+    {
+      "id": "pkg.shared",
+      "name": "shared",
+      "path": "packages/shared"
+    },
+    {
+      "id": "pkg.social-os",
+      "name": "social-os",
+      "path": "packages/social-os"
+    },
+    {
+      "id": "pkg.technology-radar",
+      "name": "technology-radar",
+      "path": "packages/technology-radar"
+    },
+    {
+      "id": "pkg.types",
+      "name": "types",
+      "path": "packages/types"
     },
     {
       "id": "pkg.typescript",
@@ -83,6 +318,21 @@
       "id": "pkg.ui",
       "name": "ui",
       "path": "packages/ui"
+    },
+    {
+      "id": "pkg.video-engine",
+      "name": "video-engine",
+      "path": "packages/video-engine"
+    },
+    {
+      "id": "pkg.workflow-engine",
+      "name": "workflow-engine",
+      "path": "packages/workflow-engine"
+    },
+    {
+      "id": "pkg.workflows",
+      "name": "workflows",
+      "path": "packages/workflows"
     }
   ]
 }

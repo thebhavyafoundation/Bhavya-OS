@@ -1,14 +1,14 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "version": "v1.0",
-  "generatedAt": "2026-07-22T18:31:33.510Z",
+  "generatedAt": "2026-09-17T06:34:49.359Z",
   "generator": "scripts/generate-knowledge-graph.js",
   "documents": [
     {
-      "id": "doc-adr-0001",
-      "title": "ADR-0001 Architectural Decision Records Standard",
+      "id": "doc-adr-007",
+      "title": "ADR-007 Architectural Decision Records Standard",
       "category": "ADR",
-      "path": "governance/adr/ADR-0001.md",
+      "path": "docs/adr/ADR-007-architectural-decision-records-standard.md",
       "content": "Adopt ADR format for all significant engineering, architectural, and governance decisions.",
       "tags": [
         "adr",
@@ -17,10 +17,10 @@
       ]
     },
     {
-      "id": "doc-adr-0002",
-      "title": "ADR-0002 Provider-Agnostic AI Gateway Abstraction Layer",
+      "id": "doc-adr-008",
+      "title": "ADR-008 Provider-Agnostic AI Gateway Abstraction Layer",
       "category": "ADR",
-      "path": "governance/adr/ADR-0002.md",
+      "path": "docs/adr/ADR-008-provider-agnostic-ai-gateway.md",
       "content": "Provider-agnostic AI Gateway architecture exposing generate, chat, embed, transcribe, reason endpoints.",
       "tags": [
         "adr",
@@ -45,7 +45,7 @@
       "id": "doc-bar-0001",
       "title": "BAR-001 Bhavya Architecture Rules",
       "category": "Standard",
-      "path": "standards/architecture.md",
+      "path": "standards/BAR-001.md",
       "content": "Monorepo dependency rules, no circular dependencies, design system isolation.",
       "tags": [
         "standard",
@@ -55,9 +55,9 @@
     },
     {
       "id": "doc-bdl-001",
-      "title": "BDL Bhavya Design Language",
+      "title": "BDL-001 Bhavya Design Language",
       "category": "Standard",
-      "path": "standards/design.md",
+      "path": "standards/BDL-001.md",
       "content": "UI design tokens, typography, visual hierarchy, color palette, accessibility WCAG AA.",
       "tags": [
         "standard",
@@ -68,9 +68,9 @@
     },
     {
       "id": "doc-bps-001",
-      "title": "BPS Bhavya Production Standards",
+      "title": "BPS-001 Bhavya Production Standards",
       "category": "Standard",
-      "path": "standards/release.md",
+      "path": "standards/BPS-001.md",
       "content": "CI/CD quality gates, bundle budgets, automated testing requirements, release checklists.",
       "tags": [
         "standard",
