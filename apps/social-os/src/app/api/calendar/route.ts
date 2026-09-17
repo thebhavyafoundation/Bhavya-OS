@@ -5,12 +5,12 @@ import {
   updateCalendarEntryStatus,
   getUpcomingEntries,
   getCalendarStats,
-} from "@/campaign/calendar.js";
+} from "@/campaign/calendar";
 import type {
   CalendarEntryType,
   CalendarStatus,
   PlatformType,
-} from "@/lib/types.js";
+} from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const GET = withAuth(async (request, _user) => {

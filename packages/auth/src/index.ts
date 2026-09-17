@@ -13,7 +13,7 @@
  *   }
  */
 
-export { validateSession, requireAuth } from "./validate-session.js";
-export type { AuthUser } from "./validate-session.js";
-export { findSession, findUser } from "./db.js";
-export type { SessionRow, UserRow } from "./db.js";
+export { validateSession, requireAuth } from "./validate-session";
+export type { AuthUser } from "./validate-session";
+export { findSession, findUser } from "./db";
+export type { SessionRow, UserRow } from "./db";

@@ -5,16 +5,16 @@ import {
   getPublication,
   updatePublicationStatus,
   deletePublication,
-} from "@/lib/publications.js";
-import { addToQueue, getQueue } from "@/queue/queue.js";
+} from "@/lib/publications";
+import { addToQueue, getQueue } from "@/queue/queue";
 import {
   getPendingApprovals,
   approvePublication,
   rejectPublication,
-} from "@/approval/gate.js";
-import { getAnalyticsSummary } from "@/analytics/collector.js";
-import { emitEvent, getRecentEvents } from "@/lib/events.js";
-import type { PlatformType, ContentSource } from "@/lib/types.js";
+} from "@/approval/gate";
+import { getAnalyticsSummary } from "@/analytics/collector";
+import { emitEvent, getRecentEvents } from "@/lib/events";
+import type { PlatformType, ContentSource } from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const GET = withAuth(async (request, _user) => {

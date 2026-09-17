@@ -2,7 +2,7 @@ import type {
   PlatformType,
   PlatformContent,
   PlatformConstraints,
-} from "../lib/types.js";
+} from "../lib/types";
 
 const PLATFORM_RULES: Record<PlatformType, (text: string) => string> = {
   linkedin: (text) => {

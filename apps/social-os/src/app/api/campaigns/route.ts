@@ -8,13 +8,13 @@ import {
   addCampaignAudience,
   linkPublicationToCampaign,
   getCampaignAnalytics,
-} from "@/campaign/engine.js";
+} from "@/campaign/engine";
 import type {
   CampaignType,
   CampaignStatus,
   CommunicationChannel,
   AudienceType,
-} from "@/lib/types.js";
+} from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const GET = withAuth(async (request, _user) => {

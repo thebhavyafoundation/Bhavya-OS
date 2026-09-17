@@ -1,6 +1,6 @@
-import { getAnalyticsSummary, saveAnalytics } from "../analytics/collector.js";
-import { emitEvent, getRecentEvents } from "../lib/events.js";
-import type { PlatformMetrics } from "../lib/types.js";
+import { getAnalyticsSummary, saveAnalytics } from "../analytics/collector";
+import { emitEvent, getRecentEvents } from "../lib/events";
+import type { PlatformMetrics } from "../lib/types";
 
 export interface GitHubOSFeedback {
   repository: string;

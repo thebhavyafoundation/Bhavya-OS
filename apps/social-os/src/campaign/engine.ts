@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
-import { emitEvent } from "../lib/events.js";
+import { getDb } from "../lib/db";
+import { emitEvent } from "../lib/events";
 import type {
   Campaign,
   CampaignStatus,
@@ -11,7 +11,7 @@ import type {
   CommunicationAsset,
   CommunicationChannel,
   PlatformType,
-} from "../lib/types.js";
+} from "../lib/types";
 
 export function createCampaign(input: {
   name: string;

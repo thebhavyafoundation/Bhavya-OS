@@ -4,18 +4,18 @@ import {
   createKnowledgePackagePublication,
   createBlogPublication,
   createAnnouncementPublication,
-} from "@/lib/content-factory.js";
+} from "@/lib/content-factory";
 import {
   getGitHubOSFeedback,
   publishAnalyticsToGitHub,
   collectAndReportAnalytics,
-} from "@/lib/github-integration.js";
+} from "@/lib/github-integration";
 import {
   validateConstitutionalCompliance,
   validateBrandConsistency,
-} from "@/lib/constitution-integration.js";
-import { getPublication } from "@/lib/publications.js";
-import type { PlatformType } from "@/lib/types.js";
+} from "@/lib/constitution-integration";
+import { getPublication } from "@/lib/publications";
+import type { PlatformType } from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const POST = withAuth(async (request, _user) => {

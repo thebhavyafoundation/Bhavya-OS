@@ -4,17 +4,17 @@ import {
   getMissionMetrics,
   collectInstitutionalMetrics,
   getInstitutionMetrics,
-} from "@/analytics/institution.js";
-import { getAnalyticsSummary } from "@/analytics/collector.js";
+} from "@/analytics/institution";
+import { getAnalyticsSummary } from "@/analytics/collector";
 import {
   getGitHubOSFeedback,
   collectAndReportAnalytics,
-} from "@/lib/github-integration.js";
-import { getFeedbackIntelligence } from "@/campaign/community-intelligence.js";
-import { getCalendarStats } from "@/campaign/calendar.js";
-import { listCampaigns } from "@/campaign/engine.js";
-import { listPublications } from "@/lib/publications.js";
-import { getPendingApprovals } from "@/approval/gate.js";
+} from "@/lib/github-integration";
+import { getFeedbackIntelligence } from "@/campaign/community-intelligence";
+import { getCalendarStats } from "@/campaign/calendar";
+import { listCampaigns } from "@/campaign/engine";
+import { listPublications } from "@/lib/publications";
+import { getPendingApprovals } from "@/approval/gate";
 import { withAuth } from "@/lib/api-auth";
 
 export const GET = withAuth(async (_request, _user) => {

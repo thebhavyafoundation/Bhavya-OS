@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
-import { emitEvent } from "../lib/events.js";
+import { getDb } from "../lib/db";
+import { emitEvent } from "../lib/events";
 import type {
   EditorialCalendarEntry,
   CalendarEntryType,
   CalendarStatus,
   PlatformType,
-} from "../lib/types.js";
+} from "../lib/types";
 
 export function createCalendarEntry(input: {
   campaignId?: string;

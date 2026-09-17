@@ -2,36 +2,33 @@ import {
   emitEvent,
   getUnprocessedEvents,
   markEventProcessed,
-} from "../lib/events.js";
+} from "../lib/events";
 import {
   createCampaign,
   getCampaign,
   updateCampaignStatus,
   linkPublicationToCampaign,
-} from "./engine.js";
-import { createCalendarEntry, updateCalendarEntryStatus } from "./calendar.js";
-import { addToQueue, getQueue } from "../queue/queue.js";
+} from "./engine";
+import { createCalendarEntry, updateCalendarEntryStatus } from "./calendar";
+import { addToQueue, getQueue } from "../queue/queue";
 import {
   validateConstitutionalCompliance,
   createBrandReview,
-} from "../lib/constitution-integration.js";
-import {
-  getPublication,
-  updatePublicationStatus,
-} from "../lib/publications.js";
-import { saveInstitutionMetric } from "../analytics/institution.js";
+} from "../lib/constitution-integration";
+import { getPublication, updatePublicationStatus } from "../lib/publications";
+import { saveInstitutionMetric } from "../analytics/institution";
 import {
   submitFeedback,
   processFeedback,
   getFeedbackIntelligence,
-} from "./community-intelligence.js";
+} from "./community-intelligence";
 import type {
   CampaignType,
   CommunicationChannel,
   PlatformType,
   CalendarEntryType,
   ContentSource,
-} from "../lib/types.js";
+} from "../lib/types";
 
 export interface CommunicationLoopResult {
   campaignId: string;

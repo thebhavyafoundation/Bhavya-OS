@@ -9,7 +9,7 @@ import type {
   PlatformConstraints,
   PlatformType,
   MediaType,
-} from "../lib/types.js";
+} from "../lib/types";
 
 export interface PostizConfig {
   apiUrl: string;

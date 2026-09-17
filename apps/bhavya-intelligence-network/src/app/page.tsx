@@ -356,10 +356,10 @@ export default function BINDashboard() {
                     <span className="truncate">
                       {JSON.stringify(
                         Object.fromEntries(
-                          Object.entries(event).filter(
-                            ([k]) => !["type", "timestamp"].includes(k),
-                          ),
-                        ).slice(0, 3),
+                          Object.entries(event)
+                            .filter(([k]) => !["type", "timestamp"].includes(k))
+                            .slice(0, 3),
+                        ),
                       )}
                     </span>
                   </div>

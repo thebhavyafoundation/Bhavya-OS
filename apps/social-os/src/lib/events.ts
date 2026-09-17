@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
+import { getDb } from "../lib/db";
 
 export interface SocialEvent {
   id: string;

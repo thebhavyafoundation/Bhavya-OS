@@ -15,7 +15,7 @@
  */
 
 import type { NextRequest } from "next/server";
-import { findSession, findUser } from "./db.js";
+import { findSession, findUser } from "./db";
 
 export interface AuthUser {
   id: string;

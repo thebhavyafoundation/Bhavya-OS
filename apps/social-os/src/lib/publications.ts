@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "./db.js";
+import { getDb } from "./db";
 import type {
   Publication,
   PublicationStatus,
@@ -7,7 +7,7 @@ import type {
   ContentSource,
   PlatformType,
   PlatformContent,
-} from "./types.js";
+} from "./types";
 
 export function createPublication(input: {
   title: string;

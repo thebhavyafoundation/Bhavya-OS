@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
-import { emitEvent } from "../lib/events.js";
+import { getDb } from "../lib/db";
+import { emitEvent } from "../lib/events";
 import type {
   CommunityFeedback,
   FeedbackSource,
   FeedbackClassification,
-} from "../lib/types.js";
+} from "../lib/types";
 
 const CLASSIFICATION_KEYWORDS: Record<FeedbackClassification, string[]> = {
   knowledge_gap: [
@@ -222,7 +222,11 @@ export function getFeedbackIntelligence(): {
   topKnowledgeGaps: { content: string; count: number }[];
 } {
   const db = getDb();
-  const all = db.prepare("SELECT * FROM community_feedback ORDER BY created_at DESC LIMIT 10000").all() as any[];
+  const all = db
+    .prepare(
+      "SELECT * FROM community_feedback ORDER BY created_at DESC LIMIT 10000",
+    )
+    .all() as any[];
 
   const byClassification: Record<string, number> = {};
   const bySource: Record<string, number> = {};

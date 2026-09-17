@@ -3,8 +3,8 @@ import {
   runCommunicationLoop,
   processEvents,
   getCommunicationLoopStatus,
-} from "@/campaign/communication-loop.js";
-import type { CommunicationChannel } from "@/lib/types.js";
+} from "@/campaign/communication-loop";
+import type { CommunicationChannel } from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const POST = withAuth(async (request, _user) => {

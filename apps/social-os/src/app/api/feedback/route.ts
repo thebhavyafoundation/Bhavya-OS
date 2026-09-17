@@ -4,8 +4,8 @@ import {
   listFeedback,
   getFeedbackIntelligence,
   processFeedback,
-} from "@/campaign/community-intelligence.js";
-import type { FeedbackSource, FeedbackClassification } from "@/lib/types.js";
+} from "@/campaign/community-intelligence";
+import type { FeedbackSource, FeedbackClassification } from "@/lib/types";
 import { withAuth } from "@/lib/api-auth";
 
 export const GET = withAuth(async (request, _user) => {

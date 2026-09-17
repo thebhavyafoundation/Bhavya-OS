@@ -2,17 +2,17 @@ import {
   getInstitutionPulse,
   getMissionMetrics,
   getInstitutionMetrics,
-} from "@/analytics/institution.js";
-import { getAnalyticsSummary } from "@/analytics/collector.js";
-import { getCalendarStats, getUpcomingEntries } from "@/campaign/calendar.js";
-import { getFeedbackIntelligence } from "@/campaign/community-intelligence.js";
-import { listCampaigns } from "@/campaign/engine.js";
-import { listPublications } from "@/lib/publications.js";
-import { getPendingApprovals } from "@/approval/gate.js";
-import { getRecentEvents } from "@/lib/events.js";
-import { getBrandReviews } from "@/lib/constitution-integration.js";
-import { getCommunicationLoopStatus } from "@/campaign/communication-loop.js";
-import { getGitHubOSFeedback } from "@/lib/github-integration.js";
+} from "@/analytics/institution";
+import { getAnalyticsSummary } from "@/analytics/collector";
+import { getCalendarStats, getUpcomingEntries } from "@/campaign/calendar";
+import { getFeedbackIntelligence } from "@/campaign/community-intelligence";
+import { listCampaigns } from "@/campaign/engine";
+import { listPublications } from "@/lib/publications";
+import { getPendingApprovals } from "@/approval/gate";
+import { getRecentEvents } from "@/lib/events";
+import { getBrandReviews } from "@/lib/constitution-integration";
+import { getCommunicationLoopStatus } from "@/campaign/communication-loop";
+import { getGitHubOSFeedback } from "@/lib/github-integration";
 
 export default function CEODashboardPage() {
   const pulse = getInstitutionPulse();

@@ -3,9 +3,9 @@ import type {
   Campaign,
   ContentSource,
   BrandReview,
-} from "../lib/types.js";
+} from "../lib/types";
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "./db.js";
+import { getDb } from "./db";
 
 export interface ConstitutionalCheck {
   passed: boolean;

@@ -1,6 +1,6 @@
-import { addToQueue } from "../queue/queue.js";
-import { emitEvent } from "../lib/events.js";
-import type { PlatformType, ContentSource } from "../lib/types.js";
+import { addToQueue } from "../queue/queue";
+import { emitEvent } from "../lib/events";
+import type { PlatformType, ContentSource } from "../lib/types";
 
 export interface ContentReadyEvent {
   knowledgePackageId?: string;

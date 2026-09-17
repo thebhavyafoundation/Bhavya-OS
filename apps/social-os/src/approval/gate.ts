@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
-import type { ApprovalRecord, ApprovalStatus } from "../lib/types.js";
+import { getDb } from "../lib/db";
+import type { ApprovalRecord, ApprovalStatus } from "../lib/types";
 
 export function createApprovalRequest(publicationId: string): ApprovalRecord {
   const db = getDb();

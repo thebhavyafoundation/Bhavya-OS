@@ -1,13 +1,13 @@
-import { getDb } from "../lib/db.js";
+import { getDb } from "../lib/db";
 import {
   createPublication,
   updatePublicationStatus,
   getPublication,
-} from "../lib/publications.js";
-import { createApprovalRequest, approvePublication } from "../approval/gate.js";
-import { formatForAllPlatforms } from "../lib/formatter.js";
-import { emitEvent } from "../lib/events.js";
-import type { PlatformType, ContentSource, SocialPriority } from "../lib/types.js";
+} from "../lib/publications";
+import { createApprovalRequest, approvePublication } from "../approval/gate";
+import { formatForAllPlatforms } from "../lib/formatter";
+import { emitEvent } from "../lib/events";
+import type { PlatformType, ContentSource, SocialPriority } from "../lib/types";
 
 export interface QueueItem {
   id: string;

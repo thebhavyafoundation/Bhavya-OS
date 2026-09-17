@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/db.js";
-import { createPostizProvider } from "@/providers/postiz.js";
+import { getDb } from "@/lib/db";
+import { createPostizProvider } from "@/providers/postiz";
 
 export async function GET() {
   const checks: Record<string, string> = {};

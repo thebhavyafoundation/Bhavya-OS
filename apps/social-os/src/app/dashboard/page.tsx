@@ -1,8 +1,8 @@
-import { getAnalyticsSummary } from "@/analytics/collector.js";
-import { listPublications, getPublication } from "@/lib/publications.js";
-import { getPendingApprovals } from "@/approval/gate.js";
-import { getRecentEvents } from "@/lib/events.js";
-import { getQueue } from "@/queue/queue.js";
+import { getAnalyticsSummary } from "@/analytics/collector";
+import { listPublications, getPublication } from "@/lib/publications";
+import { getPendingApprovals } from "@/approval/gate";
+import { getRecentEvents } from "@/lib/events";
+import { getQueue } from "@/queue/queue";
 
 export default function DashboardPage() {
   const summary = getAnalyticsSummary();

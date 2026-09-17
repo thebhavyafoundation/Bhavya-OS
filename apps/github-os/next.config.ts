@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  serverExternalPackages: ["@bhavya/auth"],
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push({
+        "@libsql/client": "commonjs @libsql/client",
+        "@libsql/win32-x64-msvc": "commonjs @libsql/win32-x64-msvc",
+      });
+    }
+    return config;
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

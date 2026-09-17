@@ -1,6 +1,6 @@
-import { getDb } from "../lib/db.js";
-import { getRecentEvents, markEventProcessed } from "../lib/events.js";
-import type { PlatformMetrics, AnalyticsSnapshot } from "../lib/types.js";
+import { getDb } from "../lib/db";
+import { getRecentEvents, markEventProcessed } from "../lib/events";
+import type { PlatformMetrics, AnalyticsSnapshot } from "../lib/types";
 import { v4 as uuidv4 } from "uuid";
 
 export function collectAnalytics(

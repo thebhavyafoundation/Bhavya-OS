@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { getDb } from "../lib/db.js";
-import { getAnalyticsSummary } from "../analytics/collector.js";
+import { getDb } from "../lib/db";
+import { getAnalyticsSummary } from "../analytics/collector";
 import type {
   InstitutionMetric,
   CampaignAnalytics,
   PlatformType,
-} from "../lib/types.js";
+} from "../lib/types";
 
 export function saveInstitutionMetric(input: {
   name: string;
