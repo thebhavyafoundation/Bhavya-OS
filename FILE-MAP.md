@@ -624,6 +624,8 @@
   - `scripts\enforce-deps.mjs`
   - `scripts\enforce-design-system.mjs`
   - `scripts\generate-file-map.mjs`
+  - `scripts\generate-knowledge-graph.js`
+  - `scripts\generate-registry.js`
   - `scripts\quality-gates.mjs`
   - `scripts\sync-tokens.mjs`
   - `scripts\vercel-build-app.mjs`
