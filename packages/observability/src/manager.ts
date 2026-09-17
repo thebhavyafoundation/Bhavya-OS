@@ -6,18 +6,18 @@ import type {
   HealthStatus,
   MetricsData,
   DiagnosticReport,
-  PluginDiagnostics,
   ObservabilityAPI,
 } from "./types.js";
+import os from "os";
 
 export class ObservabilityManager implements ObservabilityAPI {
   private components: Map<string, ComponentHealth> = new Map();
   private startTime: Date;
-  private metrics: MetricsData;
+  private _metrics: MetricsData;
 
   constructor() {
     this.startTime = new Date();
-    this.metrics = {
+    this._metrics = {
       uptime: 0,
       requests: 0,
       errors: 0,
@@ -43,7 +43,7 @@ export class ObservabilityManager implements ObservabilityAPI {
 
   async metrics(): Promise<MetricsData> {
     this.updateMetrics();
-    return { ...this.metrics };
+    return { ...this._metrics };
   }
 
   async diagnostics(): Promise<DiagnosticReport> {
@@ -115,19 +115,29 @@ export class ObservabilityManager implements ObservabilityAPI {
   }
 
   incrementRequests(): void {
-    this.metrics.requests++;
+    this._metrics.requests++;
   }
 
   incrementErrors(): void {
-    this.metrics.errors++;
+    this._metrics.errors++;
   }
 
-  updatePluginMetrics(total: number, active: number, inactive: number, error: number): void {
-    this.metrics.plugins = { total, active, inactive, error };
+  updatePluginMetrics(
+    total: number,
+    active: number,
+    inactive: number,
+    error: number,
+  ): void {
+    this._metrics.plugins = { total, active, inactive, error };
   }
 
-  updateEventMetrics(published: number, processed: number, failed: number, avgLatency: number): void {
-    this.metrics.events = { published, processed, failed, avgLatency };
+  updateEventMetrics(
+    published: number,
+    processed: number,
+    failed: number,
+    avgLatency: number,
+  ): void {
+    this._metrics.events = { published, processed, failed, avgLatency };
   }
 
   private calculateOverallStatus(components: ComponentHealth[]): HealthStatus {
@@ -140,16 +150,16 @@ export class ObservabilityManager implements ObservabilityAPI {
   }
 
   private updateMetrics(): void {
-    this.metrics.uptime = Date.now() - this.startTime.getTime();
+    this._metrics.uptime = Date.now() - this.startTime.getTime();
     const mem = process.memoryUsage();
-    this.metrics.memory = {
+    this._metrics.memory = {
       used: mem.heapUsed,
       total: mem.heapTotal,
       percentage: (mem.heapUsed / mem.heapTotal) * 100,
     };
-    this.metrics.cpu = {
+    this._metrics.cpu = {
       usage: 0,
-      cores: require("os").cpus().length,
+      cores: os.cpus().length,
     };
   }
 }
