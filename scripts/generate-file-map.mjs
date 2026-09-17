@@ -11,7 +11,13 @@ const OUT = join(ROOT, "FILE-MAP.md");
 
 // Environment/tool dirs that are gitignored or machine-generated. Skipping them
 // keeps the output byte-deterministic across machines and CI.
-const SKIP_NAMES = new Set(["node_modules", ".git", ".next", ".turbo", ".vercel"]);
+const SKIP_NAMES = new Set([
+  "node_modules", ".git", ".next", ".turbo", ".vercel",
+  ".opencode", ".agents", ".gstack", ".vscode", ".idea",
+  "bar", "packages/bar",
+  "out", "videos", "evolution",
+  "__test_io_*__",
+]);
 const HUSKY_INTERNAL = join(".husky", "_");
 
 function list(dir, depth = 0, maxDepth = 2) {
