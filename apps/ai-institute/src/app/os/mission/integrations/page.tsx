@@ -38,7 +38,7 @@ export default async function IntegrationsPage() {
                 {groups[status].slice(0, 10).map(({ artifact, jobTitle }) => (
                   <Link key={artifact.id} href={`/os/mission/jobs/${artifact.jobId}`} className="block text-xs hover:bg-bg-primary/50 rounded p-1.5 -m-1.5 transition-colors">
                     <div className="text-text-primary font-medium truncate">{artifact.title}</div>
-                    <div className="text-text-muted">v{artifact.currentVersion} · {jobTitle}</div>
+                    <div className="text-text-muted">v{artifact.currentVersion} · {jobTitle}{artifact.destination ? ` · → ${artifact.destination} (intent)` : ""}</div>
                   </Link>
                 ))}
               </div>

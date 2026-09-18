@@ -315,9 +315,68 @@ export function NewVersionForm({ artifactId }: { artifactId: string }) {  const 
         Human replacement
       </label>
       <button type="submit" disabled={busy} className="px-3 py-1.5 rounded-lg border border-border-primary text-xs font-medium text-text-primary disabled:opacity-50">
-        {busy ? "Recording…" : "Record version"}
+        {busy ? "Recording..." : "Record version"}
       </button>
       {error && <p role="alert" className="w-full text-xs text-red-400">{error}</p>}
     </form>
+  );
+}
+
+const DESTINATIONS = ["website", "offline-app", "openskool", "internal", "social"] as const;
+
+export function CurationActions({ artifactId, status }: { artifactId: string; status: string }) {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [destination, setDestination] = useState<string>("internal");
+
+  const canCurate = status !== "integrated" && status !== "archived" && status !== "superseded";
+  const canSetDestination = status === "verified" || status === "integrating" || status === "integrated";
+
+  async function run(op: "supersede" | "archive" | "setDestination") {
+    let reason = "";
+    if (op !== "setDestination") {
+      reason = window.prompt(`Reason to ${op} (recorded, required):`) ?? "";
+      if (!reason.trim()) return;
+    }
+    setError("");
+    setBusy(true);
+    try {
+      await postJson("/os/mission/api/artifacts", { op, artifactId, reason, destination });
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Operation failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!canCurate && !canSetDestination) return null;
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-2">
+      {canCurate && (
+        <>
+          <button type="button" disabled={busy} onClick={() => run("supersede")} className="px-3 py-1.5 rounded-lg border border-border-primary text-xs text-text-secondary disabled:opacity-50">
+            Supersede
+          </button>
+          <button type="button" disabled={busy} onClick={() => run("archive")} className="px-3 py-1.5 rounded-lg border border-border-primary text-xs text-text-secondary disabled:opacity-50">
+            Archive
+          </button>
+        </>
+      )}
+      {canSetDestination && (
+        <>
+          <select value={destination} onChange={(e) => setDestination(e.target.value)} aria-label="Publication destination (intent only)" className="px-2 py-1.5 bg-bg-secondary border border-border-primary rounded-lg text-xs text-text-primary">
+            {DESTINATIONS.map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+          <button type="button" disabled={busy} onClick={() => run("setDestination")} className="px-3 py-1.5 rounded-lg border border-border-primary text-xs text-text-secondary disabled:opacity-50">
+            Set destination
+          </button>
+        </>
+      )}
+      {error && <p role="alert" className="w-full text-xs text-red-400">{error}</p>}
+    </div>
   );
 }

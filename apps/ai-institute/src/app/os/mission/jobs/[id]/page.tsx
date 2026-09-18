@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requireRoles } from "@/lib/require-role";
 import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
-import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm, IntegrationActions } from "../../components/forms";
+import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm, IntegrationActions, CurationActions } from "../../components/forms";
 import { MissionGraph } from "../../components/graph";
 import { diffVersions } from "@/lib/mission-compare";
 import { getGitHubData } from "@/lib/os-data";
@@ -109,11 +109,12 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <div className="text-base font-semibold text-text-primary">{artifact.title}</div>
-                  <div className="text-xs text-text-muted mt-1">
-                    {artifact.kind} · source: {artifact.source} · v{artifact.currentVersion} · {artifact.status}
-                  </div>
+                    <div className="text-xs text-text-muted mt-1">
+                      {artifact.kind} · source: {artifact.source} · v{artifact.currentVersion} · {artifact.status}
+                      {artifact.destination && ` · destination: ${artifact.destination} (intent only — not published)`}
+                    </div>
                 </div>
-                {!req && artifact.status !== "integrated" && artifact.status !== "archived" && (
+                {!req && artifact.status !== "integrated" && artifact.status !== "archived" && artifact.status !== "superseded" && (
                   <RequestApprovalButton artifactId={artifact.id} />
                 )}
               </div>
@@ -135,6 +136,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                 </div>
               )}
               <IntegrationActions artifactId={artifact.id} status={artifact.status} />
+              <CurationActions artifactId={artifact.id} status={artifact.status} />
               {(() => {
                 const ref = versions.map((v) => v.path).find((p) => p.startsWith("github-os:repository:"));
                 if (!ref) return null;
