@@ -322,6 +322,38 @@ describe("mission control search and overview reads", () => {
   });
 });
 
+describe("mission control lesson intake", () => {
+  it("intakes academy lessons by reference, idempotently", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Lesson intake");
+    const first = await repo.createArtifactFromAcademyLesson(job.id, "found-1-1", "test-operator");
+    expect(first.deduped).toBe(false);
+    expect(first.artifact.kind).toBe("lesson");
+    expect(first.artifact.source).toBe("academy");
+    expect(first.version.version).toBe(1);
+    const second = await repo.createArtifactFromAcademyLesson(job.id, "found-1-1", "test-operator");
+    expect(second.deduped).toBe(true);
+    expect(second.artifact.id).toBe(first.artifact.id);
+    await expect(repo.createArtifactFromAcademyLesson(job.id, "nope-0-0", "op")).rejects.toThrow("not found");
+    await expect(repo.createArtifactFromAcademyLesson("missing", "found-1-1", "op")).rejects.toThrow("Job not found");
+  });
+
+  it("intakes studio lessons from the canonical studio table", async () => {
+    const repo = getMissionControlRepository();
+    const { dbCreateLesson } = await import("@/lib/studio/db");
+    const lessonId = `mc-studio-${TAG}`;
+    await dbCreateLesson({ id: lessonId, title: `Studio Fixture ${TAG}`, subject: "AI", grade: 9, duration: 30 });
+    const job = await freshJob("Studio intake");
+    const first = await repo.createArtifactFromStudioLesson(job.id, lessonId, "test-operator");
+    expect(first.deduped).toBe(false);
+    expect(first.artifact.source).toBe("academy-studio");
+    expect(first.artifact.title).toContain("Studio Fixture");
+    const again = await repo.createArtifactFromStudioLesson(job.id, lessonId, "test-operator");
+    expect(again.deduped).toBe(true);
+    await expect(repo.createArtifactFromStudioLesson(job.id, "missing-lesson", "op")).rejects.toThrow("not found");
+  });
+});
+
 describe("mission control version comparison", () => {
   it("reports only changed metadata fields", async () => {
     const { diffVersions } = await import("@/lib/mission-compare");

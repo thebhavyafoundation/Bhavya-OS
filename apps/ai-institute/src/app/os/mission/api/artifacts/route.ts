@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
   const body = (await req.json().catch(() => null)) as {
     op?: string;
     jobId?: string;
+    lessonId?: string;
     artifactId?: string;
     kind?: string;
     title?: string;
@@ -24,11 +25,28 @@ export async function POST(req: NextRequest) {
     hash?: string;
     humanReplacement?: boolean;
   } | null;
-  if (!body?.op || (body.op !== "create" && body.op !== "addVersion" && body.op !== "verify" && body.op !== "beginIntegrate" && body.op !== "completeIntegrate" && body.op !== "supersede" && body.op !== "archive" && body.op !== "setDestination")) {
-    return NextResponse.json({ error: "op must be create, addVersion, verify, beginIntegrate, completeIntegrate, supersede, archive, or setDestination" }, { status: 400 });
+  if (!body?.op || (body.op !== "create" && body.op !== "addVersion" && body.op !== "verify" && body.op !== "beginIntegrate" && body.op !== "completeIntegrate" && body.op !== "supersede" && body.op !== "archive" && body.op !== "setDestination" && body.op !== "fromAcademyLesson" && body.op !== "fromStudioLesson")) {
+    return NextResponse.json({ error: "op must be create, addVersion, verify, beginIntegrate, completeIntegrate, supersede, archive, setDestination, fromAcademyLesson, or fromStudioLesson" }, { status: 400 });
   }
   await initDatabase();
   const repo = getMissionControlRepository();
+
+  if (body.op === "fromAcademyLesson" || body.op === "fromStudioLesson") {
+    if (!body.jobId || !body.lessonId) {
+      return NextResponse.json({ error: "jobId and lessonId are required" }, { status: 400 });
+    }
+    try {
+      const out =
+        body.op === "fromAcademyLesson"
+          ? await repo.createArtifactFromAcademyLesson(body.jobId, body.lessonId, actorOf(gate.user))
+          : await repo.createArtifactFromStudioLesson(body.jobId, body.lessonId, actorOf(gate.user));
+      return NextResponse.json(out, { status: out.deduped ? 200 : 201 });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Lesson intake failed";
+      const status = message.includes("not found") ? 404 : 422;
+      return NextResponse.json({ error: message }, { status });
+    }
+  }
 
   if (body.op === "verify" || body.op === "beginIntegrate" || body.op === "completeIntegrate" || body.op === "supersede" || body.op === "archive" || body.op === "setDestination") {
     if (!body.artifactId) {

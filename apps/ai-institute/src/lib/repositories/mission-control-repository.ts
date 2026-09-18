@@ -169,6 +169,22 @@ export interface MissionControlRepository {
   listArtifacts(jobId: string): Promise<McArtifact[]>;
   /** Substring search over artifact id/title (deterministic LIKE, capped). */
   searchArtifacts(query: string, limit?: number): Promise<McArtifact[]>;
+
+  /**
+   * Lesson intake adapters. Reference patterns (never copies):
+   * academy lessons -> `academy:{lessonId}`, studio lessons -> `studio:lesson:{id}`.
+   * Idempotent per (job, lesson) via evidence keys.
+   */
+  createArtifactFromAcademyLesson(
+    jobId: string,
+    lessonId: string,
+    producer: string,
+  ): Promise<{ artifact: McArtifact; version: McArtifactVersion; deduped: boolean }>;
+  createArtifactFromStudioLesson(
+    jobId: string,
+    lessonId: string,
+    producer: string,
+  ): Promise<{ artifact: McArtifact; version: McArtifactVersion; deduped: boolean }>;
   /**
    * Terminal curation transitions. Supersede keeps the artifact queryable
    * (replaced by newer direction); archive removes it from active queues.

@@ -373,6 +373,120 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     return rows.map(rowToArtifact);
   }
 
+  private async intakeLessonArtifact(input: {
+    jobId: string;
+    lessonId: string;
+    producer: string;
+    kind: "lesson";
+    source: "academy" | "academy-studio";
+    path: string;
+    title: string;
+    contextNote: string;
+  }): Promise<{ artifact: McArtifact; version: McArtifactVersion; deduped: boolean }> {
+    const db = getAsyncDb();
+    const job = await this.getJob(input.jobId);
+    if (!job) throw new Error(`Job not found: ${input.jobId}`);
+    if (!input.producer.trim()) throw new Error("Producer is required");
+    const key = `lesson-intake:${input.jobId}:${input.path}`;
+    const prior = await db.get<Row>("SELECT * FROM evidence_records WHERE idempotency_key = ? LIMIT 1", key);
+    if (prior) {
+      const meta = JSON.parse((prior.metadata as string) ?? "{}") as { artifactId?: string };
+      const existing = meta.artifactId ? await this.getArtifact(meta.artifactId) : undefined;
+      if (existing) {
+        const versions = await this.listVersions(existing.id);
+        return { artifact: existing, version: versions[0], deduped: true };
+      }
+    }
+    const { artifact, version } = await this.createArtifact({
+      jobId: input.jobId,
+      kind: input.kind,
+      title: input.title,
+      source: input.source,
+      producer: input.producer.trim(),
+      note: input.contextNote,
+    });
+    await db.run("UPDATE mc_artifact_versions SET path = ? WHERE id = ?", input.path, version.id);
+    const evId = uid("ev-mc");
+    await db.run(
+      `INSERT INTO evidence_records (id, activity_type, activity_id, timestamp, description, metadata, idempotency_key)
+       VALUES (?, 'mission-control.lesson-intake', ?, ?, ?, ?, ?)`,
+      evId,
+      job.id,
+      now(),
+      `Lesson intake: ${input.title} (${input.path})`,
+      JSON.stringify({ jobId: job.id, artifactId: artifact.id, path: input.path }),
+      key,
+    );
+    const versions = await this.listVersions(artifact.id);
+    return { artifact: (await this.getArtifact(artifact.id)) as McArtifact, version: versions[0], deduped: false };
+  }
+
+  async createArtifactFromAcademyLesson(
+    jobId: string,
+    lessonId: string,
+    producer: string,
+  ): Promise<{ artifact: McArtifact; version: McArtifactVersion; deduped: boolean }> {
+    const id = lessonId.trim();
+    if (!id) throw new Error("lessonId is required");
+    const { getLessonContent } = await import("../../data/academy-lessons");
+    const { courses } = await import("../../data/academy-courses");
+    const content = getLessonContent(id);
+    if (!content) throw new Error(`Academy lesson not found: ${id}`);
+    let context = "";
+    for (const course of courses) {
+      for (const mod of course.modules) {
+        const lesson = mod.lessons.find((l) => l.id === id);
+        if (lesson) {
+          context = `${course.title} · ${mod.title} · ${lesson.duration} min`;
+          break;
+        }
+      }
+      if (context) break;
+    }
+    return this.intakeLessonArtifact({
+      jobId,
+      lessonId: id,
+      producer,
+      kind: "lesson",
+      source: "academy",
+      path: `academy:${id}`,
+      title: content.title,
+      contextNote: context ? `Academy lesson. ${context}.` : "Academy lesson.",
+    });
+  }
+
+  async createArtifactFromStudioLesson(
+    jobId: string,
+    lessonId: string,
+    producer: string,
+  ): Promise<{ artifact: McArtifact; version: McArtifactVersion; deduped: boolean }> {
+    const id = lessonId.trim();
+    if (!id) throw new Error("lessonId is required");
+    const { dbGetLesson } = await import("../studio/db");
+    const lesson = await dbGetLesson(id);
+    if (!lesson) throw new Error(`Studio lesson not found: ${id}`);
+    const facts = [
+      `Studio lesson: ${lesson.title}`,
+      lesson.subject ? `Subject: ${lesson.subject}` : null,
+      typeof lesson.grade === "number" ? `Grade: ${lesson.grade}` : null,
+      typeof lesson.duration === "number" ? `Duration: ${lesson.duration} min` : null,
+      lesson.status ? `Studio status: ${lesson.status}` : null,
+      lesson.courseId ? `Course: ${lesson.courseId}` : null,
+    ]
+      .filter((x): x is string => Boolean(x))
+      .join(" · ");
+    return this.intakeLessonArtifact({
+      jobId,
+      lessonId: id,
+      producer,
+      kind: "lesson",
+      source: "academy-studio",
+      path: `studio:lesson:${id}`,
+      title: lesson.title,
+      contextNote: facts,
+    });
+  }
+
   private async curateArtifact(
     id: string,
     to: "superseded" | "archived",
