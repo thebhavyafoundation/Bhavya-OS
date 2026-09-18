@@ -631,6 +631,12 @@ export interface Lesson {
   createdAt: string;
   updatedAt: string;
   version: number;
+  /**
+   * Curriculum authority. Defaults to "bhavya-academy" when absent.
+   * Shared Lesson rows are academy-authored; external content is
+   * referenced via ExternalResourceRef, never stored here.
+   */
+  source?: CurriculumSourceId;
 }
 
 export type LessonStatus = "draft" | "ready" | "published";
@@ -677,7 +683,13 @@ export interface Course {
   metadata: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
+  /**
+   * Curriculum authority. Defaults to "bhavya-academy" when absent.
+   */
+  source?: CurriculumSourceId;
 }
+
+/** Shared Course level type (also mirrored in academy apps). */
 
 export type CourseLevel =
   "foundation" | "beginner" | "intermediate" | "advanced" | "expert";
@@ -695,6 +707,113 @@ export interface CourseModuleLesson {
   title: string;
   order: number;
   duration: number;
+  /**
+   * Curriculum authority this lesson belongs to.
+   * Defaults to "bhavya-academy" when absent (backward compatible).
+   * External entries must NEVER be rewritten into academy lessons —
+   * reference them via ExternalResourceRef instead.
+   */
+  source?: CurriculumSourceId;
+}
+
+// ─── Resource Source Authority ────────────────────────────────────
+// Source A / Source B separation (ADR-014). Authority axis for learning
+// content. Distinct from SourceType (format axis) and RecordProvenance
+// (verification axis): this axis answers "who authored and owns it".
+
+/** Curriculum authority identifier. Closed set — extend only via ADR. */
+export type CurriculumSourceId = "bhavya-academy" | "external-experience-ai";
+
+/** A content authority: an independently identifiable curriculum/resource source. */
+export interface ResourceSource {
+  id: CurriculumSourceId;
+  name: string;
+  provider: string;
+  providerUrl?: string;
+  license: string;
+  /** True when the corpus is immutable (external, or license forbids derivatives). */
+  immutable: boolean;
+  description?: string;
+}
+
+/** Source A — Bhavya-authored academy curriculum (mutable via KP pipeline). */
+export const BHAVYA_ACADEMY_SOURCE: ResourceSource = {
+  id: "bhavya-academy",
+  name: "Bhavya Academy Curriculum",
+  provider: "Bhavya Foundation",
+  providerUrl: "https://bhavyafoundation.org",
+  license: "Bhavya Foundation content",
+  immutable: false,
+  description: "Existing Bhavya AI Institute curriculum (Source A).",
+};
+
+/**
+ * Source B — Raspberry Pi Foundation "Experience AI" (experience-ai.org).
+ * External, immutable, CC BY-NC-ND 4.0: attribute, non-commercial,
+ * NO derivatives. Reference/link only — never ingest bodies, never
+ * present as Bhavya-authored. Catalog facts (slug/title/counts) only.
+ */
+export const EXPERIENCE_AI_SOURCE: ResourceSource = {
+  id: "external-experience-ai",
+  name: "Experience AI",
+  provider: "Raspberry Pi Foundation",
+  providerUrl: "https://experience-ai.org",
+  license: "CC BY-NC-ND 4.0",
+  immutable: true,
+  description: "External Experience AI resource corpus (Source B).",
+};
+
+/** All known curriculum authorities, keyed by id. */
+export const RESOURCE_SOURCES: Record<CurriculumSourceId, ResourceSource> = {
+  "bhavya-academy": BHAVYA_ACADEMY_SOURCE,
+  "external-experience-ai": EXPERIENCE_AI_SOURCE,
+};
+
+/** Format of an external resource artifact. */
+export type ExternalResourceFormat =
+  | "lesson-plan"
+  | "slides"
+  | "worksheet"
+  | "activity"
+  | "project"
+  | "assessment"
+  | "overview"
+  | "guide"
+  | "glossary"
+  | "other";
+
+/**
+ * ExternalResourceRef — metadata-only pointer to one artifact in an
+ * immutable external corpus. Carries NO body content: title/slug/counts
+ * are catalog facts. Consumers must render attribution (provider + license).
+ */
+export interface ExternalResourceRef {
+  id: string;
+  sourceId: CurriculumSourceId;
+  /** Stable pack slug, e.g. "lesson-1-what-is-ai-en-US". */
+  packSlug: string;
+  title: string;
+  format: ExternalResourceFormat;
+  /** Original filename in the source corpus (traceability, not a repo path). */
+  fileName: string;
+  ageBand?: string;
+  wordCount?: number;
+  provider: string;
+  license: string;
+}
+
+/**
+ * ResourceRelationship — repo-owned mapping row between Source A and B.
+ * Mapping only: both endpoints stay independently identifiable.
+ */
+export interface ResourceRelationship {
+  id: string;
+  fromId: string;
+  fromSource: CurriculumSourceId;
+  toId: string;
+  toSource: CurriculumSourceId;
+  kind: "prerequisite" | "enrichment" | "equivalent" | "reference";
+  note?: string;
 }
 
 /** StudentProgress — tracks learner progress through courses and lessons */

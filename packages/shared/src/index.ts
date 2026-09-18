@@ -104,6 +104,11 @@ export type {
   CourseLevel,
   CourseModule,
   CourseModuleLesson,
+  CurriculumSourceId,
+  ResourceSource,
+  ExternalResourceFormat,
+  ExternalResourceRef,
+  ResourceRelationship,
   StudentProgress,
   Assessment,
   Question,
@@ -198,4 +203,11 @@ export type {
 
   // Permission
   Permission,
+} from "./types.js";
+
+// Resource source authority (runtime values)
+export {
+  BHAVYA_ACADEMY_SOURCE,
+  EXPERIENCE_AI_SOURCE,
+  RESOURCE_SOURCES,
 } from "./types.js";
