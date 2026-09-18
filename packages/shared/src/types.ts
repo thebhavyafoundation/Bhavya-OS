@@ -1208,6 +1208,112 @@ export interface ArtifactMetadata {
 }
 
 // ───────────────────────────────────────────────────────────────────
+// MISSION CONTROL — human control plane entities (ADR pending; see
+// .ai/audits/MISSION_CONTROL_DOMAIN_MODEL.md). Additive only; existing
+// Artifact (file-action record) is untouched and distinct from
+// MissionArtifact (reviewed registry entity).
+
+/** ICM department label. Grouping projection only — no department runtime. */
+export type DepartmentId =
+  | "intelligence"
+  | "research"
+  | "knowledge"
+  | "content"
+  | "design"
+  | "engineering"
+  | "distribution"
+  | "governance";
+
+/** Minimal artifact lifecycle. Terminal: integrated | superseded | archived. */
+export type ArtifactStatus =
+  | "draft"
+  | "review"
+  | "approved"
+  | "rejected"
+  | "revision_requested"
+  | "revising"
+  | "verified"
+  | "integrating"
+  | "integrated"
+  | "superseded"
+  | "archived";
+
+/** Registry entity for a human-reviewable output. Bodies live at version paths. */
+export interface MissionArtifact {
+  id: string;
+  kind: string;
+  title: string;
+  source: CurriculumSourceId | "bhavya-internal" | "external-research";
+  department?: DepartmentId;
+  owner?: string;
+  status: ArtifactStatus;
+  currentVersion: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** One version in an artifact's lineage, incl. human-uploaded replacements. */
+export interface MissionArtifactVersion {
+  artifactId: string;
+  version: number;
+  path?: string;
+  hash?: string;
+  producer: string;
+  parentVersion?: number;
+  humanReplacement: boolean;
+  status: ArtifactStatus;
+  createdAt: string;
+}
+
+/** Human control actions. Every occurrence belongs in the decision log. */
+export type DecisionAction =
+  | "approve"
+  | "reject"
+  | "approve_with_modification"
+  | "request_revision"
+  | "regenerate"
+  | "upload_replacement"
+  | "pause"
+  | "resume"
+  | "retry"
+  | "abort"
+  | "takeover"
+  | "approve_integration";
+
+/** Audit record of one human decision. Append-only. */
+export interface HumanDecision {
+  id: string;
+  action: DecisionAction;
+  targetKind: string;
+  targetId: string;
+  actor: string;
+  reason?: string;
+  instruction?: string;
+  createdAt: string;
+}
+
+/** Approval gate: what requires human sign-off before proceeding. */
+export interface ApprovalGate {
+  id: string;
+  name: string;
+  risk: "low" | "medium" | "high" | "irreversible";
+  requiresApproval: boolean;
+  approvers: string[];
+}
+
+/** Record of an approved integration (PR, content, route, publish). */
+export interface IntegrationRecord {
+  id: string;
+  kind: "pr" | "content" | "route" | "publish" | "other";
+  target: string;
+  status: "pending" | "integrating" | "integrated" | "failed";
+  decisionId?: string;
+  verifier?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ───────────────────────────────────────────────────────────────────
 // PIPELINE
 // ───────────────────────────────────────────────────────────────────
 
