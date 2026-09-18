@@ -502,6 +502,63 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     return rows.map(rowToDecision);
   }
 
+  async findJobsByTaskContract(contractId: string): Promise<McJob[]> {
+    if (!contractId.trim()) return [];
+    const jobs = await this.listJobs();
+    return jobs.filter((j) => j.taskContractIds.includes(contractId.trim()));
+  }
+
+  private async transitionArtifact(id: string, to: McArtifactStatus): Promise<McArtifact> {
+    const db = getAsyncDb();
+    const artifact = await this.getArtifact(id);
+    if (!artifact) throw new Error(`Artifact not found: ${id}`);
+    await db.run("UPDATE mc_artifacts SET status = ?, updated_at = ? WHERE id = ?", to, now(), id);
+    await this.evidence("mission-control.artifact", id, `Artifact ${artifact.status} -> ${to}`, {});
+    return (await this.getArtifact(id)) as McArtifact;
+  }
+
+  async markVerified(artifactId: string): Promise<McArtifact> {
+    const artifact = await this.getArtifact(artifactId);
+    if (!artifact) throw new Error(`Artifact not found: ${artifactId}`);
+    if (artifact.status !== "approved") {
+      throw new Error(`Only approved artifacts can be verified (current: ${artifact.status})`);
+    }
+    return this.transitionArtifact(artifactId, "verified");
+  }
+
+  async beginIntegration(artifactId: string): Promise<McArtifact> {
+    const artifact = await this.getArtifact(artifactId);
+    if (!artifact) throw new Error(`Artifact not found: ${artifactId}`);
+    if (artifact.status !== "verified") {
+      throw new Error(`Only verified artifacts can integrate (current: ${artifact.status})`);
+    }
+    return this.transitionArtifact(artifactId, "integrating");
+  }
+
+  async completeIntegration(artifactId: string, actor: string, note?: string): Promise<McArtifact> {
+    const artifact = await this.getArtifact(artifactId);
+    if (!artifact) throw new Error(`Artifact not found: ${artifactId}`);
+    if (artifact.status !== "integrating") {
+      throw new Error(`Only integrating artifacts can complete (current: ${artifact.status})`);
+    }
+    if (!actor.trim()) throw new Error("Actor is required to complete integration");
+    const db = getAsyncDb();
+    const ts = now();
+    await db.run("UPDATE mc_artifacts SET status = 'integrated', updated_at = ? WHERE id = ?", ts, artifactId);
+    await db.run(
+      `INSERT INTO mc_decisions (id, action, target_kind, target_id, actor, reason, instruction, artifact_version)
+       VALUES (?, 'approve_integration', 'artifact', ?, ?, ?, ?, ?)`,
+      uid("mc-dec"),
+      artifactId,
+      actor.trim(),
+      (note?.trim() || "Integration completed").slice(0, 500),
+      "",
+      artifact.currentVersion,
+    );
+    await this.evidence("mission-control.decision", artifactId, `Integration approved by ${actor.trim()} for ${artifact.title} v${artifact.currentVersion}`, {});
+    return (await this.getArtifact(artifactId)) as McArtifact;
+  }
+
   // ── Execution bindings + sessions ───────────────────────────────
 
   async bindQueueJob(jobId: string, queueJobId: string): Promise<McJob> {

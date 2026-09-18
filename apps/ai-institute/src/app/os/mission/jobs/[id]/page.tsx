@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { requireRoles } from "@/lib/require-role";
 import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
-import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm } from "../../components/forms";
+import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm, IntegrationActions } from "../../components/forms";
+import { diffVersions } from "@/lib/mission-compare";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -25,6 +26,10 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
   const pendingByArtifact = new Map(pending.map((r) => [r.artifactId, r]));
   const sessions = await repo.listSessions(id);
   const evidence = await repo.listEvidence(id);
+  const { getTaskContract } = await import("@/lib/task-contracts");
+  const linkedTasks = job.taskContractIds
+    .map((tc) => getTaskContract(tc))
+    .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -36,10 +41,19 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             {job.department} · {job.agent || "unassigned"} · created by {job.createdBy} · {new Date(job.createdAt).toLocaleString()}
           </p>
           <p className="text-xs text-text-muted mt-1">
-            {job.taskContractIds.length > 0 ? `Tasks: ${job.taskContractIds.join(", ")}` : "No task contracts linked"}
-            {" · "}
             {job.queueJobId ? `Queue: ${job.queueJobId}` : "No execution binding"}
           </p>
+          {linkedTasks.length > 0 && (
+            <div className="mt-3 rounded-lg bg-bg-secondary border border-border-primary px-4 py-3">
+              <div className="text-xs font-semibold text-text-primary mb-2">Linked task contracts (planning source: .ai/tasks)</div>
+              {linkedTasks.map((t) => (
+                <div key={t.id} className="text-xs text-text-secondary py-1">
+                  <span className="font-mono text-text-tertiary">{t.id}</span> · {t.title} · {t.status}
+                  {t.goal && <span className="block text-text-muted">Goal: {t.goal}</span>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <span className="text-xs px-2 py-1 rounded bg-bg-secondary border border-border-primary text-text-primary">{job.status}</span>
       </div>
@@ -68,10 +82,24 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   <RequestApprovalButton artifactId={artifact.id} />
                 )}
               </div>
-              <div className="mt-4 text-xs text-text-secondary">
+              <div className="mt-4 text-xs text-text-secondary break-words">
                 <span className="font-semibold text-text-primary">Lineage: </span>
                 {versions.map((v) => `v${v.version}${v.humanReplacement ? " (human)" : ""} by ${v.producer}${v.note ? ` — ${v.note}` : ""}`).join(" → ")}
               </div>
+              {versions.length > 1 && (
+                <div className="mt-2 text-xs text-text-secondary break-words">
+                  <span className="font-semibold text-text-primary">Metadata changes (latest): </span>
+                  {(() => {
+                    const [prev, curr] = versions.slice(-2);
+                    const changes = diffVersions(
+                      { version: prev.version, producer: prev.producer, humanReplacement: prev.humanReplacement, note: prev.note, path: prev.path, hash: prev.hash, status: prev.status },
+                      { version: curr.version, producer: curr.producer, humanReplacement: curr.humanReplacement, note: curr.note, path: curr.path, hash: curr.hash, status: curr.status },
+                    );
+                    return changes.length === 0 ? "no metadata changes" : changes.map((c) => `${c.field}: ${c.before} → ${c.after}`).join("; ");
+                  })()}
+                </div>
+              )}
+              <IntegrationActions artifactId={artifact.id} status={artifact.status} />
               {req && (
                 <div className="mt-4 border-t border-border-primary pt-4">
                   <p className="text-xs text-text-tertiary mb-1">

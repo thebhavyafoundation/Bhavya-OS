@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
-import { requireMissionOperator } from "../_auth";
+import { requireMissionOperator, actorOf } from "../_auth";
 
 export async function POST(req: NextRequest) {
   const gate = await requireMissionOperator(req);
@@ -19,11 +19,30 @@ export async function POST(req: NextRequest) {
     hash?: string;
     humanReplacement?: boolean;
   } | null;
-  if (!body?.op || (body.op !== "create" && body.op !== "addVersion")) {
-    return NextResponse.json({ error: "op must be create or addVersion" }, { status: 400 });
+  if (!body?.op || (body.op !== "create" && body.op !== "addVersion" && body.op !== "verify" && body.op !== "beginIntegrate" && body.op !== "completeIntegrate")) {
+    return NextResponse.json({ error: "op must be create, addVersion, verify, beginIntegrate, or completeIntegrate" }, { status: 400 });
   }
   await initDatabase();
   const repo = getMissionControlRepository();
+
+  if (body.op === "verify" || body.op === "beginIntegrate" || body.op === "completeIntegrate") {
+    if (!body.artifactId) {
+      return NextResponse.json({ error: "artifactId is required" }, { status: 400 });
+    }
+    try {
+      if (body.op === "verify") return NextResponse.json(await repo.markVerified(body.artifactId));
+      if (body.op === "beginIntegrate") return NextResponse.json(await repo.beginIntegration(body.artifactId));
+      return NextResponse.json(
+        await repo.completeIntegration(body.artifactId, actorOf(gate.user), body.note),
+      );
+    } catch (err) {
+      return NextResponse.json(
+        { error: err instanceof Error ? err.message : "Integration operation failed" },
+        { status: 422 },
+      );
+    }
+  }
+
   try {
     if (body.op === "create") {
       if (!body.jobId || !body.title || !body.producer) {

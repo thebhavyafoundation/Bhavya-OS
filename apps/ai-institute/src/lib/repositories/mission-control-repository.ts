@@ -168,6 +168,19 @@ export interface MissionControlRepository {
   }): Promise<McDecision>;
   listDecisions(targetKind?: string, targetId?: string): Promise<McDecision[]>;
 
+  /** Jobs referencing a task contract id (projection join, code-side filter). */
+  findJobsByTaskContract(contractId: string): Promise<McJob[]>;
+
+  /**
+   * Explicit integration gate. Approved ≠ integrated: an approved artifact
+   * must be verified, then moved to integrating, then integrated — each
+   * step persisted with evidence. completeIntegration records an
+   * approve_integration decision (actor required).
+   */
+  markVerified(artifactId: string): Promise<McArtifact>;
+  beginIntegration(artifactId: string): Promise<McArtifact>;
+  completeIntegration(artifactId: string, actor: string, note?: string): Promise<McArtifact>;
+
   // Execution bindings + sessions (Phase 2). queueJobId references a
   // workflows JobQueue job; sessionId references mc_sessions. Both stay
   // empty unless a real binding exists — never fabricated.

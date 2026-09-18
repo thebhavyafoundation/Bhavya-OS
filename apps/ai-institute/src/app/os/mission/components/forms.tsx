@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 async function postJson(url: string, body: unknown) {
@@ -14,15 +14,28 @@ export function NewJobForm() {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [department, setDepartment] = useState("engineering");
+  const [tasks, setTasks] = useState<{ task: { id: string; title: string; status: string } }[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    fetch("/os/mission/api/tasks")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((rows) => setTasks(Array.isArray(rows) ? rows : []))
+      .catch(() => {});
+  }, []);
+
+  function toggle(id: string) {
+    setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setBusy(true);
     try {
-      const job = (await postJson("/os/mission/api/jobs", { title, department })) as { id: string };
+      const job = (await postJson("/os/mission/api/jobs", { title, department, taskContractIds: selected })) as { id: string };
       router.push(`/os/mission/jobs/${job.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create job");
@@ -62,6 +75,19 @@ export function NewJobForm() {
       >
         {busy ? "Creating…" : "Create job"}
       </button>
+      {tasks.length > 0 && (
+        <div className="w-full">
+          <span className="block text-xs text-text-tertiary mb-1">Link task contracts (optional, from .ai/tasks)</span>
+          <div className="flex flex-wrap gap-2">
+            {tasks.map(({ task }) => (
+              <label key={task.id} className="flex items-center gap-1.5 text-xs text-text-secondary border border-border-primary rounded-full px-2.5 py-1">
+                <input type="checkbox" checked={selected.includes(task.id)} onChange={() => toggle(task.id)} />
+                <span className="font-mono">{task.id}</span> {task.title} ({task.status})
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
       {error && <p className="w-full text-xs text-red-400">{error}</p>}
     </form>
   );
@@ -204,8 +230,49 @@ export function DecisionForm({ requestId }: { requestId: string }) {
   );
 }
 
-export function NewVersionForm({ artifactId }: { artifactId: string }) {
+export function IntegrationActions({ artifactId, status }: { artifactId: string; status: string }) {
   const router = useRouter();
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const next =
+    status === "approved" ? "verify"
+    : status === "verified" ? "beginIntegrate"
+    : status === "integrating" ? "completeIntegrate"
+    : null;
+  if (!next) return null;
+
+  const label = next === "verify" ? "Mark verified" : next === "beginIntegrate" ? "Begin integration" : "Complete integration";
+
+  async function run() {
+    let note = "";
+    if (next === "completeIntegrate") {
+      note = window.prompt("Integration note (recorded with the approval):") ?? "";
+      if (!note.trim()) return;
+    }
+    setError("");
+    setBusy(true);
+    try {
+      await postJson("/os/mission/api/artifacts", { op: next, artifactId, note });
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Operation failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="mt-2">
+      <button type="button" disabled={busy} onClick={run} className="px-3 py-1.5 rounded-lg border border-accent-gold/40 text-xs font-medium text-accent-gold disabled:opacity-50">
+        {busy ? "Working…" : label}
+      </button>
+      {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
+    </div>
+  );
+}
+
+export function NewVersionForm({ artifactId }: { artifactId: string }) {  const router = useRouter();
   const [note, setNote] = useState("");
   const [humanReplacement, setHumanReplacement] = useState(false);
   const [error, setError] = useState("");

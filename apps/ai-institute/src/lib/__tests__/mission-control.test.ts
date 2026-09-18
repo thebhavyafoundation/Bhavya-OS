@@ -190,6 +190,62 @@ describe("mission control sessions and bindings", () => {
   });
 });
 
+describe("mission control integration gate", () => {
+  it("walks approved -> verified -> integrating -> integrated with a recorded decision", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Integration gate");
+    await repo.startJob(job.id);
+    await repo.submitJobForApproval(job.id);
+    const { artifact } = await repo.createArtifact({
+      jobId: job.id,
+      title: `Gate artifact ${TAG}`,
+      producer: "agent-1",
+    });
+    await expect(repo.markVerified(artifact.id)).rejects.toThrow("Only approved artifacts");
+    const req = await repo.requestApproval(artifact.id, "test-operator");
+    await repo.decide({ requestId: req.id, action: "approve", actor: "human-1" });
+    await expect(repo.completeIntegration(artifact.id, "human-1")).rejects.toThrow("Only integrating");
+    expect((await repo.markVerified(artifact.id)).status).toBe("verified");
+    expect((await repo.beginIntegration(artifact.id)).status).toBe("integrating");
+    expect((await repo.completeIntegration(artifact.id, "human-1", "Shipped")).status).toBe("integrated");
+    const decisions = await repo.listDecisions("artifact", artifact.id);
+    expect(decisions.some((d) => d.action === "approve_integration" && d.actor === "human-1")).toBe(true);
+    await expect(repo.completeIntegration(artifact.id, "human-1")).rejects.toThrow("Only integrating");
+  });
+});
+
+describe("mission control task linkage", () => {
+  it("finds jobs by task contract id", async () => {
+    const repo = getMissionControlRepository();
+    const { listTaskContracts } = await import("@/lib/task-contracts");
+    const contracts = listTaskContracts();
+    expect(contracts.length).toBeGreaterThan(0);
+    const target = contracts[0].id;
+    const job = await freshJob("Linked");
+    await repo.startJob(job.id);
+    expect(await repo.findJobsByTaskContract(target)).toEqual([]);
+    const db = (await import("@/lib/db")).getAsyncDb();
+    await db.run("UPDATE mc_jobs SET task_contract_ids = ? WHERE id = ?", JSON.stringify([target]), job.id);
+    expect((await repo.findJobsByTaskContract(target)).map((j) => j.id)).toContain(job.id);
+    expect(await repo.findJobsByTaskContract("  ")).toEqual([]);
+  });
+});
+
+describe("mission control version comparison", () => {
+  it("reports only changed metadata fields", async () => {
+    const { diffVersions } = await import("@/lib/mission-compare");
+    const base = { version: 1, producer: "agent-1", humanReplacement: false, note: "", path: "", hash: "", status: "draft" };
+    expect(diffVersions(base, base)).toEqual([]);
+    const changes = diffVersions(base, { ...base, version: 2, producer: "human-1", humanReplacement: true, note: "fix" });
+    const fields = changes.map((c) => c.field);
+    expect(fields).toContain("producer");
+    expect(fields).toContain("human replacement");
+    expect(fields).toContain("note");
+    expect(fields).not.toContain("status");
+    expect(changes.find((c) => c.field === "human replacement")).toMatchObject({ before: "no", after: "yes" });
+  });
+});
+
 describe("mission control graph projection", () => {
   it("emits fact-only edges with no orphans across a full loop", async () => {
     const repo = getMissionControlRepository();

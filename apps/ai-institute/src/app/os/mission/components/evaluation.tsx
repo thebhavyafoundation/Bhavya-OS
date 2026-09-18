@@ -8,8 +8,14 @@ export interface RepoOption {
   name: string;
   language?: string;
   stars?: number;
+  forks?: number;
   license?: string;
+  health_score?: number;
+  technology_score?: number;
   bhavya_score?: number;
+  engineering_maturity?: string;
+  recommendation_type?: string;
+  why_bhavya_cares?: string;
 }
 
 export function NewEvaluationForm({ repos }: { repos: RepoOption[] }) {
@@ -56,8 +62,14 @@ export function NewEvaluationForm({ repos }: { repos: RepoOption[] }) {
           `Repository: ${repo.name}`,
           repo.language ? `Language: ${repo.language}` : null,
           typeof repo.stars === "number" ? `Stars: ${repo.stars}` : null,
+          typeof repo.forks === "number" ? `Forks: ${repo.forks}` : null,
           repo.license ? `License: ${repo.license}` : null,
+          typeof repo.health_score === "number" ? `Health: ${repo.health_score}` : null,
+          typeof repo.technology_score === "number" ? `Technology: ${repo.technology_score}` : null,
           typeof repo.bhavya_score === "number" ? `Bhavya score: ${repo.bhavya_score}` : null,
+          repo.engineering_maturity ? `Maturity: ${repo.engineering_maturity}` : null,
+          repo.recommendation_type ? `Recommendation: ${repo.recommendation_type}` : null,
+          repo.why_bhavya_cares ? `Relevance: ${repo.why_bhavya_cares}` : null,
         ]
           .filter(Boolean)
           .join(" · "),
