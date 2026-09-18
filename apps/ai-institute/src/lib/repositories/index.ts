@@ -12,6 +12,8 @@ import type { KnowledgeRepository } from "./knowledge-repository";
 import { SqliteKnowledgeRepository } from "./sqlite-knowledge-repository";
 import type { EvidenceRepository } from "./evidence-repository";
 import { SqliteEvidenceRepository } from "./sqlite-evidence-repository";
+import type { MissionControlRepository } from "./mission-control-repository";
+import { SqliteMissionControlRepository } from "./sqlite-mission-control-repository";
 
 export type {
   User,
@@ -37,6 +39,19 @@ export type {
   Reference,
 } from "./knowledge-repository";
 export type { EvidenceRecord } from "./evidence-repository";
+export type {
+  McJob,
+  McJobStatus,
+  McArtifact,
+  McArtifactStatus,
+  McArtifactVersion,
+  McApprovalRequest,
+  McApprovalStatus,
+  McDecision,
+  McDecisionAction,
+  McRequestDecision,
+  MissionControlRepository,
+} from "./mission-control-repository";
 
 export function getUserRepository(): UserRepository {
   return new SqliteUserRepository();
@@ -60,6 +75,10 @@ export function getKnowledgeRepository(): KnowledgeRepository {
 
 export function getEvidenceRepository(): EvidenceRepository {
   return new SqliteEvidenceRepository();
+}
+
+export function getMissionControlRepository(): MissionControlRepository {
+  return new SqliteMissionControlRepository();
 }
 
 export { eventKey } from "./evidence-repository";
