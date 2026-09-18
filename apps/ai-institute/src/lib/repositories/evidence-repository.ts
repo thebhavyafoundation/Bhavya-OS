@@ -67,4 +67,13 @@ export interface EvidenceRepository {
 
   /** Count cumulative events of a specific type */
   countTotal(activityType: string): Promise<number>;
+
+  /** Distinct activity types, newest-first by latest row (for filter UIs) */
+  listActivityTypes(limit?: number): Promise<string[]>;
+
+  /** Recent evidence across types, newest first */
+  listRecent(limit?: number): Promise<EvidenceRecord[]>;
+
+  /** Filtered query: exact type and/or activity id, newest first */
+  query(filter: { activityType?: string; activityId?: string; limit?: number }): Promise<EvidenceRecord[]>;
 }

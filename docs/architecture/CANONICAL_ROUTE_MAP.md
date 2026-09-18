@@ -144,6 +144,8 @@ Public navigation is organized into four institutional groups:
 | `/os/volunteer`     | Volunteer workspace  | Volunteer | Yes  |
 | `/os/donor`         | Donor workspace      | Donor     | Yes  |
 | `/os/trustee`       | Trustee workspace    | Trustee   | Yes  |
+| `/os/mission`       | Mission Control      | Admin     | Yes  |
+| `/os/mission/approvals` | Approval review  | Admin     | Yes  |
 
 ---
 

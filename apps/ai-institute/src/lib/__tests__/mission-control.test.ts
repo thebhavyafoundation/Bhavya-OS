@@ -297,6 +297,31 @@ describe("mission control negative paths", () => {
     await expect(repo.startSession("missing", "p")).rejects.toThrow("Job not found");
   });
 });
+describe("mission control search and overview reads", () => {
+  it("searches jobs, lists recent artifacts, and filters by status", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Searchable Evaluation");
+    expect(await repo.searchJobs("   ")).toEqual([]);
+    const found = await repo.searchJobs("Searchable");
+    expect(found.map((j) => j.id)).toContain(job.id);
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `Search artifact ${TAG}`, producer: "agent-1" });
+    expect((await repo.listRecentArtifacts(5)).some((r) => r.artifact.id === artifact.id)).toBe(true);
+    expect((await repo.listArtifactsByStatus(["draft"])).some((r) => r.artifact.id === artifact.id)).toBe(true);
+    expect(await repo.listArtifactsByStatus([])).toEqual([]);
+    expect((await repo.listArtifactsByStatus(["integrated"])).some((r) => r.artifact.id === artifact.id)).toBe(false);
+  });
+
+  it("deduplicates job creation on idempotency key", async () => {
+    const repo = getMissionControlRepository();
+    const key = `idem-${TAG}`;
+    const first = await repo.createJob({ title: `Idem ${TAG}`, createdBy: "op", idempotencyKey: key });
+    const second = await repo.createJob({ title: `Idem ${TAG}`, createdBy: "op", idempotencyKey: key });
+    expect(second.id).toBe(first.id);
+    const third = await repo.createJob({ title: `Idem ${TAG}`, createdBy: "op" });
+    expect(third.id).not.toBe(first.id);
+  });
+});
+
 describe("mission control version comparison", () => {
   it("reports only changed metadata fields", async () => {
     const { diffVersions } = await import("@/lib/mission-compare");

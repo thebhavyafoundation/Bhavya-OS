@@ -129,4 +129,43 @@ export class SqliteEvidenceRepository implements EvidenceRepository {
     );
     return row?.count ?? 0;
   }
+
+  async listActivityTypes(limit: number = 100): Promise<string[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<{ activity_type: string }>(
+      "SELECT activity_type FROM evidence_records GROUP BY activity_type ORDER BY MAX(timestamp) DESC LIMIT ?",
+      Math.min(Math.max(limit, 1), 500),
+    );
+    return rows.map((r) => r.activity_type);
+  }
+
+  async listRecent(limit: number = 50): Promise<EvidenceRecord[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<Record<string, unknown>>(
+      "SELECT * FROM evidence_records ORDER BY timestamp DESC LIMIT ?",
+      Math.min(Math.max(limit, 1), 500),
+    );
+    return rows.map(rowToEvidence);
+  }
+
+  async query(filter: { activityType?: string; activityId?: string; limit?: number }): Promise<EvidenceRecord[]> {
+    const db = getAsyncDb();
+    const clauses: string[] = [];
+    const params: unknown[] = [];
+    if (filter.activityType?.trim()) {
+      clauses.push("activity_type = ?");
+      params.push(filter.activityType.trim());
+    }
+    if (filter.activityId?.trim()) {
+      clauses.push("activity_id = ?");
+      params.push(filter.activityId.trim());
+    }
+    const where = clauses.length > 0 ? `WHERE ${clauses.join(" AND ")}` : "";
+    const rows = await db.all<Record<string, unknown>>(
+      `SELECT * FROM evidence_records ${where} ORDER BY timestamp DESC LIMIT ?`,
+      ...params,
+      Math.min(Math.max(filter.limit ?? 50, 1), 500),
+    );
+    return rows.map(rowToEvidence);
+  }
 }

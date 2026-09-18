@@ -126,9 +126,20 @@ export interface MissionControlRepository {
     agent?: string;
     taskContractIds?: string[];
     createdBy: string;
+    /**
+     * Optional idempotency key. When supplied and a job was already created
+     * with the same key, the original job is returned instead of a duplicate.
+     */
+    idempotencyKey?: string;
   }): Promise<McJob>;
   getJob(id: string): Promise<McJob | undefined>;
   listJobs(status?: McJobStatus): Promise<McJob[]>;
+  /** Substring search over job id/title (deterministic LIKE, capped). */
+  searchJobs(query: string, limit?: number): Promise<McJob[]>;
+  /** Recent artifacts across jobs with owning job titles (overview queries). */
+  listRecentArtifacts(limit?: number): Promise<{ artifact: McArtifact; jobTitle: string }[]>;
+  /** Artifacts in any of the given statuses with owning job titles. */
+  listArtifactsByStatus(statuses: McArtifactStatus[]): Promise<{ artifact: McArtifact; jobTitle: string }[]>;
   startJob(id: string): Promise<McJob>;
   submitJobForApproval(id: string): Promise<McJob>;
   completeJob(id: string): Promise<McJob>;

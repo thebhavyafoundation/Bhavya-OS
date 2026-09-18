@@ -149,10 +149,23 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     agent?: string;
     taskContractIds?: string[];
     createdBy: string;
+    idempotencyKey?: string;
   }): Promise<McJob> {
     if (!input.title.trim()) throw new Error("Job title is required");
     if (!input.createdBy.trim()) throw new Error("createdBy actor is required");
     const db = getAsyncDb();
+    if (input.idempotencyKey?.trim()) {
+      const key = `job-create:${input.idempotencyKey.trim()}`;
+      const prior = await db.get<Row>(
+        "SELECT * FROM evidence_records WHERE idempotency_key = ? LIMIT 1",
+        key,
+      );
+      if (prior) {
+        const meta = JSON.parse((prior.metadata as string) ?? "{}") as { jobId?: string };
+        const existing = meta.jobId ? await this.getJob(meta.jobId) : undefined;
+        if (existing) return existing;
+      }
+    }
     const id = uid("mc-job");
     await db.run(
       `INSERT INTO mc_jobs (id, title, department, agent, task_contract_ids, status, created_by)
@@ -164,9 +177,23 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       JSON.stringify(input.taskContractIds ?? []),
       input.createdBy.trim(),
     );
-    await this.evidence("mission-control.job", id, `Job created: ${input.title.trim()}`, {
-      department: input.department ?? "engineering",
-    });
+    const meta: Record<string, unknown> = { department: input.department ?? "engineering" };
+    let idemKey: string | null = null;
+    if (input.idempotencyKey?.trim()) {
+      idemKey = `job-create:${input.idempotencyKey.trim()}`;
+      meta.jobId = id;
+    }
+    const evId = uid("ev-mc");
+    await db.run(
+      `INSERT INTO evidence_records (id, activity_type, activity_id, timestamp, description, metadata, idempotency_key)
+       VALUES (?, 'mission-control.job', ?, ?, ?, ?, ?)`,
+      evId,
+      id,
+      now(),
+      `Job created: ${input.title.trim()}`,
+      JSON.stringify(meta),
+      idemKey,
+    );
     return (await this.getJob(id)) as McJob;
   }
 
@@ -182,6 +209,43 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       ? await db.all<Row>("SELECT * FROM mc_jobs WHERE status = ? ORDER BY updated_at DESC", status)
       : await db.all<Row>("SELECT * FROM mc_jobs ORDER BY updated_at DESC");
     return rows.map(rowToJob);
+  }
+
+  async searchJobs(query: string, limit: number = 50): Promise<McJob[]> {
+    const q = query.trim();
+    if (!q) return [];
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      "SELECT * FROM mc_jobs WHERE id LIKE ? OR title LIKE ? ORDER BY updated_at DESC LIMIT ?",
+      `%${q}%`,
+      `%${q}%`,
+      Math.min(Math.max(limit, 1), 200),
+    );
+    return rows.map(rowToJob);
+  }
+
+  async listRecentArtifacts(limit: number = 20): Promise<{ artifact: McArtifact; jobTitle: string }[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      `SELECT a.*, j.title AS job_title FROM mc_artifacts a
+       JOIN mc_jobs j ON j.id = a.job_id
+       ORDER BY a.created_at DESC LIMIT ?`,
+      Math.min(Math.max(limit, 1), 200),
+    );
+    return rows.map((r) => ({ artifact: rowToArtifact(r), jobTitle: r.job_title as string }));
+  }
+
+  async listArtifactsByStatus(statuses: McArtifactStatus[]): Promise<{ artifact: McArtifact; jobTitle: string }[]> {
+    if (statuses.length === 0) return [];
+    const db = getAsyncDb();
+    const placeholders = statuses.map(() => "?").join(", ");
+    const rows = await db.all<Row>(
+      `SELECT a.*, j.title AS job_title FROM mc_artifacts a
+       JOIN mc_jobs j ON j.id = a.job_id
+       WHERE a.status IN (${placeholders}) ORDER BY a.updated_at DESC LIMIT 200`,
+      ...statuses,
+    );
+    return rows.map((r) => ({ artifact: rowToArtifact(r), jobTitle: r.job_title as string }));
   }
 
   private async transitionJob(id: string, to: McJobStatus): Promise<McJob> {
