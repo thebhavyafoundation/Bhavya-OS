@@ -88,7 +88,7 @@ export function NewJobForm() {
           </div>
         </div>
       )}
-      {error && <p className="w-full text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="w-full text-xs text-red-400">{error}</p>}
     </form>
   );
 }
@@ -138,7 +138,7 @@ export function JobActions({ jobId, status }: { jobId: string; status: string })
           {a === "submit" ? "Submit for approval" : a[0].toUpperCase() + a.slice(1)}
         </button>
       ))}
-      {error && <p className="w-full text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="w-full text-xs text-red-400">{error}</p>}
     </div>
   );
 }
@@ -171,7 +171,7 @@ export function RequestApprovalButton({ artifactId }: { artifactId: string }) {
       >
         {busy ? "Requesting…" : "Request approval"}
       </button>
-      {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="mt-1 text-xs text-red-400">{error}</p>}
     </div>
   );
 }
@@ -227,7 +227,7 @@ export function DecisionForm({ requestId }: { requestId: string }) {
         <button type="button" disabled={busy} onClick={() => decide("reject")} className="px-3 py-1.5 rounded-lg bg-red-500/20 text-xs font-medium text-red-400 disabled:opacity-50">Reject</button>
         <button type="button" disabled={busy} onClick={() => decide("request_revision")} className="px-3 py-1.5 rounded-lg bg-accent-gold/20 text-xs font-medium text-accent-gold disabled:opacity-50">Request revision</button>
       </div>
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="text-xs text-red-400">{error}</p>}
     </div>
   );
 }
@@ -269,7 +269,7 @@ export function IntegrationActions({ artifactId, status }: { artifactId: string;
       <button type="button" disabled={busy} onClick={run} className="px-3 py-1.5 rounded-lg border border-accent-gold/40 text-xs font-medium text-accent-gold disabled:opacity-50">
         {busy ? "Working…" : label}
       </button>
-      {error && <p className="mt-1 text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="mt-1 text-xs text-red-400">{error}</p>}
     </div>
   );
 }
@@ -317,7 +317,7 @@ export function NewVersionForm({ artifactId }: { artifactId: string }) {  const 
       <button type="submit" disabled={busy} className="px-3 py-1.5 rounded-lg border border-border-primary text-xs font-medium text-text-primary disabled:opacity-50">
         {busy ? "Recording…" : "Record version"}
       </button>
-      {error && <p className="w-full text-xs text-red-400">{error}</p>}
+      {error && <p role="alert" className="w-full text-xs text-red-400">{error}</p>}
     </form>
   );
 }

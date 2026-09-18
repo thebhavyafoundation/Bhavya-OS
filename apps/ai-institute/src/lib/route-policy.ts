@@ -55,6 +55,8 @@ export const ROUTE_POLICIES: Record<string, RoutePolicy> = {
   // Mission Control — human control plane (operators only)
   "/os/mission": { roles: ["admin", "staff"] },
   "/os/mission/approvals": { roles: ["admin", "staff"] },
+  "/os/mission/integrations": { roles: ["admin", "staff"] },
+  "/os/mission/evidence": { roles: ["admin", "staff"] },
 };
 
 /**
