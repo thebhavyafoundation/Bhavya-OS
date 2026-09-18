@@ -12,6 +12,8 @@ import {
 } from "@/data/academy-lessons";
 import { requireSessionUser } from "@/lib/require-role";
 import { getStudentByUserId } from "@/lib/student-store";
+import { getRelationshipsForLesson } from "@/data/source-relationships";
+import { sourceBPacks } from "@/data/source-b-registry.generated";
 
 export async function generateMetadata({
   params,
@@ -52,6 +54,16 @@ export default async function LessonPage({
   const next = getNextLesson(id, lessonId);
   const prev = getPreviousLesson(id, lessonId);
 
+  const externalRefs = getRelationshipsForLesson(lessonId)
+    .map((rel) => ({
+      rel,
+      pack: sourceBPacks.find((p) => p.slug === rel.packSlug),
+    }))
+    .filter(
+      (e): e is { rel: (typeof e.rel); pack: (typeof sourceBPacks)[number] } =>
+        Boolean(e.pack),
+    );
+
   return (
     <main className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-4xl px-6 py-16">
@@ -72,9 +84,14 @@ export default async function LessonPage({
         </nav>
 
         {/* Module context */}
-        <div className="mt-4 rounded-lg bg-bg-tertiary/5 px-4 py-2 text-xs text-text-tertiary/60">
-          Module {mod.order}: {mod.title} · Lesson {lesson.order} of{" "}
-          {mod.lessons.length}
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs text-text-tertiary/60">
+          <span className="rounded-lg bg-bg-tertiary/5 px-4 py-2">
+            Module {mod.order}: {mod.title} · Lesson {lesson.order} of{" "}
+            {mod.lessons.length}
+          </span>
+          <span className="rounded-full border border-border-primary px-2.5 py-1">
+            Bhavya Academy
+          </span>
         </div>
 
         {/* Lesson title */}
@@ -203,6 +220,33 @@ export default async function LessonPage({
               Lesson content is being prepared. Check back soon.
             </p>
           </div>
+        )}
+
+        {/* Recommended external resources (Source B references) */}
+        {externalRefs.length > 0 && (
+          <section className="mt-12 rounded-xl border border-border-primary bg-white p-6">
+            <h2 className="text-2xl font-bold text-text-primary">
+              Recommended external resources
+            </h2>
+            <div className="mt-4 space-y-3">
+              {externalRefs.map(({ rel, pack }) => (
+                <div key={rel.id} className="text-sm">
+                  <div className="font-semibold text-text-primary">
+                    {pack.title}
+                    <span className="ml-2 rounded-full border border-border-primary px-2 py-0.5 text-xs font-normal text-text-secondary">
+                      External · {pack.provider}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-text-primary/70">{rel.note}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs text-text-secondary">
+              Provided by the Raspberry Pi Foundation (“Experience AI”, CC
+              BY-NC-ND 4.0). Listed as references — lesson content remains
+              with the provider. See the Library for the full collection.
+            </p>
+          </section>
         )}
 
         {/* Navigation */}
