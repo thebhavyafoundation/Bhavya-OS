@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [master]
 
+# Least-privilege token scope. secret-scan's gitleaks-action reads PR
+# commits via the API (GET pulls/{n}/commits); without this block the job
+# inherits restrictive defaults and fails 403. See run 35315392267.
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   lint-and-typecheck:
     runs-on: ubuntu-latest
