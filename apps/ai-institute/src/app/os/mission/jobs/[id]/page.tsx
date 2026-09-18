@@ -23,6 +23,8 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
   const decisions = await repo.listDecisions("job", id);
   const pending = await repo.listPendingApprovals();
   const pendingByArtifact = new Map(pending.map((r) => [r.artifactId, r]));
+  const sessions = await repo.listSessions(id);
+  const evidence = await repo.listEvidence(id);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -32,6 +34,11 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
           <h1 className="text-3xl font-bold text-text-primary tracking-tight">{job.title}</h1>
           <p className="text-xs text-text-muted mt-2">
             {job.department} · {job.agent || "unassigned"} · created by {job.createdBy} · {new Date(job.createdAt).toLocaleString()}
+          </p>
+          <p className="text-xs text-text-muted mt-1">
+            {job.taskContractIds.length > 0 ? `Tasks: ${job.taskContractIds.join(", ")}` : "No task contracts linked"}
+            {" · "}
+            {job.queueJobId ? `Queue: ${job.queueJobId}` : "No execution binding"}
           </p>
         </div>
         <span className="text-xs px-2 py-1 rounded bg-bg-secondary border border-border-primary text-text-primary">{job.status}</span>
@@ -87,6 +94,28 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             <span className="font-semibold text-text-primary">{d.action}</span> by {d.actor} · {new Date(d.createdAt).toLocaleString()}
             {d.reason && <span className="block mt-0.5">Reason: {d.reason}</span>}
             {d.instruction && <span className="block mt-0.5">Instruction: {d.instruction}</span>}
+          </div>
+        ))}
+      </div>
+
+      <h2 className="mt-10 text-xl font-bold text-text-primary">Sessions ({sessions.length})</h2>
+      <div className="mt-4 space-y-2">
+        {sessions.length === 0 && <p className="text-xs text-text-muted">No execution sessions bound. Sessions appear here only when a real execution starts one.</p>}
+        {sessions.map((s) => (
+          <div key={s.id} className="text-xs text-text-secondary bg-bg-secondary border border-border-primary rounded-lg px-4 py-2.5">
+            <span className="font-semibold text-text-primary">{s.producer}</span> · {s.status} · started {new Date(s.startedAt).toLocaleString()}
+            {s.endedAt && <span> · ended {new Date(s.endedAt).toLocaleString()}</span>}
+          </div>
+        ))}
+      </div>
+
+      <h2 className="mt-10 text-xl font-bold text-text-primary">Evidence trail ({evidence.length})</h2>
+      <div className="mt-4 space-y-2">
+        {evidence.length === 0 && <p className="text-xs text-text-muted">No lifecycle events recorded yet.</p>}
+        {evidence.map((e) => (
+          <div key={e.id} className="text-xs text-text-secondary bg-bg-secondary border border-border-primary rounded-lg px-4 py-2.5">
+            <span className="font-mono text-text-tertiary">{e.activityType}</span>
+            <span className="block mt-0.5">{e.description} · {new Date(e.timestamp).toLocaleString()}</span>
           </div>
         ))}
       </div>

@@ -7,6 +7,7 @@ import type {
   McApprovalRequest,
   McArtifact,
   McArtifactVersion,
+  McDecision,
   McJob,
 } from "@/lib/repositories";
 
@@ -14,6 +15,7 @@ interface PendingRow {
   request: McApprovalRequest;
   artifact?: McArtifact;
   versions: McArtifactVersion[];
+  priorRounds: { request: McApprovalRequest; decisions: McDecision[] }[];
   job?: McJob;
 }
 
@@ -30,10 +32,17 @@ export default async function ApprovalsPage() {
   const pending: PendingRow[] = [];
   for (const r of pendingRows) {
     const artifact = await repo.getArtifact(r.artifactId);
+    const rounds = await repo.listApprovalRequests(r.artifactId);
+    const priorRounds: PendingRow["priorRounds"] = [];
+    for (const round of rounds) {
+      if (round.id === r.id) continue;
+      priorRounds.push({ request: round, decisions: await repo.listDecisions("approval_request", round.id) });
+    }
     pending.push({
       request: r,
       artifact,
       versions: await repo.listVersions(r.artifactId),
+      priorRounds,
       job: artifact ? ((await repo.getJob(artifact.jobId)) ?? undefined) : undefined,
     });
   }
@@ -50,7 +59,7 @@ export default async function ApprovalsPage() {
             <p className="text-sm text-text-muted">No pending approvals. Nothing awaiting human review.</p>
           </div>
         )}
-        {pending.map(({ request, artifact, versions, job }) => (
+        {pending.map(({ request, artifact, versions, priorRounds, job }) => (
           <div key={request.id} className="bg-bg-secondary border border-border-primary rounded-xl p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
@@ -65,6 +74,17 @@ export default async function ApprovalsPage() {
               <span className="font-semibold text-text-primary">Lineage: </span>
               {versions.map((v) => `v${v.version}${v.humanReplacement ? " (human)" : ""} by ${v.producer}`).join(" → ")}
             </div>
+            {priorRounds.length > 0 && (
+              <div className="mt-4 text-xs text-text-secondary">
+                <span className="font-semibold text-text-primary">Previous rounds: </span>
+                {priorRounds.map((round) => (
+                  <span key={round.request.id} className="block mt-1">
+                    v{round.request.version} → {round.request.status}
+                    {round.decisions.map((d) => ` — ${d.action} by ${d.actor}${d.reason ? `: ${d.reason}` : ""}`).join("; ")}
+                  </span>
+                ))}
+              </div>
+            )}
             {artifact?.jobId && (
               <Link href={`/os/mission/jobs/${artifact.jobId}`} className="inline-block mt-2 text-xs text-accent-gold hover:underline">
                 Open job timeline →

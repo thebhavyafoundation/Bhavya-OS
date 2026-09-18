@@ -3,7 +3,7 @@ import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
 import { requireMissionOperator, actorOf } from "../../_auth";
 
-const ACTIONS = ["start", "submit", "complete", "stop", "cancel"] as const;
+const ACTIONS = ["start", "submit", "complete", "stop", "cancel", "startSession", "endSession", "bind"] as const;
 
 export async function GET(
   req: NextRequest,
@@ -36,6 +36,11 @@ export async function POST(
   const body = (await req.json().catch(() => null)) as {
     action?: string;
     reason?: string;
+    producer?: string;
+    sessionId?: string;
+    sessionStatus?: "completed" | "failed";
+    queueJobId?: string;
+    graph?: boolean;
   } | null;
   if (!body || !(ACTIONS as readonly string[]).includes(body.action ?? "")) {
     return NextResponse.json(
@@ -59,6 +64,25 @@ export async function POST(
         );
       case "cancel":
         return NextResponse.json(await repo.cancelJob(id));
+      case "startSession":
+        if (!body.producer?.trim()) {
+          return NextResponse.json({ error: "producer is required" }, { status: 400 });
+        }
+        return NextResponse.json(await repo.startSession(id, body.producer), { status: 201 });
+      case "endSession": {
+        if (!body.sessionId || (body.sessionStatus !== "completed" && body.sessionStatus !== "failed")) {
+          return NextResponse.json(
+            { error: "sessionId and sessionStatus (completed|failed) are required" },
+            { status: 400 },
+          );
+        }
+        return NextResponse.json(await repo.endSession(body.sessionId, body.sessionStatus));
+      }
+      case "bind":
+        if (!body.queueJobId?.trim()) {
+          return NextResponse.json({ error: "queueJobId is required" }, { status: 400 });
+        }
+        return NextResponse.json(await repo.bindQueueJob(id, body.queueJobId));
     }
   } catch (err) {
     return NextResponse.json(
