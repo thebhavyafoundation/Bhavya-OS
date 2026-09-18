@@ -16,10 +16,15 @@ import type {
   McArtifactVersion,
   McDecision,
   McDecisionAction,
+  McEvidenceRow,
   McJob,
   McJobStatus,
   McRequestDecision,
+  McSession,
   MissionControlRepository,
+  MissionEdge,
+  MissionGraph,
+  MissionNode,
 } from "./mission-control-repository";
 
 type Row = Record<string, unknown>;
@@ -50,6 +55,8 @@ function rowToJob(r: Row): McJob {
     department: r.department as string,
     agent: r.agent as string,
     taskContractIds: JSON.parse((r.task_contract_ids as string) ?? "[]"),
+    queueJobId: (r.queue_job_id as string) ?? "",
+    sessionId: (r.session_id as string) ?? "",
     status: r.status as McJobStatus,
     createdBy: r.created_by as string,
     createdAt: r.created_at as string,
@@ -81,6 +88,7 @@ function rowToVersion(r: Row): McArtifactVersion {
     producer: r.producer as string,
     parentVersion: (r.parent_version as number) ?? undefined,
     humanReplacement: (r.human_replacement as number) === 1,
+    sessionId: (r.session_id as string) ?? "",
     status: r.status as string,
     note: r.note as string,
     createdAt: r.created_at as string,
@@ -263,6 +271,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       "",
       false,
       input.note?.trim() || "",
+      "",
     );
     await this.evidence("mission-control.artifact", id, `Artifact created: ${input.title.trim()}`, {
       jobId: input.jobId,
@@ -294,12 +303,13 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     hash: string,
     humanReplacement: boolean,
     note: string,
+    sessionId: string,
   ): Promise<McArtifactVersion> {
     const db = getAsyncDb();
     const id = uid("mc-ver");
     await db.run(
-      `INSERT INTO mc_artifact_versions (id, artifact_id, version, path, hash, producer, parent_version, human_replacement, status, note)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
+      `INSERT INTO mc_artifact_versions (id, artifact_id, version, path, hash, producer, parent_version, human_replacement, session_id, status, note)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
       id,
       artifactId,
       version,
@@ -308,6 +318,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       producer,
       parentVersion ?? null,
       humanReplacement ? 1 : 0,
+      sessionId,
       note,
     );
     await db.run(
@@ -326,6 +337,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     path?: string;
     hash?: string;
     humanReplacement?: boolean;
+    sessionId?: string;
     note?: string;
   }): Promise<McArtifactVersion> {
     const artifact = await this.getArtifact(input.artifactId);
@@ -343,6 +355,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       input.hash?.trim() || "",
       input.humanReplacement ?? false,
       input.note?.trim() || "",
+      input.sessionId?.trim() || "",
     );
     // A superseded pending request must not linger: cancel it so the new
     // version goes through a fresh explicit approval round.
@@ -400,6 +413,15 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     const db = getAsyncDb();
     const rows = await db.all<Row>(
       "SELECT * FROM mc_approval_requests WHERE status = 'pending' ORDER BY created_at ASC",
+    );
+    return rows.map(rowToApproval);
+  }
+
+  async listApprovalRequests(artifactId: string): Promise<McApprovalRequest[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      "SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC",
+      artifactId,
     );
     return rows.map(rowToApproval);
   }
@@ -479,4 +501,141 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     }
     return rows.map(rowToDecision);
   }
+
+  // ── Execution bindings + sessions ───────────────────────────────
+
+  async bindQueueJob(jobId: string, queueJobId: string): Promise<McJob> {
+    const db = getAsyncDb();
+    const job = await this.getJob(jobId);
+    if (!job) throw new Error(`Job not found: ${jobId}`);
+    if (!queueJobId.trim()) throw new Error("queueJobId is required");
+    if (job.queueJobId) {
+      throw new Error(`Job already bound to queue job: ${job.queueJobId}`);
+    }
+    await db.run("UPDATE mc_jobs SET queue_job_id = ?, updated_at = ? WHERE id = ?", queueJobId.trim(), now(), jobId);
+    await this.evidence("mission-control.job", jobId, `Bound to queue job ${queueJobId.trim()}`, {});
+    return (await this.getJob(jobId)) as McJob;
+  }
+
+  async startSession(jobId: string, producer: string): Promise<McSession> {
+    const db = getAsyncDb();
+    const job = await this.getJob(jobId);
+    if (!job) throw new Error(`Job not found: ${jobId}`);
+    if (!producer.trim()) throw new Error("Producer is required");
+    const id = uid("mc-sess");
+    await db.run("INSERT INTO mc_sessions (id, job_id, producer, status) VALUES (?, ?, ?, 'running')", id, jobId, producer.trim());
+    await this.evidence("mission-control.session", id, `Session started for job ${jobId} by ${producer.trim()}`, { jobId });
+    const row = await db.get<Row>("SELECT * FROM mc_sessions WHERE id = ?", id);
+    return rowToSession(row!);
+  }
+
+  async endSession(id: string, status: "completed" | "failed"): Promise<McSession> {
+    const db = getAsyncDb();
+    const row = await db.get<Row>("SELECT * FROM mc_sessions WHERE id = ?", id);
+    if (!row) throw new Error(`Session not found: ${id}`);
+    const session = rowToSession(row);
+    if (session.status !== "running") throw new Error(`Session already ended: ${session.status}`);
+    await db.run("UPDATE mc_sessions SET status = ?, ended_at = ? WHERE id = ?", status, now(), id);
+    await this.evidence("mission-control.session", id, `Session ${status}`, { jobId: session.jobId });
+    const updated = await db.get<Row>("SELECT * FROM mc_sessions WHERE id = ?", id);
+    return rowToSession(updated!);
+  }
+
+  async listSessions(jobId: string): Promise<McSession[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<Row>("SELECT * FROM mc_sessions WHERE job_id = ? ORDER BY started_at ASC", jobId);
+    return rows.map(rowToSession);
+  }
+
+  async listEvidence(activityId: string): Promise<McEvidenceRow[]> {
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      "SELECT id, activity_type, activity_id, timestamp, description, metadata FROM evidence_records WHERE activity_id = ? ORDER BY timestamp ASC",
+      activityId,
+    );
+    return rows.map((r: Row) => ({
+      id: r.id as string,
+      activityType: r.activity_type as string,
+      activityId: r.activity_id as string,
+      timestamp: r.timestamp as string,
+      description: r.description as string,
+      metadata: JSON.parse((r.metadata as string) ?? "{}"),
+    }));
+  }
+
+  // ── Graph projection (read-only, derived, FACT edges only) ──────
+
+  async getMissionGraph(jobId: string): Promise<MissionGraph> {
+    const job = await this.getJob(jobId);
+    if (!job) throw new Error(`Job not found: ${jobId}`);
+    const nodes: MissionNode[] = [
+      { id: `job:${job.id}`, kind: "job", label: job.title, status: job.status },
+    ];
+    const edges: MissionEdge[] = [];
+    for (const tc of job.taskContractIds) {
+      nodes.push({ id: `task:${tc}`, kind: "task_contract", label: tc, status: "referenced" });
+      edges.push({ from: `job:${job.id}`, to: `task:${tc}`, rel: "references_task", kind: "fact" });
+    }
+    const artifacts = await this.listArtifacts(jobId);
+    const sessions = await this.listSessions(jobId);
+    const sessionIds = new Set(sessions.map((s) => s.id));
+    for (const s of sessions) {
+      nodes.push({ id: `session:${s.id}`, kind: "session", label: `${s.producer} session`, status: s.status });
+      edges.push({ from: `session:${s.id}`, to: `job:${job.id}`, rel: "executed_in", kind: "fact" });
+    }
+    const db = getAsyncDb();
+    for (const a of artifacts) {
+      nodes.push({ id: `artifact:${a.id}`, kind: "artifact", label: a.title, status: a.status });
+      edges.push({ from: `job:${job.id}`, to: `artifact:${a.id}`, rel: "produces", kind: "fact" });
+      const versions = await this.listVersions(a.id);
+      for (const v of versions) {
+        nodes.push({
+          id: `version:${a.id}:${v.version}`,
+          kind: "version",
+          label: `${a.title} v${v.version}${v.humanReplacement ? " (human)" : ""}`,
+          status: v.status,
+        });
+        edges.push({ from: `artifact:${a.id}`, to: `version:${a.id}:${v.version}`, rel: "has_version", kind: "fact" });
+        if (v.parentVersion !== undefined) {
+          edges.push({
+            from: `version:${a.id}:${v.parentVersion}`,
+            to: `version:${a.id}:${v.version}`,
+            rel: "supersedes",
+            kind: "fact",
+          });
+        }
+        if (v.sessionId && sessionIds.has(v.sessionId)) {
+          edges.push({
+            from: `version:${a.id}:${v.version}`,
+            to: `session:${v.sessionId}`,
+            rel: "produced_by_session",
+            kind: "fact",
+          });
+        }
+      }
+      const approvals = await db.all<Row>("SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC", a.id);
+      for (const r of approvals) {
+        const ap = rowToApproval(r);
+        nodes.push({ id: `approval:${ap.id}`, kind: "approval", label: `Review ${a.title} v${ap.version}`, status: ap.status });
+        edges.push({ from: `approval:${ap.id}`, to: `artifact:${a.id}`, rel: "reviews", kind: "fact" });
+        const decisions = await this.listDecisions("approval_request", ap.id);
+        for (const d of decisions) {
+          nodes.push({ id: `decision:${d.id}`, kind: "decision", label: `${d.action} by ${d.actor}`, status: d.action });
+          edges.push({ from: `decision:${d.id}`, to: `approval:${ap.id}`, rel: "decides", kind: "fact" });
+        }
+      }
+    }
+    return { jobId, nodes, edges };
+  }
+}
+
+function rowToSession(r: Row): McSession {
+  return {
+    id: r.id as string,
+    jobId: r.job_id as string,
+    producer: r.producer as string,
+    status: r.status as McSession["status"],
+    startedAt: r.started_at as string,
+    endedAt: (r.ended_at as string) ?? undefined,
+  };
 }

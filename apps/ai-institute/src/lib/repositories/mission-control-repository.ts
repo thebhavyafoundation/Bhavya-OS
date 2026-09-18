@@ -61,6 +61,8 @@ export interface McJob {
   department: string;
   agent: string;
   taskContractIds: string[];
+  queueJobId: string;
+  sessionId: string;
   status: McJobStatus;
   createdBy: string;
   createdAt: string;
@@ -88,6 +90,7 @@ export interface McArtifactVersion {
   producer: string;
   parentVersion?: number;
   humanReplacement: boolean;
+  sessionId: string;
   status: string;
   note: string;
   createdAt: string;
@@ -148,12 +151,14 @@ export interface MissionControlRepository {
     path?: string;
     hash?: string;
     humanReplacement?: boolean;
+    sessionId?: string;
     note?: string;
   }): Promise<McArtifactVersion>;
   listVersions(artifactId: string): Promise<McArtifactVersion[]>;
   // Approvals + decisions
   requestApproval(artifactId: string, requestedBy: string): Promise<McApprovalRequest>;
   listPendingApprovals(): Promise<McApprovalRequest[]>;
+  listApprovalRequests(artifactId: string): Promise<McApprovalRequest[]>;
   decide(input: {
     requestId: string;
     action: McRequestDecision;
@@ -162,4 +167,64 @@ export interface MissionControlRepository {
     instruction?: string;
   }): Promise<McDecision>;
   listDecisions(targetKind?: string, targetId?: string): Promise<McDecision[]>;
+
+  // Execution bindings + sessions (Phase 2). queueJobId references a
+  // workflows JobQueue job; sessionId references mc_sessions. Both stay
+  // empty unless a real binding exists — never fabricated.
+  bindQueueJob(jobId: string, queueJobId: string): Promise<McJob>;
+  startSession(jobId: string, producer: string): Promise<McSession>;
+  endSession(id: string, status: "completed" | "failed"): Promise<McSession>;
+  listSessions(jobId: string): Promise<McSession[]>;
+
+  // Audit + projection
+  listEvidence(activityId: string): Promise<McEvidenceRow[]>;
+  getMissionGraph(jobId: string): Promise<MissionGraph>;
+}
+
+export interface McSession {
+  id: string;
+  jobId: string;
+  producer: string;
+  status: "running" | "completed" | "failed";
+  startedAt: string;
+  endedAt?: string;
+}
+
+export interface McEvidenceRow {
+  id: string;
+  activityType: string;
+  activityId: string;
+  timestamp: string;
+  description: string;
+  metadata: Record<string, unknown>;
+}
+
+export type MissionEdgeKind = "fact";
+
+export interface MissionNode {
+  id: string;
+  kind: "job" | "task_contract" | "artifact" | "version" | "approval" | "decision" | "session";
+  label: string;
+  status: string;
+}
+
+export interface MissionEdge {
+  from: string;
+  to: string;
+  rel:
+    | "references_task"
+    | "produces"
+    | "has_version"
+    | "supersedes"
+    | "reviews"
+    | "decides"
+    | "executed_in"
+    | "produced_by_session";
+  kind: MissionEdgeKind;
+}
+
+export interface MissionGraph {
+  jobId: string;
+  nodes: MissionNode[];
+  edges: MissionEdge[];
 }

@@ -153,3 +153,76 @@ describe("mission control approval loop", () => {
     expect(decisions.some((d) => d.action === "abort")).toBe(true);
   });
 });
+
+describe("mission control sessions and bindings", () => {
+  it("binds a queue job once and links sessions to versions", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Bound run");
+    expect(job.queueJobId).toBe("");
+    await expect(repo.bindQueueJob("nope", "q-1")).rejects.toThrow("Job not found");
+    await expect(repo.bindQueueJob(job.id, "  ")).rejects.toThrow("queueJobId is required");
+    expect((await repo.bindQueueJob(job.id, "queue-7")).queueJobId).toBe("queue-7");
+    await expect(repo.bindQueueJob(job.id, "queue-8")).rejects.toThrow("already bound");
+
+    const session = await repo.startSession(job.id, "agent-1");
+    expect(session.status).toBe("running");
+    await expect(repo.startSession("nope", "agent-1")).rejects.toThrow("Job not found");
+    const { artifact } = await repo.createArtifact({
+      jobId: job.id,
+      title: `Session artifact ${TAG}`,
+      producer: "agent-1",
+    });
+    const v2 = await repo.addVersion({ artifactId: artifact.id, producer: "agent-1", sessionId: session.id });
+    expect(v2.sessionId).toBe(session.id);
+    expect((await repo.endSession(session.id, "completed")).status).toBe("completed");
+    await expect(repo.endSession(session.id, "failed")).rejects.toThrow("already ended");
+    expect((await repo.listSessions(job.id)).map((s) => s.id)).toContain(session.id);
+  });
+
+  it("records evidence for every lifecycle mutation", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Evident");
+    await repo.startJob(job.id);
+    const rows = await repo.listEvidence(job.id);
+    expect(rows.length).toBeGreaterThanOrEqual(2);
+    expect(rows[0].activityType).toBe("mission-control.job");
+    expect(rows.every((r) => r.activityId === job.id)).toBe(true);
+  });
+});
+
+describe("mission control graph projection", () => {
+  it("emits fact-only edges with no orphans across a full loop", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Graphed");
+    await repo.startJob(job.id);
+    await repo.submitJobForApproval(job.id);
+    const session = await repo.startSession(job.id, "agent-1");
+    const { artifact } = await repo.createArtifact({
+      jobId: job.id,
+      title: `Graph artifact ${TAG}`,
+      producer: "agent-1",
+    });
+    await repo.addVersion({ artifactId: artifact.id, producer: "human-1", humanReplacement: true, sessionId: session.id, note: "fix" });
+    const req = await repo.requestApproval(artifact.id, "test-operator");
+    await repo.decide({ requestId: req.id, action: "approve", actor: "human-1" });
+
+    const graph = await repo.getMissionGraph(job.id);
+    const ids = new Set(graph.nodes.map((n) => n.id));
+    expect(ids.has(`job:${job.id}`)).toBe(true);
+    // every edge endpoint resolves to a real node (no fabricated edges)
+    for (const e of graph.edges) {
+      expect(ids.has(e.from)).toBe(true);
+      expect(ids.has(e.to)).toBe(true);
+      expect(e.kind).toBe("fact");
+    }
+    const rels = graph.edges.map((e) => e.rel);
+    expect(rels).toContain("has_version");
+    expect(rels).toContain("supersedes");
+    expect(rels).toContain("reviews");
+    expect(rels).toContain("decides");
+    expect(rels).toContain("executed_in");
+    expect(rels).toContain("produced_by_session");
+    expect(graph.nodes.some((n) => n.label.includes("(human)"))).toBe(true);
+    await expect(repo.getMissionGraph("missing")).rejects.toThrow("Job not found");
+  });
+});

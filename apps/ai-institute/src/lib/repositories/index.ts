@@ -50,6 +50,11 @@ export type {
   McDecision,
   McDecisionAction,
   McRequestDecision,
+  McSession,
+  McEvidenceRow,
+  MissionNode,
+  MissionEdge,
+  MissionGraph,
   MissionControlRepository,
 } from "./mission-control-repository";
 
