@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "node src/startup.mjs",
-    "test": "node --test src/**/*.mjs",
+    "test": "node --test src/indexer.mjs src/knowledge-graph.mjs src/loader.mjs src/parser.mjs src/registry.mjs src/sdk.mjs src/startup.mjs",
     "validate": "node src/startup.mjs --validate-only",
     "index": "node src/indexer.mjs --build"
   },

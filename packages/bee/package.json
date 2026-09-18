@@ -11,7 +11,7 @@
     "bee": "./src/cli/bee.mjs"
   },
   "scripts": {
-    "test": "node --test src/**/*.test.mjs",
+    "test": "node --test src/bee.test.mjs",
     "bee": "node src/cli/bee.mjs"
   },
   "dependencies": {
