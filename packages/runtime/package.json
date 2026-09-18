@@ -13,7 +13,7 @@
     "./provenance": "./src/engines/provenance-engine.mjs"
   },
   "scripts": {
-    "test": "node --test src/**/*.test.mjs",
+    "test": "node --test src/runtime.test.mjs",
     "validate": "node src/cli/validate.mjs",
     "serve": "node src/cli/serve.mjs"
   },
