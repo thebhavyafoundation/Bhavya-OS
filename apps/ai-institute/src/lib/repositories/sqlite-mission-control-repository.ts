@@ -788,6 +788,20 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     return rows.map(rowToDecision);
   }
 
+  async searchDecisions(query: string, limit: number = 50): Promise<McDecision[]> {
+    const q = query.trim();
+    if (!q) return [];
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      "SELECT * FROM mc_decisions WHERE actor LIKE ? OR reason LIKE ? OR instruction LIKE ? ORDER BY created_at DESC, rowid DESC LIMIT ?",
+      `%${q}%`,
+      `%${q}%`,
+      `%${q}%`,
+      Math.min(Math.max(limit, 1), 200),
+    );
+    return rows.map(rowToDecision);
+  }
+
   async findJobsByTaskContract(contractId: string): Promise<McJob[]> {
     if (!contractId.trim()) return [];
     const jobs = await this.listJobs();

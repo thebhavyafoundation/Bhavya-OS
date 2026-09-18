@@ -229,6 +229,19 @@ describe("mission control task linkage", () => {
     expect((await repo.findJobsByTaskContract(target)).map((j) => j.id)).toContain(job.id);
     expect(await repo.findJobsByTaskContract("  ")).toEqual([]);
   });
+
+  it("searches decisions by actor and reason", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Decision search");
+    await repo.startJob(job.id);
+    await repo.submitJobForApproval(job.id);
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `DS ${TAG}`, producer: "agent-1" });
+    const req = await repo.requestApproval(artifact.id, "op");
+    await repo.decide({ requestId: req.id, action: "reject", actor: "human-searchable", reason: `uniquereason-${TAG}` });
+    expect((await repo.searchDecisions("human-searchable")).length).toBeGreaterThan(0);
+    expect((await repo.searchDecisions(`uniquereason-${TAG}`)).length).toBeGreaterThan(0);
+    expect(await repo.searchDecisions("   ")).toEqual([]);
+  });
 });
 
 describe("mission control evaluation adapter", () => {

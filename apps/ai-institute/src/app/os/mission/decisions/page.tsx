@@ -13,7 +13,7 @@ const ACTIONS = ["approve", "reject", "request_revision", "approve_with_modifica
 export default async function DecisionsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ action?: string; actor?: string }>;
+  searchParams: Promise<{ action?: string; actor?: string; q?: string }>;
 }) {
   await requirePolicy("/os/mission");
   await initDatabase();
@@ -21,7 +21,8 @@ export default async function DecisionsPage({
   const repo = getMissionControlRepository();
   const action = (sp.action ?? "").trim();
   const actor = (sp.actor ?? "").trim();
-  const all = await repo.listDecisions();
+  const q = (sp.q ?? "").trim();
+  const all = q ? await repo.searchDecisions(q) : await repo.listDecisions();
   const rows = all.filter(
     (d) =>
       (!action || d.action === action) &&
@@ -48,8 +49,12 @@ export default async function DecisionsPage({
           <label className="block text-xs text-text-tertiary mb-1" htmlFor="mc-dec-actor">Actor</label>
           <input id="mc-dec-actor" name="actor" defaultValue={actor} placeholder="email or id…" className="px-3 py-2 bg-bg-secondary border border-border-primary rounded-lg text-sm text-text-primary placeholder-text-secondary" />
         </div>
+        <div>
+          <label className="block text-xs text-text-tertiary mb-1" htmlFor="mc-dec-q">Search reason/instruction</label>
+          <input id="mc-dec-q" name="q" defaultValue={q} placeholder="e.g. voice…" className="px-3 py-2 bg-bg-secondary border border-border-primary rounded-lg text-sm text-text-primary placeholder-text-secondary" />
+        </div>
         <button type="submit" className="px-4 py-2 rounded-lg border border-border-primary text-sm text-text-primary">Filter</button>
-        {(action || actor) && <Link href="/os/mission/decisions" className="px-4 py-2 text-sm text-accent-gold hover:underline">Clear</Link>}
+        {(action || actor || q) && <Link href="/os/mission/decisions" className="px-4 py-2 text-sm text-accent-gold hover:underline">Clear</Link>}
       </form>
 
       <div className="mt-6 space-y-2">

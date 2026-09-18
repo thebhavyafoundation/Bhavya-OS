@@ -226,6 +226,8 @@ export interface MissionControlRepository {
     instruction?: string;
   }): Promise<McDecision>;
   listDecisions(targetKind?: string, targetId?: string): Promise<McDecision[]>;
+  /** Substring search over decision actor/reason/instruction (deterministic LIKE, capped). */
+  searchDecisions(query: string, limit?: number): Promise<McDecision[]>;
 
   /** Jobs referencing a task contract id (projection join, code-side filter). */
   findJobsByTaskContract(contractId: string): Promise<McJob[]>;
