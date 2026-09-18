@@ -16,6 +16,7 @@ import type {
   McArtifactVersion,
   McDecision,
   McDecisionAction,
+  McDestination,
   McEvidenceRow,
   McJob,
   McJobStatus,
@@ -73,6 +74,7 @@ function rowToArtifact(r: Row): McArtifact {
     source: r.source as string,
     status: r.status as McArtifactStatus,
     currentVersion: r.current_version as number,
+    destination: (r.destination as string) ?? "",
     createdAt: r.created_at as string,
     updatedAt: r.updated_at as string,
   };
@@ -206,8 +208,8 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
   async listJobs(status?: McJobStatus): Promise<McJob[]> {
     const db = getAsyncDb();
     const rows = status
-      ? await db.all<Row>("SELECT * FROM mc_jobs WHERE status = ? ORDER BY updated_at DESC", status)
-      : await db.all<Row>("SELECT * FROM mc_jobs ORDER BY updated_at DESC");
+      ? await db.all<Row>("SELECT * FROM mc_jobs WHERE status = ? ORDER BY updated_at DESC, rowid DESC", status)
+      : await db.all<Row>("SELECT * FROM mc_jobs ORDER BY updated_at DESC, rowid DESC");
     return rows.map(rowToJob);
   }
 
@@ -216,7 +218,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     if (!q) return [];
     const db = getAsyncDb();
     const rows = await db.all<Row>(
-      "SELECT * FROM mc_jobs WHERE id LIKE ? OR title LIKE ? ORDER BY updated_at DESC LIMIT ?",
+      "SELECT * FROM mc_jobs WHERE id LIKE ? OR title LIKE ? ORDER BY updated_at DESC, rowid DESC LIMIT ?",
       `%${q}%`,
       `%${q}%`,
       Math.min(Math.max(limit, 1), 200),
@@ -229,7 +231,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     const rows = await db.all<Row>(
       `SELECT a.*, j.title AS job_title FROM mc_artifacts a
        JOIN mc_jobs j ON j.id = a.job_id
-       ORDER BY a.created_at DESC LIMIT ?`,
+       ORDER BY a.created_at DESC, a.rowid DESC LIMIT ?`,
       Math.min(Math.max(limit, 1), 200),
     );
     return rows.map((r) => ({ artifact: rowToArtifact(r), jobTitle: r.job_title as string }));
@@ -242,7 +244,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     const rows = await db.all<Row>(
       `SELECT a.*, j.title AS job_title FROM mc_artifacts a
        JOIN mc_jobs j ON j.id = a.job_id
-       WHERE a.status IN (${placeholders}) ORDER BY a.updated_at DESC LIMIT 200`,
+       WHERE a.status IN (${placeholders}) ORDER BY a.updated_at DESC, a.rowid DESC LIMIT 200`,
       ...statuses,
     );
     return rows.map((r) => ({ artifact: rowToArtifact(r), jobTitle: r.job_title as string }));
@@ -352,10 +354,88 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
   async listArtifacts(jobId: string): Promise<McArtifact[]> {
     const db = getAsyncDb();
     const rows = await db.all<Row>(
-      "SELECT * FROM mc_artifacts WHERE job_id = ? ORDER BY created_at ASC",
+      "SELECT * FROM mc_artifacts WHERE job_id = ? ORDER BY created_at ASC, rowid ASC",
       jobId,
     );
     return rows.map(rowToArtifact);
+  }
+
+  async searchArtifacts(query: string, limit: number = 50): Promise<McArtifact[]> {
+    const q = query.trim();
+    if (!q) return [];
+    const db = getAsyncDb();
+    const rows = await db.all<Row>(
+      "SELECT * FROM mc_artifacts WHERE id LIKE ? OR title LIKE ? ORDER BY updated_at DESC, rowid DESC LIMIT ?",
+      `%${q}%`,
+      `%${q}%`,
+      Math.min(Math.max(limit, 1), 200),
+    );
+    return rows.map(rowToArtifact);
+  }
+
+  private async curateArtifact(
+    id: string,
+    to: "superseded" | "archived",
+    actor: string,
+    reason: string,
+  ): Promise<McArtifact> {
+    const db = getAsyncDb();
+    const artifact = await this.getArtifact(id);
+    if (!artifact) throw new Error(`Artifact not found: ${id}`);
+    if (artifact.status === "integrated" && to === "superseded") {
+      throw new Error("Integrated artifacts cannot be superseded; archive them instead");
+    }
+    if (artifact.status === "archived") throw new Error("Artifact is already archived");
+    if (!actor.trim()) throw new Error("Actor is required");
+    if (!reason.trim()) throw new Error(`A reason is required to ${to === "superseded" ? "supersede" : "archive"}`);
+    await db.run("UPDATE mc_artifacts SET status = ?, updated_at = ? WHERE id = ?", to, now(), id);
+    await this.evidence("mission-control.artifact", id, `Artifact ${to} by ${actor.trim()}: ${reason.trim()}`, {});
+    return (await this.getArtifact(id)) as McArtifact;
+  }
+
+  async supersedeArtifact(artifactId: string, actor: string, reason: string): Promise<McArtifact> {
+    return this.curateArtifact(artifactId, "superseded", actor, reason);
+  }
+
+  async archiveArtifact(artifactId: string, actor: string, reason: string): Promise<McArtifact> {
+    return this.curateArtifact(artifactId, "archived", actor, reason);
+  }
+
+  async setDestination(artifactId: string, destination: McDestination, actor: string): Promise<McArtifact> {
+    const db = getAsyncDb();
+    const artifact = await this.getArtifact(artifactId);
+    if (!artifact) throw new Error(`Artifact not found: ${artifactId}`);
+    if (!["verified", "integrating", "integrated"].includes(artifact.status)) {
+      throw new Error(`Destination requires verified/integrating/integrated status (current: ${artifact.status})`);
+    }
+    if (!actor.trim()) throw new Error("Actor is required");
+    await db.run("UPDATE mc_artifacts SET destination = ?, updated_at = ? WHERE id = ?", destination, now(), artifactId);
+    await this.evidence("mission-control.artifact", artifactId, `Destination set to ${destination} by ${actor.trim()} (intent only — not published)`, {});
+    return (await this.getArtifact(artifactId)) as McArtifact;
+  }
+
+  async reportQueueEvent(
+    queueJobId: string,
+    outcome: "completed" | "failed",
+    detail?: string,
+  ): Promise<McJob | null> {
+    const db = getAsyncDb();
+    if (!queueJobId.trim()) throw new Error("queueJobId is required");
+    const row = await db.get<Row>("SELECT * FROM mc_jobs WHERE queue_job_id = ? LIMIT 1", queueJobId.trim());
+    if (!row) return null;
+    const job = rowToJob(row);
+    await this.evidence(
+      "mission-control.queue",
+      job.id,
+      `Queue job ${queueJobId.trim()} reported ${outcome}${detail?.trim() ? `: ${detail.trim().slice(0, 300)}` : ""}`,
+      { queueJobId: queueJobId.trim(), outcome },
+    );
+    if (outcome === "failed" && (job.status === "running" || job.status === "awaiting_approval" || job.status === "revising")) {
+      await db.run("UPDATE mc_jobs SET status = 'failed', updated_at = ? WHERE id = ?", now(), job.id);
+      await this.evidence("mission-control.job", job.id, `Job ${job.status} -> failed (queue report)`, {});
+      return (await this.getJob(job.id)) as McJob;
+    }
+    return job;
   }
 
   private async addVersionInternal(
@@ -386,7 +466,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       note,
     );
     await db.run(
-      "UPDATE mc_artifacts SET current_version = ?, status = 'review', updated_at = ? WHERE id = ?",
+      "UPDATE mc_artifacts SET current_version = ?, updated_at = ? WHERE id = ?",
       version,
       now(),
       artifactId,
@@ -403,6 +483,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     humanReplacement?: boolean;
     sessionId?: string;
     note?: string;
+    idempotencyKey?: string;
   }): Promise<McArtifactVersion> {
     const artifact = await this.getArtifact(input.artifactId);
     if (!artifact) throw new Error(`Artifact not found: ${input.artifactId}`);
@@ -410,6 +491,21 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
       throw new Error(`Cannot version a ${artifact.status} artifact`);
     }
     if (!input.producer.trim()) throw new Error("Producer is required");
+    const db = getAsyncDb();
+    if (input.idempotencyKey?.trim()) {
+      const key = `artifact-version:${artifact.id}:${input.idempotencyKey.trim()}`;
+      const prior = await db.get<Row>(
+        "SELECT * FROM evidence_records WHERE idempotency_key = ? LIMIT 1",
+        key,
+      );
+      if (prior) {
+        const meta = JSON.parse((prior.metadata as string) ?? "{}") as { versionId?: string };
+        if (meta.versionId) {
+          const existing = await db.get<Row>("SELECT * FROM mc_artifact_versions WHERE id = ?", meta.versionId);
+          if (existing) return rowToVersion(existing);
+        }
+      }
+    }
     const version = await this.addVersionInternal(
       artifact.id,
       artifact.currentVersion + 1,
@@ -423,16 +519,25 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     );
     // A superseded pending request must not linger: cancel it so the new
     // version goes through a fresh explicit approval round.
-    const db = getAsyncDb();
     await db.run(
       "UPDATE mc_approval_requests SET status = 'cancelled' WHERE artifact_id = ? AND status = 'pending'",
       artifact.id,
     );
-    await this.evidence(
-      "mission-control.artifact",
+    const versionMeta: Record<string, unknown> = { version: version.version, versionId: version.id };
+    let versionKey: string | null = null;
+    if (input.idempotencyKey?.trim()) {
+      versionKey = `artifact-version:${artifact.id}:${input.idempotencyKey.trim()}`;
+    }
+    const evId = uid("ev-mc");
+    await db.run(
+      `INSERT INTO evidence_records (id, activity_type, activity_id, timestamp, description, metadata, idempotency_key)
+       VALUES (?, 'mission-control.artifact', ?, ?, ?, ?, ?)`,
+      evId,
       artifact.id,
+      now(),
       `Version ${version.version} recorded${input.humanReplacement ? " (human replacement)" : ""}`,
-      { version: version.version },
+      JSON.stringify(versionMeta),
+      versionKey,
     );
     return version;
   }
@@ -452,6 +557,9 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     const db = getAsyncDb();
     const artifact = await this.getArtifact(artifactId);
     if (!artifact) throw new Error(`Artifact not found: ${artifactId}`);
+    if (artifact.status === "integrated" || artifact.status === "archived" || artifact.status === "superseded") {
+      throw new Error(`Cannot request approval for a ${artifact.status} artifact`);
+    }
     if (!requestedBy.trim()) throw new Error("requestedBy actor is required");
     const existing = await db.get<Row>(
       "SELECT * FROM mc_approval_requests WHERE artifact_id = ? AND status = 'pending' LIMIT 1",
@@ -476,7 +584,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
   async listPendingApprovals(): Promise<McApprovalRequest[]> {
     const db = getAsyncDb();
     const rows = await db.all<Row>(
-      "SELECT * FROM mc_approval_requests WHERE status = 'pending' ORDER BY created_at ASC",
+      "SELECT * FROM mc_approval_requests WHERE status = 'pending' ORDER BY created_at ASC, rowid ASC",
     );
     return rows.map(rowToApproval);
   }
@@ -484,7 +592,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
   async listApprovalRequests(artifactId: string): Promise<McApprovalRequest[]> {
     const db = getAsyncDb();
     const rows = await db.all<Row>(
-      "SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC",
+      "SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC, rowid ASC",
       artifactId,
     );
     return rows.map(rowToApproval);
@@ -556,12 +664,12 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     let rows: Row[];
     if (targetKind && targetId) {
       rows = await db.all<Row>(
-        "SELECT * FROM mc_decisions WHERE target_kind = ? AND target_id = ? ORDER BY created_at ASC",
+        "SELECT * FROM mc_decisions WHERE target_kind = ? AND target_id = ? ORDER BY created_at ASC, rowid ASC",
         targetKind,
         targetId,
       );
     } else {
-      rows = await db.all<Row>("SELECT * FROM mc_decisions ORDER BY created_at DESC LIMIT 200");
+      rows = await db.all<Row>("SELECT * FROM mc_decisions ORDER BY created_at DESC, rowid DESC LIMIT 200");
     }
     return rows.map(rowToDecision);
   }
@@ -769,14 +877,14 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
 
   async listSessions(jobId: string): Promise<McSession[]> {
     const db = getAsyncDb();
-    const rows = await db.all<Row>("SELECT * FROM mc_sessions WHERE job_id = ? ORDER BY started_at ASC", jobId);
+    const rows = await db.all<Row>("SELECT * FROM mc_sessions WHERE job_id = ? ORDER BY started_at ASC, rowid ASC", jobId);
     return rows.map(rowToSession);
   }
 
   async listEvidence(activityId: string): Promise<McEvidenceRow[]> {
     const db = getAsyncDb();
     const rows = await db.all<Row>(
-      "SELECT id, activity_type, activity_id, timestamp, description, metadata FROM evidence_records WHERE activity_id = ? ORDER BY timestamp ASC",
+      "SELECT id, activity_type, activity_id, timestamp, description, metadata FROM evidence_records WHERE activity_id = ? ORDER BY timestamp ASC, rowid ASC",
       activityId,
     );
     return rows.map((r: Row) => ({
@@ -839,7 +947,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
           });
         }
       }
-      const approvals = await db.all<Row>("SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC", a.id);
+      const approvals = await db.all<Row>("SELECT * FROM mc_approval_requests WHERE artifact_id = ? ORDER BY created_at ASC, rowid ASC", a.id);
       for (const r of approvals) {
         const ap = rowToApproval(r);
         nodes.push({ id: `approval:${ap.id}`, kind: "approval", label: `Review ${a.title} v${ap.version}`, status: ap.status });

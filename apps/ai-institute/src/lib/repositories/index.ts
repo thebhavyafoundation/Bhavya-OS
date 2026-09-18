@@ -45,6 +45,7 @@ export type {
   McArtifact,
   McArtifactStatus,
   McArtifactVersion,
+  McDestination,
   McApprovalRequest,
   McApprovalStatus,
   McDecision,

@@ -247,7 +247,7 @@ describe("mission control evaluation adapter", () => {
     const first = await repo.createJobFromEvaluation(evalInput("a"));
     expect(first.deduped).toBe(false);
     expect(first.job.status).toBe("running");
-    expect(first.job.department).toBe("engineering");
+    expect(first.job.department).toBe("intelligence");
     expect(first.session.status).toBe("running");
     expect(first.job.sessionId).toBe(first.session.id);
     expect(first.artifact.kind).toBe("evaluation");
@@ -371,5 +371,56 @@ describe("mission control graph projection", () => {
     expect(rels).toContain("produced_by_session");
     expect(graph.nodes.some((n) => n.label.includes("(human)"))).toBe(true);
     await expect(repo.getMissionGraph("missing")).rejects.toThrow("Job not found");
+  });
+});
+
+describe("mission control curation and queue reporting", () => {
+  it("supersedes and archives with reasons, guarding terminals", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Curated");
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `Cur ${TAG}`, producer: "agent-1" });
+    await expect(repo.supersedeArtifact(artifact.id, "human-1", "")).rejects.toThrow("reason is required");
+    expect((await repo.supersedeArtifact(artifact.id, "human-1", "New direction")).status).toBe("superseded");
+    expect((await repo.archiveArtifact(artifact.id, "human-1", "Retired")).status).toBe("archived");
+    await expect(repo.archiveArtifact(artifact.id, "human-1", "Again")).rejects.toThrow("already archived");
+    await expect(repo.supersedeArtifact("missing", "human-1", "x")).rejects.toThrow("Artifact not found");
+  });
+
+  it("reports queue events without executing, propagating failure", async () => {
+    const repo = getMissionControlRepository();
+    expect(await repo.reportQueueEvent("nope", "completed")).toBeNull();
+    await expect(repo.reportQueueEvent("  ", "failed")).rejects.toThrow("queueJobId is required");
+    const job = await freshJob("Queue bound");
+    await repo.startJob(job.id);
+    await repo.bindQueueJob(job.id, "q-99");
+    const observed = await repo.reportQueueEvent("q-99", "completed", "done");
+    expect(observed?.status).toBe("running");
+    const failed = await repo.reportQueueEvent("q-99", "failed", "OOM");
+    expect(failed?.status).toBe("failed");
+    const evidence = await repo.listEvidence(job.id);
+    expect(evidence.some((e) => e.activityType === "mission-control.queue")).toBe(true);
+  });
+
+  it("deduplicates retried version submissions", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Idem versions");
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `IdemV ${TAG}`, producer: "agent-1" });
+    const v2 = await repo.addVersion({ artifactId: artifact.id, producer: "agent-1", note: "retry me", idempotencyKey: "k-1" });
+    const v2again = await repo.addVersion({ artifactId: artifact.id, producer: "agent-1", note: "retry me", idempotencyKey: "k-1" });
+    expect(v2again.id).toBe(v2.id);
+    expect((await repo.listVersions(artifact.id)).length).toBe(2);
+  });
+
+  it("sets destinations only from allowed states", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Dests");
+    await repo.startJob(job.id);
+    await repo.submitJobForApproval(job.id);
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `Dest ${TAG}`, producer: "agent-1" });
+    await expect(repo.setDestination(artifact.id, "website", "human-1")).rejects.toThrow("verified/integrating/integrated");
+    const req = await repo.requestApproval(artifact.id, "op");
+    await repo.decide({ requestId: req.id, action: "approve", actor: "human-1" });
+    await repo.markVerified(artifact.id);
+    expect((await repo.setDestination(artifact.id, "openskool", "human-1")).destination).toBe("openskool");
   });
 });

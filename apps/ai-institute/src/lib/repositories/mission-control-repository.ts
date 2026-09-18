@@ -77,9 +77,20 @@ export interface McArtifact {
   source: string;
   status: McArtifactStatus;
   currentVersion: number;
+  /**
+   * Publication intent — where the approved output is meant to go.
+   * One of McDestination or "". Recording intent is not publication.
+   */
+  destination: string;
   createdAt: string;
   updatedAt: string;
 }
+
+/**
+ * Allowed publication destinations. Closed set: publication targets are
+ * institutional decisions, not free text.
+ */
+export type McDestination = "website" | "offline-app" | "openskool" | "internal" | "social";
 
 export interface McArtifactVersion {
   id: string;
@@ -156,6 +167,22 @@ export interface MissionControlRepository {
   }): Promise<{ artifact: McArtifact; version: McArtifactVersion }>;
   getArtifact(id: string): Promise<McArtifact | undefined>;
   listArtifacts(jobId: string): Promise<McArtifact[]>;
+  /** Substring search over artifact id/title (deterministic LIKE, capped). */
+  searchArtifacts(query: string, limit?: number): Promise<McArtifact[]>;
+  /**
+   * Terminal curation transitions. Supersede keeps the artifact queryable
+   * (replaced by newer direction); archive removes it from active queues.
+   * Both require actor + reason and append evidence. No rows are deleted.
+   */
+  supersedeArtifact(artifactId: string, actor: string, reason: string): Promise<McArtifact>;
+  archiveArtifact(artifactId: string, actor: string, reason: string): Promise<McArtifact>;
+
+  /**
+   * Record publication intent (destination). Allowed from verified,
+   * integrating, or integrated states. This records WHERE an approved
+   * output is meant to go — it never publishes anything.
+   */
+  setDestination(artifactId: string, destination: McDestination, actor: string): Promise<McArtifact>;
   addVersion(input: {
     artifactId: string;
     producer: string;
@@ -164,6 +191,11 @@ export interface MissionControlRepository {
     humanReplacement?: boolean;
     sessionId?: string;
     note?: string;
+    /**
+     * Optional idempotency key. Retried submissions with the same key
+     * return the original version instead of appending a duplicate.
+     */
+    idempotencyKey?: string;
   }): Promise<McArtifactVersion>;
   listVersions(artifactId: string): Promise<McArtifactVersion[]>;
   // Approvals + decisions
@@ -181,6 +213,18 @@ export interface MissionControlRepository {
 
   /** Jobs referencing a task contract id (projection join, code-side filter). */
   findJobsByTaskContract(contractId: string): Promise<McJob[]>;
+
+  /**
+   * Inbound queue-event reporter (adapter seam for a future real caller).
+   * Does NOT execute anything: records evidence, and propagates genuine
+   * failure onto a running/awaiting job. Completion is observed only —
+   * approvals still gate job completion.
+   */
+  reportQueueEvent(
+    queueJobId: string,
+    outcome: "completed" | "failed",
+    detail?: string,
+  ): Promise<McJob | null>;
 
   /**
    * Real adapter: GitHub OS evaluation record → persisted MC job + session

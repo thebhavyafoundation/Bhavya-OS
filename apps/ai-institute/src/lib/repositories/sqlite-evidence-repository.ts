@@ -162,7 +162,7 @@ export class SqliteEvidenceRepository implements EvidenceRepository {
     }
     const where = clauses.length > 0 ? `WHERE ${clauses.join(" AND ")}` : "";
     const rows = await db.all<Record<string, unknown>>(
-      `SELECT * FROM evidence_records ${where} ORDER BY timestamp DESC LIMIT ?`,
+      `SELECT * FROM evidence_records ${where} ORDER BY timestamp DESC, rowid DESC LIMIT ?`,
       ...params,
       Math.min(Math.max(filter.limit ?? 50, 1), 500),
     );
