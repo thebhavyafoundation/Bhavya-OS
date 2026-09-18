@@ -20,6 +20,11 @@ export interface LessonContent {
     instructions: string;
   }[];
   reflection: { prompt: string; followUp: string[] };
+  /**
+   * Curriculum authority. Absent means "bhavya-academy".
+   * All rows in this file are academy-authored.
+   */
+  source?: "bhavya-academy" | "external-experience-ai";
 }
 
 export const lessonContents: Record<string, LessonContent> = {

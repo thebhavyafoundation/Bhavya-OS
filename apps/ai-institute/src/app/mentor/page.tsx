@@ -181,6 +181,16 @@ export default function MentorPage() {
           {publicAgents.length} specialized mentors for every aspect of your
           learning journey
         </p>
+        <p
+          style={{
+            fontSize: "var(--text-xs)",
+            color: "var(--color-text-tertiary)",
+            marginTop: "var(--space-2)",
+          }}
+        >
+          Guided preview — mentors currently respond with curated guidance
+          while the full AI mentor is under development.
+        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 xl:grid-cols-[380px_1fr] gap-6">

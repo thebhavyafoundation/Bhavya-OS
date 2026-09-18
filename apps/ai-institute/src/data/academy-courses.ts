@@ -27,6 +27,12 @@ export interface Course {
   metadata: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
+  /**
+   * Curriculum authority. Absent means "bhavya-academy".
+   * Mirrors CurriculumSourceId in @bhavya/shared (kept local to avoid
+   * module resolution issues — see header note).
+   */
+  source?: "bhavya-academy" | "external-experience-ai";
 }
 
 export type CourseLevel =
@@ -45,6 +51,11 @@ export interface CourseModuleLesson {
   title: string;
   order: number;
   duration: number;
+  /**
+   * Curriculum authority. Absent means "bhavya-academy".
+   * External lessons are referenced, never stored here.
+   */
+  source?: "bhavya-academy" | "external-experience-ai";
 }
 
 // ───────────────────────────────────────────────────────────────────
