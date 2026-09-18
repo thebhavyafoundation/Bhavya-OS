@@ -50,6 +50,7 @@ describe("privileged workspaces deny the public", () => {
     "/os/mission/approvals",
     "/os/mission/integrations",
     "/os/mission/evidence",
+    "/os/mission/decisions",
   ];
   for (const path of privileged) {
     it(`${path} denies a visitor with no role`, () => {
@@ -139,6 +140,7 @@ describe("staff operations", () => {
     expect(canAccess("/os/mission/approvals", staff)).toBe(true);
     expect(canAccess("/os/mission/integrations", staff)).toBe(true);
     expect(canAccess("/os/mission/evidence", staff)).toBe(true);
+    expect(canAccess("/os/mission/decisions", staff)).toBe(true);
     expect(canAccess("/os/mission", admin)).toBe(true);
     expect(canAccess("/os/mission/approvals", admin)).toBe(true);
   });
@@ -147,6 +149,7 @@ describe("staff operations", () => {
     expect(canAccess("/os/mission/approvals", student)).toBe(false);
     expect(canAccess("/os/mission/integrations", student)).toBe(false);
     expect(canAccess("/os/mission/evidence", student)).toBe(false);
+    expect(canAccess("/os/mission/decisions", student)).toBe(false);
   });
 });
 

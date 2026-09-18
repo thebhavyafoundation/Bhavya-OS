@@ -57,6 +57,7 @@ export const ROUTE_POLICIES: Record<string, RoutePolicy> = {
   "/os/mission/approvals": { roles: ["admin", "staff"] },
   "/os/mission/integrations": { roles: ["admin", "staff"] },
   "/os/mission/evidence": { roles: ["admin", "staff"] },
+  "/os/mission/decisions": { roles: ["admin", "staff"] },
 };
 
 /**

@@ -25,6 +25,11 @@ export default async function EvidencePage({
     activityId: activity || undefined,
     limit: 100,
   });
+  const byDay = new Map<string, typeof rows>();
+  for (const e of rows) {
+    const day = new Date(e.timestamp).toISOString().slice(0, 10);
+    byDay.set(day, [...(byDay.get(day) ?? []), e]);
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -50,13 +55,20 @@ export default async function EvidencePage({
         {(type || activity) && <Link href="/os/mission/evidence" className="px-4 py-2 text-sm text-accent-gold hover:underline">Clear</Link>}
       </form>
 
-      <div className="mt-6 space-y-2">
+      <div className="mt-6 space-y-6">
         {rows.length === 0 && <p className="text-xs text-text-muted">No evidence matches the current filter.</p>}
-        {rows.map((e) => (
-          <div key={e.id} className="text-xs text-text-secondary bg-bg-secondary border border-border-primary rounded-lg px-4 py-2.5 break-words">
-            <span className="font-mono text-text-tertiary">{e.activityType}</span>
-            <span className="block mt-0.5">{e.description}</span>
-            <span className="block mt-0.5 text-text-muted">{new Date(e.timestamp).toLocaleString()} · {e.activityId}</span>
+        {[...byDay.entries()].map(([day, items]) => (
+          <div key={day}>
+            <h2 className="text-xs font-semibold text-text-tertiary mb-2">{day} ({items.length})</h2>
+            <div className="space-y-2">
+              {items.map((e) => (
+                <div key={e.id} className="text-xs text-text-secondary bg-bg-secondary border border-border-primary rounded-lg px-4 py-2.5 break-words">
+                  <span className="font-mono text-text-tertiary">{e.activityType}</span>
+                  <span className="block mt-0.5">{e.description}</span>
+                  <span className="block mt-0.5 text-text-muted">{new Date(e.timestamp).toLocaleString()} · {e.activityId}</span>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

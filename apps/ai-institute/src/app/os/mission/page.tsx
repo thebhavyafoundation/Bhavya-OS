@@ -201,6 +201,9 @@ export default async function MissionControlPage({
                 ))}
               </div>
             )}
+            <Link href="/os/mission/decisions" className="inline-block mt-3 text-xs text-accent-gold hover:underline">
+              Open decision history →
+            </Link>
           </div>
           <div className="bg-bg-secondary border border-border-primary rounded-xl p-5">
             <h2 className="text-sm font-semibold text-text-primary mb-4">Recent evidence</h2>

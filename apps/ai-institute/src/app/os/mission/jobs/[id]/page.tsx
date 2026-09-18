@@ -1,12 +1,30 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { requireRoles } from "@/lib/require-role";
 import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
 import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm, IntegrationActions, CurationActions } from "../../components/forms";
+import { LessonIntakeForm } from "../../components/intake";
 import { MissionGraph } from "../../components/graph";
 import { diffVersions } from "@/lib/mission-compare";
 import { getGitHubData } from "@/lib/os-data";
+import { courses as academyCourses } from "@/data/academy-courses";
+
+function canonicalLessonLink(path: string): { href: string; label: string } | null {
+  const studio = /^studio:lesson:(.+)$/.exec(path);
+  if (studio) return { href: `/studio/lessons/${studio[1]}`, label: "Open in Studio (canonical editor)" };
+  const academy = /^academy:(.+)$/.exec(path);
+  if (academy) {
+    for (const course of academyCourses) {
+      if (course.modules.some((m) => m.lessons.some((l) => l.id === academy[1]))) {
+        return { href: `/courses/${course.id}/lessons/${academy[1]}`, label: `Open in Academy (${course.title})` };
+      }
+    }
+    return { href: "/courses", label: "Open Academy courses" };
+  }
+  return null;
+}
 
 function evaluationFacts(path: string) {
   const m = /^github-os:repository:(.+)$/.exec(path);
@@ -97,6 +115,11 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
       </div>
 
       <h2 className="mt-10 text-xl font-bold text-text-primary">Artifacts ({artifacts.length})</h2>
+      <div className="mt-2 mb-4 rounded-xl border border-border-primary bg-bg-secondary p-4">
+        <div className="text-xs font-semibold text-text-primary mb-1">Intake canonical lesson</div>
+        <p className="text-xs text-text-muted mb-2">References an Academy or Studio lesson — the lesson store is never copied. Editing happens in Studio; Mission Control tracks review.</p>
+        <LessonIntakeForm jobId={job.id} />
+      </div>
       <div className="mt-4 space-y-6">
         {artifacts.length === 0 && (
           <p className="text-xs text-text-muted">No artifacts yet. Artifacts are created from real work — nothing is fabricated here.</p>
@@ -156,6 +179,17 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                   </div>
                 );
               })()}
+              {(() => {
+                const lessonRef = versions.map((v) => v.path).find((p) => p.startsWith("academy:") || p.startsWith("studio:lesson:"));
+                if (!lessonRef) return null;
+                const link = canonicalLessonLink(lessonRef);
+                if (!link) return null;
+                return (
+                  <div className="mt-2 text-xs">
+                    <Link href={link.href} className="text-accent-gold hover:underline">{link.label} →</Link>
+                  </div>
+                );
+              })()}
               {req && (
                 <div className="mt-4 border-t border-border-primary pt-4">
                   <p className="text-xs text-text-tertiary mb-1">
@@ -207,7 +241,9 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
       <h2 className="mt-10 text-xl font-bold text-text-primary">Graph ({graph.nodes.length} nodes, {graph.edges.length} edges)</h2>
       <p className="text-xs text-text-muted mt-1">Deterministic projection of persisted records — FACT edges only, no inference.</p>
       <div className="mt-4">
-        <MissionGraph nodes={graph.nodes} edges={graph.edges} />
+        <Suspense fallback={<p className="text-xs text-text-muted">Loading graph…</p>}>
+          <MissionGraph nodes={graph.nodes} edges={graph.edges} />
+        </Suspense>
       </div>
     </div>
   );
