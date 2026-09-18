@@ -7,11 +7,18 @@ interface LibraryItem {
   title: string;
   type: string;
   description?: string;
+  source?: "bhavya" | "external";
+  provider?: string;
+  license?: string;
+  strand?: string;
 }
+
+type SourceFilter = "all" | "bhavya" | "external";
 
 export default function LibraryPage() {
   const [items, setItems] = useState<LibraryItem[]>([]);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState<SourceFilter>("all");
 
   useEffect(() => {
     fetch("/api/library/items")
@@ -22,9 +29,12 @@ export default function LibraryPage() {
 
   const filtered = items.filter(
     (item) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.description?.toLowerCase().includes(search.toLowerCase())
+      (filter === "all" || (item.source ?? "bhavya") === filter) &&
+      (item.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.description?.toLowerCase().includes(search.toLowerCase()))
   );
+
+  const externalCount = items.filter((i) => i.source === "external").length;
 
   return (
     <div className="min-h-screen bg-bg-primary">
@@ -36,7 +46,7 @@ export default function LibraryPage() {
           </p>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap items-center gap-3">
           <input
             type="text"
             placeholder="Search library..."
@@ -44,6 +54,22 @@ export default function LibraryPage() {
             onChange={(e) => setSearch(e.target.value)}
             className="w-full max-w-md px-4 py-2.5 bg-bg-secondary border border-border-primary rounded-lg text-text-primary placeholder-text-secondary text-sm focus:outline-none focus:border-accent-gold"
           />
+          <div className="flex gap-2 text-xs">
+            {(["all", "bhavya", "external"] as const).map((f) => (
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFilter(f)}
+                className={`px-3 py-1.5 rounded-full border transition-colors ${
+                  filter === f
+                    ? "border-accent-gold text-accent-gold"
+                    : "border-border-primary text-text-secondary"
+                }`}
+              >
+                {f === "all" ? "All" : f === "bhavya" ? "Bhavya" : "External"}
+              </button>
+            ))}
+          </div>
         </div>
 
         {filtered.length === 0 ? (
@@ -61,6 +87,11 @@ export default function LibraryPage() {
               >
                 <div className="text-xs text-accent-gold uppercase tracking-wider mb-2">
                   {item.type}
+                  {item.source === "external" && (
+                    <span className="ml-2 normal-case tracking-normal border border-border-primary rounded-full px-2 py-0.5 text-text-secondary">
+                      External · {item.provider}
+                    </span>
+                  )}
                 </div>
                 <div className="text-sm font-semibold text-text-primary mb-1">
                   {item.title}
@@ -73,6 +104,14 @@ export default function LibraryPage() {
               </div>
             ))}
           </div>
+        )}
+        {externalCount > 0 && (
+          <p className="mt-8 text-xs text-text-secondary">
+            External resources are provided by the Raspberry Pi Foundation
+            (“Experience AI”, CC BY-NC-ND 4.0) and listed here as references.
+            Lesson content remains with the provider and is not republished by
+            Bhavya Foundation.
+          </p>
         )}
       </div>
     </div>
