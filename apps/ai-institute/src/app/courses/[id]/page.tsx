@@ -61,6 +61,9 @@ export default async function CourseDetailPage({
             <span className="text-xs text-text-primary/50">
               Grade {course.grade} · {course.domain}
             </span>
+            <span className="rounded-full border border-border-primary px-2.5 py-0.5 text-xs text-text-secondary">
+              Bhavya Academy
+            </span>
           </div>
 
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-text-primary">
