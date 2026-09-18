@@ -46,6 +46,8 @@ describe("privileged workspaces deny the public", () => {
     "/os/donor",
     "/os/runtime",
     "/os/github",
+    "/os/mission",
+    "/os/mission/approvals",
   ];
   for (const path of privileged) {
     it(`${path} denies a visitor with no role`, () => {
@@ -129,6 +131,16 @@ describe("staff operations", () => {
     expect(canAccess("/os/admin", staff)).toBe(false);
     expect(hasPermission(staff, "missions:manage")).toBe(true);
     expect(hasPermission(staff, "users:read")).toBe(false);
+  });
+  it("STAFF and ADMIN reach Mission Control", () => {
+    expect(canAccess("/os/mission", staff)).toBe(true);
+    expect(canAccess("/os/mission/approvals", staff)).toBe(true);
+    expect(canAccess("/os/mission", admin)).toBe(true);
+    expect(canAccess("/os/mission/approvals", admin)).toBe(true);
+  });
+  it("STUDENT cannot reach Mission Control", () => {
+    expect(canAccess("/os/mission", student)).toBe(false);
+    expect(canAccess("/os/mission/approvals", student)).toBe(false);
   });
 });
 

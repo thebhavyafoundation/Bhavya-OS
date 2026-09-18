@@ -407,6 +407,13 @@
               "label": "Videos",
               "href": "/os/videos",
               "icon": "Video"
+            },
+            {
+              "id": "os-mission",
+              "label": "Mission Control",
+              "href": "/os/mission",
+              "icon": "Shield",
+              "roles": ["admin", "staff"]
             }
           ]
         },

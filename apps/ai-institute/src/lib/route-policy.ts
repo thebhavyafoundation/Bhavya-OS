@@ -52,6 +52,9 @@ export const ROUTE_POLICIES: Record<string, RoutePolicy> = {
   "/os/ioc": tools(),
   "/os/social": tools(),
   "/os/videos": tools(),
+  // Mission Control — human control plane (operators only)
+  "/os/mission": { roles: ["admin", "staff"] },
+  "/os/mission/approvals": { roles: ["admin", "staff"] },
 };
 
 /**
