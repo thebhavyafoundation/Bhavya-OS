@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
 import { motion, useInView, type Variant } from "framer-motion";
 
 interface RevealProps {
@@ -62,6 +62,11 @@ export function Reveal({
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const selected = variants[variant];
   const hidden = { ...selected.hidden };
@@ -76,7 +81,7 @@ export function Reveal({
     <motion.div
       ref={ref}
       initial={hidden}
-      animate={isInView ? visible : hidden}
+      animate={mounted && isInView ? visible : hidden}
       transition={{
         duration,
         delay,

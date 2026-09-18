@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
   manifest: "/manifest.json",
   themeColor: "#0e382e",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "Bhavya Foundation",
     description:
