@@ -1,5 +1,6 @@
 import { requirePolicy } from "@/lib/require-role";
 import { getGitHubData } from "@/lib/os-data";
+import { getLocalRepoState } from "@/lib/local-repo-state";
 import {
   GitBranch,
   Activity,
@@ -19,6 +20,7 @@ export const metadata = {
 export default async function GitHubPage() {
   await requirePolicy("/os/github");
   const data = getGitHubData();
+  const localRepo = getLocalRepoState();
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -216,6 +218,59 @@ export default async function GitHubPage() {
               )}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* This repository — live local checkout state */}
+      <div className="mt-6 bg-bg-secondary border border-border-primary rounded-xl overflow-hidden">
+        <div className="px-4 py-3.5 border-b border-border-primary">
+          <div className="flex items-center gap-2">
+            <GitBranch className="w-4 h-4 text-accent-gold" />
+            <span className="text-sm font-semibold text-text-primary">
+              This repository
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-accent-gold/10 text-accent-gold">
+              live local state
+            </span>
+          </div>
+        </div>
+        <div className="px-4 py-3.5">
+          {localRepo.available ? (
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-text-tertiary">
+              <span>
+                branch{" "}
+                <span className="font-semibold text-text-primary">
+                  {localRepo.branch}
+                </span>
+              </span>
+              <span title={localRepo.headSubject}>
+                HEAD{" "}
+                <span className="font-mono text-text-primary">
+                  {localRepo.headSha}
+                </span>
+              </span>
+              <span>
+                working tree{" "}
+                <span className="font-semibold text-text-primary">
+                  {localRepo.clean ? "clean" : "modified"}
+                </span>
+              </span>
+              {localRepo.ahead !== undefined &&
+                localRepo.behind !== undefined && (
+                  <span>
+                    vs upstream{" "}
+                    <span className="font-semibold text-text-primary">
+                      +{localRepo.ahead}/-{localRepo.behind}
+                    </span>
+                  </span>
+                )}
+            </div>
+          ) : (
+            <p className="text-xs text-text-muted">
+              Git state unavailable in this runtime
+              {localRepo.reason ? ` — ${localRepo.reason}` : ""}.
+            </p>
+          )}
         </div>
       </div>
 
