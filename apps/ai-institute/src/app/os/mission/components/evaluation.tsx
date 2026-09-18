@@ -39,42 +39,15 @@ export function NewEvaluationForm({ repos }: { repos: RepoOption[] }) {
     setError("");
     setBusy(true);
     try {
-      const post = async (url: string, body: unknown) => {
-        const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error((data as { error?: string }).error || `Request failed (${res.status})`);
-        return data as { id: string };
-      };
-      const job = await post("/os/mission/api/jobs", {
-        title: `Evaluate ${repo.name}`,
-        department: "intelligence",
-        agent: "github-os",
+      const res = await fetch("/os/mission/api/evaluations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ repoId: repo.id }),
       });
-      await post("/os/mission/api/jobs/" + job.id, { action: "start" });
-      await post("/os/mission/api/artifacts", {
-        op: "create",
-        jobId: job.id,
-        kind: "research",
-        title: `Capability evaluation: ${repo.name}`,
-        source: "bhavya-internal",
-        producer: "github-os",
-        note: [
-          `Repository: ${repo.name}`,
-          repo.language ? `Language: ${repo.language}` : null,
-          typeof repo.stars === "number" ? `Stars: ${repo.stars}` : null,
-          typeof repo.forks === "number" ? `Forks: ${repo.forks}` : null,
-          repo.license ? `License: ${repo.license}` : null,
-          typeof repo.health_score === "number" ? `Health: ${repo.health_score}` : null,
-          typeof repo.technology_score === "number" ? `Technology: ${repo.technology_score}` : null,
-          typeof repo.bhavya_score === "number" ? `Bhavya score: ${repo.bhavya_score}` : null,
-          repo.engineering_maturity ? `Maturity: ${repo.engineering_maturity}` : null,
-          repo.recommendation_type ? `Recommendation: ${repo.recommendation_type}` : null,
-          repo.why_bhavya_cares ? `Relevance: ${repo.why_bhavya_cares}` : null,
-        ]
-          .filter(Boolean)
-          .join(" · "),
-      });
-      router.push(`/os/mission/jobs/${job.id}`);
+      const data = (await res.json().catch(() => ({}))) as { error?: string; job?: { id: string }; deduped?: boolean };
+      if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+      if (!data.job) throw new Error("Evaluation did not return a job");
+      router.push(`/os/mission/jobs/${data.job.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create evaluation");
       setBusy(false);

@@ -172,6 +172,37 @@ export interface MissionControlRepository {
   findJobsByTaskContract(contractId: string): Promise<McJob[]>;
 
   /**
+   * Real adapter: GitHub OS evaluation record → persisted MC job + session
+   * + evaluation artifact (v1). Idempotent: calling twice with the same
+   * repoId returns the original records (deduped: true) instead of
+   * creating a second job. No GitHub OS data is copied beyond reference
+   * facts (names/scores/license); the row stays canonical in github-os.
+   */
+  createJobFromEvaluation(input: {
+    repoId: string;
+    repoName: string;
+    language?: string;
+    stars?: number;
+    forks?: number;
+    license?: string;
+    healthScore?: number;
+    technologyScore?: number;
+    bhavyaScore?: number;
+    maturity?: string;
+    recommendation?: string;
+    relevance?: string;
+    taskContractIds?: string[];
+    createdBy: string;
+    producer?: string;
+  }): Promise<{
+    job: McJob;
+    session: McSession;
+    artifact: McArtifact;
+    version: McArtifactVersion;
+    deduped: boolean;
+  }>;
+
+  /**
    * Explicit integration gate. Approved ≠ integrated: an approved artifact
    * must be verified, then moved to integrating, then integrated — each
    * step persisted with evidence. completeIntegration records an

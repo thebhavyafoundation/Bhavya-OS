@@ -231,6 +231,72 @@ describe("mission control task linkage", () => {
   });
 });
 
+describe("mission control evaluation adapter", () => {
+  const evalInput = (suffix: string) => ({
+    repoId: `repo-${TAG}-${suffix}`,
+    repoName: `Some Repo ${suffix}`,
+    language: "TypeScript",
+    stars: 100,
+    license: "MIT",
+    bhavyaScore: 80,
+    createdBy: "test-operator",
+  });
+
+  it("creates job + session + artifact v1 with references, idempotently", async () => {
+    const repo = getMissionControlRepository();
+    const first = await repo.createJobFromEvaluation(evalInput("a"));
+    expect(first.deduped).toBe(false);
+    expect(first.job.status).toBe("running");
+    expect(first.job.department).toBe("engineering");
+    expect(first.session.status).toBe("running");
+    expect(first.job.sessionId).toBe(first.session.id);
+    expect(first.artifact.kind).toBe("evaluation");
+    expect(first.artifact.source).toBe("github-os");
+    expect(first.version.version).toBe(1);
+    expect(first.version.sessionId).toBe(first.session.id);
+
+    const second = await repo.createJobFromEvaluation(evalInput("a"));
+    expect(second.deduped).toBe(true);
+    expect(second.job.id).toBe(first.job.id);
+    expect(second.artifact.id).toBe(first.artifact.id);
+    // No second job was created for the same source record.
+    const all = await repo.listJobs();
+    expect(all.filter((j) => j.title === first.job.title).length).toBe(1);
+  });
+
+  it("validates adapter input", async () => {
+    const repo = getMissionControlRepository();
+    const base = evalInput("b");
+    await expect(repo.createJobFromEvaluation({ ...base, repoId: "  " })).rejects.toThrow("repoId is required");
+    await expect(repo.createJobFromEvaluation({ ...base, repoName: " " })).rejects.toThrow("repoName is required");
+    await expect(repo.createJobFromEvaluation({ ...base, createdBy: "" })).rejects.toThrow("createdBy");
+  });
+});
+
+describe("mission control negative paths", () => {
+  it("rejects duplicate and terminal decisions", async () => {
+    const repo = getMissionControlRepository();
+    const job = await freshJob("Negative");
+    await repo.startJob(job.id);
+    await repo.submitJobForApproval(job.id);
+    const { artifact } = await repo.createArtifact({ jobId: job.id, title: `Neg ${TAG}`, producer: "agent-1" });
+    const req = await repo.requestApproval(artifact.id, "test-operator");
+    await expect(repo.requestApproval(artifact.id, "test-operator")).rejects.toThrow("already pending");
+    await repo.decide({ requestId: req.id, action: "approve", actor: "human-1" });
+    await expect(repo.decide({ requestId: req.id, action: "approve", actor: "human-1" })).rejects.toThrow("already decided");
+    await expect(repo.decide({ requestId: "missing", action: "approve", actor: "human-1" })).rejects.toThrow("not found");
+  });
+
+  it("rejects operations on missing objects", async () => {
+    const repo = getMissionControlRepository();
+    expect(await repo.getJob("missing")).toBeUndefined();
+    expect(await repo.getArtifact("missing")).toBeUndefined();
+    await expect(repo.addVersion({ artifactId: "missing", producer: "p" })).rejects.toThrow("Artifact not found");
+    await expect(repo.requestApproval("missing", "op")).rejects.toThrow("Artifact not found");
+    await expect(repo.markVerified("missing")).rejects.toThrow("Artifact not found");
+    await expect(repo.startSession("missing", "p")).rejects.toThrow("Job not found");
+  });
+});
 describe("mission control version comparison", () => {
   it("reports only changed metadata fields", async () => {
     const { diffVersions } = await import("@/lib/mission-compare");

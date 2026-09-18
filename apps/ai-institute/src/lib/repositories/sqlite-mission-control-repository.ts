@@ -508,6 +508,110 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     return jobs.filter((j) => j.taskContractIds.includes(contractId.trim()));
   }
 
+  async createJobFromEvaluation(input: {
+    repoId: string;
+    repoName: string;
+    language?: string;
+    stars?: number;
+    forks?: number;
+    license?: string;
+    healthScore?: number;
+    technologyScore?: number;
+    bhavyaScore?: number;
+    maturity?: string;
+    recommendation?: string;
+    relevance?: string;
+    taskContractIds?: string[];
+    createdBy: string;
+    producer?: string;
+  }): Promise<{
+    job: McJob;
+    session: McSession;
+    artifact: McArtifact;
+    version: McArtifactVersion;
+    deduped: boolean;
+  }> {
+    if (!input.repoId.trim()) throw new Error("repoId is required");
+    if (!input.repoName.trim()) throw new Error("repoName is required");
+    if (!input.createdBy.trim()) throw new Error("createdBy actor is required");
+    const db = getAsyncDb();
+    const key = `ghos-eval:${input.repoId.trim()}`;
+    const prior = await db.get<Row>(
+      "SELECT * FROM evidence_records WHERE idempotency_key = ? LIMIT 1",
+      key,
+    );
+    if (prior) {
+      const meta = JSON.parse((prior.metadata as string) ?? "{}") as {
+        jobId?: string;
+        artifactId?: string;
+        sessionId?: string;
+      };
+      const job = meta.jobId ? await this.getJob(meta.jobId) : undefined;
+      const priorSession = meta.sessionId
+        ? await db.get<Row>("SELECT * FROM mc_sessions WHERE id = ?", meta.sessionId)
+        : undefined;
+      const session = priorSession ? rowToSession(priorSession) : undefined;
+      const artifact = meta.artifactId ? await this.getArtifact(meta.artifactId) : undefined;
+      if (job && session && artifact) {
+        const versions = await this.listVersions(artifact.id);
+        return { job, session, artifact, version: versions[0], deduped: true };
+      }
+      // Prior record is stale (rows removed) — fall through and rebuild.
+    }
+    const producer = input.producer?.trim() || "github-os";
+    const job = await this.createJob({
+      title: `Evaluate ${input.repoName.trim()}`,
+      department: "intelligence",
+      agent: producer,
+      taskContractIds: input.taskContractIds ?? [],
+      createdBy: input.createdBy.trim(),
+    });
+    await this.startJob(job.id);
+    const session = await this.startSession(job.id, producer);
+    const facts = [
+      `Repository: ${input.repoName.trim()}`,
+      input.language ? `Language: ${input.language}` : null,
+      typeof input.stars === "number" ? `Stars: ${input.stars}` : null,
+      typeof input.forks === "number" ? `Forks: ${input.forks}` : null,
+      input.license ? `License: ${input.license}` : null,
+      typeof input.healthScore === "number" ? `Health: ${input.healthScore}` : null,
+      typeof input.technologyScore === "number" ? `Technology: ${input.technologyScore}` : null,
+      typeof input.bhavyaScore === "number" ? `Bhavya score: ${input.bhavyaScore}` : null,
+      input.maturity ? `Maturity: ${input.maturity}` : null,
+      input.recommendation ? `Recommendation: ${input.recommendation}` : null,
+      input.relevance ? `Relevance: ${input.relevance}` : null,
+    ]
+      .filter((x): x is string => Boolean(x))
+      .join(" · ");
+    const { artifact, version } = await this.createArtifact({
+      jobId: job.id,
+      kind: "evaluation",
+      title: `Capability evaluation: ${input.repoName.trim()}`,
+      source: "github-os",
+      producer,
+      note: facts,
+    });
+    await db.run(
+      "UPDATE mc_artifact_versions SET session_id = ?, path = ? WHERE id = ?",
+      session.id,
+      `github-os:repository:${input.repoId.trim()}`,
+      version.id,
+    );
+    await db.run(
+      `INSERT INTO evidence_records (id, activity_type, activity_id, timestamp, description, metadata, idempotency_key)
+       VALUES (?, 'mission-control.evaluation', ?, ?, ?, ?, ?)`,
+      uid("ev-mc"),
+      job.id,
+      now(),
+      `Evaluation job created from github-os record ${input.repoId.trim()}`,
+      JSON.stringify({ jobId: job.id, artifactId: artifact.id, sessionId: session.id, repoId: input.repoId.trim() }),
+      key,
+    );
+    const running = (await this.getJob(job.id)) as McJob;
+    const v1 = (await this.listVersions(artifact.id))[0];
+    return { job: running, session, artifact, version: v1, deduped: false };
+  }
+
   private async transitionArtifact(id: string, to: McArtifactStatus): Promise<McArtifact> {
     const db = getAsyncDb();
     const artifact = await this.getArtifact(id);
@@ -581,6 +685,7 @@ export class SqliteMissionControlRepository implements MissionControlRepository 
     if (!producer.trim()) throw new Error("Producer is required");
     const id = uid("mc-sess");
     await db.run("INSERT INTO mc_sessions (id, job_id, producer, status) VALUES (?, ?, ?, 'running')", id, jobId, producer.trim());
+    await db.run("UPDATE mc_jobs SET session_id = ?, updated_at = ? WHERE id = ?", id, now(), jobId);
     await this.evidence("mission-control.session", id, `Session started for job ${jobId} by ${producer.trim()}`, { jobId });
     const row = await db.get<Row>("SELECT * FROM mc_sessions WHERE id = ?", id);
     return rowToSession(row!);
