@@ -1,0 +1,15 @@
+# Gitleaks allowlist — reviewed false positives ONLY.
+#
+# Each line is the exact finding fingerprint for FAKE credentials inside the
+# security-analyzer TEST FIXTURE apps/github-os/scripts/test-edge-cases.mjs
+# (committed in 3e1d496, pre-existing). That script deliberately embeds
+# split-string fake secrets ("1234...", "EXAMPLE", truncated key body) to
+# verify the repo's own credential detector; the values are non-functional
+# and can never authenticate anywhere.
+#
+# Rule: never add a line here without recording file/reason. If the fixture
+# file changes, gitleaks reports new fingerprints — review them, do not
+# bulk-ignore.
+3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:private-key:221
+3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:200
+3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:202
