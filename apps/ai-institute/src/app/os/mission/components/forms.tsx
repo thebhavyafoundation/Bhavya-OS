@@ -210,12 +210,14 @@ export function DecisionForm({ requestId }: { requestId: string }) {
     <div className="mt-3 space-y-2">
       <input
         value={reason}
+        aria-label="Decision reason (required to reject or request revision)"
         onChange={(e) => setReason(e.target.value)}
         placeholder="Reason (required to reject / revise)"
         className="w-full px-3 py-2 bg-bg-secondary border border-border-primary rounded-lg text-xs text-text-primary placeholder-text-secondary"
       />
       <input
         value={instruction}
+        aria-label="Revision instruction (optional)"
         onChange={(e) => setInstruction(e.target.value)}
         placeholder="Revision instruction (optional)"
         className="w-full px-3 py-2 bg-bg-secondary border border-border-primary rounded-lg text-xs text-text-primary placeholder-text-secondary"

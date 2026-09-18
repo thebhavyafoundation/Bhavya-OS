@@ -52,6 +52,10 @@ export default async function ApprovalsPage() {
       <Link href="/os/mission" className="text-sm text-accent-gold hover:underline">← Mission Control</Link>
       <h1 className="mt-3 text-3xl font-bold text-text-primary tracking-tight">Approval review</h1>
       <p className="text-sm text-text-tertiary mt-2">Each decision is persisted with actor, reason, and instruction.</p>
+      <p className="text-xs text-text-muted mt-1">
+        Approve advances the version toward verification and integration. Reject stops it and returns the job to revising.
+        Request revision keeps history and requires a new version. Decisions are restricted to admin and staff.
+      </p>
 
       <div className="mt-8 space-y-6">
         {pending.length === 0 && (

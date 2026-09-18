@@ -4,7 +4,41 @@ import { requireRoles } from "@/lib/require-role";
 import { initDatabase } from "@/lib/db";
 import { getMissionControlRepository } from "@/lib/repositories";
 import { JobActions, RequestApprovalButton, DecisionForm, NewVersionForm, IntegrationActions } from "../../components/forms";
+import { MissionGraph } from "../../components/graph";
 import { diffVersions } from "@/lib/mission-compare";
+import { getGitHubData } from "@/lib/os-data";
+
+function evaluationFacts(path: string) {
+  const m = /^github-os:repository:(.+)$/.exec(path);
+  if (!m) return null;
+  let row: Record<string, unknown> | undefined;
+  try {
+    const data = getGitHubData();
+    const rows = data.repositories as unknown as Record<string, unknown>[];
+    row = rows.find((r) => String(r.id) === m[1]);
+  } catch {
+    return null;
+  }
+  if (!row) return null;
+  const str = (v: unknown) => (typeof v === "string" && v ? v : null);
+  const num = (v: unknown) => (typeof v === "number" ? String(v) : null);
+  const facts = [
+    row.name ? `Repository: ${String(row.name)}` : null,
+    str(row.language) ? `Language: ${row.language}` : null,
+    num(row.stars) ? `Stars: ${row.stars}` : null,
+    num(row.forks) ? `Forks: ${row.forks}` : null,
+    str(row.license) ? `License: ${row.license}` : null,
+    num(row.health_score) ? `Health: ${row.health_score}` : null,
+    num(row.technology_score) ? `Technology: ${row.technology_score}` : null,
+    str(row.engineering_maturity) ? `Maturity: ${row.engineering_maturity}` : null,
+  ].filter((x): x is string => Boolean(x));
+  const recommendations = [
+    num(row.bhavya_score) ? `Bhavya score: ${row.bhavya_score}` : null,
+    str(row.recommendation_type) ? `Recommended action: ${row.recommendation_type}` : null,
+    str(row.why_bhavya_cares) ? `Rationale: ${row.why_bhavya_cares}` : null,
+  ].filter((x): x is string => Boolean(x));
+  return { facts, recommendations };
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -26,6 +60,7 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
   const pendingByArtifact = new Map(pending.map((r) => [r.artifactId, r]));
   const sessions = await repo.listSessions(id);
   const evidence = await repo.listEvidence(id);
+  const graph = await repo.getMissionGraph(id);
   const { getTaskContract } = await import("@/lib/task-contracts");
   const linkedTasks = job.taskContractIds
     .map((tc) => getTaskContract(tc))
@@ -100,6 +135,25 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
                 </div>
               )}
               <IntegrationActions artifactId={artifact.id} status={artifact.status} />
+              {(() => {
+                const ref = versions.map((v) => v.path).find((p) => p.startsWith("github-os:repository:"));
+                if (!ref) return null;
+                const panel = evaluationFacts(ref);
+                if (!panel) return null;
+                return (
+                  <div className="mt-4 rounded-lg bg-bg-primary/50 border border-border-primary p-4 text-xs">
+                    <div className="font-semibold text-text-primary mb-2">GitHub OS facts (live reference — not copied)</div>
+                    <div className="text-text-secondary">
+                      <span className="font-semibold text-text-primary">FACT: </span>
+                      {panel.facts.length > 0 ? panel.facts.join(" · ") : "No fact fields available."}
+                    </div>
+                    <div className="text-text-secondary mt-1">
+                      <span className="font-semibold text-text-primary">RECOMMENDATION (heuristic, not Bhavya fact): </span>
+                      {panel.recommendations.length > 0 ? panel.recommendations.join(" · ") : "No recommendation recorded."}
+                    </div>
+                  </div>
+                );
+              })()}
               {req && (
                 <div className="mt-4 border-t border-border-primary pt-4">
                   <p className="text-xs text-text-tertiary mb-1">
@@ -146,6 +200,12 @@ export default async function JobDetailPage({ params }: { params: Promise<{ id: 
             <span className="block mt-0.5">{e.description} · {new Date(e.timestamp).toLocaleString()}</span>
           </div>
         ))}
+      </div>
+
+      <h2 className="mt-10 text-xl font-bold text-text-primary">Graph ({graph.nodes.length} nodes, {graph.edges.length} edges)</h2>
+      <p className="text-xs text-text-muted mt-1">Deterministic projection of persisted records — FACT edges only, no inference.</p>
+      <div className="mt-4">
+        <MissionGraph nodes={graph.nodes} edges={graph.edges} />
       </div>
     </div>
   );
