@@ -12,7 +12,7 @@
     "./registry": "./src/registry.ts"
   },
   "scripts": {
-    "test": "vitest run --passWithNoTests --pool forks",
+    "test": "vitest run --passWithNoTests --no-isolate",
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx src/cli.ts",
     "db:migrate:status": "tsx src/cli.ts status"
