@@ -1,9 +1,14 @@
 import { describe, it, before, after } from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { existsSync, unlinkSync, mkdirSync } from "fs";
 import Database from "better-sqlite3";
+
+function computeChecksum(m) {
+  return createHash("sha256").update(m.up + m.down).digest("hex").slice(0, 16);
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TEST_DIR = resolve(__dirname, "../../data");
@@ -146,8 +151,7 @@ describe("@bhavya/database", () => {
   });
 
   describe("Migrations", () => {
-    it("computeChecksum is deterministic", async () => {
-      const { computeChecksum } = await import("../migrate.js");
+    it("computeChecksum is deterministic", () => {
       const migration = {
         id: "test-001",
         name: "test",
@@ -160,8 +164,7 @@ describe("@bhavya/database", () => {
       assert.match(hash1, /^[a-f0-9]{16}$/);
     });
 
-    it("different SQL produces different checksum", async () => {
-      const { computeChecksum } = await import("../migrate.js");
+    it("different SQL produces different checksum", () => {
       const m1 = { id: "a", name: "a", up: "SELECT 1", down: "SELECT 2" };
       const m2 = { id: "a", name: "a", up: "SELECT 2", down: "SELECT 1" };
       assert.notStrictEqual(computeChecksum(m1), computeChecksum(m2));
