@@ -12,7 +12,7 @@
     "./registry": "./src/registry.ts"
   },
   "scripts": {
-    "test": "vitest run --passWithNoTests --no-isolate",
+    "test": "node --import tsx --test src/__tests__/database.test.mjs",
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx src/cli.ts",
     "db:migrate:status": "tsx src/cli.ts status"
