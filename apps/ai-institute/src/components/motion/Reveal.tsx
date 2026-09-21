@@ -51,6 +51,11 @@ const variants: Record<string, { hidden: Variant; visible: Variant }> = {
   },
 };
 
+function getPrefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function Reveal({
   children,
   variant = "slide-up",
@@ -63,9 +68,11 @@ export function Reveal({
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: "-80px" });
   const [mounted, setMounted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setPrefersReducedMotion(getPrefersReducedMotion());
   }, []);
 
   const selected = variants[variant];
@@ -82,6 +89,10 @@ export function Reveal({
   const visible = useMemo(() => {
     return { ...selected.visible };
   }, [selected]);
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

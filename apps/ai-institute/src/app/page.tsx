@@ -139,12 +139,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:rounded-md focus:bg-accent-green focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lg focus:outline-none"
-      >
-        Skip to content
-      </a>
       <SiteHeader />
 
       {/* ====== HERO — CINEMATIC INSTITUTIONAL ====== */}
@@ -246,22 +240,9 @@ export default function HomePage() {
       </section>
 
       {/* ====== INSTITUTIONAL INTRODUCTION ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-bg-primary)",
-        }}
-      >
+      <section className="home-section home-section-cream">
         <div className="container">
-          <div
-            className="home-intro-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "var(--space-16)",
-              alignItems: "center",
-            }}
-          >
+          <div className="home-grid-2">
             <Reveal variant="slide-up">
               <div>
                 <span className="editorial-label">
@@ -309,37 +290,13 @@ export default function HomePage() {
               </div>
             </Reveal>
             <Reveal variant="slide-up" delay={0.2}>
-              <div
-                style={{
-                  padding: "var(--space-8)",
-                  background: "var(--color-ivory-200)",
-                  borderRadius: "var(--radius-lg)",
-                  borderLeft: "3px solid var(--color-brand-gold)",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-xl)",
-                    fontStyle: "italic",
-                    color: "var(--color-text-primary)",
-                    lineHeight: 1.6,
-                    margin: 0,
-                  }}
-                >
+              <div className="quote-block">
+                <p>
                   &ldquo;A tree planted today becomes the forest that protects
                   tomorrow. An institution built today becomes the system that
                   serves generations.&rdquo;
                 </p>
-                <p
-                  style={{
-                    marginTop: "var(--space-4)",
-                    fontSize: "var(--text-sm)",
-                    color: "var(--color-text-muted)",
-                  }}
-                >
-                  — Bhavya Foundation
-                </p>
+                <cite>— Bhavya Foundation</cite>
               </div>
             </Reveal>
           </div>
@@ -347,13 +304,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== FOUR MISSIONS — IMAGE CARDS ====== */}
-      <section
-        id="main-content"
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-ivory-200)",
-        }}
-      >
+      <section id="main-content" className="home-section home-section-ivory">
         <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>
             <span className="editorial-label">OUR MISSIONS</span>
@@ -380,14 +331,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div
-            className="home-missions-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "var(--space-6)",
-            }}
-          >
+          <div className="home-grid-4">
             {missions.map((m, i) => (
               <Reveal
                 key={m.key}
@@ -398,15 +342,11 @@ export default function HomePage() {
                 <a
                   href={`/${m.key}`}
                   className="mission-card"
-                  style={{
-                    height: "100%",
-                  }}
+                  style={{ height: "100%" }}
                 >
                   <div
                     className="mission-card-image"
-                    style={{
-                      height: "220px",
-                    }}
+                    style={{ height: "220px" }}
                   >
                     <img
                       src={m.photo}
@@ -420,14 +360,7 @@ export default function HomePage() {
                           "transform var(--duration-slow) var(--ease-out)",
                       }}
                     />
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(to top, rgba(14, 56, 46, 0.6) 0%, transparent 60%)",
-                      }}
-                    />
+                    <div className="mission-card-overlay" />
                     <div
                       style={{
                         position: "absolute",
@@ -470,21 +403,9 @@ export default function HomePage() {
       </section>
 
       {/* ====== REAL WORK — PEOPLE, PLACES, PROGRESS ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-bg-primary)",
-        }}
-      >
+      <section className="home-section home-section-cream">
         <div className="container">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              marginBottom: "var(--space-12)",
-            }}
-          >
+          <div className="section-header-row">
             <div>
               <span className="editorial-label">
                 OUR WORK IN THE REAL WORLD
@@ -511,31 +432,12 @@ export default function HomePage() {
                 expanding access, and strengthening communities.
               </p>
             </div>
-            <a
-              href="/missions"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "var(--space-2)",
-                fontSize: "var(--text-sm)",
-                fontWeight: 600,
-                color: "var(--color-brand-forest)",
-                textDecoration: "none",
-                transition: "gap var(--duration-fast) ease",
-              }}
-            >
+            <a href="/missions" className="section-header-link">
               View All <ArrowRight size={14} />
             </a>
           </div>
 
-          <div
-            className="home-realwork-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "var(--space-6)",
-            }}
-          >
+          <div className="home-grid-4">
             {realWork.map((item, i) => (
               <Reveal
                 key={item.title}
@@ -546,9 +448,7 @@ export default function HomePage() {
                 <a href={item.href} className="mission-card">
                   <div
                     className="mission-card-image"
-                    style={{
-                      height: "200px",
-                    }}
+                    style={{ height: "200px" }}
                   >
                     <img
                       src={item.photo}
@@ -562,14 +462,7 @@ export default function HomePage() {
                           "transform var(--duration-slow) var(--ease-out)",
                       }}
                     />
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(to top, rgba(14, 56, 46, 0.5) 0%, transparent 50%)",
-                      }}
-                    />
+                    <div className="mission-card-overlay" />
                     <div
                       style={{
                         position: "absolute",
@@ -616,12 +509,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== GOVERNANCE & TRUST — INSTITUTIONAL CREDIBILITY ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-bg-primary)",
-        }}
-      >
+      <section className="home-section home-section-cream">
         <div className="container">
           <Reveal variant="slide-up">
             <div style={{ marginBottom: "var(--space-12)" }}>
@@ -650,14 +538,7 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div
-            className="home-trust-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "var(--space-6)",
-            }}
-          >
+          <div className="home-grid-2x2">
             {[
               {
                 icon: BookCheck,
@@ -698,63 +579,18 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={30}
               >
-                <a
-                  href={item.href}
-                  style={{
-                    display: "block",
-                    padding: "var(--space-6)",
-                    borderRadius: "var(--radius-lg)",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    textDecoration: "none",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                    height: "100%",
-                  }}
-                >
+                <a href={item.href} className="governance-card">
                   <div
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "var(--radius-md)",
-                      background: "var(--color-forest-50)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: item.color,
-                      marginBottom: "var(--space-5)",
-                    }}
+                    className="governance-card-icon"
+                    style={{ color: item.color }}
                   >
                     <item.icon size={20} />
                   </div>
-                  <h3
-                    style={{
-                      fontSize: "var(--text-lg)",
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.6,
-                      marginBottom: "var(--space-4)",
-                    }}
-                  >
-                    {item.desc}
-                  </p>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                   <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "var(--space-2)",
-                      fontSize: "var(--text-sm)",
-                      fontWeight: 600,
-                      color: item.color,
-                    }}
+                    className="governance-card-link"
+                    style={{ color: item.color }}
                   >
                     {item.linkText} <ArrowRight size={14} />
                   </span>
@@ -766,22 +602,9 @@ export default function HomePage() {
       </section>
 
       {/* ====== CURRICULUM HIGHLIGHT — AI EDUCATION ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-ivory-200)",
-        }}
-      >
+      <section className="home-section home-section-ivory">
         <div className="container">
-          <div
-            className="home-curriculum-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "var(--space-16)",
-              alignItems: "center",
-            }}
-          >
+          <div className="home-grid-2">
             <Reveal variant="slide-up">
               <div>
                 <span className="editorial-label">AI INSTITUTE</span>
@@ -949,41 +772,14 @@ export default function HomePage() {
                   ].map((tier) => (
                     <div
                       key={tier.level}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "var(--space-4)",
-                        padding: "var(--space-3) var(--space-4)",
-                        borderRadius: "var(--radius-md)",
-                        background: tier.color,
-                      }}
+                      className="curriculum-tier"
+                      style={{ background: tier.color }}
                     >
-                      <span
-                        style={{
-                          fontSize: "var(--text-xs)",
-                          fontWeight: 700,
-                          color: "var(--color-brand-forest)",
-                          minWidth: "36px",
-                        }}
-                      >
+                      <span className="curriculum-tier-level">
                         L{tier.level}
                       </span>
-                      <span
-                        style={{
-                          fontSize: "var(--text-sm)",
-                          fontWeight: 500,
-                          color: "var(--color-text-primary)",
-                          flex: 1,
-                        }}
-                      >
-                        {tier.name}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "var(--text-xs)",
-                          color: "var(--color-text-muted)",
-                        }}
-                      >
+                      <span className="curriculum-tier-name">{tier.name}</span>
+                      <span className="curriculum-tier-count">
                         {tier.modules}
                       </span>
                     </div>
@@ -1017,12 +813,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== BHAVYA ECOSYSTEM ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-ivory-200)",
-        }}
-      >
+      <section className="home-section home-section-ivory">
         <div className="container">
           <Reveal variant="slide-up">
             <div
@@ -1055,17 +846,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal variant="slide-up" delay={0.2}>
-            <div
-              className="home-ecosystem-flow"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "var(--space-4)",
-                flexWrap: "wrap",
-                padding: "var(--space-8) 0",
-              }}
-            >
+            <div className="ecosystem-flow">
               {[
                 {
                   label: "Foundation",
@@ -1101,28 +882,14 @@ export default function HomePage() {
                     gap: "var(--space-4)",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "var(--space-2)",
-                      minWidth: "100px",
-                    }}
-                  >
+                  <div className="ecosystem-step">
                     <div
+                      className="ecosystem-step-icon"
                       style={{
-                        width: "48px",
-                        height: "48px",
-                        borderRadius: "var(--radius-full)",
                         background:
                           i === arr.length - 1
                             ? "var(--color-brand-forest)"
                             : "var(--color-bg-primary)",
-                        border: "1px solid var(--color-border-primary)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
                         color:
                           i === arr.length - 1
                             ? "white"
@@ -1131,27 +898,15 @@ export default function HomePage() {
                     >
                       <step.icon size={20} />
                     </div>
-                    <span
-                      style={{
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
-                      }}
-                    >
-                      {step.label}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "var(--text-xs)",
-                        color: "var(--color-text-muted)",
-                      }}
-                    >
+                    <span className="ecosystem-step-label">{step.label}</span>
+                    <span className="ecosystem-step-sublabel">
                       {step.sublabel}
                     </span>
                   </div>
                   {i < arr.length - 1 && (
                     <ArrowRight
                       size={20}
+                      className="ecosystem-arrow"
                       style={{
                         color: "var(--color-text-muted)",
                         flexShrink: 0,
@@ -1166,95 +921,25 @@ export default function HomePage() {
       </section>
 
       {/* ====== BHAVYA OS INTRODUCTION — DARK PANEL ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background:
-            "linear-gradient(160deg, var(--color-forest-950) 0%, var(--color-forest-800) 100%)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Subtle grid texture */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.05,
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-            pointerEvents: "none",
-          }}
-          aria-hidden="true"
-        />
-
+      <section className="home-section home-section-dark">
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div
-            className="home-os-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "var(--space-16)",
-              alignItems: "center",
-            }}
-          >
+          <div className="home-grid-2">
             <Reveal variant="slide-up">
               <div>
-                <span
-                  style={{
-                    display: "inline-block",
-                    fontSize: "var(--text-xs)",
-                    fontWeight: 600,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.1em",
-                    color: "var(--color-brand-gold)",
-                    marginBottom: "var(--space-4)",
-                  }}
-                >
+                <span className="dark-label">
                   THE SYSTEM BEHIND THE INSTITUTION
                 </span>
-                <h2
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(2rem, 4vw, 3rem)",
-                    fontWeight: 400,
-                    lineHeight: 1.2,
-                    color: "var(--color-text-inverse)",
-                    marginBottom: "var(--space-6)",
-                  }}
-                >
+                <h2 className="dark-heading">
                   The system behind
                   <br />
                   the institution.
                 </h2>
-                <p
-                  style={{
-                    fontSize: "var(--text-lg)",
-                    color: "rgba(247, 244, 236, 0.7)",
-                    lineHeight: 1.7,
-                    marginBottom: "var(--space-8)",
-                  }}
-                >
+                <p className="dark-desc">
                   Bhavya OS is the institutional operating system — connecting
                   programs, projects, evidence, research, and impact in one
                   unified system built to endure.
                 </p>
-                <a
-                  href="/os"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
-                    padding: "var(--space-3) var(--space-6)",
-                    borderRadius: "var(--radius-full)",
-                    background: "var(--color-brand-gold)",
-                    color: "var(--color-forest-950)",
-                    fontWeight: 600,
-                    fontSize: "var(--text-sm)",
-                    textDecoration: "none",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                  }}
-                >
+                <a href="/os" className="btn btn-gold">
                   Explore Bhavya OS
                   <ArrowRight size={14} />
                 </a>
@@ -1262,13 +947,7 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal variant="slide-up" delay={0.2}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "var(--space-4)",
-                }}
-              >
+              <div className="home-grid-2x2">
                 {[
                   {
                     label: "Programs",
@@ -1287,34 +966,9 @@ export default function HomePage() {
                     desc: "Metrics, verification, and transparent reporting",
                   },
                 ].map((item) => (
-                  <div
-                    key={item.label}
-                    style={{
-                      padding: "var(--space-5)",
-                      borderRadius: "var(--radius-md)",
-                      background: "rgba(255, 255, 255, 0.05)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 600,
-                        color: "var(--color-text-inverse)",
-                        marginBottom: "var(--space-2)",
-                      }}
-                    >
-                      {item.label}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "var(--text-xs)",
-                        color: "rgba(247, 244, 236, 0.5)",
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {item.desc}
-                    </div>
+                  <div key={item.label} className="os-panel">
+                    <div className="os-panel-label">{item.label}</div>
+                    <div className="os-panel-desc">{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -1324,12 +978,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== GET INVOLVED ====== */}
-      <section
-        style={{
-          padding: "var(--space-24) 0",
-          background: "var(--color-bg-primary)",
-        }}
-      >
+      <section className="home-section home-section-cream">
         <div className="container">
           <div style={{ marginBottom: "var(--space-12)" }}>
             <span className="editorial-label">GET INVOLVED</span>
@@ -1356,14 +1005,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div
-            className="home-involved-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "var(--space-6)",
-            }}
-          >
+          <div className="home-grid-4">
             {getInvolved.map((card, i) => (
               <Reveal
                 key={card.title}
@@ -1371,64 +1013,13 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={30}
               >
-                <a
-                  href={card.href}
-                  style={{
-                    display: "block",
-                    padding: "var(--space-6)",
-                    borderRadius: "var(--radius-lg)",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    textDecoration: "none",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                    height: "100%",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "44px",
-                      height: "44px",
-                      borderRadius: "var(--radius-md)",
-                      background: "var(--color-forest-50)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "var(--color-brand-forest)",
-                      marginBottom: "var(--space-5)",
-                    }}
-                  >
+                <a href={card.href} className="involvement-card">
+                  <div className="involvement-card-icon">
                     <card.icon size={20} />
                   </div>
-                  <h3
-                    style={{
-                      fontSize: "var(--text-lg)",
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.6,
-                      marginBottom: "var(--space-4)",
-                    }}
-                  >
-                    {card.desc}
-                  </p>
-                  <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "var(--space-2)",
-                      fontSize: "var(--text-sm)",
-                      fontWeight: 600,
-                      color: "var(--color-brand-forest)",
-                    }}
-                  >
+                  <h3>{card.title}</h3>
+                  <p>{card.desc}</p>
+                  <span className="involvement-card-link">
                     Learn more <ArrowRight size={14} />
                   </span>
                 </a>

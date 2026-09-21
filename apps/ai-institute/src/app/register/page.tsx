@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
 import { getIntent } from "@/lib/participation-intents";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export default function RegisterPage() {
   return (
@@ -49,69 +50,207 @@ function RegisterForm() {
   }
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "var(--color-bg-primary)",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <SiteHeader />
-      <div className="flex items-center justify-center p-4 pt-28 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md space-y-6"
+      <main
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          padding: "var(--space-16) var(--space-4) var(--space-24)",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "420px",
+            alignSelf: "flex-start",
+            paddingTop: "var(--space-8)",
+          }}
         >
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-text-primary">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ textAlign: "center", marginBottom: "var(--space-8)" }}
+          >
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--text-3xl, 1.875rem)",
+                fontWeight: 400,
+                color: "var(--color-text-primary)",
+                marginBottom: "var(--space-2)",
+              }}
+            >
               {intent.id === "learn" ? "Create your account" : intent.headline}
             </h1>
-            <p className="text-sm text-text-tertiary mt-1">
+            <p
+              style={{
+                fontSize: "var(--text-sm)",
+                color: "var(--color-text-muted)",
+              }}
+            >
               {intent.id === "learn"
                 ? "Start your AI learning journey"
                 : intent.sub}
             </p>
-          </div>
+          </motion.div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "var(--space-5)",
+            }}
+          >
             <div>
-              <label className="block text-xs font-medium text-text-tertiary mb-1.5">
+              <label
+                htmlFor="register-name"
+                style={{
+                  display: "block",
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
                 Name
               </label>
               <input
+                id="register-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-bg-secondary border border-border-primary text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-border-focus transition-colors"
+                style={{
+                  width: "100%",
+                  padding: "var(--space-3) var(--space-4)",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-ivory-200)",
+                  border: "1px solid var(--color-border-primary)",
+                  fontSize: "var(--text-sm)",
+                  color: "var(--color-text-primary)",
+                  outline: "none",
+                  transition: "border-color var(--duration-fast) ease",
+                }}
                 placeholder="Your name"
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-gold)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-primary)";
+                }}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-text-tertiary mb-1.5">
+              <label
+                htmlFor="register-email"
+                style={{
+                  display: "block",
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
                 Email
               </label>
               <input
+                id="register-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-bg-secondary border border-border-primary text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-border-focus transition-colors"
+                style={{
+                  width: "100%",
+                  padding: "var(--space-3) var(--space-4)",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-ivory-200)",
+                  border: "1px solid var(--color-border-primary)",
+                  fontSize: "var(--text-sm)",
+                  color: "var(--color-text-primary)",
+                  outline: "none",
+                  transition: "border-color var(--duration-fast) ease",
+                }}
                 placeholder="you@example.com"
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-gold)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-primary)";
+                }}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-text-tertiary mb-1.5">
+              <label
+                htmlFor="register-password"
+                style={{
+                  display: "block",
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 500,
+                  color: "var(--color-text-secondary)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
                 Password
               </label>
               <input
+                id="register-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={8}
-                className="w-full px-4 py-3 rounded-xl bg-bg-secondary border border-border-primary text-text-primary text-sm placeholder-text-muted focus:outline-none focus:border-border-focus transition-colors"
+                style={{
+                  width: "100%",
+                  padding: "var(--space-3) var(--space-4)",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-ivory-200)",
+                  border: "1px solid var(--color-border-primary)",
+                  fontSize: "var(--text-sm)",
+                  color: "var(--color-text-primary)",
+                  outline: "none",
+                  transition: "border-color var(--duration-fast) ease",
+                }}
                 placeholder="8+ characters"
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-gold)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "var(--color-border-primary)";
+                }}
               />
             </div>
 
             {error && (
-              <p className="text-xs text-red-600 bg-red-50 px-3 py-2 rounded-lg border border-red-200">
+              <p
+                style={{
+                  fontSize: "var(--text-xs)",
+                  color: "#b91c1c",
+                  padding: "var(--space-2) var(--space-3)",
+                  borderRadius: "var(--radius-md)",
+                  background: "#fef2f2",
+                  border: "1px solid #fecaca",
+                }}
+              >
                 {error}
               </p>
             )}
@@ -119,20 +258,50 @@ function RegisterForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-4 py-3 rounded-xl bg-accent-gold text-text-primary font-semibold text-sm hover:bg-accent-gold-hover transition-colors disabled:opacity-30"
+              style={{
+                width: "100%",
+                padding: "var(--space-3) var(--space-4)",
+                borderRadius: "var(--radius-lg)",
+                background: "var(--color-brand-gold)",
+                color: "var(--color-forest-950)",
+                fontWeight: 600,
+                fontSize: "var(--text-sm)",
+                border: "none",
+                cursor: "pointer",
+                opacity: loading ? 0.6 : 1,
+                transition:
+                  "opacity var(--duration-fast) ease, background var(--duration-fast) ease",
+              }}
             >
               {loading ? "Creating account..." : "Create Account"}
             </button>
-          </form>
+          </motion.form>
 
-          <p className="text-center text-xs text-text-tertiary">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            style={{
+              textAlign: "center",
+              marginTop: "var(--space-6)",
+              fontSize: "var(--text-xs)",
+              color: "var(--color-text-muted)",
+            }}
+          >
             Already have an account?{" "}
-            <Link href="/login" className="text-accent-gold hover:underline">
+            <Link
+              href="/login"
+              style={{
+                color: "var(--color-brand-gold)",
+                textDecoration: "none",
+              }}
+            >
               Sign in
             </Link>
-          </p>
-        </motion.div>
-      </div>
+          </motion.p>
+        </div>
+      </main>
+      <SiteFooter />
     </div>
   );
 }

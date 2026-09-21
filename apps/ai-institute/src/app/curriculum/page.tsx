@@ -58,15 +58,56 @@ export default function CurriculumPage() {
       <SiteHeader />
       <main id="main-content" className="min-h-screen">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[var(--color-brand-forest)]/5 to-transparent pt-24 pb-16">
-          <div className="mx-auto max-w-5xl px-6 text-center">
-            <span className="inline-block rounded-full bg-[var(--color-brand-forest)]/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-[var(--color-brand-forest)] uppercase mb-6">
+        <section
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            background:
+              "linear-gradient(to bottom, rgba(14, 56, 46, 0.05), transparent)",
+            padding: "var(--space-24) 0 var(--space-16)",
+          }}
+        >
+          <div
+            className="container"
+            style={{ textAlign: "center", maxWidth: "720px" }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                padding: "var(--space-1) var(--space-4)",
+                borderRadius: "var(--radius-full)",
+                background: "rgba(14, 56, 46, 0.1)",
+                fontSize: "var(--text-xs)",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                color: "var(--color-brand-forest)",
+                marginBottom: "var(--space-6)",
+              }}
+            >
               Academy / Curriculum
             </span>
-            <h1 className="font-[var(--font-display)] text-4xl md:text-5xl font-bold text-[var(--color-brand-forest)] mb-6">
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2.25rem, 5vw, 3rem)",
+                fontWeight: 400,
+                color: "var(--color-brand-forest)",
+                marginBottom: "var(--space-6)",
+                lineHeight: 1.2,
+              }}
+            >
               A Curriculum Designed for Transformation
             </h1>
-            <p className="text-lg text-[var(--color-earth)] max-w-2xl mx-auto">
+            <p
+              style={{
+                fontSize: "var(--text-lg)",
+                color: "var(--color-earth)",
+                maxWidth: "600px",
+                margin: "0 auto",
+                lineHeight: 1.7,
+              }}
+            >
               The Bhavya Academy curriculum is a structured, progressive
               learning path — from digital foundations to institution building.{" "}
               <strong>13 levels. {totalModules} modules.</strong> One
@@ -76,122 +117,339 @@ export default function CurriculumPage() {
         </section>
 
         {/* All Levels */}
-        <section className="mx-auto max-w-6xl px-6 py-16">
-          <div className="mb-10">
-            <p className="text-xs font-semibold tracking-wider text-[var(--color-brand-forest)] uppercase mb-2">
-              All Levels
-            </p>
-            <h2 className="text-2xl font-bold text-[var(--color-brand-forest)]">
-              13 Levels of Progressive Learning
-            </h2>
-            <p className="text-[var(--color-earth)] mt-2 max-w-2xl">
-              Each level builds on the previous, combining theoretical
-              understanding with hands-on practice.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {curriculum.map((level) => (
-              <a
-                key={level.level}
-                href={`/curriculum/levels/${level.level}`}
-                className="group block rounded-xl border border-[var(--color-earth)]/10 bg-white p-5 shadow-sm transition-all hover:shadow-md hover:border-[var(--color-brand-forest)]/20"
+        <section style={{ padding: "var(--space-16) 0" }}>
+          <div className="container">
+            <div style={{ marginBottom: "var(--space-10)" }}>
+              <p
+                style={{
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "var(--color-brand-forest)",
+                  marginBottom: "var(--space-2)",
+                }}
               >
-                <div className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-[var(--color-brand-forest)]/10 flex items-center justify-center text-sm font-bold text-[var(--color-brand-forest)]">
-                    L{level.level}
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="font-semibold text-[var(--color-brand-forest)] group-hover:text-[var(--color-brand-forest)]">
-                      Level {level.level}: {level.name}
-                    </h3>
-                    <p className="text-sm text-[var(--color-earth)] mt-1 line-clamp-2">
-                      {level.mission}
-                    </p>
-                    <p className="text-xs text-[var(--color-earth)]/60 mt-2">
-                      {level.duration} · {level.moduleCount} modules ·{" "}
-                      {level.handsOnPercent}% hands-on
-                    </p>
+                All Levels
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-2xl, 1.5rem)",
+                  fontWeight: 400,
+                  color: "var(--color-brand-forest)",
+                }}
+              >
+                13 Levels of Progressive Learning
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-earth)",
+                  marginTop: "var(--space-2)",
+                  maxWidth: "600px",
+                  lineHeight: 1.6,
+                }}
+              >
+                Each level builds on the previous, combining theoretical
+                understanding with hands-on practice.
+              </p>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+                gap: "var(--space-4)",
+              }}
+            >
+              {curriculum.map((level) => (
+                <a
+                  key={level.level}
+                  href={`/curriculum/levels/${level.level}`}
+                  className="curriculum-tier"
+                  style={{
+                    position: "relative",
+                    padding: "var(--space-5)",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    borderRadius: "var(--radius-lg)",
+                    textDecoration: "none",
+                    transition: "all var(--duration-normal) var(--ease-out)",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "var(--space-3)",
+                    }}
+                  >
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "var(--radius-md)",
+                        background: "rgba(14, 56, 46, 0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "var(--text-sm)",
+                        fontWeight: 700,
+                        color: "var(--color-brand-forest)",
+                      }}
+                    >
+                      L{level.level}
+                    </span>
+                    <div style={{ minWidth: 0 }}>
+                      <h3
+                        style={{
+                          fontWeight: 600,
+                          color: "var(--color-brand-forest)",
+                          fontSize: "var(--text-sm)",
+                        }}
+                      >
+                        Level {level.level}: {level.name}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          color: "var(--color-earth)",
+                          marginTop: "var(--space-1)",
+                          lineHeight: 1.5,
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {level.mission}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "rgba(106, 124, 82, 0.6)",
+                          marginTop: "var(--space-2)",
+                        }}
+                      >
+                        {level.duration} · {level.moduleCount} modules ·{" "}
+                        {level.handsOnPercent}% hands-on
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <ArrowRight
-                  size={14}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[var(--color-brand-forest)]"
-                />
-              </a>
-            ))}
+                  <ArrowRight
+                    size={14}
+                    style={{
+                      position: "absolute",
+                      right: "var(--space-4)",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      opacity: 0,
+                      transition: "opacity var(--duration-fast) ease",
+                      color: "var(--color-brand-forest)",
+                    }}
+                    className="group-hover:opacity-100"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Transformation Journey */}
-        <section className="mx-auto max-w-6xl px-6 py-16 border-t border-[var(--color-earth)]/10">
-          <div className="mb-10">
-            <p className="text-xs font-semibold tracking-wider text-[var(--color-brand-forest)] uppercase mb-2">
-              The Transformation Journey
-            </p>
-            <h2 className="text-2xl font-bold text-[var(--color-brand-forest)]">
-              From Visitor to Institution Builder
-            </h2>
-            <p className="text-[var(--color-earth)] mt-2 max-w-2xl">
-              The curriculum is designed not just to teach skills, but to
-              transform learners into leaders who can build institutions that
-              serve communities.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {journeyStages.map((stage) => {
-              const Icon = stage.icon;
-              return (
-                <div
-                  key={stage.title}
-                  className="rounded-xl border border-[var(--color-earth)]/10 bg-white p-5 shadow-sm"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-[var(--color-brand-forest)]/10 flex items-center justify-center mb-3">
-                    <Icon
-                      size={20}
-                      className="text-[var(--color-brand-forest)]"
-                    />
+        <section
+          style={{
+            padding: "var(--space-16) 0",
+            borderTop: "1px solid var(--color-border-primary)",
+          }}
+        >
+          <div className="container">
+            <div style={{ marginBottom: "var(--space-10)" }}>
+              <p
+                style={{
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "var(--color-brand-forest)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
+                The Transformation Journey
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-2xl, 1.5rem)",
+                  fontWeight: 400,
+                  color: "var(--color-brand-forest)",
+                }}
+              >
+                From Visitor to Institution Builder
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-earth)",
+                  marginTop: "var(--space-2)",
+                  maxWidth: "600px",
+                  lineHeight: 1.6,
+                }}
+              >
+                The curriculum is designed not just to teach skills, but to
+                transform learners into leaders who can build institutions that
+                serve communities.
+              </p>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                gap: "var(--space-4)",
+              }}
+            >
+              {journeyStages.map((stage) => {
+                const Icon = stage.icon;
+                return (
+                  <div
+                    key={stage.title}
+                    style={{
+                      padding: "var(--space-5)",
+                      background: "var(--color-bg-primary)",
+                      border: "1px solid var(--color-border-primary)",
+                      borderRadius: "var(--radius-lg)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "var(--radius-md)",
+                        background: "rgba(14, 56, 46, 0.1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "var(--space-3)",
+                      }}
+                    >
+                      <Icon
+                        size={20}
+                        style={{ color: "var(--color-brand-forest)" }}
+                      />
+                    </div>
+                    <h3
+                      style={{
+                        fontWeight: 600,
+                        color: "var(--color-brand-forest)",
+                        fontSize: "var(--text-sm)",
+                      }}
+                    >
+                      {stage.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        color: "var(--color-earth)",
+                        marginTop: "var(--space-1)",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {stage.description}
+                    </p>
                   </div>
-                  <h3 className="font-semibold text-[var(--color-brand-forest)]">
-                    {stage.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-earth)] mt-1">
-                    {stage.description}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </section>
 
         {/* CTA */}
-        <section className="mx-auto max-w-6xl px-6 py-16 border-t border-[var(--color-earth)]/10">
-          <div className="mb-10">
-            <p className="text-xs font-semibold tracking-wider text-[var(--color-brand-forest)] uppercase mb-2">
-              Start Your Journey
-            </p>
-            <h2 className="text-2xl font-bold text-[var(--color-brand-forest)]">
-              Begin With Level 0
-            </h2>
-            <p className="text-[var(--color-earth)] mt-2 max-w-2xl">
-              No prior experience required. The curriculum starts with digital
-              foundations and progressively builds to advanced AI skills.
-            </p>
-          </div>
-          <div className="flex gap-4 flex-wrap">
-            <a
-              href="/curriculum/levels/0"
-              className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-brand-forest)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--color-brand-forest)]/90 transition-colors"
+        <section
+          style={{
+            padding: "var(--space-16) 0",
+            borderTop: "1px solid rgba(106, 124, 82, 0.1)",
+          }}
+        >
+          <div className="container">
+            <div style={{ marginBottom: "var(--space-10)" }}>
+              <p
+                style={{
+                  fontSize: "var(--text-xs)",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "var(--color-brand-forest)",
+                  marginBottom: "var(--space-2)",
+                }}
+              >
+                Start Your Journey
+              </p>
+              <h2
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--text-2xl, 1.5rem)",
+                  fontWeight: 400,
+                  color: "var(--color-brand-forest)",
+                }}
+              >
+                Begin With Level 0
+              </h2>
+              <p
+                style={{
+                  color: "var(--color-earth)",
+                  marginTop: "var(--space-2)",
+                  maxWidth: "600px",
+                  lineHeight: 1.6,
+                }}
+              >
+                No prior experience required. The curriculum starts with digital
+                foundations and progressively builds to advanced AI skills.
+              </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: "var(--space-4)",
+                flexWrap: "wrap",
+              }}
             >
-              <BookOpen size={16} />
-              Start Level 0
-              <ArrowRight size={16} />
-            </a>
-            <a
-              href="/curriculum/levels"
-              className="inline-flex items-center gap-2 rounded-lg border border-[var(--color-earth)]/20 px-5 py-2.5 text-sm font-medium text-[var(--color-brand-forest)] hover:bg-[var(--color-earth)]/5 transition-colors"
-            >
-              View All Levels
-            </a>
+              <a
+                href="/curriculum/levels/0"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "var(--space-2)",
+                  padding: "var(--space-3) var(--space-5)",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--color-brand-forest)",
+                  color: "white",
+                  fontSize: "var(--text-sm)",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  transition: "opacity var(--duration-fast) ease",
+                }}
+              >
+                <BookOpen size={16} />
+                Start Level 0
+                <ArrowRight size={16} />
+              </a>
+              <a
+                href="/curriculum/levels"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "var(--space-2)",
+                  padding: "var(--space-3) var(--space-5)",
+                  borderRadius: "var(--radius-lg)",
+                  border: "1px solid rgba(106, 124, 82, 0.2)",
+                  color: "var(--color-brand-forest)",
+                  fontSize: "var(--text-sm)",
+                  fontWeight: 500,
+                  textDecoration: "none",
+                  transition: "background var(--duration-fast) ease",
+                }}
+              >
+                View All Levels
+              </a>
+            </div>
           </div>
         </section>
       </main>
