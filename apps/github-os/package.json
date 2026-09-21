@@ -18,7 +18,7 @@
     "@bhavya/platform-ui": "workspace:*",
     "@bhavya/shared": "workspace:*",
     "@bhavya/types": "workspace:*",
-    "better-sqlite3": "^13.0.2",
+    "better-sqlite3": "^12.10.0",
     "lucide-react": "^0.400.0",
     "next": "15.5.25",
     "react": "^19.2.0",
