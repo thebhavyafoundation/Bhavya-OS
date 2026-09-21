@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, type ReactNode } from "react";
+import { useRef, useState, useEffect, useMemo, type ReactNode } from "react";
 import { motion, useInView, type Variant } from "framer-motion";
 
 interface RevealProps {
@@ -69,13 +69,19 @@ export function Reveal({
   }, []);
 
   const selected = variants[variant];
-  const hidden = { ...selected.hidden };
-  const visible = { ...selected.visible };
 
-  if (distance !== undefined) {
-    if ("y" in hidden) hidden.y = distance;
-    if ("x" in hidden) hidden.x = distance;
-  }
+  const hidden = useMemo(() => {
+    const h = { ...selected.hidden };
+    if (distance !== undefined) {
+      if ("y" in h) h.y = distance;
+      if ("x" in h) h.x = distance;
+    }
+    return h;
+  }, [selected, distance]);
+
+  const visible = useMemo(() => {
+    return { ...selected.visible };
+  }, [selected]);
 
   return (
     <motion.div

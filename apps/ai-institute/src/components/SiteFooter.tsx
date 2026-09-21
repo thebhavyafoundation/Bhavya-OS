@@ -127,7 +127,7 @@ export function SiteFooter() {
           }}
         >
           <p>
-            &copy; {new Date().getFullYear()} Bhavya Foundation. Building for
+            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> Bhavya Foundation. Building for
             Generations.
           </p>
           <div style={{ display: "flex", gap: "var(--space-4)" }}>
