@@ -9,7 +9,8 @@
     ".": "./src/index.ts",
     "./sqlite": "./src/sqlite.ts",
     "./migrate": "./src/migrate.ts",
-    "./registry": "./src/registry.ts"
+    "./registry": "./src/registry.ts",
+    "./async-adapter": "./src/async-adapter.ts"
   },
   "scripts": {
     "test": "node --test src/__tests__/database.test.mjs",
