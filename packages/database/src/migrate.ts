@@ -101,7 +101,9 @@ function getAppliedIds(db: Database.Database): string[] {
  *
  * Each file must export a default Migration object or a `migration` named export.
  */
-function loadMigrationsFromDisk(dbName: DatabaseName): Migration[] {
+async function loadMigrationsFromDisk(
+  dbName: DatabaseName,
+): Promise<Migration[]> {
   const migrationsDir = join(__dirname, "..", "migrations", dbName);
 
   try {
@@ -112,9 +114,8 @@ function loadMigrationsFromDisk(dbName: DatabaseName): Migration[] {
     const migrations: Migration[] = [];
 
     for (const file of files) {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const mod = require(join(migrationsDir, file));
-      const migration: Migration = mod.default || mod.migration;
+      const mod = await import(join(migrationsDir, file));
+      const migration: Migration = mod.default?.migration || mod.migration;
       if (migration && migration.id && migration.up) {
         // Prefix migration ID with domain name for shared-DB uniqueness.
         // All domains export the same base ID (e.g. "001_baseline_schema");
@@ -162,7 +163,7 @@ export async function migrate(
     appliedRecords.map((r) => [r.id, r.checksum]),
   );
 
-  const allMigrations = loadMigrationsFromDisk(dbName);
+  const allMigrations = await loadMigrationsFromDisk(dbName);
 
   // Check for modified migrations
   for (const record of appliedRecords) {
@@ -219,7 +220,7 @@ export async function rollback(dbName: DatabaseName): Promise<string | null> {
   if (records.length === 0) return null;
 
   const lastRecord = records[records.length - 1];
-  const allMigrations = loadMigrationsFromDisk(dbName);
+  const allMigrations = await loadMigrationsFromDisk(dbName);
   const migration = allMigrations.find((m) => m.id === lastRecord.id);
 
   if (!migration) {
@@ -256,7 +257,7 @@ export async function getMigrationStatus(
   ensureMigrationsTable(db);
 
   const applied = getAppliedRecords(db);
-  const allMigrations = loadMigrationsFromDisk(dbName);
+  const allMigrations = await loadMigrationsFromDisk(dbName);
   const appliedIds = new Set(applied.map((r) => r.id));
   const pending = allMigrations.filter((m) => !appliedIds.has(m.id));
 
