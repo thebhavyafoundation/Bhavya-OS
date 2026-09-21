@@ -4,22 +4,15 @@ import { createHash } from "node:crypto";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { existsSync, unlinkSync, mkdirSync } from "fs";
-
-let Database;
-try {
-  Database = (await import("better-sqlite3")).default;
-} catch {
-  console.log("# better-sqlite3 native module unavailable — skipping database tests");
-  process.exit(0);
-}
-
-function computeChecksum(m) {
-  return createHash("sha256").update(m.up + m.down).digest("hex").slice(0, 16);
-}
+import Database from "better-sqlite3";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TEST_DIR = resolve(__dirname, "../../data");
 const TEST_DB = resolve(TEST_DIR, "test-db-seed.test.db");
+
+function computeChecksum(m) {
+  return createHash("sha256").update(m.up + m.down).digest("hex").slice(0, 16);
+}
 
 function getTestDb() {
   return new Database(TEST_DB);
