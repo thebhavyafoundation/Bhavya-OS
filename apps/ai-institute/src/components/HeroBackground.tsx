@@ -122,7 +122,7 @@ const pillarConfigs: Record<
 export function HeroBackground({
   pillar,
   photo,
-  overlayOpacity = 0.45,
+  overlayOpacity = 0.3,
   photoPosition = "center 40%",
   children,
 }: HeroBackgroundProps) {

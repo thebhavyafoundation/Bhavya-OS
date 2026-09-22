@@ -67,7 +67,7 @@ function LoginForm() {
           flex: 1,
           display: "flex",
           justifyContent: "center",
-          padding: "var(--space-16) var(--space-4) var(--space-24)",
+          padding: "var(--space-10) var(--space-4) var(--space-16)",
         }}
       >
         <div
@@ -75,7 +75,7 @@ function LoginForm() {
             width: "100%",
             maxWidth: "420px",
             alignSelf: "flex-start",
-            paddingTop: "var(--space-8)",
+            paddingTop: "var(--space-4)",
           }}
         >
           <motion.div

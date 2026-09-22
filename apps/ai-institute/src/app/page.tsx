@@ -11,7 +11,6 @@ import {
   Users,
   GraduationCap,
   Shield,
-  Play,
   Globe,
   Landmark,
   Compass,
@@ -215,8 +214,8 @@ export default function HomePage() {
               <ArrowRight size={16} />
             </a>
             <a href="/about" className="btn btn-secondary-inverse">
-              <Play size={14} fill="currentColor" />
               About the Institution
+              <ArrowRight size={14} />
             </a>
           </motion.div>
 
@@ -921,7 +920,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== BHAVYA OS INTRODUCTION — DARK PANEL ====== */}
-      <section className="home-section home-section-dark">
+      <section className="home-section home-section-wide home-section-dark">
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div className="home-grid-2">
             <Reveal variant="slide-up">
@@ -947,30 +946,85 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal variant="slide-up" delay={0.2}>
-              <div className="home-grid-2x2">
-                {[
-                  {
-                    label: "Programs",
-                    desc: "Manage institutional programmes across all missions",
-                  },
-                  {
-                    label: "Projects",
-                    desc: "Track on-ground initiatives with evidence trails",
-                  },
-                  {
-                    label: "Research",
-                    desc: "Knowledge, publications, and institutional learning",
-                  },
-                  {
-                    label: "Impact",
-                    desc: "Metrics, verification, and transparent reporting",
-                  },
-                ].map((item) => (
-                  <div key={item.label} className="os-panel">
-                    <div className="os-panel-label">{item.label}</div>
-                    <div className="os-panel-desc">{item.desc}</div>
-                  </div>
-                ))}
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "var(--radius-2xl)",
+                  overflow: "hidden",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  background:
+                    "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "1px",
+                    background: "rgba(255, 255, 255, 0.06)",
+                  }}
+                >
+                  {[
+                    {
+                      icon: Database,
+                      label: "Programs",
+                      desc: "Manage institutional programmes across all missions",
+                    },
+                    {
+                      icon: Target,
+                      label: "Projects",
+                      desc: "Track on-ground initiatives with evidence trails",
+                    },
+                    {
+                      icon: FlaskConical,
+                      label: "Research",
+                      desc: "Knowledge, publications, and institutional learning",
+                    },
+                    {
+                      icon: BarChart3,
+                      label: "Impact",
+                      desc: "Metrics, verification, and transparent reporting",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      style={{
+                        padding: "var(--space-5)",
+                        background: "rgba(255, 255, 255, 0.03)",
+                        transition:
+                          "background var(--duration-normal) var(--ease-out)",
+                      }}
+                    >
+                      <item.icon
+                        size={18}
+                        style={{
+                          color: "var(--color-accent-gold)",
+                          marginBottom: "var(--space-3)",
+                          opacity: 0.8,
+                        }}
+                      />
+                      <div
+                        style={{
+                          fontSize: "var(--text-sm)",
+                          fontWeight: 600,
+                          color: "var(--color-text-inverse)",
+                          marginBottom: "var(--space-1)",
+                        }}
+                      >
+                        {item.label}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          color: "rgba(247, 244, 236, 0.5)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {item.desc}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
           </div>
@@ -1032,7 +1086,7 @@ export default function HomePage() {
       {/* ====== FINAL CTA ====== */}
       <section
         style={{
-          padding: "var(--space-32) 0",
+          padding: "var(--space-28) 0",
           position: "relative",
           overflow: "hidden",
           background:

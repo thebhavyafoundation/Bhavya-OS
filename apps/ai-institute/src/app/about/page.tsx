@@ -122,35 +122,56 @@ export default function AboutPage() {
             <div className="relative">
               <div
                 style={{
-                  aspectRatio: "1/1",
+                  aspectRatio: "4/3",
                   borderRadius: "var(--radius-2xl)",
-                  background:
-                    "linear-gradient(135deg, var(--color-forest-800) 0%, var(--color-forest-950) 100%)",
+                  overflow: "hidden",
                   border: "1px solid var(--color-border-primary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                 }}
               >
-                <div style={{ textAlign: "center" }}>
+                <img
+                  src="/photography/hero/hero-himalayan-sunset.jpg"
+                  alt="Himalayan sunset — representing the long-term vision of Bhavya Foundation"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(14, 56, 46, 0.6) 0%, transparent 50%)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "var(--space-6)",
+                    left: "var(--space-6)",
+                    right: "var(--space-6)",
+                  }}
+                >
                   <div
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-7xl)",
+                      fontSize: "var(--text-5xl)",
                       fontWeight: 400,
                       color: "var(--color-accent-gold)",
                       lineHeight: 1,
-                      marginBottom: "var(--space-2)",
+                      marginBottom: "var(--space-1)",
                     }}
                   >
                     4
                   </div>
                   <div
                     style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-tertiary)",
+                      fontSize: "var(--text-xs)",
+                      color: "rgba(247, 244, 236, 0.8)",
                       textTransform: "uppercase",
                       letterSpacing: "0.1em",
+                      fontWeight: 500,
                     }}
                   >
                     Missions. One Purpose.
