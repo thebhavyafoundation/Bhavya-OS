@@ -1586,9 +1586,28 @@ body {
     width: 100%;
     max-width: 200px;
   }
+
+  .ecosystem-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .ecosystem-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
   /* Reduce section padding on mobile */
   section {
     --section-padding: var(--space-16);
+  }
+  .ecosystem-grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .ecosystem-grid-2 {
+    grid-template-columns: 1fr;
   }
 }
 

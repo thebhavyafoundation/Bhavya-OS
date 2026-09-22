@@ -22,7 +22,6 @@ import {
   FlaskConical,
   Map,
   BarChart3,
-  BookOpen,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -624,11 +623,12 @@ export default function HomePage() {
                     fontSize: "var(--text-lg)",
                     color: "var(--color-text-secondary)",
                     lineHeight: 1.7,
+                    maxWidth: "480px",
                   }}
                 >
-                  13 levels. 74 modules. 25 core concepts — a complete
-                  curriculum from foundations to advanced research, designed for
-                  communities that need it most.
+                  A complete curriculum from foundations to advanced research —
+                  designed for communities that need it most. Open, structured,
+                  and built to scale.
                 </p>
                 <div
                   style={{
@@ -667,16 +667,8 @@ export default function HomePage() {
                 </div>
                 <a
                   href="/curriculum"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
-                    marginTop: "var(--space-8)",
-                    color: "var(--color-brand-forest)",
-                    fontWeight: 600,
-                    fontSize: "var(--text-sm)",
-                    textDecoration: "none",
-                  }}
+                  className="btn btn-primary"
+                  style={{ marginTop: "var(--space-8)" }}
                 >
                   Explore the Curriculum
                   <ArrowRight size={14} />
@@ -687,124 +679,65 @@ export default function HomePage() {
             <Reveal variant="slide-up" delay={0.2}>
               <div
                 style={{
-                  padding: "var(--space-8)",
-                  background: "var(--color-bg-primary)",
-                  borderRadius: "var(--radius-lg)",
+                  position: "relative",
+                  borderRadius: "var(--radius-2xl)",
+                  overflow: "hidden",
                   border: "1px solid var(--color-border-primary)",
                 }}
               >
+                <img
+                  src="/photography/knowledge/knowledge-school-children.jpg"
+                  alt="Students in a rural school — representing the communities Bhavya AI Institute serves"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    minHeight: "400px",
+                  }}
+                  loading="lazy"
+                />
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    marginBottom: "var(--space-6)",
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(14, 56, 46, 0.7) 0%, rgba(14, 56, 46, 0.1) 50%, transparent 100%)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: "var(--space-8)",
                   }}
                 >
                   <div
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "var(--radius-md)",
-                      background: "var(--color-forest-50)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "var(--color-brand-forest)",
+                      fontSize: "var(--text-xs)",
+                      color: "rgba(247, 244, 236, 0.7)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      fontWeight: 500,
+                      marginBottom: "var(--space-2)",
                     }}
                   >
-                    <BookOpen size={20} />
+                    Knowledge Mission
                   </div>
-                  <div>
-                    <div
-                      style={{
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
-                      }}
-                    >
-                      Curriculum Overview
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "var(--text-xs)",
-                        color: "var(--color-text-muted)",
-                      }}
-                    >
-                      Foundation to Advanced Research
-                    </div>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "var(--text-2xl)",
+                      color: "var(--color-text-inverse)",
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    13 Levels. 74 Modules.
+                    <br />
+                    One Complete Path.
                   </div>
                 </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "var(--space-3)",
-                  }}
-                >
-                  {[
-                    {
-                      level: "1-3",
-                      name: "Foundations",
-                      modules: "18 modules",
-                      color: "var(--color-forest-50)",
-                    },
-                    {
-                      level: "4-7",
-                      name: "Applied Learning",
-                      modules: "24 modules",
-                      color: "var(--color-ivory-300, #ede9df)",
-                    },
-                    {
-                      level: "8-10",
-                      name: "Advanced",
-                      modules: "18 modules",
-                      color: "var(--color-ivory-300, #ede9df)",
-                    },
-                    {
-                      level: "11-13",
-                      name: "Research & Mastery",
-                      modules: "14 modules",
-                      color: "var(--color-forest-50)",
-                    },
-                  ].map((tier) => (
-                    <div
-                      key={tier.level}
-                      className="curriculum-tier"
-                      style={{ background: tier.color }}
-                    >
-                      <span className="curriculum-tier-level">
-                        L{tier.level}
-                      </span>
-                      <span className="curriculum-tier-name">{tier.name}</span>
-                      <span className="curriculum-tier-count">
-                        {tier.modules}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <a
-                  href="/curriculum/levels"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "var(--space-2)",
-                    marginTop: "var(--space-6)",
-                    padding: "var(--space-3) var(--space-5)",
-                    borderRadius: "var(--radius-full)",
-                    border: "1px solid var(--color-border-primary)",
-                    fontSize: "var(--text-sm)",
-                    fontWeight: 600,
-                    color: "var(--color-brand-forest)",
-                    textDecoration: "none",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                  }}
-                >
-                  View All Levels <ArrowRight size={14} />
-                </a>
               </div>
             </Reveal>
           </div>
@@ -812,7 +745,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== BHAVYA ECOSYSTEM ====== */}
-      <section className="home-section home-section-ivory">
+      <section className="home-section home-section-cream">
         <div className="container">
           <Reveal variant="slide-up">
             <div
@@ -844,78 +777,135 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <Reveal variant="slide-up" delay={0.2}>
-            <div className="ecosystem-flow">
-              {[
-                {
-                  label: "Foundation",
-                  sublabel: "Institutional home",
-                  icon: Landmark,
-                },
-                {
-                  label: "Missions",
-                  sublabel: "Four focus areas",
-                  icon: Target,
-                },
-                {
-                  label: "Programs",
-                  sublabel: "On-ground work",
-                  icon: Compass,
-                },
-                {
-                  label: "Impact",
-                  sublabel: "Measurable change",
-                  icon: Globe,
-                },
-                {
-                  label: "Bhavya OS",
-                  sublabel: "Operating system",
-                  icon: Database,
-                },
-              ].map((step, i, arr) => (
+          <div className="ecosystem-grid-3">
+            {[
+              {
+                icon: Landmark,
+                label: "Foundation",
+                desc: "Institutional home — constitution-bound, community-governed",
+                color: "var(--color-brand-forest)",
+              },
+              {
+                icon: Target,
+                label: "Four Missions",
+                desc: "Forest, Knowledge, Heritage, Community — permanent focus areas",
+                color: "var(--color-brand-forest)",
+              },
+              {
+                icon: Compass,
+                label: "Programs",
+                desc: "On-ground work with evidence trails and measurable outcomes",
+                color: "var(--color-earth-500, #6a7c52)",
+              },
+            ].map((item, i) => (
+              <Reveal
+                key={item.label}
+                variant="slide-up"
+                delay={i * 0.1}
+                distance={20}
+              >
                 <div
-                  key={step.label}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-4)",
+                    padding: "var(--space-6)",
+                    borderRadius: "var(--radius-lg)",
+                    background: "var(--color-bg-primary)",
+                    border: "1px solid var(--color-border-primary)",
+                    height: "100%",
                   }}
                 >
-                  <div className="ecosystem-step">
-                    <div
-                      className="ecosystem-step-icon"
-                      style={{
-                        background:
-                          i === arr.length - 1
-                            ? "var(--color-brand-forest)"
-                            : "var(--color-bg-primary)",
-                        color:
-                          i === arr.length - 1
-                            ? "white"
-                            : "var(--color-brand-forest)",
-                      }}
-                    >
-                      <step.icon size={20} />
-                    </div>
-                    <span className="ecosystem-step-label">{step.label}</span>
-                    <span className="ecosystem-step-sublabel">
-                      {step.sublabel}
-                    </span>
+                  <item.icon
+                    size={24}
+                    style={{
+                      color: item.color,
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: "var(--text-md)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {item.label}
                   </div>
-                  {i < arr.length - 1 && (
-                    <ArrowRight
-                      size={20}
-                      className="ecosystem-arrow"
-                      style={{
-                        color: "var(--color-text-muted)",
-                        flexShrink: 0,
-                      }}
-                    />
-                  )}
+                  <div
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.desc}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="ecosystem-grid-2">
+            {[
+              {
+                icon: BarChart3,
+                label: "Impact",
+                desc: "Real-time metrics, transparent reporting, institutional health — always public",
+                color: "var(--color-accent-gold)",
+              },
+              {
+                icon: Database,
+                label: "Bhavya OS",
+                desc: "The institutional operating system connecting programs, evidence, and research",
+                color: "var(--color-brand-forest)",
+              },
+            ].map((item, i) => (
+              <Reveal
+                key={item.label}
+                variant="slide-up"
+                delay={0.3 + i * 0.1}
+                distance={20}
+              >
+                <div
+                  style={{
+                    padding: "var(--space-6)",
+                    borderRadius: "var(--radius-lg)",
+                    background:
+                      "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-800) 100%)",
+                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                    height: "100%",
+                  }}
+                >
+                  <item.icon
+                    size={24}
+                    style={{
+                      color: "var(--color-accent-gold)",
+                      marginBottom: "var(--space-4)",
+                      opacity: 0.9,
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: "var(--text-md)",
+                      fontWeight: 600,
+                      color: "var(--color-text-inverse)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "rgba(247, 244, 236, 0.6)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.desc}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
