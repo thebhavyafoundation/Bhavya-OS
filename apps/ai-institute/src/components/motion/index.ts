@@ -10,3 +10,7 @@ export { ScrollProgress } from "./ScrollProgress";
 export { FloatingElement } from "./FloatingElement";
 export { ImageReveal } from "./ImageReveal";
 export { NumberReveal } from "./NumberReveal";
+export { ScrollReveal } from "./ScrollReveal";
+export { ParallaxImage } from "./ParallaxImage";
+export { TextReveal as TextRevealGSAP } from "./TextReveal";
+export { HeroEntrance } from "./HeroEntrance";
