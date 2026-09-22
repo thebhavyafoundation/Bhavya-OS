@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -17,6 +17,8 @@ interface ParallaxImageProps {
   src: string;
   /** Image alt text */
   alt: string;
+  /** Inline styles for the container */
+  style?: CSSProperties;
 }
 
 function getPrefersReducedMotion(): boolean {
@@ -29,6 +31,7 @@ export function ParallaxImage({
   className = "",
   src,
   alt,
+  style,
 }: ParallaxImageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -62,7 +65,7 @@ export function ParallaxImage({
     <div
       ref={containerRef}
       className={`overflow-hidden ${className}`}
-      style={{ position: "relative" }}
+      style={{ position: "relative", ...style }}
     >
       <div
         ref={imageRef}
