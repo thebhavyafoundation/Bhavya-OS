@@ -405,7 +405,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== REAL WORK — EVIDENCE OF IMPACT ====== */}
-      <section className="home-section home-section-ivory">
+      <section className="home-section home-section-cream">
         <div className="container">
           <div className="section-header-row">
             <div>
