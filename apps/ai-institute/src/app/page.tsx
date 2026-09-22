@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -12,8 +11,6 @@ import {
   ArrowRight,
   Users,
   GraduationCap,
-  Shield,
-  Globe,
   Landmark,
   Compass,
   Target,
@@ -137,12 +134,16 @@ const getInvolved = [
 function AnimatedStat({ value, label }: { value: string; label: string }) {
   const numericValue = parseInt(value.replace(/[^0-9]/g, ""), 10);
   const suffix = value.replace(/[0-9]/g, "");
-  const current = useAnimatedCounter(numericValue);
+  const { ref, value: current } = useAnimatedCounter({
+    target: Number.isNaN(numericValue) ? 0 : numericValue,
+  });
 
   return (
     <div>
-      <div
+      <span
+        ref={ref}
         style={{
+          display: "block",
           fontFamily: "var(--font-display)",
           fontSize: "var(--text-3xl)",
           fontWeight: 400,
@@ -151,7 +152,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
         }}
       >
         {numericValue > 0 ? `${current}${suffix}` : value}
-      </div>
+      </span>
       <div
         style={{
           fontSize: "var(--text-xs)",
@@ -181,17 +182,13 @@ export default function HomePage() {
       style={{ background: "var(--color-bg-primary)" }}
     >
       <SiteHeader />
-
-      {/* ═══════════════════════════════════════════
-          SCENE 01 — THE HIMALAYAS
-          ═══════════════════════════════════════════ */}
       <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
         <HeroBackground
           pillar="home"
           photo="/photography/hero/hero-himalayan-sunset.jpg"
           photoPosition="center 40%"
         />
-        <HeroEntrance heroRef={heroRef}>
+        <HeroEntrance>
           <h1
             id="hero-heading"
             className="hero-title"
@@ -228,10 +225,6 @@ export default function HomePage() {
           </div>
         </HeroEntrance>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 02 — WHY BHAVYA EXISTS
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-cream">
         <div className="container">
           <div className="scene-grid-asymmetric">
@@ -242,15 +235,16 @@ export default function HomePage() {
                 </span>
               </ScrollReveal>
               <ScrollReveal direction="up" distance={20} delay={0.1}>
-                <TextReveal
-                  as="h2"
-                  className="editorial-heading"
-                  style={{
-                    fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)",
-                    marginTop: "var(--space-4)",
-                  }}
-                >
-                  Long-term thinking. Enduring impact.
+                <TextReveal>
+                  <h2
+                    className="editorial-heading"
+                    style={{
+                      fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)",
+                      marginTop: "var(--space-4)",
+                    }}
+                  >
+                    Long-term thinking. Enduring impact.
+                  </h2>
                 </TextReveal>
               </ScrollReveal>
               <ScrollReveal direction="up" distance={16} delay={0.2}>
@@ -301,24 +295,21 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 03 — FOUR MISSIONS
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-ivory" id="main-content">
         <div className="container">
           <ScrollReveal direction="up" distance={20}>
             <div style={{ marginBottom: "var(--space-12)" }}>
               <span className="editorial-label">OUR MISSIONS</span>
-              <TextReveal
-                as="h2"
-                className="editorial-heading"
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  marginTop: "var(--space-4)",
-                }}
-              >
-                Four permanent missions.
+              <TextReveal>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  Four permanent missions.
+                </h2>
               </TextReveal>
               <p
                 style={{
@@ -334,7 +325,6 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-
           <div className="home-grid-4">
             {missions.map((m, i) => (
               <ScrollReveal
@@ -405,10 +395,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 04 — REAL WORK (STICKY SCROLL)
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-cream">
         <div className="container">
           <ScrollReveal direction="up" distance={20}>
@@ -416,15 +402,16 @@ export default function HomePage() {
               <span className="editorial-label">
                 OUR WORK IN THE REAL WORLD
               </span>
-              <TextReveal
-                as="h2"
-                className="editorial-heading"
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  marginTop: "var(--space-4)",
-                }}
-              >
-                From intention to action.
+              <TextReveal>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  From intention to action.
+                </h2>
               </TextReveal>
               <p
                 style={{
@@ -440,9 +427,8 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-
           <div className="real-work-sticky">
-            {realWork.map((item, i) => (
+            {realWork.map((item) => (
               <div key={item.title} className="real-work-item">
                 <div className="real-work-info">
                   <ScrollReveal direction="left" distance={20}>
@@ -526,10 +512,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 05 — BHAVYA OS CENTERPIECE
-          ═══════════════════════════════════════════ */}
       <section
         className="scene scene-dark"
         style={{ position: "relative", overflow: "hidden" }}
@@ -556,12 +538,13 @@ export default function HomePage() {
                 </span>
               </ScrollReveal>
               <ScrollReveal direction="up" distance={16} delay={0.1}>
-                <TextReveal
-                  as="h2"
-                  className="dark-heading"
-                  style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}
-                >
-                  The system behind the institution.
+                <TextReveal>
+                  <h2
+                    className="dark-heading"
+                    style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}
+                  >
+                    The system behind the institution.
+                  </h2>
                 </TextReveal>
               </ScrollReveal>
               <ScrollReveal direction="up" distance={12} delay={0.2}>
@@ -587,10 +570,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 06 — ECOSYSTEM
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-ivory">
         <div className="container">
           <ScrollReveal direction="up" distance={20}>
@@ -598,15 +577,16 @@ export default function HomePage() {
               style={{ textAlign: "center", marginBottom: "var(--space-12)" }}
             >
               <span className="editorial-label">THE BHAVYA ECOSYSTEM</span>
-              <TextReveal
-                as="h2"
-                className="editorial-heading"
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  marginTop: "var(--space-4)",
-                }}
-              >
-                A connected ecosystem for greater impact.
+              <TextReveal>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  A connected ecosystem for greater impact.
+                </h2>
               </TextReveal>
               <p
                 style={{
@@ -623,7 +603,6 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-
           <div className="ecosystem-grid-3">
             {[
               {
@@ -682,7 +661,6 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-
           <div className="ecosystem-grid-2">
             {[
               {
@@ -738,24 +716,21 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 07 — GOVERNANCE + AI INSTITUTE
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-cream">
         <div className="container">
           <ScrollReveal direction="up" distance={20}>
             <div style={{ marginBottom: "var(--space-12)" }}>
               <span className="editorial-label">BUILT ON PUBLIC TRUST</span>
-              <TextReveal
-                as="h2"
-                className="editorial-heading"
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  marginTop: "var(--space-4)",
-                }}
-              >
-                Transparency is not optional.
+              <TextReveal>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  Transparency is not optional.
+                </h2>
               </TextReveal>
               <p
                 style={{
@@ -771,7 +746,6 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-
           <div className="home-grid-2x2">
             {[
               {
@@ -832,8 +806,6 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
-
-          {/* AI Institute highlight */}
           <div style={{ marginTop: "var(--space-20)" }}>
             <div className="scene-grid-asymmetric">
               <div className="scene-content">
@@ -841,15 +813,16 @@ export default function HomePage() {
                   <span className="editorial-label">AI INSTITUTE</span>
                 </ScrollReveal>
                 <ScrollReveal direction="up" distance={16} delay={0.1}>
-                  <TextReveal
-                    as="h2"
-                    className="editorial-heading"
-                    style={{
-                      fontSize: "clamp(2rem, 4vw, 3rem)",
-                      marginTop: "var(--space-4)",
-                    }}
-                  >
-                    Free AI education for rural India.
+                  <TextReveal>
+                    <h2
+                      className="editorial-heading"
+                      style={{
+                        fontSize: "clamp(2rem, 4vw, 3rem)",
+                        marginTop: "var(--space-4)",
+                      }}
+                    >
+                      Free AI education for rural India.
+                    </h2>
                   </TextReveal>
                 </ScrollReveal>
                 <ScrollReveal direction="up" distance={12} delay={0.2}>
@@ -960,24 +933,21 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          SCENE 08 — ENTER / PARTICIPATE
-          ═══════════════════════════════════════════ */}
       <section className="scene scene-cream">
         <div className="container">
           <ScrollReveal direction="up" distance={20}>
             <div style={{ marginBottom: "var(--space-12)" }}>
               <span className="editorial-label">GET INVOLVED</span>
-              <TextReveal
-                as="h2"
-                className="editorial-heading"
-                style={{
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  marginTop: "var(--space-4)",
-                }}
-              >
-                Contribute to what lasts.
+              <TextReveal>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    marginTop: "var(--space-4)",
+                  }}
+                >
+                  Contribute to what lasts.
+                </h2>
               </TextReveal>
               <p
                 style={{
@@ -993,7 +963,6 @@ export default function HomePage() {
               </p>
             </div>
           </ScrollReveal>
-
           <div className="home-grid-4">
             {getInvolved.map((card, i) => (
               <ScrollReveal
@@ -1017,10 +986,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════════
-          FINAL CTA
-          ═══════════════════════════════════════════ */}
       <section
         style={{
           padding: "var(--space-28) 0",
@@ -1069,7 +1034,6 @@ export default function HomePage() {
           </ScrollReveal>
         </div>
       </section>
-
       <SiteFooter />
     </div>
   );
