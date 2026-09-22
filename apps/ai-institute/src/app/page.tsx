@@ -73,27 +73,31 @@ const missions = [
 
 const realWork = [
   {
-    title: "Restoration Initiatives in the Western Himalayas",
+    title: "Western Himalaya Watershed Restoration",
     category: "Forest",
-    photo: "/photography/forest/forest-cedar-sunlight.jpg",
+    desc: "Restoring degraded watersheds across Himachal Pradesh — soil conservation, native species reforestation, and community-led stewardship.",
+    metric: "12 villages",
     href: "/missions/forest",
   },
   {
-    title: "Digital Learning for Rural Schools",
+    title: "Digital Literacy for Rural Schools",
     category: "Knowledge",
-    photo: "/photography/knowledge/knowledge-school-children.jpg",
+    desc: "Equipping government schools with structured AI curriculum — from digital foundations to applied problem-solving.",
+    metric: "13 Levels",
     href: "/missions/knowledge",
   },
   {
-    title: "Documenting Living Heritage",
+    title: "Stone Temple Documentation Project",
     category: "Heritage",
-    photo: "/photography/heritage/heritage-wooden-temple.jpg",
+    desc: "Systematic documentation of Himalayan sacred architecture — 3D scanning, oral histories, and conservation planning.",
+    metric: "Active fieldwork",
     href: "/missions/heritage",
   },
   {
-    title: "Women's Leadership in Mountain Communities",
+    title: "Mountain Women's Leadership Program",
     category: "Community",
-    photo: "/photography/community/community-village-gathering.jpg",
+    desc: "Building local leadership capacity through governance training, cooperative development, and community organizing.",
+    metric: "Community-led",
     href: "/missions/community",
   },
 ];
@@ -400,8 +404,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ====== REAL WORK — PEOPLE, PLACES, PROGRESS ====== */}
-      <section className="home-section home-section-cream">
+      {/* ====== REAL WORK — EVIDENCE OF IMPACT ====== */}
+      <section className="home-section home-section-ivory">
         <div className="container">
           <div className="section-header-row">
             <div>
@@ -443,62 +447,16 @@ export default function HomePage() {
                 delay={i * 0.1}
                 distance={30}
               >
-                <a href={item.href} className="mission-card">
-                  <div
-                    className="mission-card-image"
-                    style={{ height: "200px" }}
-                  >
-                    <img
-                      src={item.photo}
-                      alt={item.title}
-                      loading="lazy"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        transition:
-                          "transform var(--duration-slow) var(--ease-out)",
-                      }}
-                    />
-                    <div className="mission-card-overlay" />
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: "var(--space-4)",
-                        left: "var(--space-4)",
-                        right: "var(--space-4)",
-                      }}
-                    >
-                      <span
-                        style={{
-                          display: "inline-block",
-                          padding: "2px var(--space-2)",
-                          borderRadius: "var(--radius-full)",
-                          background: "rgba(255, 255, 255, 0.15)",
-                          backdropFilter: "blur(4px)",
-                          fontSize: "10px",
-                          color: "white",
-                          fontWeight: 600,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                        }}
-                      >
-                        {item.category}
-                      </span>
-                    </div>
+                <a href={item.href} className="evidence-card">
+                  <div className="evidence-card-header">
+                    <span className="evidence-card-badge">{item.category}</span>
+                    <span className="evidence-card-metric">{item.metric}</span>
                   </div>
-                  <div style={{ padding: "var(--space-5)" }}>
-                    <h3
-                      style={{
-                        fontSize: "var(--text-base)",
-                        fontWeight: 600,
-                        color: "var(--color-text-primary)",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                  </div>
+                  <h3 className="evidence-card-title">{item.title}</h3>
+                  <p className="evidence-card-desc">{item.desc}</p>
+                  <span className="evidence-card-link">
+                    Learn more <ArrowRight size={14} />
+                  </span>
                 </a>
               </Reveal>
             ))}
@@ -507,7 +465,7 @@ export default function HomePage() {
       </section>
 
       {/* ====== GOVERNANCE & TRUST — INSTITUTIONAL CREDIBILITY ====== */}
-      <section className="home-section home-section-cream">
+      <section className="home-section home-section-ivory">
         <div className="container">
           <Reveal variant="slide-up">
             <div style={{ marginBottom: "var(--space-12)" }}>
