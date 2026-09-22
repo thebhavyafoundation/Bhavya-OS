@@ -1,57 +1,70 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, type ReactNode } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TextRevealProps {
-  text: string;
-  className?: string;
+  children: ReactNode;
+  /** Delay before animation starts (seconds) */
   delay?: number;
+  /** Animation duration (seconds) */
   duration?: number;
-  staggerChildren?: number;
+  /** Additional CSS classes */
+  className?: string;
+}
+
+function getPrefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export function TextReveal({
-  text,
-  className,
+  children,
   delay = 0,
-  duration = 0.5,
-  staggerChildren = 0.03,
+  duration = 0.8,
+  className,
 }: TextRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const words = text.split(" ");
+  useGSAP(
+    () => {
+      if (!ref.current) return;
+      if (getPrefersReducedMotion()) return;
+
+      gsap.fromTo(
+        ref.current,
+        {
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+          y: 40,
+        },
+        {
+          clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)",
+          y: 0,
+          duration,
+          delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 85%",
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: ref, dependencies: [delay, duration] },
+  );
+
+  if (getPrefersReducedMotion()) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      transition={{ staggerChildren, delayChildren: delay }}
-    >
-      {words.map((word, i) => (
-        <span key={i} style={{ display: "inline-block", marginRight: "0.3em" }}>
-          {word.split("").map((char, j) => (
-            <motion.span
-              key={j}
-              style={{ display: "inline-block" }}
-              variants={{
-                hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                  transition: { duration, ease: [0.16, 1, 0.3, 1] },
-                },
-              }}
-            >
-              {char}
-            </motion.span>
-          ))}
-        </span>
-      ))}
-    </motion.div>
+    <div ref={ref} className={className}>
+      {children}
+    </div>
   );
 }

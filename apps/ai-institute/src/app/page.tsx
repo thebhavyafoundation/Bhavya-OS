@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   TreePine,
   Brain,
@@ -25,11 +27,18 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Reveal } from "@/components/motion/Reveal";
 import { HeroBackground } from "@/components/HeroBackground";
+import { HeroEntrance } from "@/components/motion/HeroEntrance";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { useAnimatedCounter } from "@/hooks/use-animated-counter";
+import { OsArchitectureMap } from "@/components/os-architecture/OsArchitectureMap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ============================================
-   MISSION DATA
+   DATA
    ============================================ */
 
 const missions = [
@@ -37,37 +46,29 @@ const missions = [
     key: "forest",
     icon: TreePine,
     label: "Forest",
-    title: "Forest",
     desc: "Restore degraded ecosystems. Protect biodiversity. Conserve watersheds.",
     photo: "/photography/forest/forest-cedar-sunlight.jpg",
-    color: "var(--color-brand-forest)",
   },
   {
     key: "knowledge",
     icon: Brain,
     label: "Knowledge",
-    title: "Knowledge",
     desc: "Expand access to learning. Advance research. Bridge the digital divide.",
     photo: "/photography/knowledge/knowledge-school-children.jpg",
-    color: "var(--color-brand-forest)",
   },
   {
     key: "heritage",
     icon: Building2,
     label: "Heritage",
-    title: "Heritage",
     desc: "Preserve cultural traditions. Document living history. Protect heritage sites.",
     photo: "/photography/heritage/heritage-stone-temple.jpg",
-    color: "var(--color-brand-forest)",
   },
   {
     key: "community",
     icon: HeartHandshake,
     label: "Community",
-    title: "Community",
     desc: "Empower local leadership. Strengthen social fabric. Build resilient communities.",
     photo: "/photography/community/community-village-gathering.jpg",
-    color: "var(--color-brand-forest)",
   },
 ];
 
@@ -77,28 +78,28 @@ const realWork = [
     category: "Forest",
     desc: "Restoring degraded watersheds across Himachal Pradesh — soil conservation, native species reforestation, and community-led stewardship.",
     metric: "12 villages",
-    href: "/missions/forest",
+    photo: "/photography/forest/forest-cedar-sunlight.jpg",
   },
   {
     title: "Digital Literacy for Rural Schools",
     category: "Knowledge",
     desc: "Equipping government schools with structured AI curriculum — from digital foundations to applied problem-solving.",
     metric: "13 Levels",
-    href: "/missions/knowledge",
+    photo: "/photography/knowledge/knowledge-school-children.jpg",
   },
   {
     title: "Stone Temple Documentation Project",
     category: "Heritage",
     desc: "Systematic documentation of Himalayan sacred architecture — 3D scanning, oral histories, and conservation planning.",
     metric: "Active fieldwork",
-    href: "/missions/heritage",
+    photo: "/photography/heritage/heritage-stone-temple.jpg",
   },
   {
     title: "Mountain Women's Leadership Program",
     category: "Community",
     desc: "Building local leadership capacity through governance training, cooperative development, and community organizing.",
     metric: "Community-led",
-    href: "/missions/community",
+    photo: "/photography/community/community-village-gathering.jpg",
   },
 ];
 
@@ -130,104 +131,91 @@ const getInvolved = [
 ];
 
 /* ============================================
+   ANIMATED STAT COMPONENT
+   ============================================ */
+
+function AnimatedStat({ value, label }: { value: string; label: string }) {
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ""), 10);
+  const suffix = value.replace(/[0-9]/g, "");
+  const current = useAnimatedCounter(numericValue);
+
+  return (
+    <div>
+      <div
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "var(--text-3xl)",
+          fontWeight: 400,
+          color: "var(--color-brand-forest)",
+          lineHeight: 1,
+        }}
+      >
+        {numericValue > 0 ? `${current}${suffix}` : value}
+      </div>
+      <div
+        style={{
+          fontSize: "var(--text-xs)",
+          color: "var(--color-text-muted)",
+          marginTop: "var(--space-1)",
+          letterSpacing: "0.05em",
+          textTransform: "uppercase",
+          fontWeight: 500,
+        }}
+      >
+        {label}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================
    MAIN PAGE
    ============================================ */
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef });
-  const contentY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)]">
+    <div
+      className="min-h-screen"
+      style={{ background: "var(--color-bg-primary)" }}
+    >
       <SiteHeader />
 
-      {/* ====== HERO — CINEMATIC INSTITUTIONAL ====== */}
+      {/* ═══════════════════════════════════════════
+          SCENE 01 — THE HIMALAYAS
+          ═══════════════════════════════════════════ */}
       <section ref={heroRef} className="hero" aria-labelledby="hero-heading">
         <HeroBackground
           pillar="home"
           photo="/photography/hero/hero-himalayan-sunset.jpg"
           photoPosition="center 40%"
         />
-
-        <motion.div
-          className="hero-content"
-          style={{ y: contentY, opacity: contentOpacity }}
-        >
-          <motion.div
-            className="hero-badge"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <Shield size={12} />A PUBLIC INSTITUTION
-          </motion.div>
-
+        <HeroEntrance heroRef={heroRef}>
           <h1
             id="hero-heading"
             className="hero-title"
             style={{ color: "var(--color-text-inverse)" }}
           >
-            <motion.span
-              style={{ display: "block" }}
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 0.8,
-                delay: 0.5,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              Building for
-            </motion.span>
-            <motion.span
-              style={{ display: "block" }}
-              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{
-                duration: 0.8,
-                delay: 0.65,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              Generations.
-            </motion.span>
+            <span style={{ display: "block" }}>Building for</span>
+            <span style={{ display: "block" }}>Generations.</span>
           </h1>
-
-          <motion.p
+          <p
             className="hero-desc"
             style={{ color: "rgba(247, 244, 236, 0.75)" }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
           >
             A public institution working across nature, knowledge, heritage, and
             community — built with patience, evidence, and long-term thinking.
-          </motion.p>
-
-          <motion.div
-            className="hero-actions"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
+          </p>
+          <div className="hero-actions">
             <a href="/missions" className="btn btn-gold">
-              Our Missions
-              <ArrowRight size={16} />
+              Our Missions <ArrowRight size={16} />
             </a>
             <a href="/about" className="btn btn-secondary-inverse">
-              About the Institution
-              <ArrowRight size={14} />
+              About the Institution <ArrowRight size={14} />
             </a>
-          </motion.div>
-
-          <motion.div
-            className="hero-proof"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
-          >
+          </div>
+          <div className="hero-proof">
             <span>
               <span className="hero-proof-dot" /> Four permanent missions
             </span>
@@ -237,42 +225,50 @@ export default function HomePage() {
             <span>
               <span className="hero-proof-dot" /> Built to last
             </span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </HeroEntrance>
       </section>
 
-      {/* ====== INSTITUTIONAL INTRODUCTION ====== */}
-      <section className="home-section home-section-cream">
+      {/* ═══════════════════════════════════════════
+          SCENE 02 — WHY BHAVYA EXISTS
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-cream">
         <div className="container">
-          <div className="home-grid-2">
-            <Reveal variant="slide-up">
-              <div>
+          <div className="scene-grid-asymmetric">
+            <div className="scene-content">
+              <ScrollReveal direction="up" distance={24}>
                 <span className="editorial-label">
                   AN INSTITUTION, NOT A CAMPAIGN
                 </span>
-                <h2
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={20} delay={0.1}>
+                <TextReveal
+                  as="h2"
                   className="editorial-heading"
                   style={{
-                    fontSize: "clamp(2rem, 4vw, 3rem)",
+                    fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)",
                     marginTop: "var(--space-4)",
                   }}
                 >
-                  Long-term thinking.
-                  <br />
-                  Enduring impact.
-                </h2>
+                  Long-term thinking. Enduring impact.
+                </TextReveal>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={16} delay={0.2}>
                 <p
                   style={{
                     marginTop: "var(--space-6)",
                     fontSize: "var(--text-lg)",
                     color: "var(--color-text-secondary)",
                     lineHeight: 1.7,
+                    maxWidth: "520px",
                   }}
                 >
                   Bhavya is being built as a long-term institution — not a
                   collection of short-term projects. We work with patience,
                   evidence and integrity to create enduring change.
                 </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.3}>
                 <a
                   href="/about"
                   style={{
@@ -286,60 +282,66 @@ export default function HomePage() {
                     textDecoration: "none",
                   }}
                 >
-                  Our Approach
-                  <ArrowRight size={14} />
+                  Our Approach <ArrowRight size={14} />
                 </a>
-              </div>
-            </Reveal>
-            <Reveal variant="slide-up" delay={0.2}>
-              <div className="quote-block">
-                <p>
-                  &ldquo;A tree planted today becomes the forest that protects
-                  tomorrow. An institution built today becomes the system that
-                  serves generations.&rdquo;
-                </p>
-                <cite>— Bhavya Foundation</cite>
-              </div>
-            </Reveal>
+              </ScrollReveal>
+            </div>
+            <div className="scene-visual">
+              <ScrollReveal direction="right" distance={30} delay={0.15}>
+                <div className="quote-block">
+                  <p>
+                    &ldquo;A tree planted today becomes the forest that protects
+                    tomorrow. An institution built today becomes the system that
+                    serves generations.&rdquo;
+                  </p>
+                  <cite>— Bhavya Foundation</cite>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ====== FOUR MISSIONS — IMAGE CARDS ====== */}
-      <section id="main-content" className="home-section home-section-ivory">
+      {/* ═══════════════════════════════════════════
+          SCENE 03 — FOUR MISSIONS
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-ivory" id="main-content">
         <div className="container">
-          <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">OUR MISSIONS</span>
-            <h2
-              className="editorial-heading"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-                marginTop: "var(--space-4)",
-              }}
-            >
-              Four permanent missions.
-            </h2>
-            <p
-              style={{
-                marginTop: "var(--space-4)",
-                fontSize: "var(--text-lg)",
-                color: "var(--color-text-secondary)",
-                maxWidth: "600px",
-                lineHeight: 1.7,
-              }}
-            >
-              Bhavya works across four permanent missions to create lasting
-              impact for people and the planet.
-            </p>
-          </div>
+          <ScrollReveal direction="up" distance={20}>
+            <div style={{ marginBottom: "var(--space-12)" }}>
+              <span className="editorial-label">OUR MISSIONS</span>
+              <TextReveal
+                as="h2"
+                className="editorial-heading"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  marginTop: "var(--space-4)",
+                }}
+              >
+                Four permanent missions.
+              </TextReveal>
+              <p
+                style={{
+                  marginTop: "var(--space-4)",
+                  fontSize: "var(--text-lg)",
+                  color: "var(--color-text-secondary)",
+                  maxWidth: "600px",
+                  lineHeight: 1.7,
+                }}
+              >
+                Bhavya works across four permanent missions to create lasting
+                impact for people and the planet.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="home-grid-4">
             {missions.map((m, i) => (
-              <Reveal
+              <ScrollReveal
                 key={m.key}
-                variant="slide-up"
-                delay={i * 0.1}
+                direction="up"
                 distance={40}
+                delay={i * 0.1}
               >
                 <a
                   href={`/${m.key}`}
@@ -350,16 +352,16 @@ export default function HomePage() {
                     className="mission-card-image"
                     style={{ height: "220px" }}
                   >
-                    <img
+                    <ParallaxImage
                       src={m.photo}
-                      alt={m.title}
-                      loading="lazy"
+                      alt={m.label}
+                      speed={0.15}
                       style={{
                         width: "100%",
-                        height: "100%",
+                        height: "120%",
                         objectFit: "cover",
-                        transition:
-                          "transform var(--duration-slow) var(--ease-out)",
+                        position: "absolute",
+                        top: "-10%",
                       }}
                     />
                     <div className="mission-card-overlay" />
@@ -382,7 +384,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="mission-card-body">
-                    <h3 className="mission-card-title">{m.title}</h3>
+                    <h3 className="mission-card-title">{m.label}</h3>
                     <p className="mission-card-desc">{m.desc}</p>
                     <span
                       style={{
@@ -398,21 +400,24 @@ export default function HomePage() {
                     </span>
                   </div>
                 </a>
-              </Reveal>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ====== REAL WORK — EVIDENCE OF IMPACT ====== */}
-      <section className="home-section home-section-cream">
+      {/* ═══════════════════════════════════════════
+          SCENE 04 — REAL WORK (STICKY SCROLL)
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-cream">
         <div className="container">
-          <div className="section-header-row">
-            <div>
+          <ScrollReveal direction="up" distance={20}>
+            <div style={{ marginBottom: "var(--space-12)" }}>
               <span className="editorial-label">
                 OUR WORK IN THE REAL WORLD
               </span>
-              <h2
+              <TextReveal
+                as="h2"
                 className="editorial-heading"
                 style={{
                   fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -420,7 +425,7 @@ export default function HomePage() {
                 }}
               >
                 From intention to action.
-              </h2>
+              </TextReveal>
               <p
                 style={{
                   marginTop: "var(--space-4)",
@@ -434,43 +439,316 @@ export default function HomePage() {
                 expanding access, and strengthening communities.
               </p>
             </div>
-            <a href="/missions" className="section-header-link">
-              View All <ArrowRight size={14} />
-            </a>
-          </div>
+          </ScrollReveal>
 
-          <div className="home-grid-4">
+          <div className="real-work-sticky">
             {realWork.map((item, i) => (
-              <Reveal
-                key={item.title}
-                variant="slide-up"
-                delay={i * 0.1}
-                distance={30}
-              >
-                <a href={item.href} className="evidence-card">
-                  <div className="evidence-card-header">
+              <div key={item.title} className="real-work-item">
+                <div className="real-work-info">
+                  <ScrollReveal direction="left" distance={20}>
                     <span className="evidence-card-badge">{item.category}</span>
-                    <span className="evidence-card-metric">{item.metric}</span>
-                  </div>
-                  <h3 className="evidence-card-title">{item.title}</h3>
-                  <p className="evidence-card-desc">{item.desc}</p>
-                  <span className="evidence-card-link">
-                    Learn more <ArrowRight size={14} />
-                  </span>
-                </a>
-              </Reveal>
+                    <div
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        color: "var(--color-text-muted)",
+                        marginTop: "var(--space-2)",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {item.metric}
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--text-2xl)",
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        marginTop: "var(--space-4)",
+                        color: "var(--color-text-primary)",
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "var(--text-base)",
+                        color: "var(--color-text-secondary)",
+                        lineHeight: 1.7,
+                        marginTop: "var(--space-4)",
+                      }}
+                    >
+                      {item.desc}
+                    </p>
+                    <a
+                      href={`/missions/${item.category.toLowerCase()}`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "var(--space-2)",
+                        marginTop: "var(--space-6)",
+                        color: "var(--color-brand-forest)",
+                        fontWeight: 600,
+                        fontSize: "var(--text-sm)",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Learn more <ArrowRight size={14} />
+                    </a>
+                  </ScrollReveal>
+                </div>
+                <div className="real-work-visual">
+                  <ScrollReveal direction="right" distance={30} delay={0.1}>
+                    <div
+                      style={{
+                        borderRadius: "var(--radius-2xl)",
+                        overflow: "hidden",
+                        border: "1px solid var(--color-border-primary)",
+                        aspectRatio: "4/3",
+                      }}
+                    >
+                      <ParallaxImage
+                        src={item.photo}
+                        alt={item.title}
+                        speed={0.2}
+                        style={{
+                          width: "100%",
+                          height: "120%",
+                          objectFit: "cover",
+                          position: "absolute",
+                          top: "-10%",
+                        }}
+                      />
+                    </div>
+                  </ScrollReveal>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ====== GOVERNANCE & TRUST — INSTITUTIONAL CREDIBILITY ====== */}
-      <section className="home-section home-section-ivory">
+      {/* ═══════════════════════════════════════════
+          SCENE 05 — BHAVYA OS CENTERPIECE
+          ═══════════════════════════════════════════ */}
+      <section
+        className="scene scene-dark"
+        style={{ position: "relative", overflow: "hidden" }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.04,
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(247,244,236,0.3) 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <div
+            className="scene-grid-asymmetric"
+            style={{ alignItems: "center" }}
+          >
+            <div className="scene-content">
+              <ScrollReveal direction="up" distance={20}>
+                <span className="dark-label">
+                  THE SYSTEM BEHIND THE INSTITUTION
+                </span>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={16} delay={0.1}>
+                <TextReveal
+                  as="h2"
+                  className="dark-heading"
+                  style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}
+                >
+                  The system behind the institution.
+                </TextReveal>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.2}>
+                <p className="dark-desc">
+                  Bhavya OS is the institutional operating system — connecting
+                  programs, projects, evidence, research, and impact in one
+                  unified system built to endure.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.3}>
+                <a
+                  href="/os"
+                  className="btn btn-gold"
+                  style={{ marginTop: "var(--space-6)" }}
+                >
+                  Explore Bhavya OS <ArrowRight size={14} />
+                </a>
+              </ScrollReveal>
+            </div>
+            <div className="scene-visual">
+              <OsArchitectureMap />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          SCENE 06 — ECOSYSTEM
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-ivory">
         <div className="container">
-          <Reveal variant="slide-up">
+          <ScrollReveal direction="up" distance={20}>
+            <div
+              style={{ textAlign: "center", marginBottom: "var(--space-12)" }}
+            >
+              <span className="editorial-label">THE BHAVYA ECOSYSTEM</span>
+              <TextReveal
+                as="h2"
+                className="editorial-heading"
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  marginTop: "var(--space-4)",
+                }}
+              >
+                A connected ecosystem for greater impact.
+              </TextReveal>
+              <p
+                style={{
+                  marginTop: "var(--space-4)",
+                  fontSize: "var(--text-base)",
+                  color: "var(--color-text-secondary)",
+                  maxWidth: "550px",
+                  marginInline: "auto",
+                  lineHeight: 1.6,
+                }}
+              >
+                One institution connecting missions, programs, evidence, and
+                technology — so every effort compounds over time.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="ecosystem-grid-3">
+            {[
+              {
+                icon: Landmark,
+                label: "Foundation",
+                desc: "Institutional home — constitution-bound, community-governed",
+                color: "var(--color-brand-forest)",
+              },
+              {
+                icon: Target,
+                label: "Four Missions",
+                desc: "Forest, Knowledge, Heritage, Community — permanent focus areas",
+                color: "var(--color-brand-forest)",
+              },
+              {
+                icon: Compass,
+                label: "Programs",
+                desc: "On-ground work with evidence trails and measurable outcomes",
+                color: "var(--color-earth-500, #6a7c52)",
+              },
+            ].map((item, i) => (
+              <ScrollReveal
+                key={item.label}
+                direction="up"
+                distance={20}
+                delay={i * 0.1}
+              >
+                <div className="ecosystem-card-light">
+                  <item.icon
+                    size={24}
+                    style={{
+                      color: item.color,
+                      marginBottom: "var(--space-4)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: "var(--text-md)",
+                      fontWeight: 600,
+                      color: "var(--color-text-primary)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.desc}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <div className="ecosystem-grid-2">
+            {[
+              {
+                icon: BarChart3,
+                label: "Impact",
+                desc: "Real-time metrics, transparent reporting, institutional health — always public",
+                color: "var(--color-accent-gold)",
+              },
+              {
+                icon: Database,
+                label: "Bhavya OS",
+                desc: "The institutional operating system connecting programs, evidence, and research",
+                color: "var(--color-brand-forest)",
+              },
+            ].map((item, i) => (
+              <ScrollReveal
+                key={item.label}
+                direction="up"
+                distance={20}
+                delay={0.3 + i * 0.1}
+              >
+                <div className="ecosystem-card-dark">
+                  <item.icon
+                    size={24}
+                    style={{
+                      color: "var(--color-accent-gold)",
+                      marginBottom: "var(--space-4)",
+                      opacity: 0.9,
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: "var(--text-md)",
+                      fontWeight: 600,
+                      color: "var(--color-text-inverse)",
+                      marginBottom: "var(--space-2)",
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "var(--text-sm)",
+                      color: "rgba(247, 244, 236, 0.6)",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.desc}
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          SCENE 07 — GOVERNANCE + AI INSTITUTE
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-cream">
+        <div className="container">
+          <ScrollReveal direction="up" distance={20}>
             <div style={{ marginBottom: "var(--space-12)" }}>
               <span className="editorial-label">BUILT ON PUBLIC TRUST</span>
-              <h2
+              <TextReveal
+                as="h2"
                 className="editorial-heading"
                 style={{
                   fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -478,7 +756,7 @@ export default function HomePage() {
                 }}
               >
                 Transparency is not optional.
-              </h2>
+              </TextReveal>
               <p
                 style={{
                   marginTop: "var(--space-4)",
@@ -492,7 +770,7 @@ export default function HomePage() {
                 commitment is constitutional.
               </p>
             </div>
-          </Reveal>
+          </ScrollReveal>
 
           <div className="home-grid-2x2">
             {[
@@ -529,11 +807,11 @@ export default function HomePage() {
                 color: "var(--color-forest-600, #0e5936)",
               },
             ].map((item, i) => (
-              <Reveal
+              <ScrollReveal
                 key={item.title}
-                variant="slide-up"
-                delay={i * 0.1}
+                direction="up"
                 distance={30}
+                delay={i * 0.1}
               >
                 <a href={item.href} className="governance-card">
                   <div
@@ -551,469 +829,178 @@ export default function HomePage() {
                     {item.linkText} <ArrowRight size={14} />
                   </span>
                 </a>
-              </Reveal>
+              </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ====== CURRICULUM HIGHLIGHT — AI EDUCATION ====== */}
-      <section className="home-section home-section-ivory">
-        <div className="container">
-          <div className="home-grid-2">
-            <Reveal variant="slide-up">
-              <div>
-                <span className="editorial-label">AI INSTITUTE</span>
-                <h2
-                  className="editorial-heading"
-                  style={{
-                    fontSize: "clamp(2rem, 4vw, 3rem)",
-                    marginTop: "var(--space-4)",
-                  }}
-                >
-                  Free AI education
-                  <br />
-                  for rural India.
-                </h2>
-                <p
-                  style={{
-                    marginTop: "var(--space-6)",
-                    fontSize: "var(--text-lg)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                    maxWidth: "480px",
-                  }}
-                >
-                  A complete curriculum from foundations to advanced research —
-                  designed for communities that need it most. Open, structured,
-                  and built to scale.
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "var(--space-8)",
-                    marginTop: "var(--space-8)",
-                  }}
-                >
-                  {[
-                    { value: "13", label: "Levels" },
-                    { value: "74+", label: "Modules" },
-                    { value: "25", label: "Core Concepts" },
-                  ].map((stat) => (
-                    <div key={stat.label}>
-                      <div
-                        style={{
-                          fontFamily: "var(--font-display)",
-                          fontSize: "var(--text-2xl, 2rem)",
-                          fontWeight: 400,
-                          color: "var(--color-brand-forest)",
-                        }}
-                      >
-                        {stat.value}
-                      </div>
+          {/* AI Institute highlight */}
+          <div style={{ marginTop: "var(--space-20)" }}>
+            <div className="scene-grid-asymmetric">
+              <div className="scene-content">
+                <ScrollReveal direction="up" distance={20}>
+                  <span className="editorial-label">AI INSTITUTE</span>
+                </ScrollReveal>
+                <ScrollReveal direction="up" distance={16} delay={0.1}>
+                  <TextReveal
+                    as="h2"
+                    className="editorial-heading"
+                    style={{
+                      fontSize: "clamp(2rem, 4vw, 3rem)",
+                      marginTop: "var(--space-4)",
+                    }}
+                  >
+                    Free AI education for rural India.
+                  </TextReveal>
+                </ScrollReveal>
+                <ScrollReveal direction="up" distance={12} delay={0.2}>
+                  <p
+                    style={{
+                      marginTop: "var(--space-6)",
+                      fontSize: "var(--text-lg)",
+                      color: "var(--color-text-secondary)",
+                      lineHeight: 1.7,
+                      maxWidth: "480px",
+                    }}
+                  >
+                    A complete curriculum from foundations to advanced research
+                    — designed for communities that need it most. Open,
+                    structured, and built to scale.
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal direction="up" distance={12} delay={0.25}>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "var(--space-8)",
+                      marginTop: "var(--space-8)",
+                    }}
+                  >
+                    <AnimatedStat value="13" label="Levels" />
+                    <AnimatedStat value="74+" label="Modules" />
+                    <AnimatedStat value="25" label="Core Concepts" />
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal direction="up" distance={12} delay={0.3}>
+                  <a
+                    href="/curriculum"
+                    className="btn btn-primary"
+                    style={{ marginTop: "var(--space-8)" }}
+                  >
+                    Explore the Curriculum <ArrowRight size={14} />
+                  </a>
+                </ScrollReveal>
+              </div>
+              <div className="scene-visual">
+                <ScrollReveal direction="right" distance={30} delay={0.15}>
+                  <div
+                    style={{
+                      position: "relative",
+                      borderRadius: "var(--radius-2xl)",
+                      overflow: "hidden",
+                      border: "1px solid var(--color-border-primary)",
+                    }}
+                  >
+                    <img
+                      src="/photography/knowledge/knowledge-school-children.jpg"
+                      alt="Students in a rural school"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        minHeight: "400px",
+                      }}
+                      loading="lazy"
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(14, 56, 46, 0.7) 0%, rgba(14, 56, 46, 0.1) 50%, transparent 100%)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: "var(--space-8)",
+                      }}
+                    >
                       <div
                         style={{
                           fontSize: "var(--text-xs)",
-                          color: "var(--color-text-muted)",
-                          marginTop: "var(--space-1)",
+                          color: "rgba(247, 244, 236, 0.7)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          fontWeight: 500,
+                          marginBottom: "var(--space-2)",
                         }}
                       >
-                        {stat.label}
+                        Knowledge Mission
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: "var(--text-2xl)",
+                          color: "var(--color-text-inverse)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        13 Levels. 74 Modules.
+                        <br />
+                        One Complete Path.
                       </div>
                     </div>
-                  ))}
-                </div>
-                <a
-                  href="/curriculum"
-                  className="btn btn-primary"
-                  style={{ marginTop: "var(--space-8)" }}
-                >
-                  Explore the Curriculum
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal variant="slide-up" delay={0.2}>
-              <div
-                style={{
-                  position: "relative",
-                  borderRadius: "var(--radius-2xl)",
-                  overflow: "hidden",
-                  border: "1px solid var(--color-border-primary)",
-                }}
-              >
-                <img
-                  src="/photography/knowledge/knowledge-school-children.jpg"
-                  alt="Students in a rural school — representing the communities Bhavya AI Institute serves"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    minHeight: "400px",
-                  }}
-                  loading="lazy"
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to top, rgba(14, 56, 46, 0.7) 0%, rgba(14, 56, 46, 0.1) 50%, transparent 100%)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: "var(--space-8)",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "var(--text-xs)",
-                      color: "rgba(247, 244, 236, 0.7)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      fontWeight: 500,
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
-                    Knowledge Mission
                   </div>
-                  <div
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-2xl)",
-                      color: "var(--color-text-inverse)",
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    13 Levels. 74 Modules.
-                    <br />
-                    One Complete Path.
-                  </div>
-                </div>
+                </ScrollReveal>
               </div>
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ====== BHAVYA ECOSYSTEM ====== */}
-      <section className="home-section home-section-cream">
+      {/* ═══════════════════════════════════════════
+          SCENE 08 — ENTER / PARTICIPATE
+          ═══════════════════════════════════════════ */}
+      <section className="scene scene-cream">
         <div className="container">
-          <Reveal variant="slide-up">
-            <div
-              style={{ textAlign: "center", marginBottom: "var(--space-12)" }}
-            >
-              <span className="editorial-label">THE BHAVYA ECOSYSTEM</span>
-              <h2
+          <ScrollReveal direction="up" distance={20}>
+            <div style={{ marginBottom: "var(--space-12)" }}>
+              <span className="editorial-label">GET INVOLVED</span>
+              <TextReveal
+                as="h2"
                 className="editorial-heading"
                 style={{
                   fontSize: "clamp(2rem, 4vw, 3rem)",
                   marginTop: "var(--space-4)",
                 }}
               >
-                A connected ecosystem for greater impact.
-              </h2>
+                Contribute to what lasts.
+              </TextReveal>
               <p
                 style={{
                   marginTop: "var(--space-4)",
-                  fontSize: "var(--text-base)",
+                  fontSize: "var(--text-lg)",
                   color: "var(--color-text-secondary)",
-                  maxWidth: "550px",
-                  marginInline: "auto",
-                  lineHeight: 1.6,
+                  maxWidth: "600px",
+                  lineHeight: 1.7,
                 }}
               >
-                One institution connecting missions, programs, evidence, and
-                technology — so every effort compounds over time.
+                Whether you want to volunteer, partner, research, or support our
+                work, there are many ways to contribute to the institution.
               </p>
             </div>
-          </Reveal>
-
-          <div className="ecosystem-grid-3">
-            {[
-              {
-                icon: Landmark,
-                label: "Foundation",
-                desc: "Institutional home — constitution-bound, community-governed",
-                color: "var(--color-brand-forest)",
-              },
-              {
-                icon: Target,
-                label: "Four Missions",
-                desc: "Forest, Knowledge, Heritage, Community — permanent focus areas",
-                color: "var(--color-brand-forest)",
-              },
-              {
-                icon: Compass,
-                label: "Programs",
-                desc: "On-ground work with evidence trails and measurable outcomes",
-                color: "var(--color-earth-500, #6a7c52)",
-              },
-            ].map((item, i) => (
-              <Reveal
-                key={item.label}
-                variant="slide-up"
-                delay={i * 0.1}
-                distance={20}
-              >
-                <div
-                  style={{
-                    padding: "var(--space-6)",
-                    borderRadius: "var(--radius-lg)",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    height: "100%",
-                  }}
-                >
-                  <item.icon
-                    size={24}
-                    style={{
-                      color: item.color,
-                      marginBottom: "var(--space-4)",
-                    }}
-                  />
-                  <div
-                    style={{
-                      fontSize: "var(--text-md)",
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {item.desc}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="ecosystem-grid-2">
-            {[
-              {
-                icon: BarChart3,
-                label: "Impact",
-                desc: "Real-time metrics, transparent reporting, institutional health — always public",
-                color: "var(--color-accent-gold)",
-              },
-              {
-                icon: Database,
-                label: "Bhavya OS",
-                desc: "The institutional operating system connecting programs, evidence, and research",
-                color: "var(--color-brand-forest)",
-              },
-            ].map((item, i) => (
-              <Reveal
-                key={item.label}
-                variant="slide-up"
-                delay={0.3 + i * 0.1}
-                distance={20}
-              >
-                <div
-                  style={{
-                    padding: "var(--space-6)",
-                    borderRadius: "var(--radius-lg)",
-                    background:
-                      "linear-gradient(135deg, var(--color-forest-900) 0%, var(--color-forest-800) 100%)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    height: "100%",
-                  }}
-                >
-                  <item.icon
-                    size={24}
-                    style={{
-                      color: "var(--color-accent-gold)",
-                      marginBottom: "var(--space-4)",
-                      opacity: 0.9,
-                    }}
-                  />
-                  <div
-                    style={{
-                      fontSize: "var(--text-md)",
-                      fontWeight: 600,
-                      color: "var(--color-text-inverse)",
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "var(--text-sm)",
-                      color: "rgba(247, 244, 236, 0.6)",
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {item.desc}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ====== BHAVYA OS INTRODUCTION — DARK PANEL ====== */}
-      <section className="home-section home-section-wide home-section-dark">
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div className="home-grid-2">
-            <Reveal variant="slide-up">
-              <div>
-                <span className="dark-label">
-                  THE SYSTEM BEHIND THE INSTITUTION
-                </span>
-                <h2 className="dark-heading">
-                  The system behind
-                  <br />
-                  the institution.
-                </h2>
-                <p className="dark-desc">
-                  Bhavya OS is the institutional operating system — connecting
-                  programs, projects, evidence, research, and impact in one
-                  unified system built to endure.
-                </p>
-                <a href="/os" className="btn btn-gold">
-                  Explore Bhavya OS
-                  <ArrowRight size={14} />
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal variant="slide-up" delay={0.2}>
-              <div
-                style={{
-                  position: "relative",
-                  borderRadius: "var(--radius-2xl)",
-                  overflow: "hidden",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  background:
-                    "linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%)",
-                }}
-              >
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "1px",
-                    background: "rgba(255, 255, 255, 0.06)",
-                  }}
-                >
-                  {[
-                    {
-                      icon: Database,
-                      label: "Programs",
-                      desc: "Manage institutional programmes across all missions",
-                    },
-                    {
-                      icon: Target,
-                      label: "Projects",
-                      desc: "Track on-ground initiatives with evidence trails",
-                    },
-                    {
-                      icon: FlaskConical,
-                      label: "Research",
-                      desc: "Knowledge, publications, and institutional learning",
-                    },
-                    {
-                      icon: BarChart3,
-                      label: "Impact",
-                      desc: "Metrics, verification, and transparent reporting",
-                    },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      style={{
-                        padding: "var(--space-5)",
-                        background: "rgba(255, 255, 255, 0.03)",
-                        transition:
-                          "background var(--duration-normal) var(--ease-out)",
-                      }}
-                    >
-                      <item.icon
-                        size={18}
-                        style={{
-                          color: "var(--color-accent-gold)",
-                          marginBottom: "var(--space-3)",
-                          opacity: 0.8,
-                        }}
-                      />
-                      <div
-                        style={{
-                          fontSize: "var(--text-sm)",
-                          fontWeight: 600,
-                          color: "var(--color-text-inverse)",
-                          marginBottom: "var(--space-1)",
-                        }}
-                      >
-                        {item.label}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "var(--text-xs)",
-                          color: "rgba(247, 244, 236, 0.5)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        {item.desc}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ====== GET INVOLVED ====== */}
-      <section className="home-section home-section-cream">
-        <div className="container">
-          <div style={{ marginBottom: "var(--space-12)" }}>
-            <span className="editorial-label">GET INVOLVED</span>
-            <h2
-              className="editorial-heading"
-              style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
-                marginTop: "var(--space-4)",
-              }}
-            >
-              Contribute to what lasts.
-            </h2>
-            <p
-              style={{
-                marginTop: "var(--space-4)",
-                fontSize: "var(--text-lg)",
-                color: "var(--color-text-secondary)",
-                maxWidth: "600px",
-                lineHeight: 1.7,
-              }}
-            >
-              Whether you want to volunteer, partner, research, or support our
-              work, there are many ways to contribute to the institution.
-            </p>
-          </div>
+          </ScrollReveal>
 
           <div className="home-grid-4">
             {getInvolved.map((card, i) => (
-              <Reveal
+              <ScrollReveal
                 key={card.title}
-                variant="slide-up"
-                delay={i * 0.1}
+                direction="up"
                 distance={30}
+                delay={i * 0.1}
               >
                 <a href={card.href} className="involvement-card">
                   <div className="involvement-card-icon">
@@ -1025,13 +1012,15 @@ export default function HomePage() {
                     Learn more <ArrowRight size={14} />
                   </span>
                 </a>
-              </Reveal>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ====== FINAL CTA ====== */}
+      {/* ═══════════════════════════════════════════
+          FINAL CTA
+          ═══════════════════════════════════════════ */}
       <section
         style={{
           padding: "var(--space-28) 0",
@@ -1045,7 +1034,7 @@ export default function HomePage() {
           className="container"
           style={{ position: "relative", zIndex: 1, textAlign: "center" }}
         >
-          <Reveal variant="slide-up">
+          <ScrollReveal direction="up" distance={20}>
             <h2
               className="editorial-heading"
               style={{
@@ -1060,9 +1049,8 @@ export default function HomePage() {
                 Shape what endures.
               </span>
             </h2>
-          </Reveal>
-
-          <Reveal variant="slide-up" delay={0.2}>
+          </ScrollReveal>
+          <ScrollReveal direction="up" distance={16} delay={0.15}>
             <div
               style={{
                 display: "flex",
@@ -1072,15 +1060,13 @@ export default function HomePage() {
               }}
             >
               <a href="/donate" className="btn btn-gold">
-                <HeartHandshake size={16} />
-                Support the mission
+                <HeartHandshake size={16} /> Support the mission
               </a>
               <a href="/missions" className="btn btn-secondary-inverse">
-                Explore Missions
-                <ArrowRight size={16} />
+                Explore Missions <ArrowRight size={16} />
               </a>
             </div>
-          </Reveal>
+          </ScrollReveal>
         </div>
       </section>
 
