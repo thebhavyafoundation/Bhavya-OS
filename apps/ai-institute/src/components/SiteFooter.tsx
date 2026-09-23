@@ -30,7 +30,16 @@ export function SiteFooter() {
           }}
         >
           <div>
-            <BhavyaLogo size="sm" />
+            <div
+              style={{
+                display: "inline-block",
+                background: "var(--color-bg-primary)",
+                padding: "var(--space-3) var(--space-4)",
+                borderRadius: "var(--radius-md)",
+              }}
+            >
+              <BhavyaLogo size="lg" />
+            </div>
             <p
               style={{
                 marginTop: "var(--space-4)",
@@ -127,8 +136,9 @@ export function SiteFooter() {
           }}
         >
           <p>
-            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> Bhavya Foundation. Building for
-            Generations.
+            &copy;{" "}
+            <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+            Bhavya Foundation. Building for Generations.
           </p>
           <div style={{ display: "flex", gap: "var(--space-4)" }}>
             <a

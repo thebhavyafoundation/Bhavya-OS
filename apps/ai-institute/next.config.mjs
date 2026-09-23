@@ -25,6 +25,12 @@ const nextConfig = {
     "@libsql/isomorphic-ws",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
+  outputFileTracingExcludes: {
+    "next-server": ["**/.ignored_*"],
+  },
+  images: {
+    unoptimized: true,
+  },
   openNextConfig: defineCloudflareConfig({}),
 };
 

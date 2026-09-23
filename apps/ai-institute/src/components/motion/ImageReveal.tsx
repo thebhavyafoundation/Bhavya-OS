@@ -10,10 +10,13 @@ interface ImageRevealProps {
 }
 
 export function ImageReveal({ src, alt, className = "" }: ImageRevealProps) {
+  const [ready, setReady] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReducedMotion(mq.matches);
+    setReady(true);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -22,7 +25,7 @@ export function ImageReveal({ src, alt, className = "" }: ImageRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  if (reducedMotion) {
+  if (!ready || reducedMotion) {
     return (
       <div ref={ref} className={`overflow-hidden ${className}`}>
         <img
@@ -42,7 +45,7 @@ export function ImageReveal({ src, alt, className = "" }: ImageRevealProps) {
         animate={
           isInView
             ? { clipPath: "polygon(0 0%, 100% 0%, 100% 100%, 0 100%)" }
-            : {}
+            : undefined
         }
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       >

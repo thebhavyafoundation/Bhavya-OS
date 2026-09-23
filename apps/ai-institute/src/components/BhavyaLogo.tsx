@@ -2,53 +2,39 @@ import Link from "next/link";
 
 interface BhavyaLogoProps {
   size?: "sm" | "md" | "lg";
-  showWordmark?: boolean;
   href?: string;
 }
 
 const sizes = {
-  sm: { icon: 20, text: "var(--text-sm)" },
-  md: { icon: 28, text: "var(--text-lg)" },
-  lg: { icon: 36, text: "var(--text-2xl)" },
+  sm: { width: 48 },
+  md: { width: 72 },
+  lg: { width: 120 },
 };
 
-export function BhavyaLogo({
-  size = "md",
-  showWordmark = true,
-  href = "/",
-}: BhavyaLogoProps) {
+export function BhavyaLogo({ size = "md", href = "/" }: BhavyaLogoProps) {
   const s = sizes[size];
   return (
     <Link
       href={href}
       style={{
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
-        gap: "var(--space-2)",
         textDecoration: "none",
+        flexShrink: 0,
       }}
       aria-label="Bhavya Foundation home"
     >
       <img
-        src="/brand/icon.svg"
-        alt=""
-        width={s.icon}
-        height={s.icon}
-        aria-hidden="true"
-        style={{ flexShrink: 0 }}
+        src="/brand/logo.svg"
+        alt="Bhavya Foundation"
+        width={s.width}
+        height={Math.round(s.width * 1.2)}
+        style={{
+          width: s.width,
+          height: "auto",
+          display: "block",
+        }}
       />
-      {showWordmark && (
-        <span
-          style={{
-            fontSize: s.text,
-            fontWeight: 800,
-            color: "var(--color-text-primary)",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Bhavya
-        </span>
-      )}
     </Link>
   );
 }
