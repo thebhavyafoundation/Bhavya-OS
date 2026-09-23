@@ -113,27 +113,7 @@ export function SiteHeader({
         aria-label="Primary navigation"
       >
         <div className="site-nav-inner">
-          <a href="/" className="nav-logo">
-            <BhavyaLogo size="sm" />
-            <div className="nav-logo-text">
-              <span
-                className="nav-logo-name"
-                style={
-                  isDark ? { color: "var(--color-text-inverse)" } : undefined
-                }
-              >
-                Bhavya
-              </span>
-              <span
-                className="nav-logo-tagline"
-                style={
-                  isDark ? { color: "var(--color-brand-gold)" } : undefined
-                }
-              >
-                Foundation
-              </span>
-            </div>
-          </a>
+          <BhavyaLogo size="sm" />
 
           {/* Desktop Navigation — dropdown groups from registry */}
           <div className="nav-links">
