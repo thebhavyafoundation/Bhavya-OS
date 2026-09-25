@@ -96,7 +96,7 @@ function StageCard({
           onClick={onToggle}
           className="w-full text-left group"
           whileHover={{ x: 4 }}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">

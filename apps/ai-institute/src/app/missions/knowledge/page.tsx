@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 interface EvidenceEntry {
   id: string;
@@ -46,7 +44,6 @@ export default function KnowledgeMissionPage() {
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <SiteHeader />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -230,7 +227,6 @@ export default function KnowledgeMissionPage() {
           </div>
         </div>
       </section>
-      <SiteFooter />
     </div>
   );
 }

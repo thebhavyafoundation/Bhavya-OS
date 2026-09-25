@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Himalayan mountain range at golden hour">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1f2d"/>
+      <stop offset="28%" stop-color="#1a3348"/>
+      <stop offset="52%" stop-color="#5a6b5a"/>
+      <stop offset="72%" stop-color="#c4a35a"/>
+      <stop offset="88%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a7340"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="72%" cy="48%" r="28%">
+      <stop offset="0%" stop-color="#f5e6a8" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#d4af37" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#d4af37" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ridgeFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a7c8a"/>
+      <stop offset="100%" stop-color="#3d4f5c"/>
+    </linearGradient>
+    <linearGradient id="ridgeMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a5e52"/>
+      <stop offset="100%" stop-color="#2a3d34"/>
+    </linearGradient>
+    <linearGradient id="ridgeNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a2e26"/>
+      <stop offset="100%" stop-color="#0e1f18"/>
+    </linearGradient>
+    <linearGradient id="valley" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e382e" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#071c16" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <filter id="mist" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#sunGlow)"/>
+
+  <!-- Distant snow peaks -->
+  <g filter="url(#soft)" opacity="0.9">
+    <path d="M0 620 L120 480 L200 540 L320 400 L420 500 L520 360 L620 470 L740 320 L860 450 L980 300 L1100 430 L1220 340 L1340 420 L1460 310 L1580 400 L1700 350 L1820 430 L1920 380 L1920 720 L0 720 Z" fill="url(#ridgeFar)"/>
+    <path d="M320 400 L360 440 L420 500 L480 460 L520 360 L560 420 L620 470" fill="#e8eef2" opacity="0.55"/>
+    <path d="M740 320 L780 370 L860 450 L920 400 L980 300 L1040 360 L1100 430" fill="#f0f4f6" opacity="0.6"/>
+    <path d="M1220 340 L1260 380 L1340 420 L1400 370 L1460 310 L1520 360 L1580 400" fill="#e8eef2" opacity="0.5"/>
+  </g>
+
+  <!-- Mid ridges -->
+  <path d="M0 700 L180 580 L300 640 L450 520 L600 610 L780 480 L960 580 L1140 500 L1320 590 L1500 510 L1680 600 L1920 540 L1920 820 L0 820 Z" fill="url(#ridgeMid)" opacity="0.92"/>
+
+  <!-- Atmospheric mist -->
+  <ellipse cx="960" cy="700" rx="700" ry="60" fill="#f7f4ec" opacity="0.12" filter="url(#mist)"/>
+  <ellipse cx="400" cy="740" rx="400" ry="40" fill="#f7f4ec" opacity="0.08" filter="url(#mist)"/>
+
+  <!-- Near forested ridge -->
+  <path d="M0 780 L200 700 L380 750 L560 660 L760 740 L960 650 L1160 730 L1360 670 L1560 740 L1760 680 L1920 730 L1920 1080 L0 1080 Z" fill="url(#ridgeNear)"/>
+
+  <!-- Foreground slope -->
+  <path d="M0 900 L400 840 L800 880 L1200 820 L1600 870 L1920 840 L1920 1080 L0 1080 Z" fill="#071c16"/>
+
+  <!-- Tree silhouettes -->
+  <g fill="#040f0b" opacity="0.85">
+    <path d="M80 980 L95 860 L110 980 Z"/>
+    <path d="M140 990 L158 840 L176 990 Z"/>
+    <path d="M220 1000 L232 880 L244 1000 Z"/>
+    <path d="M1700 970 L1720 830 L1740 970 Z"/>
+    <path d="M1780 990 L1805 850 L1830 990 Z"/>
+    <path d="M1860 1000 L1875 870 L1890 1000 Z"/>
+  </g>
+
+  <!-- Soft vignette -->
+  <rect width="1920" height="1080" fill="url(#valley)"/>
+</svg>

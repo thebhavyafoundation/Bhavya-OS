@@ -9,8 +9,6 @@ import {
   getNodesByCategory,
 } from "@/data/knowledge-graph";
 import { useState } from "react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 /* Category colors — mapped to brand-compliant palette */
 const categoryColors: Record<string, string> = {
@@ -42,7 +40,6 @@ export default function ConceptPage() {
   if (!node) {
     return (
       <div className="min-h-screen bg-[var(--color-bg-primary)]">
-        <SiteHeader />
         <div
           style={{
             display: "flex",
@@ -73,7 +70,6 @@ export default function ConceptPage() {
             </Link>
           </div>
         </div>
-        <SiteFooter />
       </div>
     );
   }
@@ -86,8 +82,6 @@ export default function ConceptPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <SiteHeader />
-
       {/* Header */}
       <div
         style={{
@@ -876,8 +870,6 @@ export default function ConceptPage() {
           </section>
         )}
       </div>
-
-      <SiteFooter />
     </div>
   );
 }

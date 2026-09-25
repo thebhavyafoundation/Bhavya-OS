@@ -64,6 +64,7 @@
   - `.ai\agents`/
   - `.ai\architecture.md`
   - `.ai\architecture.summary.md`
+  - `.ai\audits`/
   - `.ai\bootstrap.md`
   - `.ai\build`/
   - `.ai\cache`/
@@ -128,6 +129,7 @@
 - `.github`/
   - `.github\workflows`/
 - `.gitignore`
+- `.gitleaksignore`
 - `.husky`/
   - `.husky\commit-msg`
   - `.husky\pre-commit`
@@ -177,6 +179,38 @@
   - `.playwright-mcp\console-2026-08-05T19-57-21-728Z.log`
   - `.playwright-mcp\console-2026-08-05T20-01-06-777Z.log`
   - `.playwright-mcp\console-2026-08-05T20-09-30-898Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-25-51-170Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-27-02-208Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-28-05-836Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-28-24-771Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-28-39-758Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-32-27-005Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-32-47-626Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-35-34-001Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-36-01-725Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-36-27-563Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-41-34-282Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-42-06-522Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-42-34-785Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-43-02-794Z.log`
+  - `.playwright-mcp\console-2026-09-18T17-43-22-826Z.log`
+  - `.playwright-mcp\console-2026-09-21T15-56-31-661Z.log`
+  - `.playwright-mcp\console-2026-09-21T15-58-07-785Z.log`
+  - `.playwright-mcp\console-2026-09-21T15-59-04-590Z.log`
+  - `.playwright-mcp\console-2026-09-21T16-02-03-907Z.log`
+  - `.playwright-mcp\console-2026-09-21T16-04-43-032Z.log`
+  - `.playwright-mcp\console-2026-09-21T16-05-33-060Z.log`
+  - `.playwright-mcp\console-2026-09-21T16-06-23-135Z.log`
+  - `.playwright-mcp\console-2026-09-21T17-59-44-267Z.log`
+  - `.playwright-mcp\console-2026-09-21T19-47-24-681Z.log`
+  - `.playwright-mcp\console-2026-09-23T06-30-18-933Z.log`
+  - `.playwright-mcp\console-2026-09-23T06-47-10-447Z.log`
+  - `.playwright-mcp\console-2026-09-23T06-48-28-475Z.log`
+  - `.playwright-mcp\console-2026-09-23T06-54-16-429Z.log`
+  - `.playwright-mcp\console-2026-09-23T19-59-05-875Z.log`
+  - `.playwright-mcp\console-2026-09-23T20-00-39-120Z.log`
+  - `.playwright-mcp\console-2026-09-23T20-03-27-599Z.log`
+  - `.playwright-mcp\console-2026-09-24T06-16-38-066Z.log`
   - `.playwright-mcp\page-2026-07-26T17-15-20-499Z.yml`
   - `.playwright-mcp\page-2026-07-26T17-24-47-414Z.yml`
   - `.playwright-mcp\page-2026-07-26T17-25-50-565Z.yml`
@@ -211,6 +245,42 @@
   - `.playwright-mcp\page-2026-08-05T19-51-18-472Z.yml`
   - `.playwright-mcp\page-2026-08-05T19-54-40-818Z.yml`
   - `.playwright-mcp\page-2026-08-05T19-56-32-311Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-25-52-655Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-27-04-285Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-28-06-390Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-28-25-432Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-35-45-858Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-36-11-120Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-36-49-276Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-41-43-872Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-42-12-638Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-42-43-057Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-43-06-079Z.yml`
+  - `.playwright-mcp\page-2026-09-18T17-43-25-622Z.yml`
+  - `.playwright-mcp\page-2026-09-21T15-56-34-780Z.yml`
+  - `.playwright-mcp\page-2026-09-21T15-58-09-073Z.yml`
+  - `.playwright-mcp\page-2026-09-21T15-59-05-482Z.yml`
+  - `.playwright-mcp\page-2026-09-21T16-04-48-211Z.yml`
+  - `.playwright-mcp\page-2026-09-21T16-05-36-726Z.yml`
+  - `.playwright-mcp\page-2026-09-21T16-06-27-259Z.yml`
+  - `.playwright-mcp\page-2026-09-21T17-59-47-633Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-30-21-918Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-47-11-624Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-47-54-002Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-48-32-246Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-48-33-436Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-49-03-386Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-50-14-631Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-51-15-524Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-51-44-229Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-54-18-043Z.yml`
+  - `.playwright-mcp\page-2026-09-23T06-54-19-722Z.yml`
+  - `.playwright-mcp\page-2026-09-23T19-59-12-879Z.yml`
+  - `.playwright-mcp\page-2026-09-23T20-00-41-236Z.yml`
+  - `.playwright-mcp\page-2026-09-23T20-03-30-690Z.yml`
+  - `.playwright-mcp\page-2026-09-24T06-16-41-476Z.yml`
+- `.pnpm-store`/
+  - `.pnpm-store\v10`/
 - `.policies`/
   - `.policies\ACCESS_POLICY.md`
   - `.policies\AI_POLICY.md`
@@ -323,6 +393,8 @@
   - `archive\apps`/
   - `archive\packages`/
   - `archive\website-starlight`/
+- `assets`/
+  - `assets\manifest.json`
 - `commitlint.config.js`
 - `config`/
   - `config\apps.json`
@@ -359,6 +431,7 @@
   - `contracts\runtime`/
   - `contracts\services`/
   - `contracts\shared`/
+- `curriculum-viewport.png`
 - `design`/
   - `design\CONTEXT.md`
   - `design\DESIGN-CONSTITUTION.md`
@@ -368,6 +441,8 @@
   - `design\inventory`/
   - `design\motion`/
   - `design\tokens`/
+- `dev-server-err.log`
+- `dev-server.log`
 - `docs`/
   - `docs\Books`/
   - `docs\CONTEXT.md`
@@ -418,6 +493,7 @@
   - `docs\social-os`/
   - `docs\social-os-v2`/
   - `docs\standards`/
+  - `docs\superpowers`/
   - `docs\system`/
   - `docs\testing.md`
   - `docs\token-reference.md`
@@ -450,10 +526,14 @@
   - `history\milestones.md`
   - `history\release-history.md`
   - `history\timeline.md`
+- `homepage-full.png`
+- `homepage-viewport.png`
 - `knowledge`/
   - `knowledge\engineering-graphs`/
 - `knowledge-packages`/
   - `knowledge-packages\level-1`/
+- `library-viewport.png`
+- `login-viewport.png`
 - `memory`/
   - `memory\agents`/
   - `memory\decisions`/
@@ -464,6 +544,7 @@
   - `memory\research`/
   - `memory\tasks`/
 - `opencode.json`
+- `os-redirect-login.png`
 - `package.json`
 - `packages`/
   - `packages\CONTEXT.md`
@@ -543,11 +624,137 @@
   - `platform\validation`/
 - `pnpm-lock.yaml`
 - `pnpm-workspace.yaml`
+- `prod-1280-top.png`
+- `prod-1440-hero.png`
+- `prod-1440-top.png`
+- `prod-390-top.png`
+- `prod-430-top.png`
+- `prod-desktop-1440.png`
 - `prototypes`/
   - `prototypes\astro-starlight`/
   - `prototypes\brand-assets`/
   - `prototypes\nextjs-fumadocs`/
   - `prototypes\nextra`/
+- `push-out.txt`
+- `qa-screenshots`/
+  - `qa-screenshots\FINAL-CONSOLIDATED-REPORT.md`
+  - `qa-screenshots\P10-REPORT.md`
+  - `qa-screenshots\P11-REPORT.md`
+  - `qa-screenshots\P11-run.md`
+  - `qa-screenshots\P12-REPORT.md`
+  - `qa-screenshots\P13-REPORT.md`
+  - `qa-screenshots\P14-REPORT.md`
+  - `qa-screenshots\P15-REPORT.md`
+  - `qa-screenshots\P16-REPORT.md`
+  - `qa-screenshots\P17-REPORT.md`
+  - `qa-screenshots\P18-REPORT.md`
+  - `qa-screenshots\about-desktop.png`
+  - `qa-screenshots\about-mobile.png`
+  - `qa-screenshots\about-tablet.png`
+  - `qa-screenshots\capture.js`
+  - `qa-screenshots\capture.py`
+  - `qa-screenshots\capture2.py`
+  - `qa-screenshots\capture3.py`
+  - `qa-screenshots\curriculum-desktop.png`
+  - `qa-screenshots\curriculum-mobile.png`
+  - `qa-screenshots\curriculum-tablet.png`
+  - `qa-screenshots\homepage-desktop.png`
+  - `qa-screenshots\homepage-mobile.png`
+  - `qa-screenshots\homepage-tablet.png`
+  - `qa-screenshots\library-desktop.png`
+  - `qa-screenshots\library-mobile.png`
+  - `qa-screenshots\library-tablet.png`
+  - `qa-screenshots\login-desktop.png`
+  - `qa-screenshots\login-mobile.png`
+  - `qa-screenshots\login-tablet.png`
+  - `qa-screenshots\p0p1-1024.png`
+  - `qa-screenshots\p0p1-1440-full.png`
+  - `qa-screenshots\p0p1-1440-hero.png`
+  - `qa-screenshots\p0p1-390-hero.png`
+  - `qa-screenshots\p0p1-430.png`
+  - `qa-screenshots\p0p1-768-midscroll.png`
+  - `qa-screenshots\p0p1-768.png`
+  - `qa-screenshots\p11-community-1024x768.png`
+  - `qa-screenshots\p11-community-1280x800.png`
+  - `qa-screenshots\p11-community-1440x900.png`
+  - `qa-screenshots\p11-community-390x844.png`
+  - `qa-screenshots\p11-community-430x932.png`
+  - `qa-screenshots\p11-community-768x1024.png`
+  - `qa-screenshots\p11-forest-1024x768.png`
+  - `qa-screenshots\p11-forest-1280x800.png`
+  - `qa-screenshots\p11-forest-1440x900.png`
+  - `qa-screenshots\p11-forest-390x844.png`
+  - `qa-screenshots\p11-forest-430x932.png`
+  - `qa-screenshots\p11-forest-768x1024.png`
+  - `qa-screenshots\p11-heritage-1024x768.png`
+  - `qa-screenshots\p11-heritage-1280x800.png`
+  - `qa-screenshots\p11-heritage-1440x900.png`
+  - `qa-screenshots\p11-heritage-390x844.png`
+  - `qa-screenshots\p11-heritage-430x932.png`
+  - `qa-screenshots\p11-heritage-768x1024.png`
+  - `qa-screenshots\p11-home-1024x768.png`
+  - `qa-screenshots\p11-home-1280x800.png`
+  - `qa-screenshots\p11-home-1440x900.png`
+  - `qa-screenshots\p11-home-390x844.png`
+  - `qa-screenshots\p11-home-430x932.png`
+  - `qa-screenshots\p11-home-768x1024.png`
+  - `qa-screenshots\p11-knowledge-1024x768.png`
+  - `qa-screenshots\p11-knowledge-1280x800.png`
+  - `qa-screenshots\p11-knowledge-1440x900.png`
+  - `qa-screenshots\p11-knowledge-390x844.png`
+  - `qa-screenshots\p11-knowledge-430x932.png`
+  - `qa-screenshots\p11-knowledge-768x1024.png`
+  - `qa-screenshots\p11-results.json`
+  - `qa-screenshots\p11_check.py`
+  - `qa-screenshots\p12-focus-home.png`
+  - `qa-screenshots\p12-results.json`
+  - `qa-screenshots\p12_check.py`
+  - `qa-screenshots\p13-results.json`
+  - `qa-screenshots\p13_check.py`
+  - `qa-screenshots\p15-about.png`
+  - `qa-screenshots\p15-accessibility.png`
+  - `qa-screenshots\p15-community.png`
+  - `qa-screenshots\p15-contact.png`
+  - `qa-screenshots\p15-courses.png`
+  - `qa-screenshots\p15-curriculum.png`
+  - `qa-screenshots\p15-donate.png`
+  - `qa-screenshots\p15-faq.png`
+  - `qa-screenshots\p15-forbidden.png`
+  - `qa-screenshots\p15-get-involved.png`
+  - `qa-screenshots\p15-heritage.png`
+  - `qa-screenshots\p15-home.png`
+  - `qa-screenshots\p15-knowledge-academy.png`
+  - `qa-screenshots\p15-knowledge-ai.png`
+  - `qa-screenshots\p15-knowledge-courses.png`
+  - `qa-screenshots\p15-knowledge-library.png`
+  - `qa-screenshots\p15-knowledge-research.png`
+  - `qa-screenshots\p15-knowledge.png`
+  - `qa-screenshots\p15-mission.png`
+  - `qa-screenshots\p15-missions.png`
+  - `qa-screenshots\p15-privacy.png`
+  - `qa-screenshots\p15-programs.png`
+  - `qa-screenshots\p15-research.png`
+  - `qa-screenshots\p15-resources.png`
+  - `qa-screenshots\p15-results.json`
+  - `qa-screenshots\p15-retry-forest.png`
+  - `qa-screenshots\p15-retry-home.png`
+  - `qa-screenshots\p15-terms.png`
+  - `qa-screenshots\p15-transparency.png`
+  - `qa-screenshots\p15-volunteer.png`
+  - `qa-screenshots\p15_check.py`
+  - `qa-screenshots\p8-home-1024x768.png`
+  - `qa-screenshots\p8-home-1440x900.png`
+  - `qa-screenshots\p8-home-390x844.png`
+  - `qa-screenshots\p8-home-768x1024.png`
+  - `qa-screenshots\p9-home-1024x768.png`
+  - `qa-screenshots\p9-home-1440x900.png`
+  - `qa-screenshots\p9-home-390x844.png`
+  - `qa-screenshots\p9-home-768x1024.png`
+  - `qa-screenshots\p9-home-reduced-motion.png`
+  - `qa-screenshots\register-desktop.png`
+  - `qa-screenshots\register-mobile.png`
+  - `qa-screenshots\register-tablet.png`
+- `register-viewport.png`
 - `registry`/
   - `registry\agents.json`
   - `registry\apps.json`
@@ -596,6 +803,7 @@
   - `scripts\generate-file-map.mjs`
   - `scripts\generate-knowledge-graph.js`
   - `scripts\generate-registry.js`
+  - `scripts\generate-source-b-registry.mjs`
   - `scripts\quality-gates.mjs`
   - `scripts\sync-tokens.mjs`
   - `scripts\vercel-build-app.mjs`

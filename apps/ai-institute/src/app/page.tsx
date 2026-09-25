@@ -1,45 +1,70 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { ArrowRight, HeartHandshake } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { HeroBackground } from "@/components/HeroBackground";
-import { VineDivider } from "@/components/BotanicalMotifs";
 import { HeroEntrance } from "@/components/motion/HeroEntrance";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TextReveal } from "@/components/motion/TextReveal";
-import { ImageReveal } from "@/components/motion/ImageReveal";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { ScrubExit } from "@/components/motion/ScrubExit";
+import { ScrubParallax } from "@/components/motion/ScrubParallax";
+import { PhotoPlate } from "@/components/editorial/PhotoPlate";
+import { ProofStrip } from "@/components/editorial/ProofStrip";
+import { EditorialLink } from "@/components/editorial/EditorialLink";
+import { StoryChapter } from "@/components/site/StoryChapter";
+import { ChapterRail } from "@/components/site/ChapterRail";
+import { CountUp } from "@/components/site/CountUp";
+import { STORY_CHAPTERS, STORY_PROOF } from "@/lib/homepage-story";
+import { PHOTO, CHAPTER_PHOTO } from "@/lib/photos";
+import { curriculum, getTotalModules } from "@/data/curriculum-levels";
 
-const pillars = [
-  {
-    key: "forest",
-    label: "Forest",
-    desc: "Restore degraded ecosystems. Protect biodiversity. Conserve watersheds.",
-  },
-  {
-    key: "knowledge",
-    label: "Knowledge",
-    desc: "Expand access to learning. Advance research. Bridge the digital divide.",
-  },
-  {
-    key: "heritage",
-    label: "Heritage",
-    desc: "Preserve cultural traditions. Document living history. Protect heritage sites.",
-  },
-  {
-    key: "community",
-    label: "Community",
-    desc: "Empower local leadership. Strengthen social fabric. Build resilient communities.",
-  },
-];
+const LazyPillarSphere = dynamic(
+  () => import("@/components/three/PillarSphere"),
+  { ssr: false, loading: () => null },
+);
 
-const communityProof = [
-  "Empower local leadership.",
-  "Strengthen social fabric.",
-  "Build resilient communities.",
-];
+/**
+ * Homepage — ten-beat cinematic narrative.
+ *
+ * PROMISE → THESIS → FOUR MISSION CHAPTERS → LEARNING → STRUCTURE →
+ * BHAVYA OS + EVIDENCE → INVITATION
+ *
+ * Impact metrics: only Brand Constitution Art. 10 + curriculum data.
+ * Photography: rights-cleared JPEGs via PHOTO/CHAPTER_PHOTO maps
+ * (see public/photography/metadata/photo_manifest.json).
+ */
+
+const chapterDetails: Record<
+  (typeof STORY_CHAPTERS)[number]["key"],
+  { body: string; credit: string; alt: string }
+> = {
+  forest: {
+    body: "Living systems restored and held for the long term — watersheds, contour planting, and stewardship measured in generations, not seasons.",
+    credit:
+      "Photo · Kavittaa, CC0 1.0 · Cedar forest, Shimla — representative, not a Bhavya site",
+    alt: "Tall Himalayan cedar trees in a dense forest near Shimla",
+  },
+  knowledge: {
+    body: "Structured open education for rural India — free, durable, and built to travel from first digital literacy through research and institution-building.",
+    credit:
+      "Photo · Glenn Carstens-Peters, CC0 · Open book study — not a Bhavya classroom",
+    alt: "Open book and notebook on a wooden table",
+  },
+  heritage: {
+    body: "Document craft, place, and living story while keepers are still here to speak — architecture, language, and ritual held as working knowledge, not museum labels.",
+    credit:
+      "Photo · UnpetitproleX, CC BY 4.0 · Shirgul Maharaj Temple, Churdhar, Himachal Pradesh — representative, not a Bhavya site",
+    alt: "Stone temple architecture at Churdhar, Himachal Pradesh",
+  },
+  community: {
+    body: "Resilience grown from within — local councils, volunteers, and shared decisions. Outside support serves the village plan, not the reverse.",
+    credit:
+      "Photo · Aashish Chindaliya, CC0 · Himachal Pradesh landscape — place photograph, not a gathering",
+    alt: "Mountain landscape in Himachal Pradesh, India",
+  },
+};
 
 const osPanels = [
   {
@@ -64,831 +89,334 @@ const osPanels = [
   },
 ];
 
-const evidenceRows = [
+const structurePillars = [
   {
-    label: "Permanent missions",
-    value: "4",
-    state: "verified",
-    href: "/missions",
-    source: "Missions",
+    label: "Forest",
+    line: "Restore degraded ecosystems. Protect biodiversity. Conserve watersheds.",
   },
   {
-    label: "Constitution articles",
-    value: "12",
-    state: "reported",
-    href: "/about",
-    source: "About",
+    label: "Knowledge",
+    line: "Expand access to learning. Advance research. Bridge the digital divide.",
   },
   {
-    label: "Academy curriculum",
-    value: "13 levels · 74 modules",
-    state: "reported",
-    href: "/curriculum",
-    source: "Curriculum",
+    label: "Heritage",
+    line: "Preserve cultural traditions. Document living history. Protect heritage sites.",
   },
   {
-    label: "Engineering quality gates",
-    value: "10 gates · 26 metrics",
-    state: "reported",
-    href: "/about",
-    source: "Engineering standards",
+    label: "Community",
+    line: "Local leadership first. Stronger social fabric. Resilient communities.",
   },
 ];
 
-const revealDistances = [24, 20, 16, 12];
-
 export default function HomePage() {
-  const [isNarrow, setIsNarrow] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 640px)");
-    const update = () => setIsNarrow(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
+  const levelCount = curriculum.length;
+  const moduleCount = getTotalModules();
   return (
     <div
       className="min-h-screen"
       style={{ background: "var(--color-bg-primary)" }}
     >
-      <SiteHeader />
+      <SiteHeader variant="dark" />
+      <ChapterRail />
       <main id="main-content">
-        <section className="hero" aria-labelledby="hero-heading">
+        {/* ——— CH 01: PLACE ——— */}
+        <section
+          className="cine-hero place-hero"
+          aria-labelledby="hero-heading"
+        >
           <HeroBackground
             pillar="home"
-            photo="/photography/hero/hero-himalayan-sunset.jpg"
-            photoPosition="center 40%"
-            overlayOpacity={0.4}
+            variant="dark"
+            overlayOpacity={0.25}
+            photo={PHOTO.hero}
           />
-          <HeroEntrance className="hero-content">
-            <span
-              className="editorial-label"
-              style={{ display: "block", marginBottom: "var(--space-6)" }}
+          {/*
+            PLACE photo: Valley of Uttarakhand, SND Nature, CC BY 4.0.
+            Brand mountain planes remain atmospheric only (hero JPEG is
+            the base layer via HeroBackground).
+          */}
+          <div className="place-atmosphere" aria-hidden="true">
+            <img
+              src="/brand/svg/atmosphere-layers.svg"
+              alt=""
+              draggable={false}
+              className="place-mist"
+            />
+            <ScrubParallax
+              distance={16}
+              className="place-plane place-plane-far"
             >
-              Bhavya Foundation
-            </span>
-            <h1
-              id="hero-heading"
-              className="hero-title editorial-heading"
-              style={{ color: "var(--color-text-inverse)" }}
+              <img
+                src="/brand/svg/mountain-layer.svg"
+                alt=""
+                draggable={false}
+              />
+            </ScrubParallax>
+            <ScrubParallax
+              distance={30}
+              className="place-plane place-plane-near"
             >
-              <span style={{ display: "block" }}>Building for</span>
-              <span style={{ display: "block" }}>Generations.</span>
-            </h1>
-            <p
-              className="hero-desc"
-              style={{
-                color: "var(--color-text-inverse)",
-                fontSize: "var(--text-xl)",
-              }}
-            >
-              A public institution working across nature, knowledge, heritage,
-              and community — built with patience, evidence, and long-term
-              thinking.
-            </p>
-            <div className="hero-actions">
-              <a href="/missions" className="btn btn-gold">
-                Our Missions <ArrowRight size={16} />
-              </a>
-              <a
-                href="#evidence"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "var(--space-2)",
-                  alignSelf: "flex-start",
-                  minHeight: 44,
-                  fontSize: "var(--text-base)",
-                  fontWeight: 600,
-                  color: "var(--color-text-inverse)",
-                  textDecoration: "underline",
-                  textUnderlineOffset: "4px",
-                }}
+              <img
+                src="/brand/svg/mountain-layer.svg"
+                alt=""
+                draggable={false}
+              />
+            </ScrubParallax>
+          </div>
+          <p className="editorial-label place-photo-credit">
+            Photo · SND Nature, CC BY 4.0 · Valley of Uttarakhand
+          </p>
+
+          <ScrubExit className="cine-hero-frame">
+            <HeroEntrance className="cine-hero-copy">
+              <span className="editorial-label cine-hero-eyebrow">
+                Bhavya Foundation · Uttarakhand
+              </span>
+              <h1
+                id="hero-heading"
+                className="cine-hero-title editorial-heading"
               >
-                See the evidence <ArrowRight size={16} />
-              </a>
-            </div>
-          </HeroEntrance>
+                <span className="cine-hero-line">Building for</span>
+                <span className="cine-hero-line cine-hero-line-accent">
+                  Generations.
+                </span>
+              </h1>
+              <p className="cine-hero-lead">
+                Nature restored. Knowledge opened. Heritage kept. Communities
+                led from within.
+              </p>
+              <div className="cine-hero-actions">
+                <a href="/missions" className="btn btn-gold">
+                  Explore Bhavya <ArrowRight size={16} />
+                </a>
+                <a
+                  href="#story"
+                  className="cine-hero-secondary place-secondary"
+                >
+                  Our story
+                </a>
+              </div>
+            </HeroEntrance>
+
+            <aside className="cine-hero-aside" aria-label="Foundation promise">
+              <p className="cine-hero-aside-text place-aside-text">
+                For People.
+                <br />
+                For Nature.
+                <br />
+                For Generations.
+              </p>
+              <span className="cine-hero-aside-rule" aria-hidden="true" />
+              <p className="cine-hero-aside-meta place-aside-meta">
+                A public charitable trust
+              </p>
+            </aside>
+          </ScrubExit>
+
+          <a href="#story" className="cine-hero-scroll place-scroll">
+            <span className="cine-hero-scroll-dot" aria-hidden="true" />
+            Scroll
+          </a>
         </section>
 
-        <section className="scene scene-ivory">
-          <div className="container">
-            <div style={{ maxWidth: 800 }}>
+        {/* ——— CH 02: WHY ——— */}
+        <section
+          className="cine-story"
+          id="story"
+          aria-labelledby="story-heading"
+        >
+          <div className="container cine-story-grid">
+            <div className="cine-story-copy">
+              <ScrollReveal direction="up" distance={20}>
+                <span className="editorial-label">Thesis</span>
+              </ScrollReveal>
               <TextReveal>
                 <h2
-                  className="editorial-heading"
-                  style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
+                  id="story-heading"
+                  className="editorial-heading cine-story-title"
                 >
-                  Long-term thinking. Enduring impact.
+                  Long arcs over loud launches.
                 </h2>
               </TextReveal>
-              <VineDivider
-                color="var(--color-sage-500)"
-                opacity={0.5}
-                height="64px"
-              />
+              <ScrollReveal direction="up" distance={16} delay={0.12}>
+                <p className="cine-story-body">
+                  Built for the long term — restoring landscapes, opening
+                  education, safeguarding heritage, and strengthening local
+                  leadership. Decades, not campaigns.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.22}>
+                <EditorialLink href="/about">Read the foundation</EditorialLink>
+              </ScrollReveal>
+            </div>
+
+            <div className="cine-story-visual">
+              <ScrollReveal direction="up" distance={28} delay={0.08}>
+                <ScrubParallax distance={24}>
+                  <PhotoPlate
+                    index="Plate 01"
+                    label="Place · Garhwal terraces"
+                    caption="Terrace fields near Ransi village, Garhwal, Uttarakhand · Varun Shiv Kapur, CC BY 2.0. Representative landscape — not a Bhavya site."
+                    variant="landscape"
+                    photo={PHOTO.why}
+                    alt="Terraced agricultural fields on a hillside near Ransi village, Garhwal, Uttarakhand"
+                  />
+                </ScrubParallax>
+              </ScrollReveal>
             </div>
           </div>
         </section>
 
-        <section className="scene scene-cream">
-          <div className="container">
-            <div className="scene-grid-asymmetric">
-              <div className="scene-content">
-                <ScrollReveal direction="up" distance={24}>
-                  <TextReveal>
-                    <h2
-                      className="editorial-heading"
-                      style={{ fontSize: "clamp(2.25rem, 4.5vw, 3.5rem)" }}
-                    >
-                      Four permanent missions.
-                    </h2>
-                  </TextReveal>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={20} delay={0.1}>
-                  <p
-                    style={{
-                      marginTop: "var(--space-6)",
-                      fontSize: "var(--text-lg)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.6,
-                      maxWidth: 560,
-                    }}
-                  >
-                    Bhavya works across four permanent missions to create
-                    lasting impact for people and the planet.
-                  </p>
-                </ScrollReveal>
+        {/* ——— CH 03–06: PRACTICE — four sticky mission chapters ——— */}
+        {STORY_CHAPTERS.map((c, i) => (
+          <StoryChapter
+            key={c.key}
+            id={`chapter-${c.key}`}
+            index={c.index}
+            label={c.label}
+            line={c.line}
+            body={chapterDetails[c.key].body}
+            href={c.href}
+            photo={CHAPTER_PHOTO[c.key]}
+            alt={chapterDetails[c.key].alt}
+            credit={chapterDetails[c.key].credit}
+            flip={i % 2 === 1}
+          />
+        ))}
+
+        {/* ——— CH 07: LEARNING — deep dive + stat moment ——— */}
+        <section
+          className="cine-learning"
+          id="learning"
+          aria-labelledby="learning-heading"
+        >
+          <div className="container cine-learning-grid">
+            <div className="cine-learning-copy">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="editorial-label">05 · Learning</span>
+              </ScrollReveal>
+              <TextReveal>
+                <h2
+                  id="learning-heading"
+                  className="editorial-heading cine-learning-title"
+                >
+                  Free AI education for rural India.
+                </h2>
+              </TextReveal>
+              <ScrollReveal direction="up" distance={14} delay={0.1}>
+                <p className="cine-learning-body">
+                  Bhavya Academy opens one progressive curriculum — from first
+                  digital literacy through research — free, structured, and
+                  built to endure.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.18}>
+                <EditorialLink href="/knowledge">
+                  Enter the Academy
+                </EditorialLink>
+              </ScrollReveal>
+            </div>
+            <dl className="cine-learning-stat" aria-label="Curriculum scale">
+              <div className="cine-learning-stat-item">
+                <dd className="cine-learning-stat-value">
+                  <CountUp value={levelCount} />
+                </dd>
+                <dt className="cine-learning-stat-label">Levels</dt>
               </div>
-              <div
-                style={{ borderTop: "1px solid var(--color-border-primary)" }}
-              >
-                {pillars.map((p, i) => (
+              <div className="cine-learning-stat-item">
+                <dd className="cine-learning-stat-value">
+                  <CountUp value={moduleCount} />
+                </dd>
+                <dt className="cine-learning-stat-label">Modules</dt>
+              </div>
+              <span className="proof-source cine-learning-stat-source">
+                Bhavya Academy · curriculum data · verified
+              </span>
+            </dl>
+          </div>
+        </section>
+
+        {/* ——— CH 08: STRUCTURE — typographic diagram + 3D ——— */}
+        <section
+          className="cine-structure"
+          id="structure"
+          aria-labelledby="structure-heading"
+        >
+          <div className="container cine-structure-grid">
+            <div className="cine-structure-copy">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="editorial-label">06 · Structure</span>
+              </ScrollReveal>
+              <TextReveal>
+                <h2
+                  id="structure-heading"
+                  className="editorial-heading cine-structure-title"
+                >
+                  Constitution-bound. Four pillars. One institution.
+                </h2>
+              </TextReveal>
+              <ScrollReveal direction="up" distance={14} delay={0.1}>
+                <p className="cine-structure-body">
+                  One public charitable trust, four permanent missions, and a
+                  written constitution that guides every decision — structure
+                  designed to outlast its founders.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.18}>
+                <EditorialLink href="/governance">
+                  Read the constitution
+                </EditorialLink>
+              </ScrollReveal>
+            </div>
+            <div className="cine-structure-stage">
+              <div className="cine-pillar-diagram">
+                {structurePillars.map((p, i) => (
                   <ScrollReveal
-                    key={p.key}
+                    key={p.label}
                     direction="up"
-                    distance={revealDistances[i]}
-                    delay={i * 0.1}
+                    distance={16}
+                    delay={i * 0.08}
                   >
-                    <a
-                      href={`/${p.key}`}
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "var(--space-4)",
-                        minHeight: 44,
-                        padding: "var(--space-5) 0",
-                        borderBottom: "1px solid var(--color-border-primary)",
-                        textDecoration: "none",
-                        color: "inherit",
-                      }}
-                    >
-                      <span
-                        style={{
-                          flexShrink: 0,
-                          minWidth: 28,
-                          fontSize: "var(--text-sm)",
-                          fontWeight: 600,
-                          letterSpacing: "0.08em",
-                          color: "var(--color-accent-gold)",
-                          paddingTop: "0.35em",
-                        }}
-                      >
-                        {`0${i + 1}`}
-                      </span>
-                      <span style={{ flex: 1 }}>
-                        <span
-                          style={{
-                            display: "block",
-                            fontSize: "var(--text-2xl)",
-                            fontWeight: 600,
-                            color: "var(--color-text-primary)",
-                            lineHeight: 1.25,
-                          }}
-                        >
-                          {p.label}
-                        </span>
-                        <span
-                          style={{
-                            display: "block",
-                            marginTop: "var(--space-1)",
-                            fontSize: "var(--text-sm)",
-                            color: "var(--color-text-secondary)",
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          {p.desc}
-                        </span>
-                      </span>
-                      <ArrowRight
-                        size={16}
-                        style={{
-                          flexShrink: 0,
-                          color: "var(--color-text-muted)",
-                          marginTop: "0.5em",
-                        }}
-                      />
-                    </a>
+                    <div className="cine-pillar-item">
+                      <span className="cine-pillar-name">{p.label}</span>
+                      <span className="cine-pillar-line" aria-hidden="true" />
+                      <span className="cine-pillar-desc">{p.line}</span>
+                    </div>
                   </ScrollReveal>
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="scene scene-ivory">
-          <div className="container">
-            <div className="grid grid-cols-1 items-center gap-[var(--space-10)] lg:grid-cols-[55fr_45fr] lg:gap-[var(--space-16)]">
-              <figure style={{ margin: 0 }}>
-                <ScrollReveal direction="up" distance={24}>
-                  <div
-                    style={{
-                      position: "relative",
-                      borderRadius: "var(--radius-2xl)",
-                      overflow: "hidden",
-                      border: "1px solid var(--color-border-primary)",
-                      aspectRatio: "4 / 3",
-                    }}
-                  >
-                    <ImageReveal
-                      src="/photography/knowledge/knowledge-school-children.jpg"
-                      alt="School children in uniform with the snowy Himalaya behind them"
-                      className="h-full w-full [&>div]:h-full [&_img]:object-[center_30%]"
-                    />
-                    <div
-                      aria-hidden="true"
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "rgba(14, 56, 46, 0.4)",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </div>
-                </ScrollReveal>
-                <figcaption
-                  style={{
-                    marginTop: "var(--space-3)",
-                    fontSize: "var(--text-xs)",
-                    color: "var(--color-text-muted)",
-                  }}
-                >
-                  Representative photograph — Himachal Pradesh.
-                </figcaption>
-              </figure>
-              <div style={{ maxWidth: 560 }}>
-                <ScrollReveal direction="up" distance={24}>
-                  <span
-                    className="editorial-label"
-                    style={{ display: "block" }}
-                  >
-                    Knowledge
-                  </span>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={20} delay={0.1}>
-                  <TextReveal>
-                    <h2
-                      className="editorial-heading"
-                      style={{
-                        fontSize: "clamp(2rem, 4vw, 3rem)",
-                        marginTop: "var(--space-4)",
-                      }}
-                    >
-                      Free AI education for rural India.
-                    </h2>
-                  </TextReveal>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={16} delay={0.2}>
-                  <p
-                    style={{
-                      marginTop: "var(--space-6)",
-                      fontSize: "var(--text-lg)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    A complete curriculum from foundations to advanced research
-                    — designed for communities that need it most. Open,
-                    structured, and built to scale.
-                  </p>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={12} delay={0.3}>
-                  <a
-                    href="/knowledge"
-                    className="btn btn-primary"
-                    style={{ marginTop: "var(--space-8)" }}
-                  >
-                    Explore Knowledge <ArrowRight size={14} />
-                  </a>
-                </ScrollReveal>
+              <div className="cine-structure-3d">
+                <LazyPillarSphere />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="scene scene-cream">
-          <div className="container">
-            <div style={{ maxWidth: 560 }}>
-              <ScrollReveal direction="up" distance={20}>
-                <span className="editorial-label" style={{ display: "block" }}>
-                  Systems
-                </span>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.1}>
-                <TextReveal>
-                  <h2
-                    className="editorial-heading"
-                    style={{
-                      fontSize: "clamp(2rem, 4vw, 3rem)",
-                      marginTop: "var(--space-4)",
-                    }}
-                  >
-                    Structure is the work.
-                  </h2>
-                </TextReveal>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={12} delay={0.2}>
-                <p
-                  style={{
-                    marginTop: "var(--space-6)",
-                    fontSize: "var(--text-lg)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  Institutional home — constitution-bound, community-governed.
-                </p>
-              </ScrollReveal>
-            </div>
-            <div
-              className="hidden sm:block"
-              style={{ maxWidth: 1000, margin: "var(--space-12) auto 0" }}
-            >
-              <ScrollReveal direction="up" distance={24} delay={0.1}>
-                <svg
-                  viewBox="0 0 640 420"
-                  role="img"
-                  aria-labelledby="systems-title"
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    height: "auto",
-                  }}
-                >
-                  <title id="systems-title">Bhavya Foundation structure</title>
-                  <line
-                    x1="240"
-                    y1="75"
-                    x2="320"
-                    y2="210"
-                    stroke="var(--color-sage-300)"
-                    strokeWidth="1"
-                  />
-                  <line
-                    x1="400"
-                    y1="75"
-                    x2="320"
-                    y2="210"
-                    stroke="var(--color-sage-300)"
-                    strokeWidth="1"
-                  />
-                  <line
-                    x1="240"
-                    y1="345"
-                    x2="320"
-                    y2="210"
-                    stroke="var(--color-sage-300)"
-                    strokeWidth="1"
-                  />
-                  <line
-                    x1="400"
-                    y1="345"
-                    x2="320"
-                    y2="210"
-                    stroke="var(--color-sage-300)"
-                    strokeWidth="1"
-                  />
-                  <rect
-                    x="40"
-                    y="40"
-                    width="200"
-                    height="70"
-                    rx="12"
-                    fill="none"
-                    stroke="var(--color-border-primary)"
-                    strokeWidth="1"
-                  />
-                  <text
-                    x="140"
-                    y="75"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="var(--font-sans)"
-                    fontSize="14"
-                    fontWeight="600"
-                    letterSpacing="0.08em"
-                    fill="var(--color-text-primary)"
-                  >
-                    FOREST
-                  </text>
-                  <rect
-                    x="400"
-                    y="40"
-                    width="200"
-                    height="70"
-                    rx="12"
-                    fill="none"
-                    stroke="var(--color-border-primary)"
-                    strokeWidth="1"
-                  />
-                  <text
-                    x="500"
-                    y="75"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="var(--font-sans)"
-                    fontSize="14"
-                    fontWeight="600"
-                    letterSpacing="0.08em"
-                    fill="var(--color-text-primary)"
-                  >
-                    KNOWLEDGE
-                  </text>
-                  <rect
-                    x="40"
-                    y="310"
-                    width="200"
-                    height="70"
-                    rx="12"
-                    fill="none"
-                    stroke="var(--color-border-primary)"
-                    strokeWidth="1"
-                  />
-                  <text
-                    x="140"
-                    y="345"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="var(--font-sans)"
-                    fontSize="14"
-                    fontWeight="600"
-                    letterSpacing="0.08em"
-                    fill="var(--color-text-primary)"
-                  >
-                    HERITAGE
-                  </text>
-                  <rect
-                    x="400"
-                    y="310"
-                    width="200"
-                    height="70"
-                    rx="12"
-                    fill="none"
-                    stroke="var(--color-border-primary)"
-                    strokeWidth="1"
-                  />
-                  <text
-                    x="500"
-                    y="345"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="var(--font-sans)"
-                    fontSize="14"
-                    fontWeight="600"
-                    letterSpacing="0.08em"
-                    fill="var(--color-text-primary)"
-                  >
-                    COMMUNITY
-                  </text>
-                  <circle
-                    cx="320"
-                    cy="210"
-                    r="56"
-                    fill="var(--color-accent-gold)"
-                  />
-                  <text
-                    x="320"
-                    y="210"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fontFamily="var(--font-sans)"
-                    fontSize="13"
-                    fontWeight="600"
-                    letterSpacing="0.06em"
-                    fill="var(--color-forest-950)"
-                  >
-                    FOUNDATION
-                  </text>
-                </svg>
-              </ScrollReveal>
-            </div>
-            <ul
-              className="sm:hidden"
-              style={{
-                listStyle: "none",
-                margin: "var(--space-8) 0 0",
-                padding: 0,
-              }}
-            >
-              {pillars.map((p) => (
-                <li
-                  key={p.key}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    padding: "var(--space-4) 0",
-                    borderBottom: "1px solid var(--color-border-primary)",
-                    fontSize: "var(--text-lg)",
-                    fontWeight: 600,
-                    color: "var(--color-text-primary)",
-                  }}
-                >
-                  {p.label}
-                </li>
-              ))}
-              <li
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "var(--space-3)",
-                  padding: "var(--space-4) 0",
-                  fontSize: "var(--text-lg)",
-                  fontWeight: 600,
-                  color: "var(--color-text-primary)",
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: "var(--radius-full)",
-                    background: "var(--color-accent-gold)",
-                    flexShrink: 0,
-                  }}
-                />
-                Foundation
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="scene scene-ivory">
-          <div className="container">
-            <div className="grid grid-cols-1 items-center gap-[var(--space-10)] lg:grid-cols-[45fr_55fr] lg:gap-[var(--space-16)]">
-              <ScrollReveal
-                direction="up"
-                distance={24}
-                className="lg:col-start-2 lg:row-start-1"
-              >
-                <figure style={{ margin: 0 }}>
-                  <div
-                    style={{
-                      position: "relative",
-                      borderRadius: "var(--radius-2xl)",
-                      overflow: "hidden",
-                      border: "1px solid var(--color-border-primary)",
-                      aspectRatio: "4 / 3",
-                    }}
-                  >
-                    <ImageReveal
-                      src="/photography/community/community-village-gathering.jpg"
-                      alt="Village women and children gathered in a stone courtyard"
-                      className="h-full w-full [&>div]:h-full"
-                    />
-                    <div
-                      aria-hidden="true"
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "rgba(14, 56, 46, 0.4)",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  </div>
-                  <figcaption
-                    style={{
-                      marginTop: "var(--space-3)",
-                      fontSize: "var(--text-xs)",
-                      color: "var(--color-text-muted)",
-                    }}
-                  >
-                    Representative photograph — Himachal Pradesh.
-                  </figcaption>
-                </figure>
-              </ScrollReveal>
-              <div
-                className="lg:col-start-1 lg:row-start-1"
-                style={{ maxWidth: 560 }}
-              >
-                <ScrollReveal direction="up" distance={24}>
-                  <span
-                    className="editorial-label"
-                    style={{ display: "block" }}
-                  >
-                    Community
-                  </span>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={20} delay={0.1}>
-                  <TextReveal>
-                    <h2
-                      className="editorial-heading"
-                      style={{
-                        fontSize: "clamp(2rem, 4vw, 3rem)",
-                        marginTop: "var(--space-4)",
-                      }}
-                    >
-                      Local leadership at the center.
-                    </h2>
-                  </TextReveal>
-                </ScrollReveal>
-                <ScrollReveal direction="up" distance={16} delay={0.15}>
-                  <p
-                    style={{
-                      marginTop: "var(--space-6)",
-                      fontSize: "var(--text-lg)",
-                      color: "var(--color-text-secondary)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Building local leadership capacity through governance
-                    training, cooperative development, and community organizing.
-                  </p>
-                </ScrollReveal>
-                <ul
-                  style={{
-                    listStyle: "none",
-                    margin: "var(--space-6) 0 0",
-                    padding: 0,
-                    borderTop: "1px solid var(--color-border-secondary)",
-                  }}
-                >
-                  {communityProof.map((text, i) => (
-                    <li
-                      key={text}
-                      style={{
-                        borderBottom: "1px solid var(--color-border-secondary)",
-                        padding: "var(--space-3) 0",
-                      }}
-                    >
-                      <ScrollReveal
-                        direction="up"
-                        distance={16}
-                        delay={i * 0.1}
-                      >
-                        <span
-                          style={{
-                            display: "flex",
-                            gap: "var(--space-3)",
-                            fontSize: "var(--text-base)",
-                            color: "var(--color-text-secondary)",
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          <span
-                            aria-hidden="true"
-                            style={{ color: "var(--color-earth-500)" }}
-                          >
-                            —
-                          </span>
-                          {text}
-                        </span>
-                      </ScrollReveal>
-                    </li>
-                  ))}
-                </ul>
-                <ScrollReveal direction="up" distance={12} delay={0.3}>
-                  <a
-                    href="/community"
-                    className="btn btn-primary"
-                    style={{ marginTop: "var(--space-8)" }}
-                  >
-                    Explore Community <ArrowRight size={14} />
-                  </a>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </section>
-
+        {/* ——— CH 09: BHAVYA OS — forest-dark system panel ——— */}
         <section
-          className="relative min-h-[70vh] overflow-hidden lg:min-h-[85vh]"
-          style={{ background: "var(--color-brand-forest)" }}
+          className="scene scene-dark cine-os"
+          id="system"
+          aria-labelledby="os-heading"
         >
-          <div aria-hidden="true" style={{ position: "absolute", inset: 0 }}>
-            <ParallaxImage
-              speed={isNarrow ? 0 : 0.15}
-              src="/photography/forest/forest-cedar-sunlight.jpg"
-              alt=""
-              style={{ position: "absolute", inset: 0 }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(14, 56, 46, 0.45)",
-              }}
-            />
-          </div>
-          <div
-            className="container"
-            style={{
-              position: "relative",
-              zIndex: 1,
-              paddingTop: "var(--space-28)",
-              paddingBottom: "var(--space-28)",
-            }}
-          >
-            <div style={{ maxWidth: 800 }}>
-              <TextReveal>
-                <h2
-                  className="editorial-heading"
-                  style={{
-                    fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                    color: "var(--color-text-inverse)",
-                  }}
-                >
-                  Knowledge grows where{" "}
-                  <span
-                    style={{
-                      borderBottom: "3px solid var(--color-accent-gold)",
-                      paddingBottom: "0.08em",
-                    }}
-                  >
-                    forests
-                  </span>{" "}
-                  remain.
+          <div className="container">
+            <div className="cine-os-head">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="dark-label">07 · Bhavya OS</span>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={24} delay={0.06}>
+                <h2 id="os-heading" className="dark-heading cine-os-title">
+                  The system behind the institution.
                 </h2>
-              </TextReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.15}>
-                <a
-                  href="/forest"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "var(--space-2)",
-                    minHeight: 44,
-                    marginTop: "var(--space-8)",
-                    fontSize: "var(--text-base)",
-                    fontWeight: 600,
-                    color: "rgba(247, 244, 236, 0.85)",
-                    textDecoration: "none",
-                  }}
-                >
-                  Explore the Forest mission <ArrowRight size={16} />
-                </a>
               </ScrollReveal>
-            </div>
-          </div>
-        </section>
-
-        <section
-          className="scene scene-dark"
-          style={{ position: "relative", overflow: "hidden" }}
-        >
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: 0.04,
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(247,244,236,0.3) 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-          <div
-            className="container"
-            style={{ position: "relative", zIndex: 1 }}
-          >
-            <div style={{ maxWidth: 800 }}>
-              <ScrollReveal direction="up" distance={20}>
-                <span className="dark-label" style={{ display: "block" }}>
-                  Bhavya OS
-                </span>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.1}>
-                <TextReveal>
-                  <h2 className="dark-heading">
-                    The system behind the institution.
-                  </h2>
-                </TextReveal>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={12} delay={0.2}>
-                <p className="dark-desc">
+              <ScrollReveal direction="up" distance={16} delay={0.12}>
+                <p className="dark-desc cine-os-desc">
                   Bhavya OS is the institutional operating system — connecting
                   programs, projects, evidence, research, and impact in one
                   unified system built to endure.
                 </p>
               </ScrollReveal>
             </div>
-            <div
-              className="home-grid-2x2"
-              style={{ marginTop: "var(--space-10)" }}
-            >
+            <div className="home-grid-2x2 cine-os-grid">
               {osPanels.map((panel, i) => (
                 <ScrollReveal
                   key={panel.title}
@@ -896,55 +424,12 @@ export default function HomePage() {
                   distance={24}
                   delay={i * 0.1}
                 >
-                  <a
-                    href={panel.href}
-                    className="flex h-full min-h-[160px] flex-col rounded-[var(--radius-lg)] border border-[rgba(247,244,236,0.12)] bg-[rgba(247,244,236,0.04)] p-[var(--space-6)] no-underline transition-colors hover:border-[rgba(247,244,236,0.28)] hover:bg-[rgba(247,244,236,0.08)]"
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-start",
-                        gap: "var(--space-3)",
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontSize: "var(--text-lg)",
-                          fontWeight: 600,
-                          color: "var(--color-text-inverse)",
-                          lineHeight: 1.3,
-                        }}
-                      >
-                        {panel.title}
-                      </h3>
-                      <span
-                        style={{
-                          flexShrink: 0,
-                          fontSize: "var(--text-xs)",
-                          fontWeight: 600,
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
-                          color: "rgba(247, 244, 236, 0.6)",
-                          border: "1px solid rgba(247, 244, 236, 0.25)",
-                          borderRadius: "var(--radius-full)",
-                          padding: "2px 10px",
-                        }}
-                      >
-                        Internal
-                      </span>
-                    </div>
-                    <p
-                      style={{
-                        margin: "var(--space-3) 0 0",
-                        fontSize: "var(--text-sm)",
-                        color: "rgba(247, 244, 236, 0.7)",
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {panel.desc}
-                    </p>
+                  <a href={panel.href} className="os-glass-card">
+                    <h3 className="os-glass-card-title">{panel.title}</h3>
+                    <p className="os-glass-card-desc">{panel.desc}</p>
+                    <span className="os-glass-card-cta" aria-hidden="true">
+                      Open <ArrowRight size={14} />
+                    </span>
                   </a>
                 </ScrollReveal>
               ))}
@@ -952,198 +437,68 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ——— CH 10: EVIDENCE ——— */}
         <section
-          className="scene scene-cream"
+          className="cine-proof"
           id="evidence"
-          style={{
-            scrollMarginTop: "calc(var(--header-h) + var(--space-4))",
-          }}
+          aria-labelledby="proof-heading"
         >
           <div className="container">
-            <div style={{ maxWidth: 640 }}>
-              <ScrollReveal direction="up" distance={20}>
-                <span className="editorial-label" style={{ display: "block" }}>
-                  Evidence
-                </span>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.1}>
-                <TextReveal>
-                  <h2
-                    className="editorial-heading"
-                    style={{
-                      fontSize: "clamp(2rem, 4vw, 3rem)",
-                      marginTop: "var(--space-4)",
-                    }}
-                  >
-                    Every claim, with its source.
-                  </h2>
-                </TextReveal>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={12} delay={0.2}>
-                <p
-                  style={{
-                    marginTop: "var(--space-6)",
-                    fontSize: "var(--text-lg)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  Figures already published by the institution, each with its
-                  source and verification state.
-                </p>
-              </ScrollReveal>
-            </div>
-            <dl
-              style={{
-                margin: 0,
-                marginTop: "var(--space-10)",
-                borderTop: "1px solid var(--color-border-secondary)",
-              }}
-            >
-              {evidenceRows.map((row, i) => (
-                <ScrollReveal
-                  key={row.label}
-                  direction="up"
-                  distance={16}
-                  delay={i * 0.08}
-                  className="flex flex-col gap-[var(--space-3)] [border-bottom:1px_solid_var(--color-border-secondary)] py-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <dt
-                    style={{
-                      fontSize: "var(--text-base)",
-                      fontWeight: 600,
-                      color: "var(--color-text-primary)",
-                    }}
-                  >
-                    {row.label}
-                  </dt>
-                  <dd
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      alignItems: "center",
-                      gap: "var(--space-4)",
-                      margin: 0,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "var(--text-xl)",
-                        fontWeight: 400,
-                        color: "var(--color-text-primary)",
-                        fontVariantNumeric: "tabular-nums",
-                      }}
-                    >
-                      {row.value}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        padding: "3px 10px",
-                        borderRadius: "var(--radius-full)",
-                        border:
-                          row.state === "verified"
-                            ? "1px solid var(--color-accent-gold)"
-                            : "1px solid var(--color-border-primary)",
-                        color:
-                          row.state === "verified"
-                            ? "var(--color-brand-forest)"
-                            : "var(--color-text-muted)",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {row.state}
-                    </span>
-                    <a
-                      href={row.href}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "var(--space-2)",
-                        minHeight: 44,
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 600,
-                        color: "var(--color-brand-forest)",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {row.source} <ArrowRight size={14} />
-                    </a>
-                  </dd>
-                </ScrollReveal>
-              ))}
-            </dl>
+            <ScrollReveal direction="up" distance={16}>
+              <span className="editorial-label">08 · Evidence</span>
+            </ScrollReveal>
+            <TextReveal>
+              <h2
+                id="proof-heading"
+                className="cine-proof-title editorial-heading"
+              >
+                Stated plainly. Sourced openly.
+              </h2>
+            </TextReveal>
+            <ProofStrip points={STORY_PROOF} />
+            <ScrollReveal direction="up" distance={12} delay={0.2}>
+              <EditorialLink href="/about">
+                Full evidence &amp; sources
+              </EditorialLink>
+            </ScrollReveal>
           </div>
         </section>
 
+        {/* ——— CH 11: INVITATION ——— */}
         <section
-          className="scene"
-          style={{
-            background: "var(--color-brand-forest)",
-            paddingTop: "var(--space-28)",
-            paddingBottom: "var(--space-28)",
-          }}
+          className="cine-invite"
+          id="invite"
+          aria-labelledby="invite-heading"
         >
-          <div className="container">
-            <div style={{ maxWidth: 800 }}>
-              <ScrollReveal direction="up" distance={24}>
-                <h2
-                  className="editorial-heading"
-                  style={{
-                    fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                    color: "var(--color-text-inverse)",
-                  }}
-                >
-                  The institution is being built.
-                  <br />
-                  <span style={{ color: "var(--color-accent-gold)" }}>
-                    Shape what endures.
-                  </span>
-                </h2>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.15}>
-                <>
-                  <p
-                    style={{
-                      marginTop: "var(--space-6)",
-                      fontSize: "var(--text-lg)",
-                      color: "rgba(247, 244, 236, 0.8)",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    Whether you want to volunteer, partner, research, or support
-                    our work, there are many ways to contribute to the
-                    institution.
-                  </p>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "var(--space-4)",
-                      marginTop: "var(--space-8)",
-                    }}
-                    className="sm:flex-row sm:flex-wrap"
-                  >
-                    <a
-                      href="/donate"
-                      className="btn btn-gold w-full justify-center sm:w-auto"
-                    >
-                      <HeartHandshake size={16} /> Support the mission
-                    </a>
-                    <a
-                      href="/volunteer"
-                      className="btn btn-secondary-inverse w-full justify-center sm:w-auto"
-                    >
-                      Volunteer <ArrowRight size={16} />
-                    </a>
-                  </div>
-                </>
-              </ScrollReveal>
-            </div>
+          <div className="cine-invite-atmosphere" aria-hidden="true" />
+          <div className="container cine-invite-inner">
+            <ScrollReveal direction="up" distance={16}>
+              <span className="dark-label">09 · Invitation</span>
+            </ScrollReveal>
+            <ScrollReveal direction="up" distance={24} delay={0.06}>
+              <h2
+                id="invite-heading"
+                className="editorial-heading cine-invite-title"
+              >
+                The institution is being built.
+                <br />
+                <span className="cine-invite-accent">Shape what endures.</span>
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal direction="up" distance={16} delay={0.12}>
+              <p className="cine-invite-body">
+                Volunteer, partner, research, or support the work — there is a
+                place for you in what lasts.
+              </p>
+              <div className="cine-invite-actions">
+                <a href="/donate" className="btn btn-gold">
+                  <HeartHandshake size={16} /> Support the mission
+                </a>
+                <a href="/volunteer" className="btn btn-secondary-inverse">
+                  Volunteer <ArrowRight size={16} />
+                </a>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
       </main>

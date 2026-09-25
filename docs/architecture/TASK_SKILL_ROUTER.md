@@ -1,9 +1,12 @@
 # TASK → SKILL ROUTER
 
 **Date:** 2026-08-10
-**Status:** ACTIVE
+**Status:** **NON-AUTHORITATIVE** — historical process sketch
 **Owner:** Bhavya Foundation Architecture
 **Last updated:** 2026-08-10
+
+> **2026-09-23:** Skill discovery uses `.opencode/skills/` only (see `AGENTS.md` §4).
+> Do not treat this router or `config/skills/registry.json` as an executable index.
 
 ---
 

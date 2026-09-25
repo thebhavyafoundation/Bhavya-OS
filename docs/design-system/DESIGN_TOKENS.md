@@ -2,6 +2,12 @@
 
 Unified token system in `packages/platform-ui/src/styles/tokens.css`.
 
+> **Authority (2026-09-23):** Implementation source of truth is `tokens.css`.
+> Color tables in this file may lag shipped tokens; **palette alignment among
+> constitution 01, constitution 05, and `tokens.css` is an open human decision**
+> — do not rewrite either constitution or tokens from this doc to “fix” it.
+> Prefer reading `tokens.css` for current values. Gate: `pnpm tokens:check`.
+
 ## Usage
 
 ### Tailwind Classes

@@ -7,8 +7,6 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
 import { roleHome, type Role } from "@/lib/roles";
 import { safeRedirect } from "@/lib/participation-intents";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export default function LoginPage() {
   return (
@@ -61,8 +59,7 @@ function LoginForm() {
         flexDirection: "column",
       }}
     >
-      <SiteHeader />
-      <main
+      <div
         style={{
           flex: 1,
           display: "flex",
@@ -260,8 +257,7 @@ function LoginForm() {
             </Link>
           </motion.p>
         </div>
-      </main>
-      <SiteFooter />
+      </div>
     </div>
   );
 }

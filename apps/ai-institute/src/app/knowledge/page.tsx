@@ -95,11 +95,7 @@ export default function KnowledgePage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground
-          pillar="knowledge"
-          photo="/photography/knowledge/knowledge-school-children.jpg"
-          photoPosition="center 30%"
-        />
+        <HeroBackground pillar="knowledge" />
 
         <div
           className="container mission-hero-grid"

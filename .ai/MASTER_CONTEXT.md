@@ -3,6 +3,9 @@
 **Last Updated:** 2026-07-28
 **Version:** 3.3.0
 **Status:** Mission Operations Platform -- Operational command center for every initiative
+**Authority:** **Non-authoritative for routing and architecture.** L0 router is
+`AGENTS.md`; start sessions there. This file is operational history/status for
+`.ai/` only and must not override `docs/constitution/` or `AGENTS.md`.
 
 ---
 
@@ -40,31 +43,31 @@ Bhavya OS (kernel)
 
 ### Version History
 
-| Version | Milestone |
-|---------|----------|
-| v1.0.0-alpha | Repository Foundation |
-| v1.1.0-alpha | Kernel Runtime |
-| v1.2.0-alpha | Productive Runtime |
-| v1.3.0-alpha | Institution Services |
-| v1.4.0-alpha | Autonomous Coordination |
-| v2.0.0-beta | Production Platform |
-| v3.0.0 | Bhavya OS + Knowledge Platform |
-| v3.1.0 | Transparency & Governance Platform |
-| v3.2.0 | Public Foundation Website |
-| **v3.3.0** | **Mission Operations Platform** |
+| Version      | Milestone                          |
+| ------------ | ---------------------------------- |
+| v1.0.0-alpha | Repository Foundation              |
+| v1.1.0-alpha | Kernel Runtime                     |
+| v1.2.0-alpha | Productive Runtime                 |
+| v1.3.0-alpha | Institution Services               |
+| v1.4.0-alpha | Autonomous Coordination            |
+| v2.0.0-beta  | Production Platform                |
+| v3.0.0       | Bhavya OS + Knowledge Platform     |
+| v3.1.0       | Transparency & Governance Platform |
+| v3.2.0       | Public Foundation Website          |
+| **v3.3.0**   | **Mission Operations Platform**    |
 
 ## Applications
 
-| Application | Status | Description |
-|-------------|--------|-------------|
-| **Mission Operations** | Active | Operational command center for every initiative |
-| **Public Website** | Active | Thin presentation layer over source of truth |
-| **Transparency & Governance** | Active | Source of truth for decisions, finance, projects |
-| Knowledge Platform | Active | Upload, classify, index, search, summarize |
-| Volunteer Platform | Planned | People, onboarding, training, role assignments |
-| Forest Mission | Planned | Module within Mission Operations |
-| Heritage Mission | Planned | Module within Mission Operations |
-| Library Mission | Planned | Module within Mission Operations |
+| Application                   | Status  | Description                                      |
+| ----------------------------- | ------- | ------------------------------------------------ |
+| **Mission Operations**        | Active  | Operational command center for every initiative  |
+| **Public Website**            | Active  | Thin presentation layer over source of truth     |
+| **Transparency & Governance** | Active  | Source of truth for decisions, finance, projects |
+| Knowledge Platform            | Active  | Upload, classify, index, search, summarize       |
+| Volunteer Platform            | Planned | People, onboarding, training, role assignments   |
+| Forest Mission                | Planned | Module within Mission Operations                 |
+| Heritage Mission              | Planned | Module within Mission Operations                 |
+| Library Mission               | Planned | Module within Mission Operations                 |
 
 ## Mission Lifecycle
 
@@ -89,42 +92,43 @@ Every new feature must first be implemented as a Bhavya OS capability and then c
 ## Compatibility Promise
 
 These APIs are guaranteed stable:
+
 - Kernel API v1, BRP v1, Memory API v1, Events API v1
 - Planner API v1, Registry API v1, Coordinator API v1
 - Replay API v1, Auth API v1, Monitoring API v1
 
 ## Release Channels
 
-| Channel | Version | Status |
-|---------|---------|--------|
-| LTS | v3.x | Planned |
-| Stable | v3.3.0 | Current |
-| Preview | v4.0-beta | Not started |
-| Experimental | feature/* | Available |
+| Channel      | Version   | Status      |
+| ------------ | --------- | ----------- |
+| LTS          | v3.x      | Planned     |
+| Stable       | v3.3.0    | Current     |
+| Preview      | v4.0-beta | Not started |
+| Experimental | feature/* | Available   |
 
 ## Next in Sequence
 
-| Version | Application |
-|---------|-------------|
-| v3.4.0 | Volunteer Platform |
-| v3.5.0 | Research Platform |
-| v3.6.0 | Forest Mission Module |
-| v3.7.0 | Heritage Mission Module |
-| v3.8.0 | Library Mission Module |
-| v4.0.0 | Mission Intelligence |
+| Version | Application             |
+| ------- | ----------------------- |
+| v3.4.0  | Volunteer Platform      |
+| v3.5.0  | Research Platform       |
+| v3.6.0  | Forest Mission Module   |
+| v3.7.0  | Heritage Mission Module |
+| v3.8.0  | Library Mission Module  |
+| v4.0.0  | Mission Intelligence    |
 
 ## Important Documents
 
-| Document | Location |
-|----------|----------|
+| Document              | Location                                  |
+| --------------------- | ----------------------------------------- |
 | Compatibility Promise | `docs/standards/COMPATIBILITY-PROMISE.md` |
-| Release Channels | `docs/standards/RELEASE-CHANNELS.md` |
-| CLI Spec | `docs/standards/CLI.md` |
-| Mission Operations | `docs/releases/v3.3.0.md` |
-| BRP Protocol | `docs/architecture/BRP.md` |
+| Release Channels      | `docs/standards/RELEASE-CHANNELS.md`      |
+| CLI Spec              | `docs/standards/CLI.md`                   |
+| Mission Operations    | `docs/releases/v3.3.0.md`                 |
+| BRP Protocol          | `docs/architecture/BRP.md`                |
 
 ---
 
-**Every coding session starts by reading this file.**
+**Routing entry point:** `AGENTS.md` (L0) → `CONTEXT.md` (L1). Read this file only when working on `.ai/` mission-ops status.
 
-*Restoring Nature. Empowering Humanity. Preserving Heritage.*
+_Restoring Nature. Empowering Humanity. Preserving Heritage._

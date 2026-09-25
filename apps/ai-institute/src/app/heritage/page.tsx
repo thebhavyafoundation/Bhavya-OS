@@ -41,11 +41,7 @@ export default function HeritagePage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground
-          pillar="heritage"
-          photo="/photography/heritage/heritage-stone-temple.jpg"
-          photoPosition="center 30%"
-        />
+        <HeroBackground pillar="heritage" />
 
         <div
           className="container"

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Himachali village women and children gathered in a stone courtyard">
+  <defs>
+    <linearGradient id="cSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a9ac0"/>
+      <stop offset="100%" stop-color="#c8d8e0"/>
+    </linearGradient>
+    <linearGradient id="cStone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a8478"/>
+      <stop offset="100%" stop-color="#5a5448"/>
+    </linearGradient>
+    <linearGradient id="cSlate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a5560"/>
+      <stop offset="100%" stop-color="#2a3540"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#cSky)"/>
+
+  <!-- Distant hills -->
+  <path d="M0 400 Q400 320 800 380 T1600 360 L1600 550 L0 550 Z" fill="#5a7a5e" opacity="0.5"/>
+
+  <!-- Slate-roofed houses backdrop -->
+  <g>
+    <!-- House 1 -->
+    <rect x="80" y="380" width="280" height="220" fill="url(#cStone)"/>
+    <polygon points="60,380 220,280 380,380" fill="url(#cSlate)"/>
+    <rect x="140" y="440" width="60" height="80" fill="#3a3020"/>
+    <rect x="240" y="440" width="60" height="80" fill="#3a3020"/>
+    <rect x="180" y="520" width="70" height="80" fill="#1a1510"/>
+
+    <!-- House 2 -->
+    <rect x="1240" y="360" width="300" height="240" fill="url(#cStone)"/>
+    <polygon points="1220,360 1390,260 1560,360" fill="url(#cSlate)"/>
+    <rect x="1300" y="420" width="60" height="80" fill="#3a3020"/>
+    <rect x="1420" y="420" width="60" height="80" fill="#3a3020"/>
+    <rect x="1355" y="500" width="70" height="100" fill="#1a1510"/>
+
+    <!-- House 3 center-back -->
+    <rect x="620" y="320" width="360" height="200" fill="url(#cStone)"/>
+    <polygon points="600,320 800,220 1000,320" fill="url(#cSlate)"/>
+    <rect x="700" y="380" width="70" height="90" fill="#3a3020"/>
+    <rect x="830" y="380" width="70" height="90" fill="#3a3020"/>
+    <rect x="765" y="440" width="70" height="80" fill="#1a1510"/>
+  </g>
+
+  <!-- Courtyard stone floor -->
+  <path d="M0 600 Q400 560 800 590 T1600 580 L1600 1200 L0 1200 Z" fill="url(#cStone)"/>
+  <!-- Stone joint lines -->
+  <g stroke="#4a4538" stroke-width="2" opacity="0.4">
+    <path d="M0 700 Q400 670 800 695 T1600 685" fill="none"/>
+    <path d="M0 800 Q400 775 800 795 T1600 785" fill="none"/>
+    <path d="M0 900 Q400 880 800 895 T1600 885" fill="none"/>
+    <path d="M200 600 L180 1200" fill="none"/>
+    <path d="M500 590 L490 1200" fill="none"/>
+    <path d="M800 590 L800 1200" fill="none"/>
+    <path d="M1100 590 L1110 1200" fill="none"/>
+    <path d="M1400 585 L1420 1200" fill="none"/>
+  </g>
+
+  <!-- Gathering group — women and children -->
+  <g transform="translate(500,750)">
+    <!-- Woman 1 (left, red dupatta) -->
+    <g transform="translate(0,0)">
+      <circle cx="0" cy="0" r="32" fill="#c4956a"/>
+      <path d="M-8 -32 Q0 -48 8 -32" fill="#2a1e14"/>
+      <path d="M-40 35 Q0 55 40 35 L48 160 Q0 185 -48 160 Z" fill="#c0392b"/>
+      <path d="M-40 35 Q-55 80 -50 140" stroke="#d4af37" stroke-width="3" fill="none"/>
+      <rect x="-45" y="160" width="90" height="80" rx="6" fill="#2c3e50"/>
+    </g>
+
+    <!-- Woman 2 (blue) -->
+    <g transform="translate(120,-10)">
+      <circle cx="0" cy="0" r="30" fill="#b8886a"/>
+      <path d="M-40 32 Q0 50 40 32 L45 155 Q0 178 -45 155 Z" fill="#2980b9"/>
+      <rect x="-42" y="155" width="84" height="75" rx="6" fill="#34495e"/>
+      <!-- Child beside -->
+      <g transform="translate(70,50)">
+        <circle cx="0" cy="0" r="20" fill="#c9a07a"/>
+        <path d="M-22 22 Q0 36 22 22 L25 80 Q0 95 -25 80 Z" fill="#f1c40f"/>
+        <rect x="-22" y="80" width="44" height="45" rx="4" fill="#5a4030"/>
+      </g>
+    </g>
+
+    <!-- Woman 3 (green) -->
+    <g transform="translate(240,5)">
+      <circle cx="0" cy="0" r="31" fill="#c4956a"/>
+      <path d="M-42 34 Q0 54 42 34 L48 158 Q0 182 -48 158 Z" fill="#27ae60"/>
+      <rect x="-44" y="158" width="88" height="78" rx="6" fill="#2c3e50"/>
+      <!-- Child -->
+      <g transform="translate(-65,55)">
+        <circle cx="0" cy="0" r="18" fill="#b8886a"/>
+        <path d="M-20 20 Q0 34 20 20 L22 75 Q0 88 -22 75 Z" fill="#e67e22"/>
+        <rect x="-20" y="75" width="40" height="40" rx="4" fill="#3a3020"/>
+      </g>
+    </g>
+
+    <!-- Elder man (turban) -->
+    <g transform="translate(360,-5)">
+      <circle cx="0" cy="0" r="30" fill="#b89878"/>
+      <ellipse cx="0" cy="-28" rx="34" ry="16" fill="#f7f4ec"/>
+      <path d="M-40 32 Q0 50 40 32 L45 155 Q0 175 -45 155 Z" fill="#f7f4ec"/>
+      <rect x="-42" y="155" width="84" height="75" rx="6" fill="#4a5a3a"/>
+      <!-- Walking stick -->
+      <line x1="55" y1="20" x2="70" y2="200" stroke="#6a5030" stroke-width="6" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Courtyard wall foreground -->
+  <path d="M0 1050 Q400 1020 800 1045 T1600 1035 L1600 1200 L0 1200 Z" fill="#5a5448"/>
+  <g stroke="#4a4538" stroke-width="2" opacity="0.5">
+    <path d="M0 1100 L1600 1090" fill="none"/>
+    <path d="M300 1050 L280 1200" fill="none"/>
+    <path d="M700 1045 L700 1200" fill="none"/>
+    <path d="M1100 1040 L1120 1200" fill="none"/>
+  </g>
+</svg>

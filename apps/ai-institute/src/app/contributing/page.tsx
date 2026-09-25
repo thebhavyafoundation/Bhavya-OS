@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 const contributionTypes = [
   {
@@ -127,8 +125,7 @@ const styleGuide = [
 export default function ContributingPage() {
   return (
     <>
-      <SiteHeader />
-      <main>
+      <div>
         <section className="relative pt-32 pb-20 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.p
@@ -376,8 +373,7 @@ export default function ContributingPage() {
             </motion.div>
           </div>
         </section>
-      </main>
-      <SiteFooter />
+      </div>
     </>
   );
 }

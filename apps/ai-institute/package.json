@@ -23,15 +23,18 @@
     "@bhavya/project-runtime": "workspace:*",
     "@gsap/react": "^2.1.2",
     "@libsql/client": "^0.17.4",
+    "@react-three/fiber": "^9.8.1",
     "@xyflow/react": "12.11.6",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^12.10.0",
     "framer-motion": "^13.0.0",
     "gsap": "^3.15.0",
+    "lenis": "^1.3.26",
     "lucide-react": "^0.468.0",
     "next": "15.5.25",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@opennextjs/cloudflare": "^1.20.6",
@@ -40,6 +43,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.186.0",
     "@typescript-eslint/eslint-plugin": "^8.66.0",
     "@typescript-eslint/parser": "^8.66.0",
     "tailwindcss": "^4",

@@ -1,0 +1,14 @@
+{
+  "test-allow-1790004760629": {
+    "count": 1,
+    "resetAt": 1790004820629
+  },
+  "test-block-1790004760640": {
+    "count": 2,
+    "resetAt": 1790004820640
+  },
+  "test-remaining-1790004760680": {
+    "count": 2,
+    "resetAt": 1790004820680
+  }
+}

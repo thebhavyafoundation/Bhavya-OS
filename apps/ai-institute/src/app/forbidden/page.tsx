@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { ShieldAlert } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Not Permitted | Bhavya Foundation",
@@ -13,7 +11,6 @@ export const metadata = {
 export default function ForbiddenPage() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
-      <SiteHeader />
       <div className="text-center max-w-md">
         <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-accent-gold-glow border border-border-gold flex items-center justify-center">
           <ShieldAlert className="w-8 h-8 text-accent-gold" />
@@ -41,7 +38,6 @@ export default function ForbiddenPage() {
           </Link>
         </div>
       </div>
-      <SiteFooter />
     </div>
   );
 }

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 import { curriculum } from "@/data/curriculum-levels";
 import { ArrowRight } from "lucide-react";
 
@@ -13,8 +11,7 @@ export const metadata: Metadata = {
 export default function LevelsPage() {
   return (
     <>
-      <SiteHeader />
-      <main id="main-content" className="min-h-screen">
+      <div id="main-content" className="min-h-screen">
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[var(--color-brand-forest)]/5 to-transparent pt-24 pb-16">
           <div className="mx-auto max-w-5xl px-6 text-center">
@@ -107,8 +104,7 @@ export default function LevelsPage() {
             ))}
           </div>
         </section>
-      </main>
-      <SiteFooter />
+      </div>
     </>
   );
 }

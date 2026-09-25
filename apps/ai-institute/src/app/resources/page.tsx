@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { BookOpen, FileText, Video, Code } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -105,6 +106,59 @@ export default function ResourcesPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-16">
+          <p className="text-xs font-semibold text-accent-gold uppercase tracking-wider mb-3">
+            Browse by Type
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link
+              href="/resources/documents"
+              className="rounded-xl border border-border bg-bg-raised p-6 hover:border-accent-gold/30 transition-colors"
+            >
+              <h3
+                className="text-lg font-semibold text-text-primary mb-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Documents
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                The Constitution, charters, policies, and legal pages — every
+                official document and where it lives.
+              </p>
+            </Link>
+            <Link
+              href="/resources/publications"
+              className="rounded-xl border border-border bg-bg-raised p-6 hover:border-accent-gold/30 transition-colors"
+            >
+              <h3
+                className="text-lg font-semibold text-text-primary mb-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Publications
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                Foundational research papers that inform the AI curriculum —
+                curated and openly linked.
+              </p>
+            </Link>
+            <Link
+              href="/resources/videos"
+              className="rounded-xl border border-border bg-bg-raised p-6 hover:border-accent-gold/30 transition-colors"
+            >
+              <h3
+                className="text-lg font-semibold text-text-primary mb-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Videos
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                Video documentation of programmes — scope, publication rules,
+                and honest current status.
+              </p>
+            </Link>
+          </div>
         </div>
 
         <div className="mt-12 text-center">

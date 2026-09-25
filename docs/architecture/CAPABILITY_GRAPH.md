@@ -1,9 +1,12 @@
 # CAPABILITY GRAPH
 
 **Date:** 2026-08-10
-**Status:** ACTIVE
+**Status:** **NON-AUTHORITATIVE** — historical capability map
 **Owner:** Bhavya Foundation Architecture
 **Last updated:** 2026-08-10
+
+> **2026-09-23:** Skill discovery uses `.opencode/skills/` only (`AGENTS.md` §4).
+> Do not treat this graph as an installed-skill index or executable ICM layer.
 
 ---
 

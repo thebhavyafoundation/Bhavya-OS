@@ -1,13 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export default function CommunityMissionPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <SiteHeader />
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -128,7 +125,6 @@ export default function CommunityMissionPage() {
           </div>
         </div>
       </section>
-      <SiteFooter />
     </div>
   );
 }

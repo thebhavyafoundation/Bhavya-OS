@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 // NOTE: hex values below are used in inline styles (hover effects, bullets).
 // They should be replaced with CSS custom properties or design tokens when possible.
@@ -76,7 +74,6 @@ const item = {
 export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <SiteHeader />
       {/* Editorial notice — Wave P: programs are curriculum descriptions, not verified institutional activity */}
       <div className="bg-accent-gold/10 border-b border-accent-gold/20 px-6 py-2 text-center">
         <p className="text-xs text-accent-gold/70 font-medium">
@@ -273,7 +270,6 @@ export default function ProgramsPage() {
           ))}
         </motion.div>
       </section>
-      <SiteFooter />
     </div>
   );
 }

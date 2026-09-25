@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="School children studying with snowy Himalayan mountains behind">
+  <defs>
+    <linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a7ab5"/>
+      <stop offset="55%" stop-color="#8eb4d4"/>
+      <stop offset="100%" stop-color="#c5d8e8"/>
+    </linearGradient>
+    <linearGradient id="kGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a7c52"/>
+      <stop offset="100%" stop-color="#3e4a32"/>
+    </linearGradient>
+    <filter id="kSoft" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#kSky)"/>
+
+  <!-- Snow mountains -->
+  <path d="M0 520 L200 320 L350 440 L500 260 L680 420 L850 240 L1050 400 L1200 300 L1400 380 L1600 280 L1600 650 L0 650 Z" fill="#e8eef2" filter="url(#kSoft)"/>
+  <path d="M0 560 L180 400 L320 500 L480 360 L650 480 L820 340 L1000 460 L1180 380 L1380 450 L1600 360 L1600 680 L0 680 Z" fill="#c5d0da" opacity="0.7"/>
+
+  <!-- Mid hills -->
+  <path d="M0 620 Q400 560 800 600 T1600 580 L1600 780 L0 780 Z" fill="#5a7a5e" opacity="0.8"/>
+
+  <!-- Ground -->
+  <path d="M0 740 Q400 700 800 730 T1600 720 L1600 1200 L0 1200 Z" fill="url(#kGround)"/>
+
+  <!-- School building silhouette -->
+  <g transform="translate(1150,560)">
+    <rect x="0" y="40" width="280" height="160" fill="#8a7359"/>
+    <polygon points="-20,40 140,-30 300,40" fill="#6a5a40"/>
+    <rect x="40" y="90" width="50" height="70" fill="#f7f4ec" opacity="0.85"/>
+    <rect x="115" y="90" width="50" height="70" fill="#f7f4ec" opacity="0.85"/>
+    <rect x="190" y="90" width="50" height="70" fill="#f7f4ec" opacity="0.85"/>
+    <rect x="120" y="150" width="40" height="50" fill="#0e382e"/>
+  </g>
+
+  <!-- Children group (stylized, respectful) -->
+  <g transform="translate(380,780)">
+    <!-- Child 1 -->
+    <circle cx="0" cy="0" r="28" fill="#c4956a"/>
+    <path d="M-30 30 Q0 50 30 30 L35 120 Q0 140 -35 120 Z" fill="#c0392b"/>
+    <rect x="-35" y="120" width="70" height="60" rx="8" fill="#2c3e50"/>
+    <!-- Book -->
+    <rect x="20" y="70" width="55" height="40" rx="3" fill="#f7f4ec" stroke="#d4af37" stroke-width="2"/>
+    <line x1="47" y1="70" x2="47" y2="110" stroke="#d4af37" stroke-width="1.5"/>
+  </g>
+
+  <g transform="translate(520,790)">
+    <!-- Child 2 -->
+    <circle cx="0" cy="0" r="26" fill="#b8886a"/>
+    <path d="M-28 28 Q0 46 28 28 L32 115 Q0 132 -32 115 Z" fill="#2980b9"/>
+    <rect x="-32" y="115" width="64" height="55" rx="8" fill="#34495e"/>
+    <rect x="-55" y="65" width="50" height="36" rx="3" fill="#f7f4ec" stroke="#8a9a8b" stroke-width="2"/>
+  </g>
+
+  <g transform="translate(650,785)">
+    <!-- Child 3 -->
+    <circle cx="0" cy="0" r="27" fill="#c9a07a"/>
+    <path d="M-29 29 Q0 48 29 29 L33 118 Q0 135 -33 118 Z" fill="#27ae60"/>
+    <rect x="-33" y="118" width="66" height="58" rx="8" fill="#2c3e50"/>
+  </g>
+
+  <!-- Path -->
+  <path d="M300 1200 Q500 1000 700 950 T1200 900" stroke="#cfc4a8" stroke-width="40" fill="none" opacity="0.4"/>
+</svg>

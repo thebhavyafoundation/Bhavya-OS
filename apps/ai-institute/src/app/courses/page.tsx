@@ -30,7 +30,7 @@ export default async function CoursesPage() {
     }),
   );
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <header className="mb-12">
           <p className="text-sm font-medium tracking-widest text-accent-gold uppercase">
@@ -115,6 +115,6 @@ export default async function CoursesPage() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

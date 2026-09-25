@@ -9,7 +9,7 @@
     "./components/*": "./src/components/*.tsx",
     "./layouts/*": "./src/layouts/*.tsx",
     "./hooks/*": "./src/hooks/*.ts",
-    "./styles/*": "./src/styles/*.css"
+    "./styles/*": "./src/styles/*"
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

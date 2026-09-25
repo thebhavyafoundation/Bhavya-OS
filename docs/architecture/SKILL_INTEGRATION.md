@@ -2,8 +2,11 @@
 
 **Date:** 2026-08-09
 **Last updated:** 2026-08-10
+**Status:** **NON-AUTHORITATIVE** — historical integration inventory
 **Purpose:** Track actual skill implementation across the Bhavya Foundation monorepo
 **Scope:** 9 current apps + packages
+
+> **2026-09-23:** Not a skill discovery source. Installed skills: `.opencode/skills/` only.
 
 ---
 

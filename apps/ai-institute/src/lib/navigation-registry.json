@@ -107,6 +107,13 @@
               "icon": "HeartHandshake",
               "pillar": "community",
               "description": "Empowering people and participation"
+            },
+            {
+              "id": "initiatives",
+              "label": "Initiatives",
+              "href": "/initiatives",
+              "icon": "Compass",
+              "description": "The full institutional portfolio"
             }
           ]
         },
@@ -127,6 +134,13 @@
               "href": "/curriculum",
               "icon": "BookOpen",
               "description": "13 levels from Digital Foundations to Institution Building"
+            },
+            {
+              "id": "ai-institute",
+              "label": "AI Institute",
+              "href": "/ai-institute",
+              "icon": "Sparkles",
+              "description": "AI education, research, and responsible practice"
             },
             {
               "id": "research",
@@ -172,9 +186,9 @@
             {
               "id": "teach",
               "label": "Teach",
-              "href": "/register?intent=educator",
+              "href": "/teachers",
               "icon": "Users",
-              "description": "Share your knowledge with others"
+              "description": "Curriculum, outreach, and resources for educators"
             },
             {
               "id": "research-with-us",
@@ -196,6 +210,13 @@
               "href": "/donate",
               "icon": "Heart",
               "description": "Support our mission"
+            },
+            {
+              "id": "support",
+              "label": "Support",
+              "href": "/support",
+              "icon": "HandHeart",
+              "description": "Every way to support the Foundation"
             }
           ]
         },
@@ -220,9 +241,9 @@
             {
               "id": "governance",
               "label": "Governance",
-              "href": "/transparency",
+              "href": "/governance",
               "icon": "Scale",
-              "description": "Transparency and accountability"
+              "description": "How the institution is governed"
             },
             {
               "id": "constitution",
@@ -507,6 +528,7 @@
         "title": "Learn",
         "links": [
           { "label": "Open Knowledge", "href": "/knowledge" },
+          { "label": "AI Institute", "href": "/ai-institute" },
           { "label": "Research", "href": "/research" },
           { "label": "Library", "href": "/knowledge/library" },
           { "label": "Public Resources", "href": "/resources" }
@@ -517,8 +539,9 @@
         "links": [
           { "label": "Volunteer", "href": "/volunteer" },
           { "label": "Become a Student", "href": "/register?intent=student" },
-          { "label": "Teach", "href": "/register?intent=educator" },
-          { "label": "Donate", "href": "/donate" }
+          { "label": "Teach", "href": "/teachers" },
+          { "label": "Donate", "href": "/donate" },
+          { "label": "Support", "href": "/support" }
         ]
       },
       {
@@ -526,7 +549,8 @@
         "links": [
           { "label": "Our Story", "href": "/about" },
           { "label": "Vision", "href": "/mission" },
-          { "label": "Governance", "href": "/transparency" },
+          { "label": "Governance", "href": "/governance" },
+          { "label": "Initiatives", "href": "/initiatives" },
           { "label": "Impact", "href": "/impact" },
           { "label": "Contact", "href": "/contact" }
         ]

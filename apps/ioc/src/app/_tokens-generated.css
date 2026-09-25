@@ -240,19 +240,46 @@
   --shadow-glow-lg: 0 0 80px rgba(14, 56, 46, 0.16);
 
   /* ============================================
-     TRANSITIONS
+     TRANSITIONS — BHAVYA MOTION SYSTEM
      ============================================ */
 
+  /* Easing curves */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-emphasis: cubic-bezier(0.34, 1.1, 0.64, 1);
+
+  /* Duration tokens */
+  --duration-micro: 100ms;
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
   --duration-slower: 600ms;
-  --transition-fast: 150ms ease;
-  --transition-normal: 200ms ease;
-  --transition-slow: 300ms ease;
+  --duration-scene: 800ms;
+  --duration-cinematic: 1200ms;
+
+  /* Composed transitions */
+  --transition-fast: 150ms var(--ease-out);
+  --transition-normal: 250ms var(--ease-out);
+  --transition-slow: 400ms var(--ease-out);
+
+  /* Motion distance */
+  --motion-distance-xs: 4px;
+  --motion-distance-sm: 8px;
+  --motion-distance-md: 16px;
+  --motion-distance-lg: 32px;
+  --motion-distance-xl: 64px;
+
+  /* Parallax speeds */
+  --parallax-bg: 0.15;
+  --parallax-mid: 0.4;
+  --parallax-fg: 0.8;
+  --parallax-accent: 1.1;
+
+  /* Stagger base */
+  --stagger-base: 80ms;
 
   /* ============================================
      LAYOUT

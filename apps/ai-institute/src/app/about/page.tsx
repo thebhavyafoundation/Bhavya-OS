@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 const values = [
   {
@@ -35,8 +33,6 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <SiteHeader />
-
       {/* ====== HERO ====== */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -126,16 +122,23 @@ export default function AboutPage() {
                   borderRadius: "var(--radius-2xl)",
                   overflow: "hidden",
                   border: "1px solid var(--color-border-primary)",
+                  background: "var(--color-brand-forest)",
+                  position: "relative",
                 }}
               >
-                <img
-                  src="/photography/hero/hero-himalayan-sunset.jpg"
-                  alt="Himalayan sunset — representing the long-term vision of Bhavya Foundation"
+                {/* ASSET REQUIRED: hero-himalayan-sunset.jpg — drop-in slot */}
+                <div
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
+                    position: "absolute",
+                    inset: 0,
+                    background: `linear-gradient(
+                    145deg,
+                    var(--color-forest-900) 0%,
+                    var(--color-brand-forest) 55%,
+                    var(--color-forest-700) 100%
+                  )`,
                   }}
+                  aria-hidden="true"
                 />
                 <div
                   style={{
@@ -392,8 +395,6 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

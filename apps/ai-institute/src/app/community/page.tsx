@@ -52,11 +52,7 @@ export default function CommunityPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground
-          pillar="community"
-          photo="/photography/community/community-village-gathering.jpg"
-          photoPosition="center center"
-        />
+        <HeroBackground pillar="community" />
 
         <div
           className="container"

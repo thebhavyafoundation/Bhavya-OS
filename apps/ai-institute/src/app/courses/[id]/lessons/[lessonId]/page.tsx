@@ -60,12 +60,12 @@ export default async function LessonPage({
       pack: sourceBPacks.find((p) => p.slug === rel.packSlug),
     }))
     .filter(
-      (e): e is { rel: (typeof e.rel); pack: (typeof sourceBPacks)[number] } =>
+      (e): e is { rel: typeof e.rel; pack: (typeof sourceBPacks)[number] } =>
         Boolean(e.pack),
     );
 
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-4xl px-6 py-16">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-text-primary/50">
@@ -243,8 +243,8 @@ export default async function LessonPage({
             </div>
             <p className="mt-4 text-xs text-text-secondary">
               Provided by the Raspberry Pi Foundation (“Experience AI”, CC
-              BY-NC-ND 4.0). Listed as references — lesson content remains
-              with the provider. See the Library for the full collection.
+              BY-NC-ND 4.0). Listed as references — lesson content remains with
+              the provider. See the Library for the full collection.
             </p>
           </section>
         )}
@@ -279,7 +279,7 @@ export default async function LessonPage({
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
