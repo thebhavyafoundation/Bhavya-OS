@@ -11,10 +11,10 @@ import { ScrubExit } from "@/components/motion/ScrubExit";
 import { ScrubParallax } from "@/components/motion/ScrubParallax";
 import { PhotoPlate } from "@/components/editorial/PhotoPlate";
 import { ProofStrip } from "@/components/editorial/ProofStrip";
-import { MissionChapter } from "@/components/editorial/MissionChapter";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
-import { STORY_PROOF } from "@/lib/homepage-story";
-import { PHOTO } from "@/lib/photos";
+import { StoryChapter } from "@/components/site/StoryChapter";
+import { STORY_CHAPTERS, STORY_PROOF } from "@/lib/homepage-story";
+import { PHOTO, CHAPTER_PHOTO } from "@/lib/photos";
 
 /**
  * Homepage — nine-chapter visual narrative.
@@ -27,32 +27,35 @@ import { PHOTO } from "@/lib/photos";
  * Reserved plates stay illustrative until first-party assets land.
  */
 
-const missions = [
-  {
-    key: "forest",
-    index: "01",
-    label: "Forest",
-    line: "Restore living systems. Protect watersheds. Hold the ground for generations.",
+const chapterDetails: Record<
+  (typeof STORY_CHAPTERS)[number]["key"],
+  { body: string; credit: string; alt: string }
+> = {
+  forest: {
+    body: "Living systems restored and held for the long term — watersheds, contour planting, and stewardship measured in generations, not seasons.",
+    credit:
+      "Photo · Kavittaa, CC0 1.0 · Cedar forest, Shimla — representative, not a Bhavya site",
+    alt: "Tall Himalayan cedar trees in a dense forest near Shimla",
   },
-  {
-    key: "knowledge",
-    index: "02",
-    label: "Knowledge",
-    line: "Open learning for rural India — structured, free, built to endure.",
+  knowledge: {
+    body: "Structured open education for rural India — free, durable, and built to travel from first digital literacy through research and institution-building.",
+    credit:
+      "Photo · Glenn Carstens-Peters, CC0 · Open book study — not a Bhavya classroom",
+    alt: "Open book and notebook on a wooden table",
   },
-  {
-    key: "heritage",
-    index: "03",
-    label: "Heritage",
-    line: "Keep living memory. Document craft, place, and story before they fade.",
+  heritage: {
+    body: "Document craft, place, and living story while keepers are still here to speak — architecture, language, and ritual held as working knowledge, not museum labels.",
+    credit:
+      "Photo · UnpetitproleX, CC BY 4.0 · Shirgul Maharaj Temple, Churdhar, Himachal Pradesh — representative, not a Bhavya site",
+    alt: "Stone temple architecture at Churdhar, Himachal Pradesh",
   },
-  {
-    key: "community",
-    index: "04",
-    label: "Community",
-    line: "Local leadership at the center. Resilience grown from within.",
+  community: {
+    body: "Resilience grown from within — local councils, volunteers, and shared decisions. Outside support serves the village plan, not the reverse.",
+    credit:
+      "Photo · Aashish Chindaliya, CC0 · Himachal Pradesh landscape — place photograph, not a gathering",
+    alt: "Mountain landscape in Himachal Pradesh, India",
   },
-];
+};
 
 export default function HomePage() {
   return (
@@ -210,90 +213,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ——— CH 03: PILLARS ——— */}
-        <section className="cine-missions" aria-labelledby="missions-heading">
-          <div className="container">
-            <div className="cine-missions-head">
-              <ScrollReveal direction="up" distance={20}>
-                <span className="dark-label">02 · Pillars</span>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={16} delay={0.08}>
-                <TextReveal>
-                  <h2
-                    id="missions-heading"
-                    className="dark-heading cine-missions-title"
-                  >
-                    Four permanent missions.
-                  </h2>
-                </TextReveal>
-              </ScrollReveal>
-            </div>
-
-            <ul className="mission-index">
-              {missions.map((m, i) => (
-                <li key={m.key} className="mission-index-item">
-                  <ScrollReveal direction="up" distance={20} delay={i * 0.07}>
-                    <a href={`/${m.key}`} className="mission-row">
-                      <span className="mission-row-index" aria-hidden="true">
-                        {m.index}
-                      </span>
-                      <span className="mission-row-body">
-                        <span className="mission-row-label">{m.label}</span>
-                        <span className="mission-row-line">{m.line}</span>
-                      </span>
-                      <span className="mission-row-cta" aria-hidden="true">
-                        Enter <ArrowRight size={15} />
-                      </span>
-                    </a>
-                  </ScrollReveal>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* ——— CH 04: PEOPLE ——— */}
-        <section className="chapter-people" aria-labelledby="people-heading">
-          <div className="container chapter-people-grid">
-            <div className="chapter-people-copy">
-              <ScrollReveal direction="up" distance={16}>
-                <span className="editorial-label">03 · People</span>
-              </ScrollReveal>
-              <TextReveal>
-                <h2
-                  id="people-heading"
-                  className="editorial-heading chapter-people-title"
-                >
-                  Held by the people who stay.
-                </h2>
-              </TextReveal>
-              <ScrollReveal direction="up" distance={14} delay={0.1}>
-                <p className="chapter-people-body">
-                  Students in village classrooms. Elders keeping craft and
-                  language. Volunteers planting on contour. Local councils
-                  choosing what endures. The work is theirs before it is ours.
-                </p>
-              </ScrollReveal>
-              <ScrollReveal direction="up" distance={12} delay={0.18}>
-                <EditorialLink href="/community">
-                  Meet the community
-                </EditorialLink>
-              </ScrollReveal>
-            </div>
-            <div className="chapter-people-visual">
-              <ScrollReveal direction="up" distance={24} delay={0.06}>
-                <ScrubParallax distance={20}>
-                  <PhotoPlate
-                    index="Plate 02"
-                    label="People · village gathering"
-                    caption="Documentary portrait reserved. No stock or AI faces — rights-cleared field photography only. PEOPLE chapter remains on hold pending consent."
-                    variant="people"
-                  />
-                </ScrubParallax>
-              </ScrollReveal>
-            </div>
-          </div>
-        </section>
+        {/* ——— CH 03–06: PRACTICE — four sticky mission chapters ——— */}
+        {STORY_CHAPTERS.map((c, i) => (
+          <StoryChapter
+            key={c.key}
+            id={`chapter-${c.key}`}
+            index={c.index}
+            label={c.label}
+            line={c.line}
+            body={chapterDetails[c.key].body}
+            href={c.href}
+            photo={CHAPTER_PHOTO[c.key]}
+            alt={chapterDetails[c.key].alt}
+            credit={chapterDetails[c.key].credit}
+            flip={i % 2 === 1}
+          />
+        ))}
 
         {/* ——— CH 05: EVIDENCE ——— */}
         <section className="cine-proof" aria-labelledby="proof-heading">
@@ -317,58 +252,6 @@ export default function HomePage() {
             </ScrollReveal>
           </div>
         </section>
-
-        {/* ——— CH 06: KNOWLEDGE ——— */}
-        <MissionChapter
-          index="05"
-          title="Knowledge"
-          statement="Learning that outlasts a classroom."
-          meaning="Structured open education for rural India — free, durable, and built to travel from first digital literacy through research and institution-building."
-          proof="Bhavya Academy · progressive curriculum toward mastery"
-          href="/knowledge"
-          cta="Enter"
-          plateLabel="Knowledge · open book study"
-          plateCaption="Object study for the knowledge chapter (CC0). Not a Bhavya classroom — school-children frame remains ASSET REQUIRED."
-          photo={PHOTO.knowledgeBooks}
-          alt="Open book and notebook on a wooden table"
-          variant="knowledge"
-          tone="ivory"
-          flip={false}
-        />
-
-        {/* ——— CH 07: HERITAGE ——— */}
-        <MissionChapter
-          index="06"
-          title="Heritage"
-          statement="Memory before it thins."
-          meaning="Document craft, place, and living story while keepers are still here to speak. Architecture, language, and ritual held as working knowledge — not museum labels."
-          href="/heritage"
-          cta="Enter"
-          plateLabel="Heritage · stone temple"
-          plateCaption="Shirgul Maharaj Temple, Churdhar, Himachal Pradesh · UnpetitproleX, CC BY 4.0. Representative photograph — not a Bhavya site."
-          photo={PHOTO.heritageStone}
-          alt="Stone temple architecture at Churdhar, Himachal Pradesh"
-          variant="heritage"
-          tone="stone"
-          flip
-        />
-
-        {/* ——— CH 08: COMMUNITY ——— */}
-        <MissionChapter
-          index="07"
-          title="Community"
-          statement="Leadership already on the ground."
-          meaning="Resilience grown from within — local councils, volunteers, and shared decisions. Outside support serves the village plan, not the reverse."
-          href="/community"
-          cta="Enter"
-          plateLabel="Community · mountain landscape"
-          plateCaption="Mountain landscape, Himachal Pradesh · Aashish Chindaliya, CC0. Place photograph only — gathering frame remains ASSET REQUIRED."
-          photo={PHOTO.communityLandscape}
-          alt="Mountain landscape in Himachal Pradesh, India"
-          variant="community"
-          tone="ivory"
-          flip={false}
-        />
 
         {/* ——— CH 09: GENERATIONS ——— */}
         <section className="cine-invite" aria-labelledby="invite-heading">

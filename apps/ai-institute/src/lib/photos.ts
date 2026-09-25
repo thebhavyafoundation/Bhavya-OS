@@ -20,6 +20,16 @@ export const PHOTO = {
 export type PhotoKey = keyof typeof PHOTO;
 
 /**
+ * Homepage StoryChapter → photo (all ACQUIRED — real JPEGs on disk).
+ */
+export const CHAPTER_PHOTO = {
+  forest: PHOTO.forest,
+  knowledge: PHOTO.knowledgeBooks,
+  heritage: PHOTO.heritageStone,
+  community: PHOTO.communityLandscape,
+} as const;
+
+/**
  * Reserved target basenames with no JPEG yet.
  * Do not wire; leave PhotoPlate in reserved mode / omit photo props.
  */

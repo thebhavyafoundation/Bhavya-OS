@@ -3519,3 +3519,132 @@ body {
     transform: none !important;
   }
 }
+
+/* ============================================
+   STORY CHAPTER � sticky full-viewport mission chapters
+   ============================================ */
+
+.story-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-bg-primary);
+  scroll-margin-top: 4.5rem;
+}
+
+.story-chapter-media {
+  position: relative;
+}
+
+.story-chapter-media-sticky {
+  position: relative;
+  overflow: hidden;
+  height: 56svh;
+}
+
+.story-chapter-media-sticky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-brand-forest) 55%, transparent),
+    transparent 30%,
+    transparent 70%,
+    color-mix(in srgb, var(--color-brand-forest) 45%, transparent)
+  );
+  pointer-events: none;
+}
+
+.story-chapter-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.story-chapter-number {
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-4);
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  line-height: 1;
+  color: var(--color-text-inverse);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.story-chapter-credit {
+  position: absolute;
+  left: var(--space-6);
+  top: var(--space-6);
+  z-index: 1;
+  max-width: 46ch;
+  color: var(--color-text-inverse);
+}
+
+.story-chapter-copy {
+  display: flex;
+  align-items: center;
+  padding: var(--space-16) var(--space-6);
+}
+
+.story-chapter-copy-inner {
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+}
+
+.story-chapter-title {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  margin: var(--space-4) 0 var(--space-6);
+  color: var(--color-forest-950);
+}
+
+.story-chapter-body {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .story-chapter {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: 160svh;
+  }
+
+  .story-chapter--flip .story-chapter-media {
+    order: 2;
+  }
+
+  .story-chapter-media-sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+  }
+
+  .story-chapter-copy {
+    padding: 30svh var(--space-12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-chapter {
+    min-height: 0;
+  }
+
+  .story-chapter-media-sticky {
+    position: relative;
+    height: 70svh;
+  }
+
+  .story-chapter-copy {
+    padding: var(--space-16) var(--space-12);
+  }
+}
