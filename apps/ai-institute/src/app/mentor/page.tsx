@@ -188,8 +188,8 @@ export default function MentorPage() {
             marginTop: "var(--space-2)",
           }}
         >
-          Guided preview — mentors currently respond with curated guidance
-          while the full AI mentor is under development.
+          Guided preview — mentors currently respond with curated guidance while
+          the full AI mentor is under development.
         </p>
       </motion.div>
 
@@ -569,7 +569,7 @@ export default function MentorPage() {
                           height: 8,
                           borderRadius: "50%",
                           background: "var(--color-status-success)",
-                          animation: "bounce 1s infinite",
+                          animation: "pulse-soft 1.4s ease-in-out infinite",
                           animationDelay: `${delay}ms`,
                         }}
                       />

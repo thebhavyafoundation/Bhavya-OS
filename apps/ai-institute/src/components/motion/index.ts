@@ -14,3 +14,5 @@ export { ScrollReveal } from "./ScrollReveal";
 export { ParallaxImage } from "./ParallaxImage";
 export { TextReveal as TextRevealGSAP } from "./TextReveal";
 export { HeroEntrance } from "./HeroEntrance";
+export { ScrubParallax } from "./ScrubParallax";
+export { ScrubExit } from "./ScrubExit";

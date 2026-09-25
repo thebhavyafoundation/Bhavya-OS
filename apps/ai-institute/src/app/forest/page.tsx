@@ -69,11 +69,7 @@ export default function ForestPage() {
           paddingTop: "var(--header-h)",
         }}
       >
-        <HeroBackground
-          pillar="forest"
-          photo="/photography/forest/forest-cedar-sunlight.jpg"
-          photoPosition="center center"
-        />
+        <HeroBackground pillar="forest" />
 
         <div
           className="container mission-hero-grid"

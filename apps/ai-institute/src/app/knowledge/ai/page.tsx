@@ -56,7 +56,7 @@ const principles = [
 export default function AIPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <main className="pb-16">
+      <div className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -129,9 +129,7 @@ export default function AIPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-16 p-8 rounded-2xl bg-[var(--color-brand-forest)] text-white text-center"
           >
-            <h2 className="text-2xl font-serif mb-4">
-              AI Ethics Policy
-            </h2>
+            <h2 className="text-2xl font-serif mb-4">AI Ethics Policy</h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-6">
               Read our comprehensive AI Ethics and Responsible AI Policy. Every
               AI system at Bhavya Foundation operates under these guidelines.
@@ -144,7 +142,7 @@ export default function AIPage() {
             </Link>
           </motion.div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

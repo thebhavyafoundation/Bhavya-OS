@@ -280,15 +280,15 @@ export function AITutor() {
             <div className="bg-white/10 rounded-lg px-4 py-2">
               <div className="flex gap-1">
                 <div
-                  className="w-2 h-2 bg-white/40 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-white/40 rounded-full animate-pulse"
                   style={{ animationDelay: "0ms" }}
                 />
                 <div
-                  className="w-2 h-2 bg-white/40 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-white/40 rounded-full animate-pulse"
                   style={{ animationDelay: "150ms" }}
                 />
                 <div
-                  className="w-2 h-2 bg-white/40 rounded-full animate-bounce"
+                  className="w-2 h-2 bg-white/40 rounded-full animate-pulse"
                   style={{ animationDelay: "300ms" }}
                 />
               </div>

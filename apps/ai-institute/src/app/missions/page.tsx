@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TreePine, Brain, Landmark, HeartHandshake } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Missions — Bhavya Foundation",
@@ -56,8 +54,6 @@ const missions = [
 export default function MissionsPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <SiteHeader />
-
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -127,8 +123,6 @@ export default function MissionsPage() {
           </div>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

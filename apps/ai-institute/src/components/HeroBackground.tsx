@@ -7,8 +7,9 @@
  * subtle gradient overlay for text readability. Falls back to
  * multi-layer gradient system when no photo is available.
  *
- * Layers (photo mode): photograph → dark overlay → vignette → bottom fade
- * Layers (fallback): base gradient → accent → mid-tone → noise → mountains → vignette → fade
+ * Layers (photo mode): photograph → readability overlay → bottom fade (max 2 gradients)
+ * Layers (fallback): base gradient → accent gradient → SVG mountain silhouette
+ * Article 6.2: maximum two gradients per composition.
  */
 
 import { useMemo } from "react";
@@ -23,6 +24,11 @@ interface HeroBackgroundProps {
   overlayOpacity?: number;
   /** Custom object-position for the photo */
   photoPosition?: string;
+  /**
+   * light = editorial light hero (dark text, soft side/bottom wash)
+   * dark  = full forest overlay (inverse text) — default when omitted
+   */
+  variant?: "light" | "dark";
   children?: React.ReactNode;
 }
 
@@ -124,6 +130,7 @@ export function HeroBackground({
   photo,
   overlayOpacity = 0.3,
   photoPosition = "center 40%",
+  variant = "dark",
   children,
 }: HeroBackgroundProps) {
   const config = pillarConfigs[pillar];
@@ -147,6 +154,7 @@ export function HeroBackground({
 
   /* When a real photograph is provided, render it with overlay */
   if (photo) {
+    const isLight = variant === "light";
     return (
       <div style={containerStyle}>
         {/* Layer 1: Real photograph */}
@@ -161,31 +169,29 @@ export function HeroBackground({
           }}
         />
 
-        {/* Layer 2: Dark gradient overlay for text readability */}
+        {/* Layer 2: Readability overlay (gradient 1 of 2) */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(
-              to bottom,
-              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 60)}%, transparent) 0%,
-              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 80)}%, transparent) 40%,
-              color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 100)}%, transparent) 100%
-            )`,
+            background: isLight
+              ? `linear-gradient(
+                  to right,
+                  rgba(247, 244, 236, ${Math.round(overlayOpacity * 100 + 55)}%) 0%,
+                  rgba(247, 244, 236, ${Math.round(overlayOpacity * 60 + 25)}%) 42%,
+                  rgba(247, 244, 236, ${Math.round(overlayOpacity * 20)}%) 70%,
+                  rgba(247, 244, 236, 0%) 100%
+                )`
+              : `linear-gradient(
+                  to bottom,
+                  color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 60)}%, transparent) 0%,
+                  color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 80)}%, transparent) 40%,
+                  color-mix(in srgb, var(--color-brand-forest) ${Math.round(overlayOpacity * 100)}%, transparent) 100%
+                )`,
           }}
         />
 
-        {/* Layer 3: Vignette */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse at center, transparent 30%, rgba(4, 15, 11, 0.25) 100%)",
-          }}
-        />
-
-        {/* Layer 4: Bottom fade to page background */}
+        {/* Layer 3: Bottom fade to page background (gradient 2 of 2) */}
         <div
           style={{
             position: "absolute",
@@ -203,10 +209,43 @@ export function HeroBackground({
     );
   }
 
-  /* Fallback: Multi-layer gradient system */
+  /* Light editorial hero without photo: solid base + exactly 2 gradients */
+  if (variant === "light" && !photo) {
+    return (
+      <div style={containerStyle}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "var(--color-bg-primary)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 80% 60% at 75% 20%, color-mix(in srgb, var(--color-brand-gold) 6%, transparent) 0%, transparent 55%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, var(--color-ivory-200) 0%, transparent 40%)",
+            opacity: 0.55,
+          }}
+        />
+        {children}
+      </div>
+    );
+  }
+
+  /* Fallback depth: exactly two gradients (Article 6.2) + SVG silhouette */
   return (
     <div style={containerStyle}>
-      {/* Layer 1: Base gradient */}
+      {/* Gradient 1 of 2: Base */}
       <div
         style={{
           position: "absolute",
@@ -215,7 +254,7 @@ export function HeroBackground({
         }}
       />
 
-      {/* Layer 2: Accent light */}
+      {/* Gradient 2 of 2: Accent light */}
       <div
         style={{
           position: "absolute",
@@ -224,27 +263,7 @@ export function HeroBackground({
         }}
       />
 
-      {/* Layer 3: Mid-tone depth */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: config.mid,
-        }}
-      />
-
-      {/* Layer 4: Subtle noise texture */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: config.noise,
-          backgroundSize: "4px 4px",
-          opacity: 0.5,
-        }}
-      />
-
-      {/* Layer 5: Mountain silhouettes */}
+      {/* Depth layer (not a gradient): Mountain silhouettes */}
       <svg
         viewBox="0 0 1440 600"
         preserveAspectRatio="xMidYMid slice"
@@ -277,29 +296,6 @@ export function HeroBackground({
           })}
         </g>
       </svg>
-
-      {/* Layer 6: Vignette */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(4, 15, 11, 0.3) 100%)",
-        }}
-      />
-
-      {/* Layer 7: Bottom fade to page background */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "150px",
-          background:
-            "linear-gradient(to top, var(--color-bg-primary) 0%, transparent 100%)",
-        }}
-      />
 
       {children}
     </div>

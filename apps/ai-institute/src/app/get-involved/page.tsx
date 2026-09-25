@@ -8,8 +8,6 @@ import {
   FlaskConical,
   ArrowRight,
 } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Get Involved — Bhavya Foundation",
@@ -68,7 +66,6 @@ const paths = [
 export default function GetInvolvedPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <SiteHeader />
       <section className="relative pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Get Involved</h1>
@@ -129,7 +126,6 @@ export default function GetInvolvedPage() {
           </div>
         </div>
       </section>
-      <SiteFooter />
     </div>
   );
 }

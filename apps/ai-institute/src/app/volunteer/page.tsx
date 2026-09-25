@@ -7,8 +7,6 @@ import {
   HeartHandshake,
   ArrowRight,
 } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Volunteer — Bhavya Foundation",
@@ -78,8 +76,6 @@ const steps = [
 export default function VolunteerPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <SiteHeader />
-
       <section className="relative pt-32 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1
@@ -250,8 +246,6 @@ export default function VolunteerPage() {
           </div>
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

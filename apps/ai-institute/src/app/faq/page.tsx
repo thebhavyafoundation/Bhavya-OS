@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 const categories = ["General", "Courses", "Pricing", "Technical"] as const;
 
@@ -142,7 +140,6 @@ export default function FAQPage() {
 
   return (
     <>
-      <SiteHeader />
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
@@ -243,7 +240,6 @@ export default function FAQPage() {
           </motion.div>
         </div>
       </section>
-      <SiteFooter />
     </>
   );
 }

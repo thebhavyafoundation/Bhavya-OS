@@ -181,7 +181,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     onMouseLeave={handleDropdownLeave}
                   >
                     <button
-                      className={`relative px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors flex items-center gap-1 ${
+                      className={`relative min-h-[44px] px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors flex items-center gap-1 ${
                         activeDropdown === group.id
                           ? "text-text-primary"
                           : "text-text-tertiary hover:text-text-secondary"
@@ -239,7 +239,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-3">
               <button
                 type="button"
-                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-tertiary text-xs hover:border-border-secondary hover:text-text-secondary transition-colors"
+                className="hidden sm:flex min-h-[44px] items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-tertiary text-xs hover:border-border-secondary hover:text-text-secondary transition-colors"
               >
                 <Search className="w-3.5 h-3.5" />
                 <span>Search</span>
@@ -252,7 +252,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <div className="flex items-center gap-2">
                   <Link
                     href="/app"
-                    className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-secondary text-xs hover:border-border-secondary transition-colors"
+                    className="hidden sm:flex min-h-[44px] items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-secondary text-xs hover:border-border-secondary transition-colors"
                   >
                     <div className="w-5 h-5 rounded-full bg-gradient-to-br from-accent-gold to-accent-earth flex items-center justify-center">
                       <span className="text-[9px] font-bold text-white">
@@ -264,7 +264,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                   <button
                     type="button"
                     onClick={logout}
-                    className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-md text-text-tertiary hover:text-text-secondary text-xs transition-colors"
+                    className="hidden sm:flex min-h-[44px] items-center gap-1 px-2 py-1.5 rounded-md text-text-tertiary hover:text-text-secondary text-xs transition-colors"
                     title="Sign out"
                   >
                     <LogOut className="w-3.5 h-3.5" />
@@ -274,13 +274,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <div className="hidden sm:flex items-center gap-2">
                   <Link
                     href="/login"
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-md text-text-secondary text-xs font-medium hover:text-text-primary transition-colors"
+                    className="flex min-h-[44px] items-center gap-2 px-3 py-1.5 rounded-md text-text-secondary text-xs font-medium hover:text-text-primary transition-colors"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
-                    className="flex items-center gap-2 px-4 py-1.5 rounded-md bg-accent-gold text-text-inverse text-xs font-semibold hover:bg-accent-gold-hover transition-colors"
+                    className="flex min-h-[44px] items-center justify-center gap-2 px-4 py-1.5 rounded-md bg-accent-gold text-text-inverse text-xs font-semibold hover:bg-accent-gold-hover transition-colors"
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     Create Account

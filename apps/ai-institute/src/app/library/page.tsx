@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, BookOpen, ExternalLink, Filter } from "lucide-react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 interface LibraryItem {
   id: string;
@@ -50,8 +48,6 @@ export default function LibraryPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <SiteHeader />
-
       {/* Hero */}
       <section
         style={{
@@ -346,8 +342,6 @@ export default function LibraryPage() {
           )}
         </div>
       </section>
-
-      <SiteFooter />
     </div>
   );
 }

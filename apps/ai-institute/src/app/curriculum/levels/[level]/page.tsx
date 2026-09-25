@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 import { curriculum, getLevelByNumber } from "@/data/curriculum-levels";
 import { ArrowRight, BookOpen } from "lucide-react";
 
@@ -37,8 +35,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
 
   return (
     <>
-      <SiteHeader />
-      <main id="main-content" className="min-h-screen">
+      <div id="main-content" className="min-h-screen">
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[var(--color-brand-forest)]/5 to-transparent pt-24 pb-16">
           <div className="mx-auto max-w-5xl px-6 text-center">
@@ -155,8 +152,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
             Back to Curriculum Overview
           </a>
         </section>
-      </main>
-      <SiteFooter />
+      </div>
     </>
   );
 }

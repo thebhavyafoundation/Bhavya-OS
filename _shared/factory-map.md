@@ -18,20 +18,20 @@ once; every run reads from the canonical home.
 | Governance rules       | `governance/README.md`                                  | `docs/` copies            |
 | Schemas                | `schemas/`                                              | ad-hoc validation         |
 | Package contracts      | `contracts/<pkg>/CONTRACT.md`                           | duplicated checks         |
-| Agent registry         | `.agents/registry.json`                                 | `platform/agents/` copies |
+| Agent registry         | `.ai/agents/registry.yaml` (exists on disk)             | `platform/agents/` copies |
 
 ## Product (new every run) — lives apart from factory
 
-| Product                                     | Lives at                                                               |
-| ------------------------------------------- | ---------------------------------------------------------------------- |
-| RFC runs                                    | `rfcs/RFC-NNNN-*.md`                                                   |
-| Release artifacts                           | `docs/releases/`                                                       |
-| Curriculum runs (KO → lesson → … → website) | `bhavya-ai-lab/data/` + `apps/ai-institute` SQLite                     |
-| Task state                                  | `.ai/current-task.md`, `.ai/current-release.md`                        |
-| Generated indexes                           | `registry/*.json`, `bar/index.json`, `FILE-MAP.md` (rebuilt by script) |
+| Product                                     | Lives at                                                                                                                                                   |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RFC runs                                    | `rfcs/RFC-NNNN-*.md`                                                                                                                                       |
+| Release artifacts                           | `docs/releases/`                                                                                                                                           |
+| Curriculum runs (KO → lesson → … → website) | `bhavya-ai-lab/data/` + `apps/ai-institute` SQLite                                                                                                         |
+| Task state                                  | `.ai/current-task.md`, `.ai/current-release.md`                                                                                                            |
+| Generated indexes                           | `registry/*.json`, `FILE-MAP.md` (root scripts); `bar/index.json` (see `bar/scripts/`; rebuild authority open — do not treat as live without verification) |
 
 ## Rules
 
 - A link beats a copy. If a fact exists in the canonical home, point — never duplicate.
-- Generated indexes are rebuilt by script, never hand-edited (`scripts/generate-file-map.mjs`).
+- Generated indexes are rebuilt by script, never hand-edited (`scripts/generate-file-map.mjs`, `scripts/generate-registry.js`). Which index is canonical when `registry/` and `bar/` disagree is a **human decision** — this map does not choose.
 - Method and instance live apart: blank starters live in `_templates/`; filled-in runs live in the product rows above.

@@ -1,0 +1,975 @@
+{
+  "source": "Raspberry Pi Foundation Experience AI (experience-ai.org), en-US, CC BY-NC-ND 4.0",
+  "generated": "2026-09-17",
+  "packs": 31,
+  "files": 130,
+  "words": 110285,
+  "catalog": [
+    {
+      "slug": "ai-detectives-the-case-of-the-clever-claim-en-US",
+      "files": [
+        {
+          "file": "eth-EG_en_Clever Guide.docx",
+          "role": "docx",
+          "words": 2494,
+          "title": "AI detectives: The case of the clever claim\nShare your feedback in our user surv"
+        },
+        {
+          "file": "eth-SL_en_Clever Case File.pptx",
+          "role": "pptx",
+          "words": 492,
+          "title": "This resource is licensed by the  Raspberry Pi Foundation  under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0). For more information on this licence, see  creativecommons.org/licenses/by-nc-nd/4.0 . Developed independently by the Raspbe"
+        }
+      ],
+      "words": 2986
+    },
+    {
+      "slug": "ai-safety-manager-challenge-en-US",
+      "files": [
+        {
+          "file": "eth-L1-A3-SL_en_AI applications.pptx",
+          "role": "pptx",
+          "words": 482,
+          "title": "Activity 3 – AI applications The AI safety manager challenge Activity 3"
+        },
+        {
+          "file": "eth-L1-A4_en_Application Audit.docx",
+          "role": "docx",
+          "words": 162,
+          "title": "Ethical audit"
+        },
+        {
+          "file": "eth-L1-A5_en_Exit Ticket.docx",
+          "role": "docx",
+          "words": 46,
+          "title": "Exit ticket"
+        },
+        {
+          "file": "eth-L1-LP_en_AI Safety Developer Challenge.docx",
+          "role": "docx",
+          "words": 427,
+          "title": "AI safety manager challenge"
+        },
+        {
+          "file": "eth-L1-SL_en_AI Safety Manager Challenge.pptx",
+          "role": "pptx",
+          "words": 815,
+          "title": "AI safety manager challenge"
+        }
+      ],
+      "words": 1932
+    },
+    {
+      "slug": "discovering-ai-14-16-en-US",
+      "files": [
+        {
+          "file": "DAI-LP_en_Discovering AI 14-16.docx",
+          "role": "docx",
+          "words": 422,
+          "title": "Lesson 0: What is AI?"
+        },
+        {
+          "file": "DAI-SL_en_Discovering AI 14-16.pptx",
+          "role": "pptx",
+          "words": 578,
+          "title": "Experience AI    What is AI?"
+        },
+        {
+          "file": "DAI_en_Exit ticket 14-16.pptx",
+          "role": "pptx",
+          "words": 43,
+          "title": "Experience AI Lesson 0: What is AI? Student worksheet/Exit ticket   Exit ticket: What is AI? This resource is licensed by the  Raspberry Pi Foundation  under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International licence (CC BY-NC-ND 4.0). For more information on this licence, "
+        }
+      ],
+      "words": 1043
+    },
+    {
+      "slug": "discovering-ai-8-12-en-US",
+      "files": [
+        {
+          "file": "DAI-A1-A2-SL_en_Discovering AI 8-12.pptx",
+          "role": "pptx",
+          "words": 700,
+          "title": "Discovering AI"
+        },
+        {
+          "file": "DAI-A3_en_Prediction Pathway 8-12.docx",
+          "role": "docx",
+          "words": 119,
+          "title": "The prediction pathway\nDraw a line between the data needed for the AI system and"
+        },
+        {
+          "file": "DAI-LP_en_Discovering AI 8-12.docx",
+          "role": "docx",
+          "words": 441,
+          "title": "Lesson 0: Discovering AI"
+        },
+        {
+          "file": "DAI_en_Exit Ticket 8-12.docx",
+          "role": "docx",
+          "words": 65,
+          "title": "Exit ticket: AI or not AI?\nDo you think these systems use AI?\nPick one or more a"
+        }
+      ],
+      "words": 1325
+    },
+    {
+      "slug": "ecosystems-and-ai-11-14-en-US",
+      "files": [
+        {
+          "file": "L8-A1_en_Workbook - Ecosystems.docx",
+          "role": "docx",
+          "words": 287,
+          "title": "Starter – Ecosystems\nWhat animals can you see in the image?\nWhat type of ecosyst"
+        },
+        {
+          "file": "L8-A4_en_Resource 4 - AI concept cartoon.pptx",
+          "role": "pptx",
+          "words": 30,
+          "title": "Discuss each statement Decide which statement(s) you agree with Give a reason for your choices Challenge (respectfully) others in your group with different opinions   Discussion: Impact of AI Activity 4"
+        },
+        {
+          "file": "L8-INTRO_en_Overview - Ecosystems.docx",
+          "role": "docx",
+          "words": 2057,
+          "title": "Experience AI: Ecosystems — Biology (11–14)"
+        },
+        {
+          "file": "L8-LP_en_Lesson plan - Ecosystems.docx",
+          "role": "docx",
+          "words": 915,
+          "title": "Experience AI: Ecosystems — Biology (11–14)"
+        },
+        {
+          "file": "L8-SL_en_Slides - Ecosystems.pptx",
+          "role": "pptx",
+          "words": 1318,
+          "title": "Experience AI: Ecosystems   Biology Biology"
+        }
+      ],
+      "words": 4607
+    },
+    {
+      "slug": "large-language-models-llms-11-14-en-US",
+      "files": [
+        {
+          "file": "L7-A5.1_en_Resource 5 - Blah model card.pptx",
+          "role": "pptx",
+          "words": 51,
+          "title": "Blah Model card Model description:  This is a large language model (LLM) trained using conversational language mostly found on the web. The model is designed to interact with users in a conversational way by predicting a response to the prompt provided by a user. Intended use:  It should be used to "
+        },
+        {
+          "file": "L7-A5.2_en_Resource 5 - Teacher support.docx",
+          "role": "docx",
+          "words": 264,
+          "title": "Activity 5 – Teacher support\nThe purpose of this activity is for students to eva"
+        },
+        {
+          "file": "L7-A5.3_en_Worksheet 5 - Worksheet.docx",
+          "role": "docx",
+          "words": 109,
+          "title": "In your groups, read the scenarios below and for each one, use the Blah model ca"
+        },
+        {
+          "file": "L7-INTRO_en_Overview - LLMs.docx",
+          "role": "docx",
+          "words": 2425,
+          "title": "Experience AI: Large language models"
+        },
+        {
+          "file": "L7-LP_en_Lesson plan - LLMs.docx",
+          "role": "docx",
+          "words": 2017,
+          "title": "Experience AI: Large language models"
+        },
+        {
+          "file": "L7-SL_en_Slides - LLMs .pptx",
+          "role": "pptx",
+          "words": 1464,
+          "title": "Large  language models (LLMs)"
+        }
+      ],
+      "words": 6330
+    },
+    {
+      "slug": "lesson-1-exploring-social-media-en-US",
+      "files": [
+        {
+          "file": "cul-L1-LP_en_Exploring Social Media.docx",
+          "role": "docx",
+          "words": 391,
+          "title": "Lesson 1: Exploring social media"
+        },
+        {
+          "file": "cul-L1-SL_en_321 Reflection.pptx",
+          "role": "pptx",
+          "words": 41,
+          "title": "AI and social media Lesson 1: Exploring social media Student  worksheet   This resource is licensed by the  Raspberry Pi Foundation  under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0). For more information on this licence, see  creativ"
+        },
+        {
+          "file": "cul-L1-SL_en_Exploring Social Media.pptx",
+          "role": "pptx",
+          "words": 462,
+          "title": "Exploring social media Lesson 1 AI and social media"
+        }
+      ],
+      "words": 894
+    },
+    {
+      "slug": "lesson-1-what-is-a-flood-en-US",
+      "files": [
+        {
+          "file": "env-L1-A2_en_Types of Floods.docx",
+          "role": "docx",
+          "words": 26,
+          "title": "Types of floods\nDraw a line between the picture and the type of flood.\nGroundwat"
+        },
+        {
+          "file": "env-L1-A3.2_en_Causes of Floods.docx",
+          "role": "docx",
+          "words": 57,
+          "title": "Causes of floods\nDraw a line between the type of flood and its cause.\nCoastal fl"
+        },
+        {
+          "file": "env-L1-A3_en_Sorting Causes.docx",
+          "role": "docx",
+          "words": 28,
+          "title": "Physical and human causes sorting cards\nVery dry ground\nWaste blocking the river"
+        },
+        {
+          "file": "env-L1-LP_en_What is a Flood.docx",
+          "role": "docx",
+          "words": 550,
+          "title": "Lesson 1: What is a flood?"
+        },
+        {
+          "file": "env-L1-SL_en_What is a Flood.pptx",
+          "role": "pptx",
+          "words": 638,
+          "title": "Flood forecasting Lesson 1: What is a flood?"
+        }
+      ],
+      "words": 1299
+    },
+    {
+      "slug": "lesson-1-what-is-ai-en-US",
+      "files": [
+        {
+          "file": "L1-A1_en_Resource - Intelligent piece of paper.docx",
+          "role": "docx",
+          "words": 258,
+          "title": "The intelligent piece of paper\nI am a highly intelligent piece of paper.\nLet’s p"
+        },
+        {
+          "file": "L1-A2_en_Worksheet - What is AI.docx",
+          "role": "docx",
+          "words": 508,
+          "title": "Activity 1\nWhat is artificial intelligence? – Part 1\nUsing your own words, write"
+        },
+        {
+          "file": "L1-LP_en_Lesson plan - What is AI.docx",
+          "role": "docx",
+          "words": 2827,
+          "title": "Lesson 1: What is AI?"
+        },
+        {
+          "file": "L1-SL_en_Slides - What is AI .pptx",
+          "role": "pptx",
+          "words": 1014,
+          "title": "Lesson 1: What is  AI ? Experience AI"
+        }
+      ],
+      "words": 4607
+    },
+    {
+      "slug": "lesson-2-ai-flood-detectives-en-US",
+      "files": [
+        {
+          "file": "env-L2-A3_en_Information Sheet.docx",
+          "role": "docx",
+          "words": 763,
+          "title": "Google Flood Hub"
+        },
+        {
+          "file": "env-L2-LP_en_AI Flood Detectives.docx",
+          "role": "docx",
+          "words": 567,
+          "title": "Lesson 2: AI flood detectives"
+        },
+        {
+          "file": "env-L2-SL_en_AI Flood Detectives.pptx",
+          "role": "pptx",
+          "words": 986,
+          "title": "Flood forecasting Lesson 2: AI flood detectives"
+        }
+      ],
+      "words": 2316
+    },
+    {
+      "slug": "lesson-2-engagement-bait-en-US",
+      "files": [
+        {
+          "file": "cul-L2-LP_en_Engagement Bait.docx",
+          "role": "docx",
+          "words": 450,
+          "title": "Lesson 2: Engagement bait"
+        },
+        {
+          "file": "cul-L2-SL_en_Engagement Bait.pptx",
+          "role": "pptx",
+          "words": 1077,
+          "title": "Engagement bait Lesson 2 AI and social media"
+        },
+        {
+          "file": "cul-L2-SL_en_Learner Worksheet.pptx",
+          "role": "pptx",
+          "words": 122,
+          "title": "AI and social media Lesson 2: Engagement bait Student  worksheet   This resource is licensed by the  Raspberry Pi Foundation  under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0). For more information on this licence, see  creativecommon"
+        }
+      ],
+      "words": 1649
+    },
+    {
+      "slug": "lesson-2-how-computers-learn-from-data-en-US",
+      "files": [
+        {
+          "file": "L2-A1_en_Worksheet 1 - What data do you need.docx",
+          "role": "docx",
+          "words": 121,
+          "title": "Would the following uses of an application be best suited to using instructions or a machine learning model?"
+        },
+        {
+          "file": "L2-A1A_en_Worksheet Answers 1 - What data do you need.docx",
+          "role": "docx",
+          "words": 160,
+          "title": "Would the following uses of an application be best suited to using instructions or a machine learning model?"
+        },
+        {
+          "file": "L2-A2_en_Resource 2 - Types of machine learning (quiz).docx",
+          "role": "docx",
+          "words": 115,
+          "title": "After watching the video, ask the students to identify which of the types of machine learning each of the following statements applies to."
+        },
+        {
+          "file": "L2-A3_en_Worksheet 3 - Data types for classification.docx",
+          "role": "docx",
+          "words": 102,
+          "title": "For these three classification problems, write which type of data you would use to train the classification model and give some ideas for classes you could choose."
+        },
+        {
+          "file": "L2-A3A_en_Worksheet Answers 3 - Data types for classification.docx",
+          "role": "docx",
+          "words": 130,
+          "title": "For these three classification problems, write which type of data you would use to train the classification model and give some ideas for classes you could choose."
+        },
+        {
+          "file": "L2-LP_en_Lesson plan - How computers learn from data .docx",
+          "role": "docx",
+          "words": 2978,
+          "title": "Lesson 2: How computers learn from data"
+        },
+        {
+          "file": "L2-SL_en_Slides - How computers learn from data .pptx",
+          "role": "pptx",
+          "words": 1607,
+          "title": "Lesson 2: How  computers  learn from data Experience AI"
+        }
+      ],
+      "words": 5213
+    },
+    {
+      "slug": "lesson-3-bias-in-bias-out-en-US",
+      "files": [
+        {
+          "file": "L3-A1_en_Worksheet 1 - Training a model.docx",
+          "role": "docx",
+          "words": 394,
+          "title": "Supermarket AI application – Training a model\nA supermarket has asked you to cre"
+        },
+        {
+          "file": "L3-A3_en_Worksheet 3 - Avoiding bias.docx",
+          "role": "docx",
+          "words": 233,
+          "title": "Avoiding bias\nYour school has tried using a machine learning (ML) model to predi"
+        },
+        {
+          "file": "L3-LP_en_Lesson plan - Bias in bias out .docx",
+          "role": "docx",
+          "words": 1911,
+          "title": "Lesson 3: Bias in, bias out"
+        },
+        {
+          "file": "L3-SL_en_Slides - Bias in bias out .pptx",
+          "role": "pptx",
+          "words": 1059,
+          "title": "Lesson 3: Bias in, bias out Experience AI"
+        }
+      ],
+      "words": 3597
+    },
+    {
+      "slug": "lesson-3-designed-for-attention-en-US",
+      "files": [
+        {
+          "file": "cul-L3-LP_en_Designed For Attention.docx",
+          "role": "docx",
+          "words": 363,
+          "title": "Lesson 3: Designed for attention"
+        },
+        {
+          "file": "cul-L3-SL_en_Designed For Attention.pptx",
+          "role": "pptx",
+          "words": 550,
+          "title": "Designed for attention Lesson 3 AI and social media"
+        },
+        {
+          "file": "cul-L3-SL_en_Learner Worksheet.pptx",
+          "role": "pptx",
+          "words": 41,
+          "title": "AI and social media Lesson 3: Designed for attention Student  worksheet   This resource is licensed by the  Raspberry Pi Foundation  under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License (CC BY-NC-ND 4.0). For more information on this licence, see  creativ"
+        }
+      ],
+      "words": 954
+    },
+    {
+      "slug": "lesson-3-using-ai-systems-to-predict-floods-en-US",
+      "files": [
+        {
+          "file": "env-L3-A4_en_Problematic Predictions.docx",
+          "role": "docx",
+          "words": 122,
+          "title": "Problematic predictions"
+        },
+        {
+          "file": "env-L3-LP_en_Predicting Floods.docx",
+          "role": "docx",
+          "words": 632,
+          "title": "Lesson 3: Using AI systems to predict floods"
+        },
+        {
+          "file": "env-L3-SL_en_Predicting Floods.pptx",
+          "role": "pptx",
+          "words": 1077,
+          "title": "Flood forecasting Lesson 3: Using AI systems to predict floods"
+        }
+      ],
+      "words": 1831
+    },
+    {
+      "slug": "lesson-4-ai-quests-market-marshes-en-US",
+      "files": [
+        {
+          "file": "env-L4-A2_en_Data Collection Support.docx",
+          "role": "docx",
+          "words": 223,
+          "title": "Data collection support cards"
+        },
+        {
+          "file": "env-L4-A3_en_Student Reflections.docx",
+          "role": "docx",
+          "words": 260,
+          "title": "Reflections"
+        },
+        {
+          "file": "env-L4-LP_en_AI Quests.docx",
+          "role": "docx",
+          "words": 367,
+          "title": "Lesson 4: AI Quests – Market Marshes"
+        },
+        {
+          "file": "env-L4-SL_en_AI and Flooding.pptx",
+          "role": "pptx",
+          "words": 593,
+          "title": "Flood forecasting Lesson 4: AI Quests"
+        }
+      ],
+      "words": 1443
+    },
+    {
+      "slug": "lesson-4-decision-trees-en-US",
+      "files": [
+        {
+          "file": "L4-A2.1_en_Worksheet 2.1 - Creating a decision tree.pptx",
+          "role": "pptx",
+          "words": 26,
+          "title": "Temperature:  2856 Radius:  0.0782 Brightness:  19.56 Colour:  Red (0) Class: Red Dwarf Temperature:  2861 Radius:  0.0899 Brightness:  16.71 Colour:  Red (0) Class: Red Dwarf Temperature:  4077 Radius:  0.795 Brightness:  6.228 Colour:  Yellow (4) Class: Main Sequence Temperature:  8052 Radius:  1."
+        },
+        {
+          "file": "L4-A2.2_en_Worksheet 2.2 - Creating a decision tree.pptx",
+          "role": "pptx",
+          "words": 25,
+          "title": "Brightness  <=  ?? ?? ?? True False True False ?? ?? Temperature:  3605 Radius:  1124 Brightness:  -10.81 Colour:  Red (0) Class: Hypergiant Temperature:  3780 Radius:  1324 Brightness:  -10.7 Colour:  Red (0) Class: Hypergiant Temperature:  10980 Radius:  0.0087 Brightness:  11.19 Colour:  Blue-Whi"
+        },
+        {
+          "file": "L4-A3_en_Worksheet 3 - Training a decision tree.docx",
+          "role": "docx",
+          "words": 329,
+          "title": "Star types – Training a decision tree\nRather than creating a decision tree by ha"
+        },
+        {
+          "file": "L4-LP_en_Lesson plan - Decision trees .docx",
+          "role": "docx",
+          "words": 2598,
+          "title": "Lesson 4: Decision trees"
+        },
+        {
+          "file": "L4-SL_en_Slides - Decision trees .pptx",
+          "role": "pptx",
+          "words": 1519,
+          "title": "Lesson 4: Decision trees Experience AI"
+        }
+      ],
+      "words": 4497
+    },
+    {
+      "slug": "lesson-5-how-to-solve-problems-with-machine-learning-models-en-US",
+      "files": [
+        {
+          "file": "L5-A1_en_Starter resource 1 - AI project lifecycle.docx",
+          "role": "docx",
+          "words": 266,
+          "title": "The AI project lifecycle\nCut out the cards and distribute one set per group. The"
+        },
+        {
+          "file": "L5-LP_en_Lesson plan - Solving problems with ML models .docx",
+          "role": "docx",
+          "words": 1837,
+          "title": "Lesson 5: Solving problems with ML models"
+        },
+        {
+          "file": "L5-PRJ1-A1.1_en_Project introduction - Ocean data.docx",
+          "role": "docx",
+          "words": 228,
+          "title": "Classifying data from the world’s oceans — Project brief\nAbout Argo\nArgo is an i"
+        },
+        {
+          "file": "L5-PRJ1-A1.2_en_Project documentation - Ocean data .docx",
+          "role": "docx",
+          "words": 380,
+          "title": "Classifying ocean data\nStage 1: Defining the problem\nTrain a machine learning mo"
+        },
+        {
+          "file": "L5-PRJ2-A1.1_en_Project introduction - Fake news.docx",
+          "role": "docx",
+          "words": 232,
+          "title": "Identifying fake news — Project briefFAKE NEWS\nFAKE NEWS\nFake news is informatio"
+        },
+        {
+          "file": "L5-PRJ2-A1.2_en_Project documentation - Fake news .docx",
+          "role": "docx",
+          "words": 374,
+          "title": "Identifying fake news\nStage 1: Defining the problem\nTrain a machine learning mod"
+        },
+        {
+          "file": "L5-PRJ3-A1.1_en_Project documentation - Waste classification .docx",
+          "role": "docx",
+          "words": 382,
+          "title": "Classifying waste products\nStage 1: Defining the problem\nTrain a machine learnin"
+        },
+        {
+          "file": "L5-PRJ3-A1.2_en_Project introduction - Waste classification.docx",
+          "role": "docx",
+          "words": 249,
+          "title": "Waste classification using images — Project brief\nImage source: https://pixabay."
+        },
+        {
+          "file": "L5-SL_en_Slides - Solving problems with ML models.pptx",
+          "role": "pptx",
+          "words": 948,
+          "title": "Lesson 5: Solving problems with ML models Experience AI"
+        }
+      ],
+      "words": 4896
+    },
+    {
+      "slug": "lesson-6-model-cards-and-careers-en-US",
+      "files": [
+        {
+          "file": "L6-A3_en_Worksheet 3 - AI careers.pptx",
+          "role": "pptx",
+          "words": 542,
+          "title": "Social and ethical Applications Models Examining how AI and machine learning impact society. Ensuring that the use of AI applications does not cause harm or increase inequality. Implementing machine learning models into a larger software system. Not responsible for training.  Creating machine learni"
+        },
+        {
+          "file": "L6-AIQ-A1_en_Worksheet 2 - My model card.pptx",
+          "role": "pptx",
+          "words": 100,
+          "title": "NAME OF MODEL:  Market Marshes flood forecasting Model card Model description:  Predicts floods to help Luna and the other villagers protect their market stalls. Intended use:  The villagers will use it to help them place their market stalls in safe places away from flood water.  Limitations:   The "
+        },
+        {
+          "file": "L6-AIQ-A1_en_Worksheet 2 - My model card_AI Quest Ans.pptx",
+          "role": "pptx",
+          "words": 53,
+          "title": "NAME OF MODEL Model card Model description:  What does the model do? Intended use:  W ho might use this model   and for what purpose/ how would it benefit them?  Limitations:   Describe any limitations  of  the data used to train the model,  such as the  amount of data   used and where the data has "
+        },
+        {
+          "file": "L6-AIQ-LP_en_Lesson plan - Model cards and careers.docx",
+          "role": "docx",
+          "words": 2044,
+          "title": "Lesson 6: Model cards and careers"
+        },
+        {
+          "file": "L6-AIQ-SL_en_Slides - Model cards and careers.pptx",
+          "role": "pptx",
+          "words": 821,
+          "title": "Lesson 6: Model cards and careers Experience AI"
+        },
+        {
+          "file": "L6-SA_en_Summative Assessment - Foundations unit.docx",
+          "role": "docx",
+          "words": 2154,
+          "title": "Summative assessment\n1. What is the difference between a traditional computer pr"
+        }
+      ],
+      "words": 5714
+    },
+    {
+      "slug": "media-literacy-in-the-age-of-ai-en-US",
+      "files": [
+        {
+          "file": "L10-LP_en-US_Session guide - Media literacy in the age of AI.docx",
+          "role": "docx",
+          "words": 3303,
+          "title": "Introduction"
+        },
+        {
+          "file": "L10-SL_en-US_Slides - Media literacy in the age of AI.pptx",
+          "role": "pptx",
+          "words": 1124,
+          "title": "Media literacy in the age of AI  AI  safety Media literacy in the age of AI"
+        }
+      ],
+      "words": 4427
+    },
+    {
+      "slug": "module-1-lesson-1-what-is-ai-en-US",
+      "files": [
+        {
+          "file": "M1-L1-A2_en-US_Worksheet 2 - Generative AI.docx",
+          "role": "docx",
+          "words": 63,
+          "title": "Generative AI\nYour task is to use an online generative AI application to produce"
+        },
+        {
+          "file": "M1-L1-A4_en-US_Worksheet Optional - Computer vision.docx",
+          "role": "docx",
+          "words": 94,
+          "title": "Computer vision\nThe website below will allow you to choose an image. It will use"
+        },
+        {
+          "file": "M1-L1-LP_en-US_Lesson plan - What is AI.docx",
+          "role": "docx",
+          "words": 2421,
+          "title": "Lesson 1: What is AI?"
+        },
+        {
+          "file": "M1-L1-SL_en-US_Slides - What is AI.pptx",
+          "role": "pptx",
+          "words": 951,
+          "title": "Lesson 1: What is  AI ? Experience AI"
+        }
+      ],
+      "words": 3529
+    },
+    {
+      "slug": "module-1-lesson-2-machine-learning-en-US",
+      "files": [
+        {
+          "file": "M1-L2-A1_en-US_Educator Resource - Intelligent piece of paper.docx",
+          "role": "docx",
+          "words": 214,
+          "title": "The intelligent piece of paper"
+        },
+        {
+          "file": "M1-L2-LP_en-US_Lesson plan - Machine Learning.docx",
+          "role": "docx",
+          "words": 3401,
+          "title": "Lesson 2: Machine learning"
+        },
+        {
+          "file": "M1-L2-SL_en-US_Slides - Machine Learning.pptx",
+          "role": "pptx",
+          "words": 1073,
+          "title": "Lesson 2: Machine learning Experience AI"
+        }
+      ],
+      "words": 4688
+    },
+    {
+      "slug": "module-1-lesson-3-classification-en-US",
+      "files": [
+        {
+          "file": "M1-L3-A2_en-US_Worksheet 2 - Quick, Draw!.docx",
+          "role": "docx",
+          "words": 128,
+          "title": "Quick, Draw!"
+        },
+        {
+          "file": "M1-L3-A3_en-US_Worksheet Optional - Classification in the real world.docx",
+          "role": "docx",
+          "words": 34,
+          "title": "Choose one classification task and answer the following questions:"
+        },
+        {
+          "file": "M1-L3-LP_en-US_Lesson plan - Classification.docx",
+          "role": "docx",
+          "words": 2932,
+          "title": "Lesson 3: Classification"
+        },
+        {
+          "file": "M1-L3-SL_en-US_Slides - Classification.pptx",
+          "role": "pptx",
+          "words": 1287,
+          "title": "Lesson 3: Classification Experience AI"
+        }
+      ],
+      "words": 4381
+    },
+    {
+      "slug": "module-1-lesson-4-bias-in-bias-out-en-US",
+      "files": [
+        {
+          "file": "M1-L4-A2_en-US_Worksheet 2 - Supermarket AI.docx",
+          "role": "docx",
+          "words": 352,
+          "title": "Supermarket AI application – Train a model"
+        },
+        {
+          "file": "M1-L4-A3_en-US_Worksheet Optional - The career you should pursue.docx",
+          "role": "docx",
+          "words": 270,
+          "title": "Your future career"
+        },
+        {
+          "file": "M1-L4-LP_en-US_Lesson plan - Bias in, bias out.docx",
+          "role": "docx",
+          "words": 2738,
+          "title": "Lesson 4: Bias in, bias out"
+        },
+        {
+          "file": "M1-L4-SL_en-US_Bias in bias out.pptx",
+          "role": "pptx",
+          "words": 1408,
+          "title": "Lesson 4: Bias in, bias out Experience AI"
+        }
+      ],
+      "words": 4768
+    },
+    {
+      "slug": "module-2-lesson-1-ai-around-you-en-US",
+      "files": [
+        {
+          "file": "M2-L1-A2_en-US_Worksheet 2 - Solving problems with predictive AI.docx",
+          "role": "docx",
+          "words": 108,
+          "title": "Solving problems with predictive AI\nChoose a problem from one of the areas in th"
+        },
+        {
+          "file": "M2-L1-A3-1_en-US_Worksheet 3 - Ethical and data considerations in AI systems.docx",
+          "role": "docx",
+          "words": 228,
+          "title": "Ethical and data issues\nSelect one AI tool from the options below.\nRead the ethi"
+        },
+        {
+          "file": "M2-L1-A3-2_en-US_Worksheet 3 - SupportCards.docx",
+          "role": "docx",
+          "words": 241,
+          "title": "Support cards"
+        },
+        {
+          "file": "M2-L1-A4_en-US_Worksheet Optional - Ethical Inspector.docx",
+          "role": "docx",
+          "words": 67,
+          "title": "Ethical inspector"
+        },
+        {
+          "file": "M2-L1-LP_en-US_Lesson plan - AI around you.docx",
+          "role": "docx",
+          "words": 2179,
+          "title": "Lesson 1: AI around you"
+        },
+        {
+          "file": "M2-L1-SL_en-US_Slides - AI around you.pptx",
+          "role": "pptx",
+          "words": 1262,
+          "title": "Lesson 1:  AI around you Experience AI"
+        }
+      ],
+      "words": 4085
+    },
+    {
+      "slug": "module-2-lesson-2-creating-ai-projects-en-US",
+      "files": [
+        {
+          "file": "M2-L2-A3-1_en-US_Worksheet - Flood Forecasting - Model card.pptx",
+          "role": "pptx",
+          "words": 48,
+          "title": "AI Flood Forecasting by Google Research Model card Model description:  Google Research's AI Flood Forecasting model uses a machine learning AI system. It can accurately predict river floods up to 7 days in advance all over the world. It makes flood forecasting a lot better, especially in places wher"
+        },
+        {
+          "file": "M2-L2-A3-2_en-US_Worksheet - Flood Forecasting - Model card_Advanced.pptx",
+          "role": "pptx",
+          "words": 42,
+          "title": "AI Flood Forecasting by Google Research Model card Model description:  Google Research's AI Flood Forecasting model uses a neural network to accurately predict  riverine  floods up to 7 days in advance globally. It significantly improves flood forecasting, especially in data-scarce regions. Intended"
+        },
+        {
+          "file": "M2-L2-A3-A_en-US_Worksheet - Model card review - Educator Answers.docx",
+          "role": "docx",
+          "words": 175,
+          "title": "Model card review\nUse this table to review the model card.\nWhat problem is the m"
+        },
+        {
+          "file": "M2-L2-A3-Q_en-US_Worksheet - Model card review.docx",
+          "role": "docx",
+          "words": 64,
+          "title": "Model card review\nUse this table to review the model card.\nWhat problem is the m"
+        },
+        {
+          "file": "M2-L2-LP_en-US_Lesson plan - Creating AI projects.docx",
+          "role": "docx",
+          "words": 1822,
+          "title": "Lesson 2: Creating AI projects"
+        },
+        {
+          "file": "M2-L2-SL_en-US_Slides - Creating AI projects.pptx",
+          "role": "pptx",
+          "words": 903,
+          "title": "Lesson 2: Creating AI projects Experience AI"
+        }
+      ],
+      "words": 3054
+    },
+    {
+      "slug": "module-2-lesson-3-solving-problems-with-ml-models-part-1-en-US",
+      "files": [
+        {
+          "file": "M2-L3-A1_en-US_AI project lifecycle.docx",
+          "role": "docx",
+          "words": 216,
+          "title": "The AI project lifecycle"
+        },
+        {
+          "file": "M2-L3-LP_en-US_Lesson plan - Solving problems with ML models.docx",
+          "role": "docx",
+          "words": 1958,
+          "title": "Lesson 3: Solving problems with ML models (part 1)"
+        },
+        {
+          "file": "M2-L3-PB-A2_en-US_Project Brief.docx",
+          "role": "docx",
+          "words": 532,
+          "title": "Project brief 1: Identifying wildfires in satellite images\nWildfires are becomin"
+        },
+        {
+          "file": "M2-L3-PRJ1-A-A2_en-US_Answers Detecting Wildfires.docx",
+          "role": "docx",
+          "words": 630,
+          "title": "User-centered design worksheet:\nDetecting wildfires\nUser persona 1: Firefighters"
+        },
+        {
+          "file": "M2-L3-PRJ2-A-A2_en-US_Answers Organic Waste.docx",
+          "role": "docx",
+          "words": 749,
+          "title": "User-centered design worksheet:\nOrganic waste\nUser persona 1: Homeowner\nLesson 3"
+        },
+        {
+          "file": "M2-L3-PW-A2_en-US_Project worksheet.docx",
+          "role": "docx",
+          "words": 770,
+          "title": "Project worksheet"
+        },
+        {
+          "file": "M2-L3-SL_en-US_Slides - Solving problems with ML models.pptx",
+          "role": "pptx",
+          "words": 906,
+          "title": "Lesson 3: Solving problems with ML models (part 1) Experience AI"
+        }
+      ],
+      "words": 5761
+    },
+    {
+      "slug": "module-2-lesson-4-solving-problems-with-ml-models-part-2-en-US",
+      "files": [
+        {
+          "file": "M2-L4-LP_en-US_Lesson plan - Solving problems with ML models.docx",
+          "role": "docx",
+          "words": 2274,
+          "title": "Lesson 4: Solving problems with ML models (part 2)"
+        },
+        {
+          "file": "M2-L4-SL_en-US_Slides - Solving problems with ML models.pptx",
+          "role": "pptx",
+          "words": 889,
+          "title": "Lesson  4: Solving problems with ML models (part 2) Experience AI"
+        }
+      ],
+      "words": 3163
+    },
+    {
+      "slug": "module-2-lesson-5-model-cards-and-careers-en-US",
+      "files": [
+        {
+          "file": "M2-L5-A2_en-US_Worksheet 1 - My model card.pptx",
+          "role": "pptx",
+          "words": 70,
+          "title": "NAME OF MODEL Model card Model description:  What does the model do? Intended use:  W ho might use this model and for what purpose? How would it help them?  Limitations:   Describe any limits of the data used to train the model, such as the amount of data used and where the data has come from. What "
+        },
+        {
+          "file": "M2-L5-A3_en-US_Worksheet 2 - AI careers.pptx",
+          "role": "pptx",
+          "words": 700,
+          "title": "Social and ethical Applications Models Social and ethical Checking how AI and machine learning affect society. Making sure that they do not create problems or make things unfair for people. Applications Adding machine learning models into a larger software system.    Models Creating machine learning"
+        },
+        {
+          "file": "M2-L5-LP_en-US_Lesson plan - Model cards and careers.docx",
+          "role": "docx",
+          "words": 2992,
+          "title": "Lesson 5: Model cards and careers"
+        },
+        {
+          "file": "M2-L5-SL_en-US_Slides - Model cards and careers.pptx",
+          "role": "pptx",
+          "words": 872,
+          "title": "Lesson 5: Model cards and careers Experience AI"
+        }
+      ],
+      "words": 4634
+    },
+    {
+      "slug": "using-ai-tools-responsibly-en-US",
+      "files": [
+        {
+          "file": "L11-LP_en-US_Session guide - Using AI tools responsibly.docx",
+          "role": "docx",
+          "words": 4397,
+          "title": "Introduction"
+        },
+        {
+          "file": "L11-SL_en-US_Slides - Using AI tools responsibly.pptx",
+          "role": "pptx",
+          "words": 1061,
+          "title": "Using AI tools responsibly AI  safety Using AI tools responsibly"
+        }
+      ],
+      "words": 5458
+    },
+    {
+      "slug": "your-data-and-ai-en-US",
+      "files": [
+        {
+          "file": "L9-LP_en-US_Session guide - Your data and AI.docx",
+          "role": "docx",
+          "words": 3509,
+          "title": "Introduction"
+        },
+        {
+          "file": "L9-SL_us_Slides - Your data and AI.pptx",
+          "role": "pptx",
+          "words": 1695,
+          "title": "Your data and AI AI  safety Your data and AI"
+        }
+      ],
+      "words": 5204
+    }
+  ]
+}

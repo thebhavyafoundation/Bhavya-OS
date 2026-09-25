@@ -42,7 +42,7 @@ export default async function CourseDetailPage({
   const firstLessonId = await getFirstLessonId(course.id);
 
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-4xl px-6 py-16">
         <Link
           href="/courses"
@@ -178,6 +178,6 @@ export default async function CourseDetailPage({
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,10 +1,26 @@
 # DOMAIN OWNERSHIP
 
 **Date:** 2026-08-10
-**Status:** ACTIVE
+**Status:** ACTIVE — **partially stale vs filesystem (2026-09-23)**
 **Owner:** Bhavya Foundation Architecture
 **Last updated:** 2026-08-10
 **Applies To:** All domains, packages, and routes
+
+> **Authority note:** Filesystem wins over claimed package paths. Rows below that
+> name packages absent under `packages/` do **not** establish ownership of a
+> directory that does not exist. Routing still points here for structure; do not
+> invent replacement packages. Full domain reassignment is a human/architecture
+> decision, not a doc edit.
+
+**Phantom package paths observed (do not treat as live owners):**
+`packages/knowledge`, `packages/curriculum`, `packages/academy`,
+`packages/research`, `packages/forest`, `packages/heritage`,
+`packages/community`, `packages/github`, `packages/social`,
+`packages/governance`, `packages/media` — not present as workspace packages.
+
+**Present (verified under `packages/`):** `packages/intelligence`, `packages/ioc`,
+`packages/platform-ui`, `packages/video-engine`, plus legacy stubs noted in
+`packages/CONTEXT.md` without `package.json`.
 
 ---
 

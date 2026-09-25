@@ -2,7 +2,10 @@
 
 **Date:** 2026-08-10
 **Task:** Design System Reconciliation + Visual Fidelity Gate
-**Status:** IN PROGRESS
+**Status:** HISTORICAL LOG (**non-authoritative** for current skill inventory)
+
+> **2026-09-23:** This file records a past task trace. Skills named here that are
+> not under `.opencode/skills/` must not be treated as installed.
 
 ---
 

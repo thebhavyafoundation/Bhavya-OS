@@ -1,4 +1,6 @@
 {
+  "_notice": "NON-AUTHORITATIVE as of 2026-09-23. Installed skills live only under .opencode/skills/ (count 13). Paths below are historical/planned and must not be invoked unless the filesystem contains them. See AGENTS.md section 4.",
+  "authority": "filesystem:.opencode/skills/",
   "version": "1.0.0",
   "lastUpdated": "2026-08-10",
   "totalSkills": 29,

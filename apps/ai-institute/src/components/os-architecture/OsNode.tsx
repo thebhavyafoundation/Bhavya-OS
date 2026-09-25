@@ -44,7 +44,7 @@ export function OsNode({
           scale: 1,
           duration: 0.6,
           delay,
-          ease: "back.out(1.4)",
+          ease: "power3.out",
           scrollTrigger: {
             trigger: nodeRef.current,
             start: "top 85%",

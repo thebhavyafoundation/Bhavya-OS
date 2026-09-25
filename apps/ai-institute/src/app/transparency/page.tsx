@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 interface FinancialReport {
   id: string;
@@ -61,7 +59,6 @@ export default function TransparencyPage() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      <SiteHeader />
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-text-primary mb-2">
@@ -174,7 +171,6 @@ export default function TransparencyPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </div>
   );
 }

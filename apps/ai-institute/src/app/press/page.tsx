@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 const brandColors = [
   {
@@ -100,7 +98,6 @@ const guidelines = [
 export default function PressPage() {
   return (
     <>
-      <SiteHeader />
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
@@ -395,7 +392,6 @@ export default function PressPage() {
           </motion.div>
         </div>
       </section>
-      <SiteFooter />
     </>
   );
 }

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 import { curriculum, getTotalModules } from "@/data/curriculum-levels";
 import {
   BookOpen,
@@ -55,8 +53,7 @@ export default function CurriculumPage() {
 
   return (
     <>
-      <SiteHeader />
-      <main id="main-content" className="min-h-screen">
+      <div id="main-content" className="min-h-screen">
         {/* Hero */}
         <section
           style={{
@@ -452,8 +449,7 @@ export default function CurriculumPage() {
             </div>
           </div>
         </section>
-      </main>
-      <SiteFooter />
+      </div>
     </>
   );
 }

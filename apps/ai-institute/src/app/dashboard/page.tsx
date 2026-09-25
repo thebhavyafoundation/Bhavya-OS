@@ -15,8 +15,6 @@ import {
   LogIn,
 } from "lucide-react";
 import { getCourseById, courses } from "@/data/academy-courses";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export default function DashboardPage() {
   const { user, student, isAuthenticated } = useAuth();
@@ -25,7 +23,6 @@ export default function DashboardPage() {
   if (!isAuthenticated || !user) {
     return (
       <>
-        <SiteHeader />
         <div className="max-w-[1600px] mx-auto px-6 py-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,7 +45,6 @@ export default function DashboardPage() {
             </Link>
           </motion.div>
         </div>
-        <SiteFooter />
       </>
     );
   }
@@ -88,7 +84,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      <SiteHeader />
       <div className="max-w-[1600px] mx-auto px-6 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -403,7 +398,6 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
     </>
   );
 }

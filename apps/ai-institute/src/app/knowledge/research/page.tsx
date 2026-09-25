@@ -56,7 +56,7 @@ const publications = [
 export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <main className="pb-16">
+      <div className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,9 @@ export default function ResearchPage() {
                 <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-1">
                   {area.title}
                 </h3>
-                <p className="text-[var(--color-text-secondary)]">{area.desc}</p>
+                <p className="text-[var(--color-text-secondary)]">
+                  {area.desc}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -128,7 +130,7 @@ export default function ResearchPage() {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

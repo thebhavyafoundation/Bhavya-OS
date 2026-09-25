@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Contact — Bhavya Foundation",
@@ -11,8 +9,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <SiteHeader />
-      <main>
+      <div>
         {/* Hero */}
         <section
           className="section-cream"
@@ -250,8 +247,7 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
-      <SiteFooter />
+      </div>
     </>
   );
 }

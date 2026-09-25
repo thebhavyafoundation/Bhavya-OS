@@ -1,0 +1,12 @@
+# Tooling Gaps (2026-09-17, Phase 0)
+
+| Gap                                     | Impact                                                                             | Install later?                                                                                                                                                                 |
+| --------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No `gh` CLI                             | GitHub ops go through MCP only; no local PR/dispatch scripting                     | USEFUL — install when local gh workflows needed                                                                                                                                |
+| No Playwright / no verified browser     | No local browser verification; `.opencode/skills/bhavya-qa` cannot execute locally | REQUIRED eventually — install `@playwright/test` + chromium for pre-PR checks, or use remote/CI browser. Do NOT install mid-mission without need (heavyweight, C: constrained) |
+| No wrangler                             | No local Cloudflare iteration; CI path only                                        | REFERENCE — CI covers; install only if Cloudflare preview debugging needed                                                                                                     |
+| No python-docx / no PDF libs            | Corpus analysis used stdlib XML parsing (worked, 0 failures)                       | NOT NEEDED — stdlib sufficed                                                                                                                                                   |
+| Superpowers project-local mirror absent | None — cache copy loadable                                                         | NOT NEEDED                                                                                                                                                                     |
+| C: 2.1 GB free                          | Cannot host corpus/extracts/browsers on C:                                         | Use D: for all heavy artifacts (done)                                                                                                                                          |
+
+Nothing above blocks the mission. No installations performed in Phase 0.

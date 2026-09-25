@@ -6,8 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
 import { getIntent } from "@/lib/participation-intents";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export default function RegisterPage() {
   return (
@@ -58,8 +56,7 @@ function RegisterForm() {
         flexDirection: "column",
       }}
     >
-      <SiteHeader />
-      <main
+      <div
         style={{
           flex: 1,
           display: "flex",
@@ -300,8 +297,7 @@ function RegisterForm() {
             </Link>
           </motion.p>
         </div>
-      </main>
-      <SiteFooter />
+      </div>
     </div>
   );
 }

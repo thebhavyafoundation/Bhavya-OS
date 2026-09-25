@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 interface StaggerProps {
   children: ReactNode;
@@ -18,6 +18,11 @@ export function Stagger({
 }: StaggerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -43,6 +48,8 @@ export function StaggerItem({
   className,
   variant = "slide-up",
 }: StaggerItemProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   const variants = {
     fade: {
       hidden: { opacity: 0 },
@@ -68,6 +75,10 @@ export function StaggerItem({
       },
     },
   };
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div className={className} variants={variants[variant]}>

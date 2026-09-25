@@ -47,7 +47,7 @@ const courses = [
 export default function CoursesPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <main className="pb-16">
+      <div className="pb-16">
         <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -116,7 +116,7 @@ export default function CoursesPage() {
             ))}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,14 @@
 # SKILL REGISTRY
 
 **Date:** 2026-08-10
-**Status:** ACTIVE
+**Status:** **NON-AUTHORITATIVE** — do not use for skill discovery
 **Owner:** Bhavya Foundation Architecture
 **Last updated:** 2026-08-10
-**Machine-readable:** `config/skills/registry.json`
+**Machine-readable:** `config/skills/registry.json` (**also non-authoritative**)
+
+> **2026-09-23:** Installed skills live only under `.opencode/skills/` (count: **13**).
+> Counts and skill names in this file are stale historical inventory. Prefer
+> filesystem + `AGENTS.md` §4. Missing skills listed here must not be invoked.
 
 ---
 

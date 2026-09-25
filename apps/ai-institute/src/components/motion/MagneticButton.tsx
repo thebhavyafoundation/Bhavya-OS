@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -17,6 +22,7 @@ export function MagneticButton({
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -25,7 +31,7 @@ export function MagneticButton({
   const springY = useSpring(y, { stiffness: 300, damping: 20 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
+    if (!ref.current || prefersReducedMotion) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -42,11 +48,11 @@ export function MagneticButton({
     <motion.button
       ref={ref}
       className={className}
-      style={{ x: springX, y: springY }}
+      style={prefersReducedMotion ? undefined : { x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      whileTap={{ scale: 0.97 }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.97 }}
     >
       {children}
     </motion.button>
