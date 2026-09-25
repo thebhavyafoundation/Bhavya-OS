@@ -88,25 +88,25 @@ export const STORY_CHAPTERS: StoryChapter[] = [
 
 export type HeroBeat =
   | "promise"
-  | "why"
-  | "pillars"
-  | "people"
-  | "evidence"
+  | "thesis"
+  | "forest"
   | "knowledge"
   | "heritage"
   | "community"
+  | "learning"
   | "structure"
+  | "system"
   | "invitation";
 
 export const HERO_BEATS: HeroBeat[] = [
   "promise",
-  "why",
-  "pillars",
-  "people",
-  "evidence",
+  "thesis",
+  "forest",
   "knowledge",
   "heritage",
   "community",
+  "learning",
   "structure",
+  "system",
   "invitation",
 ];

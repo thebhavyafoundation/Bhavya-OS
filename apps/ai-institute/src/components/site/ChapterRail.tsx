@@ -8,7 +8,9 @@ const beats = [
   { id: "chapter-knowledge", label: "Knowledge" },
   { id: "chapter-heritage", label: "Heritage" },
   { id: "chapter-community", label: "Community" },
+  { id: "learning", label: "Learning" },
   { id: "structure", label: "Structure" },
+  { id: "system", label: "System" },
   { id: "evidence", label: "Evidence" },
   { id: "invite", label: "Join" },
 ];

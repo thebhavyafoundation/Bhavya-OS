@@ -14,18 +14,20 @@ import { ProofStrip } from "@/components/editorial/ProofStrip";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { StoryChapter } from "@/components/site/StoryChapter";
 import { ChapterRail } from "@/components/site/ChapterRail";
+import { CountUp } from "@/components/site/CountUp";
 import { STORY_CHAPTERS, STORY_PROOF } from "@/lib/homepage-story";
 import { PHOTO, CHAPTER_PHOTO } from "@/lib/photos";
+import { curriculum, getTotalModules } from "@/data/curriculum-levels";
 
 /**
- * Homepage — nine-chapter visual narrative.
+ * Homepage — ten-beat cinematic narrative.
  *
- * PLACE → WHY → PILLARS → PEOPLE → EVIDENCE → KNOWLEDGE → HERITAGE →
- * COMMUNITY → GENERATIONS
+ * PROMISE → THESIS → FOUR MISSION CHAPTERS → LEARNING → STRUCTURE →
+ * BHAVYA OS + EVIDENCE → INVITATION
  *
  * Impact metrics: only Brand Constitution Art. 10 + curriculum data.
- * Photography: rights-cleared JPEGs via PHOTO map (see assets/manifest.json).
- * Reserved plates stay illustrative until first-party assets land.
+ * Photography: rights-cleared JPEGs via PHOTO/CHAPTER_PHOTO maps
+ * (see public/photography/metadata/photo_manifest.json).
  */
 
 const chapterDetails: Record<
@@ -58,7 +60,51 @@ const chapterDetails: Record<
   },
 };
 
+const osPanels = [
+  {
+    title: "Constitution & governance",
+    desc: "12 Articles — the governance framework that guides every decision.",
+    href: "/os/governance",
+  },
+  {
+    title: "Programme operations",
+    desc: "The institutional operating system connecting programs, evidence, and research.",
+    href: "/os",
+  },
+  {
+    title: "Learning records",
+    desc: "Structured learning paths from foundations to advanced research.",
+    href: "/app/learn",
+  },
+  {
+    title: "Research workspace",
+    desc: "Collaborate on institutional research and programmes.",
+    href: "/app/research",
+  },
+];
+
+const structurePillars = [
+  {
+    label: "Forest",
+    line: "Restore degraded ecosystems. Protect biodiversity. Conserve watersheds.",
+  },
+  {
+    label: "Knowledge",
+    line: "Expand access to learning. Advance research. Bridge the digital divide.",
+  },
+  {
+    label: "Heritage",
+    line: "Preserve cultural traditions. Document living history. Protect heritage sites.",
+  },
+  {
+    label: "Community",
+    line: "Local leadership first. Stronger social fabric. Resilient communities.",
+  },
+];
+
 export default function HomePage() {
+  const levelCount = curriculum.length;
+  const moduleCount = getTotalModules();
   return (
     <div
       className="min-h-screen"
@@ -176,7 +222,7 @@ export default function HomePage() {
           <div className="container cine-story-grid">
             <div className="cine-story-copy">
               <ScrollReveal direction="up" distance={20}>
-                <span className="editorial-label">01 · Why</span>
+                <span className="editorial-label">Thesis</span>
               </ScrollReveal>
               <TextReveal>
                 <h2
@@ -232,7 +278,158 @@ export default function HomePage() {
           />
         ))}
 
-        {/* ——— CH 05: EVIDENCE ——— */}
+        {/* ——— CH 07: LEARNING — deep dive + stat moment ——— */}
+        <section
+          className="cine-learning"
+          id="learning"
+          aria-labelledby="learning-heading"
+        >
+          <div className="container cine-learning-grid">
+            <div className="cine-learning-copy">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="editorial-label">05 · Learning</span>
+              </ScrollReveal>
+              <TextReveal>
+                <h2
+                  id="learning-heading"
+                  className="editorial-heading cine-learning-title"
+                >
+                  Free AI education for rural India.
+                </h2>
+              </TextReveal>
+              <ScrollReveal direction="up" distance={14} delay={0.1}>
+                <p className="cine-learning-body">
+                  Bhavya Academy opens one progressive curriculum — from first
+                  digital literacy through research — free, structured, and
+                  built to endure.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.18}>
+                <EditorialLink href="/knowledge">
+                  Enter the Academy
+                </EditorialLink>
+              </ScrollReveal>
+            </div>
+            <dl className="cine-learning-stat" aria-label="Curriculum scale">
+              <div className="cine-learning-stat-item">
+                <dd className="cine-learning-stat-value">
+                  <CountUp value={levelCount} />
+                </dd>
+                <dt className="cine-learning-stat-label">Levels</dt>
+              </div>
+              <div className="cine-learning-stat-item">
+                <dd className="cine-learning-stat-value">
+                  <CountUp value={moduleCount} />
+                </dd>
+                <dt className="cine-learning-stat-label">Modules</dt>
+              </div>
+              <span className="proof-source cine-learning-stat-source">
+                Bhavya Academy · curriculum data · verified
+              </span>
+            </dl>
+          </div>
+        </section>
+
+        {/* ——— CH 08: STRUCTURE — typographic diagram + 3D ——— */}
+        <section
+          className="cine-structure"
+          id="structure"
+          aria-labelledby="structure-heading"
+        >
+          <div className="container cine-structure-grid">
+            <div className="cine-structure-copy">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="editorial-label">06 · Structure</span>
+              </ScrollReveal>
+              <TextReveal>
+                <h2
+                  id="structure-heading"
+                  className="editorial-heading cine-structure-title"
+                >
+                  Constitution-bound. Four pillars. One institution.
+                </h2>
+              </TextReveal>
+              <ScrollReveal direction="up" distance={14} delay={0.1}>
+                <p className="cine-structure-body">
+                  One public charitable trust, four permanent missions, and a
+                  written constitution that guides every decision — structure
+                  designed to outlast its founders.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={12} delay={0.18}>
+                <EditorialLink href="/governance">
+                  Read the constitution
+                </EditorialLink>
+              </ScrollReveal>
+            </div>
+            <div className="cine-structure-stage">
+              <div className="cine-pillar-diagram">
+                {structurePillars.map((p, i) => (
+                  <ScrollReveal
+                    key={p.label}
+                    direction="up"
+                    distance={16}
+                    delay={i * 0.08}
+                  >
+                    <div className="cine-pillar-item">
+                      <span className="cine-pillar-name">{p.label}</span>
+                      <span className="cine-pillar-line" aria-hidden="true" />
+                      <span className="cine-pillar-desc">{p.line}</span>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+              <div className="cine-structure-3d" aria-hidden="true" />
+            </div>
+          </div>
+        </section>
+
+        {/* ——— CH 09: BHAVYA OS — forest-dark system panel ——— */}
+        <section
+          className="scene scene-dark cine-os"
+          id="system"
+          aria-labelledby="os-heading"
+        >
+          <div className="container">
+            <div className="cine-os-head">
+              <ScrollReveal direction="up" distance={16}>
+                <span className="dark-label">07 · Bhavya OS</span>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={24} delay={0.06}>
+                <h2 id="os-heading" className="dark-heading cine-os-title">
+                  The system behind the institution.
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal direction="up" distance={16} delay={0.12}>
+                <p className="dark-desc cine-os-desc">
+                  Bhavya OS is the institutional operating system — connecting
+                  programs, projects, evidence, research, and impact in one
+                  unified system built to endure.
+                </p>
+              </ScrollReveal>
+            </div>
+            <div className="home-grid-2x2 cine-os-grid">
+              {osPanels.map((panel, i) => (
+                <ScrollReveal
+                  key={panel.title}
+                  direction="up"
+                  distance={24}
+                  delay={i * 0.1}
+                >
+                  <a href={panel.href} className="os-glass-card">
+                    <h3 className="os-glass-card-title">{panel.title}</h3>
+                    <p className="os-glass-card-desc">{panel.desc}</p>
+                    <span className="os-glass-card-cta" aria-hidden="true">
+                      Open <ArrowRight size={14} />
+                    </span>
+                  </a>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ——— CH 10: EVIDENCE ——— */}
         <section
           className="cine-proof"
           id="evidence"
@@ -240,7 +437,7 @@ export default function HomePage() {
         >
           <div className="container">
             <ScrollReveal direction="up" distance={16}>
-              <span className="editorial-label">04 · Evidence</span>
+              <span className="editorial-label">08 · Evidence</span>
             </ScrollReveal>
             <TextReveal>
               <h2
@@ -259,12 +456,16 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ——— CH 09: GENERATIONS ——— */}
-        <section className="cine-invite" aria-labelledby="invite-heading">
+        {/* ——— CH 11: INVITATION ——— */}
+        <section
+          className="cine-invite"
+          id="invite"
+          aria-labelledby="invite-heading"
+        >
           <div className="cine-invite-atmosphere" aria-hidden="true" />
           <div className="container cine-invite-inner">
             <ScrollReveal direction="up" distance={16}>
-              <span className="dark-label">08 · Generations</span>
+              <span className="dark-label">09 · Invitation</span>
             </ScrollReveal>
             <ScrollReveal direction="up" distance={24} delay={0.06}>
               <h2
