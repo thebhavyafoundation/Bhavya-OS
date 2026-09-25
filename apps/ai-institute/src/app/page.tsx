@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ArrowRight, HeartHandshake } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -18,6 +19,11 @@ import { CountUp } from "@/components/site/CountUp";
 import { STORY_CHAPTERS, STORY_PROOF } from "@/lib/homepage-story";
 import { PHOTO, CHAPTER_PHOTO } from "@/lib/photos";
 import { curriculum, getTotalModules } from "@/data/curriculum-levels";
+
+const LazyPillarSphere = dynamic(
+  () => import("@/components/three/PillarSphere"),
+  { ssr: false, loading: () => null },
+);
 
 /**
  * Homepage — ten-beat cinematic narrative.
@@ -379,7 +385,9 @@ export default function HomePage() {
                   </ScrollReveal>
                 ))}
               </div>
-              <div className="cine-structure-3d" aria-hidden="true" />
+              <div className="cine-structure-3d">
+                <LazyPillarSphere />
+              </div>
             </div>
           </div>
         </section>

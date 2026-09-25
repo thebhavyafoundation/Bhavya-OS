@@ -3882,7 +3882,8 @@ body {
 }
 
 .cine-structure-3d {
-  min-height: 280px;
+  position: relative;
+  height: 340px;
   margin-top: var(--space-8);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -3891,6 +3892,11 @@ body {
     color-mix(in srgb, var(--color-brand-forest) 14%, transparent) 0%,
     transparent 70%
   );
+}
+
+.pillarsphere {
+  position: absolute;
+  inset: 0;
 }
 
 .cine-os {
