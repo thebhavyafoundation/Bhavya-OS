@@ -1,31 +1,40 @@
 {
-  "version": "1.0.0",
-  "created": "2026-08-12",
-  "description": "Bhavya Foundation — Real Photography Archive. All images are contextual documentary photographs from Himachal Pradesh, India.",
-  "legal_notice": "These are contextual real photographs. They do not imply Bhavya Foundation activities unless verified by repository evidence. Use language like 'Across the Himalayan communities we seek to serve' or 'Representative photograph — Himachal Pradesh.'",
+  "version": "1.4.0",
+  "updated": "2026-09-25",
+  "description": "Bhavya Foundation — Photography asset manifest. Some documentary JPEGs are now present under the same basenames; full provenance lives in assets/manifest.json. Interim .svg scene files remain on disk but must not ship as imagery and are not referenced by application code.",
+  "asset_policy": {
+    "current": "WIRED — real documentary JPEGs present and wired for hero, why-terrace-garhwal, heritage-stone-temple, knowledge-books-notepad, community-village-landscape, and forest-cedar-sunlight. knowledge-school-children, heritage-wooden-temple, and community-village-gathering remain ASSET REQUIRED (do not pass PHOTO_PENDING keys as photo props).",
+    "target": "real documentary JPEG photographs from the Himalayan region (prefer Himachal Pradesh; Uttarakhand acceptable when labeled honestly)",
+    "swap_rule": "Place real .jpg with same basename (2400x1600, 3:2, JPEG sRGB) and wire PHOTO map / HeroBackground photo props / feature-panel img slots. Never ship broken images (naturalWidth 0), SVG content with .jpg extension, or fake MIME.",
+    "quality_blocker": "Do not restore or ship SVG content disguised as .jpg (historical commit cea919c stored SVG bytes under .jpg names).",
+    "legal_notice": "Contextual real photographs do not imply Bhavya Foundation activities unless verified by repository evidence. Use language like 'Across the Himalayan communities we seek to serve' or 'Representative photograph — Himachal Pradesh / Uttarakhand.'",
+    "provenance_index": "assets/manifest.json"
+  },
   "photos": [
     {
       "id": "hero-himalayan-sunset",
-      "filename": "hero-himalayan-sunset.jpg",
+      "current_file": "hero/hero-himalayan-sunset.jpg",
+      "interim_file": "hero/hero-himalayan-sunset.svg",
+      "target_filename": "hero/hero-himalayan-sunset.jpg",
+      "status": "ACQUIRED — WIRED (HeroBackground photo={PHOTO.hero})",
       "category": "hero",
       "page": "home",
-      "description": "Himalayan mountain range at sunset with golden light, forest silhouettes, and atmospheric mist. Used as primary hero background.",
-      "subject": "Himalayan mountains, sunset, forest, valley",
-      "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "description": "Wide mountain valley in the Indian Himalaya (Valley of Uttarakhand). Primary hero background. Not a verified golden-hour sunset of Himachal.",
+      "subject": "Himalayan mountains, valley, ridgelines",
+      "location": "Uttarakhand, India",
+      "provenance_asset_id": "place-valley-uttarakhand",
+      "provenance_ref": "assets/manifest.json",
+      "attribution_required": true,
+      "dimensions": {
+        "width": 2400,
+        "height": 1600,
+        "aspect": "3:2"
+      },
+      "art_direction": "Cinematic wide-angle documentary photograph; layered ridgelines, warm golden light, deep forest-green valley silhouettes; left-aligned text-safe area for editorial hero copy; no people, no text, no logos.",
       "visual_characteristics": {
-        "dominant_colors": [
-          "golden",
-          "deep blue",
-          "forest green",
-          "warm orange"
-        ],
+        "dominant_colors": ["golden", "deep forest green", "warm amber"],
         "mood": "cinematic, warm, aspirational",
-        "text_readability": "high — dark foreground with bright sky",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.3) 0%, rgba(14,56,46,0.6) 100%)"
+        "text_readability": "high — dark foreground with bright sky"
       },
       "treatment": {
         "object_fit": "cover",
@@ -36,46 +45,62 @@
     },
     {
       "id": "forest-cedar-sunlight",
-      "filename": "forest-cedar-sunlight.jpg",
+      "current_file": "forest/forest-cedar-sunlight.jpg",
+      "interim_file": "forest/forest-cedar-sunlight.svg",
+      "target_filename": "forest/forest-cedar-sunlight.jpg",
+      "status": "ACQUIRED — WIRED (homepage StoryChapter forest photo)",
       "category": "forest",
-      "page": "forest",
-      "description": "Sunlight filtering through tall cedar/pine trees on a grassy Himalayan slope. Golden hour light.",
-      "subject": "Forest, cedar trees, sunlight, grassy slope",
-      "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "page": "home",
+      "description": "Dense Himalayan cedar (deodar) forest near Shimla — tall straight trunks, green undergrowth, soft overcast daylight. Representative forest photograph — not a Bhavya site. Original query target was golden-hour sunlight; actual light is overcast, captioned honestly.",
+      "subject": "Himalayan cedar forest, tree trunks, undergrowth",
+      "location": "Shimla, Himachal Pradesh, India",
+      "dimensions": {
+        "width": 1200,
+        "height": 1600,
+        "aspect": "3:4"
+      },
+      "art_direction": "Documentary forest photograph; vertical composition suits full-height chapter media panel; muted green/brown palette; no people, no text, no logos.",
       "visual_characteristics": {
-        "dominant_colors": ["forest green", "golden yellow", "dark brown"],
-        "mood": "serene, natural, warm",
-        "text_readability": "medium — use overlay for text areas",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.4) 0%, rgba(14,56,46,0.7) 100%)"
+        "dominant_colors": ["forest green", "dark brown", "cool grey"],
+        "mood": "serene, natural, cool",
+        "text_readability": "medium — use light-on-dark copy beside panel, not over photo"
       },
       "treatment": {
         "object_fit": "cover",
         "object_position": "center center",
-        "overlay": true,
-        "overlay_opacity": 0.45
-      }
+        "overlay": false,
+        "overlay_opacity": 0
+      },
+      "provenance_asset_id": "forest-cedar-sunlight",
+      "provenance_ref": "Openverse → Wikimedia Commons",
+      "source_url": "https://commons.wikimedia.org/w/index.php?curid=175571140",
+      "creator": "Kavittaa",
+      "license": "CC0 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "attribution_required": false
     },
     {
       "id": "knowledge-school-children",
-      "filename": "knowledge-school-children.jpg",
+      "current_file": null,
+      "interim_file": "knowledge/knowledge-school-children.svg",
+      "target_filename": "knowledge/knowledge-school-children.jpg",
+      "status": "ASSET REQUIRED — do not fill with books/stock children; see knowledge-books-notepad.jpg (object-first alternate, not this slot)",
       "category": "knowledge",
       "page": "knowledge",
+      "alternate_acquired": "knowledge/knowledge-books-notepad.jpg",
       "description": "Himachali school children in uniform with snowy Himalayan mountains in background. Documentary photography.",
       "subject": "School children, uniforms, snowy mountains, education",
       "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "dimensions": {
+        "width": 2400,
+        "height": 1600,
+        "aspect": "3:2"
+      },
+      "art_direction": "Human-interest documentary photograph; natural daylight; authentic candid moment; no visible text or logos.",
       "visual_characteristics": {
-        "dominant_colors": ["red", "white", "blue sky", "snow white"],
+        "dominant_colors": ["uniform colors", "snow white", "blue sky"],
         "mood": "hopeful, authentic, human",
-        "text_readability": "medium — use overlay for text areas",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+        "text_readability": "medium — use overlay for text areas"
       },
       "treatment": {
         "object_fit": "cover",
@@ -86,26 +111,28 @@
     },
     {
       "id": "heritage-stone-temple",
-      "filename": "heritage-stone-temple.jpg",
+      "current_file": "heritage/heritage-stone-temple.jpg",
+      "interim_file": "heritage/heritage-stone-temple.svg",
+      "target_filename": "heritage/heritage-stone-temple.jpg",
+      "status": "ACQUIRED — WIRED (page.tsx PhotoPlate photo={PHOTO.heritageStone})",
       "category": "heritage",
       "page": "heritage",
+      "provenance_asset_id": "heritage-shirgul-temple",
+      "provenance_ref": "assets/manifest.json",
+      "attribution_required": true,
       "description": "Traditional Himachali stone temple architecture with intricate carvings and slate roof. Blue sky backdrop.",
       "subject": "Stone temple, Himachali architecture, carvings, slate roof",
       "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "dimensions": {
+        "width": 2400,
+        "height": 1600,
+        "aspect": "3:2"
+      },
+      "art_direction": "Architectural heritage documentary photograph; warm natural light; no people, no text.",
       "visual_characteristics": {
-        "dominant_colors": [
-          "stone gray",
-          "warm brown",
-          "blue sky",
-          "gold accent"
-        ],
+        "dominant_colors": ["stone gray", "warm brown", "blue sky"],
         "mood": "ancient, cultural, reverent",
-        "text_readability": "medium — use overlay for text areas",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+        "text_readability": "medium — use overlay for text areas"
       },
       "treatment": {
         "object_fit": "cover",
@@ -116,26 +143,25 @@
     },
     {
       "id": "heritage-wooden-temple",
-      "filename": "heritage-wooden-temple.jpg",
+      "current_file": null,
+      "interim_file": "heritage/heritage-wooden-temple.svg",
+      "target_filename": "heritage/heritage-wooden-temple.jpg",
+      "status": "ASSET REQUIRED",
       "category": "heritage",
       "page": "heritage",
       "description": "Traditional Himachali wooden temple with multi-tiered roof and mountain backdrop. Prayer flags visible.",
       "subject": "Wooden temple, mountains, prayer flags, Himachali architecture",
       "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "dimensions": {
+        "width": 2400,
+        "height": 1600,
+        "aspect": "3:2"
+      },
+      "art_direction": "Cultural heritage documentary photograph; warm afternoon light; no people, no text.",
       "visual_characteristics": {
-        "dominant_colors": [
-          "dark wood",
-          "mountain gray",
-          "green",
-          "prayer flag colors"
-        ],
+        "dominant_colors": ["dark wood", "mountain gray", "prayer flag colors"],
         "mood": "spiritual, mountainous, authentic",
-        "text_readability": "medium — use overlay for text areas",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+        "text_readability": "medium — use overlay for text areas"
       },
       "treatment": {
         "object_fit": "cover",
@@ -146,26 +172,31 @@
     },
     {
       "id": "community-village-gathering",
-      "filename": "community-village-gathering.jpg",
+      "current_file": null,
+      "interim_file": "community/community-village-gathering.svg",
+      "target_filename": "community/community-village-gathering.jpg",
+      "status": "ASSET REQUIRED — human-subject gathering not acquired; place-only alternate is community-village-landscape.jpg",
       "category": "community",
       "page": "community",
+      "alternate_acquired": "community/community-village-landscape.jpg",
       "description": "Himachali village women and children gathered in a traditional stone courtyard. Slate-roofed houses in background.",
       "subject": "Village women, children, community gathering, traditional houses",
       "location": "Himachal Pradesh, India",
-      "photographer": "Unknown",
-      "source": "Bhavya Real Photo Archive",
-      "license": "Used with permission — Bhavya Foundation",
-      "original_source_url": null,
+      "dimensions": {
+        "width": 2400,
+        "height": 1600,
+        "aspect": "3:2"
+      },
+      "art_direction": "Human-interest documentary photograph; natural daylight; authentic communal moment; no visible text or logos.",
       "visual_characteristics": {
         "dominant_colors": [
           "colorful clothing",
           "stone gray",
-          "slate blue",
+          "slate",
           "green"
         ],
         "mood": "communal, authentic, warm",
-        "text_readability": "medium — use overlay for text areas",
-        "recommended_overlay": "linear-gradient(to bottom, rgba(14,56,46,0.35) 0%, rgba(14,56,46,0.65) 100%)"
+        "text_readability": "medium — use overlay for text areas"
       },
       "treatment": {
         "object_fit": "cover",
