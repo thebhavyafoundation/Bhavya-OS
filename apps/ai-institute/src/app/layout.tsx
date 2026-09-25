@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
-import "@bhavya/platform-ui";
 import "./globals.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import { LayoutShell } from "@/components/LayoutShell";
+import { MotionProvider } from "@/components/MotionProvider";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -17,13 +18,16 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0e382e",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://bhavyafoundation.org"),
   title: "Bhavya Foundation",
   description:
     "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
   manifest: "/manifest.json",
-  themeColor: "#0e382e",
   icons: {
     icon: "/favicon.svg",
   },
@@ -55,7 +59,11 @@ export default function RootLayout({
           Skip to content
         </a>
         <AuthProvider>
-          <LayoutShell>{children}</LayoutShell>
+          <SmoothScroll>
+            <MotionProvider>
+              <LayoutShell>{children}</LayoutShell>
+            </MotionProvider>
+          </SmoothScroll>
         </AuthProvider>
       </body>
     </html>
