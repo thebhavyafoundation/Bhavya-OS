@@ -3648,3 +3648,96 @@ body {
     padding: var(--space-16) var(--space-12);
   }
 }
+
+/* ============================================
+   CHAPTER RAIL � fixed story position indicator
+   ============================================ */
+
+.chapter-rail {
+  position: fixed;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: none;
+  padding: var(--space-3) var(--space-3);
+  background: color-mix(in srgb, var(--color-bg-primary) 72%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+}
+
+.chapter-rail ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.chapter-rail a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  transition: opacity 200ms ease;
+}
+
+.chapter-rail a:hover,
+.chapter-rail a:focus-visible {
+  opacity: 1;
+}
+
+.chapter-rail a.is-active {
+  opacity: 1;
+  color: var(--color-forest-950);
+}
+
+.chapter-rail-dot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  transform-origin: right center;
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease;
+}
+
+.chapter-rail a.is-active .chapter-rail-dot {
+  transform: scaleX(3);
+  background: var(--color-accent-gold);
+}
+
+.chapter-rail-label {
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .chapter-rail {
+    display: block;
+  }
+}
+
+#story,
+#structure,
+#evidence,
+#invite {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-rail a,
+  .chapter-rail-dot {
+    transition: none;
+  }
+}

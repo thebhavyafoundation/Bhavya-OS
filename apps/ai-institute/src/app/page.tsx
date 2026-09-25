@@ -13,6 +13,7 @@ import { PhotoPlate } from "@/components/editorial/PhotoPlate";
 import { ProofStrip } from "@/components/editorial/ProofStrip";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { StoryChapter } from "@/components/site/StoryChapter";
+import { ChapterRail } from "@/components/site/ChapterRail";
 import { STORY_CHAPTERS, STORY_PROOF } from "@/lib/homepage-story";
 import { PHOTO, CHAPTER_PHOTO } from "@/lib/photos";
 
@@ -64,6 +65,7 @@ export default function HomePage() {
       style={{ background: "var(--color-bg-primary)" }}
     >
       <SiteHeader variant="dark" />
+      <ChapterRail />
       <main id="main-content">
         {/* ——— CH 01: PLACE ——— */}
         <section
@@ -231,7 +233,11 @@ export default function HomePage() {
         ))}
 
         {/* ——— CH 05: EVIDENCE ——— */}
-        <section className="cine-proof" aria-labelledby="proof-heading">
+        <section
+          className="cine-proof"
+          id="evidence"
+          aria-labelledby="proof-heading"
+        >
           <div className="container">
             <ScrollReveal direction="up" distance={16}>
               <span className="editorial-label">04 · Evidence</span>
