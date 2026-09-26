@@ -6,7 +6,8 @@ This directory holds editorial photography for the public site.
 
 **Current state:** `PARTIAL — WIRED` — five rights-cleared JPEGs present and wired via `src/lib/photos.ts` (`PHOTO`).
 
-- Wired: `hero-himalayan-sunset.jpg`, `why/why-terrace-garhwal.jpg`,
+- Wired: `hero/hero-sunrise-mountain.jpg` (sunrise over mountains, Pexels
+  License, no attribution required), `why/why-terrace-garhwal.jpg`,
   `heritage/heritage-stone-temple.jpg`, `knowledge/knowledge-books-notepad.jpg`,
   `community/community-village-landscape.jpg`.
 - Still `ASSET REQUIRED` (do not wire — see `PHOTO_PENDING`): forest cedar,
@@ -31,7 +32,8 @@ This directory holds editorial photography for the public site.
 ```
 photography/
 ├── hero/           # Hero background (WIRED)
-│   ├── hero-himalayan-sunset.jpg   (+ .webp, .svg interim)
+│   ├── hero-sunrise-mountain.jpg     (current — sunrise on mountains)
+│   └── hero-himalayan-sunset.jpg     (replaced 2026-09-27, kept for archive)
 ├── why/            # WHY chapter plate (WIRED)
 │   └── why-terrace-garhwal.jpg     (+ .webp)
 ├── forest/         # Forest mission — ASSET REQUIRED
@@ -54,7 +56,7 @@ photography/
 
 | Photo                       | Destination (real JPEG)                     | Status           |
 | --------------------------- | ------------------------------------------- | ---------------- |
-| Valley of Uttarakhand       | `hero/hero-himalayan-sunset.jpg`            | ACQUIRED · WIRED |
+| Sunrise over mountain ridge | `hero/hero-sunrise-mountain.jpg`            | ACQUIRED · WIRED |
 | Garhwal terrace fields      | `why/why-terrace-garhwal.jpg`               | ACQUIRED · WIRED |
 | Sunlit cedar forest         | `forest/forest-cedar-sunlight.jpg`          | ASSET REQUIRED   |
 | Open book object study      | `knowledge/knowledge-books-notepad.jpg`     | ACQUIRED · WIRED |

@@ -126,7 +126,7 @@ export default function AboutPage() {
                   position: "relative",
                 }}
               >
-                {/* ASSET REQUIRED: hero-himalayan-sunset.jpg — drop-in slot */}
+                {/* ASSET REQUIRED: drop-in photo slot (see PHOTO.hero for the current hero photo) */}
                 <div
                   style={{
                     position: "absolute",

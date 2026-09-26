@@ -9,7 +9,7 @@
 
 /** Present on disk — safe to wire */
 export const PHOTO = {
-  hero: "/photography/hero/hero-himalayan-sunset.jpg",
+  hero: "/photography/hero/hero-sunrise-mountain.jpg",
   why: "/photography/why/why-terrace-garhwal.jpg",
   heritageStone: "/photography/heritage/heritage-stone-temple.jpg",
   knowledgeBooks: "/photography/knowledge/knowledge-books-notepad.jpg",
