@@ -113,7 +113,7 @@ export function SiteHeader({
         aria-label="Primary navigation"
       >
         <div className="site-nav-inner">
-          <BhavyaLogo size="sm" />
+          <BhavyaLogo size="sm" variant={isDark ? "dark" : "light"} />
 
           {/* Desktop Navigation — dropdown groups from registry */}
           <div className="nav-links">

@@ -29,7 +29,8 @@ export const metadata: Metadata = {
     "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
   manifest: "/manifest.json",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/brand/logo-mark.png",
+    apple: "/brand/logo-mark.png",
   },
   openGraph: {
     title: "Bhavya Foundation",
@@ -38,6 +39,7 @@ export const metadata: Metadata = {
     url: "https://bhavyafoundation.org",
     siteName: "Bhavya Foundation",
     type: "website",
+    images: ["/brand/logo-full.png"],
   },
   twitter: {
     card: "summary_large_image",
