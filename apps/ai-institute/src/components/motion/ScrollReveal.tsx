@@ -19,7 +19,7 @@ interface ScrollRevealProps {
   duration?: number;
   /** Distance to travel in px */
   distance?: number;
-  /** IntersectionObserver threshold */
+  /** ScrollTrigger start: reveal fires when the element's top crosses (100 - |threshold|)% of the viewport — default -15 → "top 85%", i.e. as soon as it enters the lower viewport (matches TextReveal; anchor/jump landings never leave content blank) */
   threshold?: number;
   /** Additional CSS classes */
   className?: string;
@@ -43,7 +43,7 @@ export function ScrollReveal({
   delay = 0,
   duration = 0.8,
   distance,
-  threshold = -80,
+  threshold = -15,
   className,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
