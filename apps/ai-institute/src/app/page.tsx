@@ -15,12 +15,13 @@ export const metadata: Metadata = {
 };
 
 /**
- * Homepage — split-hero rebuild per the foundation-v2 reference
- * (spec 2026-09-26-foundation-v2-design.md, plan A, task T6).
+ * Homepage — poster-stagger split-hero rebuild per the foundation-v2
+ * reference (spec 2026-09-26-foundation-v2-design.md, plan A, task T6;
+ * hero revision + credit removal per user feedback 2026-09-26).
  *
  * Server component; interactive sections are client components.
- * Impact numbers: none (D1). Photography: rights-cleared JPEGs with
- * place-free credits (D4).
+ * Impact numbers: none (D1). No image source/credit text rendered
+ * anywhere (D4 superseded by 2026-09-26 user directive).
  */
 export default function HomePage() {
   return (
