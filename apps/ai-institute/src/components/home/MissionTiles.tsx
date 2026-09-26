@@ -6,7 +6,6 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { getMissionProfile, type MissionId } from "@/data/mission-profiles";
 import { CHAPTER_PHOTO } from "@/lib/photos";
-import { photoCredit } from "@/lib/photo-credits";
 
 interface Tile {
   id: MissionId;
@@ -81,22 +80,8 @@ export function MissionTiles() {
                       style={{
                         marginTop: "auto",
                         paddingTop: "var(--space-4)",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "flex-end",
-                        gap: "var(--space-4)",
-                        flexWrap: "wrap",
                       }}
                     >
-                      <span className="home-tile-credit">
-                        {photoCredit(
-                          tile.id === "knowledge"
-                            ? "knowledgeBooks"
-                            : tile.id === "heritage"
-                              ? "heritageStone"
-                              : "communityLandscape",
-                        )}
-                      </span>
                       <EditorialLink href={`/missions/${tile.id}`}>
                         Explore
                       </EditorialLink>
