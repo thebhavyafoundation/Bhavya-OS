@@ -4,10 +4,11 @@ import { STORY_CHAPTERS, STORY_PROOF, HERO_BEATS } from "../homepage-story";
 describe("homepage story data", () => {
   it("every proof point carries a source and an allowed verification state", () => {
     const allowed = ["verified", "reported", "pending"] as const;
-    expect(STORY_PROOF.length).toBeGreaterThanOrEqual(4);
+    expect(STORY_PROOF.length).toBeGreaterThanOrEqual(1);
     for (const p of STORY_PROOF) {
       expect(p.source.length).toBeGreaterThan(0);
       expect(allowed).toContain(p.state);
+      expect(p.state).toBe("verified");
     }
   });
 

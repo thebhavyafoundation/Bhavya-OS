@@ -22,24 +22,6 @@ export interface StoryProofPoint {
 
 export const STORY_PROOF: StoryProofPoint[] = [
   {
-    value: "8+",
-    label: "Hectares restored",
-    source: "Brand Constitution · Art. 10",
-    state: "reported",
-  },
-  {
-    value: "10K+",
-    label: "Students empowered",
-    source: "Brand Constitution · Art. 10",
-    state: "reported",
-  },
-  {
-    value: "50+",
-    label: "Communities engaged",
-    source: "Brand Constitution · Art. 10",
-    state: "reported",
-  },
-  {
     value: String(getTotalModules()),
     label: "Curriculum modules",
     source: "Bhavya Academy · curriculum data",

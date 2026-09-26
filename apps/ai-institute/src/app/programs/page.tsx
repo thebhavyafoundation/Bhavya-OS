@@ -53,14 +53,6 @@ const programs = [
   },
 ];
 
-// Stats computed from verified data — no fabricated institutional scale
-const stats = [
-  { value: "3", label: "Programs" },
-  { value: "10", label: "Courses" },
-  { value: "8", label: "Learning Stages" },
-  { value: "Open", label: "Enrollment" },
-];
-
 const container = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.12 } },
@@ -125,7 +117,7 @@ export default function ProgramsPage() {
           initial="hidden"
           animate="show"
         >
-          {programs.map((prog, i) => (
+          {programs.map((prog) => (
             <motion.div
               key={prog.title}
               variants={item}
@@ -246,28 +238,6 @@ export default function ProgramsPage() {
               Browse Schools
             </Link>
           </div>
-        </motion.div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-6 pb-32">
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-4"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          {stats.map((s) => (
-            <motion.div
-              key={s.label}
-              variants={item}
-              className="bg-bg-secondary border border-border-primary/20 rounded-2xl p-6 text-center"
-            >
-              <div className="text-3xl md:text-4xl font-bold text-text-primary mb-1">
-                {s.value}
-              </div>
-              <div className="text-sm text-text-primary/40">{s.label}</div>
-            </motion.div>
-          ))}
         </motion.div>
       </section>
     </div>
