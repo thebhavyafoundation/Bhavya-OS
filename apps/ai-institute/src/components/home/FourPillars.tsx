@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { TreePine, BookOpen, Landmark, Users, ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { TextReveal } from "@/components/motion/TextReveal";
@@ -31,6 +32,12 @@ const accentVar: Record<string, string> = {
  * by the lazy MistScene in T8 (D8); inert until then.
  */
 export function FourPillars() {
+  // TiltCard renders motion.div when motion is enabled but a plain div
+  // under prefers-reduced-motion — swapping only after hydration keeps
+  // SSR and the first client render identical (avoids React #418).
+  const [tiltReady, setTiltReady] = useState(false);
+  useEffect(() => setTiltReady(true), []);
+
   return (
     <section
       className="scene scene-dark home-pillars"
@@ -67,27 +74,34 @@ export function FourPillars() {
         <div className="home-pillar-grid">
           {PILLARS.map((p, i) => {
             const Icon = iconMap[p.id];
+            const card = (
+              <a href={p.href} className="home-pillar-card">
+                <span
+                  className="home-pillar-icon"
+                  style={{
+                    background: `color-mix(in srgb, ${accentVar[p.accent]} 22%, transparent)`,
+                    color: accentVar[p.accent],
+                  }}
+                  aria-hidden="true"
+                >
+                  <Icon size={22} />
+                </span>
+                <span className="home-pillar-name">{p.name}</span>
+                <span className="home-pillar-blurb">{p.blurb}</span>
+                <span className="home-pillar-cta">
+                  Explore <ArrowRight size={13} aria-hidden="true" />
+                </span>
+              </a>
+            );
             return (
               <ScrollReveal key={p.id} direction="up" delay={i * 0.08}>
-                <TiltCard intensity={6} className="home-pillar-tilt">
-                  <a href={p.href} className="home-pillar-card">
-                    <span
-                      className="home-pillar-icon"
-                      style={{
-                        background: `color-mix(in srgb, ${accentVar[p.accent]} 22%, transparent)`,
-                        color: accentVar[p.accent],
-                      }}
-                      aria-hidden="true"
-                    >
-                      <Icon size={22} />
-                    </span>
-                    <span className="home-pillar-name">{p.name}</span>
-                    <span className="home-pillar-blurb">{p.blurb}</span>
-                    <span className="home-pillar-cta">
-                      Explore <ArrowRight size={13} aria-hidden="true" />
-                    </span>
-                  </a>
-                </TiltCard>
+                {tiltReady ? (
+                  <TiltCard intensity={6} className="home-pillar-tilt">
+                    {card}
+                  </TiltCard>
+                ) : (
+                  <div className="home-pillar-tilt">{card}</div>
+                )}
               </ScrollReveal>
             );
           })}
