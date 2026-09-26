@@ -211,6 +211,14 @@ export function SiteHeader({
               <Search size={16} />
             </button>
             <a
+              href="/donate"
+              className="nav-cta nav-cta-support"
+              aria-label="Support our work"
+            >
+              Support Our Work
+              <ArrowRight size={12} aria-hidden="true" />
+            </a>
+            <a
               href="/os"
               className="nav-cta nav-cta-os"
               style={{
@@ -296,6 +304,20 @@ export function SiteHeader({
 
                 <div className="mobile-menu-divider" />
 
+                <a
+                  href="/donate"
+                  className="mobile-menu-link mobile-menu-cta"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--space-2)",
+                    color: "var(--color-accent-gold)",
+                  }}
+                >
+                  Support Our Work
+                  <ArrowRight size={14} />
+                </a>
                 <a
                   href="/os"
                   className="mobile-menu-link mobile-menu-cta"
