@@ -9,13 +9,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/brand/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/brand/logo-mark.png",
+      "sizes": "570x570",
+      "type": "image/png"
     },
     {
-      "src": "/brand/apple-touch-icon.svg",
-      "sizes": "180x180",
+      "src": "/brand/icon.svg",
+      "sizes": "any",
       "type": "image/svg+xml"
     }
   ],

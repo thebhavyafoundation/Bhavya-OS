@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useAuth } from "@/components/AuthProvider";
+import { BhavyaLogo } from "@/components/BhavyaLogo";
 import { getIntent } from "@/lib/participation-intents";
 
 export default function RegisterPage() {
@@ -78,6 +79,9 @@ function RegisterForm() {
             transition={{ duration: 0.5 }}
             style={{ textAlign: "center", marginBottom: "var(--space-8)" }}
           >
+            <div style={{ marginBottom: "var(--space-6)" }}>
+              <BhavyaLogo size="sm" />
+            </div>
             <h1
               style={{
                 fontFamily: "var(--font-display)",

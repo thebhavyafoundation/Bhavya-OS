@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ShieldAlert } from "lucide-react";
+import { BhavyaLogo } from "@/components/BhavyaLogo";
 
 export const metadata = {
   title: "Not Permitted | Bhavya Foundation",
@@ -12,6 +13,9 @@ export default function ForbiddenPage() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md">
+        <div className="flex justify-center mb-6">
+          <BhavyaLogo size="sm" />
+        </div>
         <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-accent-gold-glow border border-border-gold flex items-center justify-center">
           <ShieldAlert className="w-8 h-8 text-accent-gold" />
         </div>

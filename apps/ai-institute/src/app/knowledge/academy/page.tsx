@@ -1,37 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  GraduationCap,
-  BookOpen,
-  Users,
-  Award,
-  ArrowRight,
-  Clock,
-  Star,
-} from "lucide-react";
+import { GraduationCap, BookOpen, Award, Star, Clock } from "lucide-react";
 const levels = [
   {
     level: "Foundations",
-    modules: 8,
     desc: "Core concepts in AI, ethics, and digital literacy.",
     icon: BookOpen,
   },
   {
     level: "Intermediate",
-    modules: 12,
     desc: "Applied skills in research, data, and communication.",
     icon: GraduationCap,
   },
   {
     level: "Advanced",
-    modules: 15,
     desc: "Specialized knowledge in AI, heritage, and ecology.",
     icon: Star,
   },
   {
     level: "Expert",
-    modules: 10,
     desc: "Research-level work and mentorship preparation.",
     icon: Award,
   },
@@ -79,9 +67,6 @@ export default function AcademyPage() {
                       {level.desc}
                     </p>
                     <div className="flex items-center gap-4 mt-3 text-sm text-[var(--color-text-secondary)]">
-                      <span className="flex items-center gap-1">
-                        <BookOpen size={14} /> {level.modules} modules
-                      </span>
                       <span className="flex items-center gap-1">
                         <Clock size={14} /> Self-paced
                       </span>
