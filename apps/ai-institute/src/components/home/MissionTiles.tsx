@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { getMissionProfile, type MissionId } from "@/data/mission-profiles";
@@ -47,11 +48,13 @@ export function MissionTiles() {
           paddingBottom: "var(--space-24)",
         }}
       >
-        <SectionHeader
-          label="Spotlight"
-          title="Three more paths forward."
-          description="Each mission keeps its own page — plan, sources, and what is honestly true today."
-        />
+        <TextReveal>
+          <SectionHeader
+            label="Spotlight"
+            title="Three more paths forward."
+            description="Each mission keeps its own page — plan, sources, and what is honestly true today."
+          />
+        </TextReveal>
         <div className="home-tiles">
           {TILES.map((tile, i) => {
             const profile = getMissionProfile(tile.id);

@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { SMALL_TILES } from "@/data/home-v2";
@@ -19,11 +20,13 @@ export function SmallTiles() {
           paddingBottom: "var(--space-24)",
         }}
       >
-        <SectionHeader
-          label="The institution"
-          title="Built to be inspected."
-          description="Read how the foundation works, what backs each claim, and where you fit in."
-        />
+        <TextReveal>
+          <SectionHeader
+            label="The institution"
+            title="Built to be inspected."
+            description="Read how the foundation works, what backs each claim, and where you fit in."
+          />
+        </TextReveal>
         <div className="home-small-grid">
           {SMALL_TILES.map((tile, i) => (
             <ScrollReveal key={tile.title} direction="up" delay={i * 0.07}>

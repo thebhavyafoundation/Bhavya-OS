@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { HeroEntrance } from "@/components/motion/HeroEntrance";
+import { ScrubParallax } from "@/components/motion/ScrubParallax";
 import { PhotoPlate } from "@/components/editorial/PhotoPlate";
 import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { PHOTO } from "@/lib/photos";
@@ -41,15 +42,17 @@ export function SplitHero() {
       </HeroEntrance>
 
       <div className="home-hero-visual">
-        <PhotoPlate
-          index="Bhavya Foundation"
-          label="For People. For Nature. For Generations."
-          caption={photoCredit("hero")}
-          variant="landscape"
-          photo={PHOTO.hero}
-          alt="Sunlit mountain landscape at sunset — representative photograph"
-          priority
-        />
+        <ScrubParallax distance={20}>
+          <PhotoPlate
+            index="Bhavya Foundation"
+            label="For People. For Nature. For Generations."
+            caption={photoCredit("hero")}
+            variant="landscape"
+            photo={PHOTO.hero}
+            alt="Sunlit mountain landscape at sunset — representative photograph"
+            priority
+          />
+        </ScrubParallax>
       </div>
     </section>
   );
