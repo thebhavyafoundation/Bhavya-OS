@@ -47,9 +47,9 @@ export function SplitHero() {
           <div className="home-hero-frame">
             <img
               src={PHOTO.hero}
-              alt="Sunlit mountain landscape at sunset — representative photograph"
-              width={1600}
-              height={1067}
+              alt="Sun rising over a mountain ridge at dawn — representative photograph"
+              width={2400}
+              height={1601}
               loading="eager"
               fetchPriority="high"
               decoding="async"

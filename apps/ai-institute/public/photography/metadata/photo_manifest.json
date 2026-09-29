@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "updated": "2026-09-25",
+  "version": "1.5.0",
+  "updated": "2026-09-27",
   "description": "Bhavya Foundation — Photography asset manifest. Some documentary JPEGs are now present under the same basenames; full provenance lives in assets/manifest.json. Interim .svg scene files remain on disk but must not ship as imagery and are not referenced by application code.",
   "asset_policy": {
     "current": "WIRED — real documentary JPEGs present and wired for hero, why-terrace-garhwal, heritage-stone-temple, knowledge-books-notepad, community-village-landscape, and forest-cedar-sunlight. knowledge-school-children, heritage-wooden-temple, and community-village-gathering remain ASSET REQUIRED (do not pass PHOTO_PENDING keys as photo props).",
@@ -12,35 +12,39 @@
   },
   "photos": [
     {
-      "id": "hero-himalayan-sunset",
-      "current_file": "hero/hero-himalayan-sunset.jpg",
-      "interim_file": "hero/hero-himalayan-sunset.svg",
-      "target_filename": "hero/hero-himalayan-sunset.jpg",
-      "status": "ACQUIRED — WIRED (HeroBackground photo={PHOTO.hero})",
+      "id": "hero-sunrise-mountain",
+      "current_file": "hero/hero-sunrise-mountain.jpg",
+      "replaced_file": "hero/hero-himalayan-sunset.jpg",
+      "target_filename": "hero/hero-sunrise-mountain.jpg",
+      "status": "ACQUIRED — WIRED (homepage SplitHero photo={PHOTO.hero})",
       "category": "hero",
       "page": "home",
-      "description": "Wide mountain valley in the Indian Himalaya (Valley of Uttarakhand). Primary hero background. Not a verified golden-hour sunset of Himachal.",
-      "subject": "Himalayan mountains, valley, ridgelines",
-      "location": "Uttarakhand, India",
-      "provenance_asset_id": "place-valley-uttarakhand",
-      "provenance_ref": "assets/manifest.json",
-      "attribution_required": true,
+      "description": "Golden sun cresting a mountain ridge at sunrise; layered misty ridgelines under an amber-orange sky. Representative stock photograph — not a Bhavya site. Replaces hero-himalayan-sunset.jpg per user feedback 2026-09-27 (wanted a rising sun on the mountains).",
+      "subject": "Sun rising over mountain ridge, misty ridgelines, dawn sky",
+      "location": "not specified — stock photograph",
+      "source": "Pexels",
+      "source_url": "https://www.pexels.com/photo/majestic-mountain-sunrise-with-vibrant-sky-34046635/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "provenance_ref": "metadata/photo_manifest.json",
+      "attribution_required": false,
       "dimensions": {
         "width": 2400,
-        "height": 1600,
+        "height": 1601,
         "aspect": "3:2"
       },
-      "art_direction": "Cinematic wide-angle documentary photograph; layered ridgelines, warm golden light, deep forest-green valley silhouettes; left-aligned text-safe area for editorial hero copy; no people, no text, no logos.",
+      "art_direction": "Cinematic sunrise landscape; sun disk on the ridge line, warm amber sky, dark forest silhouettes; left-side forest scrim provides text-safe area for editorial hero copy; no people, no text, no logos.",
       "visual_characteristics": {
-        "dominant_colors": ["golden", "deep forest green", "warm amber"],
+        "dominant_colors": ["amber", "orange", "deep forest silhouette"],
         "mood": "cinematic, warm, aspirational",
-        "text_readability": "high — dark foreground with bright sky"
+        "text_readability": "high — forest scrim over dark left side"
       },
       "treatment": {
         "object_fit": "cover",
-        "object_position": "center 40%",
+        "object_position": "center center",
         "overlay": true,
-        "overlay_opacity": 0.4
+        "overlay_opacity": 0.5,
+        "overlay_note": "CSS forest gradients: left 78%→transparent at 62%, right 55% for the vertical spine"
       }
     },
     {
