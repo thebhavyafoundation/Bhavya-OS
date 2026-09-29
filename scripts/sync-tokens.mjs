@@ -63,7 +63,7 @@ function syncApp(appName, canonicalContent, checkOnly) {
   const generatedContent = HEADER + canonicalContent;
   writeFileSync(targetFile, generatedContent, "utf-8");
   console.log("  SYNCED: " + appName);
-  return false;
+  return true;
 }
 
 const checkOnly = process.argv.includes("--check");
