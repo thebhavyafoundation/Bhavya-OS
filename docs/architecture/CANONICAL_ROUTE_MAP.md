@@ -97,6 +97,7 @@ Public navigation is organized into four institutional groups:
 | `/resources/videos`             | Video documentation        | Public   | No   | —         |
 | `/ai-institute`                 | AI Institute hub           | Public   | No   | knowledge |
 | `/ai-institute/experiments`     | AI Labs & experiments      | Public   | No   | knowledge |
+| `/gallery`                      | Public photography gallery | Public   | No   | knowledge |
 | `/initiatives`                  | Initiatives portfolio      | Public   | No   | —         |
 | `/initiatives/school-outreach`  | School outreach            | Public   | No   | community |
 | `/initiatives/rural-innovation` | Rural innovation           | Public   | No   | community |
@@ -131,6 +132,9 @@ Public navigation is organized into four institutional groups:
 | `/knowledge/projects`                        | Projects         | Public   | No   | knowledge |
 | `/knowledge/credentials`                     | Credentials      | Public   | No   | knowledge |
 | `/knowledge/graph`                           | Knowledge graph  | Public   | No   | knowledge |
+| `/certificates`                              | Credential list  | Student  | Yes  | knowledge |
+| `/certificates/[credentialId]`               | Certificate view | Public   | No   | knowledge |
+| `/verify/[credentialId]`                     | Credential check | Public   | No   | knowledge |
 
 ## My Bhavya Routes (Authenticated)
 
