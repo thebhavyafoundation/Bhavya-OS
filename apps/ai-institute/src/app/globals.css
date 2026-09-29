@@ -4021,19 +4021,6 @@ html.lenis body {
     clamp(var(--space-12), 9vh, var(--space-24));
 }
 
-.home-hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-gold-300);
-  text-shadow: 0 1px 12px rgba(4, 15, 11, 0.7);
-}
-
 .home-hero-rule {
   display: inline-block;
   width: 56px;
