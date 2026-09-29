@@ -48,7 +48,7 @@ function syncApp(appName, canonicalContent, checkOnly) {
 
   if (existsSync(targetFile)) {
     const existing = readFileSync(targetFile, "utf-8");
-    const existingContent = existing.replace(/^\/\*[\s\S]*?\*\/\n\n/, "");
+    const existingContent = existing.replace(/^\/\*[\s\S]*?\*\/\r?\n\r?\n/, "");
     if (existingContent.trim() === canonicalContent.trim()) {
       console.log("  OK: " + appName);
       return false;
