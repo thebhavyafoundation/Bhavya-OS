@@ -37,10 +37,7 @@ export function SplitHero() {
       </div>
 
       <HeroEntrance className="home-hero-copy">
-        <p className="home-hero-eyebrow">
-          <span className="home-hero-rule" aria-hidden="true" />
-          Bhavya Foundation — a public charitable trust
-        </p>
+        <span className="home-hero-rule" aria-hidden="true" />
         <h1 id="hero-heading" className="home-hero-title">
           <span className="home-hero-line">Building for</span>
           <span className="home-hero-line home-hero-line-accent">
