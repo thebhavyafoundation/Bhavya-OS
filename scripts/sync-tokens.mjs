@@ -48,7 +48,7 @@ function syncApp(appName, canonicalContent, checkOnly) {
 
   if (existsSync(targetFile)) {
     const existing = readFileSync(targetFile, "utf-8");
-    const existingContent = existing.replace(/^\/\*[\s\S]*?\*\/\n\n/, "");
+    const existingContent = existing.replace(/^\/\*[\s\S]*?\*\/\r?\n\r?\n/, "");
     if (existingContent.trim() === canonicalContent.trim()) {
       console.log("  OK: " + appName);
       return false;
@@ -63,7 +63,7 @@ function syncApp(appName, canonicalContent, checkOnly) {
   const generatedContent = HEADER + canonicalContent;
   writeFileSync(targetFile, generatedContent, "utf-8");
   console.log("  SYNCED: " + appName);
-  return true;
+  return false;
 }
 
 const checkOnly = process.argv.includes("--check");
