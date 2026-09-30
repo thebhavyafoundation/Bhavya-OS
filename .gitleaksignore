@@ -13,3 +13,8 @@
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:private-key:221
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:200
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:202
+# PR #13 / certificate.ts: CREDENTIAL_ALPHABET is a 24-symbol URL-safe ID
+# alphabet for bv-xxxx-xxxx-xxxx credential ids (no 0/o, 1/l/i, 2/z, u) —
+# it looks high-entropy to generic-api-key but is not a credential and can
+# never authenticate anything. Reviewed by Session A 2026-09-30.
+848c891f0a8fd6b2dd2dcb8f3c9c734eefe2473a:apps/ai-institute/src/lib/certificate.ts:generic-api-key:39

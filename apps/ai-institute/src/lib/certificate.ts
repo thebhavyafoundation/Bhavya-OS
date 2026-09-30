@@ -36,7 +36,7 @@ export interface CertificateEligibility {
  * URL-safe alphabet without lookalikes (no 0/o, 1/l/i, 2/z, u).
  * Lowercase so credential ids stay case-insensitive for humans retyping them.
  */
-const CREDENTIAL_ALPHABET = "abcdefgh3456789mnprstvw";
+const CREDENTIAL_ALPHABET = "abcdefgh3456789mnprstvw"; // gitleaks:allow (ID alphabet, not a key)
 
 const CREDENTIAL_GROUP_SIZE = 4;
 const CREDENTIAL_GROUPS = 3;
