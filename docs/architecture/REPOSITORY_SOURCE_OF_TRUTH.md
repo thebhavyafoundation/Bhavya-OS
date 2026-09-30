@@ -32,17 +32,19 @@
 
 ### Knowledge / Learning
 
-| Source                                               | Role                                       | Canonical?                                     |
-| ---------------------------------------------------- | ------------------------------------------ | ---------------------------------------------- |
-| `apps/ai-institute/src/data/`                        | Static knowledge objects, courses, lessons | **YES** — production app                       |
-| `apps/ai-institute/src/lib/studio/db.ts`             | SQLite persistence                         | **YES** — runtime data                         |
-| `apps/ai-institute/src/lib/academy-*.ts`             | Academy data layer                         | **YES** — runtime data                         |
-| `apps/ai-institute/src/lib/studio/runtime-client.ts` | SQLite-backed API client                   | **YES** — runtime data                         |
-| `apps/knowledge/`                                    | Knowledge visualization UI                 | NO — consumer, not source                      |
-| `knowledge/` (root)                                  | Raw knowledge data files                   | NO — data only, no UI                          |
-| `apps/knowledge-studio/`                             | Legacy Next.js KO editor                   | **ARCHIVED** — replaced by `/studio/knowledge` |
-| `apps/lesson-studio/`                                | Legacy lesson studio                       | **ARCHIVED** — replaced by `/studio/lessons`   |
-| `apps/bhavya-ai-lab/`                                | Legacy lesson builder + runtime            | **ARCHIVED** — replaced by ai-institute        |
+| Source                                               | Role                                            | Canonical?                                     |
+| ---------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------- |
+| `apps/ai-institute/src/data/`                        | Static knowledge objects, courses, lessons      | **YES** — production app                       |
+| `apps/ai-institute/src/lib/studio/db.ts`             | SQLite persistence                              | **YES** — runtime data                         |
+| `apps/ai-institute/src/lib/academy-*.ts`             | Academy data layer                              | **YES** — runtime data                         |
+| `apps/ai-institute/src/lib/studio/runtime-client.ts` | SQLite-backed API client                        | **YES** — runtime data                         |
+| `apps/ai-institute/src/lib/certificate-store.ts`     | Credentials (`certificates`, migration 006)     | **YES** — runtime data                         |
+| `apps/ai-institute/src/lib/gallery-store.ts`         | Studio photos (`gallery_photos`, migration 007) | **YES** — runtime data                         |
+| `apps/knowledge/`                                    | Knowledge visualization UI                      | NO — consumer, not source                      |
+| `knowledge/` (root)                                  | Raw knowledge data files                        | NO — data only, no UI                          |
+| `apps/knowledge-studio/`                             | Legacy Next.js KO editor                        | **ARCHIVED** — replaced by `/studio/knowledge` |
+| `apps/lesson-studio/`                                | Legacy lesson studio                            | **ARCHIVED** — replaced by `/studio/lessons`   |
+| `apps/bhavya-ai-lab/`                                | Legacy lesson builder + runtime                 | **ARCHIVED** — replaced by ai-institute        |
 
 ### GitHub / Intelligence
 

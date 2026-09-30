@@ -6,6 +6,7 @@ import {
   getFirstLessonId,
 } from "@/lib/studio/courses";
 import { EnrollButton } from "./enroll-button";
+import { CertificateClaim } from "@/components/CertificateClaim";
 
 const levelColors: Record<string, string> = {
   foundation: "bg-emerald-100 text-emerald-800",
@@ -143,6 +144,8 @@ export default async function CourseDetailPage({
             ))}
           </div>
         </div>
+
+        <CertificateClaim courseId={course.id} />
 
         {course.prerequisites.length > 0 && (
           <div className="mt-12 rounded-xl border border-border-primary bg-white p-6">

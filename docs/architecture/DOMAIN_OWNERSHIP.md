@@ -54,40 +54,44 @@ Every domain has exactly ONE canonical owner. No duplicate ownership.
 
 ## Package → Route Mapping
 
-| Package                 | Consumed By Route    | Authorization    |
-| ----------------------- | -------------------- | ---------------- |
-| `packages/knowledge`    | `/os/knowledge`      | Admin/Instructor |
-| `packages/curriculum`   | `/os/studio`         | Admin/Instructor |
-| `packages/academy`      | `/academy/*`         | Student/Admin    |
-| `packages/research`     | `/research`          | Public           |
-| `packages/forest`       | `/missions/forest`   | Public           |
-| `packages/heritage`     | `/missions/heritage` | Public           |
-| `packages/community`    | `/community`         | Public           |
-| `packages/intelligence` | `/os/intelligence`   | Admin            |
-| `packages/github`       | `/os/github`         | Admin            |
-| `packages/ioc`          | `/os/ioc`            | Admin            |
-| `packages/social`       | `/os/social`         | Admin            |
-| `packages/governance`   | `/os/docs`           | Admin            |
-| `packages/video-engine` | `/os/studio` (video) | Admin/Instructor |
-| `packages/platform-ui`  | All routes           | Public           |
+| Package                            | Consumed By Route                                                                              | Authorization                                      |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `packages/knowledge`               | `/os/knowledge`                                                                                | Admin/Instructor                                   |
+| `packages/curriculum`              | `/os/studio`                                                                                   | Admin/Instructor                                   |
+| `packages/academy`                 | `/academy/*`                                                                                   | Student/Admin                                      |
+| `packages/research`                | `/research`                                                                                    | Public                                             |
+| `packages/forest`                  | `/missions/forest`                                                                             | Public                                             |
+| `packages/heritage`                | `/missions/heritage`                                                                           | Public                                             |
+| `packages/community`               | `/community`                                                                                   | Public                                             |
+| `packages/intelligence`            | `/os/intelligence`                                                                             | Admin                                              |
+| `packages/github`                  | `/os/github`                                                                                   | Admin                                              |
+| `packages/ioc`                     | `/os/ioc`                                                                                      | Admin                                              |
+| `packages/social`                  | `/os/social`                                                                                   | Admin                                              |
+| `packages/governance`              | `/os/docs`                                                                                     | Admin                                              |
+| `packages/video-engine`            | `/os/studio` (video)                                                                           | Admin/Instructor                                   |
+| `packages/platform-ui`             | All routes                                                                                     | Public                                             |
+| `apps/ai-institute` (certificates) | `/certificates`, `/certificates/[credentialId]`, `/verify/[credentialId]`, `/api/certificates` | Student (claim) / Public (view+verify)             |
+| `apps/ai-institute` (gallery)      | `/gallery`, `/studio/gallery`, `/api/gallery*`, `/api/studio/gallery`                          | Public (read) / Instructor-Educator-Admin (upload) |
 
 ---
 
 ## Data Model Ownership
 
-| Entity            | Owner Package           | Database               |
-| ----------------- | ----------------------- | ---------------------- |
-| `KnowledgeObject` | `packages/knowledge`    | SQLite (ai-institute)  |
-| `Course`          | `packages/academy`      | SQLite (ai-institute)  |
-| `Lesson`          | `packages/curriculum`   | SQLite (ai-institute)  |
-| `Assessment`      | `packages/curriculum`   | SQLite (ai-institute)  |
-| `User`            | `packages/shared`       | SQLite (ai-institute)  |
-| `Progress`        | `packages/academy`      | SQLite (ai-institute)  |
-| `Repository`      | `packages/github`       | SQLite (github-os)     |
-| `OKR`             | `packages/ioc`          | SQLite (ioc)           |
-| `Risk`            | `packages/ioc`          | SQLite (ioc)           |
-| `Campaign`        | `packages/social`       | SQLite (social-os)     |
-| `Publication`     | `packages/social`       | SQLite (social-os)     |
-| `IntelRun`        | `packages/intelligence` | In-memory (BIN)        |
-| `Policy`          | `packages/governance`   | File-based (docs/)     |
-| `ADR`             | `packages/governance`   | File-based (docs/adr/) |
+| Entity            | Owner Package                                        | Database               |
+| ----------------- | ---------------------------------------------------- | ---------------------- |
+| `KnowledgeObject` | `packages/knowledge`                                 | SQLite (ai-institute)  |
+| `Course`          | `packages/academy`                                   | SQLite (ai-institute)  |
+| `Lesson`          | `packages/curriculum`                                | SQLite (ai-institute)  |
+| `Assessment`      | `packages/curriculum`                                | SQLite (ai-institute)  |
+| `User`            | `packages/shared`                                    | SQLite (ai-institute)  |
+| `Progress`        | `packages/academy`                                   | SQLite (ai-institute)  |
+| `Certificate`     | `apps/ai-institute` (`src/lib/certificate-store.ts`) | SQLite (ai-institute)  |
+| `GalleryPhoto`    | `apps/ai-institute` (`src/lib/gallery-store.ts`)     | SQLite (ai-institute)  |
+| `Repository`      | `packages/github`                                    | SQLite (github-os)     |
+| `OKR`             | `packages/ioc`                                       | SQLite (ioc)           |
+| `Risk`            | `packages/ioc`                                       | SQLite (ioc)           |
+| `Campaign`        | `packages/social`                                    | SQLite (social-os)     |
+| `Publication`     | `packages/social`                                    | SQLite (social-os)     |
+| `IntelRun`        | `packages/intelligence`                              | In-memory (BIN)        |
+| `Policy`          | `packages/governance`                                | File-based (docs/)     |
+| `ADR`             | `packages/governance`                                | File-based (docs/adr/) |

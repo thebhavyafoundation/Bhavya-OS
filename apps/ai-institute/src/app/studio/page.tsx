@@ -13,7 +13,7 @@ import {
   GraduationCap,
   Brain,
   Zap,
-  Plus,
+  Camera,
   ArrowRight,
 } from "lucide-react";
 
@@ -106,7 +106,7 @@ export default function StudioPage() {
       )}
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
         <Link
           href="/studio/courses/new"
           className="bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-secondary transition-colors group"
@@ -149,6 +149,22 @@ export default function StudioPage() {
           </div>
           <div className="text-sm text-text-tertiary mb-3">
             Browse, create, and manage Knowledge Objects for content generation
+          </div>
+          <div className="flex items-center gap-1 text-xs text-accent-gold group-hover:gap-2 transition-all">
+            Get started <ArrowRight className="w-3 h-3" />
+          </div>
+        </Link>
+
+        <Link
+          href="/studio/gallery"
+          className="bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-secondary transition-colors group"
+        >
+          <Camera className="w-8 h-8 text-accent-gold mb-3" />
+          <div className="text-base font-semibold text-text-primary mb-1">
+            Gallery
+          </div>
+          <div className="text-sm text-text-tertiary mb-3">
+            Publish photographs to the public gallery with a title and caption
           </div>
           <div className="flex items-center gap-1 text-xs text-accent-gold group-hover:gap-2 transition-all">
             Get started <ArrowRight className="w-3 h-3" />
