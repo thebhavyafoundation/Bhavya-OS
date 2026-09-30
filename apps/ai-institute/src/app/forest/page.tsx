@@ -80,25 +80,25 @@ export default function ForestPage() {
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>
-            <span
-              className="editorial-label"
-              style={{ color: "var(--color-brand-gold)" }}
-            >
-              Forest Mission
-            </span>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 fontWeight: 400,
                 lineHeight: 1.1,
-                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-4)",
               }}
             >
               Restoring India&apos;s
               <br />
               Forest Heritage
             </h1>
+            <span
+              className="editorial-label"
+              style={{ color: "var(--color-brand-gold)" }}
+            >
+              Forest Mission
+            </span>
             <p
               style={{
                 fontSize: "var(--text-lg)",
@@ -141,7 +141,7 @@ export default function ForestPage() {
                 padding: "var(--space-8)",
               }}
             >
-              <h3
+              <h2
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "var(--text-xl)",
@@ -151,7 +151,7 @@ export default function ForestPage() {
                 }}
               >
                 Our Impact
-              </h3>
+              </h2>
               <div
                 style={{
                   display: "flex",

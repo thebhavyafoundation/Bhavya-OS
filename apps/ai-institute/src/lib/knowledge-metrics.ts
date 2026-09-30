@@ -36,7 +36,9 @@ export interface KnowledgeMetrics {
  */
 export async function getKnowledgeMetrics(): Promise<KnowledgeMetrics> {
   const now = new Date();
-  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  // Bucket in UTC: evidence timestamps are UTC ISO strings, so a local-time
+  // month would mis-bucket events during the first hours of each month (IST).
+  const currentMonth = now.toISOString().slice(0, 7);
 
   // Each query resolves independently: a missing optional table (e.g.
   // studio_lessons on a fresh migrated DB) yields 0 for that metric

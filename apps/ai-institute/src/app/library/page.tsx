@@ -145,6 +145,7 @@ export default function LibraryPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 aria-label="Search library"
+                className="field"
                 style={{
                   width: "100%",
                   padding:
@@ -154,16 +155,7 @@ export default function LibraryPage() {
                   borderRadius: "var(--radius-lg)",
                   fontSize: "var(--text-sm)",
                   color: "var(--color-text-primary)",
-                  outline: "none",
                   transition: "border-color var(--duration-fast) ease",
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-gold)";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-primary)";
                 }}
               />
             </div>

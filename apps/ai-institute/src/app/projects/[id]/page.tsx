@@ -136,7 +136,7 @@ export default function ProjectWorkspacePage() {
           </span>
           <div className="w-24 h-1.5 bg-bg-secondary rounded-full overflow-hidden">
             <div
-              className="h-full bg-accent-blue rounded-full transition-all"
+              className="h-full bg-status-info rounded-full transition-all"
               style={{ width: `${progress?.percentage || 0}%` }}
             />
           </div>
@@ -144,7 +144,7 @@ export default function ProjectWorkspacePage() {
       </div>
       {/* Header */}
       <div className="mb-6 animate-fade-in">
-        <p className="text-[10px] text-accent-blue uppercase tracking-wider mb-1">
+        <p className="text-[10px] text-status-info uppercase tracking-wider mb-1">
           Project
         </p>
         <h1 className="text-2xl font-bold text-text-primary mb-2">
@@ -163,7 +163,7 @@ export default function ProjectWorkspacePage() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
               activeTab === tab
-                ? "text-text-primary border-b-2 border-accent-blue"
+                ? "text-text-primary border-b-2 border-status-info"
                 : "text-text-tertiary hover:text-text-primary"
             }`}
           >
@@ -182,16 +182,16 @@ export default function ProjectWorkspacePage() {
         {activeTab === "overview" && (
           <div className="space-y-6">
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 Objectives
-              </h3>
+              </h2>
               <div className="space-y-2">
                 {project.objectives.map((obj, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-2 text-sm text-text-secondary"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-blue flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-status-info flex-shrink-0" />
                     {obj}
                   </div>
                 ))}
@@ -199,9 +199,9 @@ export default function ProjectWorkspacePage() {
             </div>
 
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 Milestones
-              </h3>
+              </h2>
               <div className="space-y-3">
                 {project.milestones.map((m) => (
                   <div
@@ -210,9 +210,9 @@ export default function ProjectWorkspacePage() {
                       m.status === "completed"
                         ? "border-accent-green/30 bg-accent-green/5"
                         : m.status === "available"
-                          ? "border-accent-blue/30 bg-accent-blue/5"
+                          ? "border-status-info/30 bg-status-info/5"
                           : m.status === "in-progress"
-                            ? "border-accent-yellow/30 bg-accent-yellow/5"
+                            ? "border-accent-gold/30 bg-accent-gold/5"
                             : "border-border-primary bg-bg-primary"
                     }`}
                     onClick={() => {
@@ -229,9 +229,9 @@ export default function ProjectWorkspacePage() {
                           m.status === "completed"
                             ? "bg-accent-green/10 text-accent-green"
                             : m.status === "available"
-                              ? "bg-accent-blue/10 text-accent-blue"
+                              ? "bg-status-info/10 text-status-info"
                               : m.status === "in-progress"
-                                ? "bg-accent-yellow/10 text-accent-yellow"
+                                ? "bg-accent-gold/10 text-accent-gold"
                                 : "bg-bg-secondary text-text-muted"
                         }`}
                       >
@@ -244,9 +244,9 @@ export default function ProjectWorkspacePage() {
             </div>
 
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 Knowledge Packages
-              </h3>
+              </h2>
               <div className="space-y-2">
                 {project.knowledgePackages.map((kp) => (
                   <div
@@ -276,15 +276,15 @@ export default function ProjectWorkspacePage() {
           <div className="space-y-6">
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-medium text-text-primary">
+                <h2 className="text-sm font-medium text-text-primary">
                   Milestone {selectedMilestone.order}: {selectedMilestone.title}
-                </h3>
+                </h2>
                 <span
                   className={`px-2 py-0.5 text-[10px] rounded ${
                     selectedMilestone.status === "completed"
                       ? "bg-accent-green/10 text-accent-green"
                       : selectedMilestone.status === "available"
-                        ? "bg-accent-blue/10 text-accent-blue"
+                        ? "bg-status-info/10 text-status-info"
                         : "bg-bg-secondary text-text-muted"
                   }`}
                 >
@@ -357,7 +357,7 @@ export default function ProjectWorkspacePage() {
                   <div className="mt-4 pt-4 border-t border-border-primary">
                     <button
                       onClick={handleCompleteMilestone}
-                      className="w-full py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                      className="w-full py-2 text-sm font-medium bg-accent-gold text-text-primary rounded-md hover:bg-accent-gold-hover transition-colors"
                     >
                       Complete Milestone →
                     </button>
@@ -370,18 +370,18 @@ export default function ProjectWorkspacePage() {
         {/* AI Coach */}
         {activeTab === "mentor" && (
           <div className="space-y-6">
-            <div className="border border-accent-blue/30 rounded-lg bg-accent-blue/5 p-6">
+            <div className="border border-status-info/30 rounded-lg bg-status-info/5 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-full bg-accent-blue/20 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-status-info/20 flex items-center justify-center">
                   <span className="text-sm">🤖</span>
                 </div>
-                <h3 className="text-sm font-medium text-accent-blue">
+                <h2 className="text-sm font-medium text-status-info">
                   AI Project Coach
-                </h3>
+                </h2>
               </div>
               {coachResponse && (
                 <div>
-                  <span className="px-2 py-0.5 text-[10px] bg-accent-blue/10 text-accent-blue rounded mb-2 inline-block">
+                  <span className="px-2 py-0.5 text-[10px] bg-status-info/10 text-status-info rounded mb-2 inline-block">
                     {coachResponse.type}
                   </span>
                   <p className="text-sm text-text-secondary leading-relaxed mt-2">
@@ -404,9 +404,9 @@ export default function ProjectWorkspacePage() {
         {activeTab === "journal" && (
           <div className="space-y-6">
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 Reflection — {selectedMilestone?.title || "Select a milestone"}
-              </h3>
+              </h2>
               <div className="space-y-4">
                 <div>
                   <label className="text-xs font-medium text-text-primary mb-1 block">
@@ -503,9 +503,9 @@ export default function ProjectWorkspacePage() {
         {activeTab === "portfolio" && (
           <div className="space-y-6">
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 Portfolio Export
-              </h3>
+              </h2>
               <p className="text-sm text-text-secondary mb-4">
                 Export your project as a portfolio artifact. This includes your
                 architecture, reflection, and skills demonstrated.
@@ -513,7 +513,7 @@ export default function ProjectWorkspacePage() {
               <div className="flex gap-2 mb-4">
                 <button
                   onClick={handleExport}
-                  className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                  className="px-4 py-2 text-sm font-medium bg-accent-gold text-text-primary rounded-md hover:bg-accent-gold-hover transition-colors"
                 >
                   Generate Portfolio
                 </button>
@@ -538,9 +538,9 @@ export default function ProjectWorkspacePage() {
             </div>
 
             <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary">
-              <h3 className="text-sm font-medium text-text-primary mb-4">
+              <h2 className="text-sm font-medium text-text-primary mb-4">
                 GitHub Repository
-              </h3>
+              </h2>
               <p className="text-sm text-text-secondary mb-4">
                 Generate a GitHub-ready project structure with README,
                 architecture docs, and learning journal.

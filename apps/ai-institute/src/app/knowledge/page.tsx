@@ -106,24 +106,24 @@ export default function KnowledgePage() {
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>
-            <span
-              className="editorial-label"
-              style={{ color: "var(--color-brand-gold)" }}
-            >
-              Knowledge Mission
-            </span>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 fontWeight: 400,
                 lineHeight: 1.1,
-                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-4)",
               }}
             >
               Knowledge as a<br />
               Public Right
             </h1>
+            <span
+              className="editorial-label"
+              style={{ color: "var(--color-brand-gold)" }}
+            >
+              Knowledge Mission
+            </span>
             <p
               style={{
                 fontSize: "var(--text-lg)",
@@ -171,7 +171,7 @@ export default function KnowledgePage() {
                 padding: "var(--space-8)",
               }}
             >
-              <h3
+              <h2
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "var(--text-xl)",
@@ -181,7 +181,7 @@ export default function KnowledgePage() {
                 }}
               >
                 What We Offer
-              </h3>
+              </h2>
               <div
                 style={{
                   display: "flex",

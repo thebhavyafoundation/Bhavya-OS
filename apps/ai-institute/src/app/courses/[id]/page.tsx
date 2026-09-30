@@ -67,7 +67,10 @@ export default async function CourseDetailPage({
             </span>
           </div>
 
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-text-primary">
+          <h1
+            className="editorial-heading mt-3 text-4xl text-text-primary"
+            style={{ letterSpacing: "-0.03em" }}
+          >
             {course.title}
           </h1>
 

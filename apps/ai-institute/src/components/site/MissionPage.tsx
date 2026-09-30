@@ -110,7 +110,7 @@ export function MissionPage({ profile, activity }: MissionPageProps) {
         <div className="mt-8">
           {activity ?? (
             <EmptyState
-              title="No accomplishments published yet"
+              title="No source-backed records yet"
               description={profile.accomplishments}
             />
           )}

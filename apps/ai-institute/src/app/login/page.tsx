@@ -136,6 +136,7 @@ function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="field"
                 style={{
                   width: "100%",
                   padding: "var(--space-3) var(--space-4)",
@@ -144,18 +145,9 @@ function LoginForm() {
                   border: "1px solid var(--color-border-primary)",
                   fontSize: "var(--text-sm)",
                   color: "var(--color-text-primary)",
-                  outline: "none",
                   transition: "border-color var(--duration-fast) ease",
                 }}
                 placeholder="you@example.com"
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-gold)";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-primary)";
-                }}
               />
             </div>
             <div>
@@ -178,6 +170,7 @@ function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={8}
+                className="field"
                 style={{
                   width: "100%",
                   padding: "var(--space-3) var(--space-4)",
@@ -186,30 +179,24 @@ function LoginForm() {
                   border: "1px solid var(--color-border-primary)",
                   fontSize: "var(--text-sm)",
                   color: "var(--color-text-primary)",
-                  outline: "none",
                   transition: "border-color var(--duration-fast) ease",
                 }}
                 placeholder="8+ characters"
-                onFocus={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-gold)";
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.borderColor =
-                    "var(--color-border-primary)";
-                }}
               />
             </div>
 
             {error && (
               <p
+                role="alert"
                 style={{
                   fontSize: "var(--text-xs)",
-                  color: "#b91c1c",
+                  color: "var(--color-status-error)",
                   padding: "var(--space-2) var(--space-3)",
                   borderRadius: "var(--radius-md)",
-                  background: "#fef2f2",
-                  border: "1px solid #fecaca",
+                  background:
+                    "color-mix(in srgb, var(--color-status-error) 8%, transparent)",
+                  border:
+                    "1px solid color-mix(in srgb, var(--color-status-error) 30%, transparent)",
                 }}
               >
                 {error}
@@ -219,20 +206,8 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              style={{
-                width: "100%",
-                padding: "var(--space-3) var(--space-4)",
-                borderRadius: "var(--radius-lg)",
-                background: "var(--color-brand-gold)",
-                color: "var(--color-forest-950)",
-                fontWeight: 600,
-                fontSize: "var(--text-sm)",
-                border: "none",
-                cursor: "pointer",
-                opacity: loading ? 0.6 : 1,
-                transition:
-                  "opacity var(--duration-fast) ease, background var(--duration-fast) ease",
-              }}
+              aria-busy={loading}
+              className="btn btn-gold w-full"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>

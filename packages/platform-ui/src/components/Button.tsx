@@ -41,7 +41,7 @@ export function Button({
     <button
       className={`
         inline-flex items-center justify-center font-medium rounded-md
-        transition-all duration-fast cursor-pointer
+        transition-[background-color,border-color,color,opacity,transform] duration-fast cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variantStyles[variant]}
         ${sizeStyles[size]}

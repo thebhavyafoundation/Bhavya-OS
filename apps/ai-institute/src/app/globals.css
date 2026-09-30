@@ -75,6 +75,11 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
+.field:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
 /* High contrast mode support */
 @media (forced-colors: active) {
   *:focus-visible {
@@ -246,6 +251,21 @@ body {
   width: 100%;
 }
 
+nav a[aria-current="page"] {
+  position: relative;
+  color: var(--color-text-primary);
+}
+
+nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent-gold);
+}
+
 /* ============================================
    NAVIGATION — DROPDOWN MENUS
    ============================================ */
@@ -381,25 +401,6 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-}
-
-.nav-search {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border-primary);
-  font-size: var(--text-sm);
-  color: var(--color-text-tertiary);
-  cursor: pointer;
-  transition: all var(--duration-fast) ease;
-}
-
-.nav-search:hover {
-  border-color: var(--color-border-secondary);
-  background: var(--color-surface);
 }
 
 .nav-cta {
@@ -663,7 +664,13 @@ body {
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition:
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
 }
 
 .btn:active {
@@ -725,6 +732,17 @@ body {
   background: var(--color-surface-2);
 }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary:active,
+.btn-gold:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
 .hero-proof {
   display: flex;
   gap: var(--space-6);
@@ -767,13 +785,21 @@ body {
   border: 1px solid var(--color-border-primary);
   text-decoration: none;
   color: inherit;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
 }
 
 .mission-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--color-border-gold);
+}
+
+.mission-card:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 4px;
 }
 
 .mission-card-image {
@@ -897,7 +923,9 @@ body {
   background: var(--color-surface);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-lg);
-  transition: all var(--duration-normal) var(--ease-out);
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .knowledge-card:hover {
@@ -965,6 +993,7 @@ body {
   color: var(--color-text-inverse);
   line-height: 1;
   margin-bottom: var(--space-2);
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-label {
@@ -1030,7 +1059,10 @@ body {
   border-radius: var(--radius-lg);
   text-decoration: none;
   color: inherit;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
 }
 
 .participate-card:hover {
@@ -1341,7 +1373,10 @@ body {
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border-primary);
   text-decoration: none;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
   height: 100%;
   box-shadow: var(--shadow-sm);
 }
@@ -1895,6 +1930,11 @@ body {
 
 .editorial-tile-lg .editorial-tile-link:hover {
   border-color: rgba(212, 175, 55, 0.45);
+}
+
+.editorial-tile-link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 4px;
 }
 
 .editorial-tile-title {
@@ -2715,10 +2755,6 @@ body {
   .mission-row-cta {
     grid-column: auto;
   }
-
-  .mission-row:hover {
-    padding-left: var(--space-3);
-  }
 }
 
 /* Chapter — full-bleed quote over image plane */
@@ -3506,6 +3542,16 @@ body {
   .photo-plate-motif {
     transform: none !important;
   }
+
+  .btn:hover,
+  .btn-gold:hover,
+  .mission-card:hover,
+  .editorial-tile-link:hover,
+  .home-tile:hover,
+  .home-pillar-card:hover,
+  .nav-cta:hover {
+    transform: none !important;
+  }
 }
 
 /* ============================================
@@ -4031,7 +4077,7 @@ html.lenis body {
 .home-hero-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   line-height: 0.96;
   letter-spacing: -0.03em;
   color: var(--color-brand-ivory);
@@ -4257,6 +4303,15 @@ html.lenis body {
   background: rgba(247, 244, 236, 0.08);
 }
 
+.home-pillar-card:hover .home-pillar-cta {
+  gap: var(--space-3);
+}
+
+.home-pillar-card:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 4px;
+}
+
 .home-pillar-icon {
   display: flex;
   align-items: center;
@@ -4290,6 +4345,7 @@ html.lenis body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-brand-gold);
+  transition: gap var(--duration-fast) var(--ease-out);
 }
 
 /* Mission tiles */
@@ -4318,6 +4374,12 @@ html.lenis body {
 .home-tile:hover {
   border-color: var(--color-border-focus);
   transform: translateY(-3px);
+}
+
+.home-tile:focus-visible,
+.home-tile:has(:focus-visible) {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 4px;
 }
 
 .home-tile-media {
@@ -4426,8 +4488,8 @@ html.lenis body {
   inset: 0;
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--color-forest-950) 82%, transparent) 0%,
-    color-mix(in srgb, var(--color-forest-950) 90%, transparent) 100%
+    color-mix(in srgb, var(--color-forest-950) 62%, transparent) 0%,
+    color-mix(in srgb, var(--color-forest-950) 78%, transparent) 100%
   );
 }
 

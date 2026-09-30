@@ -66,13 +66,30 @@ const paths = [
 export default function GetInvolvedPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      <section className="relative pt-32 pb-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Get Involved</h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            One account. Every way to participate. Start anywhere — learning,
-            volunteering, donating, researching, or simply belonging.
-          </p>
+      <section className="scene">
+        <div className="max-w-6xl mx-auto px-6">
+          <div
+            className="scene-grid-asymmetric"
+            style={{ alignItems: "flex-end" }}
+          >
+            <h1
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 6rem)",
+                letterSpacing: "-0.03em",
+                margin: 0,
+              }}
+            >
+              Get Involved
+            </h1>
+            <p
+              className="editorial-lead"
+              style={{ margin: 0, maxWidth: "42ch" }}
+            >
+              One account. Every way to participate. Start anywhere — learning,
+              volunteering, donating, researching, or simply belonging.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -15,12 +15,15 @@ export default function LevelsPage() {
         {/* Hero */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[var(--color-brand-forest)]/5 to-transparent pt-24 pb-16">
           <div className="mx-auto max-w-5xl px-6 text-center">
+            <h1
+              className="editorial-heading text-4xl md:text-5xl text-[var(--color-brand-forest)] mb-4"
+              style={{ letterSpacing: "-0.03em" }}
+            >
+              13 Levels, One Transformation
+            </h1>
             <span className="inline-block rounded-full bg-[var(--color-brand-forest)]/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-[var(--color-brand-forest)] uppercase mb-6">
               Academy / Levels
             </span>
-            <h1 className="font-[var(--font-display)] text-4xl md:text-5xl font-bold text-[var(--color-brand-forest)] mb-6">
-              13 Levels, One Transformation
-            </h1>
             <p className="text-lg text-[var(--color-earth)] max-w-2xl mx-auto">
               Each level is a complete learning unit — mission, duration,
               hands-on percentage, outcome, and modules. Progress through all 13
