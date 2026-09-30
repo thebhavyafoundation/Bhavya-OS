@@ -3,19 +3,39 @@
 import { ArrowRight } from "lucide-react";
 import { HeroEntrance } from "@/components/motion/HeroEntrance";
 import { ScrubParallax } from "@/components/motion/ScrubParallax";
-import { EditorialLink } from "@/components/editorial/EditorialLink";
 import { PHOTO } from "@/lib/photos";
 
 /**
- * Poster-stagger hero — asymmetric split (44/56): ivory copy panel
- * left, documentary photograph right. The second display line steps
- * over the seam onto the photograph; a vertical tagline spine rides
- * the right edge. One authored motion: image settle (gated by
- * prefers-reduced-motion) plus the staggered HeroEntrance.
+ * Immersive background hero — full-bleed documentary photograph as a
+ * background layer with editorial typography overlaid. The image carries
+ * the scene; the type carries the message. Scrim stack guarantees WCAG
+ * AA contrast for ivory type. Motion: staggered HeroEntrance + slow
+ * background settle/parallax, all gated by prefers-reduced-motion.
  */
 export function SplitHero() {
   return (
-    <section className="home-hero" aria-labelledby="hero-heading">
+    <section
+      className="home-hero home-hero--immersive"
+      aria-labelledby="hero-heading"
+    >
+      <div className="home-hero-bg">
+        <ScrubParallax distance={36} className="home-hero-parallax">
+          <div className="home-hero-frame">
+            <img
+              src={PHOTO.hero}
+              alt="Sun rising over a mountain ridge at dawn — representative photograph"
+              width={2400}
+              height={1601}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="home-hero-img"
+            />
+            <div className="home-hero-scrim" aria-hidden="true" />
+          </div>
+        </ScrubParallax>
+      </div>
+
       <HeroEntrance className="home-hero-copy">
         <span className="home-hero-rule" aria-hidden="true" />
         <h1 id="hero-heading" className="home-hero-title">
@@ -32,36 +52,26 @@ export function SplitHero() {
           <a href="/missions" className="btn btn-gold">
             Explore Bhavya <ArrowRight size={16} aria-hidden="true" />
           </a>
-          <EditorialLink href="/knowledge">Start learning</EditorialLink>
+          <a href="/knowledge" className="btn btn-secondary-inverse">
+            Start learning
+          </a>
         </div>
-        <a href="#pillars" className="home-hero-scroll">
-          <span className="home-hero-scroll-chevron" aria-hidden="true">
-            ↓
-          </span>
-          Scroll
-        </a>
+        <div className="home-hero-meta">
+          <a href="#pillars" className="home-hero-scroll">
+            <span className="home-hero-scroll-chevron" aria-hidden="true">
+              ↓
+            </span>
+            Scroll
+          </a>
+          <p className="home-hero-proof">
+            For People. For Nature. For Generations.
+          </p>
+        </div>
       </HeroEntrance>
 
-      <div className="home-hero-visual">
-        <ScrubParallax distance={20} className="home-hero-parallax">
-          <div className="home-hero-frame">
-            <img
-              src={PHOTO.hero}
-              alt="Sun rising over a mountain ridge at dawn — representative photograph"
-              width={2400}
-              height={1601}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="home-hero-img"
-            />
-            <div className="home-hero-scrim" aria-hidden="true" />
-          </div>
-        </ScrubParallax>
-        <p className="home-hero-spine">
-          For People. For Nature. For Generations.
-        </p>
-      </div>
+      <p className="home-hero-spine" aria-hidden="true">
+        For People. For Nature. For Generations.
+      </p>
     </section>
   );
 }

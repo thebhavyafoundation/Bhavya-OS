@@ -1,7 +1,7 @@
 ---
 id: COORD-001
 owner: Engineering
-version: 0.6
+version: 0.8
 status: active
 canonical: .ai/runtime.json
 ---
@@ -9,29 +9,41 @@ canonical: .ai/runtime.json
 # Current Task — Two-Session Coordination (Bhavya Foundation V2)
 
 ## Current Goal
+
 Two agent sessions work this repository in parallel (same working copy). This file is the coordination contract: division of work, file ownership, quality bar, and reporting protocol. Session A (lead) aggregates all status and reports to the human.
 
 ## Sessions
+
 - **Session A — Lead / Integration (opencode, mimo):** owns coordination, CI/CD pipeline, verification, and reporting to the human.
 - **Session B — Feature (immersive-hero session):** owns homepage hero design and curriculum content execution.
+- **Session C — Headless executor (spawned 2026-09-30 02:03, attach to desktop server):** executes Plan C in worktree `D:\Bhavya-OS-wt\plan-c` on branch `build/plan-c-cert-gallery`. Session `ses_f112084d6ffecDWhgmlfD1rjWL`, model `mimo-v2.6-flash-free`, cost 0. Log: temp `session-c-run.log`.
 
 ## Division of work
 
 ### Session A
-1. Unblock GitHub Actions (no workflow runs created since 2026-09-26T18:25:33Z — facts in Blocked below) and retrigger PR #9.
-2. Land **PR #9** (hero sunrise photo, head `dfe6add`) → deploy → live verification (verify8 + screenshots + impeccable detect).
-3. **Plan C** — certificate of completion + gallery upload (migrations 006/007, R2 binding, studio upload API, certificate rendering). Research already held by Session A.
+
+1. CI/CD: Actions outage RESOLVED (see Status log); keep PRs green and land them in order.
+2. **PR #9 (hero sunrise photo) — DONE:** rebuilt onto master, CI 4/4, squash-merged `e3cbe067`, deployed, live-verified 31/31 + screenshot + impeccable detect.
+3. **PR #10** — rebuild onto master (design files from Session B), land after green, verify live.
+4. **Plan C** — research held by Session A; execution delegated to Session C. Session A supervises, verifies, and integrates the PR.
 
 ### Session B
-1. **PR #10** — immersive background-integrated hero: bring to design floor (Quality bar below), local gates, screenshot evidence.
+
+1. **PR #10** — immersive background-integrated hero: design floor, local gates, screenshot evidence (branch force-updated by Session A; fetch before any push).
 2. **Plan B** (`docs/superpowers/plans/2026-09-26-foundation-v2-plan-b-curriculum.md`) — all 86 modules navigable, ages 6–15 content, claims registry update to "86 modules".
 
 ## File ownership (no cross-edits without a PR comment)
-- **Session A:** `.github/workflows/**`, `.ai/current-task.md`, `src/lib/photos.ts` + `public/photography/**` manifests, Playwright verify harness, Plan C surfaces (migrations, certificate/gallery routes, studio upload).
+
+- **Session A:** `.github/workflows/**`, `.ai/current-task.md`, `src/lib/photos.ts` + `public/photography/**` manifests, Playwright verify harness, Plan C surfaces (migrations, certificate/gallery routes, studio upload), `scripts/sync-tokens.mjs`.
 - **Session B:** `src/components/home/SplitHero.tsx`, home-hero CSS block in `globals.css`, homepage visual components, curriculum data/routes/content.
-- **Merge order:** PR #9 first, then PR #10 (both base `master`; no rebase expected — re-verify mergeability after #9 lands).
+- **Merge order:** PR #11 first (done), PR #9 (done), then PR #10. Re-verify mergeability after each lands.
+
+## Machine resource contract (human directive 2026-09-30 — applies to every session here)
+
+Free models only (spawn with `opencode/mimo-v2.6-flash-free`, cost must stay 0); low-spec 8 GB machine — no parallel heavy jobs, one background computation at a time; **never delete any file outside the repository**; limited resources, always find a solution. Full text: global `~/.config/opencode/AGENTS.md` → "Machine Resource Contract".
 
 ## Quality bar (human mandate: modern, professional, aesthetic, always alive)
+
 1. **Design tokens only** — forest/ivory/gold, Playfair/Inter; `pnpm tokens:check` clean. No hardcoded colors/fonts.
 2. **Craft floor** — display type ≤ 6rem, tracking ≥ -0.04em, **no eyebrow/kicker labels above headings**, asymmetric composed layouts, zero template patterns.
 3. **Alive** — one authored motion moment per view plus subtle hover/focus micro-interactions; every animation gated by `prefers-reduced-motion`; the static fallback must hold the composition on its own.
@@ -39,11 +51,25 @@ Two agent sessions work this repository in parallel (same working copy). This fi
 5. **Evidence** — local gates green (tsc, eslint, vitest, tokens, antislop) **and** live-URL screenshots before anything is called done.
 
 ## Reporting protocol
+
 - **Session B → Session A:** status comments on the relevant PR (gate outputs + live screenshot links), plus updating this file's Session B status when starting/finishing work.
 - **Session A → human:** consolidated report after each cycle (what landed, evidence, what is next).
 
-## Blocked
-GitHub Actions: no workflow runs created for any event since **2026-09-26T18:25:33Z**. Facts: all three workflows report `state=active`; GitHub status page operational with no incidents; workflow files unchanged since 2026-09-18; events do arrive (a Vercel check suite was created for head `dfe6add` at 2026-09-29T19:39:07Z) — but the Actions app itself starts nothing. Pending owner action: check repo **Settings → Actions → General** (and account-level **Settings → Actions**) for a disable/restriction set after 2026-09-26 18:25Z.
+## Blocked — RESOLVED
+
+GitHub Actions outage (2026-09-26T18:25:33Z → 2026-09-29T21:21:59Z) is over: owner re-enabled Actions. All event types now work — proven 2026-09-30: `pull_request` synchronize (CI run #45 on PR #9), `push` to master (CI run #46 + Deploy run #35). Earlier missing runs were the disabled-window, not a repo setting.
+
+## Status log
+
+- 2026-09-30 02:55 IST — Actions re-enabled by owner; CI verified alive on PR #11.
+- 2026-09-30 02:55 IST — PR #11 opened: one-line regex fix in `scripts/sync-tokens.mjs` (CRLF header strip); root cause + byte-level verification in PR body.
+- 2026-09-30 02:55 IST — Session C steering delivered: tokens:check fail = pre-existing bug; must NOT run `tokens:sync` or edit token files; other gates must be green.
+- 2026-09-30 03:15 IST — PR #11 squash-merged `47d7b2d`; Deploy run #34 success.
+- 2026-09-30 03:50 IST — PR #9 root cause fixed: branch diverged at PR #8 squash merge (conflict in SplitHero). Rebuilt branch as one commit on master (`a603832`, exactly 7 files, sync-tokens kept from master). CI run #45 4/4 green.
+- 2026-09-30 03:56 IST — PR #9 squash-merged `e3cbe067`; CI run #46 + Deploy run #35 both success.
+- 2026-09-30 03:59 IST — Live verified: verify8 31/31 (hero-img-sunrise passes), evidence screenshots regenerated, impeccable detect shows no new anti-patterns in changed files. Sunrise hero confirmed on deployed URL.
+- 2026-09-30 04:00 IST — PR #10 rebuild: branch reset onto master carrying Session B's design files (globals.css, SplitHero.tsx) + this coord file; scripts/sync-tokens.mjs stays at master's fixed version. Session B: fetch before your next push.
 
 ## Previous current task (preserved)
+
 RUNTIME-014 — Runtime Daemon Phase 1 (`packages/runtime/daemon/watch.mjs`, `.ai/` auto-sync): paused. Completed items remain in `.ai/history/` and task contracts under `.ai/tasks/contracts/`.
