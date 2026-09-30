@@ -1,7 +1,7 @@
 ---
 id: COORD-001
 owner: Engineering
-version: 0.8
+version: 0.9
 status: active
 canonical: .ai/runtime.json
 ---
@@ -24,8 +24,9 @@ Two agent sessions work this repository in parallel (same working copy). This fi
 
 1. CI/CD: Actions outage RESOLVED (see Status log); keep PRs green and land them in order.
 2. **PR #9 (hero sunrise photo) — DONE:** rebuilt onto master, CI 4/4, squash-merged `e3cbe067`, deployed, live-verified 31/31 + screenshot + impeccable detect.
-3. **PR #10** — rebuild onto master (design files from Session B), land after green, verify live.
-4. **Plan C** — research held by Session A; execution delegated to Session C. Session A supervises, verifies, and integrates the PR.
+3. **PR #10 — DONE:** rebuilt onto master, CI 4/4, squash-merged `9371ae1`, Deploy #36, live-verified.
+4. **PR #12 — DONE (craft floor):** dropped the eyebrow/kicker above the hero h1 + dead CSS; merged `e2f3a2c2`, Deploy #37, verify 31/31, HTML probe confirms class absent, impeccable detect unchanged (8 pre-existing, none in changed files). Kicker text may only return repositioned (below rule, not above display heading).
+5. **Plan C** — Session C execution COMPLETE (5 commits, gates green, not pushed). Session A merged `origin/master` into the branch (conflicts: globals.css hero region → master's side; SplitHero/.ai → master's side; Session C gallery/cert CSS preserved), re-ran gates green (tsc, eslint 0, vitest 237/237, antislop, diff-check), and is pushing + opening the PR.
 
 ### Session B
 
@@ -69,6 +70,10 @@ GitHub Actions outage (2026-09-26T18:25:33Z → 2026-09-29T21:21:59Z) is over: o
 - 2026-09-30 03:56 IST — PR #9 squash-merged `e3cbe067`; CI run #46 + Deploy run #35 both success.
 - 2026-09-30 03:59 IST — Live verified: verify8 31/31 (hero-img-sunrise passes), evidence screenshots regenerated, impeccable detect shows no new anti-patterns in changed files. Sunrise hero confirmed on deployed URL.
 - 2026-09-30 04:00 IST — PR #10 rebuild: branch reset onto master carrying Session B's design files (globals.css, SplitHero.tsx) + this coord file; scripts/sync-tokens.mjs stays at master's fixed version. Session B: fetch before your next push.
+- 2026-09-30 04:07 IST — PR #10 squash-merged `9371ae1`; Deploy run #36 success; live verify 29/31 (2 stale assertions for the intentional split→immersive design changes, not defects).
+- 2026-09-30 04:20 IST — PR #12 (craft floor): removed `home-hero-eyebrow` kicker from SplitHero.tsx + dead CSS block; merged `e2f3a2c2`; Deploy run #37; verify8 updated for new design intent (gold accent, mobile spine `display:none`) → 31/31; HTML probe: kicker class absent, trust text only in meta descriptions; impeccable detect = 8 pre-existing, none in changed files.
+- 2026-09-30 04:54 IST — Session C run 2 complete: 5 commits on `build/plan-c-cert-gallery` (`848c891`, `a65a30e`, `816ad8b`, `03d610a`, `7ce2063`), gates green (tsc, eslint 0 errors, vitest 237/237, antislop, diff-check, prettier), tree clean, no push (per brief). Deviations: `/certificates` substitutes blocked `/app/credentials` path; server-side QR (`qrcode` never client-bundled); Task 13 dropped.
+- 2026-09-30 07:19 IST — Session A integration: merged `origin/master` (`e2f3a2c2`) into the branch as `d80305a` (both parents); conflicts resolved — globals.css hero region → master's immersive state (eyebrow block stays deleted), SplitHero.tsx + this file → master's side, Session C gallery/cert CSS preserved. Post-merge gates: tsc PASS, eslint PASS (25 files), vitest 237/237, antislop PASS, diff-check PASS.
 
 ## Previous current task (preserved)
 
