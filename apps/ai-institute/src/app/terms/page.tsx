@@ -50,23 +50,14 @@ export default function TermsPage() {
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="editorial-label"
-          >
-            Legal
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.6 }}
             className="editorial-heading"
             style={{
               fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
-              marginTop: "var(--space-4)",
-              marginBottom: "var(--space-6)",
+              marginBottom: "var(--space-4)",
             }}
           >
             Terms of Service
@@ -74,8 +65,19 @@ export default function TermsPage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="editorial-label"
+          >
+            Legal
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ color: "var(--color-text-tertiary)" }}
+            style={{
+              color: "var(--color-text-tertiary)",
+              marginTop: "var(--space-4)",
+            }}
           >
             Last updated: August 7, 2026
           </motion.p>
@@ -83,7 +85,7 @@ export default function TermsPage() {
       </section>
 
       <section className="py-12 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div style={{ maxWidth: "65ch", margin: "0 auto" }}>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

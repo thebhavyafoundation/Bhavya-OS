@@ -25,15 +25,30 @@ export default function ResearchPage() {
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
       {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            AI Research Library
-          </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            Foundational research papers and publications that inform AI
-            education and industry practice.
-          </p>
+      <section className="scene">
+        <div className="max-w-6xl mx-auto px-6">
+          <div
+            className="scene-grid-asymmetric"
+            style={{ alignItems: "flex-end" }}
+          >
+            <h1
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 6rem)",
+                letterSpacing: "-0.03em",
+                margin: 0,
+              }}
+            >
+              AI Research Library
+            </h1>
+            <p
+              className="editorial-lead"
+              style={{ margin: 0, maxWidth: "40ch" }}
+            >
+              Foundational research papers and publications that inform AI
+              education and industry practice.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -116,7 +131,7 @@ export default function ResearchPage() {
           {filteredPapers.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-4xl mb-4">📚</div>
-              <h3 className="text-xl font-semibold mb-2">No papers found</h3>
+              <h2 className="text-xl font-semibold mb-2">No papers found</h2>
               <p className="text-text-muted">
                 Try adjusting your search or filter criteria.
               </p>
@@ -133,9 +148,9 @@ export default function ResearchPage() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-forest-500 transition-colors">
+                      <h2 className="text-lg font-bold mb-2 group-hover:text-forest-500 transition-colors">
                         {paper.title}
-                      </h3>
+                      </h2>
                       <p className="text-sm text-text-secondary mb-2">
                         {paper.authors.join(", ")}
                       </p>

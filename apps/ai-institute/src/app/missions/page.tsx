@@ -43,7 +43,7 @@ export default function MissionsPage() {
               <Link
                 key={mission.id}
                 href={`/missions/${mission.id}`}
-                className="group block glass border border-border-primary rounded-2xl p-8 hover:border-border-focus transition-all"
+                className="group mission-card p-8"
               >
                 <div
                   className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"

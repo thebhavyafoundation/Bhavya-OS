@@ -16,7 +16,6 @@ import type { Role } from "@/lib/roles";
 import {
   BookOpen,
   FlaskConical,
-  Search,
   Menu,
   X,
   ChevronRight,
@@ -91,6 +90,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const desktopNavRef = useRef<HTMLElement | null>(null);
 
   // Get nav groups from canonical registry
   const navGroups = getPublicNavGroups();
@@ -123,6 +123,28 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       if (dropdownTimeoutRef.current) {
         clearTimeout(dropdownTimeoutRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const onPointerDown = (event: MouseEvent) => {
+      if (
+        desktopNavRef.current &&
+        !desktopNavRef.current.contains(event.target as Node)
+      ) {
+        setActiveDropdown(null);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, []);
 
@@ -170,7 +192,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </Link>
 
             {/* Desktop Dropdown Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav
+              ref={desktopNavRef}
+              className="hidden lg:flex items-center gap-1"
+            >
               {navGroups.map((group) => {
                 const Icon = iconMap[group.items[0]?.icon] || Target;
                 return (
@@ -181,6 +206,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     onMouseLeave={handleDropdownLeave}
                   >
                     <button
+                      type="button"
+                      aria-haspopup="menu"
+                      aria-expanded={activeDropdown === group.id}
+                      aria-controls={`nav-menu-${group.id}`}
+                      onClick={() =>
+                        setActiveDropdown(
+                          activeDropdown === group.id ? null : group.id,
+                        )
+                      }
                       className={`relative min-h-[44px] px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors flex items-center gap-1 ${
                         activeDropdown === group.id
                           ? "text-text-primary"
@@ -199,6 +233,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <AnimatePresence>
                       {activeDropdown === group.id && (
                         <motion.div
+                          id={`nav-menu-${group.id}`}
+                          role="menu"
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 8 }}
@@ -211,6 +247,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                               <Link
                                 key={item.id}
                                 href={item.href}
+                                role="menuitem"
+                                aria-current={
+                                  isActive(item.href) ? "page" : undefined
+                                }
                                 className="flex items-start gap-3 px-4 py-3 hover:bg-bg-hover transition-colors"
                                 onClick={() => setActiveDropdown(null)}
                               >
@@ -237,17 +277,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </nav>
 
             <div className="flex items-center gap-3">
-              <button
-                type="button"
-                className="hidden sm:flex min-h-[44px] items-center gap-2 px-3 py-1.5 rounded-md border border-border-primary bg-bg-secondary text-text-tertiary text-xs hover:border-border-secondary hover:text-text-secondary transition-colors"
-              >
-                <Search className="w-3.5 h-3.5" />
-                <span>Search</span>
-                <kbd className="ml-1 px-1 py-0.5 rounded bg-bg-tertiary text-text-muted text-[10px] font-mono border border-border-primary">
-                  ⌘K
-                </kbd>
-              </button>
-
               {isAuthenticated ? (
                 <div className="flex items-center gap-2">
                   <Link
@@ -332,6 +361,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                             ? "bg-accent-gold/10 text-text-primary border border-accent-gold/20"
                             : "text-text-tertiary hover:bg-bg-tertiary hover:text-text-secondary"
                         }`}
+                        aria-current={isActive(item.href) ? "page" : undefined}
                       >
                         <span className="flex items-center gap-2.5">
                           <ItemIcon className="w-4 h-4" />
@@ -357,7 +387,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <button
                       type="button"
                       onClick={logout}
-                      className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
+                      className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm border border-status-error/30 text-status-error hover:bg-status-error/10 transition-colors"
                     >
                       <LogOut className="w-4 h-4" />
                       Sign Out

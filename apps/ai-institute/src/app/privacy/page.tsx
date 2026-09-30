@@ -60,27 +60,35 @@ export default function PrivacyPage() {
     <>
       <section className="relative pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-sm text-accent-gold font-medium mb-4 tracking-widest uppercase"
-          >
-            Legal
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-6xl font-bold text-text-primary mb-6"
+            transition={{ duration: 0.6 }}
+            className="editorial-heading"
+            style={{
+              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
+              letterSpacing: "-0.03em",
+              marginBottom: "var(--space-4)",
+            }}
           >
             Privacy Policy
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="editorial-label"
+          >
+            Legal
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-text-tertiary"
+            style={{
+              color: "var(--color-text-tertiary)",
+              marginTop: "var(--space-4)",
+            }}
           >
             Last updated: August 7, 2026
           </motion.p>
@@ -88,7 +96,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="py-12 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div style={{ maxWidth: "65ch", margin: "0 auto" }}>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

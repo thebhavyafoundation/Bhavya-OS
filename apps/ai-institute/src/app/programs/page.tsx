@@ -73,40 +73,55 @@ export default function ProgramsPage() {
           programs
         </p>
       </div>
-      <section className="relative overflow-hidden pt-32 pb-20 px-6">
+      <section className="scene overflow-hidden">
         <div className="absolute inset-0 opacity-15">
           <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-accent-gold rounded-full blur-[160px]" />
           <div className="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-bg-tertiary rounded-full blur-[140px]" />
         </div>
-        <div className="relative max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div
+            className="scene-grid-asymmetric"
+            style={{ alignItems: "flex-end" }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full border border-accent-gold/30 bg-accent-gold/10 text-accent-gold text-sm font-medium tracking-wide mb-6">
-              Structured Learning Paths
-            </span>
-          </motion.div>
-          <motion.h1
-            className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Learning{" "}
-            <span className="bg-gradient-to-r from-accent-gold via-accent-green to-text-tertiary bg-clip-text text-transparent">
-              Programs
-            </span>
-          </motion.h1>
-          <motion.p
-            className="text-lg md:text-xl text-text-primary/60 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Structured paths from beginner to expert
-          </motion.p>
+            <motion.h1
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 6rem)",
+                letterSpacing: "-0.03em",
+                margin: 0,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Learning{" "}
+              <span className="bg-gradient-to-r from-accent-gold via-accent-green to-text-tertiary bg-clip-text text-transparent">
+                Programs
+              </span>
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.span
+                className="inline-block px-4 py-1.5 rounded-full border border-accent-gold/30 bg-accent-gold/10 text-accent-gold text-sm font-medium tracking-wide mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Structured Learning Paths
+              </motion.span>
+              <motion.p
+                className="text-lg md:text-xl text-text-primary/60 max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Structured paths from beginner to expert
+              </motion.p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -145,9 +160,9 @@ export default function ProgramsPage() {
                   {prog.level[0]}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-text-primary">
+                  <h2 className="text-xl font-bold text-text-primary">
                     {prog.title}
-                  </h3>
+                  </h2>
                   <p className="text-sm text-text-primary/40">
                     {prog.description}
                   </p>

@@ -52,25 +52,25 @@ export default function HeritagePage() {
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>
-            <span
-              className="editorial-label"
-              style={{ color: "var(--color-brand-gold)" }}
-            >
-              Heritage Mission
-            </span>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 fontWeight: 400,
                 lineHeight: 1.1,
-                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-4)",
               }}
             >
               Preserving Our
               <br />
               Living Heritage
             </h1>
+            <span
+              className="editorial-label"
+              style={{ color: "var(--color-brand-gold)" }}
+            >
+              Heritage Mission
+            </span>
             <p
               style={{
                 fontSize: "var(--text-lg)",

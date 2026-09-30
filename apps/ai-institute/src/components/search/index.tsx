@@ -130,7 +130,7 @@ export function SemanticSearch() {
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pl-10 text-white placeholder-white/40 focus:outline-none focus:border-accent-green/50"
+          className="field w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pl-10 text-white placeholder-white/40 focus:border-accent-green/50"
           placeholder="Search concepts, paths, glossary..."
         />
         <svg

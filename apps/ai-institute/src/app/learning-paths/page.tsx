@@ -317,15 +317,21 @@ export default function LearningPathsPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs font-mono text-white/20 tracking-[0.3em] uppercase mb-6 block">
-              Flagship Learning Path
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+            <h1
+              className="editorial-heading mb-6"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 6rem)",
+                letterSpacing: "-0.03em",
+              }}
+            >
               Your{" "}
               <span className="bg-gradient-to-r from-white via-white/80 to-white/40 bg-clip-text text-transparent">
                 AI Journey
               </span>
             </h1>
+            <span className="text-xs font-mono text-white/20 tracking-[0.3em] uppercase mb-6 block">
+              Flagship Learning Path
+            </span>
             <p className="text-lg text-white/40 leading-relaxed max-w-xl mx-auto mb-10">
               From zero to AI expert in 8 stages. A structured path designed to
               take you from complete beginner to building autonomous AI systems.

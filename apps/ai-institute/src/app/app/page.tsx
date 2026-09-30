@@ -122,7 +122,8 @@ export default async function MyAppPage() {
                   border: "1px solid var(--color-border-primary)",
                   borderRadius: "var(--radius-md)",
                   textDecoration: "none",
-                  transition: "all 0.2s ease",
+                  transition:
+                    "background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out)",
                 }}
               >
                 <Icon
