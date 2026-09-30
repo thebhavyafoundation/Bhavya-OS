@@ -4028,13 +4028,6 @@ html.lenis body {
   background: var(--color-accent-gold);
 }
 
-.home-hero-rule {
-  display: block;
-  width: 56px;
-  height: 2px;
-  background: var(--color-accent-gold);
-}
-
 .home-hero-title {
   margin: 0;
   font-family: var(--font-display);
@@ -4053,16 +4046,6 @@ html.lenis body {
 .home-hero-line-accent {
   font-style: italic;
   color: var(--color-gold-300);
-}
-
-.home-hero-line {
-  display: block;
-  white-space: nowrap;
-}
-
-.home-hero-line-accent {
-  margin-left: calc(100% + var(--space-16) + var(--space-6));
-  color: var(--color-brand-ivory);
 }
 
 .home-hero-lead {
