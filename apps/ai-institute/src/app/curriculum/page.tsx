@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { curriculum, getTotalModules } from "@/data/curriculum-levels";
+import { AICurriculumTimeline } from "@/components/curriculum/AICurriculumTimeline";
 import {
   BookOpen,
   ArrowRight,
@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bhavya Academy Curriculum — 13 Levels of AI Mastery",
+  title: "Bhavya Academy Curriculum — 86 AI Modules, Grades 1–12",
   description:
-    "Explore the Bhavya Academy curriculum: 13 progressive levels from Digital Foundations to Institution Building, designed to transform learners into builders and leaders.",
+    "Explore the Bhavya Academy AI curriculum: four bands, 86 modules for Grades 1–12, aligned to United States, China, UNESCO, and OECD AI education standards.",
 };
 
 const journeyStages = [
@@ -49,8 +49,6 @@ const journeyStages = [
 ];
 
 export default function CurriculumPage() {
-  const totalModules = getTotalModules();
-
   return (
     <>
       <div id="main-content" className="min-h-screen">
@@ -106,14 +104,14 @@ export default function CurriculumPage() {
               }}
             >
               The Bhavya Academy curriculum is a structured, progressive
-              learning path — from digital foundations to institution building.{" "}
-              <strong>13 levels. {totalModules} modules.</strong> One
+              learning path — from AI foundations to institution building.{" "}
+              <strong>Four bands. 86 modules. Grades 1–12.</strong> One
               transformation journey.
             </p>
           </div>
         </section>
 
-        {/* All Levels */}
+        {/* Full Path */}
         <section style={{ padding: "var(--space-16) 0" }}>
           <div className="container">
             <div style={{ marginBottom: "var(--space-10)" }}>
@@ -127,7 +125,7 @@ export default function CurriculumPage() {
                   marginBottom: "var(--space-2)",
                 }}
               >
-                All Levels
+                The Full Path
               </p>
               <h2
                 style={{
@@ -137,7 +135,7 @@ export default function CurriculumPage() {
                   color: "var(--color-brand-forest)",
                 }}
               >
-                13 Levels of Progressive Learning
+                86 Modules, Grades 1–12
               </h2>
               <p
                 style={{
@@ -147,108 +145,12 @@ export default function CurriculumPage() {
                   lineHeight: 1.6,
                 }}
               >
-                Each level builds on the previous, combining theoretical
-                understanding with hands-on practice.
+                Four bands, from first encounters with machines to
+                research-grade capstones — each module aligned to recognized AI
+                education standards. Your progress is saved as you go.
               </p>
             </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-                gap: "var(--space-4)",
-              }}
-            >
-              {curriculum.map((level) => (
-                <a
-                  key={level.level}
-                  href={`/curriculum/levels/${level.level}`}
-                  className="curriculum-tier"
-                  style={{
-                    position: "relative",
-                    padding: "var(--space-5)",
-                    background: "var(--color-bg-primary)",
-                    border: "1px solid var(--color-border-primary)",
-                    borderRadius: "var(--radius-lg)",
-                    textDecoration: "none",
-                    transition: "all var(--duration-normal) var(--ease-out)",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "var(--space-3)",
-                    }}
-                  >
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "var(--radius-md)",
-                        background: "rgba(14, 56, 46, 0.1)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "var(--text-sm)",
-                        fontWeight: 700,
-                        color: "var(--color-brand-forest)",
-                      }}
-                    >
-                      L{level.level}
-                    </span>
-                    <div style={{ minWidth: 0 }}>
-                      <h3
-                        style={{
-                          fontWeight: 600,
-                          color: "var(--color-brand-forest)",
-                          fontSize: "var(--text-sm)",
-                        }}
-                      >
-                        Level {level.level}: {level.name}
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: "var(--text-sm)",
-                          color: "var(--color-earth)",
-                          marginTop: "var(--space-1)",
-                          lineHeight: 1.5,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {level.mission}
-                      </p>
-                      <p
-                        style={{
-                          fontSize: "var(--text-xs)",
-                          color: "rgba(106, 124, 82, 0.6)",
-                          marginTop: "var(--space-2)",
-                        }}
-                      >
-                        {level.duration} · {level.moduleCount} modules ·{" "}
-                        {level.handsOnPercent}% hands-on
-                      </p>
-                    </div>
-                  </div>
-                  <ArrowRight
-                    size={14}
-                    style={{
-                      position: "absolute",
-                      right: "var(--space-4)",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      opacity: 0,
-                      transition: "opacity var(--duration-fast) ease",
-                      color: "var(--color-brand-forest)",
-                    }}
-                    className="group-hover:opacity-100"
-                  />
-                </a>
-              ))}
-            </div>
+            <AICurriculumTimeline />
           </div>
         </section>
 
