@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import type { CSSProperties } from "react";
 import {
   getLessonById,
   getNextLesson,
@@ -104,7 +105,17 @@ export default async function LessonPage({
 
         {/* Content */}
         {content ? (
-          <article className="mt-10 prose prose-stone max-w-none">
+          <article
+            className="mt-10 prose prose-neutral max-w-none"
+            style={
+              {
+                "--tw-prose-body": "var(--color-text-secondary)",
+                "--tw-prose-headings": "var(--color-brand-forest)",
+                "--tw-prose-links": "var(--color-brand-forest)",
+                "--tw-prose-bold": "var(--color-text-primary)",
+              } as CSSProperties
+            }
+          >
             {/* Reading */}
             <div
               className="lesson-content"

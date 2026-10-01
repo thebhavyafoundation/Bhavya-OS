@@ -79,7 +79,7 @@ export default function PublicationsPage() {
       </Section>
 
       <Section variant="ivory">
-        <div className="max-w-3xl">
+        <div style={{ maxWidth: "65ch" }}>
           <SectionHeader
             label="Institutional Research"
             title="Research by the Foundation"
