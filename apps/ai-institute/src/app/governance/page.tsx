@@ -168,7 +168,7 @@ export default function GovernancePage() {
       </Section>
 
       <Section variant="ivory">
-        <div className="max-w-3xl">
+        <div style={{ maxWidth: "65ch" }}>
           <SectionHeader
             label="Transparency by Default"
             title="Reports that do not exaggerate"
