@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import {
   AI_PROGRESS_STORAGE_KEY,
   loadProgress,
+  mergeAIProgress,
   saveProgress,
   toggleExpanded,
   toggleModuleComplete,
@@ -149,5 +150,49 @@ describe("toggleExpanded", () => {
     };
     toggleExpanded(prev, "adv-01");
     expect(prev.expandedModules).toEqual([]);
+  });
+});
+
+describe("mergeAIProgress", () => {
+  it("unions completed modules with primary order first", () => {
+    const merged = mergeAIProgress(
+      { completedModules: ["l0-m1", "ja-01"], expandedModules: ["l0-m1"] },
+      { completedModules: ["l0-m7", "l0-m1"], expandedModules: [] },
+    );
+    expect(merged.completedModules).toEqual(["l0-m1", "ja-01", "l0-m7"]);
+  });
+
+  it("keeps the primary expanded state", () => {
+    const merged = mergeAIProgress(
+      { completedModules: [], expandedModules: ["l0-m1"] },
+      { completedModules: [], expandedModules: ["adv-01"] },
+    );
+    expect(merged.expandedModules).toEqual(["l0-m1"]);
+  });
+
+  it("returns an equivalent state when the secondary adds nothing", () => {
+    const primary: AIProgressState = {
+      completedModules: ["l0-m1"],
+      expandedModules: ["l0-m7"],
+    };
+    const merged = mergeAIProgress(primary, {
+      completedModules: ["l0-m1"],
+      expandedModules: [],
+    });
+    expect(merged).toEqual(primary);
+  });
+
+  it("does not mutate either input state", () => {
+    const primary: AIProgressState = {
+      completedModules: ["l0-m1"],
+      expandedModules: [],
+    };
+    const secondary: AIProgressState = {
+      completedModules: ["l0-m7"],
+      expandedModules: [],
+    };
+    mergeAIProgress(primary, secondary);
+    expect(primary.completedModules).toEqual(["l0-m1"]);
+    expect(secondary.completedModules).toEqual(["l0-m7"]);
   });
 });
