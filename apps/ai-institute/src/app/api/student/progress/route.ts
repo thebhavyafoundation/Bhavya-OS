@@ -5,6 +5,11 @@ import {
   updateStudent,
   completeLesson,
 } from "@/lib/student-store";
+import {
+  listCompletedModuleIds,
+  replaceCompletedModules,
+  sanitizeCurriculumModuleIds,
+} from "@/lib/module-progress";
 import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
 import { createLogger, extractCorrelationId } from "@/lib/logger";
 import { roleIsAllowed, type Role } from "@/lib/roles";
@@ -206,6 +211,38 @@ export async function POST(request: NextRequest) {
           lessonId: data.lessonId,
         });
         break;
+      }
+      case "syncCurriculumProgress": {
+        if (data && data.completedModules !== undefined) {
+          const sanitized = sanitizeCurriculumModuleIds(data.completedModules);
+          if (!sanitized) {
+            return NextResponse.json(
+              { error: "Invalid completedModules" },
+              { status: 400 },
+            );
+          }
+          const stored = await replaceCompletedModules(user.id, sanitized);
+          await recordAuditEvent({
+            action: "curriculum-progress-sync",
+            actorId: user.id,
+            resource: "curriculum",
+            resourceId: "modules",
+            metadata: { count: stored.length },
+          });
+          log.info("Curriculum progress synced", {
+            userId: user.id,
+            count: stored.length,
+          });
+          return NextResponse.json(
+            { completedModules: stored },
+            { headers: { "X-Correlation-Id": correlationId } },
+          );
+        }
+        const completed = await listCompletedModuleIds(user.id);
+        return NextResponse.json(
+          { completedModules: completed },
+          { headers: { "X-Correlation-Id": correlationId } },
+        );
       }
       default:
         return NextResponse.json({ error: "Unknown action" }, { status: 400 });

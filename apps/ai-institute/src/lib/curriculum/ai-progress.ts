@@ -68,3 +68,17 @@ export function toggleExpanded(
     expandedModules: toggleId(state.expandedModules, id),
   };
 }
+
+export function mergeAIProgress(
+  primary: AIProgressState,
+  secondary: AIProgressState,
+): AIProgressState {
+  const completedModules = [...primary.completedModules];
+  for (const id of secondary.completedModules) {
+    if (!completedModules.includes(id)) completedModules.push(id);
+  }
+  return {
+    completedModules,
+    expandedModules: [...primary.expandedModules],
+  };
+}

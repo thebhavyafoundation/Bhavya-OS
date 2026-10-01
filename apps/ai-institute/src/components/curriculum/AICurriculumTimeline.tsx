@@ -7,14 +7,19 @@ import {
   getPrerequisites,
   getStandardsForModule,
 } from "@/lib/curriculum/ai-registry";
+import { BAND_META } from "@/lib/curriculum/bands";
 import {
   loadProgress,
+  mergeAIProgress,
   saveProgress,
   toggleExpanded,
   toggleModuleComplete,
   type AIProgressState,
 } from "@/lib/curriculum/ai-progress";
-import type { AIBand, AILevel } from "@/types/curriculum";
+import {
+  fetchCurriculumProgress,
+  pushCurriculumProgress,
+} from "@/lib/curriculum/ai-progress-sync";
 import {
   AIBandFilter,
   type AIBandFilterId,
@@ -22,25 +27,6 @@ import {
 } from "./AIBandFilter";
 import { AIModuleRow } from "./AIModuleRow";
 import { AIProgressBar } from "./AIProgressBar";
-
-interface BandMeta {
-  id: AIBand;
-  name: string;
-  grades: string;
-  levels: readonly AILevel[];
-}
-
-const BAND_META: readonly BandMeta[] = [
-  { id: "junior-a", name: "Junior A", grades: "Grades 1–3", levels: ["JA"] },
-  { id: "junior-b", name: "Junior B", grades: "Grades 4–5", levels: ["JB"] },
-  {
-    id: "core",
-    name: "Core",
-    grades: "Grades 6–12",
-    levels: ["L0", "L1", "L2", "L3", "L4", "L5", "L6"],
-  },
-  { id: "advanced", name: "Advanced", grades: "Grades 11–12", levels: ["ADV"] },
-];
 
 const emptyProgress: AIProgressState = {
   completedModules: [],
@@ -50,10 +36,30 @@ const emptyProgress: AIProgressState = {
 export function AICurriculumTimeline() {
   const [progress, setProgress] = useState<AIProgressState>(emptyProgress);
   const [filter, setFilter] = useState<AIBandFilterId>("all");
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setProgress(loadProgress());
+    const local = loadProgress();
+    setProgress(local);
+    setHydrated(true);
+    let cancelled = false;
+    void fetchCurriculumProgress().then((remote) => {
+      if (cancelled || !remote) return;
+      setProgress((current) =>
+        mergeAIProgress(current, {
+          completedModules: remote,
+          expandedModules: [],
+        }),
+      );
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  useEffect(() => {
+    if (hydrated) saveProgress(progress);
+  }, [hydrated, progress]);
 
   const completedSet = useMemo(
     () => new Set(progress.completedModules),
@@ -66,7 +72,7 @@ export function AICurriculumTimeline() {
 
   const update = (next: AIProgressState) => {
     setProgress(next);
-    saveProgress(next);
+    void pushCurriculumProgress(next.completedModules);
   };
 
   const options: AIBandOption[] = [
