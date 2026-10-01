@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { courses } from "@/data/academy-courses";
+import { aiModules } from "@/data/curriculum/ai-module-registry";
+import { getAllLessons } from "@/lib/curriculum/lessons";
 
 /**
  * Public sitemap. Every URL below is a verified real page (page.tsx on
@@ -17,6 +19,7 @@ const STATIC_ROUTES = [
   "/community",
   "/contributing",
   "/courses",
+  "/curriculum",
   "/donate",
   "/faq",
   "/forest",
@@ -72,5 +75,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(c.updatedAt),
     }));
 
-  return [...staticEntries, ...courseEntries];
+  const moduleEntries = aiModules.map((module) => ({
+    url: `${BASE}/curriculum/modules/${module.id}`,
+    lastModified: new Date(),
+  }));
+
+  const lessonEntries = getAllLessons().map((lesson) => ({
+    url: `${BASE}/curriculum/modules/${lesson.moduleId}/lessons/${lesson.id}`,
+    lastModified: new Date(),
+  }));
+
+  return [
+    ...staticEntries,
+    ...courseEntries,
+    ...moduleEntries,
+    ...lessonEntries,
+  ];
 }
