@@ -13,7 +13,7 @@
     "./async-adapter": "./src/async-adapter.ts"
   },
   "scripts": {
-    "test": "node --test src/__tests__/database.test.mjs",
+    "test": "node --test src/__tests__/database.test.mjs && vitest run",
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx src/cli.ts",
     "db:migrate:status": "tsx src/cli.ts status"
