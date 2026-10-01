@@ -29,3 +29,77 @@ export interface AIModule {
   readonly prerequisites?: readonly string[];
   readonly estimatedHours: number;
 }
+
+export interface QuizQuestion {
+  readonly id: string;
+  readonly prompt: string;
+  readonly options: readonly string[];
+  readonly correctIndex: number;
+  readonly feedback: {
+    readonly correct: string;
+    readonly incorrect: string;
+  };
+}
+
+export type WidgetSpec =
+  | {
+      readonly id: "tap-match";
+      readonly config: {
+        readonly pairs: readonly { readonly a: string; readonly b: string }[];
+      };
+    }
+  | {
+      readonly id: "sort-basket";
+      readonly config: {
+        readonly prompt: string;
+        readonly categories: readonly string[];
+        readonly items: readonly {
+          readonly text: string;
+          readonly category: string;
+        }[];
+      };
+    }
+  | {
+      readonly id: "predict-reveal";
+      readonly config: {
+        readonly prompt: string;
+        readonly options?: readonly string[];
+        readonly answer: string;
+        readonly reveal: string;
+      };
+    }
+  | {
+      readonly id: "investigate";
+      readonly config: {
+        readonly prompt: string;
+        readonly items: readonly {
+          readonly text: string;
+          readonly correct: boolean;
+        }[];
+      };
+    };
+
+export type LessonBlock =
+  | { readonly kind: "prose"; readonly text: string }
+  | { readonly kind: "quiz"; readonly questions: readonly QuizQuestion[] }
+  | { readonly kind: "interactive"; readonly widget: WidgetSpec }
+  | {
+      readonly kind: "experiment";
+      readonly title: string;
+      readonly materials: readonly string[];
+      readonly steps: readonly string[];
+      readonly safety?: string;
+    }
+  | {
+      readonly kind: "project";
+      readonly brief: string;
+      readonly steps: readonly string[];
+      readonly deliverable: string;
+    };
+
+export interface Lesson {
+  readonly id: string;
+  readonly moduleId: string;
+  readonly title: string;
+  readonly blocks: readonly LessonBlock[];
+}
