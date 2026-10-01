@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { AIModule, AIStandard } from "@/types/curriculum";
 
@@ -32,15 +33,21 @@ export function AIModuleRow({
           onChange={onToggleComplete}
           aria-label={`Mark ${module.title} complete`}
         />
+        <Link
+          href={`/curriculum/modules/${module.id}`}
+          className="ai-module-name"
+          data-complete={completed}
+        >
+          {module.title}
+        </Link>
         <button
           type="button"
-          className="ai-module-title"
-          data-complete={completed}
+          className="ai-module-toggle"
           aria-expanded={expanded}
           aria-controls={panelId}
           onClick={onToggleExpand}
+          aria-label={`${expanded ? "Collapse" : "Expand"} details for ${module.title}`}
         >
-          <span className="ai-module-name">{module.title}</span>
           <span className="ai-module-level">{module.level}</span>
           <span className="ai-module-hours">{module.estimatedHours} h</span>
           <ChevronDown
