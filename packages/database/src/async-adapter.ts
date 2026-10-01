@@ -164,9 +164,11 @@ export async function initAsyncAdapter(
     const url = process.env.TURSO_DATABASE_URL!;
     const authToken = process.env.TURSO_AUTH_TOKEN;
 
-    // Dynamic import — only loaded when TURSO_DATABASE_URL is set
+    // Dynamic import — only loaded when TURSO_DATABASE_URL is set.
+    // The ./web entry is fetch-based; the root entry eagerly loads the
+    // native `libsql` addon, which throws in Cloudflare Workers.
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { createClient } = require("@libsql/client");
+    const { createClient } = require("@libsql/client/web");
     const client = createClient({ url, authToken });
     _asyncAdapter = new TursoAdapter(client);
   } else {

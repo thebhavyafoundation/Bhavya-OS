@@ -1,4 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 import { TursoAdapter } from "../async-adapter";
 
 const MULTI_STATEMENT_SQL = `
@@ -76,5 +79,16 @@ describe("TursoAdapter", () => {
       sql: "INSERT INTO t (id) VALUES (?)",
       args: ["a"],
     });
+  });
+
+  it("loads @libsql/client via its web entry (no native addon in Workers)", () => {
+    // The root entry (lib-cjs/node.js) eagerly requires the native `libsql`
+    // NAPI addon. In workerd that throws "Neon: unsupported Linux
+    // architecture" at require time, failing every DB route before
+    // createClient runs. The ./web entry is fetch-based and portable.
+    const here = dirname(fileURLToPath(import.meta.url));
+    const src = readFileSync(resolve(here, "../async-adapter.ts"), "utf8");
+    expect(src).toContain('require("@libsql/client/web")');
+    expect(src).not.toMatch(/require\("@libsql\/client"\)/);
   });
 });
