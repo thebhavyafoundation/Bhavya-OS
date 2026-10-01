@@ -9,6 +9,7 @@
     "preview": "npx opennextjs-cloudflare preview",
     "deploy": "npx opennextjs-cloudflare deploy",
     "start": "next start -p 3030",
+    "typecheck": "tsc --noEmit",
     "db:migrate": "tsx src/scripts/db-migrate.ts",
     "db:seed": "tsx src/scripts/db-seed.ts",
     "db:backup": "scripts/backup-db.ts",
