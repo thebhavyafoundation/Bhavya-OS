@@ -1,7 +1,7 @@
 ---
 id: COORD-001
 owner: Engineering
-version: 0.9
+version: 0.10
 status: active
 canonical: .ai/runtime.json
 ---
@@ -26,7 +26,8 @@ Two agent sessions work this repository in parallel (same working copy). This fi
 2. **PR #9 (hero sunrise photo) — DONE:** rebuilt onto master, CI 4/4, squash-merged `e3cbe067`, deployed, live-verified 31/31 + screenshot + impeccable detect.
 3. **PR #10 — DONE:** rebuilt onto master, CI 4/4, squash-merged `9371ae1`, Deploy #36, live-verified.
 4. **PR #12 — DONE (craft floor):** dropped the eyebrow/kicker above the hero h1 + dead CSS; merged `e2f3a2c2`, Deploy #37, verify 31/31, HTML probe confirms class absent, impeccable detect unchanged (8 pre-existing, none in changed files). Kicker text may only return repositioned (below rule, not above display heading).
-5. **Plan C** — Session C execution COMPLETE (5 commits, gates green, not pushed). Session A merged `origin/master` into the branch (conflicts: globals.css hero region → master's side; SplitHero/.ai → master's side; Session C gallery/cert CSS preserved), re-ran gates green (tsc, eslint 0, vitest 237/237, antislop, diff-check), and is pushing + opening the PR.
+5. **Plan C** — Session C execution COMPLETE; Session A merged master in, pushed, opened PR #13. After a gitleaks false-positive allowlist (`.gitleaksignore` fingerprint entry + `// gitleaks:allow` at `certificate.ts:39`), CI 4/4 and squash-merged `d667918`; Deploy #38 success.
+6. **UI/UX professional pass — DONE (parallel in-session agents):** two read-only audits (UIVerse interaction craft + Openverse hierarchy/imagery) then two implementation agents on disjoint file ownership; 34 files, +521/−406; landed as PR #16 `f65513e`, Deploy #41, live verify8 31/31.
 
 ### Session B
 
@@ -74,6 +75,13 @@ GitHub Actions outage (2026-09-26T18:25:33Z → 2026-09-29T21:21:59Z) is over: o
 - 2026-09-30 04:20 IST — PR #12 (craft floor): removed `home-hero-eyebrow` kicker from SplitHero.tsx + dead CSS block; merged `e2f3a2c2`; Deploy run #37; verify8 updated for new design intent (gold accent, mobile spine `display:none`) → 31/31; HTML probe: kicker class absent, trust text only in meta descriptions; impeccable detect = 8 pre-existing, none in changed files.
 - 2026-09-30 04:54 IST — Session C run 2 complete: 5 commits on `build/plan-c-cert-gallery` (`848c891`, `a65a30e`, `816ad8b`, `03d610a`, `7ce2063`), gates green (tsc, eslint 0 errors, vitest 237/237, antislop, diff-check, prettier), tree clean, no push (per brief). Deviations: `/certificates` substitutes blocked `/app/credentials` path; server-side QR (`qrcode` never client-bundled); Task 13 dropped.
 - 2026-09-30 07:19 IST — Session A integration: merged `origin/master` (`e2f3a2c2`) into the branch as `d80305a` (both parents); conflicts resolved — globals.css hero region → master's immersive state (eyebrow block stays deleted), SplitHero.tsx + this file → master's side, Session C gallery/cert CSS preserved. Post-merge gates: tsc PASS, eslint PASS (25 files), vitest 237/237, antislop PASS, diff-check PASS.
+- 2026-10-01 00:20 IST — PR #13 (Plan C) merged `d667918` after gitleaks FP allowlist; Deploy #38 success; live probe: `/`, `/certificates`, `/studio/gallery` 200; `/api/auth/login`, `/api/gallery`, `/gallery`, `/verify/*` 500.
+- 2026-10-01 00:20 IST — ROOT CAUSE (human gate): worker `bhavya-foundation` has ZERO secrets — `TURSO_DATABASE_URL`/`TURSO_AUTH_TOKEN` never set, `isProduction()` false, better-sqlite3 loads in a Worker → every DB route 500s (pre-existing since the Workers cutover; login was already broken). Fix: `cd apps/ai-institute && npx wrangler secret put TURSO_DATABASE_URL && npx wrangler secret put TURSO_AUTH_TOKEN` (values = human). No Turso credentials exist on this machine or in any accessible API.
+- 2026-10-01 00:20 IST — PR #14 squash was a three-way no-op: fix delta empty vs merge-base `e2f3a2c2`, so GitHub kept master's duplicate hero blocks (`d667918...d8601d6` compare = files 0); Deploy #39 shipped dups; verify8 29/31 (m-accent-reset 430px, m-accent-gold ivory).
+- 2026-10-01 00:20 IST — PR #15 re-applied the 17-line hero-dup removal directly on master: merged `08d35ef`, Deploy #40, verify8 **31/31** restored.
+- 2026-10-01 00:20 IST — Parallel-agent UI pass (2 audits → 2 implementation agents, disjoint ownership, this session only): nav keyboard parity + aria-current, dead ⌘K search removed, tokenized focus rings, `.btn` hover/active/disabled, card focus parity, one h1 per route + no level skips, display h1s → Playfair editorial-heading, eyebrows moved below h1, asymmetric heroes (about/research/get-involved/programs), 65ch measure, dead `accent-blue/yellow` utilities remapped, error/skeleton/empty states tokenized, transitions enumerated, reduced-motion kills transforms, hero clamp 6rem, quote scrim eased.
+- 2026-10-01 00:20 IST — Bug found by vitest at month boundary: `knowledge-metrics.ts` bucketed "this month" by local time vs UTC evidence timestamps (fails 00:00–05:30 IST on the 1st); fixed to UTC bucketing (`97459f7`).
+- 2026-10-01 00:20 IST — PR #16 merged `f65513e`; Deploy #41 success; live verify: verify8 **31/31**, one h1 per route, eyebrow gone + label below h1, focus ring = gold outline, `aria-current`/`role=menu`/`menuitem`/`aria-expanded` confirmed post-hydration, impeccable detect 9 findings all pre-existing (verified against master), no new console errors. `/certificates` is auth-gated (redirects to login) — h1-absence there is moot.
 
 ## Previous current task (preserved)
 
