@@ -1,0 +1,826 @@
+{
+  "version": 1,
+  "moduleCount": 86,
+  "lessonCount": 5,
+  "assets": [
+    {
+      "kind": "module",
+      "id": "adv-01",
+      "title": "Neural Networks in Depth",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-01.svg",
+      "slug": "neural-networks-in-depth"
+    },
+    {
+      "kind": "module",
+      "id": "adv-02",
+      "title": "Computer Vision Systems",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-02.svg",
+      "slug": "computer-vision-systems"
+    },
+    {
+      "kind": "module",
+      "id": "adv-03",
+      "title": "Language Models and Transformers",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-03.svg",
+      "slug": "language-models-and-transformers"
+    },
+    {
+      "kind": "module",
+      "id": "adv-04",
+      "title": "Reinforcement Learning",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-04.svg",
+      "slug": "reinforcement-learning"
+    },
+    {
+      "kind": "module",
+      "id": "adv-05",
+      "title": "Generative AI: How It Creates",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-05.svg",
+      "slug": "generative-ai-how-it-creates"
+    },
+    {
+      "kind": "module",
+      "id": "adv-06",
+      "title": "Data Governance and Privacy",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-06.svg",
+      "slug": "data-governance-and-privacy"
+    },
+    {
+      "kind": "module",
+      "id": "adv-07",
+      "title": "Bias Auditing Practicum",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-07.svg",
+      "slug": "bias-auditing-practicum"
+    },
+    {
+      "kind": "module",
+      "id": "adv-08",
+      "title": "Ethics Seminar: Cases and Dilemmas",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-08.svg",
+      "slug": "ethics-seminar-cases-and-dilemmas"
+    },
+    {
+      "kind": "module",
+      "id": "adv-09",
+      "title": "Intelligent Agents and Automation",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-09.svg",
+      "slug": "intelligent-agents-and-automation"
+    },
+    {
+      "kind": "module",
+      "id": "adv-10",
+      "title": "Deploying Models Responsibly",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-10.svg",
+      "slug": "deploying-models-responsibly"
+    },
+    {
+      "kind": "module",
+      "id": "adv-11",
+      "title": "AI Research Methods and Reading Papers",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-11.svg",
+      "slug": "ai-research-methods-and-reading-papers"
+    },
+    {
+      "kind": "module",
+      "id": "adv-12",
+      "title": "Advanced Capstone Project",
+      "band": "advanced",
+      "ages": "Ages 16–18",
+      "path": "curriculum/modules/adv-12.svg",
+      "slug": "advanced-capstone-project"
+    },
+    {
+      "kind": "module",
+      "id": "ja-01",
+      "title": "Machines That Listen",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-01.svg",
+      "slug": "machines-that-listen"
+    },
+    {
+      "kind": "module",
+      "id": "ja-02",
+      "title": "Machines That See",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-02.svg",
+      "slug": "machines-that-see"
+    },
+    {
+      "kind": "module",
+      "id": "ja-03",
+      "title": "Smart Rules",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-03.svg",
+      "slug": "smart-rules"
+    },
+    {
+      "kind": "module",
+      "id": "ja-04",
+      "title": "Sort and Match",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-04.svg",
+      "slug": "sort-and-match"
+    },
+    {
+      "kind": "module",
+      "id": "ja-05",
+      "title": "Helpful Machines at Home",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-05.svg",
+      "slug": "helpful-machines-at-home"
+    },
+    {
+      "kind": "module",
+      "id": "ja-06",
+      "title": "Data All Around Us",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-06.svg",
+      "slug": "data-all-around-us"
+    },
+    {
+      "kind": "module",
+      "id": "ja-07",
+      "title": "Talking to Assistants",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-07.svg",
+      "slug": "talking-to-assistants"
+    },
+    {
+      "kind": "module",
+      "id": "ja-08",
+      "title": "Learning with Examples",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-08.svg",
+      "slug": "learning-with-examples"
+    },
+    {
+      "kind": "module",
+      "id": "ja-09",
+      "title": "Fair and Unfair",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-09.svg",
+      "slug": "fair-and-unfair"
+    },
+    {
+      "kind": "module",
+      "id": "ja-10",
+      "title": "Our Class Agreement for AI",
+      "band": "junior-a",
+      "ages": "Ages 6–8",
+      "path": "curriculum/modules/ja-10.svg",
+      "slug": "our-class-agreement-for-ai"
+    },
+    {
+      "kind": "module",
+      "id": "jb-01",
+      "title": "How Machines See and Hear",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-01.svg",
+      "slug": "how-machines-see-and-hear"
+    },
+    {
+      "kind": "module",
+      "id": "jb-02",
+      "title": "Teaching with Examples",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-02.svg",
+      "slug": "teaching-with-examples"
+    },
+    {
+      "kind": "module",
+      "id": "jb-03",
+      "title": "Patterns in Data",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-03.svg",
+      "slug": "patterns-in-data"
+    },
+    {
+      "kind": "module",
+      "id": "jb-04",
+      "title": "Why Recommendations Appear",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-04.svg",
+      "slug": "why-recommendations-appear"
+    },
+    {
+      "kind": "module",
+      "id": "jb-05",
+      "title": "Chatbots and Questions",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-05.svg",
+      "slug": "chatbots-and-questions"
+    },
+    {
+      "kind": "module",
+      "id": "jb-06",
+      "title": "Robots and Sensors",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-06.svg",
+      "slug": "robots-and-sensors"
+    },
+    {
+      "kind": "module",
+      "id": "jb-07",
+      "title": "Bias In, Bias Out",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-07.svg",
+      "slug": "bias-in-bias-out"
+    },
+    {
+      "kind": "module",
+      "id": "jb-08",
+      "title": "Build a Rule-Based Game",
+      "band": "junior-b",
+      "ages": "Ages 9–10",
+      "path": "curriculum/modules/jb-08.svg",
+      "slug": "build-a-rule-based-game"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m1",
+      "title": "What Is AI?",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m1.svg",
+      "slug": "what-is-ai"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m2",
+      "title": "Sensing the World",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m2.svg",
+      "slug": "sensing-the-world"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m3",
+      "title": "Data That Describe the World",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m3.svg",
+      "slug": "data-that-describe-the-world"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m4",
+      "title": "Rules, Algorithms, and Steps",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m4.svg",
+      "slug": "rules-algorithms-and-steps"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m5",
+      "title": "Machines That Learn from Examples",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m5.svg",
+      "slug": "machines-that-learn-from-examples"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m6",
+      "title": "Talking with Machines",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m6.svg",
+      "slug": "talking-with-machines"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m7",
+      "title": "AI Around Us: Help and Harm",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m7.svg",
+      "slug": "ai-around-us-help-and-harm"
+    },
+    {
+      "kind": "module",
+      "id": "l0-m8",
+      "title": "Mini Project: Build a Smart Sorter",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l0-m8.svg",
+      "slug": "mini-project-build-a-smart-sorter"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m1",
+      "title": "Representing Knowledge",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m1.svg",
+      "slug": "representing-knowledge"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m2",
+      "title": "Searching for Solutions",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m2.svg",
+      "slug": "searching-for-solutions"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m3",
+      "title": "Logic and If-Then Rules",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m3.svg",
+      "slug": "logic-and-if-then-rules"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m4",
+      "title": "Maps, Trees, and Graphs",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m4.svg",
+      "slug": "maps-trees-and-graphs"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m5",
+      "title": "Planning Steps to Reach a Goal",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m5.svg",
+      "slug": "planning-steps-to-reach-a-goal"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m6",
+      "title": "What Machines Cannot Reason About",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m6.svg",
+      "slug": "what-machines-cannot-reason-about"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m7",
+      "title": "Knowledge in Databases and Graphs",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m7.svg",
+      "slug": "knowledge-in-databases-and-graphs"
+    },
+    {
+      "kind": "module",
+      "id": "l1-m8",
+      "title": "Mini Project: Rule-Based Assistant",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l1-m8.svg",
+      "slug": "mini-project-rule-based-assistant"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m1",
+      "title": "Datasets and Where They Come From",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m1.svg",
+      "slug": "datasets-and-where-they-come-from"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m2",
+      "title": "Features: What the Model Sees",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m2.svg",
+      "slug": "features-what-the-model-sees"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m3",
+      "title": "Learning by Example: Classification",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m3.svg",
+      "slug": "learning-by-example-classification"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m4",
+      "title": "Finding Groups: Clustering",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m4.svg",
+      "slug": "finding-groups-clustering"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m5",
+      "title": "Training and Testing a Model",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m5.svg",
+      "slug": "training-and-testing-a-model"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m6",
+      "title": "When Models Get It Wrong",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m6.svg",
+      "slug": "when-models-get-it-wrong"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m7",
+      "title": "Measuring Success Honestly",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m7.svg",
+      "slug": "measuring-success-honestly"
+    },
+    {
+      "kind": "module",
+      "id": "l2-m8",
+      "title": "Mini Project: Train a Classifier",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l2-m8.svg",
+      "slug": "mini-project-train-a-classifier"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m1",
+      "title": "Language and Machines",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m1.svg",
+      "slug": "language-and-machines"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m2",
+      "title": "How Chatbots Respond",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m2.svg",
+      "slug": "how-chatbots-respond"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m3",
+      "title": "Speech: Listening and Speaking",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m3.svg",
+      "slug": "speech-listening-and-speaking"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m4",
+      "title": "Seeing with Computer Vision",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m4.svg",
+      "slug": "seeing-with-computer-vision"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m5",
+      "title": "Multimodal Interaction",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m5.svg",
+      "slug": "multimodal-interaction"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m6",
+      "title": "Evaluating What AI Says",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m6.svg",
+      "slug": "evaluating-what-ai-says"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m7",
+      "title": "Designing a Conversation",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m7.svg",
+      "slug": "designing-a-conversation"
+    },
+    {
+      "kind": "module",
+      "id": "l3-m8",
+      "title": "Mini Project: Build a Tutor Bot",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l3-m8.svg",
+      "slug": "mini-project-build-a-tutor-bot"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m1",
+      "title": "The Machine Learning Pipeline",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m1.svg",
+      "slug": "the-machine-learning-pipeline"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m2",
+      "title": "Neural Networks: An Introduction",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m2.svg",
+      "slug": "neural-networks-an-introduction"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m3",
+      "title": "Words as Numbers: Embeddings",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m3.svg",
+      "slug": "words-as-numbers-embeddings"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m4",
+      "title": "Prompting Large Language Models",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m4.svg",
+      "slug": "prompting-large-language-models"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m5",
+      "title": "From Notebook to Product",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m5.svg",
+      "slug": "from-notebook-to-product"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m6",
+      "title": "Experimenting Like a Scientist",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m6.svg",
+      "slug": "experimenting-like-a-scientist"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m7",
+      "title": "Testing, Trust, and Verification",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m7.svg",
+      "slug": "testing-trust-and-verification"
+    },
+    {
+      "kind": "module",
+      "id": "l4-m8",
+      "title": "Mini Project: End-to-End Model",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l4-m8.svg",
+      "slug": "mini-project-end-to-end-model"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m1",
+      "title": "Bias and Fairness",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m1.svg",
+      "slug": "bias-and-fairness"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m2",
+      "title": "Privacy and Surveillance",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m2.svg",
+      "slug": "privacy-and-surveillance"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m3",
+      "title": "Work, Economy, and AI",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m3.svg",
+      "slug": "work-economy-and-ai"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m4",
+      "title": "AI and the Environment",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m4.svg",
+      "slug": "ai-and-the-environment"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m5",
+      "title": "Rules, Laws, and Governance",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m5.svg",
+      "slug": "rules-laws-and-governance"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m6",
+      "title": "Deepfakes and Information Trust",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m6.svg",
+      "slug": "deepfakes-and-information-trust"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m7",
+      "title": "Transparency and Explainability",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m7.svg",
+      "slug": "transparency-and-explainability"
+    },
+    {
+      "kind": "module",
+      "id": "l5-m8",
+      "title": "Mini Project: Audit an AI System",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l5-m8.svg",
+      "slug": "mini-project-audit-an-ai-system"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m1",
+      "title": "How Frontier Models Are Built",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m1.svg",
+      "slug": "how-frontier-models-are-built"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m2",
+      "title": "AI Agents and Tool Use",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m2.svg",
+      "slug": "ai-agents-and-tool-use"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m3",
+      "title": "Research Methods in AI",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m3.svg",
+      "slug": "research-methods-in-ai"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m4",
+      "title": "AI for Social Good",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m4.svg",
+      "slug": "ai-for-social-good"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m5",
+      "title": "Human-AI Collaboration",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m5.svg",
+      "slug": "human-ai-collaboration"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m6",
+      "title": "Responsible Deployment",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m6.svg",
+      "slug": "responsible-deployment"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m7",
+      "title": "Capstone Proposal",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m7.svg",
+      "slug": "capstone-proposal"
+    },
+    {
+      "kind": "module",
+      "id": "l6-m8",
+      "title": "Capstone Build and Review",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/modules/l6-m8.svg",
+      "slug": "capstone-build-and-review"
+    },
+    {
+      "kind": "lesson",
+      "id": "l0-m1-l1",
+      "title": "Defining AI",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/lessons/l0-m1-l1.svg",
+      "moduleId": "l0-m1"
+    },
+    {
+      "kind": "lesson",
+      "id": "l0-m1-l2",
+      "title": "History of AI",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/lessons/l0-m1-l2.svg",
+      "moduleId": "l0-m1"
+    },
+    {
+      "kind": "lesson",
+      "id": "l0-m1-l3",
+      "title": "Types of AI Systems",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/lessons/l0-m1-l3.svg",
+      "moduleId": "l0-m1"
+    },
+    {
+      "kind": "lesson",
+      "id": "l0-m7-l1",
+      "title": "Ethics in AI",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/lessons/l0-m7-l1.svg",
+      "moduleId": "l0-m7"
+    },
+    {
+      "kind": "lesson",
+      "id": "l4-m1-l1",
+      "title": "The AI Workflow",
+      "band": "core",
+      "ages": "Ages 11–16",
+      "path": "curriculum/lessons/l4-m1-l1.svg",
+      "moduleId": "l4-m1"
+    }
+  ]
+}
