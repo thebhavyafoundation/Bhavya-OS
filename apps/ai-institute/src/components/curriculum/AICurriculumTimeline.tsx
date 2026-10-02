@@ -79,7 +79,7 @@ export function AICurriculumTimeline() {
     { id: "all", label: "All bands", count: aiModules.length },
     ...BAND_META.map((band) => ({
       id: band.id,
-      label: band.name,
+      label: `${band.name} · ${band.ages}`,
       count: getModulesByBand(band.id).length,
     })),
   ];
@@ -136,7 +136,7 @@ export function AICurriculumTimeline() {
             <header className="ai-band-header">
               <h3 className="ai-band-name">{band.name}</h3>
               <span className="ai-band-meta">
-                {band.grades} · {modules.length} modules · {hours} h
+                {band.ages} · {modules.length} modules · {hours} h
               </span>
               <span className="ai-band-meta">
                 {bandCompleted} of {modules.length} complete

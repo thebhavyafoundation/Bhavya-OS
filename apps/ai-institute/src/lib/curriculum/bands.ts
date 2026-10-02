@@ -3,20 +3,42 @@ import type { AIBand, AILevel } from "@/types/curriculum";
 export interface BandMeta {
   id: AIBand;
   name: string;
-  grades: string;
+  ages: string;
   levels: readonly AILevel[];
 }
 
+export const BAND_AGES: Record<AIBand, string> = {
+  "junior-a": "Ages 6–8",
+  "junior-b": "Ages 9–10",
+  core: "Ages 11–16",
+  advanced: "Ages 16–18",
+};
+
 export const BAND_META: readonly BandMeta[] = [
-  { id: "junior-a", name: "Junior A", grades: "Grades 1–3", levels: ["JA"] },
-  { id: "junior-b", name: "Junior B", grades: "Grades 4–5", levels: ["JB"] },
+  {
+    id: "junior-a",
+    name: "Junior A",
+    ages: BAND_AGES["junior-a"],
+    levels: ["JA"],
+  },
+  {
+    id: "junior-b",
+    name: "Junior B",
+    ages: BAND_AGES["junior-b"],
+    levels: ["JB"],
+  },
   {
     id: "core",
     name: "Core",
-    grades: "Grades 6–12",
+    ages: BAND_AGES.core,
     levels: ["L0", "L1", "L2", "L3", "L4", "L5", "L6"],
   },
-  { id: "advanced", name: "Advanced", grades: "Grades 11–12", levels: ["ADV"] },
+  {
+    id: "advanced",
+    name: "Advanced",
+    ages: BAND_AGES.advanced,
+    levels: ["ADV"],
+  },
 ];
 
 export const BAND_LABELS: Record<AIBand, string> = {

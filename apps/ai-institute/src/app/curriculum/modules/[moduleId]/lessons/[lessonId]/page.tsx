@@ -6,6 +6,7 @@ import {
   getModuleById,
   getStandardsForModule,
 } from "@/lib/curriculum/ai-registry";
+import { BAND_AGES } from "@/lib/curriculum/bands";
 import {
   getAllLessons,
   getLesson,
@@ -32,7 +33,7 @@ export async function generateMetadata({
   if (!module || !lesson) return {};
   return {
     title: `${lesson.title} — ${module.title} — AI Curriculum`,
-    description: `Lesson ${lesson.title} from the ${module.title} module of the Bhavya AI curriculum.`,
+    description: `Lesson ${lesson.title} from the ${module.title} module, ${BAND_AGES[module.band].toLowerCase()}, part of the Bhavya AI curriculum.`,
   };
 }
 
@@ -64,7 +65,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
       </nav>
 
       <p className="ai-eyebrow">
-        Lesson {lessonIndex + 1} of {lessons.length}
+        Lesson {lessonIndex + 1} of {lessons.length} · {BAND_AGES[module.band]}
       </p>
       <h1 className="ai-page-title">{lesson.title}</h1>
 

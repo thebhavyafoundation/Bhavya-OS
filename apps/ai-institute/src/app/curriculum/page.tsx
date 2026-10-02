@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Bhavya Academy Curriculum — 86 AI Modules, Grades 1–12",
+  title: "Bhavya Academy Curriculum — 86 AI Modules, Ages 6–18",
   description:
-    "Explore the Bhavya Academy AI curriculum: four bands, 86 modules for Grades 1–12, aligned to United States, China, UNESCO, and OECD AI education standards.",
+    "Explore the Bhavya Academy AI curriculum: four bands, 86 modules for ages 6–18, aligned to United States, China, UNESCO, and OECD AI education standards.",
 };
 
 const journeyStages = [
@@ -105,7 +105,7 @@ export default function CurriculumPage() {
             >
               The Bhavya Academy curriculum is a structured, progressive
               learning path — from AI foundations to institution building.{" "}
-              <strong>Four bands. 86 modules. Grades 1–12.</strong> One
+              <strong>Four bands. 86 modules. Ages 6–18.</strong> One
               transformation journey.
             </p>
           </div>
@@ -135,7 +135,7 @@ export default function CurriculumPage() {
                   color: "var(--color-brand-forest)",
                 }}
               >
-                86 Modules, Grades 1–12
+                86 Modules, Ages 6–18
               </h2>
               <p
                 style={{

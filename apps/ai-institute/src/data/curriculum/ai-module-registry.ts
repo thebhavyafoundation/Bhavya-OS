@@ -8,7 +8,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners discover how microphones and speakers let a machine hear a command and answer back.",
+      "Learners discover how microphones and speakers let a machine hear a command and answer back. For ages 6–8.",
     topics: ["perception", "sensors", "voice assistants"],
     standards: [
       "usa-ca-perception-k2",
@@ -25,7 +25,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners explore how cameras take pictures and how a machine sorts the objects it recognizes.",
+      "Learners explore how cameras take pictures and how a machine sorts the objects it recognizes. For ages 6–8.",
     topics: ["perception", "cameras", "recognition"],
     standards: [
       "usa-ca-perception-k2",
@@ -41,7 +41,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners follow and write simple if-then rules that make a machine choose what to do.",
+      "Learners follow and write simple if-then rules that make a machine choose what to do. For ages 6–8.",
     topics: ["rules", "algorithms", "decision-making"],
     standards: [
       "usa-ca-representation-k2",
@@ -57,7 +57,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners sort objects into groups by their features and see how machines learn to sort too.",
+      "Learners sort objects into groups by their features and see how machines learn to sort too. For ages 6–8.",
     topics: ["patterns", "sorting", "features"],
     standards: [
       "usa-ca-learning-k2",
@@ -74,7 +74,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners find machines that help at home and school and talk about when the help goes wrong.",
+      "Learners find machines that help at home and school and talk about when the help goes wrong. For ages 6–8.",
     topics: ["ai in daily life", "helpful ai", "safety"],
     standards: [
       "usa-ca-society-k2",
@@ -90,7 +90,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners collect and group information about their class and see how data describes the world.",
+      "Learners collect and group information about their class and see how data describes the world. For ages 6–8.",
     topics: ["data", "collection", "representation"],
     standards: [
       "usa-ca-learning-35",
@@ -106,7 +106,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners ask voice assistants clear questions and learn why machines misunderstand them.",
+      "Learners ask voice assistants clear questions and learn why machines misunderstand them. For ages 6–8.",
     topics: ["natural interaction", "voice", "questions"],
     standards: [
       "usa-ca-interaction-35",
@@ -122,7 +122,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners watch a machine improve by looking at many examples, the way practice helps people.",
+      "Learners watch a machine improve by looking at many examples, the way practice helps people. For ages 6–8.",
     topics: ["machine learning", "examples", "practice"],
     standards: [
       "usa-ca-learning-35",
@@ -138,7 +138,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners notice when an automated choice treats people fairly and when it does not.",
+      "Learners notice when an automated choice treats people fairly and when it does not. For ages 6–8.",
     topics: ["fairness", "ethics", "ai and society"],
     standards: [
       "usa-ca-society-35",
@@ -154,7 +154,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-a",
     level: "JA",
     description:
-      "Learners write shared rules for how their class will use AI tools responsibly.",
+      "Learners write shared rules for how their class will use AI tools responsibly. For ages 6–8.",
     topics: ["responsible use", "agreement", "classroom"],
     standards: [
       "usa-ca-society-35",
@@ -170,7 +170,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners examine how sensors turn light and sound into data a machine can use.",
+      "Learners examine how sensors turn light and sound into data a machine can use. For ages 9–10.",
     topics: ["perception", "sensors", "data"],
     standards: [
       "usa-ca-perception-35",
@@ -186,7 +186,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners label example data and watch how labeled examples teach a model.",
+      "Learners label example data and watch how labeled examples teach a model. For ages 9–10.",
     topics: ["machine learning", "labeling", "training data"],
     standards: [
       "usa-ca-learning-35",
@@ -202,7 +202,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners group unlabeled data and discover the patterns a model might find.",
+      "Learners group unlabeled data and discover the patterns a model might find. For ages 9–10.",
     topics: ["patterns", "clustering", "exploration"],
     standards: [
       "usa-ca-learning-35",
@@ -219,7 +219,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners trace how their past choices turn into the recommendations a service shows them.",
+      "Learners trace how their past choices turn into the recommendations a service shows them. For ages 9–10.",
     topics: ["recommendation systems", "patterns", "choices"],
     standards: [
       "usa-ca-learning-35",
@@ -237,7 +237,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners hold a conversation with a chatbot and analyze why it answers well or poorly.",
+      "Learners hold a conversation with a chatbot and analyze why it answers well or poorly. For ages 9–10.",
     topics: ["chatbots", "natural interaction", "evaluation"],
     standards: [
       "usa-ca-interaction-35",
@@ -254,7 +254,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners map the sensors and rules that let a robot react to its surroundings.",
+      "Learners map the sensors and rules that let a robot react to its surroundings. For ages 9–10.",
     topics: ["robotics", "sensors", "control"],
     standards: [
       "usa-ca-perception-35",
@@ -270,7 +270,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners see how unfair or incomplete data makes a model treat people unfairly.",
+      "Learners see how unfair or incomplete data makes a model treat people unfairly. For ages 9–10.",
     topics: ["bias", "fairness", "training data"],
     standards: [
       "usa-ca-society-35",
@@ -287,7 +287,7 @@ export const aiModules: readonly AIModule[] = [
     band: "junior-b",
     level: "JB",
     description:
-      "Learners design and build a small game driven entirely by rules they write themselves.",
+      "Learners design and build a small game driven entirely by rules they write themselves. For ages 9–10.",
     topics: ["rules", "game design", "building"],
     standards: [
       "usa-ca-representation-35",
@@ -304,7 +304,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners define artificial intelligence, trace its history, and distinguish AI from ordinary software.",
+      "Learners define artificial intelligence, trace its history, and distinguish AI from ordinary software. For ages 11–16.",
     topics: ["definition of ai", "intelligent agents", "history of ai"],
     standards: [
       "usa-ca-representation-68",
@@ -321,7 +321,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners inspect how cameras and microphones turn physical signals into data.",
+      "Learners inspect how cameras and microphones turn physical signals into data. For ages 11–16.",
     topics: ["perception", "sensors", "signal data"],
     standards: [
       "usa-ca-perception-68",
@@ -338,7 +338,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners collect, clean, and describe datasets, and explain why data quality matters.",
+      "Learners collect, clean, and describe datasets, and explain why data quality matters. For ages 11–16.",
     topics: ["data", "data quality", "collection"],
     standards: [
       "usa-ca-learning-68",
@@ -355,7 +355,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners write and trace algorithms and compare step-by-step programs with learned behaviour.",
+      "Learners write and trace algorithms and compare step-by-step programs with learned behaviour. For ages 11–16.",
     topics: ["algorithms", "programming", "automation"],
     standards: [
       "usa-ca-representation-68",
@@ -372,7 +372,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners train a simple model on examples and observe how it generalizes to new cases.",
+      "Learners train a simple model on examples and observe how it generalizes to new cases. For ages 11–16.",
     topics: ["machine learning", "training", "generalization"],
     standards: [
       "usa-ca-learning-68",
@@ -390,7 +390,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners explore how language systems parse requests and where they break down.",
+      "Learners explore how language systems parse requests and where they break down. For ages 11–16.",
     topics: ["natural interaction", "language", "limits"],
     standards: [
       "usa-ca-interaction-68",
@@ -409,7 +409,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners audit where AI already touches their lives and weigh its benefits against its risks.",
+      "Learners audit where AI already touches their lives and weigh its benefits against its risks. For ages 11–16.",
     topics: ["ai in daily life", "impact", "responsibility"],
     standards: [
       "usa-ca-society-68",
@@ -427,7 +427,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L0",
     description:
-      "Learners build a rule-driven classifier for everyday objects and present their design.",
+      "Learners build a rule-driven classifier for everyday objects and present their design. For ages 11–16.",
     topics: ["project", "classification", "design"],
     standards: [
       "usa-ca-representation-68",
@@ -445,7 +445,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners encode facts and relationships as structured representations a program can use.",
+      "Learners encode facts and relationships as structured representations a program can use. For ages 11–16.",
     topics: ["knowledge representation", "data structures", "facts"],
     standards: [
       "usa-ca-representation-68",
@@ -463,7 +463,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners apply search strategies to solve puzzles and measure their cost.",
+      "Learners apply search strategies to solve puzzles and measure their cost. For ages 11–16.",
     topics: ["search", "problem solving", "efficiency"],
     standards: [
       "usa-ca-representation-68",
@@ -480,7 +480,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners compose logical conditions and derive conclusions from given facts.",
+      "Learners compose logical conditions and derive conclusions from given facts. For ages 11–16.",
     topics: ["logic", "rules", "inference"],
     standards: [
       "usa-ca-representation-68",
@@ -497,7 +497,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners model real relationships as graphs and trees and navigate them algorithmically.",
+      "Learners model real relationships as graphs and trees and navigate them algorithmically. For ages 11–16.",
     topics: ["graphs", "trees", "modeling"],
     standards: [
       "usa-ca-representation-68",
@@ -513,7 +513,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners build plans as action sequences and test them against constraints.",
+      "Learners build plans as action sequences and test them against constraints. For ages 11–16.",
     topics: ["planning", "constraints", "automation"],
     standards: [
       "usa-ca-representation-68",
@@ -531,7 +531,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners probe the limits of machine reasoning, including ambiguity and missing common sense.",
+      "Learners probe the limits of machine reasoning, including ambiguity and missing common sense. For ages 11–16.",
     topics: ["limits of ai", "common sense", "ambiguity"],
     standards: [
       "usa-ca-interaction-68",
@@ -548,7 +548,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners store knowledge in tables and graphs and query it to answer real questions.",
+      "Learners store knowledge in tables and graphs and query it to answer real questions. For ages 11–16.",
     topics: ["databases", "knowledge bases", "querying"],
     standards: [
       "usa-ca-representation-68",
@@ -565,7 +565,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L1",
     description:
-      "Learners build a rule-based assistant that answers questions from a knowledge base they author.",
+      "Learners build a rule-based assistant that answers questions from a knowledge base they author. For ages 11–16.",
     topics: ["project", "expert systems", "knowledge base"],
     standards: [
       "usa-ca-representation-68",
@@ -583,7 +583,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners trace how datasets are collected, labeled, and chosen, and what that choice implies.",
+      "Learners trace how datasets are collected, labeled, and chosen, and what that choice implies. For ages 11–16.",
     topics: ["datasets", "labeling", "provenance"],
     standards: [
       "usa-ca-learning-68",
@@ -601,7 +601,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners select and evaluate features that make examples distinguishable to a model.",
+      "Learners select and evaluate features that make examples distinguishable to a model. For ages 11–16.",
     topics: ["features", "representation", "selection"],
     standards: [
       "usa-ca-learning-68",
@@ -618,7 +618,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners train and tune a classifier and interpret its predictions.",
+      "Learners train and tune a classifier and interpret its predictions. For ages 11–16.",
     topics: ["classification", "training", "prediction"],
     standards: [
       "usa-ca-learning-68",
@@ -636,7 +636,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners cluster unlabeled data and judge whether the groups are meaningful.",
+      "Learners cluster unlabeled data and judge whether the groups are meaningful. For ages 11–16.",
     topics: ["clustering", "unsupervised learning", "groups"],
     standards: [
       "usa-ca-learning-68",
@@ -654,7 +654,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners split data into training and test sets and measure honest performance.",
+      "Learners split data into training and test sets and measure honest performance. For ages 11–16.",
     topics: ["train-test split", "evaluation", "honest metrics"],
     standards: [
       "usa-ca-learning-68",
@@ -672,7 +672,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners diagnose model errors and connect them to harm experienced by real people.",
+      "Learners diagnose model errors and connect them to harm experienced by real people. For ages 11–16.",
     topics: ["errors", "failure analysis", "impact"],
     standards: [
       "usa-ca-society-68",
@@ -690,7 +690,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners choose honest evaluation metrics and defend them against misleading alternatives.",
+      "Learners choose honest evaluation metrics and defend them against misleading alternatives. For ages 11–16.",
     topics: ["metrics", "evaluation", "integrity"],
     standards: [
       "usa-ca-learning-68",
@@ -708,7 +708,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L2",
     description:
-      "Learners train, evaluate, and present a classifier for a problem they have scoped.",
+      "Learners train, evaluate, and present a classifier for a problem they have scoped. For ages 11–16.",
     topics: ["project", "classification", "presentation"],
     standards: [
       "usa-ca-learning-68",
@@ -726,7 +726,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners examine how machines break language into tokens, meaning, and context.",
+      "Learners examine how machines break language into tokens, meaning, and context. For ages 11–16.",
     topics: ["nlp", "tokens", "language"],
     standards: [
       "usa-ca-interaction-912",
@@ -744,7 +744,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners analyze how a chatbot produces replies and where its answers go wrong.",
+      "Learners analyze how a chatbot produces replies and where its answers go wrong. For ages 11–16.",
     topics: ["chatbots", "generation", "evaluation"],
     standards: [
       "usa-ca-interaction-912",
@@ -762,7 +762,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners explore speech recognition and synthesis and evaluate them in noisy conditions.",
+      "Learners explore speech recognition and synthesis and evaluate them in noisy conditions. For ages 11–16.",
     topics: ["speech recognition", "synthesis", "audio"],
     standards: [
       "usa-ca-perception-912",
@@ -779,7 +779,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners run object and face detection and analyze its failures and biases.",
+      "Learners run object and face detection and analyze its failures and biases. For ages 11–16.",
     topics: ["computer vision", "detection", "bias"],
     standards: [
       "usa-ca-perception-912",
@@ -796,7 +796,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners combine speech, vision, and text input so a system can respond to mixed signals.",
+      "Learners combine speech, vision, and text input so a system can respond to mixed signals. For ages 11–16.",
     topics: ["multimodal", "interaction", "fusion"],
     standards: [
       "usa-ca-interaction-912",
@@ -814,7 +814,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners fact-check AI outputs against sources and detect bias, misinformation, and inaccuracies.",
+      "Learners fact-check AI outputs against sources and detect bias, misinformation, and inaccuracies. For ages 11–16.",
     topics: ["fact-checking", "misinformation", "critical evaluation"],
     standards: [
       "usa-ca-interaction-912",
@@ -832,7 +832,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners script and test a dialogue flow with clear intent, turns, and fallbacks.",
+      "Learners script and test a dialogue flow with clear intent, turns, and fallbacks. For ages 11–16.",
     topics: ["dialogue design", "conversation", "testing"],
     standards: [
       "usa-ca-interaction-912",
@@ -850,7 +850,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L3",
     description:
-      "Learners build and evaluate a tutor bot that teaches one concept to a peer.",
+      "Learners build and evaluate a tutor bot that teaches one concept to a peer. For ages 11–16.",
     topics: ["project", "chatbot", "peer evaluation"],
     standards: [
       "usa-ca-interaction-912",
@@ -868,7 +868,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners map the full pipeline from raw data to deployed prediction and its feedback loops.",
+      "Learners map the full pipeline from raw data to deployed prediction and its feedback loops. For ages 11–16.",
     topics: ["pipeline", "mlops", "feedback loops"],
     standards: [
       "usa-ca-learning-912",
@@ -887,7 +887,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners build an intuition for layers, weights, and training by gradient descent.",
+      "Learners build an intuition for layers, weights, and training by gradient descent. For ages 11–16.",
     topics: ["neural networks", "gradient descent", "training"],
     standards: [
       "usa-ca-learning-912",
@@ -904,7 +904,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners visualize embeddings and see how meaning becomes geometry.",
+      "Learners visualize embeddings and see how meaning becomes geometry. For ages 11–16.",
     topics: ["embeddings", "vectors", "representation"],
     standards: [
       "usa-ca-representation-912",
@@ -921,7 +921,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners engineer prompts with context, constraints, and checks, and compare model responses.",
+      "Learners engineer prompts with context, constraints, and checks, and compare model responses. For ages 11–16.",
     topics: ["prompt engineering", "llms", "evaluation"],
     standards: [
       "usa-ca-interaction-912",
@@ -939,7 +939,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners package a model behind an interface and consider reliability, latency, and cost.",
+      "Learners package a model behind an interface and consider reliability, latency, and cost. For ages 11–16.",
     topics: ["deployment", "product", "reliability"],
     standards: [
       "usa-ca-society-912",
@@ -957,7 +957,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners design controlled experiments, keep records, and iterate toward better models.",
+      "Learners design controlled experiments, keep records, and iterate toward better models. For ages 11–16.",
     topics: ["experiments", "ablation", "iteration"],
     standards: [
       "usa-ca-learning-912",
@@ -975,7 +975,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners build evaluation harnesses and decide how much to trust a system's outputs.",
+      "Learners build evaluation harnesses and decide how much to trust a system's outputs. For ages 11–16.",
     topics: ["testing", "verification", "trust"],
     standards: [
       "usa-ca-society-912",
@@ -993,7 +993,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L4",
     description:
-      "Learners take a project from dataset to trained model to documented results.",
+      "Learners take a project from dataset to trained model to documented results. For ages 11–16.",
     topics: ["project", "end-to-end", "documentation"],
     standards: [
       "usa-ca-learning-912",
@@ -1011,7 +1011,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners measure fairness across groups and examine trade-offs between competing definitions.",
+      "Learners measure fairness across groups and examine trade-offs between competing definitions. For ages 11–16.",
     topics: ["fairness", "bias", "measurement"],
     standards: [
       "usa-ca-society-912",
@@ -1029,7 +1029,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners analyze data collection, consent, and surveillance uses of AI in public and private life.",
+      "Learners analyze data collection, consent, and surveillance uses of AI in public and private life. For ages 11–16.",
     topics: ["privacy", "surveillance", "consent"],
     standards: [
       "usa-ca-society-912",
@@ -1046,7 +1046,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners evaluate how AI reshapes tasks and jobs, and what human-in-the-loop work remains.",
+      "Learners evaluate how AI reshapes tasks and jobs, and what human-in-the-loop work remains. For ages 11–16.",
     topics: ["work", "economy", "human-in-the-loop"],
     standards: [
       "usa-ca-society-912",
@@ -1063,7 +1063,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners weigh the environmental costs of training and running AI against its benefits.",
+      "Learners weigh the environmental costs of training and running AI against its benefits. For ages 11–16.",
     topics: ["environment", "energy", "trade-offs"],
     standards: [
       "usa-ca-society-912",
@@ -1080,7 +1080,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners compare governance approaches and design a policy for a realistic AI use case.",
+      "Learners compare governance approaches and design a policy for a realistic AI use case. For ages 11–16.",
     topics: ["governance", "policy", "regulation"],
     standards: [
       "usa-ca-society-912",
@@ -1097,7 +1097,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners detect synthetic media and build verification habits for the information they encounter.",
+      "Learners detect synthetic media and build verification habits for the information they encounter. For ages 11–16.",
     topics: ["deepfakes", "synthetic media", "verification"],
     standards: [
       "usa-ca-society-912",
@@ -1114,7 +1114,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners explain model behaviour to a non-expert audience and judge when explanation is owed.",
+      "Learners explain model behaviour to a non-expert audience and judge when explanation is owed. For ages 11–16.",
     topics: ["transparency", "explainability", "accountability"],
     standards: [
       "usa-ca-society-912",
@@ -1132,7 +1132,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L5",
     description:
-      "Learners audit a real AI system for fairness, safety, and transparency and publish findings.",
+      "Learners audit a real AI system for fairness, safety, and transparency and publish findings. For ages 11–16.",
     topics: ["project", "audit", "reporting"],
     standards: [
       "usa-ca-society-912",
@@ -1150,7 +1150,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners study pretraining, data scale, and evaluation of large frontier models.",
+      "Learners study pretraining, data scale, and evaluation of large frontier models. For ages 11–16.",
     topics: ["frontier models", "pretraining", "evaluation"],
     standards: [
       "usa-ca-learning-912",
@@ -1168,7 +1168,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners design agents that plan, call tools, and recover from failures.",
+      "Learners design agents that plan, call tools, and recover from failures. For ages 11–16.",
     topics: ["agents", "tool use", "planning"],
     standards: [
       "usa-ca-representation-912",
@@ -1185,7 +1185,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners read AI papers critically, reproduce a small result, and report it honestly.",
+      "Learners read AI papers critically, reproduce a small result, and report it honestly. For ages 11–16.",
     topics: ["research methods", "reproducibility", "reporting"],
     standards: [
       "usa-ca-learning-912",
@@ -1202,7 +1202,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners scope a project that applies AI to a community need they have verified.",
+      "Learners scope a project that applies AI to a community need they have verified. For ages 11–16.",
     topics: ["social good", "community", "scoping"],
     standards: [
       "usa-ca-society-912",
@@ -1219,7 +1219,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners structure collaboration with AI so human judgement stays in charge of outcomes.",
+      "Learners structure collaboration with AI so human judgement stays in charge of outcomes. For ages 11–16.",
     topics: ["collaboration", "judgement", "delegation"],
     standards: [
       "usa-ca-interaction-912",
@@ -1236,7 +1236,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners plan staged rollout, monitoring, and rollback for an AI feature.",
+      "Learners plan staged rollout, monitoring, and rollback for an AI feature. For ages 11–16.",
     topics: ["deployment", "monitoring", "rollback"],
     standards: [
       "usa-ca-society-912",
@@ -1254,7 +1254,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners write a capstone proposal with problem, data plan, evaluation, and risk review.",
+      "Learners write a capstone proposal with problem, data plan, evaluation, and risk review. For ages 11–16.",
     topics: ["capstone", "proposal", "planning"],
     standards: [
       "usa-ca-society-912",
@@ -1272,7 +1272,7 @@ export const aiModules: readonly AIModule[] = [
     band: "core",
     level: "L6",
     description:
-      "Learners build the capstone, defend it in review, and document its limits.",
+      "Learners build the capstone, defend it in review, and document its limits. For ages 11–16.",
     topics: ["capstone", "build", "review"],
     standards: [
       "usa-ca-society-912",
@@ -1290,7 +1290,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners derive backpropagation and study convolutional and recurrent architectures.",
+      "Learners derive backpropagation and study convolutional and recurrent architectures. For ages 16–18.",
     topics: ["deep learning", "backpropagation", "architectures"],
     standards: [
       "usa-ca-learning-912",
@@ -1308,7 +1308,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners build detection and segmentation pipelines and evaluate them on hard cases.",
+      "Learners build detection and segmentation pipelines and evaluate them on hard cases. For ages 16–18.",
     topics: ["computer vision", "detection", "segmentation"],
     standards: [
       "usa-ca-perception-912",
@@ -1326,7 +1326,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners study attention, transformer architecture, and how language models generate text.",
+      "Learners study attention, transformer architecture, and how language models generate text. For ages 16–18.",
     topics: ["transformers", "attention", "language models"],
     standards: [
       "usa-ca-interaction-912",
@@ -1344,7 +1344,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners train agents with rewards, explore exploration-exploitation trade-offs, and evaluate policies.",
+      "Learners train agents with rewards, explore exploration-exploitation trade-offs, and evaluate policies. For ages 16–18.",
     topics: ["reinforcement learning", "rewards", "policies"],
     standards: [
       "usa-ca-learning-912",
@@ -1362,7 +1362,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners examine how generative models learn distributions and produce new content.",
+      "Learners examine how generative models learn distributions and produce new content. For ages 16–18.",
     topics: ["generative ai", "diffusion", "sampling"],
     standards: [
       "usa-ca-learning-912",
@@ -1380,7 +1380,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners design data governance covering consent, retention, access, and provenance.",
+      "Learners design data governance covering consent, retention, access, and provenance. For ages 16–18.",
     topics: ["data governance", "privacy", "policy"],
     standards: [
       "usa-ca-society-912",
@@ -1398,7 +1398,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners run a structured bias audit on a model and file actionable recommendations.",
+      "Learners run a structured bias audit on a model and file actionable recommendations. For ages 16–18.",
     topics: ["bias audit", "fairness", "practicum"],
     standards: [
       "usa-ca-society-912",
@@ -1416,7 +1416,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners debate real AI dilemmas and construct reasoned positions under uncertainty.",
+      "Learners debate real AI dilemmas and construct reasoned positions under uncertainty. For ages 16–18.",
     topics: ["ethics", "debate", "case studies"],
     standards: [
       "usa-ca-society-912",
@@ -1434,7 +1434,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners build multi-step agents with tools, memory, and guardrails.",
+      "Learners build multi-step agents with tools, memory, and guardrails. For ages 16–18.",
     topics: ["agents", "automation", "guardrails"],
     standards: [
       "usa-ca-representation-912",
@@ -1452,7 +1452,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners operate a deployed model with monitoring, incident response, and drift detection.",
+      "Learners operate a deployed model with monitoring, incident response, and drift detection. For ages 16–18.",
     topics: ["deployment", "monitoring", "incident response"],
     standards: [
       "usa-ca-society-912",
@@ -1470,7 +1470,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners replicate, critique, and present AI research with methodological rigor.",
+      "Learners replicate, critique, and present AI research with methodological rigor. For ages 16–18.",
     topics: ["research", "replication", "presentation"],
     standards: [
       "usa-ca-learning-912",
@@ -1488,7 +1488,7 @@ export const aiModules: readonly AIModule[] = [
     band: "advanced",
     level: "ADV",
     description:
-      "Learners deliver a research-grade capstone with external review and public documentation.",
+      "Learners deliver a research-grade capstone with external review and public documentation. For ages 16–18.",
     topics: ["capstone", "research", "external review"],
     standards: [
       "usa-ca-society-912",
