@@ -3,7 +3,7 @@
 **Date:** 2026-09-06
 **Status:** ACTIVE
 **Owner:** Bhavya Foundation Architecture
-**Last updated:** 2026-09-25
+**Last updated:** 2026-10-02
 **Applies To:** All routes in `apps/ai-institute`
 
 ---
@@ -118,23 +118,26 @@ Public navigation is organized into four institutional groups:
 
 ## Knowledge Routes
 
-| Route                                        | Purpose          | Audience | Auth | Parent    |
-| -------------------------------------------- | ---------------- | -------- | ---- | --------- |
-| `/knowledge`                                 | Knowledge hub    | Public   | No   | —         |
-| `/knowledge/academy`                         | Academy overview | Public   | No   | knowledge |
-| `/knowledge/courses`                         | Course listing   | Public   | No   | knowledge |
-| `/knowledge/courses/[id]`                    | Course detail    | Public   | No   | knowledge |
-| `/knowledge/courses/[id]/lessons/[lessonId]` | Lesson player    | Student  | Yes  | knowledge |
-| `/knowledge/library`                         | Library          | Public   | No   | knowledge |
-| `/knowledge/research`                        | Research hub     | Public   | No   | knowledge |
-| `/knowledge/ai`                              | AI capabilities  | Public   | No   | knowledge |
-| `/knowledge/mentor`                          | Mentor system    | Public   | No   | knowledge |
-| `/knowledge/projects`                        | Projects         | Public   | No   | knowledge |
-| `/knowledge/credentials`                     | Credentials      | Public   | No   | knowledge |
-| `/knowledge/graph`                           | Knowledge graph  | Public   | No   | knowledge |
-| `/certificates`                              | Credential list  | Student  | Yes  | knowledge |
-| `/certificates/[credentialId]`               | Certificate view | Public   | No   | knowledge |
-| `/verify/[credentialId]`                     | Credential check | Public   | No   | knowledge |
+| Route                                               | Purpose           | Audience | Auth | Parent    |
+| --------------------------------------------------- | ----------------- | -------- | ---- | --------- |
+| `/knowledge`                                        | Knowledge hub     | Public   | No   | —         |
+| `/knowledge/academy`                                | Academy overview  | Public   | No   | knowledge |
+| `/knowledge/courses`                                | Course listing    | Public   | No   | knowledge |
+| `/knowledge/courses/[id]`                           | Course detail     | Public   | No   | knowledge |
+| `/knowledge/courses/[id]/lessons/[lessonId]`        | Lesson player     | Student  | Yes  | knowledge |
+| `/knowledge/library`                                | Library           | Public   | No   | knowledge |
+| `/knowledge/research`                               | Research hub      | Public   | No   | knowledge |
+| `/knowledge/ai`                                     | AI capabilities   | Public   | No   | knowledge |
+| `/knowledge/mentor`                                 | Mentor system     | Public   | No   | knowledge |
+| `/knowledge/projects`                               | Projects          | Public   | No   | knowledge |
+| `/knowledge/credentials`                            | Credentials       | Public   | No   | knowledge |
+| `/knowledge/graph`                                  | Knowledge graph   | Public   | No   | knowledge |
+| `/curriculum`                                       | AI curriculum hub | Public   | No   | knowledge |
+| `/curriculum/modules/[moduleId]`                    | Module overview   | Public   | No   | knowledge |
+| `/curriculum/modules/[moduleId]/lessons/[lessonId]` | Lesson player     | Public   | No   | knowledge |
+| `/certificates`                                     | Credential list   | Student  | Yes  | knowledge |
+| `/certificates/[credentialId]`                      | Certificate view  | Public   | No   | knowledge |
+| `/verify/[credentialId]`                            | Credential check  | Public   | No   | knowledge |
 
 ## My Bhavya Routes (Authenticated)
 

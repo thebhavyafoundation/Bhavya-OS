@@ -19,12 +19,14 @@ let initialized = false;
 let _asyncDb: AsyncDatabase | null = null;
 
 // Cache for dynamically imported local-mode functions
-let _getAdaptedDatabase: typeof import("@bhavya/database/registry").getAdaptedDatabase | null = null;
+let _getAdaptedDatabase:
+  typeof import("@bhavya/database/registry").getAdaptedDatabase | null = null;
 let _migrate: typeof import("@bhavya/database/migrate").migrate | null = null;
 
 /**
  * Baseline schema SQL — applied to Turso on first init.
- * Kept in sync with packages/database/migrations/ai-institute/001_baseline_schema.ts
+ * Kept in sync with packages/database/migrations/ai-institute/
+ * 001_baseline_schema.ts through 006_module_progress.ts
  */
 const BASELINE_SCHEMA = `
 -- Users table
@@ -77,6 +79,19 @@ CREATE TABLE IF NOT EXISTS _migrations (
   checksum TEXT NOT NULL,
   applied_at TEXT DEFAULT (datetime('now'))
 );
+
+-- Curriculum module progress
+CREATE TABLE IF NOT EXISTS module_progress (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  module_id TEXT NOT NULL,
+  lessons_completed TEXT NOT NULL DEFAULT '[]',
+  quiz_score INTEGER,
+  completed_at TEXT,
+  updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  UNIQUE (user_id, module_id)
+);
+CREATE INDEX IF NOT EXISTS idx_module_progress_user ON module_progress(user_id);
 `;
 
 /**
