@@ -15,29 +15,29 @@ interface ModulePageProps {
 }
 
 export function generateStaticParams() {
-  return aiModules.map((module) => ({ moduleId: module.id }));
+  return aiModules.map((entry) => ({ moduleId: entry.id }));
 }
 
 export async function generateMetadata({
   params,
 }: ModulePageProps): Promise<Metadata> {
   const { moduleId } = await params;
-  const module = getModuleById(moduleId);
-  if (!module) return {};
+  const courseModule = getModuleById(moduleId);
+  if (!courseModule) return {};
   return {
-    title: `${module.title} — AI Curriculum`,
-    description: module.description,
+    title: `${courseModule.title} — AI Curriculum`,
+    description: courseModule.description,
   };
 }
 
 export default async function ModulePage({ params }: ModulePageProps) {
   const { moduleId } = await params;
-  const module = getModuleById(moduleId);
-  if (!module) notFound();
+  const courseModule = getModuleById(moduleId);
+  if (!courseModule) notFound();
 
-  const lessons = getLessonsForModule(module.id);
-  const standards = getStandardsForModule(module.id);
-  const prerequisites = getPrerequisites(module.id);
+  const lessons = getLessonsForModule(courseModule.id);
+  const standards = getStandardsForModule(courseModule.id);
+  const prerequisites = getPrerequisites(courseModule.id);
 
   return (
     <div id="main-content" className="ai-page">
@@ -45,18 +45,18 @@ export default async function ModulePage({ params }: ModulePageProps) {
         <Link href="/curriculum">Curriculum</Link>
         {" / "}
         <span className="ai-breadcrumb-current" aria-current="page">
-          {module.title}
+          {courseModule.title}
         </span>
       </nav>
 
       <p className="ai-eyebrow">
-        {BAND_LABELS[module.band]} · Level {module.level}
+        {BAND_LABELS[courseModule.band]} · Level {courseModule.level}
       </p>
-      <h1 className="ai-page-title">{module.title}</h1>
-      <p className="ai-page-lead">{module.description}</p>
+      <h1 className="ai-page-title">{courseModule.title}</h1>
+      <p className="ai-page-lead">{courseModule.description}</p>
 
       <div className="ai-meta-row">
-        <span>{module.estimatedHours} h estimated</span>
+        <span>{courseModule.estimatedHours} h estimated</span>
         <span>
           {prerequisites.length > 0
             ? `Builds on: ${prerequisites.map((pre) => pre.title).join(", ")}`
@@ -65,7 +65,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
       </div>
 
       <div className="ai-chip-row">
-        {module.topics.map((topic) => (
+        {courseModule.topics.map((topic) => (
           <span key={topic} className="ai-chip">
             {topic}
           </span>
@@ -81,7 +81,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
             {lessons.map((lesson, index) => (
               <li key={lesson.id}>
                 <Link
-                  href={`/curriculum/modules/${module.id}/lessons/${lesson.id}`}
+                  href={`/curriculum/modules/${courseModule.id}/lessons/${lesson.id}`}
                   className="ai-lesson-link"
                 >
                   <span className="ai-lesson-index" aria-hidden="true">

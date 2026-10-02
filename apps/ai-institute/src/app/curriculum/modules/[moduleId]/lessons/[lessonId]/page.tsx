@@ -28,20 +28,20 @@ export async function generateMetadata({
   params,
 }: LessonPageProps): Promise<Metadata> {
   const { moduleId, lessonId } = await params;
-  const module = getModuleById(moduleId);
+  const courseModule = getModuleById(moduleId);
   const lesson = getLesson(moduleId, lessonId);
-  if (!module || !lesson) return {};
+  if (!courseModule || !lesson) return {};
   return {
-    title: `${lesson.title} — ${module.title} — AI Curriculum`,
-    description: `Lesson ${lesson.title} from the ${module.title} module, ${BAND_AGES[module.band].toLowerCase()}, part of the Bhavya AI curriculum.`,
+    title: `${lesson.title} — ${courseModule.title} — AI Curriculum`,
+    description: `Lesson ${lesson.title} from the ${courseModule.title} module, ${BAND_AGES[courseModule.band].toLowerCase()}, part of the Bhavya AI curriculum.`,
   };
 }
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const { moduleId, lessonId } = await params;
-  const module = getModuleById(moduleId);
+  const courseModule = getModuleById(moduleId);
   const lesson = getLesson(moduleId, lessonId);
-  if (!module || !lesson) notFound();
+  if (!courseModule || !lesson) notFound();
 
   const lessons = getLessonsForModule(moduleId);
   const lessonIndex = lessons.findIndex((entry) => entry.id === lesson.id);
@@ -57,7 +57,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <nav className="ai-breadcrumb" aria-label="Breadcrumb">
         <Link href="/curriculum">Curriculum</Link>
         {" / "}
-        <Link href={`/curriculum/modules/${module.id}`}>{module.title}</Link>
+        <Link href={`/curriculum/modules/${courseModule.id}`}>
+          {courseModule.title}
+        </Link>
         {" / "}
         <span className="ai-breadcrumb-current" aria-current="page">
           {lesson.title}
@@ -65,7 +67,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
       </nav>
 
       <p className="ai-eyebrow">
-        Lesson {lessonIndex + 1} of {lessons.length} · {BAND_AGES[module.band]}
+        Lesson {lessonIndex + 1} of {lessons.length} ·{" "}
+        {BAND_AGES[courseModule.band]}
       </p>
       <h1 className="ai-page-title">{lesson.title}</h1>
 
@@ -99,7 +102,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <span>
           {previous && (
             <Link
-              href={`/curriculum/modules/${module.id}/lessons/${previous.id}`}
+              href={`/curriculum/modules/${courseModule.id}/lessons/${previous.id}`}
               className="ai-nav-btn"
             >
               ← {previous.title}
@@ -109,14 +112,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
         <span>
           {next ? (
             <Link
-              href={`/curriculum/modules/${module.id}/lessons/${next.id}`}
+              href={`/curriculum/modules/${courseModule.id}/lessons/${next.id}`}
               className="ai-nav-btn ai-nav-btn-primary"
             >
               {next.title} →
             </Link>
           ) : (
             <Link
-              href={`/curriculum/modules/${module.id}`}
+              href={`/curriculum/modules/${courseModule.id}`}
               className="ai-nav-btn ai-nav-btn-primary"
             >
               Back to module →
