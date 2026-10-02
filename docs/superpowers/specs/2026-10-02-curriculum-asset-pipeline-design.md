@@ -56,10 +56,11 @@ brand/logo.svg (watermark) ─┘        ▼
                         public/curriculum/lessons/<id>.svg
                         public/curriculum/manifest.json
                                      │
-              ┌──────────────────────┴───────────────────────┐
+              ┌──────────────────────────────────────────────┐
               ▼                                              ▼
-   vitest asset-pipeline.test.ts              .github/workflows/assets.yml
-   (coverage, schema, colors, watermark)      (assets:check on PR/push)
+   pnpm test = assets:check + vitest             assets.yml (optional,
+   (freshness gate rides the existing            pending `workflow`-scoped
+   ci.yml test job — enforced)                   credential, see below)
 ```
 
 - Generator: `apps/ai-institute/src/scripts/generate-curriculum-assets.ts`,
@@ -136,8 +137,15 @@ the parent `moduleId` and inherit band/ages from it.
 4. Watermark present (`id="watermark"`) on every card.
 5. Band/ages in the manifest equal `BAND_AGES`; titles equal registry titles.
 
-CI: existing gates (antislop, lint, typecheck, test, build) plus `assets:check`
-in the new path-filtered workflow.
+CI: existing gates (antislop, lint, typecheck, test, build). The freshness
+gate is embedded in the app `test` script
+(`assets:check && vitest run`), so the existing `ci.yml` test job enforces it
+on every pull request with no new workflow required. A path-filtered
+`assets.yml` workflow is authored but not committable: both available GitHub
+tokens lack the `workflow` scope required to write `.github/workflows/*`
+(403 from git push and from the contents API). It can be applied manually
+from the PR description once a workflow-scoped credential exists; until then
+the embedded gate loses only seconds of path filtering, not coverage.
 
 ## Security
 

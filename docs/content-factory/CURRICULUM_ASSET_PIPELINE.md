@@ -24,7 +24,7 @@ public/curriculum/{modules,lessons}/<id>.svg + manifest.json
   ↓
 committed to git → Cloudflare Workers deploy serves them over CDN
   ↓
-assets:check in CI fails if outputs drift from inputs
+assets:check inside `pnpm test` (existing ci.yml test job) fails on drift
 ```
 
 No direct publishing without regeneration: changing a module title, band
@@ -35,9 +35,15 @@ the result.
 
 ```bash
 pnpm --filter @bhavya/ai-institute assets:generate   # regenerate + prune stale
-pnpm --filter @bhavya/ai-institute assets:check      # CI freshness gate (exit 1 on drift)
-pnpm --filter @bhavya/ai-institute test              # includes asset-pipeline.test.ts
+pnpm --filter @bhavya/ai-institute assets:check      # freshness gate (exit 1 on drift)
+pnpm --filter @bhavya/ai-institute test              # assets:check + asset-pipeline.test.ts
 ```
+
+Run from `apps/ai-institute` (the generator resolves inputs relative to the
+package root). `pnpm test` runs the freshness check first, so CI enforces it
+without a dedicated workflow. A path-filtered `.github/workflows/assets.yml`
+is available as optional optimization but requires a GitHub token with the
+`workflow` scope to commit.
 
 Run from `apps/ai-institute` (the generator resolves inputs relative to the
 package root).
@@ -55,13 +61,13 @@ endings, no timestamps. Re-running with unchanged inputs produces zero diff.
 
 ## Free-tier mapping
 
-| Concern  | Choice                                                                                                      |
-| -------- | ----------------------------------------------------------------------------------------------------------- |
-| Compute  | GitHub Actions (free for public repos), `.github/workflows/assets.yml`                                      |
-| Serving  | Existing Cloudflare Workers deployment (`public/` ships with the build)                                     |
-| Storage  | Committed to git (~1 MB of SVG); revisit Cloudflare R2 only if size warrants                                |
-| Supabase | Deferred — canonical database is Turso; no Supabase credentials exist; would duplicate the database concept |
-| Vercel   | Deferred — active deploy path is Cloudflare Workers; a second host would duplicate serving                  |
+| Concern  | Choice                                                                                                                                                              |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Compute  | GitHub Actions — `assets:check` embedded in the existing CI test job (free for public repos); optional path-filtered `assets.yml` pending a `workflow`-scoped token |
+| Serving  | Existing Cloudflare Workers deployment (`public/` ships with the build)                                                                                             |
+| Storage  | Committed to git (~1 MB of SVG); revisit Cloudflare R2 only if size warrants                                                                                        |
+| Supabase | Deferred — canonical database is Turso; no Supabase credentials exist; would duplicate the database concept                                                         |
+| Vercel   | Deferred — active deploy path is Cloudflare Workers; a second host would duplicate serving                                                                          |
 
 ## Governance
 

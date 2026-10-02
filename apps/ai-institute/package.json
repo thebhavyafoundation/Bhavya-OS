@@ -15,7 +15,7 @@
     "db:backup": "scripts/backup-db.ts",
     "assets:generate": "tsx src/scripts/generate-curriculum-assets.ts",
     "assets:check": "tsx src/scripts/generate-curriculum-assets.ts --check",
-    "test": "vitest run --passWithNoTests",
+    "test": "tsx src/scripts/generate-curriculum-assets.ts --check && vitest run --passWithNoTests",
     "test:watch": "vitest"
   },
   "dependencies": {
