@@ -90,7 +90,7 @@ export function TiltCard({
           background: glareBackground,
           opacity: glareEnabled && isHovered ? 1 : 0,
           pointerEvents: "none",
-          transition: "opacity 0.3s ease",
+          transition: "opacity var(--duration-normal) var(--ease-out)",
         }}
       />
     </motion.div>

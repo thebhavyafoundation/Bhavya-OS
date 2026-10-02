@@ -33,12 +33,15 @@ export default async function CoursesPage() {
     <div className="min-h-screen bg-bg-primary">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <header className="mb-12">
-          <p className="text-sm font-medium tracking-widest text-accent-gold uppercase">
-            Curriculum
-          </p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight text-text-primary">
+          <h1
+            className="editorial-heading text-4xl text-text-primary"
+            style={{ letterSpacing: "-0.03em" }}
+          >
             Courses
           </h1>
+          <p className="mt-4 text-sm font-medium tracking-widest text-accent-gold uppercase">
+            Curriculum
+          </p>
           <p className="mt-4 max-w-2xl text-lg text-text-primary/70">
             Learn AI from the ground up. Each course is designed to build on the
             previous one, taking you from curiosity to capability.

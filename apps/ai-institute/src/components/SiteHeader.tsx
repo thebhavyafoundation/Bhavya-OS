@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search,
   Menu,
   X,
   ChevronRight,
@@ -65,6 +64,7 @@ export function SiteHeader({
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const siteNavRef = useRef<HTMLElement | null>(null);
 
   // Read navigation groups from canonical registry
   const navGroups = getPublicNavGroups();
@@ -80,6 +80,28 @@ export function SiteHeader({
       if (dropdownTimeoutRef.current) {
         clearTimeout(dropdownTimeoutRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    const onPointerDown = (event: MouseEvent) => {
+      if (
+        siteNavRef.current &&
+        !siteNavRef.current.contains(event.target as Node)
+      ) {
+        setActiveDropdown(null);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
     };
   }, []);
 
@@ -101,6 +123,7 @@ export function SiteHeader({
   return (
     <>
       <nav
+        ref={siteNavRef}
         className={`site-nav ${scrolled ? "scrolled" : ""}`}
         style={
           isDark
@@ -126,9 +149,15 @@ export function SiteHeader({
               >
                 <button
                   className="nav-link nav-dropdown-trigger"
+                  type="button"
                   aria-expanded={activeDropdown === group.id}
                   aria-haspopup="true"
                   aria-controls={`menu-${group.id}`}
+                  onClick={() =>
+                    setActiveDropdown(
+                      activeDropdown === group.id ? null : group.id,
+                    )
+                  }
                   style={
                     isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
                   }
@@ -139,7 +168,8 @@ export function SiteHeader({
                     style={{
                       display: "inline-block",
                       marginLeft: "4px",
-                      transition: "transform 150ms ease",
+                      transition:
+                        "transform var(--duration-fast) var(--ease-out)",
                       transform:
                         activeDropdown === group.id
                           ? "rotate(180deg)"
@@ -164,6 +194,7 @@ export function SiteHeader({
                           <a
                             key={item.id}
                             href={item.href}
+                            role="menuitem"
                             className="nav-dropdown-item"
                             onClick={() => setActiveDropdown(null)}
                           >
@@ -195,21 +226,6 @@ export function SiteHeader({
           </div>
 
           <div className="nav-actions">
-            <button
-              className="nav-search"
-              style={
-                isDark
-                  ? {
-                      background: "rgba(247, 244, 236, 0.1)",
-                      borderColor: "rgba(247, 244, 236, 0.15)",
-                      color: "rgba(247, 244, 236, 0.7)",
-                    }
-                  : undefined
-              }
-              aria-label="Search"
-            >
-              <Search size={16} />
-            </button>
             <a
               href="/donate"
               className="nav-cta nav-cta-support"

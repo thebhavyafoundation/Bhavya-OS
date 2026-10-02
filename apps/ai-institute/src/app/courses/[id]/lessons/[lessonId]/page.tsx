@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import type { CSSProperties } from "react";
 import {
-  getCourseById,
   getLessonById,
   getNextLesson,
   getPreviousLesson,
@@ -11,6 +11,7 @@ import {
   getPublishedLessonContent,
 } from "@/data/academy-lessons";
 import { requireSessionUser } from "@/lib/require-role";
+import { LessonCompleteButton } from "@/components/LessonCompleteButton";
 import { getStudentByUserId } from "@/lib/student-store";
 import { getRelationshipsForLesson } from "@/data/source-relationships";
 import { sourceBPacks } from "@/data/source-b-registry.generated";
@@ -104,7 +105,17 @@ export default async function LessonPage({
 
         {/* Content */}
         {content ? (
-          <article className="mt-10 prose prose-stone max-w-none">
+          <article
+            className="mt-10 prose prose-neutral max-w-none"
+            style={
+              {
+                "--tw-prose-body": "var(--color-text-secondary)",
+                "--tw-prose-headings": "var(--color-brand-forest)",
+                "--tw-prose-links": "var(--color-brand-forest)",
+                "--tw-prose-bold": "var(--color-text-primary)",
+              } as CSSProperties
+            }
+          >
             {/* Reading */}
             <div
               className="lesson-content"
@@ -248,6 +259,8 @@ export default async function LessonPage({
             </p>
           </section>
         )}
+
+        <LessonCompleteButton lessonId={lessonId} />
 
         {/* Navigation */}
         <div className="mt-16 flex items-center justify-between border-t border-border-primary pt-8">

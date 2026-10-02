@@ -171,7 +171,7 @@ export default function FAQPage() {
       </section>
 
       <section className="py-12 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div style={{ maxWidth: "65ch", margin: "0 auto" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -63,24 +63,24 @@ export default function CommunityPage() {
           }}
         >
           <Reveal variant="slide-up" delay={0.2}>
-            <span
-              className="editorial-label"
-              style={{ color: "var(--color-brand-gold)" }}
-            >
-              Community Mission
-            </span>
             <h1
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 fontWeight: 400,
                 lineHeight: 1.1,
-                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-4)",
               }}
             >
               People Building
               <br />a Stronger India
             </h1>
+            <span
+              className="editorial-label"
+              style={{ color: "var(--color-brand-gold)" }}
+            >
+              Community Mission
+            </span>
             <p
               style={{
                 fontSize: "var(--text-lg)",

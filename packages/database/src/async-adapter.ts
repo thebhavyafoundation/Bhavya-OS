@@ -45,6 +45,8 @@ interface TursoClient {
     rowsAffected?: number;
     lastInsertRowid?: string | number | bigint;
   }>;
+  /** Multi-statement entry point — present on every @libsql/client variant. */
+  executeMultiple?: (sql: string) => Promise<void>;
 }
 
 // ─── better-sqlite3 statement shape ──────────────────────────────────────────
@@ -62,7 +64,7 @@ type SqliteDb = BetterSqlite3.Database;
 
 // ─── Production Adapter (Turso/libSQL) ───────────────────────────────────────
 
-class TursoAdapter implements AsyncDatabase {
+export class TursoAdapter implements AsyncDatabase {
   private client: TursoClient;
 
   constructor(client: TursoClient) {
@@ -92,6 +94,12 @@ class TursoAdapter implements AsyncDatabase {
   }
 
   async exec(sql: string): Promise<void> {
+    // execute() rejects multi-statement SQL (SQL_MANY_STATEMENTS) — schema
+    // blocks like BASELINE_SCHEMA need executeMultiple().
+    if (typeof this.client.executeMultiple === "function") {
+      await this.client.executeMultiple(sql);
+      return;
+    }
     await this.client.execute({ sql, args: [] });
   }
 }
@@ -156,9 +164,11 @@ export async function initAsyncAdapter(
     const url = process.env.TURSO_DATABASE_URL!;
     const authToken = process.env.TURSO_AUTH_TOKEN;
 
-    // Dynamic import — only loaded when TURSO_DATABASE_URL is set
+    // Dynamic import — only loaded when TURSO_DATABASE_URL is set.
+    // The ./web entry is fetch-based; the root entry eagerly loads the
+    // native `libsql` addon, which throws in Cloudflare Workers.
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { createClient } = require("@libsql/client");
+    const { createClient } = require("@libsql/client/web");
     const client = createClient({ url, authToken });
     _asyncAdapter = new TursoAdapter(client);
   } else {

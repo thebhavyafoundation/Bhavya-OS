@@ -10,7 +10,7 @@ export default function Error({
   return (
     <div className="min-h-[400px] flex items-center justify-center p-8">
       <div className="text-center max-w-md">
-        <div className="w-12 h-12 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center mx-auto mb-4 text-xl">
+        <div className="w-12 h-12 rounded-lg bg-status-error/10 text-status-error flex items-center justify-center mx-auto mb-4 text-xl">
           !
         </div>
         <h2 className="text-lg font-semibold text-text-primary mb-2">

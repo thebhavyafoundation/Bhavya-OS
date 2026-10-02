@@ -54,7 +54,7 @@ export default function AssessmentPage() {
       <div className="min-h-screen flex items-center justify-center px-6">
         <div className="max-w-lg w-full animate-fade-in">
           <div className="text-center mb-8">
-            <div className="w-12 h-12 rounded-lg bg-accent-blue/10 text-accent-blue flex items-center justify-center mx-auto mb-4 text-xl">
+            <div className="w-12 h-12 rounded-lg bg-status-info/10 text-status-info flex items-center justify-center mx-auto mb-4 text-xl">
               🎯
             </div>
             <h1 className="text-2xl font-bold text-text-primary mb-2">
@@ -67,12 +67,12 @@ export default function AssessmentPage() {
           </div>
 
           <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary mb-6">
-            <h3 className="text-sm font-medium text-text-primary mb-3">
+            <h2 className="text-sm font-medium text-text-primary mb-3">
               What we&apos;re measuring:
-            </h3>
+            </h2>
             <div className="grid grid-cols-2 gap-3 text-sm text-text-secondary">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-blue" />
+                <span className="w-1.5 h-1.5 rounded-full bg-status-info" />
                 Programming basics
               </div>
               <div className="flex items-center gap-2">
@@ -80,7 +80,7 @@ export default function AssessmentPage() {
                 Logical reasoning
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow" />
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-300" />
                 AI familiarity
               </div>
               <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function AssessmentPage() {
 
           <button
             onClick={startQuiz}
-            className="w-full py-3 text-base font-semibold bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+            className="w-full py-3 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold-hover transition-colors"
           >
             Start Assessment
           </button>
@@ -117,7 +117,7 @@ export default function AssessmentPage() {
             </div>
             <div className="h-1 bg-bg-tertiary rounded-full overflow-hidden">
               <div
-                className="h-full bg-accent-blue transition-all duration-300"
+                className="h-full bg-status-info transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -127,9 +127,9 @@ export default function AssessmentPage() {
             <p className="text-[10px] text-text-muted uppercase tracking-wider mb-2">
               {q.category.replace("_", " ")}
             </p>
-            <h2 className="text-base font-medium text-text-primary mb-6">
+            <h1 className="text-base font-medium text-text-primary mb-6">
               {q.question}
-            </h2>
+            </h1>
             <div className="space-y-3">
               {q.options.map((opt, i) => (
                 <button
@@ -137,7 +137,7 @@ export default function AssessmentPage() {
                   onClick={() => answerQuestion(q.id, i)}
                   className={`w-full text-left p-3 border rounded-md text-sm transition-colors ${
                     answers[q.id] === i
-                      ? "border-accent-blue bg-accent-blue/10 text-text-primary"
+                      ? "border-status-info bg-status-info/10 text-text-primary"
                       : "border-border-primary bg-bg-primary text-text-secondary hover:border-border-secondary hover:text-text-primary"
                   }`}
                 >
@@ -192,12 +192,12 @@ export default function AssessmentPage() {
           </div>
 
           <div className="border border-border-primary rounded-lg p-6 bg-bg-secondary mb-6 text-left">
-            <h3 className="text-sm font-medium text-text-primary mb-3">
+            <h2 className="text-sm font-medium text-text-primary mb-3">
               Your Roadmap
-            </h3>
+            </h2>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <span className="w-6 h-6 rounded-full bg-accent-blue/10 text-accent-blue text-xs flex items-center justify-center font-bold">
+                <span className="w-6 h-6 rounded-full bg-status-info/10 text-status-info text-xs flex items-center justify-center font-bold">
                   1
                 </span>
                 <span className="text-text-secondary">
@@ -227,7 +227,7 @@ export default function AssessmentPage() {
 
           <button
             onClick={() => router.push("/dashboard")}
-            className="w-full py-3 text-base font-semibold bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+            className="w-full py-3 text-base font-semibold bg-accent-gold text-text-primary rounded-lg hover:bg-accent-gold-hover transition-colors"
           >
             Go to Dashboard
           </button>

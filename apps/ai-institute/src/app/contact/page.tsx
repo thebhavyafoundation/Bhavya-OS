@@ -19,16 +19,16 @@ export default function ContactPage() {
           }}
         >
           <div className="container-narrow" style={{ textAlign: "center" }}>
-            <p className="editorial-label">Get in Touch</p>
             <h1
               className="editorial-heading"
               style={{
                 fontSize: "var(--text-5xl)",
-                marginTop: "var(--space-4)",
+                marginBottom: "var(--space-4)",
               }}
             >
               Contact Bhavya Foundation
             </h1>
+            <p className="editorial-label">Get in Touch</p>
             <p
               className="editorial-lead"
               style={{
@@ -66,7 +66,7 @@ export default function ContactPage() {
                   border: "1px solid var(--color-border-primary)",
                 }}
               >
-                <h3
+                <h2
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "var(--text-xl)",
@@ -75,7 +75,7 @@ export default function ContactPage() {
                   }}
                 >
                   General Inquiries
-                </h3>
+                </h2>
                 <p
                   style={{
                     color: "var(--color-text-secondary)",
@@ -107,7 +107,7 @@ export default function ContactPage() {
                   border: "1px solid var(--color-border-primary)",
                 }}
               >
-                <h3
+                <h2
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "var(--text-xl)",
@@ -116,7 +116,7 @@ export default function ContactPage() {
                   }}
                 >
                   Partnerships & Collaboration
-                </h3>
+                </h2>
                 <p
                   style={{
                     color: "var(--color-text-secondary)",
@@ -148,7 +148,7 @@ export default function ContactPage() {
                   border: "1px solid var(--color-border-primary)",
                 }}
               >
-                <h3
+                <h2
                   style={{
                     fontFamily: "var(--font-display)",
                     fontSize: "var(--text-xl)",
@@ -157,7 +157,7 @@ export default function ContactPage() {
                   }}
                 >
                   Media & Press
-                </h3>
+                </h2>
                 <p
                   style={{
                     color: "var(--color-text-secondary)",

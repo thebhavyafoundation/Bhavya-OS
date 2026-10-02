@@ -34,39 +34,41 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       {/* ====== HERO ====== */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="editorial-label"
+      <section className="scene">
+        <div className="max-w-6xl mx-auto px-6">
+          <div
+            className="scene-grid-asymmetric"
+            style={{ alignItems: "flex-end" }}
           >
-            About Us
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="editorial-heading"
-            style={{
-              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
-              marginTop: "var(--space-4)",
-              marginBottom: "var(--space-6)",
-            }}
-          >
-            About Bhavya Foundation
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="editorial-lead"
-            style={{ maxWidth: "640px", margin: "0 auto" }}
-          >
-            A multi-decade mission to build one of the world&apos;s most trusted
-            public institutions. Not another platform. A lasting institution.
-          </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="editorial-heading"
+              style={{
+                fontSize: "clamp(2.5rem, 5vw, 6rem)",
+                letterSpacing: "-0.03em",
+                margin: 0,
+              }}
+            >
+              About Bhavya Foundation
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <p className="editorial-label">About Us</p>
+              <p
+                className="editorial-lead"
+                style={{ marginTop: "var(--space-4)", maxWidth: "640px" }}
+              >
+                A multi-decade mission to build one of the world&apos;s most
+                trusted public institutions. Not another platform. A lasting
+                institution.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -164,18 +166,14 @@ export default function AboutPage() {
                       color: "var(--color-accent-gold)",
                       lineHeight: 1,
                       marginBottom: "var(--space-1)",
+                      fontVariantNumeric: "tabular-nums",
                     }}
                   >
                     4
                   </div>
                   <div
-                    style={{
-                      fontSize: "var(--text-xs)",
-                      color: "rgba(247, 244, 236, 0.8)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      fontWeight: 500,
-                    }}
+                    className="editorial-label"
+                    style={{ color: "rgba(247, 244, 236, 0.8)" }}
                   >
                     Missions. One Purpose.
                   </div>
@@ -256,15 +254,12 @@ export default function AboutPage() {
                 restoration work, our open curriculum, our heritage
                 documentation — all of it compounds.
               </p>
-              <p
-                style={{
-                  color: "var(--color-text-secondary)",
-                  lineHeight: 1.7,
-                }}
-              >
-                This is not a startup. This is an institution — built to last,
-                built to lead, and built for generations to come.
-              </p>
+              <blockquote className="quote-block">
+                <p>
+                  This is not a startup. This is an institution — built to last,
+                  built to lead, and built for generations to come.
+                </p>
+              </blockquote>
             </motion.div>
           </div>
         </div>

@@ -27,7 +27,12 @@ let fileStore: Record<string, RateLimitEntry> = {};
 function loadFileStore(): void {
   if (isServerless()) return;
   try {
-    const filePath = join(process.cwd(), "bhavya-ai-lab", "data", "rate-limits.json");
+    const filePath = join(
+      process.cwd(),
+      "bhavya-ai-lab",
+      "data",
+      "rate-limits.json",
+    );
     if (existsSync(filePath)) {
       fileStore = JSON.parse(readFileSync(filePath, "utf-8"));
     }
@@ -41,7 +46,10 @@ function saveFileStore(): void {
   try {
     const dir = join(process.cwd(), "bhavya-ai-lab", "data");
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    writeFileSync(join(dir, "rate-limits.json"), JSON.stringify(fileStore, null, 2));
+    writeFileSync(
+      join(dir, "rate-limits.json"),
+      JSON.stringify(fileStore, null, 2),
+    );
   } catch {
     // Silent fail — rate limiting still works via memory
   }
@@ -121,4 +129,5 @@ export const RateLimits = {
   login: { maxRequests: 5, windowMs: 15 * 60 * 1000 },
   api: { maxRequests: 60, windowMs: 60 * 1000 },
   progress: { maxRequests: 30, windowMs: 60 * 1000 },
+  galleryUpload: { maxRequests: 10, windowMs: 60 * 60 * 1000 },
 } as const;
