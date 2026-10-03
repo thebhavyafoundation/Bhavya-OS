@@ -17,6 +17,7 @@ const SKIP_NAMES = new Set([
   "bar", "packages/bar",
   "out", "videos", "evolution",
   "__test_io_*__",
+  ".playwright-mcp",
 ]);
 const HUSKY_INTERNAL = join(".husky", "_");
 

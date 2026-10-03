@@ -20,6 +20,16 @@ export function getLessons(moduleId: string): Lesson[] {
   return lessons.sort((a, b) => a.id.localeCompare(b.id));
 }
 
+export function getLessonsForModule(moduleId: string): Lesson[] {
+  return getLessons(moduleId);
+}
+
+export function getAllLessons(): Lesson[] {
+  return Array.from(LESSON_REGISTRY.values()).sort((a, b) =>
+    a.id.localeCompare(b.id),
+  );
+}
+
 export function getLesson(
   moduleId: string,
   lessonId: string,
