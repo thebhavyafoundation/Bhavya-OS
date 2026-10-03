@@ -16,7 +16,7 @@ describe("claims registry", () => {
   });
   it("isApprovedNumber allows registry values and structural curriculum counts", () => {
     expect(isApprovedNumber(claimValue("curriculum-modules"))).toBe(true);
-    expect(isApprovedNumber("74 modules")).toBe(true);
+    expect(isApprovedNumber("86 modules")).toBe(true);
     expect(isApprovedNumber("10,000+ students")).toBe(false);
     expect(isApprovedNumber("8+ years")).toBe(false);
   });

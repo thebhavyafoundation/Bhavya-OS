@@ -22,9 +22,10 @@ export const CLAIMS: readonly Claim[] = [
   {
     id: "curriculum-modules",
     claim: "Curriculum modules",
-    value: "74 modules",
+    value: "86 modules",
     state: "verified",
-    source: "docs/master-curriculum/MODULE_CATALOG.md + getTotalModules()",
+    source:
+      "docs/master-curriculum/MODULE_CATALOG.md (74) + src/data/curriculum/junior.ts (12); computed via getTotalModules()",
     checked: "2026-09-26",
   },
   {
