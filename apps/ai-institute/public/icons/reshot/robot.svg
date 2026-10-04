@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en-AU" prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reshot retiring: What’s next for designers?</title>
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+
+    <script type="text/javascript" src="https://elements.envato.com/learn/client-id"></script><script
+    id="Cookiebot"
+    src="https://consent.cookiebot.com/uc.js"
+    type="text/javascript"
+    async
+     data-cbid="03e82c4e-d285-4fa2-9e90-0b557d5786fc" data-georegions="{&#039;region&#039;:&#039;US&#039;,&#039;cbid&#039;:&#039;d9683f70-895f-4427-97dc-f1087cddf9d8&#039;}"></script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl+"";f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',"GTM-MV3K9H2");</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script type="text/plain" data-cookieconsent="marketing">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl+"";f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',"GTM-NCHR33");</script>
+<!-- End Google Tag Manager -->
+<script>
+[
+    'CookiebotOnConsentReady',
+    'CookiebotOnLoad',
+    'CookiebotOnAccept',
+    'CookiebotOnDecline',
+    'CookiebotOnDialogInit',
+    'CookiebotOnDialogDisplay',
+    'CookiebotOnTagsExecuted'
+].forEach(function (eventName) {
+    window.addEventListener(eventName, function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "track_event",
+            event_name: eventName,
+            event_attributes: {
+                event_type: "system",
+                custom_timestamp: Date.now(),
+                context: "cookie banner"
+            },
+        });
+    });
+});
+
+window.addEventListener("click", function (event) {
+    let button;
+    if (event.target.tagName.toUpperCase() === "BUTTON") {
+        button = event.target;
+    } else if (event.target.parentElement?.tagName.toUpperCase() === "BUTTON") {
+        button = event.target.parentElement;
+    } else {
+        return;
+    }
+
+    if ([
+        'CybotCookiebotDialogBodyLevelButtonCustomize',
+        'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll',
+        'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection',
+        'CybotCookiebotDialogBodyButtonDecline'
+    ].includes(button.getAttribute('id'))) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "track_event",
+            event_name: "internal_click",
+            event_attributes: {
+                event_type: "user",
+                custom_timestamp: Date.now(),
+                context: "cookie banner",
+                element_id: button.getAttribute('id'),
+                text_content: button.textContent
+            },
+        });
+        window.dataLayer.push({event_attributes: null});
+    }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer.push({
+        app_name: 'elements blog',
+        app_env: "production",
+        page_type: 'blog',
+        ga_param: new URLSearchParams(location.search).get('_ga') ?? undefined,
+        page_location: window.location.href,
+        page_title: document.title,
+        page_referrer: document.referrer,
+        article_id: 94758,
+        article_name: "Why we're retiring Reshot and what's next for Envato's core creative platform",
+        article_author: "julia",
+        date_published: "2026-01-20T17:49:02+11:00",
+        date_updated: "2026-05-19T17:18:17+10:00",
+        category_path_json: "[[\"news\",\"product-updates\"]]",
+        user_attributes: {envato_client_id: window.ENVATO_CLIENT_ID},
+    });
+
+    window.dataLayer.push({
+        event: 'analytics_ready',
+        event_attributes: {
+            custom_timestamp: Date.now(),
+            event_type: 'user',
+        }
+    });
+});
+</script>
+
+<!-- Search Engine Optimization by Rank Math PRO - https://rankmath.com/ -->
+<meta name="description" content="Reshot retiring: Envato shutters free icons and illustrations platform. Discover why, and explore how Envato and GraphicsGen can power your next creative project."/>
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<link rel="canonical" href="https://elements.envato.com/learn/reshot-retiring" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Reshot retiring: What’s next for designers?" />
+<meta property="og:description" content="Reshot retiring: Envato shutters free icons and illustrations platform. Discover why, and explore how Envato and GraphicsGen can power your next creative project." />
+<meta property="og:url" content="https://elements.envato.com/learn/reshot-retiring" />
+<meta property="og:site_name" content="Envato" />
+<meta property="article:section" content="Envato News" />
+<meta property="og:updated_time" content="2026-05-19T17:18:17+10:00" />
+<meta property="og:image" content="https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-1024x576.png" />
+<meta property="og:image:secure_url" content="https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-1024x576.png" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="576" />
+<meta property="og:image:alt" content="Reshot retiring" />
+<meta property="og:image:type" content="image/png" />
+<meta property="article:published_time" content="2026-01-20T17:49:02+11:00" />
+<meta property="article:modified_time" content="2026-05-19T17:18:17+10:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Reshot retiring: What’s next for designers?" />
+<meta name="twitter:description" content="Reshot retiring: Envato shutters free icons and illustrations platform. Discover why, and explore how Envato and GraphicsGen can power your next creative project." />
+<meta name="twitter:creator" content="@juliakfernandez" />
+<meta name="twitter:image" content="https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-1024x576.png" />
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="Julia Fernandez" />
+<meta name="twitter:label2" content="Time to read" />
+<meta name="twitter:data2" content="2 minutes" />
+<script type="application/ld+json" class="rank-math-schema-pro">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://elements.envato.com/learn/#organization","name":"Envato Elements Blog","url":"https://elements.envato.com/learn","logo":{"@type":"ImageObject","@id":"https://elements.envato.com/learn/#logo","url":"https://elements.envato.com/learn/wp-content/uploads/2025/12/EnvatoLogo-blacktext.svg","contentUrl":"https://elements.envato.com/learn/wp-content/uploads/2025/12/EnvatoLogo-blacktext.svg","caption":"Envato","inLanguage":"en-AU","width":"0","height":"0"},"description":"From design and video to marketing and web design, elevate your creative skills with our tutorials, trends, expert interviews, and guides."},{"@type":"WebSite","@id":"https://elements.envato.com/learn/#website","url":"https://elements.envato.com/learn","name":"Envato","alternateName":"Envato Elements Blog","publisher":{"@id":"https://elements.envato.com/learn/#organization"},"inLanguage":"en-AU"},{"@type":"ImageObject","@id":"https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png","url":"https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png","width":"2560","height":"1440","caption":"Reshot retiring","inLanguage":"en-AU"},{"@type":"WebPage","@id":"https://elements.envato.com/learn/reshot-retiring#webpage","url":"https://elements.envato.com/learn/reshot-retiring","name":"Reshot retiring: What\u2019s next for designers?","datePublished":"2026-01-20T17:49:02+11:00","dateModified":"2026-05-19T17:18:17+10:00","isPartOf":{"@id":"https://elements.envato.com/learn/#website"},"primaryImageOfPage":{"@id":"https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png"},"inLanguage":"en-AU"},{"@type":"Person","@id":"https://elements.envato.com/learn/author/julia","name":"Julia Fernandez","description":"Julia is Senior Content Marketing Manager at Envato. Originally a journalist for Bauer Media Group and Time Out, she moved into content strategy in 2014 and has since worked with a range of B2C and B2B brands to create content marketing programs. While not a designer by trade, she's heavily invested in design trends, as well as the influence of fashion, film and popular culture on our visual landscape. Within her team at Envato, Julia oversees the creation of video, social media content, blogs, landing pages and more. She loves the role because it offers constant opportunities to learn something new, whether it's about content consumption habits or new social media features. Outside of work she spends her time looking after her puppy Marty, reading essays and new fiction, and listening to podcasts on everything from movies to music.","url":"https://elements.envato.com/learn/author/julia","image":{"@type":"ImageObject","@id":"https://secure.gravatar.com/avatar/2bfede84a2e0b6b39ee4f628315c4209d22649a1216c9b14e8226315bb1385ab?s=96&amp;d=mm&amp;r=g","url":"https://secure.gravatar.com/avatar/2bfede84a2e0b6b39ee4f628315c4209d22649a1216c9b14e8226315bb1385ab?s=96&amp;d=mm&amp;r=g","caption":"Julia Fernandez","inLanguage":"en-AU"},"sameAs":["https://twitter.com/juliakfernandez"],"worksFor":{"@id":"https://elements.envato.com/learn/#organization"}},{"@type":"Article","headline":"Reshot retiring: What\u2019s next for designers?","keywords":"reshot retiring","datePublished":"2026-01-20T17:49:02+11:00","dateModified":"2026-05-19T17:18:17+10:00","articleSection":"Envato News, Product Updates","author":{"@id":"https://elements.envato.com/learn/author/julia","name":"Julia Fernandez"},"publisher":{"@id":"https://elements.envato.com/learn/#organization"},"description":"Reshot retiring: Envato shutters free icons and illustrations platform. Discover why, and explore how Envato and GraphicsGen can power your next creative project.","name":"Reshot retiring: What\u2019s next for designers?","@id":"https://elements.envato.com/learn/reshot-retiring#richSnippet","isPartOf":{"@id":"https://elements.envato.com/learn/reshot-retiring#webpage"},"image":{"@id":"https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png"},"inLanguage":"en-AU","mainEntityOfPage":{"@id":"https://elements.envato.com/learn/reshot-retiring#webpage"}}]}</script>
+<!-- /Rank Math WordPress SEO plugin -->
+
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel='stylesheet' id='sbi-tokens-local-css' href='https://elements.envato.com/learn/wp-content/plugins/instagram-feed-pro/assets/tokens/sb-tokens-local.css?ver=6.14.0' media='all' />
+<link rel='stylesheet' id='sbi_styles-css' href='https://elements.envato.com/learn/wp-content/plugins/instagram-feed-pro/css/sbi-styles.min.css?ver=6.14.0' media='all' />
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-color]){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://elements.envato.com/learn/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://elements.envato.com/learn/wp-includes/blocks/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://elements.envato.com/learn/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<style id="wp-block-embed-inline-css">
+.wp-block-embed.alignleft,.wp-block-embed.alignright,.wp-block[data-align=left]>[data-type="core/embed"],.wp-block[data-align=right]>[data-type="core/embed"]{max-width:360px;width:100%}.wp-block-embed.alignleft .wp-block-embed__wrapper,.wp-block-embed.alignright .wp-block-embed__wrapper,.wp-block[data-align=left]>[data-type="core/embed"] .wp-block-embed__wrapper,.wp-block[data-align=right]>[data-type="core/embed"] .wp-block-embed__wrapper{min-width:280px}.wp-block-cover .wp-block-embed{min-height:240px;min-width:320px}.wp-block-group.is-layout-flex .wp-block-embed{flex:1 1 0%;min-width:0}.wp-block-embed{overflow-wrap:break-word}.wp-block-embed :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-embed iframe{max-width:100%}.wp-block-embed__wrapper{position:relative}.wp-embed-responsive .wp-has-aspect-ratio .wp-block-embed__wrapper:before{content:"";display:block;padding-top:50%}.wp-embed-responsive .wp-has-aspect-ratio iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.wp-embed-responsive .wp-embed-aspect-21-9 .wp-block-embed__wrapper:before{padding-top:42.85%}.wp-embed-responsive .wp-embed-aspect-18-9 .wp-block-embed__wrapper:before{padding-top:50%}.wp-embed-responsive .wp-embed-aspect-16-9 .wp-block-embed__wrapper:before{padding-top:56.25%}.wp-embed-responsive .wp-embed-aspect-4-3 .wp-block-embed__wrapper:before{padding-top:75%}.wp-embed-responsive .wp-embed-aspect-1-1 .wp-block-embed__wrapper:before{padding-top:100%}.wp-embed-responsive .wp-embed-aspect-9-16 .wp-block-embed__wrapper:before{padding-top:177.77%}.wp-embed-responsive .wp-embed-aspect-1-2 .wp-block-embed__wrapper:before{padding-top:200%}
+/*# sourceURL=https://elements.envato.com/learn/wp-includes/blocks/embed/style.min.css */
+</style>
+
+
+<link rel='stylesheet' id='block-content-global-css' href='https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/css/block-content-global.css?ver=1786515622' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #191919;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--grey: #707070;--wp--preset--color--site: #87e64b;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--polysanstrial-neutral: Polysanstrial Neutral, Arial, sans-serif;--wp--preset--font-family--polysanstrial-median: Polysanstrial Median, Arial, sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 30px;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--spacing--25: 25px;--wp--preset--spacing--45: 45px;--wp--preset--spacing--65: 65px;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}p{--wp--preset--font-size--micro: 12px;--wp--preset--font-size--small: 14px;--wp--preset--font-size--large: 16px;--wp--preset--font-size--xlarge: 18px;}.wp-block-heading{--wp--preset--font-size--h-5: 18px;--wp--preset--font-size--h-4: 24px;--wp--preset--font-size--h-3: 30px;--wp--preset--font-size--h-2: 36px;--wp--preset--font-size--h-1: 48px;}:root { --wp--style--global--content-size: 1126px;--wp--style--global--wide-size: 1376px; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{color: var(--wp--preset--color--black);font-family: var(--wp--preset--font-family--polysanstrial-neutral);font-size: 16px;font-weight: normal;line-height: 1.5;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.theme-json-styles a:where(:not(.wp-element-button))){text-decoration: none;}:root :where(.theme-json-styles h1, .theme-json-styles .h1){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: clamp(36px, 4vw, 48px);font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles h2, .theme-json-styles .h2){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: clamp(36px, 4vw, 36px);font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles h3, .theme-json-styles .h3){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: clamp(24px, 4vw, 30px);font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles h4, .theme-json-styles .h4){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: clamp(18px, 4vw, 24px);font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles h5, .theme-json-styles .h5){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: 18px;font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles h6, .theme-json-styles .h6){font-family: var(--wp--preset--font-family--polysanstrial-median);font-size: 18px;font-weight: 600;line-height: 1;margin: 0 0 15px;}:root :where(.theme-json-styles .wp-element-button, .theme-json-styles .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-grey-color{color: var(--wp--preset--color--grey) !important;}.has-site-color{color: var(--wp--preset--color--site) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-grey-background-color{background-color: var(--wp--preset--color--grey) !important;}.has-site-background-color{background-color: var(--wp--preset--color--site) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-grey-border-color{border-color: var(--wp--preset--color--grey) !important;}.has-site-border-color{border-color: var(--wp--preset--color--site) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-polysanstrial-neutral-font-family{font-family: var(--wp--preset--font-family--polysanstrial-neutral) !important;}.has-polysanstrial-median-font-family{font-family: var(--wp--preset--font-family--polysanstrial-median) !important;}p.has-micro-font-size{font-size: var(--wp--preset--font-size--micro) !important;}p.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}p.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}p.has-xlarge-font-size{font-size: var(--wp--preset--font-size--xlarge) !important;}.wp-block-heading.has-h-5-font-size{font-size: var(--wp--preset--font-size--h-5) !important;}.wp-block-heading.has-h-4-font-size{font-size: var(--wp--preset--font-size--h-4) !important;}.wp-block-heading.has-h-3-font-size{font-size: var(--wp--preset--font-size--h-3) !important;}.wp-block-heading.has-h-2-font-size{font-size: var(--wp--preset--font-size--h-2) !important;}.wp-block-heading.has-h-1-font-size{font-size: var(--wp--preset--font-size--h-1) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link rel='stylesheet' id='frontend-css' href='https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/css/frontend.css?ver=1769561010' media='all' />
+<link rel='stylesheet' id='sbi_quickscroll-css' href='https://elements.envato.com/learn/wp-content/plugins/instagram-feed-pro/css/sbi-quickscroll.css?ver=6.14.0' media='all' />
+<script id="jquery-core-js" src="https://elements.envato.com/learn/wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+<script id="jquery-migrate-js" src="https://elements.envato.com/learn/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"></script>
+<script data-wp-strategy="defer" defer id="stop-user-enumeration-js" src="https://elements.envato.com/learn/wp-content/plugins/stop-user-enumeration/frontend/js/frontend.js?ver=1.7.8"></script>
+<link rel="https://api.w.org/" href="https://elements.envato.com/learn/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://elements.envato.com/learn/wp-json/wp/v2/posts/94758" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://elements.envato.com/learn/xmlrpc.php?rsd" />
+<link rel='shortlink' href='https://elements.envato.com/learn/?p=94758' />
+<link rel="icon" href="https://elements.envato.com/learn/wp-content/uploads/2025/10/cropped-fav-icon-round-32x32.jpg" sizes="32x32" />
+<link rel="icon" href="https://elements.envato.com/learn/wp-content/uploads/2025/10/cropped-fav-icon-round-192x192.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://elements.envato.com/learn/wp-content/uploads/2025/10/cropped-fav-icon-round-180x180.jpg" />
+<meta name="msapplication-TileImage" content="https://elements.envato.com/learn/wp-content/uploads/2025/10/cropped-fav-icon-round-270x270.jpg" />
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-94758 single-format-standard wp-theme-envatoelementsblog">
+    
+    
+    <div class="shell">
+        <header class="header full-width">
+            <div class="shell__container">
+                <nav class="universal-menu">
+                    <div class="universal-menu__left">
+                        <div class="universal-menu__logo">
+                           <a href="https://elements.envato.com/"> <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/EnvatoLogo.svg" alt="Envato Logo"></a>
+                        </div>
+
+                        <ul id="menu-universal-menu" class="universal-menu__list universal-menu__list--left"><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/ai/">Gen AI</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/video-templates">Video Templates</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/stock-video">Stock Video</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/royalty-free-music">Royalty-Free Music</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/graphics">Graphics</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/graphic-templates">Design Templates</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/photos">Photos</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/3d">3D</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/fonts">Fonts</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/web-templates">Web</a></li><li class="universal-menu__item--more has-dropdown menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="#">More</a><ul class="universal-menu__dropdown"></ul></li></ul>                    </div>
+
+                    <ul id="menu-universal-menu-right" class="universal-menu__list universal-menu__list--right"><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/license-terms">License</a></li><li class=" menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/pricing">Pricing</a></li><li class="menu-item-type-custom menu-item-object-custom universal-menu__item"><a href="https://elements.envato.com/pricing" class="btn">Get unlimited downloads</a></li></ul>
+                    <div class="universal-menu__hamburger"><span></span></div>
+                </nav>
+
+                                    
+<div class="header-alert" style="background: #87e64b;">
+    <p class="header-alert__text" style="color: #191919;">
+        Envato: Get every type of asset for any type of project, and access to AI tools. <a href="https://elements.envato.com/pricing" target="_blank" style="color: #191919;">Start now</a>    </p>
+
+    <a href="#" class="header-alert__close js-header-alert-close" aria-label="Close notification bar"></a>
+</div>                
+                                    <nav class="secondary-menu">
+    <div class="secondary-menu__logo">
+        <a href="https://elements.envato.com/learn/">Envato blog</a>
+    </div>
+
+    <ul id="menu-blog-menu" class="secondary-menu__list"><li class="secondary-menu__item secondary-menu__item--has-dropdown"><a href="https://elements.envato.com/learn/c/ai-creativity">AI &amp; Creativity</a><ul class="secondary-menu__dropdown"><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Topics</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link secondary-menu__dropdown-link--archive"><a href="https://elements.envato.com/learn/c/ai-creativity">All AI &amp; Creativity</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-tools">AI Tools</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-design">AI Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-marketing">AI Marketing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-music">AI Music</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-video">AI Video</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-voiceover">AI Voiceover</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/prompting">Prompting</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Tools</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-graphics-generation">AI Graphics Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-image-editing">AI Image Editing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-image-generation">AI Image Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-mockup-generation">AI Mockup Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-music-generation">AI Music Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-sound-generation">AI Sound Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-video-generation">AI Video Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-voice-generation">AI Voice Generation</a></li></ul></li><li class="secondary-menu__cta-button-placeholder"></li></ul></li><li class="secondary-menu__item secondary-menu__item--has-dropdown"><a href="https://elements.envato.com/learn/c/design">Design</a><ul class="secondary-menu__dropdown"><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Topics</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link secondary-menu__dropdown-link--archive"><a href="https://elements.envato.com/learn/c/design">All Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/3d">3D Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-design">AI Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/branding">Branding</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/color">Color</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/trends">Design Trends</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/icons">Icons</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/illustration">Illustration</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/logos">Logo Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/marketing">Marketing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/mobile">Mobile</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/packaging">Packaging</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/portfolio">Portfolio</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/print">Print</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/typography">Typography</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/web-design">Web Design</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Software &amp; Tools</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/affinity">Affinity</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/blender">Blender</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/canva">Canva</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/figma">Figma</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-graphics-generation">AI Graphics Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/illustrator">Illustrator</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-image-editing">AI Image Editing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-image-generation">AI Image Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/indesign">InDesign</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-mockup-generation">AI Mockup Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/photoshop">Photoshop</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/procreate">Procreate</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/sketch">Sketch</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/spline">Spline</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/wordpress">WordPress</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Resources</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/add-ons">Add-Ons</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/business-cards">Business Cards</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/templates">Design Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/fonts">Fonts</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/email-templates">Email Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/mockup-templates">Mockup Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/photos">Photos</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/presentation-templates">Presentation Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/social-media-templates">Social Media Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/design/website-templates">Website Templates</a></li></ul></li><li class="secondary-menu__cta-button-placeholder"></li></ul></li><li class="secondary-menu__item secondary-menu__item--has-dropdown"><a href="https://elements.envato.com/learn/c/video-filmmaking">Video &amp; Filmmaking</a><ul class="secondary-menu__dropdown"><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Topics</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link secondary-menu__dropdown-link--archive"><a href="https://elements.envato.com/learn/c/video-filmmaking">All Video &amp; Filmmaking</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/3d-motion">3D Motion</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-video">AI Video</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/editing">Editing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/instagram">Instagram</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/motion-design">Motion Design</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/post-production">Post Production</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/social-media">Social Media</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/tiktok">TikTok</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/video-marketing">Video Marketing</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/video-trends">Video Trends</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/youtube">YouTube</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Software &amp; Tools</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/after-effects">After Effects</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/animation">Animation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/blender">Blender</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/cavalry">Cavalry</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/davinci-resolve">DaVinci Resolve</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/premiere-pro">Premiere Pro</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-video-generation">AI Video Generation</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Resources</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/luts">LUTs</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/motion-graphics">Motion Graphics</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/stock-footage">Stock Footage</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/social-media-templates">Social Media Templates</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/vfx">VFX</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/video-filmmaking/video-templates">Video Templates</a></li></ul></li><li class="secondary-menu__cta-button-placeholder"></li></ul></li><li class="secondary-menu__item secondary-menu__item--has-dropdown"><a href="https://elements.envato.com/learn/c/music-audio">Music &amp; Audio</a><ul class="secondary-menu__dropdown"><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Topics</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link secondary-menu__dropdown-link--archive"><a href="https://elements.envato.com/learn/c/music-audio">All Music &amp; Audio</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-music">AI Music</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-voiceover">AI Voiceover</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/trends-music-audio">Music Trends</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/podcasting">Podcasting</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/production">Production</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/recording">Recording</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/sound-design">Sound Design</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Tools</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-music-generation">AI Music Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-sound-generation">AI Sound Generation</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/ai-creativity/ai-voice-generation">AI Voice Generation</a></li></ul></li><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Resources</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/sound-effects">Sound Effects</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/music-audio/stock-music">Stock Music</a></li></ul></li><li class="secondary-menu__cta-button-placeholder"></li></ul></li><li class="secondary-menu__item secondary-menu__item--has-dropdown"><a href="https://elements.envato.com/learn/c/news">Envato News</a><ul class="secondary-menu__dropdown"><li class="secondary-menu__dropdown-group"><span class="secondary-menu__group-title">Topics</span><ul class="secondary-menu__dropdown-list"><li class="secondary-menu__dropdown-link secondary-menu__dropdown-link--archive"><a href="https://elements.envato.com/learn/c/news">All Envato News</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/news/people-culture">People &amp; Culture</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/news/envato-getting-started">Envato Getting Started</a></li><li class="secondary-menu__dropdown-link"><a href="https://elements.envato.com/learn/c/news/product-updates">Product Updates</a></li></ul></li><li class="secondary-menu__cta-button-placeholder"></li></ul></li></ul>
+    <form class="secondary-menu__search" role="search" method="get" action="https://elements.envato.com/learn/">
+        <span class="secondary-menu__search__icon">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="5.5" stroke="#000" stroke-width="1.5"/><line x1="11.5" y1="11.5" x2="14" y2="14" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <input type="search" placeholder="Search articles, tutorials and resources" name="s" value="" />
+    </form>            
+</nav>                          </header>
+
+        <div class="shell__container">
+
+    <div class="content-primary article-page theme-json-styles">
+
+            <nav class="breadcrumbs" aria-label="Breadcrumb navigation">
+        <ul><li><a href="https://elements.envato.com/learn">Home</a></li><li><a href="https://elements.envato.com/learn/c/news">Envato News</a></li><li><a href="https://elements.envato.com/learn/c/news/product-updates">Product Updates</a></li><li class="is-current">Why we&#8217;re retiring Reshot and what&#8217;s next for Envato&#8217;s core creative platform</li></ul>    </nav>
+
+                                
+            <!-- Article Header (full width) -->
+            <div class="article-header">
+                <h1 class="article-header__title">Why we&#8217;re retiring Reshot and what&#8217;s next for Envato&#8217;s core creative platform</h1>
+                
+                <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/julia">Julia Fernandez</a></span>
+    <span class="meta__read-time"><span class="eta">3min</span> read</span>
+    <time class="meta__date" datetime="2026-01-20">
+        20 Jan 2026    </time>
+</div>
+            </div>
+
+            <!-- Article Content + Sidebar Layout -->
+            <div class="article-layout">
+                <main class="article-layout__content">
+                                            <div class="article-layout__featured-image">
+                            <img width="2560" height="1440" src="https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png" class="attachment-full size-full wp-post-image" alt="Reshot retiring" decoding="async" fetchpriority="high" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-scaled.png 2560w, https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/01/envato-labs-image-edit-7-2048x1152.png 2048w" sizes="(max-width: 2560px) 100vw, 2560px" />                        </div>
+                    
+                    <!-- Sidebar (shows on tablet) -->
+                    <aside class="article-layout__sidebar article-layout__sidebar--tablet">
+                        <div class="article-layout__sidebar-content">
+                            <div class="sidebar__section sidebar__section--toc">
+        <div class="h3">Table of contents:</div>
+    <ul></ul>
+  
+  <div class="sidebar__section sidebar__section--share">
+    <div class="h3">Share this article:</div>
+        <div class="social-icons social-icons--horizontal">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--facebook">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/facebook-social-icon.svg" alt="Share on Facebook">
+      </a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring&text=Why+we%26%238217%3Bre+retiring+Reshot+and+what%26%238217%3Bs+next+for+Envato%26%238217%3Bs+core+creative+platform" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--twitter">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/twitter-social-icon.svg" alt="Share on Twitter">
+      </a>
+      <a href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring&description=Why+we%26%238217%3Bre+retiring+Reshot+and+what%26%238217%3Bs+next+for+Envato%26%238217%3Bs+core+creative+platform" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--pinterest">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/pinterest-social-icon.svg" alt="Share on Pinterest">
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--linkedin">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/linkedin-social-icon.svg" alt="Share on LinkedIn">
+      </a>
+      <button class="social-icons__item social-icons__item--email js-clipboard" data-clipboard-text="https://elements.envato.com/learn/reshot-retiring" title="Copy link to clipboard">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/clipboard-social-icon.svg" alt="Copy link to clipboard">
+      </button>
+    </div>
+  </div>  
+</div>
+                                        <div class="cta-widget">
+                <a href="https://elements.envato.com/pricing" target="_blank">
+                    <img src="https://elements.envato.com/learn/wp-content/uploads/2026/02/envato-labs-image-edit-29-1.png" alt="" />
+                </a>
+            </div>
+            
+        <section class="content-grid content-grid--sidebar content-grid--recommendations">
+            <div class="content-grid__header">
+                <div class="content-grid__header-inner">
+                    <div class="h3">Recommended articles for you:</div>
+                </div>
+            </div>
+            <div class="content-grid__items">
+                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/whats-new-at-envato" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="What&#8217;s new at Envato?" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/news" class="content-grid__category content-grid__category--news">Envato News</a>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/whats-new-at-envato" class="dt-disable-in-preview">What&#8217;s new at Envato?</a>
+    </h3>
+    <p class="content-grid__summary">
+        Every update, tool, and feature drop in one place. New AI models, smoother workflows, and creator-requested features — all logged here. Bookmark this page and check back often.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">36min</span> read</span>
+    <time class="meta__date" datetime="2026-09-12">
+        12 Sep 2026    </time>
+</div>
+</article>                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/seedance-2" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Bigger scenes, better physics: Seedance 2.0 just landed on Envato" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/ai-creativity/ai-video-generation" class="content-grid__category content-grid__category--ai-video-generation">AI Video Generation</a>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/seedance-2" class="dt-disable-in-preview">Bigger scenes, better physics: Seedance 2.0 just landed on Envato</a>
+    </h3>
+    <p class="content-grid__summary">
+        Seedance 2.0 — ByteDance&#039;s AI video model known for its physical realism and scene complexity — is now part of the model lineup behind Envato&#039;s AI video generator. Here&#039;s what changes.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/dallegretti">David Allegretti</a></span>
+    <span class="meta__read-time"><span class="eta">4min</span> read</span>
+    <time class="meta__date" datetime="2026-04-15">
+        15 Apr 2026    </time>
+</div>
+</article>                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Is Envato worth it? A complete review for creatives (2026)" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/news/envato-getting-started" class="content-grid__category content-grid__category--envato-getting-started">Envato Getting Started</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">Is Envato worth it? A complete review for creatives (2026)</a>
+    </h3>
+    <p class="content-grid__summary">
+        Is Envato worth it in 2026? This review covers pricing, AI credits, unlimited stock downloads, lifetime licensing, and how each plan fits different creative workflows.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">12min</span> read</span>
+    <time class="meta__date" datetime="2026-09-21">
+        21 Sep 2026    </time>
+</div>
+</article>                                            </div>
+        </section>
+
+                                </div>
+                    </aside>
+
+                    <!-- Article Content -->
+                    <section class="article-layout__content-main">
+                        
+<h2 class="wp-block-heading"><strong>What was Reshot?</strong></h2>
+
+
+
+<p class="wp-block-paragraph">If you ever downloaded a free <a href="https://elements.envato.com/graphics/icons">icon</a> or <a href="https://elements.envato.com/graphics/illustrations">illustration</a> from <strong>Reshot</strong>, you know what made it special. It was a community-driven library of free, high-quality SVGs, PNGs, and vector assets, made <em>by designers, for designers</em>. Reshot offered simple licensing, instant downloads, and no strings attached. It became a go-to for creatives who needed reliable design assets for side projects, startups, and client work alike.</p>
+
+
+
+<p class="wp-block-paragraph">However, as <a href="https://elements.envato.com/learn/">Envato’s creative ecosystem</a> has evolved, we’ve been thinking carefully about where to focus our energy for the greatest impact.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Why is Reshot</strong> retiring?</h2>
+
+
+
+<p class="wp-block-paragraph">Reshot was born from the same mission that drives Envato: to help creatives thrive. That mission hasn’t changed, but the tools we’re building have grown more powerful and connected.</p>
+
+
+
+<p class="wp-block-paragraph">As we continue to invest in our <a href="https://elements.envato.com/es/pricing"><strong>Envato subscription</strong></a>, we’re bringing everything under one creative roof. This enables us to focus on enhancing our core Envato products, delivering smarter <a data-wpil="url" data-wpil-url-old="aHR0cHM6Ly9sYWJzLmVudmF0by5jb20v" href="https://elements.envato.com/ai">AI tools</a>, seamless integrations, and a more diverse range of high-quality creative assets for our global community of creative professionals.</p>
+
+
+
+<p class="wp-block-paragraph">As we bid farewell to Reshot, we’re making way for something even better: an all-in-one <a href="https://elements.envato.com/learn/envato-vs-creative-market"  data-wpil-monitor-id="94">creative platform where design</a>, motion, music, AI, and inspiration come together.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>What Reshot users can do next</strong></h2>
+
+
+
+<p class="wp-block-paragraph">If you’ve relied on Reshot for icons, illustrations, and vectors, there are two easy ways to keep creating without interruption:</p>
+
+
+
+<h3 class="wp-block-heading"><strong>1. Subscribe to Envato</strong></h3>
+
+
+
+<p class="wp-block-paragraph">With an <strong>Envato</strong> subscription, you’ll gain unlimited access to <strong>millions of professional assets</strong>, including icons, vector illustrations, templates, mockups, fonts, and photos,&nbsp; all with simple commercial licensing.</p>
+
+
+
+<p class="wp-block-paragraph">Unlike Reshot, every asset on Envato is part of a unified ecosystem. That means everything you download can be used across your projects with clear, worry-free licensing. Plus, new assets are added daily from the same talented designer community that helped build Reshot.</p>
+
+
+
+<section class="elements-product-embed elements-product-embed--carousel elements-product-embed--has-info elements-product-embed--count-3">
+            <div class="elements-product-embed__info">
+                            <div class="elements-product-embed__info-left">
+                    <h3 class="elements-product-embed__title">
+                                                    Unlimited <span><a href="https://elements.envato.com/all-items"><strong>Creative Assets</strong></a></span>. Access to <a href="https://elements.envato.com/ai/"><strong>AI Tools</strong></a>.
+                                            </h3>
+                </div>
+            
+                            <div class="elements-product-embed__info-right">
+                    <a
+                        class="elements-product-embed__more"
+                        href="https://elements.envato.com/"
+                        target="_blank"
+                    >View all</a>
+                </div>
+                    </div>
+    
+    <div class="slider">
+    <div class="slider__items">
+                    <div class="slider__item">
+                <div class="elements-product-embed__item">
+    <a
+        class="elements-product-embed__link"
+        href="https://elements.envato.com/clouds-in-sky-fluffy-cloudy-cartoon-background-HDRHVV9"
+        target="_blank"
+    ></a>
+
+    <div class="elements-product-embed__meta">
+        <h3 class="elements-product-embed__meta-item elements-product-embed__meta-item--title">
+            Clouds in sky, fluffy cloudy cartoon background        </h3>
+                    <span class="elements-product-embed__meta-item elements-product-embed__meta-item--author">
+                Sensvector            </span>
+            </div>
+
+            <img decoding="async"
+            class="elements-product-embed__image"
+            src="https://elements-resized.envatousercontent.com/elements-cover-images/15064156-93cc-4e05-993d-2582d8116e3a?w=900&#038;cf_fit=scale-down&#038;q=85&#038;format=auto&#038;s=e2de744c903d77cc19e3a3bb1ffbe9c407c3e8027760c1e8c2f8c2e9df111aec"
+            alt="Clouds in sky, fluffy cloudy cartoon background"
+        >
+    </div>
+            </div>
+                    <div class="slider__item">
+                <div class="elements-product-embed__item">
+    <a
+        class="elements-product-embed__link"
+        href="https://elements.envato.com/pastel-rocker-girl-XE5GL5B"
+        target="_blank"
+    ></a>
+
+    <div class="elements-product-embed__meta">
+        <h3 class="elements-product-embed__meta-item elements-product-embed__meta-item--title">
+            Pastel Rocker Girl        </h3>
+                    <span class="elements-product-embed__meta-item elements-product-embed__meta-item--author">
+                EnvatoGraphics            </span>
+            </div>
+
+            <img decoding="async"
+            class="elements-product-embed__image"
+            src="https://elements-resized.envatousercontent.com/elements-cover-images/90d4876c-fef5-4372-b382-272c52ace431?w=900&#038;cf_fit=scale-down&#038;q=85&#038;format=auto&#038;s=7f9caefc52457ae6b32e4564e1ba4324117c2f7aa1d3f4a56ce8f469d0e39f51"
+            alt="Pastel Rocker Girl"
+        >
+    </div>
+            </div>
+                    <div class="slider__item">
+                <div class="elements-product-embed__item">
+    <a
+        class="elements-product-embed__link"
+        href="https://elements.envato.com/y2k-streetwear-element-collection-N7CFNFC"
+        target="_blank"
+    ></a>
+
+    <div class="elements-product-embed__meta">
+        <h3 class="elements-product-embed__meta-item elements-product-embed__meta-item--title">
+            Y2K Streetwear Element Collection        </h3>
+                    <span class="elements-product-embed__meta-item elements-product-embed__meta-item--author">
+                AnnoraStudio            </span>
+            </div>
+
+            <img decoding="async"
+            class="elements-product-embed__image"
+            src="https://elements-resized.envatousercontent.com/elements-cover-images/3e21a741-b50a-419a-b3d5-54c0eaec8199?w=900&#038;cf_fit=scale-down&#038;q=85&#038;format=auto&#038;s=09613471990df5645fd7828d361775d4c8f1bca6030cdb0db58d91047c913542"
+            alt="Y2K Streetwear Element Collection"
+        >
+    </div>
+            </div>
+        
+            </div>
+
+    <div class="slider__controls">
+        <a class="slider__control slider__control--prev" href="#">
+            &lt;
+        </a>
+        <a class="slider__control slider__control--next" href="#">
+            &gt;
+        </a>
+    </div>
+</div>
+</section>
+
+
+
+<h3 class="wp-block-heading"><strong>2. Generate new icons and illustrations with Envato GraphicsGen</strong></h3>
+
+
+
+<p class="wp-block-paragraph">If you loved Reshot’s accessibility, you’ll love <a data-wpil="url" data-wpil-url-old="aHR0cHM6Ly9sYWJzLmVudmF0by5jb20vZ3JhcGhpY3MtZ2Vu" href="https://elements.envato.com/ai/ai-graphics-generator"><strong>Envato GraphicsGen</strong></a>, our <a href="https://elements.envato.com/learn/what-is-graphics-gen">AI-powered design generator</a>. GraphicsGen lets you create icons, patterns, and illustrations instantly using text prompts and style references.</p>
+
+
+
+<figure class="wp-block-embed is-type-rich is-provider-instagram wp-block-embed-instagram"><div class="wp-block-embed__wrapper">
+<div class="sbi-embed-wrap"><blockquote class="instagram-media sbi-embed" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DRNtyuhDuWZ/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:500px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DRNtyuhDuWZ/?utm_source=ig_embed&amp;utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">View this post on Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a></div></blockquote><script async src="//platform.instagram.com/en_US/embeds.js"></script></div>
+</div></figure>
+
+
+
+<p class="wp-block-paragraph">You can start from scratch or use it to expand your existing brand assets. It’s perfect for quick concepting, moodboarding, and ideation, without spending hours searching through libraries.</p>
+
+
+
+<h2 class="wp-block-heading"><strong>Why this change benefits creatives</strong></h2>
+
+
+
+<p class="wp-block-paragraph">This shift isn’t about removing access; it’s about <strong>expanding creative possibilities</strong>.</p>
+
+
+
+<p class="wp-block-paragraph">By centralizing our resources, Envato can:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Improve quality and consistency:</strong> Assets are curated, updated, and supported directly through Envato Elements.</li>
+
+
+
+<li><strong>Offer AI-powered tools:</strong> GraphicsGen enables creators to generate unique visuals tailored to their projects.</li>
+
+
+
+<li><strong>Support the designer community:</strong> Contributors earn more visibility and revenue through Envato’s core platforms.</li>
+
+
+
+<li><strong>Simplify licensing:</strong> One clear, commercial license across millions of assets.</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Ultimately, this move allows us to dedicate more time, investment, and innovation to helping creatives do what they do best — creating.</p>
+
+
+
+<section class="section-primary toggle-section narrow-width">
+  <h3 class="toggle-section__title">Reshot FAQs</h3>
+  <div class="toggle-section__items">
+                      <div class="toggle-section__item">
+              <button class="toggle-section__heading dt-disable-in-preview" aria-expanded="false">
+                When will Reshot officially shut down?<span class="toggle-section__icon"></span>
+              </button>
+              <div class="toggle-section__content" hidden>
+                <p>Reshot will be retired in January 2026. After that date, assets will no longer be available for download.</p>
+              </div>
+            </div>
+                      <div class="toggle-section__item">
+              <button class="toggle-section__heading dt-disable-in-preview" aria-expanded="false">
+                Can I still use assets I’ve already downloaded?<span class="toggle-section__icon"></span>
+              </button>
+              <div class="toggle-section__content" hidden>
+                <p>Yes. Anything you downloaded before the shutdown remains covered under Reshot’s original free commercial license.</p>
+              </div>
+            </div>
+                      <div class="toggle-section__item">
+              <button class="toggle-section__heading dt-disable-in-preview" aria-expanded="false">
+                What’s the difference between Reshot and Envato?<span class="toggle-section__icon"></span>
+              </button>
+              <div class="toggle-section__content" hidden>
+                <p>Reshot focused on free icons and illustrations. Envato offers AI tools, along with a broader, unlimited library of creative assets (fonts, templates, photos, videos, music, and more), all with simple commercial licensing.</p>
+              </div>
+            </div>
+                </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type":"Question","name":"When will Reshot officially shut down?","acceptedAnswer":{"@type":"Answer","text":"Reshot will be retired in January 2026. After that date, assets will no longer be available for download."}},{"@type":"Question","name":"Can I still use assets I\u2019ve already downloaded?","acceptedAnswer":{"@type":"Answer","text":"Yes. Anything you downloaded before the shutdown remains covered under Reshot\u2019s original free commercial license."}},{"@type":"Question","name":"What\u2019s the difference between Reshot and Envato?","acceptedAnswer":{"@type":"Answer","text":"Reshot focused on free icons and illustrations. Envato offers AI tools, along with a broader, unlimited library of creative assets (fonts, templates, photos, videos, music, and more), all with simple commercial licensing."}}]}
+</script>
+
+                                            </section>
+                </main>
+
+                <!-- Sidebar (shows on desktop) -->
+                <aside class="article-layout__sidebar article-layout__sidebar--desktop">
+                    <div class="article-layout__sidebar-content">
+                        <div class="sidebar__section sidebar__section--toc">
+        <div class="h3">Table of contents:</div>
+    <ul></ul>
+  
+  <div class="sidebar__section sidebar__section--share">
+    <div class="h3">Share this article:</div>
+        <div class="social-icons social-icons--horizontal">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--facebook">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/facebook-social-icon.svg" alt="Share on Facebook">
+      </a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring&text=Why+we%26%238217%3Bre+retiring+Reshot+and+what%26%238217%3Bs+next+for+Envato%26%238217%3Bs+core+creative+platform" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--twitter">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/twitter-social-icon.svg" alt="Share on Twitter">
+      </a>
+      <a href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring&description=Why+we%26%238217%3Bre+retiring+Reshot+and+what%26%238217%3Bs+next+for+Envato%26%238217%3Bs+core+creative+platform" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--pinterest">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/pinterest-social-icon.svg" alt="Share on Pinterest">
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Felements.envato.com%2Flearn%2Freshot-retiring" target="_blank" rel="noopener noreferrer" class="social-icons__item social-icons__item--linkedin">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/linkedin-social-icon.svg" alt="Share on LinkedIn">
+      </a>
+      <button class="social-icons__item social-icons__item--email js-clipboard" data-clipboard-text="https://elements.envato.com/learn/reshot-retiring" title="Copy link to clipboard">
+        <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/clipboard-social-icon.svg" alt="Copy link to clipboard">
+      </button>
+    </div>
+  </div>  
+</div>
+                                    <div class="cta-widget">
+                <a href="https://elements.envato.com/pricing" target="_blank">
+                    <img src="https://elements.envato.com/learn/wp-content/uploads/2026/02/envato-labs-image-edit-29-1.png" alt="" />
+                </a>
+            </div>
+            
+        <section class="content-grid content-grid--sidebar content-grid--recommendations">
+            <div class="content-grid__header">
+                <div class="content-grid__header-inner">
+                    <div class="h3">Recommended articles for you:</div>
+                </div>
+            </div>
+            <div class="content-grid__items">
+                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/whats-new-at-envato" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="What&#8217;s new at Envato?" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2025/07/2400x1350_JOB-948_WhatsNewAtEnvato_BlogHeader-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/news" class="content-grid__category content-grid__category--news">Envato News</a>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/whats-new-at-envato" class="dt-disable-in-preview">What&#8217;s new at Envato?</a>
+    </h3>
+    <p class="content-grid__summary">
+        Every update, tool, and feature drop in one place. New AI models, smoother workflows, and creator-requested features — all logged here. Bookmark this page and check back often.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">36min</span> read</span>
+    <time class="meta__date" datetime="2026-09-12">
+        12 Sep 2026    </time>
+</div>
+</article>                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/seedance-2" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Bigger scenes, better physics: Seedance 2.0 just landed on Envato" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2700_Seedance2-0_LaunchVideo_ElementsBlogHeader-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/ai-creativity/ai-video-generation" class="content-grid__category content-grid__category--ai-video-generation">AI Video Generation</a>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/seedance-2" class="dt-disable-in-preview">Bigger scenes, better physics: Seedance 2.0 just landed on Envato</a>
+    </h3>
+    <p class="content-grid__summary">
+        Seedance 2.0 — ByteDance&#039;s AI video model known for its physical realism and scene complexity — is now part of the model lineup behind Envato&#039;s AI video generator. Here&#039;s what changes.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/dallegretti">David Allegretti</a></span>
+    <span class="meta__read-time"><span class="eta">4min</span> read</span>
+    <time class="meta__date" datetime="2026-04-15">
+        15 Apr 2026    </time>
+</div>
+</article>                                    <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Is Envato worth it? A complete review for creatives (2026)" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/news/envato-getting-started" class="content-grid__category content-grid__category--envato-getting-started">Envato Getting Started</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">Is Envato worth it? A complete review for creatives (2026)</a>
+    </h3>
+    <p class="content-grid__summary">
+        Is Envato worth it in 2026? This review covers pricing, AI credits, unlimited stock downloads, lifetime licensing, and how each plan fits different creative workflows.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">12min</span> read</span>
+    <time class="meta__date" datetime="2026-09-21">
+        21 Sep 2026    </time>
+</div>
+</article>                                            </div>
+        </section>
+
+                            </div>
+                </aside>
+            </div>
+
+                    </div>
+
+        
+<section class="section-primary content-grid content-grid--default">
+    <div class="content-grid__header">
+        <div class="content-grid__header-inner">
+            <h2 class="content-grid__title">
+                Related Posts            </h2>
+
+                          
+        </div>
+    </div>
+
+    <div class="content-grid__items">
+        <article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/flux-3-image-envato-ai" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="FLUX 3 Image is now available on Envato’s AI image tool" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/10/FLUX-3-Image-is-now-available-on-Envatos-AI-image-tool-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/ai-creativity" class="content-grid__category content-grid__category--ai-creativity">AI &amp; Creativity</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/flux-3-image-envato-ai" class="dt-disable-in-preview">FLUX 3 Image is now available on Envato’s AI image tool</a>
+    </h3>
+    <p class="content-grid__summary">
+        FLUX 3 Image is now on Envato. Use multiple references, make precise edits, keep control.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">11min</span> read</span>
+    <time class="meta__date" datetime="2026-10-02">
+        2 Oct 2026    </time>
+</div>
+</article><article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/ai-music-generator-guide" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Complete guide to Envato&#8217;s AI music generator for royalty-free music" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_MusicGenerator_Blog-1-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/ai-creativity/ai-music-generation" class="content-grid__category content-grid__category--ai-music-generation">AI Music Generation</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/ai-music-generator-guide" class="dt-disable-in-preview">Complete guide to Envato&#8217;s AI music generator for royalty-free music</a>
+    </h3>
+    <p class="content-grid__summary">
+        Turn a simple prompt into royalty-free sound with Envato&#039;s AI Music generator for fast, flexible creative workflows.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/jonathanlam">Jonathan Lam</a></span>
+    <span class="meta__read-time"><span class="eta">17min</span> read</span>
+    <time class="meta__date" datetime="2026-09-23">
+        23 Sep 2026    </time>
+</div>
+</article><article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Is Envato worth it? A complete review for creatives (2026)" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/06/Is-Envato-worth-it-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/news/envato-getting-started" class="content-grid__category content-grid__category--envato-getting-started">Envato Getting Started</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/is-envato-worth-it" class="dt-disable-in-preview">Is Envato worth it? A complete review for creatives (2026)</a>
+    </h3>
+    <p class="content-grid__summary">
+        Is Envato worth it in 2026? This review covers pricing, AI credits, unlimited stock downloads, lifetime licensing, and how each plan fits different creative workflows.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/marketing-team">Envato</a></span>
+    <span class="meta__read-time"><span class="eta">12min</span> read</span>
+    <time class="meta__date" datetime="2026-09-21">
+        21 Sep 2026    </time>
+</div>
+</article><article class="content-grid__item">
+    <div class="content-grid__image">
+        <a href="https://elements.envato.com/learn/ai-video-generator-guide" class="dt-disable-in-preview">
+                            <img width="768" height="432" src="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-768x432.png" class="attachment-medium_large size-medium_large wp-post-image" alt="Envato&#8217;s complete AI video generator guide" decoding="async" srcset="https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-768x432.png 768w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-300x169.png 300w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-1024x576.png 1024w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-1536x864.png 1536w, https://elements.envato.com/learn/wp-content/uploads/2026/04/2400x1350_JOB-2755_AIToolGuides_VideoGenerator_Blog-2048x1152.png 2048w" sizes="(max-width: 768px) 100vw, 768px" />                    </a>
+    </div>
+    <div class="content-grid__meta">
+        <a href="https://elements.envato.com/learn/c/ai-creativity/ai-video-generation" class="content-grid__category content-grid__category--ai-video-generation">AI Video Generation</a><span class="content-grid__tag">New</span>    </div>
+    <h3 class="content-grid__headline">
+        <a href="https://elements.envato.com/learn/ai-video-generator-guide" class="dt-disable-in-preview">Envato&#8217;s complete AI video generator guide</a>
+    </h3>
+    <p class="content-grid__summary">
+        Explore Envato&#039;s AI video generator that creates cinematic clips from prompts, images, and audio directly in your browser.    </p>
+    <div class="meta">
+    <span class="meta__author"><a href="https://elements.envato.com/learn/author/charlesyeager">Charles Yeager</a></span>
+    <span class="meta__read-time"><span class="eta">16min</span> read</span>
+    <time class="meta__date" datetime="2026-09-19">
+        19 Sep 2026    </time>
+</div>
+</article>            </div>
+</section>
+        
+  <section class="section-primary banner banner--image-only">
+        
+          <a href="https://elements.envato.com/pricing" target="" class="banner__link">
+        
+          <img 
+        src="https://elements.envato.com/learn/wp-content/uploads/2026/05/1376x366_JOB-2954_NewChannelBanners_BlogBannerDesktop_V4.1.png" 
+        alt="Envato banner with logo, text &#039;Your all-in-one creative asset toolkit&#039;, &#039;Start now&#039; button, and a collage of diverse digital assets including a soda can, abstract patterns, a person in sunglasses, and a silhouette against an orange circle."
+        class="banner__image-desktop"
+      />
+        
+          <img 
+        src="https://elements.envato.com/learn/wp-content/uploads/2026/05/342x580_JOB-2954_NewChannelBanners_BlogBannerMobile_V4.1.png" 
+        alt="An advertisement for Envato, featuring the text &#039;Your all-in-one creative asset toolkit&#039; and a &#039;Start now&#039; button, above a collage of diverse creative assets including abstract art, a person in sunglasses, and a silhouette against an orange sphere."
+        class="banner__image-mobile"
+      />
+        
+          </a>
+      </section>
+
+
+    </div>
+
+
+<footer class="footer full-width theme-json-styles">
+    <div class="shell__container">
+        <div class="footer__top">
+            <div class="footer__brand-socials">
+                <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/EnvatoLogo-alt.svg" alt="Envato Logo" class="footer__logo">
+
+                
+<div>
+    <ul class="footer__socials">
+                    <li>
+                <a href="https://www.youtube.com/user/Envato">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/youtube-icon.svg" alt="Youtube">
+                </a>
+            </li>
+        
+                    <li>
+                <a href="https://www.tiktok.com/@envato">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/tiktok-icon.svg" alt="TikTok">
+                </a>
+            </li>
+                
+                
+                
+                    <li>
+                <a href="https://www.facebook.com/envato/">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/facebook-icon.svg" alt="Facebook">
+                </a>
+            </li>
+        
+                    <li>
+                <a href="https://x.com/envato">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/twitter-icon.svg" alt="Twitter X">
+                </a>
+            </li>
+                
+                    <li>
+                <a href="https://www.pinterest.com.au/envato">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/pinterest-icon.svg" alt="Pinterest">
+                </a>
+            </li>
+                
+
+                    <li>
+                <a href="https://www.instagram.com/envato/">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/instagram-icon.svg" alt="Instagram">
+                </a>
+            </li>
+        
+                    <li>
+                <a href="https://www.reddit.com/r/envato/">
+                    <img src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/images/reddit-icon.svg" alt="Reddit">
+                </a>
+            </li>
+                
+
+    </ul><!-- /.list-socials -->
+</div><!-- /.footer__socials -->            </div>
+                <nav class="footer__nav">
+                <div class="footer__column">
+                                        <h4 class="footer__heading">AI Tools</h4>
+                            <ul class="footer__list"><li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27"><a href="https://elements.envato.com/ai/">AI Hub</a></li>
+<li id="menu-item-28" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="https://elements.envato.com/ai/ai-image-generator/">AI Image Generator</a></li>
+<li id="menu-item-97388" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-97388"><a href="https://elements.envato.com/ai/ai-image-editor/">AI Image Editor</a></li>
+<li id="menu-item-29" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29"><a href="https://elements.envato.com/ai/ai-video-generator/">AI Video Generator</a></li>
+<li id="menu-item-30" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-30"><a href="https://elements.envato.com/ai/ai-music-generator/">AI Music Generator</a></li>
+<li id="menu-item-31" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-31"><a href="https://elements.envato.com/ai/ai-voice-generator/">AI Voice Generator</a></li>
+<li id="menu-item-32" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-32"><a href="https://elements.envato.com/ai/ai-graphics-generator/">AI Graphics Generator</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-33"><a href="https://elements.envato.com/ai/ai-tools-faqs/">AI FAQ</a></li>
+</ul>                                                    <h4 class="footer__heading">Stock Catalog</h4>
+                            <ul class="footer__list"><li id="menu-item-104369" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104369"><a href="https://elements.envato.com/video-templates">Video Templates</a></li>
+<li id="menu-item-104370" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104370"><a href="https://elements.envato.com/stock-video">Stock Video</a></li>
+<li id="menu-item-104371" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104371"><a href="https://elements.envato.com/audio/royalty-free-music">Royalty-Free Music</a></li>
+<li id="menu-item-104372" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104372"><a href="https://elements.envato.com/graphics">Graphics</a></li>
+<li id="menu-item-104373" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104373"><a href="https://elements.envato.com/photos">Stock Photos</a></li>
+<li id="menu-item-104374" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104374"><a href="https://elements.envato.com/fonts">Fonts</a></li>
+<li id="menu-item-104375" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104375"><a href="https://elements.envato.com/popular-searches">Popular Searches</a></li>
+<li id="menu-item-104376" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104376"><a href="https://elements.envato.com/free-files">Free Files</a></li>
+</ul>                                </div>
+                    <div class="footer__column">
+                                        <h4 class="footer__heading">Plans</h4>
+                            <ul class="footer__list"><li id="menu-item-104377" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104377"><a href="https://elements.envato.com/pricing">Individual &#038; Enterprise</a></li>
+<li id="menu-item-104378" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104378"><a href="https://elements.envato.com/pricing/teams">Teams</a></li>
+<li id="menu-item-104379" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104379"><a href="https://elements.envato.com/pricing/students">Students</a></li>
+</ul>                                                    <h4 class="footer__heading">Resources</h4>
+                            <ul class="footer__list"><li id="menu-item-46" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46"><a href="https://help.elements.envato.com/hc/en-us/">Help Center</a></li>
+<li id="menu-item-45" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-45"><a href="https://elements.envato.com/learn/c/video-filmmaking">Video</a></li>
+<li id="menu-item-44" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-44"><a href="https://elements.envato.com/learn/c/design">Design</a></li>
+<li id="menu-item-47" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a href="https://elements.envato.com/learn/c/music-audio">Music</a></li>
+<li id="menu-item-48" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48"><a href="https://elements.envato.com/learn/c/design/marketing">Marketing</a></li>
+<li id="menu-item-104380" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104380"><a href="https://elements.envato.com/learn/c/design/web-design">Web Design</a></li>
+<li id="menu-item-104381" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104381"><a href="https://elements.envato.com/learn/c/ai-creativity">AI Tutorials</a></li>
+<li id="menu-item-104382" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104382"><a href="https://elements.envato.com/learn/c/ai-creativity/prompting">Prompt Guides</a></li>
+<li id="menu-item-104383" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-104383"><a href="https://elements.envato.com/learn/">Blog</a></li>
+</ul>                                                    <h4 class="footer__heading">Company</h4>
+                            <ul class="footer__list"><li id="menu-item-51" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-51"><a href="https://www.envato.com/about/">About</a></li>
+<li id="menu-item-52" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-52"><a href="https://www.envato.com/products/">Products</a></li>
+<li id="menu-item-53" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-53"><a href="https://jobs.lever.co/envato-2/">Careers</a></li>
+<li id="menu-item-104384" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104384"><a href="https://elements.envato.com/learn/c/news">News</a></li>
+<li id="menu-item-104385" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104385"><a href="https://elements.envato.com/llm-info">Hey AI, learn about Envato</a></li>
+</ul>                                </div>
+                    <div class="footer__column">
+                                        <h4 class="footer__heading">Authors</h4>
+                            <ul class="footer__list"><li id="menu-item-56" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-56"><a target="_blank" href="https://www.envato.com/lp/become-an-elements-author/">Become an Author</a></li>
+<li id="menu-item-57" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-57"><a target="_blank" href="https://elements-contributors.envato.com/">Author Sign In</a></li>
+<li id="menu-item-58" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-58"><a target="_blank" href="https://help.author.envato.com/hc/en-us?utm_source=author.envato.com&#038;utm_medium=referral&#038;utm_campaign=author_hub">Author Help Center</a></li>
+</ul>                                                    <h4 class="footer__heading">Partnerships</h4>
+                            <ul class="footer__list"><li id="menu-item-50" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-50"><a href="https://www.envato.com/affiliates/">Become an Affiliate</a></li>
+<li id="menu-item-49" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-49"><a href="https://elements.envato.com/lp/creative-partner-collective/">Creative Partner Collective</a></li>
+</ul>                                                    <h4 class="footer__heading">Legal</h4>
+                            <ul class="footer__list"><li id="menu-item-36" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-36"><a href="https://help.elements.envato.com/hc/en-us/articles/360000628966-License-Terms">License Terms</a></li>
+<li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a href="https://help.elements.envato.com/hc/en-us/articles/360000629006-User-Terms">Terms &#038; Conditions</a></li>
+<li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a rel="privacy-policy" href="https://www.envato.com/privacy/">Privacy Policy</a></li>
+<li id="menu-item-39" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a href="https://help.elements.envato.com/hc/en-us/articles/31035788503321-Acceptable-Use-Policy">Acceptable Use Policy</a></li>
+<li id="menu-item-41" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-41"><a href="https://help.elements.envato.com/hc/en-us/articles/360000621743-Fair-Use-Policy">Fair Use Policy</a></li>
+<li id="menu-item-42" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-42"><a href="https://www.envato.com/privacy/my-personal-information">Do not sell or share my personal information</a></li>
+<li id="menu-item-92949" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92949"><a target="_blank" href="https://www.envato.com/cookies/">Cookies</a></li>
+<li id="menu-item-92950" class="js-cookie-settings menu-item menu-item-type-custom menu-item-object-custom menu-item-92950"><a href="#">Cookie Settings</a></li>
+</ul>                                </div>
+                    <div class="footer__column">
+                    </div>
+                </nav>
+   
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-left">
+                <div class="footer__bottom-right">
+                    <ul id="menu-footer-primary-plans-1" class="footer__envato-links"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104377"><a href="https://elements.envato.com/pricing">Individual &#038; Enterprise</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104378"><a href="https://elements.envato.com/pricing/teams">Teams</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-104379"><a href="https://elements.envato.com/pricing/students">Students</a></li>
+</ul>
+                    <div class="footer__copyright">
+                        
+<p> &copy; 2026 Envato. Trademarks and brands are the property of their respective owners.</p>                    </div>
+                </div>
+            </div>           
+        </div>
+    </div>
+</footer>
+
+</div><!-- /.shell__container -->
+</div><!-- /.shell -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/learn/*"},{"not":{"href_matches":["/learn/wp-*.php","/learn/wp-admin/*","/learn/wp-content/uploads/*","/learn/wp-content/*","/learn/wp-content/plugins/*","/learn/wp-content/themes/envatoelementsblog/*","/learn/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<!-- Custom Feeds for Instagram JS -->
+<script type="text/javascript">
+var sbiajaxurl = "https://elements.envato.com/learn/wp-admin/admin-ajax.php";
+
+</script>
+<script id="wp-dom-ready-js" src="https://elements.envato.com/learn/wp-includes/js/dist/dom-ready.min.js?ver=a06281ae5cf5500e9317"></script>
+<script id="block-content-global-js" src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/js/block-content-global.js?ver=9c381729c647d1d79d89"></script>
+<script id="user-session-store-js-extra">
+var userSessionConfig = {"isAcknowledged":"true"};
+//# sourceURL=user-session-store-js-extra
+</script>
+<script id="user-session-store-js" src="https://elements.envato.com/learn/wp-content/plugins/atlas-search/includes/../public/js/user-session-store.js?ver=0.3.30"></script>
+<script id="analytics-js-extra">
+var wpeAitkAnalytics = {"currentPage":"0","documentID":"post:94758","nonce":"383a0d01c9","postsPerPage":"0","restUrl":"https://elements.envato.com/learn/wp-json/","searchResults":[],"title":"Why we\u2019re retiring Reshot and what\u2019s next for Envato\u2019s core creative platform"};
+//# sourceURL=analytics-js-extra
+</script>
+<script id="analytics-js" src="https://elements.envato.com/learn/wp-content/plugins/atlas-search/public/js/analytics.js?ver=0.3.30"></script>
+<script id="frontend-js-extra">
+var ajaxurl = "https://elements.envato.com/learn/wp-admin/admin-ajax.php";
+//# sourceURL=frontend-js-extra
+</script>
+<script id="frontend-js" src="https://elements.envato.com/learn/wp-content/themes/envatoelementsblog/build/js/frontend.js?ver=17e64bb90dea6ef4c2df"></script>
+<script id="frontend-js-after">
+track_post_view(94758);
+track_post_view(105995);
+track_post_view(96085);
+track_post_view(101619);
+track_post_view(96439);
+//# sourceURL=frontend-js-after
+</script>
+<script id="sbi_quickscroll-js-extra">
+var sbiQuickScroll = {"enabled":"1","debug":""};
+//# sourceURL=sbi_quickscroll-js-extra
+</script>
+<script id="sbi_quickscroll-js" src="https://elements.envato.com/learn/wp-content/plugins/instagram-feed-pro/js/sbi-quickscroll.js?ver=6.14.0"></script>
+
+<script>window.__CF$cv$params={r:'a45383416e848ae1',t:'MTc5MTEwOTg0Mg==',u:'01a1067745007693a4927c36cab196cd',ut:'PLwWQG3yCVmZdYy6Ev..OHO.1Fylgp4TiX7mTHRuU2g-1791109842-1.2.1.1-PI_VXBjImYgKzkChdhyLQbqFL_v0Eg5WBX0B84bAzyIvkqMaVQ39buultcWyLaviatjt6sBtHAMBR6PVlaAhXzCfrDinHf8JPK2FOTU5p9A',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script></body>
+</html>

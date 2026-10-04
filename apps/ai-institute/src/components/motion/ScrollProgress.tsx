@@ -1,44 +1,49 @@
 "use client";
 
-import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-interface ScrollProgressProps {
-  className?: string;
-  color?: string;
-  height?: number;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export function ScrollProgress({
-  className,
-  color = "var(--primary)",
-  height = 3,
-}: ScrollProgressProps) {
-  const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+export function ScrollProgress() {
+  const barRef = useRef<HTMLDivElement>(null);
 
-  if (prefersReducedMotion) {
-    return null;
-  }
+  useEffect(() => {
+    if (!barRef.current) return;
+
+    const tween = gsap.to(barRef.current, {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+      },
+    });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, []);
 
   return (
-    <motion.div
-      className={className}
+    <div
+      ref={barRef}
       style={{
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
-        height,
-        background: color,
-        transformOrigin: "0%",
-        scaleX,
+        height: "3px",
+        background: "linear-gradient(90deg, var(--color-accent-gold), var(--color-forest-500))",
+        transformOrigin: "left",
+        transform: "scaleX(0)",
         zIndex: 9999,
       }}
+      aria-hidden="true"
     />
   );
 }

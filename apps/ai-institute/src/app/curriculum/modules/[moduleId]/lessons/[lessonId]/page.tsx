@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlockRenderer } from "@/components/curriculum/BlockRenderer";
+import { VisualComponent } from "@/components/curriculum/VisualComponent";
+import { resolveAssetUrl } from "@/lib/assetUrls";
 import {
   getModuleById,
   getStandardsForModule,
@@ -68,6 +70,16 @@ export default async function LessonPage({ params }: LessonPageProps) {
         Lesson {lessonIndex + 1} of {lessons.length} · {BAND_AGES[module.band]}
       </p>
       <h1 className="ai-page-title">{lesson.title}</h1>
+
+      {module.recommendedAssetUrl && (
+        <div style={{ margin: "var(--space-8) 0" }}>
+          <VisualComponent
+            assetUrl={resolveAssetUrl(module.recommendedAssetUrl) || module.recommendedAssetUrl}
+            type={module.visualFormat === "3d" ? "3d" : "2d"}
+            alt={`Visual for ${module.title}`}
+          />
+        </div>
+      )}
 
       <div>
         {lesson.blocks.map((block, index) => (

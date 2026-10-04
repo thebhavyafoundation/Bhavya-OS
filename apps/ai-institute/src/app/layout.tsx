@@ -5,6 +5,10 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { LayoutShell } from "@/components/LayoutShell";
 import { MotionProvider } from "@/components/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { GsapProvider } from "@/components/motion/GsapProvider";
+import { PageTransition } from "@/components/motion/PageTransition";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { CustomCursor } from "@/components/motion/CustomCursor";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -60,10 +64,16 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
+        <CustomCursor />
+        <ScrollProgress />
         <AuthProvider>
           <SmoothScroll>
             <MotionProvider>
-              <LayoutShell>{children}</LayoutShell>
+              <GsapProvider>
+                <PageTransition>
+                  <LayoutShell>{children}</LayoutShell>
+                </PageTransition>
+              </GsapProvider>
             </MotionProvider>
           </SmoothScroll>
         </AuthProvider>

@@ -1,7 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { gsap } from "@/components/motion/GsapProvider";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { ParallaxHero } from "@/components/motion/ParallaxHero";
 
 const values = [
   {
@@ -31,170 +36,170 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const missionRef = useRef<HTMLElement>(null);
+  const storyRef = useRef<HTMLElement>(null);
+  const valuesRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLElement>(null);
+
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       {/* ====== HERO ====== */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="editorial-label"
-          >
-            About Us
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="editorial-heading"
-            style={{
-              fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
-              marginTop: "var(--space-4)",
-              marginBottom: "var(--space-6)",
-            }}
-          >
-            About Bhavya Foundation
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="editorial-lead"
-            style={{ maxWidth: "640px", margin: "0 auto" }}
-          >
-            A multi-decade mission to build one of the world&apos;s most trusted
-            public institutions. Not another platform. A lasting institution.
-          </motion.p>
-        </div>
-      </section>
+      <ParallaxHero
+        backgroundImage="/images/about-hero.webp"
+        overlayOpacity={0.75}
+        height="80vh"
+        speed={0.2}
+      >
+        <p className="editorial-label" style={{ color: "var(--color-accent-gold)" }}>
+          About Us
+        </p>
+        <h1
+          className="editorial-heading"
+          style={{
+            fontSize: "clamp(2.5rem, 5vw, 3.75rem)",
+            marginTop: "var(--space-4)",
+            marginBottom: "var(--space-6)",
+            color: "var(--color-text-inverse)",
+          }}
+        >
+          About Bhavya Foundation
+        </h1>
+        <p
+          className="editorial-lead"
+          style={{ maxWidth: "640px", margin: "0 auto", color: "var(--color-text-inverse)" }}
+        >
+          A multi-decade mission to build one of the world&apos;s most
+          trusted public institutions. Not another platform. A lasting
+          institution.
+        </p>
+      </ParallaxHero>
 
       {/* ====== MISSION ====== */}
-      <section className="py-20 px-6">
+      <section ref={missionRef} className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid md:grid-cols-2 gap-12 items-center"
-          >
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="editorial-label">Our Mission</p>
-              <h2
-                className="editorial-heading"
-                style={{
-                  fontSize: "var(--text-3xl)",
-                  marginTop: "var(--space-4)",
-                  marginBottom: "var(--space-6)",
-                }}
-              >
-                Restore Nature. Advance Knowledge. Preserve Heritage.
-              </h2>
-              <p
-                style={{
-                  color: "var(--color-text-secondary)",
-                  lineHeight: 1.7,
-                  marginBottom: "var(--space-4)",
-                }}
-              >
-                Our mission is to build an institution that restores ecosystems,
-                advances open knowledge, preserves cultural heritage, and
-                empowers communities — guided by a constitution that binds us to
-                long-term impact.
-              </p>
-              <p
-                style={{
-                  color: "var(--color-text-secondary)",
-                  lineHeight: 1.7,
-                }}
-              >
-                Through forest restoration, open education, heritage
-                documentation, and community programs, we work for decades — not
-                quarters — to create lasting institutional value.
-              </p>
+              <TextReveal>
+                <p className="editorial-label">Our Mission</p>
+                <h2
+                  className="editorial-heading"
+                  style={{
+                    fontSize: "var(--text-3xl)",
+                    marginTop: "var(--space-4)",
+                    marginBottom: "var(--space-6)",
+                  }}
+                >
+                  Restore Nature. Advance Knowledge. Preserve Heritage.
+                </h2>
+              </TextReveal>
+              <ScrollReveal direction="up" delay={0.1}>
+                <p
+                  style={{
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                    marginBottom: "var(--space-4)",
+                  }}
+                >
+                  Our mission is to build an institution that restores
+                  ecosystems, advances open knowledge, preserves cultural
+                  heritage, and empowers communities — guided by a constitution
+                  that binds us to long-term impact.
+                </p>
+              </ScrollReveal>
+              <ScrollReveal direction="up" delay={0.2}>
+                <p
+                  style={{
+                    color: "var(--color-text-secondary)",
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Through forest restoration, open education, heritage
+                  documentation, and community programs, we work for decades —
+                  not quarters — to create lasting institutional value.
+                </p>
+              </ScrollReveal>
             </div>
-            <div className="relative">
-              <div
-                style={{
-                  aspectRatio: "4/3",
-                  borderRadius: "var(--radius-2xl)",
-                  overflow: "hidden",
-                  border: "1px solid var(--color-border-primary)",
-                  background: "var(--color-brand-forest)",
-                  position: "relative",
-                }}
-              >
-                {/* ASSET REQUIRED: drop-in photo slot (see PHOTO.hero for the current hero photo) */}
+            <ScrollReveal direction="up" delay={0.15}>
+              <div className="relative">
                 <div
                   style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: `linear-gradient(
-                    145deg,
-                    var(--color-forest-900) 0%,
-                    var(--color-brand-forest) 55%,
-                    var(--color-forest-700) 100%
-                  )`,
-                  }}
-                  aria-hidden="true"
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to top, rgba(14, 56, 46, 0.6) 0%, transparent 50%)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "var(--space-6)",
-                    left: "var(--space-6)",
-                    right: "var(--space-6)",
+                    aspectRatio: "4/3",
+                    borderRadius: "var(--radius-2xl)",
+                    overflow: "hidden",
+                    border: "1px solid var(--color-border-primary)",
+                    background: "var(--color-brand-forest)",
+                    position: "relative",
+                    transformStyle: "preserve-3d",
                   }}
                 >
                   <div
                     style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "var(--text-5xl)",
-                      fontWeight: 400,
-                      color: "var(--color-accent-gold)",
-                      lineHeight: 1,
-                      marginBottom: "var(--space-1)",
+                      position: "absolute",
+                      inset: 0,
+                      background: `linear-gradient(
+                      145deg,
+                      var(--color-forest-900) 0%,
+                      var(--color-brand-forest) 55%,
+                      var(--color-forest-700) 100%
+                    )`,
                     }}
-                  >
-                    4
-                  </div>
+                    aria-hidden="true"
+                  />
                   <div
                     style={{
-                      fontSize: "var(--text-xs)",
-                      color: "rgba(247, 244, 236, 0.8)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      fontWeight: 500,
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(to top, rgba(14, 56, 46, 0.6) 0%, transparent 50%)",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "var(--space-6)",
+                      left: "var(--space-6)",
+                      right: "var(--space-6)",
                     }}
                   >
-                    Missions. One Purpose.
+                    <div
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--text-5xl)",
+                        fontWeight: 400,
+                        color: "var(--color-accent-gold)",
+                        lineHeight: 1,
+                        marginBottom: "var(--space-1)",
+                      }}
+                    >
+                      4
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "var(--text-xs)",
+                        color: "rgba(247, 244, 236, 0.8)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.1em",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Missions. One Purpose.
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
       {/* ====== STORY ====== */}
-      <section className="py-20 px-6 section-ivory">
+      <section
+        ref={storyRef}
+        className="py-20 px-6 section-ivory"
+      >
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <TextReveal>
             <p className="editorial-label">Our Story</p>
             <h2
               className="editorial-heading"
@@ -206,14 +211,9 @@ export default function AboutPage() {
             >
               The Founding Story
             </h2>
-          </motion.div>
+          </TextReveal>
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            <ScrollReveal direction="up" delay={0.1}>
               <p
                 style={{
                   color: "var(--color-text-secondary)",
@@ -233,17 +233,12 @@ export default function AboutPage() {
                 }}
               >
                 In 2026, the Bhavya Foundation set out to change that. We
-                envisioned an institution that would produce not just individual
-                projects, but lasting institutional value — guided by a
-                constitution that binds us to decades of impact.
+                envisioned an institution that would produce not just
+                individual projects, but lasting institutional value — guided
+                by a constitution that binds us to decades of impact.
               </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.2}>
               <p
                 style={{
                   color: "var(--color-text-secondary)",
@@ -265,99 +260,90 @@ export default function AboutPage() {
                 This is not a startup. This is an institution — built to last,
                 built to lead, and built for generations to come.
               </p>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ====== VALUES ====== */}
-      <section className="py-20 px-6">
+      <section ref={valuesRef} className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="editorial-label">Core Values</p>
-            <h2
-              className="editorial-heading"
-              style={{
-                fontSize: "var(--text-3xl)",
-                marginTop: "var(--space-4)",
-              }}
-            >
-              What We Stand For
-            </h2>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, i) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+          <TextReveal>
+            <div className="text-center mb-16">
+              <p className="editorial-label">Core Values</p>
+              <h2
+                className="editorial-heading"
                 style={{
-                  padding: "var(--space-6)",
-                  borderRadius: "var(--radius-lg)",
-                  border: "1px solid var(--color-border-primary)",
-                  background: "var(--color-surface)",
-                  transition: "all var(--duration-normal) var(--ease-out)",
+                  fontSize: "var(--text-3xl)",
+                  marginTop: "var(--space-4)",
                 }}
               >
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: "var(--radius-md)",
-                    background: "var(--color-surface-forest-light)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--color-accent-gold)",
-                    fontSize: "var(--text-xl)",
-                    marginBottom: "var(--space-4)",
-                  }}
-                >
-                  {value.icon}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--text-xl)",
-                    fontWeight: 400,
-                    color: "var(--color-text-primary)",
-                    marginBottom: "var(--space-3)",
-                  }}
-                >
-                  {value.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "var(--text-sm)",
-                    color: "var(--color-text-secondary)",
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {value.description}
-                </p>
-              </motion.div>
+                What We Stand For
+              </h2>
+            </div>
+          </TextReveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, i) => (
+              <ScrollReveal key={value.title} direction="up" delay={i * 0.1}>
+                <TiltCard intensity={8} className="h-full">
+                  <div
+                    style={{
+                      padding: "var(--space-6)",
+                      borderRadius: "var(--radius-lg)",
+                      border: "1px solid var(--color-border-primary)",
+                      background: "var(--color-surface)",
+                      height: "100%",
+                      transition: "all var(--duration-normal) var(--ease-out)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: "var(--radius-md)",
+                        background: "var(--color-surface-forest-light)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--color-accent-gold)",
+                        fontSize: "var(--text-xl)",
+                        marginBottom: "var(--space-4)",
+                      }}
+                    >
+                      {value.icon}
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--text-xl)",
+                        fontWeight: 400,
+                        color: "var(--color-text-primary)",
+                        marginBottom: "var(--space-3)",
+                      }}
+                    >
+                      {value.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "var(--text-sm)",
+                        color: "var(--color-text-secondary)",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {value.description}
+                    </p>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* ====== CTA ====== */}
-      <section className="py-24 px-6">
+      <section ref={ctaRef} className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <TextReveal>
             <h2
               className="editorial-heading"
               style={{
@@ -392,7 +378,7 @@ export default function AboutPage() {
                 Explore Missions
               </Link>
             </div>
-          </motion.div>
+          </TextReveal>
         </div>
       </section>
     </div>

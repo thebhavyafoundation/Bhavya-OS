@@ -17,6 +17,12 @@ export type AIBand = "junior-a" | "junior-b" | "core" | "advanced";
 export type AILevel =
   "JA" | "JB" | "L0" | "L1" | "L2" | "L3" | "L4" | "L5" | "L6" | "ADV";
 
+export type BloomVerb = "remember" | "understand" | "apply" | "analyze" | "evaluate" | "create";
+
+export type VisualType = "concept-diagram" | "process-diagram" | "data-viz" | "metaphor" | "spatial-model";
+
+export type VisualFormat = "3d" | "2d" | "animation" | "infographic";
+
 export interface AIModule {
   readonly id: string;
   readonly slug: string;
@@ -28,6 +34,11 @@ export interface AIModule {
   readonly standards: readonly string[];
   readonly prerequisites?: readonly string[];
   readonly estimatedHours: number;
+  readonly learningObjective: string;
+  readonly bloomVerb: BloomVerb;
+  readonly visualType: VisualType;
+  readonly visualFormat: VisualFormat;
+  readonly recommendedAssetUrl?: string;
 }
 
 export interface QuizQuestion {

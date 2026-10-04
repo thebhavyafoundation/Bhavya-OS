@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
+import { TextReveal } from "@/components/motion/TextReveal";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { referencePapers } from "@/data/reference-papers";
 
 export default function ResearchPage() {
@@ -24,50 +27,48 @@ export default function ResearchPage() {
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary">
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            AI Research Library
-          </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            Foundational research papers and publications that inform AI
-            education and industry practice.
-          </p>
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, var(--color-accent-gold) 0%, transparent 50%)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <TextReveal>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              AI Research Library
+            </h1>
+            <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+              Foundational research papers and publications that inform AI
+              education and industry practice.
+            </p>
+          </TextReveal>
         </div>
       </section>
 
-      {/* Stats */}
       <section className="px-6 pb-12">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-text-primary mb-1">
-              {papers.length}
-            </div>
-            <div className="text-sm text-text-tertiary">Reference Papers</div>
-          </div>
-          <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-text-primary mb-1">
-              {allTags.length}
-            </div>
-            <div className="text-sm text-text-tertiary">Topic Areas</div>
-          </div>
-          <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-text-primary mb-1">
-              {new Set(papers.flatMap((p) => p.authors)).size}
-            </div>
-            <div className="text-sm text-text-tertiary">Referenced Authors</div>
-          </div>
-          <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
-            <div className="text-3xl font-bold text-text-primary mb-1">
-              {new Set(papers.map((p) => p.year)).size}
-            </div>
-            <div className="text-sm text-text-tertiary">Years Covered</div>
-          </div>
+          {[
+            { value: papers.length, label: "Reference Papers" },
+            { value: allTags.length, label: "Topic Areas" },
+            { value: new Set(papers.flatMap((p) => p.authors)).size, label: "Referenced Authors" },
+            { value: new Set(papers.map((p) => p.year)).size, label: "Years Covered" },
+          ].map((stat, i) => (
+            <ScrollReveal key={stat.label} direction="up" delay={i * 0.1}>
+              <div className="bg-bg-secondary border border-border-primary rounded-xl p-4 text-center">
+                <div className="text-3xl font-bold text-text-primary mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-text-tertiary">{stat.label}</div>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
-      {/* Search & Filter */}
       <section className="px-6 pb-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row gap-4">
@@ -110,7 +111,6 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      {/* Papers List */}
       <section className="px-6 pb-20">
         <div className="max-w-6xl mx-auto">
           {filteredPapers.length === 0 ? (
@@ -123,66 +123,70 @@ export default function ResearchPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredPapers.map((paper) => (
-                <a
-                  key={paper.id}
-                  href={paper.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-focus transition-all group"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-forest-500 transition-colors">
-                        {paper.title}
-                      </h3>
-                      <p className="text-sm text-text-secondary mb-2">
-                        {paper.authors.join(", ")}
-                      </p>
-                      <p className="text-xs text-text-tertiary mb-3">
-                        {paper.year}
-                      </p>
-                      <p className="text-sm text-text-tertiary mb-4">
-                        {paper.abstract}
-                      </p>
-                      <div className="flex gap-2 flex-wrap">
-                        {paper.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs px-3 py-1 rounded-full bg-bg-tertiary text-text-secondary"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+              {filteredPapers.map((paper, i) => (
+                <ScrollReveal key={paper.id} direction="up" delay={(i % 4) * 0.05}>
+                  <TiltCard intensity={4} className="h-full">
+                    <a
+                      href={paper.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block bg-bg-secondary border border-border-primary rounded-xl p-6 hover:border-border-focus transition-all group h-full"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold mb-2 group-hover:text-forest-500 transition-colors">
+                            {paper.title}
+                          </h3>
+                          <p className="text-sm text-text-secondary mb-2">
+                            {paper.authors.join(", ")}
+                          </p>
+                          <p className="text-xs text-text-tertiary mb-3">
+                            {paper.year}
+                          </p>
+                          <p className="text-sm text-text-tertiary mb-4">
+                            {paper.abstract}
+                          </p>
+                          <div className="flex gap-2 flex-wrap">
+                            {paper.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-xs px-3 py-1 rounded-full bg-bg-tertiary text-text-secondary"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </a>
+                    </a>
+                  </TiltCard>
+                </ScrollReveal>
               ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA */}
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-r from-forest-700 to-forest-600 rounded-2xl p-12 border border-border-primary">
-            <h2 className="text-3xl font-bold mb-4">
-              Interested in Contributing?
-            </h2>
-            <p className="text-text-secondary mb-6 max-w-xl mx-auto">
-              We maintain this library as a reference for students and
-              researchers. If you know of foundational papers that should be
-              included, let us know.
-            </p>
-            <Link
-              href="/community"
-              className="inline-flex items-center gap-2 bg-accent-gold text-text-primary px-8 py-3 rounded-xl font-semibold hover:bg-accent-gold-hover transition-colors"
-            >
-              Join the Community
-            </Link>
-          </div>
+          <ScrollReveal direction="up">
+            <div className="bg-gradient-to-r from-forest-700 to-forest-600 rounded-2xl p-12 border border-border-primary">
+              <h2 className="text-3xl font-bold mb-4">
+                Interested in Contributing?
+              </h2>
+              <p className="text-text-secondary mb-6 max-w-xl mx-auto">
+                We maintain this library as a reference for students and
+                researchers. If you know of foundational papers that should be
+                included, let us know.
+              </p>
+              <Link
+                href="/community"
+                className="inline-flex items-center gap-2 bg-accent-gold text-text-primary px-8 py-3 rounded-xl font-semibold hover:bg-accent-gold-hover transition-colors"
+              >
+                Join the Community
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

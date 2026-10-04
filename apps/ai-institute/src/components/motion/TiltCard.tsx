@@ -8,6 +8,7 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
+import { prefersReducedMotion, SPRING_DEFAULT } from "@/lib/motion/apple-springs";
 
 interface TiltCardProps {
   children: ReactNode;
@@ -16,6 +17,12 @@ interface TiltCardProps {
   className?: string;
 }
 
+/**
+ * Tilt card with spring-based 3D rotation.
+ * - Uses Framer Motion's spring for interruptible, velocity-aware tilt
+ * - Respects prefers-reduced-motion (renders flat)
+ * - Glare effect follows pointer with spring smoothing
+ */
 export function TiltCard({
   children,
   intensity = 15,
@@ -24,11 +31,14 @@ export function TiltCard({
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotionHook = useReducedMotion();
+  const prefersReducedMotionMedia = prefersReducedMotion();
+  const isReducedMotion = prefersReducedMotionHook || prefersReducedMotionMedia;
 
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
 
+  // Spring config matching Apple's critically damped default
   const springConfig = { stiffness: 150, damping: 20 };
   const rotateX = useSpring(
     useTransform(y, [0, 1], [intensity, -intensity]),
@@ -47,7 +57,7 @@ export function TiltCard({
   );
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current || prefersReducedMotion) return;
+    if (!ref.current || isReducedMotion) return;
     const rect = ref.current.getBoundingClientRect();
     x.set((e.clientX - rect.left) / rect.width);
     y.set((e.clientY - rect.top) / rect.height);
@@ -59,7 +69,7 @@ export function TiltCard({
     setIsHovered(false);
   };
 
-  if (prefersReducedMotion) {
+  if (isReducedMotion) {
     return (
       <div ref={ref} className={className}>
         {children}
@@ -76,6 +86,7 @@ export function TiltCard({
         rotateY,
         transformStyle: "preserve-3d",
         perspective: 1000,
+        willChange: "transform",
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -91,6 +102,7 @@ export function TiltCard({
           opacity: glareEnabled && isHovered ? 1 : 0,
           pointerEvents: "none",
           transition: "opacity 0.3s ease",
+          willChange: "opacity, background",
         }}
       />
     </motion.div>
