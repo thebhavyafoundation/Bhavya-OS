@@ -13,7 +13,14 @@ export interface StudentProfile {
   userId: string;
   name: string;
   email: string;
-  role: "student" | "researcher" | "builder" | "mentor" | "volunteer" | "donor" | "educator";
+  role:
+    | "student"
+    | "researcher"
+    | "builder"
+    | "mentor"
+    | "volunteer"
+    | "donor"
+    | "educator";
   interests: string[];
   currentCourse: string;
   currentLessonIndex: number;
@@ -34,13 +41,19 @@ export interface StudentProfile {
   enrolledCourses: string[];
   enrolledAt: string;
   updatedAt: string;
+  moduleQuizScores: Record<
+    string,
+    { quizId: string; score: number; submittedAt: string }
+  >;
 }
 
 async function ensureDb(): Promise<void> {
   await initDatabase();
 }
 
-export async function getStudentByUserId(userId: string): Promise<StudentProfile | null> {
+export async function getStudentByUserId(
+  userId: string,
+): Promise<StudentProfile | null> {
   await ensureDb();
   const repo = getStudentRepository();
   return repo.findByUserId(userId) as unknown as StudentProfile | null;
@@ -73,5 +86,8 @@ export async function completeLesson(
 ): Promise<StudentProfile | null> {
   await ensureDb();
   const progressRepo = getProgressRepository();
-  return progressRepo.completeLesson(userId, lessonId) as unknown as StudentProfile | null;
+  return progressRepo.completeLesson(
+    userId,
+    lessonId,
+  ) as unknown as StudentProfile | null;
 }

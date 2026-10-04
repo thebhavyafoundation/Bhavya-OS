@@ -16,12 +16,40 @@ import { roleIsAllowed, type Role } from "@/lib/roles";
 import { recordAuditEvent } from "@/lib/audit-repository";
 import { getCourseById, courses } from "@/data/academy-courses";
 import { labExercises } from "@/data/lab-exercises";
+import {
+  getLesson,
+  getLessonsForModule,
+  getModule,
+} from "@/lib/curriculum/lessons";
+import {
+  getModule as getCurriculumModule,
+  moduleParams,
+} from "@/data/curriculum";
 
 /** Check if a lesson ID exists in any course (globally unique lesson IDs). */
 function isValidLessonId(lessonId: string): boolean {
-  return courses.some((c) =>
-    c.modules.some((m) => m.lessons.some((l) => l.id === lessonId)),
-  );
+  // Check academy courses
+  if (
+    courses.some((c) =>
+      c.modules.some((m) => m.lessons.some((l) => l.id === lessonId)),
+    )
+  ) {
+    return true;
+  }
+  // Check curriculum lessons
+  try {
+    const [moduleId, lessonIdOnly] = lessonId.split("-l");
+    if (!moduleId || !lessonIdOnly) return false;
+    const lesson = getLesson(moduleId, lessonIdOnly);
+    return !!lesson;
+  } catch {
+    return false;
+  }
+}
+
+/** Check if a module ID is valid (curriculum or academy). */
+function isValidModuleId(moduleId: string): boolean {
+  return moduleParams().some((m) => m.module === moduleId);
 }
 
 export async function POST(request: NextRequest) {
@@ -243,6 +271,100 @@ export async function POST(request: NextRequest) {
           { completedModules: completed },
           { headers: { "X-Correlation-Id": correlationId } },
         );
+      }
+      case "completeCurriculumLesson": {
+        if (!data?.moduleId || !data?.lessonId) {
+          return NextResponse.json(
+            { error: "moduleId and lessonId required" },
+            { status: 400 },
+          );
+        }
+        if (
+          !isValidModuleId(data.moduleId) ||
+          !isValidLessonId(`${data.moduleId}-l${data.lessonId}`)
+        ) {
+          return NextResponse.json(
+            { error: "Invalid moduleId or lessonId" },
+            { status: 400 },
+          );
+        }
+        const lesson = getLesson(data.moduleId, data.lessonId);
+        if (!lesson) {
+          return NextResponse.json(
+            { error: "Lesson not found" },
+            { status: 404 },
+          );
+        }
+        const completedLessons = student.lessonsCompleted.includes(lesson.id)
+          ? student.lessonsCompleted
+          : [...student.lessonsCompleted, lesson.id];
+        student = await updateStudent(user.id, {
+          lessonsCompleted: completedLessons,
+        });
+        await recordAuditEvent({
+          action: "lesson-complete",
+          actorId: user.id,
+          resource: "curriculum-lesson",
+          resourceId: lesson.id,
+        });
+        log.info("Curriculum lesson completed", {
+          userId: user.id,
+          lessonId: lesson.id,
+          moduleId: data.moduleId,
+        });
+        break;
+      }
+      case "submitModuleQuiz": {
+        if (
+          !data?.moduleId ||
+          !data?.quizId ||
+          typeof data?.score !== "number"
+        ) {
+          return NextResponse.json(
+            { error: "moduleId, quizId, and score required" },
+            { status: 400 },
+          );
+        }
+        if (data.score < 0 || data.score > 100) {
+          return NextResponse.json({ error: "Invalid score" }, { status: 400 });
+        }
+        if (!isValidModuleId(data.moduleId)) {
+          return NextResponse.json(
+            { error: "Invalid moduleId" },
+            { status: 400 },
+          );
+        }
+        const module = getCurriculumModule(data.moduleId);
+        if (!module) {
+          return NextResponse.json(
+            { error: "Module not found" },
+            { status: 404 },
+          );
+        }
+        student = await updateStudent(user.id, {
+          moduleQuizScores: {
+            ...student.moduleQuizScores,
+            [data.moduleId]: {
+              quizId: data.quizId,
+              score: data.score,
+              submittedAt: new Date().toISOString(),
+            },
+          },
+        });
+        await recordAuditEvent({
+          action: "module-quiz-submit",
+          actorId: user.id,
+          resource: "curriculum-module-quiz",
+          resourceId: data.moduleId,
+          metadata: { quizId: data.quizId, score: data.score },
+        });
+        log.info("Module quiz submitted", {
+          userId: user.id,
+          moduleId: data.moduleId,
+          quizId: data.quizId,
+          score: data.score,
+        });
+        break;
       }
       default:
         return NextResponse.json({ error: "Unknown action" }, { status: 400 });
