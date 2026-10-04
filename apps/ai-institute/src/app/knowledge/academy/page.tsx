@@ -1,83 +1,106 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { GraduationCap, BookOpen, Award, Star, Clock } from "lucide-react";
-const levels = [
-  {
-    level: "Foundations",
-    desc: "Core concepts in AI, ethics, and digital literacy.",
-    icon: BookOpen,
-  },
-  {
-    level: "Intermediate",
-    desc: "Applied skills in research, data, and communication.",
-    icon: GraduationCap,
-  },
-  {
-    level: "Advanced",
-    desc: "Specialized knowledge in AI, heritage, and ecology.",
-    icon: Star,
-  },
-  {
-    level: "Expert",
-    desc: "Research-level work and mentorship preparation.",
-    icon: Award,
-  },
-];
+import Link from "next/link";
+import { BookOpen, ArrowRight } from "lucide-react";
 
 export default function AcademyPage() {
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <div className="pb-16">
-        <section className="px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+    <main id="main-content" className="min-h-screen">
+      <section
+        style={{
+          padding: "var(--space-24) 0 var(--space-16)",
+          textAlign: "center",
+        }}
+      >
+        <div className="container" style={{ maxWidth: "720px" }}>
+          <span
+            style={{
+              display: "inline-block",
+              padding: "var(--space-1) var(--space-4)",
+              borderRadius: "var(--radius-full)",
+              background: "rgba(14, 56, 46, 0.1)",
+              fontSize: "var(--text-xs)",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              color: "var(--color-brand-forest)",
+              marginBottom: "var(--space-6)",
+            }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[var(--color-text-primary)] mb-6">
-              Bhavya Academy
-            </h1>
-            <p className="text-xl text-[var(--color-text-secondary)] max-w-3xl mb-12">
-              Free and open learning paths. From foundations to expert research.
-            </p>
-          </motion.div>
-
-          <h2 className="text-2xl font-serif text-[var(--color-text-primary)] mb-8">
-            Learning Levels
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {levels.map((level, i) => (
-              <motion.div
-                key={level.level}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-[var(--color-brand-forest)] text-white">
-                    <level.icon size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                      {level.level}
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)] mt-1">
-                      {level.desc}
-                    </p>
-                    <div className="flex items-center gap-4 mt-3 text-sm text-[var(--color-text-secondary)]">
-                      <span className="flex items-center gap-1">
-                        <Clock size={14} /> Self-paced
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            Knowledge / Academy
+          </span>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2.25rem, 5vw, 3rem)",
+              fontWeight: 400,
+              color: "var(--color-brand-forest)",
+              marginBottom: "var(--space-6)",
+              lineHeight: 1.2,
+            }}
+          >
+            Bhavya Academy
+          </h1>
+          <p
+            style={{
+              fontSize: "var(--text-lg)",
+              color: "var(--color-earth)",
+              maxWidth: "600px",
+              margin: "0 auto var(--space-10)",
+              lineHeight: 1.7,
+            }}
+          >
+            A structured, progressive learning path — from first encounters with
+            AI to institution building. Four tracks serve ages 6–18 with
+            age-appropriate content, hands-on labs, and real projects.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: "var(--space-4)",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Link
+              href="/curriculum"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "var(--space-2)",
+                padding: "var(--space-3) var(--space-5)",
+                borderRadius: "var(--radius-lg)",
+                background: "var(--color-brand-forest)",
+                color: "white",
+                fontSize: "var(--text-sm)",
+                fontWeight: 500,
+                textDecoration: "none",
+                transition: "opacity var(--duration-fast) ease",
+              }}
+            >
+              <BookOpen size={16} />
+              Explore the Curriculum
+              <ArrowRight size={16} />
+            </Link>
+            <Link
+              href="/courses"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "var(--space-2)",
+                padding: "var(--space-3) var(--space-5)",
+                borderRadius: "var(--radius-lg)",
+                border: "1px solid rgba(106, 124, 82, 0.2)",
+                color: "var(--color-brand-forest)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 500,
+                textDecoration: "none",
+                transition: "background var(--duration-fast) ease",
+              }}
+            >
+              Browse Courses
+            </Link>
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 }

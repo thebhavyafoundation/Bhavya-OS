@@ -117,23 +117,24 @@ Public navigation is organized into four institutional groups:
 
 ## Knowledge Routes
 
-| Route                                               | Purpose           | Audience | Auth | Parent    |
-| --------------------------------------------------- | ----------------- | -------- | ---- | --------- |
-| `/knowledge`                                        | Knowledge hub     | Public   | No   | —         |
-| `/knowledge/academy`                                | Academy overview  | Public   | No   | knowledge |
-| `/knowledge/courses`                                | Course listing    | Public   | No   | knowledge |
-| `/knowledge/courses/[id]`                           | Course detail     | Public   | No   | knowledge |
-| `/knowledge/courses/[id]/lessons/[lessonId]`        | Lesson player     | Student  | Yes  | knowledge |
-| `/knowledge/library`                                | Library           | Public   | No   | knowledge |
-| `/knowledge/research`                               | Research hub      | Public   | No   | knowledge |
-| `/knowledge/ai`                                     | AI capabilities   | Public   | No   | knowledge |
-| `/knowledge/mentor`                                 | Mentor system     | Public   | No   | knowledge |
-| `/knowledge/projects`                               | Projects          | Public   | No   | knowledge |
-| `/knowledge/credentials`                            | Credentials       | Public   | No   | knowledge |
-| `/knowledge/graph`                                  | Knowledge graph   | Public   | No   | knowledge |
-| `/curriculum`                                       | AI curriculum hub | Public   | No   | knowledge |
-| `/curriculum/modules/[moduleId]`                    | Module overview   | Public   | No   | knowledge |
-| `/curriculum/modules/[moduleId]/lessons/[lessonId]` | Lesson player     | Public   | No   | knowledge |
+| Route                                                    | Purpose                                      | Audience | Auth | Parent     |
+| -------------------------------------------------------- | -------------------------------------------- | -------- | ---- | ---------- |
+| `/knowledge`                                             | Knowledge hub                                | Public   | No   | —          |
+| `/knowledge/academy`                                     | Academy overview                             | Public   | No   | knowledge  |
+| `/knowledge/courses`                                     | **Alias → `/courses`** (updated 2026-09-26)  | —        | —    | —          |
+| `/knowledge/courses/[id]`                                | Course detail                                | Public   | No   | knowledge  |
+| `/knowledge/courses/[id]/lessons/[lessonId]`             | Lesson player                                | Student  | Yes  | knowledge  |
+| `/knowledge/library`                                     | Library                                      | Public   | No   | knowledge  |
+| `/knowledge/research`                                    | Research hub                                 | Public   | No   | knowledge  |
+| `/knowledge/ai`                                          | AI capabilities                              | Public   | No   | knowledge  |
+| `/knowledge/mentor`                                      | Mentor system                                | Public   | No   | knowledge  |
+| `/knowledge/projects`                                    | Projects                                     | Public   | No   | knowledge  |
+| `/knowledge/credentials`                                 | Credentials                                  | Public   | No   | knowledge  |
+| `/knowledge/graph`                                       | Knowledge graph                              | Public   | No   | knowledge  |
+| `/curriculum`                                            | Curriculum hub (4 tracks)                    | Public   | No   | curriculum |
+| `/curriculum/levels/[level]`                             | Level module list (`0`–`12`, `jr-a`, `jr-b`) | Public   | No   | curriculum |
+| `/curriculum/levels/[level]/[module]`                    | Module detail                                | Public   | No   | curriculum |
+| `/curriculum/levels/[level]/[module]/lessons/[lessonId]` | Lesson player                                | Public   | No   | curriculum |
 
 ## My Bhavya Routes (Authenticated)
 

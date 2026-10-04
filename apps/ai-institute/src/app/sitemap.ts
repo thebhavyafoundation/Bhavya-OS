@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { courses } from "@/data/academy-courses";
-import { aiModules } from "@/data/curriculum/ai-module-registry";
-import { getAllLessons } from "@/lib/curriculum/lessons";
+import { levelParams, moduleParams, getLessons } from "@/data/curriculum";
 
 /**
  * Public sitemap. Every URL below is a verified real page (page.tsx on
@@ -75,20 +74,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(c.updatedAt),
     }));
 
-  const moduleEntries = aiModules.map((module) => ({
-    url: `${BASE}/curriculum/modules/${module.id}`,
+  const curriculumLevelEntries = levelParams().map((level) => ({
+    url: `${BASE}/curriculum/levels/${level}`,
     lastModified: new Date(),
   }));
 
-  const lessonEntries = getAllLessons().map((lesson) => ({
-    url: `${BASE}/curriculum/modules/${lesson.moduleId}/lessons/${lesson.id}`,
+  const curriculumModuleEntries = moduleParams().map((m) => ({
+    url: `${BASE}/curriculum/levels/${m.level}/${m.module}`,
     lastModified: new Date(),
   }));
+
+  const curriculumLessonEntries = moduleParams().flatMap((m) => {
+    const lessons = getLessons(m.module);
+    return lessons.map((lesson) => ({
+      url: `${BASE}/curriculum/levels/${m.level}/${m.module}/lessons/${lesson.id}`,
+      lastModified: new Date(),
+    }));
+  });
 
   return [
     ...staticEntries,
     ...courseEntries,
-    ...moduleEntries,
-    ...lessonEntries,
+    ...curriculumLevelEntries,
+    ...curriculumModuleEntries,
+    ...curriculumLessonEntries,
   ];
 }
