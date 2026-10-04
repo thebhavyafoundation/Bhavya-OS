@@ -3,12 +3,12 @@
 import { useState } from "react";
 import type { QuizQuestion } from "@/data/curriculum";
 
-interface QuizBlockProps {
+interface ModuleQuizProps {
   questions: readonly QuizQuestion[];
   moduleId: string;
 }
 
-export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
+export function ModuleQuiz({ questions, moduleId }: ModuleQuizProps) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [showExplanations, setShowExplanations] = useState(false);
@@ -27,12 +27,6 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
     setShowExplanations(true);
   };
 
-  const handleRetry = () => {
-    setAnswers({});
-    setSubmitted(false);
-    setShowExplanations(false);
-  };
-
   const correctCount = Object.entries(answers).filter(
     ([idx, ans]) => ans === questions[Number(idx)].correctIndex,
   ).length;
@@ -47,8 +41,8 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          action: "submitLessonQuiz",
-          data: { moduleId, quizId: `quiz-${Date.now()}`, score },
+          action: "submitModuleQuiz",
+          data: { moduleId, score },
         }),
       });
     } catch {
@@ -62,15 +56,35 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
   }
 
   return (
-    <div
-      className="lesson-quiz"
+    <section
       style={{
-        padding: "var(--space-4)",
+        marginTop: "var(--space-8)",
+        padding: "var(--space-6)",
         borderRadius: "var(--radius-lg)",
         border: "1px solid var(--color-border-primary)",
         background: "var(--color-bg-primary)",
       }}
     >
+      <h2
+        style={{
+          fontFamily: "var(--font-display)",
+          fontWeight: 400,
+          color: "var(--color-brand-forest)",
+          marginBottom: "var(--space-4)",
+          fontSize: "var(--text-xl)",
+        }}
+      >
+        Module Quiz
+      </h2>
+      <p
+        style={{
+          marginBottom: "var(--space-6)",
+          color: "var(--color-text-secondary)",
+        }}
+      >
+        Test your understanding of this module. Score 80% or higher to be
+        eligible for the certificate.
+      </p>
       {questions.map((q, idx) => (
         <div key={q.id} style={{ marginBottom: "var(--space-6)" }}>
           <p
@@ -238,7 +252,7 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
             width: "100%",
           }}
         >
-          Submit Quiz
+          Submit Module Quiz
         </button>
       ) : (
         <div
@@ -247,11 +261,12 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
             display: "flex",
             gap: "var(--space-3)",
             justifyContent: "center",
+            flexWrap: "wrap",
           }}
         >
           <div
             style={{
-              padding: "var(--space-3) var(--space-5)",
+              padding: "var(--space-4) var(--space-6)",
               borderRadius: "var(--radius-lg)",
               background:
                 score >= 80
@@ -265,9 +280,17 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
                   score >= 80
                     ? "var(--color-status-success)"
                     : "var(--color-status-error)",
+                fontSize: "var(--text-lg)",
               }}
             >
-              Score: {score}% ({correctCount}/{questions.length})
+              Score: {score}% (
+              {
+                Object.keys(answers).filter(
+                  (k) =>
+                    answers[Number(k)] === questions[Number(k)].correctIndex,
+                ).length
+              }
+              /{questions.length})
             </strong>
             {score >= 80 && (
               <span
@@ -276,12 +299,16 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
                   color: "var(--color-status-success)",
                 }}
               >
-                ✓ Module check passed!
+                ✓ Certificate eligible!
               </span>
             )}
           </div>
           <button
-            onClick={handleRetry}
+            onClick={() => {
+              setAnswers({});
+              setSubmitted(false);
+              setShowExplanations(false);
+            }}
             style={{
               padding: "var(--space-3) var(--space-5)",
               borderRadius: "var(--radius-lg)",
@@ -293,7 +320,7 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
               cursor: "pointer",
             }}
           >
-            Retry
+            Retry Quiz
           </button>
         </div>
       )}
@@ -308,8 +335,8 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
             fontSize: "var(--text-sm)",
           }}
         >
-          Score below 80%. Review the explanations and retry to pass the module
-          check.
+          Score below 80%. Review the explanations and retry to become
+          certificate eligible.
         </p>
       )}
       {submitted && score >= 80 && (
@@ -323,10 +350,10 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
             fontSize: "var(--text-sm)",
           }}
         >
-          ✓ Score 80% or higher! This lesson's quiz contributes to module
-          completion.
+          ✓ Score 80% or higher! You are eligible to claim the module
+          certificate from the module page.
         </p>
       )}
-    </div>
+    </section>
   );
 }
