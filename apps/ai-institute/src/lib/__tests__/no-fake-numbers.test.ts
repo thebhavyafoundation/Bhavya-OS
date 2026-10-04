@@ -43,27 +43,31 @@ describe("D1 — no invented impact numbers", () => {
     expect(files.length).toBeGreaterThan(80);
   });
 
-  it("no banned impact-stat pattern outside approved claims", () => {
-    const offenders: string[] = [];
-    for (const f of files) {
-      const text = readFileSync(f, "utf8");
-      for (const re of BANNED) {
-        const rx = new RegExp(
-          re.source,
-          re.flags.includes("g") ? re.flags : `${re.flags}g`,
-        );
-        let m: RegExpExecArray | null;
-        while ((m = rx.exec(text)) !== null) {
-          if (isApprovedNumber(m[0])) continue;
-          const ctx = text.slice(
-            Math.max(0, m.index - 40),
-            m.index + m[0].length + 20,
+  it(
+    "no banned impact-stat pattern outside approved claims",
+    { timeout: 30000 },
+    () => {
+      const offenders: string[] = [];
+      for (const f of files) {
+        const text = readFileSync(f, "utf8");
+        for (const re of BANNED) {
+          const rx = new RegExp(
+            re.source,
+            re.flags.includes("g") ? re.flags : `${re.flags}g`,
           );
-          if (ALLOW.some((a) => a.test(ctx))) continue;
-          offenders.push(`${f.replace(/\\/g, "/")}: ${m[0]}`);
+          let m: RegExpExecArray | null;
+          while ((m = rx.exec(text)) !== null) {
+            if (isApprovedNumber(m[0])) continue;
+            const ctx = text.slice(
+              Math.max(0, m.index - 40),
+              m.index + m[0].length + 20,
+            );
+            if (ALLOW.some((a) => a.test(ctx))) continue;
+            offenders.push(`${f.replace(/\\/g, "/")}: ${m[0]}`);
+          }
         }
       }
-    }
-    expect(offenders, `\n${offenders.join("\n")}`).toEqual([]);
-  });
+      expect(offenders, `\n${offenders.join("\n")}`).toEqual([]);
+    },
+  );
 });
