@@ -1,27 +1,59 @@
-// Empty lesson registry — populated by Task 13 (P5 content).
-// Exports the registration function for Task 13 to use.
-import type { Lesson } from "@/data/curriculum";
+// Lesson Registry — populated by P5 content task
+// This module exports registration functions and a populate function.
+// The actual lesson data is defined in lesson-content.ts to avoid circular imports.
 
-const registry: Lesson[] = [];
+import type {
+  Lesson,
+  LessonBlock,
+  QuizQuestion,
+  WidgetSpec,
+  DiagramSpec,
+  ExperimentBlock,
+  ProjectBlock,
+} from "@/data/curriculum";
+
+const LESSON_REGISTRY: Map<string, Lesson> = new Map();
 
 export function getLessons(moduleId: string): Lesson[] {
-  return registry
-    .filter((l) => l.moduleId === moduleId)
-    .sort((a, b) => a.id.localeCompare(b.id));
+  const lessons: Lesson[] = [];
+  for (const lesson of LESSON_REGISTRY.values()) {
+    if (lesson.moduleId === moduleId) lessons.push(lesson);
+  }
+  return lessons.sort((a, b) => a.id.localeCompare(b.id));
+}
+
+export function getLessonsForModule(moduleId: string): Lesson[] {
+  return getLessons(moduleId);
+}
+
+export function getAllLessons(): Lesson[] {
+  return Array.from(LESSON_REGISTRY.values()).sort((a, b) =>
+    a.id.localeCompare(b.id),
+  );
 }
 
 export function getLesson(
   moduleId: string,
   lessonId: string,
 ): Lesson | undefined {
-  return registry.find((l) => l.moduleId === moduleId && l.id === lessonId);
+  return LESSON_REGISTRY.get(`${moduleId}:${lessonId}`);
 }
 
 export function getAllCurriculumLessonIds(): string[] {
-  return registry.map((l) => `${l.moduleId}:${l.id}`);
+  return Array.from(LESSON_REGISTRY.keys());
 }
 
-// Called by Task 13 content files to register lessons
-export function registerLessons(lessons: Lesson[]): void {
-  registry.push(...lessons);
+export function registerLesson(lesson: Lesson): void {
+  LESSON_REGISTRY.set(`${lesson.moduleId}:${lesson.id}`, lesson);
 }
+
+// Re-export types
+export type {
+  Lesson,
+  LessonBlock,
+  QuizQuestion,
+  WidgetSpec,
+  DiagramSpec,
+  ExperimentBlock,
+  ProjectBlock,
+};
