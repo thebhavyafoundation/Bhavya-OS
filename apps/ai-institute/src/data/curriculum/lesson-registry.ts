@@ -76,25 +76,15 @@ const WIDGETS: Record<string, WidgetSpec> = {
     id: "investigate",
     config: {
       prompt: "Flag every statement that describes a real source of AI bias.",
+      mode: "flag",
+      dataset: ["ai-ethics", "bias-sources"],
       items: [
-        {
-          text: "Training data reflects past discrimination",
-          correct: true,
-        },
-        {
-          text: "Certain groups are underrepresented in the data",
-          correct: true,
-        },
-        {
-          text: "Features act as proxies for protected attributes",
-          correct: true,
-        },
+        { text: "Training data reflects past discrimination", correct: true },
+        { text: "Certain groups are underrepresented in the data", correct: true },
+        { text: "Features act as proxies for protected attributes", correct: true },
         { text: "A syntax bug in the source code", correct: false },
         { text: "Bias in the training hardware", correct: false },
-        {
-          text: "Removing protected attributes from the data eliminates bias",
-          correct: false,
-        },
+        { text: "Removing protected attributes from the data eliminates bias", correct: false },
       ],
     },
   },
@@ -178,7 +168,21 @@ function toLesson(
   return {
     id: lessonId,
     moduleId,
+    band: moduleId.startsWith("jr-a")
+      ? "junior-a"
+      : moduleId.startsWith("jr-b")
+      ? "junior-b"
+      : moduleId.startsWith("l0") ||
+        moduleId.startsWith("l1") ||
+        moduleId.startsWith("l2") ||
+        moduleId.startsWith("l3") ||
+        moduleId.startsWith("l4") ||
+        moduleId.startsWith("l5") ||
+        moduleId.startsWith("l6")
+      ? "core"
+      : "advanced",
     title: legacy.title,
+    durationMin: 45,
     blocks,
   };
 }
