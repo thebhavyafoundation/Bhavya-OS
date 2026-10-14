@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, Suspense } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, ContactShadows } from "@react-three/drei";
 import { prefersReducedMotion } from "@/lib/motion/apple-springs";
 
 const Model3D = dynamic(
@@ -364,7 +362,7 @@ export function CurriculumHero3D({
   );
 }
 
-const bandColors: Record<string, string> = {
+const _bandColors: Record<string, string> = {
   "junior-a": "rgba(16, 185, 129, 0.5)",
   "junior-b": "rgba(245, 158, 11, 0.5)",
   "0": "rgba(14, 56, 46, 0.3)",
@@ -377,7 +375,7 @@ const bandColors: Record<string, string> = {
   "7": "rgba(212, 175, 55, 0.3)",
 };
 
-const bandIcons: Record<string, string> = {
+const _bandIcons: Record<string, string> = {
   "junior-a": "🌱",
   "junior-b": "🌿",
   "0": "🌲",
@@ -389,7 +387,7 @@ const bandIcons: Record<string, string> = {
   "7": "🏆",
 };
 
-const bandGradients: Record<string, string> = {
+const _bandGradients: Record<string, string> = {
   "junior-a": "linear-gradient(135deg, #10b981, #059669)",
   "junior-b": "linear-gradient(135deg, #f59e0b, #d97706)",
   "0": "linear-gradient(135deg, #0e382e, #064e3b)",

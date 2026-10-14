@@ -33,7 +33,7 @@ function getS3Client(): S3Client {
         secretAccessKey: B2_CONFIG.secretAccessKey,
       },
       forcePathStyle: true,
-    } as any); // Type assertion due to @smithy/types version mismatch in monorepo
+    });
   }
   return _s3Client;
 }
@@ -108,7 +108,8 @@ export async function getB2ObjectServer(key: string): Promise<{ body: Uint8Array
     }));
     const chunks: Uint8Array[] = [];
     if (result.Body) {
-      for await (const chunk of result.Body as any) {
+      const body = result.Body as AsyncIterable<Uint8Array>;
+      for await (const chunk of body) {
         chunks.push(chunk);
       }
     }
@@ -117,8 +118,8 @@ export async function getB2ObjectServer(key: string): Promise<{ body: Uint8Array
       contentType: result.ContentType || "application/octet-stream",
       metadata: result.Metadata || {},
     };
-  } catch (error: any) {
-    if (error.name === "NoSuchKey" || error.$metadata?.httpStatusCode === 404) {
+  } catch (error) {
+    if (error instanceof Error && (error.name === "NoSuchKey" || "httpStatusCode" in error && (error as { httpStatusCode?: number }).httpStatusCode === 404)) {
       return null;
     }
     throw error;
@@ -138,8 +139,8 @@ export async function headB2ObjectServer(key: string): Promise<{ size: number; c
       etag: result.ETag?.replace(/"/g, "") || "",
       metadata: result.Metadata || {},
     };
-  } catch (error: any) {
-    if (error.name === "NoSuchKey" || error.$metadata?.httpStatusCode === 404) {
+  } catch (error) {
+    if (error instanceof Error && (error.name === "NoSuchKey" || "httpStatusCode" in error && (error as { httpStatusCode?: number }).httpStatusCode === 404)) {
       return null;
     }
     throw error;
@@ -167,7 +168,7 @@ export async function getB2SignedUrlServer(key: string, expiresIn = 3600): Promi
     Bucket: B2_CONFIG.bucket,
     Key: key,
   });
-  return getSignedUrl(client, command, { expiresIn });
+  return getSignedUrl(client as unknown as Parameters<typeof getSignedUrl>[0], command as unknown as Parameters<typeof getSignedUrl>[1], { expiresIn });
 }
 
 export function getB2PublicUrlServer(key: string): string {
@@ -397,13 +398,19 @@ export async function downloadTextureServer(filename: string) {
   return getB2ObjectServer(key);
 }
 
+export interface B2ListOptions {
+  prefix?: string;
+  maxKeys?: number;
+}
+
+export interface B2ListResult {
+  objects: Array<{ key: string; size: number; lastModified: Date; etag: string }>;
+  isTruncated: boolean;
+  nextContinuationToken?: string;
+}
+
 export function getB2PublicUrlBase(): string {
   const publicBaseUrl = B2_CONFIG.publicBaseUrl
     ?? `${B2_CONFIG.endpoint.replace(/\/$/, "")}/${B2_CONFIG.bucket}`;
   return publicBaseUrl;
 }
-
-export type {
-  B2UploadOptions,
-  B2UploadResult,
-} from "./client";

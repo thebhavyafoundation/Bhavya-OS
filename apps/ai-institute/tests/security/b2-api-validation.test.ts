@@ -7,7 +7,7 @@
 import { describe, it, expect, beforeAll, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
-import { roleIsAllowed, hasPermission, type Role } from "@/lib/roles";
+import { roleIsAllowed, type Role } from "@/lib/roles";
 
 // Mock Next.js headers and cookies
 vi.mock("next/headers", () => ({
@@ -29,7 +29,6 @@ vi.mock("@/lib/api-auth", () => ({
 // Mock role helpers
 vi.mock("@/lib/roles", () => ({
   roleIsAllowed: vi.fn(),
-  hasPermission: vi.fn(),
   Role: {
     student: "student",
     admin: "admin",
@@ -69,7 +68,7 @@ describe("B2 API Validation", () => {
     it("returns 401 when no session", async () => {
       vi.mocked(requireAuth).mockResolvedValueOnce(null);
 
-      const request = new NextRequest("http://localhost/api/b2/signed-url?key=test.glb");
+      const _request = new NextRequest("http://localhost/api/b2/signed-url?key=test.glb");
       // Route handler would be imported and called here
       // For unit testing, we'd import the route handler directly
       // This is a placeholder for the actual test structure

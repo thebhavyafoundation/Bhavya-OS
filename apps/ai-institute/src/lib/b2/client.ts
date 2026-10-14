@@ -13,7 +13,6 @@ import {
   S3Client,
   PutObjectCommand,
   GetObjectCommand,
-  DeleteObjectCommand,
   ListObjectsV2Command,
   HeadObjectCommand,
 } from "@aws-sdk/client-s3";
@@ -21,7 +20,6 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 import { B2_CONFIG, validateEndpoint } from "./config";
 
-// Re-export types from server to avoid duplication
 export type {
   B2UploadOptions,
   B2UploadResult,
@@ -31,10 +29,6 @@ export type {
 
 let _s3Client: S3Client | null = null;
 
-/**
- * Lazy S3Client factory — instantiated on first use.
- * Ensures credentials are only read in server execution context.
- */
 function getS3Client(): S3Client {
   if (!_s3Client) {
     validateEndpoint(B2_CONFIG.endpoint);
@@ -46,7 +40,7 @@ function getS3Client(): S3Client {
         accessKeyId: B2_CONFIG.accessKeyId,
         secretAccessKey: B2_CONFIG.secretAccessKey,
       },
-    } as any); // Type assertion due to @smithy/types version mismatch in monorepo
+    });
   }
   return _s3Client;
 }
@@ -71,7 +65,7 @@ export async function uploadToB2(options: {
   const command = new PutObjectCommand({
     Bucket: B2_CONFIG.bucket,
     Key: options.key,
-    Body: options.body as any,
+    Body: options.body as Buffer | Uint8Array | ReadableStream | Blob,
     ContentType: options.contentType,
     CacheControl: options.cacheControl || "public, max-age=31536000, immutable",
     Metadata: options.metadata,
@@ -102,7 +96,7 @@ export async function getB2PresignedUrl(key: string, expiresIn: number = 3600): 
     Key: key,
   });
 
-  return getSignedUrl(client, command, { expiresIn });
+  return getSignedUrl(client as unknown as Parameters<typeof getSignedUrl>[0], command as unknown as Parameters<typeof getSignedUrl>[1], { expiresIn });
 }
 
 /**
@@ -118,8 +112,8 @@ export async function existsInB2(key: string): Promise<boolean> {
     });
     await client.send(command);
     return true;
-  } catch (error: any) {
-    if (error.name === "NotFound" || error.$metadata?.httpStatusCode === 404) {
+  } catch (error) {
+    if (error instanceof Error && (error.name === "NotFound" || "httpStatusCode" in error && (error as { httpStatusCode?: number }).httpStatusCode === 404)) {
       return false;
     }
     throw error;

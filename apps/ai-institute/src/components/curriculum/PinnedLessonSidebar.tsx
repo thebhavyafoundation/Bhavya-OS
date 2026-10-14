@@ -6,8 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion } from "@/lib/motion/apple-springs";
 import { ChevronRight, CheckCircle, Clock, BookOpen } from "lucide-react";
 import { getLessonsForModule } from "@/lib/curriculum/lessons";
-import { resolveAssetUrl } from "@/lib/assetUrls";
-import { VisualComponent } from "./VisualComponent";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,8 +139,8 @@ export function PinnedLessonSidebar({
     fetchProgress();
   }, [userId, moduleId, showProgress]);
 
-  const totalLessons = lessons.length;
-  const completedLessons = Array.from(lessonProgress.values()).filter((p) => p >= 100).length;
+  const _totalLessons = lessons.length;
+  const _completedLessons = Array.from(lessonProgress.values()).filter((p) => p >= 100).length;
 
   return (
     <div

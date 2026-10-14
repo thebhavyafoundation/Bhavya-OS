@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useRef, useEffect, useState } from "react";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { OrbitControls, Html } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 
 export { OrbitControls };
 
@@ -371,9 +371,7 @@ export async function loadGLTF(url: string): Promise<THREE.Group> {
 }
 
 export async function loadTexture(url: string): Promise<THREE.Texture> {
-  const { TextureLoader } = await import("three");
-  const loader = new THREE.TextureLoader();
-  return loader.loadAsync(url);
+  return new THREE.TextureLoader().loadAsync(url);
 }
 
 export async function loadHDRI(url: string): Promise<THREE.Texture> {
