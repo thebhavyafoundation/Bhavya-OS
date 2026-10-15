@@ -13,3 +13,21 @@
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:private-key:221
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:200
 3e1d49659fc14b02524e0c6196754c6c2c2543eb:apps/github-os/scripts/test-edge-cases.mjs:generic-api-key:202
+
+# Truncated JWT *placeholders* in documentation, not credentials.
+# Both strings begin "eyJhbGci" (base64 of {"alg":) but are truncated with
+# an ellipsis, so they are structurally incapable of being a JWT: no payload,
+# no signature. gitleaks' generic-api-key rule flags them purely on the
+# high-entropy base64 run.
+#
+# - e55108f: docs/architecture/CLOUD_INFRASTRUCTURE_SETUP_CHECKLIST.md
+# - 4526e37: apps/ai-institute/.env.example
+#
+# The live files at HEAD are already sanitized to <your-...> placeholders;
+# these entries exist only because secret-scan runs with fetch-depth: 0 and
+# therefore re-reports the immutable historical commits. Scoped to the exact
+# commit SHA so no future content in these paths is ever exempt.
+# Line numbers intentionally omitted: gitleaks prefix-matches the fingerprint,
+# so one entry covers every line variant in that commit.
+e55108ffa8341ff540702da80e7226b8a01bb608:docs/architecture/CLOUD_INFRASTRUCTURE_SETUP_CHECKLIST.md:generic-api-key
+4526e37251e255ae4a40725d0d23052e57e4aec1:apps/ai-institute/.env.example:generic-api-key
