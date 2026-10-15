@@ -6,7 +6,7 @@ import {
   registerLesson,
 } from "@/lib/curriculum/lessons";
 import { aiModules } from "@/data/curriculum/ai-module-registry";
-import type { Lesson, LessonBlock, WidgetSpec } from "@/types/curriculum";
+import type { Lesson, LessonBlock, WidgetSpec } from "@/data/curriculum/types";
 
 const BANNED_PLACE_NAMES =
   /uttarakhand|garhwal|himachal|shimla|churdhar|ransi|shirgul/i;

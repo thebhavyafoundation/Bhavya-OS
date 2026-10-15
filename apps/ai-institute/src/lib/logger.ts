@@ -38,7 +38,6 @@ const SENSITIVE_KEYS = new Set([
 function redactSensitive(obj: unknown): unknown {
   if (obj === null || obj === undefined) return obj;
   if (typeof obj === "string") {
-    // Redact long strings that look like tokens/hashes
     if (obj.length > 64 && /^[a-f0-9]+$/.test(obj)) return "[REDACTED]";
     return obj;
   }
@@ -97,8 +96,6 @@ class Logger {
       };
     }
 
-    // Use console methods for structured output
-    // In production, this could be replaced with a log aggregator
     const output = JSON.stringify(entry);
 
     switch (level) {
@@ -130,11 +127,19 @@ class Logger {
     this.log("warn", message, metadata);
   }
 
-  error(message: string, error?: Error, metadata?: Record<string, unknown>): void {
+  error(
+    message: string,
+    error?: Error,
+    metadata?: Record<string, unknown>,
+  ): void {
     this.log("error", message, metadata, error);
   }
 
-  fatal(message: string, error?: Error, metadata?: Record<string, unknown>): void {
+  fatal(
+    message: string,
+    error?: Error,
+    metadata?: Record<string, unknown>,
+  ): void {
     this.log("fatal", message, metadata, error);
   }
 
@@ -153,4 +158,60 @@ export function extractCorrelationId(request: Request): string {
     request.headers.get("x-request-id") ||
     generateCorrelationId()
   );
+}
+
+/**
+ * Rate Limiting
+ */
+
+export interface RateLimitConfig {
+  maxRequests: number;
+  windowMs: number;
+}
+
+export interface RateLimitResult {
+  limited: boolean;
+  remaining: number;
+  resetAt: number;
+}
+
+export const RateLimits = {
+  default: { maxRequests: 100, windowMs: 60_000 },
+  strict: { maxRequests: 10, windowMs: 60_000 },
+  auth: { maxRequests: 5, windowMs: 60_000 },
+  upload: { maxRequests: 20, windowMs: 60_000 },
+} as const;
+
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+export function checkRateLimit(
+  key: string,
+  config: RateLimitConfig = RateLimits.default,
+): RateLimitResult {
+  const now = Date.now();
+  const entry = rateLimitStore.get(key);
+
+  if (!entry || entry.resetAt <= now) {
+    rateLimitStore.set(key, { count: 1, resetAt: now + config.windowMs });
+    return {
+      limited: false,
+      remaining: config.maxRequests - 1,
+      resetAt: now + config.windowMs,
+    };
+  }
+
+  if (entry.count >= config.maxRequests) {
+    return { limited: true, remaining: 0, resetAt: entry.resetAt };
+  }
+
+  entry.count++;
+  return {
+    limited: false,
+    remaining: config.maxRequests - entry.count,
+    resetAt: entry.resetAt,
+  };
+}
+
+export function clearRateLimit(key: string): void {
+  rateLimitStore.delete(key);
 }

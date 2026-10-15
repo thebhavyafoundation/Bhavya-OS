@@ -18,10 +18,10 @@ export function getModuleById(id: string): AIModule | undefined {
 }
 
 export function getPrerequisites(id: string): AIModule[] {
-  const module = modulesById.get(id);
-  if (!module) return [];
+  const mod = modulesById.get(id);
+  if (!mod) return [];
   const resolved: AIModule[] = [];
-  for (const prereqId of module.prerequisites ?? []) {
+  for (const prereqId of mod.prerequisites ?? []) {
     const prereq = modulesById.get(prereqId);
     if (prereq) resolved.push(prereq);
   }
@@ -29,10 +29,10 @@ export function getPrerequisites(id: string): AIModule[] {
 }
 
 export function getStandardsForModule(id: string): AIStandard[] {
-  const module = modulesById.get(id);
-  if (!module) return [];
+  const mod = modulesById.get(id);
+  if (!mod) return [];
   const resolved: AIStandard[] = [];
-  for (const standardId of module.standards) {
+  for (const standardId of mod.standards) {
     const standard = standardsById.get(standardId);
     if (standard) resolved.push(standard);
   }
