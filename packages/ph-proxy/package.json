@@ -1,0 +1,19 @@
+{
+  "name": "@bhavya/ph-proxy",
+  "version": "0.1.0",
+  "description": "Cloudflare Worker proxy for Product Hunt API v2 — client-only OAuth token handling and GraphQL forwarding. Secrets stay in Workers environment variables.",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260911.1",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.0.0"
+  },
+  "license": "MIT"
+}

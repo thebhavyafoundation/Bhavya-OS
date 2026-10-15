@@ -13,6 +13,7 @@
 import { createHash } from "crypto";
 import { readdirSync, readFileSync } from "fs";
 import { join, basename } from "path";
+import { pathToFileURL } from "url";
 import type Database from "better-sqlite3";
 import { getReadWriteDatabase } from "./registry";
 import type { DatabaseName } from "./registry";
@@ -114,7 +115,8 @@ async function loadMigrationsFromDisk(
     const migrations: Migration[] = [];
 
     for (const file of files) {
-      const mod = await import(join(migrationsDir, file));
+      const fileUrl = pathToFileURL(join(migrationsDir, file)).href;
+      const mod = await import(fileUrl);
       const migration: Migration = mod.default?.migration || mod.migration;
       if (migration && migration.id && migration.up) {
         // Prefix migration ID with domain name for shared-DB uniqueness.
