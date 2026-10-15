@@ -73,3 +73,41 @@ bhavya-ai-lab/metrics/
 *.db-shm
 *.db-wal
 next-env.d.ts
+
+# Local tooling caches and scratch output (never source)
+/.pnpm-store/
+/.open-next/
+apps/ai-institute/.open-next/
+apps/ai-institute/build-output*.txt
+apps/ai-institute/typecheck-output*.txt
+typecheck-out*.txt
+typecheck-output*.txt
+
+# Local QA artefacts (regenerated on demand)
+/.playwright-mcp/
+/qa-screenshots/
+/prod-*.png
+/*-viewport.png
+/homepage-*.png
+/*-3d-hero.png
+/curriculum-*.png
+/about-current.png
+/qa-shot-*.png
+/*.png
+
+# Directory junction to .opencode/skills/ (Windows link, not portable content)
+/skills/
+
+# Dev scratch scripts (one-off local utilities)
+/complete-supabase.mjs
+/run-migration.mjs
+/fix_migration_checksums.mjs
+/test-3d-hero.cjs
+/index.json
+/migration1.json
+/push-out.txt
+/curriculum-hub-snapshot.yml
+packages/database/check-db.js
+packages/database/check-db.mjs
+packages/database/debug-migrate.mjs
+packages/database/run-migrations.mjs
