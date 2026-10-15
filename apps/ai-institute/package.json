@@ -10,6 +10,7 @@
     "deploy": "npx opennextjs-cloudflare deploy",
     "start": "next start -p 3030",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint src scripts",
     "db:migrate": "tsx src/scripts/db-migrate.ts",
     "db:seed": "tsx src/scripts/db-seed.ts",
     "db:create-admin": "tsx src/scripts/create-admin-user.ts",
