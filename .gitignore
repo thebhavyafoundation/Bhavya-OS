@@ -98,6 +98,10 @@ typecheck-output*.txt
 # Directory junction to .opencode/skills/ (Windows link, not portable content)
 /skills/
 
+# 4K .exr texture-authoring sources (intermediate inputs, not runtime assets).
+# Runtime derivatives (.glb/.png) are tracked; these ~50MB stay local only.
+apps/ai-institute/public/models/poly-haven/textures/
+
 # Dev scratch scripts (one-off local utilities)
 /complete-supabase.mjs
 /run-migration.mjs
