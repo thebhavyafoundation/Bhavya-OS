@@ -27,9 +27,10 @@ const SUPABASE_ANON_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....";
 
-// In a real deployment, initialize the Supabase client
-// import createClient from "@supabase/supabase-js";
-// const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// NOTE: This strategy is currently a development stub. It is not wired into
+// the live auth path — `lib/auth.ts` calls Supabase directly via
+// `supabase.auth.getUser()`. Do not use `validate()` in production: it accepts
+// the literal token "test-token" and returns a fabricated session.
 
 /**
  * Supabase Auth Strategy
@@ -47,26 +48,10 @@ export class SupabaseStrategy implements AuthStrategy {
    * @returns AuthResult with session or error
    */
   async authenticate(credentials: AuthCredentials): Promise<AuthResult> {
-    // TODO: Uncomment and use when Supabase client is set up
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: credentials.email!,
-    //   password: credentials.password!,
-    // });
+    // TODO: Replace with supabase.auth.signInWithPassword({ email, password })
+    // and persist the returned session for cross-session continuity.
 
-    // if (error) {
-    //   return { success: false, error: error.message };
-    // }
-
-    // if (!data.session) {
-    //   return { success: false, error: "No session received" };
-    // }
-
-    // TODO: Store session in SQLite for cross-session persistence
-    // const db = getNamedDatabase("auth", { path: "./auth.db" });
-    // await db.exec(`INSERT OR REPLACE INTO sessions (user_id, session_token, expires_at)
-    //   VALUES ('${data.session.user.id}', '${data.session.session}', '${data.session.expires_at}')`);
-
-    // Mock response for development - replace with actual Supabase integration
+    // Development-only fixed credential; rejected for every other input.
     if (
       credentials.email === "test@bhavya.foundation" &&
       credentials.password === "test"
@@ -96,11 +81,11 @@ export class SupabaseStrategy implements AuthStrategy {
    * @returns AuthSession if valid, null if invalid
    */
   async validate(token: string): Promise<AuthSession | null> {
-    // TODO: Implement actual Supabase token validation
-    // The Supabase anon key can validate JWTs, but for production
-    // you should use the service_role key on the server
+    // TODO: Replace with supabase.auth.getUser(token). The anon key can
+    // validate JWTs, but production verification belongs server-side using
+    // the service_role key (never exposed to the browser).
 
-    // Mock validation for development
+    // Development-only fixed token.
     if (token === "test-token") {
       return {
         userId: "user-12345",
@@ -110,19 +95,6 @@ export class SupabaseStrategy implements AuthStrategy {
         expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       };
     }
-
-    // Try to verify with Supabase (uncomment when client is set up)
-    // const { data, error } = await supabase.auth.getUser(token);
-    // if (error) return null;
-    // if (!data.user) return null;
-
-    // return {
-    //   userId: data.user.id,
-    //   email: data.user.email!,
-    //   name: data.user.user_metadata?.full_name,
-    //   roles: data.user.user_metadata?.roles || ["user"],
-    //   expiresAt: data.user.session?.expires_at || new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-    // };
 
     return null;
   }
