@@ -18,7 +18,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-import { B2_CONFIG, validateEndpoint } from "./config";
+import { B2_CONFIG, readB2Config, validateEndpoint } from "./config";
 
 export type {
   B2UploadOptions,
@@ -73,14 +73,19 @@ export async function uploadToB2(options: {
 
   const response = await client.send(command);
 
-  const publicBaseUrl = B2_CONFIG.publicBaseUrl
-    ?? `${B2_CONFIG.endpoint.replace(/\/$/, "")}/${B2_CONFIG.bucket}`;
+  const publicBaseUrl =
+    B2_CONFIG.publicBaseUrl ??
+    `${B2_CONFIG.endpoint.replace(/\/$/, "")}/${B2_CONFIG.bucket}`;
 
   return {
     key: options.key,
     url: `${publicBaseUrl}/${options.key}`,
-    size: options.body instanceof Buffer ? options.body.length :
-          options.body instanceof Uint8Array ? options.body.length : 0,
+    size:
+      options.body instanceof Buffer
+        ? options.body.length
+        : options.body instanceof Uint8Array
+          ? options.body.length
+          : 0,
     etag: response.ETag || "",
   };
 }
@@ -88,7 +93,10 @@ export async function uploadToB2(options: {
 /**
  * Get a presigned URL for B2 file (valid for specified duration)
  */
-export async function getB2PresignedUrl(key: string, expiresIn: number = 3600): Promise<string> {
+export async function getB2PresignedUrl(
+  key: string,
+  expiresIn: number = 3600,
+): Promise<string> {
   const client = getS3Client();
 
   const command = new GetObjectCommand({
@@ -96,7 +104,11 @@ export async function getB2PresignedUrl(key: string, expiresIn: number = 3600): 
     Key: key,
   });
 
-  return getSignedUrl(client as unknown as Parameters<typeof getSignedUrl>[0], command as unknown as Parameters<typeof getSignedUrl>[1], { expiresIn });
+  return getSignedUrl(
+    client as unknown as Parameters<typeof getSignedUrl>[0],
+    command as unknown as Parameters<typeof getSignedUrl>[1],
+    { expiresIn },
+  );
 }
 
 /**
@@ -113,7 +125,12 @@ export async function existsInB2(key: string): Promise<boolean> {
     await client.send(command);
     return true;
   } catch (error) {
-    if (error instanceof Error && (error.name === "NotFound" || "httpStatusCode" in error && (error as { httpStatusCode?: number }).httpStatusCode === 404)) {
+    if (
+      error instanceof Error &&
+      (error.name === "NotFound" ||
+        ("httpStatusCode" in error &&
+          (error as { httpStatusCode?: number }).httpStatusCode === 404))
+    ) {
       return false;
     }
     throw error;
@@ -123,7 +140,11 @@ export async function existsInB2(key: string): Promise<boolean> {
 /**
  * Check B2 connection health
  */
-export async function checkB2Health(): Promise<{ healthy: boolean; latencyMs: number; bucket: string }> {
+export async function checkB2Health(): Promise<{
+  healthy: boolean;
+  latencyMs: number;
+  bucket: string;
+}> {
   const start = Date.now();
 
   try {
@@ -152,10 +173,11 @@ export async function checkB2Health(): Promise<{ healthy: boolean; latencyMs: nu
  * Get B2 configuration status (safe for server-side display)
  */
 export function getB2ConfigStatus() {
+  const cfg = readB2Config();
   return {
-    configured: !!(B2_CONFIG.accessKeyId && B2_CONFIG.secretAccessKey && B2_CONFIG.bucket),
-    endpoint: B2_CONFIG.endpoint,
-    bucket: B2_CONFIG.bucket,
-    region: B2_CONFIG.region,
+    configured: !!(cfg.accessKeyId && cfg.secretAccessKey && cfg.bucket),
+    endpoint: cfg.endpoint,
+    bucket: cfg.bucket,
+    region: cfg.region,
   };
 }
