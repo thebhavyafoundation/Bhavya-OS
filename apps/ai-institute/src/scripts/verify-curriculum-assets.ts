@@ -79,20 +79,20 @@ async function verifyAssets(): Promise<void> {
   let missingCount = 0;
   const placeholderCount = 0;
 
-  for (const module of modules) {
-    const localAssets = moduleAssets.get(module.moduleId) || [];
-    module.localAssets = localAssets;
+  for (const mod of modules) {
+    const localAssets = moduleAssets.get(mod.moduleId) || [];
+    mod.localAssets = localAssets;
 
-    if (module.recommendedAssetUrl.includes("[to-be-downloaded]")) {
+    if (mod.recommendedAssetUrl.includes("[to-be-downloaded]")) {
       if (localAssets.length > 0) {
-        module.status = "ok";
+        mod.status = "ok";
         okCount++;
       } else {
-        module.status = "missing";
+        mod.status = "missing";
         missingCount++;
       }
     } else {
-      module.status = "ok";
+      mod.status = "ok";
       okCount++;
     }
   }
@@ -130,12 +130,12 @@ function guessModuleId(
 ): string | null {
   const fileName = filePath.toLowerCase();
 
-  for (const module of modules) {
-    if (filePath.includes(module.moduleId)) return module.moduleId;
+  for (const mod of modules) {
+    if (filePath.includes(mod.moduleId)) return mod.moduleId;
   }
 
-  for (const module of modules) {
-    if (filePath.includes(module.band)) return module.moduleId;
+  for (const mod of modules) {
+    if (filePath.includes(mod.band)) return mod.moduleId;
   }
 
   const keywords = {
@@ -201,30 +201,29 @@ async function generateUpdatedRegistry(
 ): Promise<void> {
   let content = await readFile(REGISTRY_PATH, "utf-8");
 
-  for (const module of modules) {
-    if (module.status === "ok" && module.localAssets.length > 0) {
+  for (const mod of modules) {
+    if (mod.status === "ok" && mod.localAssets.length > 0) {
       const preferredExt =
-        module.visualFormat === "3d"
+        mod.visualFormat === "3d"
           ? ".glb"
-          : module.visualFormat === "2d"
+          : mod.visualFormat === "2d"
             ? ".png"
             : ".json";
 
-      const matchingAsset = module.localAssets.find(
+      const matchingAsset = mod.localAssets.find(
         (a: string) =>
           a.endsWith(preferredExt) || a.endsWith(".glb") || a.endsWith(".gltf"),
       );
 
       if (matchingAsset) {
-        const oldUrl =
-          'recommendedAssetUrl: "' + module.recommendedAssetUrl + '"';
+        const oldUrl = 'recommendedAssetUrl: "' + mod.recommendedAssetUrl + '"';
         const newUrl = 'recommendedAssetUrl: "' + matchingAsset + '"';
         content = content.replace(oldUrl, newUrl);
         console.log(
           "Updated " +
-            module.moduleId +
+            mod.moduleId +
             ": " +
-            module.recommendedAssetUrl +
+            mod.recommendedAssetUrl +
             " -> " +
             matchingAsset,
         );
