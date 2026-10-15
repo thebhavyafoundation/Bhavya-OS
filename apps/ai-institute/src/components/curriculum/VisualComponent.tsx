@@ -8,15 +8,16 @@ const Model3D = dynamic(
   {
     ssr: false,
     loading: () => <VisualFallback type="3d" />,
-  }
+  },
 );
 
 const LottieLoader = dynamic(
-  () => import("@/components/motion/LottieLoader").then((mod) => mod.LottieLoader),
+  () =>
+    import("@/components/motion/LottieLoader").then((mod) => mod.LottieLoader),
   {
     ssr: false,
     loading: () => <VisualFallback type="animation" />,
-  }
+  },
 );
 
 interface VisualFallbackProps {
@@ -85,7 +86,10 @@ export function VisualComponent({
     );
   }
 
-  if (type === "3d" && (assetUrl.endsWith(".glb") || assetUrl.endsWith(".gltf"))) {
+  if (
+    type === "3d" &&
+    (assetUrl.endsWith(".glb") || assetUrl.endsWith(".gltf"))
+  ) {
     return (
       <Suspense fallback={<VisualFallback type="3d" />}>
         <Model3D src={assetUrl} />
@@ -104,7 +108,6 @@ export function VisualComponent({
   if (type === "2d" || type === "infographic") {
     if (assetUrl.endsWith(".svg")) {
       return (
-        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={assetUrl}
           alt={alt}
@@ -118,7 +121,6 @@ export function VisualComponent({
     return (
       <Suspense fallback={<VisualFallback type={type} />}>
         <div className={className} style={style}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={assetUrl}
             alt={alt}

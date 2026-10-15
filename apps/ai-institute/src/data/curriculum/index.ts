@@ -1,6 +1,7 @@
 import { CATALOG_MODULES } from "./catalog.generated";
 import { JUNIOR_MODULES } from "./junior";
-import type { AgeBand, CurriculumModule, LevelParam } from "./types";
+import type { AgeBand, CurriculumModule, LevelParam, Lesson } from "./types";
+import type { Lesson as DataLesson } from "./types";
 
 export * from "./types";
 
@@ -101,4 +102,31 @@ export function levelParams(): string[] {
 
 export function moduleParams(): Array<{ level: string; module: string }> {
   return MODULES.map((m) => ({ level: m.level, module: m.id }));
+}
+
+// Lesson registry functions
+import { LESSONS } from "./lesson-registry";
+
+export function getLessonsForModule(moduleId: string): DataLesson[] {
+  return LESSONS.filter((l) => l.moduleId === moduleId).sort((a, b) =>
+    a.id.localeCompare(b.id),
+  ) as unknown as DataLesson[];
+}
+
+// Alias for backward compatibility
+export const getLessons = getLessonsForModule;
+
+export function getLesson(
+  moduleId: string,
+  lessonId: string,
+): DataLesson | undefined {
+  return LESSONS.find(
+    (l) => l.id === lessonId && l.moduleId === moduleId,
+  ) as unknown as DataLesson | undefined;
+}
+
+export function getAllLessons(): DataLesson[] {
+  return [...LESSONS].sort((a, b) =>
+    a.id.localeCompare(b.id),
+  ) as unknown as DataLesson[];
 }
