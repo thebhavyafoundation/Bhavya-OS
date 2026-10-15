@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === "development") {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
   poweredByHeader: false,
@@ -31,7 +30,43 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  openNextConfig: defineCloudflareConfig({}),
+  async headers() {
+    const cspReportOnly = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://f002.backblazeb2.com",
+      "style-src 'self' 'unsafe-inline' https://f002.backblazeb2.com",
+      "img-src 'self' data: https: https://f002.backblazeb2.com",
+      "font-src 'self' data: https://f002.backblazeb2.com",
+      "connect-src 'self' https://bnuqwcponnhlldlybbpw.supabase.co https://f002.backblazeb2.com wss:",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; ");
+
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: cspReportOnly,
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+        ],
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+export default defineCloudflareConfig(nextConfig);
