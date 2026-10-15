@@ -1980,7 +1980,170 @@ body {
   color: var(--color-text-muted);
 }
 
-/* AI curriculum timeline */
+/* ============================================
+    2026 SCROLL-DRIVEN ANIMATIONS — NATIVE CSS
+    ============================================ */
+
+@supports (animation-timeline: scroll()) {
+  /* Scroll Progress Bar — Zero JS, runs on compositor */
+  .scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-forest),
+      var(--color-accent-gold)
+    );
+    transform-origin: left;
+    animation: scroll-progress auto linear;
+    animation-timeline: scroll(root);
+    z-index: 1000;
+  }
+
+  @keyframes scroll-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Simple Scroll Reveal — Zero JS */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: scroll-reveal both linear;
+    animation-timeline: view();
+    animation-range: entry 25% cover 50%;
+  }
+
+  @keyframes scroll-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scroll-reveal-stagger {
+    animation: scroll-reveal both linear;
+    animation-timeline: view();
+    animation-range: entry 15% cover 40%;
+  }
+
+  /* Progress indicator tied to scroll */
+  .scroll-indicator {
+    position: sticky;
+    top: var(--header-h);
+    height: 4px;
+    background: var(--color-border-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .scroll-indicator-fill {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--color-brand-forest),
+      var(--color-accent-gold)
+    );
+    transform-origin: left;
+    animation: scroll-indicator-fill auto linear;
+    animation-timeline: scroll(nearest);
+  }
+
+  @keyframes scroll-indicator-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Reduced motion: disable scroll-driven animations */
+@media (prefers-reduced-motion: reduce) {
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress-bar,
+    .scroll-reveal,
+    .scroll-reveal-stagger,
+    .scroll-indicator-fill {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* ============================================
+    SCROLL-DRIVEN REVEALS — GSAP ENHANCED
+    ============================================ */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
+
+[data-reveal="stagger"] > * {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+[data-reveal="stagger"].is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+
+[data-reveal="stagger"].is-visible > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+[data-reveal="stagger"].is-visible > *:nth-child(2) {
+  transition-delay: 100ms;
+}
+[data-reveal="stagger"].is-visible > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+[data-reveal="stagger"].is-visible > *:nth-child(4) {
+  transition-delay: 300ms;
+}
+[data-reveal="stagger"].is-visible > *:nth-child(5) {
+  transition-delay: 400ms;
+}
+[data-reveal="stagger"].is-visible > *:nth-child(6) {
+  transition-delay: 500ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================
+    AI CURRICULUM TIMELINE — ENHANCED
+    ============================================ */
 
 .ai-timeline {
   display: flex;
@@ -5844,7 +6007,9 @@ html.lenis body {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   transform: translate(-50%, -50%);
-  transition: width 0.6s ease, height 0.6s ease;
+  transition:
+    width 0.6s ease,
+    height 0.6s ease;
 }
 
 .btn:hover::after {
@@ -5874,7 +6039,8 @@ a:not(.btn):hover::after {
 .home-pillar-card,
 .home-tile,
 .glass {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.3s ease;
 }
@@ -5886,18 +6052,32 @@ a:not(.btn):hover::after {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.6); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(201, 168, 76, 0.6);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-float {

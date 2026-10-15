@@ -2,6 +2,16 @@ import { notFound } from "next/navigation";
 import { getAsyncDb } from "@/lib/db";
 import { Metadata } from "next";
 
+interface Certificate {
+  id: string;
+  learner_name: string;
+  module_id: string;
+  band: string;
+  quiz_score: number;
+  issued_at: string;
+  verification_hash: string;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -9,7 +19,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const db = getAsyncDb();
-  const cert = await db.get("SELECT * FROM certificates WHERE id = ?", id);
+  const cert = (await db.get(
+    "SELECT * FROM certificates WHERE id = ?",
+    id,
+  )) as Certificate | null;
   if (!cert) return { title: "Certificate Not Found" };
   return {
     title: `Certificate ${cert.id} — ${cert.learner_name} — Bhavya Foundation`,
@@ -24,7 +37,10 @@ export default async function VerifyPage({
 }) {
   const { id } = await params;
   const db = getAsyncDb();
-  const cert = await db.get("SELECT * FROM certificates WHERE id = ?", id);
+  const cert = (await db.get(
+    "SELECT * FROM certificates WHERE id = ?",
+    id,
+  )) as Certificate | null;
 
   if (!cert) notFound();
 

@@ -1,56 +1,27 @@
-import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/components/AuthProvider";
-import { LayoutShell } from "@/components/LayoutShell";
-import { MotionProvider } from "@/components/MotionProvider";
-import { SmoothScroll } from "@/components/SmoothScroll";
-import { GsapProvider } from "@/components/motion/GsapProvider";
-import { PageTransition } from "@/components/motion/PageTransition";
-import { ScrollProgress } from "@/components/motion/ScrollProgress";
-import { CustomCursor } from "@/components/motion/CustomCursor";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
+import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { AppProviders } from "@/lib/providers/AppProviders";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
   display: "swap",
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
-export const viewport: Viewport = {
-  themeColor: "#0e382e",
-};
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bhavyafoundation.org"),
-  title: "Bhavya Foundation",
+  title: "Bhavya Foundation — For People. For Nature. For Generations.",
   description:
-    "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
-  manifest: "/manifest.json",
-  icons: {
-    icon: "/brand/logo-mark.png",
-    apple: "/brand/logo-mark.png",
-  },
-  openGraph: {
-    title: "Bhavya Foundation",
-    description:
-      "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
-    url: "https://bhavyafoundation.org",
-    siteName: "Bhavya Foundation",
-    type: "website",
-    images: ["/brand/logo-full.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Bhavya Foundation",
-    description:
-      "Restoring Nature. Empowering Humanity. Preserving Heritage. A public charitable trust built for generations.",
-  },
+    "Nature restored. Knowledge opened. Heritage kept. Communities led from within. A public charitable trust building for generations.",
 };
 
 export default function RootLayout({
@@ -59,24 +30,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body>
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <CustomCursor />
-        <ScrollProgress />
-        <AuthProvider>
-          <SmoothScroll>
-            <MotionProvider>
-              <GsapProvider>
-                <PageTransition>
-                  <LayoutShell>{children}</LayoutShell>
-                </PageTransition>
-              </GsapProvider>
-            </MotionProvider>
-          </SmoothScroll>
-        </AuthProvider>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body
+        style={{
+          background: "var(--color-bg-primary)",
+          fontFamily: `${inter.variable}, ${playfair.variable}, sans-serif`,
+        }}
+        className={`${inter.className} ${playfair.className}`}
+      >
+        <AppProviders>
+          <SiteHeader variant="default" />
+          <main id="main-content">{children}</main>
+          <SiteFooter />
+        </AppProviders>
       </body>
     </html>
   );
