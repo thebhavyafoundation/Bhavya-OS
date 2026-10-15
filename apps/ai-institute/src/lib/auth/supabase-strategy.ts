@@ -23,9 +23,7 @@ import {
 const SUPABASE_URL =
   process.env.NEXT_PUBLIC_SUPABASE_URL ||
   "https:// YOUR_SUPABASE_PROJECT_URL.supabase.co";
-const SUPABASE_ANON_KEY =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
 // NOTE: This strategy is currently a development stub. It is not wired into
 // the live auth path — `lib/auth.ts` calls Supabase directly via

@@ -71,7 +71,7 @@
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 ```
 
 **Local Development (`.env.local` in `apps/ai-institute/`):**
@@ -79,7 +79,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```bash
 # Copy from .env.example and fill in real values
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-anon-key>
 ```
 
 ### Auth Configuration
@@ -277,7 +277,7 @@ npx wrangler secret put TURSO_DATABASE_URL --env production
 # Value: libsql://bhavya-foundation-yourorg.turso.io
 
 npx wrangler secret put TURSO_AUTH_TOKEN --env production
-# Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+# Value: <your-turso-auth-token>
 ```
 
 ### Local Development Override
@@ -285,7 +285,7 @@ npx wrangler secret put TURSO_AUTH_TOKEN --env production
 ```bash
 # In apps/ai-institute/.env.local
 TURSO_DATABASE_URL=libsql://bhavya-foundation-yourorg.turso.io
-TURSO_AUTH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+TURSO_AUTH_TOKEN=<your-turso-auth-token>
 ```
 
 ### Migration Commands
