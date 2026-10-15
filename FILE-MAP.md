@@ -219,6 +219,7 @@
 - `FILE-MAP.md`
 - `README.md`
 - `VERCEL.md`
+- `WEB_ONLY_VERIFICATION_BLUEPRINT.md`
 - `_archive`/
   - `_archive\.registry`/
   - `_archive\.schemas`/
@@ -273,6 +274,7 @@
   - `assets\cinematic-manifest.json`
   - `assets\manifest.json`
 - `commitlint.config.js`
+- `complete-supabase.mjs`
 - `config`/
   - `config\apps.json`
   - `config\environment.json`
@@ -308,6 +310,7 @@
   - `contracts\runtime`/
   - `contracts\services`/
   - `contracts\shared`/
+- `curriculum-3d-hero.png`
 - `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
@@ -350,8 +353,10 @@
   - `docs\developer`/
   - `docs\ecosystem`/
   - `docs\engineering`/
+  - `docs\experience`/
   - `docs\github-os`/
   - `docs\governance`/
+  - `docs\governance-source`/
   - `docs\institution-ops`/
   - `docs\institution-os`/
   - `docs\ioc`/
@@ -369,6 +374,8 @@
   - `docs\project-phoenix`/
   - `docs\releases`/
   - `docs\research`/
+  - `docs\runbooks`/
+  - `docs\security`/
   - `docs\skills-reference`/
   - `docs\social-campaigns`/
   - `docs\social-os`/
@@ -384,6 +391,7 @@
   - `docs\wave-9`/
   - `docs\website`/
 - `eslint.config.mjs`
+- `fix_migration_checksums.mjs`
 - `governance`/
   - `governance\bdl-governance.md`
   - `governance\coding-standards.md`
@@ -407,6 +415,7 @@
   - `history\milestones.md`
   - `history\release-history.md`
   - `history\timeline.md`
+- `homepage-3d-hero.png`
 - `homepage-after-preloader.png`
 - `homepage-current.png`
 - `homepage-full.png`
@@ -417,6 +426,7 @@
   - `knowledge\engineering-graphs`/
 - `knowledge-packages`/
   - `knowledge-packages\level-1`/
+- `lesson-3d-hero.png`
 - `library-viewport.png`
 - `login-viewport.png`
 - `memory`/
@@ -428,7 +438,9 @@
   - `memory\releases`/
   - `memory\research`/
   - `memory\tasks`/
+- `migration1.json`
 - `missions-verified.png`
+- `module-3d-hero.png`
 - `opencode.json`
 - `os-redirect-login.png`
 - `package.json`
@@ -670,6 +682,7 @@
   - `rfcs\RFC-0003-AI-Gateway.md`
   - `rfcs\RFC-0014-icm-adoption.md`
   - `rfcs\STATUS-VOCABULARY-PROPOSAL.md`
+- `run-migration.mjs`
 - `schemas`/
   - `schemas\agent.schema.json`
   - `schemas\document.schema.json`
@@ -760,6 +773,11 @@
   - `standards\release.md`
   - `standards\security.md`
   - `standards\testing.md`
+- `supabase`/
+  - `supabase\.temp`/
+  - `supabase\migrations`/
+  - `supabase\tests`/
+- `test-3d-hero.cjs`
 - `tsconfig.base.json`
 - `turbo.json`
 - `typecheck-out.txt`
@@ -771,6 +789,8 @@
   - `validation\week-3-operations.md`
   - `validation\week-4-readiness.md`
 - `vercel.json`
+- `workers`/
+  - `workers\api`/
 
 ## Canonical homes (links, not copies)
 

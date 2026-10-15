@@ -102,6 +102,9 @@ typecheck-output*.txt
 # Runtime derivatives (.glb/.png) are tracked; these ~50MB stay local only.
 apps/ai-institute/public/models/poly-haven/textures/
 
+# Supabase CLI machine-local state (not source)
+supabase/.temp/
+
 # Dev scratch scripts (one-off local utilities)
 /complete-supabase.mjs
 /run-migration.mjs
