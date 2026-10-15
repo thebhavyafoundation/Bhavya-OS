@@ -26,14 +26,14 @@ export function LottieLoader({
     if (!containerRef.current) return;
 
     let isMounted = true;
-    let animation: { destroy: () => void; addEventListener?: (event: string, callback: () => void) => void } | null = null;
+    let animation: {
+      destroy: () => void;
+      addEventListener?: (event: string, callback: () => void) => void;
+    } | null = null;
 
     const loadLottie = async () => {
       try {
-        const lottieModule = await import(
-          // @ts-expect-error lottie-web is an optional dependency
-          "lottie-web"
-        );
+        const lottieModule = await import("lottie-web");
         if (!isMounted || !containerRef.current) return;
 
         const lottie = lottieModule.default;
@@ -45,7 +45,7 @@ export function LottieLoader({
           path: src,
         });
 
-        animation = anim;
+        animation = anim as unknown as typeof animation;
         if (anim.addEventListener) {
           anim.addEventListener("DOMLoaded", () => {
             if (isMounted) setIsLoaded(true);
