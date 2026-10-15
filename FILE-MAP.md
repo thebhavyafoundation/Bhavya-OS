@@ -21,6 +21,7 @@
 - `rfcs/RFC-0001-Volunteer-Portal.md` — published
 - `rfcs/RFC-0002-Forest-GIS.md` — published
 - `rfcs/RFC-0003-AI-Gateway.md` — Accepted
+- `rfcs/RFC-0014-icm-adoption.md` — draft
 - `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — ` body line | `published` (no content change needed beyond frontmatter, when approved) |
 
 ## Top-level tree (depth 2, generated)
@@ -126,6 +127,7 @@
   - `.events\research.finished.md`
   - `.events\volunteer.joined.md`
   - `.events\website.updated.md`
+- `.gitattributes`
 - `.github`/
   - `.github\workflows`/
 - `.gitignore`
@@ -235,6 +237,10 @@
   - `_archive\test-artifacts-2026-09-05`/
   - `_archive\test-artifacts-2026-09-17`/
   - `_archive\v1.0.0_ARCHIVE.md`
+- `_config`/
+  - `_config\brand-rules.md`
+  - `_config\build-conventions.md`
+  - `_config\design-tokens.md`
 - `_shared`/
   - `_shared\factory-map.md`
 - `_system`/
@@ -246,6 +252,7 @@
   - `_templates\reasons-canvas.md`
   - `_templates\rfc-record.md`
   - `_templates\stage-CONTEXT.md`
+- `about-current.png`
 - `apps`/
   - `apps\CONTEXT.md`
   - `apps\admin`/
@@ -301,6 +308,7 @@
   - `contracts\runtime`/
   - `contracts\services`/
   - `contracts\shared`/
+- `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
   - `design\CONTEXT.md`
@@ -399,7 +407,10 @@
   - `history\milestones.md`
   - `history\release-history.md`
   - `history\timeline.md`
+- `homepage-after-preloader.png`
+- `homepage-current.png`
 - `homepage-full.png`
+- `homepage-verified.png`
 - `homepage-viewport.png`
 - `index.json`
 - `knowledge`/
@@ -417,6 +428,7 @@
   - `memory\releases`/
   - `memory\research`/
   - `memory\tasks`/
+- `missions-verified.png`
 - `opencode.json`
 - `os-redirect-login.png`
 - `package.json`
@@ -656,6 +668,7 @@
   - `rfcs\RFC-0001-Volunteer-Portal.md`
   - `rfcs\RFC-0002-Forest-GIS.md`
   - `rfcs\RFC-0003-AI-Gateway.md`
+  - `rfcs\RFC-0014-icm-adoption.md`
   - `rfcs\STATUS-VOCABULARY-PROPOSAL.md`
 - `schemas`/
   - `schemas\agent.schema.json`
@@ -687,6 +700,26 @@
   - `scripts\vercel-deploy-app.mjs`
 - `setup`/
   - `setup\questionnaire.md`
+- `shared`/
+  - `shared\constants`/
+  - `shared\schemas`/
+- `skills`/
+  - `skills\apple-design`/
+  - `skills\bhavya-ai-development`/
+  - `skills\bhavya-architecture`/
+  - `skills\bhavya-capability-research`/
+  - `skills\bhavya-content-truth`/
+  - `skills\bhavya-data-model`/
+  - `skills\bhavya-design-system`/
+  - `skills\bhavya-github-workflow`/
+  - `skills\bhavya-production-verification`/
+  - `skills\bhavya-reasons-canvas`/
+  - `skills\bhavya-route-audit`/
+  - `skills\bhavya-security`/
+  - `skills\bhavya-spec`/
+  - `skills\bhavya-ui-verification`/
+  - `skills\design-taste-frontend`/
+  - `skills\impeccable`/
 - `skills-lock.json`
 - `specs`/
   - `specs\SKILL-ARCHITECTURE.md`
@@ -695,9 +728,16 @@
   - `specs\documents.md`
   - `specs\examples`/
   - `specs\governance.md`
+  - `specs\icm-workspace-implementation-reasons-canvas.md`
   - `specs\information-architecture.md`
   - `specs\missions.md`
   - `specs\product.md`
+- `stages`/
+  - `stages\01-discovery`/
+  - `stages\02-specification`/
+  - `stages\03-implementation`/
+  - `stages\04-verification`/
+  - `stages\05-deployment`/
 - `standards`/
   - `standards\BAR-001.md`
   - `standards\BDL-001.md`
@@ -722,6 +762,9 @@
   - `standards\testing.md`
 - `tsconfig.base.json`
 - `turbo.json`
+- `typecheck-out.txt`
+- `typecheck-out2.txt`
+- `typecheck-output.txt`
 - `validation`/
   - `validation\week-1-staging.md`
   - `validation\week-2-uat.md`

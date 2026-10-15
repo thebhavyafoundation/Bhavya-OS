@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://bhavya.foundation/schemas/stage-contract.schema.json",
+  "title": "ICM Stage Contract",
+  "description": "Schema for ICM stage CONTEXT.md contract (Pattern 1)",
+  "type": "object",
+  "required": ["inputs", "process", "outputs"],
+  "properties": {
+    "inputs": {
+      "type": "array",
+      "description": "Input entries specifying what the stage loads (Pattern 4: selective section routing)",
+      "items": {
+        "type": "object",
+        "required": ["source", "fileLocation", "sectionScope", "why"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Source identifier (e.g., 'Previous stage', 'Style guide', 'Skill')"
+          },
+          "fileLocation": {
+            "type": "string",
+            "description": "Relative path from stage directory (e.g., '../01-discovery/output/', '../../_config/brand-rules.md')"
+          },
+          "sectionScope": {
+            "type": "string",
+            "description": "Specific section to load (e.g., 'Full file', 'Voice Rules section', 'Index then load rules')"
+          },
+          "why": {
+            "type": "string",
+            "description": "Reason for loading this input"
+          }
+        }
+      }
+    },
+    "process": {
+      "type": "array",
+      "description": "Ordered process steps",
+      "items": {
+        "type": "object",
+        "required": ["step", "description"],
+        "properties": {
+          "step": { "type": "integer", "minimum": 1 },
+          "description": { "type": "string" },
+          "tool": {
+            "type": "string",
+            "description": "Tool to use (e.g., 'read', 'write', 'bash', 'skill')"
+          },
+          "outputsTo": {
+            "type": "string",
+            "description": "Intermediate output location if applicable"
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Output artifacts this stage produces (Pattern 2: stage handoffs)",
+      "items": {
+        "type": "object",
+        "required": ["artifact", "location", "format"],
+        "properties": {
+          "artifact": {
+            "type": "string",
+            "description": "Artifact name (e.g., 'Discovery report')"
+          },
+          "location": {
+            "type": "string",
+            "description": "Output path relative to stage directory (e.g., 'output/discovery-report.md')"
+          },
+          "format": {
+            "type": "string",
+            "description": "Format specification (e.g., 'Markdown with metadata header')"
+          }
+        }
+      }
+    },
+    "checkpoints": {
+      "type": "array",
+      "description": "Human steering points (Pattern 11) — creative stages only",
+      "items": {
+        "type": "object",
+        "required": ["afterStep", "agentPresents", "humanDecides"],
+        "properties": {
+          "afterStep": { "type": "integer", "minimum": 1 },
+          "agentPresents": {
+            "type": "string",
+            "description": "What the agent shows (e.g., 'Three spec options with trade-offs')"
+          },
+          "humanDecides": {
+            "type": "string",
+            "description": "What the human chooses (e.g., 'Which approach to pursue')"
+          }
+        }
+      }
+    },
+    "audits": {
+      "type": "array",
+      "description": "Quality checklists before writing output (Pattern 12)",
+      "items": {
+        "type": "object",
+        "required": ["check", "passCondition"],
+        "properties": {
+          "check": {
+            "type": "string",
+            "description": "Check name (e.g., 'All types reference @bhavya/shared')"
+          },
+          "passCondition": {
+            "type": "string",
+            "description": "Unambiguous pass condition (e.g., 'No local type definitions for shared entities')"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
