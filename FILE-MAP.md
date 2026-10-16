@@ -313,7 +313,6 @@
   - `contracts\services`/
   - `contracts\shared`/
 - `curriculum-3d-hero.png`
-- `curriculum-build-error`
 - `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
