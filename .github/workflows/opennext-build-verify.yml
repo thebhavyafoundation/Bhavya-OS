@@ -1,0 +1,108 @@
+# OpenNext production-equivalent build verification.
+#
+# PURPOSE
+#   Reproduce and then gate the exact build that production uses
+#   (`opennextjs-cloudflare build`) WITHOUT deploying anything.
+#
+# WHY THIS EXISTS
+#   The normal Next.js build passes while the Cloudflare deployment build fails.
+#   The Next.js build does not perform OpenNext's server-function bundling, so a
+#   green `build` check does not mean "will deploy". This workflow closes that
+#   gap: master can no longer go green and still fail to deploy.
+#
+# SAFETY
+#   - No Cloudflare credentials. No API token. No account id.
+#   - No `wrangler deploy`, no `opennextjs-cloudflare deploy`.
+#   - No production environment.
+#   - No Turso production connection and no database query.
+#   - Runs on pull_request and on the repair branch only. Never deploys.
+name: OpenNext Build Verify
+
+on:
+  pull_request:
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "scripts/**"
+      - "content/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - "turbo.json"
+      - "tsconfig.base.json"
+      - ".github/workflows/opennext-build-verify.yml"
+  workflow_dispatch:
+
+# Cancel superseded runs on the same PR to save runner time.
+concurrency:
+  group: opennext-build-verify-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  opennext-build:
+    name: OpenNext build (no deploy)
+    runs-on: ubuntu-latest
+    # No `environment:` key, so no production environment approval is possible.
+    env:
+      # Matches deploy-cloudflare.yml exactly so this gate is representative.
+      NODE_OPTIONS: --max-old-space-size=4096
+      CI: "true"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 10.17.1
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Record toolchain versions
+        run: |
+          {
+            echo "### Toolchain"
+            echo "- node: $(node --version)"
+            echo "- pnpm: $(pnpm --version)"
+            echo "- runner: $(uname -srm)"
+            echo "- next: $(node -p "require('./apps/ai-institute/package.json').dependencies.next")"
+            echo "- @opennextjs/cloudflare: $(node -p "require('./apps/ai-institute/package.json').devDependencies['@opennextjs/cloudflare']")"
+          } >> "$GITHUB_STEP_SUMMARY"
+          node -p "require('./apps/ai-institute/package.json').dependencies.next" > opennext-build-versions.txt
+
+      - name: Self-test the bundle assertion
+        # Proves the assertion itself detects the production condition before it
+        # is trusted to judge a real build. Cheap and deterministic.
+        run: node scripts/verify-opennext-bundle.mjs --selftest
+
+      - name: Next.js application build
+        run: pnpm --filter ai-institute run build
+
+      - name: OpenNext build only (no upload)
+        working-directory: apps/ai-institute
+        # Uses the repository-installed binary from node_modules/.bin, not an
+        # unpinned remote download. This is the same command production runs,
+        # minus the deploy.
+        run: pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
+
+      - name: Verify packaged server-function dependencies
+        run: node scripts/verify-opennext-bundle.mjs
+
+      - name: Upload OpenNext build log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: opennext-build-log
+          path: |
+            opennext-build.log
+            opennext-build-versions.txt
+          retention-days: 7
+          if-no-files-found: ignore

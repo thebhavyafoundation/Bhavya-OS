@@ -699,8 +699,10 @@
   - `schemas\task.schema.json`
   - `schemas\workflow.schema.json`
 - `scripts`/
+  - `scripts\__fixtures__`/
   - `scripts\_archive`/
   - `scripts\antislop-gate.mjs`
+  - `scripts\check-skill-wrappers.mjs`
   - `scripts\deploy-all-vercel.sh`
   - `scripts\deploy-all.ps1`
   - `scripts\deploy-vercel-all.ps1`
@@ -715,9 +717,11 @@
   - `scripts\generate-source-b-registry.mjs`
   - `scripts\quality-gates.mjs`
   - `scripts\sync-tokens.mjs`
+  - `scripts\test-platform-contract.mjs`
   - `scripts\validate-platform-contract.mjs`
   - `scripts\vercel-build-app.mjs`
   - `scripts\vercel-deploy-app.mjs`
+  - `scripts\verify-opennext-bundle.mjs`
 - `setup`/
   - `setup\questionnaire.md`
 - `shared`/
