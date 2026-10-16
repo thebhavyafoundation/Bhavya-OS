@@ -46,7 +46,11 @@
     "drift:check": "node scripts/drift-check.mjs",
     "platform:check": "node scripts/validate-platform-contract.mjs",
     "platform:test": "node scripts/test-platform-contract.mjs",
-    "wrapper:check": "node scripts/check-skill-wrappers.mjs"
+    "wrapper:check": "node scripts/check-skill-wrappers.mjs",
+    "diagrams:check": "node scripts/diagrams/check-manifests.mjs",
+    "diagrams:validate": "node scripts/diagrams/validate-diagrams.mjs",
+    "diagrams:test": "node scripts/diagrams/test-profile.mjs",
+    "diagrams:verify": "pnpm diagrams:check && pnpm diagrams:validate && pnpm diagrams:test"
   },
   "dependencies": {
     "next": "15.5.25",
