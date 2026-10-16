@@ -42,7 +42,13 @@ export { Avatar } from "./components/Avatar";
 
 export { Breadcrumb } from "./components/Breadcrumb";
 
-export { Skeleton, CardSkeleton, ListSkeleton, TableSkeleton, TabSkeleton } from "./components/Skeleton";
+export {
+  Skeleton,
+  CardSkeleton,
+  ListSkeleton,
+  TableSkeleton,
+  TabSkeleton,
+} from "./components/Skeleton";
 
 export { Toast } from "./components/Toast";
 
@@ -55,4 +61,11 @@ export { AppFooter } from "./components/AppFooter";
 export type { FooterLink, FooterColumn } from "./components/AppFooter";
 
 export { BhavyaNav } from "./components/BhavyaNav";
-export type { NavItem, BhavyaNavUser, BhavyaNavProps } from "./components/BhavyaNav";
+export type {
+  NavItem,
+  BhavyaNavUser,
+  BhavyaNavProps,
+} from "./components/BhavyaNav";
+
+export { EditorialDiagram } from "./components/editorial-diagram";
+export type { EditorialDiagramProps } from "./components/editorial-diagram";
