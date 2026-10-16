@@ -27,24 +27,23 @@ const nextConfig = {
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
   },
-  // `@libsql/isomorphic-ws` is listed in serverExternalPackages above, so Next
-  // leaves it as a runtime require instead of inlining it. That means OpenNext's
-  // server-function packaging must carry the package's *files* into the Worker.
-  //
-  // File tracing alone is not sufficient here: this package resolves through a
-  // nested conditional `exports` map
-  // (import|require -> bun|deno|workerd|node|default), and the tracer copies the
-  // package.json but not the .cjs/.mjs entry files it points at. esbuild then
-  // finds the package and fails to load the entry:
-  //   "Could not resolve @libsql/isomorphic-ws"
-  //   at .../isomorphic-ws/package.json (the exports entry)
-  //
-  // This is the supported Next.js mechanism for adding files to the standalone
-  // output. It is scoped to exactly these two packages, never all of node_modules.
+  // `@libsql/isomorphic-ws` is in serverExternalPackages above, so Next leaves
+  // it as a runtime require and OpenNext must carry its files into the Worker.
+  // Tracing alone is not enough: it resolves through a nested conditional
+  // `exports` map, and the tracer copies package.json but not the .cjs/.mjs
+  // entry it points at, so esbuild finds the package and cannot load the entry.
+  // `ws` is listed because this package resolves to web.cjs (global WebSocket, no
+  // dependency) under workerd/default but to node.cjs, which require()s `ws`,
+  // under the node condition. Which one the packager picks depends on the
+  // conditions it passes to esbuild, so `ws` must resolve either way. It is
+  // already a transitive dependency (MIT); this adds no new dependency.
+  // Scoped to the Turso chain only, never all of node_modules.
   outputFileTracingIncludes: {
     "/*": [
       "./node_modules/@libsql/isomorphic-ws/**/*",
       "./node_modules/@libsql/hrana-client/**/*",
+      "./node_modules/@libsql/client/**/*",
+      "./node_modules/ws/**/*",
     ],
   },
   images: {

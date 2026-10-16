@@ -62,8 +62,19 @@ const SERVER_FN = join(OPEN_NEXT, "server-functions", "default");
  * `@libsql/hrana-client/lib-cjs/index.js` performs an UNCONDITIONAL top-level
  * `require("@libsql/isomorphic-ws")`, so it cannot be marked external — doing
  * so only moves the failure to Worker startup.
+ *
+ * `ws` is watched because `@libsql/isomorphic-ws` resolves to a different entry
+ * per condition: `web.cjs` for workerd/default (no dependency) and `node.cjs`
+ * for the node condition, which does `require("ws")`. Whichever entry the
+ * packager selects, every require reachable from the packaged tree must
+ * resolve. Watching only the Turso packages would miss a missing `ws`.
  */
-const WATCHED = ["@libsql/isomorphic-ws", "@libsql/hrana-client"];
+const WATCHED = [
+  "@libsql/isomorphic-ws",
+  "@libsql/hrana-client",
+  "@libsql/client",
+  "ws",
+];
 
 const SOURCE_EXT = /\.(mjs|cjs|js)$/;
 
@@ -256,10 +267,28 @@ function buildFixture(mode) {
         },
       }),
     );
-    if (mode === "complete") {
-      // Match the real package's CJS entry for the `require` condition.
+    if (mode === "complete" || mode === "no-ws") {
+      // Match the real package's CJS entry for the `require` + node condition,
+      // which does require("ws"). This is the case that failed on 2026-10-17.
       writeFileSync(
         join(ns, "isomorphic-ws", "node.cjs"),
+        'const { WebSocket } = require("ws");\nmodule.exports = { WebSocket };\n',
+      );
+    }
+    if (mode === "complete") {
+      // ws must sit beside @libsql, i.e. in the same node_modules the requirer
+      // resolves from. pnpm places each package's dependencies in its own
+      // node_modules, so this mirrors the real layout. Writing it under the
+      // .pnpm root instead would be unresolvable and would turn the "clean"
+      // scenario into a false negative.
+      const wsDir = join(ns, "..", "ws");
+      mkdirSync(wsDir, { recursive: true });
+      writeFileSync(
+        join(wsDir, "package.json"),
+        JSON.stringify({ name: "ws", version: "8.21.3", main: "index.js" }),
+      );
+      writeFileSync(
+        join(wsDir, "index.js"),
         "module.exports = { WebSocket: class {} };\n",
       );
     }
@@ -280,6 +309,12 @@ function selftest() {
       mustCatch: true,
     },
     {
+      mode: "no-ws",
+      label: "isomorphic-ws entry present but its own `ws` dependency missing",
+      mustCatch: true,
+      expectDep: "ws",
+    },
+    {
       mode: "complete",
       label: "isomorphic-ws fully packaged",
       mustCatch: false,
@@ -292,7 +327,7 @@ function selftest() {
     try {
       const r = checkTree(tmp);
       const depFailures = r.failures.filter(
-        (f) => f.dep === "@libsql/isomorphic-ws",
+        (f) => f.dep === (s.expectDep ?? "@libsql/isomorphic-ws"),
       );
       const caught = depFailures.length > 0;
       const correct = caught === s.mustCatch;
