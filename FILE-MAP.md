@@ -131,6 +131,7 @@
 - `.github`/
   - `.github\workflows`/
 - `.gitignore`
+- `.gitleaks.toml`
 - `.gitleaksignore`
 - `.husky`/
   - `.husky\commit-msg`
@@ -282,6 +283,7 @@
   - `config\skills`/
 - `content`/
   - `content\community.mdx`
+  - `content\diagrams`/
   - `content\financials`/
   - `content\forest`/
   - `content\governance`/
@@ -311,6 +313,7 @@
   - `contracts\services`/
   - `contracts\shared`/
 - `curriculum-3d-hero.png`
+- `curriculum-build-error`
 - `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
@@ -351,6 +354,7 @@
   - `docs\design-principles.md`
   - `docs\design-system`/
   - `docs\developer`/
+  - `docs\diagrams`/
   - `docs\ecosystem`/
   - `docs\engineering`/
   - `docs\experience`/
@@ -385,6 +389,7 @@
   - `docs\system`/
   - `docs\testing.md`
   - `docs\token-reference.md`
+  - `docs\tools`/
   - `docs\v7`/
   - `docs\validation`/
   - `docs\wave-10`/
@@ -700,6 +705,7 @@
   - `scripts\deploy-all.ps1`
   - `scripts\deploy-vercel-all.ps1`
   - `scripts\deploy-vercel.sh`
+  - `scripts\diagrams`/
   - `scripts\drift-check.mjs`
   - `scripts\enforce-deps.mjs`
   - `scripts\enforce-design-system.mjs`
