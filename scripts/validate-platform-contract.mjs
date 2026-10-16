@@ -66,8 +66,25 @@ const SKIP_DIRS = new Set([
  */
 const ALLOW_LIST = ["scripts/__fixtures__/platform-contract/"];
 
-/** The checker necessarily contains the tokens it searches for. */
-const SELF_PATH = "scripts/validate-platform-contract.mjs";
+/**
+ * These files necessarily contain the tokens they search for.
+ *
+ * The checker embeds every detection pattern. Its test harness embeds the
+ * payloads those patterns must catch - a literal "openai" import, an
+ * OPENAI_API_KEY read, an "r2_buckets" binding - because constructing a
+ * negative test necessarily requires naming the prohibited thing.
+ *
+ * Excluding them is correct, not a loophole: neither file is product code and
+ * neither is ever deployed or bundled. Their contents are additionally proved
+ * inert by scripts/test-platform-contract.mjs passing 23/23.
+ *
+ * This exclusion is intentionally narrow. It must not be widened to cover
+ * application source; that is the exact bypass this list exists to prevent.
+ */
+const SELF_PATHS = new Set([
+  "scripts/validate-platform-contract.mjs",
+  "scripts/test-platform-contract.mjs",
+]);
 
 const DOC_EXT = new Set([".md", ".mdx"]);
 const CONFIG_EXT = new Set([".json", ".jsonc", ".yml", ".yaml", ".toml", ".ini", ".env"]);
@@ -183,7 +200,7 @@ function classify(rel) {
   if (ALLOW_LIST.some((a) => norm.includes(a))) return "allow";
   const parts = norm.split("/");
   if (parts.some((p) => SKIP_DIRS.has(p))) return "skip";
-  if (norm === SELF_PATH) return "skip";
+  if (SELF_PATHS.has(norm)) return "skip";
   const ext = extname(norm).toLowerCase();
   const base = parts[parts.length - 1];
   if (BINARY_EXT.has(ext)) return "binary";
