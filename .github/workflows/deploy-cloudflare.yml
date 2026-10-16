@@ -29,9 +29,25 @@ jobs:
 
       - name: Build for Cloudflare
         working-directory: apps/ai-institute
-        run: npx opennextjs-cloudflare build
+        # pipefail is essential: without it the pipeline's exit status is tee's
+        # (always 0), which would mask a build failure and let the deploy step
+        # run on a broken bundle.
+        run: |
+          set -o pipefail
+          npx opennextjs-cloudflare build 2>&1 | tee build.log
         env:
           NODE_OPTIONS: --max-old-space-size=4096
+
+      - name: Upload build log
+        # Full logs of a failed run are otherwise unreadable from the UI, which
+        # cost a debugging cycle on 2026-10-17. Retained briefly.
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cloudflare-build-log
+          path: apps/ai-institute/build.log
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Deploy to Cloudflare Workers
         working-directory: apps/ai-institute
