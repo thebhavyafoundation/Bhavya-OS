@@ -1,0 +1,30 @@
+{
+  "diagram_id": "curriculum-learning-pathway",
+  "title": "Curriculum learning pathway",
+  "type": "tree",
+  "variant": "minimal-light",
+  "route": "/app/learn/pathway",
+  "section": "Curriculum",
+  "purpose": "Show the Institute → Programme → Course → Module → Lesson → Practice → Assessment → Mastery → Certification pathway using the existing 86-module registry and four bands.",
+  "audience": "Learners, educators",
+  "source_html": "content/diagrams/sources/html/curriculum-learning-pathway.html",
+  "production_svg": "apps/ai-institute/public/diagrams/curriculum/curriculum-learning-pathway.svg",
+  "optional_png": null,
+  "accessible_text": "The curriculum pathway moves from Institute through Programme, Course, Module, Lesson, Practice, Assessment, and Mastery to Certification, organized across four bands in the 86-module registry.",
+  "content_sources": ["content/master-curriculum/", "registry/"],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "not-applicable",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}

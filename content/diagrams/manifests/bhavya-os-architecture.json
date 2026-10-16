@@ -1,0 +1,34 @@
+{
+  "diagram_id": "bhavya-os-architecture",
+  "title": "Bhavya OS architecture",
+  "type": "architecture",
+  "variant": "minimal-light",
+  "route": "/os/architecture",
+  "section": "Bhavya OS",
+  "purpose": "Show the institutional systems and their relationships for public, learner, and administrative audiences.",
+  "audience": "Public, learners, administrators",
+  "source_html": "content/diagrams/sources/html/bhavya-os-architecture.html",
+  "production_svg": "apps/ai-institute/public/diagrams/architecture/bhavya-os-architecture.svg",
+  "optional_png": null,
+  "accessible_text": "Bhavya OS connects public, learner, and administrative users to a Cloudflare application, Supabase authentication, Turso application data, Backblaze B2 assets, the GitHub canonical repository, GitHub Actions, and the OpenCode control plane. No credentials or internal URLs are shown.",
+  "content_sources": [
+    "docs/architecture/REPOSITORY_SOURCE_OF_TRUTH.md",
+    "docs/architecture/DOMAIN_OWNERSHIP.md",
+    "apps/ai-institute/CONTEXT.md"
+  ],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "not-applicable",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curriculum learning pathway — diagram source</title>
+  <style>
+    html { font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #f7f4ec; color: #0e382e; }
+    .frame { min-width: 960px; overflow-x: auto; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <svg xmlns="http://www.w3.org/2000/svg" id="curriculum-learning-pathway-root" role="img" aria-labelledby="curriculum-learning-pathway-title curriculum-learning-pathway-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="curriculum-learning-pathway-title">Curriculum learning pathway</title>
+      <desc id="curriculum-learning-pathway-desc">The curriculum pathway moves from Institute through Programme, Course, Module, Lesson, Practice, Assessment, and Mastery to Certification, organized across four bands in the 86-module registry.</desc>
+      <style>
+        #curriculum-learning-pathway-root { font-family: Inter, system-ui, sans-serif; }
+        #curriculum-learning-pathway-root .bg { fill: #f7f4ec; }
+        #curriculum-learning-pathway-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #curriculum-learning-pathway-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #curriculum-learning-pathway-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #curriculum-learning-pathway-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #curriculum-learning-pathway-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#curriculum-learning-pathway-arrow); }
+        #curriculum-learning-pathway-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #curriculum-learning-pathway-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #curriculum-learning-pathway-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #curriculum-learning-pathway-root .arrowhead { fill: #546342; }
+        #curriculum-learning-pathway-root .band { fill: none; stroke: rgba(14,56,46,0.08); stroke-width: 1; rx: 6; ry: 6; }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">CURRICULUM · PATHWAY</text>
+      <text class="title" x="24" y="58">Curriculum learning pathway</text>
+      <marker id="curriculum-learning-pathway-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <rect class="band" x="0" y="60" width="960" height="140" />
+      <rect class="band" x="0" y="220" width="960" height="140" />
+      <rect class="band" x="0" y="380" width="960" height="100" />
+      <text class="sublabel" x="40" y="78" fill="#8a9a8b">Band 1 · Foundation</text>
+      <text class="sublabel" x="40" y="238" fill="#8a9a8b">Band 2 · Core</text>
+      <text class="sublabel" x="40" y="398" fill="#8a9a8b">Band 3 · Practice · Band 4 · Mastery</text>
+      <g class="node accent"><rect x="60" y="100" width="150" height="60" /><text class="node-name" x="135" y="124">Institute</text><text class="sublabel" x="135" y="142">Bhavya Foundation</text></g>
+      <g class="node"><rect x="250" y="100" width="150" height="60" /><text class="node-name" x="325" y="124">Programme</text><text class="sublabel" x="325" y="142">forest / knowledge / heritage / community</text></g>
+      <g class="node"><rect x="440" y="100" width="150" height="60" /><text class="node-name" x="515" y="124">Course</text><text class="sublabel" x="515" y="142">86 modules across bands</text></g>
+      <g class="node"><rect x="630" y="100" width="150" height="60" /><text class="node-name" x="705" y="124">Module</text><text class="sublabel" x="705" y="142">lessons + practice</text></g>
+      <g class="node"><rect x="820" y="100" width="120" height="60" /><text class="node-name" x="880" y="124">Lesson</text><text class="sublabel" x="880" y="142">teaching unit</text></g>
+      <g class="node"><rect x="250" y="260" width="150" height="60" /><text class="node-name" x="325" y="284">Practice</text><text class="sublabel" x="325" y="302">applied exercise</text></g>
+      <g class="node"><rect x="440" y="260" width="150" height="60" /><text class="node-name" x="515" y="284">Assessment</text><text class="sublabel" x="515" y="302">evidence of learning</text></g>
+      <g class="node"><rect x="630" y="260" width="150" height="60" /><text class="node-name" x="705" y="284">Mastery</text><text class="sublabel" x="705" y="302">competency confirmed</text></g>
+      <g class="node accent"><rect x="820" y="260" width="150" height="60" /><text class="node-name" x="895" y="284">Certification</text><text class="sublabel" x="895" y="302">next pathway</text></g>
+      <line class="arrow" x1="210" y1="130" x2="250" y2="130" />
+      <line class="arrow" x1="400" y1="130" x2="440" y2="130" />
+      <line class="arrow" x1="590" y1="130" x2="630" y2="130" />
+      <line class="arrow" x1="780" y1="130" x2="820" y2="130" />
+      <line class="arrow" x1="325" y1="160" x2="325" y2="260" />
+      <line class="arrow" x1="515" y1="160" x2="515" y2="260" />
+      <line class="arrow" x1="705" y1="160" x2="705" y2="260" />
+      <line class="arrow accent" x1="895" y1="160" x2="895" y2="260" />
+      <line class="arrow" x1="400" y1="290" x2="440" y2="290" />
+      <line class="arrow" x1="590" y1="290" x2="630" y2="290" />
+      <line class="arrow" x1="780" y1="290" x2="820" y2="290" />
+    </svg>
+  </div>
+</body>
+</html>

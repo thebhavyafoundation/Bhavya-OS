@@ -259,9 +259,9 @@ export type MissionStatus =
   "planning" | "active" | "monitoring" | "completed" | "on-hold" | "archived";
 
 export type RecordProvenance =
-  | "institutional"   // Created via authorized API with evidence recording
-  | "test-seed"       // Created during development/testing
-  | "imported";       // Imported from external source
+  | "institutional" // Created via authorized API with evidence recording
+  | "test-seed" // Created during development/testing
+  | "imported"; // Imported from external source
 
 export interface Mission {
   id: string;
@@ -392,7 +392,8 @@ export interface ForestStats {
 
 // ── Governance ────────────────────────────────────────────
 
-export type BoardMeetingStatus = "scheduled" | "in-progress" | "completed" | "cancelled";
+export type BoardMeetingStatus =
+  "scheduled" | "in-progress" | "completed" | "cancelled";
 
 export interface BoardMeeting {
   id: string;
@@ -460,7 +461,8 @@ export interface ResolutionEvent {
   notes?: string;
 }
 
-export type PolicyStatus = "draft" | "review" | "active" | "under-review" | "archived";
+export type PolicyStatus =
+  "draft" | "review" | "active" | "under-review" | "archived";
 
 export interface Policy {
   id: string;
@@ -498,7 +500,8 @@ export interface PolicyVersion {
 
 // ── Action Items ──────────────────────────────────────────
 
-export type ActionItemStatus = "pending" | "in-progress" | "completed" | "cancelled" | "overdue";
+export type ActionItemStatus =
+  "pending" | "in-progress" | "completed" | "cancelled" | "overdue";
 
 export type ActionItemSource = "resolution" | "meeting" | "policy" | "manual";
 
@@ -547,8 +550,8 @@ export interface TraceabilityChain {
   meeting?: BoardMeeting;
   resolution?: Resolution;
   actionItems: ActionItem[];
-  mission?: any;
-  project?: any;
+  mission?: unknown;
+  project?: unknown;
   policy?: Policy;
   evidence: GovernanceEvidence[];
 }
@@ -637,4 +640,24 @@ export interface MemoryStats {
   decisionsWithContext: number;
   lessonsByCategory: Record<string, number>;
   patternsByType: Record<string, number>;
+}
+
+// ── Curriculum visual block ──────────────────────────────────
+
+export type DiagramBlockType = "diagram";
+
+export interface DiagramBlock {
+  type: DiagramBlockType;
+  diagramId: string;
+  title: string;
+  learningPurpose: string;
+  caption: string;
+  textEquivalent: string;
+  contentSource: string;
+  mobileTested: boolean;
+  printFallback: boolean;
+  subjectReviewed: boolean;
+  accessibilityReviewed: boolean;
+  prompt?: string;
+  reflectionQuestion?: string;
 }

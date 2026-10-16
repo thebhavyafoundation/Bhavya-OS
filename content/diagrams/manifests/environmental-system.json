@@ -1,0 +1,33 @@
+{
+  "diagram_id": "environmental-system",
+  "title": "Environmental system",
+  "type": "loop",
+  "variant": "minimal-light",
+  "route": "/forest/environmental-system",
+  "section": "Environment",
+  "purpose": "Show the cause-and-effect cycle from the Environmental Conservation Policy and approved curriculum content; first public/educational diagram only if content is complete.",
+  "audience": "Public, learners",
+  "source_html": "content/diagrams/sources/html/environmental-system.html",
+  "production_svg": "apps/ai-institute/public/diagrams/science/environmental-system.svg",
+  "optional_png": null,
+  "accessible_text": "The environmental system is a reinforcing cycle of conservation action, monitoring, and review, drawn from the Environmental Conservation Policy and approved curriculum content.",
+  "content_sources": [
+    "governance/environmental-conservation-policy.md",
+    "content/forest/"
+  ],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "not-applicable",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}
