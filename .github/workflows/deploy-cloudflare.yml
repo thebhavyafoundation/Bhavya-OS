@@ -1,8 +1,27 @@
 name: Deploy to Cloudflare Workers
 
+# Canonical production deployment. Cloudflare/OpenNext is the permanent
+# production host (docs/architecture/PLATFORM-TRUTH.md). Vercel is preview-only.
 on:
   push:
     branches: [master]
+    paths:
+      - 'apps/ai-institute/**'
+      - 'packages/**'
+      - 'content/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'turbo.json'
+      - '.github/workflows/deploy-cloudflare.yml'
+  # Manual trigger for a deliberate production deploy. Prefer this over merging
+  # a no-op commit: it makes the deployment an explicit, auditable action.
+  workflow_dispatch:
+
+# Do not interrupt an in-flight production deploy. A newer commit queues
+# behind it rather than cancelling a half-applied Worker upload.
+concurrency:
+  group: deploy-cloudflare-production
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
