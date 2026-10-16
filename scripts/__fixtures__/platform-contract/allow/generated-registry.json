@@ -1,0 +1,23 @@
+﻿{
+  "version": "1.0",
+  "models": [
+    {
+      "id": "mimo-v2.5-free",
+      "provider": "opencode",
+      "type": "text",
+      "status": "active"
+    },
+    {
+      "id": "gpt-4",
+      "provider": "openai",
+      "type": "text",
+      "status": "available"
+    },
+    {
+      "id": "claude-3",
+      "provider": "anthropic",
+      "type": "text",
+      "status": "available"
+    }
+  ]
+}

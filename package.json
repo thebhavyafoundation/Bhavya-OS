@@ -44,7 +44,9 @@
     "antislop": "node scripts/antislop-gate.mjs",
     "antislop:staged": "node scripts/antislop-gate.mjs --staged",
     "drift:check": "node scripts/drift-check.mjs",
-    "platform:check": "node scripts/validate-platform-contract.mjs"
+    "platform:check": "node scripts/validate-platform-contract.mjs",
+    "platform:test": "node scripts/test-platform-contract.mjs",
+    "wrapper:check": "node scripts/check-skill-wrappers.mjs"
   },
   "dependencies": {
     "next": "15.5.25",

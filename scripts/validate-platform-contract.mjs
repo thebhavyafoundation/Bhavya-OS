@@ -2,43 +2,44 @@
 /**
  * Bhavya OS — Platform Contract Validation
  *
- * Enforces the permanent operating contract at CI time so that violations are
- * caught before review rather than after deployment.
+ * Enforces the permanent operating contract at CI time.
  *
  * Authority: AGENTS.md (L0 router) and docs/architecture/PLATFORM-TRUTH.md.
- * This script does not create policy; it mechanically enforces the four rules
- * listed below and prints what it checked.
+ * This script creates no policy; it mechanically enforces four rules.
  *
- * Checks
- *   1. permanent-files     AGENTS.md and docs/architecture/PLATFORM-TRUTH.md exist
- *                          and PLATFORM-TRUTH still states the core invariants.
- *   2. no-cloudflare-r2    Cloudflare R2 is prohibited. Rejects R2 usage tokens.
- *   3. b2-client-boundary  Privileged Backblaze B2 variables must never appear in
- *                          a Client Component ("use client"). Server-only boundary.
- *   4. no-paid-config      Flags new paid-service or payment-method configuration.
+ *   1. permanent-files     the two permanent files exist and hold their invariants
+ *   2. no-cloudflare-r2    Cloudflare R2 is prohibited
+ *   3. b2-client-boundary  privileged B2 credentials never reach a Client Component
+ *   4. no-paid-config      no paid-service / payment-method-requiring configuration
  *
- * Scope discipline
- *   These are *configuration* checks, not prose checks. Curriculum lesson text
- *   that teaches students about OpenAI is not Bhavya configuration and is not
- *   flagged. Exclusions are declared explicitly and reported in the output so a
- *   reviewer can see exactly what was skipped and why.
+ * CLASSIFICATION, NOT DIRECTORY EXCLUSION
+ *   These checks classify each file by kind and inspect the *execution context* of
+ *   each match. A paid-service identifier appearing inside a curriculum code sample
+ *   is teaching material; the same identifier as a real environment read is
+ *   configuration and fails. Directory-based exclusion would let prohibited
+ *   configuration hide simply by being moved under an excluded folder, so
+ *   configuration files are scanned everywhere regardless of where they sit.
  *
- * Usage:   node scripts/validate-platform-contract.mjs
- * Exit:    0 = all checks passed, 1 = at least one check failed
+ * Usage:
+ *   node scripts/validate-platform-contract.mjs                 # scan the repo
+ *   node scripts/validate-platform-contract.mjs --root <dir>    # scan a tree (tests)
+ *
+ * Exit: 0 = pass, 1 = at least one check failed
  */
 
 import { execFileSync } from "node:child_process";
-import { readFileSync, existsSync, statSync } from "node:fs";
-import { join, extname } from "node:path";
+import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
+import { join, extname, relative } from "node:path";
+
+const args = process.argv.slice(2);
+const ROOT_IDX = args.indexOf("--root");
+const SCAN_ROOT = ROOT_IDX !== -1 ? args[ROOT_IDX + 1] : null;
 
 // ---------------------------------------------------------------------------
 // Configuration
 // ---------------------------------------------------------------------------
 
-const PERMANENT_FILES = [
-  { path: "AGENTS.md", label: "L0 router" },
-  { path: "docs/architecture/PLATFORM-TRUTH.md", label: "platform truth" },
-];
+const PERMANENT_FILES = ["AGENTS.md", "docs/architecture/PLATFORM-TRUTH.md"];
 
 /** Invariants that must survive any future edit to PLATFORM-TRUTH.md. */
 const TRUTH_INVARIANTS = [
@@ -52,140 +53,78 @@ const TRUTH_INVARIANTS = [
   "Production actions require human approval",
 ];
 
-const SKIP_DIRS = [
-  "node_modules",
-  ".next",
-  ".turbo",
-  ".git",
-  ".open-next",
-  ".playwright-mcp",
-  "dist",
-  "build",
-  "_archive",
-  "archive",
-];
+/** Directories never worth scanning: tooling output and archives. */
+const SKIP_DIRS = new Set([
+  "node_modules", ".next", ".turbo", ".git", ".open-next",
+  ".playwright-mcp", "dist", "build", "_archive", "archive", "coverage",
+]);
 
 /**
- * The checker necessarily contains the very tokens it looks for. Without this
- * exclusion it flags its own source and can never pass.
+ * The only explicit allow-list. Fixtures exist to prove the checker works; they
+ * intentionally contain prohibited strings and must not fail the repo scan.
+ * There is deliberately NO directory allow-list — that was the bypass.
  */
+const ALLOW_LIST = ["scripts/__fixtures__/platform-contract/"];
+
+/** The checker necessarily contains the tokens it searches for. */
 const SELF_PATH = "scripts/validate-platform-contract.mjs";
 
+const DOC_EXT = new Set([".md", ".mdx"]);
+const CONFIG_EXT = new Set([".json", ".jsonc", ".yml", ".yaml", ".toml", ".ini", ".env"]);
+const CONFIG_NAMES = new Set(["wrangler.json", "package.json", "opencode.json", ".env"]);
+const SOURCE_EXT = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"]);
+const BINARY_EXT = new Set([
+  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif", ".ico", ".pdf",
+  ".glb", ".gltf", ".blend", ".zip", ".mp4", ".mp3", ".woff", ".woff2", ".ttf",
+]);
+
+// ---------------------------------------------------------------------------
+// Paid-service indicators
+// ---------------------------------------------------------------------------
+
+const PAID_ENV = [
+  "OPENAI_API_KEY", "OPENAI_ORGANIZATION", "ANTHROPIC_API_KEY",
+  "GEMINI_API_KEY", "GOOGLE_API_KEY", "GOOGLE_GENAI_API_KEY",
+  "STRIPE_SECRET_KEY", "STRIPE_PRICE_ID", "COHERE_API_KEY",
+  "MISTRAL_API_KEY", "GROQ_API_KEY", "REPLICATE_API_TOKEN",
+  "RUNPOD_API_KEY", "TOGETHER_API_KEY",
+];
+
+const PAID_DEPS = [
+  "openai", "@anthropic-ai/sdk", "@google/generative-ai", "@google/genai",
+  "stripe", "@mistralai/mistralai", "groq-sdk", "replicate", "runpod",
+];
+
 /**
- * Paths excluded from paid-service scanning, with reasons. These are printed in
- * the run output so the exclusions are visible rather than silent.
+ * Execution contexts in which a paid identifier is real configuration.
+ * A bare mention inside prose or a string literal is not.
+ *
+ * `config-declaration` is deliberately restricted to config-kind files. In
+ * application source, instructional prose such as
+ *   "store OPENAI_API_KEY: in the environment"
+ * would otherwise match a `NAME:` shape while being nothing but a lesson.
  */
-const PAID_SCAN_EXCLUSIONS = [
-  {
-    pattern: /^registry\//,
-    reason: "generated model/provider catalog (pnpm registry:generate), not service configuration",
-  },
-  {
-    pattern: /^config\/skills\//,
-    reason: "stale, non-authoritative skill index (AGENTS.md §8)",
-  },
-  { pattern: /^scripts\/_archive\//, reason: "archived scripts" },
-  {
-    pattern: /(^|\/)src\/data\//,
-    reason: "curriculum/assessment content — teaching material, not configuration",
-  },
-  { pattern: /^content\//, reason: "authored content, not configuration" },
+const ENV_CONTEXTS_SOURCE = [
+  { re: (v) => new RegExp(`process\\.env(?:\\.${v}|\\[['"\\]\`]*${v}\\b)`, "g"), why: "process.env read" },
+  { re: (v) => new RegExp(`\\benv\\.${v}\\b`, "g"), why: "env read" },
+  { re: (v) => new RegExp(`secrets\\.${v}\\b`, "g"), why: "workflow secret reference" },
+];
+
+const ENV_CONTEXTS_CONFIG = [
+  ...ENV_CONTEXTS_SOURCE,
+  { re: (v) => new RegExp(`['"\`]?\\b${v}\\b['"\`]?\\s*[:=]`, "g"), why: "config declaration" },
+];
+
+const DEP_CONTEXTS = [
+  { re: (d) => new RegExp(`(?:from|require\\()\\s*['"]${d.replace(/[/@]/g, "\\$&")}['"]`, "g"), why: "module import" },
 ];
 
 // ---------------------------------------------------------------------------
-// Helpers
+// R2 indicators — configuration signatures, never the bare word "R2"
 // ---------------------------------------------------------------------------
 
-function gitFiles() {
-  try {
-    const out = execFileSync("git", ["ls-files", "-z"], {
-      encoding: "utf8",
-      maxBuffer: 64 * 1024 * 1024,
-    });
-    return out.split("\0").filter(Boolean);
-  } catch {
-    return [];
-  }
-}
-
-function isExcludedPath(rel) {
-  const norm = rel.replace(/\\/g, "/");
-  return SKIP_DIRS.some((d) => norm.includes(`/${d}/`) || norm.startsWith(`${d}/`));
-}
-
-function readSafe(rel) {
-  try {
-    const st = statSync(rel);
-    if (!st.isFile() || st.size > 2 * 1024 * 1024) return null;
-    return readFileSync(rel, "utf8");
-  } catch {
-    return null;
-  }
-}
-
-const results = [];
-function record(check, ok, lines) {
-  results.push({ check, ok, lines });
-  // Print as we go so each check's findings sit under its own heading.
-  for (const l of lines) console.log(l);
-  console.log(`  => ${ok ? "PASS" : "FAIL"}  ${check}\n`);
-}
-
-function section(title) {
-  console.log(`\n${title}`);
-}
-
-// ---------------------------------------------------------------------------
-// Check 1 — permanent files exist and remain authoritative
-// ---------------------------------------------------------------------------
-
-function checkPermanentFiles() {
-  const lines = [];
-  let ok = true;
-
-  for (const f of PERMANENT_FILES) {
-    if (!existsSync(f.path)) {
-      lines.push(`  MISSING  ${f.path}  (${f.label})`);
-      ok = false;
-      continue;
-    }
-    const body = readSafe(f.path);
-    if (!body || body.trim().length === 0) {
-      lines.push(`  EMPTY    ${f.path}`);
-      ok = false;
-      continue;
-    }
-    lines.push(`  ok       ${f.path}  (${f.label}, ${body.trim().split("\n").length} lines)`);
-  }
-
-  const truthPath = "docs/architecture/PLATFORM-TRUTH.md";
-  if (existsSync(truthPath)) {
-    const body = readSafe(truthPath) ?? "";
-    const missing = TRUTH_INVARIANTS.filter((i) => !body.includes(i));
-    if (missing.length) {
-      lines.push(`  TRUTH-DRIFT  ${missing.length} invariant(s) missing:`);
-      for (const m of missing) lines.push(`             - ${m}`);
-      ok = false;
-    } else {
-      lines.push(`  ok       all ${TRUTH_INVARIANTS.length} platform invariants present`);
-    }
-  }
-
-  record("permanent-files", ok, lines);
-}
-
-// ---------------------------------------------------------------------------
-// Check 2 — Cloudflare R2 is prohibited
-// ---------------------------------------------------------------------------
-
-/**
- * Usage tokens only. The literal words "Cloudflare R2 is prohibited" in
- * AGENTS.md / PLATFORM-TRUTH.md must not trip this check, so we match concrete
- * configuration and SDK signatures rather than the word "R2".
- */
 const R2_TOKENS = [
   { re: /r2_buckets/, why: "Wrangler R2 binding type" },
-  // Matches `type: "r2"`, `"type": "r2"` and `'type': 'r2'` (JSON, YAML, TOML, object literals).
   { re: /["']?type["']?\s*:\s*["']r2["']/i, why: "Wrangler R2 binding" },
   { re: /\bR2_(BUCKET|BUCKET_NAME|ACCESS_KEY_ID|SECRET_ACCESS_KEY|ENDPOINT|ACCOUNT_ID|S3)\b/, why: "R2 environment variable" },
   { re: /\bCLOUDFLARE_R2_[A-Z_]+\b/, why: "R2 environment variable" },
@@ -194,204 +133,267 @@ const R2_TOKENS = [
   { re: /@cloudflare\/r2/, why: "R2 SDK import" },
 ];
 
-const NEGATION = /\b(prohibit|prohibited|never|not\b|no\b|must not|do not|reject|forbid|illegal|without)\b/i;
+const NEGATION =
+  /\b(prohibit|prohibited|never|not|no\b|must not|do not|reject|forbid|illegal|without|ban|banned)\b/i;
 
-function checkNoR2(files) {
+// ---------------------------------------------------------------------------
+// B2 indicators
+// ---------------------------------------------------------------------------
+
+const B2_PRIVILEGED = [
+  "B2_ACCESS_KEY_ID", "B2_SECRET_ACCESS_KEY", "S3_ACCESS_KEY_ID",
+  "S3_SECRET_ACCESS_KEY", "B2_APPLICATION_KEY", "B2_MASTER_KEY",
+];
+
+const CLIENT_DIRECTIVE = /^\s*(["'])use client\1\s*;?/m;
+const SERVER_ONLY = /import\s+["']server-only["']/;
+
+// ---------------------------------------------------------------------------
+// Discovery / IO
+// ---------------------------------------------------------------------------
+
+function gitFiles() {
+  try {
+    return execFileSync("git", ["ls-files", "-z"], {
+      encoding: "utf8",
+      maxBuffer: 64 * 1024 * 1024,
+    })
+      .split("\0")
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function walk(dir, acc = []) {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (SKIP_DIRS.has(entry.name)) continue;
+      walk(full, acc);
+    } else {
+      acc.push(full);
+    }
+  }
+  return acc;
+}
+
+function classify(rel) {
+  const norm = rel.replace(/\\/g, "/");
+  if (ALLOW_LIST.some((a) => norm.includes(a))) return "allow";
+  const parts = norm.split("/");
+  if (parts.some((p) => SKIP_DIRS.has(p))) return "skip";
+  if (norm === SELF_PATH) return "skip";
+  const ext = extname(norm).toLowerCase();
+  const base = parts[parts.length - 1];
+  if (BINARY_EXT.has(ext)) return "binary";
+  if (DOC_EXT.has(ext)) return "doc";
+  if (CONFIG_NAMES.has(base) || base.startsWith(".env")) return "config";
+  if (CONFIG_EXT.has(ext)) return "config";
+  if (SOURCE_EXT.has(ext)) return "source";
+  return "other";
+}
+
+function readSafe(abs, rel) {
+  try {
+    const st = statSync(abs);
+    if (!st.isFile() || st.size > 4 * 1024 * 1024) return null;
+    return readFileSync(abs, "utf8");
+  } catch {
+    void rel;
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Checks
+// ---------------------------------------------------------------------------
+
+const results = [];
+const warnings = [];
+function record(check, ok, lines) {
+  results.push({ check, ok });
+  for (const l of lines) console.log(l);
+  console.log(`  => ${ok ? "PASS" : "FAIL"}  ${check}\n`);
+}
+
+/** Advisory findings, grouped by file so a long tail stays readable. */
+function warn(rel, line, msg) {
+  warnings.push({ rel, line, msg });
+}
+
+function checkPermanentFiles() {
+  if (SCAN_ROOT) return; // repo-level check, not applicable to fixture trees
   const lines = [];
-  const violations = [];
+  let ok = true;
+  for (const f of PERMANENT_FILES) {
+    if (!existsSync(f)) {
+      lines.push(`  MISSING  ${f}`);
+      ok = false;
+      continue;
+    }
+    const body = readSafe(f, f);
+    if (!body || !body.trim()) {
+      lines.push(`  EMPTY    ${f}`);
+      ok = false;
+      continue;
+    }
+    lines.push(`  ok       ${f}  (${body.trim().split("\n").length} lines)`);
+  }
+  if (ok) {
+    const truth = readSafe("docs/architecture/PLATFORM-TRUTH.md", "") ?? "";
+    const missing = TRUTH_INVARIANTS.filter((i) => !truth.includes(i));
+    if (missing.length) {
+      lines.push(`  TRUTH-DRIFT ${missing.length} invariant(s) missing:`);
+      for (const m of missing) lines.push(`             - ${m}`);
+      ok = false;
+    } else {
+      lines.push(`  ok       all ${TRUTH_INVARIANTS.length} platform invariants present`);
+    }
+  }
+  record("permanent-files", ok, lines);
+}
 
-  for (const rel of files) {
-    if (isExcludedPath(rel) || rel.replace(/\\/g, "/") === SELF_PATH) continue;
-    const ext = extname(rel).toLowerCase();
-    const isDoc = [".md", ".mdx"].includes(ext);
-    const isCode = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".json", ".jsonc", ".yml", ".yaml", ".toml"].includes(ext);
-    if (!isDoc && !isCode) continue;
-
-    const body = readSafe(rel);
+function checkNoR2(entries) {
+  const lines = [];
+  const found = [];
+  for (const { rel, abs, kind } of entries) {
+    if (kind !== "doc" && kind !== "config" && kind !== "source") continue;
+    const body = readSafe(abs, rel);
     if (!body) continue;
-
     body.split(/\r?\n/).forEach((line, idx) => {
       for (const t of R2_TOKENS) {
         if (!t.re.test(line)) continue;
-        // Prose that documents the prohibition is allowed; usage is not.
-        if (isDoc && NEGATION.test(line)) continue;
-        violations.push({ file: rel, line: idx + 1, text: line.trim(), why: t.why });
+        // Prose documenting the prohibition is allowed; configuration is not.
+        if (kind === "doc" && NEGATION.test(line)) continue;
+        found.push({ rel, line: idx + 1, text: line.trim(), why: t.why });
+      }
+    });
+  }
+  if (!found.length) {
+    lines.push(`  ok  no Cloudflare R2 configuration in ${entries.length} scanned files`);
+  } else {
+    for (const v of found.slice(0, 40)) {
+      lines.push(`  R2  ${v.rel}:${v.line}  [${v.why}]  (${v.text.slice(0, 90)})`);
+    }
+    if (found.length > 40) lines.push(`      ...and ${found.length - 40} more`);
+  }
+  record("no-cloudflare-r2", found.length === 0, lines);
+}
+
+function checkB2ClientBoundary(entries) {
+  const lines = [];
+  const violations = [];
+  let clients = 0;
+
+  for (const { rel, abs, kind } of entries) {
+    if (kind !== "source") continue;
+    const body = readSafe(abs, rel);
+    if (!body) continue;
+    const isClient = CLIENT_DIRECTIVE.test(body);
+    const isServerOnly = SERVER_ONLY.test(body);
+    if (isClient) clients++;
+
+    body.split(/\r?\n/).forEach((line, idx) => {
+      // Static privileged names, including destructuring from process.env.
+      const priv = B2_PRIVILEGED.filter((v) => new RegExp(`\\b${v}\\b`).test(line));
+      const destructured = /\{[^}]*\bB2_[A-Z0-9_]+\b[^}]*\}\s*=\s*process\.env/.test(line);
+      const publicB2 = /\bNEXT_PUBLIC_[A-Z0-9_]*B2[A-Z0-9_]*/.test(line);
+      // Dynamic access: process.env[expr] where expr is not a literal.
+      const dynamic = /process\.env\[\s*(?!["'`])/.test(line);
+
+      if (isClient) {
+        if (priv.length || destructured || publicB2) {
+          violations.push({ rel, line: idx + 1, text: line.trim(), names: priv, why: "privileged B2 in Client Component" });
+        } else if (dynamic) {
+          violations.push({ rel, line: idx + 1, text: line.trim(), names: ["<dynamic>"], why: "dynamic process.env access in Client Component" });
+        }
+      } else if (priv.length && !isServerOnly) {
+        warn(rel, idx + 1, "privileged B2 referenced without an explicit \"server-only\" import — verify this module can never be bundled for the browser");
       }
     });
   }
 
-  if (violations.length === 0) {
-    lines.push(`  ok  no Cloudflare R2 usage tokens in ${files.length} tracked files`);
-  } else {
-    for (const v of violations.slice(0, 40)) {
-      lines.push(`  R2  ${v.file}:${v.line}  [${v.why}]`);
-      lines.push(`      ${v.text.slice(0, 120)}`);
-    }
-    if (violations.length > 40) lines.push(`      ...and ${violations.length - 40} more`);
-  }
-
-  record("no-cloudflare-r2", violations.length === 0, lines);
-}
-
-// ---------------------------------------------------------------------------
-// Check 3 — privileged B2 variables must not reach Client Components
-// ---------------------------------------------------------------------------
-
-/** Privileged: these grant object access. Public: bucket/endpoint/region only. */
-const B2_PRIVILEGED = [
-  "B2_ACCESS_KEY_ID",
-  "B2_SECRET_ACCESS_KEY",
-  "S3_ACCESS_KEY_ID",
-  "S3_SECRET_ACCESS_KEY",
-  "B2_APPLICATION_KEY",
-  "B2_MASTER_KEY",
-];
-
-const B2_ANY = /\bB2_[A-Z0-9_]+\b/;
-
-function checkB2ClientBoundary(files) {
-  const lines = [];
-  const violations = [];
-  let clientCount = 0;
-
-  for (const rel of files) {
-    if (isExcludedPath(rel)) continue;
-    if (![".tsx", ".jsx"].includes(extname(rel).toLowerCase())) continue;
-
-    const body = readSafe(rel);
-    if (!body) continue;
-
-    const hasDirective = /^\s*(["'])use client\1\s*;?/m.test(body);
-    if (!hasDirective) continue;
-    clientCount++;
-
-    body.split(/\r?\n/).forEach((line, idx) => {
-      const priv = B2_PRIVILEGED.filter((v) => line.includes(v));
-      // NEXT_PUBLIC_ exposure of any B2 variable is also a violation.
-      const publicB2 = /NEXT_PUBLIC_[A-Z0-9_]*B2[A-Z0-9_]*/.test(line);
-      if (priv.length === 0 && !publicB2) return;
-      violations.push({ file: rel, line: idx + 1, text: line.trim(), names: priv });
-    });
-  }
-
-  if (violations.length === 0) {
-    lines.push(`  ok  ${clientCount} Client Component(s) scanned, no privileged B2 variable referenced`);
+  if (!violations.length) {
+    lines.push(`  ok  ${clients} Client Component(s) scanned; no privileged B2 reached the browser`);
     lines.push(`      guarded: ${B2_PRIVILEGED.join(", ")}`);
-    if (B2_ANY.test("")) lines.push("");
+    if (warnings.length) {
+      const byFile = new Map();
+      for (const w of warnings) byFile.set(w.rel, (byFile.get(w.rel) ?? 0) + 1);
+      lines.push(`      advisory: ${warnings.length} privileged-B2 reference(s) in ${byFile.size} server module(s) without an explicit "server-only" import:`);
+      for (const [f, n] of [...byFile].sort((a, b) => b[1] - a[1])) {
+        lines.push(`        ${f}  (${n} reference${n === 1 ? "" : "s"})`);
+      }
+      lines.push(`      these are not failures; adding \`import "server-only"\` would harden them`);
+    }
   } else {
     for (const v of violations.slice(0, 40)) {
-      lines.push(`  B2-CLIENT  ${v.file}:${v.line}`);
-      lines.push(`      ${v.text.slice(0, 120)}`);
-      lines.push(`      privileged variable(s): ${v.names.join(", ")}`);
+      lines.push(`  B2-CLIENT  ${v.rel}:${v.line}  [${v.why}]`);
+      lines.push(`      ${v.text.slice(0, 110)}`);
+      if (v.names.length) lines.push(`      ${v.names.join(", ")}`);
     }
     if (violations.length > 40) lines.push(`      ...and ${violations.length - 40} more`);
   }
-
   record("b2-client-boundary", violations.length === 0, lines);
 }
 
-// ---------------------------------------------------------------------------
-// Check 4 — paid-service configuration
-// ---------------------------------------------------------------------------
-
-const PAID_ENV = [
-  "OPENAI_API_KEY",
-  "OPENAI_ORGANIZATION",
-  "ANTHROPIC_API_KEY",
-  "GEMINI_API_KEY",
-  "GOOGLE_API_KEY",
-  "GOOGLE_GENAI_API_KEY",
-  "STRIPE_SECRET_KEY",
-  "STRIPE_PRICE_ID",
-  "COHERE_API_KEY",
-  "MISTRAL_API_KEY",
-  "GROQ_API_KEY",
-  "REPLICATE_API_TOKEN",
-  "RUNPOD_API_KEY",
-  "TOGETHER_API_KEY",
-];
-
-/** npm dependencies that imply a paid, billable integration. */
-const PAID_DEPS = [
-  "openai",
-  "@anthropic-ai/sdk",
-  "@google/generative-ai",
-  "@google/genai",
-  "stripe",
-  "@mistralai/mistralai",
-  "groq-sdk",
-  "replicate",
-  "runpod",
-];
-
-const CONFIG_EXTS = [".json", ".jsonc", ".yml", ".yaml", ".toml"];
-const SOURCE_EXTS = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"];
-const CONFIG_NAMES = new Set(["package.json", "wrangler.json", "opencode.json"]);
-
-function checkNoPaidConfig(files) {
+function checkNoPaidConfig(entries) {
   const lines = [];
-  const violations = [];
-  const exclusions = PAID_SCAN_EXCLUSIONS.filter((e) =>
-    files.some((f) => e.pattern.test(f.replace(/\\/g, "/"))),
-  );
+  const found = [];
 
-  const isExcluded = (rel) => {
-    const norm = rel.replace(/\\/g, "/");
-    return PAID_SCAN_EXCLUSIONS.some((e) => e.pattern.test(norm));
-  };
-
-  for (const rel of files) {
-    if (isExcludedPath(rel) || isExcluded(rel)) continue;
-    const base = rel.replace(/\\/g, "/").split("/").pop();
-    const ext = extname(rel).toLowerCase();
-    const isConfig = CONFIG_NAMES.has(base) || CONFIG_EXTS.includes(ext);
-    const isSource = SOURCE_EXTS.includes(ext);
-    if (!isConfig && !isSource) continue;
-
-    const body = readSafe(rel);
+  for (const { rel, abs, kind } of entries) {
+    if (kind !== "config" && kind !== "source") continue;
+    const body = readSafe(abs, rel);
     if (!body) continue;
+    const base = rel.replace(/\\/g, "/").split("/").pop();
+    const isPackageJson = base === "package.json";
+    const isEnvFile = base.startsWith(".env");
+    const contexts = kind === "config" ? ENV_CONTEXTS_CONFIG : ENV_CONTEXTS_SOURCE;
 
-    body.split(/\r?\n/).forEach((line, idx) => {
-      // In source, only an actual environment read is configuration.
-      if (isSource && !isConfig) {
-        const hit = PAID_ENV.find((v) =>
-          new RegExp(`process\\.env\\.${v}\\b|env\\.${v}\\b`).test(line),
-        );
-        if (!hit) return;
-        violations.push({ file: rel, line: idx + 1, text: line.trim(), what: `environment read of ${hit}` });
-        return;
+    const linesArr = body.split(/\r?\n/);
+    linesArr.forEach((line, idx) => {
+      // Environment-variable execution contexts.
+      for (const v of PAID_ENV) {
+        for (const ctx of contexts) {
+          if (ctx.re(v).test(line)) {
+            // In a .env file the declaration form is `NAME=value`.
+            if (isEnvFile && new RegExp(`^\\s*${v}\\s*=`).test(line)) {
+              found.push({ rel, line: idx + 1, text: line.trim(), what: `paid service variable ${v} in .env` });
+              return;
+            }
+            found.push({ rel, line: idx + 1, text: line.trim(), what: `paid service variable ${v} (${ctx.why})` });
+            return;
+          }
+        }
       }
-
-      const envHit = PAID_ENV.find((v) => line.includes(v));
-      if (envHit) {
-        violations.push({ file: rel, line: idx + 1, text: line.trim(), what: `paid service variable ${envHit}` });
-        return;
-      }
-      const depHit = PAID_DEPS.find((d) =>
-        new RegExp(`["']${d.replace(/[/@]/g, (c) => `\\${c}`)}["']`).test(line),
-      );
-      if (depHit) {
-        violations.push({ file: rel, line: idx + 1, text: line.trim(), what: `paid dependency "${depHit}"` });
+      // Dependency execution contexts only: an import, or a package.json entry.
+      for (const d of PAID_DEPS) {
+        const importHit = DEP_CONTEXTS.some((c) => c.re(d).test(line));
+        const pkgHit =
+          isPackageJson &&
+          new RegExp(`["']${d.replace(/[/@]/g, "\\$&")}["']\\s*:\\s*["'][^"']+["']`).test(line);
+        if (importHit || pkgHit) {
+          found.push({ rel, line: idx + 1, text: line.trim(), what: `paid dependency "${d}" (${importHit ? "import" : "package.json"})` });
+          return;
+        }
       }
     });
   }
 
-  if (violations.length === 0) {
+  if (!found.length) {
     lines.push("  ok  no paid-service configuration detected");
-    lines.push(`      watched env vars: ${PAID_ENV.length}; watched deps: ${PAID_DEPS.length}`);
-    lines.push("      NOT flagged: S3_*/AWS_* (Backblaze B2 is S3-compatible and is not a paid service)");
-    for (const e of exclusions) {
-      lines.push(`      excluded ${e.pattern} — ${e.reason}`);
-    }
+    lines.push(`      env indicators: ${PAID_ENV.length} · dependency indicators: ${PAID_DEPS.length}`);
+    lines.push("      allowed by design: S3_*/AWS_* (Backblaze B2 is S3-compatible, not a paid service)");
+    lines.push("      allowed by design: paid identifiers inside prose and string literals (teaching material)");
+    lines.push(`      allow-listed: ${ALLOW_LIST.join(", ")} (fixtures that must contain violations)`);
   } else {
-    for (const v of violations.slice(0, 40)) {
-      lines.push(`  PAID  ${v.file}:${v.line}  [${v.what}]`);
-      lines.push(`      ${v.text.slice(0, 120)}`);
+    for (const v of found.slice(0, 40)) {
+      lines.push(`  PAID  ${v.rel}:${v.line}  [${v.what}]`);
+      lines.push(`      ${v.text.slice(0, 110)}`);
     }
-    if (violations.length > 40) lines.push(`      ...and ${violations.length - 40} more`);
+    if (found.length > 40) lines.push(`      ...and ${found.length - 40} more`);
   }
-
-  record("no-paid-config", violations.length === 0, lines);
+  record("no-paid-config", found.length === 0, lines);
 }
 
 // ---------------------------------------------------------------------------
@@ -401,34 +403,35 @@ function checkNoPaidConfig(files) {
 console.log("Bhavya OS — Platform Contract Validation");
 console.log("Authority: AGENTS.md + docs/architecture/PLATFORM-TRUTH.md");
 
-const files = gitFiles();
-if (files.length === 0) {
-  console.error("  ERROR: no tracked files found (git ls-files returned nothing)");
-  process.exit(1);
+let entries;
+if (SCAN_ROOT) {
+  console.log(`Scanning tree: ${SCAN_ROOT}`);
+  entries = walk(SCAN_ROOT).map((abs) => ({
+    abs,
+    rel: relative(SCAN_ROOT, abs).replace(/\\/g, "/"),
+    kind: classify(relative(SCAN_ROOT, abs)),
+  }));
+} else {
+  const files = gitFiles();
+  if (!files.length) {
+    console.error("  ERROR: no tracked files (git ls-files returned nothing)");
+    process.exit(1);
+  }
+  console.log(`Scanning ${files.length} tracked files.`);
+  entries = files.map((rel) => ({ abs: rel, rel, kind: classify(rel) }));
 }
-console.log(`Scanning ${files.length} tracked files.`);
 
-section("[1/4] permanent-files");
 checkPermanentFiles();
+checkNoR2(entries);
+checkB2ClientBoundary(entries);
+checkNoPaidConfig(entries);
 
-section("[2/4] no-cloudflare-r2");
-checkNoR2(files);
-
-section("[3/4] b2-client-boundary");
-checkB2ClientBoundary(files);
-
-section("[4/4] no-paid-config");
-checkNoPaidConfig(files);
-
-let failed = 0;
-for (const r of results) if (!r.ok) failed++;
-
+const failed = results.filter((r) => !r.ok).length;
 console.log("");
 if (failed === 0) {
-  console.log(`RESULT: PASS (${results.length}/${results.length} checks)`);
+  console.log(`RESULT: PASS (${results.length}/${results.length} checks)${warnings.length ? ` — ${warnings.length} warning(s)` : ""}`);
   process.exit(0);
-} else {
-  console.log(`RESULT: FAIL (${failed}/${results.length} checks failed)`);
-  console.log("See docs/architecture/PLATFORM-TRUTH.md for the rule each check enforces.");
-  process.exit(1);
 }
+console.log(`RESULT: FAIL (${failed}/${results.length} checks failed)`);
+console.log("See docs/architecture/PLATFORM-TRUTH.md for the rule each check enforces.");
+process.exit(1);
