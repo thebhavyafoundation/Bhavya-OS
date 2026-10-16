@@ -1,0 +1,33 @@
+{
+  "diagram_id": "responsible-ai-lifecycle",
+  "title": "Responsible AI lifecycle",
+  "type": "process",
+  "variant": "minimal-light",
+  "route": "/os/ai/responsible-lifecycle",
+  "section": "Responsible AI",
+  "purpose": "Show the approved Responsible AI Policy stages: purpose, data review, risk review, human oversight, testing, approval, monitoring, incident response.",
+  "audience": "Public, engineers, reviewers",
+  "source_html": "content/diagrams/sources/html/responsible-ai-lifecycle.html",
+  "production_svg": "apps/ai-institute/public/diagrams/science/responsible-ai-lifecycle.svg",
+  "optional_png": null,
+  "accessible_text": "The Responsible AI lifecycle proceeds through purpose, data review, risk review, human oversight, testing, approval, monitoring, and incident response. Only stages approved in the AI Ethics and Responsible AI Policy are shown.",
+  "content_sources": [
+    "docs/constitution/06-AI-ETHICS.md",
+    "governance/responsible-ai-policy.md"
+  ],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "pending",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}

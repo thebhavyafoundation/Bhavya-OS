@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="b2-secured-data-flow-root" role="img" aria-labelledby="b2-secured-data-flow-title b2-secured-data-flow-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="b2-secured-data-flow-title">Secured B2 data flow</title>
+      <desc id="b2-secured-data-flow-desc">An authenticated user presents a Supabase session. The server verifies the session, validates role and object-prefix, performs a server-side signed B2 operation, and verifies completion/metadata. Unverified sessions, invalid roles, and invalid prefixes are rejected before any B2 call. No credentials or secret names are shown.</desc>
+      <style>
+        #b2-secured-data-flow-root { font-family: Inter, system-ui, sans-serif; }
+        #b2-secured-data-flow-root .bg { fill: #f7f4ec; }
+        #b2-secured-data-flow-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #b2-secured-data-flow-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #b2-secured-data-flow-root .node.reject { stroke: #c0392b; stroke-width: 1; }
+        #b2-secured-data-flow-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #b2-secured-data-flow-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #b2-secured-data-flow-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#b2-secured-data-flow-arrow); }
+        #b2-secured-data-flow-root .arrow.accent { stroke: #d4af37; stroke-width: 2; }
+        #b2-secured-data-flow-root .arrow.reject { stroke: #c0392b; stroke-width: 1.5; stroke-dasharray: 5,4; marker-end: none; }
+        #b2-secured-data-flow-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #b2-secured-data-flow-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #b2-secured-data-flow-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #b2-secured-data-flow-root .arrowhead { fill: #546342; }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">SECURITY · DATA FLOW</text>
+      <text class="title" x="24" y="58">Secured B2 data flow</text>
+      <marker id="b2-secured-data-flow-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <line class="arrow accent" x1="216" y1="240" x2="380" y2="240" />
+      <line class="arrow" x1="460" y1="240" x2="620" y2="176" />
+      <line class="arrow" x1="460" y1="240" x2="620" y2="304" />
+      <line class="arrow accent" x1="700" y1="240" x2="820" y2="240" />
+      <line class="arrow.reject" x1="700" y1="140" x2="860" y2="140" />
+      <line class="arrow.reject" x1="700" y1="340" x2="860" y2="340" />
+      <g class="node"><rect x="36" y="204" width="160" height="72" /><text class="node-name" x="116" y="228">Authenticated user</text><text class="sublabel" x="116" y="248">session holder</text></g>
+      <g class="node accent"><rect x="380" y="204" width="160" height="72" /><text class="node-name" x="460" y="228">Supabase session verification</text><text class="sublabel" x="460" y="248">JWT + role</text></g>
+      <g class="node"><rect x="620" y="140" width="160" height="72" /><text class="node-name" x="700" y="164">Role + prefix validation</text><text class="sublabel" x="700" y="184">server-side policy</text></g>
+      <g class="node"><rect x="620" y="268" width="160" height="72" /><text class="node-name" x="700" y="292">Signed B2 operation</text><text class="sublabel" x="700" y="312">server-side signature</text></g>
+      <g class="node accent"><rect x="820" y="204" width="160" height="72" /><text class="node-name" x="900" y="228">B2 object operation</text><text class="sublabel" x="900" y="248">object storage</text></g>
+      <g class="node reject"><rect x="860" y="104" width="160" height="72" /><text class="node-name" x="940" y="128">Rejected: session</text><text class="sublabel" x="940" y="148">unverified</text></g>
+      <g class="node reject"><rect x="860" y="304" width="160" height="72" /><text class="node-name" x="940" y="328">Rejected: scope</text><text class="sublabel" x="940" y="348">invalid role/prefix</text></g>
+      <text class="label" x="298" y="234">session</text>
+      <text class="label" x="540" y="170">validate</text>
+      <text class="label" x="540" y="284">sign</text>
+      <text class="label" x="760" y="234">execute</text>
+      <text class="label" x="780" y="134">reject</text>
+      <text class="label" x="780" y="334">reject</text>
+    </svg>

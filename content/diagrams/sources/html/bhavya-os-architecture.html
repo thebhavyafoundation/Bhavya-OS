@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bhavya OS architecture — diagram source</title>
+  <style>
+    html { font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #f7f4ec; color: #0e382e; }
+    .frame { min-width: 960px; overflow-x: auto; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <svg xmlns="http://www.w3.org/2000/svg" id="bhavya-os-architecture-root" role="img" aria-labelledby="bhavya-os-architecture-title bhavya-os-architecture-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="bhavya-os-architecture-title">Bhavya OS architecture</title>
+      <desc id="bhavya-os-architecture-desc">Bhavya OS connects public, learner, and administrative users to institutional systems: Cloudflare application, Supabase authentication, Turso application data, Backblaze B2 assets, GitHub canonical repository, GitHub Actions, and OpenCode control plane. No credentials or internal URLs are shown.</desc>
+      <style>
+        #bhavya-os-architecture-root { font-family: Inter, system-ui, sans-serif; }
+        #bhavya-os-architecture-root .bg { fill: #f7f4ec; }
+        #bhavya-os-architecture-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #bhavya-os-architecture-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #bhavya-os-architecture-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #bhavya-os-architecture-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #bhavya-os-architecture-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#bhavya-os-architecture-arrow); }
+        #bhavya-os-architecture-root .arrow.accent { stroke: #d4af37; stroke-width: 2; }
+        #bhavya-os-architecture-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #bhavya-os-architecture-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #bhavya-os-architecture-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #bhavya-os-architecture-root .arrowhead { fill: #546342; }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">BAHVYA OS · ARCHITECTURE</text>
+      <text class="title" x="24" y="58">Bhavya OS architecture</text>
+      <marker id="bhavya-os-architecture-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <line class="arrow" x1="196" y1="156" x2="300" y2="240" />
+      <line class="arrow" x1="196" y1="240" x2="300" y2="240" />
+      <line class="arrow" x1="196" y1="324" x2="300" y2="240" />
+      <line class="arrow" x1="420" y1="284" x2="600" y2="176" />
+      <line class="arrow" x1="420" y1="284" x2="600" y2="240" />
+      <line class="arrow" x1="420" y1="284" x2="600" y2="376" />
+      <line class="arrow accent" x1="360" y1="420" x2="500" y2="420" />
+      <line class="arrow" x1="600" y1="420" x2="420" y2="284" />
+      <line class="arrow" x1="860" y1="240" x2="700" y2="240" />
+      <g class="node"><rect x="36" y="120" width="160" height="72" /><text class="node-name" x="116" y="144">Public user</text><text class="sublabel" x="116" y="164">public</text></g>
+      <g class="node"><rect x="36" y="204" width="160" height="72" /><text class="node-name" x="116" y="228">Learner user</text><text class="sublabel" x="116" y="248">learner</text></g>
+      <g class="node"><rect x="36" y="288" width="160" height="72" /><text class="node-name" x="116" y="312">Administrative user</text><text class="sublabel" x="116" y="332">administrator</text></g>
+      <g class="node accent"><rect x="320" y="196" width="200" height="88" /><text class="node-name" x="420" y="224">Cloudflare application</text><text class="sublabel" x="420" y="244">edge · public entry</text></g>
+      <g class="node"><rect x="600" y="104" width="160" height="72" /><text class="node-name" x="680" y="128">Supabase Auth</text><text class="sublabel" x="680" y="148">session verification</text></g>
+      <g class="node"><rect x="600" y="204" width="160" height="72" /><text class="node-name" x="680" y="228">Turso application data</text><text class="sublabel" x="680" y="248">application data</text></g>
+      <g class="node"><rect x="600" y="304" width="160" height="72" /><text class="node-name" x="680" y="328">Backblaze B2 assets</text><text class="sublabel" x="680" y="348">object storage</text></g>
+      <g class="node"><rect x="320" y="384" width="200" height="72" /><text class="node-name" x="420" y="408">GitHub canonical repository</text><text class="sublabel" x="420" y="428">source of truth</text></g>
+      <g class="node"><rect x="560" y="384" width="200" height="72" /><text class="node-name" x="660" y="408">GitHub Actions</text><text class="sublabel" x="660" y="428">CI / deployment</text></g>
+      <g class="node"><rect x="700" y="196" width="200" height="88" /><text class="node-name" x="800" y="224">OpenCode control plane</text><text class="sublabel" x="800" y="244">agent orchestration</text></g>
+      <text class="label" x="248" y="150">session</text>
+      <text class="label" x="248" y="234">learn</text>
+      <text class="label" x="248" y="318">operate</text>
+      <text class="label" x="510" y="170">verify</text>
+      <text class="label" x="510" y="234">read/write</text>
+      <text class="label" x="510" y="370">assets</text>
+      <text class="label" x="430" y="414">deploy</text>
+      <text class="label" x="510" y="414">build</text>
+      <text class="label" x="780" y="234">orchestrate</text>
+    </svg>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "diagram_id": "b2-secured-data-flow",
+  "title": "Secured B2 data flow",
+  "type": "data-flow",
+  "variant": "minimal-light",
+  "route": "/os/security/b2-data-flow",
+  "section": "Security",
+  "purpose": "Show the authenticated, role-validated, server-side signed path to Backblaze B2 object operations, including rejection paths, based on Phase 1A implementation.",
+  "audience": "Administrators, engineers, auditors",
+  "source_html": "content/diagrams/sources/html/b2-secured-data-flow.html",
+  "production_svg": "apps/ai-institute/public/diagrams/governance/b2-secured-data-flow.svg",
+  "optional_png": null,
+  "accessible_text": "An authenticated user presents a Supabase session. The server verifies the session, validates role and object-prefix, performs a server-side signed B2 operation, and verifies completion/metadata. Unverified sessions, invalid roles, and invalid prefixes are rejected before any B2 call. No credentials or secret names are shown.",
+  "content_sources": ["docs/audit/PHASE-1A-SECURITY.md", "supabase/"],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "not-applicable",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}

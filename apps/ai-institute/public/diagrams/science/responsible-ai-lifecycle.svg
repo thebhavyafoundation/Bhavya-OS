@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="responsible-ai-lifecycle-root" role="img" aria-labelledby="responsible-ai-lifecycle-title responsible-ai-lifecycle-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="responsible-ai-lifecycle-title">Responsible AI lifecycle</title>
+      <desc id="responsible-ai-lifecycle-desc">The Responsible AI lifecycle proceeds through purpose, data review, risk review, human oversight, testing, approval, monitoring, and incident response. Only stages approved in the AI Ethics and Responsible AI Policy are shown.</desc>
+      <style>
+        #responsible-ai-lifecycle-root { font-family: Inter, system-ui, sans-serif; }
+        #responsible-ai-lifecycle-root .bg { fill: #f7f4ec; }
+        #responsible-ai-lifecycle-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #responsible-ai-lifecycle-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #responsible-ai-lifecycle-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #responsible-ai-lifecycle-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #responsible-ai-lifecycle-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#responsible-ai-lifecycle-arrow); }
+        #responsible-ai-lifecycle-root .arrow.accent { stroke: #d4af37; stroke-width: 2; }
+        #responsible-ai-lifecycle-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #responsible-ai-lifecycle-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #responsible-ai-lifecycle-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #responsible-ai-lifecycle-root .arrowhead { fill: #546342; }
+        #responsible-ai-lifecycle-root .arrowhead.accent { fill: #d4af37; }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">RESPONSIBLE AI · PROCESS</text>
+      <text class="title" x="24" y="58">Responsible AI lifecycle</text>
+      <marker id="responsible-ai-lifecycle-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <line class="arrow" x1="200" y1="200" x2="340" y2="200" />
+      <line class="arrow" x1="480" y1="200" x2="620" y2="200" />
+      <line class="arrow accent" x1="760" y1="200" x2="900" y2="200" />
+      <line class="arrow" x1="940" y1="240" x2="940" y2="340" />
+      <line class="arrow" x1="800" y1="380" x2="660" y2="380" />
+      <line class="arrow" x1="520" y1="380" x2="380" y2="380" />
+      <line class="arrow" x1="240" y1="380" x2="100" y2="380" />
+      <line class="arrow" x1="60" y1="340" x2="60" y2="200" />
+      <g class="node accent"><rect x="60" y="164" width="140" height="72" /><text class="node-name" x="130" y="188">Purpose</text><text class="sublabel" x="130" y="208">approved intent</text></g>
+      <g class="node"><rect x="200" y="164" width="140" height="72" /><text class="node-name" x="270" y="188">Data review</text><text class="sublabel" x="270" y="208">provenance + quality</text></g>
+      <g class="node"><rect x="340" y="164" width="140" height="72" /><text class="node-name" x="410" y="188">Risk review</text><text class="sublabel" x="410" y="208">harms + controls</text></g>
+      <g class="node"><rect x="480" y="164" width="140" height="72" /><text class="node-name" x="550" y="188">Human oversight</text><text class="sublabel" x="550" y="208">decision gate</text></g>
+      <g class="node"><rect x="620" y="164" width="140" height="72" /><text class="node-name" x="690" y="188">Testing</text><text class="sublabel" x="690" y="208">evals + red team</text></g>
+      <g class="node"><rect x="760" y="164" width="140" height="72" /><text class="node-name" x="830" y="188">Approval</text><text class="sublabel" x="830" y="208">release gate</text></g>
+      <g class="node"><rect x="840" y="344" width="140" height="72" /><text class="node-name" x="910" y="368">Monitoring</text><text class="sublabel" x="910" y="388">drift + usage</text></g>
+      <g class="node"><rect x="700" y="344" width="140" height="72" /><text class="node-name" x="770" y="368">Incident response</text><text class="sublabel" x="770" y="388">escalation + fix</text></g>
+      <g class="node"><rect x="560" y="344" width="140" height="72" /><text class="node-name" x="630" y="368">Feedback loop</text><text class="sublabel" x="630" y="388">re-train + adjust</text></g>
+      <g class="node accent"><rect x="420" y="344" width="140" height="72" /><text class="node-name" x="490" y="368">Continuous review</text><text class="sublabel" x="490" y="388">policy re-check</text></g>
+      <g class="node"><rect x="280" y="344" width="140" height="72" /><text class="node-name" x="350" y="368">Documentation</text><text class="sublabel" x="350" y="388">traceable record</text></g>
+      <g class="node"><rect x="100" y="344" width="140" height="72" /><text class="node-name" x="170" y="368">Stakeholder input</text><text class="sublabel" x="170" y="388">community + experts</text></g>
+      <text class="label" x="270" y="194">review</text>
+      <text class="label" x="550" y="194">oversee</text>
+      <text class="label" x="830" y="194">release</text>
+      <text class="label" x="934" y="290">operate</text>
+      <text class="label" x="730" y="374">respond</text>
+      <text class="label" x="450" y="374">improve</text>
+      <text class="label" x="130" y="374">inform</text>
+      <text class="label" x="60" y="270">re-purpose</text>
+    </svg>

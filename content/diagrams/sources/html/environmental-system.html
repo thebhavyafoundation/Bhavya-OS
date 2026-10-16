@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Environmental system — diagram source</title>
+  <style>
+    html { font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #f7f4ec; color: #0e382e; }
+    .frame { min-width: 960px; overflow-x: auto; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <svg xmlns="http://www.w3.org/2000/svg" id="environmental-system-root" role="img" aria-labelledby="environmental-system-title environmental-system-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="environmental-system-title">Environmental system</title>
+      <desc id="environmental-system-desc">The environmental system is a reinforcing cycle of conservation action, monitoring, and review, drawn from the Environmental Conservation Policy and approved curriculum content.</desc>
+      <style>
+        #environmental-system-root { font-family: Inter, system-ui, sans-serif; }
+        #environmental-system-root .bg { fill: #f7f4ec; }
+        #environmental-system-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #environmental-system-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #environmental-system-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #environmental-system-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #environmental-system-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#environmental-system-arrow); }
+        #environmental-system-root .arrow.accent { stroke: #d4af37; stroke-width: 2; }
+        #environmental-system-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #environmental-system-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #environmental-system-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #environmental-system-root .arrowhead { fill: #546342; }
+        #environmental-system-root .arrowhead.accent { fill: #d4af37; }
+        #environmental-system-root .loop-arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#environmental-system-loop-arrow); }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">ENVIRONMENT · LOOP</text>
+      <text class="title" x="24" y="58">Environmental system</text>
+      <marker id="environmental-system-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <marker id="environmental-system-loop-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 8,5 0,10" class="arrowhead" />
+      </marker>
+      <line class="loop-arrow accent" x1="260" y1="240" x2="500" y2="240" />
+      <line class="loop-arrow" x1="540" y1="240" x2="700" y2="240" />
+      <path class="loop-arrow accent" d="M740 240 Q740 120 500 120 Q260 120 260 240" fill="none" stroke="#d4af37" stroke-width="2" marker-end="url(#environmental-system-loop-arrow)" />
+      <g class="node accent"><rect x="60" y="204" width="180" height="72" /><text class="node-name" x="150" y="228">Conservation action</text><text class="sublabel" x="150" y="248">protect + restore</text></g>
+      <g class="node"><rect x="500" y="204" width="180" height="72" /><text class="node-name" x="590" y="228">Monitoring</text><text class="sublabel" x="590" y="248">measure outcomes</text></g>
+      <g class="node accent"><rect x="700" y="204" width="180" height="72" /><text class="node-name" x="790" y="228">Review</text><text class="sublabel" x="790" y="248">policy re-check</text></g>
+      <text class="label" x="380" y="234">evaluate</text>
+      <text class="label" x="620" y="234">report</text>
+      <text class="label" x="500" y="114">adapt</text>
+    </svg>
+  </div>
+</body>
+</html>
