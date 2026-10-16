@@ -21,6 +21,7 @@
 - `rfcs/RFC-0001-Volunteer-Portal.md` — published
 - `rfcs/RFC-0002-Forest-GIS.md` — published
 - `rfcs/RFC-0003-AI-Gateway.md` — Accepted
+- `rfcs/RFC-0014-icm-adoption.md` — draft
 - `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — ` body line | `published` (no content change needed beyond frontmatter, when approved) |
 
 ## Top-level tree (depth 2, generated)
@@ -126,9 +127,11 @@
   - `.events\research.finished.md`
   - `.events\volunteer.joined.md`
   - `.events\website.updated.md`
+- `.gitattributes`
 - `.github`/
   - `.github\workflows`/
 - `.gitignore`
+- `.gitleaks.toml`
 - `.gitleaksignore`
 - `.husky`/
   - `.husky\commit-msg`
@@ -217,6 +220,7 @@
 - `FILE-MAP.md`
 - `README.md`
 - `VERCEL.md`
+- `WEB_ONLY_VERIFICATION_BLUEPRINT.md`
 - `_archive`/
   - `_archive\.registry`/
   - `_archive\.schemas`/
@@ -235,6 +239,10 @@
   - `_archive\test-artifacts-2026-09-05`/
   - `_archive\test-artifacts-2026-09-17`/
   - `_archive\v1.0.0_ARCHIVE.md`
+- `_config`/
+  - `_config\brand-rules.md`
+  - `_config\build-conventions.md`
+  - `_config\design-tokens.md`
 - `_shared`/
   - `_shared\factory-map.md`
 - `_system`/
@@ -246,6 +254,7 @@
   - `_templates\reasons-canvas.md`
   - `_templates\rfc-record.md`
   - `_templates\stage-CONTEXT.md`
+- `about-current.png`
 - `apps`/
   - `apps\CONTEXT.md`
   - `apps\admin`/
@@ -266,6 +275,7 @@
   - `assets\cinematic-manifest.json`
   - `assets\manifest.json`
 - `commitlint.config.js`
+- `complete-supabase.mjs`
 - `config`/
   - `config\apps.json`
   - `config\environment.json`
@@ -273,6 +283,7 @@
   - `config\skills`/
 - `content`/
   - `content\community.mdx`
+  - `content\diagrams`/
   - `content\financials`/
   - `content\forest`/
   - `content\governance`/
@@ -301,6 +312,9 @@
   - `contracts\runtime`/
   - `contracts\services`/
   - `contracts\shared`/
+- `curriculum-3d-hero.png`
+- `curriculum-build-error`
+- `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
   - `design\CONTEXT.md`
@@ -340,10 +354,13 @@
   - `docs\design-principles.md`
   - `docs\design-system`/
   - `docs\developer`/
+  - `docs\diagrams`/
   - `docs\ecosystem`/
   - `docs\engineering`/
+  - `docs\experience`/
   - `docs\github-os`/
   - `docs\governance`/
+  - `docs\governance-source`/
   - `docs\institution-ops`/
   - `docs\institution-os`/
   - `docs\ioc`/
@@ -361,6 +378,8 @@
   - `docs\project-phoenix`/
   - `docs\releases`/
   - `docs\research`/
+  - `docs\runbooks`/
+  - `docs\security`/
   - `docs\skills-reference`/
   - `docs\social-campaigns`/
   - `docs\social-os`/
@@ -370,12 +389,14 @@
   - `docs\system`/
   - `docs\testing.md`
   - `docs\token-reference.md`
+  - `docs\tools`/
   - `docs\v7`/
   - `docs\validation`/
   - `docs\wave-10`/
   - `docs\wave-9`/
   - `docs\website`/
 - `eslint.config.mjs`
+- `fix_migration_checksums.mjs`
 - `governance`/
   - `governance\bdl-governance.md`
   - `governance\coding-standards.md`
@@ -399,13 +420,18 @@
   - `history\milestones.md`
   - `history\release-history.md`
   - `history\timeline.md`
+- `homepage-3d-hero.png`
+- `homepage-after-preloader.png`
+- `homepage-current.png`
 - `homepage-full.png`
+- `homepage-verified.png`
 - `homepage-viewport.png`
 - `index.json`
 - `knowledge`/
   - `knowledge\engineering-graphs`/
 - `knowledge-packages`/
   - `knowledge-packages\level-1`/
+- `lesson-3d-hero.png`
 - `library-viewport.png`
 - `login-viewport.png`
 - `memory`/
@@ -417,6 +443,9 @@
   - `memory\releases`/
   - `memory\research`/
   - `memory\tasks`/
+- `migration1.json`
+- `missions-verified.png`
+- `module-3d-hero.png`
 - `opencode.json`
 - `os-redirect-login.png`
 - `package.json`
@@ -656,7 +685,9 @@
   - `rfcs\RFC-0001-Volunteer-Portal.md`
   - `rfcs\RFC-0002-Forest-GIS.md`
   - `rfcs\RFC-0003-AI-Gateway.md`
+  - `rfcs\RFC-0014-icm-adoption.md`
   - `rfcs\STATUS-VOCABULARY-PROPOSAL.md`
+- `run-migration.mjs`
 - `schemas`/
   - `schemas\agent.schema.json`
   - `schemas\document.schema.json`
@@ -674,6 +705,7 @@
   - `scripts\deploy-all.ps1`
   - `scripts\deploy-vercel-all.ps1`
   - `scripts\deploy-vercel.sh`
+  - `scripts\diagrams`/
   - `scripts\drift-check.mjs`
   - `scripts\enforce-deps.mjs`
   - `scripts\enforce-design-system.mjs`
@@ -687,6 +719,26 @@
   - `scripts\vercel-deploy-app.mjs`
 - `setup`/
   - `setup\questionnaire.md`
+- `shared`/
+  - `shared\constants`/
+  - `shared\schemas`/
+- `skills`/
+  - `skills\apple-design`/
+  - `skills\bhavya-ai-development`/
+  - `skills\bhavya-architecture`/
+  - `skills\bhavya-capability-research`/
+  - `skills\bhavya-content-truth`/
+  - `skills\bhavya-data-model`/
+  - `skills\bhavya-design-system`/
+  - `skills\bhavya-github-workflow`/
+  - `skills\bhavya-production-verification`/
+  - `skills\bhavya-reasons-canvas`/
+  - `skills\bhavya-route-audit`/
+  - `skills\bhavya-security`/
+  - `skills\bhavya-spec`/
+  - `skills\bhavya-ui-verification`/
+  - `skills\design-taste-frontend`/
+  - `skills\impeccable`/
 - `skills-lock.json`
 - `specs`/
   - `specs\SKILL-ARCHITECTURE.md`
@@ -695,9 +747,16 @@
   - `specs\documents.md`
   - `specs\examples`/
   - `specs\governance.md`
+  - `specs\icm-workspace-implementation-reasons-canvas.md`
   - `specs\information-architecture.md`
   - `specs\missions.md`
   - `specs\product.md`
+- `stages`/
+  - `stages\01-discovery`/
+  - `stages\02-specification`/
+  - `stages\03-implementation`/
+  - `stages\04-verification`/
+  - `stages\05-deployment`/
 - `standards`/
   - `standards\BAR-001.md`
   - `standards\BDL-001.md`
@@ -720,14 +779,24 @@
   - `standards\release.md`
   - `standards\security.md`
   - `standards\testing.md`
+- `supabase`/
+  - `supabase\.temp`/
+  - `supabase\migrations`/
+  - `supabase\tests`/
+- `test-3d-hero.cjs`
 - `tsconfig.base.json`
 - `turbo.json`
+- `typecheck-out.txt`
+- `typecheck-out2.txt`
+- `typecheck-output.txt`
 - `validation`/
   - `validation\week-1-staging.md`
   - `validation\week-2-uat.md`
   - `validation\week-3-operations.md`
   - `validation\week-4-readiness.md`
 - `vercel.json`
+- `workers`/
+  - `workers\api`/
 
 ## Canonical homes (links, not copies)
 

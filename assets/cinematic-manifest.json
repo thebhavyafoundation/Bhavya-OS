@@ -1,0 +1,189 @@
+{
+  "version": "1.0.0",
+  "created": "2026-10-02",
+  "purpose": "Provenance and rights records for assets acquired for the AI Curriculum Cinematic Experience (Phases 0-6). Photography provenance stays in manifest.json; this file covers 3D models, 2D illustrations, and animation assets. Policy inherited from manifest.json.",
+  "policy": {
+    "four_fits_required": ["brand", "narrative", "license", "technical"],
+    "license_preference": ["CC0", "public domain", "CC BY (no ShareAlike)"],
+    "authenticity": "Illustrations must not be presented as real Bhavya participants, students, or team members. No stock/generated people as Bhavya participants.",
+    "naming": "Honest basenames only; original source filenames preserved minus CDN hash prefixes.",
+    "unverified_sources": "Sources not verifiable by direct fetch are recorded BLOCKED or UNVERIFIED and never cited as authority."
+  },
+  "acquisition_method": {
+    "script": "node fetch script (TEMP), per-file magic-byte validation",
+    "validation": "gltf parsed as JSON (asset.version 2.0); SVG must contain <svg> root",
+    "retrieved_at": "2026-10-02"
+  },
+  "assets": [
+    {
+      "id": "polyhaven-book-encyclopedia-set",
+      "kind": "3d-model-gltf",
+      "source": "Poly Haven",
+      "source_page": "https://polyhaven.com/a/book_encyclopedia_set_01",
+      "license": "CC0",
+      "license_url": "https://polyhaven.com/license",
+      "attribution_required": false,
+      "resolution": "1k textures",
+      "local_dir": "assets/3d/poly-haven/book_encyclopedia_set_01",
+      "files": 8,
+      "bytes": 3261046,
+      "magic_verified": "gltf JSON parsed, asset.version 2.0, 20 meshes, 2 materials",
+      "use": "Courses page: floating books (knowledge is tangible); hero/curriculum decorative knowledge props.",
+      "meaning_alignment": "Books = courses; float/rotate on hover = exploration and student curiosity.",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "polyhaven-binder-notebook",
+      "kind": "3d-model-gltf",
+      "source": "Poly Haven",
+      "source_page": "https://polyhaven.com/a/binder_notebook",
+      "license": "CC0",
+      "license_url": "https://polyhaven.com/license",
+      "attribution_required": false,
+      "resolution": "1k textures",
+      "local_dir": "assets/3d/poly-haven/binder_notebook",
+      "files": 5,
+      "bytes": 1889775,
+      "magic_verified": "gltf JSON parsed during download (asset.version 2.0)",
+      "use": "Courses/curriculum supporting prop: notebook (study, modules, lesson notes).",
+      "meaning_alignment": "Notebook = active learning and note-taking, not passive content.",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "polyhaven-wooden-bookshelf-worn",
+      "kind": "3d-model-gltf",
+      "source": "Poly Haven",
+      "source_page": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0",
+      "license_url": "https://polyhaven.com/license",
+      "attribution_required": false,
+      "resolution": "1k textures",
+      "local_dir": "assets/3d/poly-haven/wooden_bookshelf_worn",
+      "files": 5,
+      "bytes": 2777194,
+      "magic_verified": "gltf JSON parsed during download (asset.version 2.0)",
+      "use": "Courses page library shelf: organized structure = structured learning.",
+      "meaning_alignment": "Shelves = curriculum categories; order = clear learning path.",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "open-peeps-sample",
+      "kind": "2d-illustration-svg-set",
+      "source": "Open Peeps (Pablo Stanley)",
+      "source_page": "https://www.openpeeps.com/",
+      "source_download_url": "https://cdn.prod.website-files.com/5e51c674258ffe10d286d30a/ (individual SVGs linked from landing page)",
+      "license": "CC0",
+      "license_url": "https://openpeeps.com/",
+      "attribution_required": false,
+      "local_dir": "assets/2d/open-peeps",
+      "files": 16,
+      "bytes": 663580,
+      "contents": [
+        "peep-1.svg",
+        "peep-2.svg",
+        "peep-6.svg",
+        "peep-7.svg",
+        "peep-8.svg",
+        "peep-9.svg",
+        "peep-10.svg",
+        "peep-sitting-1.svg",
+        "peep-sitting-2.svg",
+        "peep-sitting-4.svg",
+        "peep-standing-1.svg",
+        "peep-standing-2.svg",
+        "peep-standing-3.svg",
+        "peep-standing-4.svg",
+        "peep-standing-5.svg",
+        "peep-standing-6.svg"
+      ],
+      "magic_verified": "<svg> root present in every file (validated at download)",
+      "use": "About page and course UI illustrations; mix-and-match character art.",
+      "meaning_alignment": "Diverse illustrated people = inclusive community; never captioned as real Bhavya participants or staff.",
+      "honesty_notes": [
+        "Generic CC0 illustrations only. Do not use as team photos, student photos, or impact claims.",
+        "Full library (gum.co/openpeeps) not downloaded; curated landing-page sample only."
+      ],
+      "status": "ACQUIRED"
+    }
+  ],
+  "planned_custom_no_download": [
+    {
+      "id": "neural-network-scene",
+      "kind": "3d-scene-code",
+      "where": "Phase 2 homepage hero",
+      "note": "R3F custom component (~80 nodes, pulse + mouse repulsion). No external asset."
+    },
+    {
+      "id": "journey-map-checkpoints",
+      "kind": "3d-scene-code",
+      "where": "Phase 3 curriculum page",
+      "note": "SVG path extruded in R3F; checkpoint gems are procedural octahedron geometry with gold material (Three.js built-in). Replaces brief's 'Poly Haven gems' - Poly Haven has no gem models (verified via API catalog, 521 models)."
+    },
+    {
+      "id": "mission-spheres",
+      "kind": "3d-scene-code",
+      "where": "Phase 5 about page",
+      "note": "Three.js built-in sphere geometry + gold line materials, per brief."
+    },
+    {
+      "id": "abstract-shapes",
+      "kind": "3d-scene-code",
+      "note": "Three.js built-in geometries. Brief's 'OpenSource3DAssets.com' source not verified; not cited, not used."
+    }
+  ],
+  "substitutions": [
+    {
+      "brief_asked": "Kenney books (CC0) for courses page",
+      "actual": "Poly Haven CC0 book models (book_encyclopedia_set_01, binder_notebook, wooden_bookshelf_worn)",
+      "reason": "No Kenney 3D book pack located via site search; Poly Haven books verified via API and downloaded."
+    },
+    {
+      "brief_asked": "Reshot education icons (free commercial)",
+      "actual": "Existing @bhavya/icons (lucide-react, MIT) re-exports: BookOpen, GraduationCap, Brain, Library, Sprout, Users, etc.",
+      "reason": "Reshot listing is client-rendered; no server-side icon links or API discovered (recorded BLOCKED). Repository already ships education-capable icons; avoids duplicate icon dependency."
+    },
+    {
+      "brief_asked": "LottieFiles education + UI feedback animations (Lottie JSON)",
+      "actual": "GSAP + Framer Motion (already installed in @bhavya/ai-institute)",
+      "reason": "LottieFiles endpoints return HTTP 403 Cloudflare challenge (recorded BLOCKED). Motion needs are covered by the brief's own primary stack; no extra runtime dependency added."
+    },
+    {
+      "brief_asked": "Checkpoint gems from Poly Haven",
+      "actual": "Procedural gem geometry (code)",
+      "reason": "Poly Haven model catalog (521 models) contains no gem/crystal assets; verified via api.polyhaven.com."
+    }
+  ],
+  "blocked_or_held": [
+    {
+      "id": "reshot-education-icons",
+      "reason": "Category page is client-rendered: zero server-side icon hrefs, no API endpoint found in HTML (879 KB inspected).",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "lottiefiles-education",
+      "reason": "HTTP 403 Cloudflare challenge on lottiefiles.com and api paths.",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "r2-upload-bhavya-ai-assets",
+      "reason": "Account-level: Cloudflare API returns code 10042 'Please enable R2 through the Cloudflare Dashboard'. Local: `npx wrangler whoami` reports not authenticated.",
+      "required_human_steps": [
+        "Enable R2 in the Cloudflare Dashboard (account home -> R2).",
+        "Run `npx wrangler login` (from apps/ai-institute) and approve.",
+        "Then: npx wrangler r2 bucket create bhavya-ai-assets (if missing)",
+        "Then: npx wrangler r2 object put bhavya-ai-assets/3d/<file> --file=assets/3d/<file> per large asset"
+      ],
+      "status": "BLOCKED_PENDING_HUMAN"
+    },
+    {
+      "id": "open-peeps-full-library",
+      "reason": "Full library gated behind gum.co pay-what-you-want page; curated CC0 landing-page SVG sample acquired instead.",
+      "status": "HELD"
+    }
+  ],
+  "integration_status": "NOT WIRED - assets staged under assets/ only. Wiring into pages happens in Phases 1-5 (R3F loaders in lazy-loaded scenes).",
+  "totals": {
+    "files": 34,
+    "bytes": 8592595
+  }
+}

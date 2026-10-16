@@ -1,0 +1,37 @@
+{
+  "diagram_id": "foundation-governance-structure",
+  "title": "Bhavya Foundation governance structure",
+  "type": "org-chart",
+  "variant": "minimal-light",
+  "route": "/os/governance/structure",
+  "section": "Governance",
+  "purpose": "Show the governance hierarchy drawn from the Constitution, Trust Deed, Founders' Charter, Board Charter, and Governance Manual. Marked draft pending governance review — no authority relationships inferred beyond the documents.",
+  "audience": "Public, governance reviewers",
+  "source_html": "content/diagrams/sources/html/foundation-governance-structure.html",
+  "production_svg": "apps/ai-institute/public/diagrams/governance/foundation-governance-structure.svg",
+  "optional_png": null,
+  "accessible_text": "Bhavya Foundation governance flows from the Constitution and Trust Deed through the Founders' Charter and Board Charter to the Governance Manual, with named accountability boundaries. Authority relationships shown are only those explicitly supported by the source documents.",
+  "content_sources": [
+    "docs/constitution/00-VISION.md",
+    "docs/constitution/01-BRAND-CONSTITUTION.md",
+    "governance/trust-deed.md",
+    "governance/founders-charter.md",
+    "governance/board-charter.md",
+    "governance/governance-manual.md"
+  ],
+  "review": {
+    "content": "pending",
+    "subject": "pending",
+    "governance": "pending",
+    "accessibility": "pending"
+  },
+  "licensing": {
+    "generator_repository": "https://github.com/cathrynlavery/diagram-design",
+    "generator_commit": "b46c9701f035844a20b13ab0551315977188933b",
+    "generator_license": "MIT",
+    "embedded_icons": []
+  },
+  "version": "0.1.0",
+  "status": "draft",
+  "updated_at": "2026-10-16T00:00:00Z"
+}

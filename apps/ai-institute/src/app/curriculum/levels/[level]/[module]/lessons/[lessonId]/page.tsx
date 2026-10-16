@@ -11,6 +11,7 @@ import { ModuleQuiz } from "@/components/curriculum/ModuleQuiz";
 import { StandardsFooter } from "@/components/curriculum/StandardsFooter";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import type { Lesson, LessonBlock } from "@/data/curriculum";
 
 type Props = {
   params: Promise<{ level: string; module: string; lessonId: string }>;
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: Props) {
   const lesson = mod ? getLesson(mod.id, lessonId) : undefined;
   return {
     title: lesson
-      ? `${lesson.title} — ${mod.title} — Curriculum — Bhavya Foundation`
+      ? `${lesson.title} — ${mod?.title} — Curriculum — Bhavya Foundation`
       : "Lesson",
   };
 }

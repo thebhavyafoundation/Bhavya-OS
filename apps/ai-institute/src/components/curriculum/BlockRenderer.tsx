@@ -39,18 +39,27 @@ export function BlockRenderer({ block }: { block: LessonBlock }) {
           )}
         </div>
       );
-    case "quiz":
+    case "quiz": {
+      const moduleId = (block as { moduleId?: string }).moduleId || "unknown";
       return (
         <section className="ai-block" aria-label="Check your understanding">
           <h2 className="ai-block-title">Check your understanding</h2>
-          <QuizBlock questions={block.questions} />
+          <QuizBlock
+            questions={
+              block.questions as import("@/data/curriculum/types").QuizQuestion[]
+            }
+            moduleId={moduleId}
+          />
         </section>
       );
+    }
     case "interactive":
       return (
         <section className="ai-block" aria-label="Try it">
           <h2 className="ai-block-title">Try it</h2>
-          <WidgetRenderer widget={block.widget} />
+          <WidgetRenderer
+            spec={block.widget as import("@/data/curriculum/types").WidgetSpec}
+          />
         </section>
       );
     case "experiment":

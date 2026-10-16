@@ -1,12 +1,12 @@
-export { Authenticator, ApiKeyStrategy } from "./auth.js";
+export { Authenticator, ApiKeyStrategy } from "./auth";
 export type {
   AuthStrategy,
   AuthCredentials,
   AuthResult,
   AuthSession,
-} from "./auth.js";
-export { RateLimiter, RateLimits } from "./rate-limit.js";
-export type { RateLimitConfig, RateLimitResult } from "./rate-limit.js";
+} from "./auth";
+export { RateLimiter, RateLimits } from "./rate-limit";
+export type { RateLimitConfig, RateLimitResult } from "./rate-limit";
 export {
   generateToken,
   generateOtp,
@@ -15,4 +15,4 @@ export {
   timingSafeEqual,
   sign,
   verify,
-} from "./crypto.js";
+} from "./crypto";

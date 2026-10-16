@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { QuizQuestion } from "@/data/curriculum";
+import type { QuizQuestion } from "@/data/curriculum/types";
 
 interface QuizBlockProps {
-  questions: readonly QuizQuestion[];
+  questions: QuizQuestion[];
   moduleId: string;
 }
 
@@ -323,7 +323,7 @@ export function QuizBlock({ questions, moduleId }: QuizBlockProps) {
             fontSize: "var(--text-sm)",
           }}
         >
-          ✓ Score 80% or higher! This lesson's quiz contributes to module
+          ✓ Score 80% or higher! This lesson&apos;s quiz contributes to module
           completion.
         </p>
       )}

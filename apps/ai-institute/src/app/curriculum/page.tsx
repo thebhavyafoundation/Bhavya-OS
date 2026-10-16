@@ -170,7 +170,7 @@ export default function CurriculumPage() {
               {TRACKS.map((t) => (
                 <a
                   key={t.id}
-                  className="curriculum-tier"
+                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
                   href={
                     t.levels.length === 1
                       ? `/curriculum/levels/${t.levels[0]}`
@@ -183,20 +183,6 @@ export default function CurriculumPage() {
                     border: "1px solid var(--color-border-primary)",
                     borderRadius: "var(--radius-lg)",
                     textDecoration: "none",
-                    transition:
-                      "transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-                    e.currentTarget.style.borderColor =
-                      "var(--color-brand-forest)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-                    e.currentTarget.style.borderColor =
-                      "var(--color-border-primary)";
                   }}
                 >
                   <span
@@ -309,7 +295,7 @@ export default function CurriculumPage() {
                 return (
                   <a
                     key={l}
-                    className="curriculum-tier"
+                    className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
                     href={`/curriculum/levels/${l}`}
                     style={{
                       display: "block",
@@ -318,20 +304,6 @@ export default function CurriculumPage() {
                       border: "1px solid var(--color-border-primary)",
                       borderRadius: "var(--radius-lg)",
                       textDecoration: "none",
-                      transition:
-                        "transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-                      e.currentTarget.style.borderColor =
-                        "var(--color-brand-forest)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-                      e.currentTarget.style.borderColor =
-                        "var(--color-border-primary)";
                     }}
                   >
                     <span

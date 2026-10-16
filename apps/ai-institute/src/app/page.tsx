@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -10,18 +11,12 @@ import { QuoteBand } from "@/components/home/QuoteBand";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Preloader } from "@/components/motion/Preloader";
 
-export const metadata: Metadata = {
-  title: "Bhavya Foundation — For People. For Nature. For Generations.",
-  description:
-    "Nature restored. Knowledge opened. Heritage kept. Communities led from within. A public charitable trust building for generations.",
-};
-
 /**
  * Homepage — poster-stagger split-hero rebuild per the foundation-v2
  * reference (spec 2026-09-26-foundation-v2-design.md, plan A, task T6;
  * hero revision + credit removal per user feedback 2026-09-26).
  *
- * Server component; interactive sections are client components.
+ * Client component; interactive sections are client components.
  * Impact numbers: none (D1). No image source/credit text rendered
  * anywhere (D4 superseded by 2026-09-26 user directive).
  */
@@ -34,7 +29,6 @@ export default function HomePage() {
       style={{ background: "var(--color-bg-primary)" }}
     >
       <Preloader onComplete={() => setIsLoaded(true)} />
-      <SiteHeader variant="default" />
       <main id="main-content">
         <SplitHero />
         <FourPillars />
@@ -43,7 +37,6 @@ export default function HomePage() {
         <QuoteBand />
         <FinalCta />
       </main>
-      <SiteFooter />
     </div>
   );
 }

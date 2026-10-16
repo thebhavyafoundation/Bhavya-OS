@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="foundation-governance-structure-root" role="img" aria-labelledby="foundation-governance-structure-title foundation-governance-structure-desc" viewBox="0 0 960 540" width="960" height="540">
+      <title id="foundation-governance-structure-title">Bhavya Foundation governance structure</title>
+      <desc id="foundation-governance-structure-desc">Bhavya Foundation governance flows from the Constitution and Trust Deed through the Founders' Charter and Board Charter to the Governance Manual, with named accountability boundaries. Authority relationships shown are only those explicitly supported by the source documents. Draft pending governance review.</desc>
+      <style>
+        #foundation-governance-structure-root { font-family: Inter, system-ui, sans-serif; }
+        #foundation-governance-structure-root .bg { fill: #f7f4ec; }
+        #foundation-governance-structure-root .node { fill: #fdfcf9; stroke: #0e382e; stroke-width: 1; rx: 6; ry: 6; }
+        #foundation-governance-structure-root .node.accent { fill: #d4af37; stroke: #0e382e; stroke-width: 1.5; }
+        #foundation-governance-structure-root .node-name { font: 600 12px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+        #foundation-governance-structure-root .sublabel { font: 400 9px "JetBrains Mono", ui-monospace, monospace; fill: #546342; text-anchor: middle; dominant-baseline: middle; }
+        #foundation-governance-structure-root .arrow { fill: none; stroke: #546342; stroke-width: 1.5; marker-end: url(#foundation-governance-structure-arrow); }
+        #foundation-governance-structure-root .label { font: 400 10px Inter, system-ui, sans-serif; fill: #3e4a32; text-anchor: middle; dominant-baseline: central; }
+        #foundation-governance-structure-root .eyebrow { font: 600 10px "JetBrains Mono", ui-monospace, monospace; fill: #d4af37; letter-spacing: 0.15em; text-transform: uppercase; }
+        #foundation-governance-structure-root .title { font: 400 20px "Playfair Display", Georgia, serif; fill: #0e382e; }
+        #foundation-governance-structure-root .arrowhead { fill: #546342; }
+        #foundation-governance-structure-root .draft-badge { fill: #d4af37; stroke: #0e382e; stroke-width: 1; rx: 4; ry: 4; }
+        #foundation-governance-structure-root .draft-text { font: 600 10px Inter, system-ui, sans-serif; fill: #0e382e; text-anchor: middle; dominant-baseline: middle; }
+      </style>
+      <rect class="bg" x="0" y="0" width="960" height="540" />
+      <text class="eyebrow" x="24" y="34">GOVERNANCE · ORG CHART · DRAFT</text>
+      <text class="title" x="24" y="58">Bhavya Foundation governance structure</text>
+      <marker id="foundation-governance-structure-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <polygon points="0,0 6,3 0,6" class="arrowhead" />
+      </marker>
+      <line class="arrow" x1="480" y1="140" x2="480" y2="216" />
+      <line class="arrow" x1="480" y1="284" x2="480" y2="360" />
+      <line class="arrow" x1="480" y1="428" x2="480" y2="504" />
+      <g class="node accent"><rect x="400" y="80" width="160" height="72" /><text class="node-name" x="480" y="104">Constitution</text><text class="sublabel" x="480" y="124">supreme authority</text></g>
+      <g class="node"><rect x="400" y="180" width="160" height="72" /><text class="node-name" x="480" y="204">Trust Deed</text><text class="sublabel" x="480" y="224">legal instrument</text></g>
+      <g class="node"><rect x="400" y="268" width="160" height="72" /><text class="node-name" x="480" y="292">Founders' Charter</text><text class="sublabel" x="480" y="312">founding intent</text></g>
+      <g class="node"><rect x="400" y="356" width="160" height="72" /><text class="node-name" x="480" y="380">Board Charter</text><text class="sublabel" x="480" y="400">board accountability</text></g>
+      <g class="node"><rect x="400" y="444" width="160" height="72" /><text class="node-name" x="480" y="468">Governance Manual</text><text class="sublabel" x="480" y="488">operating rules</text></g>
+      <text class="label" x="480" y="158">derives</text>
+      <text class="label" x="480" y="302">establishes</text>
+      <text class="label" x="480" y="390">delegates to</text>
+      <rect class="draft-badge" x="810" y="440" width="120" height="32" rx="6" ry="6" />
+      <text class="draft-text" x="870" y="456">DRAFT — pending governance review</text>
+    </svg>

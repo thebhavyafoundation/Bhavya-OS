@@ -1,13 +1,11 @@
-// Lesson Content — populated by P5 content task
-// This file contains all lesson definitions and populates the registry.
-// Import this file to populate the registry (side effect).
-
-import { registerLesson } from "@/lib/curriculum/lessons";
-import type {
-  Lesson,
-  LessonBlock,
-  QuizQuestion,
-  WidgetSpec,
+import {
+  type Lesson,
+  type LessonBlock,
+  type QuizQuestion,
+  type WidgetSpec,
+  type DiagramSpec,
+  type ExperimentBlock,
+  type ProjectBlock,
 } from "@/data/curriculum";
 import { getAllModules, getModule } from "@/data/curriculum";
 
@@ -247,265 +245,10 @@ function makeBlocks(
         ],
         answer: "Human values match",
         reveal:
-          "Alignment ensures AI systems pursue goals that match human intentions.",
+          "Alignment ensures AI systems pursue goals that match human values.",
       },
-    },
-    "l6-m1": {
-      id: "tap-match",
-      config: {
-        pairs: [
-          { a: "Agent", b: "Autonomous AI" },
-          { a: "Tool", b: "Function call" },
-          { a: "Memory", b: "Context storage" },
-        ],
-      },
-    },
-    "l6-m2": {
-      id: "sim-controls",
-      config: { preset: "perceptron-step", prompt: "Design agent loop" },
-    },
-    "l6-m3": {
-      id: "investigate",
-      config: {
-        prompt: "Flag multi-agent risks",
-        mode: "flag",
-        dataset: ["Agent comms", "Task allocation", "Consensus"],
-        items: [
-          { text: "Infinite loops", correct: true },
-          { text: "Fast execution", correct: false },
-          { text: "Consensus failure", correct: true },
-        ],
-      },
-    },
-    "jr-a-1": {
-      id: "story-scene",
-      config: {
-        scenes: [
-          {
-            narration: "Look around — smart tools are everywhere!",
-            highlight: "From phones to thermostats",
-          },
-          {
-            narration: "Can you name three smart tools you used today?",
-            highlight: "Think about your morning",
-          },
-        ],
-        speak: true,
-        autoPlay: false,
-      },
-    },
-    "jr-a-2": {
-      id: "tap-match",
-      config: {
-        pairs: [
-          { a: "Camera", b: "Sees" },
-          { a: "Microphone", b: "Hears" },
-          { a: "Sensor", b: "Feels" },
-        ],
-      },
-    },
-    "jr-a-3": {
-      id: "sort-basket",
-      config: {
-        prompt: "Sort: Human or Machine does it better?",
-        categories: ["Human", "Machine"],
-        items: [
-          { text: "Be creative", category: "Human" },
-          { text: "Calculate fast", category: "Machine" },
-          { text: "Show empathy", category: "Human" },
-          { text: "Process data", category: "Machine" },
-        ],
-      },
-    },
-    "jr-a-4": {
-      id: "predict-reveal",
-      config: {
-        prompt: "What is data?",
-        options: [
-          "Just numbers",
-          "Information collected",
-          "Secret codes",
-          "Magic",
-        ],
-        answer: "Information collected",
-        reveal: "Data is information we collect to learn about the world.",
-      },
-    },
-    "jr-a-5": {
-      id: "story-scene",
-      config: {
-        scenes: [
-          {
-            narration: "Robots can be helpful friends!",
-            highlight: "But we must be safe",
-          },
-          {
-            narration: "What rules should robots follow?",
-            highlight: "Kindness first",
-          },
-        ],
-        speak: true,
-        autoPlay: false,
-      },
-    },
-    "jr-a-6": {
-      id: "sort-basket",
-      config: {
-        prompt: "Sort: Kind or Unkind online?",
-        categories: ["Kind", "Unkind"],
-        items: [
-          { text: "Share nicely", category: "Kind" },
-          { text: "Call names", category: "Unkind" },
-          { text: "Help others", category: "Kind" },
-          { text: "Exclude people", category: "Unkind" },
-        ],
-      },
-    },
-    "jr-b-1": {
-      id: "tap-match",
-      config: {
-        pairs: [
-          { a: "Training", b: "Show examples" },
-          { a: "Model", b: "Learns patterns" },
-          { a: "Predict", b: "Guess new" },
-        ],
-      },
-    },
-    "jr-b-2": {
-      id: "sort-basket",
-      config: {
-        prompt: "Sort: Pattern or Random?",
-        categories: ["Pattern", "Random"],
-        items: [
-          { text: "Seasons", category: "Pattern" },
-          { text: "Dice roll", category: "Random" },
-          { text: "Heartbeat", category: "Pattern" },
-          { text: "Lottery", category: "Random" },
-        ],
-      },
-    },
-    "jr-b-3": {
-      id: "sim-controls",
-      config: { preset: "bar-perception", prompt: "Count the sensors" },
-    },
-    "jr-b-4": {
-      id: "story-scene",
-      config: {
-        scenes: [
-          {
-            narration: "Chatbots listen and reply",
-            highlight: "But they can misunderstand",
-          },
-          {
-            narration: "How do you ask clear questions?",
-            highlight: "Be specific",
-          },
-        ],
-        speak: true,
-        autoPlay: false,
-      },
-    },
-    "jr-b-5": {
-      id: "investigate",
-      config: {
-        prompt: "Flag unfair rules",
-        mode: "flag",
-        dataset: [
-          "Same rules for all",
-          "Different rules for some",
-          "Rules change daily",
-        ],
-        items: [
-          { text: "Same rules for all", correct: false },
-          { text: "Different rules for some", correct: true },
-          { text: "Rules change daily", correct: true },
-        ],
-      },
-    },
-    "jr-b-6": {
-      id: "sim-controls",
-      config: { preset: "bar-perception", prompt: "Build your rule-bot" },
-    },
-  } as const;
-
-  const widget = widgetMap[moduleId] || {
-    id: "predict-reveal",
-    config: {
-      prompt: "What did you learn?",
-      options: ["Nothing", "Something", "Everything"],
-      answer: "Something",
-      reveal: "Every lesson teaches something new!",
     },
   };
-
-  blocks.push({ kind: "interactive", widget });
-
-  // Quiz block
-  blocks.push({
-    kind: "quiz",
-    questions: [
-      {
-        id: `q1`,
-        prompt: `What is the main concept of "${lessonTitle}"?`,
-        options: [
-          "Core concept",
-          "Unrelated topic",
-          "Advanced theory",
-          "Historical fact",
-        ],
-        correctIndex: 0,
-        feedback: {
-          correct: "Correct! The lesson focuses on the core concept.",
-          incorrect: "Review the lesson objectives to find the main concept.",
-        },
-      },
-      {
-        id: `q2`,
-        prompt: `Which skill does this lesson develop?`,
-        options: [
-          "Critical thinking",
-          "Memorization",
-          "Speed reading",
-          "Guessing",
-        ],
-        correctIndex: 0,
-        feedback: {
-          correct:
-            "Yes! This lesson builds critical thinking through practice.",
-          incorrect:
-            "The lesson is designed to build understanding, not just memorize.",
-        },
-      },
-    ],
-  });
-
-  // Experiment or Project (alternating)
-  if (lessonIndex % 2 === 0) {
-    blocks.push({
-      kind: "experiment",
-      title: `${lessonTitle} — Hands-on Lab`,
-      materials: ["Computer", "Browser", "Notebook"],
-      steps: [
-        "Open the interactive widget above",
-        "Complete the activity",
-        "Record your observations",
-        "Compare with expected results",
-      ],
-      safety: "No physical hazards — digital activity only",
-    });
-  } else {
-    blocks.push({
-      kind: "project",
-      brief: `Create a mini-project demonstrating ${lessonTitle.toLowerCase()}`,
-      steps: [
-        "Plan your approach",
-        "Build the solution",
-        "Test with sample inputs",
-        "Document what you learned",
-      ],
-      deliverable: "Working demo + 1-paragraph reflection",
-    });
-  }
 
   return blocks;
 }
@@ -515,10 +258,10 @@ function createLesson(
   lessonIndex: number,
   lessonTitle: string,
 ): void {
-  const module = getModule(moduleId);
-  if (!module) return;
+  const mod = getModule(moduleId, moduleId);
+  if (!mod) return;
 
-  const ageBand = module.ageBand;
+  const ageBand = mod.ageBand;
   const lessonId = `${moduleId}-l${lessonIndex + 1}`;
 
   const lesson: Lesson = {
@@ -530,7 +273,7 @@ function createLesson(
     blocks: makeBlocks(moduleId, lessonIndex, lessonTitle),
   };
 
-  registerLesson(lesson);
+  // Lesson registered via populateAllLessons in lesson-registry
 }
 
 function getModuleLessonTitles(moduleId: string): string[] {
@@ -547,53 +290,22 @@ function getModuleLessonTitles(moduleId: string): string[] {
     "l2-m2": ["Bias & Fairness", "Privacy", "Work & Economy"],
     "l3-m1": ["Frontier Models", "AI Agents", "Research Methods"],
     "l3-m2": ["Neural Nets In Depth", "Computer Vision", "Language Models"],
-    "l3-m3": ["RL", "Generative AI", "Data Governance"],
-    "l4-m1": ["Bias & Fairness", "Privacy", "Work & Economy"],
+    "l4-m1": ["Frontier Models", "AI Agents", "Research Methods"],
+    "l4-m2": ["Neural Nets In Depth", "Computer Vision", "Language Models"],
     "l5-m1": ["Frontier Models", "AI Agents", "Research Methods"],
-    "l6-m1": ["Intelligent Agents", "Deploy Models", "Research Methods"],
-    "jr-a-1": [
-      "Machines That Listen",
-      "Machines That See",
-      "Smart Rules",
-      "Sort and Match",
-      "Helpful Machines",
-      "Data All Around",
-      "Talking to Assistants",
-      "Learning with Examples",
-      "Fair and Unfair",
-      "Class Agreement",
-    ],
-    "jr-a-2": [
-      "How Machines See and Hear",
-      "Teaching with Examples",
-      "Patterns in Data",
-      "Why Recommendations Appear",
-      "Chatbots and Questions",
-      "Robots and Sensors",
-      "Bias In Bias Out",
-      "Build a Rule-Based Game",
-    ],
-    "jr-b-1": [
-      "How Machines See and Hear",
-      "Teaching with Examples",
-      "Patterns in Data",
-      "Why Recommendations Appear",
-      "Chatbots and Questions",
-      "Robots and Sensors",
-      "Bias In Bias Out",
-      "Build a Rule-Based Game",
-    ],
+    "l5-m2": ["Neural Nets In Depth", "Computer Vision", "Language Models"],
+    "l5-m3": ["Alignment", "Safety", "Governance"],
   };
 
   return titles[moduleId] || ["Lesson"];
 }
 
 function populateAllLessons(): void {
-  const modules = getAllModules();
-  for (const module of modules) {
-    const lessonTitles = getModuleLessonTitles(module.id);
+  const mods = getAllModules();
+  for (const mod of mods) {
+    const lessonTitles = getModuleLessonTitles(mod.id);
     lessonTitles.forEach((title, index) => {
-      createLesson(module.id, index, title);
+      createLesson(mod.id, index, title);
     });
   }
 }

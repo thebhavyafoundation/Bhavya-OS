@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Bhavya diagram manifest",
+  "description": "Declares one institutional diagram. JSON rendering of the manifest schema in docs/diagrams/DIAGRAM-REGISTRY.md.",
+  "type": "object",
+  "required": [
+    "diagram_id",
+    "title",
+    "type",
+    "variant",
+    "route",
+    "section",
+    "purpose",
+    "audience",
+    "source_html",
+    "production_svg",
+    "accessible_text",
+    "content_sources",
+    "review",
+    "licensing",
+    "version",
+    "status",
+    "updated_at"
+  ],
+  "properties": {
+    "diagram_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Stable, unique identifier used in DiagramBlock references and asset paths."
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": [
+        "architecture",
+        "architecture-delta",
+        "it-current-state",
+        "flowchart",
+        "sequence",
+        "state-machine",
+        "er-data-model",
+        "timeline",
+        "swimlane",
+        "quadrant",
+        "radar",
+        "polar-chart",
+        "loop",
+        "nested",
+        "tree",
+        "org-chart",
+        "layer-stack",
+        "exploded-axonometric",
+        "axonometric-plan",
+        "venn",
+        "pyramid",
+        "treemap",
+        "heatmap",
+        "bar-chart",
+        "waterfall",
+        "line-chart",
+        "gantt",
+        "scatter-plot",
+        "high-level",
+        "process",
+        "medallion",
+        "data-flow",
+        "dp-integration",
+        "dp-security-matrix",
+        "sankey",
+        "fishbone",
+        "wardley-map",
+        "kanban",
+        "user-journey",
+        "service-blueprint",
+        "deployment",
+        "dependency-graph",
+        "uml-class",
+        "story-map",
+        "database-schema"
+      ],
+      "description": "Visual type; unknown types fail validation."
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["minimal-light", "minimal-dark", "full-editorial"]
+    },
+    "route": {
+      "type": "string",
+      "pattern": "^/",
+      "description": "Canonical route where the diagram is presented."
+    },
+    "section": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "audience": { "type": "string", "minLength": 1 },
+    "source_html": {
+      "type": "string",
+      "description": "Authoring HTML source under content/diagrams/sources/html/."
+    },
+    "production_svg": {
+      "type": "string",
+      "description": "Exported SVG under apps/ai-institute/public/diagrams/<group>/."
+    },
+    "optional_png": { "type": ["string", "null"] },
+    "accessible_text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Text alternative (transcript) for the diagram."
+    },
+    "content_sources": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Institutional documents the diagram is drawn from."
+    },
+    "review": {
+      "type": "object",
+      "required": ["content", "subject", "governance", "accessibility"],
+      "properties": {
+        "content": {
+          "type": "string",
+          "enum": ["pending", "reviewed", "approved"]
+        },
+        "subject": {
+          "type": "string",
+          "enum": ["pending", "reviewed", "approved"]
+        },
+        "governance": {
+          "type": "string",
+          "enum": ["pending", "reviewed", "approved", "not-applicable"]
+        },
+        "accessibility": {
+          "type": "string",
+          "enum": ["pending", "reviewed", "approved"]
+        }
+      }
+    },
+    "licensing": {
+      "type": "object",
+      "required": [
+        "generator_repository",
+        "generator_commit",
+        "generator_license",
+        "embedded_icons"
+      ],
+      "properties": {
+        "generator_repository": { "type": "string" },
+        "generator_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "generator_license": { "type": "string" },
+        "embedded_icons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "content-reviewed",
+        "accessibility-reviewed",
+        "approved",
+        "deprecated"
+      ],
+      "description": "No draft diagram may be presented as approved institutional information."
+    },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

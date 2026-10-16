@@ -1,55 +1,123 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAuth } from "@/lib/api-auth";
-import {
-  getStudentByUserId,
-  updateStudent,
-  completeLesson,
-} from "@/lib/student-store";
-import {
-  listCompletedModuleIds,
-  replaceCompletedModules,
-  sanitizeCurriculumModuleIds,
-} from "@/lib/module-progress";
-import { checkRateLimit, RateLimits } from "@/lib/rate-limit";
-import { createLogger, extractCorrelationId } from "@/lib/logger";
-import { roleIsAllowed, type Role } from "@/lib/roles";
-import { recordAuditEvent } from "@/lib/audit-repository";
-import { getCourseById, courses } from "@/data/academy-courses";
-import { labExercises } from "@/data/lab-exercises";
-import {
-  getLesson,
-  getLessonsForModule,
-  getModule,
-} from "@/lib/curriculum/lessons";
-import {
-  getModule as getCurriculumModule,
-  moduleParams,
-} from "@/data/curriculum";
+import { requireAuth, extractCorrelationId } from "@/lib/auth";
+import { createLogger, RateLimits, checkRateLimit } from "@/lib/logger";
+import { recordAuditEvent } from "@/lib/audit";
 
-/** Check if a lesson ID exists in any course (globally unique lesson IDs). */
-function isValidLessonId(lessonId: string): boolean {
-  // Check academy courses
-  if (
-    courses.some((c) =>
-      c.modules.some((m) => m.lessons.some((l) => l.id === lessonId)),
-    )
-  ) {
-    return true;
-  }
-  // Check curriculum lessons
+/**
+ * Row shape of the canonical `student_profiles` table
+ * (packages/database/migrations/ai-institute/001_baseline_schema.ts).
+ * Columns are snake_case; JSON columns are stored as TEXT.
+ */
+interface StudentRow {
+  id: string;
+  user_id: string;
+  name: string;
+  email: string;
+  role: string;
+  interests: string;
+  current_course: string;
+  current_lesson_index: number;
+  lessons_completed: string;
+  assessment_score: number;
+  assessment_completed: number;
+  lab_tasks_completed: string;
+  lab_score: number;
+  knowledge_check_answers: string;
+  knowledge_check_score: number;
+  project_submitted: number;
+  project_score: number;
+  badge_earned: number;
+  reflection_entries: string;
+  streak: number;
+  last_active_date: string;
+  onboarding_complete: number;
+  enrolled_courses: string;
+  enrolled_at: string;
+  updated_at: string;
+}
+
+/** Response shape consumed by components/AuthProvider.tsx. */
+interface StudentProfile {
+  id: string;
+  userId: string;
+  name: string;
+  email: string;
+  role: string;
+  interests: string[];
+  currentCourse: string;
+  currentLessonIndex: number;
+  lessonsCompleted: string[];
+  assessmentScore: number;
+  assessmentCompleted: boolean;
+  labTasksCompleted: string[];
+  labScore: number;
+  knowledgeCheckAnswers: Record<string, string | number>;
+  knowledgeCheckScore: number;
+  projectSubmitted: boolean;
+  projectScore: number;
+  badgeEarned: boolean;
+  reflectionEntries: { lessonId: string; content: string; date: string }[];
+  streak: number;
+  lastActiveDate: string;
+  enrolledCourses: string[];
+  onboardingComplete: boolean;
+  enrolledAt: string;
+  updatedAt: string;
+}
+
+/** Only students may mutate their own progress. */
+const PROGRESS_WRITE_ROLES = new Set(["student"]);
+
+function parseJson<T>(raw: string | null | undefined, fallback: T): T {
+  if (!raw) return fallback;
   try {
-    const [moduleId, lessonIdOnly] = lessonId.split("-l");
-    if (!moduleId || !lessonIdOnly) return false;
-    const lesson = getLesson(moduleId, lessonIdOnly);
-    return !!lesson;
+    return JSON.parse(raw) as T;
   } catch {
-    return false;
+    return fallback;
   }
 }
 
-/** Check if a module ID is valid (curriculum or academy). */
-function isValidModuleId(moduleId: string): boolean {
-  return moduleParams().some((m) => m.module === moduleId);
+function toProfile(row: StudentRow): StudentProfile {
+  return {
+    id: row.id,
+    userId: row.user_id,
+    name: row.name,
+    email: row.email,
+    role: row.role,
+    interests: parseJson<string[]>(row.interests, []),
+    currentCourse: row.current_course,
+    currentLessonIndex: row.current_lesson_index,
+    lessonsCompleted: parseJson<string[]>(row.lessons_completed, []),
+    assessmentScore: row.assessment_score,
+    assessmentCompleted: row.assessment_completed === 1,
+    labTasksCompleted: parseJson<string[]>(row.lab_tasks_completed, []),
+    labScore: row.lab_score,
+    knowledgeCheckAnswers: parseJson<Record<string, string | number>>(
+      row.knowledge_check_answers,
+      {},
+    ),
+    knowledgeCheckScore: row.knowledge_check_score,
+    projectSubmitted: row.project_submitted === 1,
+    projectScore: row.project_score,
+    badgeEarned: row.badge_earned === 1,
+    reflectionEntries: parseJson<
+      { lessonId: string; content: string; date: string }[]
+    >(row.reflection_entries, []),
+    streak: row.streak,
+    lastActiveDate: row.last_active_date,
+    enrolledCourses: parseJson<string[]>(row.enrolled_courses, []),
+    onboardingComplete: row.onboarding_complete === 1,
+    enrolledAt: row.enrolled_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+function appendUnique(list: string[], value: string): string[] {
+  return list.includes(value) ? list : [...list, value];
+}
+
+function today(): string {
+  return new Date().toISOString().slice(0, 10);
 }
 
 export async function POST(request: NextRequest) {
@@ -62,18 +130,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    // Only students and builders can submit progress
-    if (!roleIsAllowed(user.role as Role, ["student", "builder"])) {
-      return NextResponse.json(
-        { error: "Insufficient permissions" },
-        { status: 403 },
-      );
-    }
-
-    const rateLimit = checkRateLimit(
-      `progress:${user.id}`,
-      RateLimits.progress,
-    );
+    const rateLimit = checkRateLimit(`progress:${user.id}`, RateLimits.default);
     if (rateLimit.limited) {
       log.warn("Rate limit exceeded", { userId: user.id });
       return NextResponse.json(
@@ -89,300 +146,207 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const body = await request.json();
-    const { action, data } = body;
-
-    if (!action || typeof action !== "string") {
-      return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+    // Authorisation precedes action dispatch: a caller without the student
+    // role must never learn whether an action name is valid.
+    if (!user.role || !PROGRESS_WRITE_ROLES.has(user.role)) {
+      return NextResponse.json(
+        { error: "Insufficient permissions" },
+        { status: 403 },
+      );
     }
 
-    let student = await getStudentByUserId(user.id);
-    if (!student) {
-      return NextResponse.json({ error: "Student not found" }, { status: 404 });
+    const { getAsyncDb } = await import("@/lib/db");
+    const db = getAsyncDb();
+
+    const body = (await request.json()) as {
+      action?: string;
+      data?: Record<string, unknown>;
+    };
+    const action = body.action;
+    const data = body.data ?? {};
+
+    let row = await db.get<StudentRow>(
+      "SELECT * FROM student_profiles WHERE user_id = ?",
+      user.id,
+    );
+
+    if (!row) {
+      await db.run(
+        `INSERT INTO student_profiles (id, user_id, name, email, role)
+         VALUES (?, ?, ?, ?, 'student')`,
+        user.id,
+        user.id,
+        user.email || "",
+        user.email || "",
+      );
+      row = await db.get<StudentRow>(
+        "SELECT * FROM student_profiles WHERE user_id = ?",
+        user.id,
+      );
+    }
+
+    if (!row) {
+      return NextResponse.json(
+        { error: "Student profile not found" },
+        { status: 404 },
+      );
     }
 
     switch (action) {
-      case "completeLesson": {
-        if (!data?.lessonId || !isValidLessonId(data.lessonId)) {
-          return NextResponse.json(
-            { error: "Invalid lesson ID" },
-            { status: 400 },
-          );
-        }
-        student = await completeLesson(user.id, data.lessonId);
-        await recordAuditEvent({
-          action: "lesson-complete",
-          actorId: user.id,
-          resource: "lesson",
-          resourceId: data.lessonId,
-        });
-        log.info("Lesson completed", {
-          userId: user.id,
-          lessonId: data.lessonId,
-        });
-        break;
-      }
-      case "completeLab": {
-        if (!data?.taskId || !labExercises.some((e) => e.id === data.taskId)) {
-          return NextResponse.json(
-            { error: "Invalid task ID" },
-            { status: 400 },
-          );
-        }
-        const completed = student.labTasksCompleted.includes(data.taskId)
-          ? student.labTasksCompleted
-          : [...student.labTasksCompleted, data.taskId];
-        student = await updateStudent(user.id, {
-          labTasksCompleted: completed,
-        });
-        log.info("Lab completed", { userId: user.id, taskId: data.taskId });
-        break;
-      }
-      case "submitQuiz": {
-        if (
-          !data?.answers ||
-          typeof data.score !== "number" ||
-          data.score < 0 ||
-          data.score > 100
-        ) {
-          return NextResponse.json(
-            { error: "Invalid quiz data" },
-            { status: 400 },
-          );
-        }
-        student = await updateStudent(user.id, {
-          knowledgeCheckAnswers: data.answers,
-          knowledgeCheckScore: data.score,
-        });
-        await recordAuditEvent({
-          action: "quiz-submit",
-          actorId: user.id,
-          resource: "quiz",
-          resourceId: "knowledge-check",
-        });
-        log.info("Quiz submitted", { userId: user.id, score: data.score });
-        break;
-      }
-      case "submitProject": {
-        if (
-          typeof data?.score !== "number" ||
-          data.score < 0 ||
-          data.score > 100
-        ) {
-          return NextResponse.json(
-            { error: "Invalid project score" },
-            { status: 400 },
-          );
-        }
-        student = await updateStudent(user.id, {
-          projectSubmitted: true,
-          projectScore: data.score,
-          badgeEarned: data.score >= 80,
-        });
-        await recordAuditEvent({
-          action: "project-submit",
-          actorId: user.id,
-          resource: "project",
-          resourceId: "final-project",
-        });
-        log.info("Project submitted", { userId: user.id, score: data.score });
-        break;
-      }
       case "enroll": {
-        if (!data?.courseId || !getCourseById(data.courseId)) {
+        const courseId = String(data.courseId ?? "");
+        if (!courseId) {
           return NextResponse.json(
-            { error: "Invalid course ID" },
+            { error: "courseId required" },
             { status: 400 },
           );
         }
-        const enrolled = student.enrolledCourses.includes(data.courseId)
-          ? student.enrolledCourses
-          : [...student.enrolledCourses, data.courseId];
-        student = await updateStudent(user.id, {
-          enrolledCourses: enrolled,
-          currentCourse: data.courseId,
-        });
-        await recordAuditEvent({
-          action: "enroll",
-          actorId: user.id,
-          resource: "course",
-          resourceId: data.courseId,
-        });
-        log.info("Course enrolled", {
-          userId: user.id,
-          courseId: data.courseId,
-        });
-        break;
-      }
-      case "addReflection": {
-        if (
-          !data?.lessonId ||
-          !data?.content ||
-          typeof data.content !== "string" ||
-          data.content.length > 5000
-        ) {
-          return NextResponse.json(
-            { error: "Invalid reflection data" },
-            { status: 400 },
-          );
-        }
-        const entry = {
-          lessonId: data.lessonId,
-          content: data.content,
-          date: new Date().toISOString(),
-        };
-        student = await updateStudent(user.id, {
-          reflectionEntries: [...student.reflectionEntries, entry],
-        });
-        log.info("Reflection added", {
-          userId: user.id,
-          lessonId: data.lessonId,
-        });
-        break;
-      }
-      case "syncCurriculumProgress": {
-        if (data && data.completedModules !== undefined) {
-          const sanitized = sanitizeCurriculumModuleIds(data.completedModules);
-          if (!sanitized) {
-            return NextResponse.json(
-              { error: "Invalid completedModules" },
-              { status: 400 },
-            );
-          }
-          const stored = await replaceCompletedModules(user.id, sanitized);
-          await recordAuditEvent({
-            action: "curriculum-progress-sync",
-            actorId: user.id,
-            resource: "curriculum",
-            resourceId: "modules",
-            metadata: { count: stored.length },
-          });
-          log.info("Curriculum progress synced", {
-            userId: user.id,
-            count: stored.length,
-          });
-          return NextResponse.json(
-            { completedModules: stored },
-            { headers: { "X-Correlation-Id": correlationId } },
-          );
-        }
-        const completed = await listCompletedModuleIds(user.id);
-        return NextResponse.json(
-          { completedModules: completed },
-          { headers: { "X-Correlation-Id": correlationId } },
+        await db.run(
+          `UPDATE student_profiles
+              SET enrolled_courses = ?, updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify(
+            appendUnique(
+              parseJson<string[]>(row.enrolled_courses, []),
+              courseId,
+            ),
+          ),
+          user.id,
         );
-      }
-      case "completeCurriculumLesson": {
-        if (!data?.moduleId || !data?.lessonId) {
-          return NextResponse.json(
-            { error: "moduleId and lessonId required" },
-            { status: 400 },
-          );
-        }
-        if (
-          !isValidModuleId(data.moduleId) ||
-          !isValidLessonId(`${data.moduleId}-l${data.lessonId}`)
-        ) {
-          return NextResponse.json(
-            { error: "Invalid moduleId or lessonId" },
-            { status: 400 },
-          );
-        }
-        const lesson = getLesson(data.moduleId, data.lessonId);
-        if (!lesson) {
-          return NextResponse.json(
-            { error: "Lesson not found" },
-            { status: 404 },
-          );
-        }
-        const completedLessons = student.lessonsCompleted.includes(lesson.id)
-          ? student.lessonsCompleted
-          : [...student.lessonsCompleted, lesson.id];
-        student = await updateStudent(user.id, {
-          lessonsCompleted: completedLessons,
-        });
-        await recordAuditEvent({
-          action: "lesson-complete",
-          actorId: user.id,
-          resource: "curriculum-lesson",
-          resourceId: lesson.id,
-        });
-        log.info("Curriculum lesson completed", {
-          userId: user.id,
-          lessonId: lesson.id,
-          moduleId: data.moduleId,
-        });
         break;
       }
-      case "submitModuleQuiz": {
-        if (
-          !data?.moduleId ||
-          !data?.quizId ||
-          typeof data?.score !== "number"
-        ) {
+
+      case "completeLesson": {
+        const lessonId = String(data.lessonId ?? "");
+        if (!lessonId) {
           return NextResponse.json(
-            { error: "moduleId, quizId, and score required" },
+            { error: "lessonId required" },
             { status: 400 },
           );
         }
-        if (data.score < 0 || data.score > 100) {
-          return NextResponse.json({ error: "Invalid score" }, { status: 400 });
-        }
-        if (!isValidModuleId(data.moduleId)) {
-          return NextResponse.json(
-            { error: "Invalid moduleId" },
-            { status: 400 },
-          );
-        }
-        const module = getCurriculumModule(data.moduleId);
-        if (!module) {
-          return NextResponse.json(
-            { error: "Module not found" },
-            { status: 404 },
-          );
-        }
-        student = await updateStudent(user.id, {
-          moduleQuizScores: {
-            ...student.moduleQuizScores,
-            [data.moduleId]: {
-              quizId: data.quizId,
-              score: data.score,
-              submittedAt: new Date().toISOString(),
-            },
-          },
-        });
-        await recordAuditEvent({
-          action: "module-quiz-submit",
-          actorId: user.id,
-          resource: "curriculum-module-quiz",
-          resourceId: data.moduleId,
-          metadata: { quizId: data.quizId, score: data.score },
-        });
-        log.info("Module quiz submitted", {
-          userId: user.id,
-          moduleId: data.moduleId,
-          quizId: data.quizId,
-          score: data.score,
-        });
+        const lessons = appendUnique(
+          parseJson<string[]>(row.lessons_completed, []),
+          lessonId,
+        );
+        const lastActive = row.last_active_date;
+        const streak =
+          lastActive === today() ? row.streak : lastActive ? row.streak + 1 : 1;
+        await db.run(
+          `UPDATE student_profiles
+              SET lessons_completed = ?, streak = ?, last_active_date = ?,
+                  updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify(lessons),
+          streak,
+          today(),
+          user.id,
+        );
         break;
       }
+
+      case "completeLab": {
+        const taskId = String(data.taskId ?? "");
+        if (!taskId) {
+          return NextResponse.json(
+            { error: "taskId required" },
+            { status: 400 },
+          );
+        }
+        await db.run(
+          `UPDATE student_profiles
+              SET lab_tasks_completed = ?, updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify(
+            appendUnique(
+              parseJson<string[]>(row.lab_tasks_completed, []),
+              taskId,
+            ),
+          ),
+          user.id,
+        );
+        break;
+      }
+
+      case "submitQuiz": {
+        const score = Number(data.score ?? 0);
+        const answers = (data.answers ?? {}) as Record<string, string | number>;
+        await db.run(
+          `UPDATE student_profiles
+              SET knowledge_check_answers = ?, knowledge_check_score = ?,
+                  updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify(answers),
+          score,
+          user.id,
+        );
+        break;
+      }
+
+      case "submitProject": {
+        const score = Number(data.score ?? 0);
+        await db.run(
+          `UPDATE student_profiles
+              SET project_submitted = 1, project_score = ?,
+                  updated_at = datetime('now')
+            WHERE user_id = ?`,
+          score,
+          user.id,
+        );
+        break;
+      }
+
+      case "addReflection": {
+        const lessonId = String(data.lessonId ?? "");
+        const content = String(data.content ?? "");
+        if (!lessonId || !content) {
+          return NextResponse.json(
+            { error: "lessonId and content required" },
+            { status: 400 },
+          );
+        }
+        const entries = parseJson<
+          { lessonId: string; content: string; date: string }[]
+        >(row.reflection_entries, []);
+        await db.run(
+          `UPDATE student_profiles
+              SET reflection_entries = ?, updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify([
+            ...entries,
+            { lessonId, content, date: new Date().toISOString() },
+          ]),
+          user.id,
+        );
+        break;
+      }
+
       default:
         return NextResponse.json({ error: "Unknown action" }, { status: 400 });
     }
 
+    await recordAuditEvent({
+      action: action ?? "unknown",
+      actorId: user.id,
+      resource: "student-progress",
+      resourceId: user.id,
+      metadata: { action },
+    });
+
+    const updated = await db.get<StudentRow>(
+      "SELECT * FROM student_profiles WHERE user_id = ?",
+      user.id,
+    );
+
+    log.info("Student progress updated", { userId: user.id, action });
+
     return NextResponse.json(
-      { student },
-      {
-        headers: { "X-Correlation-Id": correlationId },
-      },
+      { student: updated ? toProfile(updated) : null },
+      { headers: { "X-Correlation-Id": correlationId } },
     );
   } catch (err) {
-    log.error(
-      "Progress update failed",
-      err instanceof Error ? err : new Error(String(err)),
-    );
+    log.error("Error updating progress", err as Error, { error: String(err) });
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Failed to update progress" },
       { status: 500 },
     );
   }

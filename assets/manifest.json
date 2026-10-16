@@ -1,0 +1,330 @@
+{
+  "version": "1.0.0",
+  "created": "2026-09-24",
+  "purpose": "Provenance and rights records for acquired homepage photography. Bridge target: apps/ai-institute/public/photography/metadata/photo_manifest.json. Integration: PHOTO map, page.tsx photo props, and MissionChapter alt pass-through wired on 2026-09-24 after human authorization.",
+  "policy": {
+    "four_fits_required": ["brand", "narrative", "license", "technical"],
+    "license_preference": ["CC0", "public domain", "CC BY (no ShareAlike)"],
+    "cc_by_sa": "Held pending explicit human approval",
+    "authenticity": "No generated people as Bhavya participants; no stock children as Bhavya students; no fabricated documentary scenes or impact statistics.",
+    "naming": "Honest basenames only. Books assets must not occupy knowledge-school-children.jpg. Landscape community assets must not occupy community-village-gathering.jpg.",
+    "regression_guard": "Never store non-JPEG bytes under .jpg (commit cea919c)."
+  },
+  "processing": {
+    "tool": "ffmpeg (WinGet Gyan.FFmpeg)",
+    "method": "crop-to-3:2-where-applicable, scale to target width, JPEG q82, optional WebP q82 derivative (not wired into app)",
+    "pipeline_note": "Repo has no sharp/imagemin AVIF pipeline; WebP derivatives exist on disk only as optional candidates for a later integration phase."
+  },
+  "chapter_map": [
+    {
+      "chapter": "PLACE",
+      "priority": "P0",
+      "asset_id": "place-valley-uttarakhand",
+      "local_file": "apps/ai-institute/public/photography/hero/hero-himalayan-sunset.jpg",
+      "webp_derivative": "apps/ai-institute/public/photography/hero/hero-himalayan-sunset.webp",
+      "photo_manifest_slot": "hero-himalayan-sunset",
+      "status": "ACQUIRED",
+      "use": "Primary homepage place / hero atmosphere; also covers GENERATIONS (reuse, no separate download).",
+      "honesty_notes": [
+        "Filename preserves the pre-existing PHOTO.hero target basename.",
+        "Actual scene is Valley of Uttarakhand (not a verified golden-hour sunset shot of Himachal).",
+        "Caption must not claim Bhavya Foundation activity on-site.",
+        "Region is Uttarakhand, Himalayan India — not Himachal Pradesh; do not label as Himachal without correction."
+      ]
+    },
+    {
+      "chapter": "WHY",
+      "priority": "P0",
+      "asset_id": "why-terrace-garhwal",
+      "local_file": "apps/ai-institute/public/photography/why/why-terrace-garhwal.jpg",
+      "webp_derivative": "apps/ai-institute/public/photography/why/why-terrace-garhwal.webp",
+      "photo_manifest_slot": null,
+      "status": "ACQUIRED",
+      "use": "Chapter WHY — place, livelihood, terraced agriculture context.",
+      "honesty_notes": [
+        "Terrace farming near Ransi village, Garhwal, Uttarakhand — documentary landscape, not a Bhavya program site."
+      ]
+    },
+    {
+      "chapter": "HERITAGE",
+      "priority": "P0",
+      "asset_id": "heritage-shirgul-temple",
+      "local_file": "apps/ai-institute/public/photography/heritage/heritage-stone-temple.jpg",
+      "webp_derivative": "apps/ai-institute/public/photography/heritage/heritage-stone-temple.webp",
+      "photo_manifest_slot": "heritage-stone-temple",
+      "status": "ACQUIRED",
+      "use": "Chapter HERITAGE — stone temple / sacred architecture.",
+      "honesty_notes": [
+        "Shirgul Maharaj Temple, Churdhar, Himachal Pradesh — real place, not a Bhavya-run site.",
+        "Attribution required (CC BY 4.0)."
+      ]
+    },
+    {
+      "chapter": "KNOWLEDGE",
+      "priority": "P0",
+      "asset_id": "knowledge-books-notepad",
+      "local_file": "apps/ai-institute/public/photography/knowledge/knowledge-books-notepad.jpg",
+      "webp_derivative": "apps/ai-institute/public/photography/knowledge/knowledge-books-notepad.webp",
+      "photo_manifest_slot": null,
+      "status": "ACQUIRED",
+      "use": "Chapter KNOWLEDGE — object-first (books + notepad). Does not occupy knowledge-school-children.jpg.",
+      "honesty_notes": [
+        "Open book / notebook still life — not school children, not a Bhavya classroom.",
+        "knowledge-school-children.jpg remains ASSET REQUIRED."
+      ]
+    },
+    {
+      "chapter": "PEOPLE",
+      "priority": "P1",
+      "asset_id": null,
+      "local_file": null,
+      "status": "HOLD",
+      "use": "No consent-cleared or rights-clean identifiable-person asset acquired. Stock/generated people rejected for Bhavya participant framing.",
+      "honesty_notes": [
+        "Remains ASSET REQUIRED / HOLD pending human-approved documentary source or first-party photography."
+      ]
+    },
+    {
+      "chapter": "COMMUNITY",
+      "priority": "P1",
+      "asset_id": "community-himachal-landscape",
+      "local_file": "apps/ai-institute/public/photography/community/community-village-landscape.jpg",
+      "webp_derivative": "apps/ai-institute/public/photography/community/community-village-landscape.webp",
+      "photo_manifest_slot": null,
+      "status": "ACQUIRED_PLACE_ONLY",
+      "use": "Community chapter as place/context image (mountain landscape). Does not claim a gathering.",
+      "honesty_notes": [
+        "Filename intentionally community-village-landscape.jpg — not community-village-gathering.jpg.",
+        "photo_manifest community-village-gathering (people) remains ASSET REQUIRED.",
+        "Human-subject gathering shot not acquired (consent risk)."
+      ]
+    },
+    {
+      "chapter": "GENERATIONS",
+      "priority": "P1",
+      "asset_id": "place-valley-uttarakhand",
+      "local_file": "apps/ai-institute/public/photography/hero/hero-himalayan-sunset.jpg",
+      "status": "REUSE_PLACE",
+      "use": "Reuse PLACE asset; no separate download."
+    }
+  ],
+  "assets": [
+    {
+      "id": "place-valley-uttarakhand",
+      "chapter": "PLACE",
+      "kind": "documentary-photograph",
+      "source": "Wikimedia Commons",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Valley_of_Uttarakhand.jpg",
+      "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Valley_of_Uttarakhand.jpg/3840px-Valley_of_Uttarakhand.jpg",
+      "creator": "SND Nature",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "attribution_required": true,
+      "attribution_text": "Valley of Uttarakhand by SND Nature, CC BY 4.0, via Wikimedia Commons",
+      "retrieved_at": "2026-09-24",
+      "original_dimensions": { "width": 3840, "height": 2880 },
+      "shipped_dimensions": { "width": 2400, "height": 1600, "aspect": "3:2" },
+      "original_bytes": 1549780,
+      "shipped_jpeg_bytes": 121567,
+      "webp_bytes": 263098,
+      "local_file": "apps/ai-institute/public/photography/hero/hero-himalayan-sunset.jpg",
+      "processing": [
+        "magic-bytes-verified-jpeg",
+        "ffprobe-verified",
+        "crop-3:2",
+        "scale-2400",
+        "jpeg-q82",
+        "webp-q82-optional"
+      ],
+      "human_subjects": false,
+      "bhavya_activity_implied": false,
+      "alt": "Wide mountain valley in the Indian Himalaya under soft daylight",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "why-terrace-garhwal",
+      "chapter": "WHY",
+      "kind": "documentary-photograph",
+      "source": "Wikimedia Commons (originally Flickr)",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Terrace_farming_on_the_way_to_Ransi_village,_Garhwal,_Uttarakhand.jpg",
+      "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/6/69/Terrace_farming_on_the_way_to_Ransi_village,_Garhwal,_Uttarakhand.jpg",
+      "creator": "Varun Shiv Kapur",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "attribution_required": true,
+      "attribution_text": "Terrace farming on the way to Ransi village, Garhwal, Uttarakhand by Varun Shiv Kapur, CC BY 2.0, via Wikimedia Commons",
+      "retrieved_at": "2026-09-24",
+      "original_dimensions": { "width": 2048, "height": 1536 },
+      "shipped_dimensions": { "width": 2048, "height": 1366, "aspect": "3:2" },
+      "original_bytes": 1473038,
+      "shipped_jpeg_bytes": 66609,
+      "webp_bytes": 128692,
+      "local_file": "apps/ai-institute/public/photography/why/why-terrace-garhwal.jpg",
+      "processing": [
+        "magic-bytes-verified-jpeg",
+        "ffprobe-verified",
+        "crop-3:2",
+        "jpeg-q82",
+        "webp-q82-optional"
+      ],
+      "human_subjects": false,
+      "bhavya_activity_implied": false,
+      "alt": "Terraced agricultural fields on a hillside near Ransi village, Garhwal",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "heritage-shirgul-temple",
+      "chapter": "HERITAGE",
+      "kind": "documentary-photograph",
+      "source": "Wikimedia Commons",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shirgul_Maharaj_Temple,_Churdhar,_Himachal_Pradesh,_India.jpg",
+      "source_download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/Shirgul_Maharaj_Temple%2C_Churdhar%2C_Himachal_Pradesh%2C_India.jpg/3840px-Shirgul_Maharaj_Temple%2C_Churdhar%2C_Himachal_Pradesh%2C_India.jpg",
+      "creator": "UnpetitproleX",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "attribution_required": true,
+      "attribution_text": "Shirgul Maharaj Temple, Churdhar, Himachal Pradesh, India by UnpetitproleX, CC BY 4.0, via Wikimedia Commons",
+      "retrieved_at": "2026-09-24",
+      "original_dimensions": { "width": 7052, "height": 5289 },
+      "shipped_dimensions": { "width": 2400, "height": 1600, "aspect": "3:2" },
+      "original_bytes": null,
+      "source_thumb_bytes": 2980530,
+      "shipped_jpeg_bytes": 173273,
+      "webp_bytes": 400964,
+      "local_file": "apps/ai-institute/public/photography/heritage/heritage-stone-temple.jpg",
+      "processing": [
+        "magic-bytes-verified-jpeg",
+        "ffprobe-verified",
+        "crop-3:2",
+        "scale-2400",
+        "jpeg-q82",
+        "webp-q82-optional"
+      ],
+      "human_subjects": false,
+      "bhavya_activity_implied": false,
+      "alt": "Stone temple architecture at Churdhar, Himachal Pradesh",
+      "status": "ACQUIRED"
+    },
+    {
+      "id": "knowledge-books-notepad",
+      "chapter": "KNOWLEDGE",
+      "kind": "still-life-photograph",
+      "source": "Wikimedia Commons (Unsplash-origin CC0)",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Plan_a_lifetime_adventure_(Unsplash).jpg",
+      "source_download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Plan_a_lifetime_adventure_%28Unsplash%29.jpg/3840px-Plan_a_lifetime_adventure_%28Unsplash%29.jpg",
+      "creator": "Glenn Carstens-Peters",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution_required": false,
+      "attribution_text": "CC0 — credit appreciated (Glenn Carstens-Peters / Unsplash) but not required",
+      "retrieved_at": "2026-09-24",
+      "original_dimensions": { "width": 4256, "height": 2832 },
+      "shipped_dimensions": { "width": 2400, "height": 1596, "aspect": "3:2" },
+      "original_bytes": null,
+      "source_thumb_bytes": 486482,
+      "shipped_jpeg_bytes": 57425,
+      "webp_bytes": 60052,
+      "local_file": "apps/ai-institute/public/photography/knowledge/knowledge-books-notepad.jpg",
+      "processing": [
+        "magic-bytes-verified-jpeg",
+        "ffprobe-verified",
+        "crop-3:2",
+        "scale-2400",
+        "jpeg-q82",
+        "webp-q82-optional"
+      ],
+      "human_subjects": false,
+      "bhavya_activity_implied": false,
+      "alt": "Open book and notebook on a wooden table",
+      "status": "ACQUIRED",
+      "must_not_write_to": "apps/ai-institute/public/photography/knowledge/knowledge-school-children.jpg"
+    },
+    {
+      "id": "community-himachal-landscape",
+      "chapter": "COMMUNITY",
+      "kind": "documentary-photograph-place",
+      "source": "Wikimedia Commons",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Himachal_Pradesh_India.jpg",
+      "source_download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Himachal_Pradesh_India.jpg?width=2400",
+      "creator": "Aashish Chindaliya",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "attribution_required": false,
+      "attribution_text": "CC0 — credit appreciated (Aashish Chindaliya) but not required",
+      "retrieved_at": "2026-09-24",
+      "original_dimensions": { "width": 3456, "height": 3456 },
+      "shipped_dimensions": { "width": 2400, "height": 1600, "aspect": "3:2" },
+      "original_bytes": 3499605,
+      "shipped_jpeg_bytes": 225113,
+      "webp_bytes": 648048,
+      "local_file": "apps/ai-institute/public/photography/community/community-village-landscape.jpg",
+      "processing": [
+        "magic-bytes-verified-jpeg",
+        "ffprobe-verified",
+        "crop-3:2",
+        "scale-2400",
+        "jpeg-q82",
+        "webp-q82-optional"
+      ],
+      "human_subjects": false,
+      "bhavya_activity_implied": false,
+      "alt": "Mountain landscape in Himachal Pradesh, India",
+      "status": "ACQUIRED_PLACE_ONLY",
+      "must_not_write_to": "apps/ai-institute/public/photography/community/community-village-gathering.jpg"
+    }
+  ],
+  "rejected_or_held": [
+    {
+      "id": "cc-by-sa-place-heritage-candidates",
+      "reason": "CC BY-SA 4.0 requires explicit human approval before download (ShareAlike).",
+      "examples": [
+        "Krishansar Lake Sonmarg",
+        "Orchards in snow, Sangla HP",
+        "Panorama of Himalayas from Ranikhet",
+        "Architecture of Himachal Pradesh (Rajani Gairshail)",
+        "Chhatrari village and landscape",
+        "Pooh Village, Kinnaur",
+        "Nainital Step Farming"
+      ],
+      "status": "HELD"
+    },
+    {
+      "id": "knowledge-dutch-flemish-still-lifes",
+      "reason": "Public-domain but poor brand/narrative fit for editorial Himalayan knowledge chapter.",
+      "status": "REJECTED"
+    },
+    {
+      "id": "community-lowres-flickr-cc-by",
+      "reason": "Below technical floor for ~2400px targets; consent/human-subject risk for identifiable faces.",
+      "status": "REJECTED"
+    },
+    {
+      "id": "people-stock-identifiable",
+      "reason": "No consent-cleared documentary people path; stock/generated faces must not imply Bhavya participants or students.",
+      "status": "HOLD"
+    },
+    {
+      "id": "unsplash-direct-pages",
+      "reason": "HTTP 401 on photo-page fetches; cannot resolve CDN URLs without API key.",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "lattice-drift-kavtuai",
+      "reason": "Public search did not locate repository; do not cite as authority.",
+      "status": "UNVERIFIED"
+    },
+    {
+      "id": "stock-school-children-as-bhavya",
+      "reason": "Authenticity rule: no stock children as Bhavya students; knowledge-school-children.jpg not filled.",
+      "status": "REJECTED"
+    }
+  ],
+  "still_required": [
+    "forest/forest-cedar-sunlight.jpg",
+    "heritage/heritage-wooden-temple.jpg",
+    "knowledge/knowledge-school-children.jpg (only with honest first-party / consented source)",
+    "community/community-village-gathering.jpg (only with consent / first-party documentary source)",
+    "PEOPLE chapter human-subject asset (HOLD)"
+  ],
+  "integration_status": "WIRED — PHOTO.hero → HeroBackground; PHOTO.why / knowledgeBooks / heritageStone / communityLandscape → page.tsx PhotoPlate & MissionChapter with honest captions + CC BY attribution. PHOTO_PENDING (forest, school children, wooden temple, gathering) and PEOPLE remain unwired."
+}

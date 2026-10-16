@@ -1,7 +1,7 @@
 {
   "_notice": "GENERATED ONLY. NEVER EDIT MANUALLY. Run 'pnpm registry:generate' to update.",
   "registry_type": "index",
-  "generated_at": "2026-09-17T07:20:47.903Z",
+  "generated_at": "2026-10-09T21:47:20.347Z",
   "generator": "scripts/generate-registry.js",
   "version": "0.1.0",
   "registries": {
@@ -63,7 +63,7 @@
       "path": "registry/packages.json",
       "generated": true,
       "generator": "scripts/generate-registry.js",
-      "items": 62
+      "items": 64
     },
     "pages": {
       "path": "registry/pages.json",

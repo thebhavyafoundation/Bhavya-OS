@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, ContactShadows } from "@react-three/drei";
+import { Suspense, useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import { ContactShadows, Environment } from "@react-three/drei";
 import type { Group } from "three";
 
 interface Model3DProps {
@@ -14,52 +14,35 @@ interface Model3DProps {
   autoRotate?: boolean;
 }
 
-function Model({
-  src,
-  scale = 1,
-  position = [0, 0, 0],
-  rotation = [0, 0, 0],
-  floatIntensity = 1,
-  autoRotate = true,
-}: Model3DProps) {
-  const groupRef = useRef<Group>(null);
+function ModelLoader({ src }: { src: string }) {
   const [model, setModel] = useState<Group | null>(null);
 
-  useFrame((_, delta) => {
-    if (groupRef.current && autoRotate) {
-      groupRef.current.rotation.y += delta * 0.3;
-    }
-  });
+  useEffect(() => {
+    let cancelled = false;
 
-  const handleLoad = (loadedModel: Group) => {
-    setModel(loadedModel);
-  };
+    (async () => {
+      try {
+        const [{ GLTFLoader }, { DRACOLoader }] = await Promise.all([
+          import("three/examples/jsm/loaders/GLTFLoader.js"),
+          import("three/examples/jsm/loaders/DRACOLoader.js"),
+        ]);
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath(
+          "https://www.gstatic.com/draco/versioned/decoders/1.5.7/",
+        );
+        const loader = new GLTFLoader();
+        loader.setDRACOLoader(dracoLoader);
+        const gltf = await loader.loadAsync(src);
+        if (!cancelled) setModel(gltf.scene);
+      } catch {
+        // load failure: render nothing
+      }
+    })();
 
-  return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={floatIntensity}>
-      <group ref={groupRef} position={position} rotation={rotation} scale={scale}>
-        {model && <primitive object={model} />}
-      </group>
-    </Float>
-  );
-}
-
-function ModelLoader({ src, onLoad }: { src: string; onLoad: (model: Group) => void }) {
-  const [model, setModel] = useState<Group | null>(null);
-
-  const loadModel = async () => {
-    try {
-      const { GLTFLoader } = await import("three/examples/jsm/loaders/GLTFLoader.js");
-      const loader = new GLTFLoader();
-      const gltf = await loader.loadAsync(src);
-      setModel(gltf.scene);
-      onLoad(gltf.scene);
-    } catch {
-      // Model failed to load - render nothing
-    }
-  };
-
-  loadModel();
+    return () => {
+      cancelled = true;
+    };
+  }, [src]);
 
   return model ? <primitive object={model} /> : null;
 }
@@ -83,7 +66,7 @@ export function Model3D({
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
           <pointLight position={[-5, -5, -5]} intensity={0.5} color="#c9a84c" />
-          <ModelLoader src={src} onLoad={() => {}} />
+          <ModelLoader src={src} />
           <ContactShadows
             position={[0, -1.5, 0]}
             opacity={0.4}

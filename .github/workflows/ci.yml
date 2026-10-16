@@ -5,6 +5,10 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  # Manual escape hatch: allows verifying a branch on demand when push/PR
+  # triggers are delayed or suppressed. Runs the same jobs against the
+  # selected ref.
+  workflow_dispatch:
 
 # Least-privilege token scope. secret-scan's gitleaks-action reads PR
 # commits via the API (GET pulls/{n}/commits); without this block the job

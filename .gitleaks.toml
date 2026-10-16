@@ -1,0 +1,38 @@
+# Gitleaks configuration — reviewed false positives ONLY.
+#
+# WHY THIS FILE EXISTS IN ADDITION TO .gitleaksignore
+# ----------------------------------------------------
+# gitleaks-action@v2 does NOT read .gitleaksignore from the repository, so
+# CI ignores listed there have no effect. This file IS loaded by the action
+# (gitleaks auto-discovers .gitleaks.toml in the working directory) and is
+# therefore the effective CI allowlist. .gitleaksignore is retained because
+# it still governs local `gitleaks` CLI runs. Keep both in sync.
+#
+# Only [[allowlist]] is defined. No [[rules]] section, so gitleaks' full
+# default rule set stays active — this file can only ever subtract the
+# specific, reviewed findings below.
+#
+# Rule: never add an entry without recording file/reason. Commit SHAs are
+# immutable, so scoping by SHA means no future content in these paths is
+# ever exempt.
+
+[allowlist]
+description = "Reviewed false positives: test fixtures and truncated-JWT documentation placeholders"
+
+commits = [
+  # Non-functional fake credentials deliberately embedded split-string in
+  # the security-analyzer test fixture apps/github-os/scripts/test-edge-cases.mjs
+  # (committed 3e1d496, pre-existing). Used to verify the repo's own
+  # credential detector; the values can never authenticate anywhere.
+  "3e1d49659fc14b02524e0c6196754c6c2c2543eb",
+
+  # Truncated JWT *placeholders* in documentation, not credentials. Both
+  # begin "eyJhbGci" (base64 of {"alg":) but are truncated with an
+  # ellipsis, so they are structurally incapable of being a JWT: no payload,
+  # no signature. generic-api-key flags them purely on the high-entropy
+  # base64 run. The live files at HEAD are already sanitized to <your-...>
+  # placeholders; secret-scan uses fetch-depth: 0 and therefore re-reports
+  # these immutable historical commits.
+  "e55108ffa8341ff540702da80e7226b8a01bb608", # docs/architecture/CLOUD_INFRASTRUCTURE_SETUP_CHECKLIST.md
+  "4526e37251e255ae4a40725d0d23052e57e4aec1", # apps/ai-institute/.env.example
+]
