@@ -1,12 +1,22 @@
 ---
 name: bhavya-design-taste
-description: Bhavya-governed wrapper around the third-party "design-taste-frontend" skill. Use for landing pages, portfolios, redesigns and anti-slop frontend work where the agent must infer a design direction and ship a non-templated interface. Enforces AGENTS.md and PLATFORM-TRUTH.md before the third-party skill may load.
+description: DISABLED â€” licence unverified. Wrapper gate for the third-party "design-taste-frontend" skill. This wrapper currently REFUSES to load the upstream skill. Use only to report the licence block; it must not be used for design or landing-page work until the upstream licence is verified and this wrapper is changed to ENABLED.
+wrapper_state: DISABLED_LICENSE_UNVERIFIED
+upstream_skill: design-taste-frontend
+upstream_repo: https://github.com/Leonxlnx/taste-skill
+upstream_pin: none
+upstream_license: UNVERIFIED
+update_procedure: none
+uninstall_procedure: docs/tools/design-taste-frontend/UNINSTALL-PROCEDURE.md
 compatibility: opencode
 ---
 
-# Bhavya · Design Taste Wrapper
+# Bhavya Â· Design Taste Wrapper â€” â›” DISABLED_LICENSE_UNVERIFIED
 
-A project-owned wrapper. The third-party `design-taste-frontend` skill is **not** invoked directly by agents in this repository; this wrapper governs it.
+**State: `DISABLED_LICENSE_UNVERIFIED`**
+
+This wrapper is a gate, not a gateway. It stops before reaching the third-party
+skill. Loading the upstream skill through this wrapper is **prohibited**.
 
 ## Required platform context
 
@@ -18,40 +28,63 @@ Before using this skill, read:
 If the requested operation conflicts with either file, do not execute it.
 Correct the plan to use the established zero-budget Bhavya OS architecture.
 
-## Gate — mandatory order
+## Gate â€” mandatory order
 
 1. Read `AGENTS.md` in full.
 2. Read `docs/architecture/PLATFORM-TRUTH.md` in full.
-3. Only then load the third-party skill with `skill({ name: "design-taste-frontend" })`.
+3. **Stop here. Report the block. Do not load the upstream skill.**
 
-If either file cannot be read, **stop**. Do not load the third-party skill.
+## Required response when invoked
 
-## Precedence
+Report exactly this, then stop:
 
 ```
-AGENTS.md + PLATFORM-TRUTH.md
-  > Bhavya constitution
-    > brand authority (docs/constitution/01-BRAND-CONSTITUTION.md)
-      > design tokens (packages/platform-ui/src/styles/tokens.css)
-        > this wrapper's Bhavya constraints
-          > third-party design-taste guidance
+BLOCKED: SKILL_DISABLED_LICENSE_UNVERIFIED
+Skill:    design-taste-frontend
+Wrapper:  bhavya-design-taste
+Upstream: https://github.com/Leonxlnx/taste-skill
+Reason:   upstream licence has not been verified; contract Â§15 classifies an
+          unverified licence as "prohibited without explicit written approval".
+Action:   no Bhavya design or landing-page work may depend on this skill.
+To enable: verify the upstream licence, record it in docs/tools/design-taste/,
+          then change this wrapper's state to ENABLED.
 ```
+
+Do **not**:
+- call `skill({ name: "design-taste-frontend" })`
+- paraphrase, quote or reconstruct the upstream skill's instructions from memory
+- substitute a different third-party design skill to fill the gap
+
+## What to do instead
+
+- `bhavya-design-system` â€” canonical Bhavya design rules and quality floor
+- `bhavya-impeccable` â€” the *enabled*, Apache-2.0 verified wrapper, for frontend
+  design and audit work
+- `bhavya-ui-verification` â€” verification after visual work
+- `packages/platform-ui/src/styles/tokens.css` â€” canonical tokens
 
 ## Upstream record
 
 | Field | Value |
 |---|---|
 | Skill id | `design-taste-frontend` |
-| Repository | `Leonxlnx/taste-skill` |
-| Licence | **Unverified** — no licence field is declared in the skill frontmatter. Recorded as unverified, not as permissive. |
-| Local path | `.opencode/skills/design-taste-frontend/` |
-| Modification policy | **Do not edit upstream files.** Update via this wrapper. |
-| Review status | Licence verification outstanding per contract §15. |
+| Repository | `https://github.com/Leonxlnx/taste-skill` |
+| Pinned commit | **none** |
+| Licence | **UNVERIFIED** â€” no licence field is declared in the skill frontmatter |
+| Licence status | Not verified. Treated as prohibited under contract Â§15. |
+| Local path | `.opencode/skills/design-taste-frontend/` (untracked; not committed) |
+| Committed upstream files | **No.** Upstream directories must never be committed. |
+| Modification policy | **Do not edit upstream files.** |
+| Update procedure | Not established â€” blocked until licence verification |
+| Uninstall procedure | See `docs/tools/design-taste/` (to be created on verification) |
 
-## Bhavya constraints applied before third-party work
+## Enabling this wrapper requires
 
-- `docs/constitution/01-BRAND-CONSTITUTION.md` governs palette, fonts and voice. Third-party "taste" never overrides brand authority.
-- Tokens only — `packages/platform-ui/src/styles/tokens.css`. No hardcoded colours, no Google Fonts or external font CDNs (contract: no external fonts unless already installed and licensed).
-- No stock/placeholder imagery as a final surface. Assets require verified individual licences and provenance records.
-- No new paid service, no payment-method-requiring dependency.
-- Craft floor from the contract's quality bar: display type ≤ 6rem, tracking ≥ -0.04em, no eyebrow labels above headings, asymmetric composed layouts.
+1. Verify the upstream licence by reading the repository's licence file.
+2. Record it under `docs/tools/design-taste/LICENSE-REVIEW.md`.
+3. Pin an exact upstream commit.
+4. Establish update and uninstall procedures.
+5. Change this wrapper's state to `ENABLED` and update `docs/tools/` records.
+6. Re-run `pnpm wrapper:check`.
+
+All of the above are human-gated. An agent must not self-certify a licence.

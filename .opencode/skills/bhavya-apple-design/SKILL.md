@@ -1,12 +1,22 @@
 ---
 name: bhavya-apple-design
-description: Bhavya-governed wrapper around the third-party "apple-design" skill. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum, translucency, depth, typography, reduced-motion behaviour, or when a task asks for Apple-style physical, fluid motion on the web. Enforces AGENTS.md and PLATFORM-TRUTH.md before the third-party skill may load.
+description: DISABLED â€” licence unverified. Wrapper gate for the third-party "apple-design" skill. This wrapper currently REFUSES to load the upstream skill. Use only to report the licence block; it must not be used for motion or design work until the upstream licence is verified and this wrapper is changed to ENABLED.
+wrapper_state: DISABLED_LICENSE_UNVERIFIED
+upstream_skill: apple-design
+upstream_repo: https://github.com/emilkowalski/skills
+upstream_pin: none
+upstream_license: UNVERIFIED
+update_procedure: none
+uninstall_procedure: docs/tools/apple-design/UNINSTALL-PROCEDURE.md
 compatibility: opencode
 ---
 
-# Bhavya · Apple Design Wrapper
+# Bhavya Â· Apple Design Wrapper â€” â›” DISABLED_LICENSE_UNVERIFIED
 
-A project-owned wrapper. The third-party `apple-design` skill is **not** invoked directly by agents in this repository; this wrapper governs it.
+**State: `DISABLED_LICENSE_UNVERIFIED`**
+
+This wrapper is a gate, not a gateway. It stops before reaching the third-party
+skill. Loading the upstream skill through this wrapper is **prohibited**.
 
 ## Required platform context
 
@@ -18,43 +28,63 @@ Before using this skill, read:
 If the requested operation conflicts with either file, do not execute it.
 Correct the plan to use the established zero-budget Bhavya OS architecture.
 
-## Gate — mandatory order
+## Gate â€” mandatory order
 
 1. Read `AGENTS.md` in full.
 2. Read `docs/architecture/PLATFORM-TRUTH.md` in full.
-3. Only then load the third-party skill with `skill({ name: "apple-design" })`.
+3. **Stop here. Report the block. Do not load the upstream skill.**
 
-If either file cannot be read, **stop**. Do not load the third-party skill.
+## Required response when invoked
 
-## Precedence
+Report exactly this, then stop:
 
 ```
-AGENTS.md + PLATFORM-TRUTH.md
-  > Bhavya constitution
-    > design tokens (packages/platform-ui/src/styles/tokens.css)
-      > this wrapper's Bhavya constraints
-        > third-party apple-design guidance
+BLOCKED: SKILL_DISABLED_LICENSE_UNVERIFIED
+Skill:    apple-design
+Wrapper:  bhavya-apple-design
+Upstream: https://github.com/emilkowalski/skills
+Reason:   upstream licence has not been verified; contract Â§15 classifies an
+          unverified licence as "prohibited without explicit written approval".
+Action:   no Bhavya motion or interaction work may depend on this skill.
+To enable: verify the upstream licence, record it in docs/tools/apple-design/,
+          then change this wrapper's state to ENABLED.
 ```
 
-`apple-design` is a **motion and interaction** reference, not a brand. It must
-never be used to replace Bhavya's canonical type, palette or motion system.
+Do **not**:
+- call `skill({ name: "apple-design" })`
+- paraphrase, quote or reconstruct the upstream skill's instructions from memory
+- substitute a different third-party motion skill to fill the gap
+
+## What to do instead
+
+For motion and interaction work, use the existing, contract-compliant path:
+
+- `bhavya-design-system` â€” canonical motion/two-mode rules
+- `bhavya-ui-verification` â€” verification after visual work
+- `packages/platform-ui/src/styles/tokens.css` â€” motion tokens
 
 ## Upstream record
 
 | Field | Value |
 |---|---|
 | Skill id | `apple-design` |
-| Repository | `emilkowalski/skills` |
-| Licence | **Unverified** — no licence field is declared in the skill frontmatter. Recorded as unverified, not as permissive. |
-| Local path | `.opencode/skills/apple-design/` |
-| Modification policy | **Do not edit upstream files.** Update via this wrapper. |
-| Review status | Licence verification outstanding per contract §15. Treat as unverified until a human confirms. |
+| Repository | `https://github.com/emilkowalski/skills` |
+| Pinned commit | **none** |
+| Licence | **UNVERIFIED** â€” no licence field is declared in the skill frontmatter |
+| Licence status | Not verified. Treated as prohibited under contract Â§15. |
+| Local path | `.opencode/skills/apple-design/` (untracked; not committed) |
+| Committed upstream files | **No.** Upstream directories must never be committed. |
+| Modification policy | **Do not edit upstream files.** |
+| Update procedure | Not established â€” blocked until licence verification |
+| Uninstall procedure | See `docs/tools/apple-design/` (to be created on verification) |
 
-## Bhavya constraints applied before third-party work
+## Enabling this wrapper requires
 
-- Motion is Tier-A/curated: not every page is cinematic. Follow the experience tiers in the operating contract.
-- Every animation gated by `prefers-reduced-motion`; the static fallback must hold the composition on its own.
-- Tokens only — `packages/platform-ui/src/styles/tokens.css`. Apple translucency must be expressed with existing Bhavya tokens, never hardcoded hex.
-- No new runtime dependency for motion. Use existing `@bhavya/platform-ui` primitives and the existing cinematic/GSAP/Three.js stack.
-- WCAG 2.2 AA; no animation-dependent access to information.
-- Resource disposal, off-screen pausing and performance budgets apply to every 3D scene.
+1. Verify the upstream licence by reading the repository's licence file.
+2. Record it under `docs/tools/apple-design/LICENSE-REVIEW.md`.
+3. Pin an exact upstream commit.
+4. Establish update and uninstall procedures.
+5. Change this wrapper's state to `ENABLED` and update `docs/tools/` records.
+6. Re-run `pnpm wrapper:check`.
+
+All of the above are human-gated. An agent must not self-certify a licence.

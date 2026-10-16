@@ -2,9 +2,18 @@
 name: bhavya-impeccable
 description: Bhavya-governed wrapper around the third-party "impeccable" frontend design skill. Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Enforces AGENTS.md and PLATFORM-TRUTH.md before the third-party skill may load. Not for backend-only or non-UI tasks.
 compatibility: opencode
+wrapper_state: ENABLED
+upstream_skill: impeccable
+upstream_repo: https://github.com/pbakaus/impeccable
+upstream_pin: 4.4.0
+upstream_license: Apache-2.0
+update_procedure: docs/tools/impeccable/UPDATE-PROCEDURE.md
+uninstall_procedure: docs/tools/impeccable/UNINSTALL-PROCEDURE.md
 ---
 
 # Bhavya · Impeccable Wrapper
+
+**State: `ENABLED`**
 
 A project-owned wrapper. The third-party `impeccable` skill is **not** invoked directly by agents in this repository; this wrapper governs it.
 

@@ -2,9 +2,18 @@
 name: bhavya-diagram-design
 description: Bhavya-governed wrapper around the third-party "diagram-design" authoring skill. Use for published curriculum pathways, governance explainers, architecture diagrams, policy processes, learning journeys, concept maps and editorial infographics. Enforces AGENTS.md and PLATFORM-TRUTH.md before the third-party skill may load, and enforces human factual review before export.
 compatibility: opencode
+wrapper_state: ENABLED
+upstream_skill: diagram-design
+upstream_repo: https://github.com/cathrynlavery/diagram-design
+upstream_pin: b46c9701f035844a20b13ab0551315977188933b
+upstream_license: MIT
+update_procedure: docs/tools/diagram-design/UPDATE-PROCEDURE.md
+uninstall_procedure: docs/tools/diagram-design/UNINSTALL-PROCEDURE.md
 ---
 
 # Bhavya · Diagram Design Wrapper
+
+**State: `ENABLED`**
 
 A project-owned wrapper. The third-party `diagram-design` skill is an
 **authoring** skill installed at OpenCode user level — it is **not** a web

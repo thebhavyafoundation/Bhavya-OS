@@ -73,6 +73,18 @@ jobs:
       - name: Validate platform contract
         run: node scripts/validate-platform-contract.mjs
 
+      # Proves the checker distinguishes educational prose from executable
+      # configuration, and that prohibited configuration cannot hide under a
+      # directory. Generates its own deny fixtures in a temp dir.
+      - name: Test platform contract checker
+        run: node scripts/test-platform-contract.mjs
+
+      # Every third-party skill must be reachable only through a well-formed
+      # wrapper, and a wrapper with an unverified licence must be unable to load
+      # the upstream skill.
+      - name: Validate third-party skill wrappers
+        run: node scripts/check-skill-wrappers.mjs
+
   test:
     runs-on: ubuntu-latest
     steps:
