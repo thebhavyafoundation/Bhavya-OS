@@ -76,7 +76,15 @@ export function OsSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user } = useAuth();
+  // Auth context may not be available on pages outside the AuthProvider tree.
+  // Default to no user so the sidebar degrades gracefully (shows "no access")
+  // instead of throwing during static export.
+  let user = null;
+  try {
+    ({ user } = useAuth());
+  } catch {
+    // auth context not available
+  }
 
   const userRole = (user?.role || "student") as Role;
   const hasOsAccess = OS_ROLES.includes(userRole);
