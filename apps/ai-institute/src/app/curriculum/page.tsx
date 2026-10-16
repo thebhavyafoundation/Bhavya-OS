@@ -1,3 +1,5 @@
+"use client";
+
 import type { Metadata } from "next";
 import { AICurriculumTimeline } from "@/components/curriculum/AICurriculumTimeline";
 import {
