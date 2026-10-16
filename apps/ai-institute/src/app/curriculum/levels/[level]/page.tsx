@@ -171,6 +171,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
               {modules.map((m) => (
                 <a
                   key={m.id}
+                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
                   href={`/curriculum/levels/${level}/${m.id}`}
                   style={{
                     display: "block",
@@ -180,20 +181,6 @@ export default async function LevelPage({ params }: LevelPageProps) {
                     padding: "var(--space-5)",
                     boxShadow: "var(--shadow-sm)",
                     textDecoration: "none",
-                    transition:
-                      "transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease, border-color var(--duration-fast) ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-                    e.currentTarget.style.borderColor =
-                      "var(--color-brand-forest)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-                    e.currentTarget.style.borderColor =
-                      "var(--color-border-primary)";
                   }}
                 >
                   <span

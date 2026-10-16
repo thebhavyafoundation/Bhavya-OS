@@ -122,6 +122,7 @@ export default function LevelsPage() {
                 return (
                   <a
                     key={level}
+                    className="curriculum-tier transition-all duration-150 ease-out hover:shadow-md hover:border-[rgba(106,124,82,0.2)]"
                     href={`/curriculum/levels/${level}`}
                     style={{
                       display: "block",
@@ -130,17 +131,7 @@ export default function LevelsPage() {
                       background: "white",
                       padding: "var(--space-5)",
                       boxShadow: "var(--shadow-sm)",
-                      transition: "all var(--duration-normal) ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "var(--shadow-md)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(106, 124, 82, 0.2)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-                      e.currentTarget.style.borderColor =
-                        "rgba(106, 124, 82, 0.1)";
+                      textDecoration: "none",
                     }}
                   >
                     <div
