@@ -1,8 +1,15 @@
 name: Deploy to GitHub Pages
 
+# Publishes only the static assets in apps/ai-institute/public (images, SVGs,
+# manifests). This is NOT the application: the canonical app deploys to
+# Cloudflare/OpenNext via deploy-cloudflare.yml.
+#
+# Previous trigger included the personal branch 'feat/immersive-hero-background',
+# which meant a feature branch could publish to the public Pages URL. Only the
+# integration branch may publish.
 on:
   push:
-    branches: [main, feat/immersive-hero-background]
+    branches: [master]
     paths:
       - 'apps/ai-institute/public/**'
   workflow_dispatch:

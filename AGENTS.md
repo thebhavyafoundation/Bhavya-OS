@@ -176,7 +176,7 @@ Only claim gates that exist in root `package.json`. Unverified "done" is not don
 - Gates: `pnpm antislop` · `pnpm tokens:check` · `pnpm file-map:check` · `pnpm registry:check` · `pnpm drift:check` · `pnpm validate` · `pnpm format`
 - Generate (never hand-edit outputs): `pnpm file-map` · `pnpm registry:generate` · `pnpm tokens:sync`
 
-CI (`.github/workflows/ci.yml`, branch **`master`**): antislop + lint + typecheck, test, secret-scan, then build. `deploy.yml` targets **`main`** — push ≠ deploy (wiring mismatch is known; do not "fix" by deploying).
+CI (`.github/workflows/ci.yml`, branch **`master`**): antislop + lint + typecheck, test, secret-scan, then build. Production deploys to **Cloudflare/OpenNext** via `.github/workflows/deploy-cloudflare.yml`, on `master` push or `workflow_dispatch`. The dead `main` → Vercel production pipeline (`deploy.yml`) has been removed; Vercel is preview-only. Canonical platform facts: `docs/architecture/PLATFORM-TRUTH.md`.
 
 ---
 
