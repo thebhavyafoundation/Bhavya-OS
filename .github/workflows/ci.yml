@@ -58,6 +58,21 @@ jobs:
             exit 1
           fi
 
+  platform-contract:
+    name: Platform contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      # Enforces the permanent operating contract:
+      #   1. AGENTS.md and docs/architecture/PLATFORM-TRUTH.md exist and hold their invariants
+      #   2. Cloudflare R2 is not used anywhere
+      #   3. Privileged Backblaze B2 variables never appear in a Client Component
+      #   4. No paid-service / payment-method-requiring configuration
+      # Dependency-free Node script; no install step needed, so it stays cheap.
+      - name: Validate platform contract
+        run: node scripts/validate-platform-contract.mjs
+
   test:
     runs-on: ubuntu-latest
     steps:
