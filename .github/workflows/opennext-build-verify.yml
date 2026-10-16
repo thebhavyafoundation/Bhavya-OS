@@ -78,6 +78,11 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           node -p "require('./apps/ai-institute/package.json').dependencies.next" > opennext-build-versions.txt
 
+      - name: Self-test the bundle assertion
+        # Proves the assertion itself detects the production condition before it
+        # is trusted to judge a real build. Cheap and deterministic.
+        run: node scripts/verify-opennext-bundle.mjs --selftest
+
       - name: Next.js application build
         run: pnpm --filter ai-institute run build
 

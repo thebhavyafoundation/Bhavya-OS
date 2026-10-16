@@ -1,75 +1,69 @@
 #!/usr/bin/env node
 /**
- * Verify the OpenNext packaged server function can resolve its runtime deps.
+ * Verify the OpenNext packaged server functions can resolve their runtime deps.
  *
  * WHY
  *   The Next.js build passes while `opennextjs-cloudflare build` fails, because
- *   only the latter performs server-function bundling. This script is the
- *   executable assertion for that second stage, so the gap is caught on a pull
- *   request rather than during a production deploy.
+ *   only the latter performs server-function bundling. Worse: when the copy
+ *   step drops a dependency, the OpenNext build can still SUCCEED and only the
+ *   deploy-time bundling fails. So neither the Next build nor the OpenNext build
+ *   alone is a sufficient signal. This script is the executable assertion.
  *
- * WHAT IT CHECKS
- *   1. The default server function exists and has been packaged.
- *   2. Each required runtime dependency resolves *from inside the packaged
- *      tree* — not by walking up into the monorepo's node_modules, which would
- *      be a false pass and would break again at deploy time.
- *   3. It reports resolved version, path and licence for each dependency.
+ * HOW IT FAITHFULLY REPRODUCES THE PRODUCTION FAILURE
+ *   Production failed at:
+ *     .open-next/server-functions/default/node_modules/.pnpm/
+ *       @libsql+hrana-client@0.10.0/node_modules/@libsql/hrana-client/lib-cjs/index.js:18
+ *   i.e. esbuild resolved the dependency *relative to the file that requires
+ *   it*. This script therefore locates every packaged file that requires or
+ *   imports each watched dependency and resolves from THAT file's own location.
+ *   A copy that exists but cannot be resolved from its requirer fails, exactly
+ *   as it did in run 38960641361 / job 117174521770.
+ *
+ * MODES
+ *   node scripts/verify-opennext-bundle.mjs            # verify real build output
+ *   node scripts/verify-opennext-bundle.mjs --selftest # prove the assertion bites
  *
  * EXIT
- *   0 = every dependency resolves from the packaged tree
- *   1 = at least one does not (prints what is missing and why it matters)
- *
- * Usage: node scripts/verify-opennext-bundle.mjs
+ *   0 = every watched dependency resolves from every packaged requirer
+ *   1 = at least one does not
  */
 
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  mkdtempSync,
+  mkdirSync,
+  writeFileSync,
+  rmSync,
+  copyFileSync,
+} from "node:fs";
 import { join, dirname, resolve, relative, isAbsolute } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
+import { tmpdir } from "node:os";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OPEN_NEXT = join(ROOT, "apps", "ai-institute", ".open-next");
 const SERVER_FN = join(OPEN_NEXT, "server-functions", "default");
 
 /**
- * Dependencies the default server function must be able to resolve at runtime.
+ * Dependencies that must resolve from inside the packaged tree.
  *
- * `@libsql/isomorphic-ws` is the one that broke production deployment:
+ * `@libsql/isomorphic-ws` is the one that broke production:
  * `@libsql/hrana-client/lib-cjs/index.js` performs an UNCONDITIONAL top-level
- * `require("@libsql/isomorphic-ws")`, so omitting it is a hard failure — it
- * cannot be marked external to make it go away.
+ * `require("@libsql/isomorphic-ws")`, so it cannot be marked external — doing
+ * so only moves the failure to Worker startup.
  */
-const REQUIRED = [
-  {
-    name: "@libsql/isomorphic-ws",
-    reason:
-      "unconditional top-level require from @libsql/hrana-client/lib-cjs/index.js; " +
-      "Turso/libSQL cannot initialise without it",
-  },
-  {
-    name: "@libsql/hrana-client",
-    reason: "HTTP/SQL transport used by @libsql/client for remote Turso",
-  },
-];
+const WATCHED = ["@libsql/isomorphic-ws", "@libsql/hrana-client"];
 
-function fail(msg) {
-  console.error(`\nFAIL: ${msg}\n`);
-  process.exit(1);
-}
+const SOURCE_EXT = /\.(mjs|cjs|js)$/;
 
-// --- locate the packaged server function --------------------------------
-if (!existsSync(SERVER_FN)) {
-  fail(
-    `OpenNext output not found at ${relative(ROOT, SERVER_FN)}.\n` +
-      `      Run: pnpm --filter ai-institute exec opennextjs-cloudflare build`,
-  );
-}
-
-// Find the packaged entry point. OpenNext emits one or more .mjs entry files.
-function findEntry(dir) {
-  const candidates = [];
+/** Recursively list files under dir (bounded depth for safety). */
+function listFiles(dir, maxDepth = 12) {
+  const out = [];
   const walk = (d, depth) => {
-    if (depth > 3) return;
+    if (depth > maxDepth) return;
     let entries;
     try {
       entries = readdirSync(d, { withFileTypes: true });
@@ -78,111 +72,238 @@ function findEntry(dir) {
     }
     for (const e of entries) {
       const full = join(d, e.name);
-      if (e.isDirectory()) walk(full, depth + 1);
-      else if (/\.(mjs|cjs|js)$/.test(e.name)) candidates.push(full);
+      if (e.isDirectory()) {
+        // Skip symlinked dirs to avoid cycles; pnpm nests symlinks.
+        try {
+          if (e.isSymbolicLink()) continue;
+        } catch {
+          /* ignore */
+        }
+        walk(full, depth + 1);
+      } else if (e.isFile() && SOURCE_EXT.test(e.name)) {
+        out.push(full);
+      }
     }
   };
   walk(dir, 0);
-  // Prefer files named like an entry, otherwise take the shallowest.
-  candidates.sort((a, b) => {
-    const named = (s) => (/^(handler|index|server|entry|main)\./.test(s) ? 0 : 1);
-    return named(a) - named(b) || a.split(/[\\/]/).length - b.split(/[\\/]/).length;
-  });
-  return candidates[0] ?? null;
+  return out;
 }
 
-const entry = findEntry(SERVER_FN);
-if (!entry) {
-  fail(
-    `No packaged entry file (.mjs/.cjs/.js) found under ${relative(ROOT, SERVER_FN)}. ` +
-      `The OpenNext build may not have produced a server function.`,
-  );
-}
-
-console.log("OpenNext bundle verification");
-console.log(`  packaged tree : ${relative(ROOT, SERVER_FN)}`);
-console.log(`  entry point    : ${relative(ROOT, entry)}`);
-
-// --- resolution scoped to the packaged tree ------------------------------
-// createRequire anchored at the packaged entry so Node resolves from there.
-const packagedRequire = createRequire(pathToFileURL(entry).href);
-
-let failed = 0;
-const rows = [];
-
-for (const dep of REQUIRED) {
-  let resolved = null;
-  let error = null;
-  try {
-    resolved = packagedRequire.resolve(`${dep.name}/package.json`);
-  } catch (e) {
+/** Find files that statically reference a watched dependency. */
+function findRequirers(files, dep) {
+  const needle = dep;
+  const found = [];
+  for (const f of files) {
+    let src;
     try {
-      resolved = packagedRequire.resolve(dep.name);
-    } catch (e2) {
-      error = e2.message.split("\n")[0];
+      src = readFileSync(f, "utf8");
+    } catch {
+      continue;
+    }
+    // Match require("@libsql/x") / from "@libsql/x" / require('@libsql/x')
+    const re = new RegExp(
+      `(?:require\\(|from\\s*)\\s*['"]${needle.replace(/[/\\^$*+?.()|[\]{}]/g, "\\$&")}['"]`,
+    );
+    if (re.test(src)) found.push(f);
+  }
+  return found;
+}
+
+/** Resolve `spec` from the directory of `fromFile`, like esbuild would. */
+function resolveFrom(fromFile, spec) {
+  const req = createRequire(pathToFileURL(fromFile).href);
+  try {
+    return req.resolve(`${spec}/package.json`);
+  } catch {
+    try {
+      return req.resolve(spec);
+    } catch (e) {
+      return { error: String(e.message).split("\n")[0] };
     }
   }
+}
 
-  if (!resolved) {
-    failed++;
-    rows.push({ dep: dep.name, ok: false, detail: `UNRESOLVED — ${error}` });
-    continue;
-  }
-
-  // Critical: it must resolve INSIDE the packaged tree. A resolution that
-  // escapes to the monorepo node_modules would work locally and fail on deploy.
-  const resolvedAbs = isAbsolute(resolved) ? resolved : resolve(entry, resolved);
-  const relToPackaged = relative(SERVER_FN, resolvedAbs);
-  const insidePackaged = !relToPackaged.startsWith("..") && !isAbsolute(relToPackaged);
-
-  if (!insidePackaged) {
-    failed++;
-    rows.push({
-      dep: dep.name,
-      ok: false,
-      detail: `resolved OUTSIDE the packaged tree (${relative(ROOT, resolvedAbs)}) — ` +
-        `this would fail at deploy time`,
-    });
-    continue;
-  }
-
-  // Read version + licence when the package.json is reachable.
+function describeVersion(resolvedPath) {
   let version = "unknown";
   let license = "unknown";
-  const pkgJson = resolved.endsWith("package.json") ? resolved : join(resolved, "package.json");
+  const pkgPath = resolvedPath.endsWith("package.json")
+    ? resolvedPath
+    : join(resolvedPath, "package.json");
   try {
-    const pkg = JSON.parse(readFileSync(pkgJson, "utf8"));
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
     version = pkg.version ?? "unknown";
-    license = typeof pkg.license === "string" ? pkg.license : JSON.stringify(pkg.license ?? "unknown");
+    license =
+      typeof pkg.license === "string"
+        ? pkg.license
+        : JSON.stringify(pkg.license ?? "unknown");
   } catch {
-    // Non-fatal: still resolved, which is what we assert on.
+    /* non-fatal */
   }
-
-  rows.push({ dep: dep.name, ok: true, detail: `v${version}  license=${license}  ${relToPackaged}` });
+  return { version, license };
 }
 
-console.log("");
-for (const r of rows) {
-  console.log(`  ${r.ok ? "PASS" : "FAIL"}  ${r.dep}`);
-  console.log(`        ${r.detail}`);
+/**
+ * Core check, parameterised by the packaged tree so --selftest can exercise it.
+ * Returns { failures: [{dep, file, reason}], checked: n }
+ */
+function checkTree(treeDir, label) {
+  const files = listFiles(treeDir);
+  const failures = [];
+  let checked = 0;
+
+  for (const dep of WATCHED) {
+    const requirers = findRequirers(files, dep);
+    if (requirers.length === 0) {
+      // Not referenced from the packaged tree: nothing to assert.
+      continue;
+    }
+    for (const r of requirers) {
+      checked++;
+      const res = resolveFrom(r, dep);
+      if (res && typeof res === "object" && res.error) {
+        failures.push({
+          dep,
+          file: relative(treeDir, r),
+          reason: `cannot resolve from the packaged requirer — ${res.error}`,
+        });
+        continue;
+      }
+      const abs = isAbsolute(res) ? res : resolve(r, res);
+      const rel = relative(treeDir, abs);
+      const inside = !rel.startsWith("..") && !isAbsolute(rel);
+      if (!inside) {
+        failures.push({
+          dep,
+          file: relative(treeDir, r),
+          reason:
+            `resolved OUTSIDE the packaged tree (${relative(ROOT, abs)}) — ` +
+            `would pass locally and fail at deploy time`,
+        });
+      }
+    }
+  }
+  return { failures, checked, files: files.length };
 }
 
-// --- explain failures with the reason each dependency is required ---------
-if (failed > 0) {
-  console.error("\nReasons these are required:");
-  for (const dep of REQUIRED) {
-    const row = rows.find((r) => r.dep === dep.name);
-    if (row && !row.ok) console.error(`  - ${dep.name}: ${dep.reason}`);
+/* ----------------------------- selftest ------------------------------- */
+function selftest() {
+  // Recreate the exact production shape: hrana-client copied, its sibling
+  // isomorphic-ws omitted.
+  const tmp = mkdtempSync(join(tmpdir(), "opennext-selftest-"));
+  try {
+    const pkg = join(
+      tmp,
+      "node_modules",
+      ".pnpm",
+      "@libsql+hrana-client@0.10.0",
+      "node_modules",
+      "@libsql",
+    );
+    mkdirSync(join(pkg, "hrana-client", "lib-cjs"), { recursive: true });
+    writeFileSync(
+      join(pkg, "hrana-client", "package.json"),
+      JSON.stringify({
+        name: "@libsql/hrana-client",
+        version: "0.10.0",
+        main: "lib-cjs/index.js",
+      }),
+    );
+    writeFileSync(
+      join(pkg, "hrana-client", "lib-cjs", "index.js"),
+      'const isomorphic_ws_1 = require("@libsql/isomorphic-ws");\nmodule.exports = { isomorphic_ws_1 };\n',
+    );
+
+    // Broken tree: the sibling isomorphic-ws is absent.
+    const broken = checkTree(tmp, "broken");
+    const brokenCaught = broken.failures.some(
+      (f) => f.dep === "@libsql/isomorphic-ws",
+    );
+    console.log("SELFTEST — production-shaped tree with isomorphic-ws omitted");
+    console.log(`  files scanned        : ${broken.files}`);
+    console.log(`  resolution attempts  : ${broken.checked}`);
+    console.log(`  failures detected    : ${broken.failures.length}`);
+    for (const f of broken.failures) {
+      console.log(`    FAIL ${f.dep}  (from ${f.file})`);
+      console.log(`         ${f.reason}`);
+    }
+
+    // Now add the sibling back; the same check must pass.
+    mkdirSync(join(pkg, "isomorphic-ws"), { recursive: true });
+    writeFileSync(
+      join(pkg, "isomorphic-ws", "package.json"),
+      JSON.stringify({
+        name: "@libsql/isomorphic-ws",
+        version: "0.1.5",
+        main: "index.js",
+      }),
+    );
+    writeFileSync(
+      join(pkg, "isomorphic-ws", "index.js"),
+      "module.exports = { WebSocket: class {} };\n",
+    );
+
+    const fixed = checkTree(tmp, "fixed");
+    console.log("\nSELFTEST — same tree with isomorphic-ws present");
+    console.log(`  failures detected    : ${fixed.failures.length}`);
+    for (const f of fixed.failures)
+      console.log(`    FAIL ${f.dep} — ${f.reason}`);
+
+    const ok = brokenCaught && fixed.failures.length === 0;
+    console.log(
+      `\nSELFTEST RESULT: ${ok ? "PASS" : "FAIL"} — ` +
+        `assertion detects the production condition (${brokenCaught ? "yes" : "no"}) ` +
+        `and passes when the package is present (${fixed.failures.length === 0 ? "yes" : "no"})`,
+    );
+    return ok;
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
   }
+}
+
+/* ------------------------------- main --------------------------------- */
+if (process.argv.includes("--selftest")) {
+  process.exit(selftest() ? 0 : 1);
+}
+
+console.log("OpenNext packaged-bundle verification");
+if (!existsSync(SERVER_FN)) {
   console.error(
-    "\nThis is the condition that broke the Cloudflare deploy on 2026-10-16\n" +
-      "(run 38960641361, job 117174521770): OpenNext copied @libsql/hrana-client\n" +
-      "into .open-next/server-functions/default/node_modules but not its\n" +
-      "sibling @libsql/isomorphic-ws, so esbuild could not resolve it.\n" +
-      "\nDo NOT mark it external: the require is top-level and unconditional, so\n" +
-      "externalising would move this failure to Worker startup instead.",
+    `\nFAIL: OpenNext output not found at ${relative(ROOT, SERVER_FN)}`,
+  );
+  console.error(
+    `      Run: pnpm --filter ai-institute exec opennextjs-cloudflare build\n`,
   );
   process.exit(1);
 }
 
-console.log(`\nRESULT: PASS (${rows.length}/${rows.length} runtime dependencies resolve from the packaged tree)`);
+const result = checkTree(SERVER_FN, "real");
+console.log(`  packaged tree : ${relative(ROOT, SERVER_FN)}`);
+console.log(`  files scanned : ${result.files}`);
+console.log(`  resolution attempts : ${result.checked}`);
+console.log(`  watching      : ${WATCHED.join(", ")}`);
+console.log("");
+
+if (result.failures.length > 0) {
+  console.error(
+    "FAIL — a packaged server function cannot resolve a runtime dependency:\n",
+  );
+  for (const f of result.failures) {
+    console.error(`  ${f.dep}`);
+    console.error(`    required by : ${f.file}`);
+    console.error(`    reason      : ${f.reason}`);
+  }
+  console.error(
+    "\nThis is the condition that broke the Cloudflare deploy on 2026-10-16\n" +
+      "(run 38960641361, job 117174521770): OpenNext copied @libsql/hrana-client into\n" +
+      ".open-next/server-functions/default/node_modules but not its sibling\n" +
+      "@libsql/isomorphic-ws, so esbuild could not resolve the require.\n" +
+      "\nDo NOT mark it external: @libsql/hrana-client/lib-cjs/index.js requires it\n" +
+      "unconditionally at top level, so externalising only moves the failure to\n" +
+      "Worker startup.",
+  );
+  process.exit(1);
+}
+
+console.log(
+  "PASS — every watched runtime dependency resolves from its packaged requirer.",
+);
