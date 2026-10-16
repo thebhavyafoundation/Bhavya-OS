@@ -108,3 +108,37 @@ Diagrams produced by the skill carry **no additional licensing conditions** beyo
 ## 13. Blocked?
 
 No. MIT licence is compatible, privacy/security surface is bounded and avoidable, and no runtime dependency is introduced. Integration proceeds to Stage 2.
+
+---
+
+## Independent re-verification � 2026-10-16
+
+This audit was re-verified against the live upstream repository rather than
+inherited. Full record in [UPSTREAM-PIN.md](./UPSTREAM-PIN.md).
+
+| Claim                            | Verified by                                                 | Result                                      |
+| -------------------------------- | ----------------------------------------------------------- | ------------------------------------------- |
+| Repository and licence           | GitHub API + read of `LICENSE` at pin                       | MIT, Copyright (c) 2025 Cathryn Lavery      |
+| Pinned commit resolves           | commit lookup at `b46c9701f035844a20b13ab0551315977188933b` | CONFIRMED, dated 2026-10-16                 |
+| Third-party licences             | read of `THIRD_PARTY_LICENSES.md`                           | Tabler Icons (MIT), Simple Icons (CC0 1.0)  |
+| Security policy                  | read of `SECURITY.md`                                       | GitHub private advisory reporting           |
+| Privacy policy                   | read of `PRIVACY.md`                                        | No server, accounts, analytics or telemetry |
+| Upstream code shipped in the app | `git ls-files`                                              | 0 files committed                           |
+
+### Material finding: Google Fonts dependency
+
+**224** files in the installed skill reference `fonts.googleapis.com`. Left
+unescaped, an exported diagram would make an external font request at render
+time, disclose a visitor IP to a third party, and render in typography that is
+not the canonical Bhavya system.
+
+Two controls already cover this and are verified in the repository:
+
+1. `scripts/diagrams/validate-diagrams.mjs` fails any exported SVG containing
+   Google Fonts references, external `http(s)` hrefs, `@import` URLs, or
+   `<script>`.
+2. `scripts/diagrams/check-manifests.mjs` enforces manifest metadata including
+   licence and approval status.
+
+Required operating rule: the Bhavya Diagram Design profile must **strip** Google
+Fonts before export. The validator is a backstop, not a substitute.

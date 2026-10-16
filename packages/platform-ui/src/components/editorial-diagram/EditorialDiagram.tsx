@@ -9,6 +9,8 @@
  * and must pass sanitisation / duplicate-ID / CSP checks elsewhere.
  */
 
+"use client";
+
 import React, { useCallback, useState } from "react";
 
 export type EditorialDiagramProps = {

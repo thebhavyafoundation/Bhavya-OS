@@ -1,0 +1,52 @@
+# Bhavya OS — Code Owners
+#
+# Existing baseline: a single owner holds default review on every path.
+# The entries below make the permanent platform contract and its enforcement
+# explicitly owned, so a change to the rules cannot silently land alongside the
+# code it governs.
+#
+# Precedence follows AGENTS.md §1: constitution > AGENTS.md > CONTEXT.md chain >
+# architecture truth > contracts/standards > skills > implementation.
+# Where two authorities conflict and precedence does not resolve it, stop for a
+# human. Do not silently rewrite either authority.
+
+# Default owner for everything not listed below.
+* @manohar-lal
+
+# --- Permanent operating contract -------------------------------------------
+# Changes here alter the rules every agent and workflow is bound by.
+# Requires human review: an agent may not relax these unilaterally.
+/AGENTS.md                                   @manohar-lal
+/docs/architecture/PLATFORM-TRUTH.md        @manohar-lal
+/CODEOWNERS                                  @manohar-lal
+/.github/pull_request_template.md           @manohar-lal
+
+# Contract enforcement. Changing the checker without changing the contract
+# (or vice versa) is how enforcement quietly stops matching policy.
+/scripts/validate-platform-contract.mjs     @manohar-lal
+
+# --- Deployment ------------------------------------------------------------
+# Production deployment, secrets and targets. Merge to master deploys.
+/.github/workflows/deploy-cloudflare.yml    @manohar-lal
+/apps/ai-institute/wrangler.json            @manohar-lal
+/apps/ai-institute/next.config.mjs          @manohar-lal
+
+# --- Agent instructions -----------------------------------------------------
+# Project-owned skills and agent configuration.
+/.opencode/skills/                           @manohar-lal
+/.opencode/command/                          @manohar-lal
+/opencode.json                              @manohar-lal
+
+# --- Security and data boundaries ------------------------------------------
+# Auth, database, storage credentials. Privileged material stays server-side.
+/packages/auth/                             @manohar-lal
+/packages/database/                         @manohar-lal
+/packages/security/                         @manohar-lal
+/apps/ai-institute/src/lib/b2/              @manohar-lal
+/apps/ai-institute/src/lib/auth/            @manohar-lal
+
+# --- Design authority -------------------------------------------------------
+# Tokens and canonical components: no hardcoded values, no duplicate systems.
+/packages/platform-ui/src/styles/            @manohar-lal
+/packages/platform-ui/src/components/       @manohar-lal
+/docs/constitution/                         @manohar-lal

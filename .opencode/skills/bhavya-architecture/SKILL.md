@@ -4,6 +4,16 @@ description: Inspect and evolve Bhavya architecture without duplication or unnec
 compatibility: opencode
 ---
 
+## Required platform context
+
+Before using this skill, read:
+
+1. `/AGENTS.md`
+2. `/docs/architecture/PLATFORM-TRUTH.md`
+
+If the requested operation conflicts with either file, do not execute it.
+Correct the plan to use the established zero-budget Bhavya OS architecture.
+
 # Bhavya Architecture Skill
 
 ## Purpose
