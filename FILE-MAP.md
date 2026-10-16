@@ -129,6 +129,8 @@
   - `.events\website.updated.md`
 - `.gitattributes`
 - `.github`/
+  - `.github\CODEOWNERS`
+  - `.github\pull_request_template.md`
   - `.github\workflows`/
 - `.gitignore`
 - `.gitleaks.toml`
@@ -213,7 +215,6 @@
   - `.worktrees\worktrees.json`
 - `AGENTS.md`
 - `CHANGELOG.md`
-- `CODEOWNERS`
 - `CONTEXT.md`
 - `CONTRIBUTING.md`
 - `Dockerfile`
@@ -313,7 +314,6 @@
   - `contracts\services`/
   - `contracts\shared`/
 - `curriculum-3d-hero.png`
-- `curriculum-build-error`
 - `curriculum-hub-snapshot.yml`
 - `curriculum-viewport.png`
 - `design`/
@@ -699,8 +699,10 @@
   - `schemas\task.schema.json`
   - `schemas\workflow.schema.json`
 - `scripts`/
+  - `scripts\__fixtures__`/
   - `scripts\_archive`/
   - `scripts\antislop-gate.mjs`
+  - `scripts\check-skill-wrappers.mjs`
   - `scripts\deploy-all-vercel.sh`
   - `scripts\deploy-all.ps1`
   - `scripts\deploy-vercel-all.ps1`
@@ -715,6 +717,8 @@
   - `scripts\generate-source-b-registry.mjs`
   - `scripts\quality-gates.mjs`
   - `scripts\sync-tokens.mjs`
+  - `scripts\test-platform-contract.mjs`
+  - `scripts\validate-platform-contract.mjs`
   - `scripts\vercel-build-app.mjs`
   - `scripts\vercel-deploy-app.mjs`
 - `setup`/
@@ -725,12 +729,16 @@
 - `skills`/
   - `skills\apple-design`/
   - `skills\bhavya-ai-development`/
+  - `skills\bhavya-apple-design`/
   - `skills\bhavya-architecture`/
   - `skills\bhavya-capability-research`/
   - `skills\bhavya-content-truth`/
   - `skills\bhavya-data-model`/
   - `skills\bhavya-design-system`/
+  - `skills\bhavya-design-taste`/
+  - `skills\bhavya-diagram-design`/
   - `skills\bhavya-github-workflow`/
+  - `skills\bhavya-impeccable`/
   - `skills\bhavya-production-verification`/
   - `skills\bhavya-reasons-canvas`/
   - `skills\bhavya-route-audit`/

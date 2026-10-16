@@ -1,0 +1,103 @@
+{
+  "$comment": "Bhavya Diagram Design profile. Canonical constraints for any diagram produced with the third-party diagram-design skill. Authority: AGENTS.md + docs/architecture/PLATFORM-TRUTH.md. Enforced by scripts/diagrams/test-profile.mjs and scripts/diagrams/validate-diagrams.mjs.",
+  "profile_id": "bhavya-diagram-profile",
+  "version": "1.0.0",
+  "updated_at": "2026-10-16",
+
+  "authoring_skill": {
+    "wrapper": "bhavya-diagram-design",
+    "upstream": "https://github.com/cathrynlavery/diagram-design",
+    "upstream_pin": "b46c9701f035844a20b13ab0551315977188933b",
+    "upstream_license": "MIT",
+    "state": "ENABLED",
+    "runtime_dependency": false
+  },
+
+  "typography": {
+    "$comment": "Taken from packages/platform-ui/src/styles/tokens.css. Never hardcode a font that is not in the token file.",
+    "token_source": "packages/platform-ui/src/styles/tokens.css",
+    "display_stack": "\"Playfair Display\", Georgia, \"Times New Roman\", serif",
+    "sans_stack": "Inter, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "mono_stack": "\"JetBrains Mono\", \"SF Mono\", \"Fira Code\", monospace",
+    "forbidden": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com",
+      "any external font CDN",
+      "@import url(...) pointing at an external host"
+    ],
+    "$rationale": "The upstream skill references fonts.googleapis.com in 224 files. Left intact, an exported diagram makes an external request at render time, discloses a visitor IP to a third party, and renders outside the canonical Bhavya type system. Strip before export; the SVG validator is a backstop, not a substitute."
+  },
+
+  "colour": {
+    "token_source": "packages/platform-ui/src/styles/tokens.css",
+    "rule": "Use token values only. No hardcoded brand colours.",
+    "prohibited_services": [
+      "Cloudflare Images",
+      "Cloudflare Stream",
+      "paid transformations"
+    ]
+  },
+
+  "svg_export": {
+    "must_have": {
+      "xmlns": "http://www.w3.org/2000/svg",
+      "role": "img",
+      "aria_labelledby": "title + desc ids",
+      "title_element": true,
+      "desc_element": true,
+      "viewbox": true,
+      "width_height": "explicit, matching the viewBox"
+    },
+    "must_not_have": [
+      "<script>",
+      "external http(s) href/src/xlink:href",
+      "external @import url()",
+      "fonts.googleapis.com or fonts.gstatic.com",
+      "duplicate element ids"
+    ]
+  },
+
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "text_alternative_required": true,
+    "text_alternative_field": "accessible_text in the manifest",
+    "transcript_required_when": "the diagram encodes meaning that cannot be conveyed by a short alt text",
+    "colour_never_sole_indicator": true
+  },
+
+  "responsive": {
+    "rule": "Export with an explicit viewBox and width/height so the SVG scales without rasterisation.",
+    "viewports": {
+      "mobile": {
+        "min_width_px": 320,
+        "max_width_px": 767,
+        "requirement": "scales via viewBox; no fixed pixel width above 100%"
+      },
+      "desktop": {
+        "min_width_px": 768,
+        "requirement": "scales via viewBox; legible at 100% zoom"
+      }
+    },
+    "zoom_requirement": "must remain usable at 200% zoom"
+  },
+
+  "prohibited": [
+    "runtime AI generation of diagrams",
+    "paid services or any service requiring a payment method",
+    "Cloudflare R2",
+    "large binaries committed to git",
+    "diagrams presented as fact without human factual review"
+  ],
+
+  "review_gates": {
+    "human_factual_review_required_for": [
+      "governance",
+      "evidence",
+      "impact claims",
+      "curriculum outcomes"
+    ],
+    "accessibility_review_required": true,
+    "svg_safety_validation_required": true,
+    "mark_draft_until_reviewed": true
+  }
+}
