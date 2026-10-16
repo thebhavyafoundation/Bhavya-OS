@@ -36,7 +36,19 @@ its own path filter.
 | #27 | `master` | `3a3cbd22d17af` | `fix/editorial-diagram-use-client` | `26945e556286ebc893dbdfd9edd11e0016ad0edb` | 1              | **GREEN** 5/5          |
 | #28 | `master` | `3a3cbd22d17af` | `docs/platform-truth`              | `0fac5c52939654f805fd9eee4dcd499b9b8da45d` | 1              | **RED** — build failed |
 | #29 | `master` | `3a3cbd22d17af` | `ci/deploy-single-path`            | `4b007cc201af`                             | 1              | **RED** — build failed |
-| #30 | `master` | `3a3cbd22d17af` | `ci/platform-contract-enforcement` | `638bf0d149cf2767fd953aba0d6bd50ec3ee6c58` | 3              | **GREEN** 6/6          |
+| #30 | `master` | `3a3cbd22d17af` | `ci/platform-contract-enforcement` | `75a2b7a2`                                 | 7              | **GREEN** 6/6          |
+| #31 | `master` | `3a3cbd22d17af` | `feat/diagram-design-pilot`        | `c799f4c7`                                 | 2              | **GREEN** 6/6          |
+
+> **#30's head has moved.** It was `638bf0d1` when this runbook was first
+> drafted. It is now **`75a2b7a2`** after four added commits: contract-checker
+> hardening, third-party skill quarantine, the Diagram Design audit, and this
+> runbook. CI at the **current** head is 6/6 green. Merge `75a2b7a2`, not
+> `638bf0d1`. **#30 is now the most complete and fully green PR in the stack.**
+>
+> **#31** is the Diagram Design pilot, based on #30. Merge #30 first.
+>
+> The `638bf0d1` run IDs in the CI table below remain valid history but no
+> longer describe the head you would merge.
 
 ### Commit containment (verified, not from PR descriptions)
 
@@ -154,15 +166,15 @@ first.** #29 then needs `git rebase origin/master` and a CI rerun afterwards.
 
 ### STEP 2 — Merge #30 (build fix + platform truth + enforcement). ⚠️ **PRODUCTION DEPLOY**
 
-| Field                             | Value                                                                                                                                      |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| PR                                | #30 `ci(platform): enforce the permanent operating contract in CI`                                                                         |
-| Head SHA to merge                 | `638bf0d149cf2767fd953aba0d6bd50ec3ee6c58`                                                                                                 |
-| Checks that must be visible green | `build 117096132672`, `Platform contract 117095318948`, `lint-and-typecheck 117095318385`, `test 117095318799`, `secret-scan 117095318921` |
-| Master change                     | 3 commits: build fix, PLATFORM-TRUTH + skill blocks, contract enforcement (CI job, CODEOWNERS, PR template, update procedure)              |
-| Production deploy                 | **YES**                                                                                                                                    |
-| Post-merge                        | `pnpm platform:check` equivalent is enforced by the new CI job from now on                                                                 |
-| Rollback                          | `git revert -m 1 <merge-sha>` on `master`, then push                                                                                       |
+| Field                             | Value                                                                                                                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR                                | #30 `ci(platform): enforce the permanent operating contract in CI`                                                                                                               |
+| Head SHA to merge                 | `75a2b7a2` **(current)** — supersedes `638bf0d1`                                                                                                                                 |     |
+| Checks that must be visible green | `build`, `Platform contract`, `lint-and-typecheck`, `test`, `secret-scan` — all 6/6 green at `75a2b7a2`. The run IDs in the table above belong to the superseded `638bf0d1` head |
+| Master change                     | 3 commits: build fix, PLATFORM-TRUTH + skill blocks, contract enforcement (CI job, CODEOWNERS, PR template, update procedure)                                                    |
+| Production deploy                 | **YES**                                                                                                                                                                          |
+| Post-merge                        | `pnpm platform:check` equivalent is enforced by the new CI job from now on                                                                                                       |
+| Rollback                          | `git revert -m 1 <merge-sha>` on `master`, then push                                                                                                                             |
 
 **After this merge, `master` is green for the first time.**
 
@@ -245,6 +257,38 @@ Stop immediately, do not continue merging, if any of these occur:
    contract or introduced prohibited configuration.
 6. A merge produces a `Vercel` failure that is _newly accompanied_ by a
    Cloudflare failure. A Vercel-only failure is not a stop condition.
+
+### Known false alarm — `next/font`
+
+**Not** every `build` failure is a regression in the change under test.
+
+`apps/ai-institute/src/app/layout.tsx` imports Inter and Playfair Display from
+`next/font/google`, which fetches from Google Fonts **at build time**. Observed
+2026-10-16: that fetch failed with:
+
+```
+An error occurred in `next/font`.
+TypeError: Cannot read properties of null (reading '1')
+```
+
+This was observed empirically on 2026-10-16: PR #30's build **passed** and PR
+#31's build **failed** ten minutes later on code that differed only by a JSON
+document, a Node script, four `package.json` entries and a generated index.
+Re-running #31 passed 6/6.
+
+**Observed:** the failure was isolated to the font-fetch step and did not recur
+on re-run. **Not proven:** that per-IP throttling is the cause — the logs carry
+no provider-side evidence, and other transient causes fit equally well. See
+`docs/architecture/BUILD-EXTERNAL-DEPENDENCY-RISK.md`.
+
+**Action:** if a `build` fails with a `next/font` error, read the log, then
+re-run the job before investigating further. Do **not** treat a `next/font`
+failure as a licence to dismiss a build failure without reading it. Do **not**
+commit font binaries without a human decision — see
+`docs/architecture/BUILD-EXTERNAL-DEPENDENCY-RISK.md`.
+
+The same external fetch can fail a **production deploy**, so read the log and
+re-run a failed deploy before treating it as a code regression.
 
 ---
 
