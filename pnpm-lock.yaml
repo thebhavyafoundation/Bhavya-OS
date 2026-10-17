@@ -749,6 +749,9 @@ importers:
       '@libsql/client':
         specifier: ^0.17.4
         version: 0.17.4
+      '@libsql/isomorphic-ws':
+        specifier: 0.1.5
+        version: 0.1.5
       better-sqlite3:
         specifier: ^12.10.0
         version: 12.11.1
