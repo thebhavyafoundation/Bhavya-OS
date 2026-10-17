@@ -84,15 +84,22 @@ jobs:
         if: failure()
         run: |
           LOG=opennext-build.log
+          PAT='Could not resolve|Cannot find|Can.t resolve|Module not found|Critical dependency|Export .* was not found|Failed to compile|Build failed|ERROR|error|Error|✘'
           if [ -f "$LOG" ]; then
             {
-              echo "### OpenNext build failure"
+              echo "### OpenNext build failure — matched lines"
               echo '```'
-              grep -n -E "Could not resolve|Cannot find|Module not found|Build failed|ERROR|✘" "$LOG" | head -n 25 || echo "no matching line"
+              grep -n -E "$PAT" "$LOG" | head -n 20 || echo "no matching line"
+              echo '```'
+              echo "### tail of build log"
+              echo '```'
+              tail -n 45 "$LOG"
               echo '```'
             } >> "$GITHUB_STEP_SUMMARY"
-            MSG=$(grep -E "Could not resolve|Cannot find|Module not found|Build failed|✘" "$LOG" | head -n 3 | tr '\n' ' ' | cut -c1-900)
+            MSG=$(grep -E "$PAT" "$LOG" | head -n 4 | tr '\n' ' ' | cut -c1-900)
             [ -n "$MSG" ] && echo "::error title=OpenNext build failure::$MSG"
+            TAIL=$(tail -n 25 "$LOG" | tr '\n' ' ' | cut -c1-900)
+            [ -n "$TAIL" ] && echo "::error title=OpenNext build tail::$TAIL"
           else
             echo "::error title=OpenNext build failure::no opennext-build.log was produced"
           fi
