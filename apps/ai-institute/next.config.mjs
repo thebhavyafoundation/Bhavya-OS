@@ -33,6 +33,27 @@ const nextConfig = {
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
   },
+  // The Turso web client reaches, at require time, a chain that pnpm stores
+  // under node_modules/.pnpm and Next's tracer does not follow on its own.
+  // These patterns must match the real store layout: with pnpm's isolated
+  // node_modules there is no hoisted node_modules/@libsql/* to match, so a glob
+  // written against that layout silently matches nothing. That is why the
+  // equivalent globs in PRs #33 and #34 were inert.
+  //
+  // Chain, from lib-cjs/web.js: @libsql/hrana-client (which requires
+  // @libsql/isomorphic-ws unconditionally), @libsql/core, promise-limit,
+  // js-base64, and ws behind the isomorphic-ws node entry.
+  outputFileTracingIncludes: {
+    "/*": [
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/**/*",
+      "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
+      "./node_modules/.pnpm/@libsql+client@*/node_modules/@libsql/client/**/*",
+      "./node_modules/.pnpm/@libsql+core@*/node_modules/@libsql/core/**/*",
+      "./node_modules/.pnpm/promise-limit@*/node_modules/promise-limit/**/*",
+      "./node_modules/.pnpm/js-base64@*/node_modules/js-base64/**/*",
+      "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
+    ],
+  },
   images: {
     unoptimized: true,
   },
