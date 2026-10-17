@@ -135,22 +135,83 @@ are **not** restored here; they are recorded for a separate human decision.
 
 ## Actual fix path selected
 
-Worker-compatible libSQL pieces bundle; Node-native SQLite stays external.
+**None succeeded. This is a hard stop, not an unfinished plan.**
 
-1. Remove `@libsql/isomorphic-ws` and `@libsql/client` from
-   `serverExternalPackages`. Keep `better-sqlite3` external — it is native,
-   Node-only, and must never reach a Worker.
-2. Delete `outputFileTracingIncludes`. It cannot influence externalised packages and
-   is unnecessary once these packages bundle normally.
-3. Import `@libsql/client/web` at both require sites, restoring #19. This is what
-   makes bundling `@libsql/client` safe: the `/web` entry has no native code,
-   whereas the root `require` condition resolves to the native Node build.
-4. Restore #18 so multi-statement schema `exec` uses `executeMultiple`, together
-   with its regression test.
-5. Make the CI gate run the production OpenNext build command byte for byte, and
-   surface build errors as check annotations readable without credentials.
+Six distinct approaches were implemented and each was tested in CI. All six
+produced the byte-identical error while the tracing-glob guard reported every
+pattern matching real files:
 
-No database layer redesign. No Turso or SQLite replacement. No adapter rewrite.
+| #   | Approach                                                      | Result                                             |
+| --- | ------------------------------------------------------------- | -------------------------------------------------- |
+| 1   | direct dependency for `@libsql/isomorphic-ws` (#32, merged)   | same error                                         |
+| 2   | `outputFileTracingIncludes` on hoisted paths (#33, merged)    | same error                                         |
+| 3   | plus `ws` (#34, merged)                                       | same error                                         |
+| 4   | post-build copy of externals (#36)                            | step skipped; cannot run before a build that fails |
+| 5   | chain removed from `serverExternalPackages` so it bundles     | same error                                         |
+| 6   | whole chain added to `serverExternalPackages` for consistency | same error                                         |
+| 7   | globs rewritten to `.pnpm` store paths                        | same error                                         |
+| 8   | globs aimed at the sibling symlink location                   | same error                                         |
+| 9   | globs aimed at app-local `node_modules`                       | same error                                         |
+
+What this establishes, precisely:
+
+- `serverExternalPackages` has **no effect** on this failure. Moving the whole
+  chain out of it and back into it changed nothing. OpenNext's esbuild bundles
+  whatever is present in the traced tree; it does not consult the list.
+- `outputFileTracingIncludes` has **no effect** here. Three different, verified
+  path forms all failed to place the package where the resolver looks, even
+  while matching real files.
+- Next's module-graph tracer does not reach `@libsql/isomorphic-ws` at all. The
+  only path to it is the `@libsql/client/web` subpath export reached by a runtime
+  `require`, which the tracer does not follow.
+- esbuild runs with `platform: "neutral"` and `conditions: ["module"]` over
+  `.open-next/server-functions/default`, and resolves
+  `@libsql/isomorphic-ws` only via the pnpm sibling symlink, which is not
+  reproduced in the packaged tree.
+
+The branch therefore reverts `next.config.mjs` to `master` and ships none of the
+unproven experiments. What remains is what is proven: the reproducing gate, the
+error reporting, the glob guard, the incident record, and the two lost database
+fixes.
+
+### A real defect the guard found on `master`
+
+`--check-globs` fails against `master` as it stands. All four tracing patterns
+merged in #33 and #34 match **zero files**:
+
+```
+MATCHES NOTHING  ./node_modules/@libsql/isomorphic-ws/**/*
+MATCHES NOTHING  ./node_modules/@libsql/hrana-client/**/*
+MATCHES NOTHING  ./node_modules/@libsql/client/**/*
+MATCHES NOTHING  ./node_modules/ws/**/*
+```
+
+They were written against a hoisted `node_modules/@libsql/*`, which a pnpm
+workspace never creates. This is a latent defect independent of the bundling
+failure, and the guard now makes it visible on any pull request.
+
+## Minimum human action required
+
+One decision, then one CI cycle:
+
+1. **Decide the packaging strategy.** The remaining untried mechanism is to make
+   the pnpm sibling symlinks survive into
+   `.open-next/server-functions/default/node_modules/.pnpm/@libsql+hrana-client@0.10.0/node_modules/@libsql/isomorphic-ws`.
+   That is a pnpm layout concern, not a Next one. Two concrete routes:
+   - set `node-linker=hoisted` in `.npmrc` for this workspace, so
+     `node_modules/@libsql/*` are real directories that Next's tracer follows
+     natively and the hoisted patterns in `next.config.mjs` finally match; or
+   - add `@libsql/isomorphic-ws` as a direct dependency of the **package that
+     requires it**, so pnpm places it beside `hrana-client` in the store.
+
+   Option 1 changes install layout repository-wide and needs its own CI evidence.
+
+2. Run the `OpenNext Build Verify` gate on the resulting change. The gate is
+   trustworthy now: it runs the production build command and reports errors
+   without credentials.
+
+Restoring the two lost database fixes on this branch is independent of that
+decision and can be merged on its own merit once reviewed.
 
 ## Rollback
 
