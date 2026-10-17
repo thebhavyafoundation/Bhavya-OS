@@ -5,8 +5,69 @@ on:
     branches: [master]
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy to Cloudflare
+  # Build is a separate job from upload so the Cloudflare credentials exist
+  # only in the job that actually uploads. A failed build must never be able to
+  # reach a step holding a production secret.
+  build:
+    name: Build and verify OpenNext bundle
+    runs-on: ubuntu-latest
+    outputs:
+      verified: ${{ steps.verify.outputs.verified }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda  # v4.1.0
+        with:
+          version: 10.17.1
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Self-test the bundle assertion
+        run: node scripts/verify-opennext-bundle.mjs --selftest
+
+      - name: Build for Cloudflare
+        working-directory: apps/ai-institute
+        # pipefail is essential: without it the pipeline's exit status is tee's
+        # (always 0), which would mask a build failure and let the deploy step
+        # run on a broken bundle.
+        run: |
+          set -o pipefail
+          npx opennextjs-cloudflare build 2>&1 | tee build.log
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+
+      - name: Verify packaged server-function dependencies
+        # Fails if any require reachable in the packaged tree cannot resolve.
+        run: node scripts/verify-opennext-bundle.mjs
+
+      - name: Record verification
+        id: verify
+        run: echo "verified=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        with:
+          name: cloudflare-build-log
+          path: apps/ai-institute/build.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  deploy:
+    name: Deploy to Cloudflare Workers
+    needs: build
+    # No credentials are declared anywhere in this job except the upload step,
+    # and this job cannot start unless the build and verification both passed.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,28 +88,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build for Cloudflare
-        working-directory: apps/ai-institute
-        # pipefail is essential: without it the pipeline's exit status is tee's
-        # (always 0), which would mask a build failure and let the deploy step
-        # run on a broken bundle.
-        run: |
-          set -o pipefail
-          npx opennextjs-cloudflare build 2>&1 | tee build.log
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
-
-      - name: Upload build log
-        # Full logs of a failed run are otherwise unreadable from the UI, which
-        # cost a debugging cycle on 2026-10-17. Retained briefly.
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: cloudflare-build-log
-          path: apps/ai-institute/build.log
-          retention-days: 7
-          if-no-files-found: ignore
-
       - name: Deploy to Cloudflare Workers
         working-directory: apps/ai-institute
         run: npx opennextjs-cloudflare deploy
@@ -56,6 +95,6 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # Runtime secrets (TURSO_DATABASE_URL, TURSO_AUTH_TOKEN) must be set
-      # manually via: npx wrangler secret put <NAME> --env production
-      # These are not needed at build time — only at Worker runtime.
+        # Runtime secrets (TURSO_DATABASE_URL, TURSO_AUTH_TOKEN) must be set
+        # manually via: npx wrangler secret put <NAME> --env production
+        # These are not needed at build time — only at Worker runtime.
