@@ -45,6 +45,7 @@ import {
   writeFileSync,
   mkdtempSync,
   rmSync,
+  globSync,
 } from "node:fs";
 import { join, dirname, resolve, relative, isAbsolute } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -296,6 +297,37 @@ function buildFixture(mode) {
   return tmp;
 }
 
+function checkTracingGlobs() {
+  const cfg = join(ROOT, "apps", "ai-institute", "next.config.mjs");
+  if (!existsSync(cfg)) {
+    console.error(`  no next.config.mjs at ${cfg}`);
+    return false;
+  }
+  const patterns = [
+    ...readFileSync(cfg, "utf8").matchAll(/"\.\/node_modules[^"]+"/g),
+  ].map((m) => m[0].slice(1, -1));
+  if (patterns.length === 0) {
+    console.log("  no outputFileTracingIncludes patterns configured");
+    return true;
+  }
+  let ok = true;
+  for (const pattern of patterns) {
+    let hits = 0;
+    try {
+      hits = globSync(pattern, { cwd: ROOT }).length;
+    } catch {
+      hits = 0;
+    }
+    if (hits === 0) {
+      console.error(`  MATCHES NOTHING  ${pattern}`);
+      ok = false;
+    } else {
+      console.log(`  ok (${hits})  ${pattern}`);
+    }
+  }
+  return ok;
+}
+
 function selftest() {
   const scenarios = [
     {
@@ -358,6 +390,18 @@ function selftest() {
 /* ------------------------------- main --------------------------------- */
 if (process.argv.includes("--selftest")) {
   process.exit(selftest() ? 0 : 1);
+}
+
+// Guards against the failure mode that cost PRs #32-#34: an
+// outputFileTracingIncludes glob written against a path that does not exist.
+// It matches nothing, reports nothing, and the build stays broken.
+if (process.argv.includes("--check-globs")) {
+  console.log("outputFileTracingIncludes glob check");
+  const ok = checkTracingGlobs();
+  console.log(
+    `\nGLOB CHECK: ${ok ? "PASS" : "FAIL"} - every configured pattern matches at least one real file.`,
+  );
+  process.exit(ok ? 0 : 1);
 }
 
 console.log("OpenNext packaged-bundle verification");

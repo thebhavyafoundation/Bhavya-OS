@@ -58,6 +58,12 @@ jobs:
         # Proves the assertion detects a broken tree before it judges a real one.
         run: node scripts/verify-opennext-bundle.mjs --selftest
 
+      - name: Check tracing globs resolve to real files
+        # A glob written against a path that does not exist matches nothing,
+        # reports nothing, and leaves the build broken. That is what made the
+        # includes added in #33 and #34 inert.
+        run: node scripts/verify-opennext-bundle.mjs --check-globs
+
       - name: OpenNext build only (no upload)
         working-directory: apps/ai-institute
         # Byte-identical to the deploy workflow step. Same npx invocation, no

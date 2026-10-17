@@ -52,6 +52,14 @@ const nextConfig = {
       "./node_modules/.pnpm/promise-limit@*/node_modules/promise-limit/**/*",
       "./node_modules/.pnpm/js-base64@*/node_modules/js-base64/**/*",
       "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
+      // esbuild bundles with platform "neutral" and conditions ["module"] from
+      // the traced tree, and Node resolution only finds @libsql/isomorphic-ws
+      // through the sibling symlink beside the package that requires it. Tracing
+      // the store entry above is not enough: the files land in a directory that
+      // is not on the resolver's walk-up path. These patterns put them where
+      // resolution actually looks.
+      "./node_modules/.pnpm/@libsql+*/node_modules/@libsql/isomorphic-ws/**/*",
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/ws/**/*",
     ],
   },
   images: {
