@@ -18,50 +18,32 @@ const nextConfig = {
     "@bhavya/impact-runtime",
     "@bhavya/project-runtime",
   ],
-  // serverExternalPackages is applied per package, so this chain is listed whole
-  // or not at all. `@libsql/hrana-client` requires `@libsql/isomorphic-ws`
-  // unconditionally; externalising the requiree while bundling the requirer
-  // leaves a dangling require and fails the build at hrana-client/lib-cjs/index.js:18.
-  // `ws` is listed because the isomorphic-ws node entry requires it.
-  // `@libsql/client` is safe here only because it is reached via its `/web`
-  // entry, which is fetch-based; the root entry resolves under `require` to the
-  // native libsql NAPI build and throws in a Worker. `better-sqlite3` stays
-  // external: native, Node-only, and must never be bundled into a Worker.
   serverExternalPackages: [
     "better-sqlite3",
     "@libsql/client",
-    "@libsql/hrana-client",
     "@libsql/isomorphic-ws",
-    "@libsql/core",
-    "ws",
-    "promise-limit",
-    "js-base64",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
   },
-  // Next's tracer never picks up @libsql/isomorphic-ws: it is only reachable
-  // through a subpath export (`@libsql/client/web`) reached by a runtime
-  // require, which the module-graph tracer does not follow. It must therefore
-  // be added explicitly.
-  //
-  // Patterns are relative to outputFileTracingRoot, which is the repository
-  // root — not the app. A direct dependency materialises in the app's own
-  // node_modules, so that is the path that exists after a fresh install.
-  // Patterns written against a hoisted root `node_modules/@libsql/*` match
-  // nothing under pnpm and were the reason the includes in #33 and #34 were
-  // inert. `--check-globs` in CI now fails on any pattern that matches zero
-  // files.
+  // `@libsql/isomorphic-ws` is in serverExternalPackages above, so Next leaves
+  // it as a runtime require and OpenNext must carry its files into the Worker.
+  // Tracing alone is not enough: it resolves through a nested conditional
+  // `exports` map, and the tracer copies package.json but not the .cjs/.mjs
+  // entry it points at, so esbuild finds the package and cannot load the entry.
+  // `ws` is listed because this package resolves to web.cjs (global WebSocket, no
+  // dependency) under workerd/default but to node.cjs, which require()s `ws`,
+  // under the node condition. Which one the packager picks depends on the
+  // conditions it passes to esbuild, so `ws` must resolve either way. It is
+  // already a transitive dependency (MIT); this adds no new dependency.
+  // Scoped to the Turso chain only, never all of node_modules.
   outputFileTracingIncludes: {
     "/*": [
-      "./apps/ai-institute/node_modules/@libsql/isomorphic-ws/**/*",
-      "./apps/ai-institute/node_modules/@libsql/client/**/*",
-      "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
-      "./node_modules/.pnpm/@libsql+core@*/node_modules/@libsql/core/**/*",
-      "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
-      "./node_modules/.pnpm/promise-limit@*/node_modules/promise-limit/**/*",
-      "./node_modules/.pnpm/js-base64@*/node_modules/js-base64/**/*",
+      "./node_modules/@libsql/isomorphic-ws/**/*",
+      "./node_modules/@libsql/hrana-client/**/*",
+      "./node_modules/@libsql/client/**/*",
+      "./node_modules/ws/**/*",
     ],
   },
   images: {
