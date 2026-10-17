@@ -33,9 +33,13 @@ export async function initRemoteDatabase(): Promise<void> {
     );
   }
 
-  // Dynamic import — only loaded when TURSO_DATABASE_URL is set
+  // Dynamic import — only loaded when TURSO_DATABASE_URL is set.
+  // The /web entry is fetch-based. The root entry resolves under the `require`
+  // condition to lib-cjs/node.js, which eagerly loads the native `libsql` NAPI
+  // addon and throws "unsupported Linux architecture" in a Worker before
+  // createClient runs.
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { createClient } = require("@libsql/client");
+  const { createClient } = require("@libsql/client/web");
   _remoteClient = createClient({ url, authToken });
 }
 
