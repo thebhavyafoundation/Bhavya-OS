@@ -304,7 +304,7 @@ function checkTracingGlobs() {
     return false;
   }
   const patterns = [
-    ...readFileSync(cfg, "utf8").matchAll(/"\.\/node_modules[^"]+"/g),
+    ...readFileSync(cfg, "utf8").matchAll(/"\.\/[^"]+\/\*\*\/\*"/g),
   ].map((m) => m[0].slice(1, -1));
   if (patterns.length === 0) {
     console.log("  no outputFileTracingIncludes patterns configured");

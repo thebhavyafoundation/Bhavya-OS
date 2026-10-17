@@ -41,6 +41,29 @@ const nextConfig = {
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
   },
+  // Next's tracer never picks up @libsql/isomorphic-ws: it is only reachable
+  // through a subpath export (`@libsql/client/web`) reached by a runtime
+  // require, which the module-graph tracer does not follow. It must therefore
+  // be added explicitly.
+  //
+  // Patterns are relative to outputFileTracingRoot, which is the repository
+  // root — not the app. A direct dependency materialises in the app's own
+  // node_modules, so that is the path that exists after a fresh install.
+  // Patterns written against a hoisted root `node_modules/@libsql/*` match
+  // nothing under pnpm and were the reason the includes in #33 and #34 were
+  // inert. `--check-globs` in CI now fails on any pattern that matches zero
+  // files.
+  outputFileTracingIncludes: {
+    "/*": [
+      "./apps/ai-institute/node_modules/@libsql/isomorphic-ws/**/*",
+      "./apps/ai-institute/node_modules/@libsql/client/**/*",
+      "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
+      "./node_modules/.pnpm/@libsql+core@*/node_modules/@libsql/core/**/*",
+      "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
+      "./node_modules/.pnpm/promise-limit@*/node_modules/promise-limit/**/*",
+      "./node_modules/.pnpm/js-base64@*/node_modules/js-base64/**/*",
+    ],
+  },
   images: {
     unoptimized: true,
   },
