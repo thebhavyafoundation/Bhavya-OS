@@ -18,49 +18,28 @@ const nextConfig = {
     "@bhavya/impact-runtime",
     "@bhavya/project-runtime",
   ],
-  // Only genuinely native, Node-only packages belong here. Next excludes
-  // everything listed from tracing and bundling, so a package that is bundled
-  // but requires something listed here produces a bundle that cannot resolve it.
-  // `@libsql/*` must therefore NOT be listed: `@libsql/hrana-client` requires
-  // `@libsql/isomorphic-ws`, and excluding the latter while bundling the former
-  // fails the build at hrana-client's unconditional require. `@libsql/client`
-  // is reached through its `/web` entry, which is fetch-based and free of
-  // native code, so it bundles cleanly for Workers.
-  // `better-sqlite3` stays external: it is a native addon and must never be
-  // bundled into a Worker.
-  serverExternalPackages: ["better-sqlite3"],
+  // serverExternalPackages is applied per package, so this chain is listed whole
+  // or not at all. `@libsql/hrana-client` requires `@libsql/isomorphic-ws`
+  // unconditionally; externalising the requiree while bundling the requirer
+  // leaves a dangling require and fails the build at hrana-client/lib-cjs/index.js:18.
+  // `ws` is listed because the isomorphic-ws node entry requires it.
+  // `@libsql/client` is safe here only because it is reached via its `/web`
+  // entry, which is fetch-based; the root entry resolves under `require` to the
+  // native libsql NAPI build and throws in a Worker. `better-sqlite3` stays
+  // external: native, Node-only, and must never be bundled into a Worker.
+  serverExternalPackages: [
+    "better-sqlite3",
+    "@libsql/client",
+    "@libsql/hrana-client",
+    "@libsql/isomorphic-ws",
+    "@libsql/core",
+    "ws",
+    "promise-limit",
+    "js-base64",
+  ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
-  },
-  // The Turso web client reaches, at require time, a chain that pnpm stores
-  // under node_modules/.pnpm and Next's tracer does not follow on its own.
-  // These patterns must match the real store layout: with pnpm's isolated
-  // node_modules there is no hoisted node_modules/@libsql/* to match, so a glob
-  // written against that layout silently matches nothing. That is why the
-  // equivalent globs in PRs #33 and #34 were inert.
-  //
-  // Chain, from lib-cjs/web.js: @libsql/hrana-client (which requires
-  // @libsql/isomorphic-ws unconditionally), @libsql/core, promise-limit,
-  // js-base64, and ws behind the isomorphic-ws node entry.
-  outputFileTracingIncludes: {
-    "/*": [
-      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/**/*",
-      "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
-      "./node_modules/.pnpm/@libsql+client@*/node_modules/@libsql/client/**/*",
-      "./node_modules/.pnpm/@libsql+core@*/node_modules/@libsql/core/**/*",
-      "./node_modules/.pnpm/promise-limit@*/node_modules/promise-limit/**/*",
-      "./node_modules/.pnpm/js-base64@*/node_modules/js-base64/**/*",
-      "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
-      // esbuild bundles with platform "neutral" and conditions ["module"] from
-      // the traced tree, and Node resolution only finds @libsql/isomorphic-ws
-      // through the sibling symlink beside the package that requires it. Tracing
-      // the store entry above is not enough: the files land in a directory that
-      // is not on the resolver's walk-up path. These patterns put them where
-      // resolution actually looks.
-      "./node_modules/.pnpm/@libsql+*/node_modules/@libsql/isomorphic-ws/**/*",
-      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/ws/**/*",
-    ],
   },
   images: {
     unoptimized: true,
