@@ -69,9 +69,11 @@ async function getRemoteDb(): Promise<{
     );
   }
 
-  // Dynamic import — only loaded when remote URL is set
+  // Dynamic import — only loaded when remote URL is set.
+  // The /web entry is fetch-based; the root entry eagerly loads the native
+  // `libsql` addon, which throws in a Worker before createClient runs.
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { createClient } = require("@libsql/client");
+  const { createClient } = require("@libsql/client/web");
   _remoteDb = createClient({ url, authToken });
   return _remoteDb!;
 }
