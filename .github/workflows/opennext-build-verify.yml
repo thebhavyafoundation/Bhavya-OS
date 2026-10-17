@@ -1,39 +1,25 @@
-# OpenNext production-equivalent build verification.
+# Production-equivalent OpenNext build verification.
 #
-# PURPOSE
-#   Reproduce and then gate the exact build that production uses
-#   (`opennextjs-cloudflare build`) WITHOUT deploying anything.
+# Runs the exact build production runs, without deploying. The gap this closes:
+# `next build` does not perform OpenNext server-function bundling, so a green
+# build check never meant "will deploy". That is how three merged PRs passed
+# review and failed the deploy.
 #
-# WHY THIS EXISTS
-#   The normal Next.js build passes while the Cloudflare deployment build fails.
-#   The Next.js build does not perform OpenNext's server-function bundling, so a
-#   green `build` check does not mean "will deploy". This workflow closes that
-#   gap: master can no longer go green and still fail to deploy.
-#
-# SAFETY
-#   - No Cloudflare credentials. No API token. No account id.
-#   - No `wrangler deploy`, no `opennextjs-cloudflare deploy`.
-#   - No production environment.
-#   - No Turso production connection and no database query.
-#   - Runs on pull_request and on the repair branch only. Never deploys.
+# Safety: no Cloudflare credentials, no account id, no deploy command, no
+# production environment, no Turso connection, no database query.
 name: OpenNext Build Verify
 
 on:
   pull_request:
     paths:
-      - "apps/**"
-      - "packages/**"
-      - "scripts/**"
-      - "content/**"
+      - "apps/ai-institute/**"
+      - "packages/database/**"
+      - "scripts/verify-opennext-bundle.mjs"
       - "pnpm-lock.yaml"
-      - "pnpm-workspace.yaml"
       - "package.json"
-      - "turbo.json"
-      - "tsconfig.base.json"
       - ".github/workflows/opennext-build-verify.yml"
   workflow_dispatch:
 
-# Cancel superseded runs on the same PR to save runner time.
 concurrency:
   group: opennext-build-verify-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -42,9 +28,7 @@ jobs:
   opennext-build:
     name: OpenNext build (no deploy)
     runs-on: ubuntu-latest
-    # No `environment:` key, so no production environment approval is possible.
     env:
-      # Matches deploy-cloudflare.yml exactly so this gate is representative.
       NODE_OPTIONS: --max-old-space-size=4096
       CI: "true"
     steps:
@@ -68,41 +52,52 @@ jobs:
 
       - name: Record toolchain versions
         run: |
-          {
-            echo "### Toolchain"
-            echo "- node: $(node --version)"
-            echo "- pnpm: $(pnpm --version)"
-            echo "- runner: $(uname -srm)"
-            echo "- next: $(node -p "require('./apps/ai-institute/package.json').dependencies.next")"
-            echo "- @opennextjs/cloudflare: $(node -p "require('./apps/ai-institute/package.json').devDependencies['@opennextjs/cloudflare']")"
-          } >> "$GITHUB_STEP_SUMMARY"
-          node -p "require('./apps/ai-institute/package.json').dependencies.next" > opennext-build-versions.txt
+          node -p "const p=require('./apps/ai-institute/package.json');['next','@opennextjs/cloudflare','@libsql/client','@libsql/isomorphic-ws','better-sqlite3'].map(k=>k+'='+(p.dependencies?.[k]??p.devDependencies?.[k])).join('\n')" | tee opennext-versions.txt
 
       - name: Self-test the bundle assertion
-        # Proves the assertion itself detects the production condition before it
-        # is trusted to judge a real build. Cheap and deterministic.
+        # Proves the assertion detects a broken tree before it judges a real one.
         run: node scripts/verify-opennext-bundle.mjs --selftest
-
-      - name: Next.js application build
-        run: pnpm --filter ai-institute run build
 
       - name: OpenNext build only (no upload)
         working-directory: apps/ai-institute
-        # Uses the repository-installed binary from node_modules/.bin, not an
-        # unpinned remote download. This is the same command production runs,
-        # minus the deploy.
-        run: pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
+        # Byte-identical to the deploy workflow step. Same npx invocation, no
+        # preceding `next build`, same pipefail. A gate that is not this exact
+        # command cannot verify production.
+        run: |
+          set -o pipefail
+          npx opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
 
       - name: Verify packaged server-function dependencies
         run: node scripts/verify-opennext-bundle.mjs
+
+      - name: Surface the build error
+        # GitHub suppresses most log lines in the job UI and artifact download
+        # needs credentials, so failures here were undiagnosable and were
+        # explained with guesses instead of evidence. An ::error:: command
+        # becomes a check annotation, which the REST API returns unauthenticated.
+        if: failure()
+        run: |
+          LOG=opennext-build.log
+          if [ -f "$LOG" ]; then
+            {
+              echo "### OpenNext build failure"
+              echo '```'
+              grep -n -E "Could not resolve|Cannot find|Module not found|Build failed|ERROR|✘" "$LOG" | head -n 25 || echo "no matching line"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+            MSG=$(grep -E "Could not resolve|Cannot find|Module not found|Build failed|✘" "$LOG" | head -n 3 | tr '\n' ' ' | cut -c1-900)
+            [ -n "$MSG" ] && echo "::error title=OpenNext build failure::$MSG"
+          else
+            echo "::error title=OpenNext build failure::no opennext-build.log was produced"
+          fi
 
       - name: Upload OpenNext build log
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: opennext-build-log
+          name: opennext-build-log-${{ github.run_id }}
           path: |
             opennext-build.log
-            opennext-build-versions.txt
+            opennext-versions.txt
           retention-days: 7
           if-no-files-found: ignore
