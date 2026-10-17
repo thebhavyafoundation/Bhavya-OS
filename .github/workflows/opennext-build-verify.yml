@@ -17,6 +17,7 @@ on:
       - "scripts/verify-opennext-bundle.mjs"
       - "pnpm-lock.yaml"
       - "package.json"
+      - ".npmrc"
       - ".github/workflows/opennext-build-verify.yml"
   workflow_dispatch:
 
