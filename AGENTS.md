@@ -6,6 +6,66 @@ Next hop: `CONTEXT.md` (L1) → ICM stages (L2) / domain hubs (L2) → Layer 3 r
 
 ---
 
+## Bhavya OS Permanent Rules
+
+These rules are binding for every agent, skill, plugin and workflow.
+
+> _Editorial note (added by agent; safe to delete):_ these rules are **additive**.
+> They do not override the constitutional precedence order in §1 below, which is
+> unchanged. Where a rule here restates a platform truth, `PLATFORM-TRUTH.md`
+> remains the canonical source.
+
+### Platform truth
+
+- Canonical source: GitHub.
+- Canonical app: `apps/ai-institute`.
+- Canonical branch: `master`.
+- Canonical production host: Cloudflare/OpenNext.
+- Large production assets live in Backblaze B2.
+- Authentication lives in Supabase.
+- Production application data lives in Turso.
+- Local development data may use SQLite through the existing adapter.
+- Vercel is preview-only, never canonical production.
+- OpenCode Web uses free online models.
+- The local i5/8 GB machine is only a code editor, browser and control centre.
+- Heavy compute belongs in filtered/manual GitHub Actions.
+- Cloudflare R2 is prohibited.
+- Paid APIs and payment-method-required services are prohibited unless explicitly approved.
+
+### Operating rules
+
+- Inspect the existing implementation before changing anything.
+- Preserve the current monorepo, route map, design tokens, curriculum registry and security boundaries.
+- Do not rebuild from scratch.
+- Do not replace working infrastructure because another tool is popular.
+- Do not commit secrets, generated build output or large binaries.
+- Do not expose B2 credentials to browser code.
+- Do not add runtime AI dependencies to user-facing routes.
+- Do not deploy production, merge to `master`, or run production migrations without human approval.
+- Do not treat free tools, assets or repos as approved until licence and compatibility are verified.
+- Do not guess. Use these labels in reports: `CONFIRMED`, `PROPOSED`, `UNKNOWN`, `BLOCKED`.
+
+### Experience rules
+
+- Not every page should be cinematic.
+- Tier A pages may use scroll-driven storytelling, 3D and rich infographics.
+- Tier B pages may use lighter visual explanation.
+- Tier C learning pages must stay stable, readable and fast.
+- Tier D operational/admin/legal pages use only functional motion.
+- Every 3D or infographic feature needs a fallback, mobile behaviour and accessibility equivalent.
+
+### Required reads
+
+Before acting, read:
+
+1. `/AGENTS.md`
+2. `/docs/architecture/PLATFORM-TRUTH.md`
+3. task-relevant files in `/docs/audit/`, `/docs/experience/`, and current PR/incident docs.
+
+If a task conflicts with these rules, stop and correct the plan before coding.
+
+---
+
 ## 1. Precedence (Constitutional Authority)
 
 1. `docs/constitution/00-VISION.md` — supreme; conflicts: **lower number wins** (00 §5.4).
