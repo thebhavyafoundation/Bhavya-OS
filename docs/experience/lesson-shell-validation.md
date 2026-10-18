@@ -52,7 +52,55 @@ Screenshots: `docs/experience/screenshots/lesson-1280x800.png`, `lesson-375x812.
 - Diagram meaning is carried by a visible text equivalent, not a screen-reader-only class.
 - No animation was added, so there is nothing to pause under `prefers-reduced-motion`. Print rules hide the rail and navigation.
 
-**Not verified:** a full keyboard walkthrough and focus-visible ring inspection were not performed — no automated focus-order assertion was written, and the dev overlay interferes with visual inspection. Recorded as remaining work.
+## Keyboard and focus verification
+
+Performed separately on `1280×800` by walking the real tab order from document start.
+
+**Every focusable element has a visible focus ring.** All 14 stops measured
+`outline: 0.8px auto rgb(16, 16, 16)` — the browser default, meaning no
+`:focus-visible` override removes it. Nothing in the new CSS suppresses it.
+
+| #   | Element     | Label                                          |
+| --- | ----------- | ---------------------------------------------- |
+| 1   | `a`         | Bhavya Foundation home                         |
+| 2–6 | `button` ×5 | Explore · Learn · Participate · About · Search |
+| 7   | `a`         | Support our work                               |
+| 8   | `a`         | Bhavya OS                                      |
+| 9   | `button`    | Open menu                                      |
+| 10  | `a`         | Curriculum _(breadcrumb)_                      |
+| 11  | `a`         | What Is AI? _(rail, `aria-current="step"`)_    |
+| 12  | `a`         | How AI Works _(rail)_                          |
+| 13  | `a`         | AI History _(rail)_                            |
+| 14  | `a`         | Next lesson — How AI Works                     |
+
+Order is logical and matches DOM order: header chrome → breadcrumb → progress
+rail → lesson navigation. The progress rail and the current-lesson marker are
+both reachable by keyboard.
+
+### Structural checks
+
+| Check                                       | Result                 |
+| ------------------------------------------- | ---------------------- |
+| Interactive elements not natively focusable | **0**                  |
+| `tabindex="0"` added by script              | **0**                  |
+| Negative `tabindex`                         | **0**                  |
+| Running CSS animations / transitions        | **0**                  |
+| Skip link                                   | **absent** — see below |
+
+Zero running animations means the reduced-motion claim is measured, not assumed:
+there is genuinely nothing to pause.
+
+### Findings
+
+1. **No skip link.** A keyboard user presses Tab **11 times** to reach the first
+   lesson content, because the site header occupies stops 1–9. Not introduced
+   here — the header is pre-existing site-wide chrome — but it directly affects
+   the lesson experience. **Fixing it means editing shared header layout, which
+   is outside this branch's scope.** Recorded for follow-up.
+2. **Off-canvas "Open menu" is focusable at desktop width.** It measures 39×33,
+   `visibility: visible`, `opacity: 1`, `aria-expanded="false"`, but sits outside
+   the viewport. It relies on the browser's scroll-into-view on focus. A minor
+   focus-visibility concern, pre-existing, not introduced here.
 
 ## Console findings
 
@@ -70,7 +118,9 @@ No hydration errors were reported.
 
 ## Remaining issues
 
-1. B2 health check should not execute in the browser (pre-existing).
-2. Keyboard/focus-visible pass not yet performed.
-3. Progress rail shows position but not completion state; `src/lib/curriculum/ai-progress.ts` exists and is not wired here.
-4. Learning outcomes are per module, not per lesson — `Lesson` has no outcome field.
+1. B2 health check should not execute in the browser (pre-existing, unrelated).
+2. **No skip link** — 11 tab stops of site chrome before lesson content. Fixing
+   it means editing the shared header layout, outside this branch's scope.
+3. Off-canvas "Open menu" button is focusable at desktop width (pre-existing).
+4. Progress rail shows position but not completion state; `src/lib/curriculum/ai-progress.ts` exists and is not wired here. **Deliberately not wired** — completion state requires client-side state and would cost the zero-client-JS property of this shell. Worth it as a follow-up decision, not a silent addition.
+5. Learning outcomes are per module, not per lesson — `Lesson` has no outcome field. Would require a schema change, excluded from this branch.
