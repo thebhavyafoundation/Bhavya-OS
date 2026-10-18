@@ -1,4 +1,3 @@
-import type { OpenNextConfig } from "@opennextjs/aws/types/open-next.js";
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 
 // THE DEFECT THIS FIXES
@@ -48,4 +47,4 @@ export default {
       ],
     },
   },
-} satisfies OpenNextConfig;
+};
