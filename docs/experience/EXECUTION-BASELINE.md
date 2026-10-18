@@ -91,19 +91,17 @@ This is the single highest-value structural fix in the design-system phase. It i
 
 ### 4.2 Genuinely missing
 
-| Missing component                   | Why it is needed                                                                                                    | Tier |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---- |
-| `PublicStoryShell`                  | No single composition root for long-form public narrative. Currently each public route hand-rolls its section stack | A    |
-| `StickyVisualStage`                 | Scroll-pinned narrative visuals have no shared, reduced-motion-safe implementation                                  | A    |
-| `EditorialDiagram`                  | Diagrams have a renderer but no branded container                                                                   | A/B  |
-| `InfographicFrame`                  | No branded chart/figure frame; data-viz palette tokens are unused                                                   | B/C  |
-| `CourseHero`                        | `/courses` chain has no consistent entry composition                                                                | B    |
-| `LessonShell`                       | Lesson pages have no calm/predictable outer frame; two competing lesson implementations exist                       | C    |
-| `EmptyState`                        | Zero usages anywhere in `src/**`                                                                                    | A–D  |
-| `SkeletonState`                     | Zero usages anywhere in `src/**`                                                                                    | A–D  |
-| `ErrorState` (component)            | `errors/RouteError.tsx` exists but is a route-level error element, not a reusable state component                   | A–D  |
-| `Optional3DExplorer`                | `three/Model3D.tsx` exists but has no poster / no-WebGL / offscreen-pause contract                                  | A/B  |
-| `DiagramBlock` / `InfographicBlock` | See §4.3                                                                                                            | A–C  |
+| Missing component                   | Why it is needed                                                                                                                                                                                                                                                                                                                     | Tier |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---- |
+| `PublicStoryShell`                  | No single composition root for long-form public narrative. Currently each public route hand-rolls its section stack                                                                                                                                                                                                                  | A    |
+| `StickyVisualStage`                 | Scroll-pinned narrative visuals have no shared, reduced-motion-safe implementation                                                                                                                                                                                                                                                   | A    |
+| `EditorialDiagram`                  | Diagrams have a renderer but no branded container                                                                                                                                                                                                                                                                                    | A/B  |
+| `InfographicFrame`                  | No branded chart/figure frame; data-viz palette tokens are unused                                                                                                                                                                                                                                                                    | B/C  |
+| `CourseHero`                        | `/courses` chain has no consistent entry composition                                                                                                                                                                                                                                                                                 | B    |
+| `LessonShell`                       | Lesson pages have no calm/predictable outer frame; two competing lesson implementations exist                                                                                                                                                                                                                                        | C    |
+| Course adoption of state primitives | `EmptyState`/`ErrorState`/`LoadingSkeleton` exist in `@bhavya/platform-ui` and are used in 11 `/os/*` places, but **not once on any public or learning route**. Their implementations hardcode non-brand hex and predate the accessibility contract (`role="status"`, `role="alert"`, `aria-hidden` + label, min-height reservation) | A–D  |
+| `Optional3DExplorer`                | `three/Model3D.tsx` exists but has no poster / no-WebGL / offscreen-pause contract                                                                                                                                                                                                                                                   | A/B  |
+| `DiagramBlock` / `InfographicBlock` | See §4.3                                                                                                                                                                                                                                                                                                                             | A–C  |
 
 ### 4.3 The single largest finding: six finished diagrams are invisible
 
@@ -168,17 +166,17 @@ No asset optimisation workflow exists in GitHub Actions. `.github/workflows/` co
 
 ## 7. Baseline Risks Carried Into This Execution
 
-| #   | Risk                                                                 | Severity | Handling                                                                         |
-| --- | -------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| R1  | `globals.css` is a 126 KB single-file stylesheet across all tiers    | High     | Extract route-scoped, selector-identical. Pure move                              |
-| R2  | Six manifested diagrams render nowhere                               | High     | Surface them; this is the cheapest large visual win                              |
-| R3  | Four parallel lesson chains                                          | High     | Out of scope to consolidate. Will not add a fifth. Flagged for human gate        |
-| R4  | No asset optimisation in CI                                          | Medium   | Add filtered, review-artefact-only workflows                                     |
-| R5  | 3D components lack a documented fallback contract                    | Medium   | Add contract + tests before adding any new 3D                                    |
-| R6  | `EmptyState`/`SkeletonState` unused; zero loading/empty states       | Medium   | Build and adopt on the two vertical slices                                       |
-| R7  | Malformed `[level/]` directories pollute route audits and `file-map` | Low      | Report; deletion is a destructive op needing approval                            |
-| R8  | Design-system token/constitution palette conflict                    | Medium   | **Human gate.** Do not touch tokens to force agreement                           |
-| R9  | Local machine cannot run `pnpm build`                                | Info     | Verification limited to local `typecheck`/`lint`/gates; heavy verification in CI |
+| #   | Risk                                                                                                                          | Severity | Handling                                                                                  |
+| --- | ----------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------- |
+| R1  | `globals.css` is a 126 KB single-file stylesheet across all tiers                                                             | High     | Extract route-scoped, selector-identical. Pure move                                       |
+| R2  | Six manifested diagrams render nowhere                                                                                        | High     | Surface them; this is the cheapest large visual win                                       |
+| R3  | Four parallel lesson chains                                                                                                   | High     | Out of scope to consolidate. Will not add a fifth. Flagged for human gate                 |
+| R4  | No asset optimisation in CI                                                                                                   | Medium   | Add filtered, review-artefact-only workflows                                              |
+| R5  | 3D components lack a documented fallback contract                                                                             | Medium   | Add contract + tests before adding any new 3D                                             |
+| R6  | State primitives hardcode non-brand hex, lack the accessibility contract, and are absent from every public and learning route | Medium   | Hardened in `platform-ui` (one fix, all consumers) and adopted on the two vertical slices |
+| R7  | Malformed `[level/]` directories pollute route audits and `file-map`                                                          | Low      | Report; deletion is a destructive op needing approval                                     |
+| R8  | Design-system token/constitution palette conflict                                                                             | Medium   | **Human gate.** Do not touch tokens to force agreement                                    |
+| R9  | Local machine cannot run `pnpm build`                                                                                         | Info     | Verification limited to local `typecheck`/`lint`/gates; heavy verification in CI          |
 
 ---
 

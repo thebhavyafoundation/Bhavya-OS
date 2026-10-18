@@ -1,17 +1,33 @@
 /**
  * @bhavya/platform-ui — EmptyState
  *
- * Reusable empty state component with icon, title, description, and action.
- * Uses design tokens for consistent theming.
+ * The honest "there is nothing here yet" surface.
+ *
+ * Contract this component enforces so callers cannot get it wrong:
+ * - States what is missing and what the reader can do next.
+ * - Never implies data exists, is loading, or failed.
+ * - `role="status"` with a polite live region, so a filter change that
+ *   produced no results is announced rather than silently replacing content.
+ * - Reserves a minimum height, because the jumpy-filter experience comes
+ *   from a list swapping to empty and pushing the page around.
+ * - Token-only. No literal colours; this component renders correctly in both
+ *   the light and dark themes.
  */
 
-import React from "react";
+import type { ReactNode } from "react";
 
-interface EmptyStateProps {
-  icon?: React.ReactNode;
+export interface EmptyStateProps {
+  /** Optional mark. Keep it typographic or iconographic, never decorative art. */
+  icon?: ReactNode;
   title: string;
   description?: string;
-  action?: { label: string; onClick: () => void };
+  /** Optional qualifier: a count, or the filter that produced nothing. */
+  meta?: string;
+  /**
+   * The next action. Supplied as an element so the caller can choose a
+   * button, a link, or nothing, rather than being forced into an onClick.
+   */
+  action?: ReactNode;
   className?: string;
 }
 
@@ -19,44 +35,34 @@ export function EmptyState({
   icon,
   title,
   description,
+  meta,
   action,
   className = "",
 }: EmptyStateProps) {
   return (
     <div
-      className={`
-        flex flex-col items-center justify-center
-        py-16 px-5 text-center
-        animate-fade-in
-        ${className}
-      `}
+      role="status"
+      aria-live="polite"
+      style={{ minHeight: "16rem" }}
+      className={`flex flex-col items-center justify-center gap-4 px-6 py-16 text-center ${className}`.trim()}
     >
-      {icon && (
-        <div className="text-text-muted mb-4 opacity-50">
+      {icon ? (
+        <div aria-hidden="true" className="text-text-muted opacity-60">
           {icon}
         </div>
-      )}
-      <h3 className="text-base font-semibold text-text-primary mb-2">
-        {title}
-      </h3>
-      {description && (
-        <p className="text-sm text-text-secondary max-w-sm mb-6">
-          {description}
-        </p>
-      )}
-      {action && (
-        <button
-          onClick={action.onClick}
-          className="
-            px-4 py-2 bg-accent-blue text-white text-sm font-medium
-            rounded-md hover:bg-accent-blue-hover
-            transition-colors duration-fast
-            cursor-pointer
-          "
-        >
-          {action.label}
-        </button>
-      )}
+      ) : null}
+
+      <div className="flex max-w-prose flex-col gap-2">
+        <h3 className="font-display text-xl text-text-primary">{title}</h3>
+        {description ? (
+          <p className="text-sm leading-relaxed text-text-secondary">
+            {description}
+          </p>
+        ) : null}
+        {meta ? <p className="text-xs text-text-muted">{meta}</p> : null}
+      </div>
+
+      {action ? <div className="pt-2">{action}</div> : null}
     </div>
   );
 }
