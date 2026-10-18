@@ -18,26 +18,33 @@ const nextConfig = {
     "@bhavya/impact-runtime",
     "@bhavya/project-runtime",
   ],
+  // `@libsql/isomorphic-ws` is deliberately NOT in serverExternalPackages.
+  //
+  // Next.js applies serverExternalPackages per package, so externalising one
+  // half of a dependency chain splits it: `@libsql/hrana-client` is bundled,
+  // and it requires `@libsql/isomorphic-ws` unconditionally at
+  // `lib-cjs/index.js:18`. With the required package excluded from the bundle,
+  // that require has nothing to resolve to, and the OpenNext server-function
+  // build fails with "Could not resolve @libsql/isomorphic-ws".
+  //
+  // Bundling both halves keeps the chain intact. Under the workerd condition
+  // `isomorphic-ws` resolves to `web.cjs`, which uses the global WebSocket and
+  // has no dependencies at all -- so bundling it also retires the `ws`
+  // resolution hazard the previous configuration had to work around.
   serverExternalPackages: [
     "better-sqlite3",
     "@libsql/client",
-    "@libsql/isomorphic-ws",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {
     "next-server": ["**/.ignored_*"],
   },
-  // `@libsql/isomorphic-ws` is in serverExternalPackages above, so Next leaves
-  // it as a runtime require and OpenNext must carry its files into the Worker.
-  // Tracing alone is not enough: it resolves through a nested conditional
-  // `exports` map, and the tracer copies package.json but not the .cjs/.mjs
-  // entry it points at, so esbuild finds the package and cannot load the entry.
-  // `ws` is listed because this package resolves to web.cjs (global WebSocket, no
-  // dependency) under workerd/default but to node.cjs, which require()s `ws`,
-  // under the node condition. Which one the packager picks depends on the
-  // conditions it passes to esbuild, so `ws` must resolve either way. It is
-  // already a transitive dependency (MIT); this adds no new dependency.
-  // Scoped to the Turso chain only, never all of node_modules.
+  // These globs are scoped to the Turso chain only, never all of node_modules.
+  //
+  // Known defect, left in place so this change stays a one-line fix: the
+  // paths are written against a hoisted `node_modules/@libsql/*`, which a pnpm
+  // workspace never creates, so all four currently match zero files. Removing
+  // them is a separate change and should be verified on its own.
   outputFileTracingIncludes: {
     "/*": [
       "./node_modules/@libsql/isomorphic-ws/**/*",
