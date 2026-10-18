@@ -91,7 +91,15 @@ jobs:
         # Uses the repository-installed binary from node_modules/.bin, not an
         # unpinned remote download. This is the same command production runs,
         # minus the deploy.
-        run: pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
+        #
+        # pipefail is essential. Without it the pipeline's exit status is tee's,
+        # which is always 0, so this step reports success even when the build
+        # fails. That defect let this gate report green while production's build
+        # was failing with the identical error, which is precisely the failure
+        # this gate exists to catch.
+        run: |
+          set -o pipefail
+          pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
 
       - name: Verify packaged server-function dependencies
         run: node scripts/verify-opennext-bundle.mjs

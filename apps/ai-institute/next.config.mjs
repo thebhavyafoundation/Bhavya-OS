@@ -41,16 +41,20 @@ const nextConfig = {
   },
   // These globs are scoped to the Turso chain only, never all of node_modules.
   //
-  // Known defect, left in place so this change stays a one-line fix: the
-  // paths are written against a hoisted `node_modules/@libsql/*`, which a pnpm
-  // workspace never creates, so all four currently match zero files. Removing
-  // them is a separate change and should be verified on its own.
+  // They MUST point into the pnpm virtual store. A pnpm workspace has no
+  // `node_modules/@libsql/*` directory -- those paths are symlinks that Next's
+  // tracer does not follow -- so the previous hoisted-shaped globs matched zero
+  // files and the package entry was never carried into the packaged tree,
+  // producing "Could not resolve @libsql/isomorphic-ws".
+  //
+  // The version segment is wildcarded so a dependency bump does not silently
+  // reintroduce a dead glob.
   outputFileTracingIncludes: {
     "/*": [
-      "./node_modules/@libsql/isomorphic-ws/**/*",
-      "./node_modules/@libsql/hrana-client/**/*",
-      "./node_modules/@libsql/client/**/*",
-      "./node_modules/ws/**/*",
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/**/*",
+      "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
+      "./node_modules/.pnpm/@libsql+client@*/node_modules/@libsql/client/**/*",
+      "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
     ],
   },
   images: {
