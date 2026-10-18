@@ -50,7 +50,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        working-directory: .
+        working-directory: ${{ github.workspace }}
         run: pnpm install --frozen-lockfile
 
       - name: Record toolchain
@@ -67,8 +67,7 @@ jobs:
         run: rm -rf .next .open-next
 
       - name: Next.js production build
-        working-directory: .
-        run: pnpm --filter ai-institute run build
+        run: pnpm run build
 
       - name: Assert Stage A failure state (pre-materialisation)
         run: node scripts/verify-conditional-export-workaround.mjs a-pre

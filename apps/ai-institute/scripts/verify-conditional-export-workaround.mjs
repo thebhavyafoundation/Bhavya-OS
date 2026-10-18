@@ -8,10 +8,14 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const APP = path.resolve(process.cwd());
-const REL = (p) => path.relative(APP, p);
+// Resolve the app directory from this file's own location, never from cwd.
+// The previous version used process.cwd(), so a workflow step with a different
+// working-directory silently looked in the wrong place and reported a false
+// "standalone missing".
+const APP = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const REL = (p) => path.relative(APP, p) || ".";
 const sha = (p) => crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex").slice(0, 16);
 const stage = process.argv[2] ?? "a-pre";
 const results = [];
@@ -30,7 +34,15 @@ const A = path.join(APP, ".next", "standalone");
 const B = path.join(APP, ".open-next", "server-functions", "default");
 
 if (stage === "a-pre") {
-  if (!fs.existsSync(A)) hardFail(`.next/standalone missing: ${REL(A)}`);
+  const nextDir = path.join(APP, ".next");
+  if (!fs.existsSync(nextDir)) {
+    hardFail(`no .next directory at ${REL(nextDir)}. The Next build did not run in ${REL(APP)}.`);
+  }
+  say("nextDir.entries", fs.readdirSync(nextDir).slice(0, 25).join(", "));
+  say("standaloneOutputEnabled", /output\s*:\s*["']standalone["']/.test(fs.readFileSync(path.join(APP, "next.config.mjs"), "utf8")) ? "standalone" : "NOT standalone");
+  if (!fs.existsSync(A)) {
+    hardFail(`.next exists but .next/standalone is absent. Entries above show what was produced. output: "standalone" is ${say.length ? "" : ""}`);
+  }
   const roots = storeOf(A);
   if (!roots.length) hardFail("no @libsql+isomorphic-ws in standalone store");
   const d = roots[0];
