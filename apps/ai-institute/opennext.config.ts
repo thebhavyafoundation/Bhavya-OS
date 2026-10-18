@@ -1,9 +1,6 @@
+import type { OpenNextConfig } from "@opennextjs/aws/types/open-next.js";
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 
-// OpenNext on Cloudflare requires this file. The repository did not have one, so
-// the adapter was running on defaults with no control over how the server
-// functions are packaged.
-//
 // THE DEFECT THIS FIXES
 //
 // esbuild fails while bundling the server functions:
@@ -19,30 +16,29 @@ import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 // `.open-next/server-functions/default/node_modules/` itself, and esbuild then
 // bundles from that copy.
 //
-// Under pnpm, `hrana-client` is reachable only through the virtual store: its
-// sibling entry is a symlink to
-// `.pnpm/@libsql+isomorphic-ws@<version>/node_modules/@libsql/isomorphic-ws`.
-// That copy step does not bring the symlink target along, so the require has
-// nothing to resolve to.
+// Under pnpm, `hrana-client` reaches `isomorphic-ws` only through a virtual
+// store symlink, and that copy does not bring the symlink target along. So the
+// require has nothing to resolve to.
 //
-// `install` runs a real install into the server-function output directory,
-// producing flat, physical `node_modules/@libsql/*` directories. Normal node
-// resolution from `hrana-client` then finds `isomorphic-ws`, because it is
-// reachable by plain upward traversal rather than through a store symlink.
+// createServerBundle.js calls `installDependencies(outputPath,
+// fnOptions.install)`. That option is the mechanism that populates the
+// server-function output, and it was undefined. Setting it runs a real install
+// into the output directory, producing flat physical `node_modules/@libsql/*`
+// directories that plain upward node resolution finds from `hrana-client`.
 //
-// This is why the earlier attempts could not work: `serverExternalPackages` is
-// honoured by Next's bundler and never reaches OpenNext's own, and Next's
-// `outputFileTracingIncludes` does not govern OpenNext's copy. Neither was
-// operating on the tree esbuild actually resolves from.
+// This also explains the earlier attempts. `serverExternalPackages` is honoured
+// by Next's bundler and never reaches OpenNext's own. Next's
+// `outputFileTracingIncludes` does not govern OpenNext's copy. Neither operated
+// on the tree esbuild actually resolves from.
 //
-// Versions are pinned to what this workspace currently resolves, so the install
-// matches the lockfile rather than drifting to latest.
-//
-// `ws` is included because `isomorphic-ws` resolves to `node.cjs`, which
-// requires it, under the `node` condition. If the packager selects `web.cjs`
-// under `workerd` instead it is unused and harmless.
-export default defineCloudflareConfig({
+// `defineCloudflareConfig` accepts only caching overrides, so the AWS-shaped
+// `default.install` option is composed onto its return value.
+const base = defineCloudflareConfig();
+
+export default {
+  ...base,
   default: {
+    ...base.default,
     install: {
       packages: [
         "@libsql/isomorphic-ws@0.1.5",
@@ -52,4 +48,4 @@ export default defineCloudflareConfig({
       ],
     },
   },
-});
+} satisfies OpenNextConfig;
