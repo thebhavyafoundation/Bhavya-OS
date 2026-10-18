@@ -1,0 +1,61 @@
+/* Diagram-as-figure presentation for the learning tier. Tokens only. */
+
+.figure {
+  margin-block: var(--space-10);
+  margin-inline: 0;
+}
+
+.canvas {
+  padding: var(--space-6);
+  background: var(--color-bg-subtle, transparent);
+  border: 1px solid var(--color-border-subtle, currentColor);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+
+.canvas svg {
+  display: block;
+  max-inline-size: 100%;
+  height: auto;
+}
+
+.caption {
+  margin-block-start: var(--space-3);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.source {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+/* The readable equivalent. Visible rather than screen-reader-only: it helps a
+   scanning reader and cannot be lost by a broken accessibility tree. */
+.desc {
+  margin-block-start: var(--space-2);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  padding-inline-start: var(--space-3);
+  border-inline-start: 1px solid var(--color-border-subtle, currentColor);
+}
+
+@media (max-width: 40rem) {
+  .canvas {
+    padding: var(--space-4);
+  }
+}
+
+@media print {
+  .canvas {
+    border-color: #000;
+    background: none;
+  }
+}

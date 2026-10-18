@@ -1,6 +1,41 @@
 import type { LessonBlock } from "@/types/curriculum";
+import type { DiagramSpec } from "@/data/curriculum";
 import { QuizBlock } from "./QuizBlock";
 import { WidgetRenderer } from "./widgets/WidgetRenderer";
+import { FigureBlock } from "@/components/editorial/FigureBlock";
+
+/**
+ * Derives a readable equivalent of a diagram from its structure, so the meaning
+ * survives for a learner who never sees the graphic. Content authors can still
+ * override this by supplying a textEquivalent on the figure.
+ */
+function describeDiagram(spec: DiagramSpec): string {
+  switch (spec.kind) {
+    case "flow":
+    case "pipeline":
+      return `A left-to-right sequence: ${spec.steps.join(", then ")}.`;
+    case "cycle":
+      return `A repeating cycle of ${spec.steps.length} stages: ${spec.steps.join(
+        ", then ",
+      )}, then back to the first.`;
+    case "timeline":
+      return `A timeline: ${spec.points.map((p) => p.label).join(", then ")}.`;
+    case "compare":
+      return `A comparison. ${spec.left.label}: ${spec.left.items.join(
+        ", ",
+      )}. ${spec.right.label}: ${spec.right.items.join(", ")}.`;
+    case "network":
+      return `A network of ${spec.nodes.length} connected parts: ${spec.nodes.join(
+        ", ",
+      )}.`;
+    case "labeled-photo":
+      return `An annotated image showing ${spec.labels
+        .map((l) => l.text)
+        .join(", ")}.`;
+    default:
+      return spec.title;
+  }
+}
 
 type ProseNode = { type: "p"; text: string } | { type: "ul"; items: string[] };
 
@@ -106,6 +141,20 @@ export function BlockRenderer({ block }: { block: LessonBlock }) {
             </p>
           </div>
         </section>
+      );
+    case "visual":
+      return (
+        <FigureBlock
+          spec={block.diagram}
+          textEquivalent={describeDiagram(block.diagram)}
+        />
+      );
+    default:
+      return (
+        <p className="ai-block-unsupported">
+          This part of the lesson could not be displayed. The text content is
+          still available — please contact the Foundation if this persists.
+        </p>
       );
   }
 }
