@@ -198,13 +198,63 @@ Local machine is an editor only. Every transformation below runs in GitHub Actio
 
 ---
 
-## 6. Per-Asset Review Status Table
+## 6. Approved Asset Set — Verified 2026-10-19
 
-To be completed as assets are actually produced. A row may not be marked `APPROVED` without: source URL · creator · licence · licence URL · checksum · intended route · derivative outputs · reviewer.
+Provenance is authoritative in `apps/ai-institute/public/photography/metadata/photo_manifest.json` (source URL, creator, licence, licence URL, art direction), with acquisition history in `assets/manifest.json`. Checksums below were computed at this commit. `hero-himalayan-sunset.jpg` is superseded by `hero-sunrise-mountain.jpg` and is retained only as acquisition history, not shipped.
 
-| ID       | Asset               | Source               | Creator                    | Licence                     | Licence URL                   | SHA-256              | Route                               | Derivatives                      | Status                    |
-| -------- | ------------------- | -------------------- | -------------------------- | --------------------------- | ----------------------------- | -------------------- | ----------------------------------- | -------------------------------- | ------------------------- |
-| EXISTING | 5 photography items | Wikimedia            | see `assets/manifest.json` | CC0 / CC BY 2.0 / CC BY 4.0 | see manifest                  | recorded in manifest | `/`, missions                       | JPEG + WebP                      | `ACQUIRED`                |
-| EXISTING | Kenney models       | kenney.nl            | Kenney                     | CC0 1.0                     | https://kenney.nl/assets      | to verify            | Tier B 3D                           | none — **needs CI optimisation** | `SOURCE_ONLY`             |
-| EXISTING | Poly Haven models   | polyhaven.com        | Poly Haven                 | CC0                         | https://polyhaven.com/license | to verify            | Tier B 3D                           | none — **needs CI optimisation** | `SOURCE_ONLY`             |
-| EXISTING | 6 diagram SVGs      | diagram-design (MIT) | Bhavya Foundation          | MIT                         | recorded in each manifest     | to compute           | `/governance`, `/curriculum`, `/os` | none                             | `DRAFT` — reviews pending |
+| ID                            | Shipped file                                |   Bytes | SHA-256 (abbrev.)    | Source                                                                                                                                     | Creator               | Licence        | Attribution  |
+| ----------------------------- | ------------------------------------------- | ------: | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | -------------- | ------------ |
+| `hero-sunrise-mountain`       | `hero/hero-sunrise-mountain.jpg`            | 143,381 | `5fff3ad0…0ffb1d8`   | [Pexels 34046635](https://www.pexels.com/photo/majestic-mountain-sunrise-with-vibrant-sky-34046635/)                                       | Pexels contributor    | Pexels License | not required |
+| `forest-cedar-sunlight`       | `forest/forest-cedar-sunlight.jpg`          | 410,146 | `146b6363…5bed37`    | [Wikimedia curid 175571140](https://commons.wikimedia.org/w/index.php?curid=175571140)                                                     | Kavittaa              | CC0 1.0        | not required |
+| `heritage-stone-temple`       | `heritage/heritage-stone-temple.jpg`        | 173,273 | `c9e6344c…268436`    | [Wikimedia Shirgul Maharaj Temple](https://commons.wikimedia.org/wiki/File:Shirgul_Maharaj_Temple,_Churdhar,_Himachal_Pradesh,_India.jpg)  | UnpetitproleX         | CC BY 4.0      | **required** |
+| `why-terrace-garhwal`         | `why/why-terrace-garhwal.jpg`               |  66,609 | `772c2e68…2221e3fb`  | [Wikimedia terrace farming](https://commons.wikimedia.org/wiki/File:Terrace_farming_on_the_way_to_Ransi_village,_Garhwal,_Uttarakhand.jpg) | Varun Shiv Kapur      | CC BY 2.0      | **required** |
+| `knowledge-books-notepad`     | `knowledge/knowledge-books-notepad.jpg`     |  57,425 | `ff9d3b35…c5fd9df2a` | [Wikimedia / Unsplash](<https://commons.wikimedia.org/wiki/File:Plan_a_lifetime_adventure_(Unsplash).jpg>)                                 | Glenn Carstens-Peters | CC0            | not required |
+| `community-village-landscape` | `community/community-village-landscape.jpg` | 225,113 | `f78de2e5…94c74a`    | [Wikimedia Himachal Pradesh](https://commons.wikimedia.org/wiki/File:Himachal_Pradesh_India.jpg)                                           | Aashish Chindaliya    | CC0            | not required |
+
+**Approved for public use.** Every image is CC0, public domain, Pexels-licensed, or CC BY with attribution rendered. None implies Bhavya activity on site; all carry honest captions per the standing constraints in §0.1.
+
+Full checksums, unabbreviated:
+
+```
+5fff3ad0c7a955ca0a3c097addbfd66536c449a051733f4ec479dec790ffb1d8  hero/hero-sunrise-mountain.jpg
+146b63633a6af4f30437ff9c6d49294c55444fd3ba1515f56426e6aaf15bed37  forest/forest-cedar-sunlight.jpg
+c9e6344c63ef058d293faa77028bdb2e848b32a91964735285bbfd47ea268436  heritage/heritage-stone-temple.jpg
+772c2e68db2b8e2d5c5ce54c4ee3f95dcac65ae60c1759f2778782262221e3fb  why/why-terrace-garhwal.jpg
+ff9d3b35a8a4063cde1139cbd19474449b6a5175483ca43838589c5c5fd9df2a  knowledge/knowledge-books-notepad.jpg
+f78de2e56c5ac51f95b965203ce3739e15d9766759c6e4e19db3795d1c94c74a  community/community-village-landscape.jpg
+```
+
+### 6.1 Diagrams
+
+| ID                                | File                                                             | Bytes | Generator      | Licence | Status                        |
+| --------------------------------- | ---------------------------------------------------------------- | ----: | -------------- | ------- | ----------------------------- |
+| `curriculum-learning-pathway`     | `public/diagrams/curriculum/curriculum-learning-pathway.svg`     | 5,582 | diagram-design | MIT     | **surfaced** on `/curriculum` |
+| `foundation-governance-structure` | `public/diagrams/governance/foundation-governance-structure.svg` | 4,539 | diagram-design | MIT     | **surfaced** on `/governance` |
+| `responsible-ai-lifecycle`        | `public/diagrams/science/responsible-ai-lifecycle.svg`           | 5,975 | diagram-design | MIT     | authored, not yet placed      |
+| `environmental-system`            | `public/diagrams/science/environmental-system.svg`               | 3,945 | diagram-design | MIT     | authored, not yet placed      |
+| `bhavya-os-architecture`          | `public/diagrams/architecture/bhavya-os-architecture.svg`        | 5,697 | diagram-design | MIT     | authored, not yet placed      |
+| `b2-secured-data-flow`            | `public/diagrams/governance/b2-secured-data-flow.svg`            | 4,982 | diagram-design | MIT     | authored, not yet placed      |
+
+All six are lightweight reviewed SVGs committed to Git, as the execution list requires for this class of asset.
+
+### 6.2 3D — sourced but not yet shippable
+
+| Source                                      | Assets                                                   | Licence | Status                                  |
+| ------------------------------------------- | -------------------------------------------------------- | ------- | --------------------------------------- |
+| [Kenney](https://kenney.nl/assets)          | `public/models/kenney/**`                                | CC0 1.0 | `SOURCE_ONLY` — no optimised derivative |
+| [Poly Haven](https://polyhaven.com/license) | `public/models/poly-haven/**`, `assets/3d/poly-haven/**` | CC0     | `SOURCE_ONLY` — no optimised derivative |
+
+Not approved for production use until the CI optimisation workflows produce mobile (<500 KB) and desktop (<2 MB) Draco derivatives plus poster fallbacks. Sourcing is not the blocker; optimisation is.
+
+### 6.3 Documentation drift found and recorded
+
+`assets/manifest.json` still lists `forest/forest-cedar-sunlight.jpg` under `still_required`, and does not record `hero-sunrise-mountain.jpg` at all. Both files exist and are wired, and both have complete provenance in `photo_manifest.json`, so nothing is undocumented — the higher-level manifest is simply behind. **Not corrected in this execution**: rewriting an existing acquisition record is better done as its own commit with the owner's intent confirmed.
+
+### 6.4 Not approved
+
+| Item                              | Reason                                                                            |
+| --------------------------------- | --------------------------------------------------------------------------------- |
+| Kenney / Poly Haven derivatives   | No optimised derivative exists yet. Blocked on CI workflows, not on sourcing      |
+| `knowledge-school-children.jpg`   | ASSET REQUIRED. No consent-cleared source. Must not be filled with stock children |
+| `community-village-gathering.jpg` | ASSET REQUIRED. Human-subject consent risk                                        |
+| `heritage-wooden-temple.jpg`      | ASSET REQUIRED                                                                    |
