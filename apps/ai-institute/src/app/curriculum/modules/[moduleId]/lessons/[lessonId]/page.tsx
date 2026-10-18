@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+// Side effect: generates and registers the lessons this page reads. Without it
+// the registry is empty and every lesson route 404s.
+import "@/data/curriculum/lesson-content";
 import { BlockRenderer } from "@/components/curriculum/BlockRenderer";
 import { LessonShell } from "@/components/editorial/LessonShell";
 import { VisualComponent } from "@/components/curriculum/VisualComponent";

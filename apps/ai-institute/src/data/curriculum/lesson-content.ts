@@ -7,7 +7,8 @@ import {
   type ExperimentBlock,
   type ProjectBlock,
 } from "@/data/curriculum";
-import { getAllModules, getModule } from "@/data/curriculum";
+import { getAllModules } from "@/data/curriculum";
+import { registerLesson } from "@/lib/curriculum/lessons";
 
 const _makeQuiz = (questions: Omit<QuizQuestion, "id">[]): QuizQuestion[] => {
   return questions.map((q, i) => ({ ...q, id: `q${i + 1}` }));
@@ -258,7 +259,9 @@ function createLesson(
   lessonIndex: number,
   lessonTitle: string,
 ): void {
-  const mod = getModule(moduleId, moduleId);
+  // getModule() takes (level, id), so looking a module up by id alone always
+  // failed and every lesson was skipped. Resolve from the module list instead.
+  const mod = getAllModules().find((m) => m.id === moduleId);
   if (!mod) return;
 
   const ageBand = mod.ageBand;
@@ -273,7 +276,9 @@ function createLesson(
     blocks: makeBlocks(moduleId, lessonIndex, lessonTitle),
   };
 
-  // Lesson registered via populateAllLessons in lesson-registry
+  // Without this call every lesson route 404s: the registry the pages read from
+  // is populated only when a lesson is registered against it.
+  registerLesson(lesson);
 }
 
 function getModuleLessonTitles(moduleId: string): string[] {
