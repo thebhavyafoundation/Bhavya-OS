@@ -52,6 +52,13 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/*": [
       "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/**/*",
+      // EXPERIMENT: the recursive glob above did not carry the conditional
+      // export entries. Diagnostic run 39155731571 proved the copied tree has
+      // node.cjs but not web.cjs, and the exports map selects web.cjs under the
+      // workerd and default conditions. Naming those files exactly.
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/web.cjs",
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/web.mjs",
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/node.mjs",
       "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
       "./node_modules/.pnpm/@libsql+client@*/node_modules/@libsql/client/**/*",
       "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",

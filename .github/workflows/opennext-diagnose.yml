@@ -14,6 +14,7 @@ on:
     paths:
       - ".github/workflows/opennext-diagnose.yml"
       - "scripts/opennext-diagnose.mjs"
+      - "apps/ai-institute/next.config.mjs"
 
 permissions:
   contents: read
