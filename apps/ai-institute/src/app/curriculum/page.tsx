@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AICurriculumTimeline } from "@/components/curriculum/AICurriculumTimeline";
+import { DiagramBlock } from "@/components/editorial/DiagramBlock";
 import {
   BookOpen,
   ArrowRight,
@@ -235,6 +236,19 @@ export default function CurriculumPage() {
                 </a>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Pathway diagram */}
+        <section
+          style={{
+            padding: "var(--space-16) 0",
+            background: "var(--color-bg-secondary)",
+            borderTop: "1px solid var(--color-border-primary)",
+          }}
+        >
+          <div className="container container-narrow">
+            <DiagramBlock id="curriculum-learning-pathway" />
           </div>
         </section>
 

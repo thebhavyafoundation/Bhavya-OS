@@ -5,6 +5,7 @@ import { Section } from "@/components/site/Section";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { HubCard } from "@/components/site/HubCard";
 import { CTABand } from "@/components/site/CTABand";
+import { DiagramBlock } from "@/components/editorial/DiagramBlock";
 
 export const metadata: Metadata = {
   title: "Governance — Bhavya Foundation",
@@ -167,18 +168,25 @@ export default function GovernancePage() {
         </div>
       </Section>
 
+      <Section>
+        <SectionHeader
+          label="Structure"
+          title="How governance is organised"
+          description="Who holds authority, which body decides, and which instrument governs each decision."
+        />
+        <DiagramBlock id="foundation-governance-structure" />
+      </Section>
+
       <Section variant="ivory">
-        <div className="max-w-3xl">
-          <SectionHeader
-            label="Transparency by Default"
-            title="Reports that do not exaggerate"
-            description="Annual reporting must present activities, outcomes, impact, partnerships, governance, and financial summaries honestly. Published records live in the transparency portal — audited where audited, provisional where provisional."
-          />
-          <div className="mt-6">
-            <Link href="/transparency" className="btn btn-primary">
-              Open the Transparency Portal
-            </Link>
-          </div>
+        <SectionHeader
+          label="Transparency by Default"
+          title="Reports that do not exaggerate"
+          description="Annual reporting must present activities, outcomes, impact, partnerships, governance, and financial summaries honestly. Published records live in the transparency portal — audited where audited, provisional where provisional."
+        />
+        <div className="mt-6">
+          <Link href="/transparency" className="btn btn-primary">
+            Open the Transparency Portal
+          </Link>
         </div>
       </Section>
 
