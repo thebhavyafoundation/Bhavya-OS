@@ -6,12 +6,41 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Preloader({ onComplete }: { onComplete: () => void }) {
+const SESSION_KEY = "bhavya:preloader-shown";
+
+/**
+ * Preloader — a short brand curtain before the hero settles.
+ *
+ * Friction rules this component now enforces:
+ * - `onComplete` is optional. A caller with nothing to do when the curtain
+ *   lifts should not be forced to declare a handler just to satisfy types.
+ * - Under `prefers-reduced-motion: reduce` the countdown is skipped entirely
+ *   and the curtain never renders. An animated loading curtain is motion the
+ *   reader did not ask for, and delaying content by two seconds to watch it
+ *   is a cost paid for decoration.
+ * - Within a session the curtain shows once. A reader who navigates back to
+ *   the homepage is not made to sit through it again; the hero is already
+ *   decoded and cached by then.
+ */
+export function Preloader({ onComplete }: { onComplete?: () => void }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const alreadyShown = window.sessionStorage.getItem(SESSION_KEY) === "1";
+
+    if (reduced || alreadyShown) {
+      setIsVisible(false);
+      onComplete?.();
+      return;
+    }
+
+    window.sessionStorage.setItem(SESSION_KEY, "1");
+
     const duration = 1600;
     const startTime = Date.now();
 
@@ -25,7 +54,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
         clearInterval(interval);
         setTimeout(() => {
           setIsVisible(false);
-          onComplete();
+          onComplete?.();
         }, 400);
       }
     }, 16);
@@ -109,7 +138,7 @@ export function CinematicSection({
           end: "top 50%",
           scrub: 1,
         },
-      }
+      },
     );
 
     gsap.to(content, {

@@ -40,3 +40,27 @@ export const PHOTO_PENDING = {
 } as const;
 
 export type PhotoPendingKey = keyof typeof PHOTO_PENDING;
+
+/**
+ * Credit lines for shipped photographs.
+ *
+ * Why this exists: CC BY 4.0 attribution is a licence obligation, not a
+ * courtesy. Routing credits through the same module as the paths keeps the
+ * obligation attached to the asset, so a component cannot render a
+ * rights-encumbered photograph without also being handed its credit line.
+ *
+ * Provenance: apps/ai-institute/public/photography/metadata/photo_manifest.json
+ */
+export const PHOTO_CREDIT: Record<PhotoKey, string> = {
+  // CC BY 4.0 — attribution REQUIRED by the licence.
+  hero: "Hero: Pexels License",
+  forest:
+    "Himalayan cedar forest, Shimla — Kavittaa, CC0, via Wikimedia Commons",
+  heritageStone:
+    "Shirgul Maharaj Temple, Churdhar, Himachal Pradesh — UnpetitproleX, CC BY 4.0, via Wikimedia Commons",
+  why: "Terrace farming near Ransi village, Garhwal — Varun Shiv Kapur, CC BY 2.0, via Wikimedia Commons",
+  knowledgeBooks:
+    "Open book and notebook — Glenn Carstens-Peters, CC0, via Wikimedia Commons",
+  communityLandscape:
+    "Mountain landscape, Himachal Pradesh — Aashish Chindaliya, CC0, via Wikimedia Commons",
+};
