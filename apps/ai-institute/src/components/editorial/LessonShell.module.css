@@ -1,0 +1,167 @@
+/* Editorial lesson primitives for the learning tier.
+   Scoped via CSS Module. Tokens only; no hardcoded colours or spacing. */
+
+.lesson {
+  max-width: var(--measure-prose, 68ch);
+  margin-inline: auto;
+}
+
+.head {
+  margin-block-end: var(--space-8);
+  padding-block-end: var(--space-6);
+  border-block-end: 1px solid var(--color-border-subtle, currentColor);
+}
+
+.mission {
+  margin-block-start: var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.duration {
+  margin-block-start: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.durationValue {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Learning outcomes */
+
+.outcomes {
+  margin-block: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-bg-subtle, transparent);
+  border-inline-start: 3px solid var(--color-accent-gold);
+  border-radius: var(--radius-sm);
+}
+
+.outcomesHeading {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.outcomesList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.outcome {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  line-height: 1.6;
+}
+
+.outcomeMark {
+  margin-block-start: 0.55em;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-gold);
+}
+
+/* Lesson progress rail */
+
+.rail {
+  margin-block: var(--space-8);
+  padding-block: var(--space-4);
+  border-block: 1px solid var(--color-border-subtle, currentColor);
+}
+
+.railList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.railItem {
+  display: inline-block;
+  padding-block: var(--space-1);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-block-end: 2px solid transparent;
+}
+
+.railItem:hover {
+  color: var(--color-text-primary);
+  border-block-end-color: var(--color-border-subtle, currentColor);
+}
+
+.railItemCurrent {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  border-block-end-color: var(--color-accent-gold);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-block: var(--space-10);
+}
+
+.body > :first-child {
+  margin-block-start: 0;
+}
+
+.nav > :last-child {
+  text-align: end;
+}
+
+.navDir {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.navTitle {
+  display: block;
+  margin-block-start: var(--space-1);
+}
+
+@media (max-width: 40rem) {
+  .outcomes {
+    padding: var(--space-5);
+  }
+
+  .nav {
+    grid-template-columns: 1fr;
+  }
+
+  .nav > :last-child {
+    text-align: start;
+  }
+}
+
+@media print {
+  .rail,
+  .nav {
+    display: none;
+  }
+}

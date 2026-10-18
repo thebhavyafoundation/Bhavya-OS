@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from "./LessonShell.module.css";
 
 interface LessonShellProps {
   eyebrow: string;
@@ -42,30 +43,30 @@ export function LessonShell({
   children,
 }: LessonShellProps) {
   return (
-    <article className="bhv-lesson">
-      <header className="bhv-lesson-head">
+    <article className={styles.lesson}>
+      <header className={styles.head}>
         <p className="ai-eyebrow">{eyebrow}</p>
         <h1 className="ai-page-title">{title}</h1>
-        {mission ? <p className="bhv-lesson-mission">{mission}</p> : null}
+        {mission ? <p className={styles.mission}>{mission}</p> : null}
         {typeof durationMin === "number" ? (
-          <p className="bhv-lesson-duration">
-            <span className="bhv-duration-value">{durationMin}</span> minutes
+          <p className={styles.duration}>
+            <span className={styles.durationValue}>{durationMin}</span> minutes
           </p>
         ) : null}
       </header>
 
       {objectives && objectives.length > 0 ? (
         <section
-          className="bhv-outcomes"
+          className={styles.outcomes}
           aria-labelledby="bhv-outcomes-heading"
         >
-          <h2 id="bhv-outcomes-heading" className="bhv-outcomes-heading">
+          <h2 id="bhv-outcomes-heading" className={styles.outcomesHeading}>
             What you will be able to do
           </h2>
-          <ul className="bhv-outcomes-list">
+          <ul className={styles.outcomesList}>
             {objectives.map((objective) => (
-              <li key={objective} className="bhv-outcome">
-                <span className="bhv-outcome-mark" aria-hidden="true" />
+              <li key={objective} className={styles.outcome}>
+                <span className={styles.outcomeMark} aria-hidden="true" />
                 <span>{objective}</span>
               </li>
             ))}
@@ -74,19 +75,19 @@ export function LessonShell({
       ) : null}
 
       {siblings && siblings.length > 1 ? (
-        <nav className="bhv-lesson-rail" aria-label="Lessons in this module">
-          <ol className="bhv-lesson-rail-list">
+        <nav className={styles.rail} aria-label="Lessons in this module">
+          <ol className={styles.railList}>
             {siblings.map((sibling) => (
               <li key={sibling.href}>
                 {sibling.current ? (
                   <span
-                    className="bhv-rail-item bhv-rail-item-current"
+                    className={`${styles.railItem} ${styles.railItemCurrent}`}
                     aria-current="step"
                   >
                     {sibling.title}
                   </span>
                 ) : (
-                  <Link className="bhv-rail-item" href={sibling.href}>
+                  <Link className={styles.railItem} href={sibling.href}>
                     {sibling.title}
                   </Link>
                 )}
@@ -96,7 +97,7 @@ export function LessonShell({
         </nav>
       ) : null}
 
-      <div className="bhv-lesson-body">{children}</div>
+      <div className={styles.body}>{children}</div>
 
       {standards.length > 0 ? (
         <section className="ai-section" aria-labelledby="bhv-standards-heading">
@@ -118,12 +119,12 @@ export function LessonShell({
         </section>
       ) : null}
 
-      <nav className="ai-lesson-nav" aria-label="Lesson navigation">
+      <nav className={styles.nav} aria-label="Lesson navigation">
         <div>
           {previous ? (
             <Link href={previous.href} className="ai-nav-btn" rel="prev">
-              <span className="ai-nav-dir">Previous</span>
-              <span className="ai-nav-title">{previous.title}</span>
+              <span className={styles.navDir}>Previous</span>
+              <span className={styles.navTitle}>{previous.title}</span>
             </Link>
           ) : null}
         </div>
@@ -134,10 +135,10 @@ export function LessonShell({
               className="ai-nav-btn ai-nav-btn-primary"
               rel="next"
             >
-              <span className="ai-nav-dir">
+              <span className={styles.navDir}>
                 {next.isModuleEnd ? "Finish this module" : "Next lesson"}
               </span>
-              <span className="ai-nav-title">{next.title}</span>
+              <span className={styles.navTitle}>{next.title}</span>
             </Link>
           ) : null}
         </div>

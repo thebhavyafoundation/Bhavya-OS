@@ -1,5 +1,6 @@
 import type { DiagramSpec } from "@/data/curriculum";
 import { DiagramRenderer } from "@/components/curriculum/diagram/DiagramRenderer";
+import styles from "./FigureBlock.module.css";
 
 interface FigureBlockProps {
   spec: DiagramSpec;
@@ -33,21 +34,21 @@ export function FigureBlock({
   const describedBy = textEquivalent ? `${slug(title)}-desc` : undefined;
 
   return (
-    <figure className="bhv-figure">
-      <div className="bhv-figure-canvas">
+    <figure className={styles.figure}>
+      <div className={styles.canvas}>
         <DiagramRenderer spec={spec} />
       </div>
-      <figcaption className="bhv-figure-caption">
-        <span className="bhv-figure-title">{title}</span>
+      <figcaption className={styles.caption}>
+        <span className={styles.title}>{title}</span>
         {caption && caption.trim() !== title ? (
-          <span className="bhv-figure-text"> {caption}</span>
+          <span className={styles.text}> {caption}</span>
         ) : null}
         {source ? (
-          <span className="bhv-figure-source"> Source: {source}</span>
+          <span className={styles.source}> Source: {source}</span>
         ) : null}
       </figcaption>
       {textEquivalent ? (
-        <p className="bhv-figure-desc" id={describedBy}>
+        <p className={styles.desc} id={describedBy}>
           {textEquivalent}
         </p>
       ) : null}
