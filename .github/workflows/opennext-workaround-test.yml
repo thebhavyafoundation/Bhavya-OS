@@ -1,0 +1,114 @@
+name: OpenNext Workaround Decisive Test
+
+# DECISIVE EXPERIMENT for PR #49.
+# Diagnosis only. Never deploys. No Cloudflare credentials. No Turso contact.
+# Does not modify the canonical deploy or verify workflows.
+#
+# Sequence:
+#   clean install -> next build -> assert Stage A failure -> materialise
+#   -> assert Stage A repaired -> opennextjs-cloudflare build --skipNextBuild
+#   -> assert Stage B + resolver
+#
+# The option spelling is taken from the installed adapter source, not assumed:
+#   @opennextjs/cloudflare/dist/cli/commands/build.js:49
+#     .option("skipNextBuild", { type: "boolean", alias: ["skipBuild", "s"], ... })
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/opennext-workaround-test.yml"
+      - "apps/ai-institute/scripts/materialise-conditional-exports.mjs"
+      - "apps/ai-institute/scripts/verify-conditional-export-workaround.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: opennext-workaround-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Decisive pre-OpenNext workaround test
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: apps/ai-institute
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --frozen-lockfile
+
+      - name: Record toolchain
+        run: |
+          {
+            echo "### Toolchain"
+            echo "- node: $(node --version)"
+            echo "- pnpm: $(pnpm --version)"
+            echo "- next: $(node -p "require('./apps/ai-institute/package.json').dependencies.next")"
+            echo "- opennext: $(node -p "require('./apps/ai-institute/package.json').devDependencies['@opennextjs/cloudflare']")"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove previous build output
+        run: rm -rf .next .open-next
+
+      - name: Next.js production build
+        working-directory: .
+        run: pnpm --filter ai-institute run build
+
+      - name: Assert Stage A failure state (pre-materialisation)
+        run: node scripts/verify-conditional-export-workaround.mjs a-pre
+
+      - name: Materialise conditional-export targets
+        run: node scripts/materialise-conditional-exports.mjs
+
+      - name: Assert Stage A repaired state
+        run: node scripts/verify-conditional-export-workaround.mjs a-post
+
+      # Uses the repository-installed binary. --skipNextBuild is the exact
+      # spelling from the installed adapter; SKIP_NEXT_APP_BUILD is equivalent
+      # and avoids any shell flag-parsing ambiguity.
+      - name: OpenNext build (skip internal Next build)
+        run: SKIP_NEXT_APP_BUILD=1 pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-workaround.log
+
+      - name: Assert Stage B and resolver
+        if: always()
+        run: node scripts/verify-conditional-export-workaround.mjs b
+
+      - name: Upload artefacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: opennext-workaround-evidence
+          path: |
+            apps/ai-institute/verify-*.json
+            opennext-workaround.log
+            apps/ai-institute/.next/conditional-export-materialised.json
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "### Workaround test"
+            for f in verify-*.json; do
+              [ -f "$f" ] || continue
+              echo "#### $f"
+              cat "$f"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
