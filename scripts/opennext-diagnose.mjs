@@ -117,6 +117,49 @@ say(
     : "source store not found",
 );
 
+// ---------------------------------------------------------------------------
+// WHICH COPY DROPS THE FILE?
+//
+// Two candidate copy stages exist:
+//   A) Next.js output file tracing  -> .next/standalone/node_modules/
+//   B) OpenNext                    -> .open-next/server-functions/default/node_modules/
+//
+// Comparing the same package directory in both splits the problem definitively.
+// If web.cjs is already absent in A, the tracer dropped it and OpenNext is
+// faithful. If it is present in A but absent in B, OpenNext dropped it.
+// ---------------------------------------------------------------------------
+const probe = (label, base) => {
+  if (!exists(base)) {
+    say(`${label}.exists`, "NO");
+    return;
+  }
+  say(`${label}.exists`, "YES");
+  const storeDir = path.join(base, ".pnpm");
+  const direct = path.join(base, "@libsql", "isomorphic-ws");
+  const roots = [];
+  if (exists(storeDir)) {
+    for (const e of fs.readdirSync(storeDir)) {
+      if (e.startsWith("@libsql+isomorphic-ws")) roots.push(path.join(storeDir, e, "node_modules", "@libsql", "isomorphic-ws"));
+    }
+  }
+  if (exists(direct)) roots.push(direct);
+  if (!roots.length) {
+    say(`${label}.isomorphicWs`, "ABSENT");
+    return;
+  }
+  for (const r of roots) {
+    const tag = `${label}.[${path.basename(path.dirname(path.dirname(path.dirname(r))))}]`;
+    for (const f of ["package.json", "node.cjs", "node.mjs", "web.cjs", "web.mjs"]) {
+      say(`${tag}.${f}`, exists(path.join(r, f)) ? "PRESENT" : "ABSENT");
+    }
+  }
+};
+
+const STANDALONE = path.join(APP, ".next", "standalone");
+probe("stageA.nextStandalone", path.join(STANDALONE, "node_modules"));
+probe("stageB.openNextServerFn", NM);
+say("stageA.nextStandaloneRoot.exists", exists(STANDALONE) ? "YES" : "NO");
+
 // ------------------------------------------------------------ artefacts ----
 const lines = [];
 const walk = (dir, depth, acc) => {
