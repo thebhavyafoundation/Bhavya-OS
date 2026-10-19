@@ -152,11 +152,15 @@ Human can edit the output file before running the next stage. The next stage pic
 
 ## 8. Skills
 
-**Filesystem is authoritative:** `.opencode/skills/` — verified count **16**. Load with the `skill` tool.
+**Filesystem is authoritative:** `.opencode/skills/` — verified count **17**. Load with the `skill` tool.
 
 Installed: `bhavya-architecture`, `bhavya-design-system`, `bhavya-content-truth`, `bhavya-data-model`, `bhavya-route-audit`, `bhavya-ui-verification`, `bhavya-security`, `bhavya-github-workflow`, `bhavya-production-verification`, `bhavya-ai-development`, `bhavya-spec`, `bhavya-reasons-canvas`, `bhavya-capability-research`, plus third-party design skills `impeccable` (pbakaus/impeccable), `apple-design` (emilkowalski/skills), `design-taste-frontend` (Leonxlnx/taste-skill). Third-party design guidance never outranks §1–§3 authorities (constitution, brand, tokens).
 
 Precedence: project → personal (`~/.config/opencode/skills/`) → superpowers.
+
+**Governed wrappers (present on disk, verify before use):** `bhavya-apple-design`, `bhavya-design-taste`, `bhavya-diagram-design`, `bhavya-impeccable`. Each wraps a third-party skill and must be read before that upstream skill loads.
+
+**Third-party design skills** `impeccable` (pbakaus/impeccable), `apple-design` (emilkowalski/skills), and `design-taste-frontend` (Leonxlnx/taste-skill) are not vendored in `.opencode/skills/`; they are reachable through the governed wrappers above. Third-party design guidance never outranks §1–§3 authorities (constitution, brand, tokens).
 
 **Not installed** (never invoke or pretend): `bhavya-qa`, `bhavya-autoplan`, `bhavya-canary`, `bhavya-freeze`, `bhavya-investigate`, `bhavya-learn`, `bhavya-plan-review`, `bhavya-retro`, `bhavya-review`, `bhavya-security-audit`, `bhavya-ship`, `antislop*`, `icm-architect`, and design/gsap packs listed only in `config/skills/registry.json`. `pnpm antislop` is a command, not a skill.
 
