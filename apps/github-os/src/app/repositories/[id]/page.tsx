@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
 import {
+  Button,
   Card,
   Badge,
   Skeleton,
@@ -106,14 +107,20 @@ const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [
   { id: "activity", label: "Activity", icon: <Activity size={14} /> },
 ];
 
-const maturityVariant: Record<string, "warning" | "info" | "success" | "purple"> = {
+const maturityVariant: Record<
+  string,
+  "warning" | "info" | "success" | "purple"
+> = {
   emerging: "warning",
   developing: "info",
   mature: "success",
   exemplary: "purple",
 };
 
-const recVariant: Record<string, "success" | "info" | "purple" | "warning" | "default"> = {
+const recVariant: Record<
+  string,
+  "success" | "info" | "purple" | "warning" | "default"
+> = {
   adopt: "success",
   study: "info",
   reference: "purple",
@@ -184,10 +191,15 @@ export default function RepositoryDetailPage() {
           icon={<FileText size={24} />}
           title="Repository not found"
           description="The repository you're looking for doesn't exist or has been removed."
-          action={{
-            label: "Back to repositories",
-            onClick: () => (window.location.href = "/repositories"),
-          }}
+          action={
+            <Button
+              type="button"
+              variant="primary"
+              onClick={() => (window.location.href = "/repositories")}
+            >
+              Back to repositories
+            </Button>
+          }
         />
       </AppLayout>
     );
@@ -225,7 +237,9 @@ export default function RepositoryDetailPage() {
                 {repo.recommendation_type}
               </Badge>
             </div>
-            <p className="text-sm text-text-tertiary mb-3">{repo.description}</p>
+            <p className="text-sm text-text-tertiary mb-3">
+              {repo.description}
+            </p>
             <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted">
               {repo.language && (
                 <span className="flex items-center gap-1.5">
@@ -513,7 +527,12 @@ export default function RepositoryDetailPage() {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {deps.map((dep: string) => (
-                    <Badge key={dep} variant="default" size="sm" className="font-mono">
+                    <Badge
+                      key={dep}
+                      variant="default"
+                      size="sm"
+                      className="font-mono"
+                    >
                       {dep}
                     </Badge>
                   ))}
@@ -533,7 +552,9 @@ export default function RepositoryDetailPage() {
                 </p>
               </Card>
               <Card padding="md">
-                <p className="text-xs text-text-tertiary mb-1">Recommendation</p>
+                <p className="text-xs text-text-tertiary mb-1">
+                  Recommendation
+                </p>
                 <p className="text-lg font-semibold text-text-primary capitalize">
                   {repo.recommendation_type}
                 </p>
@@ -597,8 +618,8 @@ export default function RepositoryDetailPage() {
                 </h3>
               </div>
               <p className="text-sm text-text-secondary mb-3">
-                Ready to dive in? Explore the architecture, study the
-                patterns, and build something.
+                Ready to dive in? Explore the architecture, study the patterns,
+                and build something.
               </p>
               <Link
                 href={`/repositories/${repo.id}/learning`}
@@ -712,7 +733,9 @@ export default function RepositoryDetailPage() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-bg-primary border border-border-primary rounded">
-                  <span className="text-sm text-text-secondary">Dependencies</span>
+                  <span className="text-sm text-text-secondary">
+                    Dependencies
+                  </span>
                   <span className="text-sm font-medium text-text-primary">
                     {deps.length}
                   </span>
