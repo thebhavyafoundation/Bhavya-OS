@@ -476,7 +476,7 @@ export default function OsForestPage() {
                             : "var(--border)",
                         color:
                           m.provenance === "institutional"
-                            ? "var(--color-text-inverse, #fff)"
+                            ? "var(--color-text-inverse)"
                             : "var(--text-secondary)",
                       }}
                     >

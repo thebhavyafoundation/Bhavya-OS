@@ -738,8 +738,7 @@ export default function KnowledgePage() {
                                   <div
                                     style={{
                                       fontSize: "var(--text-xs)",
-                                      color:
-                                        "var(--color-status-error, #ef4444)",
+                                      color: "var(--color-status-error)",
                                       fontWeight: 600,
                                     }}
                                   >
@@ -748,8 +747,7 @@ export default function KnowledgePage() {
                                   <div
                                     style={{
                                       fontSize: "var(--text-xs)",
-                                      color:
-                                        "var(--color-accent-green, #22c55e)",
+                                      color: "var(--color-accent-green)",
                                       marginTop: "var(--space-1)",
                                     }}
                                   >

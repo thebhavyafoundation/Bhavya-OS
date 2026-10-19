@@ -307,7 +307,7 @@ export default function NewForestMissionPage() {
             color:
               creating || !name || !region
                 ? "var(--text-secondary)"
-                : "var(--color-text-inverse, #fff)",
+                : "var(--color-text-inverse)",
             borderRadius: "var(--radius-md)",
             fontSize: "var(--text-sm)",
             fontWeight: 600,

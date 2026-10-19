@@ -13,7 +13,7 @@ export default function OsLayout({ children }: { children: React.ReactNode }) {
       className="dark min-h-screen flex"
       style={{
         background: "var(--color-forest-950, #0a1f1a)",
-        color: "var(--color-text-inverse, #f7f4ec)",
+        color: "var(--color-text-inverse)",
       }}
     >
       <OsSidebar />

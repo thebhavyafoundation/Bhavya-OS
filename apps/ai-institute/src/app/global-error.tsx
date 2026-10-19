@@ -16,8 +16,8 @@ export default function GlobalError({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "var(--color-bg-primary, #0a0f0d)",
-            color: "var(--color-text-primary, #f5f1e6)",
+            backgroundColor: "var(--color-bg-primary)",
+            color: "var(--color-text-primary)",
             padding: "2rem",
           }}
         >
@@ -29,7 +29,7 @@ export default function GlobalError({
                 borderRadius: "8px",
                 backgroundColor:
                   "rgba(var(--color-status-error-rgb, 220, 38, 38), 0.1)",
-                color: "var(--color-status-error, #dc2626)",
+                color: "var(--color-status-error)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -64,8 +64,8 @@ export default function GlobalError({
                 padding: "10px 24px",
                 fontSize: "14px",
                 fontWeight: "600",
-                backgroundColor: "var(--color-bg-tertiary, #1a3a2a)",
-                color: "var(--color-text-primary, #f5f1e6)",
+                backgroundColor: "var(--color-bg-tertiary)",
+                color: "var(--color-text-primary)",
                 border:
                   "1px solid rgba(var(--color-text-primary-rgb, 245, 241, 230), 0.2)",
                 borderRadius: "8px",

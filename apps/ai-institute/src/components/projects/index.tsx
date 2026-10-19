@@ -164,7 +164,7 @@ const difficultyConfig = {
     icon: "🌐",
   },
   capstone: {
-    color: "var(--color-status-error, #ef4444)",
+    color: "var(--color-status-error)",
     label: "Capstone",
     icon: "🏆",
   },

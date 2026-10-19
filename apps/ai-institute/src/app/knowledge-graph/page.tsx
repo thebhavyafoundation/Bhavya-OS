@@ -23,7 +23,7 @@ const graphNodes: GraphNode[] = [
     label: "AI",
     x: 400,
     y: 300,
-    color: "var(--color-brand-forest, #0e382e)",
+    color: "var(--color-brand-forest)",
     mastery: 0,
     prerequisites: [],
     relatedLessons: ["AI Fundamentals", "History of AI"],
@@ -36,7 +36,7 @@ const graphNodes: GraphNode[] = [
     label: "ML",
     x: 250,
     y: 180,
-    color: "var(--color-brand-gold, #d4af37)",
+    color: "var(--color-brand-gold)",
     mastery: 0,
     prerequisites: ["ai"],
     relatedLessons: ["Linear Regression", "Decision Trees"],
@@ -49,7 +49,7 @@ const graphNodes: GraphNode[] = [
     label: "DL",
     x: 550,
     y: 180,
-    color: "var(--color-text-tertiary, #8a7359)",
+    color: "var(--color-text-tertiary)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Neural Networks", "Backpropagation"],
@@ -62,7 +62,7 @@ const graphNodes: GraphNode[] = [
     label: "NLP",
     x: 150,
     y: 350,
-    color: "var(--color-accent-green, #4ade80)",
+    color: "var(--color-accent-green)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Text Processing", "Sentiment Analysis"],
@@ -75,7 +75,7 @@ const graphNodes: GraphNode[] = [
     label: "CV",
     x: 650,
     y: 350,
-    color: "var(--color-status-info, #60a5fa)",
+    color: "var(--color-status-info)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Image Classification", "Object Detection"],
@@ -88,7 +88,7 @@ const graphNodes: GraphNode[] = [
     label: "RL",
     x: 150,
     y: 500,
-    color: "var(--color-accent-pink, #f472b6)",
+    color: "var(--color-viz-sage-light)",
     mastery: 0,
     prerequisites: ["ml"],
     relatedLessons: ["Reinforcement Learning", "Q-Learning"],
@@ -101,7 +101,7 @@ const graphNodes: GraphNode[] = [
     label: "CNN",
     x: 700,
     y: 220,
-    color: "var(--color-status-info, #60a5fa)",
+    color: "var(--color-status-info)",
     mastery: 0,
     prerequisites: ["dl", "cv"],
     relatedLessons: ["Convolutional Layers", "Image Nets"],
@@ -114,7 +114,7 @@ const graphNodes: GraphNode[] = [
     label: "RNN",
     x: 350,
     y: 480,
-    color: "var(--color-accent-gold, #c8a94e)",
+    color: "var(--color-accent-gold)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Sequential Data", "LSTM"],
@@ -127,7 +127,7 @@ const graphNodes: GraphNode[] = [
     label: "Transformers",
     x: 450,
     y: 120,
-    color: "var(--color-accent-amber, #fbbf24)",
+    color: "var(--color-viz-gold-light)",
     mastery: 0,
     prerequisites: ["dl", "nlp"],
     relatedLessons: ["Attention Mechanism", "Self-Attention"],
@@ -140,7 +140,7 @@ const graphNodes: GraphNode[] = [
     label: "GANs",
     x: 600,
     y: 480,
-    color: "var(--color-accent-pink, #f472b6)",
+    color: "var(--color-viz-earth-light)",
     mastery: 0,
     prerequisites: ["dl"],
     relatedLessons: ["Generative Models", "Adversarial Training"],
@@ -153,7 +153,7 @@ const graphNodes: GraphNode[] = [
     label: "BERT",
     x: 250,
     y: 100,
-    color: "var(--color-accent-emerald, #34d399)",
+    color: "var(--color-viz-forest-light)",
     mastery: 0,
     prerequisites: ["transformers", "nlp"],
     relatedLessons: ["Bidirectional Encoding", "Fine-tuning"],
@@ -166,7 +166,7 @@ const graphNodes: GraphNode[] = [
     label: "GPT",
     x: 550,
     y: 60,
-    color: "var(--color-accent-amber, #fbbf24)",
+    color: "var(--color-viz-earth)",
     mastery: 0,
     prerequisites: ["transformers"],
     relatedLessons: ["Language Models", "Prompt Engineering"],
@@ -197,9 +197,9 @@ const edges: [string, string][] = [
 ];
 
 function getMasteryColor(mastery: number): string {
-  if (mastery < 40) return "var(--color-status-error, #ef4444)";
-  if (mastery < 70) return "var(--color-status-warning, #eab308)";
-  return "var(--color-status-success, #22c55e)";
+  if (mastery < 40) return "var(--color-status-error)";
+  if (mastery < 70) return "var(--color-status-warning)";
+  return "var(--color-status-success)";
 }
 
 export default function KnowledgeGraphPage() {
@@ -332,11 +332,11 @@ export default function KnowledgeGraphPage() {
       ctx.beginPath();
       ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
       ctx.strokeStyle = isSelected
-        ? "var(--color-brand-gold, #d4af37)"
+        ? "var(--color-brand-gold)"
         : isPrereq
-          ? "var(--color-status-error, #ef4444)"
+          ? "var(--color-status-error)"
           : isRelated
-            ? "var(--color-accent-green, #4ade80)"
+            ? "var(--color-accent-green)"
             : "rgba(255,255,255,0.1)";
       ctx.lineWidth = isSelected ? 2.5 : 1.5;
       ctx.stroke();
@@ -346,7 +346,7 @@ export default function KnowledgeGraphPage() {
       ctx.fillStyle = mColor;
       ctx.fill();
 
-      ctx.fillStyle = "var(--color-brand-ivory, #f7f4ec)";
+      ctx.fillStyle = "var(--color-brand-ivory)";
       ctx.font = `${isSelected ? "bold " : ""}${radius < 28 ? 11 : 13}px system-ui, sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -507,7 +507,7 @@ export default function KnowledgeGraphPage() {
               className="text-4xl md:text-5xl font-bold tracking-tight mt-4 mb-2"
               style={{
                 background:
-                  "linear-gradient(135deg, var(--color-brand-ivory, #f7f4ec) 0%, var(--color-brand-gold, #d4af37) 100%)",
+                  "linear-gradient(135deg, var(--color-brand-ivory) 0%, var(--color-brand-gold) 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}

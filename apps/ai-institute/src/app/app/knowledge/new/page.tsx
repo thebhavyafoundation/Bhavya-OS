@@ -269,7 +269,7 @@ export default function NewKnowledgeObjectPage() {
               style={{
                 ...inputStyle,
                 borderColor: fieldErrors.title
-                  ? "var(--color-status-error, #ef4444)"
+                  ? "var(--color-status-error)"
                   : undefined,
               }}
             />
@@ -277,7 +277,7 @@ export default function NewKnowledgeObjectPage() {
               <div
                 style={{
                   fontSize: "var(--text-xs)",
-                  color: "var(--color-status-error, #ef4444)",
+                  color: "var(--color-status-error)",
                   marginTop: "var(--space-1)",
                 }}
               >
@@ -305,7 +305,7 @@ export default function NewKnowledgeObjectPage() {
                 style={{
                   ...inputStyle,
                   borderColor: fieldErrors.domain
-                    ? "var(--color-status-error, #ef4444)"
+                    ? "var(--color-status-error)"
                     : undefined,
                 }}
               />
@@ -313,7 +313,7 @@ export default function NewKnowledgeObjectPage() {
                 <div
                   style={{
                     fontSize: "var(--text-xs)",
-                    color: "var(--color-status-error, #ef4444)",
+                    color: "var(--color-status-error)",
                     marginTop: "var(--space-1)",
                   }}
                 >
@@ -347,7 +347,7 @@ export default function NewKnowledgeObjectPage() {
                 ...inputStyle,
                 resize: "vertical",
                 borderColor: fieldErrors.description
-                  ? "var(--color-status-error, #ef4444)"
+                  ? "var(--color-status-error)"
                   : undefined,
               }}
             />
@@ -355,7 +355,7 @@ export default function NewKnowledgeObjectPage() {
               <div
                 style={{
                   fontSize: "var(--text-xs)",
-                  color: "var(--color-status-error, #ef4444)",
+                  color: "var(--color-status-error)",
                   marginTop: "var(--space-1)",
                 }}
               >
@@ -379,7 +379,7 @@ export default function NewKnowledgeObjectPage() {
                 ...inputStyle,
                 width: 120,
                 borderColor: fieldErrors.grade
-                  ? "var(--color-status-error, #ef4444)"
+                  ? "var(--color-status-error)"
                   : undefined,
               }}
             />
@@ -387,7 +387,7 @@ export default function NewKnowledgeObjectPage() {
               <div
                 style={{
                   fontSize: "var(--text-xs)",
-                  color: "var(--color-status-error, #ef4444)",
+                  color: "var(--color-status-error)",
                   marginTop: "var(--space-1)",
                 }}
               >
@@ -470,7 +470,7 @@ export default function NewKnowledgeObjectPage() {
                   onClick={() => removeConcept(i)}
                   style={{
                     padding: "var(--space-2)",
-                    color: "var(--color-status-error, #ef4444)",
+                    color: "var(--color-status-error)",
                     background: "none",
                     border: "none",
                     cursor: "pointer",
@@ -547,7 +547,7 @@ export default function NewKnowledgeObjectPage() {
                   onClick={() => removeDefinition(i)}
                   style={{
                     padding: "var(--space-2)",
-                    color: "var(--color-status-error, #ef4444)",
+                    color: "var(--color-status-error)",
                     background: "none",
                     border: "none",
                     cursor: "pointer",
@@ -620,7 +620,7 @@ export default function NewKnowledgeObjectPage() {
                   onClick={() => removeExample(i)}
                   style={{
                     padding: "var(--space-2)",
-                    color: "var(--color-status-error, #ef4444)",
+                    color: "var(--color-status-error)",
                     background: "none",
                     border: "none",
                     cursor: "pointer",
