@@ -185,6 +185,15 @@ export function VelocityMarquee({
   useEffect(() => {
     let velocity = 0;
     let lastScroll = 0;
+    let frame = 0;
+    let stopped = false;
+
+    // A marquee that skews to scroll velocity is decorative motion. Under
+    // reduced motion it must not run at all, not merely run more gently.
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) return;
 
     const handleScroll = () => {
       const now = Date.now();
@@ -197,17 +206,35 @@ export function VelocityMarquee({
     };
 
     const animate = () => {
+      if (stopped) return;
       const targetSkew = Math.max(-8, Math.min(8, velocity * 0.4));
       setSkew((prev) => prev + (targetSkew - prev) * 0.08);
-      requestAnimationFrame(animate);
+
+      // Decay velocity once scrolling stops, so the loop can idle rather than
+      // burning a frame forever on a page that is not being scrolled.
+      if (Math.abs(velocity) > 0.001) {
+        velocity *= 0.9;
+      } else {
+        velocity = 0;
+      }
+
+      frame = requestAnimationFrame(animate);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    const raf = requestAnimationFrame(animate);
+    // Passive: this handler only reads scrollY. Without the flag the browser
+    // must assume the handler might call preventDefault and hold the scroll
+    // pipeline open until it returns.
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    frame = requestAnimationFrame(animate);
 
     return () => {
+      stopped = true;
       window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(raf);
+      // Cancel the *latest* handle, not the first one. Scheduling the next
+      // frame inside `animate` means the id from the initial call is stale by
+      // the time cleanup runs, so cancelling it leaves the loop running after
+      // unmount — calling setState on a component that no longer exists.
+      cancelAnimationFrame(frame);
     };
   }, []);
 

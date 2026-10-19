@@ -54,15 +54,32 @@ export function ScrollProvider({
 
     lenisRef.current = lenis;
 
+    /*
+     * The frame handle has to be tracked and cancelled.
+     *
+     * `raf` re-schedules itself, so the id returned by the initial call is
+     * stale by the time cleanup runs. Cancelling that stale id does nothing:
+     * the loop survives unmount and keeps calling `lenis.raf()` on a
+     * destroyed instance, holding a main-thread frame callback open for the
+     * rest of the session. Re-running the effect — which happens on any
+     * dependency change — stacks another loop on top of the last.
+     */
+    let frame = 0;
+    let stopped = false;
+
     function raf(time: number) {
+      if (stopped) return;
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      frame = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    frame = requestAnimationFrame(raf);
 
     return () => {
+      stopped = true;
+      cancelAnimationFrame(frame);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, [
     smoothScroll,
