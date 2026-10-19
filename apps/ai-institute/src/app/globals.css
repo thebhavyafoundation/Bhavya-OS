@@ -53,10 +53,25 @@
   top: 0;
 }
 
-/* Global focus-visible indicator for keyboard navigation */
+/* Global focus-visible indicator for keyboard navigation.
+ *
+ * Two-tone ring, using existing brand tokens only — no new colour, no token
+ * change, so brand authority is untouched.
+ *
+ * Why not the heritage gold alone: gold #d4af37 measures 1.91:1 against the
+ * ivory page background and 1.72:1 against cream. Both fail WCAG 2.2 SC
+ * 1.4.11, which requires 3:1 for non-text indicators. A keyboard user could
+ * not reliably see where they were on most of the site.
+ *
+ * Why two tones: a single colour cannot contrast with both a light and a dark
+ * surface. The inner ring is forest, which reads strongly on ivory and cream
+ * (11.77:1). The outer ring is ivory, which reads strongly on the forest and
+ * near-black sections. Whichever surface the focus lands on, one of the two
+ * rings clears 3:1 against it. */
 *:focus-visible {
-  outline: 2px solid var(--color-accent-gold, #d4af37);
+  outline: 2px solid var(--color-brand-forest);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-brand-ivory);
   border-radius: var(--radius-sm, 4px);
 }
 
