@@ -5,6 +5,7 @@ import {
   LoadingSkeleton,
   LoadingSpinner,
 } from "@bhavya/platform-ui";
+import { ErrorStateRetryDemo } from "./components/ErrorStateRetryDemo";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
@@ -125,12 +126,7 @@ export default function StatesPage() {
             title="ErrorState with retry"
             note="role=alert. Retry is a real focusable button."
           >
-            <ErrorState
-              title="We could not load this module"
-              message="The curriculum registry did not respond. Nothing has been lost."
-              retryLabel="Try again"
-              onRetry={() => undefined}
-            />
+            <ErrorStateRetryDemo />
           </Panel>
 
           <Panel
