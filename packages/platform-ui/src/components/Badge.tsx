@@ -82,6 +82,7 @@ export function Badge({
 }: BadgeProps) {
   return (
     <span
+      data-variant={variant}
       className={`
         inline-flex items-center gap-1.5 font-medium rounded border
         ${variantStyles[variant]}

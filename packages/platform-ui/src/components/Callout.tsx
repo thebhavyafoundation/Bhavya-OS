@@ -45,6 +45,21 @@ const ruleClasses: Record<CalloutTone, string> = {
   caution: "bg-callout-caution-rule",
 };
 
+/*
+ * The caution tone carries consequences, so it must never be identifiable by
+ * colour alone. In forced-colors mode every tint is flattened to the system
+ * canvas and the three tones become indistinguishable; in greyscale they
+ * collapse too. A guaranteed label is the one channel that always survives.
+ *
+ * A caller who passes an explicit title still controls the wording — this only
+ * supplies a default for the tone that most needs one.
+ */
+const toneLabels: Record<CalloutTone, string | undefined> = {
+  note: undefined,
+  tip: undefined,
+  caution: "Caution",
+};
+
 export function Callout({
   children,
   tone = "note",
@@ -52,6 +67,7 @@ export function Callout({
   className = "",
   as: Tag = "aside",
 }: CalloutProps) {
+  const label = title ?? toneLabels[tone];
   return (
     <Tag
       data-tone={tone}
@@ -68,7 +84,7 @@ export function Callout({
         className={`absolute inset-y-0 left-0 w-1 rounded-l ${ruleClasses[tone]}`}
       />
       <span className="min-w-0 flex-1">
-        {title && <strong className="mr-1 font-semibold">{title}</strong>}
+        {label && <strong className="mr-1 font-semibold">{label}</strong>}
         {children}
       </span>
     </Tag>

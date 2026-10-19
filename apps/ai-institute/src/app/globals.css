@@ -90,12 +90,9 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* High contrast mode support */
-@media (forced-colors: active) {
-  *:focus-visible {
-    outline: 2px solid CanvasText;
-  }
-}
+/* High contrast mode: handled canonically in
+ * packages/platform-ui/src/styles/tokens.css so every app inherits the same
+ * rules. It used to live only here, which left the other apps unsupported. */
 
 /* ============================================
    BHAVYA FOUNDATION — VISUAL SYSTEM
