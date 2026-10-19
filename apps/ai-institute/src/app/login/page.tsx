@@ -205,11 +205,11 @@ function LoginForm() {
               <p
                 style={{
                   fontSize: "var(--text-xs)",
-                  color: "#b91c1c",
+                  color: "var(--color-status-error-fg)",
                   padding: "var(--space-2) var(--space-3)",
                   borderRadius: "var(--radius-md)",
-                  background: "#fef2f2",
-                  border: "1px solid #fecaca",
+                  background: "var(--color-status-error-bg)",
+                  border: "1px solid var(--color-status-error-border)",
                 }}
               >
                 {error}

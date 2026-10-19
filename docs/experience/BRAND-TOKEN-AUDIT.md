@@ -305,3 +305,24 @@ Rewriting that page is deferred deliberately: it is the design-system app's
 public statement of the token contract, and changing it is a brand-visible
 decision rather than a cleanup. It should be reissued from the canonical source
 once the pps/admin question is settled, so both are decided together.
+
+---
+
+## Follow-up pass - remaining raw status hex (resolved)
+
+Raw status hex values found on the experience surface and mapped to measured semantic pairs:
+
+| Location                                                    | Before                                   | After                                 | Reason                            |
+| ----------------------------------------------------------- | ---------------------------------------- | ------------------------------------- | --------------------------------- |
+| `app/login/page.tsx:208`                                    | `color: "#b91c1c"` + `#fef2f2`/`#fecaca` | `status-error-fg` / `-bg` / `-border` | error message state               |
+| `app/register/page.tsx:248`                                 | same                                     | same                                  | error message state               |
+| `components/progress/index.tsx:41`                          | `"#ef4444"` low-confidence               | `--color-status-error-fg`             | below-threshold confidence        |
+| `app/playground/page.tsx:144`                               | `bg-[#22c55e]/10 ... text-[#22c55e]`     | `status-success` triple               | active-simulation indicator       |
+| `curriculum/levels/[level]/page.tsx`, `curriculum/page.tsx` | `hover:border-[#0e382e]`                 | `hover:border-accent-green`           | brand forest -> accent-green role |
+
+What remains documented as a gap (visual-design decision, not a status fix):
+
+- `data/learning-paths.ts` carries 17 deliberate path-identifier colors (green/amber/red/blue/purple/teal/pink/indigo family). Only four canonical viz tokens exist (`--color-viz-forest/gold/earth/sage`), so collapsing them would destroy the visual distinction content relies on. Left as-is; mapping requires a brand/visual-design decision.
+- `components/curriculum/BentoModuleGrid.tsx` and `CurriculumHero3D.tsx` band gradients use amber (`#f59e0b`, `#d97706`) alongside canonical brand forest steps. Left as-is for the same reason.
+
+Raw hex scan: 0 remaining status-color literals outside the canonical token source in `apps/ai-institute/src` and `packages/platform-ui/src`.

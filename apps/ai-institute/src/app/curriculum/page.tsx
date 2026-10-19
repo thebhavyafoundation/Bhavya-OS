@@ -307,7 +307,7 @@ export default function CurriculumPage() {
               {TRACKS.map((t) => (
                 <a
                   key={t.id}
-                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
+                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-accent-green"
                   href={
                     t.levels.length === 1
                       ? `/curriculum/levels/${t.levels[0]}`
@@ -445,7 +445,7 @@ export default function CurriculumPage() {
                 return (
                   <a
                     key={l}
-                    className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
+                    className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-accent-green"
                     href={`/curriculum/levels/${l}`}
                     style={{
                       display: "block",

@@ -171,7 +171,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
               {modules.map((m) => (
                 <a
                   key={m.id}
-                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
+                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-accent-green"
                   href={`/curriculum/levels/${level}/${m.id}`}
                   style={{
                     display: "block",
