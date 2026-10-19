@@ -11,7 +11,7 @@ const programs = [
     duration: "12 weeks",
     level: "Beginner",
     description: "Learn AI fundamentals",
-    accent: "#1a3a2a", // TODO: reference design token
+    accent: "var(--color-accent-green)",
     accentName: "green",
     curriculum: [
       "Introduction to AI & Machine Learning",
@@ -26,7 +26,7 @@ const programs = [
     duration: "16 weeks",
     level: "Intermediate",
     description: "Build real AI systems",
-    accent: "#c9a227", // TODO: reference design token
+    accent: "var(--color-accent-gold)",
     accentName: "gold",
     curriculum: [
       "Advanced Deep Learning Architectures",
@@ -41,7 +41,7 @@ const programs = [
     duration: "24 weeks",
     level: "Advanced",
     description: "Push the boundaries",
-    accent: "#8a7359", // TODO: reference design token
+    accent: "var(--color-accent-earth)",
     accentName: "earth",
     curriculum: [
       "Research Methodology & Paper Writing",
@@ -123,22 +123,22 @@ export default function ProgramsPage() {
               variants={item}
               className="group relative bg-bg-secondary border border-border-primary/20 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:scale-[1.01]"
               style={{
-                boxShadow: `0 0 0 0px ${prog.accent}00`,
+                boxShadow: `0 0 0 0px ${prog.accent}`,
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 0 40px -8px ${prog.accent}35, 0 0 0 1px ${prog.accent}50`;
-                e.currentTarget.style.borderColor = `${prog.accent}50`;
+                e.currentTarget.style.boxShadow = `0 0 40px -8px color-mix(in srgb, ${prog.accent}, transparent 65%), 0 0 0 1px color-mix(in srgb, ${prog.accent}, transparent 50%)`;
+                e.currentTarget.style.borderColor = `color-mix(in srgb, ${prog.accent}, transparent 50%)`;
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.boxShadow = `0 0 0 0px ${prog.accent}00`;
-                e.currentTarget.style.borderColor = `${prog.accent}33`;
+                e.currentTarget.style.borderColor = `color-mix(in srgb, ${prog.accent}, transparent 67%)`;
               }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold"
                   style={{
-                    backgroundColor: `${prog.accent}25`,
+                    backgroundColor: `color-mix(in srgb, ${prog.accent}, transparent 75%)`,
                     color: prog.accent,
                   }}
                 >
@@ -158,8 +158,8 @@ export default function ProgramsPage() {
                 <span
                   className="px-3 py-1 rounded-full text-xs font-medium border"
                   style={{
-                    backgroundColor: `${prog.accent}15`,
-                    borderColor: `${prog.accent}40`,
+                    backgroundColor: `color-mix(in srgb, ${prog.accent}, transparent 85%)`,
+                    borderColor: `color-mix(in srgb, ${prog.accent}, transparent 60%)`,
                     color: prog.accent,
                   }}
                 >
@@ -197,15 +197,15 @@ export default function ProgramsPage() {
                 href="/courses"
                 className="block w-full text-center py-3.5 rounded-xl font-medium text-sm transition-all"
                 style={{
-                  backgroundColor: `${prog.accent}20`,
+                  backgroundColor: `color-mix(in srgb, ${prog.accent}, transparent 80%)`,
                   color: prog.accent,
-                  border: `1px solid ${prog.accent}40`,
+                  border: `1px solid color-mix(in srgb, ${prog.accent}, transparent 60%)`,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = `${prog.accent}35`;
+                  e.currentTarget.style.backgroundColor = `color-mix(in srgb, ${prog.accent}, transparent 65%)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = `${prog.accent}20`;
+                  e.currentTarget.style.backgroundColor = `color-mix(in srgb, ${prog.accent}, transparent 80%)`;
                 }}
               >
                 Learn More
