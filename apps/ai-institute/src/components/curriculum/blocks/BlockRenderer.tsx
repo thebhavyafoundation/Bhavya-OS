@@ -1,4 +1,5 @@
 import type { LessonBlock } from "@/data/curriculum";
+import { Callout } from "@bhavya/platform-ui";
 import { DiagramRenderer } from "../diagram/DiagramRenderer";
 import { WidgetRenderer } from "../widgets/WidgetRenderer";
 import { QuizBlock } from "../QuizBlock";
@@ -41,9 +42,9 @@ export function BlockRenderer({
                   ))}
                 </ol>
                 {b.safety && (
-                  <p>
-                    <strong>Safety:</strong> {b.safety}
-                  </p>
+                  <Callout tone="caution" title="Safety:" className="mt-3">
+                    {b.safety}
+                  </Callout>
                 )}
               </section>
             );

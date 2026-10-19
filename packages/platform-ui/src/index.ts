@@ -16,6 +16,9 @@ export { StatCard } from "./components/StatCard";
 export { EmptyState } from "./components/EmptyState";
 export type { EmptyStateProps } from "./components/EmptyState";
 
+export { Callout } from "./components/Callout";
+export type { CalloutTone } from "./components/Callout";
+
 export { LoadingSpinner, LoadingSkeleton } from "./components/LoadingState";
 export type {
   LoadingSpinnerProps,
