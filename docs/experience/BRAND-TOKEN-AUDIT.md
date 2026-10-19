@@ -324,5 +324,6 @@ What remains documented as a gap (visual-design decision, not a status fix):
 
 - `data/learning-paths.ts` carries 17 deliberate path-identifier colors (green/amber/red/blue/purple/teal/pink/indigo family). Only four canonical viz tokens exist (`--color-viz-forest/gold/earth/sage`), so collapsing them would destroy the visual distinction content relies on. Left as-is; mapping requires a brand/visual-design decision.
 - `components/curriculum/BentoModuleGrid.tsx` and `CurriculumHero3D.tsx` band gradients use amber (`#f59e0b`, `#d97706`) alongside canonical brand forest steps. Left as-is for the same reason.
+- `components/platform-ui/StatusBadge.tsx` uses hardcoded dark-badge hex variants (`#991b1b` error, `#065f46` success, `#92400e` warning, `#1e40af` info, `#334155` neutral) across github-os and social-os. Canonical status roles exist but pair a light tint bg with dark fg for light-surface use; remapping StatusBadge to them would invert every badge across two apps. Left as-is; visual-design decision required before any token remap.
 
 Raw hex scan: 0 remaining status-color literals outside the canonical token source in `apps/ai-institute/src` and `packages/platform-ui/src`.
