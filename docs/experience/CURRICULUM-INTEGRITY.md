@@ -51,6 +51,9 @@ And one was materially misleading: _"contains no banned regional place names in 
 - Four regression assertions added that check **content, not shape**: that at least
   one lesson exists, that `l0-m1` resolves lessons, that every lesson has substantive
   blocks, and that each lesson resolves by its own key.
+- A fifth block asserts the per-module lesson counts that drive the "ready to study
+  now" list on `/curriculum` agree with the registry, so the page can never
+  advertise a module it cannot open.
 
 ### Result
 
@@ -78,6 +81,38 @@ The repository contains **two parallel curriculum taxonomies**, and they disagre
 **Why it was not fixed here.** Reconciling the two means deciding whether `AIBand` or `AgeBand` is canonical, which implies which taxonomy is canonical, which implies whether `/curriculum/*` and `/os/*` should share a module identity. That is an architecture decision, and it touches how the Academy describes who it teaches. This session does not make architecture decisions by assumption and does not restate authority it was not given.
 
 **Decision required:** is `6–8 / 9–11 / 12–15 / 15+` the canonical band model, with `bands.ts` corrected to match? Or is the wider `6–8 / 9–10 / 11–16 / 16–18` intended and the design spec superseded?
+
+---
+
+## 2b. DISPOSITION — Two type families, one boundary cast
+
+Discovered while wiring the §1 fix, and the technical expression of §2.
+
+The authored registry emits `Lesson` from `@/types/curriculum`, where every field is
+`readonly` and `band` is an `AIBand` (`"junior-a" | "core" | ...`). The widget tree —
+`blocks/BlockRenderer`, `WidgetRenderer`, `QuizBlock`, `ModuleQuiz` — is typed
+against `@/data/curriculum`, which is mutable and declares a different `LessonBlock`
+union member for several kinds.
+
+The two families describe the same runtime data. They differ by `readonly`
+modifiers and by which band vocabulary they use. Aligning them is one canonical
+type module for the whole curriculum — which is exactly the §2 decision, arrived at
+from a different direction.
+
+**Attempted and deliberately reverted.** Re-typing the accessor to
+`@/types/curriculum` was tried. It typechecked the accessor, then failed in
+`blocks/BlockRenderer`, then in `WidgetRenderer`, then in `QuizBlock` — a transitive
+cascade through the whole widget tree. Completing it is the consolidation, not a
+cleanup, so the attempt was reverted rather than half-applied.
+
+**What ships instead:** one documented cast at the registry boundary in
+`lib/curriculum/lessons.ts`, so every consumer receives a correctly typed `Lesson`
+and casts nothing itself. `data/curriculum/index.ts` already casts at the same
+boundary for the same reason. The alternative — leaving each page to cast its own —
+is how the two families drifted apart without anyone noticing.
+
+**§2 and §2b are one decision.** Reconciling the band vocabulary and collapsing the
+two type families must be done together. Doing either alone leaves the other as a cast.
 
 ---
 
