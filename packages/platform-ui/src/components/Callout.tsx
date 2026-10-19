@@ -3,11 +3,13 @@
  *
  * A block of text that must not be skimmed past.
  *
- * Built only from existing brand tokens. The brand palette has exactly three
- * accents — green (forest), gold, and earth — so there is deliberately no
- * "danger" or "error" hue available. `caution` therefore uses gold, which is
- * already the platform's attention colour, rather than introducing a red that
- * constitutional design authority has not approved.
+ * Tone is a semantic role, never a colour. The component references only the
+ * `--color-callout-*` component tokens, which resolve to `--color-status-*`
+ * semantic tokens in `styles/tokens.css`. Nothing here names a hue, so a
+ * palette rebalance or a light/dark switch needs no change to this file.
+ *
+ * `caution` is the tone for information where getting it wrong has a real
+ * consequence — safety instructions, safeguarding conditions.
  */
 
 import React from "react";
@@ -16,32 +18,31 @@ export type CalloutTone = "note" | "tip" | "caution";
 
 interface CalloutProps {
   children: React.ReactNode;
-  /**
-   * Defaults to `note`. `caution` is for information where getting it wrong
-   * has a real consequence — safety instructions, safeguarding conditions.
-   */
+  /** Defaults to `note`. */
   tone?: CalloutTone;
-  /** Short label rendered in the margin. Omit when the tone is self-evident. */
+  /** Short label rendered ahead of the body. Omit when the tone is self-evident. */
   title?: string;
   className?: string;
   as?: "aside" | "div" | "section";
 }
 
-const toneStyles: Record<CalloutTone, string> = {
-  note: "bg-bg-hover border-border-primary text-text-secondary",
-  tip: "bg-accent-green-subtle border-accent-green/40 text-text-primary",
-  caution: "bg-accent-gold-glow border-accent-gold/50 text-text-primary",
+/*
+ * Written out in full rather than interpolated from the tone name: Tailwind
+ * extracts candidates by scanning source text, so a template literal like
+ * `bg-callout-${tone}-bg` produces no detectable class and silently renders
+ * unstyled. Each string below is complete and statically discoverable.
+ */
+const toneClasses: Record<CalloutTone, string> = {
+  note: "bg-callout-note-bg text-callout-note-fg border-callout-note-rule",
+  tip: "bg-callout-tip-bg text-callout-tip-fg border-callout-tip-rule",
+  caution:
+    "bg-callout-caution-bg text-callout-caution-fg border-callout-caution-rule",
 };
 
-/**
- * The left rule is the part that actually carries the signal. Tone colour alone
- * is not enough, because colour is not available to every reader — the rule is
- * a non-colour cue that survives both greyscale and forced-colours mode.
- */
-const ruleStyles: Record<CalloutTone, string> = {
-  note: "bg-text-tertiary",
-  tip: "bg-accent-green",
-  caution: "bg-accent-gold",
+const ruleClasses: Record<CalloutTone, string> = {
+  note: "bg-callout-note-rule",
+  tip: "bg-callout-tip-rule",
+  caution: "bg-callout-caution-rule",
 };
 
 export function Callout({
@@ -53,18 +54,21 @@ export function Callout({
 }: CalloutProps) {
   return (
     <Tag
-      className={`relative flex gap-3 rounded-md border-l-4 py-3 pl-4 pr-3 text-sm leading-relaxed ${toneStyles[tone]} ${className}`}
+      data-tone={tone}
+      className={`relative flex gap-3 rounded-md border-l-4 py-3 pl-4 pr-3 text-sm leading-relaxed ${toneClasses[tone]} ${className}`}
     >
+      {/*
+       * The left rule carries the signal. Tone colour alone is not enough:
+       * colour is unavailable to some readers, and this is exactly the
+       * content that must not be skimmed. The rule survives greyscale and
+       * forced-colours, where the background tint does not.
+       */}
       <span
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 w-1 rounded-l ${ruleStyles[tone]}`}
+        className={`absolute inset-y-0 left-0 w-1 rounded-l ${ruleClasses[tone]}`}
       />
       <span className="min-w-0 flex-1">
-        {title && (
-          <strong className="mr-1 font-semibold text-text-primary">
-            {title}
-          </strong>
-        )}
+        {title && <strong className="mr-1 font-semibold">{title}</strong>}
         {children}
       </span>
     </Tag>

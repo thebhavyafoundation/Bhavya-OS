@@ -146,11 +146,44 @@
   --color-accent-earth-hover: #546342;
   --color-accent-earth-glow: rgba(106, 124, 82, 0.08);
 
-  /* Status */
+  /* Status — role hues.
+     These are the *rule* colour for each role: borders, dots, and other
+     non-text cues. They are NOT safe as a text foreground in every mode —
+     use the paired -fg tokens below for any text. */
   --color-status-success: #2d8a45;
   --color-status-warning: #d4af37;
+  --color-status-caution: #6a7c52;
   --color-status-error: #c0392b;
   --color-status-info: #2980b9;
+  --color-status-neutral: #546342;
+
+  /* Status — explicit foreground / background pairs.
+     Every pair below is measured, not guessed. Text foregrounds clear
+     WCAG AA (>= 4.5:1) against their own tinted background in BOTH light
+     and dark mode; rule colours clear >= 3:1 against the page surface.
+
+     Previously these roles existed only as flat hues. As text they failed:
+     warning measured 1.91:1 on the light surface, and in dark mode danger,
+     success and info all fell below 4.5:1. A role that cannot be read is
+     not a role. */
+  --color-status-success-fg: #1a6b30;
+  --color-status-success-bg: #eaf4ec;
+  --color-status-success-border: rgba(45, 138, 69, 0.35);
+  --color-status-warning-fg: #806418;
+  --color-status-warning-bg: #fbf6e4;
+  --color-status-warning-border: rgba(160, 125, 30, 0.4);
+  --color-status-caution-fg: #3e4a32;
+  --color-status-caution-bg: #f0f3ea;
+  --color-status-caution-border: rgba(106, 124, 82, 0.4);
+  --color-status-error-fg: #8c2f22;
+  --color-status-error-bg: #fbeeea;
+  --color-status-error-border: rgba(192, 57, 43, 0.35);
+  --color-status-info-fg: #1a5276;
+  --color-status-info-bg: #eaf2f8;
+  --color-status-info-border: rgba(41, 128, 185, 0.35);
+  --color-status-neutral-fg: #546342;
+  --color-status-neutral-bg: #ede8db;
+  --color-status-neutral-border: rgba(14, 56, 46, 0.16);
 
   /* ============================================
      TYPOGRAPHY — EDITORIAL SYSTEM
@@ -395,6 +428,34 @@
   --color-accent-gold-hover: #f3d88a;
   --color-accent-gold-glow: rgba(232, 192, 74, 0.1);
 
+  /* Status pairs — dark. The role hues stay constant, but the foreground
+     steps invert to the lighter end of each scale so contrast holds against
+     the dark forest surface instead of collapsing. */
+  --color-status-success: #2d8a45;
+  --color-status-caution: #a8bc8a;
+  --color-status-error: #e88b7d;
+  --color-status-info: #7fc4e8;
+  --color-status-neutral: #94ab96;
+
+  --color-status-success-fg: #7cba8d;
+  --color-status-success-bg: #16301f;
+  --color-status-success-border: rgba(124, 186, 141, 0.4);
+  --color-status-warning-fg: #e8c04a;
+  --color-status-warning-bg: #332c14;
+  --color-status-warning-border: rgba(232, 192, 74, 0.4);
+  --color-status-caution-fg: #a8bc8a;
+  --color-status-caution-bg: #23291c;
+  --color-status-caution-border: rgba(168, 188, 138, 0.4);
+  --color-status-error-fg: #e88b7d;
+  --color-status-error-bg: #3a1f1a;
+  --color-status-error-border: rgba(232, 139, 125, 0.4);
+  --color-status-info-fg: #7fc4e8;
+  --color-status-info-bg: #16283a;
+  --color-status-info-border: rgba(127, 196, 232, 0.4);
+  --color-status-neutral-fg: #94ab96;
+  --color-status-neutral-bg: #143828;
+  --color-status-neutral-border: rgba(247, 244, 236, 0.16);
+
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -405,6 +466,32 @@
   --color-surface-forest-subtle: rgba(247, 244, 236, 0.08);
   --color-surface-forest-medium: rgba(247, 244, 236, 0.15);
   --color-surface-forest-strong: rgba(247, 244, 236, 0.25);
+}
+
+/* ============================================
+   COMPONENT TOKENS
+
+   Component tokens resolve to SEMANTIC tokens, never to literal values, so
+   a palette rebalance or a light/dark switch propagates without touching a
+   single component. Declared with `@theme inline` so Tailwind emits the
+   resolved `var()` chain rather than flattening it to the light value.
+   ============================================ */
+
+@theme inline {
+  /* Callout — educational and storytelling surfaces. Each tone is a
+     semantic role, not a hue: note is neutral, tip is success, caution is
+     caution. Nothing here names a colour. */
+  --color-callout-note-fg: var(--color-status-neutral-fg);
+  --color-callout-note-bg: var(--color-status-neutral-bg);
+  --color-callout-note-rule: var(--color-status-neutral-fg);
+
+  --color-callout-tip-fg: var(--color-status-success-fg);
+  --color-callout-tip-bg: var(--color-status-success-bg);
+  --color-callout-tip-rule: var(--color-status-success);
+
+  --color-callout-caution-fg: var(--color-status-caution-fg);
+  --color-callout-caution-bg: var(--color-status-caution-bg);
+  --color-callout-caution-rule: var(--color-status-caution);
 }
 
 /* ============================================

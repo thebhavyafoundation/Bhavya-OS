@@ -245,10 +245,10 @@ export default function NewKnowledgeObjectPage() {
           <div
             style={{
               padding: "var(--space-4)",
-              background: "var(--color-status-error-bg, #fef2f2)",
-              border: "1px solid var(--color-status-error-border, #fecaca)",
+              background: "var(--color-status-error-bg)",
+              border: "1px solid var(--color-status-error-border)",
               borderRadius: "var(--radius-md)",
-              color: "var(--color-status-error-text, #991b1b)",
+              color: "var(--color-status-error-fg)",
               fontSize: "var(--text-sm)",
               marginBottom: "var(--space-6)",
             }}

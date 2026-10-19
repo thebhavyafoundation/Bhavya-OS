@@ -3,52 +3,64 @@
  *
  * Standardized badge component for status and labels.
  *
- * Variants map only onto accents that actually exist in the brand palette:
- * green (forest), gold, and earth. The previous `error`, `warning`, `info` and
- * `purple` variants referenced `accent-red`, `accent-yellow`, `accent-blue` and
- * `accent-purple`, none of which are defined in the generated theme — so all
- * four rendered with no styling at all and no visible difference from each
- * other. `warning` now uses gold, which is already the platform's attention
- * colour, and `info` uses earth.
+ * Variants are semantic roles, not colours. Each maps onto a measured
+ * `--color-status-*` pair from `styles/tokens.css` — a foreground, a
+ * background and a border that were checked for WCAG contrast in both light
+ * and dark mode.
  *
- * There is deliberately no `error` variant. The brand palette has no danger
- * hue, and adding one is a constitutional design change that needs human
- * authority rather than a component-level guess. It should return once a danger
- * token has been approved.
+ * This previously referenced `accent-red`, `accent-yellow`, `accent-blue` and
+ * `accent-purple`, none of which exist in the generated theme, so four
+ * variants rendered unstyled and indistinguishable. The roles were always
+ * meant to exist; only the names were wrong.
+ *
+ * The class strings are written out in full because Tailwind discovers
+ * candidates by scanning source text, and an interpolated class name is
+ * invisible to it.
  */
 
 import React from "react";
 
+export type BadgeVariant =
+  "neutral" | "success" | "warning" | "caution" | "info" | "danger";
+
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: "default" | "success" | "warning" | "info";
+  variant?: BadgeVariant;
   size?: "sm" | "md";
   dot?: boolean;
   className?: string;
 }
 
-const variantStyles: Record<string, string> = {
-  default: "bg-bg-hover text-text-secondary border-border-primary",
-  success: "bg-accent-green/20 text-accent-green border-accent-green/30",
-  warning: "bg-accent-gold/20 text-text-primary border-accent-gold/50",
-  info: "bg-accent-earth/20 text-text-primary border-accent-earth/50",
+const variantStyles: Record<BadgeVariant, string> = {
+  neutral:
+    "bg-status-neutral-bg text-status-neutral-fg border-status-neutral-border",
+  success:
+    "bg-status-success-bg text-status-success-fg border-status-success-border",
+  warning:
+    "bg-status-warning-bg text-status-warning-fg border-status-warning-border",
+  caution:
+    "bg-status-caution-bg text-status-caution-fg border-status-caution-border",
+  info: "bg-status-info-bg text-status-info-fg border-status-info-border",
+  danger: "bg-status-error-bg text-status-error-fg border-status-error-border",
 };
 
-const dotColors: Record<string, string> = {
-  default: "bg-text-tertiary",
-  success: "bg-accent-green",
-  warning: "bg-accent-gold",
-  info: "bg-accent-earth",
+const dotColors: Record<BadgeVariant, string> = {
+  neutral: "bg-status-neutral",
+  success: "bg-status-success",
+  warning: "bg-status-warning",
+  caution: "bg-status-caution",
+  info: "bg-status-info",
+  danger: "bg-status-error",
 };
 
-const sizeStyles: Record<string, string> = {
+const sizeStyles: Record<"sm" | "md", string> = {
   sm: "px-1.5 py-0.5 text-[10px]",
   md: "px-2 py-0.5 text-xs",
 };
 
 export function Badge({
   children,
-  variant = "default",
+  variant = "neutral",
   size = "md",
   dot = false,
   className = "",
@@ -63,7 +75,10 @@ export function Badge({
       `}
     >
       {dot && (
-        <span className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]}`} />
+        <span
+          aria-hidden="true"
+          className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]}`}
+        />
       )}
       {children}
     </span>
