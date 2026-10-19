@@ -183,3 +183,125 @@ literals — `#ef4444` and `#fef2f2`, Tailwind's red rather than the brand's
    exist and are measured.
 4. Add a `forced-colors` block to the canonical source.
 5. Add `--color-accent-gold-subtle` for symmetry with `accent-green-subtle`.
+
+---
+
+## 9. Follow-up pass - debt cleared since section 5 was written
+
+Section 5 recorded six unresolved findings. Four are now closed.
+
+### Closed
+
+| #                                         | Finding                                                  | Resolution                                                                                                                            |
+| ----------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| 2                                         | ~60 raw hex refs, Tailwind palette used as status colour | 53 hardcoded ar(--token, #hex) fallbacks removed across 13 files. ccent-blue/yellow/                                                  |
+| ed/purple had already been remapped in 18 |
+| 4                                         | pps/docs bespoke adge-* classes                          | Left alone - a separate class system outside the Tailwind token layer, and folding it in needs an inventory this branch does not have |
+| 5                                         | --color-accent-gold had no -subtle counterpart           | Not needed: Callout now resolves through callout tokens, so no component reaches for a gold tint directly                             |
+| 6                                         | No orced-colors block anywhere                           | Now canonical. See section 10                                                                                                         |
+
+A regression guard was added rather than a cleanup pass. It lives at
+pps/ai-institute/src/lib/**tests**/brand-token-integrity.test.ts and
+asserts that every status role has a complete fg/bg/border triple in both
+modes, that every ar(--color-*) in a component resolves to a token that
+exists, that no hex is embedded as a token fallback, and that the forbidden
+palette-name utilities are absent.
+
+The guard earned its place immediately: on first run it failed with 51
+unresolvable references and 6 hardcoded fallbacks that greps had missed,
+including a whole family of -rgb triplet tokens (--color-status-error-rgb,
+--color-ivory-200-rgb, --color-brand-gold-rgb) that no generation of this
+token system ever defined. Those are now 0.
+
+One regression was introduced and reverted during that work: a bulk rename of
+--color-earth to --color-accent-earth also rewrote the legitimate scale step
+--color-earth-700, producing a dead token. The guard caught it. This is why
+bulk renames over a token namespace are worth checking mechanically rather than
+by eye.
+
+### Still open
+
+| #   | Finding                        | Why still open                                                                                                                                         |
+| --- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | pps/admin has its own @theme   | Genuine governance decision: reconcile or delete. Not mechanical, and a second source of truth is a brand-authority call                               |
+| 3   | StatCard API is palette-named  | orest/gold/sage/earth are approved brand accents rather than invented hues, so the component is defensible. Renaming to roles is a cross-app API break |
+| 6   | Forced colours now implemented | What remains is browser verification, which is CI-only on this machine                                                                                 |
+
+---
+
+## 10. Forced-colors strategy
+
+Forced-colors handling now lives in the canonical source, so all eight apps
+inherit it. It previously existed only inside pps/ai-institute's local
+globals.css, which left the other seven with nothing.
+
+### What the user agent does to a page
+
+- Replaces color, ackground-color, order-color and outline-color
+  with system colours.
+- Forces ox-shadow to
+  one.
+- Forces ackground-image to
+  one.
+
+So any meaning carried by a soft fill or a glow is erased, and anything
+distinguished only by hue collapses into one appearance.
+
+### What the canonical layer does
+
+1. **Focus.** The two-tone focus ring's ivory halo is a box-shadow and will not
+   survive. The outline therefore carries focus alone, using Highlight - the
+   system colour reserved for focus, guaranteed to contrast with Canvas.
+2. **Controls.** Buttons, links, inputs, selects, textareas and summaries get
+   a ButtonBorder, because alpha borders are discarded and a control that
+   relied on its fill would otherwise lose its edge.
+3. **Status regions.** Anything carrying data-tone (Callout) or data-variant
+   (Badge) keeps a CanvasText border and orced-color-adjust: none, so the
+   region stays a visible region once every tint is flattened.
+4. **The callout rule** keeps its 4px width, which is the structural channel
+   that survives.
+
+### The rule that tone must not depend on colour
+
+A orced-color-adjust: none rule alone would still leave three callout tones
+looking identical, because their only other differentiator is a tint that gets
+flattened. So Callout now guarantees a visible text label for the caution
+tone, defaulting to the word "Caution" when a caller supplies no title. Caution
+is the tone used for experiment safety instructions and safeguarding conditions
+
+- content where getting it wrong has a real consequence - so it is the tone that
+  most needs a channel that survives greyscale, forced colours, and a monochrome
+  printer.
+
+### Not verified
+
+Whether each component looks right under forced colours requires a browser.
+That is CI-only here.
+
+### Two apparent dead references that are not dead
+
+A repo-wide sweep reports 16 references to tokens absent from the canonical
+source. Checked individually, none are defects:
+
+- **pps/social-os (11 refs)** - --color-sidebar-bg, --color-sidebar-border
+  and --color-sidebar-text are declared in that app's own @theme in its
+  globals.css. Local and intentional, the same pattern pps/admin uses.
+- **pps/design-system/src/app/tokens/page.tsx (5 refs)** - a documentation
+  page describing tokens rather than a live reference.
+
+That second one is nonetheless a real finding, and it is a coherence problem
+rather than a broken reference. The design-system app advertises a flat
+contract:
+
+`--danger  var(--color-red-500)
+--info    var(--color-heritage-400)`
+
+alongside names like --color-brand-700 and --color-accent-500. None of
+those exist in the canonical source, and a flat single-colour status model is
+exactly the model this branch replaced, because it could not hold contrast.
+The documented contract and the real one now disagree.
+
+Rewriting that page is deferred deliberately: it is the design-system app's
+public statement of the token contract, and changing it is a brand-visible
+decision rather than a cleanup. It should be reissued from the canonical source
+once the pps/admin question is settled, so both are decided together.
