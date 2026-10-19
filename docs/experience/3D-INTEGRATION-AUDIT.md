@@ -116,13 +116,11 @@ Both are marked in the source at the line that causes them.
 
 ### Remaining migration order
 
-1. ~~`Model3D`~~ — done
-2. `Hero3DCanvas` — curriculum tier, currently used for visual emphasis rather
-   than instruction. Uses `Model3D` internally, so it inherits the contract but
-   should still be migrated to make the guarantee explicit.
-3. `CinematicHero` — last, and only once the first two have been seen running.
+1. ~~`Model3D`~~ - done
+2. ~~`Hero3DCanvas`~~ - done, see section 8
+3. ~~`CinematicHero`~~ - done, see section 8
 
----
+All three are now on the shared contract.
 
 ## 7. Licence position for 3D sources
 
@@ -134,3 +132,75 @@ Both are marked in the source at the line that causes them.
 Both are approved to _use_. Neither is shippable today because the derivative pipeline has not been run. The workflows that produce mobile (<500 KB) and desktop (<2 MB) Draco derivatives plus poster fallbacks exist on this branch (`assets-glb.yml`, `assets-ktx2.yml`, `assets-posters.yml`) but have never been executed — they produce review artefacts only and never publish to B2.
 
 Until a derivative exists and has been measured, no claim of production readiness should be made for any 3D asset.
+
+---
+
+## 8. Migration - Hero3DCanvas and CinematicHero
+
+Both were the last two components mounting a raw <Canvas>. After this pass
+the only WebGL entry points in the app are ThreeStage itself, plus
+MistScene and PillarSphere, which each already implemented the full set of
+guards independently and were left alone rather than churned.
+
+### Hero3DCanvas
+
+Beyond the missing contract, this component had four real defects.
+
+**ssetUrl was silently ignored.** The URL expression read:
+
+`assetUrl || moduleId ? /models/curriculum//.glb : .../hero.glb`
+
+which parses as (assetUrl || moduleId) ? a : b. Any caller that supplied an
+explicit ssetUrl had it discarded and a derived path loaded instead - so an
+explicit asset could never be used, and the wrong path failed quietly. Now
+resolved by
+esolveModelUrl, which reads as its intent: explicit wins,
+otherwise derive.
+
+**The count prop did nothing.** CurriculumParticles3D accepted count and
+then hard-coded 100 when sizing every buffer. A caller asking for 30 got 100.
+
+**Dead code.** Hero3DModel, ModelLoader, a second module-level andColors
+map, and environmentPresets were all defined and never referenced - the
+andColors duplication meant two copies of the same map could drift.
+
+**Raw hex in scene code.** Particle colours were literals. They now resolve
+through canonical tokens via
+eadTokenColor, so a palette change reaches the
+canvas instead of drifting away from it.
+
+### CinematicHero
+
+**
+educedMotion defaulted to alse and nothing detected the preference.**
+The component only respected reduced motion if a caller remembered to pass the
+flag, and the default meant it did not. Every reader who had asked their system
+to reduce motion was shown an animated particle field whenever a caller
+omitted the prop. It now reads the media query itself and treats the prop as an
+override that can only add to the result, never suppress it.
+
+**Uncapped DPR.** No dpr was set, so the renderer followed the device pixel
+ratio without limit. On a high-density display that is the single most
+expensive thing this scene could do. Now capped by the shared stage, which
+lowers the ceiling further on narrow viewports.
+
+**The fallback was invisible when it mattered.** A gradient layer rendered
+unconditionally at opacity: 0, becoming visible only under reduced motion.
+A reader without WebGL got a transparent layer over nothing. It is now the
+stage poster, so it renders exactly when the canvas cannot.
+
+Tone mapping moved from an onCreated prop into a ToneMapping scene child,
+because the shared stage does not expose onCreated and the alternative was
+losing ACES filmic tone mapping.
+
+### Deviations carried forward, not fixed
+
+Both components still reach a third-party CDN at runtime for the Draco decoder,
+and Hero3DCanvas still uses drei's <Environment>, which resolves a preset
+HDRI from an asset CDN. Neither was rewired: re-hosting is an asset-delivery
+decision, and removing the HDRI changes the lighting, which needs visual review.
+Both are marked at the source line that causes them.
+
+No 3D assets are shippable. The reviewed CI derivative pipeline that would
+produce them has not run, so no scene in this app has been seen with a real
+model in it.
