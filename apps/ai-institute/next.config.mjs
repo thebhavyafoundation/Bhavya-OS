@@ -26,10 +26,16 @@ const nextConfig = {
   // `./web.cjs`. Externalising it lets the require resolve at runtime in the
   // Cloudflare Workers environment, where `@libsql/client` (also externalised)
   // already brings `@libsql/isomorphic-ws` as a transitive dependency.
+  //
+  // `@libsql/hrana-client` is also externalised because it requires
+  // `@libsql/isomorphic-ws` unconditionally at `lib-cjs/index.js:18`, and
+  // bundling it would re-introduce the resolution error. Externalising it
+  // keeps the dependency chain intact at runtime.
   serverExternalPackages: [
     "better-sqlite3",
     "@libsql/client",
     "@libsql/isomorphic-ws",
+    "@libsql/hrana-client",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {
