@@ -35,6 +35,29 @@ human-gate hard stops that each vendored file carries inline.
 5. `npm`-based commands replaced with Bhavya-native `pnpm` gates.
 6. Destructive or heavy-local-build instructions neutralized per AGENTS.md §16.
 
+## Bhavya reconciliation pass
+
+A second pass was performed after the initial vendoring, after the ECC catalog was
+recovered onto `feat/ecc-integration` (cherry-picked from the local-only commit
+`cd3be3a2`). These edits were required to keep every vendored asset inside the
+Bhavya platform contract. They change instruction content only; no Bhavya file,
+gate, constitution, or platform decision was modified.
+
+| File | Upstream content | Reconciled to | Authority |
+|---|---|---|---|
+| `.opencode/agent/ecc-planner.md` | "Worked Example: Adding Stripe Subscriptions" — a full plan modelling paid subscription billing, a `subscriptions` table, Stripe Checkout, and Stripe webhooks | Replaced with "Worked Example: Adding a Bhavya-Compliant Curriculum Endpoint" — a signed-URL certificate endpoint using only Cloudflare/OpenNext, Turso, Supabase Auth, and Backblaze B2 | `PLATFORM-TRUTH.md:14` (paid APIs prohibited), `AGENTS.md` §14 (free/open-source only) |
+| `.opencode/agent/ecc-architect.md` | Example architecture naming Vercel, Cloud Run, Railway, Upstash, and the Claude API | Replaced with the Bhavya platform truth: Cloudflare Workers via OpenNext, Turso, Supabase Auth, B2, `@bhavya/platform-ui` tokens | `docs/architecture/PLATFORM-TRUTH.md` (Cloudflare/OpenNext canonical) |
+| `.opencode/agent/ecc-e2e-runner.md` | Frontmatter description: "Vercel Agent Browser (preferred)" | "driven by the Playwright MCP server already wired in opencode.json" | Bhavya wires Playwright as an MCP server; `agent-browser` is not installed and not a paid dependency |
+| `.opencode/skills/ecc-security-review/SKILL.md` | Checklist item: "Production secrets in hosting platform (Vercel, Railway)" | "Production secrets in Cloudflare Workers environment (per PLATFORM-TRUTH.md)" | `PLATFORM-TRUTH.md` |
+
+Deliberately **not** changed:
+
+- The single occurrence of "Stripe" that remains in `ecc-planner.md` is inside a
+  success criterion that *forbids* introducing Stripe. It is a prohibition, not a
+  proposal, and is left intact deliberately.
+- The R2 mentions in `ecc-planner.md` are likewise prohibitive ("no R2").
+- All Bhavya authority banners and hard-stop blocks were left byte-identical.
+
 ## Vendored file inventory
 
 ### Commands — `.opencode/command/` (upstream `.opencode/commands/`)

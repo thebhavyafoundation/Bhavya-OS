@@ -248,18 +248,19 @@ Watch for these architectural anti-patterns:
 
 ## Project-Specific Architecture (Example)
 
-Example architecture for an AI-powered SaaS platform:
+Example architecture for a Bhavya AI Institute learner. This example follows
+`docs/architecture/PLATFORM-TRUTH.md`, which is canonical for this repository:
 
 ### Current Architecture
-- **Frontend**: Next.js 15 (Vercel/Cloud Run)
-- **Backend**: FastAPI or Express (Cloud Run/Railway)
-- **Database**: PostgreSQL (Supabase)
-- **Cache**: Redis (Upstash/Railway)
-- **AI**: Claude API with structured output
-- **Real-time**: Supabase subscriptions
+- **Frontend**: Next.js 15 on Cloudflare Workers via OpenNext (`opennextjs-cloudflare build`)
+- **Production data**: Turso (libSQL)
+- **Auth**: Supabase Auth
+- **Large assets**: Backblaze B2 behind `packages/providers/src/storage.ts`
+- **UI**: `@bhavya/platform-ui` with `--color-*` tokens from `packages/platform-ui/src/styles/tokens.css`
+- **Real-time**: Supabase Realtime
 
 ### Key Design Decisions
-1. **Hybrid Deployment**: Vercel (frontend) + Cloud Run (backend) for optimal performance
+1. **Single production path**: Cloudflare Workers via OpenNext is the only production target; Vercel is preview-only
 2. **AI Integration**: Structured output with Pydantic/Zod for type safety
 3. **Real-time Updates**: Supabase subscriptions for live data
 4. **Immutable Patterns**: Spread operators for predictable state

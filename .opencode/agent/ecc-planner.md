@@ -161,83 +161,68 @@ Create detailed steps with:
 6. **Think Incrementally**: Each step should be verifiable
 7. **Document Decisions**: Explain why, not just what
 
-## Worked Example: Adding Stripe Subscriptions
+## Worked Example: Adding a Bhavya-Compliant Curriculum Endpoint
+
+This repository prohibits paid APIs and payment-method-required services
+(PLATFORM-TRUTH.md, AGENTS.md section 14). The example below therefore uses
+only Bhavya platform truth: Cloudflare/OpenNext for production, Turso for
+production data, Supabase for auth, and Backblaze B2 for large assets.
 
 Here is a complete plan showing the level of detail expected:
 
 ```markdown
-# Implementation Plan: Stripe Subscription Billing
+# Implementation Plan: Certificate Download Endpoint
 
 ## Overview
-Add subscription billing with free/pro/enterprise tiers. Users upgrade via
-Stripe Checkout, and webhook events keep subscription status in sync.
+
+Add a read-only endpoint that issues a short-lived signed URL for a learner
+certificate stored in Backblaze B2. No new paid service, no R2, no new auth
+system.
 
 ## Requirements
-- Three tiers: Free (default), Pro ($29/mo), Enterprise ($99/mo)
-- Stripe Checkout for payment flow
-- Webhook handler for subscription lifecycle events
-- Feature gating based on subscription tier
+
+- Learners can download their own certificate only
+- Signed URLs expire within 5 minutes
+- Supabase session is required; anonymous access is rejected
+- Large assets stay in B2; nothing new lands in the repository
 
 ## Architecture Changes
-- New table: `subscriptions` (user_id, stripe_customer_id, stripe_subscription_id, status, tier)
-- New API route: `app/api/checkout/route.ts` — creates Stripe Checkout session
-- New API route: `app/api/webhooks/stripe/route.ts` — handles Stripe events
-- New middleware: check subscription tier for gated features
-- New component: `PricingTable` — displays tiers with upgrade buttons
+
+- `apps/ai-institute/src/app/api/certificates/[id]/route.ts`: verify Supabase session, assert row ownership, call the existing `packages/security` signing helper
+- No new storage client; reuse `packages/providers/src/storage.ts`
+- No new database table; Turso schema is unchanged
 
 ## Implementation Steps
 
-### Phase 1: Database & Backend (2 files)
-1. **Create subscription migration** (File: supabase/migrations/004_subscriptions.sql)
-   - Action: CREATE TABLE subscriptions with RLS policies
-   - Why: Store billing state server-side, never trust client
-   - Dependencies: None
-   - Risk: Low
+### Phase 1: Auth and ownership guard (1 file)
+- Action: reject unauthenticated requests before any B2 call
+- Why: never issue a signed URL for an unverified user
+- Tests: unit test for 401 and for cross-user access
 
-2. **Create Stripe webhook handler** (File: src/app/api/webhooks/stripe/route.ts)
-   - Action: Handle checkout.session.completed, customer.subscription.updated,
-     customer.subscription.deleted events
-   - Why: Keep subscription status in sync with Stripe
-   - Dependencies: Step 1 (needs subscriptions table)
-   - Risk: High — webhook signature verification is critical
-
-### Phase 2: Checkout Flow (2 files)
-3. **Create checkout API route** (File: src/app/api/checkout/route.ts)
-   - Action: Create Stripe Checkout session with price_id and success/cancel URLs
-   - Why: Server-side session creation prevents price tampering
-   - Dependencies: Step 1
-   - Risk: Medium — must validate user is authenticated
-
-4. **Build pricing page** (File: src/components/PricingTable.tsx)
-   - Action: Display three tiers with feature comparison and upgrade buttons
-   - Why: User-facing upgrade flow
-   - Dependencies: Step 3
-   - Risk: Low
-
-### Phase 3: Feature Gating (1 file)
-5. **Add tier-based middleware** (File: src/middleware.ts)
-   - Action: Check subscription tier on protected routes, redirect free users
-   - Why: Enforce tier limits server-side
-   - Dependencies: Steps 1-2 (needs subscription data)
-   - Risk: Medium — must handle edge cases (expired, past_due)
+### Phase 2: Signed URL issuance (1 file)
+- Action: reuse the existing B2 signing helper with a 5 minute expiry
+- Why: preserve the single storage boundary owned by packages/providers
+- Tests: expiry assertion and audit-log assertion
 
 ## Testing Strategy
-- Unit tests: Webhook event parsing, tier checking logic
-- Integration tests: Checkout session creation, webhook processing
-- E2E tests: Full upgrade flow (Stripe test mode)
+
+- Unit: ownership guard, expiry, error mapping
+- Integration: full request against a B2 test bucket
+- Remote: full suite and `pnpm typecheck` run on CI per AGENTS.md section 16
 
 ## Risks & Mitigations
-- **Risk**: Webhook events arrive out of order
-  - Mitigation: Use event timestamps, idempotent updates
-- **Risk**: User upgrades but webhook fails
-  - Mitigation: Poll Stripe as fallback, show "processing" state
+
+- MEDIUM: signed URL leaks via logs -> audit-log URLs only, never the token
+- MEDIUM: cross-tenant read -> ownership query is mandatory, not optional
+- LOW: B2 outage -> 503 with a retryable error shape
 
 ## Success Criteria
-- [ ] User can upgrade from Free to Pro via Stripe Checkout
-- [ ] Webhook correctly syncs subscription status
-- [ ] Free users cannot access Pro features
-- [ ] Downgrade/cancellation works correctly
-- [ ] All tests pass with 80%+ coverage
+
+- [ ] Unauthenticated request returns 401
+- [ ] Another learner requesting the same id returns 403
+- [ ] Signed URL expires within 5 minutes
+- [ ] No R2, Stripe, or other paid service is introduced
+- [ ] CI passes
 ```
 
 ## When Planning Refactors
