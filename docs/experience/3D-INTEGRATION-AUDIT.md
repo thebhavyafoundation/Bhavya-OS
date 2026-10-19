@@ -27,7 +27,7 @@ Per the web-experience standards, every 3D scene must satisfy all seven:
 | Component                     | WebGL? |     1      |  2  |  3  |  4  |  5  |  6  |  7  | Verdict                                                                                              |
 | ----------------------------- | ------ | :--------: | :-: | :-: | :-: | :-: | :-: | :-: | ---------------------------------------------------------------------------------------------------- |
 | `three/MistScene.tsx`         | yes    | via caller | ✅  | ⚠️  | ✅  | ✅  | ✅  | ✅  | **Reference implementation**                                                                         |
-| `three/Model3D.tsx`           | yes    |     ✅     | ✅  | ❌  | ❌  | ❌  | ❌  | ❌  | Gaps                                                                                                 |
+| `three/Model3D.tsx`           | yes    |     ✅     | ✅  | ✅  | ✅  | ✅  | ✅  | ✅  | **Migrated to `ThreeStage`** — see §6                                                                |
 | `three/CinematicHero.tsx`     | yes    |     ✅     | ❌  | ❌  | ❌  | ❌  | ❌  | ❌  | Gaps                                                                                                 |
 | `curriculum/Hero3DCanvas.tsx` | yes    |     ✅     | ✅  | ❌  | ❌  | ❌  | ✅  | ❌  | Gaps                                                                                                 |
 | `HeroBackground.tsx`          | **no** |     —      |  —  |  —  |  —  |  —  |  —  |  —  | Not a 3D component. Layered CSS gradient over a photograph; static, so it needs none of these guards |
@@ -71,7 +71,60 @@ Migrating a scene without being able to look at it risks trading a known gap for
 
 ---
 
-## 5. Licence position for 3D sources
+## 6. Migration — `Model3D`, and two platform-truth deviations found inside it
+
+`Model3D` was migrated to `ThreeStage`. It was first in the recommended order
+because it is the generic loader: `CurriculumHero3D` and `VisualComponent` both
+consume it, so the contract now propagates to everything built on it.
+
+Migration met the criteria for a change that does not need visual verification:
+the fallback is a reserved plate, no content meaning changes, and correctness
+is checkable by TypeScript.
+
+### Two real defects fixed alongside it
+
+**The transform API was dead.** `Model3D` declared `scale`, `position`,
+`rotation`, `floatIntensity` and `autoRotate`, and passed none of them to
+anything. `Hero3D` calls it with `scale={1.5}` and `position={[0,-0.5,0]}`,
+which did absolutely nothing. All five are now wired.
+
+**Nothing was disposed.** A loaded scene's geometries and materials were never
+released. A learner working through several 3D lessons in one sitting would
+accumulate every model until the tab ran out of memory. Disposal now runs on
+unmount, traversing the scene and releasing geometry and material.
+
+### Two platform-truth deviations — documented, deliberately not fixed
+
+Both were found while migrating and neither is an engineering call.
+
+**1. Draco decoder from a third-party CDN.**
+`Model3D` sets its decoder path to
+`https://www.gstatic.com/draco/versioned/decoders/1.5.7/`. Every 3D model on
+the platform therefore depends on an external host at runtime, with no
+fallback if it is unreachable. The platform position is that large assets are
+served from Backblaze B2. Re-hosting the decoder from the `three` package's own
+`examples/jsm/libs/draco/` is the fix, but choosing a delivery host is an
+asset-boundary decision.
+
+**2. HDRI fetched from an asset CDN.**
+`<Environment preset="forest" />` makes drei download an HDRI from a third-party
+asset CDN at runtime, again contrary to the B2 position. Unlike the decoder,
+removing it **changes the lighting**, so it cannot be fixed without visual
+review — which is CI-only.
+
+Both are marked in the source at the line that causes them.
+
+### Remaining migration order
+
+1. ~~`Model3D`~~ — done
+2. `Hero3DCanvas` — curriculum tier, currently used for visual emphasis rather
+   than instruction. Uses `Model3D` internally, so it inherits the contract but
+   should still be migrated to make the guarantee explicit.
+3. `CinematicHero` — last, and only once the first two have been seen running.
+
+---
+
+## 7. Licence position for 3D sources
 
 | Source                                                                | Licence | Shippable?                          |
 | --------------------------------------------------------------------- | ------- | ----------------------------------- |
