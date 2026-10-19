@@ -19,9 +19,9 @@ type SourceFilter = "all" | "bhavya" | "external";
 
 const typeColors: Record<string, string> = {
   module: "var(--color-brand-forest)",
-  guide: "var(--color-earth-600, #6a7c52)",
+  guide: "var(--color-earth-600)",
   reference: "var(--color-brand-gold)",
-  curriculum: "var(--color-forest-600, #0e5936)",
+  curriculum: "var(--color-forest-600)",
   default: "var(--color-text-muted)",
 };
 

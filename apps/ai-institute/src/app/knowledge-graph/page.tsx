@@ -285,7 +285,7 @@ export default function KnowledgeGraphPage() {
         hoveredNode === toId ||
         selectedNode?.id === fromId ||
         selectedNode?.id === toId
-          ? "rgba(var(--color-brand-gold-rgb, 201, 162, 39), 0.4)"
+          ? "var(--color-border-gold)"
           : "rgba(255, 255, 255, 0.06)";
       ctx.lineWidth =
         hoveredNode === fromId ||

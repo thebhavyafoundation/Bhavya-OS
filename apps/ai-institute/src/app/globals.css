@@ -1855,7 +1855,7 @@ body {
   display: inline-block;
   padding: 2px var(--space-2);
   border-radius: var(--radius-full);
-  background: var(--color-forest-50, #f0f5f1);
+  background: var(--color-forest-50);
   color: var(--color-brand-forest);
   font-size: 10px;
   font-weight: 600;

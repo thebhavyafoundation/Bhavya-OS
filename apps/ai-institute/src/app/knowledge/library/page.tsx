@@ -55,7 +55,7 @@ export default function LibraryPage() {
             <input
               type="text"
               placeholder="Search knowledge packages..."
-              className="w-full pl-12 pr-4 py-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] text-lg"
+              className="w-full pl-12 pr-4 py-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] text-lg"
             />
           </div>
 

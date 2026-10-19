@@ -549,10 +549,8 @@ export default function ConceptPage() {
                     display: "flex",
                     alignItems: "flex-start",
                     gap: "var(--space-3)",
-                    background:
-                      "rgba(var(--color-status-error-rgb, 192, 57, 43), 0.08)",
-                    border:
-                      "1px solid rgba(var(--color-status-error-rgb, 192, 57, 43), 0.2)",
+                    background: "var(--color-status-error-bg)",
+                    border: "1px solid var(--color-status-error-border)",
                     borderRadius: "var(--radius-md)",
                     padding: "var(--space-4)",
                   }}

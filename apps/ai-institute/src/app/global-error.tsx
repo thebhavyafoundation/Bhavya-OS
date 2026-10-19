@@ -27,8 +27,7 @@ export default function GlobalError({
                 width: "48px",
                 height: "48px",
                 borderRadius: "8px",
-                backgroundColor:
-                  "rgba(var(--color-status-error-rgb, 220, 38, 38), 0.1)",
+                backgroundColor: "var(--color-status-error-bg)",
                 color: "var(--color-status-error)",
                 display: "flex",
                 alignItems: "center",
@@ -51,8 +50,7 @@ export default function GlobalError({
             <p
               style={{
                 fontSize: "14px",
-                color:
-                  "rgba(var(--color-text-primary-rgb, 245, 241, 230), 0.6)",
+                color: "var(--color-text-secondary)",
                 marginBottom: "24px",
               }}
             >
@@ -66,8 +64,7 @@ export default function GlobalError({
                 fontWeight: "600",
                 backgroundColor: "var(--color-bg-tertiary)",
                 color: "var(--color-text-primary)",
-                border:
-                  "1px solid rgba(var(--color-text-primary-rgb, 245, 241, 230), 0.2)",
+                border: "1px solid var(--color-border-primary)",
                 borderRadius: "8px",
                 cursor: "pointer",
               }}

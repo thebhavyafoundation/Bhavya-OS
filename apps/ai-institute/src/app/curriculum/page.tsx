@@ -125,7 +125,7 @@ export default function CurriculumPage() {
             <p
               style={{
                 fontSize: "var(--text-lg)",
-                color: "var(--color-earth)",
+                color: "var(--color-accent-earth)",
                 maxWidth: "600px",
                 margin: "0 auto",
                 lineHeight: 1.7,
@@ -180,7 +180,7 @@ export default function CurriculumPage() {
                 </h2>
                 <p
                   style={{
-                    color: "var(--color-earth)",
+                    color: "var(--color-accent-earth)",
                     marginTop: "var(--space-2)",
                     maxWidth: "600px",
                     lineHeight: 1.6,
@@ -285,7 +285,7 @@ export default function CurriculumPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -348,7 +348,7 @@ export default function CurriculumPage() {
                   </h3>
                   <p
                     style={{
-                      color: "var(--color-earth)",
+                      color: "var(--color-accent-earth)",
                       marginBottom: "var(--space-3)",
                       lineHeight: 1.5,
                     }}
@@ -422,7 +422,7 @@ export default function CurriculumPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -492,7 +492,7 @@ export default function CurriculumPage() {
                     </h3>
                     <p
                       style={{
-                        color: "var(--color-earth)",
+                        color: "var(--color-accent-earth)",
                         marginBottom: "var(--space-3)",
                         lineHeight: 1.5,
                       }}
@@ -547,7 +547,7 @@ export default function CurriculumPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -595,7 +595,7 @@ export default function CurriculumPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -654,7 +654,7 @@ export default function CurriculumPage() {
                     <p
                       style={{
                         fontSize: "var(--text-sm)",
-                        color: "var(--color-earth)",
+                        color: "var(--color-accent-earth)",
                         marginTop: "var(--space-1)",
                         lineHeight: 1.5,
                       }}
@@ -701,7 +701,7 @@ export default function CurriculumPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,

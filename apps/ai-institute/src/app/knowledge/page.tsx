@@ -162,11 +162,9 @@ export default function KnowledgePage() {
           <ScrollReveal direction="up" delay={0.2}>
             <div
               style={{
-                background:
-                  "rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.08)",
+                background: "var(--color-surface-forest-light)",
                 backdropFilter: "blur(16px)",
-                border:
-                  "1px solid rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.12)",
+                border: "1px solid var(--color-border-secondary)",
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-8)",
               }}
@@ -202,7 +200,7 @@ export default function KnowledgePage() {
                     key={i}
                     style={{
                       borderBottom:
-                        "1px solid rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.08)",
+                        "1px solid var(--color-surface-forest-light)",
                       paddingBottom: "var(--space-4)",
                     }}
                   >
@@ -218,8 +216,7 @@ export default function KnowledgePage() {
                     <div
                       style={{
                         fontSize: "var(--text-xs)",
-                        color:
-                          "rgba(var(--color-ivory-200-rgb, 247, 244, 236), 0.6)",
+                        color: "var(--color-text-secondary)",
                         marginTop: "var(--space-1)",
                       }}
                     >
@@ -465,8 +462,8 @@ export default function KnowledgePage() {
                 lineHeight: 1.7,
               }}
             >
-              Free courses, open knowledge, community research. No prerequisites.
-              No fees.
+              Free courses, open knowledge, community research. No
+              prerequisites. No fees.
             </p>
             <a href="/knowledge/academy" className="btn btn-gold">
               Explore Academy

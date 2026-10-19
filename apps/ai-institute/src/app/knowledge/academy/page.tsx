@@ -42,7 +42,7 @@ export default function AcademyPage() {
           <p
             style={{
               fontSize: "var(--text-lg)",
-              color: "var(--color-earth)",
+              color: "var(--color-accent-earth)",
               maxWidth: "600px",
               margin: "0 auto var(--space-10)",
               lineHeight: 1.7,

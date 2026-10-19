@@ -37,12 +37,12 @@ const _OVERFIT_DATA = [
 ];
 
 const BAR_COLORS = [
-  "var(--color-viz-1)",
-  "var(--color-viz-2)",
-  "var(--color-viz-3)",
-  "var(--color-viz-4)",
-  "var(--color-viz-5)",
-  "var(--color-viz-6)",
+  "var(--color-viz-forest)",
+  "var(--color-viz-earth)",
+  "var(--color-viz-sage)",
+  "var(--color-viz-sage-light)",
+  "var(--color-viz-earth-light)",
+  "var(--color-viz-gold-light)",
 ];
 
 export function SimControls({ preset, prompt }: SimControlsProps) {
@@ -236,8 +236,8 @@ export function SimControls({ preset, prompt }: SimControlsProps) {
                 borderRadius: "50%",
                 background:
                   p.predicted === 1
-                    ? "var(--color-viz-1)"
-                    : "var(--color-viz-2)",
+                    ? "var(--color-viz-forest)"
+                    : "var(--color-viz-earth)",
                 border: p.isCorrect
                   ? "2px solid var(--color-status-success)"
                   : "2px solid var(--color-status-error)",
@@ -342,7 +342,7 @@ export function SimControls({ preset, prompt }: SimControlsProps) {
                 cx={p.x}
                 cy={p.y}
                 r={4}
-                fill="var(--color-viz-1)"
+                fill="var(--color-viz-forest)"
                 stroke="var(--color-bg-primary)"
                 strokeWidth="1"
               />

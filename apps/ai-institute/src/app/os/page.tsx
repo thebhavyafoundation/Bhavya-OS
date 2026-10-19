@@ -187,7 +187,7 @@ export default async function OSPage() {
   return (
     <div
       className="min-h-screen"
-      style={{ background: "var(--color-forest-950, #0a1f1a)" }}
+      style={{ background: "var(--color-forest-950)" }}
     >
       {/* ====== OS HEADER ====== */}
       <div
