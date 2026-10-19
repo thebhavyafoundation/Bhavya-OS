@@ -39,26 +39,10 @@ function Panel({
   dark?: boolean;
 }) {
   return (
-    <section
-      className={`rounded-lg border p-5 ${
-        dark ? "border-white/10 bg-[#0a1f15]" : "border-black/10 bg-[#f7f4ec]"
-      }`}
-    >
+    <section className="rounded-lg border p-5 border-border-primary bg-bg-primary">
       <header className="mb-4">
-        <h3
-          className={`text-sm font-semibold ${
-            dark ? "text-[#f7f4ec]" : "text-[#0e382e]"
-          }`}
-        >
-          {title}
-        </h3>
-        <p
-          className={`mt-1 text-xs ${
-            dark ? "text-[#8a9a8b]" : "text-[#546342]"
-          }`}
-        >
-          {note}
-        </p>
+        <h3 className="text-sm font-semibold text-text-primary">{title}</h3>
+        <p className="mt-1 text-xs text-text-tertiary">{note}</p>
       </header>
       <div
         className={`rounded-md border ${
@@ -77,8 +61,8 @@ export default function StatesPage() {
       <Sidebar />
       <main className="flex-1 overflow-y-auto p-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-display text-[#f7f4ec]">States</h1>
-          <p className="mt-2 max-w-prose text-sm text-[#b8c7bc]">
+          <h1 className="text-3xl font-display text-text-primary">States</h1>
+          <p className="mt-2 max-w-prose text-sm text-text-secondary">
             Loading, empty and error surfaces. Each primitive reserves space,
             announces itself to assistive technology, and renders from tokens
             alone — no literal colour, no theme-specific variant.
