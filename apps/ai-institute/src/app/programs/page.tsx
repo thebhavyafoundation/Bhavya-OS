@@ -75,8 +75,8 @@ export default function ProgramsPage() {
       </div>
       <section className="relative overflow-hidden pt-32 pb-20 px-6">
         <div className="absolute inset-0 opacity-15">
-          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-accent-gold rounded-full blur-[160px]" />
-          <div className="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-bg-tertiary rounded-full blur-[140px]" />
+          <div className="absolute top-1/3 left-1/3 w-[min(500px,90vw)] h-[min(500px,90vw)] bg-accent-gold rounded-full blur-[160px]" />
+          <div className="absolute bottom-1/3 right-1/3 w-[min(400px,80vw)] h-[min(400px,80vw)] bg-bg-tertiary rounded-full blur-[140px]" />
         </div>
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
