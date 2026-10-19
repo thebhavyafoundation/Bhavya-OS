@@ -184,10 +184,11 @@ export default function RepositoryDetailPage() {
           icon={<FileText size={24} />}
           title="Repository not found"
           description="The repository you're looking for doesn't exist or has been removed."
-          action={{
-            label: "Back to repositories",
-            onClick: () => (window.location.href = "/repositories"),
-          }}
+          action={
+            <Link className="btn btn-secondary" href="/repositories">
+              Back to repositories
+            </Link>
+          }
         />
       </AppLayout>
     );
