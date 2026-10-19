@@ -100,7 +100,7 @@ export default async function ModulePage({ params }: ModulePageProps) {
           <EmptyState
             title="No lessons published for this module yet"
             description="The module is part of the curriculum and its objectives and prerequisites are recorded, but its lessons are still being written. Nothing here is locked or missing from your progress record."
-            meta={`Objectives on record: ${mod.objectives.length}`}
+            meta={`Topics on record: ${mod.topics.length} · Standards mapped: ${standards.length}`}
             action={
               <Link className="btn btn-secondary" href="/curriculum">
                 Back to curriculum

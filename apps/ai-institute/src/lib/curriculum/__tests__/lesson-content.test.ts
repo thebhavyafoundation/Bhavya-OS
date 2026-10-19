@@ -4,6 +4,7 @@ import {
   getLesson,
   getLessonsForModule,
   registerLesson,
+  getModuleLessonCounts,
 } from "@/lib/curriculum/lessons";
 import { aiModules } from "@/data/curriculum/ai-module-registry";
 import type { Lesson, LessonBlock, WidgetSpec } from "@/data/curriculum/types";
@@ -132,6 +133,30 @@ describe("curriculum lessons are actually reachable", () => {
   it("resolves each exposed lesson by its own key", () => {
     for (const lesson of getAllLessons()) {
       expect(getLesson(lesson.moduleId, lesson.id)).toEqual(lesson);
+    }
+  });
+
+  it("reports per-module lesson counts that match the registry", () => {
+    const counts = getModuleLessonCounts();
+    const lessons = getAllLessons();
+    expect(counts.size).toBeGreaterThan(0);
+
+    const summed = [...counts.values()].reduce((a, b) => a + b, 0);
+    expect(summed).toBe(lessons.length);
+
+    // The counts drive the "ready to study now" list on /curriculum, so a
+    // count that disagreed with the registry would advertise a module that
+    // cannot be opened.
+    for (const lesson of lessons) {
+      expect(counts.get(lesson.moduleId)).toBeGreaterThan(0);
+    }
+  });
+
+  it("never reports a lesson count for a module with no lessons", () => {
+    for (const [moduleId, count] of getModuleLessonCounts()) {
+      if (count > 0) {
+        expect(getLessonsForModule(moduleId)).toHaveLength(count);
+      }
     }
   });
 });

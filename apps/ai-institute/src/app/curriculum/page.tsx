@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AICurriculumTimeline } from "@/components/curriculum/AICurriculumTimeline";
 import { DiagramBlock } from "@/components/editorial/DiagramBlock";
+import { getModuleLessonCounts } from "@/lib/curriculum/lessons";
 import {
   BookOpen,
   ArrowRight,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 import {
   TRACKS,
+  getAllModules,
   getTrackCount,
   getTotalModules,
   levelParams,
@@ -57,6 +59,24 @@ const journeyStages = [
 ];
 
 export default function CurriculumPage() {
+  // Read from the live lesson registry rather than a curated list, so the
+  // section can never claim a module has lessons when it does not. No module
+  // is sequenced or ordered here — that would be curriculum authority, not a
+  // rendering concern. The list appears in curriculum order simply because
+  // that is the order the catalogue already uses.
+  const lessonCounts = getModuleLessonCounts();
+  const publishedModules = getAllModules()
+    .map((module) => ({
+      module,
+      level: module.level,
+      lessonCount: lessonCounts.get(module.id) ?? 0,
+    }))
+    .filter((entry) => entry.lessonCount > 0);
+  const publishedLessonCount = publishedModules.reduce(
+    (total, entry) => total + entry.lessonCount,
+    0,
+  );
+
   return (
     <>
       <div id="main-content" className="min-h-screen">
@@ -120,6 +140,122 @@ export default function CurriculumPage() {
             </p>
           </div>
         </section>
+
+        {/* Published lessons — derived from the live registry, not curated */}
+        {publishedModules.length > 0 ? (
+          <section
+            style={{
+              padding: "var(--space-16) 0",
+              background: "var(--color-bg-secondary)",
+              borderTop: "1px solid var(--color-border-primary)",
+            }}
+            aria-labelledby="published-heading"
+          >
+            <div className="container">
+              <div style={{ marginBottom: "var(--space-8)" }}>
+                <p
+                  style={{
+                    fontSize: "var(--text-xs)",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    color: "var(--color-brand-forest)",
+                    marginBottom: "var(--space-2)",
+                  }}
+                >
+                  Ready to study now
+                </p>
+                <h2
+                  id="published-heading"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--text-2xl, 1.5rem)",
+                    fontWeight: 400,
+                    color: "var(--color-brand-forest)",
+                    margin: 0,
+                  }}
+                >
+                  {publishedLessonCount} lesson
+                  {publishedLessonCount === 1 ? "" : "s"} published
+                </h2>
+                <p
+                  style={{
+                    color: "var(--color-earth)",
+                    marginTop: "var(--space-2)",
+                    maxWidth: "600px",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  The curriculum is catalogued in full. These are the modules
+                  whose lessons are written and available to read today — this
+                  list is read directly from the lesson registry, so it is never
+                  out of step with what the site can actually open.
+                </p>
+              </div>
+
+              <ul
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                  gap: "var(--space-4)",
+                  listStyle: "none",
+                  margin: 0,
+                  padding: 0,
+                }}
+              >
+                {publishedModules.map(({ module, level, lessonCount }) => (
+                  <li key={module.id}>
+                    <a
+                      href={`/curriculum/modules/${module.id}`}
+                      style={{
+                        display: "block",
+                        padding: "var(--space-5)",
+                        background: "var(--color-bg-primary)",
+                        border: "1px solid var(--color-border-primary)",
+                        borderRadius: "var(--radius-lg)",
+                        textDecoration: "none",
+                        height: "100%",
+                      }}
+                    >
+                      <span
+                        style={{
+                          display: "block",
+                          fontSize: "var(--text-xs)",
+                          color: "var(--color-text-tertiary)",
+                          marginBottom: "var(--space-1)",
+                        }}
+                      >
+                        {level} · {lessonCount} lesson
+                        {lessonCount === 1 ? "" : "s"}
+                      </span>
+                      <span
+                        style={{
+                          display: "block",
+                          fontFamily: "var(--font-display)",
+                          fontSize: "var(--text-lg)",
+                          color: "var(--color-brand-forest)",
+                        }}
+                      >
+                        {module.title}
+                      </span>
+                      <span
+                        style={{
+                          display: "block",
+                          marginTop: "var(--space-3)",
+                          fontSize: "var(--text-sm)",
+                          fontWeight: 500,
+                          color: "var(--color-brand-forest)",
+                        }}
+                      >
+                        Start →
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        ) : null}
 
         {/* Track Cards */}
         <section style={{ padding: "var(--space-16) 0" }}>
