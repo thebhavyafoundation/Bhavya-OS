@@ -25,21 +25,21 @@ const typeConfig = {
   },
   error: {
     icon: AlertCircle,
-    bg: "bg-accent-red/10",
-    border: "border-accent-red/30",
-    text: "text-accent-red",
+    bg: "bg-status-error/10",
+    border: "border-status-error/30",
+    text: "text-status-error",
   },
   info: {
     icon: Info,
-    bg: "bg-accent-blue/10",
-    border: "border-accent-blue/30",
-    text: "text-accent-blue",
+    bg: "bg-status-info/10",
+    border: "border-status-info/30",
+    text: "text-status-info",
   },
   warning: {
     icon: AlertTriangle,
-    bg: "bg-accent-yellow/10",
-    border: "border-accent-yellow/30",
-    text: "text-accent-yellow",
+    bg: "bg-status-warning/10",
+    border: "border-status-warning/30",
+    text: "text-status-warning",
   },
 };
 

@@ -8,16 +8,16 @@ import { problemLibrary } from "@bhavya/impact-runtime";
 import type { ProblemCategory } from "@bhavya/impact-runtime";
 
 const categoryColors: Record<ProblemCategory, string> = {
-  education: "bg-accent-blue/10 text-accent-blue",
+  education: "bg-status-info/10 text-status-info",
   accessibility: "bg-accent-gold/10 text-accent-gold",
   healthcare: "bg-accent-green/10 text-accent-green",
-  agriculture: "bg-accent-yellow/10 text-accent-yellow",
+  agriculture: "bg-status-warning/10 text-status-warning",
   environment: "bg-accent-green/10 text-accent-green",
-  "local-government": "bg-accent-blue/10 text-accent-blue",
-  "small-business": "bg-accent-yellow/10 text-accent-yellow",
+  "local-government": "bg-status-info/10 text-status-info",
+  "small-business": "bg-status-warning/10 text-status-warning",
   ngos: "bg-accent-gold/10 text-accent-gold",
-  "open-source": "bg-accent-blue/10 text-accent-blue",
-  "bhavya-foundation": "bg-accent-blue/10 text-accent-blue",
+  "open-source": "bg-status-info/10 text-status-info",
+  "bhavya-foundation": "bg-status-info/10 text-status-info",
 };
 
 const categoryLabels: Record<ProblemCategory, string> = {
@@ -84,7 +84,7 @@ export default function ImpactPage() {
           onClick={() => setSelectedCategory("all")}
           className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
             selectedCategory === "all"
-              ? "bg-accent-blue text-white"
+              ? "bg-status-info text-white"
               : "bg-bg-secondary text-text-secondary hover:text-text-primary"
           }`}
         >
@@ -96,7 +96,7 @@ export default function ImpactPage() {
             onClick={() => setSelectedCategory(key as ProblemCategory)}
             className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
               selectedCategory === key
-                ? "bg-accent-blue text-white"
+                ? "bg-status-info text-white"
                 : "bg-bg-secondary text-text-secondary hover:text-text-primary"
             }`}
           >
@@ -126,8 +126,8 @@ export default function ImpactPage() {
                     problem.difficulty === "beginner"
                       ? "bg-accent-green/10 text-accent-green"
                       : problem.difficulty === "intermediate"
-                        ? "bg-accent-yellow/10 text-accent-yellow"
-                        : "bg-accent-red/10 text-accent-red"
+                        ? "bg-status-warning/10 text-status-warning"
+                        : "bg-status-error/10 text-status-error"
                   }`}
                 >
                   {problem.difficulty}
@@ -174,7 +174,7 @@ export default function ImpactPage() {
               </div>
               <Link
                 href={`/impact/${problem.id}`}
-                className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                className="px-4 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
               >
                 Select Problem →
               </Link>

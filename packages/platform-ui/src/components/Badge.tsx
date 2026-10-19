@@ -21,7 +21,17 @@
 import React from "react";
 
 export type BadgeVariant =
-  "neutral" | "success" | "warning" | "caution" | "info" | "danger";
+  /* Roles. `neutral` is the no-status chip. */
+  | "neutral"
+  | "success"
+  | "warning"
+  | "caution"
+  | "info"
+  | "danger"
+  /* Compatibility aliases for existing callers. Both are semantic role names
+     rather than hues, so both stay within the token rules. */
+  | "default"
+  | "error";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -42,6 +52,9 @@ const variantStyles: Record<BadgeVariant, string> = {
     "bg-status-caution-bg text-status-caution-fg border-status-caution-border",
   info: "bg-status-info-bg text-status-info-fg border-status-info-border",
   danger: "bg-status-error-bg text-status-error-fg border-status-error-border",
+  default:
+    "bg-status-neutral-bg text-status-neutral-fg border-status-neutral-border",
+  error: "bg-status-error-bg text-status-error-fg border-status-error-border",
 };
 
 const dotColors: Record<BadgeVariant, string> = {
@@ -51,6 +64,8 @@ const dotColors: Record<BadgeVariant, string> = {
   caution: "bg-status-caution",
   info: "bg-status-info",
   danger: "bg-status-error",
+  default: "bg-status-neutral",
+  error: "bg-status-error",
 };
 
 const sizeStyles: Record<"sm" | "md", string> = {

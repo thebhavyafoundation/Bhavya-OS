@@ -38,12 +38,12 @@ function getScoreColor(score: number) {
 
 const maturityVariant: Record<
   string,
-  "success" | "info" | "warning" | "purple"
+  "success" | "info" | "warning" | "caution"
 > = {
   emerging: "warning",
   developing: "info",
   mature: "success",
-  exemplary: "purple",
+  exemplary: "caution",
 };
 
 export default function Dashboard() {
@@ -107,7 +107,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Link
               href="/repositories"
-              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-status-info transition-all duration-fast group"
             >
               <FolderGit2
                 size={20}
@@ -128,7 +128,7 @@ export default function Dashboard() {
             </Link>
             <Link
               href="/knowledge"
-              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-status-info transition-all duration-fast group"
             >
               <BookOpen size={20} className="text-[var(--color-accent-gold)]" />
               <div className="flex-1 min-w-0">
@@ -146,7 +146,7 @@ export default function Dashboard() {
             </Link>
             <Link
               href="/learning"
-              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-accent-blue transition-all duration-fast group"
+              className="flex items-center gap-3 p-4 bg-bg-primary border border-border-primary rounded-lg hover:border-status-info transition-all duration-fast group"
             >
               <GraduationCap size={20} className="text-accent-green" />
               <div className="flex-1 min-w-0">

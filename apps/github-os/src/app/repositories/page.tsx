@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Sidebar } from "@/components/Sidebar";
-import {
-  FolderGit2,
-  Search,
-  Plus,
-  ChevronRight,
-} from "lucide-react";
+import { FolderGit2, Search, Plus, ChevronRight } from "lucide-react";
 import {
   Card,
   Badge,
@@ -35,11 +30,14 @@ function getScoreColor(score: number) {
   return "text-score-poor";
 }
 
-const maturityVariant: Record<string, "success" | "info" | "warning" | "purple"> = {
+const maturityVariant: Record<
+  string,
+  "success" | "info" | "warning" | "caution"
+> = {
   emerging: "warning",
   developing: "info",
   mature: "success",
-  exemplary: "purple",
+  exemplary: "caution",
 };
 
 export default function RepositoriesPage() {
@@ -60,17 +58,15 @@ export default function RepositoriesPage() {
   const filtered = repositories.filter(
     (r) =>
       r.name.toLowerCase().includes(search.toLowerCase()) ||
-      (r.description && r.description.toLowerCase().includes(search.toLowerCase())),
+      (r.description &&
+        r.description.toLowerCase().includes(search.toLowerCase())),
   );
 
   return (
     <AppLayout sidebar={<Sidebar />}>
       <div className="animate-fade-in">
         <Breadcrumb
-          items={[
-            { label: "Dashboard", href: "/" },
-            { label: "Repositories" },
-          ]}
+          items={[{ label: "Dashboard", href: "/" }, { label: "Repositories" }]}
           className="mb-6"
         />
 
@@ -124,8 +120,16 @@ export default function RepositoriesPage() {
         ) : filtered.length === 0 ? (
           <EmptyState
             icon={<FolderGit2 size={24} />}
-            title={search ? "No repositories match your search" : "No repositories yet"}
-            description={search ? "Try a different search term" : "Add a repository to get started"}
+            title={
+              search
+                ? "No repositories match your search"
+                : "No repositories yet"
+            }
+            description={
+              search
+                ? "Try a different search term"
+                : "Add a repository to get started"
+            }
           />
         ) : (
           <div className="space-y-3">
@@ -139,7 +143,10 @@ export default function RepositoriesPage() {
                 <Card padding="md" hover>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 min-w-0">
-                      <FolderGit2 size={16} className="text-text-muted flex-shrink-0" />
+                      <FolderGit2
+                        size={16}
+                        className="text-text-muted flex-shrink-0"
+                      />
                       <div className="min-w-0">
                         <p className="text-sm font-medium text-text-primary truncate">
                           {repo.name}
@@ -152,12 +159,15 @@ export default function RepositoriesPage() {
                     <div className="flex items-center gap-4 flex-shrink-0">
                       {repo.language && (
                         <span className="hidden sm:flex items-center gap-1.5 text-xs text-text-muted">
-                          <span className="w-2 h-2 rounded-full bg-accent-blue" />
+                          <span className="w-2 h-2 rounded-full bg-status-info" />
                           {repo.language}
                         </span>
                       )}
                       <Badge
-                        variant={maturityVariant[repo.engineering_maturity] || "default"}
+                        variant={
+                          maturityVariant[repo.engineering_maturity] ||
+                          "default"
+                        }
                         size="sm"
                       >
                         {repo.engineering_maturity}

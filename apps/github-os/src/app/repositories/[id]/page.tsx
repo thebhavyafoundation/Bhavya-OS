@@ -109,21 +109,21 @@ const tabs: { id: TabId; label: string; icon: React.ReactNode }[] = [
 
 const maturityVariant: Record<
   string,
-  "warning" | "info" | "success" | "purple"
+  "warning" | "info" | "success" | "caution"
 > = {
   emerging: "warning",
   developing: "info",
   mature: "success",
-  exemplary: "purple",
+  exemplary: "caution",
 };
 
 const recVariant: Record<
   string,
-  "success" | "info" | "purple" | "warning" | "default"
+  "success" | "info" | "caution" | "warning" | "default"
 > = {
   adopt: "success",
   study: "info",
-  reference: "purple",
+  reference: "caution",
   monitor: "warning",
   archive: "default",
 };
@@ -243,7 +243,7 @@ export default function RepositoryDetailPage() {
             <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted">
               {repo.language && (
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent-blue" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-status-info" />
                   {repo.language}
                 </span>
               )}
@@ -309,7 +309,7 @@ export default function RepositoryDetailPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
                 activeTab === tab.id
-                  ? "text-text-primary border-b-2 border-accent-blue"
+                  ? "text-text-primary border-b-2 border-status-info"
                   : "text-text-tertiary hover:text-text-primary"
               }`}
             >
@@ -564,7 +564,7 @@ export default function RepositoryDetailPage() {
             {repo.why_bhavya_cares && (
               <Card padding="lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <Target size={14} className="text-accent-blue" />
+                  <Target size={14} className="text-status-info" />
                   <h3 className="text-sm font-medium text-text-primary">
                     Why Learn This
                   </h3>
@@ -599,7 +599,7 @@ export default function RepositoryDetailPage() {
             {repo.learning_reading_order && (
               <Card padding="lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <BookOpen size={14} className="text-accent-yellow" />
+                  <BookOpen size={14} className="text-status-warning" />
                   <h3 className="text-sm font-medium text-text-primary">
                     Reading Order
                   </h3>
@@ -623,7 +623,7 @@ export default function RepositoryDetailPage() {
               </p>
               <Link
                 href={`/repositories/${repo.id}/learning`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-accent-blue text-white text-sm rounded-md hover:bg-accent-blue-hover transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-status-info text-white text-sm rounded-md hover:bg-status-info transition-colors"
               >
                 Open Learning Mode
                 <ChevronRight size={14} />
@@ -636,7 +636,7 @@ export default function RepositoryDetailPage() {
           <div className="space-y-6 animate-fade-in">
             <Card padding="lg">
               <div className="flex items-center gap-2 mb-3">
-                <Shield size={14} className="text-accent-blue" />
+                <Shield size={14} className="text-status-info" />
                 <h3 className="text-sm font-medium text-text-primary">
                   Engineering Advisor
                 </h3>
@@ -647,9 +647,9 @@ export default function RepositoryDetailPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Link
                   href={`/repositories/${repo.id}/advisor`}
-                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-status-info transition-colors"
                 >
-                  <ClipboardCheck size={16} className="text-accent-blue" />
+                  <ClipboardCheck size={16} className="text-status-info" />
                   <div>
                     <p className="text-sm text-text-primary">Full Assessment</p>
                     <p className="text-[10px] text-text-muted">
@@ -659,7 +659,7 @@ export default function RepositoryDetailPage() {
                 </Link>
                 <Link
                   href={`/repositories/${repo.id}/debt`}
-                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-status-info transition-colors"
                 >
                   <AlertTriangle size={16} className="text-score-fair" />
                   <div>
@@ -671,9 +671,9 @@ export default function RepositoryDetailPage() {
                 </Link>
                 <Link
                   href={`/repositories/${repo.id}/plan`}
-                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-status-info transition-colors"
                 >
-                  <Map size={16} className="text-accent-purple" />
+                  <Map size={16} className="text-accent-earth" />
                   <div>
                     <p className="text-sm text-text-primary">
                       Implementation Plan
@@ -685,7 +685,7 @@ export default function RepositoryDetailPage() {
                 </Link>
                 <Link
                   href={`/repositories/${repo.id}/architecture-advisor`}
-                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-accent-blue transition-colors"
+                  className="flex items-center gap-3 p-3 bg-bg-primary border border-border-primary rounded hover:border-status-info transition-colors"
                 >
                   <GitCompare size={16} className="text-accent-green" />
                   <div>
@@ -702,7 +702,7 @@ export default function RepositoryDetailPage() {
 
             <Card padding="lg">
               <div className="flex items-center gap-2 mb-2">
-                <Zap size={14} className="text-accent-yellow" />
+                <Zap size={14} className="text-status-warning" />
                 <h3 className="text-sm font-medium text-text-primary">
                   Quick Insights
                 </h3>
@@ -750,7 +750,7 @@ export default function RepositoryDetailPage() {
             {repo.latest_commit && (
               <Card padding="lg">
                 <div className="flex items-center gap-2 mb-2">
-                  <Activity size={14} className="text-accent-blue" />
+                  <Activity size={14} className="text-status-info" />
                   <h3 className="text-sm font-medium text-text-primary">
                     Latest Commit
                   </h3>
@@ -777,7 +777,7 @@ export default function RepositoryDetailPage() {
 
             <Card padding="lg">
               <div className="flex items-center gap-2 mb-2">
-                <Wrench size={14} className="text-accent-yellow" />
+                <Wrench size={14} className="text-status-warning" />
                 <h3 className="text-sm font-medium text-text-primary">
                   MCP Recommendations
                 </h3>
@@ -803,7 +803,7 @@ export default function RepositoryDetailPage() {
 
             <Card padding="lg">
               <div className="flex items-center gap-2 mb-2">
-                <Wrench size={14} className="text-accent-blue" />
+                <Wrench size={14} className="text-status-info" />
                 <h3 className="text-sm font-medium text-text-primary">
                   CLI Recommendations
                 </h3>

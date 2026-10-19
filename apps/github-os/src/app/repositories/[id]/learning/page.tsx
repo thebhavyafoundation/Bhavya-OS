@@ -795,7 +795,7 @@ export default function LearningModePage() {
                             <GraduationCap
                               size={14}
                               className="mt-0.5 flex-shrink-0"
-                              style={{ color: "var(--color-accent-purple)" }}
+                              style={{ color: "var(--color-accent-earth)" }}
                             />
                             <span
                               className="text-sm"
