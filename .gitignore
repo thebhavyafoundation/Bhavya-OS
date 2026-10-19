@@ -118,3 +118,4 @@ packages/database/check-db.js
 packages/database/check-db.mjs
 packages/database/debug-migrate.mjs
 packages/database/run-migrations.mjs
+/.husky/_/
