@@ -93,6 +93,16 @@ jobs:
           set -o pipefail
           pnpm exec opennextjs-cloudflare build --skipNextBuild 2>&1 | tee ../../opennext-preview-build.log
 
+      - name: Restore pnpm dependency layout in the packaged tree
+        # Next.js tracing records the real path of every traced file, so a
+        # dependency reached through a pnpm symlink is recorded at the virtual
+        # store location and the symlinked private directory next to the
+        # requiring package is never reproduced. Node resolves a bare
+        # specifier by walking up from the requiring file, so a require of
+        # "ws" from the isomorphic-ws node entry cannot resolve. This puts
+        # the missing package in the private directory pnpm would create.
+        run: node scripts/restore-dependency-layout.mjs apps/ai-institute/.open-next/server-functions/default
+
       - name: Verify packaged server-function dependencies
         run: node scripts/verify-opennext-bundle.mjs
 
