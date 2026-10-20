@@ -118,7 +118,7 @@ function tracedPackageDirs(packageName) {
 function sourcePackageDir(packageName) {
   const base = path.join(REPO, "node_modules", ".pnpm");
   if (!fs.existsSync(base)) return null;
-  const scope = packageName.replace("@", "").replace("/", "+");
+  const scope = packageName.replace("/", "+");
   for (const entry of fs.readdirSync(base)) {
     if (!entry.startsWith(`${scope}@`)) continue;
     const dir = path.join(base, entry, "node_modules", packageName);
