@@ -86,6 +86,23 @@ jobs:
       - name: Next.js application build
         run: pnpm --filter ai-institute run build
 
+      - name: Materialise conditional-export targets
+        # Next.js output file tracing emits a package main entry but drops the other
+        # conditional-export targets. For @libsql/isomorphic-ws@0.1.5 the traced tree keeps
+        # node.cjs and omits web.cjs, which the exports map selects under the workerd
+        # and default conditions. OpenNext esbuild then resolves the workerd condition
+        # and cannot find web.cjs.
+        #
+        # This must run after the Next.js build, which performs the tracing, and before
+        # the OpenNext build, which copies the traced tree and bundles it. The OpenNext
+        # build is therefore invoked with --skipNextBuild.
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs
+
+      - name: Assert conditional-export targets present
+        # Fail fast, at the boundary where the condition can still be corrected,
+        # rather than inside the bundler.
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs --verify
+
       - name: OpenNext build only (no upload)
         working-directory: apps/ai-institute
         # Uses the repository-installed binary from node_modules/.bin, not an
@@ -99,7 +116,7 @@ jobs:
         # this gate exists to catch.
         run: |
           set -o pipefail
-          pnpm exec opennextjs-cloudflare build 2>&1 | tee ../../opennext-build.log
+          pnpm exec opennextjs-cloudflare build --skipNextBuild 2>&1 | tee ../../opennext-build.log
 
       - name: Verify packaged server-function dependencies
         run: node scripts/verify-opennext-bundle.mjs

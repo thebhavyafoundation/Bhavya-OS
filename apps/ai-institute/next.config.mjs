@@ -34,6 +34,8 @@ const nextConfig = {
   serverExternalPackages: [
     "better-sqlite3",
     "@libsql/client",
+    "@libsql/isomorphic-ws",
+    "@libsql/hrana-client",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {

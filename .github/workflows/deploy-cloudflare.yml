@@ -35,6 +35,22 @@ jobs:
       - name: Self-test the bundle assertion
         run: node scripts/verify-opennext-bundle.mjs --selftest
 
+      - name: Next.js application build
+        # Separated from the OpenNext build so the traced output can be corrected
+        # between the two phases. See the Materialise step below.
+        run: pnpm --filter ai-institute run build
+
+      - name: Materialise conditional-export targets
+        # Next.js output file tracing emits a package main entry but drops the other
+        # conditional-export targets. For @libsql/isomorphic-ws@0.1.5 the traced tree keeps
+        # node.cjs and omits web.cjs, which the exports map selects under the workerd
+        # and default conditions. OpenNext esbuild then resolves the workerd condition
+        # and cannot find web.cjs.
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs
+
+      - name: Assert conditional-export targets present
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs --verify
+
       - name: Build for Cloudflare
         working-directory: apps/ai-institute
         # pipefail is essential: without it the pipeline's exit status is tee's
@@ -42,7 +58,7 @@ jobs:
         # run on a broken bundle.
         run: |
           set -o pipefail
-          npx opennextjs-cloudflare build 2>&1 | tee build.log
+          npx opennextjs-cloudflare build --skipNextBuild 2>&1 | tee build.log
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
