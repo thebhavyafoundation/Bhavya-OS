@@ -1,0 +1,156 @@
+# Canonical Cloudflare/OpenNext preview deployment.
+#
+# PURPOSE
+#   Produce a real, non-production Cloudflare Workers artifact for the exact
+#   commit under review, so browser verification is possible against the
+#   canonical platform instead of a non-canonical preview.
+#
+#   Vercel is not canonical and is not consulted here. This workflow deploys
+#   through Cloudflare Workers/OpenNext, the same build path production uses.
+#
+# SAFETY
+#   - Deploys to a separate worker, bhavya-foundation-preview. The production
+#     worker bhavya-foundation is never targeted.
+#   - Uses a separate wrangler config, wrangler.preview.json. The production
+#     wrangler.json is not modified or referenced.
+#   - No production secrets are exposed. The deploy job holds the Cloudflare
+#     credentials and runs only after the build job has succeeded.
+#   - No DNS change, no domain change, no production route change.
+#   - Runtime secrets are not provisioned on the preview worker. Preview
+#     verification therefore covers the public shell and the routes that do not
+#     require a live Turso connection.
+name: OpenNext Preview Deploy
+
+on:
+  pull_request:
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "scripts/**"
+      - "content/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - "turbo.json"
+      - "tsconfig.base.json"
+      - ".github/workflows/opennext-preview.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: opennext-preview-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build preview bundle
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
+      CI: "true"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 10.17.1
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Next.js application build
+        # The Next.js build performs output file tracing, so it is separated
+        # from the OpenNext build to give the traced output a correction step.
+        run: pnpm --filter ai-institute run build
+
+      - name: Materialise conditional-export targets
+        # Next.js output file tracing emits a package main entry but drops the
+        # other conditional-export targets. For @libsql/isomorphic-ws@0.1.5 the
+        # traced tree keeps node.cjs and omits web.cjs, which the exports map
+        # selects under the workerd and default conditions. OpenNext esbuild
+        # then resolves the workerd condition and cannot find web.cjs.
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs
+
+      - name: Assert conditional-export targets present
+        run: node apps/ai-institute/scripts/materialise-conditional-exports.mjs --verify
+
+      - name: OpenNext build (no deploy)
+        working-directory: apps/ai-institute
+        # --skipNextBuild reuses the Next.js build above, whose traced output has
+        # already been corrected.
+        run: |
+          set -o pipefail
+          pnpm exec opennextjs-cloudflare build --skipNextBuild 2>&1 | tee ../../opennext-preview-build.log
+
+      - name: Verify packaged server-function dependencies
+        run: node scripts/verify-opennext-bundle.mjs
+
+      - name: Upload preview bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: opennext-preview-bundle
+          path: apps/ai-institute/.open-next
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload preview build log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: opennext-preview-build-log
+          path: opennext-preview-build.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+  deploy:
+    name: Deploy preview to Cloudflare
+    needs: build
+    runs-on: ubuntu-latest
+    # Fork pull requests cannot read repository secrets, so the preview worker
+    # is only deployed for pull requests raised from this repository.
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Download preview bundle
+        uses: actions/download-artifact@fa0a91b85d4f404e111e1b93d2d3c22d1b1f0f3 # v4.1.8
+        with:
+          name: opennext-preview-bundle
+          path: apps/ai-institute/.open-next
+
+      - name: Deploy preview worker
+        working-directory: apps/ai-institute
+        # Deploys to bhavya-foundation-preview via wrangler.preview.json. The
+        # production worker and its config are not referenced.
+        #
+        # OPEN_NEXT_DEPLOY tells wrangler that it is being invoked from an
+        # OpenNext project, which prevents wrangler from calling back into
+        # opennextjs-cloudflare deploy.
+        run: npx wrangler deploy --config wrangler.preview.json
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OPEN_NEXT_DEPLOY: "true"
+
+      - name: Record preview URL
+        run: |
+          {
+            echo "### Preview deployment"
+            echo "- worker: bhavya-foundation-preview"
+            echo "- commit: ${{ github.sha }}"
+            echo "- url: https://bhavya-foundation-preview.thebhavyafoundation.workers.dev"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "url=https://bhavya-foundation-preview.thebhavyafoundation.workers.dev" >> "$GITHUB_OUTPUT"
+          echo "commit=${{ github.sha }}" >> "$GITHUB_OUTPUT"
