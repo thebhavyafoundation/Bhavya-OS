@@ -80,6 +80,22 @@ jobs:
         id: verify
         run: echo "verified=true" >> "$GITHUB_OUTPUT"
 
+      - name: Upload OpenNext bundle
+        # The deploy job runs in a separate runner, so the compiled OpenNext
+        # output has to cross the job boundary. Without this the deploy job
+        # starts from a bare checkout and "opennextjs-cloudflare deploy" fails
+        # with "Could not find compiled Open Next config". The bundle is only
+        # uploaded after the build and the bundle verifier both passed, so the
+        # job that holds the production credentials still cannot run on an
+        # unverified bundle. The pattern matches the preview workflow.
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        with:
+          name: cloudflare-opennext-bundle
+          include-hidden-files: true
+          path: apps/ai-institute/.open-next
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
@@ -113,6 +129,15 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Download OpenNext bundle
+        # The bundle built and verified by the build job. Downloading it here
+        # keeps the production credentials out of the build job while still
+        # giving the deploy step the compiled output it requires.
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16  # v4.1.8
+        with:
+          name: cloudflare-opennext-bundle
+          path: apps/ai-institute/.open-next
 
       - name: Deploy to Cloudflare Workers
         working-directory: apps/ai-institute
