@@ -18,24 +18,22 @@ const nextConfig = {
     "@bhavya/impact-runtime",
     "@bhavya/project-runtime",
   ],
-  // `@libsql/isomorphic-ws` IS in serverExternalPackages because its package
-  // (`@libsql/isomorphic-ws@0.1.5`) declares `"workerd": "./web.cjs"` in its
-  // package.json, but `web.cjs` does not exist in the published package.
-  // Bundling it causes OpenNext to fail with "Could not resolve
-  // @libsql/isomorphic-ws" because the bundled file references a missing
-  // `./web.cjs`. Externalising it lets the require resolve at runtime in the
-  // Cloudflare Workers environment, where `@libsql/client` (also externalised)
-  // already brings `@libsql/isomorphic-ws` as a transitive dependency.
+  // `@libsql/isomorphic-ws` is deliberately NOT in serverExternalPackages.
   //
-  // `@libsql/hrana-client` is also externalised because it requires
-  // `@libsql/isomorphic-ws` unconditionally at `lib-cjs/index.js:18`, and
-  // bundling it would re-introduce the resolution error. Externalising it
-  // keeps the dependency chain intact at runtime.
+  // Next.js applies serverExternalPackages per package, so externalising one
+  // half of a dependency chain splits it: `@libsql/hrana-client` is bundled,
+  // and it requires `@libsql/isomorphic-ws` unconditionally at
+  // `lib-cjs/index.js:18`. With the required package excluded from the bundle,
+  // that require has nothing to resolve to, and the OpenNext server-function
+  // build fails with "Could not resolve @libsql/isomorphic-ws".
+  //
+  // Bundling both halves keeps the chain intact. Under the workerd condition
+  // `isomorphic-ws` resolves to `web.cjs`, which uses the global WebSocket and
+  // has no dependencies at all -- so bundling it also retires the `ws`
+  // resolution hazard the previous configuration had to work around.
   serverExternalPackages: [
     "better-sqlite3",
     "@libsql/client",
-    "@libsql/isomorphic-ws",
-    "@libsql/hrana-client",
   ],
   outputFileTracingRoot: path.join(__dirname, "../../"),
   outputFileTracingExcludes: {
@@ -53,6 +51,7 @@ const nextConfig = {
   // reintroduce a dead glob.
   outputFileTracingIncludes: {
     "/*": [
+      "./node_modules/.pnpm/@libsql+isomorphic-ws@*/node_modules/@libsql/isomorphic-ws/**/*",
       "./node_modules/.pnpm/@libsql+hrana-client@*/node_modules/@libsql/hrana-client/**/*",
       "./node_modules/.pnpm/@libsql+client@*/node_modules/@libsql/client/**/*",
       "./node_modules/.pnpm/ws@*/node_modules/ws/**/*",
