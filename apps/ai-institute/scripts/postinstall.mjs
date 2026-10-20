@@ -48,7 +48,7 @@ function findIsomorphicWsPackage() {
 }
 
 function createWebCjs(packageDir) {
-  const webCjsPath = join(dir, "web.cjs");
+  const webCjsPath = join(packageDir, "web.cjs");
   
   if (existsSync(webCjsPath)) {
     console.log(`[postinstall] web.cjs already exists at ${webCjsPath}`);
