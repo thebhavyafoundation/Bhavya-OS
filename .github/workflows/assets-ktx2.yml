@@ -1,0 +1,115 @@
+name: Assets (KTX2 textures)
+
+# Transcodes source textures to KTX2 / Basis Universal for GPU delivery.
+#
+# Constraints, identical to assets-glb.yml:
+#   - GitHub Actions only. Never local.
+#   - Review artefacts only. Never publishes to B2, never deploys.
+#   - KTX-Software is open source (Apache-2.0). No paid transcoding service.
+
+on:
+  workflow_dispatch:
+    inputs:
+      texture:
+        description: "Path to the source texture, relative to the repo root"
+        required: true
+        type: string
+      name:
+        description: "Asset id used for output filenames"
+        required: true
+        type: string
+      size:
+        description: "Longest-edge size for the mobile tier, in pixels"
+        required: false
+        default: "1024"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  transcode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+
+      - name: Validate source
+        run: |
+          set -euo pipefail
+          if [ ! -f "${{ inputs.texture }}" ]; then
+            echo "::error::texture not found: ${{ inputs.texture }}"
+            exit 1
+          fi
+          echo "source bytes: $(stat -c%s "${{ inputs.texture }}")"
+
+      - name: Install KTX-Software
+        # ktx create ships in the KTX-Software Linux release. Pinned to a
+        # version tag rather than "latest" so a run is reproducible.
+        run: |
+          set -euo pipefail
+          KTX_VERSION=4.3.2
+          ARCH=Linux-x86_64
+          URL="https://github.com/KhronosGroup/KTX-Software/releases/download/v${KTX_VERSION}/KTX-Software-${KTX_VERSION}-${ARCH}.tar.bz2"
+          curl -sSL "$URL" | tar -xj -C /tmp
+          install -m 0755 "/tmp/KTX-Software-${KTX_VERSION}/bin/ktx" /usr/local/bin/ktx
+          ktx --version 2>&1 | head -n 2
+
+      - name: Transcode (desktop tier)
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          ktx create \
+            --format R8G8B8A8_SRGB \
+            --encode basis-lz \
+            --clevel 4 \
+            --assign-oetf srgb \
+            "${{ inputs.texture }}" "out/${{ inputs.name }}.ktx2"
+
+      - name: Transcode (mobile tier)
+        run: |
+          set -euo pipefail
+          ktx create \
+            --format R8G8B8A8_SRGB \
+            --encode basis-lz \
+            --clevel 4 \
+            --assign-oetf srgb \
+            --resize "${{ inputs.size }}" \
+            "${{ inputs.texture }}" "out/${{ inputs.name }}.mobile.ktx2"
+
+      - name: Report sizes against budget
+        run: |
+          set -euo pipefail
+          report=out/SIZES.md
+          {
+            echo "# Texture size report — ${{ inputs.name }}"
+            echo
+            echo "| Variant | Bytes | Budget | Result |"
+            echo "| --- | ---: | ---: | --- |"
+          } > "$report"
+          for f in out/*.ktx2; do
+            bytes=$(stat -c%s "$f")
+            verdict="within budget"
+            [ "$bytes" -gt 512000 ] && verdict="OVER BUDGET"
+            printf '| %s | %s | 512000 | %s |\n' "$(basename "$f")" "$bytes" "$verdict" >> "$report"
+          done
+          cat "$report"
+        continue-on-error: true
+
+      - name: Checksums
+        run: |
+          set -euo pipefail
+          cd out
+          sha256sum *.ktx2 > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Upload review artefacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ktx2-${{ inputs.name }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: error

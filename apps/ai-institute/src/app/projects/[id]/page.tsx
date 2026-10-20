@@ -136,7 +136,7 @@ export default function ProjectWorkspacePage() {
           </span>
           <div className="w-24 h-1.5 bg-bg-secondary rounded-full overflow-hidden">
             <div
-              className="h-full bg-accent-blue rounded-full transition-all"
+              className="h-full bg-status-info rounded-full transition-all"
               style={{ width: `${progress?.percentage || 0}%` }}
             />
           </div>
@@ -144,7 +144,7 @@ export default function ProjectWorkspacePage() {
       </div>
       {/* Header */}
       <div className="mb-6 animate-fade-in">
-        <p className="text-[10px] text-accent-blue uppercase tracking-wider mb-1">
+        <p className="text-[10px] text-status-info uppercase tracking-wider mb-1">
           Project
         </p>
         <h1 className="text-2xl font-bold text-text-primary mb-2">
@@ -163,7 +163,7 @@ export default function ProjectWorkspacePage() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
               activeTab === tab
-                ? "text-text-primary border-b-2 border-accent-blue"
+                ? "text-text-primary border-b-2 border-status-info"
                 : "text-text-tertiary hover:text-text-primary"
             }`}
           >
@@ -191,7 +191,7 @@ export default function ProjectWorkspacePage() {
                     key={i}
                     className="flex items-center gap-2 text-sm text-text-secondary"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-blue flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-status-info flex-shrink-0" />
                     {obj}
                   </div>
                 ))}
@@ -210,9 +210,9 @@ export default function ProjectWorkspacePage() {
                       m.status === "completed"
                         ? "border-accent-green/30 bg-accent-green/5"
                         : m.status === "available"
-                          ? "border-accent-blue/30 bg-accent-blue/5"
+                          ? "border-status-info/30 bg-status-info/5"
                           : m.status === "in-progress"
-                            ? "border-accent-yellow/30 bg-accent-yellow/5"
+                            ? "border-status-warning/30 bg-status-warning/5"
                             : "border-border-primary bg-bg-primary"
                     }`}
                     onClick={() => {
@@ -229,9 +229,9 @@ export default function ProjectWorkspacePage() {
                           m.status === "completed"
                             ? "bg-accent-green/10 text-accent-green"
                             : m.status === "available"
-                              ? "bg-accent-blue/10 text-accent-blue"
+                              ? "bg-status-info/10 text-status-info"
                               : m.status === "in-progress"
-                                ? "bg-accent-yellow/10 text-accent-yellow"
+                                ? "bg-status-warning/10 text-status-warning"
                                 : "bg-bg-secondary text-text-muted"
                         }`}
                       >
@@ -284,7 +284,7 @@ export default function ProjectWorkspacePage() {
                     selectedMilestone.status === "completed"
                       ? "bg-accent-green/10 text-accent-green"
                       : selectedMilestone.status === "available"
-                        ? "bg-accent-blue/10 text-accent-blue"
+                        ? "bg-status-info/10 text-status-info"
                         : "bg-bg-secondary text-text-muted"
                   }`}
                 >
@@ -357,7 +357,7 @@ export default function ProjectWorkspacePage() {
                   <div className="mt-4 pt-4 border-t border-border-primary">
                     <button
                       onClick={handleCompleteMilestone}
-                      className="w-full py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                      className="w-full py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
                     >
                       Complete Milestone →
                     </button>
@@ -370,18 +370,18 @@ export default function ProjectWorkspacePage() {
         {/* AI Coach */}
         {activeTab === "mentor" && (
           <div className="space-y-6">
-            <div className="border border-accent-blue/30 rounded-lg bg-accent-blue/5 p-6">
+            <div className="border border-status-info/30 rounded-lg bg-status-info/5 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-full bg-accent-blue/20 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full bg-status-info/20 flex items-center justify-center">
                   <span className="text-sm">🤖</span>
                 </div>
-                <h3 className="text-sm font-medium text-accent-blue">
+                <h3 className="text-sm font-medium text-status-info">
                   AI Project Coach
                 </h3>
               </div>
               {coachResponse && (
                 <div>
-                  <span className="px-2 py-0.5 text-[10px] bg-accent-blue/10 text-accent-blue rounded mb-2 inline-block">
+                  <span className="px-2 py-0.5 text-[10px] bg-status-info/10 text-status-info rounded mb-2 inline-block">
                     {coachResponse.type}
                   </span>
                   <p className="text-sm text-text-secondary leading-relaxed mt-2">
@@ -513,7 +513,7 @@ export default function ProjectWorkspacePage() {
               <div className="flex gap-2 mb-4">
                 <button
                   onClick={handleExport}
-                  className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                  className="px-4 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
                 >
                   Generate Portfolio
                 </button>

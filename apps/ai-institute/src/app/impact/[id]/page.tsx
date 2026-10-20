@@ -188,7 +188,7 @@ export default function ImpactWorkspacePage() {
       </div>
       {/* Header */}
       <div className="mb-6 animate-fade-in">
-        <p className="text-[10px] text-accent-blue uppercase tracking-wider mb-1">
+        <p className="text-[10px] text-status-info uppercase tracking-wider mb-1">
           Impact Project
         </p>
         <h1 className="text-2xl font-bold text-text-primary mb-2">
@@ -217,7 +217,7 @@ export default function ImpactWorkspacePage() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2.5 text-sm whitespace-nowrap transition-colors ${
               activeTab === tab
-                ? "text-text-primary border-b-2 border-accent-blue"
+                ? "text-text-primary border-b-2 border-status-info"
                 : "text-text-tertiary hover:text-text-primary"
             }`}
           >
@@ -270,7 +270,7 @@ export default function ImpactWorkspacePage() {
                     key={stakeholder}
                     className="flex items-center gap-2 text-sm text-text-secondary"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-blue flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-status-info flex-shrink-0" />
                     {stakeholder}
                   </div>
                 ))}
@@ -296,7 +296,7 @@ export default function ImpactWorkspacePage() {
                     key={constraint}
                     className="flex items-center gap-2 text-sm text-text-secondary"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent-yellow flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-status-warning flex-shrink-0" />
                     {constraint}
                   </div>
                 ))}
@@ -341,7 +341,7 @@ export default function ImpactWorkspacePage() {
               />
               <button
                 onClick={handleSaveResearch}
-                className="mt-3 px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                className="mt-3 px-4 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
               >
                 Save Research
               </button>
@@ -514,7 +514,7 @@ export default function ImpactWorkspacePage() {
                 </div>
                 <button
                   onClick={handleSaveCanvas}
-                  className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                  className="px-4 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
                 >
                   Save Canvas
                 </button>
@@ -625,7 +625,7 @@ export default function ImpactWorkspacePage() {
               </p>
               <Link
                 href="/projects/proj-first-ai-assistant"
-                className="inline-block px-5 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors"
+                className="inline-block px-5 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors"
               >
                 Open Project Workspace →
               </Link>
@@ -846,7 +846,7 @@ export default function ImpactWorkspacePage() {
                       {project.openSourcePath.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-0.5 text-[10px] bg-accent-blue/10 text-accent-blue rounded"
+                          className="px-2 py-0.5 text-[10px] bg-status-info/10 text-status-info rounded"
                         >
                           {skill}
                         </span>
@@ -871,7 +871,7 @@ export default function ImpactWorkspacePage() {
                 research you performed, the design decisions you made, and the
                 impact you achieved.
               </p>
-              <button className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-md hover:bg-accent-blue-hover transition-colors">
+              <button className="px-4 py-2 text-sm font-medium bg-status-info text-white rounded-md hover:bg-status-info transition-colors">
                 Generate Portfolio
               </button>
             </div>

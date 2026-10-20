@@ -92,7 +92,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
             <p
               style={{
                 fontSize: "var(--text-lg)",
-                color: "var(--color-earth)",
+                color: "var(--color-accent-earth)",
                 maxWidth: "600px",
                 margin: "0 auto",
                 lineHeight: 1.7,
@@ -114,7 +114,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
             }}
           >
             <div className="container mx-auto max-w-5xl px-6 text-center">
-              <p style={{ color: "var(--color-earth)", margin: 0 }}>
+              <p style={{ color: "var(--color-accent-earth)", margin: 0 }}>
                 <strong>
                   Advanced track — designed for ages 15+ and mentor-led
                   learners.
@@ -152,7 +152,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -171,7 +171,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
               {modules.map((m) => (
                 <a
                   key={m.id}
-                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-[#0e382e]"
+                  className="curriculum-tier transition-all duration-150 ease-out hover:-translate-y-[2px] hover:shadow-lg hover:border-accent-green"
                   href={`/curriculum/levels/${level}/${m.id}`}
                   style={{
                     display: "block",
@@ -211,7 +211,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
                   </h3>
                   <p
                     style={{
-                      color: "var(--color-earth)",
+                      color: "var(--color-accent-earth)",
                       marginBottom: "var(--space-3)",
                       lineHeight: 1.5,
                     }}
@@ -220,7 +220,7 @@ export default async function LevelPage({ params }: LevelPageProps) {
                   </p>
                   <p
                     style={{
-                      color: "var(--color-earth)",
+                      color: "var(--color-accent-earth)",
                       fontSize: "var(--text-sm)",
                     }}
                   >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import { Suspense } from "react";
@@ -12,18 +12,16 @@ import {
   createLightingPreset,
 } from "@/lib/three/setup";
 import {
+  ThreeStage,
+  usePrefersReducedMotion,
+} from "@/components/three/ThreeStage";
+import {
   ForestParticleSystem,
   KnowledgeParticleSystem,
   HeritageParticleSystem,
   CommunityParticleSystem,
   ParticleSystem,
 } from "./ParticleSystems";
-
-const CANVAS_CONFIG = {
-  antialias: true,
-  alpha: true,
-  preserveDrawingBuffer: false,
-};
 
 interface CinematicHeroProps {
   pillar: "forest" | "knowledge" | "heritage" | "community" | "home";
@@ -33,6 +31,20 @@ interface CinematicHeroProps {
   scrollParallax?: boolean;
   className?: string;
   children?: React.ReactNode;
+}
+
+/**
+ * Tone mapping has to be configured from inside the canvas, so it lives in a
+ * scene child rather than on an `onCreated` prop the shared stage does not
+ * expose.
+ */
+function ToneMapping() {
+  const gl = useThree((state) => state.gl);
+  useEffect(() => {
+    gl.toneMapping = THREE.ACESFilmicToneMapping;
+    gl.toneMappingExposure = 1;
+  }, [gl]);
+  return null;
 }
 
 export function CinematicHero({
@@ -45,6 +57,16 @@ export function CinematicHero({
 }: CinematicHeroProps) {
   const config = PILLAR_SCENES[pillar === "home" ? "forest" : pillar];
   const colors = PILLAR_COLORS[pillar === "home" ? "forest" : pillar];
+
+  /*
+   * The caller's `reducedMotion` flag is an override, not the detection. It
+   * defaulted to false, so a caller that forgot to pass it left every reader
+   * who had asked their system to reduce motion watching an animated particle
+   * field. The media query is the source of truth; the prop can only add to
+   * it, never suppress it.
+   */
+  const prefersReduced = usePrefersReducedMotion();
+  const motionReduced = reducedMotion || prefersReduced;
 
   const cameraConfig = useMemo(
     () => ({
@@ -64,21 +86,18 @@ export function CinematicHero({
         overflow: "hidden",
       }}
     >
-      <Canvas
+      <ThreeStage
+        poster={<PillarGradient colors={colors} />}
         camera={cameraConfig}
-        gl={CANVAS_CONFIG}
         style={{ position: "absolute", inset: 0, zIndex: 0 }}
-        onCreated={({ gl }) => {
-          gl.toneMapping = THREE.ACESFilmicToneMapping;
-          gl.toneMappingExposure = 1;
-        }}
       >
         <Suspense fallback={<SceneLoader pillar={pillar} />}>
+          <ToneMapping />
           <CinematicScene
             pillar={pillar}
             scrollProgress={scrollProgress}
             mousePosition={mousePosition}
-            reducedMotion={reducedMotion}
+            reducedMotion={motionReduced}
           />
         </Suspense>
         {children && (
@@ -94,21 +113,34 @@ export function CinematicHero({
             {children}
           </Html>
         )}
-      </Canvas>
-
-      <div
-        className={`cinematic-fallback ${reducedMotion ? "visible" : ""}`}
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          background: `linear-gradient(160deg, ${colors.primary} 0%, ${colors.secondary} 50%, ${colors.accent} 100%)`,
-          opacity: reducedMotion ? 1 : 0,
-          transition: "opacity 0.5s ease",
-          pointerEvents: "none",
-        }}
-      />
+      </ThreeStage>
     </div>
+  );
+}
+
+/**
+ * The pillar gradient. Previously this element was rendered unconditionally
+ * with `opacity: 0` unless reduced motion was set, so a reader without WebGL
+ * got a transparent layer over nothing. As the stage poster it now renders
+ * exactly when the canvas cannot.
+ */
+function PillarGradient({
+  colors,
+}: {
+  colors: { primary: string; secondary: string; accent: string };
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="cinematic-fallback"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 1,
+        background: `linear-gradient(160deg, ${colors.primary} 0%, ${colors.secondary} 50%, ${colors.accent} 100%)`,
+        pointerEvents: "none",
+      }}
+    />
   );
 }
 

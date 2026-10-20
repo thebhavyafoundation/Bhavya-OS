@@ -154,7 +154,7 @@ function getRelevanceColor(relevance: string) {
     case "high":
       return "text-[var(--color-accent-gold)]";
     case "medium":
-      return "text-accent-blue";
+      return "text-status-info";
     case "low":
       return "text-text-muted";
     default:
@@ -252,8 +252,12 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
   const [expanded, setExpanded] = useState(false);
 
   // Parse tags for source repository
-  const sourceRepo = finding.tags.find((t) => t.startsWith("repo:"))?.replace("repo:", "");
-  const sourceFile = finding.tags.find((t) => t.startsWith("file:"))?.replace("file:", "");
+  const sourceRepo = finding.tags
+    .find((t) => t.startsWith("repo:"))
+    ?.replace("repo:", "");
+  const sourceFile = finding.tags
+    .find((t) => t.startsWith("file:"))
+    ?.replace("file:", "");
 
   return (
     <Card padding="md" hover className="group">
@@ -261,7 +265,10 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 min-w-0 flex-1">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-bg-tertiary flex-shrink-0 mt-0.5 group-hover:bg-[var(--color-accent-gold)]/10 transition-colors">
-              <Icon size={14} className="text-text-secondary group-hover:text-[var(--color-accent-gold)] transition-colors" />
+              <Icon
+                size={14}
+                className="text-text-secondary group-hover:text-[var(--color-accent-gold)] transition-colors"
+              />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-0.5">
@@ -319,7 +326,7 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
               <Badge
                 variant={
                   finding.relevance_to_bhavya === "high"
-                    ? "purple"
+                    ? "caution"
                     : finding.relevance_to_bhavya === "medium"
                       ? "info"
                       : "default"
@@ -366,7 +373,9 @@ function FindingCard({ finding }: { finding: IntelligenceFinding }) {
           </div>
           {finding.tags.length > 0 && (
             <div>
-              <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1.5">Tags</p>
+              <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1.5">
+                Tags
+              </p>
               <div className="flex flex-wrap gap-1.5">
                 {finding.tags.map((tag) => (
                   <span
@@ -409,7 +418,11 @@ function BriefingSection({
       </div>
       <div className="space-y-2">
         {items.map((item, i) => (
-          <Card key={i} padding="sm" className="group hover:border-[var(--color-accent-gold)]/20 transition-colors">
+          <Card
+            key={i}
+            padding="sm"
+            className="group hover:border-[var(--color-accent-gold)]/20 transition-colors"
+          >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-text-primary mb-0.5">
@@ -428,7 +441,10 @@ function BriefingSection({
                 )}
                 {item.action && (
                   <div className="flex items-center gap-1.5 mt-2 px-2 py-1.5 bg-[var(--color-accent-gold)]/5 rounded border border-[var(--color-accent-gold)]/10">
-                    <ArrowRight size={10} className="text-[var(--color-accent-gold)]" />
+                    <ArrowRight
+                      size={10}
+                      className="text-[var(--color-accent-gold)]"
+                    />
                     <p className="text-xs text-[var(--color-accent-gold)] font-medium">
                       {item.action}
                     </p>
@@ -576,8 +592,12 @@ export default function DailyIntelligenceDashboard() {
               </p>
               {latestRun && (
                 <p className="text-xs text-text-muted mt-1">
-                  Last run: {formatDate(latestRun.completed_at || latestRun.started_at)} at {formatTime(latestRun.completed_at || latestRun.started_at)}
-                  {latestRun.duration_ms && ` · ${formatDuration(latestRun.duration_ms)}`}
+                  Last run:{" "}
+                  {formatDate(latestRun.completed_at || latestRun.started_at)}{" "}
+                  at{" "}
+                  {formatTime(latestRun.completed_at || latestRun.started_at)}
+                  {latestRun.duration_ms &&
+                    ` · ${formatDuration(latestRun.duration_ms)}`}
                 </p>
               )}
             </div>
@@ -638,7 +658,7 @@ export default function DailyIntelligenceDashboard() {
               label="Repos Inspected"
               value={latestRun.inspected_count}
               icon={BarChart3}
-              color="bg-accent-blue/10 text-accent-blue"
+              color="bg-status-info/10 text-status-info"
               tooltip="Repositories analyzed in this run"
             />
             <StatCard
@@ -661,10 +681,39 @@ export default function DailyIntelligenceDashboard() {
         {/* Tabs */}
         <div className="flex items-center gap-1 mb-6 border-b border-border-primary">
           {[
-            { id: "briefing" as const, label: "Briefing", icon: BookOpen, count: briefing ? (briefing.top_discoveries.length + briefing.engineering_practices.length + briefing.ai_techniques.length + briefing.architecture_lessons.length + briefing.design_inspiration.length + briefing.learning_lessons.length + briefing.experiments.length + briefing.warnings.length) : 0 },
-            { id: "findings" as const, label: "Findings", icon: Lightbulb, count: findings.length },
-            { id: "trends" as const, label: "Trends", icon: TrendingUp, count: trends.length },
-            { id: "history" as const, label: "Run History", icon: Clock, count: runs.length },
+            {
+              id: "briefing" as const,
+              label: "Briefing",
+              icon: BookOpen,
+              count: briefing
+                ? briefing.top_discoveries.length +
+                  briefing.engineering_practices.length +
+                  briefing.ai_techniques.length +
+                  briefing.architecture_lessons.length +
+                  briefing.design_inspiration.length +
+                  briefing.learning_lessons.length +
+                  briefing.experiments.length +
+                  briefing.warnings.length
+                : 0,
+            },
+            {
+              id: "findings" as const,
+              label: "Findings",
+              icon: Lightbulb,
+              count: findings.length,
+            },
+            {
+              id: "trends" as const,
+              label: "Trends",
+              icon: TrendingUp,
+              count: trends.length,
+            },
+            {
+              id: "history" as const,
+              label: "Run History",
+              icon: Clock,
+              count: runs.length,
+            },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -678,11 +727,13 @@ export default function DailyIntelligenceDashboard() {
               <tab.icon size={14} />
               {tab.label}
               {tab.count > 0 && (
-                <span className={`text-[10px] px-1.5 py-0.5 rounded ${
-                  activeTab === tab.id
-                    ? "bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]"
-                    : "bg-bg-tertiary text-text-muted"
-                }`}>
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded ${
+                    activeTab === tab.id
+                      ? "bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]"
+                      : "bg-bg-tertiary text-text-muted"
+                  }`}
+                >
                   {tab.count}
                 </span>
               )}

@@ -1,0 +1,115 @@
+name: Assets (GLB optimise)
+
+# Optimises source 3D models into shippable derivatives.
+#
+# Constraints this workflow enforces by construction:
+#   - Runs on GitHub Actions only. The local machine is an editor and never
+#     performs heavy processing (AGENTS.md §14, PLATFORM-TRUTH.md).
+#   - Produces review artefacts. It uploads an artefact and stops.
+#   - It never writes to Backblaze B2 and never triggers a deploy. Publishing
+#     is a separate, human-gated step.
+#   - Every tool is open source and runs without a paid service.
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Path to the source model, relative to the repo root"
+        required: true
+        type: string
+      name:
+        description: "Asset id used for output filenames"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  optimise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+
+      - name: Resolve source model
+        id: src
+        run: |
+          set -euo pipefail
+          if [ ! -f "${{ inputs.model }}" ]; then
+            echo "::error::source model not found: ${{ inputs.model }}"
+            exit 1
+          fi
+          # A model that must be optimised is, by definition, not something we
+          # want in git. Refuse rather than let a large binary through CI.
+          size=$(stat -c%s "${{ inputs.model }}")
+          if [ "$size" -gt 52428800 ]; then
+            echo "::error::source model is ${size} bytes, above the 50MB working ceiling"
+            exit 1
+          fi
+          echo "bytes=$size" >> "$GITHUB_OUTPUT"
+
+      - name: Install glTF Transform
+        run: npm install --no-save --no-audit --no-fund @gltf-transform/cli@4
+
+      - name: Optimise (web delivery profile)
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          npx gltf-transform optimize "${{ inputs.model }}" \
+            out/${{ inputs.name }}.glb \
+            --compress draco --texture-compress webp \
+            --simplify false --join false --prune false
+
+      - name: Optimise (mobile tier)
+        run: |
+          set -euo pipefail
+          npx gltf-transform optimize "${{ inputs.model }}" \
+            out/${{ inputs.name }}.mobile.glb \
+            --compress draco --texture-compress webp \
+            --texture-size 512 --simplify true --simplify-error 0.001 \
+            --join false --prune false
+
+      - name: Report sizes against budget
+        run: |
+          set -euo pipefail
+          report=out/SIZES.md
+          {
+            echo "# Asset size report — ${{ inputs.name }}"
+            echo
+            echo "| Variant | Bytes | Budget | Result |"
+            echo "| --- | ---: | ---: | --- |"
+          } > "$report"
+          check () {
+            local file="$1" budget="$2" label="$3"
+            local bytes; bytes=$(stat -c%s "$file")
+            local verdict="within budget"
+            if [ "$bytes" -gt "$budget" ]; then verdict="OVER BUDGET"; fi
+            printf '| %s | %s | %s | %s |\n' "$label" "$bytes" "$budget" "$verdict" >> "$report"
+            echo "$label: $bytes bytes (budget $budget) — $verdict"
+          }
+          check "out/${{ inputs.name }}.glb" 2097152 "desktop"
+          check "out/${{ inputs.name }}.mobile.glb" 524288 "mobile"
+          echo
+          echo "Budgets: desktop 2MB, mobile 500KB. Over-budget is reported, not hidden."
+        # Non-blocking: an over-budget result is information for review, not a
+        # pipeline failure. It must never gate the PR.
+        continue-on-error: true
+
+      - name: Checksums
+        run: |
+          set -euo pipefail
+          cd out
+          sha256sum *.glb > SHA256SUMS
+          cat SHA256SUMS
+
+      - name: Upload review artefacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: glb-${{ inputs.name }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: error

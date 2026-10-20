@@ -141,7 +141,7 @@ export default function PlaygroundPage() {
                     onClick={() => setActiveSimulation(sim.id)}
                     className={`w-full text-left p-3 rounded-lg transition-all ${
                       activeSimulation === sim.id
-                        ? "bg-[#22c55e]/10 border border-[#22c55e]/30 text-[#22c55e]"
+                        ? "bg-status-success-bg border-status-success-border text-status-success-fg"
                         : "bg-white/5 border border-white/10 text-white/60 hover:bg-white/10"
                     }`}
                   >

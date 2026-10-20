@@ -115,7 +115,7 @@ export function SemanticSearch() {
     path: "var(--color-brand-forest)",
     project: "var(--color-brand-gold)",
     glossary: "var(--color-brand-gold)",
-    paper: "var(--color-accent-red, #ef4444)",
+    paper: "var(--color-status-error)",
   };
 
   return (

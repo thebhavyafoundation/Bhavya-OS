@@ -189,7 +189,7 @@ interface MountainSilhouetteProps {
  */
 export function MountainSilhouette({
   opacity = 0.08,
-  color = "rgba(var(--color-brand-ivory-rgb, 247, 244, 236), 0.5)",
+  color = "var(--color-text-tertiary)",
   className,
 }: MountainSilhouetteProps) {
   return (

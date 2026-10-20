@@ -36,9 +36,9 @@ function SkillBar({
   confidence: number;
 }) {
   const getColor = (conf: number) => {
-    if (conf >= 70) return "var(--color-accent-green, #22c55e)";
-    if (conf >= 40) return "var(--color-accent-gold, #f59e0b)";
-    return "#ef4444";
+    if (conf >= 70) return "var(--color-accent-green)";
+    if (conf >= 40) return "var(--color-accent-gold)";
+    return "var(--color-status-error-fg)";
   };
 
   const color = getColor(confidence);

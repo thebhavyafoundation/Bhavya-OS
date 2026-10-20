@@ -1,0 +1,131 @@
+name: Assets (posters + raster)
+
+# Captures poster frames for 3D stages and derives AVIF/WebP raster
+# derivatives.
+#
+# Constraints, identical to assets-glb.yml:
+#   - GitHub Actions only. Never local.
+#   - Review artefacts only. Never publishes to B2, never deploys.
+#   - Sharp and Playwright are the only raster tools. Both are open source.
+
+on:
+  workflow_dispatch:
+    inputs:
+      poster:
+        description: "PNG or JPEG poster source for raster derivation"
+        required: false
+        default: ""
+        type: string
+      poster_url:
+        description: "Alternatively, a deployed preview URL to capture as a poster"
+        required: false
+        default: ""
+        type: string
+      route:
+        description: "Route to capture when using poster_url, e.g. /missions/forest"
+        required: false
+        default: "/"
+        type: string
+      name:
+        description: "Asset id used for output filenames"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  posters:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 20
+
+      - name: Capture poster from preview
+        if: ${{ inputs.poster_url != '' }}
+        env:
+          TARGET_URL: ${{ inputs.poster_url }}
+          ROUTE: ${{ inputs.route }}
+          NAME: ${{ inputs.name }}
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          # Captured at 1600x900: wide enough for a 1440 desktop hero, small
+          # enough that the AVIF derivative lands under the 100KB budget.
+          npx --yes playwright@1 install --with-deps chromium
+          npx --yes playwright@1 screenshot \
+            --viewport-size "1600,900" \
+            --wait-for-timeout 4000 \
+            "$TARGET_URL$ROUTE" "out/$NAME.poster.png"
+
+      - name: Validate poster source
+        if: ${{ inputs.poster == '' && inputs.poster_url == '' }}
+        run: |
+          echo "::error::supply either a poster file or a preview URL to capture"
+          exit 1
+
+      - name: Derive AVIF and WebP
+        env:
+          NAME: ${{ inputs.name }}
+        run: |
+          set -euo pipefail
+          export SRC="out/$NAME.poster.png"
+          if [ -n "${{ inputs.poster }}" ]; then
+            cp "${{ inputs.poster }}" "$SRC"
+          fi
+          if [ ! -f "$SRC" ]; then
+            echo "::error::poster source missing: $SRC"
+            exit 1
+          fi
+          npm install --no-save --no-audit --no-fund sharp@0.33
+          # Awaited: unawaited Sharp promises let node exit mid-encode and
+          # produce truncated derivatives.
+          node -e "
+            const sharp = require('sharp');
+            (async () => {
+              await sharp(process.env.SRC)
+                .avif({ quality: 55 })
+                .toFile(\`out/\${process.env.NAME}.poster.avif\`);
+              await sharp(process.env.SRC)
+                .resize({ width: 1280 })
+                .webp({ quality: 72 })
+                .toFile(\`out/\${process.env.NAME}.poster.webp\`);
+            })().catch((error) => {
+              console.error(error);
+              process.exit(1);
+            });
+          "
+          sha256sum out/*.avif out/*.webp > out/SHA256SUMS
+          cat out/SHA256SUMS
+
+      - name: Report sizes against budget
+        run: |
+          set -euo pipefail
+          report=out/SIZES.md
+          {
+            echo "# Poster size report — ${{ inputs.name }}"
+            echo
+            echo "| Variant | Bytes | Budget | Result |"
+            echo "| --- | ---: | ---: | --- |"
+          } > "$report"
+          for f in out/*.avif out/*.webp; do
+            [ -e "$f" ] || continue
+            bytes=$(stat -c%s "$f")
+            if [[ "$f" == *.avif ]]; then budget=102400; else budget=153600; fi
+            verdict="within budget"
+            [ "$bytes" -gt "$budget" ] && verdict="OVER BUDGET"
+            printf '| %s | %s | %s | %s |\n' "$(basename "$f")" "$bytes" "$budget" "$verdict" >> "$report"
+          done
+          cat "$report"
+        continue-on-error: true
+
+      - name: Upload review artefacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: poster-${{ inputs.name }}
+          path: out/
+          retention-days: 14
+          if-no-files-found: error

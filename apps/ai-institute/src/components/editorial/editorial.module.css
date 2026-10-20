@@ -1,0 +1,128 @@
+/*
+ * Editorial diagram and infographic plates.
+ *
+ * Scoped to the components that import this module. Token-only: every
+ * colour, space, radius and size comes from platform-ui tokens, so this file
+ * introduces no new brand values and `pnpm tokens:check` stays meaningful.
+ */
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-10);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.desc {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 68ch;
+}
+
+/*
+ * The plate is deliberately ivory in both themes. The authored SVGs embed
+ * literal hex fills for their `minimal-light` variant; presenting them on a
+ * fixed light plate keeps them legible without a second dark asset, and
+ * reads as a printed plate on a dark ground.
+ */
+.plate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand-ivory);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  overflow: hidden;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.alt {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-secondary);
+  padding-top: var(--space-3);
+}
+
+.alt > summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.alt > summary:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.meta {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.meta > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.meta dt {
+  font-weight: 600;
+  min-width: 6rem;
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.claim {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+.footnote,
+.source {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .plate {
+    padding: var(--space-3);
+  }
+
+  .title {
+    font-size: var(--text-xl);
+  }
+}

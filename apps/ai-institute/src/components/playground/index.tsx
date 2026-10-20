@@ -194,7 +194,7 @@ export function AIPromptPlayground() {
                   topP: parseFloat(e.target.value),
                 }))
               }
-              className="w-full accent-blue-500"
+              className="w-full status-info-500"
             />
           </div>
 

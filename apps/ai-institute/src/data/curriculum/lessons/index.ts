@@ -1,53 +1,27 @@
-// Lesson Registry — populated by P5 content task
-// This module exports registration functions and a populate function.
-// The actual lesson data is defined in lesson-content.ts to avoid circular imports.
+/**
+ * Lesson registry — re-export of the single implementation.
+ *
+ * This file previously held a second, empty `Map` that was a near-identical
+ * copy of `lib/curriculum/lessons.ts`. Both exposed the same six functions,
+ * neither was populated by anything outside a test, and the curriculum lesson
+ * route imported the empty one — so every lesson page resolved zero lessons
+ * while still typechecking.
+ *
+ * Two copies of a registry is the failure mode: one gets wired, one does not,
+ * and nothing tells you which. There is now exactly one implementation, in
+ * `lib/curriculum/lessons.ts`, and this module exists only so the
+ * `@/data/curriculum/lessons` import path keeps resolving.
+ */
 
-import type {
-  Lesson,
-  LessonBlock,
-  QuizQuestion,
-  WidgetSpec,
-  DiagramSpec,
-  ExperimentBlock,
-  ProjectBlock,
-} from "@/data/curriculum";
+export {
+  getLessons,
+  getLessonsForModule,
+  getAllLessons,
+  getLesson,
+  getAllCurriculumLessonIds,
+  registerLesson,
+} from "@/lib/curriculum/lessons";
 
-const LESSON_REGISTRY: Map<string, Lesson> = new Map();
-
-export function getLessons(moduleId: string): Lesson[] {
-  const lessons: Lesson[] = [];
-  for (const lesson of LESSON_REGISTRY.values()) {
-    if (lesson.moduleId === moduleId) lessons.push(lesson);
-  }
-  return lessons.sort((a, b) => a.id.localeCompare(b.id));
-}
-
-export function getLessonsForModule(moduleId: string): Lesson[] {
-  return getLessons(moduleId);
-}
-
-export function getAllLessons(): Lesson[] {
-  return Array.from(LESSON_REGISTRY.values()).sort((a, b) =>
-    a.id.localeCompare(b.id),
-  );
-}
-
-export function getLesson(
-  moduleId: string,
-  lessonId: string,
-): Lesson | undefined {
-  return LESSON_REGISTRY.get(`${moduleId}:${lessonId}`);
-}
-
-export function getAllCurriculumLessonIds(): string[] {
-  return Array.from(LESSON_REGISTRY.keys());
-}
-
-export function registerLesson(lesson: Lesson): void {
-  LESSON_REGISTRY.set(`${lesson.moduleId}:${lesson.id}`, lesson);
-}
-
-// Re-export types
 export type {
   Lesson,
   LessonBlock,
@@ -56,4 +30,4 @@ export type {
   DiagramSpec,
   ExperimentBlock,
   ProjectBlock,
-};
+} from "@/data/curriculum/types";

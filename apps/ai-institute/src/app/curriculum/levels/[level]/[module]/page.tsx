@@ -60,7 +60,7 @@ export default async function ModulePage({ params }: Props) {
       </h1>
       <p
         style={{
-          color: "var(--color-earth)",
+          color: "var(--color-accent-earth)",
           marginBottom: "var(--space-8)",
           lineHeight: 1.7,
         }}
@@ -81,7 +81,7 @@ export default async function ModulePage({ params }: Props) {
         </h2>
         <ul
           style={{
-            color: "var(--color-earth)",
+            color: "var(--color-accent-earth)",
             paddingLeft: "var(--space-6)",
             lineHeight: 2,
           }}
@@ -103,7 +103,7 @@ export default async function ModulePage({ params }: Props) {
         >
           Format
         </h2>
-        <p style={{ color: "var(--color-earth)", lineHeight: 1.7 }}>
+        <p style={{ color: "var(--color-accent-earth)", lineHeight: 1.7 }}>
           {mod.duration} · {mod.handsOnPercent}% hands-on
         </p>
       </section>
@@ -122,7 +122,7 @@ export default async function ModulePage({ params }: Props) {
           </h2>
           <ul
             style={{
-              color: "var(--color-earth)",
+              color: "var(--color-accent-earth)",
               paddingLeft: "var(--space-6)",
               lineHeight: 2,
             }}
@@ -148,7 +148,7 @@ export default async function ModulePage({ params }: Props) {
           </h2>
           <ul
             style={{
-              color: "var(--color-earth)",
+              color: "var(--color-accent-earth)",
               paddingLeft: "var(--space-6)",
               lineHeight: 2,
             }}
@@ -172,14 +172,14 @@ export default async function ModulePage({ params }: Props) {
           Lessons
         </h2>
         {lessons.length === 0 ? (
-          <p style={{ color: "var(--color-earth)" }}>
+          <p style={{ color: "var(--color-accent-earth)" }}>
             Lessons for this module are being prepared.
           </p>
         ) : (
           <ol
             style={{
               paddingLeft: "var(--space-6)",
-              color: "var(--color-earth)",
+              color: "var(--color-accent-earth)",
               lineHeight: 2.5,
             }}
           >
@@ -197,7 +197,7 @@ export default async function ModulePage({ params }: Props) {
                 <span
                   style={{
                     marginLeft: "var(--space-2)",
-                    color: "var(--color-earth)",
+                    color: "var(--color-accent-earth)",
                     fontSize: "var(--text-sm)",
                   }}
                 >
@@ -210,7 +210,7 @@ export default async function ModulePage({ params }: Props) {
       </section>
       <p
         style={{
-          color: "var(--color-earth)",
+          color: "var(--color-accent-earth)",
           borderTop: "1px solid var(--color-border-primary)",
           paddingTop: "var(--space-6)",
         }}

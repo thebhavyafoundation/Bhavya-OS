@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { EmptyState } from "@bhavya/platform-ui";
 import { aiModules } from "@/data/curriculum/ai-module-registry";
 import {
   getModuleById,
@@ -93,15 +94,19 @@ export default async function ModulePage({ params }: ModulePageProps) {
             ))}
           </ol>
         ) : (
-          <div className="ai-empty">
-            <p>
-              Lesson content for this module is being prepared. You can still
-              track module completion from the curriculum timeline.
-            </p>
-            <Link className="ai-back-link" href="/curriculum">
-              Back to curriculum
-            </Link>
-          </div>
+          // Most modules are catalogued before their lessons are authored, so
+          // this is the common path, not an edge case. It is stated plainly
+          // and given somewhere to go, rather than rendering an empty list.
+          <EmptyState
+            title="No lessons published for this module yet"
+            description="The module is part of the curriculum and its objectives and prerequisites are recorded, but its lessons are still being written. Nothing here is locked or missing from your progress record."
+            meta={`Topics on record: ${mod.topics.length} · Standards mapped: ${standards.length}`}
+            action={
+              <Link className="btn btn-secondary" href="/curriculum">
+                Back to curriculum
+              </Link>
+            }
+          />
         )}
       </section>
 

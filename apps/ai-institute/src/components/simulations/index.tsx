@@ -307,8 +307,8 @@ export function TokenizationSimulator() {
     "var(--color-brand-forest)",
     "var(--color-brand-gold)",
     "var(--color-brand-gold)",
-    "var(--color-accent-red, #ef4444)",
-    "var(--color-accent-gold, #d4af37)",
+    "var(--color-status-error)",
+    "var(--color-accent-gold)",
     "var(--color-brand-sage)",
     "var(--color-forest-400)",
   ];
@@ -401,8 +401,8 @@ export function EmbeddingSpaceExplorer() {
     animals: "var(--color-forest-500)",
     places: "var(--color-brand-forest)",
     actions: "var(--color-brand-gold)",
-    adjectives: "var(--color-accent-red, #ef4444)",
-    emotions: "var(--color-accent-gold, #d4af37)",
+    adjectives: "var(--color-status-error)",
+    emotions: "var(--color-accent-gold)",
   };
 
   const selected = words.find((w) => w.word === selectedWord);
@@ -958,7 +958,7 @@ export function RAGPipelineSimulator() {
             max="5"
             value={topK}
             onChange={(e) => setTopK(parseInt(e.target.value))}
-            className="w-full accent-blue-500"
+            className="w-full status-info-500"
           />
         </div>
       </div>

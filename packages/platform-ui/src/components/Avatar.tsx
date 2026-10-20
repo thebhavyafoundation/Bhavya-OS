@@ -30,12 +30,12 @@ function getInitials(name: string): string {
 
 function getColorFromName(name: string): string {
   const colors = [
-    "bg-accent-blue",
+    "bg-status-info",
     "bg-accent-green",
-    "bg-accent-purple",
+    "bg-accent-earth",
     "bg-accent-orange",
     "bg-accent-cyan",
-    "bg-accent-yellow",
+    "bg-status-warning",
   ];
   const index = name.charCodeAt(0) % colors.length;
   return colors[index];

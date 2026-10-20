@@ -58,7 +58,7 @@ export default function LevelsPage() {
             <p
               style={{
                 fontSize: "var(--text-lg)",
-                color: "var(--color-earth)",
+                color: "var(--color-accent-earth)",
                 maxWidth: "600px",
                 margin: "0 auto",
                 lineHeight: 1.7,
@@ -99,7 +99,7 @@ export default function LevelsPage() {
               </h2>
               <p
                 style={{
-                  color: "var(--color-earth)",
+                  color: "var(--color-accent-earth)",
                   marginTop: "var(--space-2)",
                   maxWidth: "600px",
                   lineHeight: 1.6,
@@ -178,7 +178,7 @@ export default function LevelsPage() {
                         <p
                           style={{
                             fontSize: "var(--text-sm)",
-                            color: "var(--color-earth)",
+                            color: "var(--color-accent-earth)",
                             marginTop: "var(--space-1)",
                           }}
                         >
@@ -187,7 +187,7 @@ export default function LevelsPage() {
                         <p
                           style={{
                             fontSize: "var(--text-xs)",
-                            color: "var(--color-earth)",
+                            color: "var(--color-accent-earth)",
                             marginTop: "var(--space-1)",
                           }}
                         >
@@ -277,7 +277,7 @@ export default function LevelsPage() {
                       <div
                         style={{
                           fontSize: "var(--text-xs)",
-                          color: "var(--color-earth)",
+                          color: "var(--color-accent-earth)",
                           marginTop: "var(--space-1)",
                         }}
                       >

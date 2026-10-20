@@ -68,17 +68,12 @@ export default function LearningPage() {
     <AppLayout sidebar={<Sidebar />}>
       <div className="animate-fade-in">
         <Breadcrumb
-          items={[
-            { label: "Dashboard", href: "/" },
-            { label: "Learning" },
-          ]}
+          items={[{ label: "Dashboard", href: "/" }, { label: "Learning" }]}
           className="mb-6"
         />
 
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-text-primary">
-            Learning
-          </h1>
+          <h1 className="text-2xl font-semibold text-text-primary">Learning</h1>
           <p className="text-sm text-text-tertiary mt-1">
             Educational materials generated from repositories
           </p>
@@ -144,7 +139,7 @@ export default function LearningPage() {
                     onClick={() => setSelected(exp)}
                     className={`w-full text-left border rounded-lg p-5 transition-all duration-fast animate-fade-in ${
                       selected?.id === exp.id
-                        ? "bg-bg-secondary border-accent-blue"
+                        ? "bg-bg-secondary border-status-info"
                         : "bg-bg-secondary border-border-primary hover:border-border-secondary"
                     }`}
                     style={{ animationDelay: `${i * 40}ms` }}
@@ -174,9 +169,7 @@ export default function LearningPage() {
               <Card padding="lg" className="sticky top-8 animate-fade-in">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-text-tertiary">
-                    {typeIcons[selected.export_type] || (
-                      <BookOpen size={14} />
-                    )}
+                    {typeIcons[selected.export_type] || <BookOpen size={14} />}
                   </span>
                   <Badge variant="default" size="sm">
                     {selected.export_type}

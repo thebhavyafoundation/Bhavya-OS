@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { EmptyState } from "@bhavya/platform-ui";
 import { BlockRenderer } from "@/components/curriculum/BlockRenderer";
+import { LessonShell } from "@/components/curriculum/LessonShell";
 import { VisualComponent } from "@/components/curriculum/VisualComponent";
 import { resolveAssetUrl } from "@/lib/assetUrls";
 import {
@@ -47,102 +48,89 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   const lessons = getLessonsForModule(moduleId);
   const lessonIndex = lessons.findIndex((entry) => entry.id === lesson.id);
-  const previous = lessonIndex > 0 ? lessons[lessonIndex - 1] : undefined;
+  const safeIndex = lessonIndex >= 0 ? lessonIndex + 1 : 1;
+  const previous =
+    lessonIndex > 0
+      ? {
+          title: lessons[lessonIndex - 1].title,
+          href: `/curriculum/modules/${mod.id}/lessons/${lessons[lessonIndex - 1].id}`,
+        }
+      : undefined;
   const next =
     lessonIndex >= 0 && lessonIndex < lessons.length - 1
-      ? lessons[lessonIndex + 1]
-      : undefined;
+      ? {
+          title: lessons[lessonIndex + 1].title,
+          href: `/curriculum/modules/${mod.id}/lessons/${lessons[lessonIndex + 1].id}`,
+        }
+      : {
+          title: "Back to the module",
+          href: `/curriculum/modules/${mod.id}`,
+        };
   const standards = getStandardsForModule(moduleId);
 
   return (
-    <div id="main-content" className="ai-page">
-      <nav className="ai-breadcrumb" aria-label="Breadcrumb">
-        <Link href="/curriculum">Curriculum</Link>
-        {" / "}
-        <Link href={`/curriculum/modules/${mod.id}`}>{mod.title}</Link>
-        {" / "}
-        <span className="ai-breadcrumb-current" aria-current="page">
-          {lesson.title}
-        </span>
-      </nav>
-
-      <p className="ai-eyebrow">
-        Lesson {lessonIndex + 1} of {lessons.length} · {BAND_AGES[mod.band]}
-      </p>
-      <h1 className="ai-page-title">{lesson.title}</h1>
-
-      {mod.recommendedAssetUrl && (
-        <div style={{ margin: "var(--space-8) 0" }}>
-          <VisualComponent
-            assetUrl={
-              resolveAssetUrl(mod.recommendedAssetUrl) ||
-              mod.recommendedAssetUrl
-            }
-            type={mod.visualFormat === "3d" ? "3d" : "2d"}
-            alt={`Visual for ${mod.title}`}
+    <LessonShell
+      crumbs={[
+        { label: "Curriculum", href: "/curriculum" },
+        { label: mod.title, href: `/curriculum/modules/${mod.id}` },
+        { label: lesson.title },
+      ]}
+      index={safeIndex}
+      total={lessons.length}
+      audience={BAND_AGES[mod.band]}
+      title={lesson.title}
+      previous={previous}
+      next={next}
+      footer={
+        standards.length > 0 ? (
+          <section aria-labelledby="lesson-standards-heading">
+            <h2 id="lesson-standards-heading" className="ai-section-title">
+              Standards this lesson works toward
+            </h2>
+            <div className="ai-chip-row">
+              {standards.map((standard) => (
+                <span
+                  key={standard.id}
+                  className="ai-chip"
+                  title={`${standard.source} · ${standard.gradeBand}`}
+                >
+                  {standard.concept}
+                </span>
+              ))}
+            </div>
+          </section>
+        ) : (
+          // A module with no mapped standards is a real authoring state, not
+          // an error. Say so rather than rendering an empty chip row.
+          <EmptyState
+            title="No standards mapped yet"
+            description="This lesson has not been aligned to a published AI-education standard. Alignment is recorded per module and is reviewed during content authoring."
+            meta={`Module: ${mod.title}`}
           />
-        </div>
-      )}
+        )
+      }
+    >
+      {mod.recommendedAssetUrl ? (
+        <VisualComponent
+          assetUrl={
+            resolveAssetUrl(mod.recommendedAssetUrl) || mod.recommendedAssetUrl
+          }
+          type={mod.visualFormat === "3d" ? "3d" : "2d"}
+          alt={`Visual for ${mod.title}`}
+        />
+      ) : null}
 
-      <div>
-        {lesson.blocks.map((block, index) => (
+      {lesson.blocks.length > 0 ? (
+        lesson.blocks.map((block, index) => (
           <BlockRenderer key={index} block={block} />
-        ))}
-      </div>
-
-      <section
-        className="ai-section"
-        aria-labelledby="lesson-standards-heading"
-      >
-        <h2 id="lesson-standards-heading" className="ai-section-title">
-          Standards this lesson works toward
-        </h2>
-        <div className="ai-chip-row">
-          {standards.map((standard) => (
-            <span
-              key={standard.id}
-              className="ai-chip"
-              title={`${standard.source} · ${standard.gradeBand}`}
-            >
-              {standard.concept}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <nav className="ai-lesson-nav" aria-label="Lesson navigation">
-        <span>
-          {previous && (
-            <Link
-              href={`/curriculum/modules/${mod.id}/lessons/${previous.id}`}
-              className="ai-nav-btn"
-            >
-              ← {previous.title}
-            </Link>
-          )}
-        </span>
-        <span>
-          {next ? (
-            <Link
-              href={`/curriculum/modules/${mod.id}/lessons/${next.id}`}
-              className="ai-nav-btn ai-nav-btn-primary"
-            >
-              {next.title} →
-            </Link>
-          ) : (
-            <Link
-              href={`/curriculum/modules/${mod.id}`}
-              className="ai-nav-btn ai-nav-btn-primary"
-            >
-              Back to module →
-            </Link>
-          )}
-        </span>
-      </nav>
-
-      <Link className="ai-back-link" href="/curriculum">
-        Back to curriculum
-      </Link>
-    </div>
+        ))
+      ) : (
+        <EmptyState
+          title="This lesson has no content yet"
+          description="The lesson exists in the registry but its body has not been authored. Nothing is missing from your progress record — the lesson simply is not ready to read."
+          meta={`Module: ${mod.title}`}
+        />
+      )}
+    </LessonShell>
   );
 }

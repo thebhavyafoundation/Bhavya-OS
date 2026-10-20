@@ -14,10 +14,19 @@ export type { BadgeVariant } from "./components/StatusBadge";
 export { StatCard } from "./components/StatCard";
 
 export { EmptyState } from "./components/EmptyState";
+export type { EmptyStateProps } from "./components/EmptyState";
+
+export { Callout } from "./components/Callout";
+export type { CalloutTone } from "./components/Callout";
 
 export { LoadingSpinner, LoadingSkeleton } from "./components/LoadingState";
+export type {
+  LoadingSpinnerProps,
+  LoadingSkeletonProps,
+} from "./components/LoadingState";
 
 export { ErrorState } from "./components/ErrorState";
+export type { ErrorStateProps } from "./components/ErrorState";
 
 export { Modal } from "./components/Modal";
 

@@ -111,11 +111,10 @@ export default function NewForestMissionPage() {
         <div
           style={{
             padding: "var(--space-4)",
-            background: "rgba(var(--color-status-error-rgb, 239, 68, 68), 0.1)",
-            border:
-              "1px solid rgba(var(--color-status-error-rgb, 239, 68, 68), 0.3)",
+            background: "var(--color-status-error-bg)",
+            border: "1px solid var(--color-status-error-border)",
             borderRadius: "var(--radius-md)",
-            color: "var(--color-status-error, #ef4444)",
+            color: "var(--color-status-error-fg)",
             fontSize: "var(--text-sm)",
             marginBottom: "var(--space-6)",
           }}
@@ -308,7 +307,7 @@ export default function NewForestMissionPage() {
             color:
               creating || !name || !region
                 ? "var(--text-secondary)"
-                : "var(--color-text-inverse, #fff)",
+                : "var(--color-text-inverse)",
             borderRadius: "var(--radius-md)",
             fontSize: "var(--text-sm)",
             fontWeight: 600,

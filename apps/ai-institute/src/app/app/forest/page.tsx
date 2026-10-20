@@ -62,7 +62,7 @@ export default function ForestMissionsPage() {
               gap: "var(--space-2)",
               padding: "var(--space-3) var(--space-5)",
               background: "var(--forest)",
-              color: "var(--color-text-inverse, #fff)",
+              color: "var(--color-text-inverse)",
               borderRadius: "var(--radius-md)",
               fontSize: "var(--text-sm)",
               fontWeight: 600,
@@ -176,7 +176,7 @@ export default function ForestMissionsPage() {
                           : "var(--border)",
                       color:
                         mission.status === "active"
-                          ? "var(--color-text-inverse, #fff)"
+                          ? "var(--color-text-inverse)"
                           : "var(--text-secondary)",
                     }}
                   >
