@@ -122,18 +122,18 @@
           "label": "Learn",
           "items": [
             {
-              "id": "courses",
-              "label": "Courses",
-              "href": "/courses",
-              "icon": "GraduationCap",
-              "description": "AI curriculum from foundations to advanced"
-            },
-            {
               "id": "curriculum",
               "label": "Curriculum",
               "href": "/curriculum",
               "icon": "BookOpen",
               "description": "13 levels from Digital Foundations to Institution Building"
+            },
+            {
+              "id": "courses",
+              "label": "Courses",
+              "href": "/courses",
+              "icon": "GraduationCap",
+              "description": "AI curriculum from foundations to advanced"
             },
             {
               "id": "ai-institute",
@@ -527,6 +527,7 @@
       {
         "title": "Learn",
         "links": [
+          { "label": "Curriculum", "href": "/curriculum" },
           { "label": "Open Knowledge", "href": "/knowledge" },
           { "label": "AI Institute", "href": "/ai-institute" },
           { "label": "Research", "href": "/research" },
