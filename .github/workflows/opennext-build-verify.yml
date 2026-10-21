@@ -114,9 +114,18 @@ jobs:
         # fails. That defect let this gate report green while production's build
         # was failing with the identical error, which is precisely the failure
         # this gate exists to catch.
+        #
+        # --dangerouslyUseUnsupportedNextVersion: OpenNext refuses to build when
+        # the pinned Next.js major is outside the Next.js team's two-year support
+        # window. Next 15 was released 2024-10-21, so that window closed on
+        # 2026-10-21 and every OpenNext build in this repository began failing
+        # with "Next.js version 15.5.25 is not supported by the Next.js team".
+        # The check is a build-time gate on the framework's support policy, not a
+        # defect in the bundle. Remove this flag once Next is upgraded to 16.x,
+        # which is supported until 2027-10-21.
         run: |
           set -o pipefail
-          pnpm exec opennextjs-cloudflare build --skipNextBuild 2>&1 | tee ../../opennext-build.log
+          pnpm exec opennextjs-cloudflare build --skipNextBuild --dangerouslyUseUnsupportedNextVersion 2>&1 | tee ../../opennext-build.log
 
       - name: Restore pnpm dependency layout in the packaged tree
         # Next.js tracing records the real path of every traced file, so a

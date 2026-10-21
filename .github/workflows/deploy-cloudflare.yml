@@ -56,9 +56,18 @@ jobs:
         # pipefail is essential: without it the pipeline's exit status is tee's
         # (always 0), which would mask a build failure and let the deploy step
         # run on a broken bundle.
+        #
+        # --dangerouslyUseUnsupportedNextVersion: OpenNext refuses to build when
+        # the pinned Next.js major is outside the Next.js team's two-year support
+        # window. Next 15 was released 2024-10-21, so that window closed on
+        # 2026-10-21 and every OpenNext build in this repository began failing
+        # with "Next.js version 15.5.25 is not supported by the Next.js team".
+        # The check is a build-time gate on the framework's support policy, not a
+        # defect in the bundle. Remove this flag once Next is upgraded to 16.x,
+        # which is supported until 2027-10-21.
         run: |
           set -o pipefail
-          npx opennextjs-cloudflare build --skipNextBuild 2>&1 | tee build.log
+          npx opennextjs-cloudflare build --skipNextBuild --dangerouslyUseUnsupportedNextVersion 2>&1 | tee build.log
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
