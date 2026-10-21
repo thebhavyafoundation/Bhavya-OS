@@ -162,7 +162,18 @@ export function SiteHeader({
                   aria-expanded={activeDropdown === group.id}
                   aria-haspopup="true"
                   aria-controls={`menu-${group.id}`}
-                  onClick={() => handleDropdownToggle(group.id)}
+                  onClick={(event) => {
+                    // A keyboard-activated click carries detail 0; a pointer
+                    // click carries detail >= 1. A pointer has already opened
+                    // the group by hover, so a pointer click must keep it open
+                    // rather than toggle it shut under the cursor. A keyboard
+                    // user has no hover, so the same gesture must toggle.
+                    if (event.detail === 0) {
+                      handleDropdownToggle(group.id);
+                    } else {
+                      handleDropdownEnter(group.id);
+                    }
+                  }}
                   onKeyDown={(event) => handleDropdownKeyDown(event, group.id)}
                   style={
                     isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
