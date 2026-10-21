@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   Search,
   Menu,
@@ -96,6 +96,38 @@ export function SiteHeader({
     }, 150);
   }, []);
 
+  /**
+   * The dropdown is a disclosure: hover opens it, and a click or key press
+   * opens it too. Without the click path the menu can only be reached with a
+   * pointing device that can hover, so it is unreachable on touch and by
+   * keyboard.
+   */
+  const handleDropdownToggle = useCallback((groupId: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setActiveDropdown((current) => (current === groupId ? null : groupId));
+  }, []);
+
+  const handleDropdownKeyDown = useCallback(
+    (event: React.KeyboardEvent, groupId: string) => {
+      if (event.key === "Escape") {
+        setActiveDropdown(null);
+        return;
+      }
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setActiveDropdown(groupId);
+      }
+    },
+    [],
+  );
+
+  const prefersReducedMotion = useReducedMotion();
+  const dropdownTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { duration: 0.15, ease: "easeOut" as const };
+
   const isDark = variant === "dark";
 
   return (
@@ -121,6 +153,7 @@ export function SiteHeader({
               <div
                 key={group.id}
                 className="nav-dropdown"
+                data-open={activeDropdown === group.id}
                 onMouseEnter={() => handleDropdownEnter(group.id)}
                 onMouseLeave={handleDropdownLeave}
               >
@@ -129,6 +162,8 @@ export function SiteHeader({
                   aria-expanded={activeDropdown === group.id}
                   aria-haspopup="true"
                   aria-controls={`menu-${group.id}`}
+                  onClick={() => handleDropdownToggle(group.id)}
+                  onKeyDown={(event) => handleDropdownKeyDown(event, group.id)}
                   style={
                     isDark ? { color: "rgba(247, 244, 236, 0.7)" } : undefined
                   }
@@ -153,10 +188,13 @@ export function SiteHeader({
                       id={`menu-${group.id}`}
                       className="nav-dropdown-menu"
                       role="menu"
+                      onKeyDown={(event) => {
+                        if (event.key === "Escape") setActiveDropdown(null);
+                      }}
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      transition={dropdownTransition}
                     >
                       {group.items.map((item) => {
                         const ItemIcon = iconMap[item.icon] || Target;
@@ -258,13 +296,16 @@ export function SiteHeader({
           <>
             <motion.div
               className="mobile-menu-overlay"
+              data-open={mobileMenuOpen}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={dropdownTransition}
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
               className="mobile-menu-drawer"
+              data-open={mobileMenuOpen}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

@@ -345,7 +345,11 @@ body {
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  /* Centring uses the independent `translate` property rather than
+     `transform`. Framer Motion animates `transform` on this element for the
+     y offset, and an inline `transform` replaces the centring outright,
+     which shifts the menu to the right of its own trigger. */
+  translate: -50% 0;
   margin-top: var(--space-2);
   width: 280px;
   background: var(--color-bg-elevated);
@@ -354,27 +358,12 @@ body {
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   z-index: 100;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--duration-normal) var(--ease-out);
-}
-
-.nav-dropdown[data-open="true"] .nav-dropdown-menu {
+  /* The menu is mounted by React only while its group is open, and Framer
+     Motion owns the fade. It must not be hidden by default: revealing it
+     through a `[data-open]` attribute only works for components that set
+     that attribute, and the navigation does not. */
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-dropdown-menu {
-    transition:
-      opacity var(--duration-fast) ease,
-      visibility var(--duration-fast) ease;
-    transform: translateX(-50%);
-  }
-  .nav-dropdown[data-open="true"] .nav-dropdown-menu {
-    transform: translateX(-50%);
-  }
 }
 
 .nav-dropdown-item {
@@ -1440,14 +1429,9 @@ body {
   z-index: 100;
   background: rgba(14, 56, 46, 0.5);
   backdrop-filter: blur(4px);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--duration-normal) var(--ease-out),
-    visibility var(--duration-normal) var(--ease-out);
-}
-
-.mobile-menu-overlay[data-open="true"] {
+  /* Mounted by React only while the menu is open; Framer Motion animates
+     the opacity. Keeping it visible here is what lets the overlay act as
+     the click-outside-to-close surface. */
   opacity: 1;
   visibility: visible;
 }
@@ -1463,12 +1447,9 @@ body {
   border-left: 1px solid var(--color-border-primary);
   overflow-y: auto;
   padding: var(--space-6);
-  transform: translateX(100%);
-  transition: transform var(--duration-normal) var(--ease-out);
-}
-
-.mobile-menu-drawer[data-open="true"] {
-  transform: translateX(0);
+  /* The slide-in is driven by Framer Motion, which owns `transform` on this
+     element. A CSS transform here would either be replaced by Framer or
+     leave the drawer parked off-screen. */
 }
 
 @media (prefers-reduced-motion: reduce) {
