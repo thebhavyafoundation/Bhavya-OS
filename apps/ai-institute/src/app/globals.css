@@ -350,6 +350,13 @@ body {
      y offset, and an inline `transform` replaces the centring outright,
      which shifts the menu to the right of its own trigger. */
   translate: -50% 0;
+  /* Promote the menu to its own compositor layer. The menu floats over a
+     homepage hero that uses blend modes and a WebGL layer, so animating the
+     menu's opacity makes the browser repaint that whole blended subtree on
+     every frame of the animation. On a software rasteriser that holds the
+     main thread long enough to look like a frozen page, and it eventually
+     kills the renderer. */
+  will-change: opacity, transform;
   margin-top: var(--space-2);
   width: 280px;
   background: var(--color-bg-elevated);
@@ -1459,6 +1466,11 @@ body {
   /* The slide-in is driven by Framer Motion, which owns `transform` on this
      element. A CSS transform here would either be replaced by Framer or
      leave the drawer parked off-screen. */
+  /* Promote the drawer to its own compositor layer for the same reason as
+     the dropdown menu: it slides over a homepage hero that uses blend modes
+     and a WebGL layer, and animating it would otherwise repaint that whole
+     blended subtree on every frame. */
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
