@@ -55,8 +55,8 @@ export function SplitHero() {
           <a href="/missions" className="btn btn-gold">
             Explore Bhavya <ArrowRight size={16} aria-hidden="true" />
           </a>
-          <a href="/knowledge" className="btn btn-secondary-inverse">
-            Start learning
+          <a href="/curriculum" className="btn btn-secondary-inverse">
+            See the pathway
           </a>
         </div>
         <div className="home-hero-meta">
