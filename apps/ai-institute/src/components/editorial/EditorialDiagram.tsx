@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { DiagramManifest } from "./diagramTypes";
 import { DIAGRAM_HEIGHT, DIAGRAM_WIDTH } from "./diagramRegistry";
+import { servedSvgPath } from "./served-svg-path";
 import styles from "./editorial.module.css";
 
 /**
@@ -56,12 +57,16 @@ export function EditorialDiagram({
   const {
     title,
     accessible_text: accessibleText,
-    production_svg: src,
+    production_svg: productionSvg,
     purpose,
     content_sources: contentSources,
     review,
     licensing,
   } = manifest;
+
+  // Manifests store a repository path; the browser needs the served URL
+  // (see served-svg-path.ts for why they differ).
+  const src = servedSvgPath(productionSvg);
 
   return (
     <figure className={`${styles.figure} ${className}`.trim()}>
