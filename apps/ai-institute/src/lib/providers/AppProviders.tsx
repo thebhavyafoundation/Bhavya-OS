@@ -15,7 +15,7 @@ import {
   ReactNode,
 } from "react";
 import { initAuthenticator, getAuthConfig, useAuth } from "@/lib/auth/index";
-import { useStorage } from "@/lib/storage/index";
+import { useStorage, isStorageConfigured } from "@/lib/storage/index";
 
 // =============================================================================
 // AUTH PROVIDER
@@ -183,22 +183,49 @@ export function StorageProvider({ children }: { children: ReactNode }) {
   const [isConfigured, setIsConfigured] = useState(false);
   const [health, setHealth] = useState<StorageContextValue["health"]>(null);
   const storage = useStorage();
+  const isConfiguredNow = isStorageConfigured();
 
-  // Check configuration and health on mount
+  // Configuration and a single health probe, ONCE on mount.
+  //
+  // Two invariants (incident 2026-10-28 — see
+  // docs/incidents/2026-10-28-homepage-freeze-storage-health-loop.md):
+  //
+  // 1. No network attempt unless storage is genuinely configured. The client
+  //    bundle cannot see S3_* env vars, so it always holds placeholder
+  //    values; a request built from them is blocked by our own CSP and used
+  //    to feed an infinite loop that froze low-end devices on every page.
+  // 2. `useStorage()` is memoized, so `[storage]` is stable and this effect
+  //    runs once per mount. State updates are guarded and use primitives or
+  //    a single object written once — never a fresh object per cycle.
   useEffect(() => {
-    const config = storage.config;
-    // Check if B2 credentials are configured
-    const hasCreds = config?.type && config?.endpoint && config?.bucket;
-    setIsConfigured(Boolean(hasCreds));
+    if (!isConfiguredNow) {
+      setIsConfigured(false);
+      return;
+    }
+
+    setIsConfigured(true);
+    let cancelled = false;
+
     storage
       .health()
       .then((h) => {
-        setHealth({ healthy: h.status === "healthy", latencyMs: h.latencyMs });
+        if (!cancelled) {
+          setHealth({
+            healthy: h.status === "healthy",
+            latencyMs: h.latencyMs,
+          });
+        }
       })
       .catch(() => {
-        setHealth({ healthy: false, latencyMs: 0 });
+        if (!cancelled) {
+          setHealth({ healthy: false, latencyMs: 0 });
+        }
       });
-  }, [storage]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [storage, isConfiguredNow]);
 
   const handleUpload = async (
     file: File,

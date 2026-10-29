@@ -6,6 +6,7 @@
  * and the provider factory pattern.
  */
 
+import { useMemo } from "react";
 import {
   B2StorageProvider,
   initB2Storage,
@@ -14,6 +15,9 @@ import {
   uploadFile,
   downloadFile,
 } from "./b2-strategy";
+import { isStorageConfigured } from "./config-gate";
+
+export { isStorageConfigured, STORAGE_PLACEHOLDER_VALUES } from "./config-gate";
 import type {
   StorageProvider,
   StorageFile,
@@ -211,30 +215,36 @@ export async function health(): Promise<{ status: string; latencyMs: number }> {
 }
 
 /**
- * Factory function for the complete storage setup
+ * Stable storage facade for client components.
  *
- * Sets up the storage provider based on environment configuration.
- * Currently defaults to B2/S3, but the factory pattern allows
- * switching between different storage backends.
+ * Sets up the storage provider based on environment configuration and
+ * returns the storage utilities.
  *
- * @returns Object with storage utilities
+ * Memoized: the returned object identity must NOT change between renders.
+ * An unstable identity here previously combined with a `[storage]` effect
+ * dependency to produce an infinite health-check/render loop that froze
+ * low-end browsers on every page (incident 2026-10-28). The provider and
+ * config are read from module constants, so `[]` deps are correct.
  */
 export function useStorage() {
-  const provider = initStorage();
+  return useMemo(() => {
+    const provider = initStorage();
 
-  return {
-    provider,
-    config: getStorageConfig(),
-    upload: (file: StorageFile) => upload(file),
-    download: (path: string) => download(path),
-    list: (prefix?: string, options?: { limit?: number }) =>
-      list(prefix, options),
-    getSignedUrl: (path: string, expiresIn?: number) =>
-      getSignedUrl(path, { expiresIn }),
-    health: () => health(),
-    bucket: provider.getBucketName(),
-    endpoint: provider.getEndpoint(),
-  };
+    return {
+      provider,
+      config: getStorageConfig(),
+      configured: isStorageConfigured(),
+      upload: (file: StorageFile) => upload(file),
+      download: (path: string) => download(path),
+      list: (prefix?: string, options?: { limit?: number }) =>
+        list(prefix, options),
+      getSignedUrl: (path: string, expiresIn?: number) =>
+        getSignedUrl(path, { expiresIn }),
+      health: () => health(),
+      bucket: provider.getBucketName(),
+      endpoint: provider.getEndpoint(),
+    };
+  }, []);
 }
 
 export default initStorage;

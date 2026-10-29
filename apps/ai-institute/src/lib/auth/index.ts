@@ -6,6 +6,7 @@
  * and the authenticator composite pattern.
  */
 
+import { useMemo } from "react";
 import { Authenticator } from "@bhavya/security";
 import {
   initSupabaseStrategy,
@@ -53,10 +54,18 @@ export type InitAuthOptions = {
 };
 
 /**
- * Full authentication initialization
+ * Stable auth facade for client components.
  *
- * Sets up the authenticator with all strategies and returns
- * the config for use in the app.
+ * Sets up the authenticator with all strategies and returns the config for
+ * use in the app.
+ *
+ * Memoized: the returned identities must NOT change between renders.
+ * Recreating the Authenticator (and a fresh SupabaseStrategy) on every
+ * render gave `AuthProvider`'s `[authenticator]` effect an unstable
+ * dependency, so any visitor carrying a stored session re-triggered
+ * `validate()` after every render — an endless round-trip/render loop
+ * (incident 2026-10-28). All values derive from module constants, so `[]`
+ * deps are correct.
  *
  * @returns Object with authenticator and config
  */
@@ -66,11 +75,13 @@ export function useAuth(): {
   initStrategies: AuthStrategy[];
   strategies: AuthStrategy[];
 } {
-  const authenticator = initAuthenticator();
-  const config = getAuthConfig();
-  const strategies: AuthStrategy[] = [new SupabaseStrategy()];
+  return useMemo(() => {
+    const authenticator = initAuthenticator();
+    const config = getAuthConfig();
+    const strategies: AuthStrategy[] = [new SupabaseStrategy()];
 
-  return { authenticator, config, initStrategies: strategies, strategies };
+    return { authenticator, config, initStrategies: strategies, strategies };
+  }, []);
 }
 
 export default initAuthenticator;
