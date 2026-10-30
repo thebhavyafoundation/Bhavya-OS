@@ -1,5 +1,7 @@
 import { SplitHero } from "@/components/home/SplitHero";
 import { FourPillars } from "@/components/home/FourPillars";
+import { CurriculumGrid } from "@/components/site/CurriculumGrid";
+import { InfographicCard } from "@/components/site/InfographicCard";
 import { PublicStoryShell } from "@/components/site/PublicStoryShell";
 import { LearningJourney } from "@/components/home/LearningJourney";
 import { ActiveLearning } from "@/components/home/ActiveLearning";
@@ -7,6 +9,15 @@ import { SmallTiles } from "@/components/home/SmallTiles";
 import { QuoteBand } from "@/components/home/QuoteBand";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Preloader } from "@/components/motion/Preloader";
+import type { DiagramSpec } from "@/data/curriculum";
+
+/** Token-driven diagram spec for the curriculum spotlight — bespoke SVG,
+ * rendered by DiagramRenderer with no hardcoded ink. */
+const PATHWAY_SPEC: DiagramSpec = {
+  kind: "pipeline",
+  title: "How a lesson builds",
+  steps: ["Foundations", "Guided practice", "Independent work", "Assessment"],
+};
 
 /**
  * Homepage — the five-scene narrative spine.
@@ -44,6 +55,35 @@ export default function HomePage() {
       <main id="main-content">
         <SplitHero />
         <FourPillars />
+        <section
+          id="curriculum-spotlight"
+          className="scene"
+          aria-labelledby="spotlight-heading"
+        >
+          <div className="container">
+            <div
+              style={{ textAlign: "center", marginBottom: "var(--space-12)" }}
+            >
+              <span className="dark-label">Curriculum</span>
+              <h2 id="spotlight-heading" className="dark-heading">
+                The pathway at a glance
+              </h2>
+              <p className="dark-desc">
+                Every module moves from first principles through guided practice
+                into independent work — and only then into assessment.
+              </p>
+            </div>
+            <div className="home-grid-2" style={{ gap: "var(--space-10)" }}>
+              <CurriculumGrid limit={6} cols="grid-cols-1 md:grid-cols-2" />
+              <InfographicCard
+                spec={PATHWAY_SPEC}
+                heading="Lesson anatomy"
+                description="Each published lesson moves through the same sequence of block kinds."
+                size="md"
+              />
+            </div>
+          </div>
+        </section>
         <PublicStoryShell />
         <LearningJourney />
         <ActiveLearning />

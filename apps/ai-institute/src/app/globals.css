@@ -728,6 +728,33 @@ body {
 }
 
 /* ============================================
+   HERO ACCENT — single gold glow pulse
+   Uses canonical tokens.css motion (shadow-glow-gold + sun-pulse), both
+   gated by prefers-reduced-motion. No Magic UI imported.
+   ============================================ */
+
+.home-hero-accent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  margin-top: -120px;
+  margin-left: -120px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--color-accent-gold) 18%, transparent) 0%,
+    transparent 65%
+  );
+  z-index: 0;
+  pointer-events: none;
+  /* Compositor-only glow (box-shadow) instead of filter:blur, which triggers
+     expensive paint work on weak devices and can lag the hero on scroll. */
+  box-shadow: var(--shadow-glow-gold);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
    BUTTONS — APPLE DESIGN RESPONSE
    Instant feedback on pointer-down, spring-based hover
    ============================================ */

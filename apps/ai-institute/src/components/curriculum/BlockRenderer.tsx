@@ -1,6 +1,7 @@
 import type { LessonBlock } from "@/types/curriculum";
 import { QuizBlock } from "./QuizBlock";
 import { WidgetRenderer } from "./widgets/WidgetRenderer";
+import { DiagramRenderer } from "./diagram/DiagramRenderer";
 
 type ProseNode = { type: "p"; text: string } | { type: "ul"; items: string[] };
 
@@ -23,6 +24,16 @@ function parseProse(text: string): ProseNode[] {
 
 export function BlockRenderer({ block }: { block: LessonBlock }) {
   switch (block.kind) {
+    case "visual":
+      return (
+        <section className="ai-block" aria-label="Concept diagram">
+          <DiagramRenderer
+            spec={
+              block.diagram as import("@/data/curriculum/types").DiagramSpec
+            }
+          />
+        </section>
+      );
     case "prose":
       return (
         <div className="ai-prose">

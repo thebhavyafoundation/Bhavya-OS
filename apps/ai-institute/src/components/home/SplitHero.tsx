@@ -37,6 +37,18 @@ export function SplitHero() {
       </div>
 
       <HeroEntrance className="home-hero-copy">
+        {/* Single hero accent: soft gold glow pulse behind the title.
+             Uses canonical tokens.css motion (shadow-glow-gold + sun-pulse),
+             both gated by prefers-reduced-motion. No Magic UI imported
+             (not installed; machine contract bars adding libraries). */}
+        <div
+          className="home-hero-accent animate-sun-pulse"
+          aria-hidden="true"
+          style={{
+            boxShadow: "var(--shadow-glow-gold)",
+            borderRadius: "var(--radius-full)",
+          }}
+        />
         <p className="home-hero-eyebrow">
           <span className="home-hero-rule" aria-hidden="true" />
           Bhavya Foundation — a public charitable trust
