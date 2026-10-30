@@ -97,8 +97,10 @@ test.describe("Performance verification - homepage", () => {
     }
 
     // Nav menu: open and close 10 times. The mobile trigger is only visible
-    // at mobile widths, so switch to a mobile viewport for this portion.
+    // at mobile widths, so reload at a mobile viewport for this portion.
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/", { waitUntil: "networkidle" });
+    await page.waitForTimeout(500);
     const menuTrigger = page.locator("button.nav-mobile-trigger");
     const menuDrawer = page.locator(".mobile-menu-drawer");
 
