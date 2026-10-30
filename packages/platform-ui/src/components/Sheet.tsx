@@ -99,7 +99,7 @@ export function SheetContent({
             position: "fixed",
             inset: 0,
             background: "var(--color-bg-overlay)",
-            zIndex: "var(--z-modal)",
+            zIndex: 9999,
             display: open ? "block" : "none",
           }}
         />
