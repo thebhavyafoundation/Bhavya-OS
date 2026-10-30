@@ -292,6 +292,76 @@ test.describe("Performance verification - desktop dropdown", () => {
   });
 });
 
+test.describe("Performance verification - ui proof", () => {
+  test("Dialog and Sheet runtime behavior", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (err) => {
+      errors.push(err.message);
+    });
+
+    await page.goto("/ui-proof", { waitUntil: "networkidle" });
+
+    // Dialog
+    const dialogTrigger = page.locator('button:has-text("Open Dialog")');
+    await dialogTrigger.focus();
+    await expect(dialogTrigger).toBeFocused();
+
+    await dialogTrigger.click();
+    const dialog = page.locator('[role="dialog"]');
+    await dialog.waitFor({ state: "visible" });
+    await expect(dialog).toHaveAttribute("aria-modal", "true");
+
+    // Focus moved into dialog
+    const dialogClose = page.locator('[aria-label="Close modal"]');
+    // tab cycle
+    await page.keyboard.press("Tab");
+    await page.waitForTimeout(50);
+
+    // Escape closes
+    await page.keyboard.press("Escape");
+    await dialog.waitFor({ state: "hidden" });
+
+    // Focus returns to trigger
+    await expect(dialogTrigger).toBeFocused();
+
+    // Repeated open/close
+    for (let i = 0; i < 5; i++) {
+      await dialogTrigger.click();
+      await dialog.waitFor({ state: "visible" });
+      await page.keyboard.press("Escape");
+      await dialog.waitFor({ state: "hidden" });
+    }
+
+    // Sheet
+    const sheetTrigger = page.locator('button:has-text("Open Sheet")');
+    await sheetTrigger.click();
+    const sheetPanel = page.locator('[aria-label="Close sheet"]').locator("..");
+    await page
+      .locator('[aria-label="Close sheet"]')
+      .waitFor({ state: "visible" });
+
+    // close via close button
+    await page.locator('[aria-label="Close sheet"]').click();
+    await page.waitForTimeout(300);
+
+    // scroll lock cleanup: body overflow should be restored
+    const overflow = await page.evaluate(() => document.body.style.overflow);
+    expect(overflow).not.toBe("hidden");
+
+    // mobile viewport
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.reload({ waitUntil: "networkidle" });
+    const mobileTrigger = page.locator('button:has-text("Open Dialog")');
+    await mobileTrigger.click();
+    const mobileDialog = page.locator('[role="dialog"]');
+    await mobileDialog.waitFor({ state: "visible" });
+    await page.keyboard.press("Escape");
+    await mobileDialog.waitFor({ state: "hidden" });
+
+    expect(errors).toEqual([]);
+  });
+});
+
 test.describe("Performance verification - route transition", () => {
   test("navigate between routes", async ({ page }) => {
     const errors: string[] = [];
