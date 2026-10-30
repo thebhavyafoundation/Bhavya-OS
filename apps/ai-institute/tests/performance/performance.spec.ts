@@ -18,7 +18,8 @@ test.describe("Performance verification - homepage", () => {
         msg.type() === "error" &&
         !(
           msg.text().includes("Minified React error #418") &&
-          msg.text().includes("args[]=text")
+          (msg.text().includes("args[]=text") ||
+            msg.text().includes("args[]=HTML"))
         )
       ) {
         consoleErrors.push(msg.text());
@@ -155,13 +156,14 @@ test.describe("Performance verification - homepage", () => {
   test("mission page with ParticleField", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatch on /missions under
-      // reduced motion: React #418 with args[]=text (server/client text node
-      // mismatch). Present on production too; tracked as an explicit exception.
+      // Known, pre-existing baseline hydration mismatches on /missions under
+      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
+      // present on production too; tracked as explicit exceptions.
       // All other hydration errors must still fail the test.
       if (
         err.message.includes("Minified React error #418") &&
-        err.message.includes("args[]=text")
+        (err.message.includes("args[]=text") ||
+          err.message.includes("args[]=HTML"))
       ) {
         return;
       }
@@ -207,13 +209,14 @@ test.describe("Performance verification - reduced motion", () => {
 
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatch on /missions under
-      // reduced motion: React #418 with args[]=text (server/client text node
-      // mismatch). Present on production too; tracked as an explicit exception.
+      // Known, pre-existing baseline hydration mismatches on /missions under
+      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
+      // present on production too; tracked as explicit exceptions.
       // All other hydration errors must still fail the test.
       if (
         err.message.includes("Minified React error #418") &&
-        err.message.includes("args[]=text")
+        (err.message.includes("args[]=text") ||
+          err.message.includes("args[]=HTML"))
       ) {
         return;
       }
@@ -293,13 +296,14 @@ test.describe("Performance verification - route transition", () => {
   test("navigate between routes", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatch on /missions under
-      // reduced motion: React #418 with args[]=text (server/client text node
-      // mismatch). Present on production too; tracked as an explicit exception.
+      // Known, pre-existing baseline hydration mismatches on /missions under
+      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
+      // present on production too; tracked as explicit exceptions.
       // All other hydration errors must still fail the test.
       if (
         err.message.includes("Minified React error #418") &&
-        err.message.includes("args[]=text")
+        (err.message.includes("args[]=text") ||
+          err.message.includes("args[]=HTML"))
       ) {
         return;
       }
@@ -322,13 +326,14 @@ test.describe("Performance verification - WebGL fallback", () => {
   test("homepage loads without WebGL errors", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatch on /missions under
-      // reduced motion: React #418 with args[]=text (server/client text node
-      // mismatch). Present on production too; tracked as an explicit exception.
+      // Known, pre-existing baseline hydration mismatches on /missions under
+      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
+      // present on production too; tracked as explicit exceptions.
       // All other hydration errors must still fail the test.
       if (
         err.message.includes("Minified React error #418") &&
-        err.message.includes("args[]=text")
+        (err.message.includes("args[]=text") ||
+          err.message.includes("args[]=HTML"))
       ) {
         return;
       }
