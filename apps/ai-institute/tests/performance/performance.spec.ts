@@ -120,7 +120,7 @@ test.describe("Performance verification - homepage", () => {
       const openTime = Date.now() - t0;
 
       const t1 = Date.now();
-      await menuTrigger.click();
+      await page.locator("button.mobile-menu-close").click();
       await menuDrawer.waitFor({ state: "hidden" });
       const closeTime = Date.now() - t1;
 
