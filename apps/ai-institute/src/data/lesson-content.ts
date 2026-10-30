@@ -75,20 +75,12 @@ export const lessonContent: LessonContent[] = [
     visualExplanation:
       "Imagine a set of nested circles. The outermost circle is labeled Artificial Intelligence — the broadest field. Inside it is Machine Learning, a subset that learns from data. Inside ML is Deep Learning, which uses neural networks with many layers. Every deep learning system is machine learning, and every machine learning system is AI, but not every AI system uses machine learning.",
     visual: {
-      kind: "network",
+      kind: "pipeline",
       title: "AI, machine learning, and deep learning — nested fields",
-      nodes: [
-        "Artificial Intelligence",
-        "Machine Learning",
-        "Deep Learning",
-        "Expert systems",
-        "Neural networks",
-      ],
-      edges: [
-        ["Artificial Intelligence", "Machine Learning"],
-        ["Machine Learning", "Deep Learning"],
-        ["Artificial Intelligence", "Expert systems"],
-        ["Deep Learning", "Neural networks"],
+      steps: [
+        "Artificial Intelligence (broadest field)",
+        "Machine Learning (subset of AI)",
+        "Deep Learning (subset of ML)",
       ],
     },
     codeExample: `# AI taxonomy demonstration
