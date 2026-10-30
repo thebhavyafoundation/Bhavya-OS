@@ -21,6 +21,8 @@ export interface AssignmentTask {
   criteria: string[];
 }
 
+import type { DiagramSpec } from "@/data/curriculum";
+
 export interface LessonContent {
   id: string;
   title: string;
@@ -28,6 +30,8 @@ export interface LessonContent {
   objectives: string[];
   prerequisites: string[];
   visualExplanation: string;
+  /** Optional concept-linked diagram (rendered via DiagramRenderer). */
+  visual?: DiagramSpec;
   codeExample: string;
   notebookCells: NotebookCell[];
   lab: {
@@ -70,6 +74,23 @@ export const lessonContent: LessonContent[] = [
     prerequisites: [],
     visualExplanation:
       "Imagine a set of nested circles. The outermost circle is labeled Artificial Intelligence — the broadest field. Inside it is Machine Learning, a subset that learns from data. Inside ML is Deep Learning, which uses neural networks with many layers. Every deep learning system is machine learning, and every machine learning system is AI, but not every AI system uses machine learning.",
+    visual: {
+      kind: "network",
+      title: "AI, machine learning, and deep learning — nested fields",
+      nodes: [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Expert systems",
+        "Neural networks",
+      ],
+      edges: [
+        ["Artificial Intelligence", "Machine Learning"],
+        ["Machine Learning", "Deep Learning"],
+        ["Artificial Intelligence", "Expert systems"],
+        ["Deep Learning", "Neural networks"],
+      ],
+    },
     codeExample: `# AI taxonomy demonstration
 ai_types = {
     'rule_based': 'Expert systems, chess engines, spam filters',
