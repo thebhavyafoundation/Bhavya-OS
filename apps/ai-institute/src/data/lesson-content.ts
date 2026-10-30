@@ -75,7 +75,7 @@ export const lessonContent: LessonContent[] = [
     visualExplanation:
       "Imagine a set of nested circles. The outermost circle is labeled Artificial Intelligence — the broadest field. Inside it is Machine Learning, a subset that learns from data. Inside ML is Deep Learning, which uses neural networks with many layers. Every deep learning system is machine learning, and every machine learning system is AI, but not every AI system uses machine learning.",
     visual: {
-      kind: "pipeline",
+      kind: "nested",
       title: "AI, machine learning, and deep learning — nested fields",
       steps: [
         "Artificial Intelligence (broadest field)",

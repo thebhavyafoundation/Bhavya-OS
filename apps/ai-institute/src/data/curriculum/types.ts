@@ -32,7 +32,7 @@ export interface QuizQuestion {
 }
 
 export type DiagramSpec =
-  | { kind: "flow" | "pipeline"; title: string; steps: string[] }
+  | { kind: "flow" | "pipeline" | "nested"; title: string; steps: string[] }
   | { kind: "cycle"; title: string; steps: string[] }
   | {
       kind: "timeline";

@@ -16,7 +16,10 @@ test.describe("Performance verification - homepage", () => {
     page.on("console", (msg) => {
       if (
         msg.type() === "error" &&
-        !msg.text().includes("Minified React error #418")
+        !(
+          msg.text().includes("Minified React error #418") &&
+          msg.text().includes("args[]=text")
+        )
       ) {
         consoleErrors.push(msg.text());
       }
@@ -152,7 +155,16 @@ test.describe("Performance verification - homepage", () => {
   test("mission page with ParticleField", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      if (err.message.includes("Minified React error #418")) return;
+      // Known, pre-existing baseline hydration mismatch on /missions under
+      // reduced motion: React #418 with args[]=text (server/client text node
+      // mismatch). Present on production too; tracked as an explicit exception.
+      // All other hydration errors must still fail the test.
+      if (
+        err.message.includes("Minified React error #418") &&
+        err.message.includes("args[]=text")
+      ) {
+        return;
+      }
       errors.push(err.message);
     });
 
@@ -195,7 +207,16 @@ test.describe("Performance verification - reduced motion", () => {
 
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      if (err.message.includes("Minified React error #418")) return;
+      // Known, pre-existing baseline hydration mismatch on /missions under
+      // reduced motion: React #418 with args[]=text (server/client text node
+      // mismatch). Present on production too; tracked as an explicit exception.
+      // All other hydration errors must still fail the test.
+      if (
+        err.message.includes("Minified React error #418") &&
+        err.message.includes("args[]=text")
+      ) {
+        return;
+      }
       errors.push(err.message);
     });
 
@@ -224,11 +245,64 @@ test.describe("Performance verification - reduced motion", () => {
   });
 });
 
+test.describe("Performance verification - desktop dropdown", () => {
+  test("desktop dropdown open/close repeated with scroll", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (err) => {
+      if (
+        err.message.includes("Minified React error #418") &&
+        err.message.includes("args[]=text")
+      ) {
+        return;
+      }
+      errors.push(err.message);
+    });
+
+    await page.goto("/", { waitUntil: "networkidle" });
+
+    // Open and close a desktop dropdown 10 times
+    const dropdownTrigger = page.locator('button:has-text("Explore")').first();
+    for (let i = 0; i < 10; i++) {
+      await dropdownTrigger.click();
+      await page.waitForTimeout(100);
+      await dropdownTrigger.click();
+      await page.waitForTimeout(100);
+    }
+
+    // Scroll then repeat
+    await page.evaluate(() => window.scrollTo(0, 500));
+    await page.waitForTimeout(300);
+    for (let i = 0; i < 5; i++) {
+      await dropdownTrigger.click();
+      await page.waitForTimeout(100);
+      await dropdownTrigger.click();
+      await page.waitForTimeout(100);
+    }
+
+    // Escape closes
+    await dropdownTrigger.click();
+    await page.waitForTimeout(100);
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(100);
+
+    expect(errors).toEqual([]);
+  });
+});
+
 test.describe("Performance verification - route transition", () => {
   test("navigate between routes", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      if (err.message.includes("Minified React error #418")) return;
+      // Known, pre-existing baseline hydration mismatch on /missions under
+      // reduced motion: React #418 with args[]=text (server/client text node
+      // mismatch). Present on production too; tracked as an explicit exception.
+      // All other hydration errors must still fail the test.
+      if (
+        err.message.includes("Minified React error #418") &&
+        err.message.includes("args[]=text")
+      ) {
+        return;
+      }
       errors.push(err.message);
     });
 
@@ -248,7 +322,16 @@ test.describe("Performance verification - WebGL fallback", () => {
   test("homepage loads without WebGL errors", async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (err) => {
-      if (err.message.includes("Minified React error #418")) return;
+      // Known, pre-existing baseline hydration mismatch on /missions under
+      // reduced motion: React #418 with args[]=text (server/client text node
+      // mismatch). Present on production too; tracked as an explicit exception.
+      // All other hydration errors must still fail the test.
+      if (
+        err.message.includes("Minified React error #418") &&
+        err.message.includes("args[]=text")
+      ) {
+        return;
+      }
       errors.push(err.message);
     });
 
