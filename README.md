@@ -28,22 +28,25 @@ Bhavya OS is the digital operating system for Bhavya Foundation — a production
 
 ### Architecture
 
+Turborepo monorepo. Actual inventory on disk (2026-10-29); routing hubs: `apps/CONTEXT.md`, `packages/CONTEXT.md`.
+
 ```
 apps/
-├── website/          # Public foundation website
-├── admin/            # Founder and operations dashboard
-├── volunteer/        # Volunteer portal
-├── forest/           # Forest mission application
-├── knowledge/        # Knowledge mission application
-├── library/          # Digital library
-└── heritage/         # Heritage mission application
+├── ai-institute/               # Canonical public site & learning experience (has its own CONTEXT.md)
+├── admin/                      # Founder and operations dashboard
+├── bhavya-intelligence-network/
+├── design-system/              # Design-system documentation app
+├── docs/                       # Documentation app
+├── github-os/                  # GitHub operations app
+├── ioc/
+└── social-os/                  # Social operations app
 
 packages/
-├── constitution/     # Constitutional documents SDK
-├── runtime/          # AI runtime engine
-├── ui/               # Reusable interface components
-├── theme/            # Brand tokens and design system
-└── ...
+├── constitution/               # Constitutional documents SDK
+├── runtime/                    # AI runtime engine
+├── platform-ui/                # Shared platform components + design tokens (tokens.css)
+├── ui/                         # Reusable interface components
+└── ...                         # 70+ packages — see packages/CONTEXT.md
 ```
 
 ### Constitution SDK

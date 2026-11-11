@@ -152,13 +152,22 @@ Human can edit the output file before running the next stage. The next stage pic
 
 ## 8. Skills
 
-**Filesystem is authoritative:** `.opencode/skills/` — verified count **16**. Load with the `skill` tool.
+**Filesystem is authoritative:** `.opencode/skills/` — verified count **22** (2026-10-29). Load with the `skill` tool.
 
-Installed: `bhavya-architecture`, `bhavya-design-system`, `bhavya-content-truth`, `bhavya-data-model`, `bhavya-route-audit`, `bhavya-ui-verification`, `bhavya-security`, `bhavya-github-workflow`, `bhavya-production-verification`, `bhavya-ai-development`, `bhavya-spec`, `bhavya-reasons-canvas`, `bhavya-capability-research`, plus third-party design skills `impeccable` (pbakaus/impeccable), `apple-design` (emilkowalski/skills), `design-taste-frontend` (Leonxlnx/taste-skill). Third-party design guidance never outranks §1–§3 authorities (constitution, brand, tokens).
+Installed (22):
+
+- **Bhavya core (13):** `bhavya-ai-development`, `bhavya-architecture`, `bhavya-capability-research`, `bhavya-content-truth`, `bhavya-data-model`, `bhavya-design-system`, `bhavya-github-workflow`, `bhavya-production-verification`, `bhavya-reasons-canvas`, `bhavya-route-audit`, `bhavya-security`, `bhavya-spec`, `bhavya-ui-verification`.
+- **Bhavya wrappers (5):** `bhavya-apple-design`, `bhavya-design-taste`, `bhavya-diagram-design`, `bhavya-impeccable`, `bhavya-ponytail`.
+- **Third-party design (3):** `impeccable` (pbakaus/impeccable), `apple-design` (emilkowalski/skills), `design-taste-frontend` (Leonxlnx/taste-skill).
+- **Methodology (1):** `icm-architect` (RinDig, MIT, vendored at a pinned commit — provenance in `.opencode/skills/icm-architect/PROVENANCE.md`). Load **only** when designing or restructuring ICM workspace structure; never for ordinary code edits.
+
+Third-party skill guidance (design or methodology) never outranks §1–§7 authorities (constitution, brand, tokens, security, human gates).
 
 Precedence: project → personal (`~/.config/opencode/skills/`) → superpowers.
 
-**Not installed** (never invoke or pretend): `bhavya-qa`, `bhavya-autoplan`, `bhavya-canary`, `bhavya-freeze`, `bhavya-investigate`, `bhavya-learn`, `bhavya-plan-review`, `bhavya-retro`, `bhavya-review`, `bhavya-security-audit`, `bhavya-ship`, `antislop*`, `icm-architect`, and design/gsap packs listed only in `config/skills/registry.json`. `pnpm antislop` is a command, not a skill.
+**Cloud persistence:** `.opencode/` is gitignored (`.gitignore`), so skills are only on GitHub when force-added (`git add -f`). A skill that is not committed lives on one machine only — verify with `git ls-files .opencode/skills` before claiming a skill is durable.
+
+**Not installed** (never invoke or pretend): `bhavya-qa`, `bhavya-autoplan`, `bhavya-canary`, `bhavya-freeze`, `bhavya-investigate`, `bhavya-learn`, `bhavya-plan-review`, `bhavya-retro`, `bhavya-review`, `bhavya-security-audit`, `bhavya-ship`, `antislop*`, and design/gsap packs listed only in `config/skills/registry.json`. `pnpm antislop` is a command, not a skill.
 
 Stale indexes (`config/skills/registry.json`, `docs/architecture/SKILL_*.md`, `TASK_SKILL_ROUTER.md`, `CAPABILITY_GRAPH.md`) are **non-authoritative** when they disagree with `.opencode/skills/`.
 
