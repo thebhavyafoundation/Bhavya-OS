@@ -77,10 +77,14 @@ pnpm --filter <pkg> build  # Build specific package
 
 ### Branching
 
-- `main` — production deployments (protected)
-- `master` — CI runs, PR targets (protected)
+- `master` — the only integration branch. CI runs, PR target, and production
+  deploy trigger. Protected.
 - Feature branches: `feat/<slug>`, `fix/<slug>`, `refactor/<slug>`
 - RFC branches: `rfc/<nnnn>-<slug>`
+
+There is no `main` branch in this repository. Earlier documentation described a
+`main` → Vercel production model; that pipeline never ran because the branch did
+not exist. Cloudflare/OpenNext on `master` is the real production path.
 
 ### Commit Convention
 
@@ -106,20 +110,38 @@ Types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`, `build`, `ci`
 
 ## Deployment
 
+Canonical host: **Cloudflare via OpenNext**, per `docs/architecture/PLATFORM-TRUTH.md`.
+Vercel is preview-only and must never become a production dependency.
+
 ### Environments
 
-| Environment | Branch | URL                            | Trigger         |
-| ----------- | ------ | ------------------------------ | --------------- |
-| Preview     | Any PR | `*.vercel.app`                 | Push to PR      |
-| Production  | `main` | `bhavya-foundation.vercel.app` | Merge to `main` |
+| Environment | Branch   | URL                                         | Trigger                       |
+| ----------- | -------- | ------------------------------------------- | ----------------------------- |
+| Preview     | Any PR   | `*.vercel.app` (Vercel app integration)     | Push to PR                    |
+| Production  | `master` | `bhavya-foundation.<subdomain>.workers.dev` | Merge to `master` or dispatch |
 
-### Deploy Pipeline (`.github/workflows/deploy.yml`)
+### Production Deploy Pipeline (`.github/workflows/deploy-cloudflare.yml`)
 
 1. CI passes (antislop → lint → typecheck → test → secret-scan → build)
-2. Deploy to Vercel (production)
-3. Visual verification on deployed URL (not local build)
+2. `npx opennextjs-cloudflare build` in `apps/ai-institute`
+3. `npx opennextjs-cloudflare deploy` to the `bhavya-foundation` Worker
+4. Visual verification on the deployed URL (not a local build)
 
-**Known issue:** `deploy.yml` targets `main`; push ≠ deploy (wiring mismatch documented; do not "fix" by deploying)
+Triggers:
+
+- `push` to `master`, filtered to app/package/content/dependency changes
+- `workflow_dispatch` — deliberate, auditable manual production deploy
+
+The workflow sets `cancel-in-progress: false` so an in-flight production deploy
+is never interrupted; a newer commit queues behind it.
+
+Runtime secrets (`TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`) are set on the Worker
+itself and are not needed at build time.
+
+### Static assets (`.github/workflows/pages.yml`)
+
+Publishes only `apps/ai-institute/public` to GitHub Pages. This is **not** the
+application. Only `master` may publish; feature branches must not.
 
 ---
 
