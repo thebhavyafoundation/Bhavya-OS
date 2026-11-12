@@ -306,6 +306,40 @@ test.describe("Acceptance - layout and resilience", () => {
           scrollWidth: document.documentElement.scrollWidth,
           clientWidth: document.documentElement.clientWidth,
         }));
+        if (overflow.scrollWidth > overflow.clientWidth + 1) {
+          // Name the elements that reach past the viewport. A bare
+          // scrollWidth says that the page is too wide; it does not say
+          // which element is responsible.
+          const widest = await page.evaluate(() => {
+            const limit = document.documentElement.clientWidth;
+            const found: Array<{
+              tag: string;
+              id: string;
+              className: string;
+              width: number;
+              right: number;
+            }> = [];
+            document
+              .querySelectorAll<HTMLElement>("body *")
+              .forEach((element) => {
+                const rect = element.getBoundingClientRect();
+                if (rect.width > 0 && rect.right > limit + 1) {
+                  found.push({
+                    tag: element.tagName.toLowerCase(),
+                    id: element.id,
+                    className: String(element.className ?? "").slice(0, 70),
+                    width: Math.round(rect.width),
+                    right: Math.round(rect.right),
+                  });
+                }
+              });
+            return found.sort((a, b) => b.right - a.right).slice(0, 8);
+          });
+          console.log(
+            `[acceptance] ${route} overflows at ${viewport.name}: ` +
+              JSON.stringify(widest),
+          );
+        }
         expect(
           overflow.scrollWidth,
           `${route} overflows horizontally at ${viewport.name}`,
