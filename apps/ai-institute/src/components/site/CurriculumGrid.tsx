@@ -37,10 +37,17 @@ export function CurriculumGrid({
 
   return (
     <section
-      className={`curriculum-grid ${className}`}
+      /*
+        `cols` is a set of Tailwind column utilities, so it belongs in the
+        class list. It used to be assigned to the inline `gridTemplateColumns`
+        style, which is not a CSS value: the declaration was dropped, the
+        grid fell back to an implicit auto column, and that column was sized
+        to the cards' max-content width. The grid then refused to shrink
+        below it and pushed the page into horizontal overflow on a phone.
+      */
+      className={`curriculum-grid ${cols} ${className}`}
       style={{
         display: "grid",
-        gridTemplateColumns: cols,
         gap: "var(--space-6)",
       }}
       aria-label="Curriculum modules"
