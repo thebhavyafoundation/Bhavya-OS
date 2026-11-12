@@ -47,6 +47,8 @@ Layer 3 refs: `_config/` · `shared/` · `skills/` → `.opencode/skills/`
 - Non-goals → `_config/non-goals.md`
 - Architecture-change trigger → `_config/architecture-trigger.md`
 - Machine resource contract → `_config/machine-contract.md`
+- Ruflo (remote orchestration) → `docs/tools/ruflo/`
+- Concept-visual inventory → `apps/ai-institute/src/data/curriculum/visual-inventory.ts`
 
 ## ICM Alignment Notes
 
