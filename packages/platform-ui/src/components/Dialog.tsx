@@ -43,13 +43,20 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
 
 export interface DialogTriggerProps {
   children: React.ReactNode;
+  /** Optional class for the trigger button. */
+  className?: string;
 }
 
-export function DialogTrigger({ children }: DialogTriggerProps) {
+export function DialogTrigger({ children, className }: DialogTriggerProps) {
   const { open, onOpenChange } = useDialogContext();
   const onClick = useCallback(() => onOpenChange(!open), [open, onOpenChange]);
   return (
-    <button type="button" onClick={onClick} aria-expanded={open}>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={open}
+      className={className}
+    >
       {children}
     </button>
   );

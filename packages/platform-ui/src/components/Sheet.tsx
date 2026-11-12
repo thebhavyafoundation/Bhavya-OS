@@ -8,6 +8,19 @@
  * `prefers-reduced-motion`. All surface, border, shadow and z-index values
  * resolve to tokens.css.
  *
+ * Behaviour contract (the same contract Modal honours, so a learner is not
+ * surprised by a different set of rules in a different surface):
+ * - The overlay sits on the modal layer; the panel sits one step above it.
+ *   An overlay raised above the panel paints over it and swallows every
+ *   click on the panel's own controls, including the close button.
+ * - Escape closes the sheet.
+ * - Focus moves into the panel on open and returns to the trigger on close.
+ * - Tab is trapped inside the panel while it is open.
+ * - Body scroll is locked while open and released on close.
+ * - While closed the panel is inert: not in the tab order, not in the
+ *   accessibility tree, and not a pointer target. It is still mounted so
+ *   the slide-out transition can play.
+ *
  * @module platform-ui/components/Sheet
  */
 
@@ -15,6 +28,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
 } from "react";
@@ -49,13 +63,20 @@ export function Sheet({ open, onOpenChange, children }: SheetProps) {
 
 export interface SheetTriggerProps {
   children: React.ReactNode;
+  /** Optional class for the trigger button. */
+  className?: string;
 }
 
-export function SheetTrigger({ children }: SheetTriggerProps) {
+export function SheetTrigger({ children, className }: SheetTriggerProps) {
   const { open, onOpenChange } = useSheetContext();
   const onClick = useCallback(() => onOpenChange(!open), [open, onOpenChange]);
   return (
-    <button type="button" onClick={onClick} aria-expanded={open}>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={open}
+      className={className}
+    >
       {children}
     </button>
   );
@@ -69,6 +90,9 @@ export interface SheetContentProps {
 
 const WIDTHS = { sm: 400, md: 560, lg: 720 };
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function SheetContent({
   title,
   children,
@@ -77,6 +101,8 @@ export function SheetContent({
   const { open, onOpenChange } = useSheetContext();
   const handleClose = useCallback(() => onOpenChange(false), [onOpenChange]);
   const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const titleId = React.useId();
 
   const prefersReducedMotion =
     typeof window !== "undefined" &&
@@ -89,24 +115,90 @@ export function SheetContent({
     ? "none"
     : `transform var(--duration-normal) var(--ease-out), opacity var(--duration-fast) ease`;
 
+  // Focus and scroll behaviour, mirroring Modal.
+  useEffect(() => {
+    if (!open) return;
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+    document.body.style.overflow = "hidden";
+
+    const panelEl = panelRef.current;
+    if (panelEl) {
+      const focusable =
+        panelEl.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      } else {
+        panelEl.focus();
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      previousFocusRef.current?.focus();
+    };
+  }, [open]);
+
+  // Escape closes; Tab is trapped inside the panel while it is open.
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onOpenChange(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const panelEl = panelRef.current;
+      if (!panelEl) return;
+
+      const focusable =
+        panelEl.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey) {
+        if (document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        }
+      } else if (document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onOpenChange]);
+
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay — on the modal layer, always below the panel. */}
       {open && (
         <div
           onClick={handleClose}
+          aria-hidden="true"
           style={{
             position: "fixed",
             inset: 0,
             background: "var(--color-bg-overlay)",
-            zIndex: 9999,
-            display: open ? "block" : "none",
+            zIndex: "var(--z-modal)",
           }}
         />
       )}
-      {/* Panel */}
+      {/* Panel — one step above the overlay it belongs to. */}
       <div
         ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? titleId : undefined}
+        aria-hidden={open ? undefined : true}
+        inert={open ? undefined : true}
+        tabIndex={-1}
         style={{
           position: "fixed",
           top: 0,
@@ -117,12 +209,13 @@ export function SheetContent({
           background: "var(--color-surface)",
           borderLeft: `1px solid var(--color-border-primary)`,
           boxShadow: "var(--shadow-xl)",
-          zIndex: "var(--z-modal)",
+          zIndex: "var(--z-modal-panel)",
           display: "flex",
           flexDirection: "column",
           transform: `translateX(${translateX})`,
           transition: transition,
           opacity,
+          pointerEvents: open ? "auto" : "none",
         }}
       >
         <div
@@ -136,6 +229,7 @@ export function SheetContent({
         >
           {title && (
             <h2
+              id={titleId}
               style={{
                 fontSize: 18,
                 fontWeight: 600,
