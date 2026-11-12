@@ -98,7 +98,17 @@ function watchHydration(
   return { pageErrors, consoleErrors, resourceLoadMessages };
 }
 
-const ARTIFACT_DIR = join(dirname(test.info().file), "artifacts");
+/**
+ * The artifact directory.
+ *
+ * It is resolved from the running test rather than at module scope:
+ * `test.info()` may only be called while a test is running, and reading it
+ * while the module is being loaded fails the whole file before a single
+ * scenario starts.
+ */
+function artifactDir(): string {
+  return join(dirname(test.info().file), "artifacts");
+}
 
 /**
  * Every resource request the page made, counted by host.
@@ -136,14 +146,14 @@ const recorders: Recorder[] = [];
 function recorderFor(page: import("playwright/test").Page): Recorder {
   const recorder = attachNetworkRecorder(page, {
     test: test.info().title,
-    artifactDir: ARTIFACT_DIR,
+    artifactDir: artifactDir(),
   });
   recorders.push(recorder);
   return recorder;
 }
 
 test.afterAll(() => {
-  const file = join(ARTIFACT_DIR, "hydration-occurrences.json");
+  const file = join(artifactDir(), "hydration-occurrences.json");
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(
     file,
