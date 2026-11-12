@@ -21,7 +21,7 @@
 - `rfcs/RFC-0001-Volunteer-Portal.md` — published
 - `rfcs/RFC-0002-Forest-GIS.md` — published
 - `rfcs/RFC-0003-AI-Gateway.md` — Accepted
-- `rfcs/RFC-0014-icm-adoption.md` — draft
+- `rfcs/RFC-0014-icm-adoption.md` — no-status
 - `rfcs/STATUS-VOCABULARY-PROPOSAL.md` — ` body line | `published` (no content change needed beyond frontmatter, when approved) |
 
 ## Top-level tree (depth 2, generated)
@@ -138,6 +138,7 @@
 - `.husky`/
   - `.husky\commit-msg`
   - `.husky\pre-commit`
+  - `.husky\pre-push`
 - `.lintstagedrc.json`
 - `.logs`/
   - `.logs\designer.log`
@@ -241,9 +242,16 @@
   - `_archive\test-artifacts-2026-09-17`/
   - `_archive\v1.0.0_ARCHIVE.md`
 - `_config`/
+  - `_config\architecture-trigger.md`
   - `_config\brand-rules.md`
   - `_config\build-conventions.md`
+  - `_config\design-gate.md`
   - `_config\design-tokens.md`
+  - `_config\icm-conventions.md`
+  - `_config\machine-contract.md`
+  - `_config\non-goals.md`
+  - `_config\project-governance.md`
+  - `_config\verification-order.md`
 - `_shared`/
   - `_shared\factory-map.md`
 - `_system`/
@@ -255,6 +263,8 @@
   - `_templates\reasons-canvas.md`
   - `_templates\rfc-record.md`
   - `_templates\stage-CONTEXT.md`
+- `_tools`/
+  - `_tools\links.py`
 - `about-current.png`
 - `apps`/
   - `apps\CONTEXT.md`
@@ -269,7 +279,6 @@
 - `archive`/
   - `archive\apps`/
   - `archive\packages`/
-  - `archive\website-starlight`/
 - `assets`/
   - `assets\2d`/
   - `assets\3d`/
@@ -326,6 +335,7 @@
   - `design\inventory`/
   - `design\motion`/
   - `design\tokens`/
+- `design-integration-plan.md`
 - `dev-server-err.log`
 - `dev-server.log`
 - `docs`/
@@ -360,7 +370,7 @@
   - `docs\experience`/
   - `docs\github-os`/
   - `docs\governance`/
-  - `docs\governance-source`/
+  - `docs\incidents`/
   - `docs\institution-ops`/
   - `docs\institution-os`/
   - `docs\ioc`/
@@ -378,7 +388,6 @@
   - `docs\project-phoenix`/
   - `docs\releases`/
   - `docs\research`/
-  - `docs\runbooks`/
   - `docs\security`/
   - `docs\skills-reference`/
   - `docs\social-campaigns`/
@@ -392,6 +401,7 @@
   - `docs\tools`/
   - `docs\v7`/
   - `docs\validation`/
+  - `docs\verification`/
   - `docs\wave-10`/
   - `docs\wave-9`/
   - `docs\website`/
@@ -447,6 +457,7 @@
 - `missions-verified.png`
 - `module-3d-hero.png`
 - `opencode.json`
+- `opennext-build-log.zip`
 - `os-redirect-login.png`
 - `package.json`
 - `packages`/
@@ -715,9 +726,13 @@
   - `scripts\generate-knowledge-graph.js`
   - `scripts\generate-registry.js`
   - `scripts\generate-source-b-registry.mjs`
+  - `scripts\pre-push-gate.mjs`
   - `scripts\quality-gates.mjs`
+  - `scripts\restore-dependency-layout.mjs`
+  - `scripts\ruflo`/
   - `scripts\sync-tokens.mjs`
   - `scripts\test-platform-contract.mjs`
+  - `scripts\tools`/
   - `scripts\validate-platform-contract.mjs`
   - `scripts\vercel-build-app.mjs`
   - `scripts\vercel-deploy-app.mjs`
@@ -733,6 +748,7 @@
   - `skills\bhavya-apple-design`/
   - `skills\bhavya-architecture`/
   - `skills\bhavya-capability-research`/
+  - `skills\bhavya-cloud-workflow`/
   - `skills\bhavya-content-truth`/
   - `skills\bhavya-data-model`/
   - `skills\bhavya-design-system`/
@@ -740,6 +756,7 @@
   - `skills\bhavya-diagram-design`/
   - `skills\bhavya-github-workflow`/
   - `skills\bhavya-impeccable`/
+  - `skills\bhavya-ponytail`/
   - `skills\bhavya-production-verification`/
   - `skills\bhavya-reasons-canvas`/
   - `skills\bhavya-route-audit`/
@@ -747,7 +764,9 @@
   - `skills\bhavya-spec`/
   - `skills\bhavya-ui-verification`/
   - `skills\design-taste-frontend`/
+  - `skills\icm-architect`/
   - `skills\impeccable`/
+  - `skills\karpathy-guidelines`/
 - `skills-lock.json`
 - `specs`/
   - `specs\SKILL-ARCHITECTURE.md`
@@ -790,9 +809,68 @@
   - `standards\testing.md`
 - `supabase`/
   - `supabase\.temp`/
-  - `supabase\migrations`/
-  - `supabase\tests`/
 - `test-3d-hero.cjs`
+- `tests`/
+  - `tests\performance`/
+- `tmp`/
+  - `tmp\axe-detail.mjs`
+  - `tmp\bisect-mobile.mjs`
+  - `tmp\browser-qa`/
+  - `tmp\browser-qa-preview.mjs`
+  - `tmp\browser-qa2`/
+  - `tmp\browser-qa2.mjs`
+  - `tmp\browser-qa3`/
+  - `tmp\chain.mjs`
+  - `tmp\commit-msg.txt`
+  - `tmp\commit-msg2.txt`
+  - `tmp\commit-msg3.txt`
+  - `tmp\commit-msg4.txt`
+  - `tmp\commit-msg5.txt`
+  - `tmp\commit-msg6.txt`
+  - `tmp\commit-msg7.txt`
+  - `tmp\commit-msg8.txt`
+  - `tmp\crash-localise.mjs`
+  - `tmp\css-cmp.mjs`
+  - `tmp\css-links.mjs`
+  - `tmp\css-probe.mjs`
+  - `tmp\css-tail.mjs`
+  - `tmp\dd-variant.mjs`
+  - `tmp\eyebrow.mjs`
+  - `tmp\final-check.mjs`
+  - `tmp\final-shot.mjs`
+  - `tmp\final-visual.mjs`
+  - `tmp\heartbeat.mjs`
+  - `tmp\hypothesis.mjs`
+  - `tmp\interact`/
+  - `tmp\interact-probe.mjs`
+  - `tmp\interact2.mjs`
+  - `tmp\interaction-suite.mjs`
+  - `tmp\isolate-desktop.mjs`
+  - `tmp\isolate-desktop2.mjs`
+  - `tmp\leak-test.mjs`
+  - `tmp\mobile-click.mjs`
+  - `tmp\mobile-click2.mjs`
+  - `tmp\mobile-isolate.mjs`
+  - `tmp\overflow-probe.mjs`
+  - `tmp\overlay-probe.mjs`
+  - `tmp\pr-body.md`
+  - `tmp\pr-comment.md`
+  - `tmp\preloader-probe.mjs`
+  - `tmp\prod-check.html`
+  - `tmp\qa3.mjs`
+  - `tmp\release-comment.md`
+  - `tmp\repeat-click.mjs`
+  - `tmp\repeat3d.mjs`
+  - `tmp\routes.mjs`
+  - `tmp\routes2.mjs`
+  - `tmp\served-css.mjs`
+  - `tmp\smoke`/
+  - `tmp\smoke.mjs`
+  - `tmp\suite-resilient.mjs`
+  - `tmp\variant.mjs`
+  - `tmp\verify-tokens.cjs`
+  - `tmp\wfcheck.py`
+  - `tmp\wfcheck2.py`
 - `tsconfig.base.json`
 - `turbo.json`
 - `typecheck-out.txt`
@@ -804,8 +882,6 @@
   - `validation\week-3-operations.md`
   - `validation\week-4-readiness.md`
 - `vercel.json`
-- `workers`/
-  - `workers\api`/
 
 ## Canonical homes (links, not copies)
 

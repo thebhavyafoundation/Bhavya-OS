@@ -49,6 +49,7 @@ Layer 3 refs: `_config/` · `shared/` · `skills/` → `.opencode/skills/`
 - Machine resource contract → `_config/machine-contract.md`
 - Ruflo (remote orchestration) → `docs/tools/ruflo/`
 - Concept-visual inventory → `apps/ai-institute/src/data/curriculum/visual-inventory.ts`
+- Third-party design skill (Taste) → `docs/tools/design-taste-frontend/`
 
 ## ICM Alignment Notes
 
