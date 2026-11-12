@@ -73,6 +73,23 @@ export function BlockRenderer({ block }: { block: LessonBlock }) {
           />
         </section>
       );
+    case "guided-example":
+      return (
+        <section className="ai-block" aria-label="Guided example">
+          <h2 className="ai-block-title">Guided example</h2>
+          <div className="ai-experiment">
+            <h3 className="ai-experiment-title">{block.title}</h3>
+            <pre className="ai-step-code">
+              <code>{block.code}</code>
+            </pre>
+            <ol className="ai-steps">
+              {block.walkthrough.map((line, index) => (
+                <li key={index}>{line}</li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      );
     case "experiment":
       return (
         <section className="ai-block" aria-label="Hands-on lab">

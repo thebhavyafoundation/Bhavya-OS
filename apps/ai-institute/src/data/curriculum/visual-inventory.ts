@@ -1,5 +1,3 @@
-import type { DiagramSpec } from "./types";
-
 /**
  * Concept-Visual Inventory
  *
@@ -8,6 +6,11 @@ import type { DiagramSpec } from "./types";
  * second content registry: every entry points at a lesson that already exists in
  * `lesson-registry.ts`, and `lessonContent.visual` remains the single runtime
  * source for what is actually rendered.
+ *
+ * The runtime diagram specification lives in exactly one place:
+ * `lessonContent.visual` in `@/data/lesson-content.ts`. This file records
+ * provenance, medium and review status for that visual; it does not copy
+ * the spec, so the two can never disagree.
  *
  * Field meanings:
  * - id              stable concept identifier (lesson id, or page/concept key)
@@ -51,8 +54,6 @@ export interface ConceptVisualEntry {
   altText: string;
   reviewStatus: VisualReviewStatus;
   loading: string;
-  /** Set when the visual is rendered from the inline DiagramSpec schema. */
-  spec?: DiagramSpec;
 }
 
 export const CONCEPT_VISUAL_INVENTORY: ConceptVisualEntry[] = [
@@ -79,70 +80,74 @@ export const CONCEPT_VISUAL_INVENTORY: ConceptVisualEntry[] = [
     reviewStatus: "published",
     loading:
       "Rendered inline with lesson content — no separate request, no lazy-loading decision needed.",
-    spec: {
-      kind: "nested",
-      title: "How AI, machine learning and deep learning relate",
-      steps: ["Artificial Intelligence", "Machine Learning", "Deep Learning"],
-    },
   },
   {
     id: "history-of-ai",
     purpose:
       "Explain why the field had periods of hype and withdrawal, so learners see progress as non-linear.",
-    existingVisual: "None. Lesson is prose plus a predict-reveal widget.",
+    existingVisual:
+      "Timeline DiagramSpec rendered by DiagramRenderer, with a text equivalent and a 'Read this diagram as text' disclosure.",
     missing:
-      "A timeline of AI winters and revivals. Without it, 'AI winter' is an unexplained label.",
+      "Nothing structural. The visual now exists and carries a text equivalent.",
     medium: "timeline",
     mediumJustification:
       "A sequence over time with causes and effects is exactly what a timeline explains; prose lists dates but not the driver at each turn.",
-    source: "Original DiagramSpec (timeline kind) to be authored in-repo.",
+    source:
+      "Original DiagramSpec authored in-repo; the runtime source is lessonContent.visual.",
     license: "Project-owned (Bhavya Foundation).",
     location:
-      "To be added at apps/ai-institute/src/data/lesson-content.ts (lesson `history-of-ai`, field `visual`).",
-    dimensions: "Inline SVG, viewBox 800x220.",
+      "apps/ai-institute/src/data/lesson-content.ts (lesson `history-of-ai`, field `visual`).",
+    dimensions:
+      "Inline SVG, viewBox 800x220, never scaled below 760px rendered width; scrolls horizontally on narrow screens.",
     altText:
       "Timeline of AI progress: early optimism, 1974 first funding collapse, expert-system era, 1980s second winter, 2012 deep-learning resurgence.",
-    reviewStatus: "draft",
+    reviewStatus: "published",
     loading: "Inline with lesson content.",
   },
   {
     id: "types-of-ai-systems",
     purpose:
       "Distinguish reactive and limited-memory systems by the state each one keeps.",
-    existingVisual: "None. Lesson uses a sort-basket widget only.",
+    existingVisual:
+      "Two-column comparison DiagramSpec rendered by DiagramRenderer, with a text equivalent and a 'Read this diagram as text' disclosure.",
     missing:
-      "A comparison of the capability types. The sort exercise tests recall, not the underlying distinction.",
+      "Nothing structural. The visual now exists and carries a text equivalent.",
     medium: "compare",
     mediumJustification:
       "Two labelled columns with their properties show the contrast directly; a diagram of the same would add noise without adding understanding.",
-    source: "Original DiagramSpec (compare kind) to be authored in-repo.",
+    source:
+      "Original DiagramSpec authored in-repo; the runtime source is lessonContent.visual.",
     license: "Project-owned (Bhavya Foundation).",
     location:
-      "To be added at apps/ai-institute/src/data/lesson-content.ts (lesson `types-of-ai-systems`, field `visual`).",
-    dimensions: "Inline SVG, viewBox 800x220.",
+      "apps/ai-institute/src/data/lesson-content.ts (lesson `types-of-ai-systems`, field `visual`).",
+    dimensions:
+      "Inline SVG, viewBox 800x220, never scaled below 760px rendered width; scrolls horizontally on narrow screens.",
     altText:
       "Comparison: Reactive AI has no memory and answers from the current input; Limited Memory AI keeps recent context and uses it.",
-    reviewStatus: "draft",
+    reviewStatus: "published",
     loading: "Inline with lesson content.",
   },
   {
     id: "the-ai-workflow",
     purpose:
       "Show the ordered stages a dataset moves through to become a prediction.",
-    existingVisual: "None. Lesson is prose, notebook cells and a lab.",
+    existingVisual:
+      "Four-stage pipeline DiagramSpec rendered by DiagramRenderer, with a text equivalent and a 'Read this diagram as text' disclosure.",
     missing:
-      "The pipeline itself. Learners follow instructions without seeing the shape of the process.",
+      "Nothing structural. The visual now exists and carries a text equivalent.",
     medium: "flow",
     mediumJustification:
       "The concept is order and transition between stages, which is what a left-to-right chain communicates.",
-    source: "Original DiagramSpec (flow/pipeline kind) to be authored in-repo.",
+    source:
+      "Original DiagramSpec authored in-repo; the runtime source is lessonContent.visual.",
     license: "Project-owned (Bhavya Foundation).",
     location:
-      "To be added at apps/ai-institute/src/data/lesson-content.ts (lesson `the-ai-workflow`, field `visual`).",
-    dimensions: "Inline SVG, width scales with step count (224px per step).",
+      "apps/ai-institute/src/data/lesson-content.ts (lesson `the-ai-workflow`, field `visual`).",
+    dimensions:
+      "Inline SVG, 896x220, never scaled below 760px rendered width; scrolls horizontally on narrow screens.",
     altText:
       "Pipeline: collect data, clean data, split into training and test sets, train a model, evaluate, then deploy.",
-    reviewStatus: "draft",
+    reviewStatus: "published",
     loading: "Inline with lesson content.",
   },
   {
@@ -150,21 +155,22 @@ export const CONCEPT_VISUAL_INVENTORY: ConceptVisualEntry[] = [
     purpose:
       "Make responsible-AI checkpoints concrete at the point where a learner builds something.",
     existingVisual:
-      "None in the lesson; a related published diagram exists for the site.",
+      "Three-pillar flow DiagramSpec rendered by DiagramRenderer, with a text equivalent and a 'Read this diagram as text' disclosure.",
     missing:
-      "A lifecycle visual tied to the lesson's checkpoints. The site diagram is a different audience.",
+      "Nothing structural. The visual now exists and carries a text equivalent.",
     medium: "flow",
     mediumJustification:
       "Ethics gates are sequential checkpoints in a build process, so a chain of decision points is the faithful form.",
     source:
-      "Reuse the already-published responsible-ai-lifecycle diagram as reference; lesson-level visual to be authored as a DiagramSpec.",
+      "Original DiagramSpec authored in-repo; the runtime source is lessonContent.visual.",
     license: "Project-owned (Bhavya Foundation).",
     location:
-      "Reference asset: apps/ai-institute/public/diagrams/science/responsible-ai-lifecycle.svg (published, 960x540). Lesson visual to be authored.",
-    dimensions: "Reference SVG 960x540; lesson spec viewBox 800x220.",
+      "apps/ai-institute/src/data/lesson-content.ts (lesson `ethics-in-ai`, field `visual`).",
+    dimensions:
+      "Inline SVG, 672x220, never scaled below 672px rendered width; scrolls horizontally on narrow screens.",
     altText:
       "Responsible AI lifecycle with checkpoints for fairness, transparency, privacy and human review at each build stage.",
-    reviewStatus: "draft",
+    reviewStatus: "published",
     loading: "Inline with lesson content.",
   },
   {
@@ -264,6 +270,54 @@ export const CONCEPT_VISUAL_INVENTORY: ConceptVisualEntry[] = [
       "Mapping: comparison question to bar chart, change over time to line chart, relationship to scatter plot, composition to stacked bar.",
     reviewStatus: "draft",
     loading: "Inline with lesson content.",
+  },
+  {
+    id: "module:concept-map",
+    purpose:
+      "Show where a module sits in the curriculum: what comes before it, what it is for, which lessons are published, and which standards it is accountable to.",
+    existingVisual:
+      "None. The module page stated a title, a description and a lesson list.",
+    missing:
+      "The relationship between prerequisites, module, lessons and standards was left to be inferred.",
+    medium: "diagram",
+    mediumJustification:
+      "A relationship between four named things is a structure, and the structure is what a reader needs. It is drawn in HTML rather than SVG because every part of it is already text: it reads at 320px, it needs no separate asset request, and a screen reader receives the same order the eye does.",
+    source:
+      "Original component authored in-repo (components/curriculum/ModuleConceptMap.tsx). Every value is read from the live curriculum registry at render time.",
+    license: "Project-owned (Bhavya Foundation).",
+    location:
+      "apps/ai-institute/src/components/curriculum/ModuleConceptMap.tsx, rendered by apps/ai-institute/src/app/curriculum/modules/[moduleId]/page.tsx.",
+    dimensions:
+      "Responsive HTML; four ordered stages, each a labelled group. No fixed pixel box.",
+    altText:
+      "Module concept map: the modules that come before this one, the module's own learning objective and topics, its published lessons in order, and the standards it is mapped to.",
+    reviewStatus: "published",
+    loading:
+      "Rendered inline with the module page - no separate request, no lazy-loading decision needed.",
+  },
+  {
+    id: "homepage:publication-status",
+    purpose:
+      "State honestly what is built, published and reviewed today, so the homepage's promise and the curriculum's actual state agree.",
+    existingVisual:
+      "None. The homepage described the institution but never said how much of the curriculum is readable.",
+    missing:
+      "Any quantitative statement of current state. A reader could not tell five published lessons from eighty-six catalogued modules.",
+    medium: "chart",
+    mediumJustification:
+      "The honest statement is a ratio - how much of each age band is published - and a ratio is what a bar states directly. The counts are printed beside every bar, so the chart is never the only way to read it and colour is never the only carrier of meaning.",
+    source:
+      "Original component authored in-repo (components/home/WhereWeStand.tsx). Every count is derived at render time from the live curriculum registry.",
+    license: "Project-owned (Bhavya Foundation).",
+    location:
+      "apps/ai-institute/src/components/home/WhereWeStand.tsx, rendered by apps/ai-institute/src/app/page.tsx.",
+    dimensions:
+      "Responsive HTML; one horizontal bar per age band with a printed figure.",
+    altText:
+      "Per age band, how many modules are catalogued and how many are published: Junior A 10 catalogued 0 published, Junior B 8 catalogued 0 published, Core 56 catalogued 3 published, Advanced 12 catalogued 0 published. Five lessons are readable today, all in the Core band.",
+    reviewStatus: "published",
+    loading:
+      "Below the hero, above the fold on a large screen. Server-rendered, so it arrives with the HTML - no client fetch, no layout shift.",
   },
   {
     id: "homepage:mission-constellation",

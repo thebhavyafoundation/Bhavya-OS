@@ -8,7 +8,7 @@ import { ActiveLearning } from "@/components/home/ActiveLearning";
 import { SmallTiles } from "@/components/home/SmallTiles";
 import { QuoteBand } from "@/components/home/QuoteBand";
 import { FinalCta } from "@/components/home/FinalCta";
-import { Preloader } from "@/components/motion/Preloader";
+import { WhereWeStand } from "@/components/home/WhereWeStand";
 import type { DiagramSpec } from "@/data/curriculum";
 
 /** Token-driven diagram spec for the curriculum spotlight — bespoke SVG,
@@ -20,14 +20,16 @@ const PATHWAY_SPEC: DiagramSpec = {
 };
 
 /**
- * Homepage — the five-scene narrative spine.
+ * Homepage — the narrative spine.
  *
- *   1. Orientation      SplitHero        photographic hero, what Bhavya is
- *   2. The mandates     FourPillars      overview of the four constitutional mandates
- *                      PublicStoryShell each mandate in depth, as chapters
- *   3. Learning journey LearningJourney   how the curriculum is structured
- *   4. Inside a lesson  ActiveLearning    what a learner actually does
- *   5. Invitation       FinalCta         one clear next action
+ *   1. Orientation       SplitHero       photographic hero, what Bhavya is
+ *   2. The mandates      FourPillars     overview of the four constitutional mandates
+ *                       PublicStoryShell each mandate in depth, as chapters
+ *   3. Curriculum        (inline)        the pathway at a glance
+ *   4. Honest state      WhereWeStand    what is built, published and reviewed today
+ *   5. Learning journey  LearningJourney how the curriculum is structured
+ *   6. Inside a lesson   ActiveLearning  what a learner actually does
+ *   7. Invitation        FinalCta        one clear next action
  *
  * The three-card mission spotlight this page used to carry was replaced by
  * `PublicStoryShell`. A card grid said "here are three things"; four chapters
@@ -41,6 +43,14 @@ const PATHWAY_SPEC: DiagramSpec = {
  * scenes can be rendered from live data rather than from values frozen into a
  * client bundle. Interactive children carry their own directive.
  *
+ * There is no blocking preloader. The full-screen brand curtain used to cover
+ * the page for the first ~1.6 seconds. It delayed the hero and the navigation
+ * for every first-time visitor, on every connection, for a decoration - which
+ * is the wrong trade for a foundation that serves low-bandwidth and rural
+ * learners. The brand is stated in the hero itself. The `Preloader` component
+ * is still in the codebase for a future use that is not on the critical path;
+ * it is simply not mounted on the homepage.
+ *
  * Impact numbers: none (D1). No image source/credit text rendered anywhere
  * (D4 superseded by the 2026-09-26 user directive) — credit lines inside
  * `PublicStoryShell` are licence attribution, not editorial sourcing.
@@ -51,7 +61,6 @@ export default function HomePage() {
       className="min-h-screen"
       style={{ background: "var(--color-bg-primary)" }}
     >
-      <Preloader />
       <main id="main-content">
         <SplitHero />
         <FourPillars />
@@ -85,6 +94,7 @@ export default function HomePage() {
           </div>
         </section>
         <PublicStoryShell />
+        <WhereWeStand />
         <LearningJourney />
         <ActiveLearning />
         <SmallTiles />

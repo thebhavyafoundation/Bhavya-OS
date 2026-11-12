@@ -1,39 +1,36 @@
-"use client";
+import type { Metadata } from "next";
+import { InteractionProof } from "./InteractionProof";
 
-import { useState } from "react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-} from "@bhavya/platform-ui";
+/**
+ * Interaction proof — the surface the remote Playwright harness drives.
+ *
+ * It is a verification route, not a reader-facing page, so it is excluded
+ * from search indexing and is not linked from anywhere in the site
+ * navigation. The content itself is a small, honest explanation of what the
+ * page is for.
+ */
+export const metadata: Metadata = {
+  title: "Interaction proof — Bhavya Foundation",
+  description:
+    "Verification surface for the interactive primitives: open, close, keyboard behaviour, focus handling and scroll-lock release.",
+  robots: { index: false, follow: false },
+};
 
 export default function UiProofPage() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [sheetOpen, setSheetOpen] = useState(false);
-
   return (
-    <div style={{ padding: 24 }}>
-      <h1>UI Proof</h1>
-      <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger>Open Dialog</DialogTrigger>
-          <DialogContent title="Dialog Title">
-            <p>Dialog body content.</p>
-            <button type="button">Inner action</button>
-          </DialogContent>
-        </Dialog>
-
-        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetTrigger>Open Sheet</SheetTrigger>
-          <SheetContent title="Sheet Title">
-            <p>Sheet body content.</p>
-            <button type="button">Inner action</button>
-          </SheetContent>
-        </Sheet>
-      </div>
+    <div
+      id="main-content"
+      className="ai-page"
+      style={{ paddingTop: "var(--header-h)" }}
+    >
+      <p className="ai-eyebrow">Verification surface</p>
+      <h1 className="ai-page-title">Interaction proof</h1>
+      <p className="ai-page-lead">
+        A plain surface for checking that the shared interactive primitives
+        behave the way they are documented to behave, in a real browser, on
+        every deploy.
+      </p>
+      <InteractionProof />
     </div>
   );
 }

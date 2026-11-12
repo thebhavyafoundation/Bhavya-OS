@@ -3,20 +3,23 @@
   "title": "Curriculum learning pathway",
   "type": "tree",
   "variant": "minimal-light",
-  "route": "/app/learn/pathway",
+  "route": "/curriculum",
   "section": "Curriculum",
-  "purpose": "Show the Institute → Programme → Course → Module → Lesson → Practice → Assessment → Mastery → Certification pathway using the existing 86-module registry and four bands.",
-  "audience": "Learners, educators",
+  "purpose": "Show how the learning pathway is structured - Institute, Programme, Course, Module, Lesson, then Practice, Assessment, Mastery and Certification - and name the four age bands the 86-module registry is organised into.",
+  "audience": "Learners, educators, and anyone asking what is actually built",
   "source_html": "content/diagrams/sources/html/curriculum-learning-pathway.html",
   "production_svg": "apps/ai-institute/public/diagrams/curriculum/curriculum-learning-pathway.svg",
   "optional_png": null,
-  "accessible_text": "The curriculum pathway moves from Institute through Programme, Course, Module, Lesson, Practice, Assessment, and Mastery to Certification, organized across four bands in the 86-module registry.",
-  "content_sources": ["content/master-curriculum/", "registry/"],
+  "accessible_text": "The curriculum pathway moves from Institute through Programme, Course, Module and Lesson, then down to Practice, Assessment, Mastery and Certification. The registry holds 86 modules across four age bands: Junior A for ages 6 to 8, Junior B for ages 9 to 10, Core for ages 11 to 16, and Advanced for ages 16 to 18.",
+  "content_sources": [
+    "apps/ai-institute/src/data/curriculum/",
+    "apps/ai-institute/src/lib/curriculum/bands.ts"
+  ],
   "review": {
-    "content": "pending",
+    "content": "reviewed",
     "subject": "pending",
     "governance": "not-applicable",
-    "accessibility": "pending"
+    "accessibility": "reviewed"
   },
   "licensing": {
     "generator_repository": "https://github.com/cathrynlavery/diagram-design",
@@ -24,7 +27,7 @@
     "generator_license": "MIT",
     "embedded_icons": []
   },
-  "version": "0.1.0",
-  "status": "draft",
-  "updated_at": "2026-10-16T00:00:00Z"
+  "version": "0.2.0",
+  "status": "accessibility-reviewed",
+  "updated_at": "2026-11-12T00:00:00Z"
 }

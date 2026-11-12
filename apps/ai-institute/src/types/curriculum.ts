@@ -156,6 +156,13 @@ export type LessonBlock =
   | { kind: "quiz"; questions: QuizQuestion[] }
   | { kind: "interactive"; widget: WidgetSpec }
   | {
+      kind: "guided-example";
+      title: string;
+      language: string;
+      code: string;
+      walkthrough: readonly string[];
+    }
+  | {
       kind: "experiment";
       title: string;
       materials: string[];
@@ -176,6 +183,37 @@ export interface Lesson {
   title: string;
   durationMin: number;
   blocks: LessonBlock[];
+  /** Reading frame around the body: outcome, worked example, sources, review, next step. */
+  detail?: LessonDetail;
+}
+
+/** A source the lesson is built on, with the attribution preserved. */
+export interface LessonSource {
+  readonly citation: string;
+  readonly attribution: string;
+}
+
+/**
+ * Per-lesson review state. "pending" is the honest default for anything a
+ * human subject-matter reviewer has not signed off.
+ */
+export interface LessonReview {
+  readonly content: "pending" | "reviewed";
+  readonly subject: "pending" | "reviewed";
+  readonly accessibility: "pending" | "reviewed";
+  readonly reviewedOn?: string;
+}
+
+export interface LessonDetail {
+  readonly outcome: string;
+  readonly guidedExample?: {
+    readonly title: string;
+    readonly language: string;
+    readonly walkthrough: readonly string[];
+  };
+  readonly sources: readonly LessonSource[];
+  readonly review: LessonReview;
+  readonly nextStep: string;
 }
 
 export interface CurriculumModule {

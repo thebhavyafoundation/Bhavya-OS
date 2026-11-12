@@ -115,6 +115,19 @@ function bulletList(items: readonly string[]): string {
   return items.map((item) => `- ${item}`).join("\n");
 }
 
+/**
+ * Short attribution for a full citation.
+ *
+ * A citation already carries its authorship in the standard
+ * "Surname, Initials (Year). Title. Publisher." form. The short form is the
+ * author-year lead of that string, so the attribution is never separated
+ * from the citation it belongs to or invented separately.
+ */
+function attributionOf(citation: string): string {
+  const match = citation.match(/^(.*?\(\d{4}[a-z]?\))/);
+  return (match ? match[1] : citation.split(".")[0]).trim();
+}
+
 function toLesson(
   legacy: LessonContent,
   moduleId: string,
@@ -130,7 +143,16 @@ function toLesson(
     { kind: "prose", text: legacy.visualExplanation },
   ];
   if (legacy.visual) {
-    blocks.splice(2, 0, { kind: "visual", diagram: legacy.visual });
+    blocks.push({ kind: "visual", diagram: legacy.visual });
+  }
+  if (legacy.guidedExample) {
+    blocks.push({
+      kind: "guided-example",
+      title: legacy.guidedExample.title,
+      language: legacy.guidedExample.language,
+      code: legacy.codeExample,
+      walkthrough: legacy.guidedExample.walkthrough,
+    });
   }
   if (widget) {
     blocks.push({ kind: "interactive", widget });
@@ -144,7 +166,11 @@ function toLesson(
       correctIndex: question.correctIndex,
       feedback: {
         correct: question.explanation,
-        incorrect: question.explanation,
+        // A wrong answer gets its own feedback. Falling back to the correct
+        // answer's explanation would tell the learner the answer they did
+        // not give, which teaches nothing.
+        incorrect:
+          question.feedbackWrong ?? `Not quite. ${question.explanation}`,
       },
     })),
   });
@@ -196,6 +222,28 @@ function toLesson(
     title: legacy.title,
     durationMin: 45,
     blocks,
+    detail: legacy.outcome
+      ? {
+          outcome: legacy.outcome,
+          guidedExample: legacy.guidedExample
+            ? {
+                title: legacy.guidedExample.title,
+                language: legacy.guidedExample.language,
+                walkthrough: legacy.guidedExample.walkthrough,
+              }
+            : undefined,
+          sources: legacy.researchReferences.map((citation) => ({
+            citation,
+            attribution: attributionOf(citation),
+          })),
+          review: legacy.review ?? {
+            content: "pending",
+            subject: "pending",
+            accessibility: "pending",
+          },
+          nextStep: legacy.nextStep ?? "",
+        }
+      : undefined,
   };
 }
 
