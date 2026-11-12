@@ -302,7 +302,13 @@ for (const surface of [DIALOG, SHEET]) {
       const toggle = page.locator(`#${surface.programmaticToggleId}`);
       const before = await readProof(page);
 
-      await toggle.click();
+      // The toggle is dispatched rather than clicked. While the surface is
+      // open the overlay covers the page - that is the behaviour another
+      // test in this file asserts - so a pointer click on a background
+      // control is impossible by design. Dispatching the event still runs
+      // the component's own handler, so the state path under test is the
+      // real one.
+      await toggle.dispatchEvent("click");
       await expect(overlayOf(page, surface)).toBeVisible();
 
       const opened = await readProof(page);
@@ -310,7 +316,7 @@ for (const surface of [DIALOG, SHEET]) {
         { surface: surface.key, open: true },
       ]);
 
-      await toggle.click();
+      await toggle.dispatchEvent("click");
       await expectClosed(page, surface, baseline);
 
       const closed = await readProof(page);
@@ -407,12 +413,38 @@ for (const surface of [DIALOG, SHEET]) {
       await expect(overlay).toBeVisible();
 
       if (surface.staysMounted) {
-        const duration = await liveOverlays(page).evaluate(
-          (el) => getComputedStyle(el).transitionDuration,
-        );
-        expect(duration, "reduced motion must disable the transition").toBe(
-          "0s",
-        );
+        const motion = await liveOverlays(page).evaluate((el) => {
+          const computed = getComputedStyle(el);
+          return {
+            duration: computed.transitionDuration,
+            inline: el.style.transition,
+          };
+        });
+
+        // The component must disable its own transition when reduced motion
+        // is asked for. This is the component's own declaration and is not
+        // affected by anything a stylesheet does.
+        expect(
+          motion.inline,
+          "the component must disable its own transition under reduced motion",
+        ).toBe("none");
+
+        // The computed duration is not literally "0s". The framework's own
+        // reduced-motion rules force every transition to 0.01ms with
+        // !important, which overrides the component's declaration. The
+        // requirement is that no transition can play, not that the browser
+        // prints a particular string, so the duration is compared as a
+        // number against a threshold that no animation can cross.
+        const durations = motion.duration
+          .split(",")
+          .map((value) => Number.parseFloat(value))
+          .filter((value) => Number.isFinite(value));
+        for (const duration of durations) {
+          expect(
+            duration,
+            "reduced motion must leave no animatable transition",
+          ).toBeLessThanOrEqual(0.00002);
+        }
       }
 
       await page.keyboard.press("Escape");

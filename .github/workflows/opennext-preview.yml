@@ -221,6 +221,7 @@ jobs:
           name: playwright-verification
           path: |
             apps/ai-institute/tests/performance/screenshots
+            apps/ai-institute/tests/performance/artifacts
             apps/ai-institute/playwright-report
             apps/ai-institute/test-results
           retention-days: 7
