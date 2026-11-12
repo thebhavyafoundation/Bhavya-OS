@@ -146,5 +146,6 @@ jobs:
             apps/ai-institute/tests/fixtures/ui-proof/fixture-report
             apps/ai-institute/fixture-report
             apps/ai-institute/tests/fixtures/ui-proof/test-results
+            apps/ai-institute/tests/fixtures/ui-proof/build-error.txt
           retention-days: 7
           if-no-files-found: ignore

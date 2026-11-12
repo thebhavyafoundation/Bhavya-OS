@@ -8,14 +8,15 @@
  * stylesheet, so the harness exercises the same CSS pipeline the deployed
  * applications use.
  *
- * Dependency handling: this script adds nothing to the workspace. It
- * resolves the tools that are already installed and pinned by the lockfile:
+ * Dependency handling: this script adds nothing to the workspace. It uses
+ * the tools that are already installed and pinned by the lockfile:
  *
- * - postcss and @tailwindcss/postcss are declared devDependencies of the
- *   ai-institute application.
+ * - @tailwindcss/postcss is a declared devDependency of the ai-institute
+ *   application. The PostCSS runtime is reached through it, so the version
+ *   that processes the stylesheet is the one the application itself uses.
  * - esbuild is already in the lockfile as a dependency of tsx, which the
- *   same application declares. It is resolved through that dependency so
- *   the bundler version cannot drift from the lockfile.
+ *   same application declares. It is reached through that dependency so the
+ *   bundler version cannot drift from the lockfile.
  *
  * Usage:
  *   node apps/ai-institute/tests/fixtures/ui-proof/build.mjs
@@ -39,6 +40,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const APP = join(HERE, "..", "..", "..");
 const REPO = join(APP, "..", "..");
 const DIST = join(HERE, "dist");
+const ERROR_FILE = join(HERE, "build-error.txt");
 
 /** Tokens a shared component reads at runtime through var(). */
 const RUNTIME_TOKENS = [
@@ -49,31 +51,67 @@ const RUNTIME_TOKENS = [
   "--ring-focus",
 ];
 
-function resolvePostcss() {
-  const requireFrom = createRequire(
-    join(APP, "node_modules", "@tailwindcss", "postcss", "package.json"),
+const notes = [];
+
+function note(message) {
+  notes.push(message);
+  process.stdout.write(message + "\n");
+}
+
+function reportFailure(stage, error) {
+  const message =
+    stage + ": " + (error && error.message ? error.message : String(error));
+  writeFileSync(
+    ERROR_FILE,
+    message + "\n\n" + ((error && error.stack) || "") + "\n\n" + notes.join("\n"),
+    "utf8",
   );
+  process.stderr.write("fixture build failed at " + message + "\n");
+  if (process.env.GITHUB_ACTIONS === "true") {
+    process.stderr.write("::error::" + message.replace(/\n/g, " "));
+  }
+  process.exit(1);
+}
+
+function loadCssToolchain() {
+  // The plugin is a declared dependency of the application, so it resolves
+  // from this file without depending on how the workspace hoists packages.
+  const pluginUrl = import.meta.resolve("@tailwindcss/postcss");
+  const requireFromPlugin = createRequire(pluginUrl);
+  const plugin = requireFromPlugin("@tailwindcss/postcss");
+  const postcss = requireFromPlugin("postcss");
+  note("css toolchain: " + pluginUrl);
   return {
-    postcss: requireFrom("postcss"),
-    tailwind: requireFrom("@tailwindcss/postcss"),
+    postcss,
+    tailwind: plugin.default ?? plugin,
   };
 }
 
-function resolveEsbuild() {
-  const candidates = [
-    createRequire(join(APP, "node_modules", "tsx", "package.json")),
-    createRequire(join(REPO, "package.json")),
-  ];
-  for (const requireFrom of candidates) {
+function loadEsbuild() {
+  const attempts = [];
+  const tryLoad = (label, run) => {
     try {
-      return requireFrom("esbuild");
-    } catch {
-      continue;
+      const loaded = run();
+      note("bundler: " + label);
+      return loaded.default ?? loaded;
+    } catch (error) {
+      attempts.push(label + " -> " + error.message);
+      return null;
     }
-  }
+  };
+
+  const fromTsx = tryLoad("esbuild through tsx", () =>
+    createRequire(import.meta.resolve("tsx"))("esbuild"),
+  );
+  if (fromTsx) return fromTsx;
+
+  const fromRoot = tryLoad("esbuild through the workspace root", () =>
+    createRequire(join(REPO, "package.json"))("esbuild"),
+  );
+  if (fromRoot) return fromRoot;
+
   throw new Error(
-    "esbuild could not be resolved from the installed workspace. " +
-      "Run pnpm install before building the fixture.",
+    "esbuild could not be loaded. Attempts: " + attempts.join(" | "),
   );
 }
 
@@ -91,12 +129,15 @@ function rootDeclarations(css) {
 }
 
 async function buildCss() {
-  const { postcss, tailwind } = resolvePostcss();
+  const { postcss, tailwind } = loadCssToolchain();
   const source = join(HERE, "fixture.css");
-  const result = await postcss([tailwind()]).process(readFileSync(source, "utf8"), {
-    from: source,
-    to: join(DIST, "fixture.css"),
-  });
+  const result = await postcss([tailwind()]).process(
+    readFileSync(source, "utf8"),
+    {
+      from: source,
+      to: join(DIST, "fixture.css"),
+    },
+  );
   writeFileSync(join(DIST, "fixture.css"), result.css, "utf8");
 
   const root = rootDeclarations(result.css);
@@ -115,7 +156,7 @@ async function buildCss() {
 }
 
 async function buildJs() {
-  const esbuild = resolveEsbuild();
+  const esbuild = loadEsbuild();
   await esbuild.build({
     absWorkingDir: HERE,
     entryPoints: [join(HERE, "fixture.tsx")],
@@ -155,6 +196,5 @@ async function main() {
 }
 
 main().catch((error) => {
-  process.stderr.write("fixture build failed: " + error.message + "\n");
-  process.exit(1);
+  reportFailure("build", error);
 });
