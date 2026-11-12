@@ -9,14 +9,26 @@ interface CurriculumGridProps {
   modules?: typeof getAllModules extends () => infer T ? T : never;
   /** Maximum number of cards to render. */
   limit?: number;
-  /** Columns at each breakpoint (Tailwind-ish class string). */
+  /**
+   * Columns for the grid, as a CSS `grid-template-columns` value.
+   *
+   * The value has to be a real CSS value. It used to be a list of Tailwind
+   * utilities assigned to the inline `gridTemplateColumns` style, which is
+   * not CSS: the declaration was dropped, the grid fell back to an implicit
+   * auto column, and an auto column is sized to its content's max-content
+   * width. The grid then refused to shrink below that and pushed the page
+   * into horizontal overflow on a phone.
+   *
+   * `minmax(min(100%, 260px), 1fr)` is used rather than a fixed track so
+   * that the column can always shrink to fit the container.
+   */
   cols?: string;
   /** Stagger delay between card reveals (seconds). */
   stagger?: number;
   className?: string;
 }
 
-const DEFAULT_COLS = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+const DEFAULT_COLS = "repeat(auto-fit, minmax(min(100%, 260px), 1fr))";
 
 /**
  * CurriculumGrid — a responsive grid of CurriculumCard, each revealed on scroll
@@ -37,17 +49,10 @@ export function CurriculumGrid({
 
   return (
     <section
-      /*
-        `cols` is a set of Tailwind column utilities, so it belongs in the
-        class list. It used to be assigned to the inline `gridTemplateColumns`
-        style, which is not a CSS value: the declaration was dropped, the
-        grid fell back to an implicit auto column, and that column was sized
-        to the cards' max-content width. The grid then refused to shrink
-        below it and pushed the page into horizontal overflow on a phone.
-      */
-      className={`curriculum-grid ${cols} ${className}`}
+      className={`curriculum-grid ${className}`}
       style={{
         display: "grid",
+        gridTemplateColumns: cols,
         gap: "var(--space-6)",
       }}
       aria-label="Curriculum modules"

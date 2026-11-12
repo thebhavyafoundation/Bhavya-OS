@@ -83,7 +83,10 @@ export default function HomePage() {
               </p>
             </div>
             <div className="home-grid-2" style={{ gap: "var(--space-10)" }}>
-              <CurriculumGrid limit={6} cols="grid-cols-1 md:grid-cols-2" />
+              <CurriculumGrid
+                limit={6}
+                cols="repeat(auto-fit, minmax(min(100%, 260px), 1fr))"
+              />
               <InfographicCard
                 spec={PATHWAY_SPEC}
                 heading="Lesson anatomy"
