@@ -72,7 +72,10 @@ jobs:
       - name: Next.js application build
         # The Next.js build performs output file tracing, so it is separated
         # from the OpenNext build to give the traced output a correction step.
-        run: pnpm --filter ai-institute run build
+        # The build fetches the Google Fonts CSS at build time, and that
+        # request fails intermittently on the runner. The retry is bounded and
+        # only covers that network failure.
+        run: sh scripts/build-with-retry.sh
 
       - name: Materialise conditional-export targets
         # Next.js output file tracing emits a package main entry but drops the

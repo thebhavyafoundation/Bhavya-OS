@@ -108,7 +108,10 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      # The build fetches the Google Fonts CSS at build time, and that
+      # request fails intermittently on the runner. The retry is bounded and
+      # only covers that network failure; a real compile error still fails.
+      - run: sh scripts/build-with-retry.sh pnpm build
 
   component-fixture:
     name: Component fixture verification
