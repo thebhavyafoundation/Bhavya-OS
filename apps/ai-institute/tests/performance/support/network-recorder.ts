@@ -111,7 +111,12 @@ export function classify(
   ) {
     return "favicon";
   }
-  if (origin && pageOrigin && origin !== pageOrigin) {
+  if (
+    origin &&
+    pageOrigin &&
+    pageOrigin !== "about:blank" &&
+    origin !== pageOrigin
+  ) {
     return "third-party";
   }
   if (resourceType === "script") return "script";

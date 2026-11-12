@@ -331,7 +331,18 @@ export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
           aria-describedby={hasTextAlternative ? descId : undefined}
           style={{
             display: "block",
-            minWidth: Math.min(_width, LEGIBLE_MIN_WIDTH),
+            /*
+             * The diagram keeps a legible minimum width so its labels can be
+             * read, but that minimum is capped at the width of its own
+             * container. Without the cap the minimum width propagates
+             * upwards through the grid item and the page ends up wider than
+             * the viewport: the diagram then has to scroll sideways inside
+             * the page rather than inside its own container.
+             *
+             * `min()` is used so the cap resolves against the container the
+             * browser actually has, whatever it turns out to be.
+             */
+            minWidth: `min(${Math.min(_width, LEGIBLE_MIN_WIDTH)}px, 100%)`,
             maxWidth: "100%",
             height: "auto",
           }}
