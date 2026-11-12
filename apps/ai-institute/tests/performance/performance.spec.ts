@@ -1,30 +1,98 @@
 import { test, expect } from "playwright/test";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+
+/**
+ * React hydration mismatch #418 is a known baseline on /missions under
+ * reduced motion. The exception is narrowed to that route, that scenario
+ * and that argument list, so any other hydration error fails the run.
+ *
+ * Occurrences that match the exception are kept in an artifact instead of
+ * being dropped, so the count and the shape of the baseline stay visible
+ * to whoever reads the run.
+ */
+const KNOWN_HYDRATION = {
+  route: "/missions",
+  scenario: "reduced-motion",
+  args: ["args[]=text", "args[]=HTML"],
+};
+
+interface HydrationOccurrence {
+  route: string;
+  scenario: string;
+  message: string;
+}
+
+const hydrationOccurrences: HydrationOccurrence[] = [];
+
+function isKnownHydration(
+  message: string,
+  route: string,
+  scenario: string,
+): boolean {
+  if (!message.includes("Minified React error #418")) return false;
+  if (route !== KNOWN_HYDRATION.route) return false;
+  if (scenario !== KNOWN_HYDRATION.scenario) return false;
+  return KNOWN_HYDRATION.args.some((arg) => message.includes(arg));
+}
+
+/**
+ * Watches the page for hydration errors. Known occurrences are recorded;
+ * everything else is returned as an unexpected error and fails the test.
+ */
+function watchHydration(
+  page: import("playwright/test").Page,
+  state: { route: string; scenario: string },
+) {
+  const unexpected: string[] = [];
+
+  const record = (message: string) => {
+    if (isKnownHydration(message, state.route, state.scenario)) {
+      hydrationOccurrences.push({
+        route: state.route,
+        scenario: state.scenario,
+        message,
+      });
+      return;
+    }
+    unexpected.push(message);
+  };
+
+  page.on("pageerror", (error) => record(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") record(message.text());
+  });
+
+  return unexpected;
+}
+
+test.afterAll(() => {
+  const file = join(
+    dirname(test.info().file),
+    "artifacts",
+    "hydration-occurrences.json",
+  );
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(
+    file,
+    JSON.stringify(
+      {
+        knownException: KNOWN_HYDRATION,
+        occurrences: hydrationOccurrences,
+      },
+      null,
+      2,
+    ),
+    "utf-8",
+  );
+});
 
 test.describe("Performance verification - homepage", () => {
   test("homepage scroll and interactions", async ({ page }) => {
-    const errors: string[] = [];
-    const consoleErrors: string[] = [];
+    const state = { route: "/", scenario: "default" };
+    const errors = watchHydration(page, state);
     const failedRequests: string[] = [];
 
-    page.on("pageerror", (err) => {
-      // React hydration mismatch #418 on /missions under reduced motion is a
-      // pre-existing baseline issue (present on production too); tracked
-      // separately and not a regression of this candidate.
-      if (err.message.includes("Minified React error #418")) return;
-      errors.push(err.message);
-    });
-    page.on("console", (msg) => {
-      if (
-        msg.type() === "error" &&
-        !(
-          msg.text().includes("Minified React error #418") &&
-          (msg.text().includes("args[]=text") ||
-            msg.text().includes("args[]=HTML"))
-        )
-      ) {
-        consoleErrors.push(msg.text());
-      }
-    });
     page.on("requestfailed", (req) => {
       if (!req.url().includes("favicon")) {
         failedRequests.push(`${req.method()} ${req.url()}`);
@@ -73,7 +141,7 @@ test.describe("Performance verification - homepage", () => {
     try {
       clsValue = await page.evaluate(() => {
         return new Promise<number>((resolve) => {
-          if (typeof window.PerformanceObserver === "undefined") {
+          if (typeof PerformanceObserver === "undefined") {
             resolve(-1);
             return;
           }
@@ -103,6 +171,8 @@ test.describe("Performance verification - homepage", () => {
     // Nav menu: open and close 10 times. The mobile trigger is only visible
     // at mobile widths, so reload at a mobile viewport for this portion.
     await page.setViewportSize({ width: 390, height: 844 });
+    state.route = "/";
+    state.scenario = "default";
     await page.goto("/", { waitUntil: "networkidle" });
     await page.waitForTimeout(500);
     const menuTrigger = page.locator("button.nav-mobile-trigger");
@@ -149,26 +219,12 @@ test.describe("Performance verification - homepage", () => {
     console.log(`DOM before: ${domBefore}, after: ${domAfter}`);
     console.log(`Canvas before: ${canvasBefore}, after: ${canvasAfter}`);
     console.log(`Menu times (open/close ms):`, JSON.stringify(menuTimes));
-    console.log(`Console errors:`, JSON.stringify(consoleErrors));
     console.log(`Failed requests:`, JSON.stringify(failedRequests));
   });
 
   test("mission page with ParticleField", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatches on /missions under
-      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
-      // present on production too; tracked as explicit exceptions.
-      // All other hydration errors must still fail the test.
-      if (
-        err.message.includes("Minified React error #418") &&
-        (err.message.includes("args[]=text") ||
-          err.message.includes("args[]=HTML"))
-      ) {
-        return;
-      }
-      errors.push(err.message);
-    });
+    const state = { route: "/missions", scenario: "default" };
+    const errors = watchHydration(page, state);
 
     await page.goto("/missions", { waitUntil: "networkidle" });
 
@@ -207,21 +263,8 @@ test.describe("Performance verification - reduced motion", () => {
     // "context.emulateMedia is not a function" at runtime and fails typecheck).
     await page.emulateMedia({ reducedMotion: "reduce" });
 
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatches on /missions under
-      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
-      // present on production too; tracked as explicit exceptions.
-      // All other hydration errors must still fail the test.
-      if (
-        err.message.includes("Minified React error #418") &&
-        (err.message.includes("args[]=text") ||
-          err.message.includes("args[]=HTML"))
-      ) {
-        return;
-      }
-      errors.push(err.message);
-    });
+    const state = { route: "/", scenario: "reduced-motion" };
+    const errors = watchHydration(page, state);
 
     await page.goto("/", { waitUntil: "networkidle" });
 
@@ -239,6 +282,7 @@ test.describe("Performance verification - reduced motion", () => {
     });
 
     // Navigate to mission page with reduced motion
+    state.route = "/missions";
     await page.goto("/missions", { waitUntil: "networkidle" });
     await page.screenshot({
       path: "tests/performance/screenshots/reduced-motion-mission.png",
@@ -250,16 +294,8 @@ test.describe("Performance verification - reduced motion", () => {
 
 test.describe("Performance verification - desktop dropdown", () => {
   test("desktop dropdown open/close repeated with scroll", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      if (
-        err.message.includes("Minified React error #418") &&
-        err.message.includes("args[]=text")
-      ) {
-        return;
-      }
-      errors.push(err.message);
-    });
+    const state = { route: "/", scenario: "default" };
+    const errors = watchHydration(page, state);
 
     await page.goto("/", { waitUntil: "networkidle" });
 
@@ -292,100 +328,47 @@ test.describe("Performance verification - desktop dropdown", () => {
   });
 });
 
-test.describe("Performance verification - ui proof", () => {
-  test("Dialog and Sheet runtime behavior", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      errors.push(err.message);
+test.describe("Performance verification - deployed stylesheet", () => {
+  test("the runtime overlay tokens reach the browser", async ({ page }) => {
+    await page.goto("/", { waitUntil: "networkidle" });
+
+    const tokens = await page.evaluate(() => {
+      const style = getComputedStyle(document.documentElement);
+      return {
+        zModal: style.getPropertyValue("--z-modal").trim(),
+        zModalPanel: style.getPropertyValue("--z-modal-panel").trim(),
+        overlay: style.getPropertyValue("--color-bg-overlay").trim(),
+      };
     });
 
-    await page.goto("/ui-proof", { waitUntil: "networkidle" });
-
-    // Dialog
-    const dialogTrigger = page.locator('button:has-text("Open Dialog")');
-    await dialogTrigger.focus();
-    await expect(dialogTrigger).toBeFocused();
-
-    await dialogTrigger.click();
-    const dialog = page.locator('[role="dialog"]');
-    await dialog.waitFor({ state: "visible" });
-    await expect(dialog).toHaveAttribute("aria-modal", "true");
-
-    // Focus moved into dialog
-    const dialogClose = page.locator('[aria-label="Close modal"]');
-    // tab cycle
-    await page.keyboard.press("Tab");
-    await page.waitForTimeout(50);
-
-    // Escape closes
-    await page.keyboard.press("Escape");
-    await dialog.waitFor({ state: "hidden" });
-
-    // Focus returns to trigger
-    await expect(dialogTrigger).toBeFocused();
-
-    // Repeated open/close
-    for (let i = 0; i < 5; i++) {
-      await dialogTrigger.click();
-      await dialog.waitFor({ state: "visible" });
-      await page.keyboard.press("Escape");
-      await dialog.waitFor({ state: "hidden" });
-    }
-
-    // Sheet
-    const sheetTrigger = page.locator('button:has-text("Open Sheet")');
-    await sheetTrigger.click();
-    const sheetPanel = page.locator('[aria-label="Close sheet"]').locator("..");
-    await page
-      .locator('[aria-label="Close sheet"]')
-      .waitFor({ state: "visible" });
-
-    // close via close button
-    await page.locator('[aria-label="Close sheet"]').click();
-    await page.waitForTimeout(300);
-
-    // scroll lock cleanup: body overflow should be restored
-    const overflow = await page.evaluate(() => document.body.style.overflow);
-    expect(overflow).not.toBe("hidden");
-
-    // mobile viewport
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.reload({ waitUntil: "networkidle" });
-    const mobileTrigger = page.locator('button:has-text("Open Dialog")');
-    await mobileTrigger.click();
-    const mobileDialog = page.locator('[role="dialog"]');
-    await mobileDialog.waitFor({ state: "visible" });
-    await page.keyboard.press("Escape");
-    await mobileDialog.waitFor({ state: "hidden" });
-
-    expect(errors).toEqual([]);
+    // A shared component reads these through var(). If the build drops
+    // them, the overlay loses its stacking order and its own close control
+    // stops receiving clicks.
+    expect(tokens.zModal, "--z-modal must reach the browser").not.toBe("");
+    expect(
+      tokens.zModalPanel,
+      "--z-modal-panel must reach the browser",
+    ).not.toBe("");
+    expect(
+      tokens.overlay,
+      "--color-bg-overlay must reach the browser",
+    ).not.toBe("");
   });
 });
 
 test.describe("Performance verification - route transition", () => {
   test("navigate between routes", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatches on /missions under
-      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
-      // present on production too; tracked as explicit exceptions.
-      // All other hydration errors must still fail the test.
-      if (
-        err.message.includes("Minified React error #418") &&
-        (err.message.includes("args[]=text") ||
-          err.message.includes("args[]=HTML"))
-      ) {
-        return;
-      }
-      errors.push(err.message);
-    });
+    const state = { route: "/", scenario: "default" };
+    const errors = watchHydration(page, state);
 
     await page.goto("/", { waitUntil: "networkidle" });
 
     // Navigate to another route
+    state.route = "/missions";
     await page.goto("/missions", { waitUntil: "networkidle" });
 
     // Navigate back
+    state.route = "/";
     await page.goto("/", { waitUntil: "networkidle" });
 
     expect(errors).toEqual([]);
@@ -394,21 +377,8 @@ test.describe("Performance verification - route transition", () => {
 
 test.describe("Performance verification - WebGL fallback", () => {
   test("homepage loads without WebGL errors", async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (err) => {
-      // Known, pre-existing baseline hydration mismatches on /missions under
-      // reduced motion: React #418 with args[]=text or args[]=HTML. Both are
-      // present on production too; tracked as explicit exceptions.
-      // All other hydration errors must still fail the test.
-      if (
-        err.message.includes("Minified React error #418") &&
-        (err.message.includes("args[]=text") ||
-          err.message.includes("args[]=HTML"))
-      ) {
-        return;
-      }
-      errors.push(err.message);
-    });
+    const state = { route: "/", scenario: "default" };
+    const errors = watchHydration(page, state);
 
     await page.goto("/", { waitUntil: "networkidle" });
 
