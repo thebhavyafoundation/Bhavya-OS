@@ -41,7 +41,14 @@ export function CurriculumCard({ module }: CurriculumCardProps) {
 
   return (
     <Link
-      href={`/curriculum/modules/${module.level}/${module.id}`}
+      /*
+        The catalog module lives at /curriculum/levels/<level>/<module>.
+        The card used to build /curriculum/modules/<level>/<module>, which
+        has no route: /curriculum/modules only takes a single segment. Every
+        card therefore pointed at a 404, and the browser's prefetch of those
+        links produced the failed route requests the remote harness recorded.
+      */
+      href={`/curriculum/levels/${module.level}/${module.id}`}
       className="group block text-decoration-none"
       aria-label={`Open ${module.title}`}
     >

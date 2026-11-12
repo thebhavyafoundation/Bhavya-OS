@@ -38,10 +38,10 @@ test.describe("Acceptance - published learning routes", () => {
 
     const map = page.getByRole("region", { name: "Where this module sits" });
     await expect(map).toBeVisible();
-    await expect(map.getByText("Builds on")).toBeVisible();
-    await expect(map.getByText("This module")).toBeVisible();
-    await expect(map.getByText("Lessons")).toBeVisible();
-    await expect(map.getByText("Standards")).toBeVisible();
+    await expect(map.getByText("Builds on", { exact: true })).toBeVisible();
+    await expect(map.getByText("This module", { exact: true })).toBeVisible();
+    await expect(map.getByText("Lessons", { exact: true })).toBeVisible();
+    await expect(map.getByText("Standards", { exact: true })).toBeVisible();
 
     // The publication state is stated, not implied.
     await expect(page.getByText(/lesson(s)? published/).first()).toBeVisible();
@@ -93,13 +93,13 @@ test.describe("Acceptance - published learning routes", () => {
   test("every concept visual on the lesson decodes", async ({ page }) => {
     const recorder = recorderFor(page);
     recorder.step("navigate to the lesson page");
-    await page.goto(LESSON_ROUTE, { waitUntil: "networkidle" });
+    await page.goto(LESSON_ROUTE, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("figure");
 
+    // A concept visual is either an image with a real source or an inline
+    // SVG. Both have to render; only the image has a natural size to check.
     const images = page.locator("figure img");
     const count = await images.count();
-    expect(count, "the lesson must render at least one visual").toBeGreaterThan(
-      0,
-    );
 
     const decoded: Array<{ src: string; width: number; height: number }> = [];
     for (let index = 0; index < count; index += 1) {
@@ -124,6 +124,26 @@ test.describe("Acceptance - published learning routes", () => {
       expect(size.height).toBeGreaterThan(0);
     }
 
+    const inline = page.locator("figure svg");
+    const inlineCount = await inline.count();
+    expect(
+      count + inlineCount,
+      "the lesson must render at least one concept visual",
+    ).toBeGreaterThan(0);
+
+    for (let index = 0; index < inlineCount; index += 1) {
+      const svg = inline.nth(index);
+      const title = await svg.locator("title").first().textContent();
+      expect(title, "an inline visual must carry a title").toBeTruthy();
+      const box = await svg.boundingBox();
+      expect(box, "an inline visual must have a box").not.toBeNull();
+      expect(box!.width).toBeGreaterThan(0);
+      expect(box!.height).toBeGreaterThan(0);
+    }
+
+    console.log(
+      `[acceptance] concept visuals: ${count} image(s), ${inlineCount} inline svg(s)`,
+    );
     console.log(`[acceptance] decoded visuals: ${JSON.stringify(decoded)}`);
     console.log(recorder.report());
   });
@@ -136,7 +156,7 @@ test.describe("Acceptance - published learning routes", () => {
     const link = page.getByRole("link", { name: /Defining AI/ }).first();
     await expect(link).toBeVisible();
     await link.click();
-    await page.waitForLoadState("networkidle");
+    await page.waitForURL("**/lessons/**");
     expect(page.url()).toContain("/lessons/");
 
     console.log(recorder.report());
@@ -193,29 +213,40 @@ test.describe("Acceptance - navigation", () => {
     const links = page.locator('nav[aria-label="Primary navigation"] a');
     const count = await links.count();
     let target: string | null = null;
+    let targetIndex = -1;
     for (let index = 0; index < count; index += 1) {
       const href = await links.nth(index).getAttribute("href");
-      if (href && href.startsWith("/") && !href.startsWith("//")) {
+      // An internal link to a different path, so that going back has
+      // somewhere to go. The link to the homepage itself adds no history
+      // entry, and going back would leave the application entirely.
+      if (
+        href &&
+        href.startsWith("/") &&
+        href !== "/" &&
+        !href.startsWith("//")
+      ) {
         target = href;
+        targetIndex = index;
         break;
       }
     }
     expect(
       target,
-      "the primary navigation must offer an internal link",
+      "the primary navigation must offer an internal link to another route",
     ).not.toBeNull();
-    await links.nth(0).click();
-    await page.waitForLoadState("networkidle");
+    await links.nth(targetIndex).click();
+    await page.waitForURL(`**${target}`);
+    expect(page.url()).toContain(target as string);
 
     recorder.step("go back");
     await page.goBack();
-    await page.waitForLoadState("networkidle");
+    await page.waitForURL("**/");
     expect(new URL(page.url()).pathname).toBe("/");
 
     recorder.step("go forward");
     await page.goForward();
-    await page.waitForLoadState("networkidle");
-    expect(page.url()).not.toBe("");
+    await page.waitForURL(`**${target}`);
+    expect(page.url()).toContain(target as string);
 
     console.log(recorder.report());
   });
@@ -259,7 +290,18 @@ test.describe("Acceptance - layout and resilience", () => {
       });
       for (const route of ["/", CURRICULUM_ROUTE, MODULE_ROUTE, LESSON_ROUTE]) {
         recorder.step(`${viewport.name}: open ${route}`);
-        await page.goto(route, { waitUntil: "networkidle" });
+        /*
+          "networkidle" is not a usable readiness signal here. The
+          curriculum index renders a large grid of links and the browser
+          prefetches each of them, so the page keeps the network busy long
+          after it is usable and the wait times out. The page is ready when
+          its own content is on screen.
+        */
+        await page.goto(route, {
+          waitUntil: "domcontentloaded",
+          timeout: 60_000,
+        });
+        await page.waitForSelector("h1", { timeout: 30_000 });
         const overflow = await page.evaluate(() => ({
           scrollWidth: document.documentElement.scrollWidth,
           clientWidth: document.documentElement.clientWidth,
