@@ -2471,7 +2471,10 @@ body {
 .ai-page {
   max-width: 880px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6) var(--space-12);
+  /* The navigation is fixed and --header-h tall, so the page has to clear
+     it. Without this the breadcrumb of every interior page starts under the
+     navigation bar. */
+  padding: calc(var(--header-h) + var(--space-6)) var(--space-6) var(--space-12);
 }
 
 .ai-breadcrumb {
