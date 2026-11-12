@@ -148,8 +148,8 @@ export function ModuleConceptMap({
             </ol>
           ) : (
             <p style={{ margin: 0, fontSize: "var(--text-sm)" }}>
-              Not yet written. The module's outcomes and prerequisites are on
-              record; its lessons are still being authored.
+              Not yet written. The module&apos;s outcomes and prerequisites are
+              on record; its lessons are still being authored.
             </p>
           )}
         </li>
