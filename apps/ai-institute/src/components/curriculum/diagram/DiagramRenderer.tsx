@@ -315,6 +315,11 @@ export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
         style={{
           overflowX: "auto",
           maxWidth: "100%",
+          // The scroll container has to be able to be narrower than its
+          // content, otherwise its content's minimum width is contributed to
+          // the parent and the page overflows sideways.
+          minWidth: 0,
+          width: "100%",
           WebkitOverflowScrolling: "touch",
         }}
       >
