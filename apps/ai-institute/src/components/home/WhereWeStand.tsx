@@ -53,15 +53,40 @@ export function WhereWeStand() {
     <section
       id="where-we-stand"
       className="scene"
+      // The navigation is fixed, so an in-page anchor has to leave room for
+      // it or the heading lands underneath the bar.
+      style={{ scrollMarginTop: "var(--header-h)" }}
       aria-labelledby="where-we-stand-heading"
     >
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: "var(--space-12)" }}>
-          <span className="dark-label">Where Bhavya stands today</span>
-          <h2 id="where-we-stand-heading" className="dark-heading">
+          {/*
+            The colour is set explicitly rather than left to a shared
+            heading class. This section sits on the light surface, and the
+            dark-surface heading classes render near-white text on it, which
+            left the heading unreadable.
+          */}
+          <span
+            className="dark-label"
+            style={{ color: "var(--color-text-secondary)" }}
+          >
+            Where Bhavya stands today
+          </span>
+          <h2
+            id="where-we-stand-heading"
+            className="dark-heading"
+            style={{
+              color: "var(--color-text-primary)",
+              fontFamily: "var(--font-display)",
+              fontWeight: 400,
+            }}
+          >
             What is built, and what is still being written
           </h2>
-          <p className="dark-desc">
+          <p
+            className="dark-desc"
+            style={{ color: "var(--color-text-secondary)" }}
+          >
             The curriculum is catalogued module by module. Lessons are written
             and published one set at a time. These numbers are read from the
             live registry on every page load, so they cannot drift from the
