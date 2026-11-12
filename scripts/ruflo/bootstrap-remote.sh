@@ -8,7 +8,8 @@
 #
 # This script is idempotent and safe to re-run. It installs Ruflo, installs the
 # free local model used for the LLM execution path, starts the MCP server over
-# HTTP with bearer authentication, and prints the RPC endpoint.
+# HTTP with bearer authentication, and holds the sandbox session open for as
+# long as the server is meant to serve.
 #
 # IMPORTANT: this must run in the approved remote environment (Vercel Sandbox),
 # never on the control-centre laptop. See the machine resource contract.
@@ -18,6 +19,9 @@ RUFLO_VERSION=3.76.0
 MODEL=qwen2.5:0.5b-instruct
 WORKDIR=${WORKDIR:-/vercel/sandbox/ruflo}
 PORT=${PORT:-3000}
+# How long the sandbox session is held open. The published URL only answers
+# while a session is alive, so the session is the lifetime of the endpoint.
+HOLD_SECONDS=${HOLD_SECONDS:-3600}
 
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
@@ -43,20 +47,42 @@ if ! command -v ollama > /dev/null 2>&1; then
   curl -fsSL https://ollama.com/install.sh -o /tmp/ollama.sh
   sh /tmp/ollama.sh
 fi
-if ! pgrep -f "ollama serve" > /dev/null 2>&1; then
+if ! pgrep -f "[o]llama serve" > /dev/null 2>&1; then
   nohup env OLLAMA_HOST=127.0.0.1:11434 ollama serve > "$WORKDIR/ollama.log" 2>&1 &
   sleep 10
 fi
 ollama list 2>/dev/null | grep -q "$MODEL" || ollama pull "$MODEL"
 
+# The model has to be present and named. The execution path refuses to run
+# without it, and it refuses to fall back to a cloud-hosted default.
+if ! ollama list 2>/dev/null | grep -q "$MODEL"; then
+  echo "ERROR: $MODEL is not installed; the model-backed execution path would refuse to run" >&2
+  exit 1
+fi
+echo "     model present: $MODEL"
+
 echo "[4/5] starting the Ruflo MCP server over HTTP with bearer auth"
-pkill -f 'claude-flow-mcp' 2>/dev/null || true
-sleep 2
+
+# The kill pattern uses a character class. A plain `pkill -f 'ruflo mcp start'`
+# also matches the shell that is running this script, so it kills the script
+# instead of the server and the endpoint never comes back.
+pkill -f '[r]uflo mcp start' 2>/dev/null || true
+pkill -f '[c]laude-flow-mcp' 2>/dev/null || true
+sleep 3
+
+# A stale single-instance lock from a previous session stops the new server
+# from binding ("MCP Server already running").
+rm -f /vercel/.claude-flow/*.pid "$WORKDIR"/*.pid 2>/dev/null || true
+
+# OLLAMA_DEFAULT_MODEL is required. Without it the execution path reports
+# "No Ollama model configured for this self-hosted/local endpoint" and
+# refuses to guess a model.
 nohup env OLLAMA_API_KEY=ollama \
   RUFLO_PROVIDER=ollama \
   OLLAMA_BASE_URL=http://127.0.0.1:11434 \
-  npx ruflo mcp start -t http -p "$PORT" --host 0.0.0.0 \
-  > "$WORKDIR/mcp.log" 2>&1 &
+  OLLAMA_DEFAULT_MODEL="$MODEL" \
+  ./node_modules/.bin/ruflo mcp start -t http -p "$PORT" --host 0.0.0.0 \
+  > "$WORKDIR/mcp.log" 2>&1 < /dev/null &
 sleep 20
 grep -E 'Tools|Status|Transport' "$WORKDIR/mcp.log" | head -3
 
@@ -70,5 +96,12 @@ else
   echo "     WARNING: no MCP token found"
 fi
 
+# The sandbox tears down the session's processes when the command that
+# started them returns, so the endpoint stops answering. The session is
+# therefore held open for the lifetime the endpoint is meant to serve.
 echo
-echo "Ruflo MCP listening on 0.0.0.0:$PORT — publish this port to reach it from the agent."
+echo "Ruflo MCP is listening on 0.0.0.0:$PORT."
+echo "Holding the sandbox session open for ${HOLD_SECONDS}s; the published URL answers only while this session is alive."
+echo "Publish the port from the operator machine with:"
+echo "  vercel sandbox config ports bhavya-ruflo --publish-port $PORT --scope bhavya-foundation --project bhavya-os"
+sleep "$HOLD_SECONDS"
