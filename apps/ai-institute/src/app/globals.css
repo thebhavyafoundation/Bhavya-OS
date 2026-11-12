@@ -1618,6 +1618,14 @@ body {
   align-items: center;
 }
 
+/* The items need the same allowance. A grid item's automatic minimum is
+   also its content's minimum, so an item holding a diagram with a legible
+   minimum width would stay 760 pixels wide inside a 390 pixel track and be
+   centred across it, overflowing both sides. */
+.home-grid-2 > * {
+  min-width: 0;
+}
+
 .home-grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3559,6 +3567,10 @@ body {
   .home-grid-2 {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-10);
+  }
+
+  .home-grid-2 > * {
+    min-width: 0;
   }
   .home-grid-4 {
     grid-template-columns: repeat(2, 1fr);
