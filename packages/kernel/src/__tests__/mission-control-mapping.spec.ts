@@ -4,26 +4,19 @@ import {
   JOB_STATUS_FOR_RESULT_CODE,
   jobStatusForResultCode,
   planJobStatusUpdate,
-  type MissionControlTransitionTable,
 } from "../execution/mission-control-mapping.js";
 import { createExecutionResult, type ExecutionResultCode } from "../execution/result.js";
+
+import { MISSION_CONTROL_TRANSITIONS } from "./helpers/mission-control-fixture.js";
 
 /**
  * The transition table exactly as Mission Control declares it
  * (apps/ai-institute/src/lib/repositories/sqlite-mission-control-repository.ts).
- * It is copied here as *test input*, not as a second source of truth: the
- * production code receives the table from its caller.
+ * It is test input, not a second source of truth: the production code
+ * receives the table from its caller. The copy lives in one place and
+ * `mission-control-drift.spec.ts` compares it with the application's source,
+ * so the two cannot drift apart unnoticed.
  */
-const MISSION_CONTROL_TRANSITIONS: MissionControlTransitionTable = {
-  queued: ["running", "cancelled"],
-  running: ["awaiting_approval", "stopped", "failed", "cancelled"],
-  awaiting_approval: ["revising", "completed", "stopped"],
-  revising: ["awaiting_approval", "stopped"],
-  completed: [],
-  stopped: [],
-  failed: [],
-  cancelled: [],
-};
 
 const result = (code: ExecutionResultCode) =>
   createExecutionResult({ code, summary: `outcome: ${code}`, correlationId: "corr-1" });
