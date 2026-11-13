@@ -120,7 +120,7 @@ describe("checkpoint envelope", () => {
     const result = verifyCheckpoint(serializeCheckpoint(envelope));
 
     expect(result.valid).toBe(false);
-    expect(result.errors.join(" ")).toMatch(/external state is unknown/i);
+    expect(result.errors.join(" ")).toMatch(/external state is not 'not-applied'/i);
     expect(isResumable(envelope)).toBe(false);
   });
 
@@ -138,5 +138,53 @@ describe("checkpoint envelope", () => {
     const result = verifyCheckpoint("not json at all");
     expect(result.valid).toBe(false);
     expect(result.errors.join(" ")).toMatch(/not valid JSON/i);
+  });
+
+  it("rejects an unrecognised external state spelling", () => {
+    for (const spelling of ["Unknown", "UNKNOWN", "banana", "", null]) {
+      const envelope = createCheckpoint(baseInput());
+      (envelope.recovery as { externalState: unknown }).externalState = spelling;
+      const result = verifyCheckpoint(serializeCheckpoint(envelope));
+      expect(result.valid).toBe(false);
+      expect(result.errors.join(" ")).toMatch(/externalState/);
+    }
+  });
+
+  it("refuses a do-not-replay list that names an idempotent action", () => {
+    const input = baseInput();
+    input.recovery.doNotReplay = ["read"];
+    const result = verifyCheckpoint(serializeCheckpoint(createCheckpoint(input)));
+    expect(result.valid).toBe(false);
+    expect(result.errors.join(" ")).toMatch(/idempotent/i);
+  });
+
+  it("refuses an inspect-before-replay list that names an unsafe action", () => {
+    const input = baseInput();
+    input.recovery.inspectBeforeReplay = ["deploy"];
+    const result = verifyCheckpoint(serializeCheckpoint(createCheckpoint(input)));
+    expect(result.valid).toBe(false);
+    expect(result.errors.join(" ")).toMatch(/doNotReplay/);
+  });
+
+  it("rejects a malformed artefact hash and wrong-typed collections", () => {
+    const envelope = createCheckpoint(baseInput());
+    envelope.artifacts = [{ artifactId: "a", version: 1, path: "p", hash: "short" }];
+    (envelope as { completedSteps: unknown }).completedSteps = "plan";
+    const result = verifyCheckpoint(serializeCheckpoint(envelope));
+    expect(result.valid).toBe(false);
+    expect(result.errors.join(" ")).toMatch(/hash|completedSteps/);
+  });
+
+  it("answers false rather than throwing for a malformed recovery block", () => {
+    const envelope = createCheckpoint(baseInput());
+    (envelope as { recovery: unknown }).recovery = { resumeAt: "x" };
+    expect(isResumable(envelope)).toBe(false);
+  });
+
+  it("refuses to canonicalise undefined or non-finite numbers", () => {
+    expect(() => canonicalize(undefined)).toThrow();
+    expect(() => canonicalize(Number.NaN)).toThrow();
+    expect(() => canonicalize([undefined])).toThrow();
+    expect(canonicalize([null])).not.toBe(canonicalize([1]));
   });
 });

@@ -43,6 +43,13 @@ describe("replay safety classification", () => {
     expect(classification.safety).toBe("unsafe");
     expect(classification.reason).toMatch(/fail closed/i);
   });
+
+  it("fails closed for a non-string action instead of throwing a TypeError", () => {
+    for (const value of [null, undefined, 42, {}, []]) {
+      expect(classifyAction(value).safety).toBe("unsafe");
+      expect(isReplaySafe(value)).toBe(false);
+    }
+  });
 });
 
 describe("replay guard", () => {

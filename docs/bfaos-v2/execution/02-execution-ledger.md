@@ -63,6 +63,37 @@
 
 ---
 
+## T-103 — Independent review cycle (two reviewers, both FAIL, all blockers resolved)
+
+Two independent reviewers examined the change and returned **FAIL**. Findings and resolutions:
+
+| # | Finding (reviewer) | Severity | Resolution |
+|---|---|---|---|
+| F1 | `vitest` was not a declared dependency of the kernel, so a fresh CI install would not resolve it — the `test` job would break | **BLOCKER** | `vitest@^3.2.1` added to `packages/kernel` devDependencies; lockfile regenerated with `pnpm install --lockfile-only` → **3-line diff** (the kernel importer only; vitest@3.2.7 was already resolved, nothing downloaded) |
+| F2 | `pnpm antislop` failed on "wall-of-comments" in the new files → the `lint-and-typecheck` CI job would break | **BLOCKER** | Headers restructured with real blank-line separators; `pnpm antislop` now **PASS** |
+| F3 | The checkpoint module failed **open** on any `externalState` spelling other than exactly `"unknown"` | HIGH | The external state is now validated against an enum and the resume test is inverted (anything other than `"not-applied"` blocks resumption) |
+| F4 | TTL expiry is broken across a store reload (number compared with an ISO string) and the test mis-described it | HIGH | The actual reload behaviour is now **pinned** by a test with a comment marking the defect; the code fix is a separate task (it would change shared kernel semantics) |
+| F5 | `verifyCheckpoint` accepted wrong-typed fields and `isResumable` threw | MEDIUM | Array/type/hash checks added; `isResumable` answers `false` instead of throwing |
+| F6 | Two idempotency specifications were tautological | MEDIUM | Replaced with behavioural pins: the one-hour default TTL read from the persisted record, no attempt cap across repeated failures, and the documented on-disk layout and key set |
+| F7 | The checkpoint payload diverged from the T-203 specification (camelCase vs snake_case, `producer` dropped, invented `externalState`) | MEDIUM | The module header now states the exact hashed byte sequence; `producer` restored; the field-name divergence is recorded here rather than by amending the Phase 1 document, to avoid conflicting with PR #67 |
+| F8 | The two modules disagreed on the action vocabulary; `doNotReplay`/`inspectBeforeReplay` were unvalidated free text | MEDIUM | `http_get` and `static_check` added to the idempotent vocabulary; checkpoint lists are now cross-validated (an idempotent action may not sit on a do-not-replay list, an unsafe action may not sit on an inspect-before-replay list) |
+| F9 | The commit mixed two tasks | MEDIUM | Recorded here; the branch is a draft pull request under review, and the contract work had its own independent review |
+| F10/F11 | `sha256` duplicated from `@bhavya/security`; `canonicalize` was not injective | LOW | Injection fixed (undefined/NaN rejected); the shared-helper consolidation is logged as a follow-up |
+| F12 | The specifications were excluded from `tsc`, so "typecheck clean" did not cover them | LOW | Logged as a follow-up (`tsconfig.spec.json`) |
+| F13 | `--passWithNoTests` plus a narrow include could stay green with zero tests | LOW | Flag removed; `exclude: ["src/**/*.test.ts"]` added so the legacy harness files stay excluded even if the include is widened |
+| F14 | The hazard test pinned only one of the engine's three hazards | LOW | Additional assertions added for the forced `running` state and swallowed handler failures |
+| F15 | `classifyAction(null)` threw a raw `TypeError` | LOW | Non-string actions are now classified `unsafe` |
+| F16 | The guard has no production caller | LOW | Disclosed honestly in the gap analysis and executive status |
+| C-F1 | The runtime validator **rejected three of the four schema-accepted Phase 1 fixtures** because the replay action classifier was used as a tool oracle (`bash`, `edit` were swept in as unsafe) | **HIGH** | A separate contract-tool classification was introduced (safe / unsafe / unclassified); the Phase 1 fixtures are now **golden acceptance tests** in the kernel suite and all agree with the schema |
+| C-F2 | The credential scan covered only `metadata` and had lost pattern coverage | HIGH | Every free-text area is now scanned, the Phase 1 pattern set is restored, and a non-object `metadata` is refused |
+| C-F3–C-F12 | Type-confusion fail-open, inverted derived signals, unvalidated `retryable_actions`, overstated field labels, duplicate tool handling, loose assertions, uncovered branches | MEDIUM–LOW | All addressed: guards inverted, `unsafeToolsGranted`/`unsafeToolsWithoutApproval` separated, retryable actions validated, field labels corrected to `advisory-only`/`not-implemented`, duplicate tools resolved deny-wins with a warning, and the uncovered branches added as tests |
+
+**Post-review verification:** 68/68 kernel specifications pass across four files · typecheck clean · lint 0 errors / 29 warnings (the pre-existing baseline; no warning from a new file) · `pnpm antislop` PASS · `pnpm wrapper:check` PASS · `pnpm platform:check` PASS (4/4) · `git diff --check` clean · credential scan 0 hits.
+
+**Still founder-gated (unchanged):** the decision writer (D-08), checkpoint/contract storage (D-09), production Mission Control read (T-102) and headless OpenCode in CI (T-301).
+
+---
+
 ## Task queue status
 
 | Task | Status |

@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { join, resolve } from "node:path";
 
 import {
   classifyContractFields,
@@ -114,7 +116,7 @@ describe("task contract validation", () => {
       ...base(),
       allowed_tools: [{ tool: "deploy", mode: "allow" as const }],
     };
-    expect(validateTaskContract(unsafe).errors.join(" ")).toMatch(/unsafe tool/);
+    expect(validateTaskContract(unsafe).errors.join(" ")).toMatch(/without founder approval/);
 
     const approved = {
       ...base(),
@@ -166,4 +168,86 @@ describe("task contract validation", () => {
     expect(validateTaskContract("nope").valid).toBe(false);
     expect(validateTaskContract(null).errors.join(" ")).toMatch(/object/);
   });
+
+  it("refuses a non-object scope, budget or retry policy", () => {
+    expect(
+      validateTaskContract({ ...base(), scope: "everything" }).errors.join(" "),
+    ).toMatch(/scope must be an object/);
+    expect(
+      validateTaskContract({ ...base(), budget: [] }).errors.join(" "),
+    ).toMatch(/budget must be an object/);
+    expect(
+      validateTaskContract({ ...base(), retry_policy: "none" }).errors.join(" "),
+    ).toMatch(/retry_policy must be an object/);
+  });
+
+  it("refuses a budget without a usd value and an out-of-range time limit", () => {
+    expect(
+      validateTaskContract({ ...base(), budget: { wall_clock_minutes: 10 } }).errors.join(" "),
+    ).toMatch(/usd/);
+    expect(
+      validateTaskContract({ ...base(), time_limit: { max_duration_minutes: 99999 } }).errors
+        .join(" "),
+    ).toMatch(/max_duration_minutes/);
+  });
+
+  it("refuses a tool entry with no name and an invalid tool mode", () => {
+    expect(
+      validateTaskContract({ ...base(), allowed_tools: [{ mode: "allow" }] }).errors.join(" "),
+    ).toMatch(/tool name/);
+    expect(
+      validateTaskContract({
+        ...base(),
+        allowed_tools: [{ tool: "read", mode: "maybe" }],
+      }).errors.join(" "),
+    ).toMatch(/mode/);
+  });
+
+  it("refuses a retry policy that nominates a side-effecting action", () => {
+    const contract = {
+      ...base(),
+      retry_policy: { max_attempts: 2, retryable_actions: ["deploy"] },
+    };
+    expect(validateTaskContract(contract).errors.join(" ")).toMatch(/idempotent/);
+  });
+
+  it("refuses a checkpoint store other than the Mission Control one", () => {
+    const contract = {
+      ...base(),
+      checkpoint_policy: { every_n_steps: 5, store: "external" },
+    };
+    expect(validateTaskContract(contract).errors.join(" ")).toMatch(/mc_artifact_version/);
+  });
+});
+
+/**
+ * Fixture agreement: the runtime policy layer and the Phase 1 JSON Schema must
+ * accept and reject the same contracts. The fixtures live with the Phase 1
+ * specification; if that directory is reorganised the test is skipped rather
+ * than failing.
+ */
+describe("task contract fixture agreement", () => {
+  const fixtureDir = resolve(
+    import.meta.dirname,
+    "../../../../docs/bfaos-v2/phase-1/fixtures",
+  );
+  const available = existsSync(fixtureDir);
+
+  const expectations: Array<[string, boolean]> = [
+    ["valid-L0-readonly.json", true],
+    ["valid-L2-shared-change.json", true],
+    ["valid-L3-production.json", true],
+    ["boundary-limits.json", true],
+    ["invalid-missing-required.json", false],
+    ["invalid-enum-and-version.json", false],
+  ];
+
+  for (const [file, shouldPass] of expectations) {
+    it(`${file} is ${shouldPass ? "accepted" : "rejected"} by the runtime policy layer`, () => {
+      if (!available) return;
+      const contract = JSON.parse(readFileSync(join(fixtureDir, file), "utf8"));
+      const result = validateTaskContract(contract, { schemaValidated: true });
+      expect(result.valid).toBe(shouldPass);
+    });
+  }
 });

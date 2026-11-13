@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -137,5 +137,53 @@ describe("kernel Idempotency", () => {
     } finally {
       rmSync(otherRoot, { recursive: true, force: true });
     }
+  });
+
+  it("uses a one-hour default TTL (asserted from the persisted record)", async () => {
+    await idempotency.register("job-ttl-default", "exec-1");
+    const stored = storedKey("job-ttl-default");
+    const created = new Date(stored.createdAt as string).getTime();
+    const expires = new Date(stored.expiresAt as string).getTime();
+    expect(expires - created).toBe(3600000);
+  });
+
+  it("does not cap retries: every failure leaves the key retryable", async () => {
+    await idempotency.register("job-1", "exec-1");
+    for (let attempt = 0; attempt < 6; attempt += 1) {
+      await idempotency.fail("job-1", `failure-${attempt}`);
+      const decision = await idempotency.shouldExecute("job-1");
+      expect(decision.proceed).toBe(true);
+      expect(decision.reason).toBe("retry_after_failure");
+    }
+  });
+
+  it("persists the documented on-disk layout and key fields", async () => {
+    await idempotency.register("job-1", "exec-1");
+    const store = join(root, ".kernel", "idempotency");
+    expect(existsSync(join(store, "keys.json"))).toBe(true);
+    expect(existsSync(join(store, "records.json"))).toBe(true);
+    expect(Object.keys(storedKey("job-1")).sort()).toEqual(
+      ["createdAt", "executionId", "expiresAt", "key", "status"].sort(),
+    );
+  });
+
+  it("does not expire a reloaded key (documented defect in the reload path)", async () => {
+    const shortLived = new Idempotency({ root, ttlMs: 1 });
+    await shortLived.initialize();
+    await shortLived.register("job-reload", "exec-1");
+    await new Promise((resolve) => setTimeout(resolve, 15));
+
+    // In the writing process the key is deleted as expired...
+    const inProcess = await shortLived.shouldExecute("job-reload");
+    expect(inProcess.reason).toBe("key_not_found");
+
+    // ...but after a reload the persisted expiresAt is a string and the
+    // implementation compares it numerically, so the key never expires.
+    // Pinned here so the defect is visible; the fix is a separate task.
+    const reloaded = new Idempotency({ root, ttlMs: 1 });
+    await reloaded.initialize();
+    const afterReload = await reloaded.shouldExecute("job-reload");
+    expect(afterReload.proceed).toBe(false);
+    expect(afterReload.reason).toBe("already_in_progress");
   });
 });
