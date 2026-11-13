@@ -42,11 +42,15 @@ export type MissionControlTransitionTable = Record<string, string[]>;
  * kernel's state is finer-grained than Mission Control's: a retryable failure
  * means the job is still running while another attempt is made, and a success
  * that needs no transition needs none.
+ *
+ * "interrupted" maps onto "stopped", which is terminal in Mission Control
+ * even though the kernel records the execution as resumable. That gap has no
+ * counterpart in the job statuses and is reported by the interface map rather
+ * than hidden here.
  */
-export const JOB_STATUS_FOR_RESULT_CODE: Record<
-  ExecutionResultCode,
-  MissionControlJobStatus
-> = {
+export const JOB_STATUS_FOR_RESULT_CODE: Readonly<
+  Record<ExecutionResultCode, MissionControlJobStatus>
+> = Object.freeze({
   success: "completed",
   retryable_failure: "running",
   permanent_failure: "failed",
@@ -54,10 +58,10 @@ export const JOB_STATUS_FOR_RESULT_CODE: Record<
   approval_required: "awaiting_approval",
   quota_paused: "stopped",
   cancelled: "cancelled",
-  timeout: "failed",
+  timeout: "running",
   interrupted: "stopped",
   unknown_failure: "failed",
-};
+});
 
 export interface JobStatusPlan {
   /** The status the job should hold after this result. */

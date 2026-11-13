@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   EXECUTION_RESULT_POLICY,
   EXECUTION_RESULT_VERSION,
+  EXECUTION_STATE_FOR_CODE,
   SUPPORTED_EXECUTION_RESULT_VERSIONS,
   classifyExecutionOutcome,
   createExecutionResult,
@@ -33,6 +34,45 @@ describe("execution result policy", () => {
     );
     for (const code of ALL_CODES) {
       expect(EXECUTION_RESULT_POLICY[code]).toBeTruthy();
+    }
+  });
+
+  it("cannot be edited by a consumer", () => {
+    // The table is exported, so an editable table would let any consumer
+    // change the contract. The constructor and the validator both read it,
+    // so a changed table would make them agree about a policy that no longer
+    // exists.
+    expect(Object.isFrozen(EXECUTION_RESULT_POLICY)).toBe(true);
+    expect(Object.isFrozen(EXECUTION_RESULT_POLICY.permanent_failure)).toBe(
+      true,
+    );
+    expect(Object.isFrozen(EXECUTION_STATE_FOR_CODE)).toBe(true);
+
+    try {
+      (
+        EXECUTION_RESULT_POLICY as unknown as Record<string, unknown>
+      ).permanent_failure = {
+        retryable: true,
+        requiresHuman: false,
+        resumable: true,
+        terminal: false,
+      };
+    } catch {
+      // A frozen object throws in strict mode, which is the expected result.
+    }
+
+    expect(EXECUTION_RESULT_POLICY.permanent_failure.retryable).toBe(false);
+    expect(EXECUTION_RESULT_POLICY.permanent_failure.requiresHuman).toBe(true);
+    expect(EXECUTION_RESULT_POLICY.permanent_failure.terminal).toBe(true);
+  });
+
+  it("keeps a retryable outcome out of a terminal execution state", () => {
+    // A consumer that reads only the execution state must still be able to
+    // tell a retryable outcome from a finished one.
+    const terminalStates = ["completed", "failed", "cancelled"];
+    for (const code of ALL_CODES) {
+      if (!EXECUTION_RESULT_POLICY[code].retryable) continue;
+      expect(terminalStates).not.toContain(executionStateForCode(code));
     }
   });
 
