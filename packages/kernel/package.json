@@ -6,14 +6,16 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "echo \"Kernel tests are custom harnesses — no vitest test blocks\"",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.spec.json",
+    "typecheck:spec": "tsc --noEmit -p tsconfig.spec.json",
+    "test": "vitest run",
     "lint": "eslint src --ext .ts"
   },
   "dependencies": {
     "@bhavya/shared": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^3.2.1"
   }
 }
