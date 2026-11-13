@@ -75,20 +75,27 @@ const DEFAULT_ITEMS: NavItem[] = [
 ];
 
 // ───────────────────────────────────────────────────────────────────
-// BRAND TOKENS
+// BRAND TOKENS — resolve to canonical tokens.css (never inline literals)
+// NOTE: Constitution 01 §2 lists Forest #1a3a2a / Gold #c9a227 / Sage #4a7c59
+// while tokens.css defines --color-brand-forest #0e382e / --color-brand-gold
+// #d4af37 / --color-brand-sage #8a9a8b. This drift is reported in the design
+// integration record; here we consume tokens.css (implementation SoT) and do
+// not silently override it.
 // ───────────────────────────────────────────────────────────────────
 
 const BRAND = {
-  forest: "#1a3a2a",
-  gold: "#c9a227",
-  earth: "#8a7359",
-  cream: "#f5f1e6",
-  darkBg: "#0a0f0d",
-  darkSurface: "#111916",
-  darkBorder: "rgba(245,241,230,0.08)",
-  textPrimary: "#f5f1e6",
-  textSecondary: "#b8b0a0",
-  textMuted: "#7a7268",
+  forest: "var(--color-brand-forest)",
+  forestHover: "var(--color-forest-800)",
+  gold: "var(--color-brand-gold)",
+  goldHover: "var(--color-gold-500)",
+  earth: "var(--color-brand-earth)",
+  cream: "var(--color-brand-ivory)",
+  darkBg: "var(--color-bg-primary)",
+  darkSurface: "var(--color-surface)",
+  darkBorder: "var(--color-border-primary)",
+  textPrimary: "var(--color-text-primary)",
+  textSecondary: "var(--color-text-secondary)",
+  textMuted: "var(--color-text-muted)",
 };
 
 // ───────────────────────────────────────────────────────────────────
@@ -258,7 +265,7 @@ export function BhavyaNav({
                   fontSize: "14px",
                   fontWeight: isActive ? 500 : 400,
                   color: isActive ? BRAND.gold : BRAND.textSecondary,
-                  background: isActive ? `${BRAND.gold}12` : "transparent",
+                  background: isActive ? "var(--color-gold-50)" : "transparent",
                   textDecoration: "none",
                   transition: "all 0.15s ease",
                   display: "flex",
@@ -268,7 +275,7 @@ export function BhavyaNav({
                 onMouseEnter={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.color = BRAND.textPrimary;
-                    e.currentTarget.style.background = `${BRAND.cream}08`;
+                    e.currentTarget.style.background = "var(--color-surface-2)";
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -319,7 +326,7 @@ export function BhavyaNav({
                 padding: "6px 12px",
                 borderRadius: "8px",
                 border: `1px solid ${BRAND.darkBorder}`,
-                background: `${BRAND.cream}06`,
+                background: "var(--color-bg-elevated)",
                 transition: "border-color 0.15s ease",
               }}
               className="bhavya-nav-search"
@@ -354,7 +361,7 @@ export function BhavyaNav({
                   fontSize: "11px",
                   padding: "2px 6px",
                   borderRadius: "4px",
-                  background: `${BRAND.cream}10`,
+                  background: "var(--color-surface-2)",
                   color: BRAND.textMuted,
                   border: `1px solid ${BRAND.darkBorder}`,
                 }}
@@ -523,7 +530,9 @@ export function BhavyaNav({
                     fontSize: "16px",
                     fontWeight: isActive ? 500 : 400,
                     color: isActive ? BRAND.gold : BRAND.textSecondary,
-                    background: isActive ? `${BRAND.gold}12` : "transparent",
+                    background: isActive
+                      ? "var(--color-gold-50)"
+                      : "transparent",
                     textDecoration: "none",
                   }}
                 >

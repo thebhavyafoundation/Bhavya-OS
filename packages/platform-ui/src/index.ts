@@ -45,6 +45,19 @@ export { Button } from "./components/Button";
 export { Card } from "./components/Card";
 export { Card as CardContent } from "./components/Card";
 
+export { Dialog } from "./components/Dialog";
+export type { DialogProps } from "./components/Dialog";
+export { DialogTrigger } from "./components/Dialog";
+export { DialogContent } from "./components/Dialog";
+
+export { Sheet } from "./components/Sheet";
+export type { SheetProps } from "./components/Sheet";
+export { SheetTrigger } from "./components/Sheet";
+export { SheetContent } from "./components/Sheet";
+
+export { Input } from "./components/Input";
+export type { InputProps } from "./components/Input";
+
 export { Badge } from "./components/Badge";
 
 export { Avatar } from "./components/Avatar";

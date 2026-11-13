@@ -108,4 +108,47 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      # The build fetches the Google Fonts CSS at build time, and that
+      # request fails intermittently on the runner. The retry is bounded and
+      # only covers that network failure; a real compile error still fails.
+      - run: sh scripts/build-with-retry.sh pnpm build
+
+  component-fixture:
+    name: Component fixture verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda  # v4.1.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # The fixture lives outside the application source tree, so it is
+      # never part of a deployed build. It is built and served here, on the
+      # runner, and only on the runner.
+      - name: Build the component proof fixture
+        run: node apps/ai-institute/tests/fixtures/ui-proof/build.mjs
+
+      - name: Install Playwright browser
+        working-directory: apps/ai-institute
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the component proof harness
+        working-directory: apps/ai-institute
+        run: npx playwright test --config=tests/fixtures/ui-proof/playwright.config.ts --workers=1
+
+      - name: Upload fixture verification artifacts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4
+        with:
+          name: component-fixture-verification
+          path: |
+            apps/ai-institute/tests/fixtures/ui-proof/fixture-report
+            apps/ai-institute/fixture-report
+            apps/ai-institute/tests/fixtures/ui-proof/test-results
+            apps/ai-institute/tests/fixtures/ui-proof/build-error.txt
+          retention-days: 7
+          if-no-files-found: ignore

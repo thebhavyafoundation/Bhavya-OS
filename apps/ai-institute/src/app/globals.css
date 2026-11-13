@@ -728,6 +728,33 @@ body {
 }
 
 /* ============================================
+   HERO ACCENT — single gold glow pulse
+   Uses canonical tokens.css motion (shadow-glow-gold + sun-pulse), both
+   gated by prefers-reduced-motion. No Magic UI imported.
+   ============================================ */
+
+.home-hero-accent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  margin-top: -120px;
+  margin-left: -120px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--color-accent-gold) 18%, transparent) 0%,
+    transparent 65%
+  );
+  z-index: 0;
+  pointer-events: none;
+  /* Compositor-only glow (box-shadow) instead of filter:blur, which triggers
+     expensive paint work on weak devices and can lag the hero on scroll. */
+  box-shadow: var(--shadow-glow-gold);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
    BUTTONS — APPLE DESIGN RESPONSE
    Instant feedback on pointer-down, spring-based hover
    ============================================ */
@@ -1581,9 +1608,22 @@ body {
 
 .home-grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0, 1fr) and not 1fr: a grid track's automatic minimum is the
+     content's minimum contribution, so a child that cannot shrink - a
+     diagram with a legible minimum width, for instance - would push the
+     track and the page out sideways. With a zero minimum the track can
+     shrink and the child scrolls inside itself. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-16);
   align-items: center;
+}
+
+/* The items need the same allowance. A grid item's automatic minimum is
+   also its content's minimum, so an item holding a diagram with a legible
+   minimum width would stay 760 pixels wide inside a 390 pixel track and be
+   centred across it, overflowing both sides. */
+.home-grid-2 > * {
+  min-width: 0;
 }
 
 .home-grid-4 {
@@ -2431,7 +2471,10 @@ body {
 .ai-page {
   max-width: 880px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6) var(--space-12);
+  /* The navigation is fixed and --header-h tall, so the page has to clear
+     it. Without this the breadcrumb of every interior page starts under the
+     navigation bar. */
+  padding: calc(var(--header-h) + var(--space-6)) var(--space-6) var(--space-12);
 }
 
 .ai-breadcrumb {
@@ -3525,8 +3568,12 @@ body {
     grid-column: 1 / -1;
   }
   .home-grid-2 {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-10);
+  }
+
+  .home-grid-2 > * {
+    min-width: 0;
   }
   .home-grid-4 {
     grid-template-columns: repeat(2, 1fr);

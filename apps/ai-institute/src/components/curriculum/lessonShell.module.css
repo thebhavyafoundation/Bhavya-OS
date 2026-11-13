@@ -12,10 +12,12 @@
   flex-direction: column;
   gap: var(--space-8);
   /* Matches the existing `.ai-page` frame so the lesson sits on the same
-     centred column as every other reading page in the curriculum. */
+     centred column as every other reading page in the curriculum. The top
+     padding clears the fixed navigation, for the same reason `.ai-page`
+     does: at 32 pixels the breadcrumb started underneath the bar. */
   max-width: 880px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6) var(--space-12);
+  padding: calc(var(--header-h) + var(--space-6)) var(--space-6) var(--space-12);
 }
 
 /* Breadcrumb */

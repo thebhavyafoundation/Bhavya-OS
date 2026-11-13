@@ -25,6 +25,20 @@ export function BlockRenderer({
             );
           case "interactive":
             return <WidgetRenderer key={i} spec={b.widget} />;
+          case "guided-example":
+            return (
+              <section key={i} className="lesson-card">
+                <h3>Guided example — {b.title}</h3>
+                <pre className="ai-step-code">
+                  <code>{b.code}</code>
+                </pre>
+                <ol className="ai-steps">
+                  {b.walkthrough.map((line, index) => (
+                    <li key={index}>{line}</li>
+                  ))}
+                </ol>
+              </section>
+            );
           case "quiz":
             return (
               <QuizBlock key={i} questions={b.questions} moduleId={moduleId} />
