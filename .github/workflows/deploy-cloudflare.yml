@@ -4,6 +4,13 @@ on:
   push:
     branches: [master]
 
+# Least-privilege token scope.
+# This workflow reads the repository and moves build artefacts between jobs.
+# Cloudflare access uses the CLOUDFLARE_API_TOKEN secret, not GITHUB_TOKEN.
+# No repository write, no pull-request write, no deployment write.
+permissions:
+  contents: read
+
 jobs:
   # Build is a separate job from upload so the Cloudflare credentials exist
   # only in the job that actually uploads. A failed build must never be able to

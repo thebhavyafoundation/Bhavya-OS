@@ -33,6 +33,12 @@ on:
       - ".github/workflows/opennext-build-verify.yml"
   workflow_dispatch:
 
+# Least-privilege token scope.
+# This workflow holds no secrets and never deploys. It only reads the
+# repository and uploads a build log.
+permissions:
+  contents: read
+
 # Cancel superseded runs on the same PR to save runner time.
 concurrency:
   group: opennext-build-verify-${{ github.event.pull_request.number || github.ref }}
