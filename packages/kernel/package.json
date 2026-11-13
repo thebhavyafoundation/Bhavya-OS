@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.spec.json",
     "typecheck:spec": "tsc --noEmit -p tsconfig.spec.json",
     "test": "vitest run",
     "lint": "eslint src --ext .ts"

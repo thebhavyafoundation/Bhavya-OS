@@ -49,37 +49,109 @@ export type ExecutionResultCode =
 
 export interface ExecutionResultPolicy {
   /** Another attempt of the same action may succeed. */
-  retryable: boolean;
+  readonly retryable: boolean;
   /** A human must decide what happens next. */
-  requiresHuman: boolean;
+  readonly requiresHuman: boolean;
   /** The work may continue from a checkpoint. */
-  resumable: boolean;
+  readonly resumable: boolean;
   /** No further automatic action will be taken. */
-  terminal: boolean;
+  readonly terminal: boolean;
+}
+
+/**
+ * Freeze a policy entry.
+ *
+ * The table is exported, so an unfrozen entry could be changed by any
+ * consumer. A changed entry would then be read by both the constructor and
+ * the validator, which would agree with each other about a policy that no
+ * longer exists.
+ */
+function freezePolicy(policy: ExecutionResultPolicy): ExecutionResultPolicy {
+  return Object.freeze(policy);
 }
 
 /**
  * The single policy table. Every flag in a produced result is derived from
  * it, so the code and the flags can never drift apart.
+ *
+ * The table is frozen: it is the contract, and a contract that a consumer can
+ * edit at runtime is not a contract.
  */
-export const EXECUTION_RESULT_POLICY: Record<
-  ExecutionResultCode,
-  ExecutionResultPolicy
-> = {
-  success: { retryable: false, requiresHuman: false, resumable: false, terminal: true },
-  retryable_failure: { retryable: true, requiresHuman: false, resumable: true, terminal: false },
-  permanent_failure: { retryable: false, requiresHuman: true, resumable: false, terminal: true },
-  policy_denied: { retryable: false, requiresHuman: true, resumable: false, terminal: true },
-  approval_required: { retryable: false, requiresHuman: true, resumable: true, terminal: false },
-  quota_paused: { retryable: false, requiresHuman: false, resumable: true, terminal: false },
-  cancelled: { retryable: false, requiresHuman: false, resumable: false, terminal: true },
-  timeout: { retryable: true, requiresHuman: false, resumable: true, terminal: false },
-  interrupted: { retryable: true, requiresHuman: false, resumable: true, terminal: false },
-  unknown_failure: { retryable: false, requiresHuman: true, resumable: false, terminal: true },
-};
+export const EXECUTION_RESULT_POLICY: Readonly<
+  Record<ExecutionResultCode, ExecutionResultPolicy>
+> = Object.freeze({
+  success: freezePolicy({
+    retryable: false,
+    requiresHuman: false,
+    resumable: false,
+    terminal: true,
+  }),
+  retryable_failure: freezePolicy({
+    retryable: true,
+    requiresHuman: false,
+    resumable: true,
+    terminal: false,
+  }),
+  permanent_failure: freezePolicy({
+    retryable: false,
+    requiresHuman: true,
+    resumable: false,
+    terminal: true,
+  }),
+  policy_denied: freezePolicy({
+    retryable: false,
+    requiresHuman: true,
+    resumable: false,
+    terminal: true,
+  }),
+  approval_required: freezePolicy({
+    retryable: false,
+    requiresHuman: true,
+    resumable: true,
+    terminal: false,
+  }),
+  quota_paused: freezePolicy({
+    retryable: false,
+    requiresHuman: false,
+    resumable: true,
+    terminal: false,
+  }),
+  cancelled: freezePolicy({
+    retryable: false,
+    requiresHuman: false,
+    resumable: false,
+    terminal: true,
+  }),
+  timeout: freezePolicy({
+    retryable: true,
+    requiresHuman: false,
+    resumable: true,
+    terminal: false,
+  }),
+  interrupted: freezePolicy({
+    retryable: true,
+    requiresHuman: false,
+    resumable: true,
+    terminal: false,
+  }),
+  unknown_failure: freezePolicy({
+    retryable: false,
+    requiresHuman: true,
+    resumable: false,
+    terminal: true,
+  }),
+});
 
-/** How each result code maps onto the kernel's existing ExecutionState. */
-export const EXECUTION_STATE_FOR_CODE: Record<ExecutionResultCode, ExecutionState> = {
+/**
+ * How each result code maps onto the kernel's existing ExecutionState.
+ *
+ * A code whose policy allows another attempt never maps onto a terminal
+ * state, so a consumer that reads only the state can still tell a retryable
+ * outcome from a finished one.
+ */
+export const EXECUTION_STATE_FOR_CODE: Readonly<
+  Record<ExecutionResultCode, ExecutionState>
+> = Object.freeze({
   success: "completed",
   retryable_failure: "retrying",
   permanent_failure: "failed",
@@ -87,10 +159,10 @@ export const EXECUTION_STATE_FOR_CODE: Record<ExecutionResultCode, ExecutionStat
   approval_required: "paused",
   quota_paused: "paused",
   cancelled: "cancelled",
-  timeout: "failed",
+  timeout: "retrying",
   interrupted: "paused",
   unknown_failure: "failed",
-};
+});
 
 export interface ExecutionResult {
   /** Contract version. */

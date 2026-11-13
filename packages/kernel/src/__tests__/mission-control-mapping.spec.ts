@@ -41,6 +41,24 @@ describe("mission control job-status mapping", () => {
     expect(jobStatusForResultCode("retryable_failure")).toBe("running");
   });
 
+  it("keeps a timeout inside a running job, because it may be retried", () => {
+    // A timeout is retryable in the kernel's policy, so it must not close a
+    // job that is still able to make another attempt.
+    expect(jobStatusForResultCode("timeout")).toBe("running");
+  });
+
+  it("cannot be edited by a consumer", () => {
+    expect(Object.isFrozen(JOB_STATUS_FOR_RESULT_CODE)).toBe(true);
+    try {
+      (
+        JOB_STATUS_FOR_RESULT_CODE as unknown as Record<string, unknown>
+      ).success = "failed";
+    } catch {
+      // A frozen object throws in strict mode, which is the expected result.
+    }
+    expect(jobStatusForResultCode("success")).toBe("completed");
+  });
+
   it("maps the terminal outcomes to terminal job statuses", () => {
     expect(jobStatusForResultCode("success")).toBe("completed");
     expect(jobStatusForResultCode("permanent_failure")).toBe("failed");
