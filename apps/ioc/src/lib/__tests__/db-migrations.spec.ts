@@ -37,27 +37,34 @@ const migrationFiles = [
 
 const normalise = (text: string) => text.replace(/\r\n/g, "\n");
 
+/**
+ * The migrations loader compiles the migration sources with esbuild, which
+ * normalises line endings to LF before any checksum is computed. The same
+ * normalisation is applied here so the spec passes on CRLF checkouts.
+ */
+const normalize = (text: string): string => text.replace(/\r\n/g, "\n");
+
 function extractUp(src: string): string {
   const start = src.indexOf("up:");
   const from = src.indexOf("`", start) + 1;
   const to = src.indexOf("`", from);
-  return src.slice(from, to);
+  return normalize(src.slice(from, to));
 }
 
 function extractDown(src: string): string {
   const start = src.indexOf("down:");
   const from = src.indexOf("`", start) + 1;
   const to = src.indexOf("`", from);
-  return src.slice(from, to);
+  return normalize(src.slice(from, to));
 }
 
-const appSource = readFileSync(resolve(__dirname, "../db.ts"), "utf-8");
+const appSource = normalize(readFileSync(resolve(__dirname, "../db.ts"), "utf-8"));
 
 function stringConstant(src: string, name: string): string {
   const marker = `const ${name} = \``;
   const from = src.indexOf(marker) + marker.length;
   const to = src.indexOf("`", from);
-  return src.slice(from, to);
+  return normalize(src.slice(from, to));
 }
 
 describe("inline IOC migrations", () => {
