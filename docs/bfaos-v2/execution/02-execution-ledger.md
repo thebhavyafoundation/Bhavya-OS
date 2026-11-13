@@ -106,6 +106,13 @@ declared `Promise<{ success, result? }>` now declares a precise, exported union 
 shapes its action handlers actually return. Type-level widening only — zero runtime change. A new
 `research-service.spec.ts` covers the one previously-uncovered widened contract.
 
+**Phase 4.1 · Shared helpers (`sha256`, `canonicalize`)** — investigated. The kernel's copies in
+`checkpoint/index.ts` are self-contained: `canonicalize` is defined nowhere else in the repository
+and `sha256` recurs only as `createHash("sha256").digest("hex")` one-liners in other packages,
+not as a shared symbol. Migrating them into `@bhavya/shared` would pull node:crypto into an
+edge-safe, types-only, zero-dependency package whose export contract is deliberately minimal.
+Consolidation is not justified; the export surface stays as it is.
+
 An **independent review** of those four commits returned the verdict **CONCERNS** — one HIGH, four
 MEDIUM and ten LOW findings. Every HIGH and MEDIUM finding is resolved; the resolutions and the
 revisions to the map's own claims are listed in the Phase 4 log. One finding corrected a false
