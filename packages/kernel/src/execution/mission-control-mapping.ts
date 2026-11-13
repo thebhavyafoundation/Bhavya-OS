@@ -1,12 +1,10 @@
 // Mapping between a kernel execution result and a Mission Control job status.
 //
-// WHY THIS EXISTS
-// ---------------
 // The kernel describes the outcome of one execution attempt; Mission Control
-// describes the state of a job. They are different vocabularies and they do
-// not align one-to-one: the kernel can express "interrupted" and "quota
-// paused", while Mission Control's job statuses have no such value and its
-// transition table makes several states terminal.
+// describes the state of a job. They do not align one-to-one: the kernel can
+// express "interrupted" and "quota paused", while Mission Control's job
+// statuses have no such value and its transition table makes several states
+// terminal.
 //
 // This module is a PURE mapping. It does not write, does not transition
 // anything, and does not know Mission Control's transition table: the caller
