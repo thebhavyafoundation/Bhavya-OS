@@ -3,7 +3,6 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import { migrate } from "@bhavya/database";
 import { createRisk, updateRiskStatus, getRiskSummary } from "../risks";
 
 /**
@@ -17,18 +16,13 @@ import { createRisk, updateRiskStatus, getRiskSummary } from "../risks";
 
 let scratchDir: string;
 
-beforeAll(async () => {
+beforeAll(() => {
   scratchDir = mkdtempSync(join(tmpdir(), "bhavya-ioc-risks-"));
   process.env.BHAVYA_DB_PATH = join(scratchDir, "ioc.db");
-
-  // The app's getDb() calls migrate("ioc") without awaiting it. Await it in
-  // the test against this scratch database instead of changing the app.
-  await migrate("ioc");
 });
 
 describe("risk aggregation", () => {
   let criticalId = "";
-  let highId = "";
   let mediumId = "";
 
   it("counts open risks by severity and ignores mitigated ones", () => {
@@ -36,10 +30,10 @@ describe("risk aggregation", () => {
       title: "Turso production database has test data in it",
       severity: "critical",
     }).id;
-    highId = createRisk({
+    createRisk({
       title: "Backups have not been verified in 90 days",
       severity: "high",
-    }).id;
+    });
     mediumId = createRisk({
       title: "Curriculum page copy is outdated",
       severity: "medium",
