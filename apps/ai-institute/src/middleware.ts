@@ -6,6 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { cacheControlFor } from "@/lib/http/cache-policy";
 
 /**
  * Origins permitted to make state-changing cross-origin requests.
@@ -148,6 +149,15 @@ export function middleware(request: NextRequest): NextResponse {
   }
 
   const response = NextResponse.next();
+
+  // Explicit cache policy: authenticated / personalized / sensitive surfaces
+  // carry `private, no-store` so a shared cache can never hold them. Public
+  // content pages keep the framework default until risk R-15 (one-year shared
+  // cache on prerendered HTML) is decided — see docs/cache-control-policy.md.
+  const cachePolicy = cacheControlFor(pathname);
+  if (cachePolicy) {
+    response.headers.set("Cache-Control", cachePolicy.value);
+  }
 
   // Keep authenticated/internal surfaces out of search indexes.
   // Public knowledge stays indexable: /os itself plus /os/knowledge
