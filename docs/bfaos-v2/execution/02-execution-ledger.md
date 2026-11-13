@@ -94,6 +94,14 @@ Two independent reviewers examined the change and returned **FAIL**. Findings an
 
 ---
 
+## Phase 4 (T-200 … T-203)
+
+Recorded in full in `04-phase-4-execution-log.md`: the idempotency reload defect (fixed and proven),
+the structured execution-result contract, the kernel ↔ Mission Control interface map, and the
+specification typechecking with a proven-failing runner check.
+
+---
+
 ## Task queue status
 
 | Task | Status |
