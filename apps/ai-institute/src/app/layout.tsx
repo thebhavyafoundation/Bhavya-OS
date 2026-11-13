@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SkipLink } from "@/components/SkipLink";
 import { AppProviders } from "@/lib/providers/AppProviders";
+import { siteMetadata } from "@/lib/seo/site-metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,11 +21,11 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "Bhavya Foundation — For People. For Nature. For Generations.",
-  description:
-    "Nature restored. Knowledge opened. Heritage kept. Communities led from within. A public charitable trust building for generations.",
-};
+// The metadata itself lives in `src/lib/seo/site-metadata.ts` so that the
+// favicon and asset references are assertable from a test. The browser's
+// default /favicon.ico is not in public/, and nothing declared the SVG that
+// is there, which is why the homepage produced one console error.
+export const metadata: Metadata = siteMetadata;
 
 export default function RootLayout({
   children,
