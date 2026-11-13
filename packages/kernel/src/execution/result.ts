@@ -5,14 +5,14 @@
 // whether a human is required, and whether the work may be resumed. Free-text
 // error strings cannot answer those questions, and an unknown error must never
 // be quietly treated as success or as a retry.
-//
+
 // RELATIONSHIP TO THE EXISTING VOCABULARY: this is NOT a second status
 // vocabulary. The kernel already has `ExecutionState` (types/index.ts) and
 // Mission Control has its own job statuses. This contract describes the
 // outcome of one attempt and maps explicitly onto `ExecutionState` through
 // `executionStateForCode`. Mission Control's job states are untouched
 // (decision D-08 remains open).
-//
+
 // POLICY IS SEPARATE: the retry, human-intervention and resumability policy
 // lives in one table, `EXECUTION_RESULT_POLICY`. The constructors derive every
 // flag from that table, so a result's flags can never disagree with its code.
