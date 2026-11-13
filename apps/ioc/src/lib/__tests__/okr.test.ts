@@ -101,10 +101,19 @@ describe("OKR engine", () => {
   });
 
   it("summarises OKRs across departments", () => {
+    // Isolated fixture: this test must not depend on the objectives created
+    // by the other tests in the file.
+    createObjective({
+      title: "Verification of page rendering",
+      description: "Self-contained summary check",
+      department: "operations",
+      quarter: "2026-Q4",
+    });
+
     const summary = getOKRSummary();
 
     expect(summary.totalObjectives).toBeGreaterThanOrEqual(1);
-    expect(Object.keys(summary.byDepartment)).toContain("education");
-    expect(summary.byDepartment["education"].count).toBeGreaterThanOrEqual(1);
+    expect(Object.keys(summary.byDepartment)).toContain("operations");
+    expect(summary.byDepartment["operations"].count).toBeGreaterThanOrEqual(1);
   });
 });
