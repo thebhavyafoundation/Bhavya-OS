@@ -3,7 +3,6 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import { migrate } from "@bhavya/database";
 import { createObjective, addKeyResult, updateKeyResult, getObjective, getOKRSummary } from "../../okr/engine";
 
 /**
@@ -19,15 +18,10 @@ import { createObjective, addKeyResult, updateKeyResult, getObjective, getOKRSum
 let scratchDir: string;
 let scratchDb: string;
 
-beforeAll(async () => {
+beforeAll(() => {
   scratchDir = mkdtempSync(join(tmpdir(), "bhavya-ioc-okr-"));
   scratchDb = join(scratchDir, "ioc.db");
   process.env.BHAVYA_DB_PATH = scratchDb;
-
-  // The app's getDb() calls migrate("ioc") without awaiting it, so a first
-  // read can race the migration. The test awaits the same migration against
-  // a scratch database instead of changing the app's runtime.
-  await migrate("ioc");
 });
 
 describe("OKR engine", () => {
