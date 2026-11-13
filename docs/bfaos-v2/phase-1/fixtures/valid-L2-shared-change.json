@@ -1,0 +1,37 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-002",
+  "contract_version": "1.0.0",
+  "job_id": "job-2026-11-13-002",
+  "title": "Add least-privilege permissions to the deployment workflows",
+  "objective": "Declare an explicit minimal GITHUB_TOKEN scope for the three workflows that currently inherit the repository default, without changing any workflow behaviour.",
+  "scope": {
+    "include": ["three GitHub Actions workflow files"],
+    "exclude": ["ci.yml", "pages.yml", "any application source", "any deployment trigger"],
+    "paths": [".github/workflows/"]
+  },
+  "dependencies": [{ "ref": "bfaos-task-2026-11-13-001", "kind": "contract" }],
+  "assigned": { "agent": "bhavya/engineering-agent", "role": "devops", "producer": "opencode:bhavya" },
+  "risk_level": "L2",
+  "required_approval": { "level": "role", "approver_role": "security", "digest_required": true, "note": "Security-sensitive workflow paths require ultra review in the pre-push gate." },
+  "allowed_tools": [
+    { "tool": "edit", "scope": ".github/workflows/", "mode": "allow" },
+    { "tool": "bash", "scope": "git and node scripts", "mode": "allow" }
+  ],
+  "budget": { "wall_clock_minutes": 120, "ci_minutes": 0, "tokens": 250000, "artifacts_bytes": 524288, "usd": 0 },
+  "time_limit": { "max_duration_minutes": 120 },
+  "retry_policy": { "max_attempts": 2, "backoff": "fixed", "retryable_actions": ["read", "static_check"], "on_quota_exhausted": "pause_and_report" },
+  "checkpoint_policy": { "enabled": true, "every_n_steps": 5, "store": "mc_artifact_version", "resume_is_idempotent": true },
+  "acceptance_criteria": [
+    { "id": "AC-01", "criterion": "All nine workflows declare an explicit permissions scope.", "verification": "test" },
+    { "id": "AC-02", "criterion": "The pre-push gate passes with an ultra-mode review record.", "verification": "test" }
+  ],
+  "verification": {
+    "evidence_required": true,
+    "checks": ["pnpm wrapper:check", "pnpm platform:check", "pre-push gate"],
+    "independent_review": "agent",
+    "deployment_required": false
+  },
+  "evidence": [{ "kind": "document", "ref": "docs/verification/2026-11-13-vercel-build-failure-root-cause-phase-1b.md" }],
+  "rollback": { "instructions": "Revert the single commit that adds the permissions declarations. No state, data or infrastructure is affected.", "data_migration": false },
+  "idempotency_key": "bfaos-task-2026-11-13-002"
+}

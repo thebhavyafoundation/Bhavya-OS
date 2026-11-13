@@ -69,6 +69,17 @@ export type {
 
 // Replay Engine (v1.3.0-alpha)
 export { ReplayEngine } from "./replay/index.js";
+export {
+  UnsafeReplayError,
+  assertReplayAllowed,
+  assertReplaySafe,
+  classifyAction,
+  isReplaySafe,
+} from "./replay/safety.js";
+export type {
+  ActionClassification,
+  ActionSafetyClass,
+} from "./replay/safety.js";
 export type { ReplayConfig, ReplayResult } from "./replay/index.js";
 
 // Institution Services (v1.3.0-alpha)
@@ -136,6 +147,38 @@ export type {
   PublishReleaseInput,
   PublishReleaseContext,
 } from "./scenarios/publish-release-notes.js";
+
+export {
+  CHECKPOINT_VERSION,
+  SUPPORTED_CHECKPOINT_VERSIONS,
+  canonicalize,
+  createCheckpoint,
+  isResumable,
+  serializeCheckpoint,
+  sha256,
+  verifyCheckpoint,
+} from "./checkpoint/index.js";
+export type {
+  CheckpointArtifactRef,
+  CheckpointEnvelope,
+  CheckpointInput,
+  CheckpointRecovery,
+  CheckpointTestResult,
+  CheckpointVerification,
+} from "./checkpoint/index.js";
+export {
+  classifyContractFields,
+  validateTaskContract,
+} from "./contracts/task-contract.js";
+export type {
+  ApprovalLevel,
+  ContractEnforcement,
+  ContractTool,
+  ContractValidationResult,
+  FieldClassification,
+  FieldEnforcement,
+  RiskLevel,
+} from "./contracts/task-contract.js";
 
 // Re-export all types
 export * from "./types/index.js";
