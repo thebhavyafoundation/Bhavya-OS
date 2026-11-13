@@ -25,7 +25,7 @@ not add a session store.** It specifies how the existing fields are *populated* 
 | **Producer (raw)** | `mc_sessions.producer` (raw segment) | the producer string as recorded by the caller | kept verbatim for the runtime that created it |
 | **Job relationship** | `mc_sessions.job_id` → `mc_jobs.id` | mandatory | already enforced by the foreign key |
 | **Attempt identity** | one `mc_sessions` row per attempt | attempt *n* = the *n*-th `listSessions(jobId)` row ordered by `startedAt` | **no attempt column exists** — ordinal + producer is the identity |
-| **Start / end** | `started_at`, `ended_at` | ISO-8601 UTC, set by `startSession` / `endSession` | already implemented |
+| **Start / end** | `started_at`, `ended_at` | **mixed formats**: `started_at` is SQLite `datetime('now')` ⇒ `"YYYY-MM-DD HH:MM:SS"` (JavaScript parses this as **local** time — a measured 5½-hour shift on this machine); `ended_at` is `toISOString()` ⇒ ISO-8601 UTC | `004_mission_control_sessions.ts:21`; `sqlite-mission-control-repository.ts:48-50`. Recommendation: write an explicit ISO-8601 UTC string — an application change, not authorised here |
 | **Status** | `mc_sessions.status` | `running` → `completed` \| `failed` | no `paused` value exists (see §5) |
 | **Checkpoint reference** | `mc_artifact_versions.session_id` + artefact `path`/`hash` | the checkpoint artefact carries the producing `session_id` | reuse, no new table |
 | **Failure reason** | `mc_decisions(action='abort', reason=…)` targeting the session | reason text lives in the append-only decision log | `mc_sessions` has **no** failure-reason column |
@@ -73,7 +73,10 @@ and machine-parseable; it never contains a credential, a learner identifier or a
 
 | Gap | Handling |
 |---|---|
-| No `attempt` column | attempt ordinal from `listSessions(jobId)` order plus the producer detail segment |
+| **The decision actions this contract depends on have no writer** | `mc_decisions` permits `pause`/`resume`/`retry`/`takeover`, but the repository only writes a fixed `'abort'`/`'job'` from `stopJob`, approve/reject/request_revision from `decide()`, and a fixed `'approve_integration'`; `endSession` writes **no** decision. There is no `recordDecision`/`pauseJob`/`resumeJob`/`failJob` in the interface. **This is a blocker (see `INDEPENDENT-REVIEW.md` S1)**: recording a failure or a pause requires a small, founder-approved repository change |
+| Foreign keys are not guaranteed in production | `mc_sessions.job_id` has an FK (`004:17`) and `foreign_keys=ON` is set on the **local** better-sqlite3 path (`packages/database/src/sqlite.ts:48,108`), but the Turso/libSQL path does not set the pragma and libSQL does not enforce FKs by default. Job↔session linkage is therefore **application-enforced, not database-enforced**, in production |
+| `mc_jobs.session_id` is a single mutable pointer | `startSession` overwrites it on every call, so the job points only at the **latest** attempt; earlier attempts are reachable only through `listSessions(jobId)`. This is why attempt identity is an ordinal |
+| No `attempt` column | attempt ordinal from `listSessions(jobId)` order (which sorts by `started_at ASC, rowid ASC`) plus the producer detail segment |
 | No `failure_reason` column | failure reason recorded in `mc_decisions` (`action='abort'`, `targetKind='session'`, `targetId=<session id>`, `reason=…`) — the append-only log is the right home for narrative |
 | No `paused` session status | a paused attempt is ended as `failed` with `mc_decisions(action='pause')`, or left `running` with a pause decision; the choice is part of D-08 |
 | No checkpoint column on the session | checkpoint is an artefact version whose `session_id` points at the session (T-203) |

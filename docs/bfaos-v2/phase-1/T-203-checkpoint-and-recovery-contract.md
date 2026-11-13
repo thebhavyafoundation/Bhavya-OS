@@ -7,7 +7,7 @@
 | Mechanism | Location | What it gives |
 |---|---|---|
 | `Idempotency` | `packages/kernel/src/idempotency/index.ts` | `check()`, `register(key, executionId)`, `complete(key, result?)`, `fail(key, error?)`, `shouldExecute()`, `recordExecution()`, `updateExecution()`, `getExecution()` |
-| `ReplayEngine` | `packages/kernel/src/replay/index.ts` | `ReplayConfig`, `ReplayResult`, deterministic replay of a recorded execution |
+| `ReplayEngine` | `packages/kernel/src/replay/index.ts` | `ReplayConfig`, `ReplayResult`. **It is not a deterministic replay**: it re-emits every recorded event, silently skips failing handlers and forces the execution back to `running`; it never consults `shouldExecute` and knows nothing of the classes below |
 | `BackupRecovery` | `packages/kernel/src/backup/index.ts` | `BackupConfig`, `Backup`, `RecoveryResult` |
 | Artefact lineage | `mc_artifact_versions(id, artifact_id, version, path, hash, producer, parent_version?, human_replacement, session_id)` | immutable version chain with a **content hash** and the producing session |
 | Job ↔ session ↔ artefact | `mc_jobs.session_id`, `mc_sessions.job_id`, `mc_artifact_versions.session_id` | a job owns attempts; an attempt owns artefact versions |
@@ -82,14 +82,30 @@ already happened — e.g. "Cloudflare deployment list contains a deployment whos
 `commit_sha`" (deploy), "PR #n is merged" (merge), "`mc_approval_requests` row is `approved`"
 (approval). If the check cannot be made, the action is not replayed.
 
-**How this is enforced in practice (no new machinery):**
+**How this would be enforced (policy only — there is no enforcement point today).** The classification
+above is a **review-time policy**, not a runtime control:
+
 1. `Idempotency.register(key, executionId)` before the action; `complete(key)` after success;
-   `fail(key, error)` after failure. On resume, `shouldExecute(key)` decides whether the action still
-   needs to run *in this system*.
+   `fail(key, error)` after failure. On resume, `check(key)` / `shouldExecute(key)` decides whether the
+   action still needs to run *in this system* — but the kernel's semantics are unforgiving: `status` is
+   only `pending|completed|failed`, an **abandoned** attempt is not representable, `shouldExecute`
+   returns `proceed:false` for `pending`, the default TTL is **1 hour** (expired keys are deleted, which
+   makes `shouldExecute` proceed again), and `register()` **overwrites** the existing entry without a
+   guard. `Idempotency` also records **no attempt counter**, so the contract's `max_attempts` is not
+   enforced by it; the kernel's existing `ExecutionContext.retryCount`/`maxRetries` is the natural owner.
 2. For class C, the idempotency record is **not** sufficient — the external state check is
    authoritative. This is why the payload carries `inspect_before_replay`.
 3. `mc_decisions` records `retry` / `abort` / `takeover` so the history of what was attempted and why
-   is append-only.
+   is append-only — **but the repository exposes no writer for those actions** (see
+   `INDEPENDENT-REVIEW.md`, S1), and there is no escalation action at all.
+4. **A gate must be specified before any of this is real:** a check that consults
+   `do_not_replay` / `inspect_before_replay` before every tool call, and a rule that
+   `ReplayEngine.replay` must not be used for executions whose checkpoint declares class-C actions —
+   the engine re-emits recorded events by default.
+5. A durable idempotency store must be chosen. The kernel store is a per-checkout filesystem map
+   (`.kernel/idempotency/*.json`, no locking) that does not survive a fresh CI runner. The
+   DB-backed `evidence_records.idempotency_key` — already used by `createJob` and `addVersion` — is
+   the only wired, durable option and should be preferred.
 
 **Anti-pattern this replaces:** an agent that lost context re-issues the whole task and re-deploys
 because the previous run never wrote a "done" marker. The checkpoint is not the authority on whether a

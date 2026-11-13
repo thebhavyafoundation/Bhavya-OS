@@ -40,6 +40,32 @@ downtime and rollback risk, so the recommendation is **not** to extend it.
 **Rule:** the *state* lives in `mc_jobs.status`; the *reason* lives in the append-only `mc_decisions`
 log. This keeps the schema untouched and preserves the "never updated or deleted" audit property.
 
+### 2.1 The state machine this proposal must live with (`VERIFIED`)
+
+The repository's `JOB_TRANSITIONS` (`sqlite-mission-control-repository.ts:33-42`) permits:
+
+```
+queued  → running | cancelled
+running → awaiting_approval | stopped | failed | cancelled
+stopped → (terminal)
+failed  → (terminal)
+```
+
+and `transitionJob` throws `Invalid job transition` for anything else. Consequences for this proposal:
+
+- **`stopped` and `failed` are terminal.** A quota-paused job (`stopped`) cannot be resumed by a
+  status change today — the repository exposes no `resumeJob` and no `failJob`.
+- **`queued` cannot reach `failed` or `stopped`.** A job blocked before dispatch (the common case for
+  "no credential", "waiting for approval") cannot be marked blocked or quota-paused with the current
+  transition table.
+- Therefore **this mapping is contingent on a small, explicit repository change**: a `failJob` path, a
+  `resumeJob` path, and `queued → failed/stopped` transitions — or, alternatively, that blocked and
+  quota-paused work is represented by a **pending decision row on a `queued` job** plus a contract
+  field, leaving the status untouched.
+
+Both routes are founder-gated because they change production behaviour. **This proposal does not
+assume either.**
+
 ## 3. Worked example — blocked work
 
 ```

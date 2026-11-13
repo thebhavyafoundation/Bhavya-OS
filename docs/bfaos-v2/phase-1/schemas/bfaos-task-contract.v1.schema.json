@@ -24,8 +24,8 @@
     },
     "contract_version": {
       "type": "string",
-      "description": "Semantic version of this contract format. Major version 1 is validated by this schema; a 2.x contract requires a new schema.",
-      "pattern": "^1\\.(0|1)\\.\\d+$"
+      "description": "Semantic version of this contract format. This schema validates major version 1 (any 1.x.y); a 2.x contract requires a new schema.",
+      "pattern": "^1\\.\\d+\\.\\d+$"
     },
     "job_id": {
       "type": "string",
@@ -71,6 +71,12 @@
     "assigned": {
       "type": "object",
       "additionalProperties": false,
+      "minProperties": 1,
+      "anyOf": [
+        { "required": ["agent"] },
+        { "required": ["role"] },
+        { "required": ["producer"] }
+      ],
       "properties": {
         "agent": { "type": "string", "maxLength": 120, "description": "Agent identity, e.g. 'bhavya/engineering-agent'." },
         "role": {
@@ -118,6 +124,7 @@
     "budget": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["usd"],
       "properties": {
         "wall_clock_minutes": { "type": "integer", "minimum": 1, "maximum": 1440 },
         "ci_minutes": { "type": "integer", "minimum": 0, "maximum": 2000 },
@@ -214,6 +221,7 @@
     },
     "idempotency_key": {
       "type": "string",
+      "minLength": 1,
       "maxLength": 200,
       "description": "Stable key so a replayed command maps to the same job. Defaults to contract_id when omitted."
     },

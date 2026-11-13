@@ -1,7 +1,12 @@
 # BFAOS V2 — T-201 Task Contract Specification
 
-**Status:** specification for founder review · **Base:** `master` @ `98388ddb` · **Date:** 2026-11-13
+**Status:** specification for founder review — **BLOCKED on D-08 and D-09** (decision writing path and
+artefact-body storage; see `INDEPENDENT-REVIEW.md`) · **Date:** 2026-11-13
+**Base:** Phase 0 branch `docs/bfaos-v2-phase0` @ `196a96bf` (which carries the D-08/D-09 decision
+pack that blocks this specification); comparison baseline `master` @ `98388ddb`
 **Artefacts:** `schemas/bfaos-task-contract.v1.schema.json`, `fixtures/*.json`, `validate-contracts.py`
+**Reviewed:** an independent review pass is recorded in `INDEPENDENT-REVIEW.md`; its findings are
+reflected here, and the ones that remain open are listed as blockers rather than silently dropped.
 
 ## 1. Purpose and constraint
 
@@ -12,7 +17,8 @@ its approval requirement, and the evidence it must produce. It is *intent*, not 
 
 | Need | Existing home | Evidence |
 |---|---|---|
-| Contract storage | `mc_artifacts` row of kind **`task_contract`** | artifact kinds already include `"task_contract"` (`mission-control-repository.ts:323`) |
+| Contract storage | `mc_artifacts` row of kind `task_contract` (the `kind` column is **free text**, default `document` — the `"task_contract"` union member belongs to the mission-graph node kind, not to `McArtifact.kind`) | `mc_artifacts.kind` (`003_mission_control.ts:30`); `McArtifact.kind: string` (`mission-control-repository.ts:75`) |
+| Contract body location | **`mc_artifacts` / `mc_artifact_versions` have no column that stores a document body** (`path`, `hash`, `note` only; `createArtifact` writes `path=""`, `hash=""`). The contract is therefore a **pointer** to a stored payload, and where that payload lives is **D-09** (artefact store, still open) | `003_mission_control.ts:27-57`; `sqlite-mission-control-repository.ts:322-341` |
 | Contract reference from a job | **`mc_jobs.task_contract_ids`** (JSON array) | `McJob.taskContractIds: string[]` (`mission-control-repository.ts:63`) |
 | Job identity and status | `mc_jobs` | `McJob` interface, `status` CHECK constraint in `003_mission_control.ts` |
 | Approval request | `mc_approval_requests` | status ∈ pending/approved/rejected/revision_requested/expired/cancelled |
@@ -77,12 +83,18 @@ at the top level (unknown fields are rejected, so a typo cannot silently disable
 | `boundary-limits.json` | accepted (all documented bounds) | PASS |
 | `invalid-missing-required.json` | rejected | PASS |
 | `invalid-enum-and-version.json` | rejected | PASS |
-| version compatibility 1.0.0 / 1.1.0 / 2.0.0 | accepted / accepted / rejected | PASS |
+| version compatibility 1.0.0 / 1.1.0 / 1.2.0 / 1.10.0 / 2.0.0 / 1.0.0-rc1 | accepted / accepted / accepted / accepted / rejected / rejected | PASS |
 | minimal required-only contract | accepted (backward compatible) | PASS |
-| 9 rule mutations (unknown risk level, L2 without exclusions, L3 without assignment, L3 without founder approval, founder approval without independent review, non-zero USD, attempts above limit, unknown version, unknown property) | each rejected; both valid baselines accepted | PASS |
+| 18 rule mutations (unknown risk level, L2 without exclusions, L3 without assignment, L3 with empty assignment, L3 without founder approval, founder approval without independent review, non-zero USD, budget without `usd`, attempts above limit, unknown version, non-date-time value, empty idempotency key, wrong checkpoint store, credential in `metadata`, learner id in `metadata`, unknown property) | each rejected; role-only assignment and both valid baselines accepted | PASS |
 
-**Total: 21 expectations satisfied, exit code 0.** Re-run with
+**Total: 32 expectations satisfied, exit code 0.** Re-run with
 `python docs/bfaos-v2/phase-1/validate-contracts.py`.
+
+**Two rules are enforced by the validator rather than by the schema** (because JSON Schema 2020-12
+cannot express them): RFC-3339 timestamp validity (the schema's `format` is advisory without a
+format-assertion vocabulary, and the optional jsonschema format dependency is not installed here), and
+the prohibition on credential-shaped or learner-identifying values in `metadata` and `evidence[].ref`.
+CI's `secret-scan` (gitleaks) remains the authoritative scanner.
 
 ## 4. What the contract deliberately does **not** do
 
@@ -100,10 +112,10 @@ at the top level (unknown fields are rejected, so a typo cannot silently disable
 |---|---|---|
 | Schema | shape, required fields, conditional rules, zero-budget | **implemented and verified** in this deliverable |
 | Repository | artefact persistence, job linkage | **already exists** (`createArtifact`, `mc_jobs.task_contract_ids`) |
-| Pre-push gate | secret scan, platform contract, review record with ultra mode for security-sensitive paths | **already exists** and is enforced |
+| Pre-push gate | secret scan, platform contract, review record with ultra mode for security-sensitive paths | **already exists**, but it is a **local Husky hook** — no CI workflow invokes it, so it is bypassable with `--no-verify` |
 | OpenCode permissions | actual tool access (global deny-list + `plan` read-only agent) | **already exists** |
-| Kernel `Permissions` | programmatic capability checks | **implemented, not wired to contracts** — see §6 |
-| Human approval | founder decision recorded in `mc_approval_requests` / `mc_decisions` | **already exists** |
+| Kernel `Permissions` | programmatic capability checks | **in-memory, per-process, grant-only, no deny semantics** (`check()` returns true for any `resource='*'` grant) — implemented, but **not** a contract enforcer: `allowed_tools[].mode:"deny"` has no implementation |
+| Human approval | founder decision recorded in `mc_approval_requests` / `mc_decisions` | **already exists**, but see `INDEPENDENT-REVIEW.md` (S1): the `pause`/`resume`/`retry`/`takeover` decision actions have **no writer** in the repository API |
 
 **The contract is a declaration that reviewers and the approval workflow can check. It is not, by
 itself, a capability grant.** An agent must never widen its own `allowed_tools`; a widened contract

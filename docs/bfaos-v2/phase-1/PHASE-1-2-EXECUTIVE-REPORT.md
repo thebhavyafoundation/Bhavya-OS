@@ -81,15 +81,17 @@ three conditional rule groups) plus **six fixtures** and an isolated validator.
 (kind already exists in the repository) and referenced by **`mc_jobs.task_contract_ids`** (column
 already exists). No new table, no schema change, no production write.
 
-**Validation result: 21 expectations satisfied, exit 0** — valid L0/L2/L3 fixtures accepted, boundary
-fixture accepted, two invalid fixtures rejected, version compatibility (1.0.0 accept / 1.1.0 accept /
-2.0.0 reject), minimal-required-only contract accepted, and **nine per-rule mutations each rejected**
-(unknown risk level, L2 without exclusions, L3 without assignment, L3 without founder approval, founder
-approval without independent review, non-zero USD, attempts above limit, unknown version, unknown
-property).
+**Validation result: 32 expectations satisfied, exit 0** — valid L0/L2/L3 fixtures accepted, boundary
+fixture accepted, two invalid fixtures rejected, version compatibility (1.0.0 / 1.1.0 / 1.2.0 / 1.10.0
+accepted; 2.0.0 and `1.0.0-rc1` rejected), minimal-required-only contract accepted, and **eighteen
+per-rule mutations each rejected** (including the ones the independent review found untested: empty
+assignment, non-date-time value, credential and learner-id values in `metadata`, budget without `usd`,
+empty idempotency key, wrong checkpoint store).
 
 **Honest limitation:** the schema *declares*; it does not *enforce*. Enforcement remains OpenCode
-permissions + kernel `Permissions` + the pre-push gate + human approval. This is stated in the spec.
+permissions + the pre-push gate + human approval. Two rules are enforced by the validator rather than
+the schema (RFC-3339 timestamps, credential/learner-value guard) because JSON Schema 2020-12 cannot
+express them. This is stated in the spec.
 
 ## F. T-202 activity contract
 
@@ -123,20 +125,52 @@ acceptance.**
 
 ## I. Independent review findings
 
-See `INDEPENDENT-REVIEW.md` in this directory for the full review of the three contract specifications
-against schema compatibility, idempotency, permission enforcement, data exposure, retry safety,
-versioning, recoverability, backward compatibility and duplication. **Summary and required fixes are
-listed there; nothing in the specifications was modified as a result of the review — findings are
-recorded for founder decision.**
+An independent agent reviewed the three contract specifications against the repository ground truth
+without modifying anything. Its full report is recorded in `INDEPENDENT-REVIEW.md`.
+
+**Verdict (as returned):** criteria 3 (permission enforcement) passed with a qualification; criteria 1,
+4, 6, 8 and 9 returned **CONCERN**; criteria **2 (idempotency), 5 (retry safety), 7
+(recoverability) and 10 (test adequacy) FAILED**. Root cause identified by the reviewer: *"the
+specifications describe behaviour that the repository permits but does not expose."*
+
+**Corrections applied to the artefacts (the review was not ignored):**
+
+| Correction | Artefact |
+|---|---|
+| `contract_version` relaxed to any `1.x.y`; the false "minor versions accepted / 1.0–1.1 only" contradiction removed | schema |
+| `assigned` now requires at least one of `agent`/`role`/`producer` (the L3 rule was vacuous) | schema |
+| `budget` must state `usd`; `idempotency_key` must be non-empty | schema |
+| RFC-3339 timestamp enforcement added (the schema's `format` is advisory) | validator |
+| Credential/learner-value guard added over `metadata` and `evidence[].ref`; pattern set extended to `sk_live_`, `sk_proj_`, `gh[pousr]_`, `github_pat_`, `xox*-`, JWT, AWS session keys | validator |
+| Eighteen rule mutations now proven, including the ones the reviewer found untested | validator |
+| Invented `paused` status removed; D-08 alignment enforced | T-203 |
+| `task_contract` citation corrected (the enumerated kind belongs to the mission-graph node union, not to `McArtifact.kind`) and the **absence of any document-body column** stated | T-201 |
+| Kernel `Permissions` and the pre-push gate no longer described as enforcing layers | T-201 |
+| `mc_sessions.started_at` format corrected (SQLite local-time string, not ISO-8601 UTC) | T-202 |
+| Kernel `Idempotency` semantics stated accurately (TTL, `register` overwrite, `pending` meaning, no attempt counter) and `ReplayEngine` no longer called deterministic | T-203 |
+| `JOB_TRANSITIONS` reality added: `stopped`/`failed` are terminal, `queued` cannot reach `failed`/`stopped` | D-08 |
+
+**Four blockers remain open and are founder-gated** (they need production code changes this phase does
+not authorise):
+
+| ID | Blocker |
+|---|---|
+| **S1** | The decision log cannot be written: `mc_decisions` permits `pause`/`resume`/`retry`/`takeover`, but the repository exposes no writer for them and `endSession` writes no decision at all |
+| **S2/S3** | Kernel idempotency semantics contradict the specification, and `max_attempts` is not enforceable by the named mechanism |
+| **S4** | The replay classification has no enforcement point, and the existing `ReplayEngine` re-emits recorded actions by default |
+| **S7/S12/S13** | No column stores a contract or checkpoint body (`path`/`hash` are pointers only); `createArtifact` is not idempotent; storing contracts as artefacts changes job-completion semantics |
+
+**Consequence:** T-201 and T-203 are marked **BLOCKED on D-08 and D-09** in their headers, and the
+D-08 mapping is marked **contingent** on a `failJob`/`resumeJob` decision path.
 
 ## J. Checks and test evidence
 
 | Check | Command / method | Result |
 |---|---|---|
-| Contract schema + fixtures | `python docs/bfaos-v2/phase-1/validate-contracts.py` | **21/21 expectations, exit 0** |
-| Rule-by-rule mutation coverage | same | 9 mutations each rejected; both valid baselines accepted |
+| Contract schema + fixtures | `python docs/bfaos-v2/phase-1/validate-contracts.py` | **32/32 expectations, exit 0** — 3 valid fixtures + boundary accepted, 2 invalid rejected, 6 version-policy cases, minimal contract accepted |
+| Rule-by-rule mutation coverage | same | **18 mutations each rejected**; role-only assignment and both valid baselines accepted |
 | JSON parsing | all 7 JSON artefacts | all parse |
-| Markdown structure | `check-markdown.py` (21 files) | **0 structural issues** (one H1 each, table columns consistent, trailing newline, no tabs) |
+| Markdown structure | `check-markdown.py` (22 files) | **0 structural issues** (one H1 each, table columns consistent, trailing newline, no tabs) |
 | Link / path validation | `check-doc-links.py` | 0 broken links, 0 credential-shaped hits; 6 paths adjudicated (§K) |
 | UTF-8 integrity | scan for replacement characters | 0 across 21 documents |
 | CI on the branch | GitHub Actions | see the delivery section below |
@@ -146,8 +180,10 @@ recorded for founder decision.**
 | Flagged path | Adjudication |
 |---|---|
 | `docs/verification/2026-11-13-vercel-*-phase-1*.md` (3 refs) | **Cross-references to evidence that exists only as untracked files in the founder's main checkout** — not in the repository. Recommend committing them (founder decision). |
-| `_config/project-governance.md` (3 refs) | **Exists on the PR #62 branch, not on `master`** — the governance file this programme cites is itself part of the frozen PR. Phase 0 documents cite it accurately for the PR #62 tree; the correction belongs with the PR #62 merge. |
-| `docs/releases/opennext-libsql-incident.md` | **Intentional** — the path is cited as absent from `master` because PR #37 adds it. |
+| `_config/project-governance.md` (4 refs) | **Exists on the PR #62 branch, not on `master`** — the governance file this programme cites is itself part of the frozen PR. Phase 0 documents cite it accurately for the PR #62 tree; the correction belongs with the PR #62 merge. |
+| `docs/releases/opennext-libsql-incident.md` (2 refs) | **Intentional** — the path is cited as absent from `master` because PR #37 adds it. |
+
+**8 references in total; none is a broken link** (0 broken relative links, 0 credential-shaped hits).
 
 ## L. Remaining founder decisions and blocked tasks
 
