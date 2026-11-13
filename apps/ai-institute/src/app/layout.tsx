@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SkipLink } from "@/components/SkipLink";
 import { AppProviders } from "@/lib/providers/AppProviders";
 
 const inter = Inter({
@@ -48,6 +49,10 @@ export default function RootLayout({
         className={`${inter.className} ${playfair.className}`}
       >
         <AppProviders>
+          {/* The skip link must be the first focusable element on the page,
+              before the header's navigation, so that a keyboard user can
+              bypass it in one keystroke. */}
+          <SkipLink />
           <SiteHeader variant="default" />
           <main id="main-content">{children}</main>
           <SiteFooter />
