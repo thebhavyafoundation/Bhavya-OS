@@ -392,3 +392,66 @@ test.describe("Acceptance - layout and resilience", () => {
     console.log(recorder.report());
   });
 });
+
+test.describe("Acceptance - hydration and progress", () => {
+  test("the lesson route hydrates without a hydration error", async ({
+    page,
+  }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") errors.push(message.text());
+    });
+
+    await page.goto(LESSON_ROUTE, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("h1", { timeout: 30_000 });
+    // Give React time to hydrate and to report a mismatch if there is one.
+    await page.waitForTimeout(3000);
+
+    const hydrationErrors = errors.filter((message) =>
+      message.includes("#418"),
+    );
+    expect(
+      hydrationErrors,
+      "the lesson route must hydrate without a hydration mismatch",
+    ).toEqual([]);
+  });
+
+  test("the curriculum index reads progress without writing it", async ({
+    page,
+  }) => {
+    const progressRequests: Array<{
+      action?: string;
+      completedModules?: unknown;
+    }> = [];
+
+    page.on("request", (request) => {
+      if (!request.url().includes("/api/student/progress")) return;
+      let parsed: {
+        action?: string;
+        data?: { completedModules?: unknown };
+      } = {};
+      try {
+        parsed = JSON.parse(request.postData() ?? "{}");
+      } catch {
+        parsed = {};
+      }
+      progressRequests.push({
+        action: parsed.action,
+        completedModules: parsed.data?.completedModules,
+      });
+    });
+
+    await page.goto("/curriculum", { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("h1", { timeout: 30_000 });
+    await page.waitForTimeout(3000);
+
+    for (const request of progressRequests) {
+      expect(request.action).toBe("syncCurriculumProgress");
+      expect(
+        request.completedModules,
+        "opening the curriculum index must not write progress",
+      ).toBeUndefined();
+    }
+  });
+});
