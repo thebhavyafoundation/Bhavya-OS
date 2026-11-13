@@ -8,6 +8,7 @@ import {
   serializeCheckpoint,
   sha256,
   verifyCheckpoint,
+  type CheckpointInput,
 } from "../checkpoint/index.js";
 
 /**
@@ -19,7 +20,7 @@ import {
  * incompatible versions, missing identity and unknown external state are all
  * refused.
  */
-const baseInput = () => ({
+const baseInput = (): CheckpointInput => ({
   jobId: "job-1",
   sessionId: "session-1",
   attempt: 1,
@@ -38,7 +39,7 @@ const baseInput = () => ({
     instructions: "Re-run the remote verification, then request review.",
     doNotReplay: ["deploy"],
     inspectBeforeReplay: ["pr-create"],
-    externalState: "not-applied" as const,
+    externalState: "not-applied",
   },
 });
 
@@ -149,7 +150,6 @@ describe("checkpoint envelope", () => {
       expect(result.errors.join(" ")).toMatch(/externalState/);
     }
   });
-
   it("refuses a do-not-replay list that names an idempotent action", () => {
     const input = baseInput();
     input.recovery.doNotReplay = ["read"];

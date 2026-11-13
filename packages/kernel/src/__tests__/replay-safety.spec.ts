@@ -91,7 +91,9 @@ describe("replay guard", () => {
 
 describe("ReplayEngine hazard characterisation", () => {
   it("re-emits recorded events, so an un-guarded replay repeats side effects", async () => {
-    const handler = vi.fn(async () => {});
+    const handler = vi.fn(
+      async (_type: string, _payload: Record<string, unknown>) => {},
+    );
     const history: Array<{ type: string; payload: Record<string, unknown>; context?: { executionId: string } }> = [
       {
         type: "deploy.completed",

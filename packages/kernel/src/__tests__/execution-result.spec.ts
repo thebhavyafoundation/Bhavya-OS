@@ -31,6 +31,9 @@ describe("execution result policy", () => {
     expect(Object.keys(EXECUTION_RESULT_POLICY).sort()).toEqual(
       [...ALL_CODES].sort(),
     );
+    for (const code of ALL_CODES) {
+      expect(EXECUTION_RESULT_POLICY[code]).toBeTruthy();
+    }
   });
 
   it("maps every code onto an existing kernel execution state", () => {
@@ -54,7 +57,12 @@ describe("execution result policy", () => {
   });
 
   it("never marks a permanent failure or a policy denial as retryable", () => {
-    for (const code of ["permanent_failure", "policy_denied", "unknown_failure"]) {
+    const terminalCodes: ExecutionResultCode[] = [
+      "permanent_failure",
+      "policy_denied",
+      "unknown_failure",
+    ];
+    for (const code of terminalCodes) {
       const policy = EXECUTION_RESULT_POLICY[code];
       expect(policy.retryable).toBe(false);
       expect(policy.requiresHuman).toBe(true);
