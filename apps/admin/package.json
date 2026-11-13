@@ -1,25 +1,28 @@
 {
-  "name": "@bhavya/admin-app",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --port 3003",
-    "build": "next build",
-    "start": "next start --port 3003",
-    "lint": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@bhavya/auth": "workspace:*",
-    "@bhavya/mission-runtime": "workspace:*",
-    "@bhavya/platform-ui": "workspace:*",
-    "@bhavya/sdk": "workspace:*",
-    "next": "15.5.25",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
-    "@bhavya/eslint": "workspace:*",
-    "@bhavya/typescript": "workspace:*"
-  }
+    "name":  "@bhavya/admin-app",
+    "version":  "0.1.0",
+    "private":  true,
+    "scripts":  {
+                    "dev":  "next dev --port 3003",
+                    "build":  "next build",
+                    "start":  "next start --port 3003",
+                    "lint":  "eslint . --max-warnings=0",
+                    "typecheck":  "tsc --noEmit",
+                    "test":  "vitest run",
+                    "test:watch":  "vitest"
+                },
+    "dependencies":  {
+                         "@bhavya/auth":  "workspace:*",
+                         "@bhavya/mission-runtime":  "workspace:*",
+                         "@bhavya/platform-ui":  "workspace:*",
+                         "@bhavya/sdk":  "workspace:*",
+                         "next":  "15.5.25",
+                         "react":  "19.2.4",
+                         "react-dom":  "19.2.4"
+                     },
+    "devDependencies":  {
+                            "@bhavya/eslint":  "workspace:*",
+                            "@bhavya/typescript":  "workspace:*",
+                            "vitest":  "^3.2.1"
+                        }
 }
