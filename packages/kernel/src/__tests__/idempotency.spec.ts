@@ -167,7 +167,7 @@ describe("kernel Idempotency", () => {
     );
   });
 
-  it("does not expire a reloaded key (documented defect in the reload path)", async () => {
+  it("expires a reloaded key exactly like an in-memory one", async () => {
     const shortLived = new Idempotency({ root, ttlMs: 1 });
     await shortLived.initialize();
     await shortLived.register("job-reload", "exec-1");
@@ -177,13 +177,13 @@ describe("kernel Idempotency", () => {
     const inProcess = await shortLived.shouldExecute("job-reload");
     expect(inProcess.reason).toBe("key_not_found");
 
-    // ...but after a reload the persisted expiresAt is a string and the
-    // implementation compares it numerically, so the key never expires.
-    // Pinned here so the defect is visible; the fix is a separate task.
+    // ...and after a reload the persisted ISO-8601 expiry is normalised, so
+    // the key expires the same way. (This previously failed: the persisted
+    // string was compared numerically, producing NaN and never expiring.)
     const reloaded = new Idempotency({ root, ttlMs: 1 });
     await reloaded.initialize();
     const afterReload = await reloaded.shouldExecute("job-reload");
-    expect(afterReload.proceed).toBe(false);
-    expect(afterReload.reason).toBe("already_in_progress");
+    expect(afterReload.proceed).toBe(true);
+    expect(afterReload.reason).toBe("key_not_found");
   });
 });
