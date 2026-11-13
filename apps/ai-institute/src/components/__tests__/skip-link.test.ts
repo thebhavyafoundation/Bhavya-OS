@@ -1,10 +1,23 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { readFileSync } from "fs";
 import { join } from "path";
 
 import { SkipLink } from "@/components/SkipLink";
+
+// Render the real root layout with the font loaders mocked. The point is not
+// to re-test the fonts; the point is to verify that the skip link is the
+// first focusable element before the header, which is an accessibility
+// contract, not a source-shape preference.
+vi.mock("next/font/google", () => ({
+  Inter: () => ({ variable: "--font-sans", className: "font-sans" }),
+  Playfair_Display: () => ({ variable: "--font-display", className: "font-display" }),
+}));
+
+vi.mock("next/font/google/shared-font-utils.js", () => ({}));
+
+import RootLayout from "@/app/layout";
 
 /**
  * The skip link guards WCAG 2.4.1 (Bypass Blocks).
@@ -16,7 +29,6 @@ import { SkipLink } from "@/components/SkipLink";
  */
 
 const SRC_ROOT = join(__dirname, "../..");
-const layoutSource = readFileSync(join(SRC_ROOT, "app/layout.tsx"), "utf-8");
 const globalStyles = readFileSync(join(SRC_ROOT, "app/globals.css"), "utf-8");
 
 describe("skip link", () => {
@@ -28,18 +40,27 @@ describe("skip link", () => {
     expect(markup).toContain("Skip to content");
   });
 
-  it("renders the link before the site's navigation", () => {
-    const skipLinkAt = layoutSource.indexOf("<SkipLink");
-    const headerAt = layoutSource.indexOf("<SiteHeader");
+  it("renders the link before the site's navigation in the root layout", () => {
+    const markup = renderToStaticMarkup(
+      createElement(RootLayout, { children: createElement("p", null, "content") }),
+    );
 
-    expect(skipLinkAt).toBeGreaterThan(-1);
-    expect(headerAt).toBeGreaterThan(-1);
-    expect(skipLinkAt).toBeLessThan(headerAt);
+    const skipLinkAt = markup.indexOf('class="skip-link"');
+    const navAt = markup.indexOf("<nav");
+    const mainAt = markup.indexOf('<main id="main-content">');
+
+    expect(skipLinkAt, "root layout renders the skip link").toBeGreaterThan(-1);
+    expect(navAt, "root layout renders the site navigation").toBeGreaterThan(-1);
+    expect(mainAt, "root layout renders the main content landmark").toBeGreaterThan(-1);
+    expect(skipLinkAt).toBeLessThan(navAt);
+    expect(skipLinkAt).toBeLessThan(mainAt);
   });
 
   it("points at an element that exists", () => {
-    // A skip link to a missing target does nothing when activated.
-    expect(layoutSource).toMatch(/<main\s+id="main-content"/);
+    const markup = renderToStaticMarkup(
+      createElement(RootLayout, { children: createElement("p", { id: "main-content-child" }, "content") }),
+    );
+    expect(markup).toMatch(/<main\s+id="main-content"/);
   });
 
   it("is revealed when it takes focus", () => {
