@@ -15,6 +15,27 @@ This is a record, not a plan of record. Nothing here has been started.
 
 ---
 
+## Merging this branch
+
+**This branch descends from PR #62's head**, so it carries PR #62's
+commits with it: `git log origin/master..HEAD` lists 35 commits, 34 of
+them PR #62's.
+
+**Do not merge this branch into `master` before PR #62 is merged.** Doing
+so would bring PR #62's work in through the back door, bypassing its draft
+review and its subject-matter gate.
+
+Two safe ways to land this file:
+
+1. Merge it **after** PR #62 is merged. Then the branch is one commit
+   ahead of `master` and the merge is the single record commit.
+2. Cherry-pick the single commit onto `master`:
+   `git cherry-pick 931bb058`.
+
+Option 2 is independent of PR #62's merge order.
+
+---
+
 ## 1. Assessment route: render-time randomness can break hydration
 
 **Severity:** the same class as the defect fixed on the lesson route in
