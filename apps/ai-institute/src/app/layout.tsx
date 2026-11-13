@@ -21,11 +21,22 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-// The metadata itself lives in `src/lib/seo/site-metadata.ts` so that the
-// favicon and asset references are assertable from a test. The browser's
-// default /favicon.ico is not in public/, and nothing declared the SVG that
-// is there, which is why the homepage produced one console error.
 export const metadata: Metadata = siteMetadata;
+
+// Public content pages are prerendered with no per-request data, so sharing
+// them at the edge is correct. They opt into incremental static regeneration
+// with a five-minute window: long enough to serve from the CDN, short
+// enough that a content correction is live within minutes rather than a
+// year (risk R-15, approved 2026-11-13).
+//
+// Authenticated, personalized and administrative surfaces are unaffected:
+// those routes are dynamic (cookies or force-dynamic) or redirect at the
+// middleware before rendering, and the fail-closed cache policy in
+// src/lib/http/cache-policy.ts governs them.
+//
+// Descendants may set a stricter static level (for example 0) but not a
+// weaker one; Next.js makes such a combination fail the build.
+export const revalidate = 300;
 
 export default function RootLayout({
   children,
