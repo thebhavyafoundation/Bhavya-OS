@@ -27,14 +27,25 @@ may remain invisible for a year").
 Authenticated, personalised and administrative surfaces carry `Cache-Control: private, no-store`,
 set in the middleware (`src/middleware.ts`, policy authority `src/lib/http/cache-policy.ts`):
 
-- `/api/**` — no API route produces a response appropriate for a shared cache;
+- `/api/**` - no API route produces a response appropriate for a shared cache;
 - the private prefixes derived from `isProtectedRoute` in the middleware: `/app`, `/dashboard`,
   `/studio`, `/onboarding`, `/account`, `/profile`, `/settings`;
 - `/os/admin`, `/os/mission`, `/os/operations`, `/os/governance`, `/os/finance`, `/os/projects`,
-  `/os/coach`, `/os/approvals`, `/os/inventory` — administrative Mission Control surfaces.
+  `/os/coach`, `/os/approvals`, `/os/inventory` - administrative Mission Control surfaces.
 
 The policy is **fail-closed for the private surface** and **deliberately silent** everywhere else:
 public pages keep the framework default and this module does not claim them.
+
+One mechanism subtlety, recorded so the policy is not over-read: Next.js applies middleware
+response headers only when a header with that name is absent on the outbound response, and
+`Cache-Control` is not in the multi-value allowlist. On any route where Next.js has already set
+`Cache-Control` (all prerendered pages serve `s-maxage=31536000`), the middleware's value is
+silently ignored; on dynamic responses with no framework-set header, the middleware value is used.
+This makes the policy a declaration of intent for dynamic and API surfaces, not a guarantee on
+prerendered pages. The authenticated surfaces are safe in practice anyway: they redirect at the
+middleware or render dynamically. This caveat is why the public-page TTL fix is phrased as
+`export const revalidate = 300` on the content routes, whose header Next.js does honour, rather
+than as a middleware override.
 
 `/_next/static/**` — content-hashed assets — is declared explicitly as
 `Cache-Control: public, max-age=31536000, immutable` in `next.config.mjs`. These URLs change when
