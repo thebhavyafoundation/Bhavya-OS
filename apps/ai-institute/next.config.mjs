@@ -101,6 +101,19 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // The only assets safe to cache for a year with no revalidation are
+        // the ones whose URL changes when their content changes. Next.js
+        // already serves these with that policy; declaring it here makes the
+        // policy explicit rather than implicit in the framework default.
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };
