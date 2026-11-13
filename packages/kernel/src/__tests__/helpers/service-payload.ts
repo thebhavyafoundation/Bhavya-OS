@@ -8,12 +8,12 @@
 // `resource`, `report`, `summary`, `entries` and so on. The `result` property
 // is never populated, so the declared type is narrower than the runtime
 // contract.
-//
+
 // The legacy harnesses destructured those named fields, and their runtime
 // behaviour still holds; only the declared type drifted. Rather than cast at
 // every call site, the migrated specifications name the payload fields once
 // here.
-//
+
 // Nothing in the repository consumes these services today, so the mismatch is
 // latent rather than a live defect. Widening ten public service signatures is
 // a separate change from migrating the specifications, so it is recorded as a
