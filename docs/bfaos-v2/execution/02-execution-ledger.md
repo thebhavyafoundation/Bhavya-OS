@@ -100,6 +100,12 @@ Recorded in full in `04-phase-4-execution-log.md`: the idempotency reload defect
 the structured execution-result contract, the kernel ↔ Mission Control interface map, and the
 specification typechecking with a proven-failing runner check.
 
+An **independent review** of those four commits returned the verdict **CONCERNS** — one HIGH, four
+MEDIUM and ten LOW findings. Every HIGH and MEDIUM finding is resolved; the resolutions and the
+revisions to the map's own claims are listed in the Phase 4 log. One finding corrected a false
+verification claim in that log: the anti-slop gate failed at the reviewed commit, and the log now
+records that instead of the opposite.
+
 ---
 
 ## Task queue status
