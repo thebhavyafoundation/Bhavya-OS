@@ -50,6 +50,21 @@ export interface ResourceInput {
   typeFilter?: string;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type ResourceExecuteResult =
+  | { success: boolean }
+  | { success: boolean; resource?: Resource }
+  | { success: boolean; resources: Resource[] };
+
 export class ResourceRegistry {
   name = "resources";
   description = "Track all resources belonging to missions";
@@ -76,7 +91,7 @@ export class ResourceRegistry {
 
   async execute(
     input: ResourceInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<ResourceExecuteResult> {
     switch (input.action) {
       case "register":
         return this.register(input);

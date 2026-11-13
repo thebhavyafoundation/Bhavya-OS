@@ -39,6 +39,23 @@ export interface ImpactInput {
   reportId?: string;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type ImpactExecuteResult =
+  | { success: boolean }
+  | { success: boolean; comparison: Record<string, unknown> }
+  | { success: boolean; report?: ImpactReport }
+  | { success: boolean; reports: ImpactReport[] }
+  | { success: boolean; summary: Record<string, unknown> };
+
 export class ImpactRegistry {
   name = "impact";
   description = "Measurable outcomes, metrics, reporting for every mission";
@@ -65,7 +82,7 @@ export class ImpactRegistry {
 
   async execute(
     input: ImpactInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<ImpactExecuteResult> {
     switch (input.action) {
       case "record-metric":
         return this.recordMetric(input);

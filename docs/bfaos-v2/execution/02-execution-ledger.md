@@ -100,6 +100,12 @@ Recorded in full in `04-phase-4-execution-log.md`: the idempotency reload defect
 the structured execution-result contract, the kernel ↔ Mission Control interface map, and the
 specification typechecking with a proven-failing runner check.
 
+**Phase 4.1 · Service execution-result reconciliation (T-204)** — recorded in
+`05-service-result-compatibility.md`: every institution and artifact service whose `execute()`
+declared `Promise<{ success, result? }>` now declares a precise, exported union of the payload
+shapes its action handlers actually return. Type-level widening only — zero runtime change. A new
+`research-service.spec.ts` covers the one previously-uncovered widened contract.
+
 An **independent review** of those four commits returned the verdict **CONCERNS** — one HIGH, four
 MEDIUM and ten LOW findings. Every HIGH and MEDIUM finding is resolved; the resolutions and the
 revisions to the map's own claims are listed in the Phase 4 log. One finding corrected a false
