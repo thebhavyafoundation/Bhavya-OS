@@ -114,8 +114,10 @@ function isFiniteNumber(value: unknown): value is number {
 
 /**
  * Stable serialisation: object keys are emitted in sorted order and
- * undefined / NaN / Infinity are rejected rather than silently coerced, so two
- * different payloads cannot canonicalise to the same string.
+ * undefined / NaN / Infinity are rejected rather than silently coerced, so a
+ * top-level value or array element of those kinds cannot canonicalise to the
+ * same string as a null. (An object property whose value is undefined is still
+ * dropped, so `{a: undefined}` and `{}` share a canonical form.)
  */
 export function canonicalize(value: unknown): string {
   if (value === undefined) {

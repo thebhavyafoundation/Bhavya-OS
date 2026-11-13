@@ -85,7 +85,7 @@ export interface FieldClassification {
 export interface ContractEnforcement {
   allowedTools: string[];
   deniedTools: string[];
-  /** Every tool the contract grants that carries an irreversible effect. */
+  /** Every tool the contract grants that carries an irreversible or unclassified effect. */
   unsafeToolsGranted: string[];
   /** Unsafe tools granted without founder approval — the error condition. */
   unsafeToolsWithoutApproval: string[];
