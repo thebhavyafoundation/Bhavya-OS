@@ -94,7 +94,21 @@ Two independent reviewers examined the change and returned **FAIL**. Findings an
 
 ---
 
-## Phase 4 (T-200 … T-203)
+## Phase 4.2 — founder-authorized cache implementation and reliability fixes
+
+Delivered across three commits in `feat/bhavya-product-quality` (PR #71, head `e5245ae7`): the
+**founder-approved** public-content revalidation policy (`export const revalidate = 300` on the
+root layout, verified live on the Cloudflare preview — public pages serve
+`s-maxage=300, stale-while-revalidate=31535700`; API and authenticated routes stay
+`private, no-store`), the **deterministic IOC database bootstrap** (`getDb()` self-applies the
+two committed migrations synchronously, with a byte-identical parity spec and a
+tampered-ledger refusal test), the skip-link specifications made **behavioural** (rendered markup),
+and the `public/_headers` companion for immutable static assets. The tracked development-database
+procedure is recorded in `08-tracked-database-preservation.md` on this branch.
+
+---
+
+## Phase 4 (T-200 through T-204)
 
 Recorded in full in `04-phase-4-execution-log.md`: the idempotency reload defect (fixed and proven),
 the structured execution-result contract, the kernel ↔ Mission Control interface map, and the
