@@ -116,8 +116,7 @@ export interface PeopleInput {
     | "search"
     | "get-by-role"
     | "get-by-skill";
-  personId?: string;
-  firstName?: string;
+  personId?: string;  firstName?: string;
   lastName?: string;
   email?: string;
   phone?: string;
@@ -135,6 +134,21 @@ export interface PeopleInput {
   query?: string;
   status?: Person["status"];
 }
+
+/**
+ * The honest result shape of `PeopleRegistry.execute`.
+ *
+ * The private action handlers return their payload under named keys
+ * (`person`, `people`). The public signature used to declare
+ * `{ success, result? }`, which lost those keys at the type level, so a
+ * caller reading the declared type could never see the payload. The union
+ * below reflects what the handlers actually return. Nothing at runtime
+ * changes; a type-level widening is all this is.
+ */
+export type PeopleExecuteResult =
+  | { success: boolean }
+  | { success: boolean; person?: Person }
+  | { success: boolean; people: Person[] };
 
 export class PeopleRegistry {
   name = "people";
@@ -166,7 +180,7 @@ export class PeopleRegistry {
 
   async execute(
     input: PeopleInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<PeopleExecuteResult> {
     switch (input.action) {
       case "register":
         return this.register(input);

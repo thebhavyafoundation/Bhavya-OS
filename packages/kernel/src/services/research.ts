@@ -22,6 +22,20 @@ export interface ResearchInput {
   query?: string;
 }
 
+/**
+ * The honest result shape of `ResearchService.execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ artifacts, success, results? }`, which lost
+ * the `summary` key the summarize action returns. This union reflects what
+ * the handlers actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type ResearchExecuteResult =
+  | { artifacts: Artifact[]; success: boolean }
+  | { artifacts: Artifact[]; success: boolean; results?: Array<{ title: string; content: string; topic: string }> }
+  | { artifacts: Artifact[]; success: boolean; summary: string };
+
 export class ResearchService implements InstitutionService {
   name = "research";
   description = "Ingest, index, search research content";
@@ -57,11 +71,7 @@ export class ResearchService implements InstitutionService {
 
   async execute(
     input: ResearchInput,
-  ): Promise<{
-    artifacts: Artifact[];
-    success: boolean;
-    results?: Array<{ title: string; content: string; topic: string }>;
-  }> {
+  ): Promise<ResearchExecuteResult> {
     const artifacts: Artifact[] = [];
 
     switch (input.action) {

@@ -69,6 +69,21 @@ export interface ProjectInput {
   approver?: string;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type ProjectExecuteResult =
+  | { success: boolean }
+  | { success: boolean; project?: Project }
+  | { success: boolean; projects: Project[] };
+
 export class ProjectsService {
   name = "projects";
   description = "Project lifecycle, milestones, impact metrics";
@@ -96,7 +111,7 @@ export class ProjectsService {
 
   async execute(
     input: ProjectInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<ProjectExecuteResult> {
     switch (input.action) {
       case "create":
         return this.create(input);
