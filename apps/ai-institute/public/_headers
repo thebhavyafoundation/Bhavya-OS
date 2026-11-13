@@ -1,0 +1,9 @@
+# https://developers.cloudflare.com/workers/static-assets/headers
+# https://opennext.js.org/cloudflare/caching#static-assets-caching
+#
+# The Workers ASSETS binding serves hashed /_next/static files and applies its
+# own default Cache-Control unless told otherwise. This file is the supported
+# way to give those assets a year of immutable caching, and it does not rely on
+# or interact with Next's `headers()` (which the binding does not read).
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
