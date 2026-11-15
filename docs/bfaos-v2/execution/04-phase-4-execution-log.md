@@ -122,3 +122,100 @@ deployed application calls them. Wiring is blocked on **D-08** (job status vocab
   payload under a *named* field, so `result` is never populated. No repository code consumes these
   services today, so the mismatch is latent rather than live; widening ten public signatures is a
   separate change from the harness migration and is recorded rather than folded in.
+
+
+## Phase 4.3 - release assurance, preview identity and migration governance (2026-11-15)
+
+Note. The Phase 4 review was planned to be re-run by an independent subagent. That run could not
+start: the free usage limit for the model provider was reached. The review below was therefore
+performed inline by the author of the work, which is weaker evidence than an independent review.
+Every claim is labelled with the evidence behind it.
+
+### Repository state (verified)
+
+- PR #69 (kernel contracts), head 070f094 -> 6f8ec07a (release-dependency document only): all nine
+  checks green at the new head, including the OpenNext preview deploy.
+- PR #70 (harness migration), head 735f3c6, base feat/bfaos-phase4-contracts: all four checks
+  green; the stacked diff is still exactly 10 files with no phantom changes from the base.
+- PR #71 (product quality), head 85f6645 -> 0399fffc -> c1424454 -> 97e6b632: test, lint-and-typecheck,
+  secret-scan, Platform contract, Build preview bundle, OpenNext build and Deploy preview to
+  Cloudflare are green at 97e6b632; `build` failed again with the known transient
+  `TypeError: Cannot read properties of null (reading '1')` while every other build of the same
+  tree succeeded.
+- Local `master` (5f61a802) is behind origin/master (98388dd); the protected checkout is on
+  feat/visual-learning-batch with untracked user/agent files, untouched. Production worker
+  bhavya-foundation is still 953f06bb (2026-10-30); the preview is overwritten on every deploy.
+
+### PR #71 build failures - root causes, both proven from logs
+
+- 37483f4f (20:14Z): TypeError: Cannot read properties of null (reading '1') - the intermittent
+  Google Fonts fetch, documented in PR #62's scripts/build-with-retry.sh. Passed unchanged on the
+  next push.
+- 85f66456 (20:44Z): react/no-children-prop as an **error** in ./src/components/__tests__/skip-link.test.ts.
+  Fixed in d4fdb6ef; `npx next lint --dir src` (the rule set the Next build uses) reports 0 errors
+  across the app. The app's own eslint does not apply that rule, which is why it was invisible before.
+- lint-and-typecheck failed at 0399fffc because the expireTime comment block was fifteen consecutive
+  comment lines, rejected by the anti-slop gate. Fixed in c1424454.
+
+### Preview identity (deployed and verified)
+
+The shared preview worker was unverifiable before this work: deployments from different branches
+overwrote each other and there was no way to tell which commit was serving.
+
+- GET /api/build-identity now reports the commit and the build time, with Cache-Control: no-store.
+  It never caches, discloses nothing beyond the commit and the timestamp, and answers 404 when the
+  build recorded nothing (production).
+- NEXT_PUBLIC_ variables never reach the server bundle; the value is written into
+  src/lib/build-info.generated.ts by apps/ai-institute/scripts/write-build-identity.mjs before the
+  build. The preview workflow records GITHUB_SHA, which for a pull_request event is the merge ref.
+- Deployed preview verified: HTTP 200 with
+  {"commit":"1d727b7be14a14f4105e527cd10d371c9bb9af48",...,"builtAt":"2026-11-15T17:15:44.832Z"},
+  and 1d727b7b was confirmed through the GitHub API to be the merge commit of 97e6b632 into
+  98388dd, i.e. the current preview serves PR #71's latest code.
+
+### R-15 cache semantics (measured, not assumed)
+
+- Next.js ISR emits s-maxage={revalidate}, stale-while-revalidate={expireTime - revalidate};
+  expireTime defaults to one year, yielding stale-while-revalidate=31535700 with revalidate=300.
+- Nothing caches the response today: no CF-Cache-Status, no Age, no KV/R2/D1 binding on the
+  deployed worker; x-nextjs-cache is MISS.
+- expireTime=900 is now pinned in next.config.mjs; the live preview serves
+  s-maxage=300, stale-while-revalidate=600 for / with x-nextjs-stale-time=300.
+- /api/health is private, no-store; /dashboard redirects to sign-in; /os is private, no-store.
+- Three specifications pin the arithmetic and fail when expireTime returns to the Next.js default.
+
+### Migration governance (IOC)
+
+- The ioC mirror now names its source file per migration and is the single list of migrations.
+- db-migration-governance.spec.ts fails on missing, extra or mismatched migrations, on ids or
+  checksums that the shared runner would not record, and on out-of-order mirrors. Demonstrated by
+  planting an unmirrored migration file: the spec failed, then passed once removed.
+- Application is atomic and serialised: the ledger is re-read inside an IMMEDIATE transaction, and
+  the migration SQL and its ledger row are applied together. Six specifications cover failure
+  atomicity, no-op on repeat, second-process serialisation and tampered-checksum refusal.
+- apps/ioc/docs/migration-procedure.md records the procedure for adding a migration.
+- ai-institute/007_content_os_core_entities is an ai-institute migration, not an IOC one; the pending
+  migration sequence on the development database is unchanged, and bhavya.db is unmodified and uncommitted.
+
+### Release decision record (findings preserved)
+
+MEDIUM: (m1) The preview worker belongs to whichever deployment ran last; the build-identity
+endpoint is the only reliable way to know. (m2) Nothing caches the ISR pages today, so the cache
+policy has no runtime effect until a binding or cache rule is deliberately enabled. (m3) The CI
+build still fails intermittently on the Google Fonts fetch; the repair lives in PR #62. (m4) The
+independent review of this increment ran inline, not independently.
+
+LOW: (l1) The build-identity endpoint is unauthenticated by design and carries only public facts,
+but its presence is now part of the attack surface and should be reviewed with the merge.
+(l2) The anti-slop gate counts comment paragraphs as wall-of-comments, which failed the build once;
+empty lines are the documented separator.
+
+Verdicts: PR #69 ACCEPT; PR #70 ACCEPT (blocked only by merging after #69); PR #71 ACCEPT WITH
+CONCERNS - it must not be described as an unconditional pass; the concerns are (m1)-(m4) and the
+fact that merge triggers the production deploy.
+
+### Release order (founder decision; nothing was merged)
+
+#62 (carries the CI font-flake repair) then #63, then #64/#65, then #66 -> #67 -> #68 -> #69,
+then #70, then #71. Merging into master is a production deployment; no PR was merged, closed,
+retargeted or rebased in this increment.
