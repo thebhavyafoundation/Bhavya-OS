@@ -25,22 +25,20 @@ const nextConfig = {
   poweredByHeader: false,
   // The stale window a shared cache may use for an ISR page.
   //
-  // Next.js defaults this to one year, so an ISR page is served with
-  // `stale-while-revalidate = expireTime - revalidate` — a year minus the
-  // revalidation period. The founder approved approximately 300-second
-  // revalidation for public content, and a year-long stale window contradicts
-  // that: a cache that honours it may serve a year-old page while it
-  // revalidates in the background.
-  //
-  // With expireTime = 900 and revalidate = 300 the header becomes
-  // `s-maxage=300, stale-while-revalidate=600`: the shared cache may serve a
-  // stale copy for at most ten minutes, and the edge revalidates within it.
-  //
-  // Today nothing caches the response — the worker has no incremental-cache
-  // binding and the edge does not cache worker responses — so this value is
-  // currently inert. It is set so that the policy is correct if a cache is
-  // ever enabled, rather than quietly waiting to become a year-long staleness
-  // window. See apps/ai-institute/docs/cache-control-policy.md.
+  // Next.js serves an ISR page with `stale-while-revalidate = expireTime -
+  // revalidate` and defaults expireTime to one year, so a 300-second
+  // revalidation would otherwise allow a cache to serve a year-old page while
+  // it revalidates in the background.
+
+  // With expireTime = 900 the header becomes `s-maxage=300,
+  // stale-while-revalidate=600`: a shared cache may serve a stale copy for at
+  // most ten minutes.
+
+  // Nothing caches the response today - the worker has no incremental-cache
+  // binding and the edge does not cache worker responses - so the value is
+  // currently inert. It is set so the policy is correct if a cache is ever
+  // enabled. The measurements are in
+  // apps/ai-institute/docs/cache-control-policy.md.
   expireTime: 900,
   transpilePackages: [
     "@bhavya/platform-ui",
