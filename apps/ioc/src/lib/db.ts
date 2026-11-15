@@ -5,16 +5,36 @@ import type Database from "better-sqlite3";
 let db: Database.Database | null = null;
 
 /**
- * The IOC migration SQL, mirrored inline as plain strings so initialization is
- * fully synchronous. `better-sqlite3` has no asynchronous surface, so the
- * asynchronous migration runner in `@bhavya/database/migrate` (which dynamic-
- * imports the migration files) cannot be awaited from this synchronous API.
+ * A migration mirrored inside the application.
  *
- * The strings below are byte-identical to the `up`/`down` text of the
- * migration files in packages/database/migrations/ioc, and
- * test/db-migrations.spec.ts asserts they remain identical. Any drift fails
- * the spec, never the app.
+ * `better-sqlite3` has no asynchronous surface, so the asynchronous migration
+ * runner in `@bhavya/database/migrate` - which dynamic-imports the migration
+ * files - cannot be awaited from this synchronous API. The two IOC migrations
+ * are therefore mirrored here as plain strings.
+ *
+ * Mirroring is only safe if it cannot drift. Two things keep it honest:
+ *
+ *   - `db-migrations.spec.ts` reads the migration files and compares them with
+ *     these strings, and fails when a migration is missing, extra, or does not
+ *     match its file byte for byte;
+ *   - the ids and checksums are the ones the shared runner records, so a
+ *     database migrated by either engine is recognised by the other.
+ *
+ * Adding a migration? See `apps/ioc/docs/migration-procedure.md`.
  */
+
+export interface EmbeddedMigration {
+  /** Id recorded in the `_migrations` ledger. */
+  id: string;
+  /** Name recorded in the `_migrations` ledger. */
+  name: string;
+  /** The migration file this mirrors, relative to packages/database/migrations/ioc. */
+  source: string;
+  /** SQL that applies the migration. */
+  up: string;
+  /** SQL that rolls the migration back. */
+  down: string;
+}
 
 const BASELINE_UP = `
 -- Institutions
@@ -252,26 +272,47 @@ DROP INDEX IF EXISTS idx_ioc_media_assets_kp;
 DROP INDEX IF EXISTS idx_ioc_student_feedback_kp;
 `;
 
-const MIGRATIONS = [
+
+export const IOC_MIGRATIONS: EmbeddedMigration[] = [
   {
     id: "ioc/001_baseline_schema",
     name: "001_baseline_schema",
+    source: "001_baseline_schema.ts",
     up: BASELINE_UP,
     down: BASELINE_DOWN,
   },
   {
     id: "ioc/002_add_fk_indexes",
     name: "002_add_fk_indexes",
+    source: "002_add_fk_indexes.ts",
     up: FK_UP,
     down: FK_DOWN,
   },
 ];
 
-function checksum(migration: { id: string; name: string; up: string; down: string }): string {
+/** The checksum the shared migration runner records for a migration. */
+export function migrationChecksum(migration: EmbeddedMigration): string {
   return computeChecksum(migration);
 }
 
-function applyMigrationsSync(database: Database.Database): void {
+/**
+ * Apply every pending migration to a database.
+ *
+ * The whole migration - its SQL and its ledger row - is applied inside one
+ * transaction, so a failure leaves no partial state: the schema change is
+ * rolled back with the ledger row.
+ *
+ * The ledger is re-read inside the transaction. The transaction takes its write
+ * lock immediately, so a second process that started earlier and found the
+ * migration missing will see it applied by the time it holds the lock, and skip
+ * it instead of failing on the ledger's primary key.
+ *
+ * @returns one entry per migration: "applied", "already-applied" or "skipped".
+ */
+export function applyMigrationsSync(
+  database: Database.Database,
+  migrations: EmbeddedMigration[] = IOC_MIGRATIONS,
+): Array<"applied" | "already-applied" | "skipped"> {
   database.exec(
     `CREATE TABLE IF NOT EXISTS _migrations (
       id TEXT PRIMARY KEY,
@@ -281,37 +322,47 @@ function applyMigrationsSync(database: Database.Database): void {
     );`,
   );
 
-  const appliedRows = database.prepare(`SELECT id, checksum FROM _migrations`).all() as Array<{
-    id: string;
-    checksum: string;
-  }>;
-  const applied = new Map(appliedRows.map((row) => [row.id, row.checksum]));
-
+  const selectChecksum = database.prepare(
+    `SELECT checksum FROM _migrations WHERE id = ?`,
+  );
   const insert = database.prepare(
     `INSERT INTO _migrations (id, name, checksum) VALUES (?, ?, ?)`,
   );
 
-  for (const migration of MIGRATIONS) {
-    const expected = checksum(migration);
-    const existing = applied.get(migration.id);
+  const outcomes: Array<"applied" | "already-applied" | "skipped"> = [];
 
-    if (existing !== undefined) {
-      if (existing !== expected) {
-        throw new Error(
-          `ioc migration ${migration.id} has a checksum recorded in ` +
-            `_migrations that does not match the migration content. ` +
-            `Refusing to run against an edited migration. Restore the ` +
-            `migration content or recreate the scratch database.`,
-        );
+  for (const migration of migrations) {
+    const applyOne = database.transaction((pending: EmbeddedMigration) => {
+      const expected = migrationChecksum(pending);
+      // Re-read under the write lock: another process may have applied this
+      // migration between our first read and this transaction.
+      const existing = selectChecksum.get(pending.id) as
+        | { checksum: string }
+        | undefined;
+
+      if (existing) {
+        if (existing.checksum !== expected) {
+          throw new Error(
+            `ioc migration ${pending.id} has a checksum recorded in ` +
+              `_migrations that does not match the migration content. ` +
+              `Refusing to run against an edited migration. Restore the ` +
+              `migration content or recreate the scratch database.`,
+          );
+        }
+        return "already-applied" as const;
       }
-      continue;
-    }
 
-    database.transaction(() => {
-      database.exec(migration.up);
-      insert.run(migration.id, migration.name, expected);
-    })();
+      database.exec(pending.up);
+      insert.run(pending.id, pending.name, expected);
+      return "applied" as const;
+    });
+
+    // Immediate: take the write lock now, so two processes initialising the
+    // same database serialise instead of racing.
+    outcomes.push(applyOne.immediate(migration));
   }
+
+  return outcomes;
 }
 
 /**
@@ -320,8 +371,8 @@ function applyMigrationsSync(database: Database.Database): void {
  *
  * Initialization is synchronous and self-bootstrapping: a fresh database gets
  * every migration applied before this function returns; an existing one is a
- * pure no-op. No caller can observe a half-migrated schema, and the first
- * read cannot race migration application.
+ * pure no-op. No caller can observe a half-migrated schema, and the first read
+ * cannot race migration application.
  */
 export function getDb(): Database.Database {
   if (db) return db;
