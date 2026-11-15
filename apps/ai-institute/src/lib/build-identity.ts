@@ -26,6 +26,8 @@ export interface BuildIdentity {
   buildId: string;
 }
 
+import { BUILD_INFO } from "@/lib/build-info.generated";
+
 const COMMIT_ENV = "NEXT_PUBLIC_BUILD_COMMIT";
 const TIME_ENV = "NEXT_PUBLIC_BUILD_TIME";
 
@@ -33,17 +35,18 @@ const TIME_ENV = "NEXT_PUBLIC_BUILD_TIME";
  * The identity of the running build.
  *
  * Returns null when the build did not record one — a production build that
- * never had the variables set, or a development server. Callers should treat
+ * never had the values set, or a development server. Callers should treat
  * null as "identity unknown" rather than inventing one.
  *
- * The environment is read on each call rather than at module load, so a test
+ * The values are read on each call rather than at module load, so a test
  * can exercise both the recorded and the unrecorded case.
  */
 export function buildIdentity(): BuildIdentity | null {
-  const commit = (process.env[COMMIT_ENV] ?? "").trim();
-  if (!commit) return null;
+  const commit = (process.env[COMMIT_ENV] ?? BUILD_INFO.commit ?? "").trim();
+  if (!commit || commit === "unknown") return null;
 
-  const builtAt = (process.env[TIME_ENV] ?? "").trim() || null;
+  const rawTime = (process.env[TIME_ENV] ?? BUILD_INFO.builtAt ?? "").trim();
+  const builtAt = rawTime && rawTime !== "unknown" ? rawTime : null;
   const shortCommit = commit.slice(0, 12);
 
   return {
