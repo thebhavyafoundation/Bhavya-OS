@@ -42,7 +42,11 @@ describe("skip link", () => {
 
   it("renders the link before the site's navigation in the root layout", () => {
     const markup = renderToStaticMarkup(
-      createElement(RootLayout, { children: createElement("p", null, "content") }),
+      createElement(
+        RootLayout,
+        null,
+        createElement("p", null, "content"),
+      ),
     );
 
     const skipLinkAt = markup.indexOf('class="skip-link"');
@@ -58,7 +62,11 @@ describe("skip link", () => {
 
   it("points at an element that exists", () => {
     const markup = renderToStaticMarkup(
-      createElement(RootLayout, { children: createElement("p", { id: "main-content-child" }, "content") }),
+      createElement(
+        RootLayout,
+        null,
+        createElement("p", { id: "main-content-child" }, "content"),
+      ),
     );
     expect(markup).toMatch(/<main\s+id="main-content"/);
   });
