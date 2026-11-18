@@ -37,8 +37,15 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: opennext-preview-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Shared concurrency group across every workflow that deploys to the
+  # canonical preview worker (bhavya-foundation-preview). A per-PR group lets
+  # different PRs deploy concurrently to the same shared worker and overwrite
+  # each other; a single shared group serializes them. cancel-in-progress:
+  # false means an in-progress deployment is never interrupted while it is
+  # modifying the shared worker; pending deployments queue and run
+  # sequentially, which is the safe behaviour for a shared target.
+  group: opennext-preview-shared-worker
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -150,6 +157,9 @@ jobs:
     # Fork pull requests cannot read repository secrets, so the preview worker
     # is only deployed for pull requests raised from this repository.
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    outputs:
+      url: ${{ steps.record-preview.outputs.url }}
+      commit: ${{ steps.record-preview.outputs.commit }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -175,6 +185,7 @@ jobs:
           OPEN_NEXT_DEPLOY: "true"
 
       - name: Record preview URL
+        id: record-preview
         run: |
           {
             echo "### Preview deployment"
@@ -184,3 +195,103 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           echo "url=https://bhavya-foundation-preview.thebhavyafoundation.workers.dev" >> "$GITHUB_OUTPUT"
           echo "commit=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+
+  verify-preview-identity:
+    name: Verify preview build identity
+    needs: deploy
+    runs-on: ubuntu-latest
+    # Always run so a failed or skipped deploy still surfaces an identity
+    # problem rather than silently passing.
+    if: always()
+    steps:
+      - name: Verify deployed preview identity
+        env:
+          EXPECTED_COMMIT: ${{ needs.deploy.outputs.commit }}
+          PREVIEW_URL: https://bhavya-foundation-preview.thebhavyafoundation.workers.dev
+        run: |
+          set -euo pipefail
+
+          IDENTITY_PATH="/api/build-identity"
+          MAX_ATTEMPTS=10
+          DELAY=5
+
+          if [ -z "${EXPECTED_COMMIT:-}" ]; then
+            echo "[verify] No expected commit was supplied (deploy job was skipped or did not run)." >&2
+            echo "[verify] Cannot verify preview identity without a reference commit." >&2
+            exit 1
+          fi
+
+          echo "[verify] Expected commit: ${EXPECTED_COMMIT}"
+          echo "[verify] Preview URL: ${PREVIEW_URL}"
+
+          # Wait for the preview to be ready and query the identity endpoint.
+          # The endpoint returns 404 when the build recorded no identity, and
+          # 200 with the commit/build time when it did. We retry for transient
+          # network/propagation delay but fail fast on a permanent mismatch.
+          attempt=1
+          identity_body=""
+          http_code=""
+          while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+            echo "[verify] attempt $attempt of $MAX_ATTEMPTS: ${PREVIEW_URL}${IDENTITY_PATH}"
+            response=$(curl -s -w "\n%{http_code}" --max-time 15 "${PREVIEW_URL}${IDENTITY_PATH}" || true)
+            http_code=$(printf '%s' "$response" | tail -n1)
+            body=$(printf '%s' "$response" | sed '$d')
+
+            if [ "$http_code" = "200" ]; then
+              identity_body="$body"
+              break
+            fi
+
+            if [ "$http_code" = "404" ]; then
+              echo "[verify] identity endpoint returned 404: build identity is not recorded for this deployment" >&2
+              echo "[verify] This means the preview was built without build-identity instrumentation." >&2
+              exit 1
+            fi
+
+            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
+              echo "[verify] failed to get a valid identity response after $MAX_ATTEMPTS attempts (last HTTP $http_code)" >&2
+              echo "[verify] Last body: $body" >&2
+              exit 1
+            fi
+
+            echo "[verify] attempt $attempt failed (HTTP $http_code); retrying in ${DELAY}s" >&2
+            sleep "$DELAY"
+            attempt=$((attempt + 1))
+          done
+
+          # Parse the commit from the JSON body.
+          if ! command -v jq >/dev/null 2>&1; then
+            echo "[verify] jq is not available; cannot parse identity response" >&2
+            exit 1
+          fi
+
+          deployed_commit=$(printf '%s' "$identity_body" | jq -r '.commit // empty')
+          deployed_short=$(printf '%s' "$identity_body" | jq -r '.shortCommit // empty')
+          deployed_built=$(printf '%s' "$identity_body" | jq -r '.builtAt // empty')
+          deployed_build_id=$(printf '%s' "$identity_body" | jq -r '.buildId // empty')
+
+          if [ -z "$deployed_commit" ]; then
+            echo "[verify] malformed identity response: no commit field" >&2
+            echo "[verify] Body: $identity_body" >&2
+            exit 1
+          fi
+
+          # Compare against the expected commit. For pull_request events,
+          # github.sha (recorded by write-build-identity.mjs via GITHUB_SHA) is
+          # the merge commit SHA, so the comparison is consistent across
+          # pull_request and workflow_dispatch triggers.
+          if [ "$deployed_commit" != "$EXPECTED_COMMIT" ]; then
+            echo "[verify] IDENTITY MISMATCH" >&2
+            echo "[verify] Expected commit: ${EXPECTED_COMMIT}" >&2
+            echo "[verify] Deployed commit:  ${deployed_commit}" >&2
+            echo "[verify] The preview worker is serving a different commit than intended." >&2
+            echo "[verify] Do not trust any behaviour observed on this preview." >&2
+            exit 1
+          fi
+
+          echo "[verify] IDENTITY OK"
+          echo "[verify] Worker: bhavya-foundation-preview"
+          echo "[verify] Commit: ${deployed_commit} (${deployed_short})"
+          echo "[verify] Built at: ${deployed_built}"
+          echo "[verify] Build ID: ${deployed_build_id}"
+          echo "[verify] The deployed preview identity matches the expected workflow commit."
