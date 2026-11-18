@@ -14,15 +14,16 @@
  * Usage:
  *   node scripts/validate-preview-concurrency.mjs
  *
- * Exits 0 when all preview-deploy workflows use the shared group
- * (opennext-preview-shared-worker) with cancel-in-progress: false.
+ * Exits 0 when all certain preview-deploy workflows use the shared group
+ * (opennext-preview-shared-worker) with cancel-in-progress: false, and no
+ * possible preview-deploy workflows require manual review.
  * Exits 1 otherwise.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
-const WORKFLOWS_DIR = join(process.cwd(), ".github/workflows");
+const WORKFLOWS_DIR = process.env.WORKFLOWS_DIR ?? join(process.cwd(), ".github/workflows");
 const EXPECTED_GROUP = "opennext-preview-shared-worker";
 
 function readText(path) {
@@ -30,12 +31,38 @@ function readText(path) {
 }
 
 /**
- * Determine whether a workflow file deploys to the preview worker.
- * A workflow deploys to preview if it references wrangler.preview.json or
- * the bhavya-foundation-preview worker name in a deploy/run step.
+ * Classify a workflow's preview-deploy risk.
+ * Returns { certain, possible } booleans.
+ *
+ * Certain: references wrangler.preview.json or bhavya-foundation-preview.
+ * Possible: runs `wrangler deploy` / `opennextjs-cloudflare deploy` as an
+ *   actual `run:` step with an explicit preview config (`--config
+ *   wrangler.preview.json` or `--env preview`) but without the shared
+ *   concurrency group — flagged for manual review.
+ *   Comments and explanatory text are ignored.
+ *   A deploy command without any preview config defaults to production
+ *   wrangler.json (bhavya-foundation), so it is NOT flagged.
  */
-function deploysToPreview(text) {
-  return /wrangler\.preview\.json|bhavya-foundation-preview/.test(text);
+function classifyPreviewDeploy(text) {
+  const certain = /wrangler\.preview\.json|bhavya-foundation-preview/.test(text);
+  if (certain) {
+    return { certain: true, possible: false };
+  }
+  // Only match deploy commands in actual `run:` steps (indented lines
+  // starting with whitespace + "run:"), ignoring comments and YAML keys.
+  const runDeployRe = /^[ \t]+run:[ \t]*.*(wrangler\s+deploy|opennextjs-cloudflare\s+deploy)/m;
+  const hasDeployCommand = runDeployRe.test(text);
+  if (!hasDeployCommand) {
+    return { certain: false, possible: false };
+  }
+  // Explicitly targets preview via --config or --env.
+  const explicitPreviewConfig = /--config\s+\S*preview\.json/.test(text);
+  const explicitPreviewEnv = /--env\s+preview/.test(text);
+  if (explicitPreviewConfig || explicitPreviewEnv) {
+    return { certain: false, possible: true };
+  }
+  // Deploy command without preview config → defaults to production.
+  return { certain: false, possible: false };
 }
 
 /**
@@ -94,25 +121,30 @@ function main() {
     (f) => f.endsWith(".yml") || f.endsWith(".yaml"),
   );
 
-  const previewWorkflows = [];
+  const certainWorkflows = [];
+  const possibleWorkflows = [];
   for (const file of files) {
     const path = join(WORKFLOWS_DIR, file);
     const text = readText(path);
-    if (!deploysToPreview(text)) continue;
-    previewWorkflows.push({ file, text });
+    const { certain, possible } = classifyPreviewDeploy(text);
+    if (certain) {
+      certainWorkflows.push({ file, text });
+    } else if (possible) {
+      possibleWorkflows.push({ file, text });
+    }
   }
 
-  if (previewWorkflows.length === 0) {
+  if (certainWorkflows.length === 0 && possibleWorkflows.length === 0) {
     console.error("FAIL: No workflows found that deploy to bhavya-foundation-preview");
     process.exit(1);
   }
 
   let failed = false;
 
-  for (const w of previewWorkflows) {
+  for (const w of certainWorkflows) {
     const { group, cancelInProgress } = extractConcurrency(w.text);
     console.log(
-      `${w.file}: concurrency.group=${group ?? "MISSING"} cancel-in-progress=${cancelInProgress ?? "MISSING"}`,
+      `${w.file}: concurrency.group=${group ?? "MISSING"} cancel-in-progress=${cancelInProgress ?? "MISSING"} (certain preview deploy)`,
     );
 
     if (group !== EXPECTED_GROUP) {
@@ -129,16 +161,31 @@ function main() {
     }
   }
 
+  for (const w of possibleWorkflows) {
+    console.log(
+      `${w.file}: POSSIBLE preview deploy (deploy command present, config not pinned to production) — manual review required`,
+    );
+    console.error(
+      `  REVIEW: ${w.file} runs a deploy command without an explicit production config; confirm it cannot target bhavya-foundation-preview or add it to the shared concurrency group "${EXPECTED_GROUP}"`,
+    );
+    failed = true;
+  }
+
   if (failed) {
     console.error(
-      "\nFAIL: Not all preview-deploy workflows use the shared concurrency group.",
+      "\nFAIL: Not all preview-deploy workflows use the shared concurrency group, or possible preview-deploy workflows require manual review.",
     );
     process.exit(1);
   }
 
   console.log(
-    `\nPASS: ${previewWorkflows.length} preview-deploy workflow(s) all use shared concurrency group "${EXPECTED_GROUP}" with cancel-in-progress: false.`,
+    `\nPASS: ${certainWorkflows.length} certain preview-deploy workflow(s) all use shared concurrency group "${EXPECTED_GROUP}" with cancel-in-progress: false.`,
   );
+  if (possibleWorkflows.length > 0) {
+    console.log(
+      `NOTE: ${possibleWorkflows.length} possible preview-deploy workflow(s) flagged for manual review (see REVIEW messages above).`,
+    );
+  }
 }
 
 main();
