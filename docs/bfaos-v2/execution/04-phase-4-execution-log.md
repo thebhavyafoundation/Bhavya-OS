@@ -219,3 +219,55 @@ fact that merge triggers the production deploy.
 #62 (carries the CI font-flake repair) then #63, then #64/#65, then #66 -> #67 -> #68 -> #69,
 then #70, then #71. Merging into master is a production deployment; no PR was merged, closed,
 retargeted or rebased in this increment.
+
+---
+
+## Re-verification (2026-11-18)
+
+### Repository state (re-verified via local git; GitHub/Cloudflare API tools no longer available)
+
+- Protected checkout `D:\Bhavya OS`: `feat/visual-learning-batch @ 6d40870e`, untracked user/agent
+  files present and untouched.
+- Local `master` = `5f61a802`; `origin/master` = `98388ddb` (local behind remote; neither moved).
+- PR #69 `feat/bfaos-phase4-contracts @ b62690f1` (base master) — working tree clean.
+- PR #70 `feat/bfaos-phase4-test-harnesses @ 735f3c6c` (base feat/bfaos-phase4-contracts) — working
+  tree clean; stacked diff still exactly 10 files.
+- PR #71 `feat/bhavya-product-quality @ 97e6b632` (base master) — working tree clean; all key files
+  tracked (build-identity.ts, build-info.generated.ts, write-build-identity.mjs,
+  src/app/api/build-identity/route.ts, next.config.mjs, stale-window.test.ts, cache-policy.ts,
+  layout.tsx; IOC: db.ts, db-migration-governance.spec.ts, db-apply-safety.spec.ts,
+  migration-procedure.md).
+- CI re-check: GitHub API tooling is no longer available in this session and the GitHub checks pages
+  did not expose check-run state via the in-app browser, so current CI conclusions rest on the
+  Nov 15 verification. Deterministic code defects (skip-link lint error, expireTime comment gate
+  failure) are fixed and committed; the remaining `build` failure is the intermittent Google Fonts
+  fetch (infrastructure, proven from logs). A legitimate CI rerun is authorized within preview-only
+  scope but requires GitHub API access this session does not have — a founder action.
+
+### Preview identity — overwrite risk materialized (§C)
+
+Re-checking `https://bhavya-foundation-preview.thebhavyafoundation.workers.dev/api/build-identity`
+now returns HTTP 404 ("Page not found"). The build-identity endpoint verified live on 2026-11-15
+(reporting commit `1d727b7b`, the merge ref of `97e6b632` into `98388dd`) is no longer deployed:
+another PR's deployment has overwritten the shared preview worker.
+
+This is direct evidence for finding (m1): the shared preview belongs to whichever deployment ran
+last, and without the build-identity endpoint deployed there is no way to know which commit is
+serving. The mechanism is built and was verified; it simply is not currently on the preview because
+the preview has been overwritten. Re-deploying #71's preview (or any PR's) restores the ability to
+verify identity via the endpoint.
+
+### Production (unchanged)
+
+Production worker `bhavya-foundation` remains `953f06bb` (2026-10-30), last verified via the
+Cloudflare API on 2026-11-15. No merge has occurred, so production is untouched. No production
+database access, writes, schema migrations, auth/learner-data changes, secret/permission/billing
+changes, or new paid services were introduced in this increment.
+
+### Independent review (§F) — limitation noted
+
+The planned independent subagent review could not start (free model-provider usage limit reached on
+2026-11-15 and again on 2026-11-18). The §F review was therefore performed inline by the author,
+which is weaker evidence than an independent review and is recorded as finding (m4). This should not
+be described as an independent review.
+
