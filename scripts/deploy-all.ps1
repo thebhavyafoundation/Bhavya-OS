@@ -14,7 +14,7 @@ $apps = @(
     @{ Name = "design-system"; Package = "design-system" }
 )
 
-$rootDir = "F:\Bhavya Foundation"
+$rootDir = Resolve-Path "$PSScriptRoot/.."
 $vercelJson = "$rootDir\vercel.json"
 
 foreach ($appInfo in $apps) {

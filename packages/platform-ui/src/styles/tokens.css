@@ -101,7 +101,6 @@
   --color-bg-elevated: #fdfcf9;
   --color-bg-hover: #ede8db;
   --color-bg-active: #d9d0b9;
-  --color-bg-overlay: rgba(14, 56, 46, 0.5);
 
   /* Surfaces */
   --color-surface: #fdfcf9;
@@ -124,7 +123,6 @@
   /* Borders */
   --color-border-primary: rgba(14, 56, 46, 0.12);
   --color-border-secondary: rgba(14, 56, 46, 0.06);
-  --color-border-focus: #d4af37;
   --color-border-subtle: rgba(14, 56, 46, 0.04);
   --color-border-gold: rgba(212, 175, 55, 0.3);
 
@@ -318,15 +316,6 @@
   --header-h: 72px;
 
   /* ============================================
-     Z-INDEX
-     ============================================ */
-
-  --z-dropdown: 50;
-  --z-modal: 100;
-  --z-toast: 150;
-  --z-tooltip: 200;
-
-  /* ============================================
      DATA VISUALIZATION — Brand-Compliant Palette
      ============================================ */
 
@@ -380,11 +369,43 @@
   --color-surface-forest-strong: rgba(14, 56, 46, 0.5);
 
   /* Focus ring */
-  --ring-focus: 0 0 0 2px var(--color-border-focus);
   --ring-focus-inset: inset 0 0 0 2px var(--color-border-focus);
 
   /* Layout */
   --sidebar-width: 240px;
+}
+
+/* ============================================
+   RUNTIME TOKENS
+   ============================================ */
+
+/*
+ * These are read at runtime through `var()` inside the shared components in
+ * packages/platform-ui/src/components, not through a utility class. Tailwind
+ * v4 only keeps a theme variable in the built stylesheet when a scanned
+ * source file mentions it, and a consuming application does not scan the
+ * shared package, so the variable is dropped and the component silently
+ * falls back to an invalid value: `z-index: var(--z-modal)` becomes
+ * `z-index: auto` and the overlay loses its stacking order.
+ *
+ * `@theme static` emits the block whether or not a source file uses it, so a
+ * shared component keeps working in every application that consumes the
+ * package. The dark-mode overrides further down stay in `.dark`, which is
+ * unlayered and therefore still wins over this theme layer.
+ */
+@theme static {
+  --color-bg-overlay: rgba(14, 56, 46, 0.5);
+  --color-border-focus: #d4af37;
+  --ring-focus: 0 0 0 2px var(--color-border-focus);
+
+  --z-dropdown: 50;
+  --z-modal: 100;
+  /* Panel content that must sit above its own modal overlay. A modal
+     overlay raised above its panel paints over it and swallows clicks on
+     the panel's own controls. */
+  --z-modal-panel: 101;
+  --z-toast: 150;
+  --z-tooltip: 200;
 }
 
 /* ============================================

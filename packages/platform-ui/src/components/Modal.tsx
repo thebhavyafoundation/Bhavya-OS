@@ -3,7 +3,9 @@
 /**
  * @bhavya/platform-ui — Modal
  *
- * Reusable modal dialog component.
+ * Reusable modal dialog component. All color, radius, shadow, focus and
+ * z-index values resolve to canonical design tokens in tokens.css. No
+ * backdrop-filter / glassmorphism (constitution 01 §7.1 #2 prohibits it).
  */
 
 import React, { useEffect, useRef } from "react";
@@ -100,12 +102,12 @@ export function Modal({
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.6)",
+        background: "var(--color-bg-overlay)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 1000,
-        backdropFilter: "blur(4px)",
+        zIndex: "var(--z-modal)",
+        padding: "var(--space-4)",
       }}
     >
       <div
@@ -115,14 +117,15 @@ export function Modal({
         aria-labelledby={titleId}
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "#1e293b",
-          borderRadius: 12,
-          border: "1px solid #334155",
+          background: "var(--color-surface)",
+          border: `1px solid var(--color-border-primary)`,
+          borderRadius: "var(--radius-xl)",
           width: "100%",
           maxWidth: SIZES[size],
-          maxHeight: "80vh",
+          maxHeight: "85vh",
           overflow: "auto",
           padding: 0,
+          boxShadow: "var(--shadow-xl)",
         }}
       >
         {title && (
@@ -132,7 +135,7 @@ export function Modal({
               justifyContent: "space-between",
               alignItems: "center",
               padding: "16px 24px",
-              borderBottom: "1px solid #334155",
+              borderBottom: `1px solid var(--color-border-secondary)`,
             }}
           >
             <h2
@@ -140,8 +143,9 @@ export function Modal({
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#f8fafc",
+                color: "var(--color-text-primary)",
                 margin: 0,
+                fontFamily: "var(--font-sans)",
               }}
             >
               {title}
@@ -150,19 +154,22 @@ export function Modal({
               onClick={onClose}
               aria-label="Close modal"
               style={{
-                background: "none",
-                border: "none",
-                color: "#94a3b8",
+                background: "transparent",
+                border: `1px solid var(--color-border-secondary)`,
+                color: "var(--color-text-secondary)",
                 fontSize: 20,
                 cursor: "pointer",
                 padding: 4,
+                borderRadius: "var(--radius-sm)",
+                transition:
+                  "border-color var(--duration-fast) ease, color var(--duration-fast) ease",
               }}
             >
               &#10005;
             </button>
           </div>
         )}
-        <div style={{ padding: "16px 24px" }}>{children}</div>
+        <div style={{ padding: "24px" }}>{children}</div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import type { LessonBlock } from "@/types/curriculum";
 import { QuizBlock } from "./QuizBlock";
 import { WidgetRenderer } from "./widgets/WidgetRenderer";
+import { DiagramRenderer } from "./diagram/DiagramRenderer";
 
 type ProseNode = { type: "p"; text: string } | { type: "ul"; items: string[] };
 
@@ -23,6 +24,16 @@ function parseProse(text: string): ProseNode[] {
 
 export function BlockRenderer({ block }: { block: LessonBlock }) {
   switch (block.kind) {
+    case "visual":
+      return (
+        <section className="ai-block" aria-label="Concept diagram">
+          <DiagramRenderer
+            spec={
+              block.diagram as import("@/data/curriculum/types").DiagramSpec
+            }
+          />
+        </section>
+      );
     case "prose":
       return (
         <div className="ai-prose">
@@ -60,6 +71,23 @@ export function BlockRenderer({ block }: { block: LessonBlock }) {
           <WidgetRenderer
             spec={block.widget as import("@/data/curriculum/types").WidgetSpec}
           />
+        </section>
+      );
+    case "guided-example":
+      return (
+        <section className="ai-block" aria-label="Guided example">
+          <h2 className="ai-block-title">Guided example</h2>
+          <div className="ai-experiment">
+            <h3 className="ai-experiment-title">{block.title}</h3>
+            <pre className="ai-step-code">
+              <code>{block.code}</code>
+            </pre>
+            <ol className="ai-steps">
+              {block.walkthrough.map((line, index) => (
+                <li key={index}>{line}</li>
+              ))}
+            </ol>
+          </div>
         </section>
       );
     case "experiment":

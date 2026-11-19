@@ -84,7 +84,10 @@ jobs:
         run: node scripts/verify-opennext-bundle.mjs --selftest
 
       - name: Next.js application build
-        run: pnpm --filter ai-institute run build
+        # The build fetches the Google Fonts CSS at build time, and that
+        # request fails intermittently on the runner. The retry is bounded
+        # and only covers that network failure.
+        run: sh scripts/build-with-retry.sh
 
       - name: Materialise conditional-export targets
         # Next.js output file tracing emits a package main entry but drops the other

@@ -8,6 +8,11 @@ export interface QuizQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /**
+   * Shown when the learner answers wrongly. It explains what to look at,
+   * which is different from the correct answer's explanation.
+   */
+  feedbackWrong?: string;
 }
 
 export interface LabStep {
@@ -21,6 +26,8 @@ export interface AssignmentTask {
   criteria: string[];
 }
 
+import type { DiagramSpec } from "@/data/curriculum";
+
 export interface LessonContent {
   id: string;
   title: string;
@@ -28,6 +35,31 @@ export interface LessonContent {
   objectives: string[];
   prerequisites: string[];
   visualExplanation: string;
+  /**
+   * One sentence: what the learner will be able to do afterwards.
+   *
+   * Optional because it is part of the published-lesson contract. Lessons
+   * that are catalogued but not yet published do not have to carry a reading
+   * frame they have not been written for.
+   */
+  outcome?: string;
+  /** Worked example: the code, with a walkthrough of what it does. */
+  guidedExample?: {
+    title: string;
+    language: string;
+    walkthrough: string[];
+  };
+  /** How far this lesson has been reviewed. "pending" is the honest default. */
+  review?: {
+    content: "pending" | "reviewed";
+    subject: "pending" | "reviewed";
+    accessibility: "pending" | "reviewed";
+    reviewedOn?: string;
+  };
+  /** What to do next, stated as an instruction. */
+  nextStep?: string;
+  /** Optional concept-linked diagram (rendered via DiagramRenderer). */
+  visual?: DiagramSpec;
   codeExample: string;
   notebookCells: NotebookCell[];
   lab: {
@@ -60,6 +92,26 @@ export const lessonContent: LessonContent[] = [
     id: "defining-ai",
     title: "Defining AI",
     stageId: "stage-1-ai-foundations",
+    outcome:
+      "Explain where artificial intelligence, machine learning and deep learning sit in relation to one another, and place a system you use every day on that map.",
+    guidedExample: {
+      title: "Classifying a system with a taxonomy",
+      language: "python",
+      walkthrough: [
+        "The three keys of `ai_types` are the three tiers of the taxonomy, and each value lists example systems that sit in that tier.",
+        "`classify_system` walks the tiers from the most specific to the broadest and returns the first tier the name appears in.",
+        "The order of the checks is the point: testing `deep_learning` first means 'transformer' is classified as Deep Learning rather than as the wider Machine Learning it also belongs to.",
+        "'linear regression' appears only in the machine_learning list, so it comes back as Machine Learning; a name in none of the lists falls through to the generic 'AI' answer.",
+      ],
+    },
+    review: {
+      content: "pending",
+      subject: "pending",
+      accessibility: "reviewed",
+      reviewedOn: "2026-11-12",
+    },
+    nextStep:
+      "Answer the check-your-understanding questions, then start the project task: list the AI systems you actually use and place each one on the taxonomy.",
     objectives: [
       "Define artificial intelligence in your own words",
       "Distinguish between AI, machine learning, and deep learning",
@@ -70,6 +122,17 @@ export const lessonContent: LessonContent[] = [
     prerequisites: [],
     visualExplanation:
       "Imagine a set of nested circles. The outermost circle is labeled Artificial Intelligence — the broadest field. Inside it is Machine Learning, a subset that learns from data. Inside ML is Deep Learning, which uses neural networks with many layers. Every deep learning system is machine learning, and every machine learning system is AI, but not every AI system uses machine learning.",
+    visual: {
+      textAlternative:
+        "Nested diagram: Deep Learning sits inside Machine Learning, which sits inside Artificial Intelligence. Every deep learning system is therefore machine learning, and every machine learning system is AI — but not every AI system uses machine learning.",
+      kind: "nested",
+      title: "AI, machine learning, and deep learning — nested fields",
+      steps: [
+        "Artificial Intelligence (broadest field)",
+        "Machine Learning (subset of AI)",
+        "Deep Learning (subset of ML)",
+      ],
+    },
     codeExample: `# AI taxonomy demonstration
 ai_types = {
     'rule_based': 'Expert systems, chess engines, spam filters',
@@ -175,6 +238,8 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
         correctIndex: 1,
         explanation:
           "Deep learning is a subset of machine learning that uses neural networks with many layers to learn representations from data.",
+        feedbackWrong:
+          "Deep Learning is the subset of Machine Learning. Artificial Intelligence is the broader field that contains Machine Learning, and Expert Systems and Robotics sit outside the learning hierarchy altogether — a rule-based expert system is AI but is not machine learning.",
       },
       {
         question: "A spam filter that uses keyword rules is an example of:",
@@ -187,6 +252,8 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
         correctIndex: 2,
         explanation:
           "Rule-based systems follow handcrafted if-then logic. They are a form of AI but do not learn from data.",
+        feedbackWrong:
+          "A keyword-rule spam filter is rule-based AI: it applies hand-written if-then logic and never changes as it sees more mail. Rule-based systems are AI, but they are not machine learning, because nothing in the system learns from the data it processes.",
       },
       {
         question: "Why has the definition of AI shifted over time?",
@@ -199,6 +266,8 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
         correctIndex: 1,
         explanation:
           "As tasks like chess or speech recognition became achievable, the bar for what counts as intelligent rose. This is sometimes called the AI effect.",
+        feedbackWrong:
+          "The bar for what counts as 'intelligent' moves as capabilities become routine. Chess, speech recognition and image classification were each once the frontier of AI research; once they were solved, the field's definition shifted on to harder problems. This is often called the AI effect.",
       },
       {
         question: "Which statement is true?",
@@ -211,6 +280,8 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
         correctIndex: 0,
         explanation:
           "Deep learning is a specialized form of ML that uses deep neural networks. The relationship is: AI contains ML, which contains DL.",
+        feedbackWrong:
+          "Deep learning is a technique inside machine learning, so every deep learning system is a machine learning system. The reverse does not hold: most machine learning is not deep learning, and machine learning is itself only one part of AI.",
       },
     ],
     assignment: {
@@ -284,6 +355,26 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
     id: "history-of-ai",
     title: "History of AI",
     stageId: "stage-1-ai-foundations",
+    outcome:
+      "Describe the shape of AI's development — including the two times funding collapsed — and explain why the field's progress is not a straight line.",
+    guidedExample: {
+      title: "Reading an AI timeline as data",
+      language: "python",
+      walkthrough: [
+        "Each tuple is (year, event, why it mattered). The third field is what turns a list of dates into an explanation.",
+        "Printing the list in order is the timeline; the third field carries the cause at each turn.",
+        "Notice the two gaps: 1974 and 1986 both follow over-promising. The dates are not evenly spaced, because the field's progress was not either.",
+        "Read the 2012 entry together with the 2017 one — the first is the deep-learning resurgence, the second is the architecture behind today's language models.",
+      ],
+    },
+    review: {
+      content: "pending",
+      subject: "pending",
+      accessibility: "reviewed",
+      reviewedOn: "2026-11-12",
+    },
+    nextStep:
+      "Answer the check-your-understanding questions, then build your own timeline for one domain and mark the two points where progress stalled.",
     objectives: [
       "Trace the key milestones in AI history from the 1940s to present",
       "Understand the AI winters and their causes",
@@ -293,6 +384,20 @@ print(is_spam('Meeting at 3pm tomorrow'))`,
     prerequisites: ["defining-ai"],
     visualExplanation:
       "Picture a timeline stretching from 1943 to today. Early peaks (Turing's ideas, early perceptrons) are followed by valleys (AI winters in the 1970s and late 1980s) where funding dried up. The modern era begins around 2012 when deep learning won ImageNet, and the curve shoots upward through transformers (2017) and large language models (2020s).",
+    visual: {
+      kind: "timeline",
+      title: "How AI progress moved, and where it stopped",
+      points: [
+        { label: "1943", note: "Neuron model (McCulloch & Pitts)" },
+        { label: "1956", note: "AI named as a field" },
+        { label: "1974", note: "First AI winter" },
+        { label: "1986", note: "Backpropagation" },
+        { label: "2012", note: "AlexNet wins ImageNet" },
+        { label: "2017", note: "Transformer architecture" },
+      ],
+      textAlternative:
+        "Timeline of AI progress: a neuron model in 1943, the field named in 1956, a first funding collapse in 1974, backpropagation in 1986, deep learning winning ImageNet in 2012, and the transformer architecture in 2017.",
+    },
     codeExample: `# Timeline of AI milestones
 milestones = [
     (1943, 'McCulloch-Pitts neuron', 'Mathematical model of a neuron'),
@@ -391,6 +496,8 @@ for i, factor in enumerate(factors, 1):
         correctIndex: 2,
         explanation:
           "John McCarthy coined Artificial Intelligence at the Dartmouth Conference in 1956, marking the official founding of the field.",
+        feedbackWrong:
+          "1956, at the Dartmouth conference, where John McCarthy proposed the name for the field. The groundwork came earlier — McCulloch and Pitts' neuron model in 1943 and Turing's paper in 1950 — but the field got its name in 1956.",
       },
       {
         question: "What was the primary cause of the first AI winter?",
@@ -403,6 +510,8 @@ for i, factor in enumerate(factors, 1):
         correctIndex: 1,
         explanation:
           "AI researchers over-promised capabilities. When expert systems proved expensive and brittle, funding agencies pulled back.",
+        feedbackWrong:
+          "Funding, not hardware. Researchers had promised more than the systems could deliver; when expert systems proved expensive and brittle, funders withdrew. The machines of the era were slow, but slowness is not what ended the funding cycle.",
       },
       {
         question:
@@ -416,6 +525,8 @@ for i, factor in enumerate(factors, 1):
         correctIndex: 2,
         explanation:
           "AlexNet, a deep convolutional neural network, dramatically outperformed traditional methods on ImageNet, proving deep learning's practical potential.",
+        feedbackWrong:
+          "AlexNet winning the ImageNet competition in 2012. Watson's Jeopardy run was in 2011, AlphaGo came in 2016, and the transformer paper followed in 2017 — none of them is the 2012 event.",
       },
       {
         question: "The transformer architecture was introduced in which paper?",
@@ -428,6 +539,8 @@ for i, factor in enumerate(factors, 1):
         correctIndex: 1,
         explanation:
           "Vaswani et al. published Attention Is All You Need in 2017, introducing the transformer which powers GPT, BERT, and most modern language models.",
+        feedbackWrong:
+          "'Attention Is All You Need' by Vaswani and colleagues, 2017. Deep Residual Learning is 2015 and concerns networks rather than attention; the ImageNet paper is 2012; generative adversarial networks are 2014.",
       },
     ],
     assignment: {
@@ -503,6 +616,26 @@ for i, factor in enumerate(factors, 1):
     id: "types-of-ai-systems",
     title: "Types of AI Systems",
     stageId: "stage-1-ai-foundations",
+    outcome:
+      "Place a given AI system on the capability spectrum and state how much state it keeps.",
+    guidedExample: {
+      title: "Assigning a capability level to a real system",
+      language: "python",
+      walkthrough: [
+        "Each level is a dictionary with a description, examples and a capability number.",
+        "The capability number is what makes this a spectrum rather than a list: reactive is 1, limited memory is 2, and so on.",
+        "Sorting a real system into a level is therefore two questions — how much state does it keep, and does it model other agents?",
+        "The 'Type 3' entry is included to show where the frontier sits, not to claim it has been reached.",
+      ],
+    },
+    review: {
+      content: "pending",
+      subject: "pending",
+      accessibility: "reviewed",
+      reviewedOn: "2026-11-12",
+    },
+    nextStep:
+      "Answer the check-your-understanding questions, then use the sort exercise to place ten systems you already use on the spectrum and note the state each one keeps.",
     objectives: [
       "Classify AI systems by capability level",
       "Explain the difference between reactive and proactive AI",
@@ -512,6 +645,30 @@ for i, factor in enumerate(factors, 1):
     prerequisites: ["defining-ai", "history-of-ai"],
     visualExplanation:
       "Think of a spectrum from left to right. On the far left is Reactive AI — it responds to inputs with fixed rules (like a calculator). Moving right is Limited Memory AI — it uses recent data (like self-driving cars). Further right is Theory of Mind AI — systems that model other agents' beliefs (not yet achieved). On the far right is Self-Aware AI — machines with consciousness (purely theoretical). Current AI lives firmly in the Reactive to Limited Memory range.",
+    visual: {
+      kind: "compare",
+      title: "Two capability tiers, side by side",
+      left: {
+        label: "Reactive AI",
+        items: [
+          "Answers from the current input only",
+          "Keeps no memory between inputs",
+          "Rules or direct evaluation",
+          "Examples: chess engines, calculators",
+        ],
+      },
+      right: {
+        label: "Limited Memory AI",
+        items: [
+          "Uses recent past data",
+          "Carries short-term state",
+          "Learns patterns from data",
+          "Examples: self-driving cars, recommendation engines",
+        ],
+      },
+      textAlternative:
+        "Comparison: Reactive AI has no memory and answers from the current input only; Limited Memory AI keeps recent context and uses it. Everything shipped today sits between these two tiers.",
+    },
     codeExample: `# Classifying AI systems by capability
 ai_levels = {
     'Type 1 - Reactive': {
@@ -609,6 +766,8 @@ print(assess_capability('limited_memory'))`,
         correctIndex: 1,
         explanation:
           "Limited Memory AI uses past data to make decisions (like self-driving cars using recent sensor data) but does not model the beliefs of other agents.",
+        feedbackWrong:
+          "Limited Memory AI. Reactive systems use only the current input, Theory of Mind systems model other agents' beliefs, and Self-Aware AI is not established. Only the limited-memory tier both uses past data and still lacks a model of other minds.",
       },
       {
         question:
@@ -622,6 +781,8 @@ print(assess_capability('limited_memory'))`,
         correctIndex: 1,
         explanation:
           "Pure chess engines evaluate the current board position without memory of past games — they are reactive systems.",
+        feedbackWrong:
+          "Reactive AI. It responds to the board in front of it and keeps no memory of earlier games. A limited-memory system would carry recent history into the decision.",
       },
       {
         question: "What distinguishes narrow AI from general AI?",
@@ -634,6 +795,8 @@ print(assess_capability('limited_memory'))`,
         correctIndex: 1,
         explanation:
           "Narrow AI (like image classifiers or chatbots) performs specific tasks well. General AI (AGI) would match human flexibility across all cognitive domains.",
+        feedbackWrong:
+          "Scope, not power. Narrow AI is built for a specific task and does that task well; general AI is the hypothetical capability to transfer across any intellectual task. A narrow system is not 'weaker' — it is simply not general.",
       },
       {
         question: "Theory of Mind AI would need to:",
@@ -646,6 +809,8 @@ print(assess_capability('limited_memory'))`,
         correctIndex: 1,
         explanation:
           "Theory of Mind AI would understand that other agents have different knowledge, beliefs, and goals — a key element of social intelligence that current AI lacks.",
+        feedbackWrong:
+          "To model the beliefs, desires and intentions of other agents. That is what the tier names — it is social intelligence, and it is the part no deployed system has. Faster hardware or more data do not by themselves give a system a model of other minds.",
       },
     ],
     assignment: {
@@ -718,6 +883,26 @@ print(assess_capability('limited_memory'))`,
     id: "the-ai-workflow",
     title: "The AI Workflow",
     stageId: "stage-1-ai-foundations",
+    outcome:
+      "Lay out the end-to-end AI project lifecycle and name the failure point that most often breaks it.",
+    guidedExample: {
+      title: "Writing the workflow out as a pipeline",
+      language: "python",
+      walkthrough: [
+        "The list is the workflow in order, numbered 1 to 10 — definition through iteration.",
+        "Stages 2 to 3 (collection, preprocessing) and 6 to 7 (training, evaluation) are the ones most projects rush, and they are where most failures start.",
+        "Stages 8 to 10 — deployment, monitoring, iteration — are not an epilogue. A project that stops at stage 8 has shipped; it has not finished.",
+        "Writing the pipeline out as data is the first task in the lab: it is far easier to see a missing stage on a list than inside a plan.",
+      ],
+    },
+    review: {
+      content: "pending",
+      subject: "pending",
+      accessibility: "reviewed",
+      reviewedOn: "2026-11-12",
+    },
+    nextStep:
+      "Answer the check-your-understanding questions, then write the ten stages of your own project as a list — before you write any code.",
     objectives: [
       "Map the end-to-end AI project lifecycle from problem to deployment",
       "Identify the key stages: data collection, preprocessing, training, evaluation, deployment",
@@ -727,6 +912,18 @@ print(assess_capability('limited_memory'))`,
     prerequisites: ["defining-ai"],
     visualExplanation:
       "Picture a circular flow: Problem Definition leads to Data Collection, which feeds into Data Preprocessing, then Model Training, then Evaluation. If evaluation fails, you loop back to earlier stages. If it passes, you deploy. After deployment, you monitor and collect feedback, which leads to the next iteration. The cycle never truly ends.",
+    visual: {
+      kind: "pipeline",
+      title: "The stages an AI project moves through",
+      steps: [
+        "Define the problem",
+        "Collect and clean data",
+        "Train the model",
+        "Evaluate, deploy, monitor",
+      ],
+      textAlternative:
+        "Pipeline: define the problem, collect and clean the data, train the model, then evaluate it, deploy it and keep monitoring it in production.",
+    },
     codeExample: `# The AI workflow as a pipeline
 workflow_stages = [
     '1. Problem Definition',
@@ -831,6 +1028,8 @@ for stage, failure in failures.items():
         correctIndex: 1,
         explanation:
           "After collecting raw data, you must clean and preprocess it — handling missing values, normalizing, encoding, and splitting into train/test sets.",
+        feedbackWrong:
+          "Data preprocessing. Raw data has to be cleaned, encoded and split before anything can be trained on it. Model training comes later still, and deployment is the last stage of the first pass — not the one after collection.",
       },
       {
         question: "What is data leakage?",
@@ -843,6 +1042,8 @@ for stage, failure in failures.items():
         correctIndex: 1,
         explanation:
           "Data leakage occurs when the model has access to information it should not have during training, leading to unrealistically high performance metrics that do not hold in production.",
+        feedbackWrong:
+          "Data leakage is information from the test set reaching the model during training. It is not loss of data, nor memorisation of the training set, and it has nothing to do with sharing or permissions.",
       },
       {
         question: "Why is monitoring important after deployment?",
@@ -855,6 +1056,8 @@ for stage, failure in failures.items():
         correctIndex: 1,
         explanation:
           "The world changes. User behavior shifts, data distributions drift, and models that performed well in testing can degrade silently in production.",
+        feedbackWrong:
+          "Because models degrade. The world changes, inputs drift, and a model that scored well in evaluation can fail quietly in production. Monitoring is how you find out before your users do.",
       },
       {
         question:
@@ -868,6 +1071,8 @@ for stage, failure in failures.items():
         correctIndex: 1,
         explanation:
           "A gap between evaluation and production performance usually indicates data leakage, evaluation set contamination, or a distribution shift between training and real-world data.",
+        feedbackWrong:
+          "Diagnose before you retrain. Check for data leakage, for a contaminated evaluation set, and for distribution shift between the training data and real inputs. Retraining on more data without diagnosing the cause usually hides the problem rather than fixing it.",
       },
     ],
     assignment: {
@@ -941,6 +1146,26 @@ for stage, failure in failures.items():
     id: "ethics-in-ai",
     title: "Ethics in AI",
     stageId: "stage-1-ai-foundations",
+    outcome:
+      "Identify where bias enters an AI system, and name the evidence you would need before calling a model fair.",
+    guidedExample: {
+      title: "Checking demographic balance in a dataset",
+      language: "python",
+      walkthrough: [
+        "The function groups rows by one column — the attribute whose representation you want to check.",
+        "It then prints each group's share of the dataset, so under-representation becomes a number instead of an intuition.",
+        "A small share is a flag to investigate, not a conclusion: it can mean the sample was drawn badly, or that the population itself is uneven.",
+        "Nothing here is enough to call a model fair. This is the measurement a fairness claim has to be built on.",
+      ],
+    },
+    review: {
+      content: "pending",
+      subject: "pending",
+      accessibility: "reviewed",
+      reviewedOn: "2026-11-12",
+    },
+    nextStep:
+      "Answer the check-your-understanding questions, then run the group-balance check on a dataset you are allowed to use and write down what you would still need to know.",
     objectives: [
       "Identify sources of bias in AI systems",
       "Explain the concepts of fairness, transparency, and accountability",
@@ -950,6 +1175,17 @@ for stage, failure in failures.items():
     prerequisites: ["defining-ai", "the-ai-workflow"],
     visualExplanation:
       "Think of three pillars holding up responsible AI. The first is Fairness — ensuring the system does not discriminate against groups. The second is Transparency — being able to explain why the system made a particular decision. The third is Accountability — having clear ownership for the system's outcomes. If any pillar is missing, the structure of trust collapses.",
+    visual: {
+      kind: "flow",
+      title: "The three pillars responsible AI rests on",
+      steps: [
+        "Fairness — no group is systematically disadvantaged",
+        "Transparency — a decision can be explained",
+        "Accountability — someone owns the outcome",
+      ],
+      textAlternative:
+        "Three pillars hold up responsible AI: fairness, so that no group is systematically disadvantaged; transparency, so that a decision can be explained; and accountability, so that someone owns the outcome. If any one pillar is missing, the structure of trust in the system's decisions collapses.",
+    },
     codeExample: `# Detecting bias in a dataset
 def check_demographic_balance(data, group_col):
     groups = {}
@@ -1082,6 +1318,8 @@ for g, r in rates.items():
         correctIndex: 1,
         explanation:
           "Algorithmic bias refers to systematic and repeatable errors in an AI system that create unfair outcomes, such as discriminating against certain demographic groups.",
+        feedbackWrong:
+          "Systematic, repeatable unfairness in the system's decisions. It is not a coding bug — a buggy system fails unpredictably, while a biased system fails the same way, every time, for the same groups.",
       },
       {
         question: "What is the fairness-accuracy trade-off?",
@@ -1094,6 +1332,8 @@ for g, r in rates.items():
         correctIndex: 1,
         explanation:
           "Making a model fairer (e.g., by equalizing error rates across groups) can sometimes reduce overall accuracy. The trade-off depends on the fairness definition and context.",
+        feedbackWrong:
+          "It is a trade-off, not a fixed rule. Equalising error rates across groups can reduce aggregate accuracy, and which definition of fairness you choose changes the size of the gap. It is not true that fair models are always less accurate, nor that accuracy always wins.",
       },
       {
         question: "What is the main purpose of LIME?",
@@ -1106,6 +1346,8 @@ for g, r in rates.items():
         correctIndex: 1,
         explanation:
           "LIME explains individual predictions by fitting a simple, interpretable model in the neighborhood of the prediction, providing local explanations faithful to the complex model.",
+        feedbackWrong:
+          "LIME explains individual predictions by fitting a simple, interpretable surrogate model in the neighbourhood of the prediction. It is an explanation tool — not a training, compression or data-generation technique.",
       },
       {
         question: "What is a model card?",
@@ -1118,6 +1360,8 @@ for g, r in rates.items():
         correctIndex: 1,
         explanation:
           "Model cards are documentation that includes a model's intended use, training data, evaluation metrics broken down by demographic groups, known limitations, and ethical considerations.",
+        feedbackWrong:
+          "A model card is documentation: intended use, training data, evaluation metrics broken down by group, known limitations, and the ethical considerations around deployment. It is a framework for reporting, not a network architecture or a piece of hardware.",
       },
     ],
     assignment: {

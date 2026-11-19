@@ -1,20 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  initialLeftItems,
+  initialRightItems,
+  shuffleRightItems,
+} from "./tap-match-order";
 
 export function TapMatch({
   pairs,
 }: {
   pairs: Array<{ a: string; b: string }>;
 }) {
-  const [leftItems] = useState(
-    pairs.map((p, i) => ({ id: `l-${i}`, text: p.a, match: p.b })),
-  );
-  const [rightItems] = useState(
-    pairs
-      .map((p, i) => ({ id: `r-${i}`, text: p.b, match: p.a }))
-      .sort(() => Math.random() - 0.5),
-  );
+  /*
+   * The first render has to be identical on the server and in the browser,
+   * so both columns start in their authored order. The definitions are
+   * shuffled afterwards, once the component is mounted in the browser, so
+   * that the matching exercise is not a matter of reading two aligned
+   * columns.
+   *
+   * Shuffling during the render - which is what this did before - made the
+   * server and the browser pick different orders, the markup disagreed and
+   * React reported a hydration mismatch (error #418) on every load where
+   * the two orders differed.
+   */
+  const [leftItems] = useState(() => initialLeftItems(pairs));
+  const [rightItems, setRightItems] = useState(() => initialRightItems(pairs));
+
+  useEffect(() => {
+    setRightItems((items) => shuffleRightItems(items));
+  }, []);
+
   const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
   const [selectedRight, setSelectedRight] = useState<string | null>(null);
   const [matched, setMatched] = useState<Set<string>>(new Set());

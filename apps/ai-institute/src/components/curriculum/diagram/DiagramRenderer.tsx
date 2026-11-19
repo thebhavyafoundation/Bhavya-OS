@@ -8,7 +8,21 @@ const NODE_BG = "var(--color-bg-elevated)";
 
 const FONT: React.CSSProperties = { fontFamily: "var(--font-sans)", fill: INK };
 
-function Chain({ steps, cyclic }: { steps: string[]; cyclic?: boolean }) {
+/**
+ * Below this rendered width the labels stop being readable, so the graphic
+ * scrolls instead of shrinking further.
+ */
+const LEGIBLE_MIN_WIDTH = 760;
+
+function Chain({
+  steps,
+  cyclic,
+  markerId,
+}: {
+  steps: string[];
+  cyclic?: boolean;
+  markerId: string;
+}) {
   const w = 160,
     h = 72,
     gap = 64;
@@ -42,7 +56,7 @@ function Chain({ steps, cyclic }: { steps: string[]; cyclic?: boolean }) {
                 y2={40 + h / 2}
                 stroke={ACCENT}
                 strokeWidth={2}
-                markerEnd="url(#arrow)"
+                markerEnd={`url(#${markerId})`}
               />
             )}
             {cyclic && i === steps.length - 1 && (
@@ -51,7 +65,7 @@ function Chain({ steps, cyclic }: { steps: string[]; cyclic?: boolean }) {
                 fill="none"
                 stroke={ACCENT}
                 strokeWidth={2}
-                markerEnd="url(#arrow)"
+                markerEnd={`url(#${markerId})`}
               />
             )}
           </g>
@@ -63,17 +77,20 @@ function Chain({ steps, cyclic }: { steps: string[]; cyclic?: boolean }) {
 
 export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
   const titleId = `dg-${spec.title.replace(/\W+/g, "-").toLowerCase()}`;
+  const descId = `${titleId}-desc`;
+  // Unique per diagram: two diagrams on one page must not share a marker id.
+  const markerId = `${titleId}-arrow`;
   let body: React.ReactNode = null;
   let _width = 800;
   switch (spec.kind) {
     case "flow":
     case "pipeline":
       _width = spec.steps.length * 224;
-      body = <Chain steps={spec.steps} />;
+      body = <Chain steps={spec.steps} markerId={markerId} />;
       break;
     case "cycle":
       _width = spec.steps.length * 224;
-      body = <Chain steps={spec.steps} cyclic />;
+      body = <Chain steps={spec.steps} cyclic markerId={markerId} />;
       break;
     case "timeline": {
       const step = 760 / Math.max(1, spec.points.length - 1 || 1);
@@ -214,6 +231,42 @@ export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
       );
       break;
     }
+    case "nested": {
+      _width = 800;
+      const n = spec.steps.length;
+      body = (
+        <g>
+          {spec.steps.map((s, i) => {
+            const inset = i * 60;
+            const w = 760 - i * 120;
+            const h = 180 - i * 30;
+            const x = 20 + i * 60;
+            const y = 20 + i * 15;
+            return (
+              <g key={s}>
+                <rect
+                  x={x}
+                  y={y}
+                  width={w}
+                  height={h}
+                  rx={12}
+                  fill={NODE_BG}
+                  stroke={i === 0 ? LINE : ACCENT}
+                  strokeWidth={2}
+                  opacity={1 - i * 0.15}
+                />
+                <foreignObject x={x + 12} y={y + 12} width={w - 24} height={24}>
+                  <div style={{ ...FONT, fontSize: 13, fontWeight: 600 }}>
+                    {s}
+                  </div>
+                </foreignObject>
+              </g>
+            );
+          })}
+        </g>
+      );
+      break;
+    }
     case "labeled-photo":
       _width = 800;
       body = (
@@ -249,30 +302,71 @@ export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
       );
       break;
   }
+  const hasTextAlternative = Boolean(spec.textAlternative);
   return (
     <figure aria-label={spec.title} style={{ margin: 0 }}>
-      <svg
-        viewBox={`0 0 ${_width} 220`}
-        width="100%"
-        role="img"
-        aria-labelledby={titleId}
+      {/*
+        The diagram is never scaled below a legible width. On a phone the
+        graphic scrolls horizontally at full size instead of shrinking until
+        the labels are unreadable — a 13px label scaled to a 360px viewport
+        lands at roughly 5px, which is decoration, not explanation.
+      */}
+      <div
+        style={{
+          overflowX: "auto",
+          maxWidth: "100%",
+          // The scroll container has to be able to be narrower than its
+          // content, otherwise its content's minimum width is contributed to
+          // the parent and the page overflows sideways.
+          minWidth: 0,
+          width: "100%",
+          WebkitOverflowScrolling: "touch",
+        }}
       >
-        <title id={titleId}>{spec.title}</title>
-        <defs>
-          <marker
-            id="arrow"
-            viewBox="0 0 10 10"
-            refX={8}
-            refY={5}
-            markerWidth={6}
-            markerHeight={6}
-            orient="auto"
-          >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill={ACCENT} />
-          </marker>
-        </defs>
-        {body}
-      </svg>
+        <svg
+          viewBox={`0 0 ${_width} 220`}
+          width={_width}
+          role="img"
+          aria-labelledby={titleId}
+          aria-describedby={hasTextAlternative ? descId : undefined}
+          style={{
+            display: "block",
+            /*
+             * The diagram keeps a legible minimum width so its labels can be
+             * read, but that minimum is capped at the width of its own
+             * container. Without the cap the minimum width propagates
+             * upwards through the grid item and the page ends up wider than
+             * the viewport: the diagram then has to scroll sideways inside
+             * the page rather than inside its own container.
+             *
+             * `min()` is used so the cap resolves against the container the
+             * browser actually has, whatever it turns out to be.
+             */
+            minWidth: `min(${Math.min(_width, LEGIBLE_MIN_WIDTH)}px, 100%)`,
+            maxWidth: "100%",
+            height: "auto",
+          }}
+        >
+          <title id={titleId}>{spec.title}</title>
+          {hasTextAlternative ? (
+            <desc id={descId}>{spec.textAlternative}</desc>
+          ) : null}
+          <defs>
+            <marker
+              id={markerId}
+              viewBox="0 0 10 10"
+              refX={8}
+              refY={5}
+              markerWidth={6}
+              markerHeight={6}
+              orient="auto"
+            >
+              <path d="M 0 0 L 10 5 L 0 10 z" fill={ACCENT} />
+            </marker>
+          </defs>
+          {body}
+        </svg>
+      </div>
       <figcaption
         style={{
           fontFamily: "var(--font-sans)",
@@ -283,6 +377,24 @@ export function DiagramRenderer({ spec }: { spec: DiagramSpec }) {
       >
         {spec.title}
       </figcaption>
+      {/*
+        The text equivalent is also exposed visibly, in a collapsed disclosure.
+        A learner on a small screen, or one who cannot see the graphic at all,
+        still gets the whole explanation. Same convention as EditorialDiagram.
+      */}
+      {hasTextAlternative ? (
+        <details
+          style={{
+            marginTop: "var(--space-3)",
+            fontFamily: "var(--font-sans)",
+            fontSize: "var(--text-sm)",
+            color: MUTED,
+          }}
+        >
+          <summary>Read this diagram as text</summary>
+          <p style={{ marginTop: "var(--space-2)" }}>{spec.textAlternative}</p>
+        </details>
+      ) : null}
     </figure>
   );
 }

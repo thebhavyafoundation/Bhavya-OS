@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EmptyState } from "@bhavya/platform-ui";
 import { aiModules } from "@/data/curriculum/ai-module-registry";
+import { ModuleConceptMap } from "@/components/curriculum/ModuleConceptMap";
 import {
   getModuleById,
   getPrerequisites,
@@ -63,6 +64,11 @@ export default async function ModulePage({ params }: ModulePageProps) {
             ? `Builds on: ${prerequisites.map((pre) => pre.title).join(", ")}`
             : "No prerequisites"}
         </span>
+        <span>
+          {lessons.length > 0
+            ? `${lessons.length} lesson${lessons.length === 1 ? "" : "s"} published`
+            : "Lessons not yet published"}
+        </span>
       </div>
 
       <div className="ai-chip-row">
@@ -73,26 +79,43 @@ export default async function ModulePage({ params }: ModulePageProps) {
         ))}
       </div>
 
+      <ModuleConceptMap
+        module={mod}
+        prerequisites={prerequisites}
+        lessons={lessons}
+        standards={standards}
+      />
+
       <section className="ai-section" aria-labelledby="lessons-heading">
         <h2 id="lessons-heading" className="ai-section-title">
           Lessons
         </h2>
         {lessons.length > 0 ? (
-          <ol className="ai-lesson-list">
-            {lessons.map((lesson, index) => (
-              <li key={lesson.id}>
-                <Link
-                  href={`/curriculum/modules/${mod.id}/lessons/${lesson.id}`}
-                  className="ai-lesson-link"
-                >
-                  <span className="ai-lesson-index" aria-hidden="true">
-                    {index + 1}
-                  </span>
-                  {lesson.title}
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <>
+            <ol className="ai-lesson-list">
+              {lessons.map((lesson, index) => (
+                <li key={lesson.id}>
+                  <Link
+                    href={`/curriculum/modules/${mod.id}/lessons/${lesson.id}`}
+                    className="ai-lesson-link"
+                  >
+                    <span className="ai-lesson-index" aria-hidden="true">
+                      {index + 1}
+                    </span>
+                    {lesson.title}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+            <p style={{ marginTop: "var(--space-5)" }}>
+              <Link
+                className="btn btn-primary"
+                href={`/curriculum/modules/${mod.id}/lessons/${lessons[0].id}`}
+              >
+                Start {lessons[0].title}
+              </Link>
+            </p>
+          </>
         ) : (
           // Most modules are catalogued before their lessons are authored, so
           // this is the common path, not an edge case. It is stated plainly

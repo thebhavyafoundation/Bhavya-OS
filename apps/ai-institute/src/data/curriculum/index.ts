@@ -130,3 +130,19 @@ export function getAllLessons(): DataLesson[] {
     a.id.localeCompare(b.id),
   ) as unknown as DataLesson[];
 }
+
+// Concept-visual inventory. Extends the curriculum schema rather than creating a
+// second content registry: `lessonContent.visual` stays the single runtime
+// source for what renders, and this records provenance, medium and review
+// status for each concept's intended visual.
+export {
+  CONCEPT_VISUAL_INVENTORY,
+  getVisualizedConceptIds,
+  getUncoveredConceptIds,
+  getInventoryEntry,
+} from "./visual-inventory";
+export type {
+  ConceptVisualEntry,
+  VisualMedium,
+  VisualReviewStatus,
+} from "./visual-inventory";

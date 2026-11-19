@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EmptyState } from "@bhavya/platform-ui";
 import { BlockRenderer } from "@/components/curriculum/BlockRenderer";
+import { LessonProvenance } from "@/components/curriculum/LessonProvenance";
 import { LessonShell } from "@/components/curriculum/LessonShell";
 import { VisualComponent } from "@/components/curriculum/VisualComponent";
 import { resolveAssetUrl } from "@/lib/assetUrls";
@@ -67,6 +68,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           href: `/curriculum/modules/${mod.id}`,
         };
   const standards = getStandardsForModule(moduleId);
+  const detail = lesson.detail;
 
   return (
     <LessonShell
@@ -79,35 +81,39 @@ export default async function LessonPage({ params }: LessonPageProps) {
       total={lessons.length}
       audience={BAND_AGES[mod.band]}
       title={lesson.title}
+      lede={detail?.outcome}
       previous={previous}
       next={next}
       footer={
-        standards.length > 0 ? (
-          <section aria-labelledby="lesson-standards-heading">
-            <h2 id="lesson-standards-heading" className="ai-section-title">
-              Standards this lesson works toward
-            </h2>
-            <div className="ai-chip-row">
-              {standards.map((standard) => (
-                <span
-                  key={standard.id}
-                  className="ai-chip"
-                  title={`${standard.source} · ${standard.gradeBand}`}
-                >
-                  {standard.concept}
-                </span>
-              ))}
-            </div>
-          </section>
-        ) : (
-          // A module with no mapped standards is a real authoring state, not
-          // an error. Say so rather than rendering an empty chip row.
-          <EmptyState
-            title="No standards mapped yet"
-            description="This lesson has not been aligned to a published AI-education standard. Alignment is recorded per module and is reviewed during content authoring."
-            meta={`Module: ${mod.title}`}
-          />
-        )
+        <>
+          {standards.length > 0 ? (
+            <section aria-labelledby="lesson-standards-heading">
+              <h2 id="lesson-standards-heading" className="ai-section-title">
+                Standards this lesson works toward
+              </h2>
+              <div className="ai-chip-row">
+                {standards.map((standard) => (
+                  <span
+                    key={standard.id}
+                    className="ai-chip"
+                    title={`${standard.source} · ${standard.gradeBand}`}
+                  >
+                    {standard.concept}
+                  </span>
+                ))}
+              </div>
+            </section>
+          ) : (
+            // A module with no mapped standards is a real authoring state, not
+            // an error. Say so rather than rendering an empty chip row.
+            <EmptyState
+              title="No standards mapped yet"
+              description="This lesson has not been aligned to a published AI-education standard. Alignment is recorded per module and is reviewed during content authoring."
+              meta={`Module: ${mod.title}`}
+            />
+          )}
+          {detail ? <LessonProvenance detail={detail} /> : null}
+        </>
       }
     >
       {mod.recommendedAssetUrl ? (
@@ -131,6 +137,13 @@ export default async function LessonPage({ params }: LessonPageProps) {
           meta={`Module: ${mod.title}`}
         />
       )}
+
+      {detail ? (
+        <section className="ai-block" aria-label="Next step">
+          <h2 className="ai-block-title">Next step</h2>
+          <p className="ai-prose">{detail.nextStep}</p>
+        </section>
+      ) : null}
     </LessonShell>
   );
 }

@@ -1,0 +1,32 @@
+/*
+ * Fixture stylesheet.
+ *
+ * `source(none)` switches off Tailwind's automatic source detection so the
+ * only scanned file is this fixture. That matters: the applications do not
+ * scan the shared component package either, and the token defect this
+ * harness guards against only appears when the package is outside the
+ * scanned set. A fixture that scanned the package would hide the defect.
+ */
+@import "tailwindcss" source(none);
+@import "@bhavya/platform-ui/styles/tokens.css";
+
+@source "./fixture.tsx";
+
+#proof-triggers button,
+#background-action,
+#proof-nav button {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+#proof-triggers button:focus-visible,
+#background-action:focus-visible,
+#proof-nav button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}

@@ -165,6 +165,32 @@ export async function POST(request: NextRequest) {
     const action = body.action;
     const data = body.data ?? {};
 
+    /*
+     * A read must not mutate.
+     *
+     * `syncCurriculumProgress` without a `completedModules` list is the
+     * client asking what the server already holds. It is answered from the
+     * stored row alone: no profile row is created, nothing is updated and no
+     * audit event is written. Before the read and the write were separated,
+     * the profile row was inserted before the action was even looked at, so
+     * merely opening a page that read progress could create a learner
+     * record.
+     */
+    if (action === "syncCurriculumProgress" && !("completedModules" in data)) {
+      const existing = await db.get<StudentRow>(
+        "SELECT * FROM student_profiles WHERE user_id = ?",
+        user.id,
+      );
+      const completedModules = existing
+        ? parseJson<string[]>(existing.lessons_completed, [])
+        : [];
+      log.info("Student progress read", { userId: user.id, action });
+      return NextResponse.json(
+        { completedModules },
+        { headers: { "X-Correlation-Id": correlationId } },
+      );
+    }
+
     let row = await db.get<StudentRow>(
       "SELECT * FROM student_profiles WHERE user_id = ?",
       user.id,
@@ -192,7 +218,39 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    let syncedModules: string[] | null = null;
+
     switch (action) {
+      case "syncCurriculumProgress": {
+        const incoming = Array.isArray(data.completedModules)
+          ? (data.completedModules as unknown[]).filter(
+              (value): value is string => typeof value === "string",
+            )
+          : [];
+        const stored = parseJson<string[]>(row.lessons_completed, []);
+        /*
+         * Merged, not replaced. The client only knows about the completions
+         * it has seen; replacing the stored list would drop completions
+         * recorded elsewhere - a lesson completed through the lesson page
+         * is not in the curriculum timeline's list. Merging is monotonic, in
+         * the same way `completeLesson` is.
+         */
+        const merged = [...stored];
+        for (const moduleId of incoming) {
+          if (!merged.includes(moduleId)) merged.push(moduleId);
+        }
+        await db.run(
+          `UPDATE student_profiles
+              SET lessons_completed = ?, updated_at = datetime('now')
+            WHERE user_id = ?`,
+          JSON.stringify(merged),
+          user.id,
+        );
+        syncedModules = merged;
+        row = { ...row, lessons_completed: JSON.stringify(merged) };
+        break;
+      }
+
       case "enroll": {
         const courseId = String(data.courseId ?? "");
         if (!courseId) {
@@ -340,7 +398,10 @@ export async function POST(request: NextRequest) {
     log.info("Student progress updated", { userId: user.id, action });
 
     return NextResponse.json(
-      { student: updated ? toProfile(updated) : null },
+      {
+        student: updated ? toProfile(updated) : null,
+        ...(syncedModules ? { completedModules: syncedModules } : {}),
+      },
       { headers: { "X-Correlation-Id": correlationId } },
     );
   } catch (err) {
