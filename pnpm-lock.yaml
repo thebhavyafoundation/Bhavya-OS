@@ -91,6 +91,9 @@ importers:
       '@bhavya/typescript':
         specifier: workspace:*
         version: link:../../packages/typescript
+      vitest:
+        specifier: ^3.2.1
+        version: 3.2.7(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.16.9)(tsx@4.23.1)(yaml@2.9.0)
 
   apps/ai-institute:
     dependencies:
@@ -309,6 +312,9 @@ importers:
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
+      vitest:
+        specifier: ^3.2.1
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.16.9)(tsx@4.23.1)(yaml@2.9.0)
 
   apps/design-system:
     dependencies:
@@ -343,6 +349,9 @@ importers:
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
+      vitest:
+        specifier: ^3.2.1
+        version: 3.2.7(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.16.9)(tsx@4.23.1)(yaml@2.9.0)
 
   apps/docs:
     dependencies:
@@ -368,6 +377,9 @@ importers:
       '@bhavya/typescript':
         specifier: workspace:*
         version: link:../../packages/typescript
+      vitest:
+        specifier: ^3.2.1
+        version: 3.2.7(@types/node@22.20.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.16.9)(tsx@4.23.1)(yaml@2.9.0)
 
   apps/github-os:
     dependencies:
@@ -475,6 +487,9 @@ importers:
       typescript:
         specifier: ^5.8.0
         version: 5.9.3
+      vitest:
+        specifier: ^3.2.1
+        version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.16.9)(tsx@4.23.1)(yaml@2.9.0)
 
   apps/social-os:
     dependencies:

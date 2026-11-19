@@ -23,6 +23,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const nextConfig = {
   output: "standalone",
   poweredByHeader: false,
+  // The stale window a shared cache may use for an ISR page.
+  //
+  // Next.js serves an ISR page with `stale-while-revalidate = expireTime -
+  // revalidate` and defaults expireTime to one year, so a 300-second
+  // revalidation would otherwise allow a cache to serve a year-old page while
+  // it revalidates in the background.
+
+  // With expireTime = 900 the header becomes `s-maxage=300,
+  // stale-while-revalidate=600`: a shared cache may serve a stale copy for at
+  // most ten minutes.
+
+  // Nothing caches the response today - the worker has no incremental-cache
+  // binding and the edge does not cache worker responses - so the value is
+  // currently inert. It is set so the policy is correct if a cache is ever
+  // enabled. The measurements are in
+  // apps/ai-institute/docs/cache-control-policy.md.
+  expireTime: 900,
   transpilePackages: [
     "@bhavya/platform-ui",
     "@bhavya/impact-runtime",
@@ -98,6 +115,19 @@ const nextConfig = {
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
+          },
+        ],
+      },
+      {
+        // The only assets safe to cache for a year with no revalidation are
+        // the ones whose URL changes when their content changes. Next.js
+        // already serves these with that policy; declaring it here makes the
+        // policy explicit rather than implicit in the framework default.
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
