@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: ["main"]
 
+# Least-privilege token scope.
+# Vercel access uses the VERCEL_TOKEN secret; GITHUB_TOKEN is only used to
+# read the repository.
+permissions:
+  contents: read
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
