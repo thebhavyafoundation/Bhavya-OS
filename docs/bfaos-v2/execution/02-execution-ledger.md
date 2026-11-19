@@ -94,6 +94,47 @@ Two independent reviewers examined the change and returned **FAIL**. Findings an
 
 ---
 
+## Phase 4.2 — founder-authorized cache implementation and reliability fixes
+
+Delivered across three commits in `feat/bhavya-product-quality` (PR #71, head `e5245ae7`): the
+**founder-approved** public-content revalidation policy (`export const revalidate = 300` on the
+root layout, verified live on the Cloudflare preview — public pages serve
+`s-maxage=300, stale-while-revalidate=31535700`; API and authenticated routes stay
+`private, no-store`), the **deterministic IOC database bootstrap** (`getDb()` self-applies the
+two committed migrations synchronously, with a byte-identical parity spec and a
+tampered-ledger refusal test), the skip-link specifications made **behavioural** (rendered markup),
+and the `public/_headers` companion for immutable static assets. The tracked development-database
+procedure is recorded in `08-tracked-database-preservation.md` on this branch.
+
+---
+
+## Phase 4 (T-200 through T-204)
+
+Recorded in full in `04-phase-4-execution-log.md`: the idempotency reload defect (fixed and proven),
+the structured execution-result contract, the kernel ↔ Mission Control interface map, and the
+specification typechecking with a proven-failing runner check.
+
+**Phase 4.1 · Service execution-result reconciliation (T-204)** — recorded in
+`05-service-result-compatibility.md`: every institution and artifact service whose `execute()`
+declared `Promise<{ success, result? }>` now declares a precise, exported union of the payload
+shapes its action handlers actually return. Type-level widening only — zero runtime change. A new
+`research-service.spec.ts` covers the one previously-uncovered widened contract.
+
+**Phase 4.1 · Shared helpers (`sha256`, `canonicalize`)** — investigated. The kernel's copies in
+`checkpoint/index.ts` are self-contained: `canonicalize` is defined nowhere else in the repository
+and `sha256` recurs only as `createHash("sha256").digest("hex")` one-liners in other packages,
+not as a shared symbol. Migrating them into `@bhavya/shared` would pull node:crypto into an
+edge-safe, types-only, zero-dependency package whose export contract is deliberately minimal.
+Consolidation is not justified; the export surface stays as it is.
+
+An **independent review** of those four commits returned the verdict **CONCERNS** — one HIGH, four
+MEDIUM and ten LOW findings. Every HIGH and MEDIUM finding is resolved; the resolutions and the
+revisions to the map's own claims are listed in the Phase 4 log. One finding corrected a false
+verification claim in that log: the anti-slop gate failed at the reviewed commit, and the log now
+records that instead of the opposite.
+
+---
+
 ## Task queue status
 
 | Task | Status |

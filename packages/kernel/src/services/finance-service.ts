@@ -101,6 +101,25 @@ export interface FinanceInput {
   categories?: BudgetCategory[];
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type FinanceExecuteResult =
+  | { success: boolean }
+  | { success: boolean; budget?: Budget }
+  | { success: boolean; donation?: Donation }
+  | { success: boolean; donations: Donation[] }
+  | { success: boolean; grant?: Grant }
+  | { success: boolean; grants: Grant[] }
+  | { success: boolean; report?: FinancialReport };
+
 export class FinanceService {
   name = "finance";
   description = "Budgets, grants, donations, financial reports";
@@ -133,7 +152,7 @@ export class FinanceService {
 
   async execute(
     input: FinanceInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<FinanceExecuteResult> {
     switch (input.action) {
       case "create-budget":
         return this.createBudget(input);

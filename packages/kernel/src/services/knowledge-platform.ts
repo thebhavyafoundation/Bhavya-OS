@@ -69,6 +69,23 @@ export interface KnowledgeInput {
   updates?: Partial<KnowledgeDocument>;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type KnowledgeExecuteResult =
+  | { artifacts: Artifact[]; success: boolean }
+  | { artifacts: Artifact[]; success: boolean; document?: KnowledgeDocument }
+  | { artifacts: Artifact[]; success: boolean; results: KnowledgeDocument[] }
+  | { artifacts: Artifact[]; success: boolean; related: KnowledgeDocument[] }
+  | { artifacts: Artifact[]; success: boolean; summary: string; keyPoints: string[] };
+
 export class KnowledgePlatformService implements InstitutionService {
   name = "knowledge-platform";
   description =
@@ -118,7 +135,7 @@ export class KnowledgePlatformService implements InstitutionService {
 
   async execute(
     input: KnowledgeInput,
-  ): Promise<{ artifacts: Artifact[]; success: boolean; result?: unknown }> {
+  ): Promise<KnowledgeExecuteResult> {
     const artifacts: Artifact[] = [];
 
     switch (input.action) {

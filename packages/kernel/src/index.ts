@@ -158,6 +158,24 @@ export {
   sha256,
   verifyCheckpoint,
 } from "./checkpoint/index.js";
+export {
+  EXECUTION_RESULT_POLICY,
+  EXECUTION_RESULT_VERSION,
+  EXECUTION_STATE_FOR_CODE,
+  SUPPORTED_EXECUTION_RESULT_VERSIONS,
+  classifyExecutionOutcome,
+  createExecutionResult,
+  executionStateForCode,
+  isExecutionResultCode,
+  isSupportedExecutionResultVersion,
+  validateExecutionResult,
+} from "./execution/result.js";
+export type {
+  ExecutionResult,
+  ExecutionResultCode,
+  ExecutionResultInput,
+  ExecutionResultPolicy,
+} from "./execution/result.js";
 export type {
   CheckpointArtifactRef,
   CheckpointEnvelope,

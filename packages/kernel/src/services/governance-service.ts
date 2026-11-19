@@ -98,6 +98,23 @@ export interface GovernanceInput {
   query?: string;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type GovernanceExecuteResult =
+  | { success: boolean }
+  | { success: boolean; document?: GovernanceDocument }
+  | { success: boolean; documents: GovernanceDocument[] }
+  | { success: boolean; minutes?: MeetingMinutes }
+  | { success: boolean; resolution?: Resolution };
+
 export class GovernanceService {
   name = "governance";
   description =
@@ -131,7 +148,7 @@ export class GovernanceService {
 
   async execute(
     input: GovernanceInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<GovernanceExecuteResult> {
     switch (input.action) {
       case "create-document":
         return this.createDocument(input);

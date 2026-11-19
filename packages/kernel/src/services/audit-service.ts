@@ -50,6 +50,24 @@ export interface AuditInput {
   ruleId?: string;
 }
 
+
+/**
+ * The honest result shape of `execute`.
+ *
+ * The action handlers return their payload under named keys. The public
+ * signature used to declare `{ success, result? }`, which lost those
+ * keys at the type level. This union reflects what the handlers
+ * actually return. Type-level widening only; nothing at runtime
+ * changes.
+ */
+export type AuditExecuteResult =
+  | { success: boolean }
+  | { success: boolean; compliant: boolean; violations: string[] }
+  | { success: boolean; entries: AuditEntry[] }
+  | { success: boolean; entry?: AuditEntry }
+  | { success: boolean; snapshot?: Snapshot }
+  | { success: boolean; snapshots: Snapshot[] };
+
 export class AuditService {
   name = "audit";
   description = "Audit trail, compliance, versioning, snapshots";
@@ -99,7 +117,7 @@ export class AuditService {
 
   async execute(
     input: AuditInput,
-  ): Promise<{ success: boolean; result?: unknown }> {
+  ): Promise<AuditExecuteResult> {
     switch (input.action) {
       case "record":
         return this.record(input);
