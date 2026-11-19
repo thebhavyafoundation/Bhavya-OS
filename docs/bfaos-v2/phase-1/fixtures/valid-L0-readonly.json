@@ -1,0 +1,48 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-001",
+  "contract_version": "1.0.0",
+  "job_id": "job-2026-11-13-001",
+  "title": "Read-only Phase 0 provider census",
+  "objective": "Establish the verified provider and integration state of the Bhavya Foundation platform and publish it as evidence, without changing any provider configuration.",
+  "scope": {
+    "include": ["read-only API inspection", "documentation"],
+    "exclude": ["any provider mutation", "any credential read", "any deployment"],
+    "paths": ["docs/"],
+    "branches": ["docs/bhavya-v2-phase0"]
+  },
+  "dependencies": [],
+  "assigned": {
+    "agent": "bhavya/research-agent",
+    "role": "research",
+    "producer": "opencode:bhavya"
+  },
+  "risk_level": "L0",
+  "required_approval": { "level": "none" },
+  "allowed_tools": [
+    { "tool": "read", "scope": "repository and public API responses", "mode": "allow" },
+    { "tool": "bash", "scope": "read-only shell commands", "mode": "allow" },
+    { "tool": "edit", "scope": "docs only", "mode": "allow" }
+  ],
+  "budget": { "wall_clock_minutes": 180, "ci_minutes": 0, "tokens": 400000, "artifacts_bytes": 1048576, "usd": 0 },
+  "time_limit": { "max_duration_minutes": 180 },
+  "retry_policy": { "max_attempts": 1, "backoff": "none", "retryable_actions": ["read", "http_get"], "on_quota_exhausted": "pause_and_report" },
+  "checkpoint_policy": { "enabled": true, "every_n_steps": 10, "store": "mc_artifact_version", "resume_is_idempotent": true },
+  "acceptance_criteria": [
+    { "id": "AC-01", "criterion": "Every provider has a labelled status backed by a direct observation.", "verification": "review" },
+    { "id": "AC-02", "criterion": "No secret value appears in any published document.", "verification": "test" }
+  ],
+  "verification": {
+    "evidence_required": true,
+    "checks": ["secret scan over changed files", "link validation for published documents"],
+    "independent_review": "agent",
+    "deployment_required": false,
+    "notes": "No deployment is part of this contract."
+  },
+  "evidence": [],
+  "rollback": {
+    "instructions": "Revert the documentation commit. No data, configuration or deployment is affected.",
+    "data_migration": false
+  },
+  "idempotency_key": "bfaos-task-2026-11-13-001",
+  "metadata": { "phase": "0", "generated_by": "bhavya" }
+}

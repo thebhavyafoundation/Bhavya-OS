@@ -1,0 +1,45 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-003",
+  "contract_version": "1.0.0",
+  "job_id": "job-2026-11-13-003",
+  "title": "Publish the production release of the approved candidate",
+  "objective": "Promote the founder-approved commit to the production Cloudflare Worker and confirm the deployed version reports the approved source SHA.",
+  "scope": {
+    "include": ["one production deployment of the approved commit"],
+    "exclude": ["any other worker", "any database migration", "any credential change", "any Vercel deployment"],
+    "paths": []
+  },
+  "dependencies": [
+    { "ref": "bfaos-task-2026-11-13-002", "kind": "contract" },
+    { "ref": "pr-63", "kind": "external", "note": "Approved pull request and its exact head SHA." }
+  ],
+  "assigned": { "agent": "bhavya/operations-agent", "role": "release", "producer": "github-actions:deploy-cloudflare" },
+  "risk_level": "L3",
+  "required_approval": { "level": "founder", "digest_required": true, "note": "Approval is valid only for the head SHA named in the digest." },
+  "allowed_tools": [
+    { "tool": "bash", "scope": "git push origin master:<approved-sha> only", "mode": "allow" },
+    { "tool": "bash", "scope": "wrangler deploy", "mode": "deny" }
+  ],
+  "budget": { "wall_clock_minutes": 60, "ci_minutes": 45, "tokens": 50000, "artifacts_bytes": 10485760, "usd": 0 },
+  "time_limit": { "max_duration_minutes": 60 },
+  "retry_policy": { "max_attempts": 1, "backoff": "none", "retryable_actions": ["read"], "on_quota_exhausted": "pause_and_report" },
+  "checkpoint_policy": { "enabled": true, "every_n_steps": 1, "store": "mc_artifact_version", "resume_is_idempotent": false },
+  "acceptance_criteria": [
+    { "id": "AC-01", "criterion": "The production worker serves the approved commit.", "verification": "browser" },
+    { "id": "AC-02", "criterion": "A rollback target is recorded before the deployment starts.", "verification": "review" }
+  ],
+  "verification": {
+    "evidence_required": true,
+    "checks": ["Cloudflare deployment list", "production smoke test"],
+    "independent_review": "human",
+    "deployment_required": true,
+    "notes": "Deployment is the deliverable here; it is never automatic."
+  },
+  "evidence": [],
+  "rollback": {
+    "instructions": "Redeploy the recorded prior deployment identifier. Rollback is a founder-executed action; the agent may only report the target.",
+    "revert_commit": "98388ddb",
+    "data_migration": false
+  },
+  "idempotency_key": "bfaos-task-2026-11-13-003"
+}

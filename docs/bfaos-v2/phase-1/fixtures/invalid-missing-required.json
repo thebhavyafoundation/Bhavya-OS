@@ -1,0 +1,9 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-004",
+  "contract_version": "1.0.0",
+  "job_id": "job-2026-11-13-004",
+  "title": "Missing required fields",
+  "objective": "This fixture omits objective, acceptance_criteria, verification and rollback, and must therefore be rejected by the schema.",
+  "risk_level": "L1",
+  "required_approval": { "level": "none" }
+}

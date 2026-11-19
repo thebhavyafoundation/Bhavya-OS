@@ -1,0 +1,40 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-006",
+  "contract_version": "1.0.0",
+  "job_id": "job-2026-11-13-006",
+  "title": "Boundary values at the documented limits",
+  "objective": "Exercise every documented upper and lower bound of the contract schema so that limit handling is proven rather than assumed.",
+  "scope": {
+    "include": ["boundary validation only"],
+    "exclude": ["any execution", "any deployment"],
+    "paths": []
+  },
+  "dependencies": [],
+  "assigned": { "agent": "bhavya/qa-agent", "role": "testing", "producer": "opencode:bhavya" },
+  "risk_level": "L1",
+  "required_approval": { "level": "none", "digest_required": true },
+  "allowed_tools": [
+    { "tool": "bash", "scope": "fixture validation only", "mode": "allow" },
+    { "tool": "edit", "scope": "fixtures only", "mode": "allow" }
+  ],
+  "budget": { "wall_clock_minutes": 1440, "ci_minutes": 2000, "tokens": 2147483647, "artifacts_bytes": 1073741824, "usd": 0 },
+  "time_limit": { "started_at": "2026-11-13T00:00:00Z", "deadline": "2026-11-14T00:00:00Z", "max_duration_minutes": 1440 },
+  "retry_policy": { "max_attempts": 5, "backoff": "exponential", "retryable_actions": ["read", "http_get", "static_check"], "on_quota_exhausted": "pause_and_report" },
+  "checkpoint_policy": { "enabled": true, "every_n_steps": 100, "store": "mc_artifact_version", "resume_is_idempotent": true },
+  "acceptance_criteria": [
+    { "id": "AC-01", "criterion": "Every documented boundary value is accepted by the schema.", "verification": "test" },
+    { "id": "AC-99", "criterion": "The contract carries a zero monetary budget.", "verification": "test" }
+  ],
+  "verification": {
+    "evidence_required": true,
+    "checks": ["schema validation of boundary fixture", "negative fixtures rejected"],
+    "independent_review": "agent",
+    "deployment_required": false
+  },
+  "evidence": [
+    { "kind": "document", "ref": "docs/bfaos-v2/phase-1/fixtures/valid-L2-shared-change.json", "sha256": "0000000000000000000000000000000000000000000000000000000000000000", "note": "Placeholder digest demonstrating the 64-hex pattern requirement." }
+  ],
+  "rollback": { "instructions": "Delete the fixture directory. Nothing outside it is affected.", "data_migration": false },
+  "idempotency_key": "bfaos-task-2026-11-13-006",
+  "metadata": { "boundary": true }
+}

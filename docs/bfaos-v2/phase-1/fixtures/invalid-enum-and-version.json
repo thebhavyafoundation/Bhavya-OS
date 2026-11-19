@@ -1,0 +1,13 @@
+{
+  "contract_id": "bfaos-task-2026-11-13-005",
+  "contract_version": "2.0.0",
+  "job_id": "job-2026-11-13-005",
+  "title": "Invalid risk level, missing exclusions and incompatible major version",
+  "objective": "This fixture must be rejected for three independent reasons: an unknown risk level, an L2 contract without explicit exclusions, and a major contract version that the v1 schema must not accept.",
+  "scope": { "include": ["something"], "exclude": [] },
+  "risk_level": "L4",
+  "required_approval": { "level": "none" },
+  "acceptance_criteria": [{ "id": "AC-01", "criterion": "A criterion that will never be evaluated.", "verification": "manual" }],
+  "verification": { "evidence_required": false, "independent_review": "none" },
+  "rollback": { "instructions": "Nothing to roll back, but the contract is invalid." }
+}

@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bhavya.foundation/schemas/bfaos-task-contract.v1.schema.json",
+  "title": "BFAOS Task Contract",
+  "description": "Versioned contract describing one bounded unit of autonomous work. The contract is stored as a Mission Control artifact of kind 'task_contract' and referenced by mc_jobs.task_contract_ids. It records intent and limits; it does not itself grant permission and does not extend the mc_jobs status vocabulary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_id",
+    "contract_version",
+    "job_id",
+    "objective",
+    "risk_level",
+    "required_approval",
+    "acceptance_criteria",
+    "verification",
+    "rollback"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "description": "Stable identifier for the contract, e.g. 'bfaos-task-2026-11-13-001'.",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+    },
+    "contract_version": {
+      "type": "string",
+      "description": "Semantic version of this contract format. This schema validates major version 1 (any 1.x.y); a 2.x contract requires a new schema.",
+      "pattern": "^1\\.\\d+\\.\\d+$"
+    },
+    "job_id": {
+      "type": "string",
+      "description": "Mission Control job id (mc_jobs.id) this contract governs.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "objective": {
+      "type": "string",
+      "description": "Single, verifiable statement of what the task must achieve.",
+      "minLength": 10,
+      "maxLength": 2000
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "include": { "type": "array", "items": { "type": "string", "minLength": 1 }, "maxItems": 100 },
+        "exclude": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "maxItems": 100,
+          "description": "Explicit non-goals. Must be present for L2 and L3 contracts."
+        },
+        "paths": { "type": "array", "items": { "type": "string", "minLength": 1 }, "maxItems": 100 },
+        "branches": { "type": "array", "items": { "type": "string", "minLength": 1 }, "maxItems": 20 }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ref"],
+        "properties": {
+          "ref": { "type": "string", "minLength": 1 },
+          "kind": { "enum": ["contract", "artifact", "job", "external", "approval"] },
+          "note": { "type": "string", "maxLength": 500 }
+        }
+      }
+    },
+    "assigned": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "anyOf": [
+        { "required": ["agent"] },
+        { "required": ["role"] },
+        { "required": ["producer"] }
+      ],
+      "properties": {
+        "agent": { "type": "string", "maxLength": 120, "description": "Agent identity, e.g. 'bhavya/engineering-agent'." },
+        "role": {
+          "type": "string",
+          "maxLength": 80,
+          "description": "Logical role. Must map to an entry in the canonical agent registry (see T-101)."
+        },
+        "producer": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Value written to mc_sessions.producer for this attempt."
+        }
+      }
+    },
+    "risk_level": {
+      "enum": ["L0", "L1", "L2", "L3"],
+      "description": "L0 read-only; L1 reversible isolated change; L2 shared integration change; L3 production or irreversible."
+    },
+    "required_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level"],
+      "properties": {
+        "level": { "enum": ["none", "founder", "role"] },
+        "approver_role": { "type": "string", "maxLength": 80 },
+        "digest_required": { "type": "boolean", "default": true },
+        "note": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "allowed_tools": {
+      "type": "array",
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tool"],
+        "properties": {
+          "tool": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "scope": { "type": "string", "maxLength": 500 },
+          "mode": { "enum": ["allow", "deny"], "default": "allow" }
+        }
+      },
+      "description": "Declared intent only. This list does not enforce anything; enforcement lives in OpenCode permissions and the kernel Permissions module."
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["usd"],
+      "properties": {
+        "wall_clock_minutes": { "type": "integer", "minimum": 1, "maximum": 1440 },
+        "ci_minutes": { "type": "integer", "minimum": 0, "maximum": 2000 },
+        "tokens": { "type": "integer", "minimum": 0 },
+        "artifacts_bytes": { "type": "integer", "minimum": 0 },
+        "usd": { "type": "number", "minimum": 0, "maximum": 0, "description": "Zero-budget invariant: the only permitted value is 0." }
+      }
+    },
+    "time_limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "started_at": { "type": "string", "format": "date-time" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "max_duration_minutes": { "type": "integer", "minimum": 1, "maximum": 1440 }
+      }
+    },
+    "retry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_attempts": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "backoff": { "enum": ["none", "fixed", "exponential"] },
+        "retryable_actions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 50,
+          "description": "Explicitly idempotent actions only. Never list deploy, publish, merge, migration or notification side effects."
+        },
+        "on_quota_exhausted": { "enum": ["pause_and_report"], "default": "pause_and_report" }
+      }
+    },
+    "checkpoint_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "every_n_steps": { "type": "integer", "minimum": 1, "maximum": 100 },
+        "store": { "enum": ["mc_artifact_version"], "default": "mc_artifact_version" },
+        "resume_is_idempotent": { "type": "boolean", "default": true }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "criterion"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^AC-[0-9]{2,4}$" },
+          "criterion": { "type": "string", "minLength": 5, "maxLength": 1000 },
+          "verification": { "enum": ["manual", "test", "ci", "browser", "review"], "default": "manual" }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_required"],
+      "properties": {
+        "evidence_required": { "type": "boolean" },
+        "checks": { "type": "array", "items": { "type": "string", "minLength": 1 }, "maxItems": 50 },
+        "independent_review": { "enum": ["none", "agent", "ci", "human"], "default": "none" },
+        "deployment_required": { "type": "boolean", "default": false },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "ref"],
+        "properties": {
+          "kind": { "enum": ["artifact", "artifact_version", "test_run", "ci_run", "deployment", "document", "external"] },
+          "ref": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "note": { "type": "string", "maxLength": 1000 }
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instructions"],
+      "properties": {
+        "instructions": { "type": "string", "minLength": 10, "maxLength": 4000 },
+        "revert_commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+        "data_migration": { "type": "boolean", "default": false }
+      }
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Stable key so a replayed command maps to the same job. Defaults to contract_id when omitted."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Non-authoritative annotations only. No credential, token or learner data may appear here.",
+      "additionalProperties": { "type": ["string", "number", "boolean", "null"] }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "risk_level": { "enum": ["L2", "L3"] } }, "required": ["risk_level"] },
+      "then": {
+        "required": ["scope"],
+        "properties": {
+          "scope": { "required": ["exclude"], "properties": { "exclude": { "minItems": 1 } } }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "risk_level": { "const": "L3" } }, "required": ["risk_level"] },
+      "then": {
+        "required": ["assigned"],
+        "properties": {
+          "required_approval": { "properties": { "level": { "const": "founder" } } }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "required_approval": { "properties": { "level": { "const": "founder" } } } }, "required": ["required_approval"] },
+      "then": {
+        "properties": {
+          "verification": { "required": ["independent_review"], "properties": { "independent_review": { "enum": ["agent", "ci", "human"] } } }
+        }
+      }
+    }
+  ]
+}
